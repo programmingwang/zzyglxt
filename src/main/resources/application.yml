@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: zyyglxt
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://47.115.177.141:3306/culpro?useUnicode=true&characterEncoding=utf8
+    username: root
+    password: root1234
+    type: com.alibaba.druid.pool.DruidDataSource

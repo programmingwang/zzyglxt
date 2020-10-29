@@ -16,4 +16,5 @@ public interface IHospService {
     int deleteHosp(HospDOKey hospDOKey);
     List<HospDO> getAllHosp();
     List<HospDO> searchHosp(String keyWord);
+    List<HospDO> top5Hosp();
 }

@@ -67,6 +67,13 @@
     where itemID = #{itemid,jdbcType=INTEGER}
       and itemCode = #{itemcode,jdbcType=CHAR}
   </select>
+  <select id="selectAllUser" resultMap="ResultMapWithBLOBs">
+    select
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from user
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="com.zyyglxt.dataobject.UserDOKey">
     <!--
       WARNING - @mbg.generated

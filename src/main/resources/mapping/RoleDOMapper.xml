@@ -39,6 +39,11 @@
     where itemID = #{itemid,jdbcType=INTEGER}
       and itemCode = #{itemcode,jdbcType=CHAR}
   </select>
+  <select id="selectAllRole" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from role
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="com.zyyglxt.dataobject.RoleDOKey">
     <!--
       WARNING - @mbg.generated

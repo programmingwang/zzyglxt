@@ -1,8 +1,8 @@
-package com.zyyglxt.controller;
+package com.zyyglxt.controller.IndustrialDevelop;
 
 import com.zyyglxt.dataobject.IndustrialDevelopSciAchiDO;
 import com.zyyglxt.dataobject.IndustrialDevelopSciAchiDOKey;
-import com.zyyglxt.service.IIndustrialDevelop;
+import com.zyyglxt.service.IIndustrialDevelopSciAchi;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -14,9 +14,9 @@ import javax.annotation.Resource;
  **/
 @RestController
 @RequestMapping(value = "industrialdevelop")
-public class IndustrialController {
+public class IndustrialSciAchiController {
     @Resource
-    IIndustrialDevelop industrialDevelop;
+    IIndustrialDevelopSciAchi industrialDevelop;
 
     /**
      * 增加科研成果

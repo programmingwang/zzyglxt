@@ -7,24 +7,15 @@ spring:
     username: root
     password: root1234
     type: com.alibaba.druid.pool.DruidDataSource
-<<<<<<< HEAD
 
-=======
->>>>>>> 6cf20310b269941e6de68176e0f0bf936cfc74c3
 mybatis:
   mapper-locations: classpath:mapping/*.xml
   type-aliases-package: com.zyyglxt.dataobject
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
-<<<<<<< HEAD
 
 server:
   port: 8989
   servlet:
     context-path: /zyyglxt
-=======
-server:
-  port: 8989
-  servlet:
-    context-path: /zyyglxt
->>>>>>> 6cf20310b269941e6de68176e0f0bf936cfc74c3
+

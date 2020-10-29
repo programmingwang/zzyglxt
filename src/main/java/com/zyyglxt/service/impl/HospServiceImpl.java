@@ -7,6 +7,7 @@ import com.zyyglxt.service.IHospService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -16,7 +17,7 @@ import java.util.List;
  */
 @Service
 public class HospServiceImpl implements IHospService {
-    @Autowired
+    @Resource
     HospDOMapper hospDOMapper;
 
     @Override
@@ -45,6 +46,11 @@ public class HospServiceImpl implements IHospService {
     @Override
     public List<HospDO> searchHosp(String keyWord) {
         return hospDOMapper.searchHosp(keyWord);
+    }
+
+    @Override
+    public List<HospDO> top5Hosp() {
+        return hospDOMapper.top5Hosp();
     }
 
 }

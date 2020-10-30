@@ -36,8 +36,8 @@ public class HospServiceImpl implements IHospService {
     }
 
     @Override
-    public List<HospDO> getAllHosp() {
-        return hospDOMapper.selectAll();
+    public List<HospDO> selectAllHosp() {
+        return hospDOMapper.selectAllHosp();
     }
 
     /*

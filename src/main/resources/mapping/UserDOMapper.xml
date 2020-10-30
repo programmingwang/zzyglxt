@@ -402,6 +402,6 @@
       -->
       update user
       set PASSWORD = #{password,jdbcType=VARCHAR}
-      where mobilePhone = #{mobilephone,jdbcType=VARCHAR}
+      where mobilePhone = #{mobilePhone,jdbcType=VARCHAR}
   </update>
 </mapper>

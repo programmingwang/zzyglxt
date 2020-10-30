@@ -54,6 +54,7 @@ public class IUserServiceImpl implements IUserService {
 
     /**
      * 注册功能中的添加用户
+     * 待完成：需要再添加一个STATE数据，表示当前状态（登录，未登录）
      *
      * @param userDO
      */
@@ -70,15 +71,6 @@ public class IUserServiceImpl implements IUserService {
         userDO.setPassword(password);
         userDO.setCreater(userDO.getUsername());// 注册时，注册用户为 创建人
         userDO.setUpdater(userDO.getUsername());// 注册时，注册用户为 修改人
-        // 获取当前系统时间作为 创建时间
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
-        try {
-            Date date = sdf.parse(sdf.format(System.currentTimeMillis()));
-            userDO.setItemcreateat(date);// 设置 创建时间
-            userDO.setItemupdateat(date);// 设置 修改时间
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
         // 设置为普通用户（0：普通，1：管理员）
         userDO.setType(0);
 
@@ -135,8 +127,9 @@ public class IUserServiceImpl implements IUserService {
     @Override
     public void UpdatePassword(UserDto userDto) {
         /*
-        先判断电话号码时候正确，再查询数据库原密码和输入的原密码是否匹配，若匹配，再比较两次输入的新密码是否正确
-        都正确就实行更新，有对不上的则修改失败
+        已实现： 先判断电话号码时候正确，再查询数据库原密码和输入的原密码是否匹配，若匹配，再比较两次输入的新密码是否正确
+        都正确就实行更新，有对不上的则修改失败，
+        待实现： 若新密码与旧密码一致则修改不成功，提示原密码与新密码一致； 判断是普通用户还是管理员
          */
         if (MobileUtil.checkPhone(userDto.getMobilePhone())) {
             String mobilePhone = userDto.getMobilePhone();

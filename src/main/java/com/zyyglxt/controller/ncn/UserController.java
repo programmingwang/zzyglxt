@@ -23,7 +23,7 @@ public class UserController {
      * @param userDO
      */
     @RequestMapping(value = "/register", method = RequestMethod.POST)
-    public void Register(@RequestBody UserDO userDO) {
+    public void Register(UserDO userDO) {
         userService.Register(userDO);
     }
 
@@ -33,7 +33,7 @@ public class UserController {
      * @param userDto
      */
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public void Login(@RequestBody UserDto userDto) {
+    public void Login(UserDto userDto) {
         userService.Login(userDto.getUsername(), userDto.getPassword());
     }
 

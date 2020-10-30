@@ -93,5 +93,5 @@ public interface UserDOMapper {
      *
      * @mbg.generated Wed Oct 28 16:25:52 CST 2020
      */
-    int updatePasswordByMobilePhone(String password, String mobilephone);
+    int updatePasswordByMobilePhone(String password, String mobilePhone);
 }

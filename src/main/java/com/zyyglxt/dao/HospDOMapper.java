@@ -67,4 +67,6 @@ public interface HospDOMapper {
     List<HospDO> searchHosp(String keyWord);
 
     List<HospDO> top5Hosp();
+
+
 }

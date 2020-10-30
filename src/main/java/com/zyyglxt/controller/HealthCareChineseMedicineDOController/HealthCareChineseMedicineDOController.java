@@ -5,7 +5,6 @@ import com.zyyglxt.dataobject.HealthCareChineseMedicineDO;
 import com.zyyglxt.dataobject.HealthCareChineseMedicineDOKey;
 
 import com.zyyglxt.service.HealthCareChineseMedicineDOService;
-import org.apache.ibatis.annotations.Param;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -21,7 +20,7 @@ public class HealthCareChineseMedicineDOController {
    @Resource
     HealthCareChineseMedicineDOService healthCareChineseMedicineDOService;
    /*
-     中医药名称相关数据的插入
+     中医药名称相关数据插入
    */
    @RequestMapping(value ="inserthealthcarechinesemedicinedo",method = RequestMethod.POST )
    public Result insertHealthCareChineseMedicineDOMapper(@RequestBody HealthCareChineseMedicineDO key) {
@@ -57,8 +56,7 @@ public class HealthCareChineseMedicineDOController {
     @RequestMapping(value ="selecthealthcarechinesemedicinedo",method = RequestMethod.POST )
     public Result selectHealthCareChineseMedicineDOMapper(@RequestBody HealthCareChineseMedicineDOKey key){
         healthCareChineseMedicineDOService.selectByPrimaryKey(key);
-        /*System.out.println("要修改中医药编号为："+key.getItemid());*/
-        return Result.succ("查询数据成功");
+        return Result.succ( healthCareChineseMedicineDOService.selectByPrimaryKey(key));
     }
 }
 

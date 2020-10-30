@@ -12,6 +12,6 @@ public interface HealthSciKnowDOService {
 
     int insertSelective(HealthSciKnowDO record);
     int deleteByPrimaryKey(HealthSciKnowDOKey key);
-    int updateByPrimaryKeyWithBLOBs(HealthSciKnowDO record);
+    int updateByPrimaryKeySelective(HealthSciKnowDO record);
     HealthSciKnowDO selectByPrimaryKey(HealthSciKnowDOKey key);
 }

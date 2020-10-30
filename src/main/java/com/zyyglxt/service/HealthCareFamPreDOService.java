@@ -14,6 +14,6 @@ public interface HealthCareFamPreDOService {
    **/
     int insertSelective(HealthCareFamPreDO record);
     int deleteByPrimaryKey(HealthCareFamPreDOKey key);
-    int updateByPrimaryKeyWithBLOBs(HealthCareFamPreDO record);
+    int updateByPrimaryKeySelective(HealthCareFamPreDO record);
     HealthCareFamPreDO selectByPrimaryKey(HealthCareFamPreDOKey key);
 }

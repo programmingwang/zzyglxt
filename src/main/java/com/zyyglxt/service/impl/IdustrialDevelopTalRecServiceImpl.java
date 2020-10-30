@@ -1,10 +1,9 @@
 package com.zyyglxt.service.impl;
 
 import com.zyyglxt.dao.IndustrialDevelopTalRecDOMapper;
-import com.zyyglxt.dataobject.IndustrialDevelopTalRecDO;
 import com.zyyglxt.dataobject.IndustrialDevelopTalRecDOKey;
 import com.zyyglxt.dataobject.IndustrialDevelopTalRecDOWithBLOBs;
-import com.zyyglxt.service.IIndustrialTalRec;
+import com.zyyglxt.service.IIndustrialDevelopTalRecService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -16,7 +15,7 @@ import java.util.Date;
  * @Version 1.0
  **/
 @Service
-public class IdustrialTalRecImpl implements IIndustrialTalRec {
+public class IdustrialDevelopTalRecServiceImpl implements IIndustrialDevelopTalRecService {
     @Resource
     IndustrialDevelopTalRecDOMapper developTalRecDOMapper;
 

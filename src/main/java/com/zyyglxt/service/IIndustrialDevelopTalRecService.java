@@ -10,7 +10,7 @@ import com.zyyglxt.dataobject.IndustrialDevelopTalRecDOWithBLOBs;
  * @Version 1.0
  * 人才招募业务
  **/
-public interface IIndustrialTalRec {
+public interface IIndustrialDevelopTalRecService {
 
     void addTalRec(IndustrialDevelopTalRecDOWithBLOBs developTalRecDO);
 

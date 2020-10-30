@@ -8,7 +8,7 @@ import com.zyyglxt.dataobject.IndustrialDevelopSciAchiDOKey;
  * @Date 2020/10/29 9:11
  * @Version 1.0
  **/
-public interface IIndustrialDevelopSciAchi {
+public interface IIndustrialDevelopSciAchiService {
 
     void addAchievement(IndustrialDevelopSciAchiDO achiDO);
 

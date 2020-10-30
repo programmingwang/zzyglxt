@@ -2,7 +2,7 @@ package com.zyyglxt.controller.IndustrialDevelop;
 
 import com.zyyglxt.dataobject.IndustrialDevelopTopicDO;
 import com.zyyglxt.dataobject.IndustrialDevelopTopicDOKey;
-import com.zyyglxt.service.IIndustrialDevelopTopic;
+import com.zyyglxt.service.IIndustrialDevelopTopicService;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -19,7 +19,7 @@ import javax.annotation.Resource;
 @RequestMapping(value = "industrialdevelop")
 public class IndustrialTopicController {
     @Resource
-    IIndustrialDevelopTopic developTopicService;
+    IIndustrialDevelopTopicService developTopicService;
 
     @RequestMapping(value = "/topic", method = RequestMethod.POST)
     public void addTopic(@RequestBody IndustrialDevelopTopicDO developTopicDO){

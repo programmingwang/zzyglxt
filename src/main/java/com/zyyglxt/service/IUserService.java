@@ -1,8 +1,7 @@
 package com.zyyglxt.service;
 
 import com.zyyglxt.dataobject.UserDO;
-import com.zyyglxt.dataobject.UserDOKey;
-import org.springframework.stereotype.Service;
+import com.zyyglxt.dto.UserDto;
 
 /**
  * @Author nongcn
@@ -12,6 +11,6 @@ import org.springframework.stereotype.Service;
 public interface IUserService {
 
     void Register(UserDO userDO);
-
     void Login(String username, String password);
+    void UpdatePassword(UserDto userDto);
 }

@@ -36,4 +36,14 @@ public class UserController {
     public void Login(@RequestBody UserDto userDto) {
         userService.Login(userDto.getUsername(), userDto.getPassword());
     }
+
+    /**
+     * 根据电话号码来修改密码
+     *
+     * @param userDto
+     */
+    @RequestMapping(value = "upwd", method = RequestMethod.PUT)
+    public void UpdatePassword(UserDto userDto) {
+        userService.UpdatePassword(userDto);
+    }
 }

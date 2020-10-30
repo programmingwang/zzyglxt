@@ -1,9 +1,15 @@
 package com.zyyglxt.service.impl;
 
+import com.zyyglxt.dao.RoleDOMapper;
 import com.zyyglxt.dao.UserDOMapper;
+import com.zyyglxt.dao.UserRoleRefDOMapper;
 import com.zyyglxt.dataobject.UserDO;
+import com.zyyglxt.dataobject.UserRoleRefDO;
+import com.zyyglxt.dto.UserDto;
 import com.zyyglxt.service.IUserService;
+import com.zyyglxt.util.MobileUtil;
 import org.apache.commons.codec.digest.DigestUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -22,6 +28,10 @@ public class IUserServiceImpl implements IUserService {
 
     @Resource
     UserDOMapper userDOMapper;
+    @Resource
+    RoleDOMapper roleDOMapper;
+    @Resource
+    UserRoleRefDOMapper userRoleRefDOMapper;
 
     /**
      * 用户注册
@@ -30,39 +40,75 @@ public class IUserServiceImpl implements IUserService {
      */
     @Override
     public void Register(UserDO userDO) {
-        // 生成UUID, 作为唯一标识UUID
-        String itemCode = UUID.randomUUID().toString().replace("-", "");
-        userDO.setItemcode(itemCode);
 
-        // 拿到用户名作为 盐 进行加密
-        String username = userDO.getUsername();
-        // 将手机号码设置为 盐，存放到数据库中
-        userDO.setSalt(username);
-        // 拿到前端输入的密码
-        String password = userDO.getPassword();
-        // 拿到 盐
-        String salt = userDO.getSalt();
-        // 加盐，实现密码加密
-        password = DigestUtils.md5Hex(password + salt);
+        // 根据用户名查询数据库，若查询到数据，表示该用户名已存在，不能注册
+        UserDO username = userDOMapper.selectByUsername(userDO.getUsername());
+        if (username != null) {
+            System.out.println("用户名已存在，请更换用户名继续！");
+        } else {
+            insertUser(userDO);// 添加数据到user表
+            insertUserRoleRef(userDO);// 添加数据到user_role_ref表
+        }
+
+    }
+
+    /**
+     * 注册功能中的添加用户
+     *
+     * @param userDO
+     */
+    private void insertUser(UserDO userDO) {
+        // 生成UUID, 作为用户表唯一标识UUID
+        String userItemCode = UUID.randomUUID().toString();
+        userDO.setItemcode(userItemCode);
+
+        String username = userDO.getUsername();// 拿到用户名作为 盐 进行加密
+        userDO.setSalt(username);// 将手机号码设置为 盐，存放到数据库中
+        String password = userDO.getPassword();// 拿到前端输入的密码
+        String salt = userDO.getSalt();// 拿到 盐
+        password = DigestUtils.md5Hex(password + salt);// 加盐，实现密码加密
         userDO.setPassword(password);
-
-        // 注册时，注册用户为 创建人和修改人
-        userDO.setCreater(userDO.getUsername());
+        userDO.setCreater(userDO.getUsername());// 注册时，注册用户为 创建人
+        userDO.setUpdater(userDO.getUsername());// 注册时，注册用户为 修改人
         // 获取当前系统时间作为 创建时间
-        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
         try {
-            Date date = df.parse(df.format(System.currentTimeMillis()));
-            // 设置 创建时间
-            userDO.setItemcreateat(date);
-            // 设置 修改时间
-            userDO.setItemupdateat(date);
+            Date date = sdf.parse(sdf.format(System.currentTimeMillis()));
+            userDO.setItemcreateat(date);// 设置 创建时间
+            userDO.setItemupdateat(date);// 设置 修改时间
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        // 设置为普通用户，（0：普通，1：管理员）
+        // 设置为普通用户（0：普通，1：管理员）
         userDO.setType(0);
 
-        userDOMapper.insertSelective(userDO);
+        userDOMapper.insertSelective(userDO);// 添加数据到user表
+
+    }
+
+    /**
+     * 注册功能中添加用户-角色关系
+     *
+     * @param userDO
+     */
+    private void insertUserRoleRef(UserDO userDO) {
+        String userItemCode = userDO.getItemcode();
+
+        // 生成UUID, 作为用户 - 角色表唯一标识UUID
+        String userRoleItemCode = UUID.randomUUID().toString();
+        UserRoleRefDO userRoleRefDO = new UserRoleRefDO();
+        userRoleRefDO.setItemcode(userRoleItemCode);// 唯一标识UUID
+        userRoleRefDO.setUserCode(userItemCode);// 关联user表itemCode字段
+
+        String roleType = roleDOMapper.selectItemCodeByRoleType(0);//根据角色类型查到itemcode
+        userRoleRefDO.setRoleCode(roleType);// 关联role表itemCode字段
+
+        userRoleRefDO.setCreater(userDO.getCreater());// 设置创建人
+        userRoleRefDO.setItemcreateat(userDO.getItemcreateat());// 设置创建时间
+        userRoleRefDO.setUpdater(userDO.getUpdater());// 设置修改人
+        userRoleRefDO.setItemupdateat(userDO.getItemupdateat());// 设置修改时间
+
+        userRoleRefDOMapper.insertSelective(userRoleRefDO);// 添加数据到user_role_ref表
     }
 
     /**
@@ -79,10 +125,49 @@ public class IUserServiceImpl implements IUserService {
          */
         password = DigestUtils.md5Hex(password + username);
         UserDO userDO = userDOMapper.selectByUsernameAndPassword(username, password);
-        if (userDO!=null){
+        if (userDO != null) {
             System.out.println("登录成功");
         } else {
             System.out.println("登录失败");
+        }
+    }
+
+    @Override
+    public void UpdatePassword(UserDto userDto) {
+        /*
+        先判断电话号码时候正确，再查询数据库原密码和输入的原密码是否匹配，若匹配，再比较两次输入的新密码是否正确
+        都正确就实行更新，有对不上的则修改失败
+         */
+        if (MobileUtil.checkPhone(userDto.getMobilePhone())) {
+            String mobilePhone = userDto.getMobilePhone();
+            System.out.println("输入的手机号码："+mobilePhone);
+            // 根据手机号码查询数据库拿到 盐
+            UserDO userDO = userDOMapper.selectByMobilePhone(mobilePhone);
+            String salt = userDO.getSalt();
+
+            String oldPassword = userDto.getPassword();// 输入的原密码
+            oldPassword = DigestUtils.md5Hex(oldPassword + salt);// 输入的原密码+盐计算
+            // 数据库查询到的原密码和输入的 原密码+盐计算后 比对
+            if (userDO.getPassword().equals(oldPassword)) {
+                String newPassword = userDto.getNewPassword();// 第一次输入的新密码
+                String checkNewPassword = userDto.getCheckNewPassword();// 第二次输入的新密码
+                // 输入不能为空
+                if (StringUtils.isEmpty(newPassword) || StringUtils.isEmpty(checkNewPassword)) {
+                    System.out.println("密码输入不能为空，请重新输入！");
+                } else {
+                    // 判断两次输入的新密码是否一致
+                    if (newPassword.equals(checkNewPassword)) {
+                        userDto.setNewPassword(DigestUtils.md5Hex(userDto.getNewPassword() + salt));
+                        userDOMapper.updatePasswordByMobilePhone(userDto.getNewPassword(), mobilePhone);
+                    } else {
+                        System.out.println("两次输入的新密码不一致，请重新输入！");
+                    }
+                }
+            } else {
+                System.out.println("输入的旧密码错误，请重新输入！");
+            }
+        } else {
+            System.out.println("手机号码不正确！");
         }
     }
 }

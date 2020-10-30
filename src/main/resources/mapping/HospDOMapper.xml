@@ -316,7 +316,7 @@
         and itemCode = #{itemcode,jdbcType=CHAR}
     </update>
 
-    <select id="selectAll" resultMap="ResultMapWithBLOBs">
+    <select id="selectAllHosp" resultMap="ResultMapWithBLOBs">
         SELECT *
         FROM tb_culpro_hosp
         ORDER BY itemCreateAt DESC

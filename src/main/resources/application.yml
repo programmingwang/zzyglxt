@@ -16,6 +16,7 @@ spring:
     password: root1234
     type: com.alibaba.druid.pool.DruidDataSource
 
+
 mybatis:
   mapper-locations: classpath:mapping/*.xml
   type-aliases-package: com.zyyglxt.dataobject
@@ -26,4 +27,8 @@ server:
   port: 8989
   servlet:
     context-path: /zyyglxt
+    
+logging:
+  file:
+    path: E:/Desktop
 

@@ -8,7 +8,7 @@ import com.zyyglxt.dataobject.IndustrialDevelopCooExcDOKey;
  * @Date 2020/10/29 14:24
  * @Version 1.0
  **/
-public interface IIndustrialDevelopCoo {
+public interface IIndustrialDevelopCooService {
 
     void addCooRecord(IndustrialDevelopCooExcDO developCooExcDO);
 

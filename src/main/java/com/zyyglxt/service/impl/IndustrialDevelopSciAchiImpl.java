@@ -7,6 +7,7 @@ import com.zyyglxt.service.IIndustrialDevelopSciAchi;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.Date;
 
 /**
  * @Author lrt
@@ -21,6 +22,8 @@ public class IndustrialDevelopSciAchiImpl implements IIndustrialDevelopSciAchi {
 
     @Override
     public void addAchievement(IndustrialDevelopSciAchiDO achiDO) {
+        achiDO.setItemcreateat(new Date());
+        achiDO.setItemupdateat(new Date());
         sciAchiDOMapper.insertSelective(achiDO);
     }
 
@@ -31,6 +34,7 @@ public class IndustrialDevelopSciAchiImpl implements IIndustrialDevelopSciAchi {
 
     @Override
     public void updAchievement(IndustrialDevelopSciAchiDO achiDO) {
+        achiDO.setItemupdateat(new Date());
         sciAchiDOMapper.updateByPrimaryKeySelective(achiDO);
     }
 

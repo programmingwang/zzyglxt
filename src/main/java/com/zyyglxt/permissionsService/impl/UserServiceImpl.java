@@ -4,6 +4,8 @@ import com.zyyglxt.dao.UserDOMapper;
 import com.zyyglxt.dataobject.UserDO;
 import com.zyyglxt.dataobject.UserDOKey;
 import com.zyyglxt.permissionsService.UserService;
+import com.zyyglxt.permissionsUtil.DateUtils;
+import com.zyyglxt.permissionsUtil.UUIDUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -31,6 +33,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public int insertSelective(UserDO record) {
+        record.setItemcode(UUIDUtils.getUUID());
+        record.setItemcreateat(DateUtils.getDate());
         return userDOMapper.insertSelective(record);
     }
 
@@ -41,6 +45,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public int updateByPrimaryKeySelective(UserDO record) {
+        record.setItemupdateat(DateUtils.getDate());
         return userDOMapper.updateByPrimaryKeySelective(record);
     }
 
@@ -58,4 +63,10 @@ public class UserServiceImpl implements UserService {
     public List<UserDO> selectAllUser() {
         return userDOMapper.selectAllUser();
     }
+
+    @Override
+    public int deleteByUsername(String username) {
+        return userDOMapper.deleteByUsername(username);
+    }
+
 }

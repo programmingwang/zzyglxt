@@ -1,9 +1,13 @@
 package com.zyyglxt.permissionsController;
 
+import com.zyyglxt.dataobject.ResourcesRoleRefDO;
 import com.zyyglxt.dataobject.RoleDO;
 import com.zyyglxt.dataobject.RoleDOKey;
+import com.zyyglxt.permissionsService.ResourcesRoleRefService;
+import com.zyyglxt.permissionsService.ResourcesService;
 import com.zyyglxt.permissionsService.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,16 +24,26 @@ import java.util.List;
 public class RoleController {
     @Autowired
     RoleService roleService;
+    @Autowired
+    ResourcesRoleRefService resRoleRefService;
+    @Autowired
+    ResourcesService resService;
 
     /**
      * 添加角色
      * @param roleDO
      * @return 添加结果信息
      */
-    @RequestMapping(value = "/insertRole", method = RequestMethod.POST)
-    public void insertRoleSelective(RoleDO roleDO){
+    @RequestMapping(value = "/insertrole", method = RequestMethod.POST)
+    public void insertRoleSelective(@RequestBody RoleDO roleDO){
+        //添加角色
         roleService.insertSelective(roleDO);
-
+        //分配resources
+        ResourcesRoleRefDO resourcesRoleRefDO = new ResourcesRoleRefDO();
+        resourcesRoleRefDO.setRoleCode(roleDO.getItemcode());
+        /*resService.selectByPrimaryKey()
+        resourcesRoleRefDO.setResourceCode();*/
+        resRoleRefService.insertSelective(resourcesRoleRefDO);
     }
 
     /**

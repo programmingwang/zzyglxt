@@ -4,6 +4,8 @@ import com.zyyglxt.dao.ResourcesRoleRefDOMapper;
 import com.zyyglxt.dataobject.ResourcesRoleRefDO;
 import com.zyyglxt.dataobject.ResourcesRoleRefDOKey;
 import com.zyyglxt.permissionsService.ResourcesRoleRefService;
+import com.zyyglxt.permissionsUtil.DateUtils;
+import com.zyyglxt.permissionsUtil.UUIDUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,6 +26,8 @@ public class ResourcesRoleRefServiceImpl implements ResourcesRoleRefService {
 
     @Override
     public int insertSelective(ResourcesRoleRefDO record) {
+        record.setItemcode(UUIDUtils.getUUID());
+        record.setItemcreateat(DateUtils.getDate());
         return rRRMapper.insertSelective(record);
     }
 
@@ -35,5 +39,10 @@ public class ResourcesRoleRefServiceImpl implements ResourcesRoleRefService {
     @Override
     public int updateByPrimaryKeySelective(ResourcesRoleRefDO record) {
         return rRRMapper.updateByPrimaryKeySelective(record);
+    }
+
+    @Override
+    public ResourcesRoleRefDO selectByResCode(String itemcode) {
+        return rRRMapper.selectByResCode(itemcode);
     }
 }

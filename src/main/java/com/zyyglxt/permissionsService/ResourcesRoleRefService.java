@@ -41,4 +41,10 @@ public interface ResourcesRoleRefService {
      */
     int updateByPrimaryKeySelective(ResourcesRoleRefDO record);
 
+    /**
+     * selectByResCode 查询角色权限关系
+     * @param itemcode
+     * @return
+     */
+    ResourcesRoleRefDO selectByResCode(String itemcode);
 }

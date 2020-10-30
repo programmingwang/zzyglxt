@@ -41,5 +41,12 @@ public interface UserRoleRefService {
      * @mbg.generated Wed Oct 28 16:25:52 CST 2020
      */
     int updateByPrimaryKeySelective(UserRoleRefDO record);
+    int updateByKeySelective(UserRoleRefDO record);
 
+    /**
+     * 根据user_code查询
+     * @param itemcode
+     * @return
+     */
+    UserRoleRefDO selectByUserCode(String itemcode);
 }

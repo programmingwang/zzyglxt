@@ -53,4 +53,11 @@ public interface ResourcesRoleRefDOMapper {
      * @mbg.generated Wed Oct 28 16:25:52 CST 2020
      */
     int updateByPrimaryKey(ResourcesRoleRefDO record);
+
+    /**
+     * 查询角色权限关系
+     * @param itemcode
+     * @return
+     */
+    ResourcesRoleRefDO selectByResCode(String itemcode);
 }

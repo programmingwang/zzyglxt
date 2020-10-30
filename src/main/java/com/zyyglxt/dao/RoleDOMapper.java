@@ -61,4 +61,11 @@ public interface RoleDOMapper {
      * @return
      */
     List<RoleDO> selectAllRole();
+
+    /**
+     * selectByRoleType
+     * @param type
+     * @return 角色信息
+     */
+    RoleDO selectByRoleType(Integer type);
 }

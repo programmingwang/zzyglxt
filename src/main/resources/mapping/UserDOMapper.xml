@@ -84,6 +84,10 @@
     where itemID = #{itemid,jdbcType=INTEGER}
       and itemCode = #{itemcode,jdbcType=CHAR}
   </delete>
+  <delete id="deleteByUsername" parameterType="java.lang.String">
+    delete from user
+    where USERNAME = #{username,jdbcType=VARCHAR}
+  </delete>
   <insert id="insert" parameterType="com.zyyglxt.dataobject.UserDO">
     <!--
       WARNING - @mbg.generated

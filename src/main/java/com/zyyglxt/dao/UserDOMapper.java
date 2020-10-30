@@ -69,4 +69,12 @@ public interface UserDOMapper {
      * @return List<UserDO>
      */
     List<UserDO> selectAllUser();
+
+    /**
+     * 根据用户名删除用户
+     * @param username
+     * @return
+     */
+    int deleteByUsername(String username);
+
 }

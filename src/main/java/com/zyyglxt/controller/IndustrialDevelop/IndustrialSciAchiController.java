@@ -51,7 +51,6 @@ public class IndustrialSciAchiController {
     @RequestMapping(value = "/achievement", method = RequestMethod.DELETE)
     public void delAchievement(@RequestBody IndustrialDevelopSciAchiDOKey key) {
         industrialDevelop.delAchievement(key);
-        
     }
 
     /**

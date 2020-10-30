@@ -96,9 +96,7 @@ public class IUserServiceImpl implements IUserService {
         userRoleRefDO.setRoleCode(roleType);// 关联role表itemCode字段
 
         userRoleRefDO.setCreater(userDO.getCreater());// 设置创建人
-        userRoleRefDO.setItemcreateat(userDO.getItemcreateat());// 设置创建时间
         userRoleRefDO.setUpdater(userDO.getUpdater());// 设置修改人
-        userRoleRefDO.setItemupdateat(userDO.getItemupdateat());// 设置修改时间
 
         userRoleRefDOMapper.insertSelective(userRoleRefDO);// 添加数据到user_role_ref表
     }

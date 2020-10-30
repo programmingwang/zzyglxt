@@ -14,6 +14,6 @@ public interface HealthCareChineseMedicineDOService {
    **/
     int insert(HealthCareChineseMedicineDO record);
     int deleteByPrimaryKey(HealthCareChineseMedicineDOKey key);
-    int updateByPrimaryKey(HealthCareChineseMedicineDO record);
+    int updateByPrimaryKeySelective(HealthCareChineseMedicineDO record);
     HealthCareChineseMedicineDO selectByPrimaryKey(HealthCareChineseMedicineDOKey key);
 }

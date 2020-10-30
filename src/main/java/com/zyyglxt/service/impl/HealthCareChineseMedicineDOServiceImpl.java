@@ -37,13 +37,13 @@ public class HealthCareChineseMedicineDOServiceImpl implements HealthCareChinese
     }
 
     @Override
-    public int deleteByPrimaryKey(HealthCareChineseMedicineDOKey key) {
+    public int  deleteByPrimaryKey(HealthCareChineseMedicineDOKey key) {
           healthCareChineseMedicineDOMapper.deleteByPrimaryKey(key);
           return 0;
     }
 
     @Override
-    public int updateByPrimaryKey(HealthCareChineseMedicineDO record) {
+    public int updateByPrimaryKeySelective(HealthCareChineseMedicineDO record) {
         Date data=new Date();
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         try {
@@ -52,7 +52,7 @@ public class HealthCareChineseMedicineDOServiceImpl implements HealthCareChinese
             e.printStackTrace();
         }
         record.setItemcreateat(data);
-        return healthCareChineseMedicineDOMapper.updateByPrimaryKey(record);
+        return healthCareChineseMedicineDOMapper.updateByPrimaryKeySelective(record);
     }
 
     @Override

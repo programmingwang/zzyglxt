@@ -62,7 +62,7 @@ public interface HospDOMapper {
      */
     int updateByPrimaryKey(HospDO record);
 
-    List<HospDO> selectAll();
+    List<HospDO> selectAllHosp();
 
     List<HospDO> searchHosp(String keyWord);
 

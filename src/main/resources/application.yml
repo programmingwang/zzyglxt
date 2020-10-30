@@ -1,4 +1,12 @@
 spring:
+  thymeleaf:
+#    听说关掉就可以不用重启，上线要开启
+    cache: false
+    suffix: .html
+    mode: HTML5
+    encoding: UTF-8
+    servlet:
+      content-type: text/html
   application:
     name: zyyglxt
   datasource:
@@ -15,13 +23,12 @@ mybatis:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 
-
 server:
   port: 8989
   servlet:
     context-path: /zyyglxt
-
-
+    
 logging:
   file:
     path: E:/Desktop
+

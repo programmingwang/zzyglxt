@@ -67,6 +67,13 @@
     where itemID = #{itemid,jdbcType=INTEGER}
       and itemCode = #{itemcode,jdbcType=CHAR}
   </select>
+  <select id="selectAllUser" resultMap="ResultMapWithBLOBs">
+    select
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from user
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="com.zyyglxt.dataobject.UserDOKey">
     <!--
       WARNING - @mbg.generated
@@ -76,6 +83,10 @@
     delete from user
     where itemID = #{itemid,jdbcType=INTEGER}
       and itemCode = #{itemcode,jdbcType=CHAR}
+  </delete>
+  <delete id="deleteByUsername" parameterType="java.lang.String">
+    delete from user
+    where USERNAME = #{username,jdbcType=VARCHAR}
   </delete>
   <insert id="insert" parameterType="com.zyyglxt.dataobject.UserDO">
     <!--

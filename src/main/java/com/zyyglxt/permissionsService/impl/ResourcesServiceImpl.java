@@ -58,4 +58,14 @@ public class ResourcesServiceImpl implements ResourcesService {
     public List<ResourcesDO> selectAllResources() {
         return resourcesDOMapper.selectAllResources();
     }
+
+    @Override
+    public List<ResourcesDO> selectMenuByLevelOrParentid(Character level, Character parentid) {
+        return resourcesDOMapper.selectMenuByLevelOrParentid(level, parentid);
+    }
+
+    @Override
+    public List<ResourcesDO> SelectMenuByparent(ResourcesDO m, String level, String parentid) {
+        return null;
+    }
 }

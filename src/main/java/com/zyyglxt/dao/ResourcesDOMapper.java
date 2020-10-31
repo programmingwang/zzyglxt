@@ -2,6 +2,7 @@ package com.zyyglxt.dao;
 
 import com.zyyglxt.dataobject.ResourcesDO;
 import com.zyyglxt.dataobject.ResourcesDOKey;
+import com.zyyglxt.dataobject.UserDO;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -61,4 +62,13 @@ public interface ResourcesDOMapper {
      * @return
      */
     List<ResourcesDO> selectAllResources();
+
+    /**
+     * 根据等级或父节点查询菜单信息
+     * @param level 等级
+     * @param parentid 父节点编号
+     * @return 菜单信息
+     */
+    List<ResourcesDO> selectMenuByLevelOrParentid(Character level,Character parentid);
+
 }

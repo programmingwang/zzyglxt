@@ -6,6 +6,7 @@ import com.zyyglxt.dataobject.ResourcesRoleRefDO;
 import com.zyyglxt.dataobject.ResourcesRoleRefDOKey;
 import com.zyyglxt.permissionsService.ResourcesRoleRefService;
 import com.zyyglxt.permissionsService.ResourcesService;
+import com.zyyglxt.permissionsUtil.MenuTreeUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -67,6 +68,8 @@ public class ResourcesController {
     @RequestMapping(value = "/selectall", method = RequestMethod.GET)
     public List<ResourcesDO> selectAllResources(){
         List<ResourcesDO> resourcesDOS = resourcesService.selectAllResources();
-        return resourcesDOS;
+        MenuTreeUtil menuTreeUtil = new MenuTreeUtil(resourcesDOS, null);
+        List<ResourcesDO> treeGridList = menuTreeUtil.buildTreeGrid();
+        return treeGridList;
     }
 }

@@ -64,4 +64,18 @@ public interface ResourcesService {
      * @return
      */
     List<ResourcesDO> selectAllResources();
+
+    /**
+     * 根据等级或父节点查询菜单信息
+     * @param level 等级
+     * @param parentid 父节点编号
+     * @return 菜单信息
+     */
+    List<ResourcesDO> selectMenuByLevelOrParentid(Character level,Character parentid);
+
+    /**
+     * 查询菜单（父子菜单对应形式）
+     * @return
+     */
+    List<ResourcesDO> SelectMenuByparent(ResourcesDO m,String level,String parentid);
 }

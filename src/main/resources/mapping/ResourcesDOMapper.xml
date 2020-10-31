@@ -47,6 +47,15 @@
     <include refid="Base_Column_List" />
     from resource
   </select>
+  <select id="selectMenuByLevelOrParentid" parameterType="java.lang.Character" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from resource
+    <where>
+      and RESOURCE_LEVEL = #{resourceLevel,jdbcType=CHAR}
+      and RESOURCE_PCODE = #{resourcePcode,jdbcType=CHAR}
+    </where>
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="com.zyyglxt.dataobject.ResourcesDOKey">
     <!--
       WARNING - @mbg.generated

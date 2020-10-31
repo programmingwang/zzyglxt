@@ -25,7 +25,8 @@ public interface ITravelService {
     int removeTravel(ChineseCulturalDOKey key);
 
     //修改一个健康旅游信息
-    int updateTravel(ChineseCulturalDOKey key, ChineseCulturalDO record);
+    int updateTravel(ChineseCulturalDO record);
 
     //修改一个健康旅游信息状态
+    int changeTravelStatus(ChineseCulturalDOKey key, String chineseCulturalStatus);
 }

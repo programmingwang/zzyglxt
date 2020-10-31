@@ -3,7 +3,7 @@ package com.zyyglxt.service.impl;
 import com.zyyglxt.dao.IndustrialDevelopSciAchiDOMapper;
 import com.zyyglxt.dataobject.IndustrialDevelopSciAchiDO;
 import com.zyyglxt.dataobject.IndustrialDevelopSciAchiDOKey;
-import com.zyyglxt.service.IIndustrialDevelopSciAchi;
+import com.zyyglxt.service.IIndustrialDevelopSciAchiService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -15,7 +15,7 @@ import java.util.Date;
  * @Version 1.0
  **/
 @Service
-public class IndustrialDevelopSciAchiImpl implements IIndustrialDevelopSciAchi {
+public class IndustrialDevelopSciAchiServiceImpl implements IIndustrialDevelopSciAchiService {
 
     @Resource
     IndustrialDevelopSciAchiDOMapper sciAchiDOMapper;

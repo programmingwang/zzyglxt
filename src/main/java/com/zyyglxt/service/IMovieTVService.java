@@ -25,7 +25,8 @@ public interface IMovieTVService {
     int removeMovieTV(ChineseCulturalDOKey key);
 
     //修改一个电视电影
-    int updateMovieTV(ChineseCulturalDOKey key,ChineseCulturalDO record);
+    int updateMovieTV(ChineseCulturalDO record);
 
     //修改一个电视电影状态
+    int changeMovieStatus(ChineseCulturalDOKey key, String chineseCulturalStatus);
 }

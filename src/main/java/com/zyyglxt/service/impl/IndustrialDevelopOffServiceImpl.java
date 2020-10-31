@@ -3,7 +3,7 @@ package com.zyyglxt.service.impl;
 import com.zyyglxt.dao.IndustrialDevelopOffDOMapper;
 import com.zyyglxt.dataobject.IndustrialDevelopOffDO;
 import com.zyyglxt.dataobject.IndustrialDevelopOffDOKey;
-import com.zyyglxt.service.IIndustrialDevelopOff;
+import com.zyyglxt.service.IIndustrialDevelopOffService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -15,7 +15,7 @@ import java.util.Date;
  * @Version 1.0
  **/
 @Service
-public class IndustrialDevelopOffImpl implements IIndustrialDevelopOff {
+public class IndustrialDevelopOffServiceImpl implements IIndustrialDevelopOffService {
     @Resource
     IndustrialDevelopOffDOMapper developOffDOMapper;
 

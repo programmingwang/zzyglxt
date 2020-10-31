@@ -25,8 +25,8 @@ public interface ICulturalRelicsService {
     int removeCulturalRelics(ChineseCulturalDOKey key);
 
     //修改一个文化古迹
-    int updateCulturalRelics(ChineseCulturalDOKey key, ChineseCulturalDO record);
+    int updateCulturalRelics(ChineseCulturalDO record);
 
     //修改一个文化古迹状态
-
+    int changeCulturalRelics(ChineseCulturalDOKey key, String chineseCulturalStatus);
 }

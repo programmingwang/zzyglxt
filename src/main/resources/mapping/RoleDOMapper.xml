@@ -39,6 +39,7 @@
     where itemID = #{itemid,jdbcType=INTEGER}
       and itemCode = #{itemcode,jdbcType=CHAR}
   </select>
+  
   <select id="selectItemCodeByRoleType" resultType="java.lang.String">
     <!--
       WARNING - @mbg.generated
@@ -47,6 +48,16 @@
     -->
     select
       itemCode
+
+  <select id="selectAllRole" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from role
+  </select>
+  <select id="selectByRoleType" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+
     from role
     where ROLE_TYPE = #{roleType,jdbcType=INTEGER}
   </select>

@@ -1,0 +1,93 @@
+.content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.zyytable thead {
+    background-color: #775637;
+    color: white;
+    font-size: 14px;
+}
+
+.zyytable {
+    width: 1162px;
+    table-layout: fixed;
+}
+
+.zyytable thead tr {
+    height: 52px;
+}
+
+.zyytable tr {
+    height: 92px;
+}
+
+.zyytable td {
+    font-size: 12px;
+    word-wrap: break-word;
+    white-space: nowrap;
+    width: 194px;
+    height: 92px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+}
+
+.zyytable td[name="firstcol"] {
+    font-size: 12px;
+    color: #775637;
+}
+
+
+.pagediv {
+    position: relative;
+    right: -400px;
+    display: flex;
+    flex-direction: row;
+
+}
+
+.my-page-item {
+    width: 28px;
+    height: 28px;
+    font-size: 12px;
+    margin-left: 10px;
+}
+
+.my-pagination {
+    display: -ms-flexbox;
+    display: flex;
+    height: 28px;
+    padding-left: 0;
+    list-style: none;
+    border-radius: 0.25rem;
+}
+
+.my-page-link {
+    position: relative;
+    display: block;
+    padding: 0.5rem 0.75rem;
+    margin-left: -1px;
+    line-height: 1;
+    color: #896B6B;
+    background-color: #fff;
+    border: 1px solid #dee2e6;
+}
+
+.my-page-link:hover {
+    z-index: 2;
+    text-decoration: none;
+    color: white;
+    background-color: #775637;
+    border-color: #dee2e6;
+}
+
+.my-page-link:active{
+    z-index: 2;
+    text-decoration: none;
+    color: white;
+    background-color: #775637;
+    border-color: #dee2e6;
+}

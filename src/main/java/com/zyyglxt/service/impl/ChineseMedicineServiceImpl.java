@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * @author qjc
@@ -25,6 +26,7 @@ public class ChineseMedicineServiceImpl implements IChineseMedicineService {
      */
     @Override
     public int addChineseMedicine(ChineseMedicineDO chineseMedicineDO) {
+        chineseMedicineDO.setItemcode(UUID.randomUUID().toString());
         return chineseMedicineDOMapper.insertSelective(chineseMedicineDO);
     }
 

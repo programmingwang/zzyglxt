@@ -6,11 +6,13 @@ import com.zyyglxt.dataobject.HospSpecialtyRefDO;
 import com.zyyglxt.dataobject.HospSpecialtyRefDOKey;
 import com.zyyglxt.dataobject.SpecialtyDO;
 import com.zyyglxt.dataobject.SpecialtyDOKey;
+import com.zyyglxt.dto.SpecialtyDto;
 import com.zyyglxt.service.ISpecialtyService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * @author qjc
@@ -24,26 +26,54 @@ public class SpecialtyServiceImpl implements ISpecialtyService {
     SpecialtyDOMapper specialtyDOMapper;
     @Resource
     HospSpecialtyRefDOMapper hospSpecialtyRefDOMapper;
-
-    /*在控制层将数据封装好再传进service层*/
+    @Resource
+    SpecialtyDO specialtyDO;
+    @Resource
+    HospSpecialtyRefDO hospSpecialtyRefDO;
 
     /*增加科室，同时也将科室与医院记录插入*/
     @Override
-    public void addSpecialty(SpecialtyDO specialtyDO, HospSpecialtyRefDO hospSpecialtyRefDO) {
+    public void addSpecialty(SpecialtyDto specialtyDto) {
+        specialtyDO = specialtyDto;
+        specialtyDO.setItemcode(UUID.randomUUID().toString());
+
+        hospSpecialtyRefDO.setItemcode(UUID.randomUUID().toString());
+        hospSpecialtyRefDO.setHospitalCode(specialtyDto.getHospitalCode());
+        hospSpecialtyRefDO.setSpecialtyCode(specialtyDto.getHospitalCode());
+        hospSpecialtyRefDO.setCreater(specialtyDto.getCreater());
+        hospSpecialtyRefDO.setItemcreateat(specialtyDto.getItemcreateat());
+        hospSpecialtyRefDO.setUpdater(specialtyDto.getUpdater());
+        hospSpecialtyRefDO.setItemupdateat(specialtyDto.getItemupdateat());
+
         specialtyDOMapper.insertSelective(specialtyDO);
         hospSpecialtyRefDOMapper.insertSelective(hospSpecialtyRefDO);
     }
 
     /*更新科室信息，同步更新医院科室关系表*/
     @Override
-    public void updateSpecialty(SpecialtyDO specialtyDO, HospSpecialtyRefDO hospSpecialtyRefDO) {
+    public void updateSpecialty(SpecialtyDto specialtyDto) {
+        specialtyDO = specialtyDto;
+
+        hospSpecialtyRefDO.setItemcode(UUID.randomUUID().toString());
+        hospSpecialtyRefDO.setHospitalCode(specialtyDto.getHospitalCode());
+        hospSpecialtyRefDO.setSpecialtyCode(specialtyDto.getHospitalCode());
+        hospSpecialtyRefDO.setCreater(specialtyDto.getCreater());
+        hospSpecialtyRefDO.setItemcreateat(specialtyDto.getItemcreateat());
+        hospSpecialtyRefDO.setUpdater(specialtyDto.getUpdater());
+        hospSpecialtyRefDO.setItemupdateat(specialtyDto.getItemupdateat());
+
         specialtyDOMapper.updateByPrimaryKeySelective(specialtyDO);
         hospSpecialtyRefDOMapper.updateByPrimaryKeySelective(hospSpecialtyRefDO);
     }
 
     /*删除科室记录，包括科室表和关系表*/
     @Override
-    public void deleteSpecialty(SpecialtyDOKey specialtyDOKey, HospSpecialtyRefDOKey hospSpecialtyRefDOKey) {
+    public void deleteSpecialty(SpecialtyDto specialtyDto) {
+        SpecialtyDOKey specialtyDOKey = specialtyDto;
+        HospSpecialtyRefDOKey hospSpecialtyRefDOKey = new HospSpecialtyRefDOKey();
+        hospSpecialtyRefDOKey.setItemid(specialtyDto.getItemid());
+        hospSpecialtyRefDOKey.setItemcode(specialtyDto.getItemcode());
+
         hospSpecialtyRefDOMapper.deleteByPrimaryKey(hospSpecialtyRefDOKey);
         specialtyDOMapper.deleteByPrimaryKey(specialtyDOKey);
     }

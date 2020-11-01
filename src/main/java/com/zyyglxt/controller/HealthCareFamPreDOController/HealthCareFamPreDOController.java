@@ -35,7 +35,7 @@ public class HealthCareFamPreDOController {
         return Result.succ("添加数据成功");
     }
     /*
-      历史名方、国医话健康相关数据的删除
+      国医话健康相关数据的删除
     */
     @RequestMapping(value ="deletehealthcarefampredo",method = RequestMethod.POST )
     public Result deleteHealthCareFamPreDOMapper(@RequestBody HealthCareFamPreDOKey key){

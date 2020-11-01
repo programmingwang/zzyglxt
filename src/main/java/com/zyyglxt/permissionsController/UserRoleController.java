@@ -4,8 +4,6 @@ import com.zyyglxt.dataobject.*;
 import com.zyyglxt.permissionsService.RoleService;
 import com.zyyglxt.permissionsService.UserRoleRefService;
 import com.zyyglxt.permissionsService.UserService;
-import com.zyyglxt.permissionsUtil.DateUtils;
-import com.zyyglxt.permissionsUtil.UUIDUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,7 +20,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("user")
-public class UserController {
+public class UserRoleController {
     @Autowired
     UserService userService;
     @Autowired

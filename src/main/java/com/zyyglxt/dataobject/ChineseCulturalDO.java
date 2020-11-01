@@ -2,6 +2,7 @@ package com.zyyglxt.dataobject;
 
 import lombok.ToString;
 
+import javax.validation.constraints.NotBlank;
 import java.util.Date;
 
 @ToString
@@ -13,6 +14,7 @@ public class ChineseCulturalDO extends ChineseCulturalDOKey {
      *
      * @mbg.generated Thu Oct 29 16:49:53 CST 2020
      */
+    @NotBlank(message = "名称不能为空")
     private String chineseCulturalName;
 
     /**

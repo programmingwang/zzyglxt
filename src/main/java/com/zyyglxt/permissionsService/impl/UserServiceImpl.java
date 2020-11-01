@@ -1,10 +1,10 @@
 package com.zyyglxt.permissionsService.impl;
 
+import com.zyyglxt.dao.RoleDOMapper;
 import com.zyyglxt.dao.UserDOMapper;
-import com.zyyglxt.dataobject.UserDO;
-import com.zyyglxt.dataobject.UserDOKey;
+import com.zyyglxt.dao.UserRoleRefDOMapper;
+import com.zyyglxt.dataobject.*;
 import com.zyyglxt.permissionsService.UserService;
-import com.zyyglxt.permissionsUtil.DateUtils;
 import com.zyyglxt.permissionsUtil.UUIDUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,10 +20,24 @@ import java.util.List;
 public class UserServiceImpl implements UserService {
     @Autowired
     UserDOMapper userDOMapper;
+    @Autowired
+    UserRoleRefDOMapper userRoleRefDOMapper;
+    @Autowired
+    RoleDOMapper roleDOMapper;
 
     @Override
-    public int deleteByPrimaryKey(UserDOKey key) {
-        return userDOMapper.deleteByPrimaryKey(key);
+    public void deleteUserByUsername(UserDO userDO) {
+        //删除用户角色关系
+        UserRoleRefDOKey userRoleRefDOKey = new UserRoleRefDOKey();
+        UserRoleRefDO userRoleRefDO = userRoleRefDOMapper.selectByUserCode(userDO.getItemcode());
+        userRoleRefDOKey.setItemid(userRoleRefDO.getItemid());
+        userRoleRefDOKey.setItemcode(userRoleRefDO.getItemcode());
+        userRoleRefDOMapper.deleteByPrimaryKey(userRoleRefDOKey);
+        //删除用户
+        UserDOKey userDOKey = new UserDOKey();
+        userDOKey.setItemid(userDO.getItemid());
+        userDOKey.setItemcode(userDO.getItemcode());
+        userDOMapper.deleteByPrimaryKey(userDOKey);
     }
 
     @Override
@@ -32,11 +46,19 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public int insertSelective(UserDO record) {
+    public void insertUserSelective(UserDO record) {
+        //添加用户
         record.setItemcode(UUIDUtils.getUUID());
-        record.setItemcreateat(DateUtils.getDate());
-        return userDOMapper.insertSelective(record);
+        userDOMapper.insertSelective(record);
+        //分配角色
+        //查询角色role_code
+        RoleDO roleDO = roleDOMapper.selectByRoleType(record.getType());
+        UserRoleRefDO userRoleRefDO = new UserRoleRefDO();
+        userRoleRefDO.setRoleCode(roleDO.getItemcode());
+        userRoleRefDO.setUserCode(record.getItemcode());
+        userRoleRefDOMapper.insertSelective(userRoleRefDO);
     }
+
 
     @Override
     public UserDO selectByPrimaryKey(UserDOKey key) {
@@ -44,9 +66,25 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public int updateByPrimaryKeySelective(UserDO record) {
-        record.setItemupdateat(DateUtils.getDate());
-        return userDOMapper.updateByPrimaryKeySelective(record);
+    public void updateByPrimaryKeySelective(UserDO userDO) {
+        UserDOKey userDOKey = new UserDOKey();
+        userDOKey.setItemid(userDO.getItemid());
+        userDOKey.setItemcode(userDO.getItemcode());
+        UserDO userDO1 = userDOMapper.selectByPrimaryKey(userDOKey);
+        //更新用户信息
+        userDOMapper.updateByPrimaryKeySelective(userDO);
+        //更新角色
+        if (!userDO1.getType().equals(userDO.getType())&& userDO.getType()!=null ){
+            RoleDO roleDO = roleDOMapper.selectByRoleType(userDO.getType());
+            UserRoleRefDO userRoleRefDO = new UserRoleRefDO();
+            //获取需要更新的userRoleRefDO
+            UserRoleRefDO userRoleRefDO1 = userRoleRefDOMapper.selectByUserCode(userDO.getItemcode());
+            userRoleRefDO.setItemid(userRoleRefDO1.getItemid());
+            userRoleRefDO.setItemcode(userRoleRefDO1.getItemcode());
+            userRoleRefDO.setRoleCode(roleDO.getItemcode());
+            userRoleRefDO.setUserCode(userDO.getItemcode());
+            userRoleRefDOMapper.updateByPrimaryKeySelective(userRoleRefDO);
+        }
     }
 
     @Override

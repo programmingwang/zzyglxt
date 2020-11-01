@@ -14,7 +14,7 @@ public interface IHospService {
     int addHosp(HospDO hospDO);
     int updateHosp(HospDO hospDO);
     int deleteHosp(HospDOKey hospDOKey);
-    List<HospDO> getAllHosp();
+    List<HospDO> selectAllHosp();
     List<HospDO> searchHosp(String keyWord);
     List<HospDO> top5Hosp();
 }

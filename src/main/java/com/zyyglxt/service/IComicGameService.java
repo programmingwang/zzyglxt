@@ -25,7 +25,8 @@ public interface IComicGameService {
     int removeComicGame(ChineseCulturalDOKey key);
 
     //修改一个动漫游戏
-    int updateComicGame(ChineseCulturalDOKey key,ChineseCulturalDO record);
+    int updateComicGame(ChineseCulturalDO record);
 
     //修改一个动漫游戏状态
+    int changeComicGameStatus(ChineseCulturalDOKey key, String chineseCulturalStatus);
 }

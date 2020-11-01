@@ -25,8 +25,8 @@ public interface IIntangibleCulturalHeritageService {
     int removeIntangibleCulturalHeritage(ChineseCulturalDOKey key);
 
     //修改一个非物质文化遗产
-    int updateIntangibleCulturalHeritage(ChineseCulturalDOKey key, ChineseCulturalDO record);
+    int updateIntangibleCulturalHeritage(ChineseCulturalDO record);
 
     //修改一个非物质文化遗产状态
-
+    int changeIntangibleCulturalHeritageStatus(ChineseCulturalDOKey key, String chineseCulturalStatus);
 }

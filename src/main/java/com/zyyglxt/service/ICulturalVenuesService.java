@@ -25,8 +25,8 @@ public interface ICulturalVenuesService {
     int removeCulturalVenues(ChineseCulturalDOKey key);
 
     //修改一个文化场馆
-    int updateCulturalVenues(ChineseCulturalDOKey key, ChineseCulturalDO record);
+    int updateCulturalVenues(ChineseCulturalDO record);
 
     //修改一个文化场馆状态
-
+    int changeCulturalVenuesStatus(ChineseCulturalDOKey key, String chineseCulturalStatus);
 }

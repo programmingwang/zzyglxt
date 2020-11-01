@@ -190,4 +190,34 @@
     where itemID = #{itemid,jdbcType=INTEGER}
       and itemCode = #{itemcode,jdbcType=CHAR}
   </update>
+
+
+    <select id="selectAllFile" resultMap="ResultMapWithBLOBs">
+        SELECT *
+        FROM tb_culpro_file
+        ORDER BY itemCreateAt DESC
+    </select>
+
+    <select id="searchFile" resultMap="ResultMapWithBLOBs">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from tb_culpro_file
+        WHERE UPLOADER LIKE "%"#{value}"%"
+        OR FILE_NAME LIKE "%"#{value}"%"
+        OR FILE_TYPE LIKE "%"#{value}"%"
+        ORDER BY itemCreateAt DESC
+    </select>
+
+    <select id="top5File" resultMap="ResultMapWithBLOBs">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from tb_culpro_file
+        ORDER BY itemCreateAt DESC
+        LIMIT 5
+    </select>
+
 </mapper>

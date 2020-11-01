@@ -2,6 +2,7 @@ package com.zyyglxt.controller.ChineseCultural.prodiuction;
 
 import com.zyyglxt.dataobject.ChineseCulturalDO;
 import com.zyyglxt.dataobject.ChineseCulturalDOKey;
+import com.zyyglxt.error.BusinessException;
 import com.zyyglxt.service.IMovieTVService;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -44,7 +45,7 @@ public class MovieTVController {
 
     //增加一个漫画典故
     @RequestMapping(value = "/addMovTv" , method = RequestMethod.POST)
-    public String addTraditionalCultural(ChineseCulturalDO chineseCulturalDO){
+    public String addTraditionalCultural(ChineseCulturalDO chineseCulturalDO) throws BusinessException {
         chineseCulturalDO.setChineseCulturalType("电影电视");
         chineseCulturalDO.setChineseCulturalStatus("待上架");
         iMovieTVService.addMovieTV(chineseCulturalDO);
@@ -75,7 +76,7 @@ public class MovieTVController {
 
     //修改一个电影电视
     @RequestMapping(value = "/updMovTv" , method = RequestMethod.POST)
-    public String updateTraditionalCultural(ChineseCulturalDO chineseCulturalDO){
+    public String updateTraditionalCultural(ChineseCulturalDO chineseCulturalDO) throws BusinessException {
         iMovieTVService.updateMovieTV(chineseCulturalDO);
         return "back to main page";
     }

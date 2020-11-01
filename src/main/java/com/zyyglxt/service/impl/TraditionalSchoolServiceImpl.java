@@ -6,7 +6,12 @@ import com.zyyglxt.dataobject.ChineseCulturalDO;
 import com.zyyglxt.dataobject.ChineseCulturalDOKey;
 import com.zyyglxt.dataobject.CulturalResourcesDO;
 import com.zyyglxt.dataobject.CulturalResourcesDOKey;
+import com.zyyglxt.error.BusinessException;
+import com.zyyglxt.error.EmBusinessError;
 import com.zyyglxt.service.ITraditionalSchoolService;
+import com.zyyglxt.validator.ValidatorImpl;
+import com.zyyglxt.validator.ValidatorResult;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -25,6 +30,9 @@ public class TraditionalSchoolServiceImpl implements ITraditionalSchoolService {
     @Resource
     private CulturalResourcesDOMapper culturalResourcesDOMapper;
 
+    @Autowired
+    private ValidatorImpl validator;
+
     @Override
     public CulturalResourcesDO getTraditionalSchool(CulturalResourcesDOKey key) {
         return culturalResourcesDOMapper.selectByPrimaryKey(key,"中医流派");
@@ -37,10 +45,12 @@ public class TraditionalSchoolServiceImpl implements ITraditionalSchoolService {
 
     @Override
     @Transactional
-    public int addTraditionalSchool(CulturalResourcesDO record) {
-        record.setItemcreateat(new Date());
+    public int addTraditionalSchool(CulturalResourcesDO record) throws BusinessException {
+        ValidatorResult result = validator.validate(record);
+        if(result.isHasErrors()){
+            throw new BusinessException(result.getErrMsg(), EmBusinessError.PARAMETER_VALIDATION_ERROR);
+        }
         record.setCreater("");
-        record.setItemupdateat(new Date());
         record.setUpdater("");
         record.setChineseCulturalType("中医流派");
         return culturalResourcesDOMapper.insertSelective(record);
@@ -55,7 +65,11 @@ public class TraditionalSchoolServiceImpl implements ITraditionalSchoolService {
 
     @Override
     @Transactional
-    public int updateTraditionalSchool(CulturalResourcesDO record) {
+    public int updateTraditionalSchool(CulturalResourcesDO record) throws BusinessException {
+        ValidatorResult result = validator.validate(record);
+        if(result.isHasErrors()){
+            throw new BusinessException(result.getErrMsg(), EmBusinessError.PARAMETER_VALIDATION_ERROR);
+        }
         record.setUpdater("");
         record.setItemupdateat(new Date());
         return culturalResourcesDOMapper.updateByPrimaryKeySelective(record);

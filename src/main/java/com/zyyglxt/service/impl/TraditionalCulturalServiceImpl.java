@@ -4,7 +4,12 @@ import com.zyyglxt.dao.CulturalResourcesDOMapper;
 import com.zyyglxt.dataobject.ChineseCulturalDOKey;
 import com.zyyglxt.dataobject.CulturalResourcesDO;
 import com.zyyglxt.dataobject.CulturalResourcesDOKey;
+import com.zyyglxt.error.BusinessException;
+import com.zyyglxt.error.EmBusinessError;
 import com.zyyglxt.service.ITraditionalCulturalService;
+import com.zyyglxt.validator.ValidatorImpl;
+import com.zyyglxt.validator.ValidatorResult;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -23,6 +28,9 @@ public class TraditionalCulturalServiceImpl implements ITraditionalCulturalServi
     @Resource
     private CulturalResourcesDOMapper culturalResourcesDOMapper;
 
+    @Autowired
+    private ValidatorImpl validator;
+
     @Override
     public CulturalResourcesDO getTraditionalCultural(CulturalResourcesDOKey key) {
         return culturalResourcesDOMapper.selectByPrimaryKey(key,"中医医史");
@@ -35,10 +43,12 @@ public class TraditionalCulturalServiceImpl implements ITraditionalCulturalServi
 
     @Override
     @Transactional
-    public int addTraditionalCultural(CulturalResourcesDO record) {
-        record.setItemcreateat(new Date());
+    public int addTraditionalCultural(CulturalResourcesDO record) throws BusinessException {
+        ValidatorResult result = validator.validate(record);
+        if(result.isHasErrors()){
+            throw new BusinessException(result.getErrMsg(), EmBusinessError.PARAMETER_VALIDATION_ERROR);
+        }
         record.setCreater("测试");
-        record.setItemupdateat(new Date());
         record.setUpdater("测试");
         record.setChineseCulturalType("中医医史");
         return culturalResourcesDOMapper.insertSelective(record);
@@ -52,10 +62,11 @@ public class TraditionalCulturalServiceImpl implements ITraditionalCulturalServi
 
     @Override
     @Transactional
-    public int updateTraditionalCultural(CulturalResourcesDO record) {
-        ChineseCulturalDOKey key = new ChineseCulturalDOKey();
-        key.setItemid(record.getItemid());
-        key.setItemcode(record.getItemcode());
+    public int updateTraditionalCultural(CulturalResourcesDO record) throws BusinessException {
+        ValidatorResult result = validator.validate(record);
+        if(result.isHasErrors()){
+            throw new BusinessException(result.getErrMsg(), EmBusinessError.PARAMETER_VALIDATION_ERROR);
+        }
         record.setUpdater("");
         record.setItemupdateat(new Date());
         return culturalResourcesDOMapper.updateByPrimaryKeySelective(record);

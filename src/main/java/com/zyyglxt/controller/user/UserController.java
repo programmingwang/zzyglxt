@@ -47,28 +47,6 @@ public class UserController {
      */
     @RequestMapping(value = "upwd", method = RequestMethod.PUT)
     public void UpdatePassword(UserDto userDto) {
-        // 验证手机号是否正确
-        if (MobileUtil.checkPhone(userDto.getMobilePhone())) {
-            // 验证密码输入是否为空
-            if (StringUtils.isEmpty(userDto.getPassword()) ||
-                    StringUtils.isEmpty(userDto.getNewPassword()) ||
-                    StringUtils.isEmpty(userDto.getCheckNewPassword())) {
-                System.out.println("密码输入不能为空，请重新输入！");
-            } else {
-                // 验证输入的新密码与输入的原密码是否一致
-                if (userDto.getPassword().equals(userDto.getNewPassword())) {
-                    System.out.println("原密码与新密码一致，请重新输入新密码！");
-                } else {
-                    // 验证两次输入的新密码是否一致
-                    if (userDto.getNewPassword().equals(userDto.getCheckNewPassword())) {
-                        userService.UpdatePassword(userDto);
-                    } else {
-                        System.out.println("两次输入的新密码不一致，请重新输入！");
-                    }
-                }
-            }
-        } else {
-            System.out.println("手机号码不正确！");
-        }
+        userService.UpdatePassword(userDto);
     }
 }

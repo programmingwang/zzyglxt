@@ -8,6 +8,7 @@ import com.zyyglxt.dataobject.UserRoleRefDO;
 import com.zyyglxt.dto.UserDto;
 import com.zyyglxt.service.IUserService;
 import com.zyyglxt.util.MobileUtil;
+import com.zyyglxt.util.UserUtil;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
@@ -40,7 +41,6 @@ public class IUserServiceImpl implements IUserService {
      */
     @Override
     public void Register(UserDO userDO) {
-
         // 根据用户名查询数据库，若查询到数据，表示该用户名已存在，不能注册
         UserDO username = userDOMapper.selectByUsername(userDO.getUsername());
         if (username != null) {
@@ -116,6 +116,9 @@ public class IUserServiceImpl implements IUserService {
         password = DigestUtils.md5Hex(password + username);
         UserDO userDO = userDOMapper.selectByUsernameAndPassword(username, password);
         if (userDO != null) {
+            UserUtil userUtil = new UserUtil();
+            userUtil.setUserName(username);
+            System.out.println("登录后从session拿到的用户名：" + userUtil.getUserName());
             System.out.println("登录成功");
         } else {
             System.out.println("登录失败");
@@ -124,23 +127,63 @@ public class IUserServiceImpl implements IUserService {
 
     @Override
     public void UpdatePassword(UserDto userDto) {
-    /*
-    已实现： 先判断电话号码时候正确，再查询数据库原密码和输入的原密码是否匹配，若匹配，再比较两次输入的新密码是否正确
-    都正确就实行更新，有对不上的则修改失败，
-    待实现： 若新密码与旧密码一致则修改不成功，提示原密码与新密码一致； 判断是普通用户还是管理员
-        */
-        // 根据手机号码查询数据库拿到 盐
-        UserDO userDO = userDOMapper.selectByMobilePhone(userDto.getMobilePhone());
-        String salt = userDO.getSalt();
+        //从session中拿到用户名，然后根据用户名查询数据库，得到角色类型，然后判断是普通用户还是管理员，
+        //如果是普通用户则需要输入手机号码和原密码，管理员则直接输入新密码替换原密码（不需要手机号码和原密码）
+        UserUtil userUtil = new UserUtil();
+        UserDO userDO = userDOMapper.selectByUsername(userUtil.getUserName());
+        int userType = userDO.getType();// 用户类型（0：普通，1：管理员）
+        System.out.println("用户类型："+userType);
 
-        String oldPassword = userDto.getPassword();// 输入的原密码
-        oldPassword = DigestUtils.md5Hex(oldPassword + salt);// 输入的原密码+盐计算
-        // 数据库查询到的原密码和输入的 原密码+盐计算后 比对
-        if (userDO.getPassword().equals(oldPassword)) {
-            userDto.setNewPassword(DigestUtils.md5Hex(userDto.getNewPassword() + salt));
-            userDOMapper.updatePasswordByMobilePhone(userDto.getNewPassword(), userDto.getMobilePhone());
-        } else {
-            System.out.println("输入的旧密码错误，请重新输入！");
+        // 如果是普通用户
+        if (userType == 0) {
+            if (MobileUtil.checkPhone(userDto.getMobilePhone())) {
+                String mobilePhone = userDto.getMobilePhone();
+                System.out.println("输入的手机号码：" + mobilePhone);
+                // 根据手机号码查询数据库拿到 盐
+                userDO = userDOMapper.selectByMobilePhone(mobilePhone);
+                String salt = userDO.getSalt();
+
+                String oldPassword = userDto.getPassword();// 输入的原密码
+                oldPassword = DigestUtils.md5Hex(oldPassword + salt);// 输入的原密码+盐计算
+                // 数据库查询到的原密码和输入的 原密码+盐计算后 比对
+                if (userDO.getPassword().equals(oldPassword)) {
+                    String newPassword = userDto.getNewPassword();// 第一次输入的新密码
+                    String checkNewPassword = userDto.getCheckNewPassword();// 第二次输入的新密码
+                    // 输入不能为空
+                    if (StringUtils.isEmpty(newPassword) || StringUtils.isEmpty(checkNewPassword)) {
+                        System.out.println("密码输入不能为空，请重新输入！");
+                    } else {
+                        // 判断两次输入的新密码是否一致
+                        if (newPassword.equals(checkNewPassword)) {
+                            userDto.setNewPassword(DigestUtils.md5Hex(userDto.getNewPassword() + salt));
+                            userDOMapper.updatePasswordByMobilePhone(userDto.getNewPassword(), mobilePhone);
+                        } else {
+                            System.out.println("两次输入的新密码不一致，请重新输入！");
+                        }
+                    }
+                } else {
+                    System.out.println("输入的旧密码错误，请重新输入！");
+                }
+            } else {
+                System.out.println("手机号码不正确！");
+            }
+        } else if (userType == 1) {
+            // 如果是管理员
+            String username = userUtil.getUserName();
+
+            String newPassword = userDto.getNewPassword();// 第一次输入的新密码
+            String checkNewPassword = userDto.getCheckNewPassword();// 第二次输入的新密码
+            // 判断两次输入的新密码是否一致
+            if (StringUtils.isEmpty(newPassword) || StringUtils.isEmpty(checkNewPassword)) {
+                System.out.println("密码输入不能为空，请重新输入！");
+            } else {
+                if (newPassword.equals(checkNewPassword)) {
+                    userDto.setNewPassword(DigestUtils.md5Hex(userDto.getNewPassword() + username));
+                    userDOMapper.updatePasswordByUserName(userDto.getNewPassword(), username);
+                } else {
+                    System.out.println("两次输入的新密码不一致，请重新输入！");
+                }
+            }
         }
     }
 }

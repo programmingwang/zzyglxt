@@ -5,6 +5,7 @@ import com.zyyglxt.dataobject.DataDO;
 import com.zyyglxt.dataobject.DataDOKey;
 import com.zyyglxt.service.IDataDOService;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 
@@ -22,35 +23,42 @@ public class DataDOServiceImpl  implements IDataDOService{
     DataDOMapper dataDOMapper;
 
     @Override
-    public DataDO selectByPrimaryKey(DataDOKey key) {
-        return dataDOMapper.selectByPrimaryKey(key);
+    public DataDO selectNewsInf(DataDOKey key) {
+        return dataDOMapper.selectByPrimaryKey(key,"新闻信息");
     }
 
     @Override
-    public void insertSelective(DataDO record) {
+    public List<DataDO> selectAllNewsInf(String dataType) {
+        return dataDOMapper.selectByAllInf(dataType);
+    }
+
+    @Override
+    @Transactional
+    public int insertNewsInf(DataDO record) {
         record.setItemcreateat(new Date());
+        record.setCreater("test");
         record.setItemupdateat(new Date());
-        dataDOMapper.insertSelective(record);
+        record.setUpdater("test");
+        record.setDataType("新闻管理");
+        return dataDOMapper.insertSelective(record);
     }
 
     @Override
-    public void deleteByPrimaryKey(DataDOKey key) {
-        dataDOMapper.deleteByPrimaryKey(key);
+    @Transactional
+    public int deleteNewsInf(DataDOKey key) {
+        return dataDOMapper.deleteByPrimaryKey(key);
     }
 
     @Override
-    public void updateByPrimaryKeySelective(DataDO record) {
+    @Transactional
+    public int updateNewsInf(DataDO record) {
+        record.setUpdater("asd");
         record.setItemupdateat(new Date());
-        dataDOMapper.updateByPrimaryKeySelective(record);
-    }
-
-    @Override
-    public List<DataDO> selectAll() {
-        return dataDOMapper.selectAll();
+        return dataDOMapper.updateByPrimaryKeySelective(record);
     }
 
     /**
-     * 关键字搜索，包括标题、所属位置、作者、来源、政策法规类型、状态、数据类型
+     * 关键字搜索
      * @param keyWord
      * @return
      */

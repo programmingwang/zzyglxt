@@ -2,7 +2,7 @@ package com.zyyglxt.controller.IndustrialDevelop;
 
 import com.zyyglxt.dataobject.IndustrialDevelopSciAchiDO;
 import com.zyyglxt.dataobject.IndustrialDevelopSciAchiDOKey;
-import com.zyyglxt.service.IIndustrialDevelopSciAchi;
+import com.zyyglxt.service.IIndustrialDevelopSciAchiService;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -16,7 +16,7 @@ import javax.annotation.Resource;
 @RequestMapping(value = "industrialdevelop")
 public class IndustrialSciAchiController {
     @Resource
-    IIndustrialDevelopSciAchi industrialDevelop;
+    IIndustrialDevelopSciAchiService industrialDevelop;
 
     /**
      * 增加科研成果
@@ -37,8 +37,6 @@ public class IndustrialSciAchiController {
     @ResponseBody
     @RequestMapping(value = "/achievement", method = RequestMethod.PUT)
     public void updateAchievement(@RequestBody IndustrialDevelopSciAchiDO sciAchiDO) {
-        System.out.println(sciAchiDO.toString());
-        System.out.println("update");
         industrialDevelop.updAchievement(sciAchiDO);
         
     }

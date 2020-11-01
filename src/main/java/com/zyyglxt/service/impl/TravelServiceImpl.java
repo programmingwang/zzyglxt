@@ -51,9 +51,17 @@ public class TravelServiceImpl implements ITravelService {
 
     @Override
     @Transactional
-    public int updateTravel(ChineseCulturalDOKey key, ChineseCulturalDO record) {
+    public int updateTravel(ChineseCulturalDO record) {
+        ChineseCulturalDOKey key = new ChineseCulturalDOKey();
+        key.setItemid(record.getItemid());
+        key.setItemcode(record.getItemcode());
         record.setUpdater("");
         record.setItemupdateat(new Date());
         return chineseCulturalDOMapper.updateByPrimaryKeySelective(key,record);
+    }
+
+    @Override
+    public int changeTravelStatus(ChineseCulturalDOKey key, String chineseCulturalStatus) {
+        return chineseCulturalDOMapper.changeStatusByPrimaryKeySelective(key,chineseCulturalStatus);
     }
 }

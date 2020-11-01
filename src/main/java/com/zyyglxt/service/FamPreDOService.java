@@ -3,6 +3,8 @@ package com.zyyglxt.service;
 import com.zyyglxt.dataobject.FamPreDO;
 import com.zyyglxt.dataobject.FamPreDOKey;
 
+import java.util.List;
+
 /**
  * @version 1.0
  * @Author huangwj
@@ -16,4 +18,5 @@ public interface FamPreDOService {
   int deleteByPrimaryKey(FamPreDOKey key);
   int updateByPrimaryKeySelective(FamPreDO record);
   FamPreDO selectByPrimaryKey(FamPreDOKey key);
+  List<FamPreDO> selectAllFamPre();//查询所有历史名方
 }

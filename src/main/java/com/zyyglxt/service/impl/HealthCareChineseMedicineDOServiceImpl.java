@@ -10,6 +10,7 @@ import javax.annotation.Resource;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @version 1.0
@@ -58,5 +59,10 @@ public class HealthCareChineseMedicineDOServiceImpl implements HealthCareChinese
     @Override
     public HealthCareChineseMedicineDO selectByPrimaryKey(HealthCareChineseMedicineDOKey key) {
         return healthCareChineseMedicineDOMapper.selectByPrimaryKey(key);
+    }
+     /*查询所有中医药常识数据*/
+    @Override
+    public List<HealthCareChineseMedicineDO> selectAllHealthCareChineseMedicine() {
+        return healthCareChineseMedicineDOMapper.selectAllHealthCareChineseMedicine();
     }
 }

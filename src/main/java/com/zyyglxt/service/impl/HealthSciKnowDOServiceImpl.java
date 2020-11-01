@@ -10,6 +10,7 @@ import javax.annotation.Resource;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @version 1.0
@@ -55,5 +56,10 @@ public class HealthSciKnowDOServiceImpl implements HealthSciKnowDOService {
     @Override
     public HealthSciKnowDO selectByPrimaryKey(HealthSciKnowDOKey key) {
         return healthSciKnowDOMapper.selectByPrimaryKey(key);
+    }
+    /*查询所有科普知识数据*/
+    @Override
+    public List<HealthSciKnowDO> selectAllHealthSciKnow() {
+        return healthSciKnowDOMapper.selectAllHealthSciKnow();
     }
 }

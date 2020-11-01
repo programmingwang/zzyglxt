@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * @version 1.0
@@ -57,5 +58,10 @@ public class HealthCareFamPreDOController {
     public Result selectHealthCareFamPreDOMapper(@RequestBody HealthCareFamPreDOKey key){
        healthCareFamPreDOService.selectByPrimaryKey(key);
         return Result.succ( healthCareFamPreDOService.selectByPrimaryKey(key));
+    }
+    /*查询所有国医话健康所有数据*/
+    @RequestMapping(value ="selectallhealthcarefampredo",method = RequestMethod.POST )
+    public List<HealthCareFamPreDO> selectAllHealthCareFamPreDOMapper(){
+        return healthCareFamPreDOService.selectAllHealthCareFamPre();
     }
 }

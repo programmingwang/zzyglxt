@@ -250,4 +250,11 @@
     where itemID = #{itemid,jdbcType=INTEGER}
       and itemCode = #{itemcode,jdbcType=CHAR}
   </update>
+
+  <select id="selectAllFamPre" resultMap="ResultMapWithBLOBs">
+        SELECT *
+        FROM tb_culpro_fam_pre
+        ORDER BY itemCreateAt DESC
+    </select>
+
 </mapper>

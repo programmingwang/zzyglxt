@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * @version 1.0
@@ -46,7 +47,7 @@ public class HealthSciKnowDOController {
     科普知识相关数据的修改
     */
     @RequestMapping(value ="updatehealthsciknowdo",method = RequestMethod.POST )
-    public Result updateHealthCareChineseMedicineDOMapper(@RequestBody HealthSciKnowDO key){
+    public Result updateHealthSciKnowDOMapper(@RequestBody HealthSciKnowDO key){
         healthSciKnowDOService.updateByPrimaryKeySelective(key);
         System.out.println("要修改科普知识编号为："+key.getItemid());
         return Result.succ("修改数据成功");
@@ -55,8 +56,14 @@ public class HealthSciKnowDOController {
      中医药名称相关数据的查询
    */
     @RequestMapping(value ="selecthealthsciknowdo",method = RequestMethod.POST )
-    public Result selectHealthCareChineseMedicineDOMapper(@RequestBody HealthSciKnowDOKey key){
+    public Result selectHealthSciKnowDOMapper(@RequestBody HealthSciKnowDOKey key){
         healthSciKnowDOService.selectByPrimaryKey(key);
         return Result.succ( healthSciKnowDOService.selectByPrimaryKey(key));
     }
+    /*查询所有国医话健康所有数据*/
+    @RequestMapping(value ="selectallhealthsciknowdo",method = RequestMethod.POST )
+    public List<HealthSciKnowDO> selectAllHealthSciKnowDOMapper(){
+        return healthSciKnowDOService.selectAllHealthSciKnow();
+    }
 }
+

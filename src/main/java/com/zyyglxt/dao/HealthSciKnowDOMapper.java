@@ -6,6 +6,8 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Mapper
 @Repository
 public interface HealthSciKnowDOMapper {
@@ -64,4 +66,6 @@ public interface HealthSciKnowDOMapper {
      * @mbg.generated Wed Oct 28 16:25:52 CST 2020
      */
     int updateByPrimaryKey(HealthSciKnowDO record);
+    List<HealthSciKnowDO> selectAllHealthSciKnow();//查询所有科普知识所有数据
+
 }

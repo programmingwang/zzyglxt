@@ -10,6 +10,7 @@ import javax.annotation.Resource;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @version 1.0
@@ -22,15 +23,18 @@ public class FamPreDOServiceImpl implements FamPreDOService {
     FamPreDOMapper famPreDOMapper;
     @Override
     public int insertSelective(FamPreDO record) {
-        Date data=new Date();
+        /*Date data=new Date();
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         try {
             data = df.parse(df.format(data));
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        record.setItemcreateat(data);
-        return famPreDOMapper.insertSelective(record);
+        record.setItemcreateat(data);*/
+        famPreDOMapper.insertSelective(record);
+        record.setItemcreateat(new Date());
+        record.setCreater("");
+        return 0;
     }
 
     @Override
@@ -41,19 +45,27 @@ public class FamPreDOServiceImpl implements FamPreDOService {
 
     @Override
     public int updateByPrimaryKeySelective(FamPreDO record) {
-        Date data=new Date();
+        /*Date data=new Date();
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         try {
             data = df.parse(df.format(data));
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        record.setItemcreateat(data);
-        return famPreDOMapper.updateByPrimaryKeySelective(record);
+        record.setItemcreateat(data);*/
+        famPreDOMapper.updateByPrimaryKeySelective(record);
+        record.setItemupdateat(new Date());
+        record.setUpdater("");
+        return 0;
     }
 
     @Override
     public FamPreDO selectByPrimaryKey(FamPreDOKey key) {
         return famPreDOMapper.selectByPrimaryKey(key);
+    }
+
+    @Override
+    public List<FamPreDO> selectAllFamPre() {
+        return famPreDOMapper.selectAllFamPre();
     }
 }

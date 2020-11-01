@@ -22,8 +22,8 @@ public class IndustrialDevelopSciAchiImpl implements IIndustrialDevelopSciAchi {
 
     @Override
     public void addAchievement(IndustrialDevelopSciAchiDO achiDO) {
-        achiDO.setItemcreateat(new Date());
-        achiDO.setItemupdateat(new Date());
+        /*achiDO.setItemcreateat(new Date());
+        achiDO.setItemupdateat(new Date());*/
         sciAchiDOMapper.insertSelective(achiDO);
     }
 
@@ -34,7 +34,7 @@ public class IndustrialDevelopSciAchiImpl implements IIndustrialDevelopSciAchi {
 
     @Override
     public void updAchievement(IndustrialDevelopSciAchiDO achiDO) {
-        achiDO.setItemupdateat(new Date());
+       // achiDO.setItemupdateat(new Date());
         sciAchiDOMapper.updateByPrimaryKeySelective(achiDO);
     }
 

@@ -250,4 +250,9 @@
     where itemID = #{itemid,jdbcType=INTEGER}
       and itemCode = #{itemcode,jdbcType=CHAR}
   </update>
+  <select id="selectAllHealthSciKnow" resultMap="BaseResultMap">
+        SELECT *
+        FROM tb_health_care_sci_know
+        ORDER BY itemCreateAt
+    </select>
 </mapper>

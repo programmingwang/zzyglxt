@@ -10,6 +10,7 @@ import javax.annotation.Resource;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @version 1.0
@@ -57,5 +58,10 @@ public class HealthCareFamPreDOServiceImpl implements HealthCareFamPreDOService 
     @Override
     public HealthCareFamPreDO selectByPrimaryKey(HealthCareFamPreDOKey key) {
         return healthCareFamPreDOMapper.selectByPrimaryKey(key);
+    }
+    /*查询国医话健康所有数据*/
+    @Override
+    public List<HealthCareFamPreDO> selectAllHealthCareFamPre() {
+        return healthCareFamPreDOMapper.selectAllHealthCareFamPre();
     }
 }

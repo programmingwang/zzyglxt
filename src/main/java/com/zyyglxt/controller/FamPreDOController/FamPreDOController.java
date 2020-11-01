@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * @version 1.0
@@ -26,22 +27,23 @@ public class FamPreDOController {
   /*历史名方数据添加*/
   @RequestMapping(value = "insertfampredo",method = RequestMethod.POST)
     public Result insertFamPreDOMapper(@RequestBody FamPreDO key){
-      try {
           System.out.println("历史名方名称: " + key.getName());
           famPreDOService.insertSelective(key);
-          return Result.succ(key);
-      } catch (Exception e) {
-          e.printStackTrace();
-          return Result.fail("添加数据失败");
-      }
+              return Result.succ("添加数据成功"+key);
+
+
   }
   /*历史名方数据删除*/
     @RequestMapping(value ="deletefamprerdo",method = RequestMethod.POST )
     public Result deleteFamPreDOMapper(@RequestBody FamPreDOKey key){
-        famPreDOService.deleteByPrimaryKey(key);
-        System.out.println("要删除历史名方编号为："+key.getItemid());
-        return Result.succ("删除成功");
-    }
+        try{
+            famPreDOService.deleteByPrimaryKey(key);
+            System.out.println("要删除历史名方编号为："+key.getItemid());
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+            return Result.succ("删除成功");
+        }
     /*历史名方数据修改*/
     @RequestMapping(value ="updatefampredo",method = RequestMethod.POST )
     public Result updateFamPreDOMapper(@RequestBody FamPreDO key){
@@ -54,5 +56,10 @@ public class FamPreDOController {
     public Result selectFamPreDOMapper(@RequestBody FamPreDOKey key){
         famPreDOService.selectByPrimaryKey(key);
         return Result.succ( famPreDOService.selectByPrimaryKey(key));
+    }
+    /*历史名方所有数据查询*/
+    @RequestMapping(value ="selectallfampredo",method = RequestMethod.POST )
+    public List<FamPreDO> selectAllFamPreDOMapper(){
+        return famPreDOService.selectAllFamPre();
     }
 }

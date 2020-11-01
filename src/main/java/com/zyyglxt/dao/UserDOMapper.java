@@ -103,7 +103,7 @@ public interface UserDOMapper {
      *
      * @mbg.generated Wed Oct 28 16:25:52 CST 2020
      */
-    int updatePasswordByUserName(String password, String mobilePhone);
+    int updatePasswordByUserName(String password, String username);
 
     int updateStateByUserName(String state, String username);
 

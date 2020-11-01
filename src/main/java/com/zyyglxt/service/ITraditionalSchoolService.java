@@ -2,6 +2,8 @@ package com.zyyglxt.service;
 
 import com.zyyglxt.dataobject.ChineseCulturalDO;
 import com.zyyglxt.dataobject.ChineseCulturalDOKey;
+import com.zyyglxt.dataobject.CulturalResourcesDO;
+import com.zyyglxt.dataobject.CulturalResourcesDOKey;
 
 import java.util.List;
 
@@ -13,20 +15,20 @@ import java.util.List;
  */
 public interface ITraditionalSchoolService {
     //查询一个中医流派
-    ChineseCulturalDO getTraditionalSchool(ChineseCulturalDOKey key);
+    CulturalResourcesDO getTraditionalSchool(CulturalResourcesDOKey key);
 
     //查询所有中医流派
-    List<ChineseCulturalDO> getTraditionalSchoolList();
+    List<CulturalResourcesDO> getTraditionalSchoolList();
 
     //增加一个中医流派
-    int addTraditionalSchool(ChineseCulturalDO record);
+    int addTraditionalSchool(CulturalResourcesDO record);
 
     //删除一个中医流派
-    int removeTraditionalSchool(ChineseCulturalDOKey key);
+    int removeTraditionalSchool(CulturalResourcesDOKey key);
 
     //修改一个中医流派
-    int updateTraditionalSchool(ChineseCulturalDOKey key, ChineseCulturalDO record);
+    int updateTraditionalSchool(CulturalResourcesDO record);
 
     //修改一个中医流派状态
-
+    int changeTraditionalSchoolStatus(CulturalResourcesDOKey key, String chineseCulturalStatus);
 }

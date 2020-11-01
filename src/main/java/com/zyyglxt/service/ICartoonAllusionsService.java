@@ -25,7 +25,8 @@ public interface ICartoonAllusionsService {
     int removeCartoonAllusions(ChineseCulturalDOKey key);
 
     //修改一个漫画典故
-    int updateCartoonAllusions(ChineseCulturalDOKey key,ChineseCulturalDO record);
+    int updateCartoonAllusions(ChineseCulturalDO record);
 
     //修改一个漫画典故状态
+    int changeCartoonAllusionsStatus(ChineseCulturalDOKey key, String chineseCulturalStatus);
 }

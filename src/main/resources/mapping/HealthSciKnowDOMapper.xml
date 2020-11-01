@@ -65,8 +65,8 @@
       This element was generated on Wed Oct 28 16:25:52 CST 2020.
     -->
     delete from tb_health_care_sci_know
-    where itemID = #{itemid,jdbcType=INTEGER}
-      and itemCode = #{itemcode,jdbcType=CHAR}
+    where itemID = #{key.itemid,jdbcType=INTEGER}
+      and itemCode = #{key.itemcode,jdbcType=CHAR}
   </delete>
   <insert id="insert" parameterType="com.zyyglxt.dataobject.HealthSciKnowDO">
     <!--

@@ -26,48 +26,51 @@ public class DataDOController {
      * @param key
      * @return
      */
-    @GetMapping("selectByPrimaryKey")
+    @RequestMapping(value = "/selectByPrimaryKey", method = RequestMethod.GET)
     public DataDO selectByPrimaryKey(DataDOKey key){
-        return dataDOService.selectByPrimaryKey(key);
+        return dataDOService.selectNewsInf(key);
     }
 
     /**
      * 查看所有数据
      * @return
      */
-    @GetMapping("selectAll")
-    public List<DataDO> selectAll(){
-        return dataDOService.selectAll();
+    @RequestMapping(value = "/selectAllNewsInf/{dataType}", method = RequestMethod.GET)
+    public List<DataDO> selectAllNewsInf(@PathVariable("dataType") String dataType){
+        return dataDOService.selectAllNewsInf(dataType);
     }
 
     /**
      * 删除新闻数据记录
-     * @param key
+     * @param itemID
+     * @param itemCode
      */
-    @ResponseBody
-    @DeleteMapping("deleteByPrimaryKey")
-    public void deleteByPrimaryKey(DataDOKey key){
-        dataDOService.deleteByPrimaryKey(key);
+    @RequestMapping(value = "/deleteByPrimaryKey/{itemID}/{itemCode}", method = RequestMethod.DELETE)
+    public int deleteByPrimaryKey(@PathVariable("itemID") Integer itemID, @PathVariable("itemCode")String itemCode){
+        DataDOKey dataDOKey = new DataDOKey();
+        dataDOKey.setItemid(itemID);
+        dataDOKey.setItemcode(itemCode);
+        return dataDOService.deleteNewsInf(dataDOKey);
     }
 
     /**
      * 增加新闻数据记录
      * @param record
      */
-    @ResponseBody
-    @PostMapping("insertSelective")
-    public void insertSelective(@RequestBody DataDO record){
-        dataDOService.insertSelective(record);
+    @RequestMapping(value = "/insertNewsInf", method = RequestMethod.POST)
+    public int insertNewsInf(DataDO record){
+        record.setDataType("新闻管理");
+        record.setDataStatus("待上架");
+        return dataDOService.insertNewsInf(record);
     }
 
     /**
      * 更新新闻数据记录
      * @param record
      */
-    @ResponseBody
-    @PutMapping("updateByPrimaryKeySelective")
-    public void updateByPrimaryKeySelective(@RequestBody DataDO record){
-        dataDOService.updateByPrimaryKeySelective(record);
+    @RequestMapping(value = "/updateNewsInf", method = RequestMethod.PUT)
+    public int updateNewsInf(DataDO record){
+        return dataDOService.updateNewsInf(record);
     }
 
     /**
@@ -75,7 +78,6 @@ public class DataDOController {
      * @param keyWord
      * @return
      */
-    @ResponseBody
     @GetMapping("searchDataDO")
     public List<DataDO> searchDataDO(@RequestBody String keyWord) {
         return dataDOService.searchDataDO(keyWord);

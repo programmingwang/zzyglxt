@@ -41,6 +41,14 @@ public class UserController {
     }
 
     /**
+     * 用户登出
+     */
+    @RequestMapping(value = "/logout", method = RequestMethod.GET)
+    public void Logout() {
+        userService.Logout();
+    }
+
+    /**
      * 根据电话号码来修改密码
      *
      * @param userDto

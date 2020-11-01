@@ -13,4 +13,5 @@ public interface IUserService {
     void Register(UserDO userDO);
     void Login(String username, String password);
     void UpdatePassword(UserDto userDto);
+    void Logout();
 }

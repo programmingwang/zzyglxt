@@ -105,6 +105,8 @@ public interface UserDOMapper {
      */
     int updatePasswordByUserName(String password, String mobilePhone);
 
+    int updateStateByUserName(String state, String username);
+
     /*
      * 查询所有用户
      * @return List<UserDO>

@@ -117,14 +117,28 @@ public class IUserServiceImpl implements IUserService {
         UserDO userDO = userDOMapper.selectByUsernameAndPassword(username, password);
         if (userDO != null) {
             UserUtil userUtil = new UserUtil();
-            userUtil.setUserName(username);
-            System.out.println("登录后从session拿到的用户名：" + userUtil.getUserName());
+            userUtil.setUserName(username);// 用户登录进去将用户名存到session中
+            userDOMapper.updateStateByUserName("入", userUtil.getUserName());
             System.out.println("登录成功");
         } else {
             System.out.println("登录失败");
         }
     }
 
+    /**
+     * 退出登录，更改状态
+     */
+    @Override
+    public void Logout() {
+        UserUtil userUtil = new UserUtil();
+        userDOMapper.updateStateByUserName("出", userUtil.getUserName());
+    }
+
+    /**
+     * 修改密码
+     *
+     * @param userDto
+     */
     @Override
     public void UpdatePassword(UserDto userDto) {
         //从session中拿到用户名，然后根据用户名查询数据库，得到角色类型，然后判断是普通用户还是管理员，
@@ -132,7 +146,7 @@ public class IUserServiceImpl implements IUserService {
         UserUtil userUtil = new UserUtil();
         UserDO userDO = userDOMapper.selectByUsername(userUtil.getUserName());
         int userType = userDO.getType();// 用户类型（0：普通，1：管理员）
-        System.out.println("用户类型："+userType);
+        System.out.println("用户类型：" + userType);
 
         // 如果是普通用户
         if (userType == 0) {

@@ -6,9 +6,9 @@ import com.zyyglxt.dataobject.UserDOKey;
 import com.zyyglxt.permissionsService.UserService;
 import com.zyyglxt.permissionsUtil.DateUtils;
 import com.zyyglxt.permissionsUtil.UUIDUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -18,7 +18,7 @@ import java.util.List;
  */
 @Service
 public class UserServiceImpl implements UserService {
-    @Autowired
+    @Resource
     UserDOMapper userDOMapper;
 
     @Override

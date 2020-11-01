@@ -29,9 +29,7 @@ public class FamPreDOController {
     public Result insertFamPreDOMapper(@RequestBody FamPreDO key){
           System.out.println("历史名方名称: " + key.getName());
           famPreDOService.insertSelective(key);
-              return Result.succ("添加数据成功"+key);
-
-
+          return Result.succ("添加数据成功"+key);
   }
   /*历史名方数据删除*/
     @RequestMapping(value ="deletefamprerdo",method = RequestMethod.POST )

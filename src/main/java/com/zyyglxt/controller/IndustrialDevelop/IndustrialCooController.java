@@ -4,13 +4,12 @@ import com.zyyglxt.dataobject.IndustrialDevelopCooExcDO;
 import com.zyyglxt.dataobject.IndustrialDevelopCooExcDOKey;
 import com.zyyglxt.service.IIndustrialDevelopCooService;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import java.util.*;
 
 /**
  * @Author lrt
@@ -39,8 +38,14 @@ public class IndustrialCooController {
         developCooService.updCooRecord(developCooExcDO);
     }
 
-    @GetMapping(value = "/coorecord")
-    public String cooView(HttpServletRequest request) {
+    @GetMapping(value = "/coorecord/{page}")
+    public String cooView(ModelMap map, @PathVariable int page, @RequestParam int pagesize) {
+
+        List<IndustrialDevelopCooExcDO> list = developCooService.getCooRecord(1, 10);
+        map.put("dataList", list);
+        map.put("page", page);
+        map.put("pagesize", pagesize);
         return "industrial_develop/cooperation";
     }
+
 }

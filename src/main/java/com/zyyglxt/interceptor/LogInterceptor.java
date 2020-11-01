@@ -46,10 +46,10 @@ public class LogInterceptor extends HandlerInterceptorAdapter {
             String logLevel = mainlog.logLevel();
             String creater = mainlog.creater();
             String updater = mainlog.updater();
-            String itemcode = mainlog.itemcode();
-            Date itemcreateat = mainlog.itemcreateat();
-            Integer itemid = UUID.randomUUID().toString().replace("-", "");
-            LogUtil.writeMainLog(new LogDO(itemid, itemcode, appCode, logTitle, logLevel, creater, itemcreateat, updater, itemupdateat));//异步插入数据库日志记录
+//            String itemcode = mainlog.itemcode();
+//            Date itemcreateat = mainlog.itemcreateat();
+//            Integer itemid = UUID.randomUUID().toString().replace("-", "");
+//            LogUtil.writeMainLog(new LogDO(itemid, itemcode, appCode, logTitle, logLevel, creater, itemcreateat, updater, itemupdateat));//异步插入数据库日志记录
 
         }
     }

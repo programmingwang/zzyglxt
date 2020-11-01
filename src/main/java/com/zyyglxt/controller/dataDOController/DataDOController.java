@@ -1,6 +1,5 @@
-package com.zyyglxt.controller.dataDO;
+package com.zyyglxt.controller.dataDOController;
 
-import com.zyyglxt.dao.DataDOMapper;
 import com.zyyglxt.dataobject.DataDO;
 import com.zyyglxt.dataobject.DataDOKey;
 import com.zyyglxt.service.IDataDOService;

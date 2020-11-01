@@ -31,9 +31,9 @@ public class FamPreDOServiceImpl implements FamPreDOService {
             e.printStackTrace();
         }
         record.setItemcreateat(data);*/
-        famPreDOMapper.insertSelective(record);
         record.setItemcreateat(new Date());
         record.setCreater("");
+        famPreDOMapper.insertSelective(record);
         return 0;
     }
 
@@ -53,9 +53,8 @@ public class FamPreDOServiceImpl implements FamPreDOService {
             e.printStackTrace();
         }
         record.setItemcreateat(data);*/
-        famPreDOMapper.updateByPrimaryKeySelective(record);
         record.setItemupdateat(new Date());
-        record.setUpdater("");
+        famPreDOMapper.updateByPrimaryKeySelective(record);
         return 0;
     }
 

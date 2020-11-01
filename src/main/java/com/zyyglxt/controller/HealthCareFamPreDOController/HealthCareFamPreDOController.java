@@ -22,7 +22,7 @@ public class HealthCareFamPreDOController {
     @Resource
     HealthCareFamPreDOService healthCareFamPreDOService;
     /*
-     历史名方、国医话健康相关数据插入
+     国医话健康相关数据插入
    */
     @RequestMapping(value ="inserthealthcarefampredo",method = RequestMethod.POST )
     public Result insertHealthCareFamPreDOMapper(@RequestBody HealthCareFamPreDO key) {
@@ -43,7 +43,7 @@ public class HealthCareFamPreDOController {
         return Result.succ("删除成功");
     }
     /*
-     历史名方、国医话健康相关数据的修改
+     国医话健康相关数据的修改
    */
     @RequestMapping(value ="updatehealthcarefampredo",method = RequestMethod.POST )
     public Result updateHealthCareFamPreDOMapper(@RequestBody HealthCareFamPreDO key){
@@ -52,7 +52,7 @@ public class HealthCareFamPreDOController {
         return Result.succ("修改数据成功");
     }
     /*
-     历史名方、国医话健康相关数据的查询
+     国医话健康相关数据的查询
    */
     @RequestMapping(value ="selecthealthcarefampredo",method = RequestMethod.POST )
     public Result selectHealthCareFamPreDOMapper(@RequestBody HealthCareFamPreDOKey key){

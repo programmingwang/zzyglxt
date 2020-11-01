@@ -23,14 +23,16 @@ public class HealthSciKnowDOServiceImpl implements HealthSciKnowDOService {
     HealthSciKnowDOMapper healthSciKnowDOMapper;
     @Override
     public int insertSelective(HealthSciKnowDO record) {
-        Date data=new Date();
+        /*Date data=new Date();
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         try {
             data = df.parse(df.format(data));
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        record.setItemcreateat(data);
+        record.setItemcreateat(data);*/
+        record.setItemcreateat(new Date());
+        record.setItemupdateat(new Date());
         return healthSciKnowDOMapper.insertSelective(record);
     }
 
@@ -42,14 +44,15 @@ public class HealthSciKnowDOServiceImpl implements HealthSciKnowDOService {
 
     @Override
     public int updateByPrimaryKeySelective(HealthSciKnowDO record) {
-        Date data=new Date();
+        /*Date data=new Date();
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         try {
             data = df.parse(df.format(data));
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        record.setItemcreateat(data);
+        record.setItemcreateat(data);*/
+        record.setItemupdateat(new Date());
         return healthSciKnowDOMapper.updateByPrimaryKeySelective(record);
     }
 

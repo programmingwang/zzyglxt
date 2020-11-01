@@ -26,14 +26,16 @@ public class HealthCareChineseMedicineDOServiceImpl implements HealthCareChinese
 **/
     @Override
     public int insert(HealthCareChineseMedicineDO record) {
-        Date data=new Date();
+        /*Date data=new Date();
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         try {
             data = df.parse(df.format(data));
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        record.setItemcreateat(data);
+        record.setItemcreateat(data);*/
+        record.setItemcreateat(new Date());
+        record.setItemupdateat(new Date());
         return healthCareChineseMedicineDOMapper.insert(record);
     }
 
@@ -45,14 +47,15 @@ public class HealthCareChineseMedicineDOServiceImpl implements HealthCareChinese
 
     @Override
     public int updateByPrimaryKeySelective(HealthCareChineseMedicineDO record) {
-        Date data=new Date();
+        /*Date data=new Date();
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         try {
             data = df.parse(df.format(data));
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        record.setItemcreateat(data);
+        record.setItemcreateat(data);*/
+        record.setItemupdateat(new Date());
         return healthCareChineseMedicineDOMapper.updateByPrimaryKeySelective(record);
     }
 

@@ -35,13 +35,12 @@ public class CulturalVenuesServiceImpl implements ICulturalVenuesService {
     @Override
     @Transactional
     public int addCulturalVenues(ChineseCulturalDO record) {
-        chineseCulturalDOMapper.insertSelective(record);
         record.setItemcreateat(new Date());
         record.setCreater("");
         record.setItemupdateat(new Date());
         record.setUpdater("");
         record.setChineseCulturalType("文化场馆");
-        return 0;
+        return chineseCulturalDOMapper.insertSelective(record);
     }
 
     @Override
@@ -52,9 +51,17 @@ public class CulturalVenuesServiceImpl implements ICulturalVenuesService {
 
     @Override
     @Transactional
-    public int updateCulturalVenues(ChineseCulturalDOKey key, ChineseCulturalDO record) {
+    public int updateCulturalVenues(ChineseCulturalDO record) {
+        ChineseCulturalDOKey key = new ChineseCulturalDOKey();
+        key.setItemid(record.getItemid());
+        key.setItemcode(record.getItemcode());
         record.setUpdater("");
         record.setItemupdateat(new Date());
         return chineseCulturalDOMapper.updateByPrimaryKeySelective(key,record);
+    }
+
+    @Override
+    public int changeCulturalVenuesStatus(ChineseCulturalDOKey key, String chineseCulturalStatus) {
+        return chineseCulturalDOMapper.changeStatusByPrimaryKeySelective(key,chineseCulturalStatus);
     }
 }

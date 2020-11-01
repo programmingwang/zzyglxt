@@ -2,7 +2,7 @@ package com.zyyglxt.controller.IndustrialDevelop;
 
 import com.zyyglxt.dataobject.IndustrialDevelopTalRecDOKey;
 import com.zyyglxt.dataobject.IndustrialDevelopTalRecDOWithBLOBs;
-import com.zyyglxt.service.IIndustrialTalRec;
+import com.zyyglxt.service.IIndustrialDevelopTalRecService;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -19,7 +19,7 @@ import javax.annotation.Resource;
 @RequestMapping(value = "industrialdevelop")
 public class IndustrialTalRecController {
     @Resource
-    IIndustrialTalRec talRecService;
+    IIndustrialDevelopTalRecService talRecService;
 
     @RequestMapping(value = "/talrec", method = RequestMethod.POST)
     public void addTalRec(@RequestBody IndustrialDevelopTalRecDOWithBLOBs record) {

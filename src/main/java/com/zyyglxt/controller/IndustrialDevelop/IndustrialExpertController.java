@@ -2,7 +2,9 @@ package com.zyyglxt.controller.IndustrialDevelop;
 
 import com.zyyglxt.dataobject.IndustrialDevelopExpertDO;
 import com.zyyglxt.dataobject.IndustrialDevelopExpertDOKey;
-import com.zyyglxt.service.IIndustrialExpert;
+import com.zyyglxt.dataobject.IndustrialDevelopExpertRefDO;
+import com.zyyglxt.dataobject.IndustrialDevelopExpertRefDOKey;
+import com.zyyglxt.service.IIndustrialDevelopExpertService;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -19,7 +21,7 @@ import javax.annotation.Resource;
 @RequestMapping(value = "industrialdevelop")
 public class IndustrialExpertController {
     @Resource
-    IIndustrialExpert industrialExpertService;
+    IIndustrialDevelopExpertService industrialExpertService;
 
     @RequestMapping(value = "/expert", method = RequestMethod.POST)
     public void addExpert(@RequestBody IndustrialDevelopExpertDO developExpertDO){
@@ -34,5 +36,20 @@ public class IndustrialExpertController {
     @RequestMapping(value = "/expert", method = RequestMethod.DELETE)
     public void delExpert(@RequestBody IndustrialDevelopExpertDOKey key) {
         industrialExpertService.delExpert(key);
+    }
+
+    @RequestMapping(value = "/expert-ref", method = RequestMethod.POST)
+    public void addExpertRef(@RequestBody IndustrialDevelopExpertRefDO record) {
+        industrialExpertService.addExpertRef(record);
+    }
+
+    @RequestMapping(value = "/expert-ref", method = RequestMethod.PUT)
+    public void updExpertRef(@RequestBody IndustrialDevelopExpertRefDO record) {
+        industrialExpertService.updExpertRef(record);
+    }
+
+    @RequestMapping(value = "/expert-ref", method = RequestMethod.DELETE)
+    public void delExpertRef(@RequestBody IndustrialDevelopExpertRefDOKey key) {
+        industrialExpertService.delExpertRef(key);
     }
 }

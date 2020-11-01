@@ -11,6 +11,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * @version 1.0
@@ -31,6 +32,7 @@ public class FamPreDOServiceImpl implements FamPreDOService {
             e.printStackTrace();
         }
         record.setItemcreateat(data);*/
+        record.setItemcode(UUID.randomUUID().toString());
         record.setItemcreateat(new Date());
         record.setCreater("");
         famPreDOMapper.insertSelective(record);

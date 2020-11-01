@@ -1,5 +1,6 @@
 package com.zyyglxt.service.impl;
 
+import com.zyyglxt.common.Result;
 import com.zyyglxt.dao.RoleDOMapper;
 import com.zyyglxt.dao.UserDOMapper;
 import com.zyyglxt.dao.UserRoleRefDOMapper;
@@ -10,6 +11,7 @@ import com.zyyglxt.service.IUserService;
 import com.zyyglxt.util.MobileUtil;
 import com.zyyglxt.util.UserUtil;
 import org.apache.commons.codec.digest.DigestUtils;
+import org.apache.commons.lang3.EnumUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
@@ -40,16 +42,17 @@ public class IUserServiceImpl implements IUserService {
      * @param userDO
      */
     @Override
-    public void Register(UserDO userDO) {
+    public Result Register(UserDO userDO) {
         // 根据用户名查询数据库，若查询到数据，表示该用户名已存在，不能注册
         UserDO username = userDOMapper.selectByUsername(userDO.getUsername());
         if (username != null) {
             System.out.println("用户名已存在，请更换用户名继续！");
+            return Result.succ(200, "用户名已存在，请更换用户名继续！",null);
         } else {
             insertUser(userDO);// 添加数据到user表
             insertUserRoleRef(userDO);// 添加数据到user_role_ref表
+            return Result.succ(200, "注册成功！",null);
         }
-
     }
 
     /**
@@ -108,7 +111,7 @@ public class IUserServiceImpl implements IUserService {
      * @param password
      */
     @Override
-    public void Login(String username, String password) {
+    public Result Login(String username, String password) {
         /*
          将拿到的前端用户名和密码加盐后查询数据库，
          如果查到记录，则登录成功，否则，登录失败
@@ -120,8 +123,10 @@ public class IUserServiceImpl implements IUserService {
             userUtil.setUserName(username);// 用户登录进去将用户名存到session中
             userDOMapper.updateStateByUserName("入", userUtil.getUserName());
             System.out.println("登录成功");
+            return Result.succ(200,"登录成功！", null);
         } else {
             System.out.println("登录失败");
+            return Result.fail(200,"用户名或密码错误！", null);
         }
     }
 
@@ -129,9 +134,10 @@ public class IUserServiceImpl implements IUserService {
      * 退出登录，更改状态
      */
     @Override
-    public void Logout() {
+    public Result Logout() {
         UserUtil userUtil = new UserUtil();
         userDOMapper.updateStateByUserName("出", userUtil.getUserName());
+        return Result.succ(200, "退出登录成功！", null);
     }
 
     /**
@@ -140,7 +146,7 @@ public class IUserServiceImpl implements IUserService {
      * @param userDto
      */
     @Override
-    public void UpdatePassword(UserDto userDto) {
+    public Result UpdatePassword(UserDto userDto) {
         //从session中拿到用户名，然后根据用户名查询数据库，得到角色类型，然后判断是普通用户还是管理员，
         //如果是普通用户则需要输入手机号码和原密码，管理员则直接输入新密码替换原密码（不需要手机号码和原密码）
         UserUtil userUtil = new UserUtil();
@@ -164,20 +170,29 @@ public class IUserServiceImpl implements IUserService {
                     if (checkPassword(userDto)) {
                         userDto.setNewPassword(DigestUtils.md5Hex(userDto.getNewPassword() + username));
                         userDOMapper.updatePasswordByMobilePhone(userDto.getNewPassword(), mobilePhone);
+                        return Result.succ(200, "修改成功！", null);
+                    } else {
+                        return Result.fail(404, "输入的新密码不一致或为空！", null);
                     }
                 } else {
                     System.out.println("输入的旧密码错误，请重新输入！");
+                    return Result.fail(404, "输入的旧密码错误，请重新输入！", null);
                 }
             } else {
                 System.out.println("手机号码不正确！");
+                return Result.fail(404, "手机号码不正确！", null);
             }
         } else if (userType == 1) {
             // 如果是管理员
             if (checkPassword(userDto)) {
                 userDto.setNewPassword(DigestUtils.md5Hex(userDto.getNewPassword() + username));
                 userDOMapper.updatePasswordByUserName(userDto.getNewPassword(), username);
+                return Result.succ(200, "修改成功！", null);
+            } else {
+                return Result.fail(404, "输入的新密码不一致或为空！", null);
             }
         }
+        return null;
     }
 
     /**

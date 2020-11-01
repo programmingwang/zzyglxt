@@ -1,5 +1,6 @@
 package com.zyyglxt.controller.user;
 
+import com.zyyglxt.common.Result;
 import com.zyyglxt.dataobject.UserDO;
 import com.zyyglxt.dto.UserDto;
 import com.zyyglxt.service.IUserService;
@@ -26,8 +27,14 @@ public class UserController {
      * @param userDO
      */
     @RequestMapping(value = "/register", method = RequestMethod.POST)
-    public void Register(UserDO userDO) {
-        userService.Register(userDO);
+    public Result Register(UserDO userDO) {
+        Result result = userService.Register(userDO);
+        if (result.getCode() == 200) {
+            return Result.succ(200, result.getMsg(), null);
+        } else {
+            return Result.succ(404, result.getMsg(), null);
+        }
+
     }
 
     /**
@@ -36,16 +43,26 @@ public class UserController {
      * @param userDto
      */
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public void Login(UserDto userDto) {
-        userService.Login(userDto.getUsername(), userDto.getPassword());
+    public Result Login(UserDto userDto) {
+        Result result = userService.Login(userDto.getUsername(), userDto.getPassword());
+        if (result.getCode() == 200) {
+            return Result.succ(200, result.getMsg(), null);
+        } else {
+            return Result.succ(404, result.getMsg(), null);
+        }
     }
 
     /**
      * 用户登出
      */
     @RequestMapping(value = "/logout", method = RequestMethod.GET)
-    public void Logout() {
-        userService.Logout();
+    public Result Logout() {
+        Result result = userService.Logout();
+        if (result.getCode() == 200){
+            return Result.succ(200, result.getMsg(),null);
+        } else {
+            return Result.fail(404, result.getMsg(),null);
+        }
     }
 
     /**
@@ -54,7 +71,12 @@ public class UserController {
      * @param userDto
      */
     @RequestMapping(value = "upwd", method = RequestMethod.PUT)
-    public void UpdatePassword(UserDto userDto) {
-        userService.UpdatePassword(userDto);
+    public Result UpdatePassword(UserDto userDto) {
+        Result result = userService.UpdatePassword(userDto);
+        if (result.getCode() == 200){
+            return Result.succ(200, result.getMsg(), null);
+        } else {
+            return Result.succ(404, result.getMsg(), null);
+        }
     }
 }

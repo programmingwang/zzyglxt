@@ -11,15 +11,22 @@ import java.util.List;
  * @Version 1.0
  */
 public interface IDataDOService {
-    DataDO selectByPrimaryKey(DataDOKey key);
+    //查询一个新闻信息
+    DataDO selectNewsInf(DataDOKey key);
 
-    void insertSelective(DataDO record);
+    //查询所有新闻信息
+    List<DataDO> selectAllNewsInf(String dataType);
 
-    void deleteByPrimaryKey(DataDOKey key);
+    //增加一个新闻信息
+    int insertNewsInf(DataDO record);
 
-    void updateByPrimaryKeySelective(DataDO record);
+    //删除一个新闻信息
+    int deleteNewsInf(DataDOKey key);
 
-    List<DataDO> selectAll();
+    //修改新闻信息
+    int updateNewsInf(DataDO record);
 
     List<DataDO> searchDataDO(String keyWord);
+
+
 }

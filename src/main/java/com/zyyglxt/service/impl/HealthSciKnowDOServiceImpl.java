@@ -1,0 +1,59 @@
+package com.zyyglxt.service.impl;
+
+import com.zyyglxt.dao.HealthSciKnowDOMapper;
+import com.zyyglxt.dataobject.HealthSciKnowDO;
+import com.zyyglxt.dataobject.HealthSciKnowDOKey;
+import com.zyyglxt.service.HealthSciKnowDOService;
+import org.springframework.stereotype.Service;
+
+import javax.annotation.Resource;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+/**
+ * @version 1.0
+ * @Author huangwj
+ * @time 2020/10/29 14:28
+ */
+@Service
+public class HealthSciKnowDOServiceImpl implements HealthSciKnowDOService {
+    @Resource
+    HealthSciKnowDOMapper healthSciKnowDOMapper;
+    @Override
+    public int insertSelective(HealthSciKnowDO record) {
+        Date data=new Date();
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        try {
+            data = df.parse(df.format(data));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        record.setItemcreateat(data);
+        return healthSciKnowDOMapper.insertSelective(record);
+    }
+
+    @Override
+    public int deleteByPrimaryKey(HealthSciKnowDOKey key) {
+        healthSciKnowDOMapper.deleteByPrimaryKey(key);
+        return 0;
+    }
+
+    @Override
+    public int updateByPrimaryKeySelective(HealthSciKnowDO record) {
+        Date data=new Date();
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        try {
+            data = df.parse(df.format(data));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        record.setItemcreateat(data);
+        return healthSciKnowDOMapper.updateByPrimaryKeySelective(record);
+    }
+
+    @Override
+    public HealthSciKnowDO selectByPrimaryKey(HealthSciKnowDOKey key) {
+        return healthSciKnowDOMapper.selectByPrimaryKey(key);
+    }
+}

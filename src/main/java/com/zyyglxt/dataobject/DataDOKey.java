@@ -26,9 +26,8 @@ public class DataDOKey {
      * @return the value of tb_culpro_data.itemID
      *
      * @mbg.generated Wed Oct 28 16:25:52 CST 2020
-     * @param i
      */
-    public Integer getItemid(int i) {
+    public Integer getItemid() {
         return itemid;
     }
 

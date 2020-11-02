@@ -49,4 +49,9 @@ public class IndustrialDevelopCooServiceImpl implements IIndustrialDevelopCooSer
         return cooExcDOMapper.selectByPage(start, end);
     }
 
+    @Override
+    public List<IndustrialDevelopCooExcDO> getCooRecord() {
+        return cooExcDOMapper.selectAll();
+    }
+
 }

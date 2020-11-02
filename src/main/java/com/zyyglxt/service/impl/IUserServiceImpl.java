@@ -7,6 +7,8 @@ import com.zyyglxt.dao.UserRoleRefDOMapper;
 import com.zyyglxt.dataobject.UserDO;
 import com.zyyglxt.dataobject.UserRoleRefDO;
 import com.zyyglxt.dto.UserDto;
+import com.zyyglxt.error.BusinessException;
+import com.zyyglxt.error.EmBusinessError;
 import com.zyyglxt.service.IUserService;
 import com.zyyglxt.util.MobileUtil;
 import com.zyyglxt.util.UserUtil;
@@ -146,7 +148,7 @@ public class IUserServiceImpl implements IUserService {
      * @param userDto
      */
     @Override
-    public Result UpdatePassword(UserDto userDto) {
+    public Result UpdatePassword(UserDto userDto){
         //从session中拿到用户名，然后根据用户名查询数据库，得到角色类型，然后判断是普通用户还是管理员，
         //如果是普通用户则需要输入手机号码和原密码，管理员则直接输入新密码替换原密码（不需要手机号码和原密码）
         UserUtil userUtil = new UserUtil();

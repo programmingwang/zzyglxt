@@ -1,8 +1,9 @@
-package com.zyyglxt.permissionsController;
+package com.zyyglxt.controller.permissionsController;
 
 import com.zyyglxt.dataobject.*;
-import com.zyyglxt.permissionsService.ResourcesRoleRefService;
-import com.zyyglxt.permissionsService.ResourcesService;
+
+import com.zyyglxt.service.ResourcesRoleRefService;
+import com.zyyglxt.service.ResourcesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;

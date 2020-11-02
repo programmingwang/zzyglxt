@@ -1,9 +1,9 @@
-package com.zyyglxt.permissionsController;
+package com.zyyglxt.controller.permissionsController;
 
 import com.zyyglxt.dataobject.ResourcesDO;
 import com.zyyglxt.dataobject.RoleDO;
 import com.zyyglxt.dataobject.RoleDOKey;
-import com.zyyglxt.permissionsService.RoleService;
+import com.zyyglxt.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;

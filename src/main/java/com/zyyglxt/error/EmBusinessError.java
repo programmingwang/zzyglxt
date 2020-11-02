@@ -18,7 +18,7 @@ public enum EmBusinessError implements CommonError {
     UNKNOWN_ERROR(10000,"未知错误"),
 
     //用20000开头来表示用户模块的错误信息
-
+    USER_NOT_LOGIN(20001,"用户未登录"),
 
 
 

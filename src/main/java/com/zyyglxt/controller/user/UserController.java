@@ -2,11 +2,18 @@ package com.zyyglxt.controller.user;
 
 import com.zyyglxt.common.Result;
 import com.zyyglxt.dataobject.UserDO;
+import com.zyyglxt.dto.UpdatePwdDto;
 import com.zyyglxt.dto.UserDto;
+import com.zyyglxt.error.BusinessException;
+import com.zyyglxt.error.EmBusinessError;
+import com.zyyglxt.response.ResponseData;
 import com.zyyglxt.service.IUserService;
 import com.zyyglxt.util.UserUtil;
+import com.zyyglxt.validator.ValidatorImpl;
+import com.zyyglxt.validator.ValidatorResult;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -23,18 +30,28 @@ public class UserController {
 
     /**
      * 用户注册，接收前段传递的数据，到service层
-     *
-     * @param userDO
      */
     @RequestMapping(value = "/register", method = RequestMethod.POST)
-    public Result Register(UserDO userDO) {
-        Result result = userService.Register(userDO);
-        if (result.getCode() == 200) {
-            return Result.succ(200, result.getMsg(), null);
-        } else {
-            return Result.fail(500, result.getMsg(), null);
-        }
+    public ResponseData Register(@RequestParam("orgName") String orgName,
+                                 @RequestParam("orgIdentify") String orgIdentify,
+                                 @RequestParam("orgCode") String orgCode,
+                                 @RequestParam("username") String username,
+                                 @RequestParam("password") String password,
+                                 @RequestParam("mobilePhone") String mobilePhone) throws BusinessException {
+        UserDto userDto = new UserDto();
+        userDto.setOrgName(orgName);
+        userDto.setOrgIdentify(orgIdentify);
+        userDto.setOrgCode(orgCode);
+        userDto.setUsername(username);
+        userDto.setPassword(password);
+        userDto.setMobilePhone(mobilePhone);
 
+        int rs = userService.Register(userDto);
+        if (rs == 200) {
+            return new ResponseData(EmBusinessError.success);
+        } else {
+            return new ResponseData(EmBusinessError.fail);
+        }
     }
 
     /**
@@ -70,17 +87,17 @@ public class UserController {
     /**
      * 根据电话号码来修改密码
      *
-     * @param userDto
+     * @param updatePwdDto
      */
     @RequestMapping(value = "upwd", method = RequestMethod.PUT)
-    public Result UpdatePassword(UserDto userDto) {
+    public Result UpdatePassword(UpdatePwdDto updatePwdDto) {
         Result result = null;
-        if (StringUtils.isEmpty(userDto.getNewPassword()) || StringUtils.isEmpty(userDto.getCheckNewPassword())) {
+        if (StringUtils.isEmpty(updatePwdDto.getNewPassword()) || StringUtils.isEmpty(updatePwdDto.getCheckNewPassword())) {
             System.out.println("密码输入不能为空，请重新输入！");
             return Result.fail(500, "密码输入不能为空，请重新输入！", null);
         } else {
-            if (userDto.getNewPassword().equals(userDto.getCheckNewPassword())) {
-                result = userService.UpdatePassword(userDto);
+            if (updatePwdDto.getNewPassword().equals(updatePwdDto.getCheckNewPassword())) {
+                result = userService.UpdatePassword(updatePwdDto);
                 if (result.getCode() == 200) {
                     return Result.succ(200, result.getMsg(), null);
                 } else {

@@ -24,7 +24,7 @@ public enum EmBusinessError implements CommonError {
     MOBILEPHONE_ERROR(20004, "手机号码错误"),
     INPUT_NOT_NULL(20005, "输入不能为空"),
     OLDPASSWORD_ERROR(20006, "原密码错误"),
-    NEWPASSWORD_NOT_(20006, "原密码错误")
+    NEWPASSWORD_NOT_EQUAL(20007, "新密码不一致")
     ;
 
     EmBusinessError(int errCode, String msg) {

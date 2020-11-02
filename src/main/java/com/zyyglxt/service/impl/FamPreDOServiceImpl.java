@@ -1,9 +1,9 @@
 package com.zyyglxt.service.impl;
 
-import com.zyyglxt.dao.HealthSciKnowDOMapper;
-import com.zyyglxt.dataobject.HealthSciKnowDO;
-import com.zyyglxt.dataobject.HealthSciKnowDOKey;
-import com.zyyglxt.service.HealthSciKnowDOService;
+import com.zyyglxt.dao.FamPreDOMapper;
+import com.zyyglxt.dataobject.FamPreDO;
+import com.zyyglxt.dataobject.FamPreDOKey;
+import com.zyyglxt.service.FamPreDOService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -16,14 +16,14 @@ import java.util.UUID;
 /**
  * @version 1.0
  * @Author huangwj
- * @time 2020/10/29 14:28
+ * @time 2020/10/31 12:11
  */
 @Service
-public class HealthSciKnowDOServiceImpl implements HealthSciKnowDOService {
+public class FamPreDOServiceImpl implements FamPreDOService {
     @Resource
-    HealthSciKnowDOMapper healthSciKnowDOMapper;
+    FamPreDOMapper famPreDOMapper;
     @Override
-    public int insertSelective(HealthSciKnowDO record) {
+    public int insertSelective(FamPreDO record) {
         /*Date data=new Date();
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         try {
@@ -34,17 +34,19 @@ public class HealthSciKnowDOServiceImpl implements HealthSciKnowDOService {
         record.setItemcreateat(data);*/
         record.setItemcode(UUID.randomUUID().toString());
         record.setItemcreateat(new Date());
-        return healthSciKnowDOMapper.insertSelective(record);
-    }
-
-    @Override
-    public int deleteByPrimaryKey(HealthSciKnowDOKey key) {
-        healthSciKnowDOMapper.deleteByPrimaryKey(key);
+        record.setCreater("");
+        famPreDOMapper.insertSelective(record);
         return 0;
     }
 
     @Override
-    public int updateByPrimaryKeySelective(HealthSciKnowDO record) {
+    public int deleteByPrimaryKey(FamPreDOKey key) {
+        famPreDOMapper.deleteByPrimaryKey(key);
+        return 0;
+    }
+
+    @Override
+    public int updateByPrimaryKeySelective(FamPreDO record) {
         /*Date data=new Date();
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         try {
@@ -54,22 +56,23 @@ public class HealthSciKnowDOServiceImpl implements HealthSciKnowDOService {
         }
         record.setItemcreateat(data);*/
         record.setItemupdateat(new Date());
-        return healthSciKnowDOMapper.updateByPrimaryKeySelective(record);
+        famPreDOMapper.updateByPrimaryKeySelective(record);
+        return 0;
     }
 
     @Override
-    public HealthSciKnowDO selectByPrimaryKey(HealthSciKnowDOKey key) {
-        return healthSciKnowDOMapper.selectByPrimaryKey(key);
-    }
-    /*查询所有科普知识数据*/
-    @Override
-    public List<HealthSciKnowDO> selectAllHealthSciKnow() {
-        return healthSciKnowDOMapper.selectAllHealthSciKnow();
+    public FamPreDO selectByPrimaryKey(FamPreDOKey key) {
+        return famPreDOMapper.selectByPrimaryKey(key);
     }
 
     @Override
-    public int updateVisitNumHealthSciKnow(HealthSciKnowDOKey key) {
-        healthSciKnowDOMapper.updateVisitNumHealthSciKnow(key);
+    public List<FamPreDO> selectAllFamPre() {
+        return famPreDOMapper.selectAllFamPre();
+    }
+     /*点击浏览次数*/
+    @Override
+    public int increaseVisitNumFamPre(FamPreDOKey key) {
+        famPreDOMapper.updateVisitNumFamPre(key);
         return 0;
     }
 }

@@ -8,6 +8,7 @@ import com.zyyglxt.service.HealthCareChineseMedicineDOService;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * @version 1.0
@@ -58,5 +59,11 @@ public class HealthCareChineseMedicineDOController {
         healthCareChineseMedicineDOService.selectByPrimaryKey(key);
         return Result.succ( healthCareChineseMedicineDOService.selectByPrimaryKey(key));
     }
+    /*中医药常识数据所有查询*/
+    @RequestMapping(value ="selectallhealthcarechinesemedicinedo",method = RequestMethod.POST )
+    public List<HealthCareChineseMedicineDO> selectAllHealthCareChineseMedicineDOMapper(){
+        return healthCareChineseMedicineDOService.selectAllHealthCareChineseMedicine();
+    }
+
 }
 

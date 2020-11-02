@@ -57,4 +57,8 @@ public interface IndustrialDevelopSciAchiDOMapper {
     int updateVisitNumByItemidAndItemcode(IndustrialDevelopSciAchiDOKey record);
 
     List<IndustrialDevelopSciAchiDO> selectByPage(int start, int end);
+
 }
+
+
+

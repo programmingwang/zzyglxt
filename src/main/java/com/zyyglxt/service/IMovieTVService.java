@@ -2,6 +2,7 @@ package com.zyyglxt.service;
 
 import com.zyyglxt.dataobject.ChineseCulturalDO;
 import com.zyyglxt.dataobject.ChineseCulturalDOKey;
+import com.zyyglxt.error.BusinessException;
 
 import java.util.List;
 
@@ -19,13 +20,14 @@ public interface IMovieTVService {
     List<ChineseCulturalDO> getMovieTVList();
 
     //增加一个电视电影
-    int addMovieTV(ChineseCulturalDO record);
+    int addMovieTV(ChineseCulturalDO record) throws BusinessException;
 
     //删除一个电视电影
     int removeMovieTV(ChineseCulturalDOKey key);
 
     //修改一个电视电影
-    int updateMovieTV(ChineseCulturalDOKey key,ChineseCulturalDO record);
+    int updateMovieTV(ChineseCulturalDO record) throws BusinessException;
 
     //修改一个电视电影状态
+    int changeMovieStatus(ChineseCulturalDOKey key, String chineseCulturalStatus);
 }

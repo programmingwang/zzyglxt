@@ -3,7 +3,12 @@ package com.zyyglxt.service.impl;
 import com.zyyglxt.dao.ChineseCulturalDOMapper;
 import com.zyyglxt.dataobject.ChineseCulturalDO;
 import com.zyyglxt.dataobject.ChineseCulturalDOKey;
+import com.zyyglxt.error.BusinessException;
+import com.zyyglxt.error.EmBusinessError;
 import com.zyyglxt.service.ICulturalRelicsService;
+import com.zyyglxt.validator.ValidatorImpl;
+import com.zyyglxt.validator.ValidatorResult;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -22,6 +27,9 @@ public class CulturalRelicsServiceImpl implements ICulturalRelicsService {
     @Resource
     private ChineseCulturalDOMapper chineseCulturalDOMapper;
 
+    @Autowired
+    private ValidatorImpl validator;
+
     @Override
     public ChineseCulturalDO getCulturalRelics(ChineseCulturalDOKey key) {
         return chineseCulturalDOMapper.selectByPrimaryKey(key,"文化古迹");
@@ -35,14 +43,15 @@ public class CulturalRelicsServiceImpl implements ICulturalRelicsService {
 
     @Override
     @Transactional
-    public int addCulturalRelics(ChineseCulturalDO record) {
-        chineseCulturalDOMapper.insertSelective(record);
-        record.setItemcreateat(new Date());
+    public int addCulturalRelics(ChineseCulturalDO record) throws BusinessException {
+        ValidatorResult result = validator.validate(record);
+        if(result.isHasErrors()){
+            throw new BusinessException(result.getErrMsg(), EmBusinessError.PARAMETER_VALIDATION_ERROR);
+        }
         record.setCreater("");
-        record.setItemupdateat(new Date());
         record.setUpdater("");
         record.setChineseCulturalType("文化古迹");
-        return 0;
+        return chineseCulturalDOMapper.insertSelective(record);
     }
 
     @Override
@@ -53,9 +62,22 @@ public class CulturalRelicsServiceImpl implements ICulturalRelicsService {
 
     @Override
     @Transactional
-    public int updateCulturalRelics(ChineseCulturalDOKey key, ChineseCulturalDO record) {
+    public int updateCulturalRelics(ChineseCulturalDO record) throws BusinessException {
+        ValidatorResult result = validator.validate(record);
+        if(result.isHasErrors()){
+            throw new BusinessException(result.getErrMsg(), EmBusinessError.PARAMETER_VALIDATION_ERROR);
+        }
+        ChineseCulturalDOKey key = new ChineseCulturalDOKey();
+        key.setItemid(record.getItemid());
+        key.setItemcode(record.getItemcode());
         record.setUpdater("");
         record.setItemupdateat(new Date());
         return chineseCulturalDOMapper.updateByPrimaryKeySelective(key,record);
     }
+
+    @Override
+    public int changeCulturalRelics(ChineseCulturalDOKey key, String chineseCulturalStatus) {
+        return chineseCulturalDOMapper.changeStatusByPrimaryKeySelective(key,chineseCulturalStatus);
+    }
+
 }

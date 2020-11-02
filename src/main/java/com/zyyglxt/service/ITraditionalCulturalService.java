@@ -2,6 +2,9 @@ package com.zyyglxt.service;
 
 import com.zyyglxt.dataobject.ChineseCulturalDO;
 import com.zyyglxt.dataobject.ChineseCulturalDOKey;
+import com.zyyglxt.dataobject.CulturalResourcesDO;
+import com.zyyglxt.dataobject.CulturalResourcesDOKey;
+import com.zyyglxt.error.BusinessException;
 
 import java.util.List;
 
@@ -13,20 +16,20 @@ import java.util.List;
  */
 public interface ITraditionalCulturalService {
     //查询一个中医医史
-    ChineseCulturalDO getTraditionalCultural(ChineseCulturalDOKey key);
+    CulturalResourcesDO getTraditionalCultural(CulturalResourcesDOKey key);
 
     //查询所有中医医史
-    List<ChineseCulturalDO> getTraditionalCulturalList();
+    List<CulturalResourcesDO> getTraditionalCulturalList();
 
     //增加一个中医医史
-    int addTraditionalCultural(ChineseCulturalDO record);
+    int addTraditionalCultural(CulturalResourcesDO record) throws BusinessException;
 
     //删除一个中医医史
-    int removeTraditionalCultural(ChineseCulturalDOKey key);
+    int removeTraditionalCultural(CulturalResourcesDOKey key);
 
     //修改一个中医医史
-    int updateTraditionalCultural(ChineseCulturalDOKey key,ChineseCulturalDO record);
+    int updateTraditionalCultural(CulturalResourcesDO record) throws BusinessException;
 
     //修改一个中医医史状态
-
+    int changeTraditionalCulturalStatus(CulturalResourcesDOKey key, String chineseCulturalStatus);
 }

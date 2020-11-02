@@ -3,7 +3,7 @@ package com.zyyglxt.service.impl;
 import com.zyyglxt.dao.IndustrialDevelopTopicDOMapper;
 import com.zyyglxt.dataobject.IndustrialDevelopTopicDO;
 import com.zyyglxt.dataobject.IndustrialDevelopTopicDOKey;
-import com.zyyglxt.service.IIndustrialDevelopTopic;
+import com.zyyglxt.service.IIndustrialDevelopTopicService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -15,7 +15,7 @@ import java.util.Date;
  * @Version 1.0
  **/
 @Service
-public class IndustrialDevelopTopicImpl implements IIndustrialDevelopTopic {
+public class IndustrialDevelopTopicServiceImpl implements IIndustrialDevelopTopicService {
 
     @Resource
     IndustrialDevelopTopicDOMapper developTopicDOMapper;

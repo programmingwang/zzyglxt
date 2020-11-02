@@ -2,7 +2,7 @@ package com.zyyglxt.controller.IndustrialDevelop;
 
 import com.zyyglxt.dataobject.IndustrialDevelopOffDO;
 import com.zyyglxt.dataobject.IndustrialDevelopOffDOKey;
-import com.zyyglxt.service.IIndustrialDevelopOff;
+import com.zyyglxt.service.IIndustrialDevelopOffService;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -19,7 +19,7 @@ import javax.annotation.Resource;
 @RequestMapping(value = "industrialdevelop")
 public class IndustrialOffController {
     @Resource
-    IIndustrialDevelopOff developOffService;
+    IIndustrialDevelopOffService developOffService;
 
     @RequestMapping(value = "/Off", method = RequestMethod.POST)
     public void addOff(@RequestBody IndustrialDevelopOffDO record) {

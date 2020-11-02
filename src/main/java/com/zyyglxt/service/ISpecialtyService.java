@@ -4,6 +4,7 @@ import com.zyyglxt.dataobject.HospSpecialtyRefDO;
 import com.zyyglxt.dataobject.HospSpecialtyRefDOKey;
 import com.zyyglxt.dataobject.SpecialtyDO;
 import com.zyyglxt.dataobject.SpecialtyDOKey;
+import com.zyyglxt.dto.SpecialtyDto;
 
 import java.util.List;
 
@@ -13,9 +14,9 @@ import java.util.List;
  * @date 2020/10/29 17:32
  */
 public interface ISpecialtyService {
-    void addSpecialty(SpecialtyDO specialtyDO, HospSpecialtyRefDO hospSpecialtyRefDO);
-    void updateSpecialty(SpecialtyDO specialtyDO, HospSpecialtyRefDO hospSpecialtyRefDO);
-    void deleteSpecialty(SpecialtyDOKey specialtyDOKey, HospSpecialtyRefDOKey hospSpecialtyRefDOKey);
+    void addSpecialty(SpecialtyDto specialtyDto);
+    void updateSpecialty(SpecialtyDto specialtyDto);
+    void deleteSpecialty(SpecialtyDto specialtyDto);
     List<SpecialtyDO> selectAllSpecialty();
     List<SpecialtyDO> searchSpecialty(String keyWord);
     List<SpecialtyDO> top5Specialty();

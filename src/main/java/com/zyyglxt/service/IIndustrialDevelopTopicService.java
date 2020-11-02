@@ -8,7 +8,7 @@ import com.zyyglxt.dataobject.IndustrialDevelopTopicDOKey;
  * @Date 2020/10/29 15:47
  * @Version 1.0
  **/
-public interface IIndustrialDevelopTopic {
+public interface IIndustrialDevelopTopicService {
 
     void addTopic(IndustrialDevelopTopicDO developTopicDO);
 

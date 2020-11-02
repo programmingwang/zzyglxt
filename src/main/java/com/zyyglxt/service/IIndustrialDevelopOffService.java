@@ -8,7 +8,7 @@ import com.zyyglxt.dataobject.IndustrialDevelopOffDOKey;
  * @Date 2020/10/29 17:26
  * @Version 1.0
  **/
-public interface IIndustrialDevelopOff {
+public interface IIndustrialDevelopOffService {
 
     void addOff(IndustrialDevelopOffDO record);
 

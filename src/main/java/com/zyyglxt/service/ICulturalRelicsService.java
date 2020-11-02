@@ -2,6 +2,7 @@ package com.zyyglxt.service;
 
 import com.zyyglxt.dataobject.ChineseCulturalDO;
 import com.zyyglxt.dataobject.ChineseCulturalDOKey;
+import com.zyyglxt.error.BusinessException;
 
 import java.util.List;
 
@@ -19,13 +20,13 @@ public interface ICulturalRelicsService {
     List<ChineseCulturalDO> getCulturalRelicsList();
 
     //增加一个文化古迹
-    int addCulturalRelics(ChineseCulturalDO record);
+    int addCulturalRelics(ChineseCulturalDO record) throws BusinessException;
 
     //删除一个文化古迹
     int removeCulturalRelics(ChineseCulturalDOKey key);
 
     //修改一个文化古迹
-    int updateCulturalRelics(ChineseCulturalDO record);
+    int updateCulturalRelics(ChineseCulturalDO record) throws BusinessException;
 
     //修改一个文化古迹状态
     int changeCulturalRelics(ChineseCulturalDOKey key, String chineseCulturalStatus);

@@ -250,4 +250,12 @@
     where itemID = #{itemid,jdbcType=INTEGER}
       and itemCode = #{itemcode,jdbcType=CHAR}
   </update>
+  <select id="selectAllHealthSciKnow" resultMap="BaseResultMap">
+        SELECT *
+        FROM tb_health_care_sci_know
+        ORDER BY itemCreateAt
+    </select>
+    <update id="updateVisitNumHealthSciKnow" parameterType="com.zyyglxt.dataobject.HealthSciKnowDOKey">
+      update tb_health_care_sci_know set VISIT_NUM = VISIT_NUM + 1 where itemID = #{itemid,jdbcType=INTEGER} and itemCode = #{itemcode,jdbcType=CHAR}
+    </update>
 </mapper>

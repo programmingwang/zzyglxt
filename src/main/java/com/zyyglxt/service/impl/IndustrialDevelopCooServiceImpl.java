@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @Author lrt
@@ -41,5 +42,11 @@ public class IndustrialDevelopCooServiceImpl implements IIndustrialDevelopCooSer
         cooExcDOMapper.updateVisitNumByItemidAndItemcode(key);
     }
 
+    @Override
+    public List<IndustrialDevelopCooExcDO> getCooRecord(int page, int page_size) {
+        int start = (page - 1) * page_size;
+        int end = page * page_size;
+        return cooExcDOMapper.selectByPage(start, end);
+    }
 
 }

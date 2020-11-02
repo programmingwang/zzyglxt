@@ -27,7 +27,7 @@ public class IndustrialSciAchiController {
     public void addAchievement(@RequestBody IndustrialDevelopSciAchiDO sciAchiDO) {
         System.out.println(sciAchiDO.toString());
         industrialDevelop.addAchievement(sciAchiDO);
-        
+
     }
 
     /**
@@ -38,7 +38,7 @@ public class IndustrialSciAchiController {
     @RequestMapping(value = "/achievement", method = RequestMethod.PUT)
     public void updateAchievement(@RequestBody IndustrialDevelopSciAchiDO sciAchiDO) {
         industrialDevelop.updAchievement(sciAchiDO);
-        
+
     }
 
     /**
@@ -60,3 +60,4 @@ public class IndustrialSciAchiController {
         industrialDevelop.increaseVisitNum(key);
     }
 }
+

@@ -4,7 +4,12 @@ import com.zyyglxt.dao.ChineseCulturalDOMapper;
 import com.zyyglxt.dao.CulturalResourcesDOMapper;
 import com.zyyglxt.dataobject.CulturalResourcesDO;
 import com.zyyglxt.dataobject.CulturalResourcesDOKey;
+import com.zyyglxt.error.BusinessException;
+import com.zyyglxt.error.EmBusinessError;
 import com.zyyglxt.service.ITraditionalDoctorService;
+import com.zyyglxt.validator.ValidatorImpl;
+import com.zyyglxt.validator.ValidatorResult;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -23,6 +28,9 @@ public class TraditionalDoctorServiceImpl implements ITraditionalDoctorService {
     @Resource
     private CulturalResourcesDOMapper culturalResourcesDOMapper;
 
+    @Autowired
+    private ValidatorImpl validator;
+
     @Override
     public CulturalResourcesDO getTraditionalDoctor(CulturalResourcesDOKey key) {
         return culturalResourcesDOMapper.selectByPrimaryKey(key,"历代名家");
@@ -35,10 +43,12 @@ public class TraditionalDoctorServiceImpl implements ITraditionalDoctorService {
 
     @Override
     @Transactional
-    public int addTraditionalDoctor(CulturalResourcesDO record) {
-        record.setItemcreateat(new Date());
+    public int addTraditionalDoctor(CulturalResourcesDO record) throws BusinessException {
+        ValidatorResult result = validator.validate(record);
+        if(result.isHasErrors()){
+            throw new BusinessException(result.getErrMsg(), EmBusinessError.PARAMETER_VALIDATION_ERROR);
+        }
         record.setCreater("");
-        record.setItemupdateat(new Date());
         record.setUpdater("");
         record.setChineseCulturalType("历代名家");
         return culturalResourcesDOMapper.insertSelective(record);
@@ -52,7 +62,11 @@ public class TraditionalDoctorServiceImpl implements ITraditionalDoctorService {
 
     @Override
     @Transactional
-    public int updateTraditionalDoctor(CulturalResourcesDO record) {
+    public int updateTraditionalDoctor(CulturalResourcesDO record) throws BusinessException {
+        ValidatorResult result = validator.validate(record);
+        if(result.isHasErrors()){
+            throw new BusinessException(result.getErrMsg(), EmBusinessError.PARAMETER_VALIDATION_ERROR);
+        }
         record.setUpdater("");
         record.setItemupdateat(new Date());
         return culturalResourcesDOMapper.updateByPrimaryKeySelective(record);

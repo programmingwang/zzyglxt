@@ -2,6 +2,7 @@ package com.zyyglxt.controller.ChineseCultural.resource;
 
 import com.zyyglxt.dataobject.CulturalResourcesDO;
 import com.zyyglxt.dataobject.CulturalResourcesDOKey;
+import com.zyyglxt.error.BusinessException;
 import com.zyyglxt.service.ITraditionalDoctorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -45,7 +46,7 @@ public class TraditionalDoctorController {
 
     //增加一个中医医史
     @RequestMapping(value = "/addTraDoc" , method = RequestMethod.POST)
-    public String addTraditionalCultural(CulturalResourcesDO culturalResourcesDO){
+    public String addTraditionalCultural(CulturalResourcesDO culturalResourcesDO) throws BusinessException {
         culturalResourcesDO.setChineseCulturalType("历代名家");
         culturalResourcesDO.setChineseCulturalStatus("待上架");
         iTraditionalDoctorService.addTraditionalDoctor(culturalResourcesDO);
@@ -76,7 +77,7 @@ public class TraditionalDoctorController {
 
     //修改一个历代名家
     @RequestMapping(value = "/updTraDoc" , method = RequestMethod.POST)
-    public String updateTraditionalCultural(CulturalResourcesDO culturalResourcesDO){
+    public String updateTraditionalCultural(CulturalResourcesDO culturalResourcesDO) throws BusinessException {
         iTraditionalDoctorService.updateTraditionalDoctor(culturalResourcesDO);
         return "back to main page";
     }

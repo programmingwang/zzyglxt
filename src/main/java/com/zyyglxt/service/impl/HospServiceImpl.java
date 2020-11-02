@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * @author qjc
@@ -22,6 +23,7 @@ public class HospServiceImpl implements IHospService {
 
     @Override
     public int addHosp(HospDO hospDO) {
+        hospDO.setItemcode(UUID.randomUUID().toString());
         return hospDOMapper.insertSelective(hospDO);
     }
 

@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!--suppress ThymeleafVariablesResolveInspection -->
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
@@ -11,10 +12,13 @@
     <script src="/webjars/jquery/3.5.1/jquery.min.js"
             th:src="@{/webjars/jquery/3.5.1/jquery.min.js}"></script>
 </head>
-<body >
+<body>
 <div class="content">
-    <table class="table table-borderless table-hover zyytable" >
-        <thead class="">
+    <p th:if="${#lists.isEmpty(dataList)}">
+        无数据
+    </p>
+    <table class="table table-borderless table-hover zyytable">
+        <thead>
         <tr>
             <th scope="col">合作交流名称</th>
             <th scope="col">主研人</th>
@@ -27,38 +31,16 @@
         </tr>
         </thead>
         <tbody>
-        <tr>
-            <td name="firstcol">中外友好关系合作</td>
-            <td>兰云涛</td>
-            <td>项目简介项目简介项目简介项目简介项目简介项目简介项目简介项目简介项目简介
-                项目简介项目简介项目简介项目简介项目简介项目简介项目简介项目简介项目简介
-                项目简介项目简介项目简介项目简介项目简介项目简介项目简介项目简介项目简介
-                项目简介项目简介项目简介项目简介项目简介项目简介项目简介项目简介项目简介项目简介项目简介</td>
-            <td>知乎</td>
-            <td>唐任猛</td>
-            <td>15907786666</td>
-            <td>桂电</td>
-            <td>审核不通过</td>
-        </tr>
-        <tr>
-            <td name="firstcol">中外友好关系合作</td>
-            <td>兰云涛</td>
-            <td>懂得都懂</td>
-            <td>知乎</td>
-            <td>唐任猛</td>
-            <td>15907786666</td>
-            <td>桂电</td>
-            <td>审核不通过</td>
-        </tr>
-        <tr>
-            <td name="firstcol">中外友好关系合作</td>
-            <td>兰云涛</td>
-            <td>懂得都懂</td>
-            <td>知乎</td>
-            <td>唐任猛</td>
-            <td>15907786666</td>
-            <td>桂电</td>
-            <td>审核不通过</td>
+        <!--/*@thymesVar id="dataList" type="java.util.List"*/-->
+        <tr th:each="item,status:${dataList}">
+            <td th:text="${item.getCooperationExchangeName()}" name="firstcol"></td>
+            <td th:text="${item.getCooperationExchangeLeader()}">兰云涛</td>
+            <td th:text="${item.getProjectIntroduce()}">项目简介</td>
+            <td th:text="${item.getProjectUnit()}">某单位</td>
+            <td th:text="${item.getContacts()}">唐任猛</td>
+            <td th:text="${item.getPhone()}">15907786666</td>
+            <td th:text="${item.getCooOrg()}">桂电</td>
+            <td th:text="${item.getStatus()}">审核不通过</td>
         </tr>
         </tbody>
     </table>
@@ -70,34 +52,29 @@
                         <span aria-hidden="true"><</span>
                     </a>
                 </li>
-                <li class="my-page-item"><a class="my-page-link" href="#">1</a></li>
-                <li class="my-page-item"><a class="my-page-link" href="#">2</a></li>
-                <li class="my-page-item"><a class="my-page-link" href="#">3</a></li>
+                <li th:each="i : ${#numbers.sequence(1,10)}" class="my-page-item">
+                    <a class="my-page-link" href="#" th:text="${i}"></a></li>
                 <li class="my-page-item">
                     <a class="my-page-link" href="#" aria-label="Next">
                         <span aria-hidden="true">></span>
                     </a>
                 </li>
                 <li>
-                    <div class="dropdown">
-                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Dropdown button
-                        </button>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" href="#">Action</a>
-                            <a class="dropdown-item" href="#">Another action</a>
-                            <a class="dropdown-item" href="#">Something else here</a>
-                        </div>
-                    </div>
+                    <label>
+                        <select id="pageselect" class="my-select my-select-secondary">
+                            <option th:value="10">10/页</option>
+                            <option th:value="20">20/页</option>
+                            <option th:value="30">30/页</option>
+                            <option th:value="40">40/页</option>
+                        </select>
+                    </label>
                 </li>
-                <li>
+                <li class="page-input">
                     跳至
-                    <input type="number" id="pageinput">
+                    <input type="number" id="pageinput" value="5">
                     页
                 </li>
             </ul>
-
-
         </nav>
     </div>
 </div>

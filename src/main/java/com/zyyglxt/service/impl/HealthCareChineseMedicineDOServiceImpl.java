@@ -10,6 +10,8 @@ import javax.annotation.Resource;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
+import java.util.UUID;
 
 /**
  * @version 1.0
@@ -25,14 +27,16 @@ public class HealthCareChineseMedicineDOServiceImpl implements HealthCareChinese
 **/
     @Override
     public int insert(HealthCareChineseMedicineDO record) {
-        Date data=new Date();
+        /*Date data=new Date();
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         try {
             data = df.parse(df.format(data));
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        record.setItemcreateat(data);
+        record.setItemcreateat(data);*/
+        record.setItemcode(UUID.randomUUID().toString());
+        record.setItemcreateat(new Date());
         return healthCareChineseMedicineDOMapper.insert(record);
     }
 
@@ -44,19 +48,25 @@ public class HealthCareChineseMedicineDOServiceImpl implements HealthCareChinese
 
     @Override
     public int updateByPrimaryKeySelective(HealthCareChineseMedicineDO record) {
-        Date data=new Date();
+        /*Date data=new Date();
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         try {
             data = df.parse(df.format(data));
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        record.setItemcreateat(data);
+        record.setItemcreateat(data);*/
+        record.setItemupdateat(new Date());
         return healthCareChineseMedicineDOMapper.updateByPrimaryKeySelective(record);
     }
 
     @Override
     public HealthCareChineseMedicineDO selectByPrimaryKey(HealthCareChineseMedicineDOKey key) {
         return healthCareChineseMedicineDOMapper.selectByPrimaryKey(key);
+    }
+     /*查询所有中医药常识数据*/
+    @Override
+    public List<HealthCareChineseMedicineDO> selectAllHealthCareChineseMedicine() {
+        return healthCareChineseMedicineDOMapper.selectAllHealthCareChineseMedicine();
     }
 }

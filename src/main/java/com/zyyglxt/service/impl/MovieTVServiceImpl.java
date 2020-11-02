@@ -3,7 +3,12 @@ package com.zyyglxt.service.impl;
 import com.zyyglxt.dao.ChineseCulturalDOMapper;
 import com.zyyglxt.dataobject.ChineseCulturalDO;
 import com.zyyglxt.dataobject.ChineseCulturalDOKey;
+import com.zyyglxt.error.BusinessException;
+import com.zyyglxt.error.EmBusinessError;
 import com.zyyglxt.service.IMovieTVService;
+import com.zyyglxt.validator.ValidatorImpl;
+import com.zyyglxt.validator.ValidatorResult;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,6 +26,9 @@ public class MovieTVServiceImpl implements IMovieTVService {
     @Resource
     private ChineseCulturalDOMapper chineseCulturalDOMapper;
 
+    @Autowired
+    private ValidatorImpl validator;
+
     @Override
     public ChineseCulturalDO getMovieTV(ChineseCulturalDOKey key) {
         return chineseCulturalDOMapper.selectByPrimaryKey(key,"电视电影");
@@ -33,14 +41,15 @@ public class MovieTVServiceImpl implements IMovieTVService {
 
     @Override
     @Transactional
-    public int addMovieTV(ChineseCulturalDO record) {
-        chineseCulturalDOMapper.insertSelective(record);
-        record.setItemcreateat(new Date());
+    public int addMovieTV(ChineseCulturalDO record) throws BusinessException {
+        ValidatorResult result = validator.validate(record);
+        if(result.isHasErrors()){
+            throw new BusinessException(result.getErrMsg(), EmBusinessError.PARAMETER_VALIDATION_ERROR);
+        }
         record.setCreater("");
-        record.setItemupdateat(new Date());
         record.setUpdater("");
         record.setChineseCulturalType("电视电影");
-        return 0;
+        return chineseCulturalDOMapper.insertSelective(record);
     }
 
     @Override
@@ -51,7 +60,11 @@ public class MovieTVServiceImpl implements IMovieTVService {
 
     @Override
     @Transactional
-    public int updateMovieTV(ChineseCulturalDO record) {
+    public int updateMovieTV(ChineseCulturalDO record) throws BusinessException {
+        ValidatorResult result = validator.validate(record);
+        if(result.isHasErrors()){
+            throw new BusinessException(result.getErrMsg(), EmBusinessError.PARAMETER_VALIDATION_ERROR);
+        }
         ChineseCulturalDOKey key = new ChineseCulturalDOKey();
         key.setItemid(record.getItemid());
         key.setItemcode(record.getItemcode());

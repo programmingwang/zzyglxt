@@ -61,4 +61,6 @@ public interface ResourcesDOMapper {
      * @return
      */
     List<ResourcesDO> selectAllResources();
+
+    List<ResourcesDO> SelectMenuByRoleCode(String itemcode);
 }

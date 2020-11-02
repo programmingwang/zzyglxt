@@ -2,6 +2,7 @@ package com.zyyglxt.controller.ChineseCultural.prodiuction;
 
 import com.zyyglxt.dataobject.ChineseCulturalDO;
 import com.zyyglxt.dataobject.ChineseCulturalDOKey;
+import com.zyyglxt.error.BusinessException;
 import com.zyyglxt.service.ICartoonAllusionsService;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -43,7 +44,7 @@ public class CartoonAllusionsController {
 
     //增加一个漫画典故
     @RequestMapping(value = "/addCarAll" , method = RequestMethod.POST)
-    public String addTraditionalCultural(ChineseCulturalDO chineseCulturalDO){
+    public String addTraditionalCultural(ChineseCulturalDO chineseCulturalDO) throws BusinessException {
         chineseCulturalDO.setChineseCulturalType("漫画典故");
         chineseCulturalDO.setChineseCulturalStatus("待上架");
         iCartoonAllusionsService.addCartoonAllusions(chineseCulturalDO);
@@ -74,7 +75,7 @@ public class CartoonAllusionsController {
 
     //修改一个漫画典故
     @RequestMapping(value = "/updCarAll" , method = RequestMethod.POST)
-    public String updateTraditionalCultural(ChineseCulturalDO chineseCulturalDO){
+    public String updateTraditionalCultural(ChineseCulturalDO chineseCulturalDO) throws BusinessException {
         iCartoonAllusionsService.updateCartoonAllusions(chineseCulturalDO);
         return "back to main page";
     }

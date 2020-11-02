@@ -4,6 +4,8 @@ import com.zyyglxt.dataobject.*;
 import com.zyyglxt.permissionsService.RoleService;
 import com.zyyglxt.permissionsService.UserRoleRefService;
 import com.zyyglxt.permissionsService.UserService;
+import com.zyyglxt.permissionsUtil.DateUtils;
+import com.zyyglxt.permissionsUtil.UUIDUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,10 +25,6 @@ import java.util.List;
 public class UserRoleController {
     @Autowired
     UserService userService;
-    @Autowired
-    UserRoleRefService userRoleRefService;
-    @Autowired
-    RoleService roleService;
 
     /**
      * 根据主键删除用户
@@ -34,17 +32,7 @@ public class UserRoleController {
      */
     @RequestMapping(value = "/deletebykey",method = RequestMethod.DELETE)
     public void deleteUserByUsername(@RequestBody UserDO userDO){
-        //删除用户角色关系
-        UserRoleRefDOKey userRoleRefDOKey = new UserRoleRefDOKey();
-        UserRoleRefDO userRoleRefDO = userRoleRefService.selectByUserCode(userDO.getItemcode());
-        userRoleRefDOKey.setItemid(userRoleRefDO.getItemid());
-        userRoleRefDOKey.setItemcode(userRoleRefDO.getItemcode());
-        userRoleRefService.deleteByPrimaryKey(userRoleRefDOKey);
-        //删除用户
-        UserDOKey userDOKey = new UserDOKey();
-        userDOKey.setItemid(userDO.getItemid());
-        userDOKey.setItemcode(userDO.getItemcode());
-        userService.deleteByPrimaryKey(userDOKey);
+        userService.deleteUserByUsername(userDO);
     }
 
     /**
@@ -54,15 +42,7 @@ public class UserRoleController {
      */
     @RequestMapping(value = "/insertuser",method = RequestMethod.POST)
     public void insertUserSelective(@RequestBody UserDO userDO){
-        //添加用户
-        userService.insertSelective(userDO);
-        //分配角色
-            //查询角色role_code
-        RoleDO roleDO = roleService.selectByRoleType(userDO.getType());
-        UserRoleRefDO userRoleRefDO = new UserRoleRefDO();
-        userRoleRefDO.setRoleCode(roleDO.getItemcode());
-        userRoleRefDO.setUserCode(userDO.getItemcode());
-        userRoleRefService.insertSelective(userRoleRefDO);
+        userService.insertUserSelective(userDO);
     }
 
     /**
@@ -82,23 +62,6 @@ public class UserRoleController {
      */
     @RequestMapping(value = "/updateuser",method = RequestMethod.PUT)
     public void updateUserByPrimaryKeySelective(@RequestBody UserDO userDO){
-        UserDOKey userDOKey = new UserDOKey();
-        userDOKey.setItemid(userDO.getItemid());
-        userDOKey.setItemcode(userDO.getItemcode());
-        UserDO userDO1 = userService.selectByPrimaryKey(userDOKey);
-        //更新用户信息
         userService.updateByPrimaryKeySelective(userDO);
-        //更新角色
-        if (!userDO1.getType().equals(userDO.getType())&& userDO.getType()!=null ){
-            RoleDO roleDO = roleService.selectByRoleType(userDO.getType());
-            UserRoleRefDO userRoleRefDO = new UserRoleRefDO();
-            //获取需要更新的userRoleRefDO
-            UserRoleRefDO userRoleRefDO1 = userRoleRefService.selectByUserCode(userDO.getItemcode());
-            userRoleRefDO.setItemid(userRoleRefDO1.getItemid());
-            userRoleRefDO.setItemcode(userRoleRefDO1.getItemcode());
-            userRoleRefDO.setRoleCode(roleDO.getItemcode());
-            userRoleRefDO.setUserCode(userDO.getItemcode());
-            userRoleRefService.updateByPrimaryKeySelective(userRoleRefDO);
-        }
     }
 }

@@ -3,6 +3,8 @@ package com.zyyglxt.service;
 import com.zyyglxt.dataobject.HealthCareFamPreDO;
 import com.zyyglxt.dataobject.HealthCareFamPreDOKey;
 
+import java.util.List;
+
 /**
  * @version 1.0
  * @Author huangwj
@@ -16,4 +18,6 @@ public interface HealthCareFamPreDOService {
     int deleteByPrimaryKey(HealthCareFamPreDOKey key);
     int updateByPrimaryKeySelective(HealthCareFamPreDO record);
     HealthCareFamPreDO selectByPrimaryKey(HealthCareFamPreDOKey key);
+    List<HealthCareFamPreDO> selectAllHealthCareFamPre();//查询所有国医话健康所有数据
+    int updateVisitNumHealthCareFamPre(HealthCareFamPreDOKey key);
 }

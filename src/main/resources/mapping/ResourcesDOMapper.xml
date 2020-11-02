@@ -47,6 +47,18 @@
     <include refid="Base_Column_List" />
     from resource
   </select>
+  <select id="SelectMenuByRoleCode" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    r.itemID, r.itemCode, r.RESOURCE_NAME,
+    r.RESOURCE_TYPE, r.RESOURCE_PCODE, r.RESOURCE_LEVEL,
+    r.RESOURCE_URL, r.RESOURCE_DESCRIPTION, r.SORT,
+    r.CREATER, r.itemCreateAt, r.UPDATER,
+    r.itemUpdateAt
+    from resource r,resource_role_ref r3, role r2
+    where r.itemCode = r3.RESOURCE_CODE
+    and r3.ROLE_CODE = r2.itemCode
+    and r2.itemCode = #{value}
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="com.zyyglxt.dataobject.ResourcesDOKey">
     <!--
       WARNING - @mbg.generated

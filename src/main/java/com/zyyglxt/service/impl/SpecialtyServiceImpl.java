@@ -26,9 +26,9 @@ public class SpecialtyServiceImpl implements ISpecialtyService {
     SpecialtyDOMapper specialtyDOMapper;
     @Resource
     HospSpecialtyRefDOMapper hospSpecialtyRefDOMapper;
-
+    @Resource
     SpecialtyDO specialtyDO;
-
+    @Resource
     HospSpecialtyRefDO hospSpecialtyRefDO;
 
     /*增加科室，同时也将科室与医院记录插入*/

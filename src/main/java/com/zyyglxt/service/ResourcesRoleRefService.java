@@ -1,4 +1,4 @@
-package com.zyyglxt.permissionsService;
+package com.zyyglxt.service;
 
 import com.zyyglxt.dataobject.ResourcesRoleRefDO;
 import com.zyyglxt.dataobject.ResourcesRoleRefDOKey;

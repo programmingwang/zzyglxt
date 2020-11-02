@@ -1,7 +1,10 @@
 package com.zyyglxt.dataobject;
 
+import org.springframework.stereotype.Repository;
+
 import java.util.Date;
 
+@Repository
 public class HospSpecialtyRefDO extends HospSpecialtyRefDOKey {
     /**
      *

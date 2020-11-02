@@ -4,7 +4,7 @@ import com.zyyglxt.common.Result;
 import com.zyyglxt.dataobject.UserDO;
 import com.zyyglxt.dto.UserDto;
 import com.zyyglxt.service.IUserService;
-import com.zyyglxt.util.MobileUtil;
+import com.zyyglxt.util.UserUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -32,7 +32,7 @@ public class UserController {
         if (result.getCode() == 200) {
             return Result.succ(200, result.getMsg(), null);
         } else {
-            return Result.succ(404, result.getMsg(), null);
+            return Result.fail(500, result.getMsg(), null);
         }
 
     }
@@ -48,7 +48,7 @@ public class UserController {
         if (result.getCode() == 200) {
             return Result.succ(200, result.getMsg(), null);
         } else {
-            return Result.succ(404, result.getMsg(), null);
+            return Result.fail(500, result.getMsg(), null);
         }
     }
 
@@ -58,10 +58,12 @@ public class UserController {
     @RequestMapping(value = "/logout", method = RequestMethod.GET)
     public Result Logout() {
         Result result = userService.Logout();
-        if (result.getCode() == 200){
-            return Result.succ(200, result.getMsg(),null);
+        if (result.getCode() == 200) {
+            UserUtil userUtil = new UserUtil();
+            userUtil.removeUserName();// 从session中删除用户名
+            return Result.succ(200, result.getMsg(), null);
         } else {
-            return Result.fail(404, result.getMsg(),null);
+            return Result.fail(500, result.getMsg(), null);
         }
     }
 
@@ -72,11 +74,22 @@ public class UserController {
      */
     @RequestMapping(value = "upwd", method = RequestMethod.PUT)
     public Result UpdatePassword(UserDto userDto) {
-        Result result = userService.UpdatePassword(userDto);
-        if (result.getCode() == 200){
-            return Result.succ(200, result.getMsg(), null);
+        Result result = null;
+        if (StringUtils.isEmpty(userDto.getNewPassword()) || StringUtils.isEmpty(userDto.getCheckNewPassword())) {
+            System.out.println("密码输入不能为空，请重新输入！");
+            return Result.fail(500, "密码输入不能为空，请重新输入！", null);
         } else {
-            return Result.succ(404, result.getMsg(), null);
+            if (userDto.getNewPassword().equals(userDto.getCheckNewPassword())) {
+                result = userService.UpdatePassword(userDto);
+                if (result.getCode() == 200) {
+                    return Result.succ(200, result.getMsg(), null);
+                } else {
+                    return Result.fail(500, result.getMsg(), null);
+                }
+            } else {
+                System.out.println("两次输入的新密码不一致，请重新输入！");
+                return Result.fail(500, "两次输入的新密码不一致，请重新输入！", null);
+            }
         }
     }
 }

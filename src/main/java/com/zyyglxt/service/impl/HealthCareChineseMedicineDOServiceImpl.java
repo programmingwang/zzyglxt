@@ -3,8 +3,14 @@ package com.zyyglxt.service.impl;
 import com.zyyglxt.dao.HealthCareChineseMedicineDOMapper;
 import com.zyyglxt.dataobject.HealthCareChineseMedicineDO;
 import com.zyyglxt.dataobject.HealthCareChineseMedicineDOKey;
+import com.zyyglxt.error.BusinessException;
+import com.zyyglxt.error.EmBusinessError;
 import com.zyyglxt.service.HealthCareChineseMedicineDOService;
+import com.zyyglxt.validator.ValidatorImpl;
+import com.zyyglxt.validator.ValidatorResult;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.text.ParseException;
@@ -21,41 +27,36 @@ import java.util.UUID;
 @Service
 public class HealthCareChineseMedicineDOServiceImpl implements HealthCareChineseMedicineDOService {
     @Resource
-    HealthCareChineseMedicineDOMapper healthCareChineseMedicineDOMapper;
-/*
+    private HealthCareChineseMedicineDOMapper healthCareChineseMedicineDOMapper;
+    @Autowired
+    private ValidatorImpl validator;
+    @Transactional
+    /*
   中医药科普知识添加、删除、修改、查询实现方法
 **/
     @Override
-    public int insert(HealthCareChineseMedicineDO record) {
-        /*Date data=new Date();
-        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        try {
-            data = df.parse(df.format(data));
-        } catch (ParseException e) {
-            e.printStackTrace();
+    public int insert(HealthCareChineseMedicineDO record) throws BusinessException {
+        ValidatorResult result = validator.validate(record);
+        if(result.isHasErrors()){
+            throw new BusinessException(result.getErrMsg(), EmBusinessError.PARAMETER_VALIDATION_ERROR);
         }
-        record.setItemcreateat(data);*/
         record.setItemcode(UUID.randomUUID().toString());
         record.setItemcreateat(new Date());
         return healthCareChineseMedicineDOMapper.insert(record);
     }
-
+    @Transactional
     @Override
     public int  deleteByPrimaryKey(HealthCareChineseMedicineDOKey key) {
           healthCareChineseMedicineDOMapper.deleteByPrimaryKey(key);
           return 0;
     }
-
+    @Transactional
     @Override
-    public int updateByPrimaryKeySelective(HealthCareChineseMedicineDO record) {
-        /*Date data=new Date();
-        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        try {
-            data = df.parse(df.format(data));
-        } catch (ParseException e) {
-            e.printStackTrace();
+    public int updateByPrimaryKeySelective(HealthCareChineseMedicineDO record) throws BusinessException {
+        ValidatorResult result = validator.validate(record);
+        if(result.isHasErrors()){
+            throw new BusinessException(result.getErrMsg(), EmBusinessError.PARAMETER_VALIDATION_ERROR);
         }
-        record.setItemcreateat(data);*/
         record.setItemupdateat(new Date());
         return healthCareChineseMedicineDOMapper.updateByPrimaryKeySelective(record);
     }

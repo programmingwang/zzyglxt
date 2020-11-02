@@ -1,5 +1,6 @@
 package com.zyyglxt.dataobject;
 
+import javax.validation.constraints.NotBlank;
 import java.util.Date;
 
 public class HealthSciKnowDO extends HealthSciKnowDOKey {
@@ -10,6 +11,7 @@ public class HealthSciKnowDO extends HealthSciKnowDOKey {
      *
      * @mbg.generated Wed Oct 28 16:25:52 CST 2020
      */
+    @NotBlank(message = "科普知识名称不能为空")
     private String scienceKnowledgeName;
 
     /**
@@ -28,6 +30,7 @@ public class HealthSciKnowDO extends HealthSciKnowDOKey {
      *
      * @mbg.generated Wed Oct 28 16:25:52 CST 2020
      */
+    @NotBlank(message = "作者不能为空")
     private String scienceKnowledgeAuthor;
 
     /**

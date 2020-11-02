@@ -259,7 +259,7 @@
       </if>
     </set>
     where itemID = #{itemid,jdbcType=INTEGER}
-      or itemCode = #{itemcode,jdbcType=CHAR}
+      and itemCode = #{itemcode,jdbcType=CHAR}
   </update>
   <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.zyyglxt.dataobject.DataDO">
     <!--

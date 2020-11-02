@@ -2,6 +2,9 @@ package com.zyyglxt.controller.dataDOController;
 
 import com.zyyglxt.dataobject.DataDO;
 import com.zyyglxt.dataobject.DataDOKey;
+import com.zyyglxt.error.BusinessException;
+import com.zyyglxt.error.EmBusinessError;
+import com.zyyglxt.response.ResponseData;
 import com.zyyglxt.service.IDataDOService;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,18 +29,20 @@ public class DataDOController {
      * @param key
      * @return
      */
-    @RequestMapping(value = "/selectByPrimaryKey", method = RequestMethod.GET)
-    public DataDO selectByPrimaryKey(DataDOKey key){
-        return dataDOService.selectNewsInf(key);
+    @RequestMapping(value = "/selectByPrimaryKey/{itemID}", method = RequestMethod.GET)
+    public ResponseData selectByPrimaryKey(@PathVariable("itemID") DataDOKey key){
+        DataDO dataDO = dataDOService.selectNewsInf(key);
+        return new ResponseData(EmBusinessError.success,dataDO);
     }
 
     /**
-     * 查看所有数据
+     * 查看相应类型的所有数据
      * @return
      */
     @RequestMapping(value = "/selectAllNewsInf/{dataType}", method = RequestMethod.GET)
-    public List<DataDO> selectAllNewsInf(@PathVariable("dataType") String dataType){
-        return dataDOService.selectAllNewsInf(dataType);
+    public ResponseData selectAllNewsInf(@PathVariable("dataType") String dataType){
+        List<DataDO> dataDOList = dataDOService.selectAllNewsInf(dataType);
+        return new ResponseData(EmBusinessError.success,dataDOList);
     }
 
     /**
@@ -46,11 +51,12 @@ public class DataDOController {
      * @param itemCode
      */
     @RequestMapping(value = "/deleteByPrimaryKey/{itemID}/{itemCode}", method = RequestMethod.DELETE)
-    public int deleteByPrimaryKey(@PathVariable("itemID") Integer itemID, @PathVariable("itemCode")String itemCode){
+    public ResponseData deleteByPrimaryKey(@PathVariable("itemID") Integer itemID, @PathVariable("itemCode")String itemCode){
         DataDOKey dataDOKey = new DataDOKey();
         dataDOKey.setItemid(itemID);
         dataDOKey.setItemcode(itemCode);
-        return dataDOService.deleteNewsInf(dataDOKey);
+        dataDOService.deleteNewsInf(dataDOKey);
+        return new ResponseData(EmBusinessError.success);
     }
 
     /**
@@ -58,10 +64,12 @@ public class DataDOController {
      * @param record
      */
     @RequestMapping(value = "/insertNewsInf", method = RequestMethod.POST)
-    public int insertNewsInf(DataDO record){
+    @ResponseBody
+    public ResponseData insertNewsInf(@RequestBody DataDO record) throws BusinessException {
         record.setDataType("新闻管理");
         record.setDataStatus("待上架");
-        return dataDOService.insertNewsInf(record);
+        dataDOService.insertNewsInf(record);
+        return new ResponseData(EmBusinessError.success);
     }
 
     /**
@@ -69,8 +77,10 @@ public class DataDOController {
      * @param record
      */
     @RequestMapping(value = "updateNewsInf", method = RequestMethod.PUT)
-    public int updateNewsInf(DataDO record){
-        return dataDOService.updateNewsInf(record);
+    @ResponseBody
+    public ResponseData updateNewsInf(@RequestBody DataDO record) throws BusinessException {
+        dataDOService.updateNewsInf(record);
+        return new ResponseData(EmBusinessError.success);
     }
 
     /**
@@ -79,6 +89,7 @@ public class DataDOController {
      * @return
      */
     @GetMapping("searchDataDO")
+    @ResponseBody
     public List<DataDO> searchDataDO(@RequestBody String keyWord) {
         return dataDOService.searchDataDO(keyWord);
     }

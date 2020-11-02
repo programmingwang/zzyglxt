@@ -1,10 +1,14 @@
 package com.zyyglxt.permissionsService.impl;
 
 import com.zyyglxt.dao.ResourcesDOMapper;
-import com.zyyglxt.dataobject.ResourcesDO;
-import com.zyyglxt.dataobject.ResourcesDOKey;
+import com.zyyglxt.dao.ResourcesRoleRefDOMapper;
+import com.zyyglxt.dao.RoleDOMapper;
+import com.zyyglxt.dataobject.*;
 import com.zyyglxt.permissionsService.ResourcesService;
+import com.zyyglxt.permissionsService.RoleService;
+import com.zyyglxt.permissionsService.UserService;
 import com.zyyglxt.permissionsUtil.DateUtils;
+import com.zyyglxt.permissionsUtil.MenuTreeUtil;
 import com.zyyglxt.permissionsUtil.UUIDUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,22 +24,36 @@ import java.util.List;
 public class ResourcesServiceImpl implements ResourcesService {
     @Autowired
     ResourcesDOMapper resourcesDOMapper;
+    @Autowired
+    RoleDOMapper roleDOMapper;
+    @Autowired
+    ResourcesRoleRefDOMapper resourcesRoleRefDOMapper;
 
     @Override
-    public int deleteByPrimaryKey(ResourcesDOKey key) {
-        return resourcesDOMapper.deleteByPrimaryKey(key);
+    public void deleteByPrimaryKey(ResourcesDO resourcesDO) {
+        //
+        ResourcesRoleRefDOKey resRoleRefDOKey = new ResourcesRoleRefDOKey();
+        ResourcesRoleRefDO resRoleRefDO = resourcesRoleRefDOMapper.selectByResCode(resourcesDO.getItemcode());
+        resRoleRefDOKey.setItemid(resRoleRefDO.getItemid());
+        resRoleRefDOKey.setItemcode(resRoleRefDO.getItemcode());
+        resourcesRoleRefDOMapper.deleteByPrimaryKey(resRoleRefDOKey);
+        //
+        ResourcesDOKey resourcesDOKey = new ResourcesDOKey();
+        resourcesDOKey.setItemid(resourcesDO.getItemid());
+        resourcesDOKey.setItemcode(resourcesDO.getItemcode());
+        resourcesDOMapper.deleteByPrimaryKey(resourcesDOKey);
     }
 
     @Override
     public int insert(ResourcesDO record) {
+        record.setItemcode(UUIDUtils.getUUID());
         return resourcesDOMapper.insert(record);
     }
 
     @Override
-    public int insertSelective(ResourcesDO record) {
+    public void insertSelective(ResourcesDO record) {
         record.setItemcode(UUIDUtils.getUUID());
-        record.setItemcreateat(DateUtils.getDate());
-        return resourcesDOMapper.insertSelective(record);
+        resourcesDOMapper.insertSelective(record);
     }
 
     @Override
@@ -56,6 +74,20 @@ public class ResourcesServiceImpl implements ResourcesService {
 
     @Override
     public List<ResourcesDO> selectAllResources() {
-        return resourcesDOMapper.selectAllResources();
+        List<ResourcesDO> resourcesDOS = resourcesDOMapper.selectAllResources();
+        MenuTreeUtil menuTreeUtil = new MenuTreeUtil(resourcesDOS, null);
+        List<ResourcesDO> treeGridList = menuTreeUtil.buildTreeGrid();
+        return treeGridList;
     }
+
+    @Override
+    public List<ResourcesDO> SelectMenuByRoleCode(UserDO userDO) {
+        Integer type = userDO.getType();
+        RoleDO roleDO = roleDOMapper.selectByRoleType(type);
+        List<ResourcesDO> resourcesDOS = resourcesDOMapper.SelectMenuByRoleCode(roleDO.getItemcode());
+        MenuTreeUtil menuTreeUtil = new MenuTreeUtil(resourcesDOS, null);
+        List<ResourcesDO> treeGridList = menuTreeUtil.buildTreeGrid();
+        return treeGridList;
+    }
+
 }

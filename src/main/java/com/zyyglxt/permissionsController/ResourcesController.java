@@ -1,12 +1,10 @@
 package com.zyyglxt.permissionsController;
 
-import com.zyyglxt.dataobject.ResourcesDO;
-import com.zyyglxt.dataobject.ResourcesDOKey;
-import com.zyyglxt.dataobject.ResourcesRoleRefDO;
-import com.zyyglxt.dataobject.ResourcesRoleRefDOKey;
+import com.zyyglxt.dataobject.*;
 import com.zyyglxt.permissionsService.ResourcesRoleRefService;
 import com.zyyglxt.permissionsService.ResourcesService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -50,23 +48,22 @@ public class ResourcesController {
      */
     @RequestMapping(value = "/delete", method = RequestMethod.DELETE)
     public void deleteByPrimaryKey(ResourcesDO resourcesDO){
-        ResourcesRoleRefDOKey resRoleRefDOKey = new ResourcesRoleRefDOKey();
-        ResourcesRoleRefDO resRoleRefDO = resRoleRefService.selectByResCode(resourcesDO.getItemcode());
-        resRoleRefDOKey.setItemid(resRoleRefDO.getItemid());
-        resRoleRefDOKey.setItemcode(resRoleRefDO.getItemcode());
-        resRoleRefService.deleteByPrimaryKey(resRoleRefDOKey);
-        ResourcesDOKey resourcesDOKey = new ResourcesDOKey();
-        resourcesDOKey.setItemid(resourcesDO.getItemid());
-        resourcesDOKey.setItemcode(resourcesDO.getItemcode());
-        resourcesService.deleteByPrimaryKey(resourcesDOKey);
+        resourcesService.deleteByPrimaryKey(resourcesDO);
     }
 
     /**
-     * 查询所有
+     * 查询所有权限
      */
     @RequestMapping(value = "/selectall", method = RequestMethod.GET)
     public List<ResourcesDO> selectAllResources(){
-        List<ResourcesDO> resourcesDOS = resourcesService.selectAllResources();
-        return resourcesDOS;
+        return resourcesService.selectAllResources();
+    }
+
+    /**
+     * 查询角色权限
+     */
+    @RequestMapping(value = "/selectroleres", method = RequestMethod.GET)
+    public List<ResourcesDO> selectRoleResources(@RequestBody UserDO userDO){
+        return resourcesService.SelectMenuByRoleCode(userDO);
     }
 }

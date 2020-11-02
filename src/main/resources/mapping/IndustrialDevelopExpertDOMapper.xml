@@ -36,6 +36,9 @@
     where itemID = #{itemid,jdbcType=INTEGER}
       and itemCode = #{itemcode,jdbcType=CHAR}
   </select>
+  <select id="selectByPage" resultType="com.zyyglxt.dataobject.IndustrialDevelopExpertDO" resultMap="BaseResultMap">
+    SELECT * FROM tb_industrial_develop_expert LIMIT #{start},#{end}
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="com.zyyglxt.dataobject.IndustrialDevelopExpertDOKey">
     <!--
       WARNING - @mbg.generated

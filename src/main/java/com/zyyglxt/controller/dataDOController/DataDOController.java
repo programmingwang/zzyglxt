@@ -68,7 +68,7 @@ public class DataDOController {
      * 更新新闻数据记录
      * @param record
      */
-    @RequestMapping(value = "/updateNewsInf", method = RequestMethod.PUT)
+    @RequestMapping(value = "updateNewsInf", method = RequestMethod.PUT)
     public int updateNewsInf(DataDO record){
         return dataDOService.updateNewsInf(record);
     }

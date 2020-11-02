@@ -319,14 +319,12 @@
     ,
     <include refid="Blob_Column_List"/>
     from tb_culpro_data
-    WHERE DATA_TITLE LIKE "%"#{value}"%"
-    OR DATA_LOCATION LIKE "%"#{value}"%"
-    OR DATA_AUTHOR LIKE "%"#{value}"%"
-    OR DATA_SOURCE LIKE "%"#{value}"%"
-    OR DATA_FILE_TYPE LIKE "%"#{value}"%"
-    OR DATA_STATUS LIKE "%"#{value}"%"
-    OR DATA_TYPE LIKE "%"#{value}"%"
-    ORDER BY itemCreateAt DESC
+    WHERE DATA_TITLE LIKE "%"#{dataTitle,jdbcType=VARCHAR}"%"
+    AND DATA_LOCATION LIKE "%"#{dataLocation,jdbcType=VARCHAR}"%"
+    AND DATA_AUTHOR LIKE "%"#{dataAuthor,jdbcType=VARCHAR}"%"
+    AND DATA_SOURCE LIKE "%"#{dataSource,jdbcType=VARCHAR}"%"
+    AND DATA_FILE_TYPE LIKE "%"#{dataFileType,jdbcType=VARCHAR}"%"
+    AND DATA_STATUS LIKE "%"#{dataStatus,jdbcType=VARCHAR}"%"
+    AND DATA_TYPE LIKE "%"#{dataType,jdbcType=VARCHAR}"%"
   </select>
-
 </mapper>

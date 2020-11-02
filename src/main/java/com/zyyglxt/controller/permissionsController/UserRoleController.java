@@ -1,11 +1,10 @@
-package com.zyyglxt.permissionsController;
+package com.zyyglxt.controller.permissionsController;
 
 import com.zyyglxt.dataobject.*;
-import com.zyyglxt.permissionsService.RoleService;
-import com.zyyglxt.permissionsService.UserRoleRefService;
-import com.zyyglxt.permissionsService.UserService;
+
 import com.zyyglxt.permissionsUtil.DateUtils;
 import com.zyyglxt.permissionsUtil.UUIDUtils;
+import com.zyyglxt.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;

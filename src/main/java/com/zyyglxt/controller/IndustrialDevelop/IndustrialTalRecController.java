@@ -2,11 +2,10 @@ package com.zyyglxt.controller.IndustrialDevelop;
 
 import com.zyyglxt.dataobject.IndustrialDevelopTalRecDOKey;
 import com.zyyglxt.dataobject.IndustrialDevelopTalRecDOWithBLOBs;
+import com.zyyglxt.error.EmBusinessError;
+import com.zyyglxt.response.ResponseData;
 import com.zyyglxt.service.IIndustrialDevelopTalRecService;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 
@@ -22,17 +21,23 @@ public class IndustrialTalRecController {
     IIndustrialDevelopTalRecService talRecService;
 
     @RequestMapping(value = "/talrec", method = RequestMethod.POST)
-    public void addTalRec(@RequestBody IndustrialDevelopTalRecDOWithBLOBs record) {
+    @ResponseBody
+    public ResponseData addTalRec(@RequestBody IndustrialDevelopTalRecDOWithBLOBs record) {
         talRecService.addTalRec(record);
+        return new ResponseData(EmBusinessError.success);
     }
 
     @RequestMapping(value = "/talrec", method = RequestMethod.PUT)
-    public void updTalRec(@RequestBody IndustrialDevelopTalRecDOWithBLOBs record) {
+    @ResponseBody
+    public ResponseData updTalRec(@RequestBody IndustrialDevelopTalRecDOWithBLOBs record) {
         talRecService.updTalRec(record);
+        return new ResponseData(EmBusinessError.success);
     }
 
     @RequestMapping(value = "/talrec", method = RequestMethod.DELETE)
-    public void delTalRec(@RequestBody IndustrialDevelopTalRecDOKey key) {
+    @ResponseBody
+    public ResponseData delTalRec(@RequestBody IndustrialDevelopTalRecDOKey key) {
         talRecService.delTalRec(key);
+        return new ResponseData(EmBusinessError.success);
     }
 }

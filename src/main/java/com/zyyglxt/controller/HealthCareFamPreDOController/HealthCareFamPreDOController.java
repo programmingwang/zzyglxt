@@ -1,6 +1,7 @@
 package com.zyyglxt.controller.HealthCareFamPreDOController;
 
 import com.zyyglxt.common.Result;
+import com.zyyglxt.dataobject.FamPreDOKey;
 import com.zyyglxt.dataobject.HealthCareFamPreDO;
 import com.zyyglxt.dataobject.HealthCareFamPreDOKey;
 import com.zyyglxt.service.HealthCareFamPreDOService;
@@ -64,4 +65,13 @@ public class HealthCareFamPreDOController {
     public List<HealthCareFamPreDO> selectAllHealthCareFamPreDOMapper(){
         return healthCareFamPreDOService.selectAllHealthCareFamPre();
     }
+    /**
+     * 增加点击数
+     * @param key
+     */
+    @RequestMapping(value = "visitnumhealthcarefampredo", method = RequestMethod.POST)
+    public void increaseVisitNum(@RequestBody HealthCareFamPreDOKey key) {
+        healthCareFamPreDOService.updateVisitNumHealthCareFamPre(key);
+    }
 }
+

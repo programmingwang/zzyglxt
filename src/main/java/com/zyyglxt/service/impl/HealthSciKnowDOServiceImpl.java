@@ -66,4 +66,10 @@ public class HealthSciKnowDOServiceImpl implements HealthSciKnowDOService {
     public List<HealthSciKnowDO> selectAllHealthSciKnow() {
         return healthSciKnowDOMapper.selectAllHealthSciKnow();
     }
+
+    @Override
+    public int updateVisitNumHealthSciKnow(HealthSciKnowDOKey key) {
+        healthSciKnowDOMapper.updateVisitNumHealthSciKnow(key);
+        return 0;
+    }
 }

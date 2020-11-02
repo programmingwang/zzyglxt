@@ -256,5 +256,8 @@
         FROM tb_culpro_fam_pre
         ORDER BY itemCreateAt DESC
     </select>
+    <update id="updateVisitNumFamPre" parameterType="com.zyyglxt.dataobject.FamPreDOKey">
+      update tb_culpro_fam_pre set VISIT_NUM = VISIT_NUM + 1 where itemID = #{itemid,jdbcType=INTEGER} and itemCode = #{itemcode,jdbcType=CHAR}
+    </update>
 
 </mapper>

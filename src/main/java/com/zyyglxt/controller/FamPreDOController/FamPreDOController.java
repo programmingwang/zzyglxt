@@ -3,6 +3,7 @@ package com.zyyglxt.controller.FamPreDOController;
 import com.zyyglxt.common.Result;
 import com.zyyglxt.dataobject.FamPreDO;
 import com.zyyglxt.dataobject.FamPreDOKey;
+import com.zyyglxt.dataobject.IndustrialDevelopSciAchiDOKey;
 import com.zyyglxt.service.FamPreDOService;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -59,5 +60,13 @@ public class FamPreDOController {
     @RequestMapping(value ="selectallfampredo",method = RequestMethod.POST )
     public List<FamPreDO> selectAllFamPreDOMapper(){
         return famPreDOService.selectAllFamPre();
+    }
+    /**
+     * 增加点击数
+     * @param key
+     */
+    @RequestMapping(value = "visitnumfampredo", method = RequestMethod.POST)
+    public void increaseVisitNum(@RequestBody FamPreDOKey key) {
+        famPreDOService.increaseVisitNumFamPre(key);
     }
 }

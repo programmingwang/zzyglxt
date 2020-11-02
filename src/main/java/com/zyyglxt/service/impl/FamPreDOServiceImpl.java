@@ -69,4 +69,10 @@ public class FamPreDOServiceImpl implements FamPreDOService {
     public List<FamPreDO> selectAllFamPre() {
         return famPreDOMapper.selectAllFamPre();
     }
+     /*点击浏览次数*/
+    @Override
+    public int increaseVisitNumFamPre(FamPreDOKey key) {
+        famPreDOMapper.updateVisitNumFamPre(key);
+        return 0;
+    }
 }

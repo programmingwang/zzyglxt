@@ -2,6 +2,7 @@ package com.zyyglxt.dao;
 
 import com.zyyglxt.dataobject.FamPreDO;
 import com.zyyglxt.dataobject.FamPreDOKey;
+import com.zyyglxt.dataobject.IndustrialDevelopSciAchiDOKey;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
@@ -67,4 +68,5 @@ public interface FamPreDOMapper {
      */
     int updateByPrimaryKey(FamPreDO record);
     List<FamPreDO> selectAllFamPre();
+    int updateVisitNumFamPre(FamPreDOKey key);
 }

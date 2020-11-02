@@ -1,5 +1,6 @@
 package com.zyyglxt.dao;
 
+import com.zyyglxt.dataobject.HealthCareFamPreDOKey;
 import com.zyyglxt.dataobject.HealthSciKnowDO;
 import com.zyyglxt.dataobject.HealthSciKnowDOKey;
 import org.apache.ibatis.annotations.Mapper;
@@ -67,5 +68,5 @@ public interface HealthSciKnowDOMapper {
      */
     int updateByPrimaryKey(HealthSciKnowDO record);
     List<HealthSciKnowDO> selectAllHealthSciKnow();//查询所有科普知识所有数据
-
+    int updateVisitNumHealthSciKnow(HealthSciKnowDOKey key);
 }

@@ -1,6 +1,7 @@
 package com.zyyglxt.controller.HealthSciKnowDOController;
 
 import com.zyyglxt.common.Result;
+import com.zyyglxt.dataobject.HealthCareFamPreDOKey;
 import com.zyyglxt.dataobject.HealthSciKnowDO;
 import com.zyyglxt.dataobject.HealthSciKnowDOKey;
 import com.zyyglxt.service.HealthSciKnowDOService;
@@ -64,6 +65,14 @@ public class HealthSciKnowDOController {
     @RequestMapping(value ="selectallhealthsciknowdo",method = RequestMethod.POST )
     public List<HealthSciKnowDO> selectAllHealthSciKnowDOMapper(){
         return healthSciKnowDOService.selectAllHealthSciKnow();
+    }
+    /**
+     * 增加点击数
+     * @param key
+     */
+    @RequestMapping(value = "visitnumhealthSciKnowdo", method = RequestMethod.POST)
+    public void increaseVisitNum(@RequestBody HealthSciKnowDOKey key) {
+       healthSciKnowDOService.updateVisitNumHealthSciKnow(key);
     }
 }
 

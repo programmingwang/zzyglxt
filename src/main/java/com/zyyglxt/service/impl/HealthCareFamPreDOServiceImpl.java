@@ -68,4 +68,10 @@ public class HealthCareFamPreDOServiceImpl implements HealthCareFamPreDOService 
     public List<HealthCareFamPreDO> selectAllHealthCareFamPre() {
         return healthCareFamPreDOMapper.selectAllHealthCareFamPre();
     }
+
+    @Override
+    public int updateVisitNumHealthCareFamPre(HealthCareFamPreDOKey key) {
+         healthCareFamPreDOMapper.updateVisitNumHealthCareFamPre(key);
+        return 0;
+    }
 }

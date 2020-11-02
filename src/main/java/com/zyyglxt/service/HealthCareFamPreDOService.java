@@ -19,4 +19,5 @@ public interface HealthCareFamPreDOService {
     int updateByPrimaryKeySelective(HealthCareFamPreDO record);
     HealthCareFamPreDO selectByPrimaryKey(HealthCareFamPreDOKey key);
     List<HealthCareFamPreDO> selectAllHealthCareFamPre();//查询所有国医话健康所有数据
+    int updateVisitNumHealthCareFamPre(HealthCareFamPreDOKey key);
 }

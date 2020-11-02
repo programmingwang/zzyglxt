@@ -17,4 +17,6 @@ public interface HealthSciKnowDOService {
     int updateByPrimaryKeySelective(HealthSciKnowDO record);//科普知识数据的修改
     HealthSciKnowDO selectByPrimaryKey(HealthSciKnowDOKey key);//通过id以及code查询某一条科普知识数据
     List<HealthSciKnowDO> selectAllHealthSciKnow();//查询所有科普知识所有数据
+  int updateVisitNumHealthSciKnow(HealthSciKnowDOKey key);
 }
+

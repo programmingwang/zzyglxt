@@ -66,8 +66,6 @@ public class DataDOController {
     @RequestMapping(value = "/insertNewsInf", method = RequestMethod.POST)
     @ResponseBody
     public ResponseData insertNewsInf(@RequestBody DataDO record) throws BusinessException {
-        record.setDataType("新闻管理");
-        record.setDataStatus("待上架");
         dataDOService.insertNewsInf(record);
         return new ResponseData(EmBusinessError.success);
     }

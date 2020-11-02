@@ -9,6 +9,8 @@ import com.zyyglxt.service.IDataDOService;
 import com.zyyglxt.validator.ValidatorImpl;
 import com.zyyglxt.validator.ValidatorResult;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -22,6 +24,7 @@ import java.util.List;
  * @Date 2020/10/29 10:18
  * @Version 1.0
  */
+//@EnableScheduling
 @Service
 public class DataDOServiceImpl  implements IDataDOService{
     @Resource
@@ -42,6 +45,7 @@ public class DataDOServiceImpl  implements IDataDOService{
 
     @Override
     @Transactional
+    //@Scheduled(cron = "30 50 17 2 11 ? ")
     public int insertNewsInf(DataDO record) throws BusinessException {
         ValidatorResult result = validator.validate(record);
         if(result.isHasErrors()){
@@ -52,6 +56,7 @@ public class DataDOServiceImpl  implements IDataDOService{
         record.setItemupdateat(new Date());
         record.setUpdater("test");
         record.setDataType("新闻管理");
+        record.setDataStatus("未上架");
         return dataDOMapper.insertSelective(record);
     }
 

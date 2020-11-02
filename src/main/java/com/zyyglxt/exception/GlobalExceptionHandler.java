@@ -1,0 +1,55 @@
+package com.zyyglxt.exception;
+
+import com.zyyglxt.error.BusinessException;
+import com.zyyglxt.response.ResponseData;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+
+
+/**
+ * Author:wangzh
+ * Date: 2020/11/1 14:54
+ * Version: 1.0
+ */
+@ControllerAdvice
+public class GlobalExceptionHandler {
+    private static final Logger logger = LoggerFactory.getLogger(GlobalExceptionHandler.class);
+
+    /**
+     * 处理自定义的业务异常
+     * @param e
+     * @return
+     */
+    @ExceptionHandler(value = BusinessException.class)
+    @ResponseBody
+    public ResponseData bizExceptionHandler(BusinessException e){
+        logger.error("发生业务异常！原因是：{}",e.getErrMsg());
+//        Map<String,Object> map = new HashMap<>();
+//        map.put("code",e.getErrCode());
+//        map.put("message",e.getErrMsg());
+//        //将error放入作用域内，有就能取
+//        req.setAttribute("errMap",map);
+        //将Exception直接包装返回
+        return new ResponseData(e);
+    }
+
+    /**
+     * 处理其他异常
+     * @param e
+     * @return
+     */
+    @ExceptionHandler(value =Exception.class)
+    @ResponseBody
+    public ResponseData exceptionHandler(Exception e){
+        logger.error("未知异常！原因是:",e);
+//        Map<String,String> map = new HashMap<>();
+//        map.put("message","服务器内部开了点小差，请重试。。。。。");
+//        req.setAttribute("errMap",map);
+        return new ResponseData();
+    }
+
+}

@@ -2,6 +2,7 @@ package com.zyyglxt.controller.ChineseCultural.facility;
 
 import com.zyyglxt.dataobject.ChineseCulturalDO;
 import com.zyyglxt.dataobject.ChineseCulturalDOKey;
+import com.zyyglxt.error.BusinessException;
 import com.zyyglxt.service.ICulturalVenuesService;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -44,7 +45,7 @@ public class CulturalVenuesController {
 
     //增加一个文化古迹
     @RequestMapping(value = "/addCulVen" , method = RequestMethod.POST)
-    public String addTraditionalCultural(ChineseCulturalDO chineseCulturalDO){
+    public String addTraditionalCultural(ChineseCulturalDO chineseCulturalDO) throws BusinessException {
         chineseCulturalDO.setChineseCulturalType("文化场馆");
         chineseCulturalDO.setChineseCulturalStatus("待上架");
         iCulturalVenuesService.addCulturalVenues(chineseCulturalDO);
@@ -75,7 +76,7 @@ public class CulturalVenuesController {
 
     //修改一个文化场馆
     @RequestMapping(value = "/updCulVen" , method = RequestMethod.POST)
-    public String updateTraditionalCultural(ChineseCulturalDO chineseCulturalDO){
+    public String updateTraditionalCultural(ChineseCulturalDO chineseCulturalDO) throws BusinessException {
         iCulturalVenuesService.updateCulturalVenues(chineseCulturalDO);
         return "back to main page";
     }

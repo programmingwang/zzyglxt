@@ -2,6 +2,7 @@ package com.zyyglxt.dataobject;
 
 import lombok.ToString;
 
+import javax.validation.constraints.NotBlank;
 import java.util.Date;
 
 @ToString
@@ -13,6 +14,7 @@ public class CulturalResourcesDO extends CulturalResourcesDOKey {
      *
      * @mbg.generated Fri Oct 30 16:11:19 CST 2020
      */
+    @NotBlank(message = "名称不能为空")
     private String chineseCulturalName;
 
     /**
@@ -31,6 +33,7 @@ public class CulturalResourcesDO extends CulturalResourcesDOKey {
      *
      * @mbg.generated Fri Oct 30 16:11:19 CST 2020
      */
+    @NotBlank(message = "作者不能为空")
     private String chineseCulturalAuthor;
 
     /**
@@ -103,6 +106,7 @@ public class CulturalResourcesDO extends CulturalResourcesDOKey {
      *
      * @mbg.generated Fri Oct 30 16:11:19 CST 2020
      */
+    @NotBlank(message = "正文不能为空")
     private String chineseCulturalContent;
 
     /**

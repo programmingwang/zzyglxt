@@ -1,7 +1,9 @@
 package com.zyyglxt.service;
 
+import com.zyyglxt.common.Result;
 import com.zyyglxt.dataobject.UserDO;
 import com.zyyglxt.dto.UserDto;
+import com.zyyglxt.error.BusinessException;
 
 /**
  * @Author nongcn
@@ -10,7 +12,8 @@ import com.zyyglxt.dto.UserDto;
  */
 public interface IUserService {
 
-    void Register(UserDO userDO);
-    void Login(String username, String password);
-    void UpdatePassword(UserDto userDto);
+    Result Register(UserDO userDO);
+    Result Login(String username, String password);
+    Result UpdatePassword(UserDto userDto);
+    Result Logout();
 }

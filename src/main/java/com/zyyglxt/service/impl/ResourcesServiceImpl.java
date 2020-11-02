@@ -1,15 +1,14 @@
-package com.zyyglxt.permissionsService.impl;
+package com.zyyglxt.service.impl;
 
 import com.zyyglxt.dao.ResourcesDOMapper;
 import com.zyyglxt.dao.ResourcesRoleRefDOMapper;
 import com.zyyglxt.dao.RoleDOMapper;
 import com.zyyglxt.dataobject.*;
-import com.zyyglxt.permissionsService.ResourcesService;
-import com.zyyglxt.permissionsService.RoleService;
-import com.zyyglxt.permissionsService.UserService;
+
 import com.zyyglxt.permissionsUtil.DateUtils;
 import com.zyyglxt.permissionsUtil.MenuTreeUtil;
 import com.zyyglxt.permissionsUtil.UUIDUtils;
+import com.zyyglxt.service.ResourcesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -1,9 +1,9 @@
-package com.zyyglxt.permissionsService.impl;
+package com.zyyglxt.service.impl;
 
 import com.zyyglxt.dao.UserRoleRefDOMapper;
 import com.zyyglxt.dataobject.UserRoleRefDO;
 import com.zyyglxt.dataobject.UserRoleRefDOKey;
-import com.zyyglxt.permissionsService.UserRoleRefService;
+import com.zyyglxt.service.UserRoleRefService;
 import com.zyyglxt.permissionsUtil.DateUtils;
 import com.zyyglxt.permissionsUtil.UUIDUtils;
 import org.springframework.beans.factory.annotation.Autowired;

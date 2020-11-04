@@ -38,16 +38,18 @@ public class HealthCareChineseMedicineDOServiceImpl implements HealthCareChinese
   中医药常识添加、删除、修改、查询实现方法
 **/
     @Override
-    public int insert(HealthCareChineseMedicineDO record,FileDO fileDO) throws BusinessException {
+    public int insert(HealthCareChineseMedicineDO record) throws BusinessException {
         ValidatorResult result = validator.validate(record);
         if(result.isHasErrors()){
             throw new BusinessException(result.getErrMsg(), EmBusinessError.PARAMETER_VALIDATION_ERROR);
         }
-        //record.setItemcode(UUID.randomUUID().toString());
-        record.setItemcreateat(new Date());
         //iFileService.addFile(fileDO.setDataCode());
-        fileDO.setDataCode(UUID.randomUUID().toString());
-        return healthCareChineseMedicineDOMapper.insert(record,fileDO);
+        //fileDO.setDataCode(UUID.randomUUID().toString());
+        if(record.getItemcode()==null){
+            record.setItemcode(UUID.randomUUID().toString());
+        }
+        record.setItemcreateat(new Date());
+        return healthCareChineseMedicineDOMapper.insert(record);
     }
     @Transactional
     @Override

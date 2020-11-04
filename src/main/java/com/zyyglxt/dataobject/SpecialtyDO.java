@@ -1,7 +1,10 @@
 package com.zyyglxt.dataobject;
 
+import org.springframework.stereotype.Repository;
+
 import java.util.Date;
 
+@Repository
 public class SpecialtyDO extends SpecialtyDOKey {
     /**
      *
@@ -11,6 +14,8 @@ public class SpecialtyDO extends SpecialtyDOKey {
      * @mbg.generated Wed Oct 28 16:25:52 CST 2020
      */
     private String specialtyName;
+
+    private String specialtyPicture;
 
     /**
      *
@@ -430,5 +435,13 @@ public class SpecialtyDO extends SpecialtyDOKey {
      */
     public void setSpecialtyDescribe(String specialtyDescribe) {
         this.specialtyDescribe = specialtyDescribe == null ? null : specialtyDescribe.trim();
+    }
+
+    public String getSpecialtyPicture() {
+        return specialtyPicture;
+    }
+
+    public void setSpecialtyPicture(String specialtyPicture) {
+        this.specialtyPicture = specialtyPicture;
     }
 }

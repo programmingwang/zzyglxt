@@ -1,0 +1,214 @@
+.content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.zyytable thead {
+    background-color: #775637;
+    color: white;
+    font-size: 14px;
+}
+
+.zyytable {
+    width: 1162px;
+    table-layout: fixed;
+}
+
+.zyytable thead tr {
+    height: 52px;
+}
+
+.zyytable tr {
+    height: 92px;
+}
+
+.zyytable td {
+    font-size: 12px;
+    word-wrap: break-word;
+    white-space: nowrap;
+    width: 194px;
+    height: 92px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+}
+
+.zyytable td[name="firstcol"] {
+    font-size: 12px;
+    color: #775637;
+}
+
+
+.pagediv {
+    position: relative;
+    right: -200px;
+    display: flex;
+    flex-direction: row;
+
+}
+
+.my-page-item {
+    width: 28px;
+    height: 28px;
+    font-size: 12px;
+    margin-left: 10px;
+}
+
+.my-pagination {
+    display: -ms-flexbox;
+    display: flex;
+    height: 28px;
+    padding-left: 0;
+    list-style: none;
+    border-radius: 0.25rem;
+}
+
+.my-page-link {
+    position: relative;
+    display: block;
+    padding: 0.5rem 0.75rem;
+    margin-left: -1px;
+    line-height: 1;
+    color: #896B6B;
+    background-color: #fff;
+    border: 1px solid #dee2e6;
+}
+
+.my-page-link:hover {
+    z-index: 2;
+    text-decoration: none;
+    color: white;
+    background-color: #775637;
+    border-color: #dee2e6;
+}
+
+.my-page-link:active {
+    z-index: 2;
+    text-decoration: none;
+    color: white;
+    background-color: #775637;
+    border-color: #dee2e6;
+}
+
+/*下拉框*/
+.my-select-secondary {
+    color: #666666;
+    background-color: #fff;
+    border-color: #6c757d;
+}
+
+/*.my-btn-secondary:hover {*/
+/*    color: #666666;*/
+/*    background-color: #5a6268;*/
+/*    border-color: #545b62;*/
+/*}*/
+
+.my-select-secondary:focus, .my-select-secondary.focus {
+    background-color: #fff;
+    border-color: #545b62;
+    box-shadow: 0 0 0 0.2rem rgba(130, 138, 145, 0.5);
+}
+
+.my-select-secondary.disabled, .my-select-secondary:disabled {
+    color: #666666;
+    background-color: #6c757d;
+    border-color: #6c757d;
+}
+
+.my-select-secondary:not(:disabled):not(.disabled):active, .my-select-secondary:not(:disabled):not(.disabled).active,
+.show > .my-select-secondary.dropdown-toggle {
+    color: #666666;
+    background-color: #fff;
+    border-color: #4e555b;
+}
+
+.my-select-secondary:not(:disabled):not(.disabled):active:focus, .my-select-secondary:not(:disabled):not(.disabled).active:focus,
+.show > .my-select-secondary.dropdown-toggle:focus {
+    box-shadow: 0 0 0 0.2rem rgba(130, 138, 145, 0.5);
+}
+
+.my-select {
+    margin-left: 16px;
+    display: inline-block;
+    font-weight: 400;
+    color: #666666;
+    text-align: center;
+    vertical-align: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-color: transparent;
+    border: 1px solid #dee2e6;
+    padding: 0.375rem 0.75rem;
+    font-size: 12px;
+    line-height: 1;
+    border-radius: 0.25rem;
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .my-select {
+        transition: none;
+    }
+}
+
+/*.my-btn:hover {*/
+/*    color: gray;*/
+/*    text-decoration: none;*/
+/*}*/
+
+.my-select:focus, .my-select.focus {
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.my-select.disabled, .my-select:disabled {
+    opacity: 0.65;
+}
+
+.my-select:not(:disabled):not(.disabled) {
+    cursor: pointer;
+}
+
+select{
+    /*Chrome和Firefox里面的边框是不一样的，所以复写了一下*/
+    border: solid 1px #000;
+
+    /*很关键：将默认的select选择框样式清除*/
+    appearance:none;
+    -moz-appearance:none;
+    -webkit-appearance:none;
+
+    /*在选择框的最右侧中间显示小箭头图片*/
+    background: url("../img/arrow.png") no-repeat scroll right center transparent;
+
+
+    /*为下拉小箭头留出一点位置，避免被文字覆盖*/
+    padding-right: 14px;
+}
+
+/*清除ie的默认选择框样式清除，隐藏下拉箭头*/
+select::-ms-expand{
+    display: none;
+}
+
+/*输入分页*/
+.page-input {
+    color: #666666;
+    margin-left: 10px;
+}
+
+input[type='number'] {
+    -moz-appearance: textfield;
+}
+
+#pageinput {
+    color: #666666;
+    width: 40px;
+    text-align: center;
+    border-radius: 0.25rem;
+    border: 1px solid #dee2e6;
+}

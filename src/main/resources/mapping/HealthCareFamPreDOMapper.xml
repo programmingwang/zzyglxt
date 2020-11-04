@@ -66,8 +66,8 @@
       This element was generated on Wed Oct 28 16:25:52 CST 2020.
     -->
     delete from tb_health_care_fam_pre
-    where itemID = #{itemid,jdbcType=INTEGER}
-      and itemCode = #{itemcode,jdbcType=CHAR}
+    where itemID = #{key.itemid,jdbcType=INTEGER}
+      and itemCode = #{key.itemcode,jdbcType=CHAR}
   </delete>
   <insert id="insert" parameterType="com.zyyglxt.dataobject.HealthCareFamPreDO">
     <!--
@@ -262,4 +262,12 @@
     where itemID = #{itemid,jdbcType=INTEGER}
       and itemCode = #{itemcode,jdbcType=CHAR}
   </update>
+  <select id="selectAllHealthCareFamPre" resultMap="BaseResultMap">
+        SELECT *
+        FROM tb_health_care_fam_pre
+        ORDER BY itemCreateAt
+    </select>
+    <update id="updateVisitNumHealthCareFamPre" parameterType="com.zyyglxt.dataobject.HealthCareFamPreDOKey">
+      update tb_health_care_fam_pre set VISIT_NUM = VISIT_NUM + 1 where itemID = #{itemid,jdbcType=INTEGER} and itemCode = #{itemcode,jdbcType=CHAR}
+    </update>
 </mapper>

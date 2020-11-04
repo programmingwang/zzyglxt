@@ -31,7 +31,7 @@ server:
   servlet:
     context-path: /zyyglxt
     
-logging:
-  file:
-    path: E:/Desktop
+#logging:
+#  file:
+#    path: E:/Desktop
 

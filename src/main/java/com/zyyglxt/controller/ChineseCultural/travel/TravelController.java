@@ -9,7 +9,6 @@ import com.zyyglxt.error.BusinessException;
 import com.zyyglxt.error.EmBusinessError;
 import com.zyyglxt.response.ResponseData;
 import com.zyyglxt.service.ITravelService;
-import com.zyyglxt.util.JsonXMLUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;

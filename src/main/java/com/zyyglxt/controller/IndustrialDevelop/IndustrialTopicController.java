@@ -2,11 +2,10 @@ package com.zyyglxt.controller.IndustrialDevelop;
 
 import com.zyyglxt.dataobject.IndustrialDevelopTopicDO;
 import com.zyyglxt.dataobject.IndustrialDevelopTopicDOKey;
+import com.zyyglxt.error.EmBusinessError;
+import com.zyyglxt.response.ResponseData;
 import com.zyyglxt.service.IIndustrialDevelopTopicService;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 
@@ -22,18 +21,23 @@ public class IndustrialTopicController {
     IIndustrialDevelopTopicService developTopicService;
 
     @RequestMapping(value = "/topic", method = RequestMethod.POST)
-    public void addTopic(@RequestBody IndustrialDevelopTopicDO developTopicDO){
-        
+    @ResponseBody
+    public ResponseData addTopic(@RequestBody IndustrialDevelopTopicDO developTopicDO){
         developTopicService.addTopic(developTopicDO);
+        return new ResponseData(EmBusinessError.success);
     }
 
     @RequestMapping(value = "/topic", method = RequestMethod.PUT)
-    public void updTopic(@RequestBody IndustrialDevelopTopicDO developTopicDO) {
+    @ResponseBody
+    public ResponseData updTopic(@RequestBody IndustrialDevelopTopicDO developTopicDO) {
         developTopicService.updTopic(developTopicDO);
+        return new ResponseData(EmBusinessError.success);
     }
 
     @RequestMapping(value = "/topic", method = RequestMethod.DELETE)
-    public void delTopic(IndustrialDevelopTopicDOKey key) {
+    @ResponseBody
+    public ResponseData delTopic(IndustrialDevelopTopicDOKey key) {
         developTopicService.delTopic(key);
+        return new ResponseData(EmBusinessError.success);
     }
 }

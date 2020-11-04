@@ -39,6 +39,9 @@
   <select id="selectByPage" resultType="com.zyyglxt.dataobject.IndustrialDevelopExpertDO" resultMap="BaseResultMap">
     SELECT * FROM tb_industrial_develop_expert LIMIT #{start},#{end}
   </select>
+  <select id="selectAll" resultType="com.zyyglxt.dataobject.IndustrialDevelopExpertDO">
+    SELECT * FROM tb_industrial_develop_expert
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="com.zyyglxt.dataobject.IndustrialDevelopExpertDOKey">
     <!--
       WARNING - @mbg.generated

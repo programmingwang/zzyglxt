@@ -3,10 +3,19 @@ package com.zyyglxt.service.impl;
 import com.zyyglxt.dao.DataDOMapper;
 import com.zyyglxt.dataobject.DataDO;
 import com.zyyglxt.dataobject.DataDOKey;
+import com.zyyglxt.error.BusinessException;
+import com.zyyglxt.error.EmBusinessError;
 import com.zyyglxt.service.IDataDOService;
+import com.zyyglxt.validator.ValidatorImpl;
+import com.zyyglxt.validator.ValidatorResult;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+
 import java.util.Date;
 import java.util.List;
 
@@ -15,41 +24,62 @@ import java.util.List;
  * @Date 2020/10/29 10:18
  * @Version 1.0
  */
+//@EnableScheduling
 @Service
 public class DataDOServiceImpl  implements IDataDOService{
     @Resource
     DataDOMapper dataDOMapper;
 
+    @Autowired
+    private ValidatorImpl validator;
+
     @Override
-    public DataDO selectByPrimaryKey(DataDOKey key) {
-        return dataDOMapper.selectByPrimaryKey(key);
+    public DataDO selectNewsInf(DataDOKey key) {
+        return dataDOMapper.selectByPrimaryKey(key,"新闻管理");
     }
 
     @Override
-    public void insertSelective(DataDO record) {
+    public List<DataDO> selectAllNewsInf(String dataType) {
+        return dataDOMapper.selectByAllInf(dataType);
+    }
+
+    @Override
+    @Transactional
+    //@Scheduled(cron = "30 50 17 2 11 ? ")
+    public int insertNewsInf(DataDO record) throws BusinessException {
+        ValidatorResult result = validator.validate(record);
+        if(result.isHasErrors()){
+            throw new BusinessException(result.getErrMsg(), EmBusinessError.PARAMETER_VALIDATION_ERROR);
+        }
         record.setItemcreateat(new Date());
+        record.setCreater("test");
         record.setItemupdateat(new Date());
-        dataDOMapper.insertSelective(record);
+        record.setUpdater("test");
+        record.setDataType("新闻管理");
+        record.setDataStatus("未上架");
+        return dataDOMapper.insertSelective(record);
     }
 
     @Override
-    public void deleteByPrimaryKey(DataDOKey key) {
-        dataDOMapper.deleteByPrimaryKey(key);
+    @Transactional
+    public int deleteNewsInf(DataDOKey key) {
+        return dataDOMapper.deleteByPrimaryKey(key);
     }
 
     @Override
-    public void updateByPrimaryKeySelective(DataDO record) {
+    @Transactional
+    public int updateNewsInf(DataDO record) throws BusinessException {
+        ValidatorResult result = validator.validate(record);
+        if(result.isHasErrors()){
+            throw new BusinessException(result.getErrMsg(), EmBusinessError.PARAMETER_VALIDATION_ERROR);
+        }
+        record.setUpdater("asd");
         record.setItemupdateat(new Date());
-        dataDOMapper.updateByPrimaryKeySelective(record);
-    }
-
-    @Override
-    public List<DataDO> selectAll() {
-        return dataDOMapper.selectAll();
+        return dataDOMapper.updateByPrimaryKeySelective(record);
     }
 
     /**
-     * 关键字搜索，包括标题、所属位置、作者、来源、政策法规类型、状态、数据类型
+     * 关键字搜索
      * @param keyWord
      * @return
      */
@@ -57,4 +87,5 @@ public class DataDOServiceImpl  implements IDataDOService{
     public List<DataDO> searchDataDO(String keyWord) {
         return dataDOMapper.searchDataDO(keyWord);
     }
+
 }

@@ -55,4 +55,6 @@ public interface IndustrialDevelopOffDOMapper {
     int updateByPrimaryKey(IndustrialDevelopOffDO record);
 
     List<IndustrialDevelopOffDO> selectByPage(int start, int end);
+
+    List<IndustrialDevelopOffDO> selectAll();
 }

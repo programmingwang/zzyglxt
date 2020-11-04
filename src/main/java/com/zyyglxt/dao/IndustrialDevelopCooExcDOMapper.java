@@ -57,4 +57,6 @@ public interface IndustrialDevelopCooExcDOMapper {
     int updateVisitNumByItemidAndItemcode(IndustrialDevelopCooExcDOKey key);
 
     List<IndustrialDevelopCooExcDO> selectByPage(int start, int end);
+
+    List<IndustrialDevelopCooExcDO> selectAll();
 }

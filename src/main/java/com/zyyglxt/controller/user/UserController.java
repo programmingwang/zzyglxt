@@ -50,7 +50,7 @@ public class UserController {
         if (rs == 200) {
             return new ResponseData(EmBusinessError.success);
         } else {
-            return new ResponseData(EmBusinessError.fail);
+            return new ResponseData(EmBusinessError.USER_REGISTER_FAILED);
         }
     }
 
@@ -60,12 +60,12 @@ public class UserController {
      * @param userDto
      */
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public Result Login(UserDto userDto) {
-        Result result = userService.Login(userDto.getUsername(), userDto.getPassword());
-        if (result.getCode() == 200) {
-            return Result.succ(200, result.getMsg(), null);
+    public ResponseData Login(UserDto userDto) throws BusinessException {
+        int result = userService.Login(userDto.getUsername(), userDto.getPassword());
+        if (result == 200) {
+            return new ResponseData(EmBusinessError.success);
         } else {
-            return Result.fail(500, result.getMsg(), null);
+            return new ResponseData(EmBusinessError.USER_LOGIN_FAILED);
         }
     }
 
@@ -73,15 +73,9 @@ public class UserController {
      * 用户登出
      */
     @RequestMapping(value = "/logout", method = RequestMethod.GET)
-    public Result Logout() {
-        Result result = userService.Logout();
-        if (result.getCode() == 200) {
-            UserUtil userUtil = new UserUtil();
-            userUtil.removeUserName();// 从session中删除用户名
-            return Result.succ(200, result.getMsg(), null);
-        } else {
-            return Result.fail(500, result.getMsg(), null);
-        }
+    public ResponseData Logout() {
+        userService.Logout();
+        return new ResponseData(EmBusinessError.success);
     }
 
     /**
@@ -108,5 +102,19 @@ public class UserController {
                 return Result.fail(500, "两次输入的新密码不一致，请重新输入！", null);
             }
         }
+    }
+
+
+    @RequestMapping(value = "/usermsg", method = RequestMethod.GET)
+    public UserDO selectOne(){
+        return userService.selectOne();
+    }
+
+    @RequestMapping(value = "/updateusermsg", method = RequestMethod.POST)
+    public ResponseData updateUserMsg(UserDO userDO){
+
+
+        userService.UpdateUserMsg(userDO);
+        return new ResponseData(EmBusinessError.MODIFY_USER_MESSAGE_FAILED);
     }
 }

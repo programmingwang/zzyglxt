@@ -13,15 +13,20 @@ import com.zyyglxt.dto.UpdatePwdDto;
 import com.zyyglxt.dto.UserDto;
 import com.zyyglxt.error.BusinessException;
 import com.zyyglxt.error.EmBusinessError;
+import com.zyyglxt.response.ResponseData;
 import com.zyyglxt.service.IUserService;
+import com.zyyglxt.util.IDUtil;
 import com.zyyglxt.util.MobileUtil;
 import com.zyyglxt.util.UserUtil;
 import com.zyyglxt.validator.ValidatorImpl;
 import com.zyyglxt.validator.ValidatorResult;
 import org.apache.commons.codec.digest.DigestUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.annotation.Resource;
 import java.util.UUID;
@@ -58,13 +63,13 @@ public class IUserServiceImpl implements IUserService {
         // 根据用户名查询数据库，若查询到数据，表示该用户名已存在，不能注册
         UserDO userDO = userDOMapper.selectByUsername(userDto.getUsername());
         if (userDO != null) {
-            return 500;
+            throw new BusinessException("用户名已存在，请更换", EmBusinessError.USER_REGISTER_FAILED);
         } else {
             if (MobileUtil.checkPhone(userDto.getMobilePhone())) {
                 register(userDto);
                 return 200;
             } else {
-                return 500;
+                throw new BusinessException("手机号不正确", EmBusinessError.MOBILEPHONE_ERROR);
             }
         }
     }
@@ -127,7 +132,8 @@ public class IUserServiceImpl implements IUserService {
      * @param password
      */
     @Override
-    public Result Login(String username, String password) {
+    @Transactional
+    public int Login(String username, String password) throws BusinessException {
         /*
          将拿到的前端用户名和密码加盐后查询数据库，
          如果查到记录，则登录成功，否则，登录失败
@@ -137,12 +143,16 @@ public class IUserServiceImpl implements IUserService {
         if (userDO != null) {
             UserUtil userUtil = new UserUtil();
             userUtil.setUserName(username);// 用户登录进去将用户名存到session中
+            System.out.println("11111111111111111111111111111111111111111111"+userDO.getItemid());
+            System.out.println("222222222222222222222222222222222222222222222"+userDO.getItemcode());
+            userUtil.setUserItemID(userDO.getItemid());
+            userUtil.setUserItemCode(userDO.getItemcode());
             userDOMapper.updateStateByUserName("入", userUtil.getUserName());
             System.out.println("登录成功");
-            return Result.succ(200, "登录成功！", null);
+            return 200;
         } else {
             System.out.println("登录失败");
-            return Result.fail(500, "用户名或密码错误！", null);
+            throw new BusinessException("用户名或密码错误", EmBusinessError.USER_LOGIN_FAILED);
         }
     }
 
@@ -150,10 +160,10 @@ public class IUserServiceImpl implements IUserService {
      * 退出登录，更改状态
      */
     @Override
-    public Result Logout() {
+    public void Logout() {
         UserUtil userUtil = new UserUtil();
         userDOMapper.updateStateByUserName("出", userUtil.getUserName());
-        return Result.succ(200, "退出登录成功！", null);
+        userUtil.removeUserName();// 从session中删除用户名
     }
 
     /**
@@ -162,9 +172,15 @@ public class IUserServiceImpl implements IUserService {
      * @param updatePwdDto
      */
     @Override
+    @Transactional
     public Result UpdatePassword(UpdatePwdDto updatePwdDto) {
         //从session中拿到用户名，然后根据用户名查询数据库，得到角色类型，然后判断是普通用户还是管理员，
         //如果是普通用户则需要输入手机号码和原密码，管理员则直接输入新密码替换原密码（不需要手机号码和原密码）
+        ValidatorResult result = validator.validate(updatePwdDto);
+        if (result.isHasErrors()) {
+            throw new BusinessException(result.getErrMsg(), EmBusinessError.PARAMETER_VALIDATION_ERROR);
+        }
+
         UserUtil userUtil = new UserUtil();
         String username = userUtil.getUserName();
         UserDO userDO = userDOMapper.selectByUsername(username);
@@ -201,6 +217,49 @@ public class IUserServiceImpl implements IUserService {
             return Result.succ(200, "修改成功！", null);
         }
         return Result.fail(500, "该用户既不是普通用户，也不是管理员！", null);
+    }
+
+    /**
+     * 查看个人用户信息
+     *
+     * @return
+     */
+    @Override
+    public UserDO selectOne() {
+        UserUtil userUtil = new UserUtil();
+        String username = userUtil.getUserName();
+        return userDOMapper.selectByUsername(username);
+    }
+
+    /**
+     * 修改用户信息
+     * @param userDO
+     * @return
+     */
+    @Override
+    @Transactional
+    public void UpdateUserMsg(UserDO userDO) {
+        ValidatorResult result = validator.validate(userDO);
+        if (result.isHasErrors()) {
+            throw new BusinessException(result.getErrMsg(), EmBusinessError.PARAMETER_VALIDATION_ERROR);
+        }
+        // 验证通过返回 null，不通过则返回一个 字符串，
+        // 所以利用判空来判断身份证号码是否合法
+        String isValidIDCardNo = IDUtil.IdentityCardVerification(userDO.getIdcardNo());
+        if (!StringUtils.isEmpty(isValidIDCardNo)){
+            throw new BusinessException(isValidIDCardNo, EmBusinessError.PARAMETER_VALIDATION_ERROR);
+        }
+        UserUtil userUtil = new UserUtil();
+
+
+        String userItemCode = userUtil.getUserItemCode();
+        System.out.println("3333333333333333333333333333333333333: "+userItemCode);
+        int userItemID = userUtil.getUserItemID();
+        System.out.println("5555555555555555555555555555555555555: "+userItemID);
+        userDO.setItemid(userItemID);
+        userDO.setItemcode(userItemCode);
+
+        userDOMapper.updateByPrimaryKeySelective(userDO);
     }
 }
 

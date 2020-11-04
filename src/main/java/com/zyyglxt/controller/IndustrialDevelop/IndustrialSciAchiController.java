@@ -2,6 +2,8 @@ package com.zyyglxt.controller.IndustrialDevelop;
 
 import com.zyyglxt.dataobject.IndustrialDevelopSciAchiDO;
 import com.zyyglxt.dataobject.IndustrialDevelopSciAchiDOKey;
+import com.zyyglxt.error.EmBusinessError;
+import com.zyyglxt.response.ResponseData;
 import com.zyyglxt.service.IIndustrialDevelopSciAchiService;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,10 +26,10 @@ public class IndustrialSciAchiController {
      */
     @ResponseBody
     @RequestMapping(value = "/achievement", method = RequestMethod.POST)
-    public void addAchievement(@RequestBody IndustrialDevelopSciAchiDO sciAchiDO) {
+    public ResponseData addAchievement(@RequestBody IndustrialDevelopSciAchiDO sciAchiDO) {
         System.out.println(sciAchiDO.toString());
         industrialDevelop.addAchievement(sciAchiDO);
-
+        return new ResponseData(EmBusinessError.success);
     }
 
     /**
@@ -36,9 +38,9 @@ public class IndustrialSciAchiController {
      */
     @ResponseBody
     @RequestMapping(value = "/achievement", method = RequestMethod.PUT)
-    public void updateAchievement(@RequestBody IndustrialDevelopSciAchiDO sciAchiDO) {
+    public ResponseData updateAchievement(@RequestBody IndustrialDevelopSciAchiDO sciAchiDO) {
         industrialDevelop.updAchievement(sciAchiDO);
-
+        return new ResponseData(EmBusinessError.success);
     }
 
     /**
@@ -47,8 +49,9 @@ public class IndustrialSciAchiController {
      */
     @ResponseBody
     @RequestMapping(value = "/achievement", method = RequestMethod.DELETE)
-    public void delAchievement(@RequestBody IndustrialDevelopSciAchiDOKey key) {
+    public ResponseData delAchievement(@RequestBody IndustrialDevelopSciAchiDOKey key) {
         industrialDevelop.delAchievement(key);
+        return new ResponseData(EmBusinessError.success);
     }
 
     /**
@@ -56,8 +59,9 @@ public class IndustrialSciAchiController {
      * @param key
      */
     @RequestMapping(value = "visit-num", method = RequestMethod.PUT)
-    public void increaseVisitNum(@RequestBody IndustrialDevelopSciAchiDOKey key) {
+    public ResponseData increaseVisitNum(@RequestBody IndustrialDevelopSciAchiDOKey key) {
         industrialDevelop.increaseVisitNum(key);
+        return new ResponseData(EmBusinessError.success);
     }
 }
 

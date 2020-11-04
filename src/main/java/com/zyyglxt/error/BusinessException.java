@@ -6,7 +6,7 @@ package com.zyyglxt.error;
  * Version: 1.0
  */
 //包装器业务异常类实现
-public class BusinessException extends Exception implements CommonError {
+public class BusinessException extends RuntimeException implements CommonError {
 
     private CommonError commonError;
 

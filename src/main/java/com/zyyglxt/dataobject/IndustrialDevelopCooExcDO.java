@@ -1,5 +1,6 @@
 package com.zyyglxt.dataobject;
 
+import javax.validation.constraints.NotBlank;
 import java.util.Date;
 
 public class IndustrialDevelopCooExcDO extends IndustrialDevelopCooExcDOKey {
@@ -10,6 +11,7 @@ public class IndustrialDevelopCooExcDO extends IndustrialDevelopCooExcDOKey {
      *
      * @mbg.generated Wed Oct 28 16:25:52 CST 2020
      */
+    @NotBlank(message = "合作交流名称不能为空")
     private String cooperationExchangeName;
 
     /**
@@ -19,6 +21,7 @@ public class IndustrialDevelopCooExcDO extends IndustrialDevelopCooExcDOKey {
      *
      * @mbg.generated Wed Oct 28 16:25:52 CST 2020
      */
+    @NotBlank(message = "合作交流主研人不能为空")
     private String cooperationExchangeLeader;
 
     /**
@@ -37,6 +40,7 @@ public class IndustrialDevelopCooExcDO extends IndustrialDevelopCooExcDOKey {
      *
      * @mbg.generated Wed Oct 28 16:25:52 CST 2020
      */
+    @NotBlank(message = "项目简介不能为空")
     private String projectIntroduce;
 
     /**
@@ -46,6 +50,7 @@ public class IndustrialDevelopCooExcDO extends IndustrialDevelopCooExcDOKey {
      *
      * @mbg.generated Wed Oct 28 16:25:52 CST 2020
      */
+    @NotBlank(message = "项目单位不能为空")
     private String projectUnit;
 
     /**
@@ -55,6 +60,7 @@ public class IndustrialDevelopCooExcDO extends IndustrialDevelopCooExcDOKey {
      *
      * @mbg.generated Wed Oct 28 16:25:52 CST 2020
      */
+    @NotBlank(message = "联系人不能为空")
     private String contacts;
 
     /**
@@ -64,6 +70,7 @@ public class IndustrialDevelopCooExcDO extends IndustrialDevelopCooExcDOKey {
      *
      * @mbg.generated Wed Oct 28 16:25:52 CST 2020
      */
+    @NotBlank(message = "电话号码不能为空")
     private String phone;
 
     /**
@@ -73,6 +80,7 @@ public class IndustrialDevelopCooExcDO extends IndustrialDevelopCooExcDOKey {
      *
      * @mbg.generated Wed Oct 28 16:25:52 CST 2020
      */
+    @NotBlank(message = "预期合作机构不能为空")
     private String cooOrg;
 
     /**

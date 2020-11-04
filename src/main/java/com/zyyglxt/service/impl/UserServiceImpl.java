@@ -108,4 +108,9 @@ public class UserServiceImpl implements UserService {
         return userDOMapper.deleteByUsername(username);
     }
 
+    @Override
+    public UserDO selectByName(String username) {
+        return userDOMapper.selectByUsername(username);
+    }
+
 }

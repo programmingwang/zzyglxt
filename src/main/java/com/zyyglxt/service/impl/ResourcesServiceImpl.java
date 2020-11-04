@@ -89,4 +89,9 @@ public class ResourcesServiceImpl implements ResourcesService {
         return treeGridList;
     }
 
+    @Override
+    public List<ResourcesDO> selectListByPath(String requestUrl) {
+        return resourcesDOMapper.selectListByPath(requestUrl);
+    }
+
 }

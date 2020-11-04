@@ -1,12 +1,11 @@
 package com.zyyglxt.controller.medicalService;
 
-import com.zyyglxt.dataobject.HospSpecialtyRefDO;
 import com.zyyglxt.dataobject.SpecialtyDO;
-import com.zyyglxt.dataobject.SpecialtyDOKey;
 import com.zyyglxt.dto.SpecialtyDto;
+import com.zyyglxt.error.BusinessException;
+import com.zyyglxt.error.EmBusinessError;
+import com.zyyglxt.response.ResponseData;
 import com.zyyglxt.service.ISpecialtyService;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -23,37 +22,40 @@ public class SpecialtyController {
     @Resource
     ISpecialtyService specialtyService;
 
-    @PostMapping(value = "addSpecialty")
-    public void addSpecialty(SpecialtyDto specialtyDto){
+    @PostMapping(value = "add")
+    public ResponseData addSpecialty(SpecialtyDto specialtyDto) throws BusinessException {
         specialtyService.addSpecialty(specialtyDto);
+        return new ResponseData(EmBusinessError.success);
     }
 
-    @PostMapping(value = "updateSpecialty")
-    public void updateSpecialty(SpecialtyDto specialtyDto){
+    @PostMapping(value = "update")
+    public ResponseData updateSpecialty(SpecialtyDto specialtyDto){
         specialtyService.updateSpecialty(specialtyDto);
+        return new ResponseData(EmBusinessError.success);
     }
 
-    @DeleteMapping(value = "deleteSpecialty")
-    public void deleteSpecialty(SpecialtyDto specialtyDto){
+    @DeleteMapping(value = "delete")
+    public ResponseData deleteSpecialty(SpecialtyDto specialtyDto){
         specialtyService.deleteSpecialty(specialtyDto);
+        return new ResponseData(EmBusinessError.success);
     }
 
-    @GetMapping(value = "selectAllSpecialty")
-    public void selectAllSpecialty(Model model){
+    @GetMapping(value = "selectAll")
+    public ResponseData selectAllSpecialty(){
         List<SpecialtyDO> specialtyDOList = specialtyService.selectAllSpecialty();
-        model.addAttribute("specialtyDOList",specialtyDOList);
+        return new ResponseData(EmBusinessError.success,specialtyDOList);
     }
 
-    @GetMapping(value = "searchSpecialty")
-    public void searchSpecialty(Model model, String keyWord){
+    @GetMapping(value = "search")
+    public ResponseData searchSpecialty(String keyWord){
         List<SpecialtyDO> specialtyDOList = specialtyService.searchSpecialty(keyWord);
-        model.addAttribute("specialtyDOList",specialtyDOList);
+        return new ResponseData(EmBusinessError.success,specialtyDOList);
     }
 
-    @GetMapping(value = "top5Specialty")
-    public void top5Specialty(Model model){
+    @GetMapping(value = "top5")
+    public ResponseData top5Specialty(){
         List<SpecialtyDO> specialtyDOList = specialtyService.top5Specialty();
-        model.addAttribute("specialtyDOList",specialtyDOList);
+        return new ResponseData(EmBusinessError.success,specialtyDOList);
     }
 
 }

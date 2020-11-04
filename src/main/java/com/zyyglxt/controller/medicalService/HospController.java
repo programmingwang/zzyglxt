@@ -2,8 +2,9 @@ package com.zyyglxt.controller.medicalService;
 
 import com.zyyglxt.dataobject.HospDO;
 import com.zyyglxt.dataobject.HospDOKey;
+import com.zyyglxt.error.EmBusinessError;
+import com.zyyglxt.response.ResponseData;
 import com.zyyglxt.service.IHospService;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -20,37 +21,40 @@ public class HospController {
     @Resource
     IHospService hospService;
 
-    @PostMapping(value = "addHosp")
-    public void addHosp(HospDO hospDO){
+    @PostMapping(value = "add")
+    public ResponseData addHosp(HospDO hospDO){
         hospService.addHosp(hospDO);
+        return new ResponseData(EmBusinessError.success);
     }
 
-    @PostMapping(value = "updateHosp")
-    public void updateHosp(HospDO hospDO){
+    @PostMapping(value = "update")
+    public ResponseData updateHosp(HospDO hospDO){
         hospService.updateHosp(hospDO);
+        return new ResponseData(EmBusinessError.success);
     }
 
-    @DeleteMapping(value = "deleteHosp")
-    public void deleteHosp(HospDOKey hospDOKey){
+    @DeleteMapping(value = "delete")
+    public ResponseData deleteHosp(HospDOKey hospDOKey){
         hospService.deleteHosp(hospDOKey);
+        return new ResponseData(EmBusinessError.success);
     }
 
-    @GetMapping(value = "selectAllHosp")
-    public void selectAllHosp(Model model){
+    @GetMapping(value = "selectAll")
+    public ResponseData selectAllHosp(){
         List<HospDO> hospDOList = hospService.selectAllHosp();
-        model.addAttribute("hospDOList",hospDOList);
+        return new ResponseData(EmBusinessError.success,hospDOList);
     }
 
-    @GetMapping(value = "searchHosp")
-    public void searchHosp(Model model, String keyWord){
+    @GetMapping(value = "search")
+    public ResponseData searchHosp(String keyWord){
         List<HospDO> hospDOList = hospService.searchHosp(keyWord);
-        model.addAttribute("hospDOList",hospDOList);
+        return new ResponseData(EmBusinessError.success,hospDOList);
     }
 
-    @GetMapping(value = "top5Hosp")
-    public void top5Hosp(Model model){
+    @GetMapping(value = "top5")
+    public ResponseData top5Hosp(){
         List<HospDO> hospDOList = hospService.top5Hosp();
-        model.addAttribute("hospDOList",hospDOList);
+        return new ResponseData(EmBusinessError.success,hospDOList);
     }
 
 }

@@ -61,6 +61,9 @@
   <select id="selectByPage" resultType="com.zyyglxt.dataobject.IndustrialDevelopTalRecDO" resultMap="BaseResultMap">
     SELECT * FROM tb_industrial_develop_tal_rec LIMIT #{start},#{end}
   </select>
+  <select id="selectAll" resultType="com.zyyglxt.dataobject.IndustrialDevelopTalRecDO">
+    SELECT * FROM tb_industrial_develop_tal_rec
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="com.zyyglxt.dataobject.IndustrialDevelopTalRecDOKey">
     <!--
       WARNING - @mbg.generated

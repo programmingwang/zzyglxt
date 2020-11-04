@@ -58,6 +58,7 @@ public interface IndustrialDevelopSciAchiDOMapper {
 
     List<IndustrialDevelopSciAchiDO> selectByPage(int start, int end);
 
+    List<IndustrialDevelopSciAchiDO> selectAll();
 }
 
 

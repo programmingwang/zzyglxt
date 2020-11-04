@@ -2,6 +2,7 @@ package com.zyyglxt.service;
 
 import com.zyyglxt.dataobject.ChineseCulturalDO;
 import com.zyyglxt.dataobject.ChineseCulturalDOKey;
+import com.zyyglxt.dataobject.FileDO;
 import com.zyyglxt.error.BusinessException;
 
 import java.util.List;
@@ -20,7 +21,7 @@ public interface ITravelService {
     List<ChineseCulturalDO> getTravelList();
 
     //增加一个健康旅游信息
-    int addTravelSchool(ChineseCulturalDO record) throws BusinessException;
+    int addTravel(ChineseCulturalDO record) throws BusinessException;
 
     //删除一个健康旅游信息
     int removeTravel(ChineseCulturalDOKey key);

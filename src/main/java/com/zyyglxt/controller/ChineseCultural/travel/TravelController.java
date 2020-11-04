@@ -1,15 +1,20 @@
 package com.zyyglxt.controller.ChineseCultural.travel;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import com.zyyglxt.dataobject.ChineseCulturalDO;
 import com.zyyglxt.dataobject.ChineseCulturalDOKey;
+import com.zyyglxt.dataobject.FileDO;
 import com.zyyglxt.error.BusinessException;
 import com.zyyglxt.error.EmBusinessError;
 import com.zyyglxt.response.ResponseData;
 import com.zyyglxt.service.ITravelService;
+import com.zyyglxt.util.JsonXMLUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Author:wangzh
@@ -35,19 +40,16 @@ public class TravelController {
 
     //查询一个健康旅游
 
-    //去增加页面,这个是为了跳转到增加的页面
-//    @RequestMapping(value = "/toAddPage" , method = RequestMethod.GET)
-//    public ResponseData toAddPage(){
-//        return "to add page";
-//    }
+
 
     //增加一个健康旅游
     @RequestMapping(value = "/addTrav" , method = RequestMethod.POST)
     @ResponseBody
+//    public ResponseData addTravel(@RequestBody ChineseCulturalDO chineseCulturalDO , @RequestBody(required = false) FileDO fileDO) throws BusinessException {
     public ResponseData addTravel(@RequestBody ChineseCulturalDO chineseCulturalDO) throws BusinessException {
         chineseCulturalDO.setChineseCulturalType("健康旅游");
         chineseCulturalDO.setChineseCulturalStatus("待上架");
-        iTravelService.addTravelSchool(chineseCulturalDO);
+        iTravelService.addTravel(chineseCulturalDO);
         return new ResponseData(EmBusinessError.success);
     }
 

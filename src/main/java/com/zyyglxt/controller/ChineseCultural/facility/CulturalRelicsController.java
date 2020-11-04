@@ -46,7 +46,7 @@ public class CulturalRelicsController {
     //增加一个文化古迹
     @RequestMapping(value = "/addCulRel" , method = RequestMethod.POST)
     @ResponseBody
-    public ResponseData addCulturalRelics(@RequestBody ChineseCulturalDO chineseCulturalDO) throws BusinessException {
+    public ResponseData addCulturalRelics(@RequestBody ChineseCulturalDO chineseCulturalDO){
         chineseCulturalDO.setChineseCulturalType("文化古迹");
         chineseCulturalDO.setChineseCulturalStatus("待上架");
         iCulturalRelicsService.addCulturalRelics(chineseCulturalDO);

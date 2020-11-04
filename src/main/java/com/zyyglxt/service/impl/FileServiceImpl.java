@@ -4,6 +4,7 @@ import com.zyyglxt.dao.FileDOMapper;
 import com.zyyglxt.dataobject.FileDO;
 import com.zyyglxt.dataobject.FileDOKey;
 import com.zyyglxt.service.IFileService;
+import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -14,6 +15,7 @@ import java.util.UUID;
  * @version 1.0
  * @date 2020/11/1 17:52
  */
+@Service
 public class FileServiceImpl implements IFileService {
 
     @Resource

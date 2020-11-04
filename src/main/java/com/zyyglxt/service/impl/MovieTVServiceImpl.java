@@ -6,6 +6,7 @@ import com.zyyglxt.dataobject.ChineseCulturalDOKey;
 import com.zyyglxt.error.BusinessException;
 import com.zyyglxt.error.EmBusinessError;
 import com.zyyglxt.service.IMovieTVService;
+import com.zyyglxt.util.DOKeyAndValidateUtil;
 import com.zyyglxt.validator.ValidatorImpl;
 import com.zyyglxt.validator.ValidatorResult;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,16 +62,7 @@ public class MovieTVServiceImpl implements IMovieTVService {
     @Override
     @Transactional
     public int updateMovieTV(ChineseCulturalDO record) throws BusinessException {
-        ValidatorResult result = validator.validate(record);
-        if(result.isHasErrors()){
-            throw new BusinessException(result.getErrMsg(), EmBusinessError.PARAMETER_VALIDATION_ERROR);
-        }
-        ChineseCulturalDOKey key = new ChineseCulturalDOKey();
-        key.setItemid(record.getItemid());
-        key.setItemcode(record.getItemcode());
-        record.setUpdater("");
-        record.setItemupdateat(new Date());
-        return chineseCulturalDOMapper.updateByPrimaryKeySelective(key,record);
+        return DOKeyAndValidateUtil.updateUtil(record, validator, chineseCulturalDOMapper);
     }
 
     @Override

@@ -45,9 +45,7 @@ public class MovieTVController {
     //增加一个漫画典故
     @RequestMapping(value = "/addMovTv" , method = RequestMethod.POST)
     @ResponseBody
-    public ResponseData addMovieTV(@RequestBody ChineseCulturalDO chineseCulturalDO) throws BusinessException {
-        chineseCulturalDO.setChineseCulturalType("电影电视");
-        chineseCulturalDO.setChineseCulturalStatus("待上架");
+    public ResponseData addMovieTV(@RequestBody ChineseCulturalDO chineseCulturalDO){
         iMovieTVService.addMovieTV(chineseCulturalDO);
         return new ResponseData(EmBusinessError.success);
     }
@@ -77,7 +75,7 @@ public class MovieTVController {
     //修改一个电影电视
     @RequestMapping(value = "/updMovTv" , method = RequestMethod.POST)
     @ResponseBody
-    public ResponseData updateMovieTV(@RequestBody ChineseCulturalDO chineseCulturalDO) throws BusinessException {
+    public ResponseData updateMovieTV(@RequestBody ChineseCulturalDO chineseCulturalDO){
         iMovieTVService.updateMovieTV(chineseCulturalDO);
         return new ResponseData(EmBusinessError.success);
     }

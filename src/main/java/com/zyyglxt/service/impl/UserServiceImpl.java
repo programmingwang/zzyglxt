@@ -4,7 +4,7 @@ import com.zyyglxt.dao.RoleDOMapper;
 import com.zyyglxt.dao.UserDOMapper;
 import com.zyyglxt.dao.UserRoleRefDOMapper;
 import com.zyyglxt.dataobject.*;
-import com.zyyglxt.permissionsUtil.UUIDUtils;
+import com.zyyglxt.util.UUIDUtils;
 import com.zyyglxt.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

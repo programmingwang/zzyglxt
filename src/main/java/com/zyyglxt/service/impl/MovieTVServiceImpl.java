@@ -5,6 +5,8 @@ import com.zyyglxt.dataobject.ChineseCulturalDO;
 import com.zyyglxt.dataobject.ChineseCulturalDOKey;
 import com.zyyglxt.error.BusinessException;
 import com.zyyglxt.error.EmBusinessError;
+import com.zyyglxt.util.DateUtils;
+import com.zyyglxt.util.UUIDUtils;
 import com.zyyglxt.service.IMovieTVService;
 import com.zyyglxt.util.DOKeyAndValidateUtil;
 import com.zyyglxt.validator.ValidatorImpl;
@@ -14,7 +16,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -42,14 +43,20 @@ public class MovieTVServiceImpl implements IMovieTVService {
 
     @Override
     @Transactional
-    public int addMovieTV(ChineseCulturalDO record) throws BusinessException {
+    public int addMovieTV(ChineseCulturalDO record){
         ValidatorResult result = validator.validate(record);
         if(result.isHasErrors()){
             throw new BusinessException(result.getErrMsg(), EmBusinessError.PARAMETER_VALIDATION_ERROR);
         }
         record.setCreater("");
+        record.setItemcreateat(DateUtils.getDate());
         record.setUpdater("");
         record.setChineseCulturalType("电视电影");
+        record.setChineseCulturalStatus("待上架");
+        //如果前台没有插入图片或者附件，就自己生成uuid
+        if(record.getItemcode() == null){
+            record.setItemcode(UUIDUtils.getUUID());
+        }
         return chineseCulturalDOMapper.insertSelective(record);
     }
 
@@ -61,7 +68,7 @@ public class MovieTVServiceImpl implements IMovieTVService {
 
     @Override
     @Transactional
-    public int updateMovieTV(ChineseCulturalDO record) throws BusinessException {
+    public int updateMovieTV(ChineseCulturalDO record){
         return DOKeyAndValidateUtil.updateUtil(record, validator, chineseCulturalDOMapper);
     }
 

@@ -44,9 +44,7 @@ public class CartoonAllusionsController {
     //增加一个漫画典故
     @RequestMapping(value = "/addCarAll" , method = RequestMethod.POST)
     @ResponseBody
-    public ResponseData addCartoonAllusions(@RequestBody ChineseCulturalDO chineseCulturalDO) throws BusinessException {
-        chineseCulturalDO.setChineseCulturalType("漫画典故");
-        chineseCulturalDO.setChineseCulturalStatus("待上架");
+    public ResponseData addCartoonAllusions(@RequestBody ChineseCulturalDO chineseCulturalDO) {
         iCartoonAllusionsService.addCartoonAllusions(chineseCulturalDO);
         return new ResponseData(EmBusinessError.success);
     }
@@ -76,7 +74,7 @@ public class CartoonAllusionsController {
     //修改一个漫画典故
     @RequestMapping(value = "/updCarAll" , method = RequestMethod.POST)
     @ResponseBody
-    public ResponseData updateCartoonAllusions(@RequestBody ChineseCulturalDO chineseCulturalDO) throws BusinessException {
+    public ResponseData updateCartoonAllusions(@RequestBody ChineseCulturalDO chineseCulturalDO) {
         iCartoonAllusionsService.updateCartoonAllusions(chineseCulturalDO);
         return new ResponseData(EmBusinessError.success);
     }

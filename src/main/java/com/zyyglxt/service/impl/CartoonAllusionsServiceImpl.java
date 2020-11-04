@@ -7,6 +7,9 @@ import com.zyyglxt.error.BusinessException;
 import com.zyyglxt.error.EmBusinessError;
 import com.zyyglxt.service.ICartoonAllusionsService;
 import com.zyyglxt.util.DOKeyAndValidateUtil;
+
+import com.zyyglxt.service.IFileService;
+
 import com.zyyglxt.validator.ValidatorImpl;
 import com.zyyglxt.validator.ValidatorResult;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.annotation.Resource;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * Author:wangzh
@@ -29,6 +33,9 @@ public class CartoonAllusionsServiceImpl implements ICartoonAllusionsService {
 
     @Autowired
     private ValidatorImpl validator;
+
+    @Autowired
+    private IFileService iFileService;
 
     @Override
     public ChineseCulturalDO getCartoonAllusions(ChineseCulturalDOKey key) {
@@ -51,6 +58,7 @@ public class CartoonAllusionsServiceImpl implements ICartoonAllusionsService {
         record.setUpdater("");
         record.setChineseCulturalType("漫画典故");
         return chineseCulturalDOMapper.insertSelective(record);
+
     }
 
     @Override

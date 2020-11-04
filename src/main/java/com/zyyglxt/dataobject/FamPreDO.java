@@ -1,5 +1,8 @@
 package com.zyyglxt.dataobject;
 
+import lombok.experimental.Accessors;
+
+import javax.validation.constraints.NotBlank;
 import java.util.Date;
 
 public class FamPreDO extends FamPreDOKey {
@@ -10,6 +13,7 @@ public class FamPreDO extends FamPreDOKey {
      *
      * @mbg.generated Wed Oct 28 16:25:52 CST 2020
      */
+    @NotBlank(message = "名方名称不能为空")
     private String name;
 
     /**
@@ -19,6 +23,7 @@ public class FamPreDO extends FamPreDOKey {
      *
      * @mbg.generated Wed Oct 28 16:25:52 CST 2020
      */
+    @NotBlank(message = "名方来源不能为空")
     private String source;
 
     /**
@@ -28,6 +33,7 @@ public class FamPreDO extends FamPreDOKey {
      *
      * @mbg.generated Wed Oct 28 16:25:52 CST 2020
      */
+    @NotBlank(message = "处方不能为空")
     private String prescription;
 
     /**
@@ -55,6 +61,7 @@ public class FamPreDO extends FamPreDOKey {
      *
      * @mbg.generated Wed Oct 28 16:25:52 CST 2020
      */
+    @NotBlank(message = "创建者不能为空")
     private String creater;
 
     /**
@@ -91,6 +98,7 @@ public class FamPreDO extends FamPreDOKey {
      *
      * @mbg.generated Wed Oct 28 16:25:52 CST 2020
      */
+    @NotBlank(message = "正文内容不能为空")
     private String content;
 
     /**

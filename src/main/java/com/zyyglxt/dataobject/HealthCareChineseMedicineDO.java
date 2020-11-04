@@ -1,5 +1,6 @@
 package com.zyyglxt.dataobject;
 
+import javax.validation.constraints.NotBlank;
 import java.util.Date;
 
 public class HealthCareChineseMedicineDO extends HealthCareChineseMedicineDOKey {
@@ -10,6 +11,7 @@ public class HealthCareChineseMedicineDO extends HealthCareChineseMedicineDOKey 
      *
      * @mbg.generated Wed Oct 28 16:25:52 CST 2020
      */
+    @NotBlank(message = "中医药名称不能为空")
     private String chineseMedicineName;
 
     /**

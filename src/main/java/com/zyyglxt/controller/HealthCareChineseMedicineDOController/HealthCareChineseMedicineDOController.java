@@ -1,10 +1,13 @@
 package com.zyyglxt.controller.HealthCareChineseMedicineDOController;
 
-import com.zyyglxt.common.Result;
 import com.zyyglxt.dataobject.HealthCareChineseMedicineDO;
 import com.zyyglxt.dataobject.HealthCareChineseMedicineDOKey;
 
+import com.zyyglxt.error.BusinessException;
+import com.zyyglxt.error.EmBusinessError;
+import com.zyyglxt.response.ResponseData;
 import com.zyyglxt.service.HealthCareChineseMedicineDOService;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -19,51 +22,52 @@ import java.util.List;
                 /*（控制器类实现数据交互）*/
 public class HealthCareChineseMedicineDOController {
    @Resource
-    HealthCareChineseMedicineDOService healthCareChineseMedicineDOService;
+   private HealthCareChineseMedicineDOService healthCareChineseMedicineDOService;
    /*
      中医药名称相关数据插入
    */
    @RequestMapping(value ="inserthealthcarechinesemedicinedo",method = RequestMethod.POST )
-   public Result insertHealthCareChineseMedicineDOMapper(@RequestBody HealthCareChineseMedicineDO key) {
-       try {
+   public ResponseData insertHealthCareChineseMedicineDOMapper(@RequestBody HealthCareChineseMedicineDO key) throws BusinessException {
+
            System.out.println("中医药名称: " + key.getChineseMedicineName());
            healthCareChineseMedicineDOService.insert(key);
-       } catch (Exception e) {
-           e.printStackTrace();
-       }
-       return Result.succ("添加数据成功");
+           return new ResponseData(EmBusinessError.success);
    }
     /*
       中医药名称相关数据的删除
     */
     @RequestMapping(value ="deletehealthcarechinesemedicinedo",method = RequestMethod.POST )
-    public Result deleteHealthCareChineseMedicineDOMapper(@RequestBody HealthCareChineseMedicineDOKey key){
+    public ResponseData deleteHealthCareChineseMedicineDOMapper(@RequestBody HealthCareChineseMedicineDOKey key){
         healthCareChineseMedicineDOService.deleteByPrimaryKey(key);
         System.out.println("要删除中医药编号为："+key.getItemid());
-        return Result.succ("删除成功");
+        return new ResponseData(EmBusinessError.success);
     }
     /*
      中医药名称相关数据的修改
    */
     @RequestMapping(value ="updatehealthcarechinesemedicinedo",method = RequestMethod.POST )
-    public Result updateHealthCareChineseMedicineDOMapper(@RequestBody HealthCareChineseMedicineDO key){
+    public ResponseData updateHealthCareChineseMedicineDOMapper(@RequestBody HealthCareChineseMedicineDO key) throws BusinessException {
             healthCareChineseMedicineDOService.updateByPrimaryKeySelective(key);
             System.out.println("要修改中医药编号为："+key.getItemid());
-            return Result.succ("修改数据成功");
+            return new ResponseData(EmBusinessError.success);
     }
     /*
-     中医药名称相关数据的查询
+     中医药名称相关数据的查询(通过id和编号)
    */
     @RequestMapping(value ="selecthealthcarechinesemedicinedo",method = RequestMethod.POST )
-    public Result selectHealthCareChineseMedicineDOMapper(@RequestBody HealthCareChineseMedicineDOKey key){
+    public ResponseData selectHealthCareChineseMedicineDOMapper(@RequestBody HealthCareChineseMedicineDOKey key){
         healthCareChineseMedicineDOService.selectByPrimaryKey(key);
-        return Result.succ( healthCareChineseMedicineDOService.selectByPrimaryKey(key));
+        return new ResponseData(EmBusinessError.success);
     }
     /*中医药常识数据所有查询*/
     @RequestMapping(value ="selectallhealthcarechinesemedicinedo",method = RequestMethod.POST )
-    public List<HealthCareChineseMedicineDO> selectAllHealthCareChineseMedicineDOMapper(){
+    /*public List<HealthCareChineseMedicineDO> selectAllHealthCareChineseMedicineDOMapper(){
         return healthCareChineseMedicineDOService.selectAllHealthCareChineseMedicine();
+    }*/
+    public ResponseData selectAllHealthCareChineseMedicineDOMapper(Model model){
+        List<HealthCareChineseMedicineDO> healthCareChineseMedicineDOSList = healthCareChineseMedicineDOService.selectAllHealthCareChineseMedicine();
+        model.addAttribute("traditionalCulturalList",healthCareChineseMedicineDOSList);
+        return new ResponseData(EmBusinessError.success,healthCareChineseMedicineDOSList);
     }
-
 }
 

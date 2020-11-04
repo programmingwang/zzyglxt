@@ -4,8 +4,12 @@ import com.zyyglxt.dao.RoleDOMapper;
 import com.zyyglxt.dao.UserDOMapper;
 import com.zyyglxt.dao.UserRoleRefDOMapper;
 import com.zyyglxt.dataobject.*;
+import com.zyyglxt.error.BusinessException;
+import com.zyyglxt.error.EmBusinessError;
 import com.zyyglxt.permissionsUtil.UUIDUtils;
 import com.zyyglxt.service.UserService;
+import com.zyyglxt.validator.ValidatorImpl;
+import com.zyyglxt.validator.ValidatorResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,6 +29,8 @@ public class UserServiceImpl implements UserService {
     UserRoleRefDOMapper userRoleRefDOMapper;
     @Autowired
     RoleDOMapper roleDOMapper;
+    @Autowired
+    private ValidatorImpl validator;
 
     @Override
     public void deleteUserByUsername(UserDO userDO) {
@@ -48,6 +54,10 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void insertUserSelective(UserDO record) {
+        ValidatorResult result = validator.validate(record);
+        if(result.isHasErrors()){
+            throw new BusinessException(result.getErrMsg(), EmBusinessError.PARAMETER_VALIDATION_ERROR);
+        }
         //添加用户
         record.setItemcode(UUIDUtils.getUUID());
         userDOMapper.insertSelective(record);

@@ -51,4 +51,6 @@ public interface IndustrialDevelopExpertRefDOMapper {
      * @mbg.generated Wed Oct 28 16:25:52 CST 2020
      */
     int updateByPrimaryKey(IndustrialDevelopExpertRefDO record);
+
+
 }

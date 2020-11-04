@@ -2,11 +2,10 @@ package com.zyyglxt.controller.IndustrialDevelop;
 
 import com.zyyglxt.dataobject.IndustrialDevelopOffDO;
 import com.zyyglxt.dataobject.IndustrialDevelopOffDOKey;
+import com.zyyglxt.error.EmBusinessError;
+import com.zyyglxt.response.ResponseData;
 import com.zyyglxt.service.IIndustrialDevelopOffService;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 
@@ -22,17 +21,23 @@ public class IndustrialOffController {
     IIndustrialDevelopOffService developOffService;
 
     @RequestMapping(value = "/Off", method = RequestMethod.POST)
-    public void addOff(@RequestBody IndustrialDevelopOffDO record) {
+    @ResponseBody
+    public ResponseData addOff(@RequestBody IndustrialDevelopOffDO record) {
         developOffService.addOff(record);
+        return new ResponseData(EmBusinessError.success);
     }
 
     @RequestMapping(value = "/Off", method = RequestMethod.PUT)
-    public void updOff(@RequestBody IndustrialDevelopOffDO record) {
+    @ResponseBody
+    public ResponseData updOff(@RequestBody IndustrialDevelopOffDO record) {
         developOffService.updOff(record);
+        return new ResponseData(EmBusinessError.success);
     }
 
     @RequestMapping(value = "/Off", method = RequestMethod.DELETE)
-    public void delOff(@RequestBody IndustrialDevelopOffDOKey key) {
+    @ResponseBody
+    public ResponseData delOff(@RequestBody IndustrialDevelopOffDOKey key) {
         developOffService.delOff(key);
+        return new ResponseData(EmBusinessError.success);
     }
 }

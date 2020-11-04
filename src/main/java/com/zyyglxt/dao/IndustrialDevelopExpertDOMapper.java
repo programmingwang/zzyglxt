@@ -55,4 +55,6 @@ public interface IndustrialDevelopExpertDOMapper {
     int updateByPrimaryKey(IndustrialDevelopExpertDO record);
 
     List<IndustrialDevelopExpertDO> selectByPage(int start, int end);
+
+    List<IndustrialDevelopExpertDO> selectAll();
 }

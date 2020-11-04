@@ -1,11 +1,14 @@
 package com.zyyglxt.service.impl;
 
+import com.zyyglxt.dao.FileDOMapper;
 import com.zyyglxt.dao.HealthCareChineseMedicineDOMapper;
+import com.zyyglxt.dataobject.FileDO;
 import com.zyyglxt.dataobject.HealthCareChineseMedicineDO;
 import com.zyyglxt.dataobject.HealthCareChineseMedicineDOKey;
 import com.zyyglxt.error.BusinessException;
 import com.zyyglxt.error.EmBusinessError;
 import com.zyyglxt.service.HealthCareChineseMedicineDOService;
+import com.zyyglxt.service.IFileService;
 import com.zyyglxt.validator.ValidatorImpl;
 import com.zyyglxt.validator.ValidatorResult;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,8 +16,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -28,21 +29,25 @@ import java.util.UUID;
 public class HealthCareChineseMedicineDOServiceImpl implements HealthCareChineseMedicineDOService {
     @Resource
     private HealthCareChineseMedicineDOMapper healthCareChineseMedicineDOMapper;
+    @Resource
+    private IFileService iFileService;
     @Autowired
     private ValidatorImpl validator;
     @Transactional
     /*
-  中医药科普知识添加、删除、修改、查询实现方法
+  中医药常识添加、删除、修改、查询实现方法
 **/
     @Override
-    public int insert(HealthCareChineseMedicineDO record) throws BusinessException {
+    public int insert(HealthCareChineseMedicineDO record,FileDO fileDO) throws BusinessException {
         ValidatorResult result = validator.validate(record);
         if(result.isHasErrors()){
             throw new BusinessException(result.getErrMsg(), EmBusinessError.PARAMETER_VALIDATION_ERROR);
         }
-        record.setItemcode(UUID.randomUUID().toString());
+        //record.setItemcode(UUID.randomUUID().toString());
         record.setItemcreateat(new Date());
-        return healthCareChineseMedicineDOMapper.insert(record);
+        //iFileService.addFile(fileDO.setDataCode());
+        fileDO.setDataCode(UUID.randomUUID().toString());
+        return healthCareChineseMedicineDOMapper.insert(record,fileDO);
     }
     @Transactional
     @Override

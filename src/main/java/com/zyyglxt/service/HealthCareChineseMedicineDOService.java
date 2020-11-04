@@ -1,5 +1,6 @@
 package com.zyyglxt.service;
 
+import com.zyyglxt.dataobject.FileDO;
 import com.zyyglxt.dataobject.HealthCareChineseMedicineDO;
 import com.zyyglxt.dataobject.HealthCareChineseMedicineDOKey;
 import com.zyyglxt.error.BusinessException;
@@ -15,7 +16,7 @@ public interface HealthCareChineseMedicineDOService {
    /*
     中医药科普知识添加、删除、修改、查询实现接口
    **/
-    int insert(HealthCareChineseMedicineDO record) throws BusinessException;
+    int insert(HealthCareChineseMedicineDO record, FileDO fileDO) throws BusinessException;
     int deleteByPrimaryKey(HealthCareChineseMedicineDOKey key);
     int updateByPrimaryKeySelective(HealthCareChineseMedicineDO record) throws BusinessException;
     HealthCareChineseMedicineDO selectByPrimaryKey(HealthCareChineseMedicineDOKey key);

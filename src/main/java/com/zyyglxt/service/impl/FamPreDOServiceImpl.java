@@ -1,11 +1,13 @@
 package com.zyyglxt.service.impl;
 
 import com.zyyglxt.dao.FamPreDOMapper;
+import com.zyyglxt.dao.FileDOMapper;
 import com.zyyglxt.dataobject.FamPreDO;
 import com.zyyglxt.dataobject.FamPreDOKey;
 import com.zyyglxt.error.BusinessException;
 import com.zyyglxt.error.EmBusinessError;
 import com.zyyglxt.service.FamPreDOService;
+import com.zyyglxt.service.IFileService;
 import com.zyyglxt.validator.ValidatorImpl;
 import com.zyyglxt.validator.ValidatorResult;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,8 +15,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -33,7 +33,7 @@ public class FamPreDOServiceImpl implements FamPreDOService {
     @Transactional
     @Override
     /*历史名方添加数据*/
-    public int insertSelective(FamPreDO record) throws BusinessException {
+    public int  insertSelective(FamPreDO record) throws BusinessException {
         ValidatorResult result = validator.validate(record);
         if(result.isHasErrors()){
             throw new BusinessException(result.getErrMsg(), EmBusinessError.PARAMETER_VALIDATION_ERROR);

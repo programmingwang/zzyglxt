@@ -27,9 +27,6 @@ public class CustomizeFilterInvocationSecurityMetadataSource implements FilterIn
         String requestUrl = ((FilterInvocation) o).getRequestUrl();
         //查询具体某个接口的权限
         List<ResourcesDO> permissionList =  resService.selectListByPath(requestUrl);
-        for (ResourcesDO aDo : permissionList) {
-            System.out.println("----------"+aDo.getResourceName());
-        }
         if(permissionList == null || permissionList.size() == 0){
             //请求路径没有配置权限，表明该请求接口可以任意访问
             return null;

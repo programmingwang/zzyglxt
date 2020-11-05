@@ -2,9 +2,10 @@ package com.zyyglxt.dao;
 
 import com.zyyglxt.dataobject.UserDO;
 import com.zyyglxt.dataobject.UserDOKey;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
-
+@Component
 public interface UserDOMapper {
 
     int deleteByPrimaryKey(UserDOKey key);

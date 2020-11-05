@@ -5,6 +5,7 @@ import com.zyyglxt.dataobject.UserDO;
 import com.zyyglxt.permissionsUtil.JsonResult;
 import com.zyyglxt.permissionsUtil.ResultTool;
 import com.zyyglxt.service.UserService;
+import com.zyyglxt.util.UserUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -16,6 +17,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @Description: 登录成功处理逻辑
@@ -32,6 +35,18 @@ public class CustomizeAuthenticationSuccessHandler implements AuthenticationSucc
         UserDO userDo = userService.selectByName(userDetails.getUsername());
         userDo.setItemupdateat(new Date());
         userDo.setUpdater(userDo.getUsername());
+        Map<String,String> map = new HashMap<>();
+        UserUtil userUtil = new UserUtil();
+        map.put("username", userDo.getUsername());
+        map.put("itemid", String.valueOf(userDo.getItemid()));
+        map.put("itemcode", userDo.getItemcode());
+
+        userUtil.setUser(map);
+
+        userDo = new UserDO();
+        userDo.setState("入");
+        userDo.setItemid(Integer.parseInt(map.get("itemid")));
+        userDo.setItemcode(map.get("itemcode"));
         userService.updateByPrimaryKeySelective(userDo);
 
         //返回json数据

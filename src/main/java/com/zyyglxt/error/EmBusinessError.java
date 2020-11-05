@@ -32,6 +32,9 @@ public enum EmBusinessError implements CommonError {
     MOBILEPHONE_ERROR(2011, "手机号不正确"),
     USER_LOGIN_FAILED(2012, "登陆失败"),
     MODIFY_USER_MESSAGE_FAILED(2013, "修改用户信息失败"),
+    OLDPASSWORD_ERROR(2014,"旧密码错误"),
+    INPUT_NOT_NULL(2015,"密码输入不能为空，请重新输入"),
+    NEWPASSWORD_NOT_EQUAL(2016,"两次输入的新密码不一致，请重新输入"),
     /* 业务错误 */
     NO_PERMISSION(10001, "没有权限"),
     ;

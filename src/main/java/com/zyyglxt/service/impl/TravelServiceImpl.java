@@ -3,11 +3,10 @@ package com.zyyglxt.service.impl;
 import com.zyyglxt.dao.ChineseCulturalDOMapper;
 import com.zyyglxt.dataobject.ChineseCulturalDO;
 import com.zyyglxt.dataobject.ChineseCulturalDOKey;
-import com.zyyglxt.dataobject.FileDO;
 import com.zyyglxt.error.BusinessException;
 import com.zyyglxt.error.EmBusinessError;
-import com.zyyglxt.permissionsUtil.UUIDUtils;
-import com.zyyglxt.service.IFileService;
+import com.zyyglxt.util.DateUtils;
+import com.zyyglxt.util.UUIDUtils;
 import com.zyyglxt.service.ITravelService;
 import com.zyyglxt.util.DOKeyAndValidateUtil;
 import com.zyyglxt.validator.ValidatorImpl;
@@ -51,8 +50,10 @@ public class TravelServiceImpl implements ITravelService {
             throw new BusinessException(result.getErrMsg(), EmBusinessError.PARAMETER_VALIDATION_ERROR);
         }
         record.setCreater("测试");
+        record.setItemcreateat(DateUtils.getDate());
         record.setUpdater("测试");
         record.setChineseCulturalType("健康旅游信息");
+        record.setChineseCulturalStatus("待上架");
         //如果前台没有插入图片或者附件，就自己生成uuid
         if(record.getItemcode() == null){
             record.setItemcode(UUIDUtils.getUUID());
@@ -68,7 +69,7 @@ public class TravelServiceImpl implements ITravelService {
 
     @Override
     @Transactional
-    public int updateTravel(ChineseCulturalDO record) throws BusinessException {
+    public int updateTravel(ChineseCulturalDO record) {
         return DOKeyAndValidateUtil.updateUtil(record, validator, chineseCulturalDOMapper);
     }
 

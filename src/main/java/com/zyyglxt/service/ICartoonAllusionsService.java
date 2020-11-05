@@ -20,13 +20,13 @@ public interface ICartoonAllusionsService {
     List<ChineseCulturalDO> getCartoonAllusionsList();
 
     //增加一个漫画典故
-    int addCartoonAllusions(ChineseCulturalDO record) throws BusinessException;
+    int addCartoonAllusions(ChineseCulturalDO record);
 
     //删除一个漫画典故
     int removeCartoonAllusions(ChineseCulturalDOKey key);
 
     //修改一个漫画典故
-    int updateCartoonAllusions(ChineseCulturalDO record) throws BusinessException;
+    int updateCartoonAllusions(ChineseCulturalDO record);
 
     //修改一个漫画典故状态
     int changeCartoonAllusionsStatus(ChineseCulturalDOKey key, String chineseCulturalStatus);

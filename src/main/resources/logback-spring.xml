@@ -6,7 +6,7 @@
 
     <!--<property name="log.path" value="E:/logs/logback.log" />-->
 
-    <property name="log.path" value="E:/Desktop/logback.log" />
+    <!--<property name="log.path" value="E:/Desktop/logback.log" />-->
 
     <!--输出到控制台-->
 

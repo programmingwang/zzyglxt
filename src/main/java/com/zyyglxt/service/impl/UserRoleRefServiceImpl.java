@@ -4,8 +4,8 @@ import com.zyyglxt.dao.UserRoleRefDOMapper;
 import com.zyyglxt.dataobject.UserRoleRefDO;
 import com.zyyglxt.dataobject.UserRoleRefDOKey;
 import com.zyyglxt.service.UserRoleRefService;
-import com.zyyglxt.permissionsUtil.DateUtils;
-import com.zyyglxt.permissionsUtil.UUIDUtils;
+import com.zyyglxt.util.DateUtils;
+import com.zyyglxt.util.UUIDUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

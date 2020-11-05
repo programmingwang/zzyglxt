@@ -46,9 +46,7 @@ public class TraditionalSchoolController {
     //增加一个中医流派
     @RequestMapping(value = "/addTraSch" , method = RequestMethod.POST)
     @ResponseBody
-    public ResponseData addTraditionalSchool(@RequestBody CulturalResourcesDO culturalResourcesDO) throws BusinessException {
-        culturalResourcesDO.setChineseCulturalType("中医流派");
-        culturalResourcesDO.setChineseCulturalStatus("待上架");
+    public ResponseData addTraditionalSchool(@RequestBody CulturalResourcesDO culturalResourcesDO){
         iTraditionalSchoolService.addTraditionalSchool(culturalResourcesDO);
         return new ResponseData(EmBusinessError.success);
     }
@@ -78,7 +76,7 @@ public class TraditionalSchoolController {
     //修改一个中医流派
     @RequestMapping(value = "/updTraSch" , method = RequestMethod.POST)
     @ResponseBody
-    public ResponseData updateTraditionalSchool(@RequestBody CulturalResourcesDO culturalResourcesDO) throws BusinessException {
+    public ResponseData updateTraditionalSchool(@RequestBody CulturalResourcesDO culturalResourcesDO)  {
         iTraditionalSchoolService.updateTraditionalSchool(culturalResourcesDO);
         return new ResponseData(EmBusinessError.success);
     }

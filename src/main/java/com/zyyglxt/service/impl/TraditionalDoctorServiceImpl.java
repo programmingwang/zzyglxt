@@ -1,11 +1,12 @@
 package com.zyyglxt.service.impl;
 
-import com.zyyglxt.dao.ChineseCulturalDOMapper;
 import com.zyyglxt.dao.CulturalResourcesDOMapper;
 import com.zyyglxt.dataobject.CulturalResourcesDO;
 import com.zyyglxt.dataobject.CulturalResourcesDOKey;
 import com.zyyglxt.error.BusinessException;
 import com.zyyglxt.error.EmBusinessError;
+import com.zyyglxt.util.DateUtils;
+import com.zyyglxt.util.UUIDUtils;
 import com.zyyglxt.service.ITraditionalDoctorService;
 import com.zyyglxt.validator.ValidatorImpl;
 import com.zyyglxt.validator.ValidatorResult;
@@ -43,14 +44,20 @@ public class TraditionalDoctorServiceImpl implements ITraditionalDoctorService {
 
     @Override
     @Transactional
-    public int addTraditionalDoctor(CulturalResourcesDO record) throws BusinessException {
+    public int addTraditionalDoctor(CulturalResourcesDO record)  {
         ValidatorResult result = validator.validate(record);
         if(result.isHasErrors()){
             throw new BusinessException(result.getErrMsg(), EmBusinessError.PARAMETER_VALIDATION_ERROR);
         }
         record.setCreater("");
+        record.setItemcreateat(DateUtils.getDate());
         record.setUpdater("");
         record.setChineseCulturalType("历代名家");
+        record.setChineseCulturalStatus("待上架");
+        //如果前台没有插入图片或者附件，就自己生成uuid
+        if(record.getItemcode() == null){
+            record.setItemcode(UUIDUtils.getUUID());
+        }
         return culturalResourcesDOMapper.insertSelective(record);
     }
 
@@ -62,7 +69,7 @@ public class TraditionalDoctorServiceImpl implements ITraditionalDoctorService {
 
     @Override
     @Transactional
-    public int updateTraditionalDoctor(CulturalResourcesDO record) throws BusinessException {
+    public int updateTraditionalDoctor(CulturalResourcesDO record) {
         ValidatorResult result = validator.validate(record);
         if(result.isHasErrors()){
             throw new BusinessException(result.getErrMsg(), EmBusinessError.PARAMETER_VALIDATION_ERROR);

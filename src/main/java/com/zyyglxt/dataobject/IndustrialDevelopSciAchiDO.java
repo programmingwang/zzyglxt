@@ -15,8 +15,11 @@ import java.util.Date;
 public class IndustrialDevelopSciAchiDO extends IndustrialDevelopSciAchiDOKey {
 
 
-    @NotBlank(message = "科研成果不能为空",groups = ValidationGroups.Insert.class)
+    @NotBlank(message = "科研成果名称不能为空",groups = ValidationGroups.Insert.class)
     private String industrialDevelopName;
+
+    @NotBlank(message = "科研成果不能为空", groups = ValidationGroups.Insert.class)
+    private String industrialDevelopResult;
 
     @NotBlank(message = "主研人不能为空",groups = ValidationGroups.Insert.class)
     private String industrialDevelopLeader;

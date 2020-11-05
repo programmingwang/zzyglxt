@@ -13,33 +13,40 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 public class IndustrialDevelopTalRecDO extends IndustrialDevelopTalRecDOKey {
-    
-    @NotBlank(message = "工作地不能为空",groups = ValidationGroups.Insert.class)
+
+    @NotBlank(message = "标题不能为空", groups = ValidationGroups.Insert.class)
+    private String title;
+
+    @NotBlank(message = "岗位名称不能为空", groups = ValidationGroups.Insert.class)
+    private String postName;
+
+    @NotBlank(message = "工作地不能为空", groups = ValidationGroups.Insert.class)
     private String workplace;
 
-    
-    @NotBlank(message = "岗位数量不能为空",groups = ValidationGroups.Insert.class)
+    @NotBlank(message = "来源机构不能为空", groups = ValidationGroups.Insert.class)
+    private String source;
+
+    @NotBlank(message = "岗位数量不能为空", groups = ValidationGroups.Insert.class)
     private String postNum;
 
-    
-    @NotBlank(message = "待遇条件不能为空",groups = ValidationGroups.Insert.class)
+    @NotBlank(message = "待遇条件不能为空", groups = ValidationGroups.Insert.class)
     private String conditionsTreament;
 
-    
+
     private String status;
 
-    
+
     private String creater;
 
-    
+
     @JsonFormat(timezone = "GMT+8")
     private Date itemcreateat;
 
-    
+
     @JsonFormat(timezone = "GMT+8")
     private String updater;
 
-    
+
     private Date itemupdateat;
 
 }

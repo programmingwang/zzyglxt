@@ -7,7 +7,12 @@ import com.zyyglxt.dataobject.HospSpecialtyRefDOKey;
 import com.zyyglxt.dataobject.SpecialtyDO;
 import com.zyyglxt.dataobject.SpecialtyDOKey;
 import com.zyyglxt.dto.SpecialtyDto;
+import com.zyyglxt.error.BusinessException;
+import com.zyyglxt.error.EmBusinessError;
 import com.zyyglxt.service.ISpecialtyService;
+import com.zyyglxt.validator.ValidatorImpl;
+import com.zyyglxt.validator.ValidatorResult;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -23,19 +28,24 @@ import java.util.UUID;
 public class SpecialtyServiceImpl implements ISpecialtyService {
 
     @Resource
-    SpecialtyDOMapper specialtyDOMapper;
+    private SpecialtyDOMapper specialtyDOMapper;
     @Resource
-    HospSpecialtyRefDOMapper hospSpecialtyRefDOMapper;
-    @Resource
-    SpecialtyDO specialtyDO;
-    @Resource
-    HospSpecialtyRefDO hospSpecialtyRefDO;
+    private HospSpecialtyRefDOMapper hospSpecialtyRefDOMapper;
+    @Autowired
+    private ValidatorImpl validator;
+
+    private SpecialtyDO specialtyDO = new SpecialtyDO();
+
+    private HospSpecialtyRefDO hospSpecialtyRefDO = new HospSpecialtyRefDO();
 
     /*增加科室，同时也将科室与医院记录插入*/
     @Override
     public void addSpecialty(SpecialtyDto specialtyDto) {
+        ValidatorResult result = validator.validate(specialtyDto);
+        if(result.isHasErrors()){
+            throw new BusinessException(result.getErrMsg(), EmBusinessError.PARAMETER_VALIDATION_ERROR);
+        }
         specialtyDO = specialtyDto;
-        specialtyDO.setItemcode(UUID.randomUUID().toString());
 
         hospSpecialtyRefDO.setItemcode(UUID.randomUUID().toString());
         hospSpecialtyRefDO.setHospitalCode(specialtyDto.getHospitalCode());
@@ -52,9 +62,12 @@ public class SpecialtyServiceImpl implements ISpecialtyService {
     /*更新科室信息，同步更新医院科室关系表*/
     @Override
     public void updateSpecialty(SpecialtyDto specialtyDto) {
+        ValidatorResult result = validator.validate(specialtyDto);
+        if(result.isHasErrors()){
+            throw new BusinessException(result.getErrMsg(), EmBusinessError.PARAMETER_VALIDATION_ERROR);
+        }
         specialtyDO = specialtyDto;
 
-        hospSpecialtyRefDO.setItemcode(UUID.randomUUID().toString());
         hospSpecialtyRefDO.setHospitalCode(specialtyDto.getHospitalCode());
         hospSpecialtyRefDO.setSpecialtyCode(specialtyDto.getHospitalCode());
         hospSpecialtyRefDO.setCreater(specialtyDto.getCreater());
@@ -69,6 +82,10 @@ public class SpecialtyServiceImpl implements ISpecialtyService {
     /*删除科室记录，包括科室表和关系表*/
     @Override
     public void deleteSpecialty(SpecialtyDto specialtyDto) {
+        ValidatorResult result = validator.validate(specialtyDto);
+        if(result.isHasErrors()){
+            throw new BusinessException(result.getErrMsg(), EmBusinessError.PARAMETER_VALIDATION_ERROR);
+        }
         SpecialtyDOKey specialtyDOKey = specialtyDto;
         HospSpecialtyRefDOKey hospSpecialtyRefDOKey = new HospSpecialtyRefDOKey();
         hospSpecialtyRefDOKey.setItemid(specialtyDto.getItemid());
@@ -89,6 +106,9 @@ public class SpecialtyServiceImpl implements ISpecialtyService {
      */
     @Override
     public List<SpecialtyDO> searchSpecialty(String keyWord) {
+        if(keyWord.isEmpty()){
+            throw new BusinessException("关键字不能为空", EmBusinessError.PARAMETER_VALIDATION_ERROR);
+        }
         return specialtyDOMapper.searchSpecialty(keyWord);
     }
 

@@ -32,12 +32,6 @@ public class GlobalExceptionHandler {
     @ResponseBody
     public ResponseData bizExceptionHandler(BusinessException e){
         logger.error("发生业务异常！原因是：{}",e.getErrMsg());
-//        Map<String,Object> map = new HashMap<>();
-//        map.put("code",e.getErrCode());
-//        map.put("message",e.getErrMsg());
-//        //将error放入作用域内，有就能取
-//        req.setAttribute("errMap",map);
-        //将Exception直接包装返回
         return new ResponseData(e);
     }
 
@@ -64,9 +58,6 @@ public class GlobalExceptionHandler {
     @ResponseBody
     public ResponseData exceptionHandler(Exception e){
         logger.error("未知异常！原因是:",e);
-//        Map<String,String> map = new HashMap<>();
-//        map.put("message","服务器内部开了点小差，请重试。。。。。");
-//        req.setAttribute("errMap",map);
         return new ResponseData();
     }
 

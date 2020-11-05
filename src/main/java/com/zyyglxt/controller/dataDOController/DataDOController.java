@@ -25,14 +25,18 @@ public class DataDOController {
     IDataDOService dataDOService;
 
     /**
-     *查看新闻数据记录
-     * @param key
+     * 查看一条记录
+     * @param itemID
+     * @param itemCode
      * @return
      */
-    @RequestMapping(value = "/selectByPrimaryKey/{itemID}", method = RequestMethod.GET)
-    public ResponseData selectByPrimaryKey(@PathVariable("itemID") DataDOKey key){
-        DataDO dataDO = dataDOService.selectNewsInf(key);
-        return new ResponseData(EmBusinessError.success,dataDO);
+    @RequestMapping(value = "/selectByPrimaryKey/{itemID}/{itemCode}", method = RequestMethod.GET)
+    public ResponseData selectByPrimaryKey(@PathVariable("itemID") Integer itemID, @PathVariable("itemCode")String itemCode){
+        DataDOKey dataDOKey = new DataDOKey();
+        dataDOKey.setItemid(itemID);
+        dataDOKey.setItemcode(itemCode);
+        dataDOService.selectNewsInf(dataDOKey);
+        return new ResponseData(EmBusinessError.success);
     }
 
     /**
@@ -65,7 +69,7 @@ public class DataDOController {
      */
     @RequestMapping(value = "/insertNewsInf", method = RequestMethod.POST)
     @ResponseBody
-    public ResponseData insertNewsInf(@RequestBody DataDO record) throws BusinessException {
+    public ResponseData insertNewsInf(@RequestBody DataDO record) {
         dataDOService.insertNewsInf(record);
         return new ResponseData(EmBusinessError.success);
     }
@@ -76,8 +80,19 @@ public class DataDOController {
      */
     @RequestMapping(value = "updateNewsInf", method = RequestMethod.PUT)
     @ResponseBody
-    public ResponseData updateNewsInf(@RequestBody DataDO record) throws BusinessException {
+    public ResponseData updateNewsInf(@RequestBody DataDO record) {
         dataDOService.updateNewsInf(record);
+        return new ResponseData(EmBusinessError.success);
+    }
+
+    //修改展示状态
+    @RequestMapping(value = "/changeStatus/{itemID}/{itemCode}", method = RequestMethod.PUT)
+    @ResponseBody
+    public ResponseData changeStatus(String dataStatus, @PathVariable("itemID") Integer itemID, @PathVariable("itemCode")String itemCode){
+        DataDOKey dataDOKey = new DataDOKey();
+        dataDOKey.setItemid(itemID);
+        dataDOKey.setItemcode(itemCode);
+        dataDOService.changeStatus(dataDOKey,dataStatus);
         return new ResponseData(EmBusinessError.success);
     }
 

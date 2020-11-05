@@ -34,9 +34,6 @@ public class CustomizeAuthenticationSuccessHandler implements AuthenticationSucc
         userDo.setUpdater(userDo.getUsername());
         userService.updateByPrimaryKeySelective(userDo);
 
-        //此处还可以进行一些处理，比如登录成功之后可能需要返回给前台当前用户有哪些菜单权限，
-        //进而前台动态的控制菜单的显示等，具体根据自己的业务需求进行扩展
-
         //返回json数据
         JsonResult result = ResultTool.success();
         httpServletResponse.setContentType("text/json;charset=utf-8");

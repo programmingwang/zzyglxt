@@ -1,5 +1,6 @@
 package com.zyyglxt.config;
 
+import com.zyyglxt.common.MPasswordEncoder;
 import com.zyyglxt.config.handler.*;
 import com.zyyglxt.config.service.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,14 +63,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Bean
-    public BCryptPasswordEncoder passwordEncoder() {
-        // 设置默认的加密方式（强hash方式加密）
-        return new BCryptPasswordEncoder();
+    public MPasswordEncoder passwordEncoder() {
+        return new MPasswordEncoder();
     }
+
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userDetailsService());
+        auth.userDetailsService(userDetailsService())
+                .passwordEncoder(passwordEncoder());
     }
 
     @Override

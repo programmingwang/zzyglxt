@@ -52,13 +52,11 @@
     and password = #{password,jdbcType=VARCHAR}
   </select>
   <select id="selectAllUser" resultMap="ResultMapWithBLOBs">
-
     select
     <include refid="Base_Column_List" />
     ,
     <include refid="Blob_Column_List" />
-    where username = #{username,jdbcType=VARCHAR}
-    and password = #{password,jdbcType=VARCHAR}
+    from user
   </select>
   <select id="selectByUsername" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
     select

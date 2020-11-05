@@ -47,8 +47,6 @@ public class CulturalRelicsController {
     @RequestMapping(value = "/addCulRel" , method = RequestMethod.POST)
     @ResponseBody
     public ResponseData addCulturalRelics(@RequestBody ChineseCulturalDO chineseCulturalDO){
-        chineseCulturalDO.setChineseCulturalType("文化古迹");
-        chineseCulturalDO.setChineseCulturalStatus("待上架");
         iCulturalRelicsService.addCulturalRelics(chineseCulturalDO);
         return new ResponseData(EmBusinessError.success);
     }
@@ -78,7 +76,7 @@ public class CulturalRelicsController {
     //修改一个文化古迹
     @RequestMapping(value = "/updCulRel" , method = RequestMethod.POST)
     @ResponseBody
-    public ResponseData updateCulturalRelics(@RequestBody ChineseCulturalDO chineseCulturalDO) throws BusinessException {
+    public ResponseData updateCulturalRelics(@RequestBody ChineseCulturalDO chineseCulturalDO){
         iCulturalRelicsService.updateCulturalRelics(chineseCulturalDO);
         return new ResponseData(EmBusinessError.success);
     }

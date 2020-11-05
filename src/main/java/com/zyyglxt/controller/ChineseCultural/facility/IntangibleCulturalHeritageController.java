@@ -44,9 +44,7 @@ public class IntangibleCulturalHeritageController {
     //增加一个文化古迹
     @RequestMapping(value = "/addInCuHe" , method = RequestMethod.POST)
     @ResponseBody
-    public ResponseData addIntangibleCulturalHeritage(@RequestBody ChineseCulturalDO chineseCulturalDO) throws BusinessException {
-        chineseCulturalDO.setChineseCulturalType("非物质文化遗产");
-        chineseCulturalDO.setChineseCulturalStatus("待上架");
+    public ResponseData addIntangibleCulturalHeritage(@RequestBody ChineseCulturalDO chineseCulturalDO)  {
         iIntangibleCulturalHeritageService.addIntangibleCulturalHeritage(chineseCulturalDO);
         return new ResponseData(EmBusinessError.success);
     }
@@ -76,7 +74,7 @@ public class IntangibleCulturalHeritageController {
     //修改一个非物质文化遗产
     @RequestMapping(value = "/updInCuHe" , method = RequestMethod.POST)
     @ResponseBody
-    public ResponseData updateIntangibleCulturalHeritage(@RequestBody ChineseCulturalDO chineseCulturalDO) throws BusinessException {
+    public ResponseData updateIntangibleCulturalHeritage(@RequestBody ChineseCulturalDO chineseCulturalDO) {
         iIntangibleCulturalHeritageService.updateIntangibleCulturalHeritage(chineseCulturalDO);
         return new ResponseData(EmBusinessError.success);
     }

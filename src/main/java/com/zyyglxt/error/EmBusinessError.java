@@ -19,9 +19,6 @@ public enum EmBusinessError implements CommonError {
 
     //用20000开头来表示用户模块的错误信息
     USER_NOT_LOGIN(20001,"用户未登录"),
-
-
-
     ;
 
     EmBusinessError(int errCode,String msg) {

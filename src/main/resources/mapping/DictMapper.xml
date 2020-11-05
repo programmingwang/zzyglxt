@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zyyglxt.dao.DictMapper">
+
+    <select id="selectDictItemByCode" resultType="com.zyyglxt.dataobject.DictItem">
+        select dictitem.itemCode as code, dictitem.DITEM_VALUE as value
+        from dict,
+             dictitem
+        where dict.itemCode = dictitem.DICT_CODE
+          and dict.itemCode = (select itemCode from dict where dict.DICT_CODE = #{dictCode})
+    </select>
+</mapper>

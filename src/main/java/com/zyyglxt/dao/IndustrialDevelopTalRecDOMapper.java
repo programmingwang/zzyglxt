@@ -63,7 +63,7 @@ public interface IndustrialDevelopTalRecDOMapper {
      */
     int updateByPrimaryKey(IndustrialDevelopTalRecDO record);
 
-    List<IndustrialDevelopTalRecDO> selectByPage(int start, int end);
+    List<IndustrialDevelopTalRecDOWithBLOBs> selectByPage(int start, int end);
 
-    List<IndustrialDevelopTalRecDO> selectAll();
+    List<IndustrialDevelopTalRecDOWithBLOBs> selectAll();
 }

@@ -1,5 +1,9 @@
 package com.zyyglxt.dataobject;
 
+import com.zyyglxt.dataobject.validation.ValidationGroups;
+
+import javax.validation.constraints.NotBlank;
+
 public class IndustrialDevelopTopicDOKey {
     /**
      *
@@ -17,6 +21,7 @@ public class IndustrialDevelopTopicDOKey {
      *
      * @mbg.generated Wed Oct 28 16:25:52 CST 2020
      */
+    @NotBlank(message = "主键不能为空",groups = ValidationGroups.UpdateOrDelete.class)
     private String itemcode;
 
     /**

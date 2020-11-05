@@ -1,10 +1,11 @@
-package com.zyyglxt.controller.IndustrialDevelop;
+package com.zyyglxt.controller.industrialDevelop;
 
 import com.zyyglxt.dataobject.IndustrialDevelopOffDO;
 import com.zyyglxt.dataobject.IndustrialDevelopOffDOKey;
 import com.zyyglxt.error.EmBusinessError;
 import com.zyyglxt.response.ResponseData;
 import com.zyyglxt.service.IIndustrialDevelopOffService;
+import io.swagger.annotations.Api;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -14,6 +15,7 @@ import javax.annotation.Resource;
  * @Date 2020/10/29 12:00
  * @Version 1.0
  **/
+@Api(tags = "产业发展-填报时间记录")
 @RestController
 @RequestMapping(value = "industrialdevelop")
 public class IndustrialOffController {
@@ -39,5 +41,11 @@ public class IndustrialOffController {
     public ResponseData delOff(@RequestBody IndustrialDevelopOffDOKey key) {
         developOffService.delOff(key);
         return new ResponseData(EmBusinessError.success);
+    }
+
+    @GetMapping
+    @ResponseBody
+    public ResponseData getOff(){
+        return new ResponseData(EmBusinessError.success,developOffService.getOff());
     }
 }

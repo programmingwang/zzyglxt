@@ -23,9 +23,9 @@ public class ValidatorImpl implements InitializingBean {
 
 
     //实现校验方法并返回校验结果
-    public ValidatorResult validate(Object bean){
+    public ValidatorResult validate(Object bean,Class<?>... group){
         ValidatorResult result = new ValidatorResult();
-        Set<ConstraintViolation<Object>> validateSet = validator.validate(bean);
+        Set<ConstraintViolation<Object>> validateSet = validator.validate(bean,group);
         if(validateSet.size()> 0){
             result.setHasErrors(true);
             validateSet.forEach(validate -> {

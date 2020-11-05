@@ -1,9 +1,15 @@
-package com.zyyglxt.dao;
+package com.zyyglxt.service;
 
 import com.zyyglxt.dataobject.DictitemDO;
 import com.zyyglxt.dataobject.DictitemDOKey;
 
-public interface DictitemDOMapper {
+public interface IDictitemDOService {
+    /**
+     * @version 1.0
+     * @Author zs
+     * @time 2020/11/05 15:07
+     */
+
     /*删除数据字典项*/
     int deleteByPrimaryKey(DictitemDOKey key);
     /*新增数据字典项*/

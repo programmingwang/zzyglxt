@@ -1,14 +1,9 @@
-package com.zyyglxt.dao;
+package com.zyyglxt.service;
 
 import com.zyyglxt.dataobject.DictDO;
 import com.zyyglxt.dataobject.DictDOKey;
 
-public interface DictDOMapper {
-    /**
-     * @version 1.0
-     * @Author zs
-     * @time 2020/11/05 15:05
-     */
+public interface IDictDOService {
 
     /*删除数据字典*/
     int deleteByPrimaryKey(DictDOKey key);
@@ -16,7 +11,7 @@ public interface DictDOMapper {
     /*新增数据字典*/
     int insert(DictDO record);
 
-    /*新增数据字典跳NULL*/
+    /*新增数据字典跳过NULL*/
     int insertSelective(DictDO record);
 
     /*查找数据字典*/

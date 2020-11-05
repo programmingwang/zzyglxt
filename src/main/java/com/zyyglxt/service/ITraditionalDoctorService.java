@@ -22,13 +22,13 @@ public interface ITraditionalDoctorService {
     List<CulturalResourcesDO> getTraditionalDoctorList();
 
     //增加一个历代名家
-    int addTraditionalDoctor(CulturalResourcesDO record) throws BusinessException;
+    int addTraditionalDoctor(CulturalResourcesDO record);
 
     //删除一个历代名家
     int removeTraditionalDoctor(CulturalResourcesDOKey key);
 
     //修改一个历代名家
-    int updateTraditionalDoctor(CulturalResourcesDO record) throws BusinessException;
+    int updateTraditionalDoctor(CulturalResourcesDO record);
 
     //修改一个历代名家状态
     int changeTraditionalDoctorStatus(CulturalResourcesDOKey key, String chineseCulturalStatus);

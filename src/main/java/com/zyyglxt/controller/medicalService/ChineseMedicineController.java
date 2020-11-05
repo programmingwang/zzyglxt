@@ -2,8 +2,9 @@ package com.zyyglxt.controller.medicalService;
 
 import com.zyyglxt.dataobject.ChineseMedicineDO;
 import com.zyyglxt.dataobject.ChineseMedicineDOKey;
+import com.zyyglxt.error.EmBusinessError;
+import com.zyyglxt.response.ResponseData;
 import com.zyyglxt.service.IChineseMedicineService;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -21,35 +22,38 @@ public class ChineseMedicineController {
     IChineseMedicineService chineseMedicineService;
 
     @PostMapping(value = "add")
-    public void addChineseMedicine(ChineseMedicineDO chineseMedicineDO){
+    public ResponseData addChineseMedicine(ChineseMedicineDO chineseMedicineDO){
         chineseMedicineService.addChineseMedicine(chineseMedicineDO);
+        return new ResponseData(EmBusinessError.success);
     }
 
     @PostMapping(value = "update")
-    public void updateChineseMedicine(ChineseMedicineDO chineseMedicineDO){
+    public ResponseData updateChineseMedicine(ChineseMedicineDO chineseMedicineDO){
         chineseMedicineService.updateChineseMedicine(chineseMedicineDO);
+        return new ResponseData(EmBusinessError.success);
     }
 
     @DeleteMapping(value = "delete")
-    public void deleteChineseMedicine(ChineseMedicineDOKey chineseMedicineDOKey){
+    public ResponseData deleteChineseMedicine(ChineseMedicineDOKey chineseMedicineDOKey){
         chineseMedicineService.deleteChineseMedicine(chineseMedicineDOKey);
+        return new ResponseData(EmBusinessError.success);
     }
 
     @GetMapping(value = "selectAll")
-    public void selectAllChineseMedicine(Model model){
+    public ResponseData selectAllChineseMedicine(){
         List<ChineseMedicineDO> chineseMedicineDOList = chineseMedicineService.selectAllChineseMedicine();
-        model.addAttribute("chineseMedicineDOList",chineseMedicineDOList);
+        return new ResponseData(EmBusinessError.success,chineseMedicineDOList);
     }
 
     @GetMapping(value = "search")
-    public void searchChineseMedicine(Model model,String keyWord){
+    public ResponseData searchChineseMedicine(String keyWord){
         List<ChineseMedicineDO> chineseMedicineDOList = chineseMedicineService.searchChineseMedicine(keyWord);
-        model.addAttribute("chineseMedicineDOList",chineseMedicineDOList);
+        return new ResponseData(EmBusinessError.success,chineseMedicineDOList);
     }
 
     @GetMapping(value = "top5")
-    public void top5ChineseMedicine(Model model){
+    public ResponseData top5ChineseMedicine(){
         List<ChineseMedicineDO> chineseMedicineDOList = chineseMedicineService.top5ChineseMedicine();
-        model.addAttribute("chineseMedicineDOList",chineseMedicineDOList);
+        return new ResponseData(EmBusinessError.success,chineseMedicineDOList);
     }
 }

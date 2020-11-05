@@ -1,11 +1,8 @@
 package com.zyyglxt.controller.ChineseCultural.travel;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonObject;
+
 import com.zyyglxt.dataobject.ChineseCulturalDO;
 import com.zyyglxt.dataobject.ChineseCulturalDOKey;
-import com.zyyglxt.dataobject.FileDO;
-import com.zyyglxt.error.BusinessException;
 import com.zyyglxt.error.EmBusinessError;
 import com.zyyglxt.response.ResponseData;
 import com.zyyglxt.service.ITravelService;
@@ -13,7 +10,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Author:wangzh
@@ -45,9 +41,7 @@ public class TravelController {
     @RequestMapping(value = "/addTrav" , method = RequestMethod.POST)
     @ResponseBody
 //    public ResponseData addTravel(@RequestBody ChineseCulturalDO chineseCulturalDO , @RequestBody(required = false) FileDO fileDO) throws BusinessException {
-    public ResponseData addTravel(@RequestBody ChineseCulturalDO chineseCulturalDO) throws BusinessException {
-        chineseCulturalDO.setChineseCulturalType("健康旅游");
-        chineseCulturalDO.setChineseCulturalStatus("待上架");
+    public ResponseData addTravel(@RequestBody ChineseCulturalDO chineseCulturalDO) {
         iTravelService.addTravel(chineseCulturalDO);
         return new ResponseData(EmBusinessError.success);
     }
@@ -80,7 +74,7 @@ public class TravelController {
     //修改一个健康旅游
     @RequestMapping(value = "/updTrav" , method = RequestMethod.POST)
     @ResponseBody
-    public ResponseData updateTravel(@RequestBody ChineseCulturalDO chineseCulturalDO) throws BusinessException {
+    public ResponseData updateTravel(@RequestBody ChineseCulturalDO chineseCulturalDO) {
         iTravelService.updateTravel(chineseCulturalDO);
         return new ResponseData(EmBusinessError.success);
     }

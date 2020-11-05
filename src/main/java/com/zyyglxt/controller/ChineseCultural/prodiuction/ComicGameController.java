@@ -45,9 +45,7 @@ public class ComicGameController {
     //增加一个漫画典故
     @RequestMapping(value = "/addComGam" , method = RequestMethod.POST)
     @ResponseBody
-    public ResponseData addComicGame(@RequestBody ChineseCulturalDO chineseCulturalDO) throws BusinessException {
-        chineseCulturalDO.setChineseCulturalType("动漫游戏");
-        chineseCulturalDO.setChineseCulturalStatus("待上架");
+    public ResponseData addComicGame(@RequestBody ChineseCulturalDO chineseCulturalDO){
         iComicGameService.addComicGame(chineseCulturalDO);
         return new ResponseData(EmBusinessError.success);
     }
@@ -77,7 +75,7 @@ public class ComicGameController {
     //修改一个动漫游戏
     @RequestMapping(value = "/updComGam" , method = RequestMethod.POST)
     @ResponseBody
-    public ResponseData updateComicGame(@RequestBody ChineseCulturalDO chineseCulturalDO) throws BusinessException {
+    public ResponseData updateComicGame(@RequestBody ChineseCulturalDO chineseCulturalDO){
         iComicGameService.updateComicGame(chineseCulturalDO);
         return new ResponseData(EmBusinessError.success);
     }

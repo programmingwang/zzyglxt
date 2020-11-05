@@ -5,9 +5,9 @@ import com.zyyglxt.dao.ResourcesRoleRefDOMapper;
 import com.zyyglxt.dao.RoleDOMapper;
 import com.zyyglxt.dataobject.*;
 
-import com.zyyglxt.permissionsUtil.DateUtils;
-import com.zyyglxt.permissionsUtil.MenuTreeUtil;
-import com.zyyglxt.permissionsUtil.UUIDUtils;
+import com.zyyglxt.util.DateUtils;
+import com.zyyglxt.util.MenuTreeUtil;
+import com.zyyglxt.util.UUIDUtils;
 import com.zyyglxt.service.ResourcesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

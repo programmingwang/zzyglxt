@@ -18,14 +18,16 @@ public interface IDataDOService {
     //查询所有新闻信息
     List<DataDO> selectAllNewsInf(String dataType);
 
-    //增加一个新闻信息
-    int insertNewsInf(DataDO record) throws BusinessException;
+    //增加一个信息
+    int insertNewsInf(DataDO record);
 
     //删除一个新闻信息
     int deleteNewsInf(DataDOKey key);
 
     //修改新闻信息
-    int updateNewsInf(DataDO record) throws BusinessException;
+    int updateNewsInf(DataDO record);
+
+    int changeStatus(DataDOKey key, String dataStatus);
 
     List<DataDO> searchDataDO(String keyWord);
 

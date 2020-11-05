@@ -2,6 +2,8 @@ package com.zyyglxt.controller.permissionsController;
 
 import com.zyyglxt.dataobject.*;
 
+import com.zyyglxt.error.EmBusinessError;
+import com.zyyglxt.response.ResponseData;
 import com.zyyglxt.service.ResourcesRoleRefService;
 import com.zyyglxt.service.ResourcesService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,8 +32,9 @@ public class ResourcesController {
      * @return
      */
     @RequestMapping(value = "/insert", method = RequestMethod.POST)
-    public void insertSelective(ResourcesDO resourcesDO){
+    public ResponseData insertSelective(ResourcesDO resourcesDO){
         resourcesService.insertSelective(resourcesDO);
+        return new ResponseData(EmBusinessError.success);
     }
 
     /**
@@ -39,8 +42,10 @@ public class ResourcesController {
      * @param resourcesDO
      */
     @RequestMapping(value = "updateresources", method = RequestMethod.PUT)
-    public void updateByPrimaryKeySelective(ResourcesDO resourcesDO){
+    public ResponseData updateByPrimaryKeySelective(ResourcesDO resourcesDO){
         resourcesService.updateByPrimaryKeySelective(resourcesDO);
+        return new ResponseData(EmBusinessError.success);
+
     }
 
     /**
@@ -48,23 +53,29 @@ public class ResourcesController {
      * @param resourcesDO
      */
     @RequestMapping(value = "/delete", method = RequestMethod.DELETE)
-    public void deleteByPrimaryKey(ResourcesDO resourcesDO){
+    public ResponseData deleteByPrimaryKey(ResourcesDO resourcesDO){
         resourcesService.deleteByPrimaryKey(resourcesDO);
+        return new ResponseData(EmBusinessError.success);
+
     }
 
     /**
      * 查询所有权限
      */
     @RequestMapping(value = "/selectall", method = RequestMethod.GET)
-    public List<ResourcesDO> selectAllResources(){
-        return resourcesService.selectAllResources();
+    public ResponseData selectAllResources(){
+        List<ResourcesDO> resourcesDOS = resourcesService.selectAllResources();
+        return new ResponseData(EmBusinessError.success, resourcesDOS);
+
     }
 
     /**
      * 查询角色权限
      */
     @RequestMapping(value = "/selectroleres", method = RequestMethod.GET)
-    public List<ResourcesDO> selectRoleResources(@RequestBody UserDO userDO){
-        return resourcesService.SelectMenuByRoleCode(userDO);
+    public ResponseData selectRoleResources(@RequestBody UserDO userDO){
+        List<ResourcesDO> resourcesDOS = resourcesService.SelectMenuByRoleCode(userDO);
+        return new ResponseData(EmBusinessError.success, resourcesDOS);
+
     }
 }

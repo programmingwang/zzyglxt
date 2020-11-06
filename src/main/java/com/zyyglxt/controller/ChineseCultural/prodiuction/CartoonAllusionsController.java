@@ -2,15 +2,22 @@ package com.zyyglxt.controller.ChineseCultural.prodiuction;
 
 import com.zyyglxt.dataobject.ChineseCulturalDO;
 import com.zyyglxt.dataobject.ChineseCulturalDOKey;
+import com.zyyglxt.dataobject.FileDO;
+import com.zyyglxt.dto.ChineseCulturalDto;
 import com.zyyglxt.error.BusinessException;
 import com.zyyglxt.error.EmBusinessError;
 import com.zyyglxt.response.ResponseData;
 import com.zyyglxt.service.ICartoonAllusionsService;
+import com.zyyglxt.service.IFileService;
+import org.springframework.beans.BeanUtils;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Author:wangzh
@@ -25,12 +32,29 @@ public class CartoonAllusionsController {
     @Resource
     private ICartoonAllusionsService iCartoonAllusionsService;
 
+    @Resource
+    private IFileService iFileService;
+
+    private ChineseCulturalDto convertFromDOToDTO(ChineseCulturalDO chineseCulturalDO,String filePath){
+        ChineseCulturalDto chineseCulturalDto = new ChineseCulturalDto();
+        BeanUtils.copyProperties(chineseCulturalDO,chineseCulturalDto);
+        chineseCulturalDto.setFilePath(filePath);
+        return chineseCulturalDto;
+    }
+
     //获取所有的漫画典故
     @RequestMapping(value = "/getAll" , method = RequestMethod.GET)
     @ResponseBody
     public ResponseData getAllCartoonAllusions(){
         List<ChineseCulturalDO> cartoonAllusionsList = iCartoonAllusionsService.getCartoonAllusionsList();
-        return new ResponseData(EmBusinessError.success,cartoonAllusionsList);
+        List<ChineseCulturalDto> chineseCulturalDtoList = new ArrayList<>();
+        for (ChineseCulturalDO chineseCulturalDO : cartoonAllusionsList) {
+            chineseCulturalDtoList.add(
+                    this.convertFromDOToDTO(
+                            chineseCulturalDO,iFileService.selectFileByDataCode(
+                                    chineseCulturalDO.getItemcode()).getFilePath()));
+        }
+        return new ResponseData(EmBusinessError.success,chineseCulturalDtoList);
     }
 
 //    //查询一个漫画典故

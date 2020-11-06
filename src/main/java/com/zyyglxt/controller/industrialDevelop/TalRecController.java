@@ -1,7 +1,7 @@
 package com.zyyglxt.controller.industrialDevelop;
 
+import com.zyyglxt.dataobject.IndustrialDevelopTalRecDO;
 import com.zyyglxt.dataobject.IndustrialDevelopTalRecDOKey;
-import com.zyyglxt.dataobject.IndustrialDevelopTalRecDOWithBLOBs;
 import com.zyyglxt.error.EmBusinessError;
 import com.zyyglxt.response.ResponseData;
 import com.zyyglxt.service.IIndustrialDevelopTalRecService;
@@ -18,20 +18,20 @@ import javax.annotation.Resource;
 @Api(tags = "产业发展-人才招募")
 @RestController
 @RequestMapping(value = "industrialdevelop")
-public class IndustrialTalRecController {
+public class TalRecController {
     @Resource
     IIndustrialDevelopTalRecService talRecService;
 
     @RequestMapping(value = "/talrec", method = RequestMethod.POST)
     @ResponseBody
-    public ResponseData addTalRec(@RequestBody IndustrialDevelopTalRecDOWithBLOBs record) {
+    public ResponseData addTalRec(@RequestBody IndustrialDevelopTalRecDO record) {
         talRecService.addTalRec(record);
         return new ResponseData(EmBusinessError.success);
     }
 
     @RequestMapping(value = "/talrec", method = RequestMethod.PUT)
     @ResponseBody
-    public ResponseData updTalRec(@RequestBody IndustrialDevelopTalRecDOWithBLOBs record) {
+    public ResponseData updTalRec(@RequestBody IndustrialDevelopTalRecDO record) {
         talRecService.updTalRec(record);
         return new ResponseData(EmBusinessError.success);
     }

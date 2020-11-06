@@ -18,7 +18,7 @@ import javax.annotation.Resource;
 @Api(tags = "产业发展-合作交流")
 @RestController
 @RequestMapping(value = "industrialdevelop")
-public class IndustrialCooController {
+public class CooController {
 
     @Resource
     IIndustrialDevelopCooService developCooService;

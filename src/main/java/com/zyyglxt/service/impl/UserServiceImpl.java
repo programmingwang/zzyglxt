@@ -6,6 +6,7 @@ import com.zyyglxt.dao.UserRoleRefDOMapper;
 import com.zyyglxt.dataobject.*;
 import com.zyyglxt.error.BusinessException;
 import com.zyyglxt.error.EmBusinessError;
+import com.zyyglxt.util.UUIDUtils;
 import com.zyyglxt.service.UserService;
 import com.zyyglxt.util.UUIDUtils;
 import com.zyyglxt.validator.ValidatorImpl;

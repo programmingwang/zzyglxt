@@ -2,13 +2,16 @@ package com.zyyglxt.controller.dataDOController;
 
 import com.zyyglxt.dataobject.DataDO;
 import com.zyyglxt.dataobject.DataDOKey;
-import com.zyyglxt.error.BusinessException;
+import com.zyyglxt.dto.DataDto;
 import com.zyyglxt.error.EmBusinessError;
 import com.zyyglxt.response.ResponseData;
-import com.zyyglxt.service.IDataDOService;
+import com.zyyglxt.service.IDataNewsService;
+import com.zyyglxt.service.IFileService;
+import org.springframework.beans.BeanUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -18,11 +21,14 @@ import java.util.List;
  */
 
 @RestController
-@RequestMapping("/datado")
-public class DataDOController {
+@RequestMapping("/datado/newsInf")
+public class DataNewsInfController {
 
     @Resource
-    IDataDOService dataDOService;
+    IDataNewsService dataDOService;
+
+    @Resource
+    private IFileService fileService;
 
     /**
      * 查看一条记录
@@ -35,18 +41,32 @@ public class DataDOController {
         DataDOKey dataDOKey = new DataDOKey();
         dataDOKey.setItemid(itemID);
         dataDOKey.setItemcode(itemCode);
-        dataDOService.selectNewsInf(dataDOKey);
-        return new ResponseData(EmBusinessError.success);
+        DataDO data = dataDOService.selectNewsInf(dataDOKey);
+        return new ResponseData(EmBusinessError.success, data);
+    }
+
+    private DataDto convertFromDOToDTO(DataDO dataDo,String filePath) {
+        DataDto dataDto = new DataDto();
+        BeanUtils.copyProperties(dataDo,dataDto);
+        dataDto.setFilePath(filePath);
+        return dataDto;
     }
 
     /**
-     * 查看相应类型的所有数据
+     * 查看新闻管理的所有数据
      * @return
      */
-    @RequestMapping(value = "/selectAllNewsInf/{dataType}", method = RequestMethod.GET)
-    public ResponseData selectAllNewsInf(@PathVariable("dataType") String dataType){
-        List<DataDO> dataDOList = dataDOService.selectAllNewsInf(dataType);
-        return new ResponseData(EmBusinessError.success,dataDOList);
+    @RequestMapping(value = "/selectAll", method = RequestMethod.GET)
+    public ResponseData selectNewsInfList(){
+        List<DataDO> dataDOList = dataDOService.selectNewsInfList();
+        List<DataDto> dataDtoList = new ArrayList<>();
+        for (DataDO dataDO:dataDOList) {
+            dataDtoList.add(
+                    this.convertFromDOToDTO(
+                            dataDO,fileService.selectFileByDataCode(
+                                    dataDO.getItemcode()).getFilePath()));
+        }
+        return new ResponseData(EmBusinessError.success,dataDtoList);
     }
 
     /**
@@ -86,9 +106,9 @@ public class DataDOController {
     }
 
     //修改展示状态
-    @RequestMapping(value = "/changeStatus/{itemID}/{itemCode}", method = RequestMethod.PUT)
+    @RequestMapping(value = "changeStatus/{itemID}/{itemCode}", method = RequestMethod.PUT)
     @ResponseBody
-    public ResponseData changeStatus(String dataStatus, @PathVariable("itemID") Integer itemID, @PathVariable("itemCode")String itemCode){
+    public ResponseData changeStatus(@RequestParam("dataStatus") String dataStatus, @PathVariable("itemID") Integer itemID, @PathVariable("itemCode")String itemCode){
         DataDOKey dataDOKey = new DataDOKey();
         dataDOKey.setItemid(itemID);
         dataDOKey.setItemcode(itemCode);
@@ -101,10 +121,11 @@ public class DataDOController {
      * @param keyWord
      * @return
      */
-    @GetMapping("searchDataDO")
+    @GetMapping("/searchDataDO/{keyWord}")
     @ResponseBody
-    public List<DataDO> searchDataDO(@RequestBody String keyWord) {
-        return dataDOService.searchDataDO(keyWord);
+    public ResponseData searchDataDO(@PathVariable("keyWord") String keyWord) {
+        List<DataDO> dataDOList = dataDOService.searchDataDO(keyWord);
+        return new ResponseData(EmBusinessError.success,dataDOList);
     }
 
 }

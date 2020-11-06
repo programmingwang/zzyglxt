@@ -3,14 +3,18 @@ package com.zyyglxt.controller.HealthCareChineseMedicineDOController;
 import com.zyyglxt.dataobject.HealthCareChineseMedicineDO;
 import com.zyyglxt.dataobject.HealthCareChineseMedicineDOKey;
 
+import com.zyyglxt.dto.HealthCareChineseMedicineDto;
 import com.zyyglxt.error.BusinessException;
 import com.zyyglxt.error.EmBusinessError;
 import com.zyyglxt.response.ResponseData;
 import com.zyyglxt.service.HealthCareChineseMedicineDOService;
+import com.zyyglxt.service.IFileService;
+import org.springframework.beans.BeanUtils;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -23,6 +27,9 @@ import java.util.List;
 public class HealthCareChineseMedicineDOController {
    @Resource
    private HealthCareChineseMedicineDOService healthCareChineseMedicineDOService;
+
+   @Resource
+   private IFileService iFileService;
    /*
      中医药名称相关数据插入
    */
@@ -64,10 +71,23 @@ public class HealthCareChineseMedicineDOController {
     /*public List<HealthCareChineseMedicineDO> selectAllHealthCareChineseMedicineDOMapper(){
         return healthCareChineseMedicineDOService.selectAllHealthCareChineseMedicine();
     }*/
-    public ResponseData selectAllHealthCareChineseMedicineDOMapper(Model model){
+    public ResponseData selectAllHealthCareChineseMedicineDOMapper(){
         List<HealthCareChineseMedicineDO> healthCareChineseMedicineDOSList = healthCareChineseMedicineDOService.selectAllHealthCareChineseMedicine();
-        model.addAttribute("traditionalCulturalList",healthCareChineseMedicineDOSList);
-        return new ResponseData(EmBusinessError.success,healthCareChineseMedicineDOSList);
+        List<HealthCareChineseMedicineDto> healthCareChineseMedicineDtoList = new ArrayList<>();
+        for (HealthCareChineseMedicineDO healthCareChineseMedicineDO : healthCareChineseMedicineDOSList) {
+            healthCareChineseMedicineDtoList.add(
+                    this.convertDtoFromDo(
+                            healthCareChineseMedicineDO,iFileService.selectFileByDataCode(
+                                    healthCareChineseMedicineDO.getItemcode()).getFilePath()));
+        }
+        return new ResponseData(EmBusinessError.success,healthCareChineseMedicineDtoList);
+    }
+
+    private HealthCareChineseMedicineDto convertDtoFromDo(HealthCareChineseMedicineDO healthCareChineseMedicineDO, String filePath){
+        HealthCareChineseMedicineDto healthCareChineseMedicineDto = new HealthCareChineseMedicineDto();
+        BeanUtils.copyProperties(healthCareChineseMedicineDO,healthCareChineseMedicineDto);
+        healthCareChineseMedicineDto.setFilePath(filePath);
+        return healthCareChineseMedicineDto;
     }
 }
 

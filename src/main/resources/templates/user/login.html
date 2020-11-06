@@ -1,0 +1,34 @@
+
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>中医科学院仪器设备共享管理平台-登录</title>
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" type="text/css" th:href="@{/component/bootstrap@4.5.2/css/bootstrap.min.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/project/css/user/login.css}">
+</head>
+<body>
+<div class="form-signin">
+    <div class="text-center mb-4">
+        <img class="mb-4" src="/images/logo.png" alt="" width="227" height="32">
+        <h1 class="h3 mb-3 font-weight-normal">任务管理平台</h1>
+    </div>
+
+    <div class="form-label-group">
+        <input type="text" id="inputUsername" class="form-control" placeholder="username " required>
+        <label for="inputUsername">用户登录账户</label>
+    </div>
+
+    <div class="form-label-group">
+        <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+        <label for="inputPassword">用户密码</label>
+    </div>
+
+
+    <button id="btn_Login" class="btn btn-lg btn-primary btn-block" type="submit">登录</button>
+    <p class="mt-5 mb-3 text-muted text-center">&copy; 2020</p>
+</div>
+</body>
+<script type="text/javascript" data-main="/main/main.js" th:src="@{/component/require@2.3.6/require-2.3.6.js}"></script>
+</html>

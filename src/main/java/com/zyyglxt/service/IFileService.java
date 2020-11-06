@@ -17,7 +17,7 @@ public interface IFileService {
     List<FileDO> selectAllFile();
     List<FileDO> searchFile(String keyWord);
     List<FileDO> top5File();
-    List<FileDO> selectFileByDataCode(String dataCode);
+    FileDO selectFileByDataCode(String dataCode);
     FileDO selectFileByDataCodeAndType(String dataCode, String fileType);
     FileDO selectFileByDataCodeAndName(String dataCode, String fileName);
     int deleteFileByDataCode(String dataCode);

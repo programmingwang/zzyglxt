@@ -20,7 +20,7 @@ import javax.annotation.Resource;
 @Api(tags = "产业发展-专家信息")
 @RestController
 @RequestMapping(value = "industrialdevelop")
-public class IndustrialExpertController {
+public class ExpertController {
     @Resource
     IIndustrialDevelopExpertService industrialExpertService;
 

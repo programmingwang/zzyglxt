@@ -2,8 +2,8 @@ package com.zyyglxt.controller.permissionsController;
 
 import com.zyyglxt.dataobject.*;
 
-import com.zyyglxt.permissionsUtil.DateUtils;
-import com.zyyglxt.permissionsUtil.UUIDUtils;
+import com.zyyglxt.error.EmBusinessError;
+import com.zyyglxt.response.ResponseData;
 import com.zyyglxt.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -30,8 +30,9 @@ public class UserRoleController {
      * @return 操作结果信息
      */
     @RequestMapping(value = "/deletebykey",method = RequestMethod.DELETE)
-    public void deleteUserByUsername(@RequestBody UserDO userDO){
+    public ResponseData deleteUserByUsername(@RequestBody UserDO userDO){
         userService.deleteUserByUsername(userDO);
+        return new ResponseData(EmBusinessError.success);
     }
 
     /**
@@ -40,8 +41,9 @@ public class UserRoleController {
      * @return 添加结果信息
      */
     @RequestMapping(value = "/insertuser",method = RequestMethod.POST)
-    public void insertUserSelective(@RequestBody UserDO userDO){
+    public ResponseData insertUserSelective(@RequestBody UserDO userDO){
         userService.insertUserSelective(userDO);
+        return new ResponseData(EmBusinessError.success);
     }
 
     /**
@@ -49,9 +51,9 @@ public class UserRoleController {
      * @return user和查询结果
      */
     @RequestMapping(value = "/alluser",method = RequestMethod.GET)
-    public List<UserDO> selectAllUser(){
+    public ResponseData selectAllUser(){
         List<UserDO> users = userService.selectAllUser();
-        return users;
+        return new ResponseData(EmBusinessError.success, users);
     }
 
     /**
@@ -60,7 +62,8 @@ public class UserRoleController {
      * @return
      */
     @RequestMapping(value = "/updateuser",method = RequestMethod.PUT)
-    public void updateUserByPrimaryKeySelective(@RequestBody UserDO userDO){
+    public ResponseData updateUserByPrimaryKeySelective(@RequestBody UserDO userDO){
         userService.updateByPrimaryKeySelective(userDO);
+        return new ResponseData(EmBusinessError.success);
     }
 }

@@ -20,13 +20,13 @@ public interface IMovieTVService {
     List<ChineseCulturalDO> getMovieTVList();
 
     //增加一个电视电影
-    int addMovieTV(ChineseCulturalDO record) throws BusinessException;
+    int addMovieTV(ChineseCulturalDO record);
 
     //删除一个电视电影
     int removeMovieTV(ChineseCulturalDOKey key);
 
     //修改一个电视电影
-    int updateMovieTV(ChineseCulturalDO record) throws BusinessException;
+    int updateMovieTV(ChineseCulturalDO record);
 
     //修改一个电视电影状态
     int changeMovieStatus(ChineseCulturalDOKey key, String chineseCulturalStatus);

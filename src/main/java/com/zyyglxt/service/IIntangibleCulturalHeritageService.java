@@ -20,13 +20,13 @@ public interface IIntangibleCulturalHeritageService {
     List<ChineseCulturalDO> getIntangibleCulturalHeritageList();
 
     //增加一个非物质文化遗产
-    int addIntangibleCulturalHeritage(ChineseCulturalDO record) throws BusinessException;
+    int addIntangibleCulturalHeritage(ChineseCulturalDO record);
 
     //删除一个非物质文化遗产
     int removeIntangibleCulturalHeritage(ChineseCulturalDOKey key);
 
     //修改一个非物质文化遗产
-    int updateIntangibleCulturalHeritage(ChineseCulturalDO record) throws BusinessException;
+    int updateIntangibleCulturalHeritage(ChineseCulturalDO record) ;
 
     //修改一个非物质文化遗产状态
     int changeIntangibleCulturalHeritageStatus(ChineseCulturalDOKey key, String chineseCulturalStatus);

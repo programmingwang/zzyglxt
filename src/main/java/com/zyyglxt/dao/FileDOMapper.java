@@ -2,6 +2,7 @@ package com.zyyglxt.dao;
 
 import com.zyyglxt.dataobject.FileDO;
 import com.zyyglxt.dataobject.FileDOKey;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -59,6 +60,16 @@ public interface FileDOMapper {
     List<FileDO> searchFile(String keyWord);
 
     List<FileDO> top5File();
-    
-    
+
+//    List<FileDO> selectFileByDataCode(String dataCode);
+
+    FileDO selectFileByDataCode(String dataCode);
+
+    FileDO selectFileByDataCodeAndType(@Param("dataCode") String dataCode, @Param("fileType") String fileType);
+
+    FileDO selectFileByDataCodeAndName(@Param("dataCode") String dataCode, @Param("fileName") String fileName);
+
+    int deleteByDataCode(String dataCode);
+
+    int deleteByDataCodeAndType(@Param("dataCode") String dataCode, @Param("fileType") String fileType);
 }

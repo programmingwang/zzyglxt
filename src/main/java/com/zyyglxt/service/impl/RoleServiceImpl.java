@@ -6,9 +6,13 @@ import com.zyyglxt.dataobject.ResourcesDO;
 import com.zyyglxt.dataobject.ResourcesRoleRefDO;
 import com.zyyglxt.dataobject.RoleDO;
 import com.zyyglxt.dataobject.RoleDOKey;
+import com.zyyglxt.error.BusinessException;
+import com.zyyglxt.error.EmBusinessError;
 import com.zyyglxt.permissionsUtil.DateUtils;
 import com.zyyglxt.permissionsUtil.UUIDUtils;
 import com.zyyglxt.service.RoleService;
+import com.zyyglxt.validator.ValidatorImpl;
+import com.zyyglxt.validator.ValidatorResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,6 +29,8 @@ public class RoleServiceImpl implements RoleService {
     RoleDOMapper roleDOMapper;
     @Autowired
     ResourcesRoleRefDOMapper resRoleRefDOMapper;
+    @Autowired
+    private ValidatorImpl validator;
 
     @Override
     public int deleteByPrimaryKey(RoleDOKey key) {
@@ -38,6 +44,10 @@ public class RoleServiceImpl implements RoleService {
 
     @Override
     public void insertSelective(RoleDO roleDO, List<ResourcesDO> resourcesDOList) {
+        ValidatorResult result = validator.validate(roleDO);
+        if(result.isHasErrors()){
+            throw new BusinessException(result.getErrMsg(), EmBusinessError.PARAMETER_VALIDATION_ERROR);
+        }
         String uuid = UUIDUtils.getUUID();
         roleDO.setItemcode(uuid);
         roleDOMapper.insertSelective(roleDO);

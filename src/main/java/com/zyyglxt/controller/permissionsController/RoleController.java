@@ -3,6 +3,8 @@ package com.zyyglxt.controller.permissionsController;
 import com.zyyglxt.dataobject.ResourcesDO;
 import com.zyyglxt.dataobject.RoleDO;
 import com.zyyglxt.dataobject.RoleDOKey;
+import com.zyyglxt.error.EmBusinessError;
+import com.zyyglxt.response.ResponseData;
 import com.zyyglxt.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -30,8 +32,9 @@ public class RoleController {
      * @return 添加结果信息
      */
     @RequestMapping(value = "/insertrole", method = RequestMethod.POST)
-    public void insertRoleSelective(@RequestBody RoleDO roleDO, @RequestBody ArrayList<ResourcesDO> resourcesDOList){
+    public ResponseData insertRoleSelective(@RequestBody RoleDO roleDO, @RequestBody ArrayList<ResourcesDO> resourcesDOList){
         roleService.insertSelective(roleDO, resourcesDOList);
+        return new ResponseData(EmBusinessError.success);
     }
 
     /**
@@ -40,9 +43,9 @@ public class RoleController {
      * @return
      */
     @RequestMapping(value = "/updaterole", method = RequestMethod.PUT)
-    public void updateRoleSelective(RoleDO roleDO){
+    public ResponseData updateRoleSelective(RoleDO roleDO){
         roleService.updateByPrimaryKeySelective(roleDO);
-
+        return new ResponseData(EmBusinessError.success);
     }
 
     /**
@@ -51,8 +54,9 @@ public class RoleController {
      * @return
      */
     @RequestMapping(value = "/deleterole", method = RequestMethod.DELETE)
-    public void deleteRoleByPrimaryKey(RoleDOKey key){
+    public ResponseData deleteRoleByPrimaryKey(RoleDOKey key){
         roleService.deleteByPrimaryKey(key);
+        return new ResponseData(EmBusinessError.success);
     }
 
     /**
@@ -60,8 +64,8 @@ public class RoleController {
      * @return
      */
     @RequestMapping(value = "/allroles", method = RequestMethod.GET)
-    public List<RoleDO> selectAllRoles(){
+    public ResponseData selectAllRoles(){
         List<RoleDO> roles = roleService.selectAllRole();
-        return roles;
+        return new ResponseData(EmBusinessError.success, roles);
     }
 }

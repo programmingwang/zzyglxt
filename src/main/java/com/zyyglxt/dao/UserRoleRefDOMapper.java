@@ -21,10 +21,5 @@ public interface UserRoleRefDOMapper {
 
     int updateByPrimaryKey(UserRoleRefDO record);
 
-    /**
-     * 根据user_code查询
-     * @param itemcode
-     * @return
-     */
     UserRoleRefDO selectByUserCode(String itemcode);
 }

@@ -3,9 +3,13 @@ package com.zyyglxt.service.impl;
 import com.zyyglxt.dao.UserRoleRefDOMapper;
 import com.zyyglxt.dataobject.UserRoleRefDO;
 import com.zyyglxt.dataobject.UserRoleRefDOKey;
+import com.zyyglxt.error.BusinessException;
+import com.zyyglxt.error.EmBusinessError;
 import com.zyyglxt.service.UserRoleRefService;
-import com.zyyglxt.util.DateUtils;
-import com.zyyglxt.util.UUIDUtils;
+import com.zyyglxt.permissionsUtil.DateUtils;
+import com.zyyglxt.permissionsUtil.UUIDUtils;
+import com.zyyglxt.validator.ValidatorImpl;
+import com.zyyglxt.validator.ValidatorResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +23,8 @@ public class UserRoleRefServiceImpl implements UserRoleRefService {
 
     @Autowired
     UserRoleRefDOMapper userRoleRefDOMapper;
+    @Autowired
+    private ValidatorImpl validator;
 
     @Override
     public int deleteByPrimaryKey(UserRoleRefDOKey key) {
@@ -27,7 +33,10 @@ public class UserRoleRefServiceImpl implements UserRoleRefService {
 
     @Override
     public int insertSelective(UserRoleRefDO record) {
-
+        ValidatorResult result = validator.validate(record);
+        if(result.isHasErrors()){
+            throw new BusinessException(result.getErrMsg(), EmBusinessError.PARAMETER_VALIDATION_ERROR);
+        }
         record.setItemcode(UUIDUtils.getUUID());
         record.setItemcreateat(DateUtils.getDate());
         return userRoleRefDOMapper.insertSelective(record);

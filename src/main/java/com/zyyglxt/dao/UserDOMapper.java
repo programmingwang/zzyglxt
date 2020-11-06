@@ -2,9 +2,10 @@ package com.zyyglxt.dao;
 
 import com.zyyglxt.dataobject.UserDO;
 import com.zyyglxt.dataobject.UserDOKey;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
-
+@Component
 public interface UserDOMapper {
 
     int deleteByPrimaryKey(UserDOKey key);
@@ -33,16 +34,7 @@ public interface UserDOMapper {
 
     int updateStateByUserName(String state, String username);
 
-    /*
-     * 查询所有用户
-     * @return List<UserDO>
-     */
     List<UserDO> selectAllUser();
 
-    /**
-     * 根据用户名删除用户
-     * @param username
-     * @return
-     */
     int deleteByUsername(String username);
 }

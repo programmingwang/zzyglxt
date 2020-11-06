@@ -3,12 +3,18 @@ package com.zyyglxt.service.impl;
 import com.zyyglxt.dao.IndustrialDevelopCooExcDOMapper;
 import com.zyyglxt.dataobject.IndustrialDevelopCooExcDO;
 import com.zyyglxt.dataobject.IndustrialDevelopCooExcDOKey;
+import com.zyyglxt.dataobject.validation.ValidationGroups;
+import com.zyyglxt.error.BusinessException;
+import com.zyyglxt.error.EmBusinessError;
 import com.zyyglxt.service.IIndustrialDevelopCooService;
+import com.zyyglxt.validator.ValidatorImpl;
+import com.zyyglxt.validator.ValidatorResult;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * @Author lrt
@@ -20,21 +26,39 @@ public class IndustrialDevelopCooServiceImpl implements IIndustrialDevelopCooSer
     @Resource
     IndustrialDevelopCooExcDOMapper cooExcDOMapper;
 
-    public void addCooRecord(IndustrialDevelopCooExcDO developCooExcDO) {
-        developCooExcDO.setItemcreateat(new Date());
-        developCooExcDO.setItemupdateat(new Date());
-        cooExcDOMapper.insertSelective(developCooExcDO);
+    @Resource
+    ValidatorImpl validator;
+
+    public void addCooRecord(IndustrialDevelopCooExcDO record) {
+        ValidatorResult result = validator.validate(record,ValidationGroups.Insert.class);
+        if (result.isHasErrors()){
+            throw new BusinessException(result.getErrMsg(), EmBusinessError.PARAMETER_VALIDATION_ERROR);
+        }
+        if (record.getItemcode() == null || record.getItemcode().isEmpty()){
+            record.setItemcode(UUID.randomUUID().toString());
+        }
+        record.setItemcreateat(new Date());
+        record.setItemupdateat(new Date());
+        cooExcDOMapper.insertSelective(record);
     }
 
     @Override
     public void delCooRecord(IndustrialDevelopCooExcDOKey key) {
+        ValidatorResult result = validator.validate(key,ValidationGroups.UpdateOrDelete.class);
+        if (result.isHasErrors()){
+            throw new BusinessException(result.getErrMsg(), EmBusinessError.PARAMETER_VALIDATION_ERROR);
+        }
         cooExcDOMapper.deleteByPrimaryKey(key);
     }
 
     @Override
-    public void updCooRecord(IndustrialDevelopCooExcDO developCooExcDO) {
-        developCooExcDO.setItemupdateat(new Date());
-        cooExcDOMapper.updateByPrimaryKeySelective(developCooExcDO);
+    public void updCooRecord(IndustrialDevelopCooExcDO record) {
+        ValidatorResult result = validator.validate(record,ValidationGroups.UpdateOrDelete.class);
+        if (result.isHasErrors()){
+            throw new BusinessException(result.getErrMsg(), EmBusinessError.PARAMETER_VALIDATION_ERROR);
+        }
+        record.setItemupdateat(new Date());
+        cooExcDOMapper.updateByPrimaryKeySelective(record);
     }
 
     @Override

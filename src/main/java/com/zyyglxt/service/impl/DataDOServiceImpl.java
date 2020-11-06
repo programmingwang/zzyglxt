@@ -35,7 +35,7 @@ public class DataDOServiceImpl  implements IDataDOService{
 
     @Override
     public DataDO selectNewsInf(DataDOKey key) {
-        return dataDOMapper.selectByPrimaryKey(key,"新闻管理");
+        return dataDOMapper.selectByPrimaryKey(key);
     }
 
     @Override
@@ -44,9 +44,7 @@ public class DataDOServiceImpl  implements IDataDOService{
     }
 
     @Override
-    @Transactional
-    //@Scheduled(cron = "30 50 17 2 11 ? ")
-    public int insertNewsInf(DataDO record) throws BusinessException {
+    public int insertNewsInf(DataDO record) {
         ValidatorResult result = validator.validate(record);
         if(result.isHasErrors()){
             throw new BusinessException(result.getErrMsg(), EmBusinessError.PARAMETER_VALIDATION_ERROR);
@@ -55,20 +53,16 @@ public class DataDOServiceImpl  implements IDataDOService{
         record.setCreater("test");
         record.setItemupdateat(new Date());
         record.setUpdater("test");
-        record.setDataType("新闻管理");
-        record.setDataStatus("未上架");
         return dataDOMapper.insertSelective(record);
     }
 
     @Override
-    @Transactional
     public int deleteNewsInf(DataDOKey key) {
         return dataDOMapper.deleteByPrimaryKey(key);
     }
 
     @Override
-    @Transactional
-    public int updateNewsInf(DataDO record) throws BusinessException {
+    public int updateNewsInf(DataDO record) {
         ValidatorResult result = validator.validate(record);
         if(result.isHasErrors()){
             throw new BusinessException(result.getErrMsg(), EmBusinessError.PARAMETER_VALIDATION_ERROR);
@@ -76,6 +70,11 @@ public class DataDOServiceImpl  implements IDataDOService{
         record.setUpdater("asd");
         record.setItemupdateat(new Date());
         return dataDOMapper.updateByPrimaryKeySelective(record);
+    }
+
+    @Override
+    public int changeStatus(DataDOKey key, String dataStatus) {
+        return dataDOMapper.changeStatusByPrimaryKey(key, dataStatus);
     }
 
     /**

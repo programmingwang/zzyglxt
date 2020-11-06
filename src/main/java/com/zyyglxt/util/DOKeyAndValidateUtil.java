@@ -30,7 +30,6 @@ public class DOKeyAndValidateUtil{
         key.setItemid(record.getItemid());
         key.setItemcode(record.getItemcode());
         record.setUpdater("");
-        record.setItemupdateat(new Date());
         return chineseCulturalDOMapper.updateByPrimaryKeySelective(key,record);
     }
 

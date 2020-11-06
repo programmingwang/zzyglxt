@@ -45,9 +45,7 @@ public class   CulturalVenuesController {
     //增加一个文化古迹
     @RequestMapping(value = "/addCulVen" , method = RequestMethod.POST)
     @ResponseBody
-    public ResponseData addCulturalVenues(@RequestBody ChineseCulturalDO chineseCulturalDO) throws BusinessException {
-        chineseCulturalDO.setChineseCulturalType("文化场馆");
-        chineseCulturalDO.setChineseCulturalStatus("待上架");
+    public ResponseData addCulturalVenues(@RequestBody ChineseCulturalDO chineseCulturalDO) {
         iCulturalVenuesService.addCulturalVenues(chineseCulturalDO);
         return new ResponseData(EmBusinessError.success);
     }
@@ -77,7 +75,7 @@ public class   CulturalVenuesController {
     //修改一个文化场馆
     @RequestMapping(value = "/updCulVen" , method = RequestMethod.POST)
     @ResponseBody
-    public ResponseData updateCulturalVenues(@RequestBody ChineseCulturalDO chineseCulturalDO) throws BusinessException {
+    public ResponseData updateCulturalVenues(@RequestBody ChineseCulturalDO chineseCulturalDO){
         iCulturalVenuesService.updateCulturalVenues(chineseCulturalDO);
         return new ResponseData(EmBusinessError.success);
     }

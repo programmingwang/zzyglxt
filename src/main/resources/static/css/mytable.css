@@ -142,7 +142,7 @@
     user-select: none;
     background-color: transparent;
     border: 1px solid #dee2e6;
-    padding: 0.375rem 0.75rem;
+    padding: 7px 12px;
     font-size: 12px;
     line-height: 1;
     border-radius: 0.25rem;
@@ -183,7 +183,7 @@ select{
     -webkit-appearance:none;
 
     /*在选择框的最右侧中间显示小箭头图片*/
-    background: url("../img/arrow.png") no-repeat scroll right center transparent;
+    background: url("../images/arrow.png") no-repeat scroll right center transparent;
 
 
     /*为下拉小箭头留出一点位置，避免被文字覆盖*/

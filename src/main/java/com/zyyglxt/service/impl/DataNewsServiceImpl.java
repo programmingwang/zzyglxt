@@ -6,6 +6,7 @@ import com.zyyglxt.dataobject.DataDOKey;
 import com.zyyglxt.error.BusinessException;
 import com.zyyglxt.error.EmBusinessError;
 import com.zyyglxt.service.IDataNewsService;
+import com.zyyglxt.util.UUIDUtils;
 import com.zyyglxt.validator.ValidatorImpl;
 import com.zyyglxt.validator.ValidatorResult;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,6 +52,10 @@ public class DataNewsServiceImpl implements IDataNewsService {
         record.setItemupdateat(new Date());
         record.setUpdater("test");
         record.setDataType("新闻管理");
+        //如果前台没有插入图片或者附件，就自己生成uuid
+        if(record.getItemcode() == null){
+            record.setItemcode(UUIDUtils.getUUID());
+        }
         return dataDOMapper.insertSelective(record);
     }
 

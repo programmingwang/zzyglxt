@@ -2,12 +2,16 @@ package com.zyyglxt.controller.dataDOController;
 
 import com.zyyglxt.dataobject.DataDO;
 import com.zyyglxt.dataobject.DataDOKey;
+import com.zyyglxt.dto.DataDto;
 import com.zyyglxt.error.EmBusinessError;
 import com.zyyglxt.response.ResponseData;
 import com.zyyglxt.service.IDataNewsService;
+import com.zyyglxt.service.IFileService;
+import org.springframework.beans.BeanUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -22,6 +26,9 @@ public class DataNewsInfController {
 
     @Resource
     IDataNewsService dataDOService;
+
+    @Resource
+    private IFileService fileService;
 
     /**
      * 查看一条记录
@@ -38,6 +45,13 @@ public class DataNewsInfController {
         return new ResponseData(EmBusinessError.success, data);
     }
 
+    private DataDto convertFromDOToDTO(DataDO dataDo,String filePath) {
+        DataDto dataDto = new DataDto();
+        BeanUtils.copyProperties(dataDo,dataDto);
+        dataDto.setFilePath(filePath);
+        return dataDto;
+    }
+
     /**
      * 查看新闻管理的所有数据
      * @return
@@ -45,7 +59,14 @@ public class DataNewsInfController {
     @RequestMapping(value = "/selectAll", method = RequestMethod.GET)
     public ResponseData selectNewsInfList(){
         List<DataDO> dataDOList = dataDOService.selectNewsInfList();
-        return new ResponseData(EmBusinessError.success,dataDOList);
+        List<DataDto> dataDtoList = new ArrayList<>();
+        for (DataDO dataDO:dataDOList) {
+            dataDtoList.add(
+                    this.convertFromDOToDTO(
+                            dataDO,fileService.selectFileByDataCode(
+                                    dataDO.getItemcode()).getFilePath()));
+        }
+        return new ResponseData(EmBusinessError.success,dataDtoList);
     }
 
     /**

@@ -73,7 +73,7 @@ public class FileServiceImpl implements IFileService {
     }
 
     @Override
-    public List<FileDO> selectFileByDataCode(String dataCode) {
+    public FileDO selectFileByDataCode(String dataCode) {
         if(dataCode.isEmpty()){
             throw new BusinessException("数据源code不能为空", EmBusinessError.PARAMETER_VALIDATION_ERROR);
         }

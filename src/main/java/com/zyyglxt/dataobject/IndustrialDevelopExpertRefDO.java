@@ -13,32 +13,33 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 public class IndustrialDevelopExpertRefDO extends IndustrialDevelopExpertRefDOKey {
-    
-    @NotBlank(message = "专家代码不能为空",groups = ValidationGroups.Insert.class)
+
+    @NotBlank(message = "专家代码不能为空", groups = ValidationGroups.Insert.class)
     private String expertCode;
 
-    
-    @NotBlank(message = "课题代码不能为空",groups = ValidationGroups.Insert.class)
-    private String topicCode;
 
-    
+    @NotBlank(message = "课题代码不能为空", groups = ValidationGroups.Insert.class)
+    private String topicCode;
 
     private String exmaineStatus;
 
-    
+    private String submitStatus;
+
+    private Integer score;
+
     private String opinion;
 
-    
+
     private String creater;
 
-    
+
     @JsonFormat(timezone = "GMT+8")
     private Date itemcreateat;
 
-    
+
     private String updater;
 
-    
+
     @JsonFormat(timezone = "GMT+8")
     private Date itemupdateat;
 

@@ -19,7 +19,7 @@ import javax.validation.Valid;
 @Api(tags = "产业发展-科研成果")
 @RestController
 @RequestMapping(value = "industrialdevelop")
-public class IndustrialSciAchiController {
+public class SciAchiController {
     @Resource
     IIndustrialDevelopSciAchiService sciAchiService;
 

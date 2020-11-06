@@ -18,7 +18,7 @@ import javax.annotation.Resource;
 @RestController
 @RequestMapping(value = "industrialdevelop")
 @Api(tags = "产业发展-课题数据")
-public class IndustrialTopicController {
+public class TopicController {
     @Resource
     IIndustrialDevelopTopicService developTopicService;
 

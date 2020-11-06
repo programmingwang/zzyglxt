@@ -42,7 +42,10 @@ public class IndustrialDevelopCooExcDO extends IndustrialDevelopCooExcDOKey {
 
     
     @NotBlank(message = "预期合作机构不能为空",groups = ValidationGroups.Insert.class)
-    private String cooOrg;
+    private String cooperativeOrg;
+
+    @NotBlank(message = "用户所在机构代码不能为空", groups = ValidationGroups.Insert.class)
+    private String orgCode;
 
     
     private String status;

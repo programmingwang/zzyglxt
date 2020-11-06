@@ -2,6 +2,7 @@ package com.zyyglxt.dao;
 
 import com.zyyglxt.dataobject.IndustrialDevelopCooExcDO;
 import com.zyyglxt.dataobject.IndustrialDevelopCooExcDOKey;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -56,7 +57,7 @@ public interface IndustrialDevelopCooExcDOMapper {
 
     int updateVisitNumByItemidAndItemcode(IndustrialDevelopCooExcDOKey key);
 
-    List<IndustrialDevelopCooExcDO> selectByPage(int start, int end);
+    List<IndustrialDevelopCooExcDO> selectByPage(@Param("start") int start,@Param("end") int end);
 
     List<IndustrialDevelopCooExcDO> selectAll();
 }

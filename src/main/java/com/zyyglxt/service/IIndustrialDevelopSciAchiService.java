@@ -3,6 +3,8 @@ package com.zyyglxt.service;
 import com.zyyglxt.dataobject.IndustrialDevelopSciAchiDO;
 import com.zyyglxt.dataobject.IndustrialDevelopSciAchiDOKey;
 
+import java.util.List;
+
 /**
  * @Author lrt
  * @Date 2020/10/29 9:11
@@ -17,5 +19,7 @@ public interface IIndustrialDevelopSciAchiService {
     void updAchievement(IndustrialDevelopSciAchiDO achiDO);
 
     void increaseVisitNum(IndustrialDevelopSciAchiDOKey key);
+
+    List<IndustrialDevelopSciAchiDO> getAchievement();
 
 }

@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zyyglxt.dao.OrganizationDOMapper">
+  <resultMap id="BaseResultMap" type="com.zyyglxt.dataobject.OrganizationDO">
+    <id column="itemID" jdbcType="INTEGER" property="itemid" />
+    <result column="itemCode" jdbcType="CHAR" property="itemcode" />
+    <result column="ORG_NAME" jdbcType="VARCHAR" property="orgName" />
+    <result column="ORG_CODE" jdbcType="VARCHAR" property="orgCode" />
+    <result column="ORG_DESCRIPTION" jdbcType="VARCHAR" property="orgDescription" />
+    <result column="ORG_IDENTIFY" jdbcType="VARCHAR" property="orgIdentify" />
+    <result column="backup1" jdbcType="VARCHAR" property="backup1" />
+    <result column="backup2" jdbcType="VARCHAR" property="backup2" />
+    <result column="LEFT" jdbcType="INTEGER" property="left" />
+    <result column="RIGHT" jdbcType="INTEGER" property="right" />
+    <result column="LEVEL" jdbcType="INTEGER" property="level" />
+    <result column="CREATER" jdbcType="VARCHAR" property="creater" />
+    <result column="itemCreateAt" jdbcType="TIMESTAMP" property="itemcreateat" />
+    <result column="UPDATER" jdbcType="VARCHAR" property="updater" />
+    <result column="itemUpdateAt" jdbcType="TIMESTAMP" property="itemupdateat" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    itemID, itemCode, ORG_NAME, ORG_CODE, ORG_DESCRIPTION, ORG_IDENTIFY, backup1, backup2,
+    LEFT, RIGHT, LEVEL, CREATER, itemCreateAt, UPDATER, itemUpdateAt
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from organization
+    where itemID = #{itemid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from organization
+    where itemID = #{itemid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zyyglxt.dataobject.OrganizationDO">
+    insert into organization (itemID, itemCode, ORG_NAME,
+      ORG_CODE, ORG_DESCRIPTION, ORG_IDENTIFY,
+      backup1, backup2, LEFT,
+      RIGHT, LEVEL, CREATER,
+      itemCreateAt, UPDATER, itemUpdateAt
+      )
+    values (#{itemid,jdbcType=INTEGER}, #{itemcode,jdbcType=CHAR}, #{orgName,jdbcType=VARCHAR},
+      #{orgCode,jdbcType=VARCHAR}, #{orgDescription,jdbcType=VARCHAR}, #{orgIdentify,jdbcType=VARCHAR},
+      #{backup1,jdbcType=VARCHAR}, #{backup2,jdbcType=VARCHAR}, #{left,jdbcType=INTEGER},
+      #{right,jdbcType=INTEGER}, #{level,jdbcType=INTEGER}, #{creater,jdbcType=VARCHAR},
+      #{itemcreateat,jdbcType=TIMESTAMP}, #{updater,jdbcType=VARCHAR}, #{itemupdateat,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zyyglxt.dataobject.OrganizationDO">
+    insert into organization
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="itemid != null">
+        itemID,
+      </if>
+      <if test="itemcode != null">
+        itemCode,
+      </if>
+      <if test="orgName != null">
+        ORG_NAME,
+      </if>
+      <if test="orgCode != null">
+        ORG_CODE,
+      </if>
+      <if test="orgDescription != null">
+        ORG_DESCRIPTION,
+      </if>
+      <if test="orgIdentify != null">
+        ORG_IDENTIFY,
+      </if>
+      <if test="backup1 != null">
+        backup1,
+      </if>
+      <if test="backup2 != null">
+        backup2,
+      </if>
+      <if test="left != null">
+        LEFT,
+      </if>
+      <if test="right != null">
+        RIGHT,
+      </if>
+      <if test="level != null">
+        LEVEL,
+      </if>
+      <if test="creater != null">
+        CREATER,
+      </if>
+      <if test="itemcreateat != null">
+        itemCreateAt,
+      </if>
+      <if test="updater != null">
+        UPDATER,
+      </if>
+      <if test="itemupdateat != null">
+        itemUpdateAt,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="itemid != null">
+        #{itemid,jdbcType=INTEGER},
+      </if>
+      <if test="itemcode != null">
+        #{itemcode,jdbcType=CHAR},
+      </if>
+      <if test="orgName != null">
+        #{orgName,jdbcType=VARCHAR},
+      </if>
+      <if test="orgCode != null">
+        #{orgCode,jdbcType=VARCHAR},
+      </if>
+      <if test="orgDescription != null">
+        #{orgDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="orgIdentify != null">
+        #{orgIdentify,jdbcType=VARCHAR},
+      </if>
+      <if test="backup1 != null">
+        #{backup1,jdbcType=VARCHAR},
+      </if>
+      <if test="backup2 != null">
+        #{backup2,jdbcType=VARCHAR},
+      </if>
+      <if test="left != null">
+        #{left,jdbcType=INTEGER},
+      </if>
+      <if test="right != null">
+        #{right,jdbcType=INTEGER},
+      </if>
+      <if test="level != null">
+        #{level,jdbcType=INTEGER},
+      </if>
+      <if test="creater != null">
+        #{creater,jdbcType=VARCHAR},
+      </if>
+      <if test="itemcreateat != null">
+        #{itemcreateat,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updater != null">
+        #{updater,jdbcType=VARCHAR},
+      </if>
+      <if test="itemupdateat != null">
+        #{itemupdateat,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zyyglxt.dataobject.OrganizationDO">
+    update organization
+    <set>
+      <if test="itemcode != null">
+        itemCode = #{itemcode,jdbcType=CHAR},
+      </if>
+      <if test="orgName != null">
+        ORG_NAME = #{orgName,jdbcType=VARCHAR},
+      </if>
+      <if test="orgCode != null">
+        ORG_CODE = #{orgCode,jdbcType=VARCHAR},
+      </if>
+      <if test="orgDescription != null">
+        ORG_DESCRIPTION = #{orgDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="orgIdentify != null">
+        ORG_IDENTIFY = #{orgIdentify,jdbcType=VARCHAR},
+      </if>
+      <if test="backup1 != null">
+        backup1 = #{backup1,jdbcType=VARCHAR},
+      </if>
+      <if test="backup2 != null">
+        backup2 = #{backup2,jdbcType=VARCHAR},
+      </if>
+      <if test="left != null">
+        LEFT = #{left,jdbcType=INTEGER},
+      </if>
+      <if test="right != null">
+        RIGHT = #{right,jdbcType=INTEGER},
+      </if>
+      <if test="level != null">
+        LEVEL = #{level,jdbcType=INTEGER},
+      </if>
+      <if test="creater != null">
+        CREATER = #{creater,jdbcType=VARCHAR},
+      </if>
+      <if test="itemcreateat != null">
+        itemCreateAt = #{itemcreateat,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updater != null">
+        UPDATER = #{updater,jdbcType=VARCHAR},
+      </if>
+      <if test="itemupdateat != null">
+        itemUpdateAt = #{itemupdateat,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where itemID = #{itemid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zyyglxt.dataobject.OrganizationDO">
+    update organization
+    set itemCode = #{itemcode,jdbcType=CHAR},
+      ORG_NAME = #{orgName,jdbcType=VARCHAR},
+      ORG_CODE = #{orgCode,jdbcType=VARCHAR},
+      ORG_DESCRIPTION = #{orgDescription,jdbcType=VARCHAR},
+      ORG_IDENTIFY = #{orgIdentify,jdbcType=VARCHAR},
+      backup1 = #{backup1,jdbcType=VARCHAR},
+      backup2 = #{backup2,jdbcType=VARCHAR},
+      LEFT = #{left,jdbcType=INTEGER},
+      RIGHT = #{right,jdbcType=INTEGER},
+      LEVEL = #{level,jdbcType=INTEGER},
+      CREATER = #{creater,jdbcType=VARCHAR},
+      itemCreateAt = #{itemcreateat,jdbcType=TIMESTAMP},
+      UPDATER = #{updater,jdbcType=VARCHAR},
+      itemUpdateAt = #{itemupdateat,jdbcType=TIMESTAMP}
+    where itemID = #{itemid,jdbcType=INTEGER}
+  </update>
+</mapper>

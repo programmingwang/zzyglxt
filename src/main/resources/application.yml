@@ -7,6 +7,7 @@ spring:
     encoding: UTF-8
     servlet:
       content-type: text/html
+    prefix: classpath:/templates
   application:
     name: zyyglxt
   datasource:
@@ -17,7 +18,7 @@ spring:
     type: com.alibaba.druid.pool.DruidDataSource
 #     使项目能访问图片
   resources:
-    static-locations: classpath:/templates/, classpath:/static/, classpath:classpath:/static/img/
+    static-locations: classpath:/static/
 
 
 mybatis:

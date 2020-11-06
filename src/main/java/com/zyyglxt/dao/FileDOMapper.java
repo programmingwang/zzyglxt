@@ -61,6 +61,11 @@ public interface FileDOMapper {
 
     List<FileDO> top5File();
 
+
+//    List<FileDO> selectFileByDataCode(String dataCode);
+
+
+
     FileDO selectFileByDataCode(String dataCode);
 
     FileDO selectFileByDataCodeAndType(@Param("dataCode") String dataCode, @Param("fileType") String fileType);

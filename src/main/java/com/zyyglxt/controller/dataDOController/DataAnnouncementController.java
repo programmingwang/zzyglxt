@@ -2,10 +2,10 @@ package com.zyyglxt.controller.dataDOController;
 
 import com.zyyglxt.dataobject.DataDO;
 import com.zyyglxt.dataobject.DataDOKey;
-import com.zyyglxt.error.BusinessException;
 import com.zyyglxt.error.EmBusinessError;
 import com.zyyglxt.response.ResponseData;
-import com.zyyglxt.service.IDataDOService;
+import com.zyyglxt.service.IDataAnnouncementService;
+import com.zyyglxt.service.IDataNewsService;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -18,14 +18,14 @@ import java.util.List;
  */
 
 @RestController
-@RequestMapping("/datado")
-public class DataDOController {
+@RequestMapping("/datado/announcement")
+public class DataAnnouncementController {
 
     @Resource
-    IDataDOService dataDOService;
+    IDataAnnouncementService dataAnnouncementService;
 
     /**
-     * 查看一条记录
+     * 查看一条通知公告
      * @param itemID
      * @param itemCode
      * @return
@@ -35,22 +35,22 @@ public class DataDOController {
         DataDOKey dataDOKey = new DataDOKey();
         dataDOKey.setItemid(itemID);
         dataDOKey.setItemcode(itemCode);
-        dataDOService.selectNewsInf(dataDOKey);
-        return new ResponseData(EmBusinessError.success);
+        DataDO data = dataAnnouncementService.selectAnnouncement(dataDOKey);
+        return new ResponseData(EmBusinessError.success, data);
     }
 
     /**
-     * 查看相应类型的所有数据
+     * 查看通知公告的所有数据
      * @return
      */
-    @RequestMapping(value = "/selectAllNewsInf/{dataType}", method = RequestMethod.GET)
-    public ResponseData selectAllNewsInf(@PathVariable("dataType") String dataType){
-        List<DataDO> dataDOList = dataDOService.selectAllNewsInf(dataType);
+    @RequestMapping(value = "/selectAll", method = RequestMethod.GET)
+    public ResponseData selectAnnouncementList(){
+        List<DataDO> dataDOList = dataAnnouncementService.selectAnnouncementList();
         return new ResponseData(EmBusinessError.success,dataDOList);
     }
 
     /**
-     * 删除新闻数据记录
+     * 删除通知公告记录
      * @param itemID
      * @param itemCode
      */
@@ -59,40 +59,40 @@ public class DataDOController {
         DataDOKey dataDOKey = new DataDOKey();
         dataDOKey.setItemid(itemID);
         dataDOKey.setItemcode(itemCode);
-        dataDOService.deleteNewsInf(dataDOKey);
+        dataAnnouncementService.deleteAnnouncement(dataDOKey);
         return new ResponseData(EmBusinessError.success);
     }
 
     /**
-     * 增加新闻数据记录
+     * 增加通知公告记录
      * @param record
      */
-    @RequestMapping(value = "/insertNewsInf", method = RequestMethod.POST)
+    @RequestMapping(value = "/insertAnn", method = RequestMethod.POST)
     @ResponseBody
     public ResponseData insertNewsInf(@RequestBody DataDO record) {
-        dataDOService.insertNewsInf(record);
+        dataAnnouncementService.insertAnnouncement(record);
         return new ResponseData(EmBusinessError.success);
     }
 
     /**
-     * 更新新闻数据记录
+     * 更新通知公告记录
      * @param record
      */
-    @RequestMapping(value = "updateNewsInf", method = RequestMethod.PUT)
+    @RequestMapping(value = "updateAnn", method = RequestMethod.PUT)
     @ResponseBody
-    public ResponseData updateNewsInf(@RequestBody DataDO record) {
-        dataDOService.updateNewsInf(record);
+    public ResponseData updateAnnouncement(@RequestBody DataDO record) {
+        dataAnnouncementService.updateAnnouncement(record);
         return new ResponseData(EmBusinessError.success);
     }
 
     //修改展示状态
-    @RequestMapping(value = "/changeStatus/{itemID}/{itemCode}", method = RequestMethod.PUT)
+    @RequestMapping(value = "changeStatus/{itemID}/{itemCode}", method = RequestMethod.PUT)
     @ResponseBody
-    public ResponseData changeStatus(String dataStatus, @PathVariable("itemID") Integer itemID, @PathVariable("itemCode")String itemCode){
+    public ResponseData changeStatus(@RequestParam("dataStatus") String dataStatus, @PathVariable("itemID") Integer itemID, @PathVariable("itemCode")String itemCode){
         DataDOKey dataDOKey = new DataDOKey();
         dataDOKey.setItemid(itemID);
         dataDOKey.setItemcode(itemCode);
-        dataDOService.changeStatus(dataDOKey,dataStatus);
+        dataAnnouncementService.changeStatus(dataDOKey,dataStatus);
         return new ResponseData(EmBusinessError.success);
     }
 
@@ -101,10 +101,11 @@ public class DataDOController {
      * @param keyWord
      * @return
      */
-    @GetMapping("searchDataDO")
+    @GetMapping("/searchDataDO/{keyWord}")
     @ResponseBody
-    public List<DataDO> searchDataDO(@RequestBody String keyWord) {
-        return dataDOService.searchDataDO(keyWord);
+    public ResponseData searchDataDO(@PathVariable("keyWord") String keyWord) {
+        List<DataDO> dataDOList = dataAnnouncementService.searchDataDO(keyWord);
+        return new ResponseData(EmBusinessError.success,dataDOList);
     }
 
 }

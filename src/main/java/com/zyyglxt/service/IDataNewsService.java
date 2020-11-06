@@ -11,12 +11,12 @@ import java.util.List;
  * @Date 2020/10/29 10:17
  * @Version 1.0
  */
-public interface IDataDOService {
+public interface IDataNewsService {
     //查询一个新闻信息
     DataDO selectNewsInf(DataDOKey key);
 
     //查询所有新闻信息
-    List<DataDO> selectAllNewsInf(String dataType);
+    List<DataDO> selectNewsInfList();
 
     //增加一个信息
     int insertNewsInf(DataDO record);
@@ -30,6 +30,5 @@ public interface IDataDOService {
     int changeStatus(DataDOKey key, String dataStatus);
 
     List<DataDO> searchDataDO(String keyWord);
-
 
 }

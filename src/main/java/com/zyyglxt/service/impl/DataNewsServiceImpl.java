@@ -5,14 +5,11 @@ import com.zyyglxt.dataobject.DataDO;
 import com.zyyglxt.dataobject.DataDOKey;
 import com.zyyglxt.error.BusinessException;
 import com.zyyglxt.error.EmBusinessError;
-import com.zyyglxt.service.IDataDOService;
+import com.zyyglxt.service.IDataNewsService;
 import com.zyyglxt.validator.ValidatorImpl;
 import com.zyyglxt.validator.ValidatorResult;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.EnableScheduling;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 
@@ -24,9 +21,9 @@ import java.util.List;
  * @Date 2020/10/29 10:18
  * @Version 1.0
  */
-//@EnableScheduling
+
 @Service
-public class DataDOServiceImpl  implements IDataDOService{
+public class DataNewsServiceImpl implements IDataNewsService {
     @Resource
     DataDOMapper dataDOMapper;
 
@@ -35,12 +32,12 @@ public class DataDOServiceImpl  implements IDataDOService{
 
     @Override
     public DataDO selectNewsInf(DataDOKey key) {
-        return dataDOMapper.selectByPrimaryKey(key);
+        return dataDOMapper.selectByPrimaryKey(key,"新闻管理");
     }
 
     @Override
-    public List<DataDO> selectAllNewsInf(String dataType) {
-        return dataDOMapper.selectByAllInf(dataType);
+    public List<DataDO> selectNewsInfList() {
+        return dataDOMapper.selectByAllData("新闻管理");
     }
 
     @Override
@@ -53,6 +50,7 @@ public class DataDOServiceImpl  implements IDataDOService{
         record.setCreater("test");
         record.setItemupdateat(new Date());
         record.setUpdater("test");
+        record.setDataType("新闻管理");
         return dataDOMapper.insertSelective(record);
     }
 
@@ -71,6 +69,7 @@ public class DataDOServiceImpl  implements IDataDOService{
         record.setItemupdateat(new Date());
         return dataDOMapper.updateByPrimaryKeySelective(record);
     }
+
 
     @Override
     public int changeStatus(DataDOKey key, String dataStatus) {

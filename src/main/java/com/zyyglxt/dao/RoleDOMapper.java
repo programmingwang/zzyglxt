@@ -17,21 +17,14 @@ public interface RoleDOMapper {
 
     RoleDO selectByPrimaryKey(RoleDOKey key);
 
+    String selectItemCodeByRoleType(Integer roleType);
+
     int updateByPrimaryKeySelective(RoleDO record);
 
     int updateByPrimaryKey(RoleDO record);
 
-    /**
-     * 查询所有角色
-     * @return
-     */
     List<RoleDO> selectAllRole();
 
-    /**
-     * selectByRoleType
-     * @param type
-     * @return 角色信息
-     */
     RoleDO selectByRoleType(Integer type);
 }
 

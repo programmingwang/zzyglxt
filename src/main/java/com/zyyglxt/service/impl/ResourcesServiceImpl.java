@@ -5,10 +5,14 @@ import com.zyyglxt.dao.ResourcesRoleRefDOMapper;
 import com.zyyglxt.dao.RoleDOMapper;
 import com.zyyglxt.dataobject.*;
 
-import com.zyyglxt.util.DateUtils;
-import com.zyyglxt.util.MenuTreeUtil;
-import com.zyyglxt.util.UUIDUtils;
+import com.zyyglxt.error.BusinessException;
+import com.zyyglxt.error.EmBusinessError;
+import com.zyyglxt.permissionsUtil.DateUtils;
+import com.zyyglxt.permissionsUtil.MenuTreeUtil;
+import com.zyyglxt.permissionsUtil.UUIDUtils;
 import com.zyyglxt.service.ResourcesService;
+import com.zyyglxt.validator.ValidatorImpl;
+import com.zyyglxt.validator.ValidatorResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,6 +31,8 @@ public class ResourcesServiceImpl implements ResourcesService {
     RoleDOMapper roleDOMapper;
     @Autowired
     ResourcesRoleRefDOMapper resourcesRoleRefDOMapper;
+    @Autowired
+    private ValidatorImpl validator;
 
     @Override
     public void deleteByPrimaryKey(ResourcesDO resourcesDO) {
@@ -51,6 +57,10 @@ public class ResourcesServiceImpl implements ResourcesService {
 
     @Override
     public void insertSelective(ResourcesDO record) {
+        ValidatorResult result = validator.validate(record);
+        if(result.isHasErrors()){
+            throw new BusinessException(result.getErrMsg(), EmBusinessError.PARAMETER_VALIDATION_ERROR);
+        }
         record.setItemcode(UUIDUtils.getUUID());
         resourcesDOMapper.insertSelective(record);
     }
@@ -87,6 +97,11 @@ public class ResourcesServiceImpl implements ResourcesService {
         MenuTreeUtil menuTreeUtil = new MenuTreeUtil(resourcesDOS, null);
         List<ResourcesDO> treeGridList = menuTreeUtil.buildTreeGrid();
         return treeGridList;
+    }
+
+    @Override
+    public List<ResourcesDO> selectListByPath(String requestUrl) {
+        return resourcesDOMapper.selectListByPath(requestUrl);
     }
 
 }

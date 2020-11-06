@@ -1,10 +1,11 @@
-package com.zyyglxt.controller.IndustrialDevelop;
+package com.zyyglxt.controller.industrialDevelop;
 
 import com.zyyglxt.dataobject.IndustrialDevelopTopicDO;
 import com.zyyglxt.dataobject.IndustrialDevelopTopicDOKey;
 import com.zyyglxt.error.EmBusinessError;
 import com.zyyglxt.response.ResponseData;
 import com.zyyglxt.service.IIndustrialDevelopTopicService;
+import io.swagger.annotations.Api;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -16,6 +17,7 @@ import javax.annotation.Resource;
  **/
 @RestController
 @RequestMapping(value = "industrialdevelop")
+@Api(tags = "产业发展-课题数据")
 public class IndustrialTopicController {
     @Resource
     IIndustrialDevelopTopicService developTopicService;
@@ -39,5 +41,11 @@ public class IndustrialTopicController {
     public ResponseData delTopic(IndustrialDevelopTopicDOKey key) {
         developTopicService.delTopic(key);
         return new ResponseData(EmBusinessError.success);
+    }
+
+    @GetMapping(value = "/topic")
+    @ResponseBody
+    public ResponseData getTopic(){
+        return new ResponseData(EmBusinessError.success,developTopicService.getTopics());
     }
 }

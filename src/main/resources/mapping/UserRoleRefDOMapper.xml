@@ -37,12 +37,12 @@
   </delete>
   <insert id="insert" parameterType="com.zyyglxt.dataobject.UserRoleRefDO">
     insert into user_role_ref (itemID, itemCode, USER_CODE,
-      APP_CODE, ROLE_CODE, PLAT_ROLE,
-      CREATER, itemCreateAt, UPDATER,
+      APP_CODE, ROLE_CODE, PLAT_ROLE, 
+      CREATER, itemCreateAt, UPDATER, 
       itemUpdateAt)
-    values (#{itemid,jdbcType=INTEGER}, #{itemcode,jdbcType=CHAR}, #{userCode,jdbcType=CHAR},
-      #{appCode,jdbcType=CHAR}, #{roleCode,jdbcType=CHAR}, #{platRole,jdbcType=CHAR},
-      #{creater,jdbcType=VARCHAR}, #{itemcreateat,jdbcType=TIMESTAMP}, #{updater,jdbcType=VARCHAR},
+    values (#{itemid,jdbcType=INTEGER}, #{itemcode,jdbcType=CHAR}, #{userCode,jdbcType=CHAR}, 
+      #{appCode,jdbcType=CHAR}, #{roleCode,jdbcType=CHAR}, #{platRole,jdbcType=CHAR}, 
+      #{creater,jdbcType=VARCHAR}, #{itemcreateat,jdbcType=TIMESTAMP}, #{updater,jdbcType=VARCHAR}, 
       #{itemupdateat,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.zyyglxt.dataobject.UserRoleRefDO">

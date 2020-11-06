@@ -29,6 +29,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.annotation.Resource;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 /**
@@ -141,17 +143,22 @@ public class IUserServiceImpl implements IUserService {
         password = DigestUtils.md5Hex(password + username);
         UserDO userDO = userDOMapper.selectByUsernameAndPassword(username, password);
         if (userDO != null) {
+            Map<String,String> map = new HashMap<>();
             UserUtil userUtil = new UserUtil();
-            userUtil.setUserName(username);// 用户登录进去将用户名存到session中
-            System.out.println("11111111111111111111111111111111111111111111"+userDO.getItemid());
-            System.out.println("222222222222222222222222222222222222222222222"+userDO.getItemcode());
-            userUtil.setUserItemID(userDO.getItemid());
-            userUtil.setUserItemCode(userDO.getItemcode());
-            userDOMapper.updateStateByUserName("入", userUtil.getUserName());
-            System.out.println("登录成功");
+            map.put("username", username);
+            map.put("itemid", String.valueOf(userDO.getItemid()));
+            map.put("itemcode", userDO.getItemcode());
+
+            userUtil.setUser(map);
+
+            userDO = new UserDO();
+            userDO.setState("入");
+            userDO.setItemid(Integer.parseInt(map.get("itemid")));
+            userDO.setItemcode(map.get("itemcode"));
+
+            userDOMapper.updateByPrimaryKeySelective(userDO);
             return 200;
         } else {
-            System.out.println("登录失败");
             throw new BusinessException("用户名或密码错误", EmBusinessError.USER_LOGIN_FAILED);
         }
     }
@@ -162,8 +169,13 @@ public class IUserServiceImpl implements IUserService {
     @Override
     public void Logout() {
         UserUtil userUtil = new UserUtil();
-        userDOMapper.updateStateByUserName("出", userUtil.getUserName());
-        userUtil.removeUserName();// 从session中删除用户名
+        UserDO userDO = new UserDO();
+        userDO.setState("出");
+        userDO.setItemid(Integer.parseInt(userUtil.getUser().get("itemid")));
+        userDO.setItemcode(userUtil.getUser().get("itemcode"));
+
+        userDOMapper.updateByPrimaryKeySelective(userDO);
+        userUtil.removeUser();// 从session中删除用户名
     }
 
     /**
@@ -173,7 +185,7 @@ public class IUserServiceImpl implements IUserService {
      */
     @Override
     @Transactional
-    public Result UpdatePassword(UpdatePwdDto updatePwdDto) {
+    public int UpdatePassword(UpdatePwdDto updatePwdDto) {
         //从session中拿到用户名，然后根据用户名查询数据库，得到角色类型，然后判断是普通用户还是管理员，
         //如果是普通用户则需要输入手机号码和原密码，管理员则直接输入新密码替换原密码（不需要手机号码和原密码）
         ValidatorResult result = validator.validate(updatePwdDto);
@@ -182,7 +194,7 @@ public class IUserServiceImpl implements IUserService {
         }
 
         UserUtil userUtil = new UserUtil();
-        String username = userUtil.getUserName();
+        String username = userUtil.getUser().get("username");
         UserDO userDO = userDOMapper.selectByUsername(username);
         int userType = userDO.getType();// 用户类型（0：普通，1：管理员）
 
@@ -201,22 +213,20 @@ public class IUserServiceImpl implements IUserService {
                     // 输入的两次密码是否一致
                     updatePwdDto.setNewPassword(DigestUtils.md5Hex(updatePwdDto.getNewPassword() + username));
                     userDOMapper.updatePasswordByMobilePhone(updatePwdDto.getNewPassword(), mobilePhone);
-                    return Result.succ(200, "修改成功！", null);
+                    return 200;
                 } else {
-                    System.out.println("输入的旧密码错误，请重新输入！");
-                    return Result.fail(500, "输入的旧密码错误，请重新输入！", null);
+                    throw new BusinessException("输入的旧密码错误，请重新输入！", EmBusinessError.OLDPASSWORD_ERROR);
                 }
             } else {
-                System.out.println("手机号码不正确！");
-                return Result.fail(500, "手机号码不正确！", null);
+                throw new BusinessException("手机号码不正确！", EmBusinessError.MOBILEPHONE_ERROR);
             }
         } else if (userType == 1) {
             // 如果是管理员
             updatePwdDto.setNewPassword(DigestUtils.md5Hex(updatePwdDto.getNewPassword() + username));
             userDOMapper.updatePasswordByUserName(updatePwdDto.getNewPassword(), username);
-            return Result.succ(200, "修改成功！", null);
+            return 200;
         }
-        return Result.fail(500, "该用户既不是普通用户，也不是管理员！", null);
+        throw new BusinessException("该用户既不是普通用户，也不是管理员！", EmBusinessError.UNKNOWN_ERROR);
     }
 
     /**
@@ -227,12 +237,13 @@ public class IUserServiceImpl implements IUserService {
     @Override
     public UserDO selectOne() {
         UserUtil userUtil = new UserUtil();
-        String username = userUtil.getUserName();
+        String username = userUtil.getUser().get("username");
         return userDOMapper.selectByUsername(username);
     }
 
     /**
      * 修改用户信息
+     *
      * @param userDO
      * @return
      */
@@ -246,16 +257,16 @@ public class IUserServiceImpl implements IUserService {
         // 验证通过返回 null，不通过则返回一个 字符串，
         // 所以利用判空来判断身份证号码是否合法
         String isValidIDCardNo = IDUtil.IdentityCardVerification(userDO.getIdcardNo());
-        if (!StringUtils.isEmpty(isValidIDCardNo)){
+        if (!StringUtils.isEmpty(isValidIDCardNo)) {
             throw new BusinessException(isValidIDCardNo, EmBusinessError.PARAMETER_VALIDATION_ERROR);
         }
         UserUtil userUtil = new UserUtil();
 
+        int userItemID = Integer.parseInt(userUtil.getUser().get("itemid"));
+        System.out.println("servicece层 UpdateUserMsg方法下的 itemid：------------" + userItemID);
+        String userItemCode = userUtil.getUser().get("itemcode");
+        System.out.println("servicece层 UpdateUserMsg方法下的 itemcode：------------" + userItemCode);
 
-        String userItemCode = userUtil.getUserItemCode();
-        System.out.println("3333333333333333333333333333333333333: "+userItemCode);
-        int userItemID = userUtil.getUserItemID();
-        System.out.println("5555555555555555555555555555555555555: "+userItemID);
         userDO.setItemid(userItemID);
         userDO.setItemcode(userItemCode);
 

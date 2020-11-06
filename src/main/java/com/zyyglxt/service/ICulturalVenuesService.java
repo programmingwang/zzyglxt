@@ -20,13 +20,13 @@ public interface ICulturalVenuesService {
     List<ChineseCulturalDO> getCulturalVenuesList();
 
     //增加一个文化场馆
-    int addCulturalVenues(ChineseCulturalDO record) throws BusinessException;
+    int addCulturalVenues(ChineseCulturalDO record) ;
 
     //删除一个文化场馆
     int removeCulturalVenues(ChineseCulturalDOKey key);
 
     //修改一个文化场馆
-    int updateCulturalVenues(ChineseCulturalDO record) throws BusinessException;
+    int updateCulturalVenues(ChineseCulturalDO record) ;
 
     //修改一个文化场馆状态
     int changeCulturalVenuesStatus(ChineseCulturalDOKey key, String chineseCulturalStatus);

@@ -21,13 +21,13 @@ public interface ITravelService {
     List<ChineseCulturalDO> getTravelList();
 
     //增加一个健康旅游信息
-    int addTravel(ChineseCulturalDO record) throws BusinessException;
+    int addTravel(ChineseCulturalDO record);
 
     //删除一个健康旅游信息
     int removeTravel(ChineseCulturalDOKey key);
 
     //修改一个健康旅游信息
-    int updateTravel(ChineseCulturalDO record) throws BusinessException;
+    int updateTravel(ChineseCulturalDO record);
 
     //修改一个健康旅游信息状态
     int changeTravelStatus(ChineseCulturalDOKey key, String chineseCulturalStatus);

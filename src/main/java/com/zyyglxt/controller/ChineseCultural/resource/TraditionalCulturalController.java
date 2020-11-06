@@ -48,9 +48,7 @@ public class TraditionalCulturalController {
     //增加一个中医医史
     @RequestMapping(value = "/addTraCul" , method = RequestMethod.POST)
     @ResponseBody
-    public ResponseData addTraditionalCultural(@RequestBody CulturalResourcesDO culturalResourcesDO) throws BusinessException {
-        culturalResourcesDO.setChineseCulturalType("中医医史");
-        culturalResourcesDO.setChineseCulturalStatus("待上架");
+    public ResponseData addTraditionalCultural(@RequestBody CulturalResourcesDO culturalResourcesDO)  {
         traditionalCulturalService.addTraditionalCultural(culturalResourcesDO);
         return new ResponseData(EmBusinessError.success);
     }
@@ -80,7 +78,7 @@ public class TraditionalCulturalController {
     //修改一个中医医史
     @RequestMapping(value = "/updTraCul" , method = RequestMethod.POST)
     @ResponseBody
-    public ResponseData updateTraditionalCultural(@RequestBody CulturalResourcesDO culturalResourcesDO) throws BusinessException {
+    public ResponseData updateTraditionalCultural(@RequestBody CulturalResourcesDO culturalResourcesDO) {
         traditionalCulturalService.updateTraditionalCultural(culturalResourcesDO);
         return new ResponseData(EmBusinessError.success);
     }

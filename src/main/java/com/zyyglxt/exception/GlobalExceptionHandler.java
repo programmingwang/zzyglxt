@@ -1,17 +1,12 @@
 package com.zyyglxt.exception;
 
 import com.zyyglxt.error.BusinessException;
-import com.zyyglxt.error.EmBusinessError;
 import com.zyyglxt.response.ResponseData;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
-
-import java.util.Objects;
 
 
 /**
@@ -32,28 +27,9 @@ public class GlobalExceptionHandler {
     @ResponseBody
     public ResponseData bizExceptionHandler(BusinessException e){
         logger.error("发生业务异常！原因是：{}",e.getErrMsg());
-//        Map<String,Object> map = new HashMap<>();
-//        map.put("code",e.getErrCode());
-//        map.put("message",e.getErrMsg());
-//        //将error放入作用域内，有就能取
-//        req.setAttribute("errMap",map);
-        //将Exception直接包装返回
         return new ResponseData(e);
     }
 
-    /**
-     * 处理校验异常
-     * @param e
-     * @return
-     */
-    @ExceptionHandler(value = MethodArgumentNotValidException.class)
-    @ResponseBody
-    public ResponseData validExceptionHandler(MethodArgumentNotValidException e){
-        BindingResult bindingResult = e.getBindingResult();
-        String message = Objects.requireNonNull(bindingResult.getFieldError()).getDefaultMessage();
-        logger.error("数据校验异常:{}",message);
-        return new ResponseData(EmBusinessError.PARAMETER_VALIDATION_ERROR, message);
-    }
 
     /**
      * 处理其他异常
@@ -64,9 +40,6 @@ public class GlobalExceptionHandler {
     @ResponseBody
     public ResponseData exceptionHandler(Exception e){
         logger.error("未知异常！原因是:",e);
-//        Map<String,String> map = new HashMap<>();
-//        map.put("message","服务器内部开了点小差，请重试。。。。。");
-//        req.setAttribute("errMap",map);
         return new ResponseData();
     }
 

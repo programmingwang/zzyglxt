@@ -7,10 +7,10 @@ import com.zyyglxt.dataobject.*;
 
 import com.zyyglxt.error.BusinessException;
 import com.zyyglxt.error.EmBusinessError;
-import com.zyyglxt.permissionsUtil.DateUtils;
-import com.zyyglxt.permissionsUtil.MenuTreeUtil;
-import com.zyyglxt.permissionsUtil.UUIDUtils;
 import com.zyyglxt.service.ResourcesService;
+import com.zyyglxt.util.DateUtils;
+import com.zyyglxt.util.MenuTreeUtil;
+import com.zyyglxt.util.UUIDUtils;
 import com.zyyglxt.validator.ValidatorImpl;
 import com.zyyglxt.validator.ValidatorResult;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -95,13 +95,21 @@ public class ResourcesServiceImpl implements ResourcesService {
         RoleDO roleDO = roleDOMapper.selectByRoleType(type);
         List<ResourcesDO> resourcesDOS = resourcesDOMapper.SelectMenuByRoleCode(roleDO.getItemcode());
         MenuTreeUtil menuTreeUtil = new MenuTreeUtil(resourcesDOS, null);
-        List<ResourcesDO> treeGridList = menuTreeUtil.buildTreeGrid();
-        return treeGridList;
+        return menuTreeUtil.buildTreeGrid();
     }
 
     @Override
     public List<ResourcesDO> selectListByPath(String requestUrl) {
         return resourcesDOMapper.selectListByPath(requestUrl);
+    }
+
+    @Override
+    public List<ResourcesDO> SelectPermissionByRoleCode(UserDO userDO) {
+        Integer type = userDO.getType();
+        RoleDO roleDO = roleDOMapper.selectByRoleType(type);
+        List<ResourcesDO> resourcesDOS = resourcesDOMapper.SelectPermissionByRoleCode(roleDO.getItemcode());
+        MenuTreeUtil menuTreeUtil = new MenuTreeUtil(resourcesDOS, null);
+        return menuTreeUtil.buildTreeGrid();
     }
 
 }

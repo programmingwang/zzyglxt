@@ -1,4 +1,4 @@
-package com.zyyglxt.permissionsUtil;
+package com.zyyglxt.util;
 
 import com.zyyglxt.error.EmBusinessError;
 

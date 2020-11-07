@@ -3,7 +3,7 @@
         function (jquery,ajaxUtil,bootstrapTableUtil,objectUtil,alertUtil,modalUtil,selectUtil,stringUtil,dictUtil) {
 
 
-        var url = "/cul/pro/carAll/getAll";
+        var url = "/cul/pro/movTv/getAll";
         var aParam = {
 
         };
@@ -166,7 +166,7 @@
 
 
         var aCol = [
-            {field: 'chineseCulturalName', title: '漫画典故名称'},
+            {field: 'chineseCulturalName', title: '电视电影名称'},
             {field: 'fileName', title: '图片'},
             {field: 'chineseCulturalSource', title: '来源'},
             {field: 'chineseCulturalAuthor', title: '作者'},

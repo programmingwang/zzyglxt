@@ -14,20 +14,20 @@
             },
             {
                 menu_name : "＞电视电影",
-                menu_url: "/project/projectList",
+                menu_url: "/chineseCultural/production/movieTV",
                 id:"1-1",
                 level:"2",
                 pid:"1"
             },
             {
                 menu_name : "＞动漫游戏",
-                menu_url: "/task/taskDownList",
+                menu_url: "/chineseCultural/production/comicGame",
                 id:"1-2",
                 level:"2",
                 pid:"1"
             },{
                 menu_name : "＞漫画典故",
-                menu_url: "/task/taskDownList",
+                menu_url: "/chineseCultural/production/cartoonAllusions",
                 id:"1-3",
                 level:"2",
                 pid:"1"
@@ -49,42 +49,42 @@
 
             {
                 menu_name : "＞中医医史",
-                menu_url: "/project/projectList",
+                menu_url: "/chineseCultural/resource/traditionalCultural",
                 id:"3-1",
                 level:"2",
                 pid:"3"
             },
             {
                 menu_name : "＞中医流派",
-                menu_url: "/project/projectList",
+                menu_url: "/chineseCultural/resource/traditionalSchool",
                 id:"3-2",
                 level:"2",
                 pid:"3"
             },
             {
                 menu_name : "＞历代名家",
-                menu_url: "/project/projectList",
+                menu_url: "/chineseCultural/resource/traditionalDoctor",
                 id:"3-3",
                 level:"2",
                 pid:"3"
             },
             {
                 menu_name : "＞文化古迹",
-                menu_url: "/project/projectList",
+                menu_url: "/chineseCultural/facility/culturalRelics",
                 id:"3-4",
                 level:"2",
                 pid:"3"
             },
             {
                 menu_name : "＞非物质文化遗产",
-                menu_url: "/project/projectList",
+                menu_url: "/chineseCultural/facility/intangibleCulturalHeritage",
                 id:"3-5",
                 level:"2",
                 pid:"3"
             },
             {
                 menu_name : "＞文化场馆",
-                menu_url: "/project/projectList",
+                menu_url: "/chineseCultural/facility/culturalVenues",
                 id:"3-6",
                 level:"2",
                 pid:"3"
@@ -95,6 +95,13 @@
                 id:"4",
                 level:"1",
                 pid:""
+            },
+            {
+                menu_name : "健康旅游",
+                menu_url: "/chineseCultural/travel/travel",
+                id:"4-1",
+                level:"2",
+                pid:"4"
             },
             {
                 menu_name : "中药常识",
@@ -313,7 +320,7 @@
                     } else {
                         alertUtil.error( url+'加载失败');
                     }
-                }})
+            }})
         }
 
 

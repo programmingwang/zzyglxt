@@ -2,14 +2,16 @@ package com.zyyglxt.controller.ChineseCultural.facility;
 
 import com.zyyglxt.dataobject.ChineseCulturalDO;
 import com.zyyglxt.dataobject.ChineseCulturalDOKey;
-import com.zyyglxt.error.BusinessException;
+import com.zyyglxt.dto.ChineseCulturalDto;
 import com.zyyglxt.error.EmBusinessError;
 import com.zyyglxt.response.ResponseData;
 import com.zyyglxt.service.ICulturalRelicsService;
-import org.springframework.ui.Model;
+import com.zyyglxt.service.IFileService;
+import com.zyyglxt.util.ConvertDOToDTOUtil;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -26,13 +28,22 @@ public class CulturalRelicsController {
     @Resource
     private ICulturalRelicsService iCulturalRelicsService;
 
+    @Resource
+    private IFileService iFileService;
+
     //获取所有的文化古迹
     @RequestMapping(value = "/getAll" , method = RequestMethod.GET)
     @ResponseBody
-    public ResponseData getAllCulturalRelics(Model model){
+    public ResponseData getAllCulturalRelics(){
         List<ChineseCulturalDO> culturalRelicsList = iCulturalRelicsService.getCulturalRelicsList();
-        model.addAttribute("culturalRelicsList",culturalRelicsList);
-        return new ResponseData(EmBusinessError.success,culturalRelicsList);
+        List<ChineseCulturalDto> chineseCulturalDtoList = new ArrayList<>();
+        for (ChineseCulturalDO chineseCulturalDO : culturalRelicsList) {
+            chineseCulturalDtoList.add(
+                    ConvertDOToDTOUtil.convertFromDOToDTO(
+                            chineseCulturalDO,iFileService.selectFileByDataCode(
+                                    chineseCulturalDO.getItemcode()).getFilePath()));
+        }
+        return new ResponseData(EmBusinessError.success,chineseCulturalDtoList);
     }
 
 //    //查询一个文化古迹

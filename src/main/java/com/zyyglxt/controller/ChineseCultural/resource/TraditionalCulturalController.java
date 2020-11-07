@@ -1,18 +1,18 @@
 package com.zyyglxt.controller.ChineseCultural.resource;
 
-import com.zyyglxt.dataobject.ChineseCulturalDO;
-import com.zyyglxt.dataobject.ChineseCulturalDOKey;
 import com.zyyglxt.dataobject.CulturalResourcesDO;
 import com.zyyglxt.dataobject.CulturalResourcesDOKey;
-import com.zyyglxt.error.BusinessException;
+import com.zyyglxt.dto.CulturalResourcesDto;
 import com.zyyglxt.error.EmBusinessError;
 import com.zyyglxt.response.ResponseData;
+import com.zyyglxt.service.IFileService;
 import com.zyyglxt.service.ITraditionalCulturalService;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.zyyglxt.util.ConvertDOToDTOUtil;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -22,11 +22,11 @@ import java.util.List;
  * 中医医史控制器
  */
 //@Controller
-@RestController
+@Controller
 @RequestMapping("/cul/res/traCul")
 public class TraditionalCulturalController {
 
-    @Autowired
+    @Resource
     private ITraditionalCulturalService traditionalCulturalService;
 
     //获取所有的中医医史
@@ -39,10 +39,10 @@ public class TraditionalCulturalController {
 
     //查询一个中医医史
 
-    //去增加页面,这个是为了跳转到增加的页面
-//    @RequestMapping(value = "/toAddPage" , method = RequestMethod.GET)
+//    //去增加页面,这个是为了跳转到增加的页面
+//    @RequestMapping(value = "/toAddPage")
 //    public String toAddPage(){
-//        return "to add page";
+//        return "/add/js/add";
 //    }
 
     //增加一个中医医史

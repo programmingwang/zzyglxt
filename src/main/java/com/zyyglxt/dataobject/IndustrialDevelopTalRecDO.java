@@ -15,26 +15,37 @@ import java.util.Date;
 public class IndustrialDevelopTalRecDO extends IndustrialDevelopTalRecDOKey {
 
     @NotBlank(message = "标题不能为空", groups = ValidationGroups.Insert.class)
-    private String title;
+    private String recruitmentTitle;
 
     @NotBlank(message = "岗位名称不能为空", groups = ValidationGroups.Insert.class)
-    private String postName;
+    private String recruitmentPosition;
+
+    @NotBlank(message = "招聘数量不能为空", groups = ValidationGroups.Insert.class)
+    private String recruitmentCount;
+
+    @NotBlank(message = "薪水不能为空", groups = ValidationGroups.Insert.class)
+    private String salary;
 
     @NotBlank(message = "工作地不能为空", groups = ValidationGroups.Insert.class)
     private String workplace;
 
-    @NotBlank(message = "来源机构不能为空", groups = ValidationGroups.Insert.class)
-    private String source;
+    @NotBlank(message = "学历要求不能为空", groups = ValidationGroups.Insert.class)
+    private String education;
 
-    @NotBlank(message = "岗位数量不能为空", groups = ValidationGroups.Insert.class)
-    private String postNum;
+    @NotBlank(message = "邮箱不能为空", groups = ValidationGroups.Insert.class)
+    private String emali;
 
-    @NotBlank(message = "待遇条件不能为空", groups = ValidationGroups.Insert.class)
-    private String conditionsTreament;
+    @NotBlank(message = "岗位职责不能为空", groups = ValidationGroups.Insert.class)
+    private String postDuty;
 
+    private String postDescr;
 
     private String status;
 
+    @NotBlank(message = "来源机构不能为空", groups = ValidationGroups.Insert.class)
+    private String orgCode;
+
+    private Integer visitNum;
 
     private String creater;
 

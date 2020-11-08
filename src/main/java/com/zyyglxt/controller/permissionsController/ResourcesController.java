@@ -70,11 +70,21 @@ public class ResourcesController {
     }
 
     /**
+     * 查询角色菜单
+     */
+    @RequestMapping(value = "/selectrolemenu", method = RequestMethod.GET)
+    public ResponseData selectRoleMenu(@RequestBody UserDO userDO){
+        List<ResourcesDO> resourcesDOS = resourcesService.SelectMenuByRoleCode(userDO);
+        return new ResponseData(EmBusinessError.success, resourcesDOS);
+
+    }
+
+    /**
      * 查询角色权限
      */
     @RequestMapping(value = "/selectroleres", method = RequestMethod.GET)
     public ResponseData selectRoleResources(@RequestBody UserDO userDO){
-        List<ResourcesDO> resourcesDOS = resourcesService.SelectMenuByRoleCode(userDO);
+        List<ResourcesDO> resourcesDOS = resourcesService.SelectPermissionByRoleCode(userDO);
         return new ResponseData(EmBusinessError.success, resourcesDOS);
 
     }

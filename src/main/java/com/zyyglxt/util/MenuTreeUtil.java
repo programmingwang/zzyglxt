@@ -36,7 +36,7 @@ public class MenuTreeUtil {
         List<ResourcesDO> list = new ArrayList<>();
         for (ResourcesDO node : nodes) {
             //这里判断父节点，需要自己更改判断
-            if (node.getResourcePcode().toString().equals("0")) {
+            if (node.getResourcePcode().toString().equals("root")) {
                 List<ResourcesDO> childs = buildTreeGridChilds(node);
                 node.setResourcesDOList(childs);
                 list.add(node);

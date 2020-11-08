@@ -23,10 +23,10 @@ public class ZyyglxtApplication {
         SpringApplication.run(ZyyglxtApplication.class, args);
     }
 
-/*    @Bean
+    @Bean
     public MultipartConfigElement multipartConfigElement(){
         MultipartConfigFactory factory = new MultipartConfigFactory();
         factory.setMaxFileSize(DataSize.parse("1024KB"));
         return factory.createMultipartConfig();
-    }*/
+    }
 }

@@ -1,6 +1,5 @@
 package com.zyyglxt.service.impl;
 
-import com.zyyglxt.common.Result;
 import com.zyyglxt.dao.OrganizationDOMapper;
 import com.zyyglxt.dao.RoleDOMapper;
 import com.zyyglxt.dao.UserDOMapper;
@@ -25,8 +24,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.annotation.Resource;
 import java.util.HashMap;
@@ -57,7 +54,7 @@ public class IUserServiceImpl implements IUserService {
      */
     @Override
     @Transactional
-    public int Register(UserDto userDto) throws BusinessException {
+    public ResponseData Register(UserDto userDto) throws BusinessException {
         ValidatorResult result = validator.validate(userDto);
         if (result.isHasErrors()) {
             throw new BusinessException(result.getErrMsg(), EmBusinessError.PARAMETER_VALIDATION_ERROR);
@@ -69,7 +66,7 @@ public class IUserServiceImpl implements IUserService {
         } else {
             if (MobileUtil.checkPhone(userDto.getMobilePhone())) {
                 register(userDto);
-                return 200;
+                return new ResponseData(EmBusinessError.success);
             } else {
                 throw new BusinessException("手机号不正确", EmBusinessError.MOBILEPHONE_ERROR);
             }
@@ -93,7 +90,6 @@ public class IUserServiceImpl implements IUserService {
         organizationDO.setOrgDescription(userDto.getOrgIdentify());
         organizationDO.setCreater(userDto.getUsername());
         organizationDO.setUpdater(userDto.getUsername());
-
 
         // user 表唯一标识UUID
         String userItemCode = UUID.randomUUID().toString();
@@ -143,7 +139,7 @@ public class IUserServiceImpl implements IUserService {
         password = DigestUtils.md5Hex(password + username);
         UserDO userDO = userDOMapper.selectByUsernameAndPassword(username, password);
         if (userDO != null) {
-            Map<String,String> map = new HashMap<>();
+            Map<String, String> map = new HashMap<>();
             UserUtil userUtil = new UserUtil();
             map.put("username", username);
             map.put("itemid", String.valueOf(userDO.getItemid()));
@@ -185,7 +181,7 @@ public class IUserServiceImpl implements IUserService {
      */
     @Override
     @Transactional
-    public int UpdatePassword(UpdatePwdDto updatePwdDto) {
+    public ResponseData UpdatePassword(UpdatePwdDto updatePwdDto) {
         //从session中拿到用户名，然后根据用户名查询数据库，得到角色类型，然后判断是普通用户还是管理员，
         //如果是普通用户则需要输入手机号码和原密码，管理员则直接输入新密码替换原密码（不需要手机号码和原密码）
         ValidatorResult result = validator.validate(updatePwdDto);
@@ -213,7 +209,7 @@ public class IUserServiceImpl implements IUserService {
                     // 输入的两次密码是否一致
                     updatePwdDto.setNewPassword(DigestUtils.md5Hex(updatePwdDto.getNewPassword() + username));
                     userDOMapper.updatePasswordByMobilePhone(updatePwdDto.getNewPassword(), mobilePhone);
-                    return 200;
+                    return new ResponseData(EmBusinessError.success);
                 } else {
                     throw new BusinessException("输入的旧密码错误，请重新输入！", EmBusinessError.OLDPASSWORD_ERROR);
                 }
@@ -224,7 +220,7 @@ public class IUserServiceImpl implements IUserService {
             // 如果是管理员
             updatePwdDto.setNewPassword(DigestUtils.md5Hex(updatePwdDto.getNewPassword() + username));
             userDOMapper.updatePasswordByUserName(updatePwdDto.getNewPassword(), username);
-            return 200;
+            return new ResponseData(EmBusinessError.success);
         }
         throw new BusinessException("该用户既不是普通用户，也不是管理员！", EmBusinessError.UNKNOWN_ERROR);
     }
@@ -260,16 +256,12 @@ public class IUserServiceImpl implements IUserService {
         if (!StringUtils.isEmpty(isValidIDCardNo)) {
             throw new BusinessException(isValidIDCardNo, EmBusinessError.PARAMETER_VALIDATION_ERROR);
         }
+        // 还需加上信息的验证，如电话是否正确等
         UserUtil userUtil = new UserUtil();
-
         int userItemID = Integer.parseInt(userUtil.getUser().get("itemid"));
-        System.out.println("servicece层 UpdateUserMsg方法下的 itemid：------------" + userItemID);
         String userItemCode = userUtil.getUser().get("itemcode");
-        System.out.println("servicece层 UpdateUserMsg方法下的 itemcode：------------" + userItemCode);
-
         userDO.setItemid(userItemID);
         userDO.setItemcode(userItemCode);
-
         userDOMapper.updateByPrimaryKeySelective(userDO);
     }
 }

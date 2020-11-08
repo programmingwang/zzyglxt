@@ -2,14 +2,16 @@ package com.zyyglxt.controller.ChineseCultural.facility;
 
 import com.zyyglxt.dataobject.ChineseCulturalDO;
 import com.zyyglxt.dataobject.ChineseCulturalDOKey;
-import com.zyyglxt.error.BusinessException;
+import com.zyyglxt.dto.ChineseCulturalDto;
 import com.zyyglxt.error.EmBusinessError;
 import com.zyyglxt.response.ResponseData;
+import com.zyyglxt.service.IFileService;
 import com.zyyglxt.service.IIntangibleCulturalHeritageService;
-import org.springframework.ui.Model;
+import com.zyyglxt.util.ConvertDOToDTOUtil;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -25,7 +27,7 @@ public class IntangibleCulturalHeritageController {
     @Resource
     private IIntangibleCulturalHeritageService iIntangibleCulturalHeritageService;
 
-    //获取所有的文化场馆
+    //获取所有的非物质文化遗产
     @RequestMapping(value = "/getAll" , method = RequestMethod.GET)
     @ResponseBody
     public ResponseData getAllIntangibleCulturalHeritage(){
@@ -41,7 +43,7 @@ public class IntangibleCulturalHeritageController {
 //        return "to add page";
 //    }
 
-    //增加一个文化古迹
+    //增加一个非物质文化遗产
     @RequestMapping(value = "/addInCuHe" , method = RequestMethod.POST)
     @ResponseBody
     public ResponseData addIntangibleCulturalHeritage(@RequestBody ChineseCulturalDO chineseCulturalDO)  {

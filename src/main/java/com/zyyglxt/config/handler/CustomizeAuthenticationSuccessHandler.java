@@ -43,14 +43,13 @@ public class CustomizeAuthenticationSuccessHandler implements AuthenticationSucc
 
         userUtil.setUser(map);
 
-        userDo = new UserDO();
         userDo.setState("入");
         userDo.setItemid(Integer.parseInt(map.get("itemid")));
         userDo.setItemcode(map.get("itemcode"));
         userService.updateByPrimaryKeySelective(userDo);
 
         //返回json数据
-        JsonResult result = ResultTool.success();
+        JsonResult result = ResultTool.success(userDo);
         httpServletResponse.setContentType("text/json;charset=utf-8");
         httpServletResponse.getWriter().write(JSON.toJSONString(result));
     }

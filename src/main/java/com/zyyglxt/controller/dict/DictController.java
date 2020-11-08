@@ -19,11 +19,12 @@ import javax.annotation.Resource;
  **/
 @Api(tags = "获取字典值")
 @RestController
+@RequestMapping(value = "dict")
 public class DictController {
     @Resource
     IDictService dictService;
 
-    @RequestMapping(value = "dict",method = RequestMethod.GET)
+    @RequestMapping(value = "/getDictByCode",method = RequestMethod.GET)
     public ResponseData getDictByCode(@ApiParam(value = "字典代码，对应dict表中的dict.DICT_CODE") @RequestParam String code){
         ResponseData responseData = new ResponseData();
         responseData.setCode(EmBusinessError.success.getErrCode());

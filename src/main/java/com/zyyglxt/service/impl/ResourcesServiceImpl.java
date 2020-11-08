@@ -96,8 +96,7 @@ public class ResourcesServiceImpl implements ResourcesService {
 
     @Override
     public List<ResourcesDO> SelectMenuByRoleCode(UserDO userDO) {
-        Integer type = userDO.getType();
-        RoleDO roleDO = roleDOMapper.selectByRoleType(type);
+        RoleDO roleDO = roleDOMapper.selectByUserid(userDO.getItemcode());
         List<ResourcesDO> resourcesDOS = resourcesDOMapper.SelectMenuByRoleCode(roleDO.getItemcode());
         MenuTreeUtil menuTreeUtil = new MenuTreeUtil(resourcesDOS, null);
         return menuTreeUtil.buildTreeGrid();
@@ -110,8 +109,7 @@ public class ResourcesServiceImpl implements ResourcesService {
 
     @Override
     public List<ResourcesDO> SelectPermissionByRoleCode(UserDO userDO) {
-        Integer type = userDO.getType();
-        RoleDO roleDO = roleDOMapper.selectByRoleType(type);
+        RoleDO roleDO = roleDOMapper.selectByUserid(userDO.getItemcode());
         List<ResourcesDO> resourcesDOS = resourcesDOMapper.SelectPermissionByRoleCode(roleDO.getItemcode());
         MenuTreeUtil menuTreeUtil = new MenuTreeUtil(resourcesDOS, null);
         return menuTreeUtil.buildTreeGrid();

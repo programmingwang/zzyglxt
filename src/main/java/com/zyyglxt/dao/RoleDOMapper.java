@@ -26,5 +26,7 @@ public interface RoleDOMapper {
     List<RoleDO> selectAllRole();
 
     RoleDO selectByRoleType(Integer type);
+
+    RoleDO selectByUserid(String itemcode);
 }
 

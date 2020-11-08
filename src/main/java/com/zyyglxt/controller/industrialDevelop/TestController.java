@@ -16,16 +16,20 @@ import java.util.List;
  * @Version 1.0
  **/
 @Controller
-@RequestMapping("industrial")
 public class TestController {
     @Resource
     IIndustrialDevelopCooService developCooService;
-    @GetMapping("/cooperation")
-    public String getHtml(ModelMap map) {
-        List<IndustrialDevelopCooExcDO> list = developCooService.getCooRecord(1, 10);
-        map.put("dataList", list);
-//        map.put("page", page);
-//        map.put("pagesize", pagesize);
-        return "/industrial_develop/cooperation";
+//    @GetMapping("/cooperation")
+//    public String getHtml(ModelMap map) {
+//        List<IndustrialDevelopCooExcDO> list = developCooService.getCooRecord(1, 10);
+//        map.put("dataList", list);
+////        map.put("page", page);
+////        map.put("pagesize", pagesize);
+//        return "/industrial_develop/cooperation";
+//    }
+
+    @GetMapping("/")
+    public String getHtml() {
+        return "/index";
     }
 }

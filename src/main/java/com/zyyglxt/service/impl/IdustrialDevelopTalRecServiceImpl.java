@@ -2,7 +2,7 @@ package com.zyyglxt.service.impl;
 
 import com.zyyglxt.dao.IndustrialDevelopTalRecDOMapper;
 import com.zyyglxt.dataobject.IndustrialDevelopTalRecDOKey;
-import com.zyyglxt.dataobject.IndustrialDevelopTalRecDOWithBLOBs;
+import com.zyyglxt.dataobject.IndustrialDevelopTalRecDO;
 import com.zyyglxt.dataobject.validation.ValidationGroups;
 import com.zyyglxt.error.BusinessException;
 import com.zyyglxt.error.EmBusinessError;
@@ -29,7 +29,7 @@ public class IdustrialDevelopTalRecServiceImpl implements IIndustrialDevelopTalR
     @Resource
     ValidatorImpl validator;
     @Override
-    public void addTalRec(IndustrialDevelopTalRecDOWithBLOBs record) {
+    public void addTalRec(IndustrialDevelopTalRecDO record) {
         record.setCreater("未定义");
         record.setUpdater("未定义");
         ValidatorResult result = validator.validate(record, ValidationGroups.Insert.class);
@@ -55,14 +55,14 @@ public class IdustrialDevelopTalRecServiceImpl implements IIndustrialDevelopTalR
     }
 
     @Override
-    public void updTalRec(IndustrialDevelopTalRecDOWithBLOBs record) {
+    public void updTalRec(IndustrialDevelopTalRecDO record) {
         record.setUpdater("未定义");
         record.setItemupdateat(new Date());
         developTalRecDOMapper.updateByPrimaryKeySelective(record);
     }
 
     @Override
-    public List<IndustrialDevelopTalRecDOWithBLOBs> getTalRecs() {
+    public List<IndustrialDevelopTalRecDO> getTalRecs() {
         return developTalRecDOMapper.selectAll();
     }
 }

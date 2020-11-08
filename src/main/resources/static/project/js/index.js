@@ -174,6 +174,48 @@
                 pid:""
             },
             {
+                menu_name : "信息发布",
+                menu_url: "/data/dataNewsRotations",
+                id:"13",
+                level:"1",
+                pid:""
+            },
+            {
+                menu_name : "＞新闻轮播图",
+                menu_url: "/data/dataNewsRotations",
+                id:"13-1",
+                level:"2",
+                pid:"13"
+            },
+            {
+                menu_name : "＞新闻管理",
+                menu_url: "/data/dataNewsInf",
+                id:"13-2",
+                level:"2",
+                pid:"13"
+            },
+            {
+                menu_name : "＞通知公告",
+                menu_url: "/data/dataAnnouncement",
+                id:"13-3",
+                level:"2",
+                pid:"13"
+            },
+            {
+                menu_name : "＞政策法规",
+                menu_url: "/data/dataRegulation",
+                id:"13-4",
+                level:"2",
+                pid:"13"
+            },
+            {
+                menu_name : "＞办事流程",
+                menu_url: "/data/dataProcess",
+                id:"13-5",
+                level:"2",
+                pid:"13"
+            },
+            {
                 menu_name : "产业发展",
                 menu_url: "",
                 id:"99",

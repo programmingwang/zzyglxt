@@ -2,15 +2,19 @@ package com.zyyglxt.controller.ChineseCultural.resource;
 
 import com.zyyglxt.dataobject.CulturalResourcesDO;
 import com.zyyglxt.dataobject.CulturalResourcesDOKey;
+import com.zyyglxt.dto.CulturalResourcesDto;
 import com.zyyglxt.error.BusinessException;
 import com.zyyglxt.error.EmBusinessError;
 import com.zyyglxt.response.ResponseData;
+import com.zyyglxt.service.IFileService;
 import com.zyyglxt.service.ITraditionalSchoolService;
+import com.zyyglxt.util.ConvertDOToDTOUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -27,12 +31,22 @@ public class TraditionalSchoolController {
     @Resource
     private ITraditionalSchoolService iTraditionalSchoolService;
 
+    @Resource
+    private IFileService iFileService;
+
     //获取所有的中医流派
     @RequestMapping(value = "/getAll" , method = RequestMethod.GET)
     @ResponseBody
     public ResponseData getAllTraditionalSchool(){
         List<CulturalResourcesDO> traditionalSchoolList = iTraditionalSchoolService.getTraditionalSchoolList();
-        return new ResponseData(EmBusinessError.success,traditionalSchoolList);
+        List<CulturalResourcesDto> chineseCulturalDtoList = new ArrayList<>();
+        for (CulturalResourcesDO culturalResourcesDO : traditionalSchoolList) {
+            chineseCulturalDtoList.add(
+                    ConvertDOToDTOUtil.convertFromDOToDTO(
+                            culturalResourcesDO,iFileService.selectFileByDataCode(
+                                    culturalResourcesDO.getItemcode()).getFilePath()));
+        }
+        return new ResponseData(EmBusinessError.success,chineseCulturalDtoList);
     }
 
 //    //查询一个中医流派

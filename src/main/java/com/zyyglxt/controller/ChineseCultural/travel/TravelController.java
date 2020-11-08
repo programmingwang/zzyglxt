@@ -3,12 +3,16 @@ package com.zyyglxt.controller.ChineseCultural.travel;
 
 import com.zyyglxt.dataobject.ChineseCulturalDO;
 import com.zyyglxt.dataobject.ChineseCulturalDOKey;
+import com.zyyglxt.dto.ChineseCulturalDto;
 import com.zyyglxt.error.EmBusinessError;
 import com.zyyglxt.response.ResponseData;
+import com.zyyglxt.service.IFileService;
 import com.zyyglxt.service.ITravelService;
+import com.zyyglxt.util.ConvertDOToDTOUtil;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -25,12 +29,22 @@ public class TravelController {
     @Resource
     private ITravelService iTravelService;
 
+    @Resource
+    private IFileService iFileService;
+
     //获取所有的健康旅游
     @RequestMapping(value = "/getAll" , method = RequestMethod.GET)
     @ResponseBody
     public ResponseData getAllTravel(){
-        List<ChineseCulturalDO> travelList = iTravelService.getTravelList();
-        return new ResponseData(EmBusinessError.success,travelList);
+        List<ChineseCulturalDO> cartoonAllusionsList = iTravelService.getTravelList();
+        List<ChineseCulturalDto> chineseCulturalDtoList = new ArrayList<>();
+        for (ChineseCulturalDO chineseCulturalDO : cartoonAllusionsList) {
+            chineseCulturalDtoList.add(
+                    ConvertDOToDTOUtil.convertFromDOToDTO(
+                            chineseCulturalDO,iFileService.selectFileByDataCode(
+                                    chineseCulturalDO.getItemcode()).getFilePath()));
+        }
+        return new ResponseData(EmBusinessError.success,chineseCulturalDtoList);
     }
 
     //查询一个健康旅游

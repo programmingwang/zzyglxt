@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zyyglxt.dao.IndustrialDevelopSchoolMapper">
+  <resultMap id="BaseResultMap" type="com.zyyglxt.dataobject.IndustrialDevelopSchool">
+    <!--@mbg.generated-->
+    <!--@Table tb_industrial_develop_school-->
+    <id column="itemID" jdbcType="INTEGER" property="itemid" />
+    <id column="itemCode" jdbcType="CHAR" property="itemcode" />
+    <result column="SCHOOL_NAME" jdbcType="VARCHAR" property="schoolName" />
+    <result column="SCHOOL_INTRODUCE" jdbcType="VARCHAR" property="schoolIntroduce" />
+    <result column="SECONDARY_COLLEGE" jdbcType="LONGVARCHAR" property="secondaryCollege" />
+    <result column="ENROLLMENT_MAJOR" jdbcType="LONGVARCHAR" property="enrollmentMajor" />
+    <result column="GRADUATE_ENROLLMENT_MAJOR" jdbcType="LONGVARCHAR" property="graduateEnrollmentMajor" />
+    <result column="PHONE" jdbcType="VARCHAR" property="phone" />
+    <result column="ONLINE_ADDRESS" jdbcType="VARCHAR" property="onlineAddress" />
+    <result column="SCHOOL_TEXT" jdbcType="LONGVARCHAR" property="schoolText" />
+    <result column="ADDRESS_PRO" jdbcType="VARCHAR" property="addressPro" />
+    <result column="ADDRESS_CITY" jdbcType="VARCHAR" property="addressCity" />
+    <result column="ADDRESS_COUNTRY" jdbcType="VARCHAR" property="addressCountry" />
+    <result column="ADDRESS" jdbcType="VARCHAR" property="address" />
+    <result column="STATUS" jdbcType="VARCHAR" property="status" />
+    <result column="CREATER" jdbcType="VARCHAR" property="creater" />
+    <result column="itemCreateAt" jdbcType="TIMESTAMP" property="itemcreateat" />
+    <result column="UPDATER" jdbcType="VARCHAR" property="updater" />
+    <result column="itemUpdateAt" jdbcType="TIMESTAMP" property="itemupdateat" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    itemID, itemCode, SCHOOL_NAME, SCHOOL_INTRODUCE, SECONDARY_COLLEGE, ENROLLMENT_MAJOR, 
+    GRADUATE_ENROLLMENT_MAJOR, PHONE, ONLINE_ADDRESS, SCHOOL_TEXT, ADDRESS_PRO, ADDRESS_CITY, 
+    ADDRESS_COUNTRY, ADDRESS, `STATUS`, CREATER, itemCreateAt, UPDATER, itemUpdateAt
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="map" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from tb_industrial_develop_school
+    where itemID = #{itemid,jdbcType=INTEGER}
+      and itemCode = #{itemcode,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="map">
+    <!--@mbg.generated-->
+    delete from tb_industrial_develop_school
+    where itemID = #{itemid,jdbcType=INTEGER}
+      and itemCode = #{itemcode,jdbcType=CHAR}
+  </delete>
+  <insert id="insert" keyColumn="itemID" keyProperty="itemid" parameterType="com.zyyglxt.dataobject.IndustrialDevelopSchool" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into tb_industrial_develop_school (itemCode, SCHOOL_NAME, SCHOOL_INTRODUCE, 
+      SECONDARY_COLLEGE, ENROLLMENT_MAJOR, 
+      GRADUATE_ENROLLMENT_MAJOR, PHONE, ONLINE_ADDRESS, 
+      SCHOOL_TEXT, ADDRESS_PRO, ADDRESS_CITY, 
+      ADDRESS_COUNTRY, ADDRESS, `STATUS`, 
+      CREATER, itemCreateAt, UPDATER, 
+      itemUpdateAt)
+    values (#{itemcode,jdbcType=CHAR}, #{schoolName,jdbcType=VARCHAR}, #{schoolIntroduce,jdbcType=VARCHAR}, 
+      #{secondaryCollege,jdbcType=LONGVARCHAR}, #{enrollmentMajor,jdbcType=LONGVARCHAR}, 
+      #{graduateEnrollmentMajor,jdbcType=LONGVARCHAR}, #{phone,jdbcType=VARCHAR}, #{onlineAddress,jdbcType=VARCHAR}, 
+      #{schoolText,jdbcType=LONGVARCHAR}, #{addressPro,jdbcType=VARCHAR}, #{addressCity,jdbcType=VARCHAR}, 
+      #{addressCountry,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, 
+      #{creater,jdbcType=VARCHAR}, #{itemcreateat,jdbcType=TIMESTAMP}, #{updater,jdbcType=VARCHAR}, 
+      #{itemupdateat,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" keyColumn="itemID" keyProperty="itemid" parameterType="com.zyyglxt.dataobject.IndustrialDevelopSchool" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into tb_industrial_develop_school
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="itemcode != null">
+        itemCode,
+      </if>
+      <if test="schoolName != null">
+        SCHOOL_NAME,
+      </if>
+      <if test="schoolIntroduce != null">
+        SCHOOL_INTRODUCE,
+      </if>
+      <if test="secondaryCollege != null">
+        SECONDARY_COLLEGE,
+      </if>
+      <if test="enrollmentMajor != null">
+        ENROLLMENT_MAJOR,
+      </if>
+      <if test="graduateEnrollmentMajor != null">
+        GRADUATE_ENROLLMENT_MAJOR,
+      </if>
+      <if test="phone != null">
+        PHONE,
+      </if>
+      <if test="onlineAddress != null">
+        ONLINE_ADDRESS,
+      </if>
+      <if test="schoolText != null">
+        SCHOOL_TEXT,
+      </if>
+      <if test="addressPro != null">
+        ADDRESS_PRO,
+      </if>
+      <if test="addressCity != null">
+        ADDRESS_CITY,
+      </if>
+      <if test="addressCountry != null">
+        ADDRESS_COUNTRY,
+      </if>
+      <if test="address != null">
+        ADDRESS,
+      </if>
+      <if test="status != null">
+        `STATUS`,
+      </if>
+      <if test="creater != null">
+        CREATER,
+      </if>
+      <if test="itemcreateat != null">
+        itemCreateAt,
+      </if>
+      <if test="updater != null">
+        UPDATER,
+      </if>
+      <if test="itemupdateat != null">
+        itemUpdateAt,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="itemcode != null">
+        #{itemcode,jdbcType=CHAR},
+      </if>
+      <if test="schoolName != null">
+        #{schoolName,jdbcType=VARCHAR},
+      </if>
+      <if test="schoolIntroduce != null">
+        #{schoolIntroduce,jdbcType=VARCHAR},
+      </if>
+      <if test="secondaryCollege != null">
+        #{secondaryCollege,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="enrollmentMajor != null">
+        #{enrollmentMajor,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="graduateEnrollmentMajor != null">
+        #{graduateEnrollmentMajor,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="onlineAddress != null">
+        #{onlineAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="schoolText != null">
+        #{schoolText,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="addressPro != null">
+        #{addressPro,jdbcType=VARCHAR},
+      </if>
+      <if test="addressCity != null">
+        #{addressCity,jdbcType=VARCHAR},
+      </if>
+      <if test="addressCountry != null">
+        #{addressCountry,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="creater != null">
+        #{creater,jdbcType=VARCHAR},
+      </if>
+      <if test="itemcreateat != null">
+        #{itemcreateat,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updater != null">
+        #{updater,jdbcType=VARCHAR},
+      </if>
+      <if test="itemupdateat != null">
+        #{itemupdateat,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zyyglxt.dataobject.IndustrialDevelopSchool">
+    <!--@mbg.generated-->
+    update tb_industrial_develop_school
+    <set>
+      <if test="schoolName != null">
+        SCHOOL_NAME = #{schoolName,jdbcType=VARCHAR},
+      </if>
+      <if test="schoolIntroduce != null">
+        SCHOOL_INTRODUCE = #{schoolIntroduce,jdbcType=VARCHAR},
+      </if>
+      <if test="secondaryCollege != null">
+        SECONDARY_COLLEGE = #{secondaryCollege,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="enrollmentMajor != null">
+        ENROLLMENT_MAJOR = #{enrollmentMajor,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="graduateEnrollmentMajor != null">
+        GRADUATE_ENROLLMENT_MAJOR = #{graduateEnrollmentMajor,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="phone != null">
+        PHONE = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="onlineAddress != null">
+        ONLINE_ADDRESS = #{onlineAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="schoolText != null">
+        SCHOOL_TEXT = #{schoolText,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="addressPro != null">
+        ADDRESS_PRO = #{addressPro,jdbcType=VARCHAR},
+      </if>
+      <if test="addressCity != null">
+        ADDRESS_CITY = #{addressCity,jdbcType=VARCHAR},
+      </if>
+      <if test="addressCountry != null">
+        ADDRESS_COUNTRY = #{addressCountry,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        ADDRESS = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        `STATUS` = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="creater != null">
+        CREATER = #{creater,jdbcType=VARCHAR},
+      </if>
+      <if test="itemcreateat != null">
+        itemCreateAt = #{itemcreateat,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updater != null">
+        UPDATER = #{updater,jdbcType=VARCHAR},
+      </if>
+      <if test="itemupdateat != null">
+        itemUpdateAt = #{itemupdateat,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where itemID = #{itemid,jdbcType=INTEGER}
+      and itemCode = #{itemcode,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zyyglxt.dataobject.IndustrialDevelopSchool">
+    <!--@mbg.generated-->
+    update tb_industrial_develop_school
+    set SCHOOL_NAME = #{schoolName,jdbcType=VARCHAR},
+      SCHOOL_INTRODUCE = #{schoolIntroduce,jdbcType=VARCHAR},
+      SECONDARY_COLLEGE = #{secondaryCollege,jdbcType=LONGVARCHAR},
+      ENROLLMENT_MAJOR = #{enrollmentMajor,jdbcType=LONGVARCHAR},
+      GRADUATE_ENROLLMENT_MAJOR = #{graduateEnrollmentMajor,jdbcType=LONGVARCHAR},
+      PHONE = #{phone,jdbcType=VARCHAR},
+      ONLINE_ADDRESS = #{onlineAddress,jdbcType=VARCHAR},
+      SCHOOL_TEXT = #{schoolText,jdbcType=LONGVARCHAR},
+      ADDRESS_PRO = #{addressPro,jdbcType=VARCHAR},
+      ADDRESS_CITY = #{addressCity,jdbcType=VARCHAR},
+      ADDRESS_COUNTRY = #{addressCountry,jdbcType=VARCHAR},
+      ADDRESS = #{address,jdbcType=VARCHAR},
+      `STATUS` = #{status,jdbcType=VARCHAR},
+      CREATER = #{creater,jdbcType=VARCHAR},
+      itemCreateAt = #{itemcreateat,jdbcType=TIMESTAMP},
+      UPDATER = #{updater,jdbcType=VARCHAR},
+      itemUpdateAt = #{itemupdateat,jdbcType=TIMESTAMP}
+    where itemID = #{itemid,jdbcType=INTEGER}
+      and itemCode = #{itemcode,jdbcType=CHAR}
+  </update>
+</mapper>

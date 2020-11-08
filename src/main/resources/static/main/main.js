@@ -66,7 +66,7 @@
             respond: '../component/respond@1.4.2/respond.min',
             myBootstrapTable: '../component/bootstrap-table@1.15.3/bootstrap-table.min',
             bootstrapTableLocalAll: '../component/bootstrap-table@1.15.3/bootstrap-table-locale-all.min',
-
+            wangEditor: '../component/wangEditor/wangEditor.min',
 
 
 
@@ -101,8 +101,7 @@
     //根据path 加载JS
     var rArr = [
         {path:"/main",jspath:"index"},
-        {path:"/userLogin",jspath:"userLogin"},
-        {path:"/test",jspath:"test"}
+        {path:"/userLogin",jspath:"userLogin"}
 
     ];
 

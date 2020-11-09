@@ -256,7 +256,7 @@ public class IUserServiceImpl implements IUserService {
         // 所以利用判空来判断身份证号码是否合法
         String isValidIDCardNo = IDUtil.IdentityCardVerification(userDO.getIdcardNo());
         if (!StringUtils.isEmpty(isValidIDCardNo)) {
-            throw new BusinessException(isValidIDCardNo, EmBusinessError.PARAMETER_VALIDATION_ERROR);
+            throw new BusinessException(isValidIDCardNo, EmBusinessError.IDNO_ERROR);
         }
         // 验证电话是否正确
         if (!MobileUtil.checkPhone(userDO.getMobilephone())) {

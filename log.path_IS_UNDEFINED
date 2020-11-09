@@ -6322,3 +6322,141 @@ Caused by: java.lang.RuntimeException: 用户不能为空
 	at com.zyyglxt.config.service.UserDetailsServiceImpl.loadUserByUsername(UserDetailsServiceImpl.java:30)
 	at org.springframework.security.authentication.dao.DaoAuthenticationProvider.retrieveUser(DaoAuthenticationProvider.java:93)
 	... 57 common frames omitted
+17:18:09.814 logback [background-preinit] INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 6.1.5.Final
+17:18:09.855 logback [restartedMain] INFO  com.zyyglxt.ZyyglxtApplication - Starting ZyyglxtApplication on DESKTOP-MJQ3SFG with PID 9280 (F:\zyyglxt\target\classes started by 彼缘 in F:\zyyglxt)
+17:18:09.856 logback [restartedMain] INFO  com.zyyglxt.ZyyglxtApplication - No active profile set, falling back to default profiles: default
+17:18:10.153 logback [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+17:18:10.154 logback [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+17:18:18.379 logback [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8989 (http)
+17:18:18.412 logback [restartedMain] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8989"]
+17:18:18.413 logback [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+17:18:18.414 logback [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.38]
+17:18:18.418 logback [restartedMain] INFO  o.a.c.core.AprLifecycleListener - Loaded Apache Tomcat Native library [1.2.23] using APR version [1.7.0].
+17:18:18.419 logback [restartedMain] INFO  o.a.c.core.AprLifecycleListener - APR capabilities: IPv6 [true], sendfile [true], accept filters [false], random [true].
+17:18:18.419 logback [restartedMain] INFO  o.a.c.core.AprLifecycleListener - APR/OpenSSL configuration: useAprConnector [false], useOpenSSL [true]
+17:18:18.463 logback [restartedMain] INFO  o.a.c.core.AprLifecycleListener - OpenSSL successfully initialized [OpenSSL 1.1.1c  28 May 2019]
+17:18:18.697 logback [restartedMain] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+17:18:18.698 logback [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 8543 ms
+17:18:20.817 logback [restartedMain] WARN  c.z.c.h.CustomizeAbstractSecurityInterceptor - Could not validate configuration attributes as the SecurityMetadataSource did not return any attributes from getAllConfigAttributes()
+17:18:22.137 logback [restartedMain] INFO  s.d.s.w.PropertySourcedRequestMappingHandlerMapping - Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+17:18:23.128 logback [restartedMain] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@fd568d7, org.springframework.security.web.context.SecurityContextPersistenceFilter@28034b12, org.springframework.security.web.header.HeaderWriterFilter@250d6bb7, org.springframework.web.filter.CorsFilter@6785036d, org.springframework.security.web.authentication.logout.LogoutFilter@425d2acb, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@76f8b2d6, org.springframework.security.web.session.ConcurrentSessionFilter@1e9025e, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@156967e2, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@70554138, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@4d027339, org.springframework.security.web.session.SessionManagementFilter@4c137f82, org.springframework.security.web.access.ExceptionTranslationFilter@7a63b094, com.zyyglxt.config.handler.CustomizeAbstractSecurityInterceptor@1702d407, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@12792fab]
+17:18:23.211 logback [restartedMain] INFO  o.s.s.c.ThreadPoolTaskExecutor - Initializing ExecutorService 'applicationTaskExecutor'
+17:18:23.265 logback [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+17:18:23.430 logback [restartedMain] WARN  o.t.templatemode.TemplateMode - [THYMELEAF][restartedMain] Template Mode 'HTML5' is deprecated. Using Template Mode 'HTML' instead.
+17:18:23.706 logback [restartedMain] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8989"]
+17:18:23.741 logback [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 8989 (http) with context path ''
+17:18:23.742 logback [restartedMain] INFO  s.d.s.w.p.DocumentationPluginsBootstrapper - Context refreshed
+17:18:23.781 logback [restartedMain] INFO  s.d.s.w.p.DocumentationPluginsBootstrapper - Found 1 custom documentation plugin(s)
+17:18:23.893 logback [restartedMain] INFO  s.d.s.w.s.ApiListingReferenceScanner - Scanning for api listing references
+17:18:24.305 logback [restartedMain] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: changeStatusUsingPOST_1
+17:18:24.312 logback [restartedMain] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: toUpdatePageUsingGET_1
+17:18:24.335 logback [restartedMain] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: changeStatusUsingPOST_2
+17:18:24.341 logback [restartedMain] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: toUpdatePageUsingGET_2
+17:18:24.349 logback [restartedMain] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: changeStatusUsingPOST_3
+17:18:24.355 logback [restartedMain] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: toUpdatePageUsingGET_3
+17:18:24.386 logback [restartedMain] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: changeStatusUsingPUT_1
+17:18:24.388 logback [restartedMain] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: deleteByPrimaryKeyUsingDELETE_1
+17:18:24.392 logback [restartedMain] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: insertNewsInfUsingPOST_1
+17:18:24.394 logback [restartedMain] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: searchDataDOUsingGET_1
+17:18:24.396 logback [restartedMain] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: selectByPrimaryKeyUsingGET_1
+17:18:24.405 logback [restartedMain] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: changeStatusUsingPUT_2
+17:18:24.407 logback [restartedMain] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: deleteByPrimaryKeyUsingDELETE_2
+17:18:24.412 logback [restartedMain] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: searchDataDOUsingGET_2
+17:18:24.414 logback [restartedMain] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: selectByPrimaryKeyUsingGET_2
+17:18:24.424 logback [restartedMain] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: changeStatusUsingPUT_3
+17:18:24.426 logback [restartedMain] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: deleteByPrimaryKeyUsingDELETE_3
+17:18:24.429 logback [restartedMain] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: searchDataDOUsingGET_3
+17:18:24.431 logback [restartedMain] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: selectByPrimaryKeyUsingGET_3
+17:18:24.446 logback [restartedMain] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: deleteByPrimaryKeyUsingDELETE_4
+17:18:24.453 logback [restartedMain] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: selectByPrimaryKeyUsingGET_4
+17:18:24.456 logback [restartedMain] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: deleteByPrimaryKeyUsingDELETE_5
+17:18:24.461 logback [restartedMain] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: insertSelectiveUsingPOST_1
+17:18:24.463 logback [restartedMain] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: selectByPrimaryKeyUsingGET_5
+17:18:24.464 logback [restartedMain] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: updateByPrimaryKeySelectiveUsingPUT_1
+17:18:24.540 logback [restartedMain] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: increaseVisitNumUsingPOST_1
+17:18:24.551 logback [restartedMain] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: increaseVisitNumUsingPOST_2
+17:18:24.587 logback [restartedMain] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: changeStatusUsingPOST_4
+17:18:24.590 logback [restartedMain] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: toUpdatePageUsingGET_4
+17:18:24.605 logback [restartedMain] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: changeStatusUsingPOST_5
+17:18:24.608 logback [restartedMain] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: toUpdatePageUsingGET_5
+17:18:24.639 logback [restartedMain] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: deleteByPrimaryKeyUsingDELETE_6
+17:18:24.642 logback [restartedMain] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: insertSelectiveUsingPOST_2
+17:18:24.657 logback [restartedMain] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: updateByPrimaryKeySelectiveUsingPUT_2
+17:18:24.770 logback [restartedMain] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: changeStatusUsingPOST_6
+17:18:24.772 logback [restartedMain] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: deleteTraditionalCulturalUsingDELETE_1
+17:18:24.774 logback [restartedMain] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: toUpdatePageUsingGET_6
+17:18:24.779 logback [restartedMain] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: changeStatusUsingPOST_7
+17:18:24.784 logback [restartedMain] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: toUpdatePageUsingGET_7
+17:18:24.787 logback [restartedMain] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: changeStatusUsingPOST_8
+17:18:24.790 logback [restartedMain] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: toUpdatePageUsingGET_8
+17:18:24.796 logback [restartedMain] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: changeStatusUsingPOST_9
+17:18:24.800 logback [restartedMain] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: toUpdatePageUsingGET_9
+17:18:24.874 logback [restartedMain] INFO  com.zyyglxt.ZyyglxtApplication - Started ZyyglxtApplication in 16.165 seconds (JVM running for 19.508)
+17:18:53.682 logback [http-nio-8989-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+17:18:53.683 logback [http-nio-8989-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+17:18:53.693 logback [http-nio-8989-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 10 ms
+17:18:54.033 logback [http-nio-8989-exec-1] INFO  c.alibaba.druid.pool.DruidDataSource - {dataSource-1} inited
+17:19:07.887 logback [http-nio-8989-exec-5] ERROR o.s.s.w.a.UsernamePasswordAuthenticationFilter - An internal error occurred while trying to authenticate the user.
+org.springframework.security.authentication.InternalAuthenticationServiceException: 用户不存在
+	at org.springframework.security.authentication.dao.DaoAuthenticationProvider.retrieveUser(DaoAuthenticationProvider.java:108)
+	at org.springframework.security.authentication.dao.AbstractUserDetailsAuthenticationProvider.authenticate(AbstractUserDetailsAuthenticationProvider.java:133)
+	at org.springframework.security.authentication.ProviderManager.authenticate(ProviderManager.java:182)
+	at org.springframework.security.authentication.ProviderManager.authenticate(ProviderManager.java:201)
+	at org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter.attemptAuthentication(UsernamePasswordAuthenticationFilter.java:85)
+	at org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter.doFilter(AbstractAuthenticationProcessingFilter.java:222)
+	at org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter.doFilter(AbstractAuthenticationProcessingFilter.java:212)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:103)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:89)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
+	at org.springframework.web.filter.CorsFilter.doFilterInternal(CorsFilter.java:92)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
+	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:90)
+	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:75)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
+	at org.springframework.security.web.context.SecurityContextPersistenceFilter.doFilter(SecurityContextPersistenceFilter.java:110)
+	at org.springframework.security.web.context.SecurityContextPersistenceFilter.doFilter(SecurityContextPersistenceFilter.java:80)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:55)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336)
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:211)
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:183)
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:358)
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:271)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:202)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:97)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:541)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:143)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:78)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:343)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:374)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:868)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1590)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.lang.Thread.run(Thread.java:748)
+Caused by: java.lang.RuntimeException: 用户不存在
+	at com.zyyglxt.config.service.UserDetailsServiceImpl.loadUserByUsername(UserDetailsServiceImpl.java:35)
+	at org.springframework.security.authentication.dao.DaoAuthenticationProvider.retrieveUser(DaoAuthenticationProvider.java:93)
+	... 57 common frames omitted

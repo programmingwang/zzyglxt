@@ -30,6 +30,7 @@ public enum EmBusinessError implements CommonError {
     USER_ACCOUNT_USE_BY_OTHERS(2009, "账号下线"),
     USER_REGISTER_FAILED(2010, "注册失败"),
     MOBILEPHONE_ERROR(2011, "手机号不正确"),
+    IDNO_ERROR(2011, "身份证号不正确"),
     USER_LOGIN_FAILED(2012, "登陆失败"),
     MODIFY_USER_MESSAGE_FAILED(2013, "修改用户信息失败"),
     OLDPASSWORD_ERROR(2014, "旧密码错误"),

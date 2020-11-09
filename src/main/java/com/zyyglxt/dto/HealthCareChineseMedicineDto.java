@@ -2,6 +2,7 @@ package com.zyyglxt.dto;
 
 import lombok.Data;
 import lombok.ToString;
+import lombok.experimental.Accessors;
 
 /**
  * @version 1.0
@@ -10,6 +11,7 @@ import lombok.ToString;
  */
 @Data
 @ToString
+@Accessors(chain = true)
 public class HealthCareChineseMedicineDto {
     private Integer itemid;
 

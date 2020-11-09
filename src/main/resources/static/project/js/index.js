@@ -140,7 +140,7 @@
             },
             {
                 menu_name : "历史名方",
-                menu_url: "/knowledgeDb/dataBack",
+                menu_url: "/healthCare/famPre",
                 id:"8",
                 level:"1",
                 pid:""

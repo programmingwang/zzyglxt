@@ -4,6 +4,7 @@ import com.zyyglxt.dataobject.UserDO;
 import com.zyyglxt.dto.UpdatePwdDto;
 import com.zyyglxt.dto.UserDto;
 import com.zyyglxt.error.BusinessException;
+import com.zyyglxt.response.ResponseData;
 
 /**
  * @Author nongcn
@@ -12,15 +13,15 @@ import com.zyyglxt.error.BusinessException;
  */
 public interface IUserService {
 
-    int Register(UserDto userDto) throws BusinessException;
+    ResponseData Register(UserDto userDto) throws BusinessException;
 
-    int Login(String username, String password) throws BusinessException;
+//    int Login(String username, String password) throws BusinessException;
 
-    int UpdatePassword(UpdatePwdDto updatePwdDto);
+    ResponseData UpdatePassword(UpdatePwdDto updatePwdDto);
 
     UserDO selectOne();
 
-    void Logout();
+//    void Logout();
 
     void UpdateUserMsg(UserDO userDO);
 }

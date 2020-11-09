@@ -36,6 +36,8 @@
         modalHtml.myDeleteModalCulVen = '是否删除文化场馆信息?';
         modalHtml.myDeleteModalInCuHe = '是否删除非物质文化遗产信息?';
         modalHtml.myDeleteModalMovTV = '是否删除电视电影信息?';
+        modalHtml.myDeleteAchievement = '是否删除科研成果?';
+
 
         return modalHtml;
 

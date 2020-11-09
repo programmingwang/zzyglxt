@@ -24,6 +24,8 @@ spring:
       enabled: false
 
 
+
+
 mybatis:
   mapper-locations: classpath:mapping/*.xml
   type-aliases-package: com.zyyglxt.dataobject

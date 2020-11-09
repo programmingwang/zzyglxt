@@ -26,4 +26,6 @@ public interface ResourcesDOMapper {
     List<ResourcesDO> SelectMenuByRoleCode(String itemcode);
 
     List<ResourcesDO> selectListByPath(String requestUrl);
+
+    List<ResourcesDO> SelectPermissionByRoleCode(String itemcode);
 }

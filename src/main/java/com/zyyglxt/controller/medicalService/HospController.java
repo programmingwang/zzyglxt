@@ -19,38 +19,44 @@ import java.util.List;
 @RequestMapping(value = "/medivalService/hosp")
 public class HospController {
     @Resource
-    IHospService hospService;
+    private IHospService hospService;
 
     @PostMapping(value = "add")
-    public ResponseData addHosp(HospDO hospDO){
+    @ResponseBody
+    public ResponseData addHosp(@RequestBody HospDO hospDO){
         hospService.addHosp(hospDO);
         return new ResponseData(EmBusinessError.success);
     }
 
     @PostMapping(value = "update")
-    public ResponseData updateHosp(HospDO hospDO){
+    @ResponseBody
+    public ResponseData updateHosp(@RequestBody HospDO hospDO){
         hospService.updateHosp(hospDO);
         return new ResponseData(EmBusinessError.success);
     }
 
     @DeleteMapping(value = "delete")
-    public ResponseData deleteHosp(HospDOKey hospDOKey){
+    @ResponseBody
+    public ResponseData deleteHosp(@RequestBody HospDOKey hospDOKey){
         hospService.deleteHosp(hospDOKey);
         return new ResponseData(EmBusinessError.success);
     }
 
     @GetMapping(value = "selectAll")
+    @ResponseBody
     public ResponseData selectAllHosp(){
         List<HospDO> hospDOList = hospService.selectAllHosp();
         return new ResponseData(EmBusinessError.success,hospDOList);
     }
 
+    @ResponseBody
     @GetMapping(value = "search")
     public ResponseData searchHosp(String keyWord){
         List<HospDO> hospDOList = hospService.searchHosp(keyWord);
         return new ResponseData(EmBusinessError.success,hospDOList);
     }
 
+    @ResponseBody
     @GetMapping(value = "top5")
     public ResponseData top5Hosp(){
         List<HospDO> hospDOList = hospService.top5Hosp();

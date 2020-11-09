@@ -184,29 +184,9 @@
         WHERE DATA_CODE = #{dataCode}
     </select>
 
-    <select id="selectFileByDataCodeAndType" resultMap="BaseResultMap">
-        SELECT
-        <include refid="Base_Column_List"/>
-        FROM tb_culpro_file
-        WHERE DATA_CODE = #{dataCode} AND FILE_TYPE = #{fileType}
-    </select>
-
-    <select id="selectFileByDataCodeAndName" resultMap="BaseResultMap">
-        SELECT
-        <include refid="Base_Column_List"/>
-        FROM tb_culpro_file
-        WHERE DATA_CODE = #{dataCode} AND FILE_NAME = #{fileName}
-    </select>
-
     <delete id="deleteByDataCode">
         delete from tb_culpro_file
         where DATA_CODE = #{dataCode}
-    </delete>
-
-    <delete id="deleteByDataCodeAndType">
-        delete from tb_culpro_file
-        where DATA_CODE = #{dataCode}
-        AND FILE_TYPE = #{fileType}
     </delete>
 
 </mapper>

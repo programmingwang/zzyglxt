@@ -2,6 +2,7 @@ package com.zyyglxt.dao;
 
 import com.zyyglxt.dataobject.IndustrialDevelopSciAchiDO;
 import com.zyyglxt.dataobject.IndustrialDevelopSciAchiDOKey;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -56,7 +57,7 @@ public interface IndustrialDevelopSciAchiDOMapper {
 
     int updateVisitNumByItemidAndItemcode(IndustrialDevelopSciAchiDOKey record);
 
-    List<IndustrialDevelopSciAchiDO> selectByPage(int start, int end);
+    List<IndustrialDevelopSciAchiDO> selectByPage(@Param("start") int start,@Param("end") int end);
 
     List<IndustrialDevelopSciAchiDO> selectAll();
 }

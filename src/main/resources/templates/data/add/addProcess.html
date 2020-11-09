@@ -44,17 +44,9 @@
 <div class="row">
     <div class="col-12">
         <form>
-            <!--上传图片的div-->
-            <div class="form-group row">
-                <label class="col-sm-2 col-form-label">轮播图片：</label>
-                <div class="upload-wrap anticon col-sm-3" nv-file-drop="" uploader="uploader">
-                    <input class="file-ele" type="file" file-model="image" name="image" nv-file-select uploader="uploader" multiple />
-                    <div class="file-open"> <p id="upimg"> 选择图片</p> </div>
-                </div>
-            </div>
 
             <div class="form-group row">
-                <label class="col-sm-2 col-form-label">新闻标题：</label>
+                <label class="col-sm-2 col-form-label">标题：</label>
                 <div class="col-sm-3">
                     <input type="text" class="form-control" placeholder="请输入">
                 </div>
@@ -66,27 +58,17 @@
                 </div>
             </div>
             <div class="form-group row">
-                <label class="col-sm-2 col-form-label">作者：</label>
-                <div class="col-sm-3">
-                    <input type="text" class="form-control" placeholder="请输入">
-                </div>
-            </div>
-            <div class="form-group row">
                 <label class="col-sm-2 col-form-label">正文：</label>
                 <div id="div1" class="col-sm-8">
                 </div>
             </div>
 
+            <!--附件div-->
             <div class="form-group row">
-                <label class="col-sm-2 col-form-label">位置：</label>
-                <div class="col-sm-3">
-                    <select class="custom-select" id="chargePersonSearch">
-                        <option value="位置一">位置一</option>
-                        <option value="位置二">位置二</option>
-                        <option value="位置三">位置三</option>
-                        <option value="位置四">位置四</option>
-                        <option value="位置五">位置五</option>
-                    </select>
+                <label for="exampleFormControlFile1" class="col-sm-2 col-form-label">附件：</label>
+                <div class="upload-wrap anticon" nv-file-drop="" uploader="uploader">
+                    <input class="file-ele" type="file" file-model="image" name="image" nv-file-select uploader="uploader" multiple />
+                    <div class="file-open"><em class="upload"></em>&nbsp;上传附件</div>
                 </div>
             </div>
 
@@ -97,8 +79,11 @@
                         <button type="button" class="btn btn-light col">取消</button>
                     </div>
                     <div class="col">
+                        <button type="button" class="btn btn-danger col">保存</button>
+                    </div><div class="col">
                     <button type="submit" class="btn btn-primary col">提交</button>
                 </div>
+
 
                 </div>
             </div>
@@ -108,6 +93,6 @@
 
 </div>
 <script type="text/javascript" data-main="/main/main.js" th:src="@{/component/require@2.3.6/require-2.3.6.js}"></script>
-<script type="text/javascript" th:src="@{/project/js/data/addNewsRotations.js}"></script>
+<script type="text/javascript" th:src="@{/project/js/data/add/addProcess.js}"></script>
 </body>
 </html>

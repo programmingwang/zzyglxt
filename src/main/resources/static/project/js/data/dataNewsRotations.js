@@ -127,7 +127,7 @@
 
         $("#btn_addTask").unbind().on('click',function () {
             $("#main_body").html("");
-            var url = "/data/addNewsRotations";
+            var url = "/data/add/addNewsRotations";
             orange.loadPage({url: url, target: 'main_body', selector: '#fir_body', success: function(data){
 
                     if(data == null||data == ""){

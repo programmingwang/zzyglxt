@@ -148,7 +148,7 @@
         };
 
 
-        $("#search").unbind().on("click",function () {
+        /*$("#search").unbind().on("click",function () {
             var param = {
 
             };
@@ -158,11 +158,24 @@
 
         $("#btn_addProject").unbind().on('click',function () {
             addUpdate("add");
-        });
+        });*/
 
         // $("#btn_addModule").unbind().on('click',function () {
         //     addModule();
         // });
+
+        $("#btn_addTask").unbind().on('click',function () {
+            $("#main_body").html("");
+            var url = "/data/add/addProcess";
+            orange.loadPage({url: url, target: 'main_body', selector: '#fir_body', success: function(data){
+
+                    if(data == null||data == ""){
+                        return alertUtil.error( url+'加载失败');
+                    }
+
+                    $("#main_body").html(data);
+                }})
+        });
 
 
         var aCol = [

@@ -1,5 +1,5 @@
 (function() {
-    require(['jquery','stringUtil','alertUtil'], function (jquery,stringUtil,alertUtil) {
+    require(['jquery','stringUtil','alertUtil','ajaxUtil'], function (jquery,stringUtil,alertUtil,ajaxUtil) {
 
 
         $("#btn_Login").unbind("click").bind("click",function () {
@@ -17,24 +17,32 @@
             }
 
 
-            var userEntity = {"userAccountName":inputUsername,"userAccountPassword":inputPassword};
-            $.ajax({
-                /*登录*/
-                url: "/api/user/userLogin",
-                type: "post",
-                dataType: 'json',
-                data: userEntity,
-                success: function(data) {
-                    if(data && data.code === "000") {
-                        window.location.href = "/"
-                    }else{
-                        alertUtil.error(data.msg)
-                    }
-                },
-                error: function() {
-                    window.location.href = "/"
-                },
-            });
+            var userEntity = {"username":inputUsername,"password":inputPassword};
+            ajaxUtil.myAjax(null,"/userLogin",userEntity,function (data) {
+                if(data && data.errorCode === 88888) {
+                    window.location.href = "/main"
+                }else{
+                    alertUtil.error(data.errorMsg)
+                }
+            },false)
+            // $.ajax({
+            //     /*登录*/
+            //     url: "http://localhost:8989/userLogin",
+            //     type: "post",
+            //     dataType: 'form-data',
+            //     contentType: 'form-data',
+            //     data: inputUsername,inputPassword,
+            //     success: function(data) {
+            //         if(data && data.code === "88888") {
+            //             window.location.href = "/main"
+            //         }else{
+            //             alertUtil.error("aaaaa")
+            //         }
+            //     },
+            //     error: function() {
+            //         window.location.href = "/userLogin"
+            //     },
+            // });
         })
 
         $("#return").unbind("click").bind("click",function () {

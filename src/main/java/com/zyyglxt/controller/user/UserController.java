@@ -32,22 +32,9 @@ public class UserController {
      * 用户注册，接收前段传递的数据，到service层
      */
     @RequestMapping(value = "/register", method = RequestMethod.POST)
-    public ResponseData Register(@RequestParam("orgName") String orgName,
-                                 @RequestParam("orgIdentify") String orgIdentify,
-                                 @RequestParam("orgCode") String orgCode,
-                                 @RequestParam("username") String username,
-                                 @RequestParam("password") String password,
-                                 @RequestParam("mobilePhone") String mobilePhone) throws BusinessException {
-        UserDto userDto = new UserDto();
-        userDto.setOrgName(orgName);
-        userDto.setOrgIdentify(orgIdentify);
-        userDto.setOrgCode(orgCode);
-        userDto.setUsername(username);
-        userDto.setPassword(password);
-        userDto.setMobilePhone(mobilePhone);
-
-        int rs = userService.Register(userDto);
-        if (rs == 200) {
+    public ResponseData Register(UserDto userDto) throws BusinessException {
+        ResponseData rd = userService.Register(userDto);
+        if (rd.getCode().equals(EmBusinessError.success.getErrCode())) {
             return new ResponseData(EmBusinessError.success);
         } else {
             return new ResponseData(EmBusinessError.USER_REGISTER_FAILED);
@@ -90,8 +77,8 @@ public class UserController {
             return new ResponseData(EmBusinessError.INPUT_NOT_NULL);
         } else {
             if (updatePwdDto.getNewPassword().equals(updatePwdDto.getCheckNewPassword())) {
-                int result = userService.UpdatePassword(updatePwdDto);
-                if (result == 200) {
+                ResponseData rd = userService.UpdatePassword(updatePwdDto);
+                if (rd.getCode().equals(EmBusinessError.success.getErrCode())) {
                     return new ResponseData(EmBusinessError.success);
                 } else {
                     return new ResponseData(EmBusinessError.MODIFY_USER_MESSAGE_FAILED);

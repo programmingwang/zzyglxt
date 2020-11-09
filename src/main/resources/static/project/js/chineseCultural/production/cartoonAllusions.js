@@ -77,43 +77,7 @@
             myUpdateModal.show();
         }
 
-        // function addModule(row){
-        //     var myAddModuleModalData ={
-        //         modalBodyID : "myAddModuleModal",
-        //         modalTitle : "新增模块",
-        //         modalConfirmFun:function () {
-        //             var moduleEntity = {
-        //                 moduleName: $("#moduleName").val(),
-        //                 projectID: $("#projectID").val(),
-        //             };
-        //
-        //             ajaxUtil.myAjax(null,"api/project/addModule",moduleEntity,function (data) {
-        //                 if(ajaxUtil.success(data)){
-        //                     alertUtil.info("新增模块成功");
-        //                     refreshTable();
-        //                     myaddModuleModal.hide();
-        //                 }else {
-        //                     alertUtil.alert(data.msg)
-        //                 }
-        //             },false);
-        //         //    数据能正常入库，只是刚刚加入的数据无法正常同步，不知道为什么？？
-        //
-        //         }
-        //
-        //     };
-        //     var myaddModuleModal = modalUtil.init(myAddModuleModalData);
-        //
-        //     var pl = dictUtil.getDictByCode(dictUtil.DICT_LIST.PROJECT_LIST);
-        //     $("#projectID").selectUtil(pl).on('change',function () {
-        //         var ml = dictUtil.getDictByCode(dictUtil.DICT_LIST.Module_LIST,$("#projectID").val(),true);
-        //         $("#moduleName").selectUtil(ml);
-        //     });
-        //
-        //     var ml = dictUtil.getDictByCode(dictUtil.DICT_LIST.Module_LIST,stringUtil.isBlank(row) ? $("#projectID").val() : row.projectID ,true);
-        //     $("#moduleName").selectUtil(ml);
-        //
-        //     myaddModuleModal.show();
-        // }
+
 
         //修改事件
         window.orgEvents = {
@@ -122,22 +86,19 @@
             },
             'click .delete': function (e, value, row, index) {
                 var myDeleteModalData ={
-                    modalBodyID : "myDeleteModalProject",
-                    modalTitle : "删除项目",
+                    modalBodyID : "myDeleteModalCartoonAll",
+                    modalTitle : "删除漫画典故信息",
                     modalClass : "modal-lg",
                     confirmButtonClass : "btn-danger",
                     modalConfirmFun:function () {
-                        var projectEntity = {
-                            projectID: row.projectID
-                        };
                         var isSuccess = false;
-                        ajaxUtil.myAjax(null,"/api/project/deleteProject",projectEntity,function (data) {
+                        ajaxUtil.myAjax(null,"/cul/pro/carAll/delCarAll/"+row.itemid+"/"+row.itemcode,null,function (data) {
                             if(ajaxUtil.success(data)){
-                                alertUtil.info("删除项目成功");
+                                alertUtil.info("删除漫画典故信息成功");
                                 isSuccess = true;
                                 refreshTable();
                             }
-                        },false);
+                        },false,true,"delete");
                         return isSuccess;
                     }
 
@@ -148,21 +109,18 @@
         };
 
 
-        $("#search").unbind().on("click",function () {
-            var param = {
+            $("#btn_addTask").unbind().on('click',function () {
+                $("#main_body").html("");
+                var url = "/chineseCultural/production/insertCartoonAllusions";
+                orange.loadPage({url: url, target: 'main_body', selector: '#fir_body', success: function(data){
 
-            };
-            $('#table').bootstrapTable("destroy");
-            bootstrapTableUtil.myBootStrapTableInit("table", url, param, aCol);
-        });
+                        if(data == null||data == ""){
+                            return alertUtil.error( url+'加载失败');
+                        }
 
-        $("#btn_addProject").unbind().on('click',function () {
-            addUpdate("add");
-        });
-
-        // $("#btn_addModule").unbind().on('click',function () {
-        //     addModule();
-        // });
+                        $("#main_body").html(data);
+                    }})
+            });
 
 
         var aCol = [

@@ -231,15 +231,22 @@
                 },
                 {
                     menu_name: "＞科研成果",
-                    menu_url: "/industrialDev/achievement",
+                    menu_url: "/industrialdevelop/achievement",
                     id: "99-1",
                     level: "2",
                     pid: "99"
                 },
                 {
                     menu_name: "＞合作交流",
-                    menu_url: "/industrialDev/cooperation",
-                    id: "99-1",
+                    menu_url: "/industrialdevelop/cooperation",
+                    id: "99-2",
+                    level: "2",
+                    pid: "99"
+                },
+                {
+                    menu_name: "＞人才招募",
+                    menu_url: "/industrialdevelop/recruit",
+                    id: "99-3",
                     level: "2",
                     pid: "99"
                 }

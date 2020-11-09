@@ -30,6 +30,14 @@
     from role
     where ROLE_TYPE = #{roleType,jdbcType=INTEGER}
   </select>
+  <select id="selectByUserid" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    r.itemID, r.itemCode, r.ROLE_NAME, r.ROLE_DESCRIPTION, r.APP_CODE, r.ROLE_TYPE, r.CREATER, r.itemCreateAt,
+    r.UPDATER, r.itemUpdateAt
+    from role r, user_role_ref u
+    where  r.itemCode = u.ROLE_CODE
+    and u.USER_CODE = #{value}
+  </select>
   <select id="selectAllRole" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />

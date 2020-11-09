@@ -2,8 +2,8 @@ package com.zyyglxt.config.handler;
 
 import com.alibaba.fastjson.JSON;
 import com.zyyglxt.dataobject.UserDO;
-import com.zyyglxt.permissionsUtil.JsonResult;
-import com.zyyglxt.permissionsUtil.ResultTool;
+import com.zyyglxt.util.JsonResult;
+import com.zyyglxt.util.ResultTool;
 import com.zyyglxt.service.UserService;
 import com.zyyglxt.util.UserUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,14 +43,13 @@ public class CustomizeAuthenticationSuccessHandler implements AuthenticationSucc
 
         userUtil.setUser(map);
 
-        userDo = new UserDO();
         userDo.setState("入");
         userDo.setItemid(Integer.parseInt(map.get("itemid")));
         userDo.setItemcode(map.get("itemcode"));
         userService.updateByPrimaryKeySelective(userDo);
 
         //返回json数据
-        JsonResult result = ResultTool.success();
+        JsonResult result = ResultTool.success(userDo);
         httpServletResponse.setContentType("text/json;charset=utf-8");
         httpServletResponse.getWriter().write(JSON.toJSONString(result));
     }

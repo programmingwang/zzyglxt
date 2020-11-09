@@ -34,8 +34,9 @@
             }
         }
 
-        function myAjax(aButton, url, param, fun, async, isReqJson, type="post") {
-            console.log(!objectUtil.strIsBlank(isReqJson));
+
+        function myAjax(aButton, url, param, fun, async, isReqJson,type="post") {
+
             var _setting =
                 {
                     url: url,

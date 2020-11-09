@@ -7,10 +7,7 @@ import com.zyyglxt.response.ResponseData;
 import com.zyyglxt.service.ResourcesRoleRefService;
 import com.zyyglxt.service.ResourcesService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -32,7 +29,7 @@ public class ResourcesController {
      * @return
      */
     @RequestMapping(value = "/insert", method = RequestMethod.POST)
-    public ResponseData insertSelective(ResourcesDO resourcesDO){
+    public ResponseData insertSelective(@RequestBody ResourcesDO resourcesDO){
         resourcesService.insertSelective(resourcesDO);
         return new ResponseData(EmBusinessError.success);
     }
@@ -42,7 +39,7 @@ public class ResourcesController {
      * @param resourcesDO
      */
     @RequestMapping(value = "updateresources", method = RequestMethod.PUT)
-    public ResponseData updateByPrimaryKeySelective(ResourcesDO resourcesDO){
+    public ResponseData updateByPrimaryKeySelective(@RequestBody ResourcesDO resourcesDO){
         resourcesService.updateByPrimaryKeySelective(resourcesDO);
         return new ResponseData(EmBusinessError.success);
 
@@ -53,7 +50,7 @@ public class ResourcesController {
      * @param resourcesDO
      */
     @RequestMapping(value = "/delete", method = RequestMethod.DELETE)
-    public ResponseData deleteByPrimaryKey(ResourcesDO resourcesDO){
+    public ResponseData deleteByPrimaryKey(@RequestBody ResourcesDO resourcesDO){
         resourcesService.deleteByPrimaryKey(resourcesDO);
         return new ResponseData(EmBusinessError.success);
 

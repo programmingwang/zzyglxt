@@ -19,7 +19,7 @@ public interface RoleService {
 
     int insert(RoleDO record);
 
-    void insertSelective(RoleDO roleDO, List<ResourcesDO> resourcesDOList);
+    void insertSelective(RoleDO roleDO);
 
     RoleDO selectByPrimaryKey(RoleDOKey key);
 

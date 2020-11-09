@@ -1,6 +1,8 @@
 package com.zyyglxt.config.handler;
 
 import com.alibaba.fastjson.JSON;
+import com.zyyglxt.dao.RoleDOMapper;
+import com.zyyglxt.dataobject.RoleDO;
 import com.zyyglxt.dataobject.UserDO;
 import com.zyyglxt.util.JsonResult;
 import com.zyyglxt.util.ResultTool;
@@ -27,6 +29,8 @@ import java.util.Map;
 public class CustomizeAuthenticationSuccessHandler implements AuthenticationSuccessHandler {
     @Autowired
     UserService userService;
+    @Autowired
+    RoleDOMapper roleDOMapper;
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Authentication authentication) throws IOException {
@@ -48,8 +52,9 @@ public class CustomizeAuthenticationSuccessHandler implements AuthenticationSucc
         userDo.setItemcode(map.get("itemcode"));
         userService.updateByPrimaryKeySelective(userDo);
 
+        RoleDO roleDO = roleDOMapper.selectByUserid(userDo.getItemcode());
         //返回json数据
-        JsonResult result = ResultTool.success(userDo);
+        JsonResult result = ResultTool.success(roleDO.getRoleName());
         httpServletResponse.setContentType("text/json;charset=utf-8");
         httpServletResponse.getWriter().write(JSON.toJSONString(result));
     }

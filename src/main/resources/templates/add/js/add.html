@@ -3,42 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <style>
-        .upload-wrap{
-            position: relative;
-            display: inline-block;
-            overflow: hidden;
+    <title>Add</title>
+    <link rel="stylesheet" th:href="@{/project/js/add/css/add.css}">
 
-            border-radius: 3px;
-        }
-        .upload-wrap .file-ele{
-            position: absolute;
-            top:0;
-            right:0;
-            opacity: 0;
-            height: 100%;
-            width: 100%;
-            cursor: pointer;
-        }
-        .upload-wrap .file-open{
-            width:90px;
-            height:36px;
-            line-height:36px;
-            text-align: center;
-            color:#fff;
-            background: red;
-        }
-        label{
-            text-align: right;
-        }
-    </style>
 </head>
 <body>
 <div class="row">
-    <div class="col-1"></div>
-    <div class="col-10">
+    <div class="col-12">
         <form>
+            <div class="form-group row">
+                <label for="exampleFormControlFile1" class="col-sm-2 col-form-label">上传图片：</label>
+                <div class="upload-wrap anticon col-sm-3" nv-file-drop="" uploader="uploader">
+                    <input  id="aImg" class="file-ele" type="file" file-model="image" name="image" nv-file-select uploader="uploader" multiple accept="image/jpg,image/jpeg,image/png,image/PNG" />
+                    <div class="file-open" id="upimg"> <p> 选择图片</p> </div>
+                    <img src="#" alt="" style="display: none;" id="img1">
+                </div>
+                <button type="button" class="btn btn-danger" id="clsbtn">清除图片</button>
+            </div>
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label">文章标题：</label>
                 <div class="col-sm-3">
@@ -60,13 +41,19 @@
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label">中医医史介绍：</label>
                 <div id="div1" class="col-sm-8">
+
                 </div>
             </div>
             <div class="form-group row">
-                <label for="exampleFormControlFile1" class="col-sm-2 col-form-label">附件：</label>
-                <div class="upload-wrap anticon" nv-file-drop="" uploader="uploader">
-                    <input class="file-ele" type="file" file-model="image" name="image" nv-file-select uploader="uploader" multiple />
+                <label for="exampleFormControlFile2" class="col-sm-2 col-form-label">附件：</label>
+                <div class="upload-wrap anticon col-sm-3" nv-file-drop="" uploader="uploader">
+                    <input id="upfile" class="file-ele" type="file" file-model="image" name="image" nv-file-select uploader="uploader" multiple />
                     <div class="file-open"><em class="upload"></em>&nbsp;选择附件</div>
+
+                </div>
+                <button type="button" class="btn btn-danger" id="clsfile">清除文件</button>
+                <div  id="addFile">
+                    <!-- <p> </p> -->
                 </div>
             </div>
 
@@ -88,7 +75,6 @@
         </form>
 
     </div>
-    <div class="col-1"></div>
 </div>
 <script type="text/javascript" data-main="/main/main.js" th:src="@{/component/require@2.3.6/require-2.3.6.js}"></script>
 <script type="text/javascript" th:src="@{/project/js/add/js/add.js}"></script>

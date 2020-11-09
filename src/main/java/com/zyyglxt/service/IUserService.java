@@ -15,13 +15,13 @@ public interface IUserService {
 
     ResponseData Register(UserDto userDto) throws BusinessException;
 
-    int Login(String username, String password) throws BusinessException;
+//    int Login(String username, String password) throws BusinessException;
 
     ResponseData UpdatePassword(UpdatePwdDto updatePwdDto);
 
     UserDO selectOne();
 
-    void Logout();
+//    void Logout();
 
     void UpdateUserMsg(UserDO userDO);
 }

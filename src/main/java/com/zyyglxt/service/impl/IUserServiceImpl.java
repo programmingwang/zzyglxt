@@ -131,50 +131,50 @@ public class IUserServiceImpl implements IUserService {
      * @param username
      * @param password
      */
-    @Override
-    @Transactional
-    public int Login(String username, String password) throws BusinessException {
-        /*
-         将拿到的前端用户名和密码加盐后查询数据库，
-         如果查到记录，则登录成功，否则，登录失败
-         */
-        password = DigestUtils.md5Hex(password + username);
-        UserDO userDO = userDOMapper.selectByUsernameAndPassword(username, password);
-        if (userDO != null) {
-            Map<String, String> map = new HashMap<>();
-            UserUtil userUtil = new UserUtil();
-            map.put("username", username);
-            map.put("itemid", String.valueOf(userDO.getItemid()));
-            map.put("itemcode", userDO.getItemcode());
-
-            userUtil.setUser(map);
-
-            userDO = new UserDO();
-            userDO.setState("入");
-            userDO.setItemid(Integer.parseInt(map.get("itemid")));
-            userDO.setItemcode(map.get("itemcode"));
-
-            userDOMapper.updateByPrimaryKeySelective(userDO);
-            return 200;
-        } else {
-            throw new BusinessException("用户名或密码错误", EmBusinessError.USER_LOGIN_FAILED);
-        }
-    }
+//    @Override
+//    @Transactional
+//    public int Login(String username, String password) throws BusinessException {
+//        /*
+//         将拿到的前端用户名和密码加盐后查询数据库，
+//         如果查到记录，则登录成功，否则，登录失败
+//         */
+//        password = DigestUtils.md5Hex(password + username);
+//        UserDO userDO = userDOMapper.selectByUsernameAndPassword(username, password);
+//        if (userDO != null) {
+//            Map<String, String> map = new HashMap<>();
+//            UserUtil userUtil = new UserUtil();
+//            map.put("username", username);
+//            map.put("itemid", String.valueOf(userDO.getItemid()));
+//            map.put("itemcode", userDO.getItemcode());
+//
+//            userUtil.setUser(map);
+//
+//            userDO = new UserDO();
+//            userDO.setState("入");
+//            userDO.setItemid(Integer.parseInt(map.get("itemid")));
+//            userDO.setItemcode(map.get("itemcode"));
+//
+//            userDOMapper.updateByPrimaryKeySelective(userDO);
+//            return 200;
+//        } else {
+//            throw new BusinessException("用户名或密码错误", EmBusinessError.USER_LOGIN_FAILED);
+//        }
+//    }
 
     /**
      * 退出登录，更改状态
      */
-    @Override
-    public void Logout() {
-        UserUtil userUtil = new UserUtil();
-        UserDO userDO = new UserDO();
-        userDO.setState("出");
-        userDO.setItemid(Integer.parseInt(userUtil.getUser().get("itemid")));
-        userDO.setItemcode(userUtil.getUser().get("itemcode"));
-
-        userDOMapper.updateByPrimaryKeySelective(userDO);
-        userUtil.removeUser();// 从session中删除用户名
-    }
+//    @Override
+//    public void Logout() {
+//        UserUtil userUtil = new UserUtil();
+//        UserDO userDO = new UserDO();
+//        userDO.setState("出");
+//        userDO.setItemid(Integer.parseInt(userUtil.getUser().get("itemid")));
+//        userDO.setItemcode(userUtil.getUser().get("itemcode"));
+//
+//        userDOMapper.updateByPrimaryKeySelective(userDO);
+//        userUtil.removeUser();// 从session中删除用户名
+//    }
 
     /**
      * 修改密码

@@ -77,44 +77,6 @@
             myUpdateModal.show();
         }
 
-        // function addModule(row){
-        //     var myAddModuleModalData ={
-        //         modalBodyID : "myAddModuleModal",
-        //         modalTitle : "新增模块",
-        //         modalConfirmFun:function () {
-        //             var moduleEntity = {
-        //                 moduleName: $("#moduleName").val(),
-        //                 projectID: $("#projectID").val(),
-        //             };
-        //
-        //             ajaxUtil.myAjax(null,"api/project/addModule",moduleEntity,function (data) {
-        //                 if(ajaxUtil.success(data)){
-        //                     alertUtil.info("新增模块成功");
-        //                     refreshTable();
-        //                     myaddModuleModal.hide();
-        //                 }else {
-        //                     alertUtil.alert(data.msg)
-        //                 }
-        //             },false);
-        //         //    数据能正常入库，只是刚刚加入的数据无法正常同步，不知道为什么？？
-        //
-        //         }
-        //
-        //     };
-        //     var myaddModuleModal = modalUtil.init(myAddModuleModalData);
-        //
-        //     var pl = dictUtil.getDictByCode(dictUtil.DICT_LIST.PROJECT_LIST);
-        //     $("#projectID").selectUtil(pl).on('change',function () {
-        //         var ml = dictUtil.getDictByCode(dictUtil.DICT_LIST.Module_LIST,$("#projectID").val(),true);
-        //         $("#moduleName").selectUtil(ml);
-        //     });
-        //
-        //     var ml = dictUtil.getDictByCode(dictUtil.DICT_LIST.Module_LIST,stringUtil.isBlank(row) ? $("#projectID").val() : row.projectID ,true);
-        //     $("#moduleName").selectUtil(ml);
-        //
-        //     myaddModuleModal.show();
-        // }
-
         //修改事件
         window.orgEvents = {
             'click .edit' : function(e, value, row, index) {
@@ -147,8 +109,7 @@
             }
         };
 
-
-        $("#search").unbind().on("click",function () {
+        /*$("#search").unbind().on("click",function () {
             var param = {
 
             };
@@ -158,12 +119,24 @@
 
         $("#btn_addProject").unbind().on('click',function () {
             addUpdate("add");
-        });
+        });*/
 
         // $("#btn_addModule").unbind().on('click',function () {
         //     addModule();
         // });
 
+        $("#btn_addTask").unbind().on('click',function () {
+            $("#main_body").html("");
+            var url = "/data/addNewsRotations";
+            orange.loadPage({url: url, target: 'main_body', selector: '#fir_body', success: function(data){
+
+                    if(data == null||data == ""){
+                        return alertUtil.error( url+'加载失败');
+                    }
+
+                    $("#main_body").html(data);
+                }})
+        });
 
         var aCol = [
             {field: 'dataTitle', title: '新闻标题'},

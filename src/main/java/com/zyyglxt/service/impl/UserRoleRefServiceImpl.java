@@ -6,8 +6,10 @@ import com.zyyglxt.dataobject.UserRoleRefDOKey;
 import com.zyyglxt.error.BusinessException;
 import com.zyyglxt.error.EmBusinessError;
 import com.zyyglxt.service.UserRoleRefService;
-import com.zyyglxt.permissionsUtil.DateUtils;
-import com.zyyglxt.permissionsUtil.UUIDUtils;
+
+import com.zyyglxt.util.DateUtils;
+
+import com.zyyglxt.util.UUIDUtils;
 import com.zyyglxt.validator.ValidatorImpl;
 import com.zyyglxt.validator.ValidatorResult;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,7 +40,6 @@ public class UserRoleRefServiceImpl implements UserRoleRefService {
             throw new BusinessException(result.getErrMsg(), EmBusinessError.PARAMETER_VALIDATION_ERROR);
         }
         record.setItemcode(UUIDUtils.getUUID());
-        record.setItemcreateat(DateUtils.getDate());
         return userRoleRefDOMapper.insertSelective(record);
     }
 
@@ -49,13 +50,11 @@ public class UserRoleRefServiceImpl implements UserRoleRefService {
 
     @Override
     public int updateByPrimaryKeySelective(UserRoleRefDO record) {
-        record.setItemupdateat(DateUtils.getDate());
         return userRoleRefDOMapper.updateByPrimaryKeySelective(record);
     }
 
     @Override
     public int updateByKeySelective(UserRoleRefDO record) {
-        record.setItemupdateat(DateUtils.getDate());
         return userRoleRefDOMapper.updateByKeySelective(record);
     }
 

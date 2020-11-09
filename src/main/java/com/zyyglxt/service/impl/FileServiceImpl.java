@@ -3,15 +3,21 @@ package com.zyyglxt.service.impl;
 import com.zyyglxt.dao.FileDOMapper;
 import com.zyyglxt.dataobject.FileDO;
 import com.zyyglxt.dataobject.FileDOKey;
+import com.zyyglxt.dto.FileDto;
 import com.zyyglxt.error.BusinessException;
 import com.zyyglxt.error.EmBusinessError;
 import com.zyyglxt.service.IFileService;
 import com.zyyglxt.validator.ValidatorImpl;
 import com.zyyglxt.validator.ValidatorResult;
+import org.apache.commons.io.FilenameUtils;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
+import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -22,10 +28,13 @@ import java.util.List;
 @Service
 public class FileServiceImpl implements IFileService {
 
+
     @Resource
-    FileDOMapper fileDOMapper;
+    private FileDOMapper fileDOMapper;
     @Autowired
     private ValidatorImpl validator;
+    @Resource
+    private IFileService fileService;
 
     @Override
     public int addFile(FileDO fileDO) {
@@ -33,6 +42,7 @@ public class FileServiceImpl implements IFileService {
         if(result.isHasErrors()){
             throw new BusinessException(result.getErrMsg(), EmBusinessError.PARAMETER_VALIDATION_ERROR);
         }
+        fileDO.setItemcreateat(new Date());
         return fileDOMapper.insertSelective(fileDO);
     }
 
@@ -46,7 +56,7 @@ public class FileServiceImpl implements IFileService {
     }
 
     @Override
-    public int deleteFile(FileDOKey fileDOKey) {
+    public int deleteFileByKey(FileDOKey fileDOKey) {
         ValidatorResult result = validator.validate(fileDOKey);
         if(result.isHasErrors()){
             throw new BusinessException(result.getErrMsg(), EmBusinessError.PARAMETER_VALIDATION_ERROR);
@@ -73,33 +83,11 @@ public class FileServiceImpl implements IFileService {
     }
 
     @Override
-    public List<FileDO> selectFileByDataCode(String dataCode) {
+    public FileDO selectFileByDataCode(String dataCode) {
         if(dataCode.isEmpty()){
             throw new BusinessException("数据源code不能为空", EmBusinessError.PARAMETER_VALIDATION_ERROR);
         }
         return fileDOMapper.selectFileByDataCode(dataCode);
-    }
-
-    @Override
-    public FileDO selectFileByDataCodeAndType(String dataCode, String fileType) {
-        if(dataCode.isEmpty()){
-            throw new BusinessException("数据源code不能为空", EmBusinessError.PARAMETER_VALIDATION_ERROR);
-        }
-        if (fileType.isEmpty()){
-            throw new BusinessException("文件类型不能为空", EmBusinessError.PARAMETER_VALIDATION_ERROR);
-        }
-        return fileDOMapper.selectFileByDataCodeAndType(dataCode,fileType);
-    }
-
-    @Override
-    public FileDO selectFileByDataCodeAndName(String dataCode, String fileName) {
-        if(dataCode.isEmpty()){
-            throw new BusinessException("数据源code不能为空", EmBusinessError.PARAMETER_VALIDATION_ERROR);
-        }
-        if (fileName.isEmpty()){
-            throw new BusinessException("文件名称不能为空", EmBusinessError.PARAMETER_VALIDATION_ERROR);
-        }
-        return fileDOMapper.selectFileByDataCodeAndName(dataCode,fileName);
     }
 
     @Override
@@ -111,14 +99,14 @@ public class FileServiceImpl implements IFileService {
     }
 
     @Override
-    public int deleteFileByDataCodeAndType(String dataCode, String fileType) {
-        if(dataCode.isEmpty()){
-            throw new BusinessException("数据源code不能为空", EmBusinessError.PARAMETER_VALIDATION_ERROR);
+    public void uploadFile(FileDO fileDO) {
+        ValidatorResult result = validator.validate(fileDO);
+        if(result.isHasErrors()){
+            throw new BusinessException(result.getErrMsg(), EmBusinessError.PARAMETER_VALIDATION_ERROR);
         }
-        if (fileType.isEmpty()){
-            throw new BusinessException("文件类型不能为空", EmBusinessError.PARAMETER_VALIDATION_ERROR);
-        }
-        return fileDOMapper.deleteByDataCodeAndType(dataCode,fileType);
+        /*对文件上传记录表操作，记录上传信息*/
+        fileService.addFile(fileDO);
     }
+
 
 }

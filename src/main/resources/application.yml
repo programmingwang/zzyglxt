@@ -29,8 +29,8 @@ mybatis:
 
 server:
   port: 8989
-  servlet:
-    context-path: /zyyglxt
+#  servlet:
+#    context-path: /zyyglxt
     
 #logging:
 #  file:

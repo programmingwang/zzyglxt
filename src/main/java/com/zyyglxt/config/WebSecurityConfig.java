@@ -90,7 +90,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     logoutSuccessHandler(logoutSuccessHandler).//登出成功处理逻辑
                     deleteCookies("JSESSIONID").//登出之后删除cookie
                 //登入
-                and().formLogin().
+                and().formLogin().loginPage("/userLogin").
                     permitAll().//允许所有用户
                     successHandler(authenticationSuccessHandler).//登录成功处理逻辑
                     failureHandler(authenticationFailureHandler).//登录失败处理逻辑

@@ -1,0 +1,27 @@
+.upload-wrap{
+    position: relative;
+    display: inline-block;
+    overflow: hidden;
+
+    border-radius: 3px;
+}
+.upload-wrap .file-ele{
+    position: absolute;
+    top:0;
+    right:0;
+    opacity: 0;
+    height: 100%;
+    width: 100%;
+    cursor: pointer;
+}
+.upload-wrap .file-open{
+    width:90px;
+    height:36px;
+    line-height:36px;
+    text-align: center;
+    color:#fff;
+    background: red;
+}
+label{
+    text-align: right;
+}

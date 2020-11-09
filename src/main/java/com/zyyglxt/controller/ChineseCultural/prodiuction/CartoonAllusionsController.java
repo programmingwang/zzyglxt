@@ -2,14 +2,16 @@ package com.zyyglxt.controller.ChineseCultural.prodiuction;
 
 import com.zyyglxt.dataobject.ChineseCulturalDO;
 import com.zyyglxt.dataobject.ChineseCulturalDOKey;
-import com.zyyglxt.error.BusinessException;
+import com.zyyglxt.dto.ChineseCulturalDto;
 import com.zyyglxt.error.EmBusinessError;
 import com.zyyglxt.response.ResponseData;
 import com.zyyglxt.service.ICartoonAllusionsService;
-import org.springframework.ui.Model;
+import com.zyyglxt.service.IFileService;
+import com.zyyglxt.util.ConvertDOToDTOUtil;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -25,12 +27,24 @@ public class CartoonAllusionsController {
     @Resource
     private ICartoonAllusionsService iCartoonAllusionsService;
 
+    @Resource
+    private IFileService iFileService;
+
+
+
     //获取所有的漫画典故
     @RequestMapping(value = "/getAll" , method = RequestMethod.GET)
     @ResponseBody
     public ResponseData getAllCartoonAllusions(){
         List<ChineseCulturalDO> cartoonAllusionsList = iCartoonAllusionsService.getCartoonAllusionsList();
-        return new ResponseData(EmBusinessError.success,cartoonAllusionsList);
+        List<ChineseCulturalDto> chineseCulturalDtoList = new ArrayList<>();
+        for (ChineseCulturalDO chineseCulturalDO : cartoonAllusionsList) {
+            chineseCulturalDtoList.add(
+                    ConvertDOToDTOUtil.convertFromDOToDTO(
+                            chineseCulturalDO,iFileService.selectFileByDataCode(
+                                    chineseCulturalDO.getItemcode()).getFilePath()));
+        }
+        return new ResponseData(EmBusinessError.success,chineseCulturalDtoList);
     }
 
 //    //查询一个漫画典故

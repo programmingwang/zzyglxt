@@ -23,6 +23,7 @@ import com.zyyglxt.validator.ValidatorResult;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -101,8 +102,9 @@ public class IUserServiceImpl implements IUserService {
         userDO.setItemcode(userItemCode);
         userDO.setOrgCode(orgItemCode);
         userDO.setUsername(userDto.getUsername());
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        String password= passwordEncoder.encode(userDto.getPassword());
         userDO.setSalt(userDto.getUsername());// 将 登陆账号 设置为 盐，存放到数据库中
-        String password = DigestUtils.md5Hex(userDto.getPassword() + userDto.getUsername());// 加盐，实现密码加密
         userDO.setPassword(password);
         userDO.setState("出");
         userDO.setMobilephone(userDto.getMobilePhone());

@@ -2,14 +2,16 @@ package com.zyyglxt.controller.ChineseCultural.facility;
 
 import com.zyyglxt.dataobject.ChineseCulturalDO;
 import com.zyyglxt.dataobject.ChineseCulturalDOKey;
-import com.zyyglxt.error.BusinessException;
+import com.zyyglxt.dto.ChineseCulturalDto;
 import com.zyyglxt.error.EmBusinessError;
 import com.zyyglxt.response.ResponseData;
 import com.zyyglxt.service.ICulturalVenuesService;
-import org.springframework.ui.Model;
+import com.zyyglxt.service.IFileService;
+import com.zyyglxt.util.ConvertDOToDTOUtil;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -26,12 +28,23 @@ public class   CulturalVenuesController {
     @Resource
     private ICulturalVenuesService iCulturalVenuesService;
 
+    @Resource
+    private IFileService iFileService;
+
+
     //获取所有的文化场馆
     @RequestMapping(value = "/getAll" , method = RequestMethod.GET)
     @ResponseBody
     public ResponseData getAllCulturalVenues(){
         List<ChineseCulturalDO> culturalVenuesList = iCulturalVenuesService.getCulturalVenuesList();
-        return new ResponseData(EmBusinessError.success,culturalVenuesList);
+        List<ChineseCulturalDto> chineseCulturalDtoList = new ArrayList<>();
+        for (ChineseCulturalDO chineseCulturalDO : culturalVenuesList) {
+            chineseCulturalDtoList.add(
+                    ConvertDOToDTOUtil.convertFromDOToDTO(
+                            chineseCulturalDO,iFileService.selectFileByDataCode(
+                                    chineseCulturalDO.getItemcode()).getFilePath()));
+        }
+        return new ResponseData(EmBusinessError.success,chineseCulturalDtoList);
     }
 
 //    //查询一个文化场馆

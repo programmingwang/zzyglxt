@@ -2,7 +2,6 @@ package com.zyyglxt.service;
 
 import com.zyyglxt.dataobject.FileDO;
 import com.zyyglxt.dataobject.FileDOKey;
-
 import java.util.List;
 
 /**
@@ -13,13 +12,11 @@ import java.util.List;
 public interface IFileService {
     int addFile(FileDO fileDO);
     int updateFile(FileDO fileDO);
-    int deleteFile(FileDOKey fileDOKey);
+    int deleteFileByKey(FileDOKey fileDOKey);
     List<FileDO> selectAllFile();
     List<FileDO> searchFile(String keyWord);
     List<FileDO> top5File();
-    List<FileDO> selectFileByDataCode(String dataCode);
-    FileDO selectFileByDataCodeAndType(String dataCode, String fileType);
-    FileDO selectFileByDataCodeAndName(String dataCode, String fileName);
+    FileDO selectFileByDataCode(String dataCode);
     int deleteFileByDataCode(String dataCode);
-    int deleteFileByDataCodeAndType(String dataCode, String fileType);
+    void uploadFile(FileDO fileDO);
 }

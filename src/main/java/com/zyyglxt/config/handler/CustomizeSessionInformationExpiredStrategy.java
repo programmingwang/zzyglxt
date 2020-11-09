@@ -2,8 +2,8 @@ package com.zyyglxt.config.handler;
 
 import com.alibaba.fastjson.JSON;
 import com.zyyglxt.error.EmBusinessError;
-import com.zyyglxt.permissionsUtil.JsonResult;
-import com.zyyglxt.permissionsUtil.ResultTool;
+import com.zyyglxt.util.JsonResult;
+import com.zyyglxt.util.ResultTool;
 import org.springframework.security.web.session.SessionInformationExpiredEvent;
 import org.springframework.security.web.session.SessionInformationExpiredStrategy;
 import org.springframework.stereotype.Component;

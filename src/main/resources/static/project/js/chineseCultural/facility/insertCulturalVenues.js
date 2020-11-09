@@ -65,6 +65,26 @@
                     chineseCulturalContent : editor.txt.html()
                 };
 
+                var formData = new FormData();
+                formData.append("dataCode",culRelEntity.itemcode);
+                formData.append("file",$("#upload_file")[0].files[0]);
+                formData.append("itemcode",stringUtil.getUUID());
+                formData.append("uploader","admin");
+                formData.append("uploaderCode","qweqwqwewasdasd");
+                $.ajax({
+                    url:"/file/upload",
+                    type:'POST',
+                    data: formData,
+                    processData: false,   // jQuery不要去处理发送的数据
+                    contentType: false,   // jQuery不要去设置Content-Type请求头
+                    success:function(data){
+                        alertUtil.success(data.msg);
+                    },
+                    error: function(data){
+                        alertUtil.error(data.msg)
+                    }
+                });
+
                 ajaxUtil.myAjax(null,"/cul/fac/culVen/addCulVen",culRelEntity,function (data) {
                     if(ajaxUtil.success(data)){
                         alertUtil.info("新增文化场馆成功");

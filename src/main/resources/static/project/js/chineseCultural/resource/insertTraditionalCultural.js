@@ -67,7 +67,7 @@
 
                 ajaxUtil.myAjax(null,"/cul/res/traCul/addTraCul",traCulEntity,function (data) {
                     if(ajaxUtil.success(data)){
-                        alertUtil.info("新增旅游景点成功");
+                        alertUtil.info("新增中医医史成功");
                         var url = "/chineseCultural/resource/traditionalCultural";
                         orange.loadPage({url: url, target: 'main_body', selector: '#fir_body', success: function(data){
                                 if(data == null||data == ""){

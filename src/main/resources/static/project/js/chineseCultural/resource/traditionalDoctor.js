@@ -123,7 +123,13 @@
 
             var aCol = [
                 {field: 'chineseCulturalName', title: '历代名家姓名'},
-                {field: 'filePath', title: '图片'},
+                {field: 'filePath', title: '图片', formatter:function (value, row, index) {
+                        if(value == "已经损坏了"){
+                            return '<p>'+value+'</p>';
+                        }else{
+                            return '<img  src='+value+' width="100" height="100" class="img-rounded" >';
+                        }
+                }},
                 {field: 'chineseCulturalSource', title: '来源'},
                 {field: 'chineseCulturalAuthor', title: '作者'},
                 {field: 'itemcreateat', title: '创建时间'},

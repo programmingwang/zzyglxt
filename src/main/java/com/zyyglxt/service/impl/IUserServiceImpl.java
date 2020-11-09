@@ -258,7 +258,11 @@ public class IUserServiceImpl implements IUserService {
         if (!StringUtils.isEmpty(isValidIDCardNo)) {
             throw new BusinessException(isValidIDCardNo, EmBusinessError.PARAMETER_VALIDATION_ERROR);
         }
-        // 还需加上信息的验证，如电话是否正确等
+        // 验证电话是否正确
+        if (!MobileUtil.checkPhone(userDO.getMobilephone())) {
+            throw new BusinessException("手机号码不正确！", EmBusinessError.MOBILEPHONE_ERROR);
+        }
+
         UserUtil userUtil = new UserUtil();
         int userItemID = Integer.parseInt(userUtil.getUser().get("itemid"));
         String userItemCode = userUtil.getUser().get("itemcode");

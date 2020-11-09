@@ -24,7 +24,9 @@
                     modalConfirmFun:function () {
                         var projectEntity = {
                             projectName: $("#projectName").val(),
-                            projectNo: $("#projectNo").val(),
+                            industrialDevelopName: $("#industrialDevelopName").val(),
+                            industrialDevelopLeader: $("#industrialDevelopLeader").val(),
+                            industrialDevelopStatus: $("#industrialDevelopStatus").val()
                         };
 
                         if(addOrUpdate === "add"){
@@ -59,20 +61,14 @@
                 var myUpdateModal = modalUtil.init(myUpdateModalData);
 
 
-                var pl = dictUtil.getDictByCode(dictUtil.DICT_LIST.PROJECT_LIST);
-                $("#projectName").selectUtil(pl).on('change',function () {
-                    var ml = dictUtil.getDictByCode(dictUtil.DICT_LIST.Module_LIST,$("#projectName").val(),true);
-                    $("#moduleName").selectUtil(ml);
-                });
 
-                var ml = dictUtil.getDictByCode(dictUtil.DICT_LIST.Module_LIST,stringUtil.isBlank(row) ? $("#projectName").val() : row.projectID ,true);
-                $("#moduleName").selectUtil(ml);
+
 
                 if(addOrUpdate === "update"){
                     $("#projectName").val(row.projectName);
-                    $("#projectNo").val(row.projectNo);
-                    $("#createBy").val(row.createBy);
-                    $("#createAt").val(stringUtil.formatDateTime(row.createAt));
+                    $("#industrialDevelopName").val(row.industrialDevelopName);
+                    $("#industrialDevelopLeader").val(row.industrialDevelopLeader);
+                    $("#industrialDevelopStatus").val(row.industrialDevelopStatus)
                 }
                 myUpdateModal.show();
             }
@@ -122,8 +118,8 @@
                 },
                 'click .delete': function (e, value, row, index) {
                     var myDeleteModalData ={
-                        modalBodyID : "myDeleteModalProject",
-                        modalTitle : "删除项目",
+                        modalBodyID : "myDeleteAchievement",
+                        modalTitle : "删除科研成果",
                         modalClass : "modal-lg",
                         confirmButtonClass : "btn-danger",
                         modalConfirmFun:function () {
@@ -161,9 +157,21 @@
                 addUpdate("add");
             });
 
-            // $("#btn_addModule").unbind().on('click',function () {
-            //     addModule();
-            // });
+            $("#btn_addTask").unbind().on('click',function () {
+                $("#main_body").html("");
+                var url = "/add/js/industrialDev/achievement";
+                orange.loadPage({url: url, target: 'main_body', selector: '#fir_body', success: function(data){
+
+                        if(data == null||data == ""){
+                            return alertUtil.error( url+'加载失败');
+                        }
+
+                        $("#main_body").html(data);
+                    }})
+            });
+
+            var pl = dictUtil.getDictByCode(dictUtil.DICT_LIST.showStatus);
+            $("#chargePersonSearch").selectUtil(pl);
 
 
             var aCol = [

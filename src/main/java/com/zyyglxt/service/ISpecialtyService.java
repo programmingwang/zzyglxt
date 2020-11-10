@@ -16,8 +16,9 @@ import java.util.List;
 public interface ISpecialtyService {
     void addSpecialty(SpecialtyDto specialtyDto);
     void updateSpecialty(SpecialtyDto specialtyDto);
-    void deleteSpecialty(SpecialtyDto specialtyDto);
+    void deleteSpecialty(SpecialtyDOKey specialtyDOKey);
     List<SpecialtyDO> selectAllSpecialty();
     List<SpecialtyDO> searchSpecialty(String keyWord);
     List<SpecialtyDO> top5Specialty();
+    List<SpecialtyDO> selectByHospCode(String hospCode);
 }

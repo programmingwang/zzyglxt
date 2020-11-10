@@ -15,3 +15,10 @@ import javax.validation.constraints.NotBlank;
 public class HospDto extends HospDO {
     private String filePath;
 }
+
+
+
+
+
+
+

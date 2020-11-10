@@ -145,7 +145,8 @@
                     id: "6-4",
                     level: "2",
                     pid: "6"
-
+                },
+                {
                     menu_name : "名老中医",
                     menu_url: "",
                     id:"7",

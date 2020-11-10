@@ -4,12 +4,14 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.zyyglxt.dataobject.validation.ValidationGroups;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotBlank;
 import java.util.Date;
 
 @Data
+@EqualsAndHashCode(callSuper = false)
 @NoArgsConstructor
 @AllArgsConstructor
 public class IndustrialDevelopCooExcDO extends IndustrialDevelopCooExcDOKey {
@@ -17,8 +19,7 @@ public class IndustrialDevelopCooExcDO extends IndustrialDevelopCooExcDOKey {
     @NotBlank(message = "合作交流名称不能为空",groups = ValidationGroups.Insert.class)
     private String cooperationExchangeName;
 
-    
-    @NotBlank(message = "合作交流主研人不能为空",groups = ValidationGroups.Insert.class)
+
     private String cooperationExchangeLeader;
 
     
@@ -28,11 +29,6 @@ public class IndustrialDevelopCooExcDO extends IndustrialDevelopCooExcDOKey {
     @NotBlank(message = "项目简介不能为空",groups = ValidationGroups.Insert.class)
     private String projectIntroduce;
 
-    
-    @NotBlank(message = "项目单位不能为空",groups = ValidationGroups.Insert.class)
-    private String projectUnit;
-
-    
     @NotBlank(message = "联系人不能为空",groups = ValidationGroups.Insert.class)
     private String contacts;
 
@@ -53,7 +49,6 @@ public class IndustrialDevelopCooExcDO extends IndustrialDevelopCooExcDOKey {
     
     private String creater;
 
-    
     @JsonFormat(timezone = "GMT+8")
     private Date itemcreateat;
 

@@ -14,6 +14,7 @@ import com.zyyglxt.util.UUIDUtils;
 import com.zyyglxt.validator.ValidatorImpl;
 import com.zyyglxt.validator.ValidatorResult;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -62,6 +63,7 @@ public class UserServiceImpl implements UserService {
             throw new BusinessException(result.getErrMsg(), EmBusinessError.PARAMETER_VALIDATION_ERROR);
         }
         //添加用户
+        record.setPassword(new BCryptPasswordEncoder().encode(record.getPassword()));
         record.setItemcode(UUIDUtils.getUUID());
         userDOMapper.insertSelective(record);
         //分配角色

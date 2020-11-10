@@ -123,7 +123,7 @@
             });
 
             var aCol = [
-                {field: 'name', title: '科普知识标题'},
+                {field: 'name', title: '国医话健康标题'},
                 {field: 'source', title: '来源'},
                 {field: 'author', title: '作者'},
                 {field:'itemcreateat',title:'发布时间'},

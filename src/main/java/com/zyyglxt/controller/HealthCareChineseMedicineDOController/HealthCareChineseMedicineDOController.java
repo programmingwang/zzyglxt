@@ -43,7 +43,7 @@ public class HealthCareChineseMedicineDOController {
     /*
       中医药名称相关数据的删除
     */
-    @RequestMapping(value ="deletehealthcarechinesemedicinedo",method = RequestMethod.POST )
+    @RequestMapping(value ="deletehealthcarechinesemedicinedo",method = RequestMethod.DELETE )
     public ResponseData deleteHealthCareChineseMedicineDOMapper(@RequestBody HealthCareChineseMedicineDOKey key){
         healthCareChineseMedicineDOService.deleteByPrimaryKey(key);
         System.out.println("要删除中医药编号为："+key.getItemid());

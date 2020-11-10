@@ -90,6 +90,9 @@
                     modalClass : "modal-lg",
                     confirmButtonClass : "btn-danger",
                     modalConfirmFun:function () {
+                        var projectEntity = {
+                            projectID: row.projectID
+                        };
                         var isSuccess = false;
                         ajaxUtil.myAjax(null,"/cul/pro/movTv/delMovTv/"+row.itemid+"/"+row.itemcode,null,function (data) {
                             if(ajaxUtil.success(data)){

@@ -426,6 +426,7 @@
                 loadPage(currentUrlHash);
             }
 
+            $("#userName").text(sessionStorage.getItem('username'))
         })
 })();
 

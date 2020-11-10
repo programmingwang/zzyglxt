@@ -1,5 +1,6 @@
 package com.zyyglxt.dao;
 
+import com.zyyglxt.dataobject.DataDO;
 import com.zyyglxt.dataobject.FamPreDO;
 import com.zyyglxt.dataobject.FamPreDOKey;
 import com.zyyglxt.dataobject.IndustrialDevelopSciAchiDOKey;
@@ -30,4 +31,6 @@ public interface FamPreDOMapper {
     List<FamPreDO> selectAllFamPre();//查询所有历史名方
 
     int updateVisitNumFamPre(FamPreDOKey key);
+
+    List<FamPreDO> searchFamPre(String keyWord);
 }

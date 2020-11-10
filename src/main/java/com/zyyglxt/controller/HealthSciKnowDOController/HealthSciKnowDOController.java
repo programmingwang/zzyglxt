@@ -6,13 +6,12 @@ import com.zyyglxt.error.BusinessException;
 import com.zyyglxt.error.EmBusinessError;
 import com.zyyglxt.response.ResponseData;
 import com.zyyglxt.service.HealthSciKnowDOService;
+import com.zyyglxt.service.IFileService;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -24,6 +23,9 @@ import java.util.List;
 public class HealthSciKnowDOController {
     @Resource
      private HealthSciKnowDOService healthSciKnowDOService;
+
+    @Resource
+    private IFileService iFileService;
     /*
     科普知识相关数据插入
     */
@@ -36,10 +38,14 @@ public class HealthSciKnowDOController {
     /*
     科普知识相关数据的删除
     */
-    @RequestMapping(value ="deletehealthsciknowdo",method = RequestMethod.POST )
-    public ResponseData deleteHealthSciKnowDOMapper(@RequestBody HealthSciKnowDOKey key){
-        healthSciKnowDOService.deleteByPrimaryKey(key);
-        System.out.println("要删除科普知识编号为："+key.getItemid());
+    @RequestMapping(value ="deletehealthsciknowdo/{itemID}/{itemCode}",method = RequestMethod.DELETE)
+    @ResponseBody
+    public ResponseData deleteHealthSciKnowDOMapper(@PathVariable("itemID") Integer itemID,@PathVariable("itemCode")String itemCode){
+        HealthSciKnowDOKey healthSciKnowDOKey=new HealthSciKnowDOKey();
+        healthSciKnowDOKey.setItemid(itemID);
+        healthSciKnowDOKey.setItemcode(itemCode);
+        healthSciKnowDOService.deleteByPrimaryKey(healthSciKnowDOKey);
+        System.out.println("要删除科普知识编号为："+healthSciKnowDOKey.getItemid());
         return new ResponseData(EmBusinessError.success);
     }
     /*
@@ -52,21 +58,17 @@ public class HealthSciKnowDOController {
         return new ResponseData(EmBusinessError.success);
     }
     /*
-     中医药名称相关数据的查询
+     科普知识相关数据的查询
    */
     @RequestMapping(value ="selecthealthsciknowdo",method = RequestMethod.POST )
     public ResponseData selectHealthSciKnowDOMapper(@RequestBody HealthSciKnowDOKey key){
         healthSciKnowDOService.selectByPrimaryKey(key);
         return new ResponseData(EmBusinessError.success);
     }
-    /*查询所有国医话健康所有数据*/
-    @RequestMapping(value ="selectallhealthsciknowdo",method = RequestMethod.POST )
-    /*public List<HealthSciKnowDO> selectAllHealthSciKnowDOMapper(){
-        return healthSciKnowDOService.selectAllHealthSciKnow();
-    }*/
-    public ResponseData selectAllHealthSciKnowDOMapper(Model model){
+    /*查询所有科普知识所有数据*/
+    @RequestMapping(value ="selectallhealthsciknowdo",method = RequestMethod.GET)
+    public ResponseData selectAllHealthSciKnowDOMapper(){
         List<HealthSciKnowDO> healthSciKnowDOSList = healthSciKnowDOService.selectAllHealthSciKnow();
-        model.addAttribute("traditionalCulturalList",healthSciKnowDOSList);
         return new ResponseData(EmBusinessError.success,healthSciKnowDOSList);
     }
     /**
@@ -77,5 +79,6 @@ public class HealthSciKnowDOController {
     public void increaseVisitNum(@RequestBody HealthSciKnowDOKey key) {
        healthSciKnowDOService.updateVisitNumHealthSciKnow(key);
     }
+
 }
 

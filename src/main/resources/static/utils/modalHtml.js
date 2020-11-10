@@ -43,6 +43,9 @@
         modalHtml.myDeleteRegulation = '是否删除政策法规?';
         modalHtml.myDeleteProcess = '是否删除办事流程?';
 
+        modalHtml.myDeleteHospital = "是否删除医院信息？";
+        modalHtml.myDeleteSpecialty = "是否删除科室信息？";
+        modalHtml.myDeleteChineseMedicine = "是否删除名老中医信息？";
 
         return modalHtml;
 

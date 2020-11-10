@@ -1,5 +1,6 @@
 package com.zyyglxt.controller.permissionsController;
 
+import com.zyyglxt.annotation.LogAnnotation;
 import com.zyyglxt.dataobject.*;
 
 import com.zyyglxt.error.EmBusinessError;
@@ -29,6 +30,7 @@ public class UserRoleController {
      * 根据主键删除用户
      * @return 操作结果信息
      */
+    @LogAnnotation(logTitle = "删除用户", logLevel = "4")
     @RequestMapping(value = "/deletebykey",method = RequestMethod.DELETE)
     public ResponseData deleteUserByUsername(@RequestBody UserDO userDO){
         userService.deleteUserByUsername(userDO);
@@ -40,6 +42,7 @@ public class UserRoleController {
      * @param userDO
      * @return 添加结果信息
      */
+    @LogAnnotation(logTitle = "添加用户", logLevel = "3")
     @RequestMapping(value = "/insertuser",method = RequestMethod.POST)
     public ResponseData insertUserSelective(@RequestBody UserDO userDO){
         userService.insertUserSelective(userDO);
@@ -50,6 +53,7 @@ public class UserRoleController {
      * 查询所有用户
      * @return user和查询结果
      */
+    @LogAnnotation(logTitle = "查询所有用户", logLevel = "1")
     @RequestMapping(value = "/alluser",method = RequestMethod.GET)
     public ResponseData selectAllUser(){
         List<UserDO> users = userService.selectAllUser();
@@ -61,6 +65,7 @@ public class UserRoleController {
      * @param userDO
      * @return
      */
+    @LogAnnotation(logTitle = "更新用户信息", logLevel = "2")
     @RequestMapping(value = "/updateuser",method = RequestMethod.PUT)
     public ResponseData updateUserByPrimaryKeySelective(@RequestBody UserDO userDO){
         userService.updateByPrimaryKeySelective(userDO);

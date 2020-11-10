@@ -2,7 +2,6 @@ package com.zyyglxt.service;
 
 import com.zyyglxt.dataobject.ResourcesDO;
 import com.zyyglxt.dataobject.ResourcesDOKey;
-import com.zyyglxt.dataobject.RoleDO;
 import com.zyyglxt.dataobject.UserDO;
 
 import java.util.List;
@@ -31,4 +30,6 @@ public interface ResourcesService {
     List<ResourcesDO> SelectMenuByRoleCode(UserDO userDO);
 
     List<ResourcesDO> selectListByPath(String requestUrl);
+
+    List<ResourcesDO> SelectPermissionByRoleCode(UserDO userDO);
 }

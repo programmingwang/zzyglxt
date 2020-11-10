@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -46,14 +47,14 @@ public class SpecialtyServiceImpl implements ISpecialtyService {
             throw new BusinessException(result.getErrMsg(), EmBusinessError.PARAMETER_VALIDATION_ERROR);
         }
         specialtyDO = specialtyDto;
+        specialtyDO.setItemcreateat(new Date());
 
         hospSpecialtyRefDO.setItemcode(UUID.randomUUID().toString());
         hospSpecialtyRefDO.setHospitalCode(specialtyDto.getHospitalCode());
         hospSpecialtyRefDO.setSpecialtyCode(specialtyDto.getHospitalCode());
         hospSpecialtyRefDO.setCreater(specialtyDto.getCreater());
-        hospSpecialtyRefDO.setItemcreateat(specialtyDto.getItemcreateat());
+        hospSpecialtyRefDO.setItemcreateat(new Date());
         hospSpecialtyRefDO.setUpdater(specialtyDto.getUpdater());
-        hospSpecialtyRefDO.setItemupdateat(specialtyDto.getItemupdateat());
 
         specialtyDOMapper.insertSelective(specialtyDO);
         hospSpecialtyRefDOMapper.insertSelective(hospSpecialtyRefDO);

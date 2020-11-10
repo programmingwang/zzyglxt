@@ -8,6 +8,10 @@ import com.zyyglxt.dataobject.RoleDO;
 import com.zyyglxt.dataobject.RoleDOKey;
 import com.zyyglxt.error.BusinessException;
 import com.zyyglxt.error.EmBusinessError;
+
+import com.zyyglxt.util.DateUtils;
+import com.zyyglxt.util.UUIDUtils;
+
 import com.zyyglxt.service.RoleService;
 import com.zyyglxt.util.UUIDUtils;
 import com.zyyglxt.validator.ValidatorImpl;
@@ -42,7 +46,7 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
-    public void insertSelective(RoleDO roleDO, List<ResourcesDO> resourcesDOList) {
+    public void insertSelective(RoleDO roleDO) {
         ValidatorResult result = validator.validate(roleDO);
         if(result.isHasErrors()){
             throw new BusinessException(result.getErrMsg(), EmBusinessError.PARAMETER_VALIDATION_ERROR);
@@ -51,7 +55,7 @@ public class RoleServiceImpl implements RoleService {
         roleDO.setItemcode(uuid);
         roleDOMapper.insertSelective(roleDO);
         //分配resources
-        if (resourcesDOList.size()!=0){
+        /*if (resourcesDOList.size()!=0){
             ResourcesRoleRefDO resRoleRefDO = new ResourcesRoleRefDO();
             for (ResourcesDO aDo : resourcesDOList) {
                 resRoleRefDO.setItemcode(UUIDUtils.getUUID());
@@ -59,7 +63,7 @@ public class RoleServiceImpl implements RoleService {
                 resRoleRefDO.setResourceCode(aDo.getItemcode());
                 resRoleRefDOMapper.insertSelective(resRoleRefDO);
             }
-        }
+        }*/
     }
 
     @Override

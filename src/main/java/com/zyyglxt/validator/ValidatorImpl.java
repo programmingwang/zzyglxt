@@ -1,5 +1,6 @@
 package com.zyyglxt.validator;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.stereotype.Component;
 
@@ -27,10 +28,6 @@ public class ValidatorImpl implements InitializingBean {
         ValidatorResult result = new ValidatorResult();
         Set<ConstraintViolation<Object>> validateSet = validator.validate(bean,group);
         if(validateSet.size()> 0){
-
-
-            
-
             result.setHasErrors(true);
             validateSet.forEach(validate -> {
                 String errMsg = validate.getMessage();
@@ -40,4 +37,5 @@ public class ValidatorImpl implements InitializingBean {
         }
         return result;
     }
+
 }

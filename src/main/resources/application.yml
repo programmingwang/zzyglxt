@@ -19,6 +19,11 @@ spring:
 #     使项目能访问图片
   resources:
     static-locations: classpath:/static/
+  devtools:
+    restart:
+      enabled: false
+
+
 
 
 mybatis:
@@ -29,6 +34,7 @@ mybatis:
 
 server:
   port: 8989
+
 #  servlet:
 #    context-path: /zyyglxt
     

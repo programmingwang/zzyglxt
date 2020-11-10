@@ -2,14 +2,16 @@ package com.zyyglxt.controller.ChineseCultural.prodiuction;
 
 import com.zyyglxt.dataobject.ChineseCulturalDO;
 import com.zyyglxt.dataobject.ChineseCulturalDOKey;
-import com.zyyglxt.error.BusinessException;
+import com.zyyglxt.dto.ChineseCulturalDto;
 import com.zyyglxt.error.EmBusinessError;
 import com.zyyglxt.response.ResponseData;
+import com.zyyglxt.service.IFileService;
 import com.zyyglxt.service.IMovieTVService;
-import org.springframework.ui.Model;
+import com.zyyglxt.util.ConvertDOToDTOUtil;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -26,12 +28,22 @@ public class MovieTVController {
     @Resource
     private IMovieTVService iMovieTVService;
 
+    @Resource
+    private IFileService iFileService;
+
     //获取所有的电影电视
     @RequestMapping(value = "/getAll" , method = RequestMethod.GET)
     @ResponseBody
     public ResponseData getAllMovieTV(){
         List<ChineseCulturalDO> movieTVList = iMovieTVService.getMovieTVList();
-        return new ResponseData(EmBusinessError.success,movieTVList);
+        List<ChineseCulturalDto> chineseCulturalDtoList = new ArrayList<>();
+        for (ChineseCulturalDO chineseCulturalDO : movieTVList) {
+            chineseCulturalDtoList.add(
+                    ConvertDOToDTOUtil.convertFromDOToDTO(
+                            chineseCulturalDO,iFileService.selectFileByDataCode(
+                                    chineseCulturalDO.getItemcode()).getFilePath()));
+        }
+        return new ResponseData(EmBusinessError.success,chineseCulturalDtoList);
     }
 
 //    //查询一个电影电视

@@ -48,6 +48,7 @@ public class UserUtil {
      * 登出后将username从session中移除
      */
     public void removeUser() {
+        session.setAttribute(user,null);
         session.removeAttribute(user);
     }
 }

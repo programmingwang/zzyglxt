@@ -7,6 +7,11 @@ import com.zyyglxt.dataobject.*;
 
 import com.zyyglxt.error.BusinessException;
 import com.zyyglxt.error.EmBusinessError;
+
+import com.zyyglxt.util.DateUtils;
+import com.zyyglxt.util.MenuTreeUtil;
+import com.zyyglxt.util.UUIDUtils;
+
 import com.zyyglxt.service.ResourcesService;
 import com.zyyglxt.util.DateUtils;
 import com.zyyglxt.util.MenuTreeUtil;
@@ -91,17 +96,23 @@ public class ResourcesServiceImpl implements ResourcesService {
 
     @Override
     public List<ResourcesDO> SelectMenuByRoleCode(UserDO userDO) {
-        Integer type = userDO.getType();
-        RoleDO roleDO = roleDOMapper.selectByRoleType(type);
+        RoleDO roleDO = roleDOMapper.selectByUserid(userDO.getItemcode());
         List<ResourcesDO> resourcesDOS = resourcesDOMapper.SelectMenuByRoleCode(roleDO.getItemcode());
         MenuTreeUtil menuTreeUtil = new MenuTreeUtil(resourcesDOS, null);
-        List<ResourcesDO> treeGridList = menuTreeUtil.buildTreeGrid();
-        return treeGridList;
+        return menuTreeUtil.buildTreeGrid();
     }
 
     @Override
     public List<ResourcesDO> selectListByPath(String requestUrl) {
         return resourcesDOMapper.selectListByPath(requestUrl);
+    }
+
+    @Override
+    public List<ResourcesDO> SelectPermissionByRoleCode(UserDO userDO) {
+        RoleDO roleDO = roleDOMapper.selectByUserid(userDO.getItemcode());
+        List<ResourcesDO> resourcesDOS = resourcesDOMapper.SelectPermissionByRoleCode(roleDO.getItemcode());
+        MenuTreeUtil menuTreeUtil = new MenuTreeUtil(resourcesDOS, null);
+        return menuTreeUtil.buildTreeGrid();
     }
 
 }

@@ -167,7 +167,7 @@
 
         var aCol = [
             {field: 'chineseCulturalName', title: '漫画典故名称'},
-            {field: 'fileName', title: '图片'},
+            {field: 'filePath', title: '图片'},
             {field: 'chineseCulturalSource', title: '来源'},
             {field: 'chineseCulturalAuthor', title: '作者'},
             {field: 'itemcreateat', title: '创建时间'},

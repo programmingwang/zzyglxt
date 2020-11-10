@@ -120,6 +120,8 @@
                     }})
             });
 
+            var pl = dictUtil.getDictByCode(dictUtil.DICT_LIST.showStatus);
+            $("#chargePersonSearch").selectUtil(pl);
 
             var aCol = [
                 {field: 'chineseCulturalName', title: '非物质文化遗产名称'},

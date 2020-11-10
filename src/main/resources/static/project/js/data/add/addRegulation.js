@@ -1,6 +1,7 @@
 (function () {
     require(['jquery','wangEditor','ajaxUtil','alertUtil','stringUtil'],
         function (jquery,wangEditor,ajaxUtil,alertUtil,stringUtil) {
+            var type = isUpdate() ? "put":"post";
             const editor = new wangEditor('#div1')
             // 或者 const editor = new E( document.getElementById('div1') )
             //菜单配置
@@ -106,6 +107,20 @@
                 },false,true);
 
             });
+
+            (function init() {
+                if (isUpdate()){
+                    var tempdata = JSON.parse(localStorage.getItem("rowData"));
+                    $("#dataTitle").val(tempdata.dataTitle);
+                    $("#dataSource").val(tempdata.dataSource);
+                    $("#dataFileType").val(tempdata.dataFileType);
+                    $(".w-e-text").html(tempdata.dataContent);
+                }
+            }());
+
+            function isUpdate() {
+                return (localStorage.getItem("rowData") != null || localStorage.getItem("rowData") != undefined)
+            }
 
         })
 })();

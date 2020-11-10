@@ -4,6 +4,7 @@
 
 
         var url = "/datado/regulation/selectAll";
+        var addUrl = "/data/add/addRegulation";
         var aParam = {
 
         };
@@ -118,7 +119,8 @@
         //修改事件
         window.orgEvents = {
             'click .edit' : function(e, value, row, index) {
-
+                localStorage.setItem("rowData", JSON.stringify(row));
+                orange.redirect(addUrl);
             },
 
             'click .delete': function (e, value, row, index) {
@@ -176,6 +178,9 @@
         // });
 
         $("#btn_addTask").unbind().on('click',function () {
+            localStorage.removeItem("rowData");
+            orange.redirect(addUrl);
+
             $("#main_body").html("");
             var url = "/data/add/addRegulation";
             orange.loadPage({url: url, target: 'main_body', selector: '#fir_body', success: function(data){

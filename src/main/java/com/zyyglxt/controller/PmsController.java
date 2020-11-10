@@ -1,8 +1,11 @@
 package com.zyyglxt.controller;
 
 
+import com.zyyglxt.dto.UserDto;
 import com.zyyglxt.error.EmBusinessError;
 import com.zyyglxt.response.ResponseData;
+import org.apache.commons.lang3.ObjectUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -26,12 +29,12 @@ public class PmsController {
     @ResponseBody
     @RequestMapping("/getAppContext")
     public ResponseData getAppContext(HttpServletRequest request){
-        HttpSession session = request.getSession();
+//        HttpSession session = request.getSession();
 //        UserDto userDto = (UserDto) session.getAttribute("userDto");
 //        if (ObjectUtil.isNull(userDto)){
-        return new ResponseData(EmBusinessError.success, null);
+              return new ResponseData(EmBusinessError.success, null);
 //        }else {
-//            return new ResponseData(ResponseEnum.success, userDto);
+//            return new ResponseData(EmBusinessError.success, userDto);
 //        }
     }
 }

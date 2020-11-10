@@ -281,4 +281,7 @@
     where itemID = #{itemid,jdbcType=INTEGER}
       and itemCode = #{itemcode,jdbcType=CHAR}
   </update>
+    <select id="selectAll" resultMap="BaseResultMap">
+      select * from tb_industrial_develop_tec_ser_org
+    </select>
 </mapper>

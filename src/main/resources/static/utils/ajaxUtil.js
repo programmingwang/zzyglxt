@@ -1,5 +1,5 @@
 (function() {
-    define('ajaxUtil', ['jquery','objectUtil','stringUtil'], function(jquery, objectUtil,stringUtil) {
+    define('ajaxUtil', ['jquery','objectUtil','stringUtil','alertUtil'], function(jquery, objectUtil,stringUtil,alertUtil) {
 
 
         var successCode = 88888;
@@ -83,6 +83,28 @@
             $.ajax(_setting);
         }
 
+        function fileAjax(dataCode, file, uploader,uploaderCode){
+            var formData = new FormData();
+            formData.append("dataCode",dataCode);
+            formData.append("file",file);
+            formData.append("itemcode",stringUtil.getUUID());
+            formData.append("uploader",uploader);
+            formData.append("uploaderCode",uploaderCode);
+            $.ajax({
+                url:"/file/upload",
+                type:'POST',
+                data: formData,
+                processData: false,   // jQuery不要去处理发送的数据
+                contentType: false,   // jQuery不要去设置Content-Type请求头
+                success:function(data){
+                    alertUtil.success(data.msg);
+                },
+                error: function(data){
+                    alertUtil.error(data.msg)
+                }
+            });
+        }
+
 
 
 
@@ -94,7 +116,8 @@
         return {
             success:success,
             notLoggedIn:notLoggedIn,
-            myAjax:myAjax
+            myAjax:myAjax,
+            fileAjax: fileAjax
         }
     })
 })();

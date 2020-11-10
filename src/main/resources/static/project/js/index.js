@@ -103,13 +103,13 @@
                     level: "2",
                     pid: "4"
                 },
-                {
+                /*{
                     menu_name: "中药常识",
                     menu_url: "",
                     id: "5",
                     level: "1",
                     pid: ""
-                }, {
+                }, */{
                     menu_name: "治未病理念",
                     menu_url: "",
                     id: "6",
@@ -119,22 +119,51 @@
 
                 {
                     menu_name: "＞科普知识",
-                    menu_url: "/knowledgeDb/problemSolution",
+                    menu_url: "/healthCare/healthsciKnow",
                     id: "6-1",
                     level: "2",
                     pid: "6"
                 },
                 {
                     menu_name: "＞节气养生",
-                    menu_url: "/knowledgeDb/problemAnswerPlan",
+                    menu_url: "/healthCare/healthsciKnow",
                     id: "6-2",
                     level: "2",
                     pid: "6"
                 },
                 {
                     menu_name: "＞国医话健康",
-                    menu_url: "/knowledgeDb/dataSelect",
+                    menu_url: "/healthCare/healthcarefamPre",
                     id: "6-3",
+                    level: "2",
+                    pid: "6"
+                },
+                {
+
+                    menu_name: "＞中药常识",
+                    menu_url: "/healthCare/healthcarechineseMedicine",
+                    id: "6-4",
+                    level: "2",
+                    pid: "6"
+
+                    menu_name : "名老中医",
+                    menu_url: "",
+                    id:"7",
+                    level:"1",
+                    pid:""
+                },
+                {
+                    menu_name : "名老中医",
+                    menu_url: "/medicalService/chineseMedicine",
+                    id:"7-1",
+                    level:"2",
+                    pid:"7"
+
+                },
+                {
+                    menu_name: "＞历史名方",
+                    menu_url: "/healthCare/famPre",
+                    id: "6-5",
                     level: "2",
                     pid: "6"
                 },
@@ -151,14 +180,14 @@
                     id:"7-1",
                     level:"2",
                     pid:"7"
-                },
+                }/*,
                 {
                     menu_name: "历史名方",
                     menu_url: "/knowledgeDb/dataBack",
                     id: "8",
                     level: "1",
                     pid: ""
-                },
+                }*/,
                 {
                     menu_name : "中医药名院",
                     menu_url: "",
@@ -174,6 +203,22 @@
                     pid:"9"
                 },
                 {
+
+                    menu_name : "中医药名院",
+                    menu_url: "",
+                    id:"9",
+                    level:"1",
+                    pid:""
+                },
+                {
+                    menu_name : "＞中医药名院",
+                    menu_url: "/medicalService/hosp",
+                    id:"9-1",
+                    level:"2",
+                    pid:"9"
+                },
+                {
+
                     menu_name : "中医药名科",
                     menu_url: "",
                     id:"10",
@@ -268,6 +313,20 @@
                     menu_name: "＞人才招募",
                     menu_url: "/industrialdevelop/recruit",
                     id: "99-3",
+                    level: "2",
+                    pid: "99"
+                },
+                {
+                    menu_name: "＞技术服务机构",
+                    menu_url: "/industrialdevelop/tecservice",
+                    id: "99-4",
+                    level: "2",
+                    pid: "99"
+                },
+                {
+                    menu_name: "＞科研院所",
+                    menu_url: "/industrialdevelop/tecserviceorg",
+                    id: "99-5",
                     level: "2",
                     pid: "99"
                 }

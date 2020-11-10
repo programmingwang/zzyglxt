@@ -1,5 +1,6 @@
 package com.zyyglxt.controller.permissionsController;
 
+import com.zyyglxt.annotation.LogAnnotation;
 import com.zyyglxt.dataobject.*;
 
 import com.zyyglxt.error.EmBusinessError;
@@ -28,6 +29,7 @@ public class ResourcesController {
      * 新增
      * @return
      */
+    @LogAnnotation(logTitle = "添加权限", logLevel = "3")
     @RequestMapping(value = "/insert", method = RequestMethod.POST)
     public ResponseData insertSelective(@RequestBody ResourcesRoleRefDO resourcesDO){
         resRoleRefService.insertSelective(resourcesDO);
@@ -38,6 +40,7 @@ public class ResourcesController {
      * 修改
      * @param resourcesDO
      */
+    @LogAnnotation(logTitle = "修改权限", logLevel = "2")
     @RequestMapping(value = "updateresources", method = RequestMethod.PUT)
     public ResponseData updateByPrimaryKeySelective(@RequestBody ResourcesDO resourcesDO){
         resourcesService.updateByPrimaryKeySelective(resourcesDO);
@@ -49,6 +52,7 @@ public class ResourcesController {
      * 删除
      * @param resourcesDO
      */
+    @LogAnnotation(logTitle = "删除权限", logLevel = "4")
     @RequestMapping(value = "/delete", method = RequestMethod.DELETE)
     public ResponseData deleteByPrimaryKey(@RequestBody ResourcesDO resourcesDO){
         resourcesService.deleteByPrimaryKey(resourcesDO);
@@ -59,6 +63,7 @@ public class ResourcesController {
     /**
      * 查询所有权限
      */
+    @LogAnnotation(logTitle = "查询所有权限", logLevel = "1")
     @RequestMapping(value = "/selectall", method = RequestMethod.GET)
     public ResponseData selectAllResources(){
         List<ResourcesDO> resourcesDOS = resourcesService.selectAllResources();
@@ -69,6 +74,7 @@ public class ResourcesController {
     /**
      * 查询角色菜单
      */
+    @LogAnnotation(logTitle = "查询角色菜单", logLevel = "1")
     @RequestMapping(value = "/selectrolemenu", method = RequestMethod.GET)
     public ResponseData selectRoleMenu(@RequestBody UserDO userDO){
         List<ResourcesDO> resourcesDOS = resourcesService.SelectMenuByRoleCode(userDO);
@@ -79,6 +85,7 @@ public class ResourcesController {
     /**
      * 查询角色权限
      */
+    @LogAnnotation(logTitle = "查询角色权限", logLevel = "1")
     @RequestMapping(value = "/selectroleres", method = RequestMethod.GET)
     public ResponseData selectRoleResources(@RequestBody UserDO userDO){
         List<ResourcesDO> resourcesDOS = resourcesService.SelectPermissionByRoleCode(userDO);

@@ -90,13 +90,13 @@
                         confirmButtonClass : "btn-danger",
                         modalConfirmFun:function () {
                             var isSuccess = false;
-                            ajaxUtil.myAjax(null,"deletehealthsciknowdo",function (data) {
+                            ajaxUtil.myAjax(null,"deletehealthsciknowdo/"+row.itemid+"/"+row.itemcode,null,function (data) {
                                 if(ajaxUtil.success(data)){
                                     alertUtil.info("删除科普知识名称成功");
                                     isSuccess = true;
                                     refreshTable();
                                 }
-                            },false);
+                            },false,true,"delete");
                             return isSuccess;
                         }
 

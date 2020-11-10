@@ -90,13 +90,13 @@
                         confirmButtonClass : "btn-danger",
                         modalConfirmFun:function () {
                             var isSuccess = false;
-                            ajaxUtil.myAjax(null,"deletehealthcarefampredo",key,function (data) {
+                            ajaxUtil.myAjax(null,"deletehealthcarefampredo/"+row.itemid+"/"+row.itemcode,null,function (data) {
                                 if(ajaxUtil.success(data)){
                                     alertUtil.info("删除国医话健康成功");
                                     isSuccess = true;
                                     refreshTable();
                                 }
-                            },false);
+                            },false,true,"delete");
                             return isSuccess;
                         }
 

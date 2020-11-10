@@ -61,6 +61,8 @@
                     itemcode: stringUtil.getUUID(),
                     name : $("#name").val(),
                     source : $("#source").val(),
+                    prescription:$("#prescription").val(),
+                    status:$("#status").val(),
                     creater : $("#creater").val(),
                     content : editor.txt.html()
                 };

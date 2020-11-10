@@ -8,10 +8,7 @@ import com.zyyglxt.response.ResponseData;
 import com.zyyglxt.service.HealthSciKnowDOService;
 import com.zyyglxt.service.IFileService;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
@@ -41,10 +38,14 @@ public class HealthSciKnowDOController {
     /*
     科普知识相关数据的删除
     */
-    @RequestMapping(value ="deletehealthsciknowdo",method = RequestMethod.POST )
-    public ResponseData deleteHealthSciKnowDOMapper(@RequestBody HealthSciKnowDOKey key){
-        healthSciKnowDOService.deleteByPrimaryKey(key);
-        System.out.println("要删除科普知识编号为："+key.getItemid());
+    @RequestMapping(value ="deletehealthsciknowdo/{itemID}/{itemCode}",method = RequestMethod.DELETE)
+    @ResponseBody
+    public ResponseData deleteHealthSciKnowDOMapper(@PathVariable("itemID") Integer itemID,@PathVariable("itemCode")String itemCode){
+        HealthSciKnowDOKey healthSciKnowDOKey=new HealthSciKnowDOKey();
+        healthSciKnowDOKey.setItemid(itemID);
+        healthSciKnowDOKey.setItemcode(itemCode);
+        healthSciKnowDOService.deleteByPrimaryKey(healthSciKnowDOKey);
+        System.out.println("要删除科普知识编号为："+healthSciKnowDOKey.getItemid());
         return new ResponseData(EmBusinessError.success);
     }
     /*

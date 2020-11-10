@@ -7,10 +7,7 @@ import com.zyyglxt.error.EmBusinessError;
 import com.zyyglxt.response.ResponseData;
 import com.zyyglxt.service.HealthCareFamPreDOService;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -38,10 +35,14 @@ HealthCareFamPreDOController {
     /*
       国医话健康相关数据的删除
     */
-    @RequestMapping(value ="deletehealthcarefampredo",method = RequestMethod.POST )
-    public ResponseData deleteHealthCareFamPreDOMapper(@RequestBody HealthCareFamPreDOKey key){
-       healthCareFamPreDOService.deleteByPrimaryKey(key);
-       return new ResponseData(EmBusinessError.success);
+    @RequestMapping(value ="deletehealthcarefampredo/{itemID}/{itemCode}",method = RequestMethod.DELETE )
+    @ResponseBody
+    public ResponseData deleteHealthCareFamPreDOMapper(@PathVariable("itemID")Integer itemID,@PathVariable("itemCode")String itemCode){
+        HealthCareFamPreDOKey healthCareFamPreDOKey=new HealthCareFamPreDOKey();
+        healthCareFamPreDOKey.setItemid(itemID);
+        healthCareFamPreDOKey.setItemcode(itemCode);
+        healthCareFamPreDOService.deleteByPrimaryKey(healthCareFamPreDOKey);
+        return new ResponseData(EmBusinessError.success);
     }
     /*
      国医话健康相关数据的修改

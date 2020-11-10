@@ -59,10 +59,12 @@
             $("#btn_insert").unbind().on('click',function () {
                 var travelEntity = {
                     itemcode: stringUtil.getUUID(),
-                    chineseCulturalName : $("#chineseMedicineName").val(),
-                    chineseCulturalSource : $("#chineseMedicineSource").val(),
-                    chineseCulturalAuthor : $("#creater").val(),
-                    chineseCulturalContent : editor.txt.html()
+                    chineseMedicineName : $("#chineseMedicineName").val(),
+                    chineseMedicineSource : $("#chineseMedicineSource").val(),
+                    creater : $("#creater").val(),
+                    chineseMedicineAlias:$("#chineseMedicineAlias").val(),
+                    chineseMedicineEffect:$("#chineseMedicineEffect").val(),
+                    chineseMedicineUsage : editor.txt.html()
                 };
 
                 var formData = new FormData();

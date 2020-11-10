@@ -96,7 +96,7 @@
                                     isSuccess = true;
                                     refreshTable();
                                 }
-                            },false);
+                            },false,true,"delete");
                             return isSuccess;
                         }
 

@@ -46,17 +46,21 @@
             });
 
             $("#cancel").unbind().on('click',function () {
-                $("#main_body").html("");
                 var url = "/chineseCultural/travel/travel";
-                orange.loadPage({url: url, target: 'main_body', selector: '#fir_body', success: function(data){
-                    if(data == null||data == ""){
-                        return alertUtil.error( url+'加载失败');
-                    }
-                    $("#main_body").html(data);
-                }})
+                orange.redirect(url);
             });
 
+
             $("#btn_insert").unbind().on('click',function () {
+                var addUpdateUrl;
+                var operateMessage;
+                if(!isUpdate()){
+                    addUpdateUrl = "/cul/trav/trav/addTrav";
+                    operateMessage = "新增旅游景点成功";
+                }else{
+                    addUpdateUrl = "/cul/trav/trav/updTrav";
+                    operateMessage = "更新旅游景点成功";
+                }
                 var travelEntity = {
                     itemcode: stringUtil.getUUID(),
                     chineseCulturalName : $("#chineseCulturalName").val(),
@@ -90,21 +94,34 @@
                 });
 
 
-                ajaxUtil.myAjax(null,"/cul/trav/trav/addTrav",travelEntity,function (data) {
+                ajaxUtil.myAjax(null,addUpdateUrl,travelEntity,function (data) {
                     if(ajaxUtil.success(data)){
-                        alertUtil.info("新增旅游景点成功");
+                        alertUtil.info(operateMessage);
                         var url = "/chineseCultural/travel/travel";
-                        orange.loadPage({url: url, target: 'main_body', selector: '#fir_body', success: function(data){
-                                if(data == null||data == ""){
-                                    return alertUtil.error( url+'加载失败');
-                                }
-                                $("#main_body").html(data);
-                        }})
+                        orange.redirect(url);
                     }else {
                         alertUtil.alert(data.msg);
                     }
                 },false,true);
 
             });
+
+
+            (function init() {
+                if (isUpdate()){
+                    var tempdata = JSON.parse(localStorage.getItem("rowData"));
+                    $("#chineseCulturalName").val(tempdata.chineseCulturalName);
+                    $("#chineseCulturalName").val(tempdata.chineseCulturalName);
+                    $("#chineseCulturalSource").val(tempdata.chineseCulturalSource);
+                    $("#chineseCulturalAuthor").val(tempdata.chineseCulturalAuthor);
+                    editor.txt.html(tempdata.chineseCulturalContent);
+                    var filePath = tempdata.filePath;
+                }
+            }());
+
+
+            function isUpdate() {
+                return (localStorage.getItem("rowData") != null || localStorage.getItem("rowData") != undefined)
+            }
         })
 })();

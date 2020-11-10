@@ -19,10 +19,10 @@
 
             var userEntity = {"username":inputUsername,"password":inputPassword};
             ajaxUtil.myAjax(null,"/userLogin",userEntity,function (data) {
-                if(data && data.errorCode === 88888) {
+                if(data && data.code === 88888) {
                     window.location.href = "/main"
                 }else{
-                    alertUtil.error(data.errorMsg)
+                    alertUtil.error(data.msg)
                 }
             },false)
             // $.ajax({

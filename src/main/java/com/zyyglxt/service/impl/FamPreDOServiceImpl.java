@@ -73,4 +73,9 @@ public class FamPreDOServiceImpl implements FamPreDOService {
         famPreDOMapper.updateVisitNumFamPre(key);
         return 0;
     }
+    /*关键字查询*/
+    @Override
+    public List<FamPreDO> searchFamPre(String keyWord) {
+        return famPreDOMapper.searchFamPre(keyWord);
+    }
 }

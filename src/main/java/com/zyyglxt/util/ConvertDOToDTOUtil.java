@@ -18,7 +18,7 @@ public class ConvertDOToDTOUtil {
 
     public static ChineseCulturalDto convertFromDOToDTO(ChineseCulturalDO chineseCulturalDO, String filePath){
         if(StringUtils.isEmpty(filePath)){
-            throw new BusinessException("图片或附件信息不存在，请联系管理员查看后台", EmBusinessError.PARAMETER_VALIDATION_ERROR);
+            filePath = "已经损坏了";
         }
         ChineseCulturalDto chineseCulturalDto = new ChineseCulturalDto();
         BeanUtils.copyProperties(chineseCulturalDO,chineseCulturalDto);
@@ -28,11 +28,22 @@ public class ConvertDOToDTOUtil {
 
     public static CulturalResourcesDto convertFromDOToDTO(CulturalResourcesDO culturalResourcesDO, String filePath){
         if(StringUtils.isEmpty(filePath)){
-            throw new BusinessException("图片或附件信息不存在，请联系管理员查看后台", EmBusinessError.PARAMETER_VALIDATION_ERROR);
+            filePath = "已经损坏了";
         }
         CulturalResourcesDto culturalResourcesDto = new CulturalResourcesDto();
         BeanUtils.copyProperties(culturalResourcesDO,culturalResourcesDto);
         culturalResourcesDto.setFilePath(filePath);
+        return culturalResourcesDto;
+    }
+
+    public static CulturalResourcesDto convertFromDOToDTO(CulturalResourcesDO culturalResourcesDO, String filePath, String fileName){
+        if(StringUtils.isEmpty(filePath)){
+            filePath = "已经损坏了";
+        }
+        CulturalResourcesDto culturalResourcesDto = new CulturalResourcesDto();
+        BeanUtils.copyProperties(culturalResourcesDO,culturalResourcesDto);
+        culturalResourcesDto.setFilePath(filePath);
+        culturalResourcesDto.setFileName(fileName);
         return culturalResourcesDto;
     }
 

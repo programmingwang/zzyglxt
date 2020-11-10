@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
+import java.io.File;
 import java.io.IOException;
 import java.util.Date;
 import java.util.List;
@@ -87,7 +88,11 @@ public class FileServiceImpl implements IFileService {
         if(dataCode.isEmpty()){
             throw new BusinessException("数据源code不能为空", EmBusinessError.PARAMETER_VALIDATION_ERROR);
         }
-        return fileDOMapper.selectFileByDataCode(dataCode);
+        FileDO fileDO = fileDOMapper.selectFileByDataCode(dataCode);
+        if(fileDO == null){
+            return new FileDO();
+        }
+        return fileDO;
     }
 
     @Override
@@ -104,8 +109,14 @@ public class FileServiceImpl implements IFileService {
         if(result.isHasErrors()){
             throw new BusinessException(result.getErrMsg(), EmBusinessError.PARAMETER_VALIDATION_ERROR);
         }
+        FileDO f = fileDOMapper.selectFileByDataCode(fileDO.getDataCode());
         /*对文件上传记录表操作，记录上传信息*/
-        fileService.addFile(fileDO);
+        if (f == null){
+            fileService.addFile(fileDO);
+        }
+        else {
+            fileService.updateFile(fileDO);
+        }
     }
 
 

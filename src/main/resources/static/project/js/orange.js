@@ -142,12 +142,19 @@
 			}
 		});
 
+		// 页面跳转
+		function redirect(url) {
+			$("#main_body").html("");
 
+			loadPage({url: url, target: 'main_body', selector: '#fir_body', success: function(data){
 
+					if(data == null||data == ""){
+						return alert(url+"加载失败");
+					}
 
-
-
-
+					$("#main_body").html(data);
+				}})
+		}
 
 
 		return window.orange = {
@@ -155,6 +162,7 @@
 			start: start,
 			stop: stop,
 			loadPage: loadPage,
+			redirect: redirect
 		};
 	});
 })();

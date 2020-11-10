@@ -139,11 +139,18 @@
                     pid: "6"
                 },
                 {
-                    menu_name: "名老中医",
-                    menu_url: "/knowledgeDb/dataBack",
-                    id: "7",
-                    level: "1",
-                    pid: ""
+                    menu_name : "名老中医",
+                    menu_url: "",
+                    id:"7",
+                    level:"1",
+                    pid:""
+                },
+                {
+                    menu_name : "名老中医",
+                    menu_url: "/medicalService/chineseMedicine",
+                    id:"7-1",
+                    level:"2",
+                    pid:"7"
                 },
                 {
                     menu_name: "历史名方",
@@ -153,18 +160,32 @@
                     pid: ""
                 },
                 {
-                    menu_name: "中医药名院",
-                    menu_url: "/knowledgeDb/dataBack",
-                    id: "9",
-                    level: "1",
-                    pid: ""
+                    menu_name : "中医药名院",
+                    menu_url: "",
+                    id:"9",
+                    level:"1",
+                    pid:""
                 },
                 {
-                    menu_name: "中医药名科",
-                    menu_url: "/knowledgeDb/dataBack",
-                    id: "10",
-                    level: "1",
-                    pid: ""
+                    menu_name : "＞中医药名院",
+                    menu_url: "/medicalService/hosp",
+                    id:"9-1",
+                    level:"2",
+                    pid:"9"
+                },
+                {
+                    menu_name : "中医药名科",
+                    menu_url: "",
+                    id:"10",
+                    level:"1",
+                    pid:""
+                },
+                {
+                    menu_name : "＞中医药名科",
+                    menu_url: "/medicalService/specialty",
+                    id:"10-1",
+                    level:"2",
+                    pid:"10"
                 },
                 {
                     menu_name: "中医药名校",

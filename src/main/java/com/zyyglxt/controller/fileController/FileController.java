@@ -34,7 +34,7 @@ public class FileController {
     @Value("${fdfs.http_tracker_http_port}")
     private String port;
 
-    @PostMapping("upload")
+    @PostMapping("/upload")
     @ResponseBody
     public ResponseData upload(FileDto fileDto) throws IOException {
         FileDO fileDO = new FileDO();
@@ -56,7 +56,7 @@ public class FileController {
         return new ResponseData(EmBusinessError.success);
     }
 
-    @GetMapping("delete")
+    @GetMapping("/delete")
     @ResponseBody
     public ResponseData delete(String dataCode){
         FileDO fileDO = fileService.selectFileByDataCode(dataCode);

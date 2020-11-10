@@ -15,4 +15,9 @@ import java.util.Date;
 public class SpecialtyDto extends SpecialtyDO {
     @NotBlank(message = "医院code不能为空")
     private String hospitalCode;
+
+    @NotBlank(message = "医院名称不能为空")
+    private String hospitalName;
+
+    private String filePath;
 }

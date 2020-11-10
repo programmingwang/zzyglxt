@@ -26,182 +26,21 @@
                 '    </div>';
 
         };
-
-
-
-        modalHtml.myUpdateStatusModal = '是否更新状态为完成?';
-
-
-        modalHtml.myDeleteModal = '是否删除任务?';
-
-        modalHtml.myDeleteModalProject = '是否删除项目?确保删除项目前已全部删除对应的任务！';
-
+        modalHtml.myDeleteModalTravel = '是否删除景点信息?';
+        modalHtml.myDeleteModalTraditionalCul = '是否删除中医医史信息?';
+        modalHtml.myDeleteModalTraditionalDoc = '是否删除历代名家信息?';
+        modalHtml.myDeleteModalTraditionalSch = '是否删除中医流派信息?';
+        modalHtml.myDeleteModalCartoonAll = '是否删除漫画典故信息?';
+        modalHtml.myDeleteModalComGam = '是否删除动漫游戏信息?';
+        modalHtml.myDeleteModalCulRel = '是否删除文化古迹信息?';
+        modalHtml.myDeleteModalCulVen = '是否删除文化场馆信息?';
+        modalHtml.myDeleteModalInCuHe = '是否删除非物质文化遗产信息?';
+        modalHtml.myDeleteModalMovTV = '是否删除电视电影信息?';
         modalHtml.myDeleteAchievement = '是否删除科研成果?';
+        modalHtml.myDeleteRecruit = '是否删除招聘信息?';
 
-        modalHtml.myAddUpdateModal =
-            '<div class="row">'+
-            '            <div class="col-lg-12 col-md-12">\n' +
-            '                <div class="input-group mb-3">\n' +
-            '                    <div class="input-group-prepend">\n' +
-            '                        <span class="input-group-text" >任务名称</span>\n' +
-            '                    </div>\n' +
-            '                    <input type="text" id="taskName" class="form-control">\n' +
-            '                </div>\n' +
-            '            </div>\n' +
-            '\n' +
-            '            <div class="col-lg-12 col-md-12">\n' +
-            '                <div class="input-group mb-3">\n' +
-            '                    <div class="input-group-prepend">\n' +
-            '                        <span class="input-group-text" >所属项目</span>\n' +
-            '                    </div>\n' +
-            '                    <select class="custom-select" id="projectName"></select>\n' +
-            '                </div>\n' +
-            '            </div>\n' +
-            '\n' +
-            '            <div class="col-lg-12 col-md-12">\n' +
-            '                <div class="input-group mb-3">\n' +
-            '                    <div class="input-group-prepend">\n' +
-            '                        <span class="input-group-text" >所属模块</span>\n' +
-            '                    </div>\n' +
-            '                    <select class="custom-select" id="moduleName"></select>\n' +
-            '                </div>\n' +
-            '            </div>\n' +
-            '\n' +
-            '            <div class="col-lg-12 col-md-12">\n' +
-            '                <div class="input-group mb-3">\n' +
-            '                    <div class="input-group-prepend">\n' +
-            '                        <span class="input-group-text" >负责人</span>\n' +
-            '                    </div>\n' +
-            '                    <input type="text" id="chargePerson" class="form-control">\n' +
-            '                </div>\n' +
-            '            </div>\n' +
-            '\n' +
-            '            <div class="col-lg-12 col-md-12">\n' +
-            '                <div class="input-group mb-3">\n' +
-            '                    <div class="input-group-prepend">\n' +
-            '                        <label class="input-group-text">重要程度</label>\n' +
-            '                    </div>\n' +
-            '                    <select class="custom-select" id="applicantStatus">\n' +
-            '                        <option value="1" >非常紧急</option>\n' +
-            '                        <option value="2" >紧急</option>\n' +
-            '                        <option value="3" >一般</option>\n' +
-            '                        <option value="4" >计划</option>\n' +
-            '                        <option value="5" >长期</option>\n' +
-            '                    </select>\n' +
-            '                </div>\n' +
-            '            </div>\n'+
-            '\n' +
-            '            <div class="col-lg-6 col-md-6">\n' +
-            '                <fieldset disabled>'+
-            '                <div class="input-group mb-3">\n' +
-            '                    <div class="input-group-prepend">\n' +
-            '                        <label class="input-group-text" for="applicant">创建人</label>\n' +
-            '                    </div>\n' +
-            '                    <input type="text"  id="createBy" class="form-control">\n' +
-            '                </div>\n' +
-            '                </fieldset>'+
-            '            </div>\n'+
-            '\n' +
-            '            <div class="col-lg-6 col-md-6">\n' +
-            '                <fieldset disabled>'+
-            '                <div class="input-group mb-3">\n' +
-            '                    <div class="input-group-prepend">\n' +
-            '                        <label class="input-group-text" for="applicant">创建时间</label>\n' +
-            '                    </div>\n' +
-            '                    <input type="text"  id="createAt" class="form-control">\n' +
-            '                </div>\n' +
-            '                </fieldset>'+
-            '            </div>\n'+
+        modalHtml.myDeleteCooperation = '是否删除合作交流信息?';
 
-        '</div>';
-
-        modalHtml.myAddUpdateModalProject =
-            '<div class="row">'+
-            '            <div class="col-lg-12 col-md-12">\n' +
-            '                <div class="input-group mb-3">\n' +
-            '                    <div class="input-group-prepend">\n' +
-            '                        <span class="input-group-text" >公司项目号</span>\n' +
-            '                    </div>\n' +
-            '                    <input type="text" id="projectNo" class="form-control">\n' +
-            '                </div>\n' +
-            '            </div>\n' +
-            '\n' +
-            '            <div class="col-lg-12 col-md-12">\n' +
-            '                <div class="input-group mb-3">\n' +
-            '                    <div class="input-group-prepend">\n' +
-            '                        <span class="input-group-text" >&nbsp &nbsp项目名称</span>\n' +
-            '                    </div>\n' +
-            '                    <input type="text" id="projectName" class="form-control">\n' +
-            '                </div>\n' +
-            '            </div>\n' +
-            '\n' +
-            '            <div class="col-lg-6 col-md-6">\n' +
-            '                <fieldset disabled>'+
-            '                <div class="input-group mb-3">\n' +
-            '                    <div class="input-group-prepend">\n' +
-            '                        <label class="input-group-text" for="applicant">创建人</label>\n' +
-            '                    </div>\n' +
-            '                    <input type="text"  id="createBy" class="form-control">\n' +
-            '                </div>\n' +
-            '                </fieldset>'+
-            '            </div>\n'+
-            '\n' +
-            '            <div class="col-lg-6 col-md-6">\n' +
-            '                <fieldset disabled>'+
-            '                <div class="input-group mb-3">\n' +
-            '                    <div class="input-group-prepend">\n' +
-            '                        <label class="input-group-text" for="applicant">创建时间</label>\n' +
-            '                    </div>\n' +
-            '                    <input type="text"  id="createAt" class="form-control">\n' +
-            '                </div>\n' +
-            '                </fieldset>'+
-            '            </div>\n'+
-
-            '</div>';
-
-        // modalHtml.myAddModuleModal =
-        //     '<div class="row">'+
-        //     '            <div class="col-lg-12 col-md-12">\n' +
-        //     '                <div class="input-group mb-3">\n' +
-        //     '                    <div class="input-group-prepend">\n' +
-        //     '                        <span class="input-group-text" >模块名称</span>\n' +
-        //     '                    </div>\n' +
-        //     '                    <input type="text" id="moduleName" class="form-control">\n' +
-        //     '                </div>\n' +
-        //     '            </div>\n' +
-        //     '\n' +
-        //     '            <div class="col-lg-12 col-md-12">\n' +
-        //     '                <div class="input-group mb-3">\n' +
-        //     '                    <div class="input-group-prepend">\n' +
-        //     '                        <span class="input-group-text" >所属项目</span>\n' +
-        //     '                    </div>\n' +
-        //     '                    <select class="custom-select" id="projectID"></select>\n' +
-        //     '                </div>\n' +
-        //     '            </div>\n' +
-        //     '\n' +
-        //     '            <div class="col-lg-6 col-md-6">\n' +
-        //     '                <fieldset disabled>'+
-        //     '                <div class="input-group mb-3">\n' +
-        //     '                    <div class="input-group-prepend">\n' +
-        //     '                        <label class="input-group-text" for="applicant">创建人</label>\n' +
-        //     '                    </div>\n' +
-        //     '                    <input type="text"  id="createBy" class="form-control">\n' +
-        //     '                </div>\n' +
-        //     '                </fieldset>'+
-        //     '            </div>\n'+
-        //     '\n' +
-        //     '            <div class="col-lg-6 col-md-6">\n' +
-        //     '                <fieldset disabled>'+
-        //     '                <div class="input-group mb-3">\n' +
-        //     '                    <div class="input-group-prepend">\n' +
-        //     '                        <label class="input-group-text" for="applicant">创建时间</label>\n' +
-        //     '                    </div>\n' +
-        //     '                    <input type="text"  id="createAt" class="form-control">\n' +
-        //     '                </div>\n' +
-        //     '                </fieldset>'+
-        //     '            </div>\n'+
-        //
-        //     '</div>';
 
         return modalHtml;
 

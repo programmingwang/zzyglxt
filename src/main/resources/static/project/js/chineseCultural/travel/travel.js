@@ -32,6 +32,11 @@
                         var isSuccess = false;
                         ajaxUtil.myAjax(null,"/cul/trav/trav/delTrav/"+row.itemid+"/"+row.itemcode,null,function (data) {
                             if(ajaxUtil.success(data)){
+                                ajaxUtil.myAjax(null,"/file/delete?dataCode="+row.itemcode,null,function (data) {
+                                    if(!ajaxUtil.success(data)){
+                                        return alertUtil.error("文件删除失败");
+                                    }
+                                },false,"","get");
                                 alertUtil.info("删除景点信息成功");
                                 isSuccess = true;
                                 refreshTable();
@@ -65,6 +70,9 @@
                     $("#main_body").html(data);
                 }})
             });
+
+            var pl = dictUtil.getDictByCode(dictUtil.DICT_LIST.showStatus);
+            $("#chargePersonSearch").selectUtil(pl);
 
 
         var aCol = [

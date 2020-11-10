@@ -53,6 +53,7 @@ public class TraditionalCulturalServiceImpl implements ITraditionalCulturalServi
         record.setItemcreateat(DateUtils.getDate());
         record.setUpdater("测试");
         record.setChineseCulturalType("中医医史");
+        record.setChineseCulturalStatus("待上架");
         //如果前台没有插入图片或者附件，就自己生成uuid
         if(record.getItemcode() == null){
             record.setItemcode(UUIDUtils.getUUID());

@@ -34,15 +34,13 @@
             }
         }
 
-
-        function myAjax(aButton, url, param, fun, async, isReqJson,type="post") {
-
+        function myAjax(aButton, url, param, fun, async, isReqJson, type="post") {
             var _setting =
                 {
                     url: url,
                     async: (async == undefined) ? true : async,
                     type: type,
-                    dataType: "json",
+                    dataType: "json"
                 }
 
             if (!objectUtil.strIsBlank(isReqJson)) {
@@ -51,7 +49,6 @@
             }else{
                 _setting.data = param;
             }
-
 
             _setting.beforeSend = function () {
                 if (aButton != null) {

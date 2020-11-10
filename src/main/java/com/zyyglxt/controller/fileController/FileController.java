@@ -34,7 +34,7 @@ public class FileController {
     @Value("${fdfs.http_tracker_http_port}")
     private String port;
 
-    @PostMapping("upload")
+    @PostMapping("/upload")
     @ResponseBody
     public ResponseData upload(FileDto fileDto) throws IOException {
         FileDO fileDO = new FileDO();

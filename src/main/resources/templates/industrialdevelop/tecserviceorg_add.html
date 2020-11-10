@@ -39,21 +39,22 @@
     <div class="col-12">
         <form>
             <div class="form-group row">
-                <label class="col-sm-2 col-form-label">项目名称：</label>
-                <div class="col-sm-3">
-                    <input id="projectName" type="text" class="form-control" placeholder="请输入">
+                <label class="col-sm-2 col-form-label">院所照片：</label>
+                <div class="upload-wrap anticon col-sm-3" nv-file-drop="" uploader="uploader">
+                    <input id="upload_file" class="file-ele" type="file" file-model="image" name="image" nv-file-select uploader="uploader" multiple />
+                    <div class="file-open"><img id="upimg" src="#" alt="选择图片"/></div>
                 </div>
             </div>
             <div class="form-group row">
-                <label class="col-sm-2 col-form-label">研究成果：</label>
+                <label class="col-sm-2 col-form-label">院所名称：</label>
                 <div class="col-sm-3">
-                    <input id="industrialDevelopName" type="text" class="form-control" placeholder="请输入">
+                    <input id="cooperationExchangeName" type="text" class="form-control" placeholder="请输入">
                 </div>
             </div>
             <div class="form-group row">
-                <label class="col-sm-2 col-form-label">主研人：</label>
+                <label class="col-sm-2 col-form-label">项目收费：</label>
                 <div class="col-sm-3">
-                    <input id="industrialDevelopLeader" type="text" class="form-control" placeholder="请输入">
+                    <input id="cooperativeOrg" type="text" class="form-control" placeholder="请输入">
                 </div>
             </div>
             <div class="form-group row">
@@ -67,21 +68,36 @@
                     <input id="phone" type="text" class="form-control" placeholder="请输入">
                 </div>
             </div>
+
+            <div data-toggle="distpicker" class="form-group row">
+                <label for="addressPro" class="col-sm-2 col-form-label">省：</label>
+                <div class="col-sm-2">
+                    <select id="addressPro" class="form-control" data-province="———选择省———"></select>
+                </div>
+
+                <label for="addressCity" class="col-sm-1 col-form-label">市：</label>
+                <div class="col-sm-2">
+                    <select id="addressCity" class="form-control" data-city="———选择市———"></select>
+                </div>
+
+                <label for="addressCountry" class="col-sm-1 col-form-label">区：</label>
+                <div class="col-sm-2">
+                    <select id="addressCountry" class="form-control" data-district="———选择区———"></select>
+                </div>
+            </div>
+
             <div class="form-group row">
-                <label class="col-sm-2 col-form-label">成果简介：</label>
+                <label class="col-sm-2 col-form-label">地址：</label>
+                <div class="col-sm-3">
+                    <input id="address" type="text" class="form-control" placeholder="请输入">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">服务项目介绍：</label>
                 <div id="div1" class="col-sm-8">
                 </div>
             </div>
 
-            <!--附件div-->
-            <div class="form-group row">
-                <label class="col-sm-2 col-form-label">附件：</label>
-                <div class="upload-wrap anticon" nv-file-drop="" uploader="uploader">
-                    <input id="upload_file" class="file-ele" type="file" file-model="image" name="image" nv-file-select uploader="uploader" multiple />
-                    <div class="file-open"><em class="upload"></em>&nbsp;选择附件</div>
-                </div>
-                <span id="filename_span" style="margin: 10px 0 0 5px;"></span>
-            </div>
 
             <div class="form-group row">
                 <div class="col-sm-8" ></div>
@@ -102,6 +118,9 @@
 
 </div>
 <script type="text/javascript" data-main="/main/main.js" th:src="@{/component/require@2.3.6/require-2.3.6.js}"></script>
-<script type="text/javascript" th:src="@{/project/js/industrialdevelop/achievement_add.js}"></script>
+<script type="text/javascript" th:src="@{/project/js/industrialdevelop/tecserviceorg_add.js}"></script>
+<script type="text/javascript" th:src="@{/component/jquery@3.5.1/jquery.js}"></script>
+<script type="text/javascript" th:src="@{/component/distSelect/distpicker.common.js}"></script>
+<script type="text/javascript"  th:src="@{/component/distSelect/distpicker.min.js}"></script>
 </body>
 </html>

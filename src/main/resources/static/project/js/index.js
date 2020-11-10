@@ -249,6 +249,20 @@
                     id: "99-3",
                     level: "2",
                     pid: "99"
+                },
+                {
+                    menu_name: "＞技术服务机构",
+                    menu_url: "/industrialdevelop/tecservice",
+                    id: "99-4",
+                    level: "2",
+                    pid: "99"
+                },
+                {
+                    menu_name: "＞科研院所",
+                    menu_url: "/industrialdevelop/tecserviceorg",
+                    id: "99-5",
+                    level: "2",
+                    pid: "99"
                 }
             ];
 

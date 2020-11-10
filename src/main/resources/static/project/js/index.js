@@ -1,6 +1,6 @@
-(function () {
-    require(['jquery', 'urlUtil', 'stringUtil', 'alertUtil', 'ajaxUtil'],
-        function (jquery, urlUtil, stringUtil, alertUtil, ajaxUtil) {
+(function() {
+    require(['jquery','urlUtil','stringUtil','alertUtil','ajaxUtil'],
+        function (jquery,urlUtil,stringUtil,alertUtil,ajaxUtil) {
 
 
             var currentUrlHash = window.location.hash.replace("#", "");
@@ -34,7 +34,7 @@
                 },
                 {
                     menu_name: "文化科普",
-                    menu_url: "",
+                    menu_url: "/chineseCultural/production/movieTV",
                     id: "2",
                     level: "1",
                     pid: ""
@@ -274,22 +274,26 @@
             ];
 
 
-            function getHTML_dropdown_menu_item(astr, aurl, show_active) {
-                var str = "<a class=\"dropdown-item  " + (show_active ? "active" : "") + " \" url=\"" + aurl + "\">" + astr + "</a>\n";
+            function getHTML_dropdown_menu_item(astr,aurl,show_active) {
+                var str = "<a class=\"dropdown-item  "+  (show_active ? "active" : "")  +" \" url=\"" + aurl +"\">" + astr + "</a>\n" +
+                    "<hr size=\"1\" style=\"color: #E8E8E8;border-style:dashed;width:100%\">" ;
                 return str;
             }
 
 
-            function getHTML_dropdown_menu(itemStr) {
-                var str = "<div class=\"dropdown-menu left-menu-dropdown-menu\">\n" +
-                    itemStr +
-                    "</div>";
-                return str;
-            }
+        function getHTML_dropdown_menu(itemStr) {
+            var str = "<div class=\"dropdown-menu left-menu-dropdown-menu\">\n" +
+                itemStr +
+                "</div>";
+            return str;
+        }
 
 
-            function getHTML(header, dropdownStr, show_active) {
+            function getHTML(item,dropdownStr,show_active) {
                 var uuid = stringUtil.getUUID();
+                var header = item.menu_name;
+                var furl = item.menu_url;
+                console.log(furl);
                 var str = "<div class=\"card\">\n" +
                     "                    <div class=\"\" id=\"headingOne\">\n" +
                     "                        <button class=\"collapse-btn btn btn-link btn-block text-left\" type=\"button\" data-toggle=\"collapse\" data-target=\"#" + uuid + "\" aria-expanded=\"true\" aria-controls=\"collapseOne\">\n" +
@@ -301,8 +305,24 @@
                     dropdownStr +
                     "                    </div>\n" +
                     "                </div>";
-                return str;
+                var str1 = "<div class=\"card\">\n" +
+                    "                    <div class=\"aaaa\" id=\"headingOne\">\n" +
+                    "                    <a  class=\"AFirstMenu\" url=\"" + furl + "\">" + header + "</a>\n" +
+                    "                    </div>\n" +
+                    "\n" +
+                    "                    <div id=\"" + uuid + "\" class=\"nullmenu " + (show_active ? "show" : "") + " \" aria-labelledby=\"headingOne\" data-parent=\"#accordionExample\">\n" +
+                    dropdownStr +
+                    "                    </div>\n" +
+                    "                </div>";
+
+                if (dropdownStr == "<div class=\"dropdown-menu left-menu-dropdown-menu\">\n" +
+                    "</div>") {
+                    return str1;
+                } else {
+                    return str;
+                }
             }
+
 
 
             function getMenuStr(menuList) {
@@ -318,70 +338,81 @@
                 });
 
                 var htmlStr = "";
-                $.each(topMenu, function (i, tm_item) {
+                $.each(topMenu,function (i,tm_item) {
                     var dropdowStr = "";
                     var show = false;
-                    $.each(menuList, function (j, item) {
-                        var active = false;
-                        if (item.pid == tm_item.id) {
-                            if (!stringUtil.isBlank(currentUrlHash) && currentUrlHash == item.menu_url) {
+                    $.each(menuList,function (j,item) {
+                        var active =false;
+                        if(item.pid == tm_item.id){
+                            if(!stringUtil.isBlank(currentUrlHash) && currentUrlHash == item.menu_url){
                                 active = true;
                                 show = true;
                             }
-                            dropdowStr = dropdowStr + getHTML_dropdown_menu_item(item.menu_name, item.menu_url, active);
+                            dropdowStr = dropdowStr + getHTML_dropdown_menu_item(item.menu_name,item.menu_url,active);
                         }
                     });
                     dropdowStr = getHTML_dropdown_menu(dropdowStr);
-                    htmlStr = htmlStr + getHTML(tm_item.menu_name, dropdowStr, show);
+                    htmlStr = htmlStr + getHTML(tm_item,dropdowStr,show);
                 });
 
-                return htmlStr;
-            }
+            return htmlStr;
+        }
 
 
-            $("#left_menu").html(getMenuStr(menu_list));
+        $("#left_menu").html(getMenuStr(menu_list));
 
 
-            $(".collapse-btn").unbind().on("click", function () {
+            $(".collapse-btn").unbind().on("click",function () {
                 $(".collapse").removeClass("show");
-                $($(this).attr("data-target")).addClass("show");
+                var a=1;
+                if(a=1){
+                    $($(this).attr("data-target")).addClass("show");
+                    a=a+1;
+                }else {
+                    $($(this).attr("data-target")).removeClass("show");
+                    a=1;
+                }
+
             });
 
 
-            $(".dropdown-item").unbind().on("click", function () {
+            $(".dropdown-item").unbind().on("click",function () {
                 $(".dropdown-item").removeClass("active");
+                $(this).addClass("active");
+                loadPage($(this).attr("url"));
+            });
+            $(".AFirstMenu").unbind().on("click",function () {
+                $(".AFirstMenu").removeClass("active");
                 $(this).addClass("active");
                 loadPage($(this).attr("url"));
             });
 
 
-            function loadPage(url) {
-                orange.loadPage({
-                    url: url, target: 'main_body', selector: '#fir_body', success: function (data) {
-                        if (typeof data == "string") {
-                            console.log(url + "加载")
-                        } else {
-                            alertUtil.error(url + '加载失败');
-                        }
-                    }
-                })
-            }
-
-
-            $("#logout").on("click", function () {
-                ajaxUtil.myAjax(null, "/api/user/userLogout", null, function (data) {
-                    if (ajaxUtil.success(data)) {
-                        orange.stop();
-                        window.location.href = "/userLogin";
+        function loadPage(url){
+            orange.loadPage({url: url, target: 'main_body', selector: '#fir_body', success: function(data){
+                    if(typeof data == "string"){
+                        console.log(url + "加载")
                     } else {
-                        alertUtil.alert(data.msg);
+                        alertUtil.error( url+'加载失败');
                     }
-                }, false)
-            });
+            }})
+        }
 
-            if (!stringUtil.isBlank(currentUrlHash)) {
-                loadPage(currentUrlHash);
-            }
 
-        })
+        $("#logout").on("click",function () {
+            ajaxUtil.myAjax(null,"/api/user/userLogout",null,function (data) {
+                if(ajaxUtil.success(data)){
+                    orange.stop();
+                    window.location.href = "/userLogin";
+                }else{
+                    alertUtil.alert(data.msg);
+                }
+            },false)
+        });
+
+        if(!stringUtil.isBlank(currentUrlHash)){
+            loadPage(currentUrlHash);
+        }
+
+    })
 })();

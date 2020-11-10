@@ -23,7 +23,7 @@ import java.util.List;
 //@Controller
 @RestController
 @RequestMapping("/cul/fac/culVen")
-public class CulturalVenuesController {
+public class   CulturalVenuesController {
 
     @Resource
     private ICulturalVenuesService iCulturalVenuesService;

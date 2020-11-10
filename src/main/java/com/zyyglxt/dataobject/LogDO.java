@@ -1,10 +1,12 @@
 package com.zyyglxt.dataobject;
 
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 import java.util.Date;
 
 @Data
+@Accessors(chain = true)
 public class LogDO  {
     /*itemid*/
     private Integer itemid;
@@ -25,17 +27,4 @@ public class LogDO  {
     /*项目修改时间*/
     private Date itemupdateat;
 
-
-    public LogDO(Integer itemid,String itemcode,String appCode,String logTitle,String logLevel,String creater,Date itemcreateat,String updater,Date itemupdateat){
-        this.itemid=itemid;
-        this.itemcode=itemcode;
-        this.appCode=appCode;
-        this.logTitle=logTitle;
-        this.logLevel=logLevel;
-        this.creater=creater;
-        this.itemcreateat=itemcreateat;
-        this.updater=updater;
-        this.itemupdateat=itemupdateat;
-
-    }
 }

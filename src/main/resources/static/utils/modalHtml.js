@@ -38,8 +38,11 @@
         modalHtml.myDeleteModalMovTV = '是否删除电视电影信息?';
         modalHtml.myDeleteAchievement = '是否删除科研成果?';
         modalHtml.myDeleteRecruit = '是否删除招聘信息?';
-
         modalHtml.myDeleteCooperation = '是否删除合作交流信息?';
+        modalHtml.myDeleteModalfamPre='是否删除历史名方';
+        modalHtml.myDeleteModalMedicine='是否删除中医药';
+        modalHtml.myDeleteModalcareFam='是否删除国医话健康';
+        modalHtml.myDeleteModalSciknow='是否删除科普知识';
 
 
         return modalHtml;

@@ -8,6 +8,7 @@
     <id column="itemCode" jdbcType="CHAR" property="itemcode" />
     <result column="NAME" jdbcType="VARCHAR" property="name" />
     <result column="SPECIFICATIONS" jdbcType="VARCHAR" property="specifications" />
+    <result column="PRICE" jdbcType="VARCHAR" property="price" />
     <result column="PLACE" jdbcType="VARCHAR" property="place" />
     <result column="CONTACTS" jdbcType="VARCHAR" property="contacts" />
     <result column="PHONE" jdbcType="VARCHAR" property="phone" />
@@ -20,35 +21,33 @@
   </resultMap>
   <sql id="Base_Column_List">
     <!--@mbg.generated-->
-    itemID, itemCode, `NAME`, SPECIFICATIONS, PLACE, CONTACTS, PHONE, `STATUS`, ORG_CODE, 
-    CREATER, itemCreateAt, UPDATER, itemUpdateAt
+    itemID, itemCode, `NAME`, SPECIFICATIONS, PRICE, PLACE, CONTACTS, PHONE, `STATUS`, 
+    ORG_CODE, CREATER, itemCreateAt, UPDATER, itemUpdateAt
   </sql>
   <select id="selectByPrimaryKey" parameterType="map" resultMap="BaseResultMap">
     <!--@mbg.generated-->
     select 
     <include refid="Base_Column_List" />
     from tb_industrial_develop_med_mat
-    where itemID = #{itemid,jdbcType=INTEGER}
-      and itemCode = #{itemcode,jdbcType=CHAR}
+    where itemCode = #{itemcode,jdbcType=CHAR}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="map">
     <!--@mbg.generated-->
     delete from tb_industrial_develop_med_mat
-    where itemID = #{itemid,jdbcType=INTEGER}
-      and itemCode = #{itemcode,jdbcType=CHAR}
+    where itemCode = #{itemcode,jdbcType=CHAR}
   </delete>
   <insert id="insert" keyColumn="itemID" keyProperty="itemid" parameterType="com.zyyglxt.dataobject.IndustrialDevelopMedMat" useGeneratedKeys="true">
     <!--@mbg.generated-->
     insert into tb_industrial_develop_med_mat (itemCode, `NAME`, SPECIFICATIONS, 
-      PLACE, CONTACTS, PHONE, 
-      `STATUS`, ORG_CODE, CREATER, 
-      itemCreateAt, UPDATER, itemUpdateAt
-      )
+      PRICE, PLACE, CONTACTS, 
+      PHONE, `STATUS`, ORG_CODE, 
+      CREATER, itemCreateAt, UPDATER, 
+      itemUpdateAt)
     values (#{itemcode,jdbcType=CHAR}, #{name,jdbcType=VARCHAR}, #{specifications,jdbcType=VARCHAR}, 
-      #{place,jdbcType=VARCHAR}, #{contacts,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, 
-      #{status,jdbcType=VARCHAR}, #{orgCode,jdbcType=CHAR}, #{creater,jdbcType=VARCHAR}, 
-      #{itemcreateat,jdbcType=TIMESTAMP}, #{updater,jdbcType=VARCHAR}, #{itemupdateat,jdbcType=TIMESTAMP}
-      )
+      #{price,jdbcType=VARCHAR}, #{place,jdbcType=VARCHAR}, #{contacts,jdbcType=VARCHAR}, 
+      #{phone,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, #{orgCode,jdbcType=CHAR}, 
+      #{creater,jdbcType=VARCHAR}, #{itemcreateat,jdbcType=TIMESTAMP}, #{updater,jdbcType=VARCHAR}, 
+      #{itemupdateat,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" keyColumn="itemID" keyProperty="itemid" parameterType="com.zyyglxt.dataobject.IndustrialDevelopMedMat" useGeneratedKeys="true">
     <!--@mbg.generated-->
@@ -62,6 +61,9 @@
       </if>
       <if test="specifications != null">
         SPECIFICATIONS,
+      </if>
+      <if test="price != null">
+        PRICE,
       </if>
       <if test="place != null">
         PLACE,
@@ -100,6 +102,9 @@
       </if>
       <if test="specifications != null">
         #{specifications,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null">
+        #{price,jdbcType=VARCHAR},
       </if>
       <if test="place != null">
         #{place,jdbcType=VARCHAR},
@@ -140,6 +145,9 @@
       <if test="specifications != null">
         SPECIFICATIONS = #{specifications,jdbcType=VARCHAR},
       </if>
+      <if test="price != null">
+        PRICE = #{price,jdbcType=VARCHAR},
+      </if>
       <if test="place != null">
         PLACE = #{place,jdbcType=VARCHAR},
       </if>
@@ -168,14 +176,14 @@
         itemUpdateAt = #{itemupdateat,jdbcType=TIMESTAMP},
       </if>
     </set>
-    where itemID = #{itemid,jdbcType=INTEGER}
-      and itemCode = #{itemcode,jdbcType=CHAR}
+    where itemCode = #{itemcode,jdbcType=CHAR}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.zyyglxt.dataobject.IndustrialDevelopMedMat">
     <!--@mbg.generated-->
     update tb_industrial_develop_med_mat
     set `NAME` = #{name,jdbcType=VARCHAR},
       SPECIFICATIONS = #{specifications,jdbcType=VARCHAR},
+      PRICE = #{price,jdbcType=VARCHAR},
       PLACE = #{place,jdbcType=VARCHAR},
       CONTACTS = #{contacts,jdbcType=VARCHAR},
       PHONE = #{phone,jdbcType=VARCHAR},
@@ -185,7 +193,6 @@
       itemCreateAt = #{itemcreateat,jdbcType=TIMESTAMP},
       UPDATER = #{updater,jdbcType=VARCHAR},
       itemUpdateAt = #{itemupdateat,jdbcType=TIMESTAMP}
-    where itemID = #{itemid,jdbcType=INTEGER}
-      and itemCode = #{itemcode,jdbcType=CHAR}
+    where itemCode = #{itemcode,jdbcType=CHAR}
   </update>
 </mapper>

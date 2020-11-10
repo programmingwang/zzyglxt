@@ -36,6 +36,8 @@
 
         modalHtml.myDeleteModalProject = '是否删除项目?确保删除项目前已全部删除对应的任务！';
 
+        modalHtml.myDeleteAchievement = '是否删除科研成果?';
+
         modalHtml.myAddUpdateModal =
             '<div class="row">'+
             '            <div class="col-lg-12 col-md-12">\n' +

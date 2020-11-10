@@ -19,27 +19,39 @@
 
         function getDictByCode(code,param,noCache) {
             if(dictList[code] == null || !stringUtil.isBlank(noCache)){
-                ajaxUtil.myAjax(null,"/api/dict/getDictByCode",stringUtil.isBlank(param)?{code:code}:{code:code,param:param},function (data) {
+                ajaxUtil.myAjax(null,"/dict/getDictByCode",stringUtil.isBlank(param)?{code:code}:{code:code,param:param},function (data) {
                     if(ajaxUtil.success(data)){
-                        console.log(data);
                         var al = new Array();
                         $.each(data.data,function (k,v) {
-                            al.push({id:k,text:v});
+                            al.push({id:v.code,text:v.value});
                         });
                         dictList[code] = al;
                     }
-
                 },false)
             }
-            console.log(dictList[code]);
             return dictList[code];
         }
 
 
         var DICT_LIST = {
-            "PROJECT_LIST":"projectList",
-            "Module_LIST":"moduleList",
-            "pm_ImportanceType":"pm_ImportanceType",
+            //展示状态
+            "showStatus": "showStatus",
+            //专家类别
+            "expertType": "expertType",
+            //科室
+            "dept": "dept",
+            //医院等级
+            "hospitalLevel": "hospitalLevel",
+            //中药功效分类
+            "effectType": "effectType",
+            //学科专业代码
+            "subjectMajor": "subjectMajor",
+            //网站数据状态
+            "webStatus": "status",
+            //科研项目数据状态
+            "projectStatus": "projectStatus",
+            //专家评审状态
+            "exmaineStatus": "exmaineStatus"
         }
 
         var dictList = {

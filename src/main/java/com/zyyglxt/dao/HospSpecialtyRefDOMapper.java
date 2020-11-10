@@ -16,4 +16,6 @@ public interface HospSpecialtyRefDOMapper {
     int updateByPrimaryKeySelective(HospSpecialtyRefDO record);
 
     int updateByPrimaryKey(HospSpecialtyRefDO record);
+
+    HospSpecialtyRefDO selectHospBySpecialtyCode(String specialtyCode);
 }

@@ -2,8 +2,8 @@
     define('ajaxUtil', ['jquery','objectUtil','stringUtil'], function(jquery, objectUtil,stringUtil) {
 
 
-        var successCode = "000";
-        var notLoggedInCode= "100900";
+        var successCode = 88888;
+        var notLoggedInCode= 20001;
 
 
         function success(data) {
@@ -34,14 +34,13 @@
             }
         }
 
-        function myAjax(aButton, url, param, fun, async, isReqJson) {
+        function myAjax(aButton, url, param, fun, async, isReqJson, type="post") {
             var _setting =
                 {
                     url: url,
                     async: (async == undefined) ? true : async,
-                    type: "post",
-                    dataType: "json",
-
+                    type: type,
+                    dataType: "json"
                 }
 
             if (!objectUtil.strIsBlank(isReqJson)) {
@@ -50,7 +49,6 @@
             }else{
                 _setting.data = param;
             }
-
 
             _setting.beforeSend = function () {
                 if (aButton != null) {

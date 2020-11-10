@@ -39,11 +39,7 @@ public class IndustrialDevelopSciAchiDO extends IndustrialDevelopSciAchiDOKey {
      */
     private String context;
 
-    @NotBlank(message = "来源不能为空",groups = ValidationGroups.Insert.class)
-    private String industrialDevelopSource;
 
-    @NotBlank(message = "作者不能为空",groups = ValidationGroups.Insert.class)
-    private String industrialDevelopAuthor;
 
     private String industrialDevelopStatus;
 

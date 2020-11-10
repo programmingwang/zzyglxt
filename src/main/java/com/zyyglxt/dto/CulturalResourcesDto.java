@@ -1,5 +1,6 @@
 package com.zyyglxt.dto;
 
+import com.zyyglxt.dataobject.CulturalResourcesDO;
 import lombok.Data;
 import lombok.ToString;
 
@@ -12,18 +13,7 @@ import java.util.Date;
  */
 @Data
 @ToString
-public class CulturalResourcesDto {
-    private Integer itemid;
-    private String itemcode;
-    private String chineseCulturalName;
-    private String chineseCulturalSource;
-    private String chineseCulturalAuthor;
-    private Integer visitNum;
-    private String chineseCulturalType;
-    private String chineseCulturalStatus;
-    private String creater;
-    private Date itemcreateat;
-    private String updater;
-    private Date itemupdateat;
+public class CulturalResourcesDto extends CulturalResourcesDO {
     private String filePath;
+    private String fileName;
 }

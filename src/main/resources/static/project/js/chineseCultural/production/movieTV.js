@@ -16,72 +16,10 @@
             ].join('');
         }
 
-
-        function addUpdate(addOrUpdate,row){
-            var myUpdateModalData ={
-                modalBodyID : "myAddUpdateModalProject",
-                modalTitle : addOrUpdate === "add" ? "新增项目" :"修改项目",
-                modalConfirmFun:function () {
-                    var projectEntity = {
-                        projectName: $("#projectName").val(),
-                        projectNo: $("#projectNo").val(),
-                };
-
-                    if(addOrUpdate === "add"){
-                        ajaxUtil.myAjax(null,"api/project/addProject",projectEntity,function (data) {
-                            if(ajaxUtil.success(data)){
-                                alertUtil.info("新增项目成功");
-                                refreshTable();
-                                myUpdateModal.hide();
-                            }else {
-                                alertUtil.alert(data.msg)
-                            }
-                        },false);
-                    }
-
-                    if(addOrUpdate === "update"){
-                        projectEntity.projectID = row.projectID;
-                        ajaxUtil.myAjax(null,"api/project/updateProject",projectEntity,function (data) {
-                            if(ajaxUtil.success(data)){
-                                alertUtil.info("更新项目成功");
-                                refreshTable();
-                                myUpdateModal.hide();
-                            }else {
-                                alertUtil.alert(data.msg)
-                            }
-                        },false);
-                    }
-
-
-                }
-
-            };
-            var myUpdateModal = modalUtil.init(myUpdateModalData);
-
-
-            var pl = dictUtil.getDictByCode(dictUtil.DICT_LIST.PROJECT_LIST);
-            $("#projectName").selectUtil(pl).on('change',function () {
-                var ml = dictUtil.getDictByCode(dictUtil.DICT_LIST.Module_LIST,$("#projectName").val(),true);
-                $("#moduleName").selectUtil(ml);
-            });
-
-            var ml = dictUtil.getDictByCode(dictUtil.DICT_LIST.Module_LIST,stringUtil.isBlank(row) ? $("#projectName").val() : row.projectID ,true);
-            $("#moduleName").selectUtil(ml);
-
-            if(addOrUpdate === "update"){
-                $("#projectName").val(row.projectName);
-                $("#projectNo").val(row.projectNo);
-                $("#createBy").val(row.createBy);
-                $("#createAt").val(stringUtil.formatDateTime(row.createAt));
-            }
-            myUpdateModal.show();
-        }
-
-
         //修改事件
         window.orgEvents = {
             'click .edit' : function(e, value, row, index) {
-                addUpdate("update",row)
+
             },
             'click .delete': function (e, value, row, index) {
                 var myDeleteModalData ={

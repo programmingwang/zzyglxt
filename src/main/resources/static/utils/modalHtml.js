@@ -37,10 +37,24 @@
         modalHtml.myDeleteModalInCuHe = '是否删除非物质文化遗产信息?';
         modalHtml.myDeleteModalMovTV = '是否删除电视电影信息?';
         modalHtml.myDeleteAchievement = '是否删除科研成果?';
+
         modalHtml.myDeleteRecruit = '是否删除招聘信息?';
-
         modalHtml.myDeleteCooperation = '是否删除合作交流信息?';
+        modalHtml.myDeleteModalfamPre='是否删除历史名方';
+        modalHtml.myDeleteModalMedicine='是否删除中医药';
+        modalHtml.myDeleteModalcareFam='是否删除国医话健康';
+        modalHtml.myDeleteModalSciknow='是否删除科普知识';
 
+        modalHtml.myDeleteNewsInf = '是否删除新闻信息?';
+        modalHtml.myDeleteNewsRotations = '是否删除新闻轮播图?';
+        modalHtml.myDeleteAnnouncement = '是否删除通知公告?';
+        modalHtml.myDeleteRegulation = '是否删除政策法规?';
+        modalHtml.myDeleteProcess = '是否删除办事流程?';
+
+
+        modalHtml.myDeleteHospital = "是否删除医院信息？";
+        modalHtml.myDeleteSpecialty = "是否删除科室信息？";
+        modalHtml.myDeleteChineseMedicine = "是否删除名老中医信息？";
 
         return modalHtml;
 

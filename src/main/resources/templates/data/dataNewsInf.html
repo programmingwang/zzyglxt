@@ -2,6 +2,8 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <title>新闻管理</title>
+    <link rel="stylesheet" th:href="@{CSS/taskList.css}">
 </head>
 <body>
     <div id="fir_body">
@@ -22,11 +24,11 @@
                     >
                 </a>
             </div>
-            <div id="collapseOne" class="collapse show col-md-12 col-lg-12 row" style="height: 0px; ">
-            <div class="col-lg-3 col-md-3">
-                <div class="input-group mb-3">
+            <div id="collapseOne" class="collapse col-md-12 col-lg-12 row" style="height: 0px; ">
+            <div class="col-lg-4 col-md-4">
+                <div class="input-group mb-4">
                     <div class="input-group-prepend">
-                        <span class="input-text" >其他选项： 展示状态：</span>
+                        <span class="input-text" >其他选项：   展示状态：</span>
                     </div>
                     <select class="custom-select" id="chargePersonSearch"></select>
                 </div>
@@ -36,7 +38,7 @@
             <div class="col-lg-3 col-md-3">
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
-                        <span class="input-group-text" >创建时间</span>
+                        <span class="input-group-text" >发布时间</span>
                     </div>
                     <select class="custom-select" id="applicantSearch"></select>
                 </div>
@@ -46,8 +48,7 @@
 
         <div class="row col-lg-12 col-md-12 mb-3">
             <div class="col-lg-12 col-md-12">
-                <button type="button" id="btn_sel" class="btn btn-primary">查询</button>
-                <button type="button" id="btn_addTask" class="btn btn-primary ml-3">新增任务</button>
+                <button type="button" id="btn_addTask" class="btn btn-primary ml-3">新增新闻</button>
             </div>
         </div>
         <div class="col-lg-12">
@@ -57,12 +58,9 @@
 
         <!-- Modal -->
 
-
-
-
     </div>
 
 </body>
 <script type="text/javascript" data-main="/main/main.js" th:src="@{/component/require@2.3.6/require-2.3.6.js}"></script>
-<script type="text/javascript" th:src="@{/project/js/data/dataNewsInf.js}"></script>
+<script type="text/javascript" th:src="@{/project/js/data/add/dataNewsInf.js}"></script>
 </html>

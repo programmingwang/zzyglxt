@@ -198,18 +198,14 @@ public class IUserServiceImpl implements IUserService {
 
         // 如果是普通用户
         if (userType == 0) {
-            if (MobileUtil.checkPhone(updatePwdDto.getMobilePhone())) {
-                String mobilePhone = updatePwdDto.getMobilePhone();
-                // 根据手机号码查询数据库拿到 盐
-                userDO = userDOMapper.selectByMobilePhone(mobilePhone);
-                String salt = userDO.getSalt();
-
+            String mobilePhone = updatePwdDto.getMobilePhone();
+            if (MobileUtil.checkPhone(mobilePhone)) {
                 String oldPassword = updatePwdDto.getPassword();// 输入的原密码
-                oldPassword = DigestUtils.md5Hex(oldPassword + salt);// 输入的原密码+盐计算
-                // 数据库查询到的原密码和输入的 原密码+盐计算后 比对
+                BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+                oldPassword = passwordEncoder.encode(oldPassword);
+                // 数据库查询到的原密码和输入的原密码比对
                 if (userDO.getPassword().equals(oldPassword)) {
-                    // 输入的两次密码是否一致
-                    updatePwdDto.setNewPassword(DigestUtils.md5Hex(updatePwdDto.getNewPassword() + username));
+                    updatePwdDto.setNewPassword(passwordEncoder.encode(updatePwdDto.getNewPassword()));
                     userDOMapper.updatePasswordByMobilePhone(updatePwdDto.getNewPassword(), mobilePhone);
                     return new ResponseData(EmBusinessError.success);
                 } else {
@@ -218,13 +214,13 @@ public class IUserServiceImpl implements IUserService {
             } else {
                 throw new BusinessException("手机号码不正确！", EmBusinessError.MOBILEPHONE_ERROR);
             }
-        } else if (userType == 1) {
+        } else {
             // 如果是管理员
-            updatePwdDto.setNewPassword(DigestUtils.md5Hex(updatePwdDto.getNewPassword() + username));
+            BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+            updatePwdDto.setNewPassword(passwordEncoder.encode(updatePwdDto.getNewPassword()));
             userDOMapper.updatePasswordByUserName(updatePwdDto.getNewPassword(), username);
             return new ResponseData(EmBusinessError.success);
         }
-        throw new BusinessException("该用户既不是普通用户，也不是管理员！", EmBusinessError.UNKNOWN_ERROR);
     }
 
     /**
@@ -259,7 +255,7 @@ public class IUserServiceImpl implements IUserService {
             throw new BusinessException(isValidIDCardNo, EmBusinessError.IDNO_ERROR);
         }
         // 验证电话是否正确
-        if (!MobileUtil.checkPhone(userDO.getMobilephone())) {
+        if (!MobileUtil.checkPhone(userDO.getMobilephone()) && !StringUtils.isEmpty(userDO.getMobilephone())) {
             throw new BusinessException("手机号码不正确！", EmBusinessError.MOBILEPHONE_ERROR);
         }
 

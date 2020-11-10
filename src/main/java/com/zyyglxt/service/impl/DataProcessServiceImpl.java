@@ -7,6 +7,7 @@ import com.zyyglxt.error.BusinessException;
 import com.zyyglxt.error.EmBusinessError;
 import com.zyyglxt.service.IDataNewsService;
 import com.zyyglxt.service.IDataProcessService;
+import com.zyyglxt.util.UUIDUtils;
 import com.zyyglxt.validator.ValidatorImpl;
 import com.zyyglxt.validator.ValidatorResult;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,6 +52,10 @@ public class DataProcessServiceImpl implements IDataProcessService {
         record.setItemupdateat(new Date());
         record.setUpdater("test");
         record.setDataType("办事流程");
+        record.setDataStatus("待上架");
+        if(record.getItemcode() == null){
+            record.setItemcode(UUIDUtils.getUUID());
+        }
         return dataDOMapper.insertSelective(record);
     }
 

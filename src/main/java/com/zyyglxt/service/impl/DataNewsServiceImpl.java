@@ -52,6 +52,7 @@ public class DataNewsServiceImpl implements IDataNewsService {
         record.setItemupdateat(new Date());
         record.setUpdater("test");
         record.setDataType("新闻管理");
+        record.setDataStatus("待上架");
         //如果前台没有插入图片或者附件，就自己生成uuid
         if(record.getItemcode() == null){
             record.setItemcode(UUIDUtils.getUUID());

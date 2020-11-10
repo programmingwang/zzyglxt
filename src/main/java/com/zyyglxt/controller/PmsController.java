@@ -31,8 +31,8 @@ public class PmsController {
     public ResponseData getAppContext(HttpServletRequest request){
 //        HttpSession session = request.getSession();
 //        UserDto userDto = (UserDto) session.getAttribute("userDto");
-//        if (userDto==null){
-            return new ResponseData(EmBusinessError.success, null);
+//        if (ObjectUtil.isNull(userDto)){
+              return new ResponseData(EmBusinessError.success, null);
 //        }else {
 //            return new ResponseData(EmBusinessError.success, userDto);
 //        }

@@ -139,11 +139,26 @@
                     pid: "6"
                 },
                 {
+
                     menu_name: "＞中药常识",
                     menu_url: "/healthCare/healthcarechineseMedicine",
                     id: "6-4",
                     level: "2",
                     pid: "6"
+
+                    menu_name : "名老中医",
+                    menu_url: "",
+                    id:"7",
+                    level:"1",
+                    pid:""
+                },
+                {
+                    menu_name : "名老中医",
+                    menu_url: "/medicalService/chineseMedicine",
+                    id:"7-1",
+                    level:"2",
+                    pid:"7"
+
                 },
                 {
                     menu_name: "＞历史名方",
@@ -188,6 +203,22 @@
                     pid:"9"
                 },
                 {
+
+                    menu_name : "中医药名院",
+                    menu_url: "",
+                    id:"9",
+                    level:"1",
+                    pid:""
+                },
+                {
+                    menu_name : "＞中医药名院",
+                    menu_url: "/medicalService/hosp",
+                    id:"9-1",
+                    level:"2",
+                    pid:"9"
+                },
+                {
+
                     menu_name : "中医药名科",
                     menu_url: "",
                     id:"10",

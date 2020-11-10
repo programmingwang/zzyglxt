@@ -7,6 +7,7 @@ spring:
     encoding: UTF-8
     servlet:
       content-type: text/html
+    prefix: classpath:/templates
   application:
     name: zyyglxt
   datasource:
@@ -15,6 +16,14 @@ spring:
     username: root
     password: root1234
     type: com.alibaba.druid.pool.DruidDataSource
+#     使项目能访问图片
+  resources:
+    static-locations: classpath:/static/
+  devtools:
+    restart:
+      enabled: false
+
+
 
 
 mybatis:
@@ -25,10 +34,11 @@ mybatis:
 
 server:
   port: 8989
-  servlet:
-    context-path: /zyyglxt
+
+#  servlet:
+#    context-path: /zyyglxt
     
-logging:
-  file:
-    path: E:/Desktop
+#logging:
+#  file:
+#    path: E:/Desktop
 

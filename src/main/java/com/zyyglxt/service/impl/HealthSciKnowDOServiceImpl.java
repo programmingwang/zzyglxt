@@ -3,13 +3,21 @@ package com.zyyglxt.service.impl;
 import com.zyyglxt.dao.HealthSciKnowDOMapper;
 import com.zyyglxt.dataobject.HealthSciKnowDO;
 import com.zyyglxt.dataobject.HealthSciKnowDOKey;
+import com.zyyglxt.error.BusinessException;
+import com.zyyglxt.error.EmBusinessError;
 import com.zyyglxt.service.HealthSciKnowDOService;
+import com.zyyglxt.validator.ValidatorImpl;
+import com.zyyglxt.validator.ValidatorResult;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
+import java.util.UUID;
 
 /**
  * @version 1.0
@@ -19,41 +27,58 @@ import java.util.Date;
 @Service
 public class HealthSciKnowDOServiceImpl implements HealthSciKnowDOService {
     @Resource
-    HealthSciKnowDOMapper healthSciKnowDOMapper;
+    private HealthSciKnowDOMapper healthSciKnowDOMapper;
+    @Autowired
+    private ValidatorImpl validator;
+    @Transactional
     @Override
-    public int insertSelective(HealthSciKnowDO record) {
-        Date data=new Date();
+    public int insertSelective(HealthSciKnowDO record) throws BusinessException {
+        /*Date data=new Date();
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         try {
             data = df.parse(df.format(data));
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        record.setItemcreateat(data);
+        record.setItemcreateat(data);*/
+        ValidatorResult result = validator.validate(record);
+        if(result.isHasErrors()){
+            throw new BusinessException(result.getErrMsg(), EmBusinessError.PARAMETER_VALIDATION_ERROR);
+        }
+        record.setItemcode(UUID.randomUUID().toString());
+        record.setItemcreateat(new Date());
         return healthSciKnowDOMapper.insertSelective(record);
     }
-
+    @Transactional
     @Override
     public int deleteByPrimaryKey(HealthSciKnowDOKey key) {
         healthSciKnowDOMapper.deleteByPrimaryKey(key);
         return 0;
     }
-
+    @Transactional
     @Override
-    public int updateByPrimaryKeySelective(HealthSciKnowDO record) {
-        Date data=new Date();
-        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        try {
-            data = df.parse(df.format(data));
-        } catch (ParseException e) {
-            e.printStackTrace();
+    public int updateByPrimaryKeySelective(HealthSciKnowDO record) throws BusinessException {
+        ValidatorResult result = validator.validate(record);
+        if(result.isHasErrors()){
+            throw new BusinessException(result.getErrMsg(), EmBusinessError.PARAMETER_VALIDATION_ERROR);
         }
-        record.setItemcreateat(data);
+        record.setItemupdateat(new Date());
         return healthSciKnowDOMapper.updateByPrimaryKeySelective(record);
     }
 
     @Override
     public HealthSciKnowDO selectByPrimaryKey(HealthSciKnowDOKey key) {
         return healthSciKnowDOMapper.selectByPrimaryKey(key);
+    }
+    /*查询所有科普知识数据*/
+    @Override
+    public List<HealthSciKnowDO> selectAllHealthSciKnow() {
+        return healthSciKnowDOMapper.selectAllHealthSciKnow();
+    }
+
+    @Override
+    public int updateVisitNumHealthSciKnow(HealthSciKnowDOKey key) {
+        healthSciKnowDOMapper.updateVisitNumHealthSciKnow(key);
+        return 0;
     }
 }

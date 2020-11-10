@@ -2,14 +2,16 @@ package com.zyyglxt.controller.ChineseCultural.prodiuction;
 
 import com.zyyglxt.dataobject.ChineseCulturalDO;
 import com.zyyglxt.dataobject.ChineseCulturalDOKey;
+import com.zyyglxt.dto.ChineseCulturalDto;
+import com.zyyglxt.error.EmBusinessError;
+import com.zyyglxt.response.ResponseData;
+import com.zyyglxt.service.IFileService;
 import com.zyyglxt.service.IMovieTVService;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import com.zyyglxt.util.ConvertDOToDTOUtil;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -26,67 +28,78 @@ public class MovieTVController {
     @Resource
     private IMovieTVService iMovieTVService;
 
+    @Resource
+    private IFileService iFileService;
+
     //获取所有的电影电视
     @RequestMapping(value = "/getAll" , method = RequestMethod.GET)
-    public String getAllTraditionalCultural(Model model){
+    @ResponseBody
+    public ResponseData getAllMovieTV(){
         List<ChineseCulturalDO> movieTVList = iMovieTVService.getMovieTVList();
-        model.addAttribute("movieTVList",movieTVList);
-        return "获得了所有电影电视信息";
+        List<ChineseCulturalDto> chineseCulturalDtoList = new ArrayList<>();
+        for (ChineseCulturalDO chineseCulturalDO : movieTVList) {
+            chineseCulturalDtoList.add(
+                    ConvertDOToDTOUtil.convertFromDOToDTO(
+                            chineseCulturalDO,iFileService.selectFileByDataCode(
+                                    chineseCulturalDO.getItemcode()).getFilePath()));
+        }
+        return new ResponseData(EmBusinessError.success,chineseCulturalDtoList);
     }
 
-    //查询一个电影电视
-
-    //去增加页面,这个是为了跳转到增加的页面
-    @RequestMapping(value = "/toAddPage" , method = RequestMethod.GET)
-    public String toAddPage(){
-        return "to add page";
-    }
+//    //查询一个电影电视
+//
+//    //去增加页面,这个是为了跳转到增加的页面
+//    @RequestMapping(value = "/toAddPage" , method = RequestMethod.GET)
+//    public ResponseData toAddPage(){
+//        return "to add page";
+//    }
 
     //增加一个漫画典故
     @RequestMapping(value = "/addMovTv" , method = RequestMethod.POST)
-    public String addTraditionalCultural(ChineseCulturalDO chineseCulturalDO){
-        chineseCulturalDO.setChineseCulturalType("电影电视");
-        chineseCulturalDO.setChineseCulturalStatus("待上架");
+    @ResponseBody
+    public ResponseData addMovieTV(@RequestBody ChineseCulturalDO chineseCulturalDO){
         iMovieTVService.addMovieTV(chineseCulturalDO);
-        return "to main page";
+        return new ResponseData(EmBusinessError.success);
     }
 
     //删除一个电影电视（真正的数据库中删除）
     @RequestMapping(value = "/delMovTv/{itemID}/{itemCode}" , method = RequestMethod.DELETE)
-    public String deleteTraditionalCultural(@PathVariable("itemID") Integer itemID, @PathVariable("itemCode")String itemCode){
+    @ResponseBody
+    public ResponseData deleteMovieTV(@PathVariable("itemID") Integer itemID, @PathVariable("itemCode")String itemCode){
         ChineseCulturalDOKey chineseCulturalDOKey = new ChineseCulturalDOKey();
         chineseCulturalDOKey.setItemid(itemID);
         chineseCulturalDOKey.setItemcode(itemCode);
         iMovieTVService.removeMovieTV(chineseCulturalDOKey);
-        return "back to main page";
+        return new ResponseData(EmBusinessError.success);
     }
 
     //去修改的页面
     @RequestMapping(value = "/toUpdMovTv/{itemID}/{itemCode}" , method = RequestMethod.GET)
-    public String toUpdatePage(@PathVariable("itemID") Integer itemID, @PathVariable("itemCode")String itemCode,Model model){
+    @ResponseBody
+    public ResponseData toUpdatePage(@PathVariable("itemID") Integer itemID, @PathVariable("itemCode")String itemCode){
         ChineseCulturalDOKey chineseCulturalDOKey = new ChineseCulturalDOKey();
         chineseCulturalDOKey.setItemid(itemID);
         chineseCulturalDOKey.setItemcode(itemCode);
         ChineseCulturalDO chineseCultural = iMovieTVService.getMovieTV(chineseCulturalDOKey);
-        //在update的页面就可以拿到对应的数据了
-        model.addAttribute("chineseCultural",chineseCultural);
-        return "to update Page";
+        return new ResponseData(EmBusinessError.success,chineseCultural);
     }
 
     //修改一个电影电视
     @RequestMapping(value = "/updMovTv" , method = RequestMethod.POST)
-    public String updateTraditionalCultural(ChineseCulturalDO chineseCulturalDO){
+    @ResponseBody
+    public ResponseData updateMovieTV(@RequestBody ChineseCulturalDO chineseCulturalDO){
         iMovieTVService.updateMovieTV(chineseCulturalDO);
-        return "back to main page";
+        return new ResponseData(EmBusinessError.success);
     }
 
     //修改一个电影电视状态 （逻辑删除，但是是将状态改成下架状态,也可以是处长页面 通过->上架， 未通过->下架）
     @RequestMapping(value = "/cgMovTvSta/{itemID}/{itemCode}" , method = RequestMethod.POST)
-    public String changeStatus(@PathVariable("itemID") Integer itemID, @PathVariable("itemCode")String itemCode, String status){
+    @ResponseBody
+    public ResponseData changeStatus(@RequestParam("chineseCulturalStatus") String chineseCulturalStatus ,@PathVariable("itemID") Integer itemID, @PathVariable("itemCode")String itemCode){
         ChineseCulturalDOKey chineseCulturalDOKey = new ChineseCulturalDOKey();
         chineseCulturalDOKey.setItemid(itemID);
         chineseCulturalDOKey.setItemcode(itemCode);
-        iMovieTVService.changeMovieStatus(chineseCulturalDOKey,status);
-        return "back to main page";
+        iMovieTVService.changeMovieStatus(chineseCulturalDOKey,chineseCulturalStatus);
+        return new ResponseData(EmBusinessError.success);
     }
 }

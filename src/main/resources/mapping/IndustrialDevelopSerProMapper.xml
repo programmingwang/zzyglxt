@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zyyglxt.dao.IndustrialDevelopSerProMapper">
+  <resultMap id="BaseResultMap" type="com.zyyglxt.dataobject.IndustrialDevelopSerPro">
+    <!--@mbg.generated-->
+    <!--@Table tb_industrial_develop_ser_pro-->
+    <id column="itemID" jdbcType="INTEGER" property="itemid" />
+    <id column="itemCode" jdbcType="CHAR" property="itemcode" />
+    <result column="SERVICE_PROJECT" jdbcType="VARCHAR" property="serviceProject" />
+    <result column="PROJECT_COST" jdbcType="VARCHAR" property="projectCost" />
+    <result column="PHONE" jdbcType="VARCHAR" property="phone" />
+    <result column="CONTACTS" jdbcType="VARCHAR" property="contacts" />
+    <result column="PROJECT_INTRODUCE" jdbcType="LONGVARCHAR" property="projectIntroduce" />
+    <result column="VISIT_NUM" jdbcType="INTEGER" property="visitNum" />
+    <result column="STATUS" jdbcType="VARCHAR" property="status" />
+    <result column="ORG_CODE" jdbcType="CHAR" property="orgCode" />
+    <result column="CREATER" jdbcType="VARCHAR" property="creater" />
+    <result column="itemCreateAt" jdbcType="TIMESTAMP" property="itemcreateat" />
+    <result column="UPDATER" jdbcType="VARCHAR" property="updater" />
+    <result column="itemUpdateAt" jdbcType="TIMESTAMP" property="itemupdateat" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    itemID, itemCode, SERVICE_PROJECT, PROJECT_COST, PHONE, CONTACTS, PROJECT_INTRODUCE, 
+    VISIT_NUM, `STATUS`, ORG_CODE, CREATER, itemCreateAt, UPDATER, itemUpdateAt
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="map" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from tb_industrial_develop_ser_pro
+    where itemID = #{itemid,jdbcType=INTEGER}
+      and itemCode = #{itemcode,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="map">
+    <!--@mbg.generated-->
+    delete from tb_industrial_develop_ser_pro
+    where itemID = #{itemid,jdbcType=INTEGER}
+      and itemCode = #{itemcode,jdbcType=CHAR}
+  </delete>
+  <insert id="insert" parameterType="com.zyyglxt.dataobject.IndustrialDevelopSerPro">
+    <!--@mbg.generated-->
+    insert into tb_industrial_develop_ser_pro (itemID, itemCode, SERVICE_PROJECT, 
+      PROJECT_COST, PHONE, CONTACTS, 
+      PROJECT_INTRODUCE, VISIT_NUM, `STATUS`, 
+      ORG_CODE, CREATER, itemCreateAt, 
+      UPDATER, itemUpdateAt)
+    values (#{itemid,jdbcType=INTEGER}, #{itemcode,jdbcType=CHAR}, #{serviceProject,jdbcType=VARCHAR}, 
+      #{projectCost,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{contacts,jdbcType=VARCHAR}, 
+      #{projectIntroduce,jdbcType=LONGVARCHAR}, #{visitNum,jdbcType=INTEGER}, #{status,jdbcType=VARCHAR}, 
+      #{orgCode,jdbcType=CHAR}, #{creater,jdbcType=VARCHAR}, #{itemcreateat,jdbcType=TIMESTAMP}, 
+      #{updater,jdbcType=VARCHAR}, #{itemupdateat,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zyyglxt.dataobject.IndustrialDevelopSerPro">
+    <!--@mbg.generated-->
+    insert into tb_industrial_develop_ser_pro
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="itemid != null">
+        itemID,
+      </if>
+      <if test="itemcode != null">
+        itemCode,
+      </if>
+      <if test="serviceProject != null">
+        SERVICE_PROJECT,
+      </if>
+      <if test="projectCost != null">
+        PROJECT_COST,
+      </if>
+      <if test="phone != null">
+        PHONE,
+      </if>
+      <if test="contacts != null">
+        CONTACTS,
+      </if>
+      <if test="projectIntroduce != null">
+        PROJECT_INTRODUCE,
+      </if>
+      <if test="visitNum != null">
+        VISIT_NUM,
+      </if>
+      <if test="status != null">
+        `STATUS`,
+      </if>
+      <if test="orgCode != null">
+        ORG_CODE,
+      </if>
+      <if test="creater != null">
+        CREATER,
+      </if>
+      <if test="itemcreateat != null">
+        itemCreateAt,
+      </if>
+      <if test="updater != null">
+        UPDATER,
+      </if>
+      <if test="itemupdateat != null">
+        itemUpdateAt,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="itemid != null">
+        #{itemid,jdbcType=INTEGER},
+      </if>
+      <if test="itemcode != null">
+        #{itemcode,jdbcType=CHAR},
+      </if>
+      <if test="serviceProject != null">
+        #{serviceProject,jdbcType=VARCHAR},
+      </if>
+      <if test="projectCost != null">
+        #{projectCost,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="contacts != null">
+        #{contacts,jdbcType=VARCHAR},
+      </if>
+      <if test="projectIntroduce != null">
+        #{projectIntroduce,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="visitNum != null">
+        #{visitNum,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="orgCode != null">
+        #{orgCode,jdbcType=CHAR},
+      </if>
+      <if test="creater != null">
+        #{creater,jdbcType=VARCHAR},
+      </if>
+      <if test="itemcreateat != null">
+        #{itemcreateat,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updater != null">
+        #{updater,jdbcType=VARCHAR},
+      </if>
+      <if test="itemupdateat != null">
+        #{itemupdateat,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zyyglxt.dataobject.IndustrialDevelopSerPro">
+    <!--@mbg.generated-->
+    update tb_industrial_develop_ser_pro
+    <set>
+      <if test="serviceProject != null">
+        SERVICE_PROJECT = #{serviceProject,jdbcType=VARCHAR},
+      </if>
+      <if test="projectCost != null">
+        PROJECT_COST = #{projectCost,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        PHONE = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="contacts != null">
+        CONTACTS = #{contacts,jdbcType=VARCHAR},
+      </if>
+      <if test="projectIntroduce != null">
+        PROJECT_INTRODUCE = #{projectIntroduce,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="visitNum != null">
+        VISIT_NUM = #{visitNum,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        `STATUS` = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="orgCode != null">
+        ORG_CODE = #{orgCode,jdbcType=CHAR},
+      </if>
+      <if test="creater != null">
+        CREATER = #{creater,jdbcType=VARCHAR},
+      </if>
+      <if test="itemcreateat != null">
+        itemCreateAt = #{itemcreateat,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updater != null">
+        UPDATER = #{updater,jdbcType=VARCHAR},
+      </if>
+      <if test="itemupdateat != null">
+        itemUpdateAt = #{itemupdateat,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where itemID = #{itemid,jdbcType=INTEGER}
+      and itemCode = #{itemcode,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zyyglxt.dataobject.IndustrialDevelopSerPro">
+    <!--@mbg.generated-->
+    update tb_industrial_develop_ser_pro
+    set SERVICE_PROJECT = #{serviceProject,jdbcType=VARCHAR},
+      PROJECT_COST = #{projectCost,jdbcType=VARCHAR},
+      PHONE = #{phone,jdbcType=VARCHAR},
+      CONTACTS = #{contacts,jdbcType=VARCHAR},
+      PROJECT_INTRODUCE = #{projectIntroduce,jdbcType=LONGVARCHAR},
+      VISIT_NUM = #{visitNum,jdbcType=INTEGER},
+      `STATUS` = #{status,jdbcType=VARCHAR},
+      ORG_CODE = #{orgCode,jdbcType=CHAR},
+      CREATER = #{creater,jdbcType=VARCHAR},
+      itemCreateAt = #{itemcreateat,jdbcType=TIMESTAMP},
+      UPDATER = #{updater,jdbcType=VARCHAR},
+      itemUpdateAt = #{itemupdateat,jdbcType=TIMESTAMP}
+    where itemID = #{itemid,jdbcType=INTEGER}
+      and itemCode = #{itemcode,jdbcType=CHAR}
+  </update>
+</mapper>

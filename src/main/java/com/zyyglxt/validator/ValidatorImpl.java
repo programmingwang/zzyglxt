@@ -1,5 +1,6 @@
 package com.zyyglxt.validator;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.stereotype.Component;
 
@@ -15,18 +16,18 @@ public class ValidatorImpl implements InitializingBean {
     private Validator validator;
 
     @Override
-    public void afterPropertiesSet() throws Exception {
+    public void afterPropertiesSet() throws Exception{
         //将hibernate validator通过工厂的初始化方式使其初始化
         this.validator = Validation.buildDefaultValidatorFactory().getValidator();
 
     }
 
+
     //实现校验方法并返回校验结果
-    public ValidatorResult validate(Object bean){
+    public ValidatorResult validate(Object bean,Class<?>... group){
         ValidatorResult result = new ValidatorResult();
-        Set<ConstraintViolation<Object>> validateSet = validator.validate(bean);
+        Set<ConstraintViolation<Object>> validateSet = validator.validate(bean,group);
         if(validateSet.size()> 0){
-            //有错误
             result.setHasErrors(true);
             validateSet.forEach(validate -> {
                 String errMsg = validate.getMessage();
@@ -36,4 +37,5 @@ public class ValidatorImpl implements InitializingBean {
         }
         return result;
     }
+
 }

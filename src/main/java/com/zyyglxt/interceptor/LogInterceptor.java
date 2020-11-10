@@ -3,6 +3,7 @@ package com.zyyglxt.interceptor;
 import com.zyyglxt.annotation.LogAnnotation;
 import com.zyyglxt.dataobject.LogDO;
 import com.zyyglxt.util.LogUtil;
+import org.springframework.stereotype.Component;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
@@ -11,7 +12,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.sql.Date;
 import java.util.UUID;
-
 
 public class LogInterceptor extends HandlerInterceptorAdapter {
 
@@ -30,6 +30,7 @@ public class LogInterceptor extends HandlerInterceptorAdapter {
     //后置拦截
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
+        LogUtil logUtil=new LogUtil();
         if (!(handler instanceof HandlerMethod)) {
             super.preHandle(request, response, handler);
             return;
@@ -46,10 +47,9 @@ public class LogInterceptor extends HandlerInterceptorAdapter {
             String logLevel = mainlog.logLevel();
             String creater = mainlog.creater();
             String updater = mainlog.updater();
-//            String itemcode = mainlog.itemcode();
-//            Date itemcreateat = mainlog.itemcreateat();
-//            Integer itemid = UUID.randomUUID().toString().replace("-", "");
-//            LogUtil.writeMainLog(new LogDO(itemid, itemcode, appCode, logTitle, logLevel, creater, itemcreateat, updater, itemupdateat));//异步插入数据库日志记录
+            LogDO logDO = new LogDO();
+            logDO.setAppCode(appCode).setLogTitle(logTitle).setLogLevel(logLevel).setCreater(creater).setUpdater(updater);
+            logUtil.writeMainLog(logDO);//异步插入数据库日志记录
 
         }
     }

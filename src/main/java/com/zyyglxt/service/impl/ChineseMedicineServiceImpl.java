@@ -3,10 +3,16 @@ package com.zyyglxt.service.impl;
 import com.zyyglxt.dao.ChineseMedicineDOMapper;
 import com.zyyglxt.dataobject.ChineseMedicineDO;
 import com.zyyglxt.dataobject.ChineseMedicineDOKey;
+import com.zyyglxt.error.BusinessException;
+import com.zyyglxt.error.EmBusinessError;
 import com.zyyglxt.service.IChineseMedicineService;
+import com.zyyglxt.validator.ValidatorImpl;
+import com.zyyglxt.validator.ValidatorResult;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -18,13 +24,19 @@ import java.util.List;
 public class ChineseMedicineServiceImpl implements IChineseMedicineService {
 
     @Resource
-    ChineseMedicineDOMapper chineseMedicineDOMapper;
-
+    private ChineseMedicineDOMapper chineseMedicineDOMapper;
+    @Autowired
+    private ValidatorImpl validator;
     /*
     新建名老中医
      */
     @Override
     public int addChineseMedicine(ChineseMedicineDO chineseMedicineDO) {
+        ValidatorResult result = validator.validate(chineseMedicineDO);
+        if(result.isHasErrors()){
+            throw new BusinessException(result.getErrMsg(), EmBusinessError.PARAMETER_VALIDATION_ERROR);
+        }
+        chineseMedicineDO.setItemcreateat(new Date());
         return chineseMedicineDOMapper.insertSelective(chineseMedicineDO);
     }
 
@@ -33,6 +45,10 @@ public class ChineseMedicineServiceImpl implements IChineseMedicineService {
      */
     @Override
     public int updateChineseMedicine(ChineseMedicineDO chineseMedicineDO) {
+        ValidatorResult result = validator.validate(chineseMedicineDO);
+        if(result.isHasErrors()){
+            throw new BusinessException(result.getErrMsg(), EmBusinessError.PARAMETER_VALIDATION_ERROR);
+        }
         return chineseMedicineDOMapper.updateByPrimaryKeySelective(chineseMedicineDO);
     }
 
@@ -41,6 +57,10 @@ public class ChineseMedicineServiceImpl implements IChineseMedicineService {
     */
     @Override
     public int deleteChineseMedicine(ChineseMedicineDOKey chineseMedicineDOKey) {
+        ValidatorResult result = validator.validate(chineseMedicineDOKey);
+        if(result.isHasErrors()){
+            throw new BusinessException(result.getErrMsg(), EmBusinessError.PARAMETER_VALIDATION_ERROR);
+        }
         return chineseMedicineDOMapper.deleteByPrimaryKey(chineseMedicineDOKey);
     }
 
@@ -55,6 +75,9 @@ public class ChineseMedicineServiceImpl implements IChineseMedicineService {
     * */
     @Override
     public List<ChineseMedicineDO> searchChineseMedicine(String keyWord) {
+        if(keyWord.isEmpty()){
+            throw new BusinessException("关键字不能为空", EmBusinessError.PARAMETER_VALIDATION_ERROR);
+        }
         return chineseMedicineDOMapper.searchChineseMedicine(keyWord);
     }
 

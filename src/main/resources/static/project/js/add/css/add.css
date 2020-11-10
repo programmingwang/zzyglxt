@@ -1,0 +1,59 @@
+.upload-wrap{
+    position: relative;
+    display: inline-block;
+    overflow: hidden;
+
+    border-radius: 3px;
+}
+.upload-wrap .file-ele{
+    position: absolute;
+    top:0;
+    right:0;
+    opacity: 0;
+    height: 100%;
+    width: 100%;
+    cursor: pointer;
+}
+.upload-wrap .file-open{
+    width:90px;
+    height:36px;
+    line-height:36px;
+    text-align: center;
+    color:#fff;
+    background: red;
+}
+label{
+    text-align: right;
+}
+#upimg {
+    padding-top: 23%;
+    height: 10em;
+    width: 10em;
+    background-color: #CBCECE;
+}
+#img1{
+    width: 100%;
+    height: 100%;
+    display: none;
+}
+#clsbtn{
+    height: 36px;
+    margin-top: 124px;
+    display: none;
+}
+#clsfile{
+    height: 36px;
+    margin-left: -92px;
+    display: none;
+    margin-right: 18px;
+    background-color: red;
+    z-index: 1;
+}
+.AFirstMenu {
+    font-family: 'Arial Negreta', 'Arial Normal', 'Arial', sans-serif;
+    font-weight: 700;
+    font-style: normal;
+    font-size: 14px;
+    color: black;
+    text-decoration: none;
+}

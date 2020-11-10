@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en"xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .upload-wrap{
+            position: relative;
+            display: inline-block;
+            overflow: hidden;
+
+            border-radius: 3px;
+        }
+        .upload-wrap .file-ele{
+            position: absolute;
+            top:0;
+            right:0;
+            opacity: 0;
+            height: 100%;
+            width: 100%;
+            cursor: pointer;
+        }
+        .upload-wrap .file-open{
+            width:90px;
+            height:36px;
+            line-height:36px;
+            text-align: center;
+            color:#fff;
+            background: red;
+        }
+        label{
+            text-align: right;
+        }
+    </style>
+</head>
+<body>
+<div class="row">
+    <div class="col-12">
+        <form>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">招聘标题：</label>
+                <div class="col-sm-3">
+                    <input id="recruitmentTitle" type="text" class="form-control" placeholder="请输入">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">招聘职位：</label>
+                <div class="col-sm-3">
+                    <input id="recruitmentPosition" type="text" class="form-control" placeholder="请输入">
+                </div>
+
+                <label class="col-sm-2 col-form-label">招聘数量：</label>
+                <div class="col-sm-3">
+                    <input id="recruitmentCount" type="text" class="form-control" placeholder="请输入">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">薪资：</label>
+                <div class="col-sm-3">
+                    <input id="salary" type="text" class="form-control" placeholder="请输入">
+                </div>
+
+                <label class="col-sm-2 col-form-label">工作地点：</label>
+                <div class="col-sm-3">
+                    <input id="workplace" type="text" class="form-control" placeholder="请输入">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">学历要求：</label>
+                <div class="col-sm-3">
+                    <input id="education" type="text" class="form-control" placeholder="请输入">
+                </div>
+
+                <label class="col-sm-2 col-form-label">简历投递邮箱：</label>
+                <div class="col-sm-3">
+                    <input id="emali" type="text" class="form-control" placeholder="请输入">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">职位要求：</label>
+                <div id="div1" class="col-sm-8">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">职位描述：</label>
+                <div id="div2" class="col-sm-8">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-sm-8" ></div>
+                <div class=" col-sm-4 row" >
+                    <div class="col">
+                        <button id="cancelBtn" type="button" class="btn btn-light col">取消</button>
+                    </div>
+                    <div class="col">
+                        <button id="saveBtn" type="button" class="btn btn-danger col">保存</button>
+                    </div><div class="col">
+                    <button id="submitBtn" type="submit" class="btn btn-primary col">提交</button>
+                </div>
+                </div>
+            </div>
+        </form>
+
+    </div>
+
+</div>
+<script type="text/javascript" data-main="/main/main.js" th:src="@{/component/require@2.3.6/require-2.3.6.js}"></script>
+<script type="text/javascript" th:src="@{/project/js/industrialdevelop/recruit_add.js}"></script>
+</body>
+</html>

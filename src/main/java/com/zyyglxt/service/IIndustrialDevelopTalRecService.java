@@ -2,7 +2,8 @@ package com.zyyglxt.service;
 
 import com.zyyglxt.dataobject.IndustrialDevelopTalRecDO;
 import com.zyyglxt.dataobject.IndustrialDevelopTalRecDOKey;
-import com.zyyglxt.dataobject.IndustrialDevelopTalRecDOWithBLOBs;
+
+import java.util.List;
 
 /**
  * @Author lrt
@@ -12,9 +13,11 @@ import com.zyyglxt.dataobject.IndustrialDevelopTalRecDOWithBLOBs;
  **/
 public interface IIndustrialDevelopTalRecService {
 
-    void addTalRec(IndustrialDevelopTalRecDOWithBLOBs developTalRecDO);
+    void addTalRec(IndustrialDevelopTalRecDO developTalRecDO);
 
     void delTalRec(IndustrialDevelopTalRecDOKey key);
 
-    void updTalRec(IndustrialDevelopTalRecDOWithBLOBs developTalRecDO);
+    void updTalRec(IndustrialDevelopTalRecDO developTalRecDO);
+
+    List<IndustrialDevelopTalRecDO> getTalRecs();
 }

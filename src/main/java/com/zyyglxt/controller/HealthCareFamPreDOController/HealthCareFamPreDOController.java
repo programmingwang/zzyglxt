@@ -1,15 +1,19 @@
 package com.zyyglxt.controller.HealthCareFamPreDOController;
 
-import com.zyyglxt.common.Result;
 import com.zyyglxt.dataobject.HealthCareFamPreDO;
 import com.zyyglxt.dataobject.HealthCareFamPreDOKey;
+import com.zyyglxt.error.BusinessException;
+import com.zyyglxt.error.EmBusinessError;
+import com.zyyglxt.response.ResponseData;
 import com.zyyglxt.service.HealthCareFamPreDOService;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * @version 1.0
@@ -19,43 +23,59 @@ import javax.annotation.Resource;
 @RestController
 public class HealthCareFamPreDOController {
     @Resource
-    HealthCareFamPreDOService healthCareFamPreDOService;
+     private HealthCareFamPreDOService healthCareFamPreDOService;
     /*
-     历史名方、国医话健康相关数据插入
+     国医话健康相关数据插入
    */
     @RequestMapping(value ="inserthealthcarefampredo",method = RequestMethod.POST )
-    public Result insertHealthCareFamPreDOMapper(@RequestBody HealthCareFamPreDO key) {
-        try {
-            System.out.println("标题名称: " + key.getName());
-            healthCareFamPreDOService.insertSelective(key);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return Result.succ("添加数据成功");
+    public ResponseData insertHealthCareFamPreDOMapper(@RequestBody HealthCareFamPreDO key) throws BusinessException {
+
+        System.out.println("标题名称: " + key.getName());
+        healthCareFamPreDOService.insertSelective(key);
+        return new ResponseData(EmBusinessError.success);
     }
     /*
-      历史名方、国医话健康相关数据的删除
+      国医话健康相关数据的删除
     */
     @RequestMapping(value ="deletehealthcarefampredo",method = RequestMethod.POST )
-    public Result deleteHealthCareFamPreDOMapper(@RequestBody HealthCareFamPreDOKey key){
+    public ResponseData deleteHealthCareFamPreDOMapper(@RequestBody HealthCareFamPreDOKey key){
        healthCareFamPreDOService.deleteByPrimaryKey(key);
-        return Result.succ("删除成功");
+       return new ResponseData(EmBusinessError.success);
     }
     /*
-     历史名方、国医话健康相关数据的修改
+     国医话健康相关数据的修改
    */
     @RequestMapping(value ="updatehealthcarefampredo",method = RequestMethod.POST )
-    public Result updateHealthCareFamPreDOMapper(@RequestBody HealthCareFamPreDO key){
+    public ResponseData updateHealthCareFamPreDOMapper(@RequestBody HealthCareFamPreDO key) throws BusinessException {
       healthCareFamPreDOService.updateByPrimaryKeySelective(key);
         System.out.println("要修改标题名称编号为："+key.getItemid());
-        return Result.succ("修改数据成功");
+        return new ResponseData(EmBusinessError.success);
     }
     /*
-     历史名方、国医话健康相关数据的查询
+     国医话健康相关数据的查询
    */
     @RequestMapping(value ="selecthealthcarefampredo",method = RequestMethod.POST )
-    public Result selectHealthCareFamPreDOMapper(@RequestBody HealthCareFamPreDOKey key){
+    public ResponseData selectHealthCareFamPreDOMapper(@RequestBody HealthCareFamPreDOKey key){
        healthCareFamPreDOService.selectByPrimaryKey(key);
-        return Result.succ( healthCareFamPreDOService.selectByPrimaryKey(key));
+        return new ResponseData(EmBusinessError.success);
+    }
+    /*查询所有国医话健康所有数据*/
+    @RequestMapping(value ="selectallhealthcarefampredo",method = RequestMethod.POST )
+    /*public List<HealthCareFamPreDO> selectAllHealthCareFamPreDOMapper(){
+        return healthCareFamPreDOService.selectAllHealthCareFamPre();
+    }*/
+    public ResponseData selectAllHealthCareFamPreDOMapper(Model model){
+        List<HealthCareFamPreDO> healthCareFamPreDOSList = healthCareFamPreDOService.selectAllHealthCareFamPre();;
+        model.addAttribute("traditionalCulturalList",healthCareFamPreDOSList);
+        return new ResponseData(EmBusinessError.success,healthCareFamPreDOSList);
+    }
+    /**
+     * 增加点击数
+     * @param key
+     */
+    @RequestMapping(value = "visitnumhealthcarefampredo", method = RequestMethod.POST)
+    public void increaseVisitNum(@RequestBody HealthCareFamPreDOKey key) {
+        healthCareFamPreDOService.updateVisitNumHealthCareFamPre(key);
     }
 }
+

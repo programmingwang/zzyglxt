@@ -348,19 +348,22 @@
 
 
             $("#logout").on("click", function () {
-                ajaxUtil.myAjax(null, "/api/user/userLogout", null, function (data) {
-                    if (ajaxUtil.success(data)) {
-                        orange.stop();
-                        window.location.href = "/userLogin";
-                    } else {
-                        alertUtil.alert(data.msg);
+                ajaxUtil.myAjax(null, "/logout", null, function (data) {
+                    if(data && data.errorCode === 88888) {
+                        window.location.href = "/userLogin"
+                    }else{
+                        alertUtil.error(data.errorMsg)
                     }
                 }, false)
             });
 
+
+
             if (!stringUtil.isBlank(currentUrlHash)) {
                 loadPage(currentUrlHash);
             }
+
+            $("#userName").text(localStorage.getItem('username'))
 
         })
 })();

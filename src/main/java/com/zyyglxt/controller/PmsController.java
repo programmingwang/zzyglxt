@@ -1,8 +1,9 @@
 package com.zyyglxt.controller;
 
-
+import com.zyyglxt.dto.UserSessionDto;
 import com.zyyglxt.error.EmBusinessError;
 import com.zyyglxt.response.ResponseData;
+import com.zyyglxt.util.ObjectUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -13,25 +14,16 @@ import javax.servlet.http.HttpSession;
 @Controller
 @RequestMapping(value = "/api/pms")
 public class PmsController {
-//    @Autowired
-//    UserService userService;
-
-    /**
-     * @Author yqz
-     * @Date 2020/9/15 11:46
-     * @Description :获取上下文信息，userDto
-     */
-
 
     @ResponseBody
     @RequestMapping("/getAppContext")
     public ResponseData getAppContext(HttpServletRequest request){
         HttpSession session = request.getSession();
-//        UserDto userDto = (UserDto) session.getAttribute("userDto");
-//        if (ObjectUtil.isNull(userDto)){
+        UserSessionDto userSessionDto = (UserSessionDto) session.getAttribute("user");
+        if (ObjectUtil.isNull(userSessionDto)){
             return new ResponseData(EmBusinessError.success, null);
-//        }else {
-//            return new ResponseData(ResponseEnum.success, userDto);
-//        }
+        }else {
+            return new ResponseData(EmBusinessError.success, userSessionDto);
+        }
     }
 }

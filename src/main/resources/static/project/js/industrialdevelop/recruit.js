@@ -3,8 +3,12 @@
         function (jquery,ajaxUtil,bootstrapTableUtil,objectUtil,alertUtil,modalUtil,selectUtil,stringUtil,dictUtil) {
 
 
+            //后台请求地址
             var url = "/industrialdevelop/talrec";
+            //页面请求地址
             var pathUrl = "/industrialdevelop/recruit";
+            //新增页面地址
+            var addUrl = pathUrl+"_add";
             var aParam = {
 
             };
@@ -21,12 +25,12 @@
             window.orgEvents = {
                 'click .edit' : function(e, value, row, index) {
                     localStorage.setItem("rowData", JSON.stringify(row));
-                    goDetail();
+                    orange.redirect(addUrl);
                 },
                 'click .delete': function (e, value, row, index) {
                     var myDeleteModalData ={
-                        modalBodyID : "myDeleteCooperation",
-                        modalTitle : "删除合作交流",
+                        modalBodyID : "myDeleteRecruit",
+                        modalTitle : "删除招聘信息",
                         modalClass : "modal-lg",
                         confirmButtonClass : "btn-danger",
                         modalConfirmFun:function () {
@@ -59,24 +63,12 @@
                 $('#table').bootstrapTable("destroy");
                 bootstrapTableUtil.myBootStrapTableInit("table", url, param, aCol);
             });
-
-            function goDetail() {
-                $("#main_body").html("");
-                var addUrl = "/add/js" + pathUrl;
-                orange.loadPage({url: addUrl, target: 'main_body', selector: '#fir_body', success: function(data){
-
-                        if(data == null||data == ""){
-                            return alertUtil.error( addUrl+'加载失败');
-                        }
-
-                        $("#main_body").html(data);
-                    }})
-            }
+            
 
 
             $("#btn_addTask").unbind().on('click',function () {
                 localStorage.removeItem("rowData");
-                goDetail();
+                orange.redirect(addUrl);
             });
 
             var pl = dictUtil.getDictByCode(dictUtil.DICT_LIST.showStatus);

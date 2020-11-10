@@ -38,6 +38,10 @@
 
         modalHtml.myDeleteAchievement = '是否删除科研成果?';
 
+        modalHtml.myDeleteRecruit = '是否删除招聘信息?';
+
+        modalHtml.myDeleteCooperation = '是否删除合作交流信息?';
+
         modalHtml.myAddUpdateModal =
             '<div class="row">'+
             '            <div class="col-lg-12 col-md-12">\n' +

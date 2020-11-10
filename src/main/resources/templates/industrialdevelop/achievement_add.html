@@ -39,53 +39,46 @@
     <div class="col-12">
         <form>
             <div class="form-group row">
-                <label class="col-sm-2 col-form-label">招聘标题：</label>
+                <label class="col-sm-2 col-form-label">项目名称：</label>
                 <div class="col-sm-3">
-                    <input id="recruitmentTitle" type="text" class="form-control" placeholder="请输入">
+                    <input id="projectName" type="text" class="form-control" placeholder="请输入">
                 </div>
             </div>
             <div class="form-group row">
-                <label class="col-sm-2 col-form-label">招聘职位：</label>
+                <label class="col-sm-2 col-form-label">研究成果：</label>
                 <div class="col-sm-3">
-                    <input id="recruitmentPosition" type="text" class="form-control" placeholder="请输入">
+                    <input id="industrialDevelopName" type="text" class="form-control" placeholder="请输入">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">主研人：</label>
+                <div class="col-sm-3">
+                    <input id="industrialDevelopLeader" type="text" class="form-control" placeholder="请输入">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">联系人：</label>
+                <div class="col-sm-3">
+                    <input id="contacts" type="text" class="form-control" placeholder="请输入">
                 </div>
 
-                <label class="col-sm-2 col-form-label">招聘数量：</label>
+                <label class="col-sm-2 col-form-label">联系电话：</label>
                 <div class="col-sm-3">
-                    <input id="recruitmentCount" type="text" class="form-control" placeholder="请输入">
+                    <input id="phone" type="text" class="form-control" placeholder="请输入">
                 </div>
             </div>
             <div class="form-group row">
-                <label class="col-sm-2 col-form-label">薪资：</label>
-                <div class="col-sm-3">
-                    <input id="salary" type="text" class="form-control" placeholder="请输入">
-                </div>
-
-                <label class="col-sm-2 col-form-label">工作地点：</label>
-                <div class="col-sm-3">
-                    <input id="workplace" type="text" class="form-control" placeholder="请输入">
-                </div>
-            </div>
-            <div class="form-group row">
-                <label class="col-sm-2 col-form-label">学历要求：</label>
-                <div class="col-sm-3">
-                    <input id="education" type="text" class="form-control" placeholder="请输入">
-                </div>
-
-                <label class="col-sm-2 col-form-label">简历投递邮箱：</label>
-                <div class="col-sm-3">
-                    <input id="emali" type="text" class="form-control" placeholder="请输入">
-                </div>
-            </div>
-            <div class="form-group row">
-                <label class="col-sm-2 col-form-label">职位要求：</label>
+                <label class="col-sm-2 col-form-label">成果简介：</label>
                 <div id="div1" class="col-sm-8">
                 </div>
             </div>
 
+            <!--附件div-->
             <div class="form-group row">
-                <label class="col-sm-2 col-form-label">职位描述：</label>
-                <div id="div2" class="col-sm-8">
+                <label class="col-sm-2 col-form-label">附件：</label>
+                <div class="upload-wrap anticon" nv-file-drop="" uploader="uploader">
+                    <input class="file-ele" type="file" file-model="image" name="image" nv-file-select uploader="uploader" multiple />
+                    <div class="file-open"><em class="upload"></em>&nbsp;选择附件</div>
                 </div>
             </div>
 
@@ -108,6 +101,6 @@
 
 </div>
 <script type="text/javascript" data-main="/main/main.js" th:src="@{/component/require@2.3.6/require-2.3.6.js}"></script>
-<script type="text/javascript" th:src="@{/project/js/add/js/industrialdevelop/achievement.js}"></script>
+<script type="text/javascript" th:src="@{/project/js/industrialdevelop/achievement_add.js}"></script>
 </body>
 </html>

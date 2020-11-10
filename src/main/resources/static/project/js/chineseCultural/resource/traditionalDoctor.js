@@ -20,7 +20,8 @@
             //修改事件
             window.orgEvents = {
                 'click .edit' : function(e, value, row, index) {
-
+                    localStorage.setItem("rowData", JSON.stringify(row));
+                    orange.redirect("/chineseCultural/resource/insertTraditionalDoctor");
                 },
                 'click .delete': function (e, value, row, index) {
                     var myDeleteModalData ={
@@ -54,6 +55,7 @@
 
             $("#btn_addTask").unbind().on('click',function () {
                 var url = "/chineseCultural/resource/insertTraditionalDoctor";
+                localStorage.removeItem("rowData");
                 orange.redirect(url);
             });
 

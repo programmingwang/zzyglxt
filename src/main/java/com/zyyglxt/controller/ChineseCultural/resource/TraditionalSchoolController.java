@@ -50,13 +50,7 @@ public class TraditionalSchoolController {
         return new ResponseData(EmBusinessError.success,chineseCulturalDtoList);
     }
 
-//    //查询一个中医流派
-//
-//    //去增加页面,这个是为了跳转到增加的页面
-//    @RequestMapping(value = "/toAddPage" , method = RequestMethod.GET)
-//    public ResponseData toAddPage(){
-//        return "to add page";
-//    }
+
 
     //增加一个中医流派
     @RequestMapping(value = "/addTraSch" , method = RequestMethod.POST)
@@ -77,16 +71,7 @@ public class TraditionalSchoolController {
         return new ResponseData(EmBusinessError.success);
     }
 
-    //去修改的页面
-    @RequestMapping(value = "/toUpdTraSch/{itemID}/{itemCode}" , method = RequestMethod.GET)
-    @ResponseBody
-    public ResponseData toUpdatePage(@PathVariable("itemID") Integer itemID, @PathVariable("itemCode")String itemCode){
-        CulturalResourcesDOKey culturalResourcesDOKey = new CulturalResourcesDOKey();
-        culturalResourcesDOKey.setItemid(itemID);
-        culturalResourcesDOKey.setItemcode(itemCode);
-        CulturalResourcesDO culturalResources = iTraditionalSchoolService.getTraditionalSchool(culturalResourcesDOKey);
-        return new ResponseData(EmBusinessError.success,culturalResources);
-    }
+
 
     //修改一个中医流派
     @RequestMapping(value = "/updTraSch" , method = RequestMethod.POST)

@@ -84,22 +84,22 @@
                 },
                 'click .delete': function (e, value, row, index) {
                     var myDeleteModalData ={
-                        modalBodyID : "myDeleteModalProject",
-                        modalTitle : "删除项目",
+                        modalBodyID : "myDeleteModalfamPre",
+                        modalTitle : "删除历史名方",
                         modalClass : "modal-lg",
                         confirmButtonClass : "btn-danger",
                         modalConfirmFun:function () {
-                            var projectEntity = {
+                            /*var projectEntity = {
                                 projectID: row.projectID
-                            };
+                            };*/
                             var isSuccess = false;
-                            ajaxUtil.myAjax(null,"/api/project/deleteProject",projectEntity,function (data) {
+                            ajaxUtil.myAjax(null,"deletefamprerdo/"+row.itemid+"/"+row.itemcode,null,function (data) {
                                 if(ajaxUtil.success(data)){
-                                    alertUtil.info("删除项目成功");
+                                    alertUtil.info("删除历史名方成功");
                                     isSuccess = true;
                                     refreshTable();
                                 }
-                            },false);
+                            },false,true,"delete");
                             return isSuccess;
                         }
 
@@ -109,20 +109,21 @@
                 }
             };
 
+            $("#btn_addTask").unbind().on('click',function () {
+                $("#main_body").html("");
+                var url = "/healthCare/insertfamPre";
+                orange.loadPage({url: url, target: 'main_body', selector: '#fir_body', success: function(data){
 
-            $("#search").unbind().on("click",function () {
-                var param = {
+                        if(data == null||data == ""){
+                            return alertUtil.error( url+'加载失败');
+                        }
 
-                };
-                $('#table').bootstrapTable("destroy");
-                bootstrapTableUtil.myBootStrapTableInit("table", url, param, aCol);
+                        $("#main_body").html(data);
+                    }})
             });
 
-            $("#btn_addProject").unbind().on('click',function () {
-                addUpdate("add");
-            });
-
-
+            var pl = dictUtil.getDictByCode(dictUtil.DICT_LIST.showStatus);
+            $("#chargePersonSearch").selectUtil(pl);
 
             var aCol = [
                 {field: 'name', title: '方名'},

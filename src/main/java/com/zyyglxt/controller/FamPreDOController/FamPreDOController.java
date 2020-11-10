@@ -33,10 +33,14 @@ public class FamPreDOController {
           return new ResponseData(EmBusinessError.success);
   }
   /*历史名方数据删除*/
-    @RequestMapping(value ="deletefamprerdo",method = RequestMethod.POST )
-    public ResponseData deleteFamPreDOMapper(@RequestBody FamPreDOKey key){
-            famPreDOService.deleteByPrimaryKey(key);
-            System.out.println("要删除历史名方编号为："+key.getItemid());
+    @RequestMapping(value ="deletefamprerdo/{itemID}/{itemCode}",method = RequestMethod.DELETE)
+    @ResponseBody
+    public ResponseData deleteFamPreDOMapper(@PathVariable("itemID") Integer itemID, @PathVariable("itemCode")String itemCode){
+            FamPreDOKey famPreDOKey=new FamPreDOKey();
+            famPreDOKey.setItemid(itemID);
+            famPreDOKey.setItemcode(itemCode);
+            famPreDOService.deleteByPrimaryKey(famPreDOKey);
+            System.out.println("要删除历史名方编号为："+famPreDOKey.getItemid());
             return new ResponseData(EmBusinessError.success);
         }
     /*历史名方数据修改*/
@@ -53,7 +57,7 @@ public class FamPreDOController {
         return new ResponseData(EmBusinessError.success);
     }
     /*历史名方所有数据查询*/
-    @RequestMapping(value ="selectallfampredo",method = RequestMethod.POST )
+    @RequestMapping(value ="selectallfampredo",method = RequestMethod.GET )
     public ResponseData selectAllFamPreDOMapper(Model model){
         List<FamPreDO> famPreDOList = famPreDOService.selectAllFamPre();
         model.addAttribute("traditionalCulturalList",famPreDOList);

@@ -90,7 +90,7 @@
                         confirmButtonClass : "btn-danger",
                         modalConfirmFun:function () {
                             var isSuccess = false;
-                            ajaxUtil.myAjax(null,"deletehealthcarechinesemedicinedo",key,function (data) {
+                            ajaxUtil.myAjax(null,"deletehealthcarechinesemedicinedo/"+row.itemid+"/"+row.itemcode,null,function (data) {
                                 if(ajaxUtil.success(data)){
                                     alertUtil.info("删除中医药名称成功");
                                     isSuccess = true;
@@ -103,29 +103,45 @@
                     };
                     var myDeleteModal = modalUtil.init(myDeleteModalData);
                     myDeleteModal.show();
-                }
+                },
+
+                'click .pass' : function (e, value, row, index) {
+
+                },
+
+                'click .fail' : function (e, value, row, index) {
+
+                },
             };
 
 
-            $("#search").unbind().on("click",function () {
-                var param = {
-
-                };
-                $('#table').bootstrapTable("destroy");
-                bootstrapTableUtil.myBootStrapTableInit("table", url, param, aCol);
+            $("#btn_addTask").unbind().on('click',function () {
+                $("#main_body").html("");
+                var url = "/healthCare/insertchineseMedicine";
+                orange.loadPage({url: url, target: 'main_body', selector: '#fir_body', success: function(data){
+                        if(data == null||data == ""){
+                            return alertUtil.error( url+'加载失败');
+                        }
+                        $("#main_body").html(data);
+                    }})
             });
 
-            $("#btn_addProject").unbind().on('click',function () {
-                addUpdate("add");
-            });
+            var pl = dictUtil.getDictByCode(dictUtil.DICT_LIST.showStatus);
+            $("#chargePersonSearch").selectUtil(pl);
 
             var aCol = [
-                {field: 'chineseMedicineName', title: '中药材名称'},
-                {field: 'chineseMedicineAlias', title: '别名'},
-                {field: 'filePath', title: '中药图片'},
-                {field:'chineseMedicineUsage',title:'功效分类'},
-                {field: 'action',  title: '操作',formatter: operation,events:orgEvents}
-            ];
+                        {field: 'chineseMedicineName', title: '中医药名称'},
+                        {field: 'filePath', title: '药材图片', formatter:function (value, row, index) {
+                                if(value == "已经损坏了"){
+                                    return '<p>'+value+'</p>';
+                                }else{
+                                    return '<img  src='+value+' width="100" height="100" class="img-rounded" >';
+                                }
+                        }},
+                        {field: 'chineseMedicineAlias', title: '别名'},
+                        {field:'chineseMedicineEffect',title:'功效分类'},
+                        {field: 'action',  title: '操作',formatter: operation,events:orgEvents}
+                    ];
 
             var myTable = bootstrapTableUtil.myBootStrapTableInit("table", url, aParam, aCol);
 

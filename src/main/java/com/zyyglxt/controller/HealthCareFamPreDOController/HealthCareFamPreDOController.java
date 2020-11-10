@@ -61,13 +61,12 @@ HealthCareFamPreDOController {
         return new ResponseData(EmBusinessError.success);
     }
     /*查询所有国医话健康所有数据*/
-    @RequestMapping(value ="selectallhealthcarefampredo",method = RequestMethod.POST )
+    @RequestMapping(value ="selectallhealthcarefampredo",method = RequestMethod.GET )
     /*public List<HealthCareFamPreDO> selectAllHealthCareFamPreDOMapper(){
         return healthCareFamPreDOService.selectAllHealthCareFamPre();
     }*/
-    public ResponseData selectAllHealthCareFamPreDOMapper(Model model){
-        List<HealthCareFamPreDO> healthCareFamPreDOSList = healthCareFamPreDOService.selectAllHealthCareFamPre();;
-        model.addAttribute("traditionalCulturalList",healthCareFamPreDOSList);
+    public ResponseData selectAllHealthCareFamPreDOMapper(){
+        List<HealthCareFamPreDO> healthCareFamPreDOSList = healthCareFamPreDOService.selectAllHealthCareFamPre();
         return new ResponseData(EmBusinessError.success,healthCareFamPreDOSList);
     }
     /**

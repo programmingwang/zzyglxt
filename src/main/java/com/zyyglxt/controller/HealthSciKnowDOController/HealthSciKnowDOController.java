@@ -65,10 +65,9 @@ public class HealthSciKnowDOController {
         return new ResponseData(EmBusinessError.success);
     }
     /*查询所有科普知识所有数据*/
-    @RequestMapping(value ="selectallhealthsciknowdo",method = RequestMethod.POST )
-    public ResponseData selectAllHealthSciKnowDOMapper(Model model){
+    @RequestMapping(value ="selectallhealthsciknowdo",method = RequestMethod.GET)
+    public ResponseData selectAllHealthSciKnowDOMapper(){
         List<HealthSciKnowDO> healthSciKnowDOSList = healthSciKnowDOService.selectAllHealthSciKnow();
-        model.addAttribute("traditionalCulturalList",healthSciKnowDOSList);
         return new ResponseData(EmBusinessError.success,healthSciKnowDOSList);
     }
     /**

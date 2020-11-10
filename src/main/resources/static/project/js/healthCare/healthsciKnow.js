@@ -84,18 +84,15 @@
                 },
                 'click .delete': function (e, value, row, index) {
                     var myDeleteModalData ={
-                        modalBodyID : "myDeleteModalProject",
-                        modalTitle : "删除项目",
+                        modalBodyID : "myDeleteModalSciknow",
+                        modalTitle : "删除科普知识",
                         modalClass : "modal-lg",
                         confirmButtonClass : "btn-danger",
                         modalConfirmFun:function () {
-                            var projectEntity = {
-                                projectID: row.projectID
-                            };
                             var isSuccess = false;
-                            ajaxUtil.myAjax(null,"/api/project/deleteProject",projectEntity,function (data) {
+                            ajaxUtil.myAjax(null,"deletehealthsciknowdo",function (data) {
                                 if(ajaxUtil.success(data)){
-                                    alertUtil.info("删除项目成功");
+                                    alertUtil.info("删除科普知识名称成功");
                                     isSuccess = true;
                                     refreshTable();
                                 }
@@ -110,17 +107,21 @@
             };
 
 
-            $("#search").unbind().on("click",function () {
-                var param = {
+            $("#btn_addTask").unbind().on('click',function () {
+                $("#main_body").html("");
+                var url = "/healthCare/insertsciKnow";
+                orange.loadPage({url: url, target: 'main_body', selector: '#fir_body', success: function(data){
 
-                };
-                $('#table').bootstrapTable("destroy");
-                bootstrapTableUtil.myBootStrapTableInit("table", url, param, aCol);
+                        if(data == null||data == ""){
+                            return alertUtil.error( url+'加载失败');
+                        }
+
+                        $("#main_body").html(data);
+                    }})
             });
 
-            $("#btn_addProject").unbind().on('click',function () {
-                addUpdate("add");
-            });
+            var pl = dictUtil.getDictByCode(dictUtil.DICT_LIST.showStatus);
+            $("#chargePersonSearch").selectUtil(pl);
 
             var aCol = [
                 {field: 'scienceKnowledgeName', title: '科普知识标题'},

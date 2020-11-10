@@ -7,7 +7,6 @@ import com.zyyglxt.dataobject.ChineseMedicineDOWithBLOBs;
 import java.util.List;
 
 public interface ChineseMedicineDOMapper {
-    /**/
     int deleteByPrimaryKey(ChineseMedicineDOKey key);
 
     int insert(ChineseMedicineDO record);

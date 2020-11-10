@@ -14,24 +14,14 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 public class HealthCareChineseMedicineDto {
     private Integer itemid;
-
     private String itemcode;
-
     private String chineseMedicineName;
-
     private String chineseMedicineType;
-
     private String chineseMedicineAlias;
-
     private String chineseMedicineSource;
-
     private String chineseMedicineHarvesting;
-
     private String chineseMedicineTaste;
-
     private String chineseMedicineMerTro;
-
     private String chineseMedicineEffect;
-
     private String filePath;
 }

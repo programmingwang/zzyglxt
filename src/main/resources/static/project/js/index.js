@@ -103,13 +103,13 @@
                 level:"2",
                 pid:"4"
             },
-            {
+            /*{
                 menu_name : "中药常识",
                 menu_url: "",
                 id:"5",
                 level:"1",
                 pid:""
-            },{
+            },*/{
                 menu_name : "治未病理念",
                 menu_url: "",
                 id:"6",
@@ -119,7 +119,7 @@
 
             {
                 menu_name : "＞科普知识",
-                menu_url: "/knowledgeDb/problemSolution",
+                menu_url: "/healthCare/healthsciKnow",
                 id:"6-1",
                 level:"2",
                 pid:"6"
@@ -133,11 +133,25 @@
             },
             {
                 menu_name : "＞国医话健康",
-                menu_url: "/knowledgeDb/dataSelect",
+                menu_url: "/healthCare/healthcarefamPre",
                 id:"6-3",
                 level:"2",
                 pid:"6"
             },
+            {
+                menu_name : "＞中药常识",
+                menu_url: "/healthCare/healthcarechineseMedicine",
+                id:"6-4",
+                level:"2",
+                pid:"6"
+            },
+             {
+            menu_name : "＞历史名方",
+                menu_url: "/healthCare/famPre",
+                id:"6-5",
+                level:"2",
+                pid:"6"
+             },
             {
                 menu_name : "名老中医",
                 menu_url: "/knowledgeDb/dataBack",
@@ -145,13 +159,13 @@
                 level:"1",
                 pid:""
             },
-            {
+            /*{
                 menu_name : "历史名方",
                 menu_url: "/healthCare/famPre",
                 id:"8",
                 level:"1",
                 pid:""
-            },
+            },*/
             {
                 menu_name : "中医药名院",
                 menu_url: "/knowledgeDb/dataBack",
@@ -223,14 +237,6 @@
                 pid:"13"
             },
         ];
-
-
-
-
-
-
-
-
 
         function getHTML_dropdown_menu_item(astr,aurl,show_active) {
             var str = "<a class=\"dropdown-item  "+  (show_active ? "active" : "")  +" \" url=\"" + aurl +"\">" + astr + "</a>\n" ;

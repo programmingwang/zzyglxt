@@ -67,7 +67,7 @@ public class HealthCareChineseMedicineDOController {
         return new ResponseData(EmBusinessError.success);
     }
     /*中医药常识数据所有查询*/
-    @RequestMapping(value ="selectallhealthcarechinesemedicinedo",method = RequestMethod.POST )
+    @RequestMapping(value ="selectallhealthcarechinesemedicinedo",method = RequestMethod.GET )
     /*public List<HealthCareChineseMedicineDO> selectAllHealthCareChineseMedicineDOMapper(){
         return healthCareChineseMedicineDOService.selectAllHealthCareChineseMedicine();
     }*/

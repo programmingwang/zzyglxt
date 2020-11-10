@@ -1,5 +1,6 @@
 package com.zyyglxt.controller.FamPreDOController;
 
+import com.zyyglxt.dataobject.DataDO;
 import com.zyyglxt.dataobject.FamPreDO;
 import com.zyyglxt.dataobject.FamPreDOKey;
 import com.zyyglxt.error.BusinessException;
@@ -7,10 +8,7 @@ import com.zyyglxt.error.EmBusinessError;
 import com.zyyglxt.response.ResponseData;
 import com.zyyglxt.service.FamPreDOService;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -68,5 +66,12 @@ public class FamPreDOController {
     @RequestMapping(value = "visitnumfampredo", method = RequestMethod.POST)
     public int increaseVisitNum(@RequestBody FamPreDOKey key) {
         return famPreDOService.increaseVisitNumFamPre(key);
+    }
+    /*关键字查询*/
+    @GetMapping("/searchFamPre/{keyWord}")
+    @ResponseBody
+    public ResponseData searchFamPre(@PathVariable("keyWord") String keyWord) {
+        List<FamPreDO> famPreDOList = famPreDOService.searchFamPre(keyWord);
+        return new ResponseData(EmBusinessError.success,famPreDOList);
     }
 }

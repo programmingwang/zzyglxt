@@ -21,7 +21,8 @@ import java.util.List;
  * @time 2020/10/30 15:11
  */
 @RestController
-public class HealthCareFamPreDOController {
+public class
+HealthCareFamPreDOController {
     @Resource
      private HealthCareFamPreDOService healthCareFamPreDOService;
     /*

@@ -4,6 +4,8 @@ import com.zyyglxt.dataobject.IndustrialDevelopSerPro;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
+
 /**
  * @Author lrt
  * @Date 2020/11/10 11:20
@@ -22,4 +24,6 @@ public interface IndustrialDevelopSerProMapper {
     int updateByPrimaryKeySelective(IndustrialDevelopSerPro record);
 
     int updateByPrimaryKey(IndustrialDevelopSerPro record);
+
+    List<IndustrialDevelopSerPro> selectAll();
 }

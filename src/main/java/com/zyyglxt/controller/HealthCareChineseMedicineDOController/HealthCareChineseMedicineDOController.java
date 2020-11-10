@@ -3,14 +3,19 @@ package com.zyyglxt.controller.HealthCareChineseMedicineDOController;
 import com.zyyglxt.dataobject.HealthCareChineseMedicineDO;
 import com.zyyglxt.dataobject.HealthCareChineseMedicineDOKey;
 
+import com.zyyglxt.dto.HealthCareChineseMedicineDto;
 import com.zyyglxt.error.BusinessException;
 import com.zyyglxt.error.EmBusinessError;
 import com.zyyglxt.response.ResponseData;
 import com.zyyglxt.service.HealthCareChineseMedicineDOService;
+import com.zyyglxt.service.IFileService;
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.BeanUtils;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -23,6 +28,9 @@ import java.util.List;
 public class HealthCareChineseMedicineDOController {
    @Resource
    private HealthCareChineseMedicineDOService healthCareChineseMedicineDOService;
+
+   @Resource
+   private IFileService iFileService;
    /*
      中医药名称相关数据插入
    */
@@ -36,10 +44,19 @@ public class HealthCareChineseMedicineDOController {
     /*
       中医药名称相关数据的删除
     */
-    @RequestMapping(value ="deletehealthcarechinesemedicinedo",method = RequestMethod.POST )
-    public ResponseData deleteHealthCareChineseMedicineDOMapper(@RequestBody HealthCareChineseMedicineDOKey key){
+    @RequestMapping(value ="deletehealthcarechinesemedicinedo/{itemID}/{itemCode}",method = RequestMethod.DELETE )
+    @ResponseBody
+    /*public ResponseData deleteHealthCareChineseMedicineDOMapper(@RequestBody HealthCareChineseMedicineDOKey key){
         healthCareChineseMedicineDOService.deleteByPrimaryKey(key);
         System.out.println("要删除中医药编号为："+key.getItemid());
+        return new ResponseData(EmBusinessError.success);
+    }*/
+    public ResponseData deleteHealthCareChineseMedicineDOMapper(@PathVariable("itemID") Integer itemID, @PathVariable("itemCode")String itemCode){
+        HealthCareChineseMedicineDOKey healthCareChineseMedicineDOKey=new HealthCareChineseMedicineDOKey();
+        healthCareChineseMedicineDOKey.setItemid(itemID);
+        healthCareChineseMedicineDOKey.setItemcode(itemCode);
+        healthCareChineseMedicineDOService.deleteByPrimaryKey(healthCareChineseMedicineDOKey);
+        System.out.println("要删除中医药编号为："+healthCareChineseMedicineDOKey.getItemid());
         return new ResponseData(EmBusinessError.success);
     }
     /*
@@ -60,14 +77,30 @@ public class HealthCareChineseMedicineDOController {
         return new ResponseData(EmBusinessError.success);
     }
     /*中医药常识数据所有查询*/
-    @RequestMapping(value ="selectallhealthcarechinesemedicinedo",method = RequestMethod.POST )
+    @RequestMapping(value ="selectallhealthcarechinesemedicinedo",method = RequestMethod.GET )
     /*public List<HealthCareChineseMedicineDO> selectAllHealthCareChineseMedicineDOMapper(){
         return healthCareChineseMedicineDOService.selectAllHealthCareChineseMedicine();
     }*/
-    public ResponseData selectAllHealthCareChineseMedicineDOMapper(Model model){
+    public ResponseData selectAllHealthCareChineseMedicineDOMapper(){
         List<HealthCareChineseMedicineDO> healthCareChineseMedicineDOSList = healthCareChineseMedicineDOService.selectAllHealthCareChineseMedicine();
-        model.addAttribute("traditionalCulturalList",healthCareChineseMedicineDOSList);
-        return new ResponseData(EmBusinessError.success,healthCareChineseMedicineDOSList);
+        List<HealthCareChineseMedicineDto> healthCareChineseMedicineDtoList = new ArrayList<>();
+        for (HealthCareChineseMedicineDO healthCareChineseMedicineDO : healthCareChineseMedicineDOSList) {
+            healthCareChineseMedicineDtoList.add(
+                    this.convertDtoFromDo(
+                            healthCareChineseMedicineDO,iFileService.selectFileByDataCode(
+                                    healthCareChineseMedicineDO.getItemcode()).getFilePath()));
+        }
+        return new ResponseData(EmBusinessError.success,healthCareChineseMedicineDtoList);
+    }
+
+    private HealthCareChineseMedicineDto convertDtoFromDo(HealthCareChineseMedicineDO healthCareChineseMedicineDO, String filePath){
+        if(StringUtils.isEmpty(filePath)){
+            filePath = "已经损坏了";
+        }
+        HealthCareChineseMedicineDto healthCareChineseMedicineDto = new HealthCareChineseMedicineDto();
+        BeanUtils.copyProperties(healthCareChineseMedicineDO,healthCareChineseMedicineDto);
+        healthCareChineseMedicineDto.setFilePath(filePath);
+        return healthCareChineseMedicineDto;
     }
 }
 

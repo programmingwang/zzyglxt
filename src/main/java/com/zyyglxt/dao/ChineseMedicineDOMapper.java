@@ -13,7 +13,7 @@ public interface ChineseMedicineDOMapper {
 
     int insertSelective(ChineseMedicineDO record);
 
-    ChineseMedicineDOWithBLOBs selectByPrimaryKey(ChineseMedicineDOKey key);
+    ChineseMedicineDO selectByPrimaryKey(ChineseMedicineDOKey key);
 
     int updateByPrimaryKeySelective(ChineseMedicineDO record);
 

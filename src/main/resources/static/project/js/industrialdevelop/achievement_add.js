@@ -1,8 +1,10 @@
 (function () {
-    require(['jquery','ajaxUtil','wangEditor'],
-        function (jquery,ajaxUtil, wangEditor) {
+    require(['jquery','ajaxUtil','stringUtil','wangEditor'],
+        function (jquery,ajaxUtil,stringUtil, wangEditor) {
 
             var type = isUpdate() ? "put":"post";
+
+            var itemcode = stringUtil.getUUID();
 
             //后台数据交互地址
             var url = "/industrialdevelop/achievement";
@@ -55,12 +57,13 @@
 
 
 
-            $("#cancelBtn").click(function () {
+            $("#cancelBtn").unbind().on('click',function () {
                 orange.redirect(purl);
             });
 
             function generateParam(){
                 var param = {};
+                param.itemcode = itemcode;
                 param.industrialDevelopLeader = $("#industrialDevelopLeader").val();
                 param.industrialDevelopName = $("#industrialDevelopName").val();
                 param.projectName = $("#projectName").val();
@@ -71,12 +74,20 @@
                 return param;
             }
 
+            $("#upload_file").change(function () {
+                var file = $("#upload_file")[0].files[0];
+                var file_span = $("#filename_span");
+                file_span.text(file.name)
+            });
+
             $("#saveBtn").unbind().on('click',function () {
                 var param = generateParam();
                 param.industrialDevelopStatus = "——";
+                var file = $("#upload_file")[0].files[0];
 
                 ajaxUtil.myAjax(null,url,param,function (data) {
                     if(ajaxUtil.success(data)){
+                        ajaxUtil.fileAjax(itemcode, file, "admin", "aaaaaaa");
                         orange.redirect(url)
                     }else {
                         alert(data.msg)
@@ -106,6 +117,7 @@
                     $("#phone").val(tempdata.phone);
                     $("#projectName").val(tempdata.projectName);
                     $(".w-e-text").html(tempdata.context);
+                    itemcode = tempdata.itemcode
                 }
             }());
 

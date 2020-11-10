@@ -400,12 +400,13 @@
 
 
             $("#logout").on("click",function () {
-                ajaxUtil.myAjax(null,"/api/user/userLogout",null,function (data) {
-                    if(ajaxUtil.success(data)){
-                        orange.stop();
+                ajaxUtil.myAjax(null,"/logout",null,function (data) {
+                    if(data && data.errorCode === 88888){
+                        sessionStorage.removeItem('username');
+                        sessionStorage.removeItem('rolename');
                         window.location.href = "/userLogin";
                     }else{
-                        alertUtil.alert(data.msg);
+                        alertUtil.alert(data.errorMsg);
                     }
                 },false)
             });

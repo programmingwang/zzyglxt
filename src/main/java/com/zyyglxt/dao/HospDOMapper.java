@@ -27,5 +27,6 @@ public interface HospDOMapper {
 
     List<HospDO> top5Hosp();
 
+    HospDO selectHospByItemCode(String itemCode);
 
 }

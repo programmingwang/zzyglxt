@@ -17,4 +17,5 @@ public interface IHospService {
     List<HospDO> selectAllHosp();
     List<HospDO> searchHosp(String keyWord);
     List<HospDO> top5Hosp();
+    HospDO selectHospByItemCode(String itemCode);
 }

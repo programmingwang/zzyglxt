@@ -28,11 +28,9 @@ public interface FileDOMapper {
 
     FileDO selectFileByDataCode(String dataCode);
 
-    FileDO selectFileByDataCodeAndType(@Param("dataCode") String dataCode, @Param("fileType") String fileType);
-
-    FileDO selectFileByDataCodeAndName(@Param("dataCode") String dataCode, @Param("fileName") String fileName);
 
     int deleteByDataCode(String dataCode);
 
-    int deleteByDataCodeAndType(@Param("dataCode") String dataCode, @Param("fileType") String fileType);
+
+
 }

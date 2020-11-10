@@ -36,4 +36,15 @@ public class ConvertDOToDTOUtil {
         return culturalResourcesDto;
     }
 
+    public static CulturalResourcesDto convertFromDOToDTO(CulturalResourcesDO culturalResourcesDO, String filePath, String fileName){
+        if(StringUtils.isEmpty(filePath)){
+            filePath = "已经损坏了";
+        }
+        CulturalResourcesDto culturalResourcesDto = new CulturalResourcesDto();
+        BeanUtils.copyProperties(culturalResourcesDO,culturalResourcesDto);
+        culturalResourcesDto.setFilePath(filePath);
+        culturalResourcesDto.setFileName(fileName);
+        return culturalResourcesDto;
+    }
+
 }

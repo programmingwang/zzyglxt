@@ -14,7 +14,7 @@ import javax.annotation.Resource;
  * @Date 2020/11/6 21:18
  * @Version 1.0
  **/
-@Api(tags = "产业发展-服务项目")
+@Api(tags = "产业发展-科研院所")
 @RestController
 @RequestMapping(value = "industrialdevelop")
 public class TecSerOrgController {
@@ -41,5 +41,11 @@ public class TecSerOrgController {
     public ResponseData delTec(@RequestBody IndustrialDevelopTecSerOrg record){
         tecSerOrgService.deleteByPrimaryKey(record.getItemid(),record.getItemcode());
         return new ResponseData(EmBusinessError.success);
+    }
+
+    @ResponseBody
+    @GetMapping(value = "/tec-ser-org")
+    public ResponseData getTec(){
+        return new ResponseData(EmBusinessError.success,tecSerOrgService.selectAll());
     }
 }

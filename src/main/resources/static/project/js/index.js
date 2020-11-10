@@ -268,40 +268,40 @@
         }
 
 
-            function getHTML(item,dropdownStr,show_active){
+            function getHTML(item,dropdownStr,show_active) {
                 var uuid = stringUtil.getUUID();
-                var header=item.menu_name;
-                var furl=item.menu_url;
+                var header = item.menu_name;
+                var furl = item.menu_url;
                 console.log(furl);
                 var str = "<div class=\"card\">\n" +
                     "                    <div class=\"\" id=\"headingOne\">\n" +
-                    "                        <button class=\"collapse-btn btn btn-link btn-block text-left\" type=\"button\" data-toggle=\"collapse\" data-target=\"#"+uuid+"\" aria-expanded=\"true\" aria-controls=\"collapseOne\">\n" +
-                    "                            <h4>"+ header +"</h4>\n" +
+                    "                        <button class=\"collapse-btn btn btn-link btn-block text-left\" type=\"button\" data-toggle=\"collapse\" data-target=\"#" + uuid + "\" aria-expanded=\"true\" aria-controls=\"collapseOne\">\n" +
+                    "                            <h4>" + header + "</h4>\n" +
                     "                        </button>\n" +
                     "                    </div>\n" +
                     "\n" +
-                    "                    <div id=\"" + uuid + "\" class=\"collapse " + (show_active ? "show" : "")   + " \" aria-labelledby=\"headingOne\" data-parent=\"#accordionExample\">\n" +
+                    "                    <div id=\"" + uuid + "\" class=\"collapse " + (show_active ? "show" : "") + " \" aria-labelledby=\"headingOne\" data-parent=\"#accordionExample\">\n" +
                     dropdownStr +
                     "                    </div>\n" +
                     "                </div>";
-                var str1="<div class=\"card\">\n" +
+                var str1 = "<div class=\"card\">\n" +
                     "                    <div class=\"aaaa\" id=\"headingOne\">\n" +
-                    "                    <a  class=\"AFirstMenu\" url=\""+furl+"\">"+header+"</a>\n"+
+                    "                    <a  class=\"AFirstMenu\" url=\"" + furl + "\">" + header + "</a>\n" +
                     "                    </div>\n" +
                     "\n" +
-                    "                    <div id=\"" + uuid + "\" class=\"nullmenu " + (show_active ? "show" : "")   + " \" aria-labelledby=\"headingOne\" data-parent=\"#accordionExample\">\n" +
+                    "                    <div id=\"" + uuid + "\" class=\"nullmenu " + (show_active ? "show" : "") + " \" aria-labelledby=\"headingOne\" data-parent=\"#accordionExample\">\n" +
                     dropdownStr +
                     "                    </div>\n" +
                     "                </div>";
 
-
-
-                if (dropdownStr=="<div class=\"dropdown-menu left-menu-dropdown-menu\">\n" +
-                    "</div>"){
+                if (dropdownStr == "<div class=\"dropdown-menu left-menu-dropdown-menu\">\n" +
+                    "</div>") {
                     return str1;
                 } else {
                     return str;
                 }
+            }
+
 
 
             function getMenuStr(menuList) {

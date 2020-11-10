@@ -44,5 +44,68 @@
                     alert("字数不能超过10000");                  //将替换的值赋值给当前对象
                 }
             });
+            /*
+     上传图片
+     */
+            function getObjectURL(file) {
+                var url = null ;
+                if (window.createObjectURL!=undefined) { // basic
+                    url = window.createObjectURL(file) ;
+                } else if (window.URL!=undefined) { // mozilla(firefox)
+                    url = window.URL.createObjectURL(file) ;
+                } else if (window.webkitURL!=undefined) { // webkit or chrome
+                    url = window.webkitURL.createObjectURL(file) ;
+                }
+
+                return url ;
+            };
+            document.getElementById('aImg').onchange = function() {
+                $("#upimg").css("display","none");
+                var strsrc=getObjectURL(this.files[0]);
+                var imgSize = this.files[0].size;  //b
+                if(imgSize>1024*1024*1){//1M
+                    return alert("上传图片不能超过1M");
+                }
+                if(this.files[0].type != 'image/png' && this.files[0].type != 'image/jpeg' && this.files[0].type != 'image/gif'){
+                    return alert("图片上传格式不正确");
+                }
+                //console.log(strsrc);
+                $("#img1").attr("src",strsrc);
+                $("#img1").css("display","block");
+                if(strsrc!=null){
+                    $("#clsbtn").css("display","block")
+                }
+            }
+            document.getElementById('clsbtn').onclick = function() {
+
+                $("#upimg").css("display","block");
+                var strsrc=null;
+                //console.log(strsrc);
+                $("#img1").attr("src",strsrc);
+                $("#img1").css("display","none");
+                $("#clsbtn").css("display","none")
+            }
+            /*
+            上传文件
+            */
+            document.getElementById('upfile').onchange=function(){
+                var len=this.files.length;
+                $("#addFile").empty("p");
+                for (var i = 0; i < len; i++) {
+                    var name = this.files[i].name;
+                    var j=i+1;
+                    $("#addFile").append('<p>附件'+j+'：&nbsp;'+ name +'&nbsp;</p>');
+                    console.log(name);
+                };
+                if(len>0){
+                    $("#clsfile").css("display","block")
+                }
+            }
+            document.getElementById('clsfile').onclick = function() {
+                var obj = document.getElementById('upfile');
+                obj.outerHTML=obj.outerHTML;
+                $("#clsfile").css("display","none");
+                $("#addFile").empty("p");
+            }
         })
 })();

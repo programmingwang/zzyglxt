@@ -1,6 +1,7 @@
 package com.zyyglxt.controller.dictDO;
 
 
+import com.zyyglxt.annotation.LogAnnotation;
 import com.zyyglxt.dataobject.DictDO;
 import com.zyyglxt.dataobject.DictDOKey;
 import com.zyyglxt.error.BusinessException;
@@ -23,6 +24,7 @@ public class DictDOController {
      */
     @RequestMapping(value = "/selectDictDO/{itemID}/{itemCode}",method = RequestMethod.GET)
     @ResponseBody
+    @LogAnnotation(appCode ="",logTitle ="查看数据字典",logLevel ="1",creater ="",updater = "")
     public ResponseData selectByPrimaryKey(@PathVariable("itemID") Integer itemid, @PathVariable("itemCode") String itemCode){
         DictDOKey key = new DictDOKey();
         key.setItemcode(itemCode);

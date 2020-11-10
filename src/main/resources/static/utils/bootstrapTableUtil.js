@@ -23,10 +23,10 @@
                 method: 'GET',                     //请求方式（*）
                 contentType: "application/json; charset=UTF-8",
                 striped: true,                      //是否显示行间隔色
-                cache: false,                       //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
+                cache: true,                       //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
                 pagination: true,                   //是否显示分页（*）
                 sortOrder: "asc",                   //排序方式
-                sidePagination: "server",           //分页方式：client客户端分页，server服务端分页（*）
+                sidePagination: "client",           //分页方式：client客户端分页，server服务端分页（*）
                 page: 1,                      //初始化加载第一页，默认第一页,并记录
                 pageSize: 10,                       //每页的记录行数（*）
                 pageList: [10, 25, 50, 100],        //可供选择的每页的行数（*）
@@ -34,7 +34,10 @@
                 paginationNextText: '下一页',
                 // showColumns: true,               //是否显示所有的列（选择显示的列）
                 // minimumCountColumns: 2,          //最少允许的列数
+                search: true,                       //显示搜索框
+                // searchOnEnterKey:true,              //回车后查询
                 clickToSelect: true,                //是否启用点击选中行
+                search:true,                        //显示搜索框
                 //height: 500,                      //行高，如果没有设置height属性，表格自动根据记录条数觉得表格高度
                 uniqueId: "ID",                     //每一行的唯一标识，一般为主键列
                 queryParams: function (params) {
@@ -61,9 +64,9 @@
                     }
                     if (data.code === 88888) {
                         for(var i=0; i<data.data.length; i++){
-                            data.data[i].itemcreateat = changeTimestap(data.data[i].itemcreateat)
+                            data.data[i].itemcreateat = stringUtil.formatDateTime(data.data[i].itemcreateat);
+
                         }
-                        console.log(changeTimestap(data.data[0].itemcreateat));
                         return {
                             total: data.data.length,
                             rows: data.data
@@ -108,15 +111,5 @@
             myBootStrapTableDestory:myBootStrapTableDestory,
         }
 
-        function changeTimestap(data) {
-            var date = new Date(data)
-            var Y = date.getFullYear() + '-'
-            var M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '-'
-            var D = (date.getDate() < 10 ? '0' + date.getDate() : date.getDate()) + ' '
-            var h = (date.getHours() < 10 ? '0' + date.getHours() : date.getHours()) + ':'
-            var m = (date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes()) + ':'
-            var s = (date.getSeconds() < 10 ? '0' + date.getSeconds() : date.getSeconds())
-            return Y + M + D + h + m + s
-        }
     })
 })();

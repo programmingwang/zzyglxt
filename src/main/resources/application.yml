@@ -25,6 +25,7 @@ spring:
 
 
 
+
 mybatis:
   mapper-locations: classpath:mapping/*.xml
   type-aliases-package: com.zyyglxt.dataobject
@@ -33,9 +34,10 @@ mybatis:
 
 server:
   port: 8989
+
 #  servlet:
 #    context-path: /zyyglxt
-
+    
 #logging:
 #  file:
 #    path: E:/Desktop

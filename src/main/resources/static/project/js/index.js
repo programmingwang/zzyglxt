@@ -281,12 +281,12 @@
             }
 
 
-            function getHTML_dropdown_menu(itemStr) {
-                var str = "<div class=\"dropdown-menu left-menu-dropdown-menu\">\n" +
-                    itemStr +
-                    "</div>";
-                return str;
-            }
+        function getHTML_dropdown_menu(itemStr) {
+            var str = "<div class=\"dropdown-menu left-menu-dropdown-menu\">\n" +
+                itemStr +
+                "</div>";
+            return str;
+        }
 
 
             function getHTML(item,dropdownStr,show_active) {
@@ -355,11 +355,11 @@
                     htmlStr = htmlStr + getHTML(tm_item,dropdowStr,show);
                 });
 
-                return htmlStr;
-            }
+            return htmlStr;
+        }
 
 
-            $("#left_menu").html(getMenuStr(menu_list));
+        $("#left_menu").html(getMenuStr(menu_list));
 
 
             $(".collapse-btn").unbind().on("click",function () {
@@ -430,5 +430,3 @@
             $("#userName").text(sessionStorage.getItem('username'))
         })
 })();
-
-

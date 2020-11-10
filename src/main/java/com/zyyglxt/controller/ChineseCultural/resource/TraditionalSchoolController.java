@@ -2,6 +2,7 @@ package com.zyyglxt.controller.ChineseCultural.resource;
 
 import com.zyyglxt.dataobject.CulturalResourcesDO;
 import com.zyyglxt.dataobject.CulturalResourcesDOKey;
+import com.zyyglxt.dataobject.FileDO;
 import com.zyyglxt.dto.CulturalResourcesDto;
 import com.zyyglxt.error.BusinessException;
 import com.zyyglxt.error.EmBusinessError;
@@ -41,10 +42,10 @@ public class TraditionalSchoolController {
         List<CulturalResourcesDO> traditionalSchoolList = iTraditionalSchoolService.getTraditionalSchoolList();
         List<CulturalResourcesDto> chineseCulturalDtoList = new ArrayList<>();
         for (CulturalResourcesDO culturalResourcesDO : traditionalSchoolList) {
+            FileDO fileDO = iFileService.selectFileByDataCode(culturalResourcesDO.getItemcode());
             chineseCulturalDtoList.add(
                     ConvertDOToDTOUtil.convertFromDOToDTO(
-                            culturalResourcesDO,iFileService.selectFileByDataCode(
-                                    culturalResourcesDO.getItemcode()).getFilePath()));
+                            culturalResourcesDO,fileDO.getFilePath(),fileDO.getFileName()));
         }
         return new ResponseData(EmBusinessError.success,chineseCulturalDtoList);
     }

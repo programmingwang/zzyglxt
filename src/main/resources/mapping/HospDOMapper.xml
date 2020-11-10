@@ -283,7 +283,7 @@
     </select>
 
 
-    <select id="selectHospByItemCode">
+    <select id="selectHospByItemCode" resultMap="ResultMapWithBLOBs">
         select
         <include refid="Base_Column_List"/>
         ,

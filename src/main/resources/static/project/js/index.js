@@ -316,6 +316,20 @@
                     id: "99-3",
                     level: "2",
                     pid: "99"
+                },
+                {
+                    menu_name: "＞技术服务机构",
+                    menu_url: "/industrialdevelop/tecservice",
+                    id: "99-4",
+                    level: "2",
+                    pid: "99"
+                },
+                {
+                    menu_name: "＞科研院所",
+                    menu_url: "/industrialdevelop/tecserviceorg",
+                    id: "99-5",
+                    level: "2",
+                    pid: "99"
                 }
             ];
 
@@ -434,31 +448,45 @@
             });
 
 
-        function loadPage(url){
-            orange.loadPage({url: url, target: 'main_body', selector: '#fir_body', success: function(data){
-                    if(typeof data == "string"){
-                        console.log(url + "加载")
-                    } else {
-                        alertUtil.error( url+'加载失败');
+            function loadPage(url){
+                orange.loadPage({url: url, target: 'main_body', selector: '#fir_body', success: function(data){
+                        if(typeof data == "string"){
+                            console.log(url + "加载")
+                        } else {
+                            alertUtil.error( url+'加载失败');
+                        }
+                    }})
+            }
+
+
+            $("#logout").on("click",function () {
+                ajaxUtil.myAjax(null,"/logout",null,function (data) {
+                    if(data && data.code === 88888){
+                        sessionStorage.removeItem('username');
+                        sessionStorage.removeItem('rolename');
+                        window.location.href = "/userLogin";
+                    }else{
+                        alertUtil.alert(data.msg);
                     }
-            }})
-        }
+                },false)
+            });
 
 
-        $("#logout").on("click",function () {
-            ajaxUtil.myAjax(null,"/api/user/userLogout",null,function (data) {
-                if(ajaxUtil.success(data)){
-                    orange.stop();
-                    window.location.href = "/userLogin";
-                }else{
-                    alertUtil.alert(data.msg);
-                }
-            },false)
-        });
+            $("#queryUserMsg").on("click", function () {
+                ajaxUtil.myAjax(null, "/user/usermsg", null, function (data) {
+                    if(data && data.code === 88888) {
+                        console.log(data);
+                        window.location.href = "/user/usermsg"
+                    }else{
+                        alertUtil.error(data.msg)
+                    }
+                }, false,"","get")
+            });
 
-        if(!stringUtil.isBlank(currentUrlHash)){
-            loadPage(currentUrlHash);
-        }
+            if(!stringUtil.isBlank(currentUrlHash)){
+                loadPage(currentUrlHash);
+            }
 
-    })
+            $("#userName").text(sessionStorage.getItem('username'))
+        })
 })();

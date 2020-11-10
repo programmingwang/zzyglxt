@@ -44,6 +44,9 @@
         modalHtml.myDeleteModalcareFam='是否删除国医话健康';
         modalHtml.myDeleteModalSciknow='是否删除科普知识';
 
+        modalHtml.myDeleteHospital = "是否删除医院信息？";
+        modalHtml.myDeleteSpecialty = "是否删除科室信息？";
+        modalHtml.myDeleteChineseMedicine = "是否删除名老中医信息？";
 
         return modalHtml;
 

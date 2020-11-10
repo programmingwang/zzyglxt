@@ -12,12 +12,12 @@ import java.util.concurrent.Executors;
 
 public class LogUtil {
 
-    private final static Logger logger = LoggerFactory.getLogger(LogUtil.class);
-    private static ExecutorService executorService = Executors.newFixedThreadPool(2);
+    private final  Logger logger = LoggerFactory.getLogger(LogUtil.class);
+    private  ExecutorService executorService = Executors.newFixedThreadPool(2);
 
-    private static ILogService logService = ApplicationContextHolder.getBean("logServiceImpl");
+    private  ILogService logService = ApplicationContextHolder.getBean("logServiceImpl");
 
-    public static void writeMainLog(LogDO logDO) {
+    public  void writeMainLog(LogDO logDO) {
         executorService.execute(new Runnable() {
             @Override
             public void run() {
@@ -34,6 +34,8 @@ public class LogUtil {
                 }
             }
         });
+
+
         /*
         1、停止接收新的submit的任务
         2、已经提交的任务（包括正在跑的和队列中等待的）,会继续执行完成
@@ -51,5 +53,6 @@ public class LogUtil {
                 e.printStackTrace();
             }
         }
+
     }
 }

@@ -12,6 +12,7 @@ import com.zyyglxt.error.EmBusinessError;
 import com.zyyglxt.service.ISpecialtyService;
 import com.zyyglxt.validator.ValidatorImpl;
 import com.zyyglxt.validator.ValidatorResult;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -46,7 +47,7 @@ public class SpecialtyServiceImpl implements ISpecialtyService {
         if(result.isHasErrors()){
             throw new BusinessException(result.getErrMsg(), EmBusinessError.PARAMETER_VALIDATION_ERROR);
         }
-        specialtyDO = specialtyDto;
+        BeanUtils.copyProperties(specialtyDto,specialtyDO);
         specialtyDO.setItemcreateat(new Date());
 
         hospSpecialtyRefDO.setItemcode(UUID.randomUUID().toString());
@@ -118,6 +119,7 @@ public class SpecialtyServiceImpl implements ISpecialtyService {
     public List<SpecialtyDO> top5Specialty() {
         return specialtyDOMapper.top5Specialty();
     }
+
 
 
 }

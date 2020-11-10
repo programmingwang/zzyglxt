@@ -11,6 +11,7 @@
     <result column="PHONE" jdbcType="VARCHAR" property="phone" />
     <result column="CONTACTS" jdbcType="VARCHAR" property="contacts" />
     <result column="PROJECT_INTRODUCE" jdbcType="LONGVARCHAR" property="projectIntroduce" />
+    <result column="VISIT_NUM" jdbcType="INTEGER" property="visitNum" />
     <result column="STATUS" jdbcType="VARCHAR" property="status" />
     <result column="ORG_CODE" jdbcType="CHAR" property="orgCode" />
     <result column="CREATER" jdbcType="VARCHAR" property="creater" />
@@ -21,7 +22,7 @@
   <sql id="Base_Column_List">
     <!--@mbg.generated-->
     itemID, itemCode, SERVICE_PROJECT, PROJECT_COST, PHONE, CONTACTS, PROJECT_INTRODUCE, 
-    `STATUS`, ORG_CODE, CREATER, itemCreateAt, UPDATER, itemUpdateAt
+    VISIT_NUM, `STATUS`, ORG_CODE, CREATER, itemCreateAt, UPDATER, itemUpdateAt
   </sql>
   <select id="selectByPrimaryKey" parameterType="map" resultMap="BaseResultMap">
     <!--@mbg.generated-->
@@ -37,23 +38,26 @@
     where itemID = #{itemid,jdbcType=INTEGER}
       and itemCode = #{itemcode,jdbcType=CHAR}
   </delete>
-  <insert id="insert" keyColumn="itemID" keyProperty="itemid" parameterType="com.zyyglxt.dataobject.IndustrialDevelopSerPro" useGeneratedKeys="true">
+  <insert id="insert" parameterType="com.zyyglxt.dataobject.IndustrialDevelopSerPro">
     <!--@mbg.generated-->
-    insert into tb_industrial_develop_ser_pro (itemCode, SERVICE_PROJECT, PROJECT_COST, 
-      PHONE, CONTACTS, PROJECT_INTRODUCE, 
-      `STATUS`, ORG_CODE, CREATER, 
-      itemCreateAt, UPDATER, itemUpdateAt
-      )
-    values (#{itemcode,jdbcType=CHAR}, #{serviceProject,jdbcType=VARCHAR}, #{projectCost,jdbcType=VARCHAR}, 
-      #{phone,jdbcType=VARCHAR}, #{contacts,jdbcType=VARCHAR}, #{projectIntroduce,jdbcType=LONGVARCHAR}, 
-      #{status,jdbcType=VARCHAR}, #{orgCode,jdbcType=CHAR}, #{creater,jdbcType=VARCHAR}, 
-      #{itemcreateat,jdbcType=TIMESTAMP}, #{updater,jdbcType=VARCHAR}, #{itemupdateat,jdbcType=TIMESTAMP}
-      )
+    insert into tb_industrial_develop_ser_pro (itemID, itemCode, SERVICE_PROJECT, 
+      PROJECT_COST, PHONE, CONTACTS, 
+      PROJECT_INTRODUCE, VISIT_NUM, `STATUS`, 
+      ORG_CODE, CREATER, itemCreateAt, 
+      UPDATER, itemUpdateAt)
+    values (#{itemid,jdbcType=INTEGER}, #{itemcode,jdbcType=CHAR}, #{serviceProject,jdbcType=VARCHAR}, 
+      #{projectCost,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{contacts,jdbcType=VARCHAR}, 
+      #{projectIntroduce,jdbcType=LONGVARCHAR}, #{visitNum,jdbcType=INTEGER}, #{status,jdbcType=VARCHAR}, 
+      #{orgCode,jdbcType=CHAR}, #{creater,jdbcType=VARCHAR}, #{itemcreateat,jdbcType=TIMESTAMP}, 
+      #{updater,jdbcType=VARCHAR}, #{itemupdateat,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" keyColumn="itemID" keyProperty="itemid" parameterType="com.zyyglxt.dataobject.IndustrialDevelopSerPro" useGeneratedKeys="true">
+  <insert id="insertSelective" parameterType="com.zyyglxt.dataobject.IndustrialDevelopSerPro">
     <!--@mbg.generated-->
     insert into tb_industrial_develop_ser_pro
     <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="itemid != null">
+        itemID,
+      </if>
       <if test="itemcode != null">
         itemCode,
       </if>
@@ -71,6 +75,9 @@
       </if>
       <if test="projectIntroduce != null">
         PROJECT_INTRODUCE,
+      </if>
+      <if test="visitNum != null">
+        VISIT_NUM,
       </if>
       <if test="status != null">
         `STATUS`,
@@ -92,6 +99,9 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="itemid != null">
+        #{itemid,jdbcType=INTEGER},
+      </if>
       <if test="itemcode != null">
         #{itemcode,jdbcType=CHAR},
       </if>
@@ -109,6 +119,9 @@
       </if>
       <if test="projectIntroduce != null">
         #{projectIntroduce,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="visitNum != null">
+        #{visitNum,jdbcType=INTEGER},
       </if>
       <if test="status != null">
         #{status,jdbcType=VARCHAR},
@@ -149,6 +162,9 @@
       <if test="projectIntroduce != null">
         PROJECT_INTRODUCE = #{projectIntroduce,jdbcType=LONGVARCHAR},
       </if>
+      <if test="visitNum != null">
+        VISIT_NUM = #{visitNum,jdbcType=INTEGER},
+      </if>
       <if test="status != null">
         `STATUS` = #{status,jdbcType=VARCHAR},
       </if>
@@ -179,6 +195,7 @@
       PHONE = #{phone,jdbcType=VARCHAR},
       CONTACTS = #{contacts,jdbcType=VARCHAR},
       PROJECT_INTRODUCE = #{projectIntroduce,jdbcType=LONGVARCHAR},
+      VISIT_NUM = #{visitNum,jdbcType=INTEGER},
       `STATUS` = #{status,jdbcType=VARCHAR},
       ORG_CODE = #{orgCode,jdbcType=CHAR},
       CREATER = #{creater,jdbcType=VARCHAR},

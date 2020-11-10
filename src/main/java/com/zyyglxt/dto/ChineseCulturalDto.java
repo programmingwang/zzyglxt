@@ -14,20 +14,6 @@ import java.util.Date;
  */
 @Data
 @ToString
-@Accessors(chain = true)
-public class ChineseCulturalDto {
-    private Integer itemid;
-    private String itemcode;
-    private String chineseCulturalName;
-    private String chineseCulturalSource;
-    private String chineseCulturalAuthor;
-    private Integer visitNum;
-    private String chineseCulturalType;
-    private String chineseCulturalStatus;
-    private String creater;
-    private Date itemcreateat;
-    private String updater;
-    private Date itemupdateat;
-    private String chineseCulturalContent;
+public class ChineseCulturalDto extends ChineseCulturalDO {
     private String filePath;
 }

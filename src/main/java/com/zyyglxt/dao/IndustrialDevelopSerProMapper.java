@@ -5,10 +5,10 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 /**
-   *@Author lrt
-   *@Date 2020/11/6 20:00
-   *@Version 1.0
-**/
+ * @Author lrt
+ * @Date 2020/11/10 11:20
+ * @Version 1.0
+ **/
 @Mapper
 public interface IndustrialDevelopSerProMapper {
     int deleteByPrimaryKey(@Param("itemid") Integer itemid, @Param("itemcode") String itemcode);

@@ -283,4 +283,13 @@
     </select>
 
 
+    <select id="selectHospByItemCode">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from tb_culpro_hosp
+        WHERE itemCode = #{itemCode}
+    </select>
+
 </mapper>

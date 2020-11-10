@@ -3,7 +3,12 @@
         function (jquery,ajaxUtil,bootstrapTableUtil,objectUtil,alertUtil,modalUtil,selectUtil,stringUtil,dictUtil) {
 
 
+            //请求后台url
             var url = "/industrialdevelop/achievement";
+            //请求页面url
+            var pathUrl = url;
+            //请求新增页面url
+            var addUrl = pathUrl+"_add";
             var aParam = {
 
             };
@@ -20,7 +25,7 @@
             window.orgEvents = {
                 'click .edit' : function(e, value, row, index) {
                     localStorage.setItem("rowData", JSON.stringify(row));
-                    goDetail();
+                    orange.redirect(addUrl);
                 },
                 'click .delete': function (e, value, row, index) {
                     var myDeleteModalData ={
@@ -59,23 +64,10 @@
                 bootstrapTableUtil.myBootStrapTableInit("table", url, param, aCol);
             });
 
-            function goDetail() {
-                $("#main_body").html("");
-                var addUrl = "/add/js" + url;
-                orange.loadPage({url: addUrl, target: 'main_body', selector: '#fir_body', success: function(data){
-
-                        if(data == null||data == ""){
-                            return alertUtil.error( addUrl+'加载失败');
-                        }
-
-                        $("#main_body").html(data);
-                    }})
-            }
-
 
             $("#btn_addTask").unbind().on('click',function () {
                 localStorage.removeItem("rowData");
-                goDetail()
+                orange.redirect(addUrl)
             });
 
             var pl = dictUtil.getDictByCode(dictUtil.DICT_LIST.showStatus);

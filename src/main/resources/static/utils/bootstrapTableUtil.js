@@ -35,6 +35,7 @@
                 // showColumns: true,               //是否显示所有的列（选择显示的列）
                 // minimumCountColumns: 2,          //最少允许的列数
                 clickToSelect: true,                //是否启用点击选中行
+                search:true,                        //显示搜索框
                 //height: 500,                      //行高，如果没有设置height属性，表格自动根据记录条数觉得表格高度
                 uniqueId: "ID",                     //每一行的唯一标识，一般为主键列
                 queryParams: function (params) {
@@ -61,9 +62,9 @@
                     }
                     if (data.code === 88888) {
                         for(var i=0; i<data.data.length; i++){
-                            data.data[i].itemcreateat = changeTimestap(data.data[i].itemcreateat)
+                            data.data[i].itemcreateat = stringUtil.formatDateTime(data.data[i].itemcreateat);
+
                         }
-                        console.log(changeTimestap(data.data[0].itemcreateat));
                         return {
                             total: data.data.length,
                             rows: data.data
@@ -108,15 +109,5 @@
             myBootStrapTableDestory:myBootStrapTableDestory,
         }
 
-        function changeTimestap(data) {
-            var date = new Date(data)
-            var Y = date.getFullYear() + '-'
-            var M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '-'
-            var D = (date.getDate() < 10 ? '0' + date.getDate() : date.getDate()) + ' '
-            var h = (date.getHours() < 10 ? '0' + date.getHours() : date.getHours()) + ':'
-            var m = (date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes()) + ':'
-            var s = (date.getSeconds() < 10 ? '0' + date.getSeconds() : date.getSeconds())
-            return Y + M + D + h + m + s
-        }
     })
 })();

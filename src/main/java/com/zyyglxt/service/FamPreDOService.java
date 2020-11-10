@@ -21,4 +21,5 @@ public interface FamPreDOService {
   FamPreDO selectByPrimaryKey(FamPreDOKey key);
   List<FamPreDO> selectAllFamPre();//查询所有历史名方
   int increaseVisitNumFamPre(FamPreDOKey key);//增加浏览次数
+  List<FamPreDO> searchFamPre(String keyWord);//关键字查询
 }

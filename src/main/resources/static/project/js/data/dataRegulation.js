@@ -118,33 +118,44 @@
         //修改事件
         window.orgEvents = {
             'click .edit' : function(e, value, row, index) {
-                addUpdate("update",row)
+
             },
+
             'click .delete': function (e, value, row, index) {
                 var myDeleteModalData ={
-                    modalBodyID : "myDeleteModalProject",
-                    modalTitle : "删除项目",
+                    modalBodyID : "myDeleteRegulation",
+                    modalTitle : "删除政策法规",
                     modalClass : "modal-lg",
                     confirmButtonClass : "btn-danger",
                     modalConfirmFun:function () {
-                        var projectEntity = {
-                            projectID: row.projectID
-                        };
                         var isSuccess = false;
-                        ajaxUtil.myAjax(null,"/api/project/deleteProject",projectEntity,function (data) {
+                        ajaxUtil.myAjax(null,"/datado/regulation/deleteByPrimaryKey/"+row.itemid+"/"+row.itemcode,null,function (data) {
                             if(ajaxUtil.success(data)){
-                                alertUtil.info("删除项目成功");
+                                ajaxUtil.myAjax(null,"/file/delete?dataCode="+row.itemcode,null,function (data) {
+                                    if(!ajaxUtil.success(data)){
+                                        return alertUtil.error("附件删除失败");
+                                    }
+                                },false,"","get");
+                                alertUtil.info("删除政策法规成功");
                                 isSuccess = true;
                                 refreshTable();
                             }
-                        },false);
+                        },false,true,"delete");
                         return isSuccess;
                     }
 
                 };
                 var myDeleteModal = modalUtil.init(myDeleteModalData);
                 myDeleteModal.show();
-            }
+            },
+
+            'click .pass' : function (e, value, row, index) {
+
+            },
+
+            'click .fail' : function (e, value, row, index) {
+
+            },
         };
 
 
@@ -177,11 +188,20 @@
                 }})
         });
 
+        var pl = dictUtil.getDictByCode(dictUtil.DICT_LIST.showStatus);
+        $("#chargePersonSearch").selectUtil(pl);
+
         var aCol = [
             {field: 'dataTitle', title: '政策法规名称'},
             {field: 'dataSource', title: '来源'},
             {field: 'dataFileType', title: '文件类型'},
-            {field: 'fileName', title: '附件'},
+            {field: 'filePath', title: '附件', formatter:function (value, row, index) {
+                    if(value == "已经损坏了"){
+                        return '<p>'+value+'</p>';
+                    }else{
+                        return '<a href="'+value+'">政策法规</a>'
+                    }
+                }},
             {field: 'itemcreateat', title: '发布时间'},
             {field: 'action',  title: '操作',formatter: operation,events:orgEvents}
         ];

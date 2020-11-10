@@ -2,6 +2,8 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <title>办事流程</title>
+    <link rel="stylesheet" th:href="@{CSS/taskList.css}">
 </head>
 <body>
     <div id="fir_body">
@@ -23,15 +25,12 @@
                 </a>
             </div>
             <div id="collapseOne" class="collapse col-md-12 col-lg-12 row" style="height: 0px; ">
-            <div class="col-lg-5 col-md-5">
-                <div class="input-group mb-5">
+            <div class="col-lg-4 col-md-4">
+                <div class="input-group mb-4">
                     <div class="input-group-prepend">
                         <span class="input-text" >其他选项： 展示状态：</span>
                     </div>
-                    <select class="custom-select" id="chargePersonSearch">
-                        <option value="展示中">展示中</option>
-                        <option value="已下架">已下架</option>
-                    </select>
+                    <select class="custom-select" id="chargePersonSearch"></select>
                 </div>
             </div>
             <div class="col-lg-3"></div>
@@ -58,8 +57,6 @@
 
 
         <!-- Modal -->
-
-
 
 
     </div>

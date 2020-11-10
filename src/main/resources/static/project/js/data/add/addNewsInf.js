@@ -1,6 +1,6 @@
 (function () {
-    require(['jquery','wangEditor'],
-        function (jquery,wangEditor) {
+    require(['jquery','wangEditor','ajaxUtil','alertUtil','stringUtil'],
+        function (jquery,wangEditor,ajaxUtil,alertUtil,stringUtil) {
             const editor = new wangEditor('#div1')
             // 或者 const editor = new E( document.getElementById('div1') )
             //菜单配置
@@ -44,5 +44,60 @@
                     alert("字数不能超过10000");                  //将替换的值赋值给当前对象
                 }
             });
+
+            $("#cancelbtn").unbind().on('click',function () {
+                $("#main_body").html("");
+                var url = "/data/dataNewsInf";
+                orange.loadPage({url: url, target: 'main_body', selector: '#fir_body', success: function(data){
+                        if(data == null||data == ""){
+                            return alertUtil.error( url+'加载失败');
+                        }
+                        $("#main_body").html(data);
+                    }})
+            });
+
+            $("#submitbtn").unbind().on('click',function () {
+                var travelEntity = {
+                    itemcode: stringUtil.getUUID(),
+                    dataTitle : $("#dataTitle").val(),
+                    dataAuthor : $("#dataAuthor").val(),
+                    dataSource : $("#dataSource").val(),
+                    dataFileType : $("#dataFileType").val(),
+                    dataContent : editor.txt.html()
+                };
+
+                ajaxUtil.myAjax(null,"/datado/newsInf/insertNewsInf",travelEntity,function (data) {
+                    if(ajaxUtil.success(data)){
+                        alertUtil.info("新增新闻信息成功");
+                        var url = "/data/dataNewsInf";
+                        orange.loadPage({url: url, target: 'main_body', selector: '#fir_body', success: function(data){
+                                if(data == null||data == ""){
+                                    return alertUtil.error( url+'加载失败');
+                                }
+                                $("#main_body").html(data);
+                            }})
+                    }else {
+                        alertUtil.alert(data.msg);
+                    }
+                },false,true);
+
+            });
+
+
+            (function init() {
+                if (isUpdate()){
+                    var tempdata = JSON.parse(localStorage.getItem("rowData"));
+                    $("#dataTitle").val(tempdata.dataTitle);
+                    $("#dataAuthor").val(tempdata.dataAuthor);
+                    $("#dataSource").val(tempdata.dataSource);
+                    $("#dataFileType").val(tempdata.dataFileType);
+                    $(".w-e-text").html(tempdata.dataContent);
+                }
+            }());
+
+            function isUpdate() {
+                return (localStorage.getItem("rowData") != null || localStorage.getItem("rowData") != undefined)
+            }
+
         })
 })();

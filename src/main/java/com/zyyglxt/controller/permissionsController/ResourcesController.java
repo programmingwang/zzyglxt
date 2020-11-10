@@ -29,8 +29,8 @@ public class ResourcesController {
      * @return
      */
     @RequestMapping(value = "/insert", method = RequestMethod.POST)
-    public ResponseData insertSelective(@RequestBody ResourcesDO resourcesDO){
-        resourcesService.insertSelective(resourcesDO);
+    public ResponseData insertSelective(@RequestBody ResourcesRoleRefDO resourcesDO){
+        resRoleRefService.insertSelective(resourcesDO);
         return new ResponseData(EmBusinessError.success);
     }
 

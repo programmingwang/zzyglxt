@@ -401,12 +401,12 @@
 
             $("#logout").on("click",function () {
                 ajaxUtil.myAjax(null,"/logout",null,function (data) {
-                    if(data && data.errorCode === 88888){
+                    if(data && data.code === 88888){
                         sessionStorage.removeItem('username');
                         sessionStorage.removeItem('rolename');
                         window.location.href = "/userLogin";
                     }else{
-                        alertUtil.alert(data.errorMsg);
+                        alertUtil.alert(data.msg);
                     }
                 },false)
             });

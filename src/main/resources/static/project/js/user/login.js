@@ -19,14 +19,14 @@
 
             var userEntity = {"username":inputUsername,"password":inputPassword};
             ajaxUtil.myAjax(null,"/userLogin",userEntity,function (data) {
-                if(data && data.errorCode === 88888) {
+                if(data && data.code === 88888) {
                     var userName = data.data.username;
                     var rolename = data.data.rolename;
                     sessionStorage.setItem('username',userName);
                     sessionStorage.setItem('rolename',rolename);
                     window.location.href = "/main"
                 }else{
-                    alertUtil.error(data.errorMsg)
+                    alertUtil.error(data.msg)
                 }
             },false)
         })

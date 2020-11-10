@@ -7226,3 +7226,151 @@ java.lang.NullPointerException: null
 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
 	at java.lang.Thread.run(Thread.java:748)
 20:39:01.018 logback [http-nio-8989-exec-9] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [java.lang.NullPointerException]
+22:57:46.540 logback [background-preinit] INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 6.1.5.Final
+22:57:46.572 logback [restartedMain] INFO  com.zyyglxt.ZyyglxtApplication - Starting ZyyglxtApplication on DESKTOP-MJQ3SFG with PID 1792 (F:\zyyglxt\target\classes started by 彼缘 in F:\zyyglxt)
+22:57:46.573 logback [restartedMain] INFO  com.zyyglxt.ZyyglxtApplication - No active profile set, falling back to default profiles: default
+22:57:46.674 logback [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+22:57:46.674 logback [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+22:57:49.334 logback [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8989 (http)
+22:57:49.343 logback [restartedMain] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8989"]
+22:57:49.344 logback [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+22:57:49.344 logback [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.38]
+22:57:49.347 logback [restartedMain] INFO  o.a.c.core.AprLifecycleListener - Loaded Apache Tomcat Native library [1.2.23] using APR version [1.7.0].
+22:57:49.347 logback [restartedMain] INFO  o.a.c.core.AprLifecycleListener - APR capabilities: IPv6 [true], sendfile [true], accept filters [false], random [true].
+22:57:49.347 logback [restartedMain] INFO  o.a.c.core.AprLifecycleListener - APR/OpenSSL configuration: useAprConnector [false], useOpenSSL [true]
+22:57:49.351 logback [restartedMain] INFO  o.a.c.core.AprLifecycleListener - OpenSSL successfully initialized [OpenSSL 1.1.1c  28 May 2019]
+22:57:49.437 logback [restartedMain] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+22:57:49.438 logback [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 2762 ms
+22:57:50.674 logback [restartedMain] WARN  c.z.c.h.CustomizeAbstractSecurityInterceptor - Could not validate configuration attributes as the SecurityMetadataSource did not return any attributes from getAllConfigAttributes()
+22:57:51.571 logback [restartedMain] INFO  s.d.s.w.PropertySourcedRequestMappingHandlerMapping - Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+22:57:52.277 logback [restartedMain] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@3d0440c3, org.springframework.security.web.context.SecurityContextPersistenceFilter@5d582cee, org.springframework.security.web.header.HeaderWriterFilter@66023119, org.springframework.web.filter.CorsFilter@2e85edb2, org.springframework.security.web.authentication.logout.LogoutFilter@11547d95, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@14c841ad, org.springframework.security.web.session.ConcurrentSessionFilter@562efe08, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@24681f20, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@639cef0e, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@4a9141e1, org.springframework.security.web.session.SessionManagementFilter@47693499, org.springframework.security.web.access.ExceptionTranslationFilter@aa82bee, com.zyyglxt.config.handler.CustomizeAbstractSecurityInterceptor@6c7fb7a4, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@84b9747]
+22:57:52.389 logback [restartedMain] INFO  o.s.s.c.ThreadPoolTaskExecutor - Initializing ExecutorService 'applicationTaskExecutor'
+22:57:52.462 logback [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+22:57:52.592 logback [restartedMain] WARN  o.t.templatemode.TemplateMode - [THYMELEAF][restartedMain] Template Mode 'HTML5' is deprecated. Using Template Mode 'HTML' instead.
+22:57:52.821 logback [restartedMain] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8989"]
+22:57:52.869 logback [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 8989 (http) with context path ''
+22:57:52.870 logback [restartedMain] INFO  s.d.s.w.p.DocumentationPluginsBootstrapper - Context refreshed
+22:57:52.895 logback [restartedMain] INFO  s.d.s.w.p.DocumentationPluginsBootstrapper - Found 1 custom documentation plugin(s)
+22:57:52.982 logback [restartedMain] INFO  s.d.s.w.s.ApiListingReferenceScanner - Scanning for api listing references
+22:57:53.618 logback [restartedMain] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: changeStatusUsingPOST_1
+22:57:53.622 logback [restartedMain] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: toUpdatePageUsingGET_1
+22:57:53.637 logback [restartedMain] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: changeStatusUsingPOST_2
+22:57:53.642 logback [restartedMain] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: toUpdatePageUsingGET_2
+22:57:53.647 logback [restartedMain] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: changeStatusUsingPOST_3
+22:57:53.650 logback [restartedMain] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: toUpdatePageUsingGET_3
+22:57:53.667 logback [restartedMain] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: changeStatusUsingPUT_1
+22:57:53.669 logback [restartedMain] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: deleteByPrimaryKeyUsingDELETE_1
+22:57:53.671 logback [restartedMain] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: insertNewsInfUsingPOST_1
+22:57:53.673 logback [restartedMain] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: searchDataDOUsingGET_1
+22:57:53.674 logback [restartedMain] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: selectByPrimaryKeyUsingGET_1
+22:57:53.679 logback [restartedMain] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: changeStatusUsingPUT_2
+22:57:53.681 logback [restartedMain] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: deleteByPrimaryKeyUsingDELETE_2
+22:57:53.684 logback [restartedMain] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: searchDataDOUsingGET_2
+22:57:53.686 logback [restartedMain] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: selectByPrimaryKeyUsingGET_2
+22:57:53.692 logback [restartedMain] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: changeStatusUsingPUT_3
+22:57:53.694 logback [restartedMain] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: deleteByPrimaryKeyUsingDELETE_3
+22:57:53.697 logback [restartedMain] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: searchDataDOUsingGET_3
+22:57:53.699 logback [restartedMain] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: selectByPrimaryKeyUsingGET_3
+22:57:53.712 logback [restartedMain] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: deleteByPrimaryKeyUsingDELETE_4
+22:57:53.720 logback [restartedMain] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: selectByPrimaryKeyUsingGET_4
+22:57:53.723 logback [restartedMain] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: deleteByPrimaryKeyUsingDELETE_5
+22:57:53.728 logback [restartedMain] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: insertSelectiveUsingPOST_1
+22:57:53.730 logback [restartedMain] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: selectByPrimaryKeyUsingGET_5
+22:57:53.731 logback [restartedMain] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: updateByPrimaryKeySelectiveUsingPUT_1
+22:57:53.800 logback [restartedMain] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: increaseVisitNumUsingPOST_1
+22:57:53.814 logback [restartedMain] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: increaseVisitNumUsingPOST_2
+22:57:53.871 logback [restartedMain] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: changeStatusUsingPOST_4
+22:57:53.875 logback [restartedMain] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: toUpdatePageUsingGET_4
+22:57:53.895 logback [restartedMain] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: changeStatusUsingPOST_5
+22:57:53.900 logback [restartedMain] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: toUpdatePageUsingGET_5
+22:57:53.929 logback [restartedMain] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: deleteByPrimaryKeyUsingDELETE_6
+22:57:53.931 logback [restartedMain] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: insertSelectiveUsingPOST_2
+22:57:53.940 logback [restartedMain] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: updateByPrimaryKeySelectiveUsingPUT_2
+22:57:54.021 logback [restartedMain] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: changeStatusUsingPOST_6
+22:57:54.022 logback [restartedMain] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: deleteTraditionalCulturalUsingDELETE_1
+22:57:54.024 logback [restartedMain] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: toUpdatePageUsingGET_6
+22:57:54.029 logback [restartedMain] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: changeStatusUsingPOST_7
+22:57:54.032 logback [restartedMain] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: toUpdatePageUsingGET_7
+22:57:54.037 logback [restartedMain] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: changeStatusUsingPOST_8
+22:57:54.041 logback [restartedMain] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: toUpdatePageUsingGET_8
+22:57:54.047 logback [restartedMain] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: changeStatusUsingPOST_9
+22:57:54.050 logback [restartedMain] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: toUpdatePageUsingGET_9
+22:57:54.188 logback [restartedMain] INFO  com.zyyglxt.ZyyglxtApplication - Started ZyyglxtApplication in 8.398 seconds (JVM running for 11.189)
+22:58:07.525 logback [http-nio-8989-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+22:58:07.525 logback [http-nio-8989-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+22:58:07.536 logback [http-nio-8989-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 11 ms
+22:58:07.729 logback [http-nio-8989-exec-1] INFO  c.alibaba.druid.pool.DruidDataSource - {dataSource-1} inited
+23:03:11.181 logback [background-preinit] INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 6.1.5.Final
+23:03:11.214 logback [restartedMain] INFO  com.zyyglxt.ZyyglxtApplication - Starting ZyyglxtApplication on DESKTOP-MJQ3SFG with PID 16004 (F:\zyyglxt\target\classes started by 彼缘 in F:\zyyglxt)
+23:03:11.226 logback [restartedMain] INFO  com.zyyglxt.ZyyglxtApplication - No active profile set, falling back to default profiles: default
+23:03:11.429 logback [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+23:03:11.430 logback [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+23:03:14.039 logback [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8989 (http)
+23:03:14.048 logback [restartedMain] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8989"]
+23:03:14.049 logback [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+23:03:14.050 logback [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.38]
+23:03:14.052 logback [restartedMain] INFO  o.a.c.core.AprLifecycleListener - Loaded Apache Tomcat Native library [1.2.23] using APR version [1.7.0].
+23:03:14.052 logback [restartedMain] INFO  o.a.c.core.AprLifecycleListener - APR capabilities: IPv6 [true], sendfile [true], accept filters [false], random [true].
+23:03:14.053 logback [restartedMain] INFO  o.a.c.core.AprLifecycleListener - APR/OpenSSL configuration: useAprConnector [false], useOpenSSL [true]
+23:03:14.056 logback [restartedMain] INFO  o.a.c.core.AprLifecycleListener - OpenSSL successfully initialized [OpenSSL 1.1.1c  28 May 2019]
+23:03:14.153 logback [restartedMain] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+23:03:14.153 logback [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 2723 ms
+23:03:15.283 logback [restartedMain] WARN  c.z.c.h.CustomizeAbstractSecurityInterceptor - Could not validate configuration attributes as the SecurityMetadataSource did not return any attributes from getAllConfigAttributes()
+23:03:16.522 logback [restartedMain] INFO  s.d.s.w.PropertySourcedRequestMappingHandlerMapping - Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+23:03:17.344 logback [restartedMain] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@53c44def, org.springframework.security.web.context.SecurityContextPersistenceFilter@14df7111, org.springframework.security.web.header.HeaderWriterFilter@47817152, org.springframework.web.filter.CorsFilter@25a7ddf4, org.springframework.security.web.authentication.logout.LogoutFilter@767f93a7, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@2914c5d7, org.springframework.security.web.session.ConcurrentSessionFilter@62a600d8, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@1f75e1fc, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@3246d5cd, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@1d54511d, org.springframework.security.web.session.SessionManagementFilter@4363cbf, org.springframework.security.web.access.ExceptionTranslationFilter@564b2055, com.zyyglxt.config.handler.CustomizeAbstractSecurityInterceptor@702b49db, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@2b607996]
+23:03:17.411 logback [restartedMain] INFO  o.s.s.c.ThreadPoolTaskExecutor - Initializing ExecutorService 'applicationTaskExecutor'
+23:03:17.446 logback [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+23:03:17.519 logback [restartedMain] WARN  o.t.templatemode.TemplateMode - [THYMELEAF][restartedMain] Template Mode 'HTML5' is deprecated. Using Template Mode 'HTML' instead.
+23:03:17.699 logback [restartedMain] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8989"]
+23:03:17.730 logback [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 8989 (http) with context path ''
+23:03:17.731 logback [restartedMain] INFO  s.d.s.w.p.DocumentationPluginsBootstrapper - Context refreshed
+23:03:17.756 logback [restartedMain] INFO  s.d.s.w.p.DocumentationPluginsBootstrapper - Found 1 custom documentation plugin(s)
+23:03:17.829 logback [restartedMain] INFO  s.d.s.w.s.ApiListingReferenceScanner - Scanning for api listing references
+23:03:18.135 logback [restartedMain] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: changeStatusUsingPOST_1
+23:03:18.141 logback [restartedMain] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: toUpdatePageUsingGET_1
+23:03:18.170 logback [restartedMain] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: changeStatusUsingPOST_2
+23:03:18.176 logback [restartedMain] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: toUpdatePageUsingGET_2
+23:03:18.185 logback [restartedMain] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: changeStatusUsingPOST_3
+23:03:18.190 logback [restartedMain] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: toUpdatePageUsingGET_3
+23:03:18.216 logback [restartedMain] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: changeStatusUsingPUT_1
+23:03:18.219 logback [restartedMain] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: deleteByPrimaryKeyUsingDELETE_1
+23:03:18.220 logback [restartedMain] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: insertNewsInfUsingPOST_1
+23:03:18.222 logback [restartedMain] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: searchDataDOUsingGET_1
+23:03:18.224 logback [restartedMain] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: selectByPrimaryKeyUsingGET_1
+23:03:18.233 logback [restartedMain] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: changeStatusUsingPUT_2
+23:03:18.234 logback [restartedMain] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: deleteByPrimaryKeyUsingDELETE_2
+23:03:18.238 logback [restartedMain] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: searchDataDOUsingGET_2
+23:03:18.240 logback [restartedMain] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: selectByPrimaryKeyUsingGET_2
+23:03:18.247 logback [restartedMain] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: changeStatusUsingPUT_3
+23:03:18.250 logback [restartedMain] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: deleteByPrimaryKeyUsingDELETE_3
+23:03:18.253 logback [restartedMain] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: searchDataDOUsingGET_3
+23:03:18.255 logback [restartedMain] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: selectByPrimaryKeyUsingGET_3
+23:03:18.269 logback [restartedMain] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: deleteByPrimaryKeyUsingDELETE_4
+23:03:18.276 logback [restartedMain] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: selectByPrimaryKeyUsingGET_4
+23:03:18.280 logback [restartedMain] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: deleteByPrimaryKeyUsingDELETE_5
+23:03:18.286 logback [restartedMain] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: insertSelectiveUsingPOST_1
+23:03:18.288 logback [restartedMain] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: selectByPrimaryKeyUsingGET_5
+23:03:18.289 logback [restartedMain] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: updateByPrimaryKeySelectiveUsingPUT_1
+23:03:18.372 logback [restartedMain] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: increaseVisitNumUsingPOST_1
+23:03:18.389 logback [restartedMain] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: increaseVisitNumUsingPOST_2
+23:03:18.443 logback [restartedMain] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: changeStatusUsingPOST_4
+23:03:18.447 logback [restartedMain] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: toUpdatePageUsingGET_4
+23:03:18.462 logback [restartedMain] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: changeStatusUsingPOST_5
+23:03:18.466 logback [restartedMain] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: toUpdatePageUsingGET_5
+23:03:18.489 logback [restartedMain] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: deleteByPrimaryKeyUsingDELETE_6
+23:03:18.490 logback [restartedMain] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: insertSelectiveUsingPOST_2
+23:03:18.503 logback [restartedMain] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: updateByPrimaryKeySelectiveUsingPUT_2
+23:03:18.598 logback [restartedMain] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: changeStatusUsingPOST_6
+23:03:18.600 logback [restartedMain] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: deleteTraditionalCulturalUsingDELETE_1
+23:03:18.602 logback [restartedMain] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: toUpdatePageUsingGET_6
+23:03:18.606 logback [restartedMain] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: changeStatusUsingPOST_7
+23:03:18.610 logback [restartedMain] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: toUpdatePageUsingGET_7
+23:03:18.616 logback [restartedMain] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: changeStatusUsingPOST_8
+23:03:18.619 logback [restartedMain] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: toUpdatePageUsingGET_8
+23:03:18.624 logback [restartedMain] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: changeStatusUsingPOST_9
+23:03:18.628 logback [restartedMain] INFO  s.d.s.w.r.o.CachingOperationNameGenerator - Generating unique operation named: toUpdatePageUsingGET_9
+23:03:18.678 logback [restartedMain] INFO  com.zyyglxt.ZyyglxtApplication - Started ZyyglxtApplication in 8.236 seconds (JVM running for 10.129)
+23:03:24.642 logback [http-nio-8989-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+23:03:24.642 logback [http-nio-8989-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+23:03:24.650 logback [http-nio-8989-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 8 ms
+23:03:24.880 logback [http-nio-8989-exec-1] INFO  c.alibaba.druid.pool.DruidDataSource - {dataSource-1} inited

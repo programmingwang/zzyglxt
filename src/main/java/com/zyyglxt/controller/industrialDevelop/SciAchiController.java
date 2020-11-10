@@ -30,7 +30,7 @@ public class SciAchiController {
      */
     @ResponseBody
     @RequestMapping(value = "/achievement", method = RequestMethod.POST)
-    public ResponseData addAchievement(@RequestBody @Valid IndustrialDevelopSciAchiDO sciAchiDO) {
+    public ResponseData addAchievement(@RequestBody IndustrialDevelopSciAchiDO sciAchiDO) {
         System.out.println(sciAchiDO.toString());
         sciAchiService.addAchievement(sciAchiDO);
         return new ResponseData(EmBusinessError.success);

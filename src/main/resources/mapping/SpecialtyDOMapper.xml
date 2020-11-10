@@ -278,6 +278,13 @@
         LIMIT 5
     </select>
 
-
+    <select id="selectSpecialtyByItemCode" resultMap="ResultMapWithBLOBs">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from tb_culpro_specialty
+        where itemCode = #{itemcode}
+    </select>
 
 </mapper>

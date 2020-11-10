@@ -28,10 +28,6 @@ public class ValidatorImpl implements InitializingBean {
         ValidatorResult result = new ValidatorResult();
         Set<ConstraintViolation<Object>> validateSet = validator.validate(bean,group);
         if(validateSet.size()> 0){
-
-
-            
-
             result.setHasErrors(true);
             validateSet.forEach(validate -> {
                 String errMsg = validate.getMessage();

@@ -84,22 +84,19 @@
                 },
                 'click .delete': function (e, value, row, index) {
                     var myDeleteModalData ={
-                        modalBodyID : "myDeleteModalProject",
-                        modalTitle : "删除项目",
+                        modalBodyID : "myDeleteModalTraditionalCul",
+                        modalTitle : "删除中医医史",
                         modalClass : "modal-lg",
                         confirmButtonClass : "btn-danger",
                         modalConfirmFun:function () {
-                            var projectEntity = {
-                                projectID: row.projectID
-                            };
                             var isSuccess = false;
-                            ajaxUtil.myAjax(null,"/api/project/deleteProject",projectEntity,function (data) {
+                            ajaxUtil.myAjax(null,"/cul/res/traCul/delTraCul/"+row.itemid+"/"+row.itemcode,null,function (data) {
                                 if(ajaxUtil.success(data)){
-                                    alertUtil.info("删除项目成功");
+                                    alertUtil.info("删除中医医史信息成功");
                                     isSuccess = true;
                                     refreshTable();
                                 }
-                            },false);
+                            },false,true,"delete");
                             return isSuccess;
                         }
 
@@ -110,17 +107,9 @@
             };
 
 
-            // $("#search").unbind().on("click",function () {
-            //     var param = {
-            //
-            //     };
-            //     $('#table').bootstrapTable("destroy");
-            //     bootstrapTableUtil.myBootStrapTableInit("table", url, param, aCol);
-            // });
-
             $("#btn_addTask").unbind().on('click',function () {
                 $("#main_body").html("");
-                var url = "/add/js/add";
+                var url = "/chineseCultural/resource/insertTraditionalCultural";
                 orange.loadPage({url: url, target: 'main_body', selector: '#fir_body', success: function(data){
 
                         if(data == null||data == ""){

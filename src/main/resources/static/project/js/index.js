@@ -1,8 +1,6 @@
 (function () {
     require(['jquery', 'urlUtil', 'stringUtil', 'alertUtil', 'ajaxUtil'],
         function (jquery, urlUtil, stringUtil, alertUtil, ajaxUtil) {
-
-
             var currentUrlHash = window.location.hash.replace("#", "");
             var menu_list = [
                 {
@@ -252,12 +250,10 @@
                 }
             ];
 
-
             function getHTML_dropdown_menu_item(astr, aurl, show_active) {
                 var str = "<a class=\"dropdown-item  " + (show_active ? "active" : "") + " \" url=\"" + aurl + "\">" + astr + "</a>\n";
                 return str;
             }
-
 
             function getHTML_dropdown_menu(itemStr) {
                 var str = "<div class=\"dropdown-menu left-menu-dropdown-menu\">\n" +
@@ -265,7 +261,6 @@
                     "</div>";
                 return str;
             }
-
 
             function getHTML(header, dropdownStr, show_active) {
                 var uuid = stringUtil.getUUID();
@@ -282,7 +277,6 @@
                     "                </div>";
                 return str;
             }
-
 
             function getMenuStr(menuList) {
                 if (stringUtil.isBlank(menuList)) {
@@ -317,7 +311,6 @@
                 return htmlStr;
             }
 
-
             $("#left_menu").html(getMenuStr(menu_list));
 
 
@@ -326,13 +319,11 @@
                 $($(this).attr("data-target")).addClass("show");
             });
 
-
             $(".dropdown-item").unbind().on("click", function () {
                 $(".dropdown-item").removeClass("active");
                 $(this).addClass("active");
                 loadPage($(this).attr("url"));
             });
-
 
             function loadPage(url) {
                 orange.loadPage({
@@ -346,10 +337,11 @@
                 })
             }
 
-
             $("#logout").on("click", function () {
                 ajaxUtil.myAjax(null, "/logout", null, function (data) {
                     if(data && data.errorCode === 88888) {
+                        sessionStorage.removeItem('username');
+                        sessionStorage.removeItem('rolename');
                         window.location.href = "/userLogin"
                     }else{
                         alertUtil.error(data.errorMsg)
@@ -357,13 +349,11 @@
                 }, false)
             });
 
-
-
             if (!stringUtil.isBlank(currentUrlHash)) {
                 loadPage(currentUrlHash);
             }
 
-            $("#userName").text(localStorage.getItem('username'))
+            $("#userName").text(sessionStorage.getItem('username'))
 
         })
 })();

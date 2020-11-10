@@ -92,6 +92,11 @@
                             var isSuccess = false;
                             ajaxUtil.myAjax(null,"/cul/res/traDoc/delTraDoc/"+row.itemid+"/"+row.itemcode,null,function (data) {
                                 if(ajaxUtil.success(data)){
+                                    ajaxUtil.myAjax(null,"/file/delete?dataCode="+row.itemcode,null,function (data) {
+                                        if(!ajaxUtil.success(data)){
+                                            return alertUtil.error("文件删除失败");
+                                        }
+                                    },false,"","get");
                                     alertUtil.info("删除历代名家信息成功");
                                     isSuccess = true;
                                     refreshTable();
@@ -120,6 +125,8 @@
                     }})
             });
 
+            var pl = dictUtil.getDictByCode(dictUtil.DICT_LIST.showStatus);
+            $("#chargePersonSearch").selectUtil(pl);
 
             var aCol = [
                 {field: 'chineseCulturalName', title: '历代名家姓名'},

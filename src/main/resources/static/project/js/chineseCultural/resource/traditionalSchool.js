@@ -92,6 +92,11 @@
                             var isSuccess = false;
                             ajaxUtil.myAjax(null,"/cul/res/traSch/delTraSch/"+row.itemid+"/"+row.itemcode,null,function (data) {
                                 if(ajaxUtil.success(data)){
+                                    ajaxUtil.myAjax(null,"/file/delete?dataCode="+row.itemcode,null,function (data) {
+                                        if(!ajaxUtil.success(data)){
+                                            return alertUtil.error("文件删除失败");
+                                        }
+                                    },false,"","get");
                                     alertUtil.info("删除中医流派信息成功");
                                     isSuccess = true;
                                     refreshTable();
@@ -106,6 +111,8 @@
                 }
             };
 
+            var pl = dictUtil.getDictByCode(dictUtil.DICT_LIST.showStatus);
+            $("#chargePersonSearch").selectUtil(pl);
 
             $("#btn_addTask").unbind().on('click',function () {
                 $("#main_body").html("");
@@ -123,7 +130,14 @@
 
             var aCol = [
                 {field: 'chineseCulturalName', title: '流派名称'},
-                {field: 'filePath', title: '附件'},
+                {field: 'fileName', title: '文件名'},
+                {field: 'filePath', title: '附件', formatter:function (value, row, index) {
+                        if(value == "已经损坏了"){
+                            return '<p>'+value+'</p>';
+                        }else{
+                            return '<a href="'+value+'">流派信息</a>'
+                        }
+                    }},
                 {field: 'chineseCulturalAuthor', title: '作者'},
                 {field: 'itemcreateat', title: '发布时间'},
                 {field: 'action',  title: '操作',formatter: operation,events:orgEvents}

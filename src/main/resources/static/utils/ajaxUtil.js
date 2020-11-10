@@ -2,8 +2,8 @@
     define('ajaxUtil', ['jquery','objectUtil','stringUtil'], function(jquery, objectUtil,stringUtil) {
 
 
-        var successCode = "88888";
-        var notLoggedInCode= "100900";
+        var successCode = 88888;
+        var notLoggedInCode= 20001;
 
 
         function success(data) {

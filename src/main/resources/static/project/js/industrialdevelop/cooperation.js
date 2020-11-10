@@ -4,7 +4,9 @@
 
 
             var url = "/industrialdevelop/coorecord";
+
             var pathUrl = "/industrialdevelop/cooperation";
+            var addUrl = pathUrl+"_add";
             var aParam = {
 
             };
@@ -21,7 +23,7 @@
             window.orgEvents = {
                 'click .edit' : function(e, value, row, index) {
                     localStorage.setItem("rowData", JSON.stringify(row));
-                    goDetail();
+                    orange.redirect(addUrl);
                 },
                 'click .delete': function (e, value, row, index) {
                     var myDeleteModalData ={
@@ -61,23 +63,9 @@
             });
 
 
-            function goDetail() {
-                $("#main_body").html("");
-                var addUrl = "/add/js" + pathUrl;
-                orange.loadPage({url: addUrl, target: 'main_body', selector: '#fir_body', success: function(data){
-
-                        if(data == null||data == ""){
-                            return alertUtil.error( addUrl+'加载失败');
-                        }
-
-                        $("#main_body").html(data);
-                    }})
-            }
-
-
             $("#btn_addTask").unbind().on('click',function () {
                 localStorage.removeItem("rowData");
-                goDetail()
+                orange.redirect(addUrl);
             });
 
             var pl = dictUtil.getDictByCode(dictUtil.DICT_LIST.showStatus);

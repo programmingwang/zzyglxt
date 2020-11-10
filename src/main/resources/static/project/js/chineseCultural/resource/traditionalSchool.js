@@ -77,44 +77,6 @@
                 myUpdateModal.show();
             }
 
-            // function addModule(row){
-            //     var myAddModuleModalData ={
-            //         modalBodyID : "myAddModuleModal",
-            //         modalTitle : "新增模块",
-            //         modalConfirmFun:function () {
-            //             var moduleEntity = {
-            //                 moduleName: $("#moduleName").val(),
-            //                 projectID: $("#projectID").val(),
-            //             };
-            //
-            //             ajaxUtil.myAjax(null,"api/project/addModule",moduleEntity,function (data) {
-            //                 if(ajaxUtil.success(data)){
-            //                     alertUtil.info("新增模块成功");
-            //                     refreshTable();
-            //                     myaddModuleModal.hide();
-            //                 }else {
-            //                     alertUtil.alert(data.msg)
-            //                 }
-            //             },false);
-            //         //    数据能正常入库，只是刚刚加入的数据无法正常同步，不知道为什么？？
-            //
-            //         }
-            //
-            //     };
-            //     var myaddModuleModal = modalUtil.init(myAddModuleModalData);
-            //
-            //     var pl = dictUtil.getDictByCode(dictUtil.DICT_LIST.PROJECT_LIST);
-            //     $("#projectID").selectUtil(pl).on('change',function () {
-            //         var ml = dictUtil.getDictByCode(dictUtil.DICT_LIST.Module_LIST,$("#projectID").val(),true);
-            //         $("#moduleName").selectUtil(ml);
-            //     });
-            //
-            //     var ml = dictUtil.getDictByCode(dictUtil.DICT_LIST.Module_LIST,stringUtil.isBlank(row) ? $("#projectID").val() : row.projectID ,true);
-            //     $("#moduleName").selectUtil(ml);
-            //
-            //     myaddModuleModal.show();
-            // }
-
             //修改事件
             window.orgEvents = {
                 'click .edit' : function(e, value, row, index) {
@@ -122,22 +84,24 @@
                 },
                 'click .delete': function (e, value, row, index) {
                     var myDeleteModalData ={
-                        modalBodyID : "myDeleteModalProject",
-                        modalTitle : "删除项目",
+                        modalBodyID : "myDeleteModalTraditionalSch",
+                        modalTitle : "删除中医流派",
                         modalClass : "modal-lg",
                         confirmButtonClass : "btn-danger",
                         modalConfirmFun:function () {
-                            var projectEntity = {
-                                projectID: row.projectID
-                            };
                             var isSuccess = false;
-                            ajaxUtil.myAjax(null,"/api/project/deleteProject",projectEntity,function (data) {
+                            ajaxUtil.myAjax(null,"/cul/res/traSch/delTraSch/"+row.itemid+"/"+row.itemcode,null,function (data) {
                                 if(ajaxUtil.success(data)){
-                                    alertUtil.info("删除项目成功");
+                                    ajaxUtil.myAjax(null,"/file/delete?dataCode="+row.itemcode,null,function (data) {
+                                        if(!ajaxUtil.success(data)){
+                                            return alertUtil.error("文件删除失败");
+                                        }
+                                    },false,"","get");
+                                    alertUtil.info("删除中医流派信息成功");
                                     isSuccess = true;
                                     refreshTable();
                                 }
-                            },false);
+                            },false,true,"delete");
                             return isSuccess;
                         }
 
@@ -147,27 +111,33 @@
                 }
             };
 
+            var pl = dictUtil.getDictByCode(dictUtil.DICT_LIST.showStatus);
+            $("#chargePersonSearch").selectUtil(pl);
 
-            $("#search").unbind().on("click",function () {
-                var param = {
+            $("#btn_addTask").unbind().on('click',function () {
+                $("#main_body").html("");
+                var url = "/chineseCultural/resource/insertTraditionalSchool";
+                orange.loadPage({url: url, target: 'main_body', selector: '#fir_body', success: function(data){
 
-                };
-                $('#table').bootstrapTable("destroy");
-                bootstrapTableUtil.myBootStrapTableInit("table", url, param, aCol);
+                        if(data == null||data == ""){
+                            return alertUtil.error( url+'加载失败');
+                        }
+
+                        $("#main_body").html(data);
+                    }})
             });
-
-            $("#btn_addProject").unbind().on('click',function () {
-                addUpdate("add");
-            });
-
-            // $("#btn_addModule").unbind().on('click',function () {
-            //     addModule();
-            // });
 
 
             var aCol = [
                 {field: 'chineseCulturalName', title: '流派名称'},
-                {field: 'filePath', title: '附件'},
+                {field: 'fileName', title: '文件名'},
+                {field: 'filePath', title: '附件', formatter:function (value, row, index) {
+                        if(value == "已经损坏了"){
+                            return '<p>'+value+'</p>';
+                        }else{
+                            return '<a href="'+value+'">流派信息</a>'
+                        }
+                    }},
                 {field: 'chineseCulturalAuthor', title: '作者'},
                 {field: 'itemcreateat', title: '发布时间'},
                 {field: 'action',  title: '操作',formatter: operation,events:orgEvents}

@@ -88,7 +88,11 @@ public class FileServiceImpl implements IFileService {
         if(dataCode.isEmpty()){
             throw new BusinessException("数据源code不能为空", EmBusinessError.PARAMETER_VALIDATION_ERROR);
         }
-        return fileDOMapper.selectFileByDataCode(dataCode);
+        FileDO fileDO = fileDOMapper.selectFileByDataCode(dataCode);
+        if(fileDO == null){
+            return new FileDO();
+        }
+        return fileDO;
     }
 
     @Override

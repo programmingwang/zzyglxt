@@ -24,13 +24,12 @@ import java.util.List;
 @RestController
 @RequestMapping("/cul/pro/carAll")
 public class CartoonAllusionsController {
+
     @Resource
     private ICartoonAllusionsService iCartoonAllusionsService;
 
     @Resource
     private IFileService iFileService;
-
-
 
     //获取所有的漫画典故
     @RequestMapping(value = "/getAll" , method = RequestMethod.GET)

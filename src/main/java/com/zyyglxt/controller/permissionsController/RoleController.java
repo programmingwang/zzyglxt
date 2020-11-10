@@ -32,8 +32,8 @@ public class RoleController {
      * @return 添加结果信息
      */
     @RequestMapping(value = "/insertrole", method = RequestMethod.POST)
-    public ResponseData insertRoleSelective(@RequestBody RoleDO roleDO, @RequestBody ArrayList<ResourcesDO> resourcesDOList){
-        roleService.insertSelective(roleDO, resourcesDOList);
+    public ResponseData insertRoleSelective(@RequestBody RoleDO roleDO){
+        roleService.insertSelective(roleDO);
         return new ResponseData(EmBusinessError.success);
     }
 

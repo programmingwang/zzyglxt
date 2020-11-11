@@ -1,6 +1,7 @@
 package com.zyyglxt.controller;
 
 
+import com.zyyglxt.annotation.LogAnnotation;
 import com.zyyglxt.dto.UserDto;
 import com.zyyglxt.error.EmBusinessError;
 import com.zyyglxt.response.ResponseData;
@@ -28,6 +29,7 @@ public class PmsController {
 
     @ResponseBody
     @RequestMapping("/getAppContext")
+    @LogAnnotation(appCode ="",logTitle ="获取上下文信息",logLevel ="1",creater ="",updater = "")
     public ResponseData getAppContext(HttpServletRequest request){
 //        HttpSession session = request.getSession();
 //        UserDto userDto = (UserDto) session.getAttribute("userDto");

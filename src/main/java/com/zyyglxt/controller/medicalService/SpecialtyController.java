@@ -1,5 +1,6 @@
 package com.zyyglxt.controller.medicalService;
 
+import com.zyyglxt.annotation.LogAnnotation;
 import com.zyyglxt.dao.HospSpecialtyRefDOMapper;
 import com.zyyglxt.dataobject.FileDO;
 import com.zyyglxt.dataobject.HospDO;
@@ -37,6 +38,7 @@ public class SpecialtyController {
 
     @ResponseBody
     @PostMapping(value = "add")
+    @LogAnnotation(appCode ="",logTitle ="添加科室数据",logLevel ="3",creater ="",updater = "")
     public ResponseData addSpecialty(@RequestBody SpecialtyDto specialtyDto) {
         specialtyService.addSpecialty(specialtyDto);
         return new ResponseData(EmBusinessError.success);
@@ -44,6 +46,7 @@ public class SpecialtyController {
 
     @ResponseBody
     @PostMapping(value = "update")
+    @LogAnnotation(appCode ="",logTitle ="更新科室数据",logLevel ="2",creater ="",updater = "")
     public ResponseData updateSpecialty(@RequestBody SpecialtyDto specialtyDto){
         specialtyService.updateSpecialty(specialtyDto);
         return new ResponseData(EmBusinessError.success);
@@ -51,6 +54,7 @@ public class SpecialtyController {
 
     @ResponseBody
     @DeleteMapping(value = "delete")
+    @LogAnnotation(appCode ="",logTitle ="删除科室数据",logLevel ="4",creater ="",updater = "")
     public ResponseData deleteSpecialty(@RequestBody SpecialtyDto specialtyDto){
         specialtyService.deleteSpecialty(specialtyDto);
         return new ResponseData(EmBusinessError.success);
@@ -58,6 +62,7 @@ public class SpecialtyController {
 
     @ResponseBody
     @GetMapping(value = "selectAll")
+    @LogAnnotation(appCode ="",logTitle ="查看所有科室数据",logLevel ="1",creater ="",updater = "")
     public ResponseData selectAllSpecialty(){
         List<SpecialtyDO> specialtyDOList = specialtyService.selectAllSpecialty();
         return new ResponseData(EmBusinessError.success,DoToDto(specialtyDOList));
@@ -65,6 +70,7 @@ public class SpecialtyController {
 
     @ResponseBody
     @GetMapping(value = "search")
+    @LogAnnotation(appCode ="",logTitle ="搜索科室数据",logLevel ="1",creater ="",updater = "")
     public ResponseData searchSpecialty(String keyWord){
         List<SpecialtyDO> specialtyDOList = specialtyService.searchSpecialty(keyWord);
         return new ResponseData(EmBusinessError.success,DoToDto(specialtyDOList));
@@ -72,6 +78,7 @@ public class SpecialtyController {
 
     @ResponseBody
     @GetMapping(value = "top5")
+    @LogAnnotation(appCode ="",logTitle ="查看前5条科室数据",logLevel ="1",creater ="",updater = "")
     public ResponseData top5Specialty(){
         List<SpecialtyDO> specialtyDOList = specialtyService.top5Specialty();
         return new ResponseData(EmBusinessError.success,DoToDto(specialtyDOList));

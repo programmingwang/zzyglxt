@@ -1,5 +1,6 @@
 package com.zyyglxt.controller.medicalService;
 
+import com.zyyglxt.annotation.LogAnnotation;
 import com.zyyglxt.dataobject.FileDO;
 import com.zyyglxt.dataobject.HospDO;
 import com.zyyglxt.dataobject.HospDOKey;
@@ -30,6 +31,7 @@ public class HospController {
 
     @PostMapping(value = "add")
     @ResponseBody
+    @LogAnnotation(appCode ="",logTitle ="添加医院数据",logLevel ="3",creater ="",updater = "")
     public ResponseData addHosp(@RequestBody HospDO hospDO){
         hospService.addHosp(hospDO);
         return new ResponseData(EmBusinessError.success);
@@ -37,6 +39,7 @@ public class HospController {
 
     @PostMapping(value = "update")
     @ResponseBody
+    @LogAnnotation(appCode ="",logTitle ="更新医院数据",logLevel ="2",creater ="",updater = "")
     public ResponseData updateHosp(@RequestBody HospDO hospDO){
         hospService.updateHosp(hospDO);
         return new ResponseData(EmBusinessError.success);
@@ -44,6 +47,7 @@ public class HospController {
 
     @DeleteMapping(value = "delete")
     @ResponseBody
+    @LogAnnotation(appCode ="",logTitle ="删除医院数据",logLevel ="4",creater ="",updater = "")
     public ResponseData deleteHosp(@RequestBody HospDOKey hospDOKey){
         hospService.deleteHosp(hospDOKey);
         return new ResponseData(EmBusinessError.success);
@@ -51,6 +55,7 @@ public class HospController {
 
     @GetMapping(value = "selectAll")
     @ResponseBody
+    @LogAnnotation(appCode ="",logTitle ="查看所有医院数据",logLevel ="1",creater ="",updater = "")
     public ResponseData selectAllHosp(){
         List<HospDO> hospDOList = hospService.selectAllHosp();
         return new ResponseData(EmBusinessError.success,DoToDto(hospDOList));
@@ -58,6 +63,7 @@ public class HospController {
 
     @ResponseBody
     @GetMapping(value = "search")
+    @LogAnnotation(appCode ="",logTitle ="搜索医院数据",logLevel ="1",creater ="",updater = "")
     public ResponseData searchHosp(String keyWord){
         List<HospDO> hospDOList = hospService.searchHosp(keyWord);
         return new ResponseData(EmBusinessError.success,DoToDto(hospDOList));
@@ -65,6 +71,7 @@ public class HospController {
 
     @ResponseBody
     @GetMapping(value = "top5")
+    @LogAnnotation(appCode ="",logTitle ="查看前5条医院数据",logLevel ="1",creater ="",updater = "")
     public ResponseData top5Hosp(){
         List<HospDO> hospDOList = hospService.top5Hosp();
         return new ResponseData(EmBusinessError.success,DoToDto(hospDOList));

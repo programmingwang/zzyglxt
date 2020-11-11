@@ -2,6 +2,7 @@ package com.zyyglxt.controller.fileController;
 
 import com.github.tobato.fastdfs.domain.fdfs.StorePath;
 import com.github.tobato.fastdfs.service.FastFileStorageClient;
+import com.zyyglxt.annotation.LogAnnotation;
 import com.zyyglxt.dataobject.FileDO;
 import com.zyyglxt.dto.FileDto;
 import com.zyyglxt.error.EmBusinessError;
@@ -36,6 +37,7 @@ public class FileController {
 
     @PostMapping("/upload")
     @ResponseBody
+    @LogAnnotation(appCode ="",logTitle ="更新文件加载",logLevel ="1",creater ="",updater = "")
     public ResponseData upload(FileDto fileDto) throws IOException {
         FileDO fileDO = new FileDO();
         BeanUtils.copyProperties(fileDto,fileDO);
@@ -58,6 +60,7 @@ public class FileController {
 
     @GetMapping("/delete")
     @ResponseBody
+    @LogAnnotation(appCode ="",logTitle ="删除文件",logLevel ="4",creater ="",updater = "")
     public ResponseData delete(String dataCode){
         FileDO fileDO = fileService.selectFileByDataCode(dataCode);
         fastFileStorageClient.deleteFile(fileDO.getFilePath());

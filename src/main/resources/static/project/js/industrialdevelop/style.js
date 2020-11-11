@@ -3,9 +3,9 @@
         function (jquery,ajaxUtil,bootstrapTableUtil,objectUtil,alertUtil,modalUtil,selectUtil,stringUtil,dictUtil) {
 
 
-            var url = "/industrialdevelop/tec-ser-org";
+            var url = "/industrialdevelop/style";
 
-            var pathUrl = "/industrialdevelop/tecserviceorg";
+            var pathUrl = "/industrialdevelop/style";
             var addUrl = pathUrl+"_add";
             var aParam = {
 
@@ -73,16 +73,15 @@
 
 
             var aCol = [
-                {field: 'name', title: '院所名称'},
-                {field: 'filePath', title: '图片', formatter:function (value, row, index) {
+                {field: 'filePath', title: '基地照片', formatter:function (value, row, index) {
                         if(value == "已经损坏了"){
                             return '<p>'+value+'</p>';
                         }else{
                             return '<img  src='+value+' width="100" height="100" class="img-rounded" >';
                         }
                     }},
-                {field: 'contacts', title: '联系人'},
-                {field: 'status', title: '项目状态'},
+                {field: 'itemcreateat', title: '上传时间'},
+                {field: 'status', title: '照片状态'},
                 {field: 'action',  title: '操作',formatter: operation,events:orgEvents}
             ];
 

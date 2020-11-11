@@ -55,7 +55,7 @@
             });
             //图片上传
             $('#upload').unbind().on('change', function(e) {
-                // isUpdate = true;
+                updated = true
                 var imgSize = this.files[0].size;
                 if (imgSize > 1024 * 1024 * 1) { //1M
                     return alert("上传图片不能超过1M");

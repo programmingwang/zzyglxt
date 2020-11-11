@@ -90,6 +90,7 @@
             orange: '../project/js/orange',
             userLogin: '../project/js/user/login',
             index: '../project/js/index',
+            userMsg: '../project/js/user/usermsg'
 
         },
         map: {
@@ -103,7 +104,8 @@
     //根据path 加载JS
     var rArr = [
         {path:"/main",jspath:"index"},
-        {path:"/userLogin",jspath:"userLogin"}
+        {path:"/userLogin",jspath:"userLogin"},
+        {path:"/toUserMsg",jspath:"userMsg"}
 
     ];
 

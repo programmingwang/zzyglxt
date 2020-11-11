@@ -16,4 +16,5 @@ import java.util.Date;
 @ToString
 public class DataDto extends DataDO {
     private String filePath;
+    private String fileName;
 }

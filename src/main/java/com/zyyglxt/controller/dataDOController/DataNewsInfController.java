@@ -3,6 +3,7 @@ package com.zyyglxt.controller.dataDOController;
 import com.zyyglxt.annotation.LogAnnotation;
 import com.zyyglxt.dataobject.DataDO;
 import com.zyyglxt.dataobject.DataDOKey;
+import com.zyyglxt.dataobject.FileDO;
 import com.zyyglxt.dto.DataDto;
 import com.zyyglxt.error.EmBusinessError;
 import com.zyyglxt.response.ResponseData;
@@ -61,14 +62,7 @@ public class DataNewsInfController {
     @LogAnnotation(appCode ="",logTitle ="查看所有新闻轮播图",logLevel ="1",creater ="",updater = "")
     public ResponseData selectNewsRotList(){
         List<DataDO> dataDOList = dataDOService.selectNewsRotList();
-        List<DataDto> dataDtoList = new ArrayList<>();
-        for (DataDO dataDO:dataDOList) {
-            dataDtoList.add(
-                    this.convertFromDOToDTO(
-                            dataDO,fileService.selectFileByDataCode(
-                                    dataDO.getItemcode()).getFilePath()));
-        }
-        return new ResponseData(EmBusinessError.success,dataDtoList);
+        return new ResponseData(EmBusinessError.success,DoToDto(dataDOList));
     }
 
 
@@ -143,6 +137,21 @@ public class DataNewsInfController {
     public ResponseData searchDataDO(@PathVariable("keyWord") String keyWord) {
         List<DataDO> dataDOList = dataDOService.searchDataDO(keyWord);
         return new ResponseData(EmBusinessError.success,dataDOList);
+    }
+
+    private List<DataDto> DoToDto(List<DataDO> DOList){
+        List<DataDto> DtoList = new ArrayList<>();
+        if (!DOList.isEmpty()){
+            for (DataDO DO:DOList){
+                DataDto Dto = new DataDto();
+                BeanUtils.copyProperties(DO,Dto);
+                FileDO fileDO= fileService.selectFileByDataCode(Dto.getItemcode());
+                Dto.setFileName(fileDO == null ? null:fileDO.getFileName());
+                Dto.setFilePath(fileDO == null ? null:fileDO.getFilePath());
+                DtoList.add(Dto);
+            }
+        }
+        return DtoList;
     }
 
 }

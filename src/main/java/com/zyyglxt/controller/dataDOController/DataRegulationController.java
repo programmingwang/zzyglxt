@@ -99,7 +99,7 @@ public class DataRegulationController {
      * 更新政策法规记录
      * @param record
      */
-    @RequestMapping(value = "updateRegulation", method = RequestMethod.PUT)
+    @RequestMapping(value = "updateRegulation", method = RequestMethod.POST)
     @ResponseBody
     public ResponseData updateRegulation(@RequestBody DataDO record) {
         dataRegulationService.updateRegulation(record);

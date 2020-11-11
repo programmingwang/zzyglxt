@@ -1,7 +1,6 @@
 (function () {
-    require(['jquery','wangEditor','ajaxUtil','alertUtil','stringUtil'],
-        function (jquery,wangEditor,ajaxUtil,alertUtil,stringUtil) {
-            var type = isUpdate() ? "put":"post";
+    require(['jquery','wangEditor','ajaxUtil','alertUtil','stringUtil','fileUtil'],
+        function (jquery,wangEditor,ajaxUtil,alertUtil,stringUtil,fileUtil) {
             const editor = new wangEditor('#div1')
             // 或者 const editor = new E( document.getElementById('div1') )
             //菜单配置
@@ -47,36 +46,46 @@
             });
 
             $("#cancelbtn").unbind().on('click',function () {
-                $("#main_body").html("");
                 var url = "/data/dataNewsInf";
-                orange.loadPage({url: url, target: 'main_body', selector: '#fir_body', success: function(data){
-                        if(data == null||data == ""){
-                            return alertUtil.error( url+'加载失败');
-                        }
-                        $("#main_body").html(data);
-                    }})
+                orange.redirect(url);
             });
 
-            $("#submitbtn").unbind().on('click',function () {
-                var travelEntity = {
-                    itemcode: stringUtil.getUUID(),
-                    dataTitle : $("#dataTitle").val(),
-                    dataAuthor : $("#dataAuthor").val(),
-                    dataSource : $("#dataSource").val(),
-                    dataFileType : $("#dataFileType").val(),
-                    dataContent : editor.txt.html()
-                };
 
-                ajaxUtil.myAjax(null,"/datado/newsInf/insertNewsInf",travelEntity,function (data) {
+            $("#submitbtn").unbind().on('click',function () {
+                var newsInfEntity;
+                var addUpdateUrl;
+                var operateMessage;
+                if(!isUpdate()){
+                    addUpdateUrl = "/datado/newsInf/insertNewsInf";
+                    operateMessage = "新增新闻信息成功";
+                    newsInfEntity = {
+                        itemcode: stringUtil.getUUID(),
+                        dataTitle : $("#dataTitle").val(),
+                        dataAuthor : $("#dataAuthor").val(),
+                        dataSource : $("#dataSource").val(),
+                        dataFileType : $("#dataFileType").val(),
+                        dataContent : editor.txt.html()
+                    };
+                }else{
+                    var needData = JSON.parse(localStorage.getItem("rowData"));
+                    addUpdateUrl = "/datado/newsInf/updateNewsInf";
+                    newsInfEntity = {
+                        itemid: needData.itemid,
+                        itemcode: needData.itemcode,
+                        dataTitle : $("#dataTitle").val(),
+                        dataAuthor : $("#dataAuthor").val(),
+                        dataSource : $("#dataSource").val(),
+                        dataFileType : $("#dataFileType").val(),
+                        dataContent : editor.txt.html()
+                    };
+                    operateMessage = "更新新闻信息成功";
+                }
+
+                ajaxUtil.myAjax(null,addUpdateUrl,newsInfEntity,function (data) {
                     if(ajaxUtil.success(data)){
-                        alertUtil.info("新增新闻信息成功");
+                        alertUtil.info(operateMessage);
                         var url = "/data/dataNewsInf";
-                        orange.loadPage({url: url, target: 'main_body', selector: '#fir_body', success: function(data){
-                                if(data == null||data == ""){
-                                    return alertUtil.error( url+'加载失败');
-                                }
-                                $("#main_body").html(data);
-                            }})
+                        orange.redirect(url);
                     }else {
                         alertUtil.alert(data.msg);
                     }
@@ -92,7 +101,7 @@
                     $("#dataAuthor").val(tempdata.dataAuthor);
                     $("#dataSource").val(tempdata.dataSource);
                     $("#dataFileType").val(tempdata.dataFileType);
-                    $(".w-e-text").html(tempdata.dataContent);
+                    editor.txt.html(tempdata.dataContent);
                 }
             }());
 

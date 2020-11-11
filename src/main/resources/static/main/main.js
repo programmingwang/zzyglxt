@@ -67,6 +67,7 @@
             myBootstrapTable: '../component/bootstrap-table@1.15.3/bootstrap-table.min',
             bootstrapTableLocalAll: '../component/bootstrap-table@1.15.3/bootstrap-table-locale-all.min',
             wangEditor: '../component/wangEditor/wangEditor.min',
+            uploadImg: '../component/uploadImg/js/uploadImg',
 
 
 

@@ -103,7 +103,7 @@
                     $("#phone").val(tempdata.phone);
                     $(".w-e-text").html(tempdata.projectIntroduce);
                 }
-            }());
+            })();
 
 
             function isUpdate() {

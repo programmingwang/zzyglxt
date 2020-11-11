@@ -20,35 +20,27 @@
             var userEntity = {"username":inputUsername,"password":inputPassword};
             ajaxUtil.myAjax(null,"/userLogin",userEntity,function (data) {
                 if(data && data.code === 88888) {
+                    var userName = data.data.username;
+                    var rolename = data.data.rolename;
+                    sessionStorage.setItem('username',userName);
+                    sessionStorage.setItem('rolename',rolename);
                     window.location.href = "/main"
                 }else{
                     alertUtil.error(data.msg)
                 }
             },false)
-            // $.ajax({
-            //     /*登录*/
-            //     url: "http://localhost:8989/userLogin",
-            //     type: "post",
-            //     dataType: 'form-data',
-            //     contentType: 'form-data',
-            //     data: inputUsername,inputPassword,
-            //     success: function(data) {
-            //         if(data && data.code === "88888") {
-            //             window.location.href = "/main"
-            //         }else{
-            //             alertUtil.error("aaaaa")
-            //         }
-            //     },
-            //     error: function() {
-            //         window.location.href = "/userLogin"
-            //     },
-            // });
         })
 
         $("#return").unbind("click").bind("click",function () {
             window.location.href = "/"
         })
 
-
+        //回车事件绑定，密码框输完密码按回车课实现登录
+        $('#inputPassword').bind('keyup', function(event) {
+            if (event.keyCode === 13) {
+                //回车执行登录
+                $('#btn_Login').click();
+            }
+        });
     })
 })();

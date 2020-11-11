@@ -7,10 +7,7 @@ import com.zyyglxt.error.EmBusinessError;
 import com.zyyglxt.response.ResponseData;
 import com.zyyglxt.service.HealthCareFamPreDOService;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -21,7 +18,8 @@ import java.util.List;
  * @time 2020/10/30 15:11
  */
 @RestController
-public class HealthCareFamPreDOController {
+public class
+HealthCareFamPreDOController {
     @Resource
      private HealthCareFamPreDOService healthCareFamPreDOService;
     /*
@@ -30,17 +28,21 @@ public class HealthCareFamPreDOController {
     @RequestMapping(value ="inserthealthcarefampredo",method = RequestMethod.POST )
     public ResponseData insertHealthCareFamPreDOMapper(@RequestBody HealthCareFamPreDO key) throws BusinessException {
 
-        System.out.println("标题名称: " + key.getName());
+        System.out.println("国医话健康标题名称: " + key.getName());
         healthCareFamPreDOService.insertSelective(key);
         return new ResponseData(EmBusinessError.success);
     }
     /*
       国医话健康相关数据的删除
     */
-    @RequestMapping(value ="deletehealthcarefampredo",method = RequestMethod.POST )
-    public ResponseData deleteHealthCareFamPreDOMapper(@RequestBody HealthCareFamPreDOKey key){
-       healthCareFamPreDOService.deleteByPrimaryKey(key);
-       return new ResponseData(EmBusinessError.success);
+    @RequestMapping(value ="deletehealthcarefampredo/{itemID}/{itemCode}",method = RequestMethod.DELETE )
+    @ResponseBody
+    public ResponseData deleteHealthCareFamPreDOMapper(@PathVariable("itemID")Integer itemID,@PathVariable("itemCode")String itemCode){
+        HealthCareFamPreDOKey healthCareFamPreDOKey=new HealthCareFamPreDOKey();
+        healthCareFamPreDOKey.setItemid(itemID);
+        healthCareFamPreDOKey.setItemcode(itemCode);
+        healthCareFamPreDOService.deleteByPrimaryKey(healthCareFamPreDOKey);
+        return new ResponseData(EmBusinessError.success);
     }
     /*
      国医话健康相关数据的修改
@@ -60,13 +62,12 @@ public class HealthCareFamPreDOController {
         return new ResponseData(EmBusinessError.success);
     }
     /*查询所有国医话健康所有数据*/
-    @RequestMapping(value ="selectallhealthcarefampredo",method = RequestMethod.POST )
+    @RequestMapping(value ="selectallhealthcarefampredo",method = RequestMethod.GET )
     /*public List<HealthCareFamPreDO> selectAllHealthCareFamPreDOMapper(){
         return healthCareFamPreDOService.selectAllHealthCareFamPre();
     }*/
-    public ResponseData selectAllHealthCareFamPreDOMapper(Model model){
-        List<HealthCareFamPreDO> healthCareFamPreDOSList = healthCareFamPreDOService.selectAllHealthCareFamPre();;
-        model.addAttribute("traditionalCulturalList",healthCareFamPreDOSList);
+    public ResponseData selectAllHealthCareFamPreDOMapper(){
+        List<HealthCareFamPreDO> healthCareFamPreDOSList = healthCareFamPreDOService.selectAllHealthCareFamPre();
         return new ResponseData(EmBusinessError.success,healthCareFamPreDOSList);
     }
     /**

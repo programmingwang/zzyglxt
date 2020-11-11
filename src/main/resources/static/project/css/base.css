@@ -62,7 +62,7 @@ table{
     height: 400px;
 }
 .h500{
-    height: 500px;
+    /*height: 500px;*/
 }
 
 .cursor{
@@ -107,7 +107,8 @@ table{
 .left-menu-dropdown-menu{
     position: static;
     display: block;
-    width: 100%
+    width: 100%;
+    border: none;
 }
 
 
@@ -124,6 +125,7 @@ table{
     font-weight: 400;
     font-style: normal;
     font-size: 12px;
+    background-color: #F8F9FB;
 }
 .btn-block>h4 {
     font-family: 'Arial Negreta', 'Arial Normal', 'Arial', sans-serif;
@@ -134,15 +136,33 @@ table{
 
 .dropdown-menu.left-menu-dropdown-menu {
     padding-bottom: 0px;
-
+    padding-top: 0;
     background-color: #F8F9FB;
 }
-hr {
-    /* margin-top: 1rem; */
-    /* margin-bottom: 1rem; */
-    border: 0;
-    border-top: 1px solid rgba(0,0,0,.1);
-}
+
 .card{
     background-color: #FCFCFA;
+}
+hr {
+    margin-top: 0;
+    border-top: 1px solid;
+    margin-bottom: 0;
+}
+.aaaa {
+    height: 30px;
+    margin-top: 3px;
+    margin-left: 2px;
+    margin-bottom: 3px;
+}
+.AFirstMenu {
+
+    color: black;
+    margin-left: 11px;
+    font-family: 'Arial Negreta', 'Arial Normal', 'Arial', sans-serif;
+    font-weight: 700;
+    font-style: normal;
+    font-size: 14px;
+}
+.nullmenu{
+    display:none;
 }

@@ -16,72 +16,10 @@
             ].join('');
         }
 
-
-        function addUpdate(addOrUpdate,row){
-            var myUpdateModalData ={
-                modalBodyID : "myAddUpdateModalProject",
-                modalTitle : addOrUpdate === "add" ? "新增项目" :"修改项目",
-                modalConfirmFun:function () {
-                    var projectEntity = {
-                        projectName: $("#projectName").val(),
-                        projectNo: $("#projectNo").val(),
-                };
-
-                    if(addOrUpdate === "add"){
-                        ajaxUtil.myAjax(null,"api/project/addProject",projectEntity,function (data) {
-                            if(ajaxUtil.success(data)){
-                                alertUtil.info("新增项目成功");
-                                refreshTable();
-                                myUpdateModal.hide();
-                            }else {
-                                alertUtil.alert(data.msg)
-                            }
-                        },false);
-                    }
-
-                    if(addOrUpdate === "update"){
-                        projectEntity.projectID = row.projectID;
-                        ajaxUtil.myAjax(null,"api/project/updateProject",projectEntity,function (data) {
-                            if(ajaxUtil.success(data)){
-                                alertUtil.info("更新项目成功");
-                                refreshTable();
-                                myUpdateModal.hide();
-                            }else {
-                                alertUtil.alert(data.msg)
-                            }
-                        },false);
-                    }
-
-
-                }
-
-            };
-            var myUpdateModal = modalUtil.init(myUpdateModalData);
-
-
-            var pl = dictUtil.getDictByCode(dictUtil.DICT_LIST.PROJECT_LIST);
-            $("#projectName").selectUtil(pl).on('change',function () {
-                var ml = dictUtil.getDictByCode(dictUtil.DICT_LIST.Module_LIST,$("#projectName").val(),true);
-                $("#moduleName").selectUtil(ml);
-            });
-
-            var ml = dictUtil.getDictByCode(dictUtil.DICT_LIST.Module_LIST,stringUtil.isBlank(row) ? $("#projectName").val() : row.projectID ,true);
-            $("#moduleName").selectUtil(ml);
-
-            if(addOrUpdate === "update"){
-                $("#projectName").val(row.projectName);
-                $("#projectNo").val(row.projectNo);
-                $("#createBy").val(row.createBy);
-                $("#createAt").val(stringUtil.formatDateTime(row.createAt));
-            }
-            myUpdateModal.show();
-        }
-
-
         //修改事件
         window.orgEvents = {
             'click .edit' : function(e, value, row, index) {
-                addUpdate("update",row)
+
             },
             'click .delete': function (e, value, row, index) {
                 var myDeleteModalData ={
@@ -90,9 +28,17 @@
                     modalClass : "modal-lg",
                     confirmButtonClass : "btn-danger",
                     modalConfirmFun:function () {
+                        var projectEntity = {
+                            projectID: row.projectID
+                        };
                         var isSuccess = false;
                         ajaxUtil.myAjax(null,"/cul/pro/movTv/delMovTv/"+row.itemid+"/"+row.itemcode,null,function (data) {
                             if(ajaxUtil.success(data)){
+                                ajaxUtil.myAjax(null,"/file/delete?dataCode="+row.itemcode,null,function (data) {
+                                    if(!ajaxUtil.success(data)){
+                                        return alertUtil.error("文件删除失败");
+                                    }
+                                },false,"","get");
                                 alertUtil.info("删除电视电影信息成功");
                                 isSuccess = true;
                                 refreshTable();
@@ -111,20 +57,15 @@
             $("#btn_addTask").unbind().on('click',function () {
                 $("#main_body").html("");
                 var url = "/chineseCultural/production/insertMovieTV";
-                orange.loadPage({url: url, target: 'main_body', selector: '#fir_body', success: function(data){
-
-                        if(data == null||data == ""){
-                            return alertUtil.error( url+'加载失败');
-                        }
-
-                        $("#main_body").html(data);
-                    }})
+                orange.redirect(url);
             });
 
+            var pl = dictUtil.getDictByCode(dictUtil.DICT_LIST.showStatus);
+            $("#chargePersonSearch").selectUtil(pl);
 
         var aCol = [
             {field: 'chineseCulturalName', title: '电视电影名称'},
-            {field: 'filePath', title: '景点图片', formatter:function (value, row, index) {
+            {field: 'filePath', title: '图片', formatter:function (value, row, index) {
                     if(value == "已经损坏了"){
                         return '<p>'+value+'</p>';
                     }else{
@@ -144,5 +85,49 @@
             myTable.free();
             myTable = bootstrapTableUtil.myBootStrapTableInit("table", url, param, aCol);
         }
+
+        //
+            var oTab=document.getElementById("table");
+            var oBt=document.getElementById("taskNameSearch");
+            var aaaa=document.getElementById("aaaa")
+            aaaa.onclick=function(){
+                console.log(oTab.tBodies[0].rows);
+                for(var i=0;i<oTab.tBodies[0].rows.length;i++)
+                {
+                    var str1=oTab.tBodies[0].rows[i].cells[1].innerHTML.toUpperCase();
+                    var str2=oBt.value.toUpperCase();
+                    if (str2==null||str2==""){
+                        refreshTable()
+                    }
+                    //使用string.toUpperCase()(将字符串中的字符全部转换成大写)或string.toLowerCase()(将字符串中的字符全部转换成小写)
+                    //所谓忽略大小写的搜索就是将用户输入的字符串全部转换大写或小写，然后把信息表中的字符串的全部转换成大写或小写，最后再去比较两者转换后的字符就行了
+                    /*******************************JS实现表格忽略大小写搜索*********************************/
+                    if(str1==str2){
+                        console.log("aaaa")
+                        console.log(oTab.tBodies[0].rows[i])
+                        oTab.tBodies[0].rows[i].hidden= false;
+                    }
+                    else{
+                        oTab.tBodies[0].rows[i].hidden= true;
+                    }
+                    /***********************************JS实现表格的模糊搜索*************************************/
+                    //表格的模糊搜索的就是通过JS中的一个search()方法，使用格式，string1.search(string2);如果
+                    //用户输入的字符串是其一个子串，就会返回该子串在主串的位置，不匹配则会返回-1，故操作如下
+                    if(str1.search(str2)!=-1){oTab.tBodies[0].rows[i].hidden= false;}
+                    else{oTab.tBodies[0].rows[i].hidden= true;}
+                    /***********************************JS实现表格的多关键字搜索********************************/
+                        //表格的多关键字搜索，加入用户所输入的多个关键字之间用空格隔开，就用split方法把一个长字符串以空格为标准，分成一个字符串数组，
+                        //然后以一个循环将切成的数组的子字符串与信息表中的字符串比较
+                    var arr=str2.split(' ');
+                    for(var j=0;j<arr.length;j++)
+                    {
+                        if(str1.search(arr[j])!=-1){oTab.tBodies[0].rows[i].hidden= false;}
+                    }
+
+                }
+
+            }
+
+
     })
 })();

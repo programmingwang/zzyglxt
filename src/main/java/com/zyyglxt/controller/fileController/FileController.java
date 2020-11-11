@@ -56,7 +56,7 @@ public class FileController {
         return new ResponseData(EmBusinessError.success);
     }
 
-    @GetMapping("delete")
+    @GetMapping("/delete")
     @ResponseBody
     public ResponseData delete(String dataCode){
         FileDO fileDO = fileService.selectFileByDataCode(dataCode);

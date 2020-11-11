@@ -48,12 +48,7 @@
             $("#cancel").unbind().on('click',function () {
                 $("#main_body").html("");
                 var url = "/chineseCultural/resource/traditionalSchool";
-                orange.loadPage({url: url, target: 'main_body', selector: '#fir_body', success: function(data){
-                        if(data == null||data == ""){
-                            return alertUtil.error( url+'加载失败');
-                        }
-                        $("#main_body").html(data);
-                    }})
+                orange.redirect(url);
             });
 
             $("#btn_insert").unbind().on('click',function () {
@@ -65,16 +60,35 @@
                     chineseCulturalContent : editor.txt.html()
                 };
 
+                var formData = new FormData();
+                formData.append("dataCode",traSchEntity.itemcode);
+                formData.append("file",$("#upload_file")[0].files[0]);
+                formData.append("itemcode",stringUtil.getUUID());
+                formData.append("uploader","admin");
+                formData.append("uploaderCode","qweqwqwewasdasd");
+                $.ajax({
+                    url:"/file/upload",
+                    type:'POST',
+                    data: formData,
+                    processData: false,   // jQuery不要去处理发送的数据
+                    contentType: false,   // jQuery不要去设置Content-Type请求头
+                    success:function(data){
+                        if(data.code === 88888){
+                            alertUtil.success("上传附件成功");
+                        }else{
+                            alertUtil.error(data.msg)
+                        }
+                    },
+                    error: function(data){
+                        alertUtil.error(data.msg)
+                    }
+                });
+
                 ajaxUtil.myAjax(null,"/cul/res/traSch/addTraSch",traSchEntity,function (data) {
                     if(ajaxUtil.success(data)){
                         alertUtil.info("新增中医流派成功");
                         var url = "/chineseCultural/resource/traditionalSchool";
-                        orange.loadPage({url: url, target: 'main_body', selector: '#fir_body', success: function(data){
-                                if(data == null||data == ""){
-                                    return alertUtil.error( url+'加载失败');
-                                }
-                                $("#main_body").html(data);
-                            }})
+                        orange.redirect(url);
                     }else {
                         alertUtil.alert(data.msg);
                     }

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en"xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .upload-wrap{
+            position: relative;
+            display: inline-block;
+            overflow: hidden;
+
+            border-radius: 3px;
+        }
+        .upload-wrap .file-ele{
+            position: absolute;
+            top:0;
+            right:0;
+            opacity: 0;
+            height: 100%;
+            width: 100%;
+            cursor: pointer;
+        }
+        .upload-wrap .file-open{
+            width:90px;
+            height:36px;
+            line-height:36px;
+            text-align: center;
+            color:#fff;
+            background: red;
+        }
+        label{
+            text-align: right;
+        }
+        div#upimg {
+            padding-top: 23%;
+            height: 10em;
+            width: 10em;
+            background-color: #CBCECE;
+        }
+    </style>
+</head>
+<body>
+<div class="row">
+    <div class="col-12">
+        <form>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">科室名称：</label>
+                <div class="col-sm-3">
+                    <select id="specialtyName" class="form-control"></select>
+                </div>
+            </div>
+
+            <!--上传图片的div-->
+            <div class="form-group row">
+                <label for="exampleFormControlFile1" class="col-sm-2 col-form-label">科室图片：</label>
+                <div class="upload-wrap anticon col-sm-3" nv-file-drop="" uploader="uploader">
+                    <input id="upload_file" class="file-ele" type="file" file-model="image" name="image" nv-file-select uploader="uploader" multiple />
+                    <div class="file-open" id="upimg"> <p id="upimg"> 选择图片</p> </div>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">所属医院：</label>
+                <div class="col-sm-3">
+                    <select id="hospitalName"  class="form-control"></select>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">联系电话：</label>
+                <div class="col-sm-3">
+                    <input id="specialtyPhone" type="text" class="form-control" placeholder="请输入">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">科室描述：</label>
+                <div id="div1" class="col-sm-8">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-sm-8" ></div>
+                <div class=" col-sm-4 row" >
+                    <div class="col">
+                        <button id="cancel" type="button" class="btn btn-light col">取消</button>
+                    </div>
+
+                    <button id="btn_insert" type="submit" class="btn btn-primary col">提交</button>
+                </div>
+            </div>
+        </form>
+
+    </div>
+
+</div>
+<script type="text/javascript" data-main="/main/main.js" th:src="@{/component/require@2.3.6/require-2.3.6.js}"></script>
+<script type="text/javascript" th:src="@{/project/js/medicalService/add/addSpecialty.js}"></script>
+</body>
+</html>

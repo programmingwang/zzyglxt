@@ -15,4 +15,5 @@ import java.util.Date;
 @ToString
 public class CulturalResourcesDto extends CulturalResourcesDO {
     private String filePath;
+    private String fileName;
 }

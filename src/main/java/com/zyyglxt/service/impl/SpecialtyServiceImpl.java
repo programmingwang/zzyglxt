@@ -12,6 +12,7 @@ import com.zyyglxt.error.EmBusinessError;
 import com.zyyglxt.service.ISpecialtyService;
 import com.zyyglxt.validator.ValidatorImpl;
 import com.zyyglxt.validator.ValidatorResult;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -46,12 +47,12 @@ public class SpecialtyServiceImpl implements ISpecialtyService {
         if(result.isHasErrors()){
             throw new BusinessException(result.getErrMsg(), EmBusinessError.PARAMETER_VALIDATION_ERROR);
         }
-        specialtyDO = specialtyDto;
+        BeanUtils.copyProperties(specialtyDto,specialtyDO);
         specialtyDO.setItemcreateat(new Date());
 
         hospSpecialtyRefDO.setItemcode(UUID.randomUUID().toString());
         hospSpecialtyRefDO.setHospitalCode(specialtyDto.getHospitalCode());
-        hospSpecialtyRefDO.setSpecialtyCode(specialtyDto.getHospitalCode());
+        hospSpecialtyRefDO.setSpecialtyCode(specialtyDto.getItemcode());
         hospSpecialtyRefDO.setCreater(specialtyDto.getCreater());
         hospSpecialtyRefDO.setItemcreateat(new Date());
         hospSpecialtyRefDO.setUpdater(specialtyDto.getUpdater());
@@ -82,17 +83,12 @@ public class SpecialtyServiceImpl implements ISpecialtyService {
 
     /*删除科室记录，包括科室表和关系表*/
     @Override
-    public void deleteSpecialty(SpecialtyDto specialtyDto) {
-        ValidatorResult result = validator.validate(specialtyDto);
+    public void deleteSpecialty(SpecialtyDOKey specialtyDOKey) {
+        ValidatorResult result = validator.validate(specialtyDOKey);
         if(result.isHasErrors()){
             throw new BusinessException(result.getErrMsg(), EmBusinessError.PARAMETER_VALIDATION_ERROR);
         }
-        SpecialtyDOKey specialtyDOKey = specialtyDto;
-        HospSpecialtyRefDOKey hospSpecialtyRefDOKey = new HospSpecialtyRefDOKey();
-        hospSpecialtyRefDOKey.setItemid(specialtyDto.getItemid());
-        hospSpecialtyRefDOKey.setItemcode(specialtyDto.getItemcode());
-
-        hospSpecialtyRefDOMapper.deleteByPrimaryKey(hospSpecialtyRefDOKey);
+        hospSpecialtyRefDOMapper.deleteBySpecialtyCode(specialtyDOKey.getItemcode());
         specialtyDOMapper.deleteByPrimaryKey(specialtyDOKey);
     }
 
@@ -117,6 +113,14 @@ public class SpecialtyServiceImpl implements ISpecialtyService {
     @Override
     public List<SpecialtyDO> top5Specialty() {
         return specialtyDOMapper.top5Specialty();
+    }
+
+    @Override
+    public List<SpecialtyDO> selectByHospCode(String hospCode) {
+        if(hospCode.isEmpty()){
+            throw new BusinessException("医院code不能为空", EmBusinessError.PARAMETER_VALIDATION_ERROR);
+        }
+        return specialtyDOMapper.selectByHospCode(hospCode);
     }
 
 

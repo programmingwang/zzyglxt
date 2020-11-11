@@ -71,19 +71,7 @@ public class TravelController {
         return new ResponseData(EmBusinessError.success);
     }
 
-    //去修改的页面
-    @RequestMapping(value = "/toUpdTrav/{itemID}/{itemCode}" , method = RequestMethod.GET)
-    @ResponseBody
-    public ResponseData toUpdatePage(@PathVariable("itemID") Integer itemID,@PathVariable("itemCode")String itemCode){
-        ChineseCulturalDOKey chineseCulturalDOKey = new ChineseCulturalDOKey();
-        chineseCulturalDOKey.setItemid(itemID);
-        chineseCulturalDOKey.setItemcode(itemCode);
-        ChineseCulturalDO chineseCultural = iTravelService.getTravel(chineseCulturalDOKey);
-        //在update的页面就可以拿到对应的数据了
-//        model.addAttribute("chineseCultural",chineseCultural);
-        //点击修改按钮，先调用这个接口？获得对应的实体类，然后前端跳转页面
-        return new ResponseData(EmBusinessError.success,chineseCultural);
-    }
+
 
     //修改一个健康旅游
     @RequestMapping(value = "/updTrav" , method = RequestMethod.POST)

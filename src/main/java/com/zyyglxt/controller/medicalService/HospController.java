@@ -1,13 +1,18 @@
 package com.zyyglxt.controller.medicalService;
 
+import com.zyyglxt.dataobject.FileDO;
 import com.zyyglxt.dataobject.HospDO;
 import com.zyyglxt.dataobject.HospDOKey;
+import com.zyyglxt.dto.HospDto;
 import com.zyyglxt.error.EmBusinessError;
 import com.zyyglxt.response.ResponseData;
+import com.zyyglxt.service.IFileService;
 import com.zyyglxt.service.IHospService;
+import org.springframework.beans.BeanUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -16,10 +21,12 @@ import java.util.List;
  * @date 2020/11/1 9:20
  */
 @RestController
-@RequestMapping(value = "/medivalService/hosp")
+@RequestMapping(value = "/medicalService/hosp")
 public class HospController {
     @Resource
     private IHospService hospService;
+    @Resource
+    private IFileService fileService;
 
     @PostMapping(value = "add")
     @ResponseBody
@@ -35,7 +42,7 @@ public class HospController {
         return new ResponseData(EmBusinessError.success);
     }
 
-    @DeleteMapping(value = "delete")
+    @DeleteMapping(value = "/delete")
     @ResponseBody
     public ResponseData deleteHosp(@RequestBody HospDOKey hospDOKey){
         hospService.deleteHosp(hospDOKey);
@@ -46,21 +53,35 @@ public class HospController {
     @ResponseBody
     public ResponseData selectAllHosp(){
         List<HospDO> hospDOList = hospService.selectAllHosp();
-        return new ResponseData(EmBusinessError.success,hospDOList);
+        return new ResponseData(EmBusinessError.success,DoToDto(hospDOList));
     }
 
     @ResponseBody
     @GetMapping(value = "search")
     public ResponseData searchHosp(String keyWord){
         List<HospDO> hospDOList = hospService.searchHosp(keyWord);
-        return new ResponseData(EmBusinessError.success,hospDOList);
+        return new ResponseData(EmBusinessError.success,DoToDto(hospDOList));
     }
 
     @ResponseBody
     @GetMapping(value = "top5")
     public ResponseData top5Hosp(){
         List<HospDO> hospDOList = hospService.top5Hosp();
-        return new ResponseData(EmBusinessError.success,hospDOList);
+        return new ResponseData(EmBusinessError.success,DoToDto(hospDOList));
     }
 
+
+    private List<HospDto> DoToDto(List<HospDO> DOList){
+        List<HospDto> DtoList = new ArrayList<>();
+        if (!DOList.isEmpty()){
+            for (HospDO DO:DOList){
+                HospDto Dto = new HospDto();
+                BeanUtils.copyProperties(DO,Dto);
+                FileDO fileDO= fileService.selectFileByDataCode(Dto.getItemcode());
+                Dto.setFilePath(fileDO == null ? null:fileDO.getFilePath());
+                DtoList.add(Dto);
+            }
+        }
+        return DtoList;
+    }
 }

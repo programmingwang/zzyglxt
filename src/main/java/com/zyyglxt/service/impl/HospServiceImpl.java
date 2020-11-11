@@ -77,4 +77,9 @@ public class HospServiceImpl implements IHospService {
         return hospDOMapper.top5Hosp();
     }
 
+    @Override
+    public HospDO selectHospByItemCode(String itemCode) {
+        return hospDOMapper.selectHospByItemCode(itemCode);
+    }
+
 }

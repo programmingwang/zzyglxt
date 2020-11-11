@@ -48,62 +48,80 @@
             $("#cancel").unbind().on('click',function () {
                 $("#main_body").html("");
                 var url = "/chineseCultural/resource/traditionalDoctor";
-                orange.loadPage({url: url, target: 'main_body', selector: '#fir_body', success: function(data){
-                        if(data == null||data == ""){
-                            return alertUtil.error( url+'加载失败');
-                        }
-                        $("#main_body").html(data);
-                    }})
+                orange.redirect(url);
             });
 
             $("#btn_insert").unbind().on('click',function () {
-                var traDocEntity = {
-                    itemcode: stringUtil.getUUID(),
-                    chineseCulturalName : $("#chineseCulturalName").val(),
-                    chineseCulturalSource : $("#chineseCulturalSource").val(),
-                    chineseCulturalAuthor : $("#chineseCulturalAuthor").val(),
-                    chineseCulturalContent : editor.txt.html()
-                };
-
-                var formData = new FormData();
-                formData.append("dataCode",traDocEntity.itemcode);
-                formData.append("file",$("#upload_file")[0].files[0]);
-                formData.append("itemcode",stringUtil.getUUID());
-                formData.append("uploader","admin");
-                formData.append("uploaderCode","qweqwqwewasdasd");
-                $.ajax({
-                    url:"/file/upload",
-                    type:'POST',
-                    data: formData,
-                    processData: false,   // jQuery不要去处理发送的数据
-                    contentType: false,   // jQuery不要去设置Content-Type请求头
-                    success:function(data){
-                        if(data.code === 88888){
-                            alertUtil.success("上传图片成功");
-                        }else{
-                            alertUtil.error(data.msg)
-                        }
-                    },
-                    error: function(data){
-                        alertUtil.error(data.msg)
+                var traDocEntity ;
+                var addUpdateUrl;
+                var operateMessage;
+                if(!isUpdate()){
+                    addUpdateUrl = "/cul/res/traDoc/addTraDoc";
+                    operateMessage = "新增历代名家成功";
+                    traDocEntity = {
+                        itemcode: stringUtil.getUUID(),
+                        chineseCulturalName : $("#chineseCulturalName").val(),
+                        chineseCulturalSource : $("#chineseCulturalSource").val(),
+                        chineseCulturalAuthor : $("#chineseCulturalAuthor").val(),
+                        chineseCulturalContent : editor.txt.html()
+                    };
+                }else{
+                    var needData = JSON.parse(localStorage.getItem("rowData"));
+                    addUpdateUrl = "/cul/res/traDoc/updTraDoc";
+                    traDocEntity = {
+                        itemid: needData.itemid,
+                        itemcode: needData.itemcode,
+                        chineseCulturalName : $("#chineseCulturalName").val(),
+                        chineseCulturalSource : $("#chineseCulturalSource").val(),
+                        chineseCulturalAuthor : $("#chineseCulturalAuthor").val(),
+                        chineseCulturalContent : editor.txt.html()
                     }
-                })
+                    operateMessage = "更新历代名家成功";
+                }
+                // 如果当前是新增或者图片没有修改那么就不修改文件了
+                // 如果当前是修改并且不是原来的那张图片，那么就修改,并且要删除原来的那一张图片
+                if(!isUpdate()){
+                    ajaxUtil.fileAjax(traDocEntity.itemcode,$("#upload_file")[0].files[0],
+                        "admin","qeqweasd");
+                }else if(isUpdate() && $("#upload_file")[0].files[0] != null){
+                    ajaxUtil.myAjax(null,"/file/delete?dataCode="+traDocEntity.itemcode,null,function (data) {
+                        if(!ajaxUtil.success(data)){
+                            return alertUtil.error("文件删除失败");
+                        }
+                    },false,"","get");
+                    ajaxUtil.fileAjax(traDocEntity.itemcode,$("#upload_file")[0].files[0],
+                        stringUtil.getUUID(),"admin","qeqweasd");
+                }
 
-                ajaxUtil.myAjax(null,"/cul/res/traDoc/addTraDoc",traDocEntity,function (data) {
+                ajaxUtil.myAjax(null,addUpdateUrl,traDocEntity,function (data) {
                     if(ajaxUtil.success(data)){
-                        alertUtil.info("新增历代名家成功");
+                        alertUtil.info(operateMessage);
                         var url = "/chineseCultural/resource/traditionalDoctor";
-                        orange.loadPage({url: url, target: 'main_body', selector: '#fir_body', success: function(data){
-                                if(data == null||data == ""){
-                                    return alertUtil.error( url+'加载失败');
-                                }
-                                $("#main_body").html(data);
-                            }})
+                        orange.redirect(url);
                     }else {
                         alertUtil.alert(data.msg);
                     }
                 },false,true);
 
+
             });
+
+            (function init() {
+                if (isUpdate()){
+                    var tempdata = JSON.parse(localStorage.getItem("rowData"));
+                    $("#chineseCulturalName").val(tempdata.chineseCulturalName);
+                    $("#chineseCulturalSource").val(tempdata.chineseCulturalSource);
+                    $("#chineseCulturalAuthor").val(tempdata.chineseCulturalAuthor);
+                    editor.txt.html(tempdata.chineseCulturalContent);
+                    var img = tempdata.filePath;
+                    console.log(img);
+                    $("#upimg").attr("src",img);
+                }
+            }());
+
+
+            function isUpdate() {
+                return (localStorage.getItem("rowData") != null || localStorage.getItem("rowData") != undefined)
+            }
         })
 })();

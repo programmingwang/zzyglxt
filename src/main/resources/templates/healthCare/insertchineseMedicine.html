@@ -39,6 +39,7 @@
             background-color: #CBCECE;
         }
     </style>
+    <link rel="stylesheet" href="https://at.alicdn.com/t/font_1805932_ysrcp4y0uy9.css">
 </head>
 <body>
 <div class="row">
@@ -63,14 +64,27 @@
                     <input id="chineseMedicineEffect" type="text" class="form-control" placeholder="请输入">
                 </div>
             </div>
-            <!--上传图片的div-->
+
             <div class="form-group row">
-                <label for="exampleFormControlFile1" class="col-sm-2 col-form-label">中医药材图片：</label>
-                <div class="upload-wrap anticon col-sm-3" nv-file-drop="" uploader="uploader">
-                    <input id="upload_file" class="file-ele" type="file" file-model="image" nv-file-select uploader="uploader" multiple />
-                    <div class="file-open" id="upimg"> <p id="upimg"> 选择图片</p> </div>
+                <label for="exampleFormControlFile1" class="col-sm-2 col-form-label">药材图片：</label>
+                <div class="upload-content" data-limit="1">
+                    <div class="content-img">
+                        <ul class="content-img-list"></ul>
+                        <div class="file">
+                            <i class="gcl gcladd"></i>
+                            <input type="file" name="file" accept="image/*" id="upload" multiple>
+                        </div>
+                    </div>
+                    <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog"
+                         aria-labelledby="myLargeModalLabel">
+                        <div class="modal-dialog modal-lg" role="document">
+                            <div class="modal-content">
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
+
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label">采制：</label>
                 <div class="col-sm-3">

@@ -1,6 +1,6 @@
 (function () {
-    require(['jquery','wangEditor','ajaxUtil','alertUtil','stringUtil','fileUtil'],
-        function (jquery,wangEditor,ajaxUtil,alertUtil,stringUtil,fileUtil) {
+    require(['jquery','wangEditor','ajaxUtil','alertUtil','stringUtil','fileUtil','uploadImg'],
+        function (jquery,wangEditor,ajaxUtil,alertUtil,stringUtil,fileUtil,uploadImg) {
             const editor = new wangEditor('#div1')
             // 或者 const editor = new E( document.getElementById('div1') )
             //菜单配置
@@ -35,7 +35,7 @@
             editor.config.uploadImgShowBase64 = true
             editor.create()
             editor.txt.html('')
-
+            uploadImg.init();
             $("#div1").on("input propertychange", function() {
                 var textNUm=editor.txt.text()
                 if(textNUm.length>=100000){
@@ -46,6 +46,7 @@
             });
 
             $("#cancel").unbind().on('click',function () {
+                $("#main_body").html("");
                 var url = "/healthCare/healthcarechineseMedicine";
                 orange.redirect(url);
             });
@@ -87,7 +88,7 @@
                     }
                     operateMessage = "更新中医药成功";
                 }
-                fileUtil.handleFile(isUpdate(), chinesemedicineEntity.itemcode, $("#upload_file")[0].files[0]);
+                fileUtil.handleFile(isUpdate(), chinesemedicineEntity.itemcode, uploadImg.getFiles()[0]);
 
                 ajaxUtil.myAjax(null,addUpdateUrl,chinesemedicineEntity,function (data) {
                     if(ajaxUtil.success(data)){

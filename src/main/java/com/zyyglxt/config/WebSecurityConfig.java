@@ -2,6 +2,7 @@ package com.zyyglxt.config;
 
 import com.zyyglxt.config.handler.*;
 import com.zyyglxt.config.service.UserDetailsServiceImpl;
+import com.zyyglxt.util.UserUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -88,7 +89,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 and().logout().
                     permitAll().//允许所有用户
                     logoutSuccessHandler(logoutSuccessHandler).//登出成功处理逻辑
-                    deleteCookies("JSESSIONID").//登出之后删除cookie
+                    invalidateHttpSession(true).//登出成功后使session失效
                 //登入
                 and().formLogin().loginPage("/userLogin").
                     permitAll().//允许所有用户

@@ -1,5 +1,6 @@
 package com.zyyglxt.controller.permissionsController;
 
+import com.zyyglxt.annotation.LogAnnotation;
 import com.zyyglxt.dataobject.ResourcesDO;
 import com.zyyglxt.dataobject.RoleDO;
 import com.zyyglxt.dataobject.RoleDOKey;
@@ -31,6 +32,7 @@ public class RoleController {
      * @param roleDO
      * @return 添加结果信息
      */
+    @LogAnnotation(logTitle = "添加角色", logLevel = "3")
     @RequestMapping(value = "/insertrole", method = RequestMethod.POST)
     public ResponseData insertRoleSelective(@RequestBody RoleDO roleDO){
         roleService.insertSelective(roleDO);
@@ -42,6 +44,7 @@ public class RoleController {
      * @param roleDO
      * @return
      */
+    @LogAnnotation(logTitle = "更新角色信息", logLevel = "2")
     @RequestMapping(value = "/updaterole", method = RequestMethod.PUT)
     public ResponseData updateRoleSelective(RoleDO roleDO){
         roleService.updateByPrimaryKeySelective(roleDO);
@@ -53,6 +56,7 @@ public class RoleController {
      * @param key
      * @return
      */
+    @LogAnnotation(logTitle = "删除角色", logLevel = "4")
     @RequestMapping(value = "/deleterole", method = RequestMethod.DELETE)
     public ResponseData deleteRoleByPrimaryKey(RoleDOKey key){
         roleService.deleteByPrimaryKey(key);
@@ -63,6 +67,7 @@ public class RoleController {
      * 查询所有角色
      * @return
      */
+    @LogAnnotation(logTitle = "查询所有角色", logLevel = "1")
     @RequestMapping(value = "/allroles", method = RequestMethod.GET)
     public ResponseData selectAllRoles(){
         List<RoleDO> roles = roleService.selectAllRole();

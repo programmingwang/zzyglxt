@@ -22,21 +22,19 @@
             cursor: pointer;
         }
         .upload-wrap .file-open{
-            width:90px;
-            height:36px;
+            width: 150px;
+            height: 150px;
             line-height:36px;
             text-align: center;
             color:#fff;
-            background: red;
+            background: #E6E6E6;
         }
         label{
             text-align: right;
         }
-        div#upimg {
-            padding-top: 23%;
-            height: 10em;
-            width: 10em;
-            background-color: #CBCECE;
+        #upimg {
+            height: 100%;
+            width: 100%;
         }
     </style>
 </head>
@@ -49,7 +47,7 @@
                 <label for="exampleFormControlFile1" class="col-sm-2 col-form-label">景点图片：</label>
                 <div class="upload-wrap anticon col-sm-3" nv-file-drop="" uploader="uploader">
                     <input id="upload_file" class="file-ele" type="file" file-model="image" nv-file-select uploader="uploader" multiple />
-                    <div class="file-open" id="upimg"> <p id="upimg"> 选择图片</p> </div>
+                    <div class="file-open"> <img src="#" id="upimg" value="选择图片"/> </div>
                 </div>
             </div>
 

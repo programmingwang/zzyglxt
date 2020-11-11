@@ -1,0 +1,17 @@
+#portrait {
+    width: 227px;
+}
+
+#userMessage {
+    margin-top: 50px;
+}
+
+div {
+    margin-bottom: 10px;
+    justify-content: center;
+}
+
+label {
+    text-align: right;
+    text: 20px
+}

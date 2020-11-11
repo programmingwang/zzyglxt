@@ -45,65 +45,36 @@
     <div class="col-12">
         <form>
             <div class="form-group row">
-                <label class="col-sm-2 col-form-label">医院名称：</label>
+                <label class="col-sm-2 col-form-label">科室名称：</label>
                 <div class="col-sm-3">
-                    <input type="text" class="form-control" placeholder="请输入">
-                </div>
-            </div>
-            <div class="form-group row">
-                <label class="col-sm-2 col-form-label">医院等级：</label>
-                <div class="col-sm-3">
-                    <input type="text" class="form-control" placeholder="请输入">
+                    <select id="specialtyName" class="form-control"></select>
                 </div>
             </div>
 
             <!--上传图片的div-->
             <div class="form-group row">
-                <label for="exampleFormControlFile1" class="col-sm-2 col-form-label">上传图片：</label>
+                <label for="exampleFormControlFile1" class="col-sm-2 col-form-label">科室图片：</label>
                 <div class="upload-wrap anticon col-sm-3" nv-file-drop="" uploader="uploader">
-                    <input class="file-ele" type="file" file-model="image" name="image" nv-file-select uploader="uploader" multiple />
+                    <input id="upload_file" class="file-ele" type="file" file-model="image" name="image" nv-file-select uploader="uploader" multiple />
                     <div class="file-open" id="upimg"> <p id="upimg"> 选择图片</p> </div>
                 </div>
             </div>
 
             <div class="form-group row">
-                <label class="col-sm-2 col-form-label">医院简介：</label>
+                <label class="col-sm-2 col-form-label">所属医院：</label>
                 <div class="col-sm-3">
-                    <input type="text" class="form-control" placeholder="请输入">
+                    <select id="hospitalName"  class="form-control"></select>
                 </div>
             </div>
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label">联系电话：</label>
                 <div class="col-sm-3">
-                    <input type="text" class="form-control" placeholder="请输入">
+                    <input id="specialtyPhone" type="text" class="form-control" placeholder="请输入">
                 </div>
             </div>
+
             <div class="form-group row">
-                <label class="col-sm-2 col-form-label">医院所在市：</label>
-                <div class="col-sm-3">
-                    <input type="text" class="form-control" placeholder="请输入">
-                </div>
-            </div>
-            <div class="form-group row">
-                <label class="col-sm-2 col-form-label">医院所在县：</label>
-                <div class="col-sm-3">
-                    <input type="text" class="form-control" placeholder="请输入">
-                </div>
-            </div>
-            <div class="form-group row">
-                <label class="col-sm-2 col-form-label">医院详细地址：</label>
-                <div class="col-sm-3">
-                    <input type="text" class="form-control" placeholder="请输入">
-                </div>
-            </div>
-            <div class="form-group row">
-                <label class="col-sm-2 col-form-label">链接地址：</label>
-                <div class="col-sm-3">
-                    <input type="text" class="form-control" placeholder="请输入">
-                </div>
-            </div>
-            <div class="form-group row">
-                <label class="col-sm-2 col-form-label">医院介绍：</label>
+                <label class="col-sm-2 col-form-label">科室描述：</label>
                 <div id="div1" class="col-sm-8">
                 </div>
             </div>
@@ -112,15 +83,10 @@
                 <div class="col-sm-8" ></div>
                 <div class=" col-sm-4 row" >
                     <div class="col">
-                        <button type="button" class="btn btn-light col">取消</button>
+                        <button id="cancel" type="button" class="btn btn-light col">取消</button>
                     </div>
-                    <div class="col">
-                        <button type="button" class="btn btn-danger col">保存</button>
-                    </div><div class="col">
-                    <button type="submit" class="btn btn-primary col">提交</button>
-                </div>
 
-
+                    <button id="btn_insert" type="submit" class="btn btn-primary col">提交</button>
                 </div>
             </div>
         </form>
@@ -129,6 +95,6 @@
 
 </div>
 <script type="text/javascript" data-main="/main/main.js" th:src="@{/component/require@2.3.6/require-2.3.6.js}"></script>
-<script type="text/javascript" th:src="@{/project/js/add/js/add.js}"></script>
+<script type="text/javascript" th:src="@{/project/js/medicalService/add/addSpecialty.js}"></script>
 </body>
 </html>

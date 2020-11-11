@@ -73,16 +73,6 @@ public class CartoonAllusionsController {
         return new ResponseData(EmBusinessError.success);
     }
 
-    //去修改的页面
-    @RequestMapping(value = "/toUpdCarAll/{itemID}/{itemCode}" , method = RequestMethod.GET)
-    @ResponseBody
-    public ResponseData toUpdatePage(@PathVariable("itemID") Integer itemID, @PathVariable("itemCode")String itemCode){
-        ChineseCulturalDOKey chineseCulturalDOKey = new ChineseCulturalDOKey();
-        chineseCulturalDOKey.setItemid(itemID);
-        chineseCulturalDOKey.setItemcode(itemCode);
-        ChineseCulturalDO chineseCultural = iCartoonAllusionsService.getCartoonAllusions(chineseCulturalDOKey);
-        return new ResponseData(EmBusinessError.success,chineseCultural);
-    }
 
     //修改一个漫画典故
     @RequestMapping(value = "/updCarAll" , method = RequestMethod.POST)

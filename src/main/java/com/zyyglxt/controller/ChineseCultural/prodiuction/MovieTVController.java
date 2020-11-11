@@ -46,13 +46,6 @@ public class MovieTVController {
         return new ResponseData(EmBusinessError.success,chineseCulturalDtoList);
     }
 
-//    //查询一个电影电视
-//
-//    //去增加页面,这个是为了跳转到增加的页面
-//    @RequestMapping(value = "/toAddPage" , method = RequestMethod.GET)
-//    public ResponseData toAddPage(){
-//        return "to add page";
-//    }
 
     //增加一个漫画典故
     @RequestMapping(value = "/addMovTv" , method = RequestMethod.POST)
@@ -73,16 +66,7 @@ public class MovieTVController {
         return new ResponseData(EmBusinessError.success);
     }
 
-    //去修改的页面
-    @RequestMapping(value = "/toUpdMovTv/{itemID}/{itemCode}" , method = RequestMethod.GET)
-    @ResponseBody
-    public ResponseData toUpdatePage(@PathVariable("itemID") Integer itemID, @PathVariable("itemCode")String itemCode){
-        ChineseCulturalDOKey chineseCulturalDOKey = new ChineseCulturalDOKey();
-        chineseCulturalDOKey.setItemid(itemID);
-        chineseCulturalDOKey.setItemcode(itemCode);
-        ChineseCulturalDO chineseCultural = iMovieTVService.getMovieTV(chineseCulturalDOKey);
-        return new ResponseData(EmBusinessError.success,chineseCultural);
-    }
+
 
     //修改一个电影电视
     @RequestMapping(value = "/updMovTv" , method = RequestMethod.POST)

@@ -35,13 +35,7 @@ public class IntangibleCulturalHeritageController {
         return new ResponseData(EmBusinessError.success,intangibleCulturalHeritageList);
     }
 
-//    //查询一个非物质文化遗产
-//
-//    //去增加页面,这个是为了跳转到增加的页面
-//    @RequestMapping(value = "/toAddPage" , method = RequestMethod.GET)
-//    public String toAddPage(){
-//        return "to add page";
-//    }
+
 
     //增加一个非物质文化遗产
     @RequestMapping(value = "/addInCuHe" , method = RequestMethod.POST)
@@ -62,16 +56,7 @@ public class IntangibleCulturalHeritageController {
         return new ResponseData(EmBusinessError.success);
     }
 
-    //去修改的页面
-    @RequestMapping(value = "/toUpdInCuHe/{itemID}/{itemCode}" , method = RequestMethod.GET)
-    @ResponseBody
-    public ResponseData toUpdatePage(@PathVariable("itemID") Integer itemID, @PathVariable("itemCode")String itemCode){
-        ChineseCulturalDOKey chineseCulturalDOKey = new ChineseCulturalDOKey();
-        chineseCulturalDOKey.setItemid(itemID);
-        chineseCulturalDOKey.setItemcode(itemCode);
-        ChineseCulturalDO chineseCultural = iIntangibleCulturalHeritageService.getIntangibleCulturalHeritage(chineseCulturalDOKey);
-        return new ResponseData(EmBusinessError.success,chineseCultural);
-    }
+
 
     //修改一个非物质文化遗产
     @RequestMapping(value = "/updInCuHe" , method = RequestMethod.POST)

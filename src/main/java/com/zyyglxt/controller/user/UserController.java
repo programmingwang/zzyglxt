@@ -1,5 +1,6 @@
 package com.zyyglxt.controller.user;
 
+import com.zyyglxt.annotation.LogAnnotation;
 import com.zyyglxt.common.Result;
 import com.zyyglxt.dataobject.UserDO;
 import com.zyyglxt.dto.UpdatePwdDto;
@@ -31,6 +32,7 @@ public class UserController {
     /**
      * 用户注册，接收前段传递的数据，到service层
      */
+    @LogAnnotation(logTitle = "注册", logLevel = "3")
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public ResponseData Register(UserDto userDto) throws BusinessException {
         ResponseData rd = userService.Register(userDto);
@@ -70,7 +72,8 @@ public class UserController {
      *
      * @param updatePwdDto
      */
-    @RequestMapping(value = "updatepwd", method = RequestMethod.PUT)
+    @LogAnnotation(logTitle = "修改密码", logLevel = "2")
+    @RequestMapping(value = "/updatepwd", method = RequestMethod.PUT)
     public ResponseData UpdatePassword(UpdatePwdDto updatePwdDto) {
         if (StringUtils.isEmpty(updatePwdDto.getNewPassword()) || StringUtils.isEmpty(updatePwdDto.getCheckNewPassword())) {
             System.out.println("密码输入不能为空，请重新输入！");
@@ -90,11 +93,14 @@ public class UserController {
         }
     }
 
+    @LogAnnotation(logTitle = "查看个人信息", logLevel = "1")
     @RequestMapping(value = "/usermsg", method = RequestMethod.GET)
-    public UserDO selectOne() {
-        return userService.selectOne();
+    public ResponseData selectOne() {
+        UserDO userDO = userService.selectOne();
+        return new ResponseData(EmBusinessError.success, userDO);
     }
 
+    @LogAnnotation(logTitle = "修改个人信息", logLevel = "2")
     @RequestMapping(value = "/updateusermsg", method = RequestMethod.POST)
     public ResponseData updateUserMsg(UserDO userDO) {
         userService.UpdateUserMsg(userDO);

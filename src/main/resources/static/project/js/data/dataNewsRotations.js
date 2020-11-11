@@ -3,7 +3,8 @@
         function (jquery,ajaxUtil,bootstrapTableUtil,objectUtil,alertUtil,modalUtil,selectUtil,stringUtil,dictUtil) {
 
 
-        var url = "/datado/newsInf/selectAll";
+        var url = "/datado/newsInf/selectAllNewsRot";
+        var addUrl = "/data/add/addNewsRotations";
         var aParam = {
 
         };
@@ -17,157 +18,67 @@
         }
 
 
-        function addUpdate(addOrUpdate,row){
-            var myUpdateModalData ={
-                modalBodyID : "myAddUpdateModalProject",
-                modalTitle : addOrUpdate === "add" ? "新增项目" :"修改项目",
-                modalConfirmFun:function () {
-                    var projectEntity = {
-                        projectName: $("#projectName").val(),
-                        projectNo: $("#projectNo").val(),
-                };
+            //修改事件
+            window.orgEvents = {
+                'click .edit' : function(e, value, row, index) {
+                    localStorage.setItem("rowData", JSON.stringify(row));
+                    orange.redirect(addUrl);
+                },
 
-                    if(addOrUpdate === "add"){
-                        ajaxUtil.myAjax(null,"api/project/addProject",projectEntity,function (data) {
-                            if(ajaxUtil.success(data)){
-                                alertUtil.info("新增项目成功");
-                                refreshTable();
-                                myUpdateModal.hide();
-                            }else {
-                                alertUtil.alert(data.msg)
-                            }
-                        },false);
-                    }
+                'click .delete': function (e, value, row, index) {
+                    var myDeleteModalData ={
+                        modalBodyID : "myDeleteNewsRotations",
+                        modalTitle : "删除新闻轮播图",
+                        modalClass : "modal-lg",
+                        confirmButtonClass : "btn-danger",
+                        modalConfirmFun:function () {
+                            var isSuccess = false;
+                            ajaxUtil.myAjax(null,"/datado/newsInf/deleteByPrimaryKey/"+row.itemid+"/"+row.itemcode,null,function (data) {
+                                if(ajaxUtil.success(data)){
+                                    ajaxUtil.myAjax(null,"/file/delete?dataCode="+row.itemcode,null,function (data) {
+                                        if(!ajaxUtil.success(data)){
+                                            return alertUtil.error("图片删除失败");
+                                        }
+                                    },false,"","get");
+                                    alertUtil.info("删除新闻轮播图成功");
+                                    isSuccess = true;
+                                    refreshTable();
+                                }
+                            },false,true,"delete");
+                            return isSuccess;
+                        }
+                    };
+                    var myDeleteModal = modalUtil.init(myDeleteModalData);
+                    myDeleteModal.show();
+                },
 
-                    if(addOrUpdate === "update"){
-                        projectEntity.projectID = row.projectID;
-                        ajaxUtil.myAjax(null,"api/project/updateProject",projectEntity,function (data) {
-                            if(ajaxUtil.success(data)){
-                                alertUtil.info("更新项目成功");
-                                refreshTable();
-                                myUpdateModal.hide();
-                            }else {
-                                alertUtil.alert(data.msg)
-                            }
-                        },false);
-                    }
+                'click .pass' : function (e, value, row, index) {
 
+                },
 
-                }
+                'click .fail' : function (e, value, row, index) {
 
+                },
             };
-            var myUpdateModal = modalUtil.init(myUpdateModalData);
 
 
-            var pl = dictUtil.getDictByCode(dictUtil.DICT_LIST.PROJECT_LIST);
-            $("#projectName").selectUtil(pl).on('change',function () {
-                var ml = dictUtil.getDictByCode(dictUtil.DICT_LIST.Module_LIST,$("#projectName").val(),true);
-                $("#moduleName").selectUtil(ml);
-            });
-
-            var ml = dictUtil.getDictByCode(dictUtil.DICT_LIST.Module_LIST,stringUtil.isBlank(row) ? $("#projectName").val() : row.projectID ,true);
-            $("#moduleName").selectUtil(ml);
-
-            if(addOrUpdate === "update"){
-                $("#projectName").val(row.projectName);
-                $("#projectNo").val(row.projectNo);
-                $("#createBy").val(row.createBy);
-                $("#createAt").val(stringUtil.formatDateTime(row.createAt));
-            }
-            myUpdateModal.show();
-        }
-
-        // function addModule(row){
-        //     var myAddModuleModalData ={
-        //         modalBodyID : "myAddModuleModal",
-        //         modalTitle : "新增模块",
-        //         modalConfirmFun:function () {
-        //             var moduleEntity = {
-        //                 moduleName: $("#moduleName").val(),
-        //                 projectID: $("#projectID").val(),
-        //             };
-        //
-        //             ajaxUtil.myAjax(null,"api/project/addModule",moduleEntity,function (data) {
-        //                 if(ajaxUtil.success(data)){
-        //                     alertUtil.info("新增模块成功");
-        //                     refreshTable();
-        //                     myaddModuleModal.hide();
-        //                 }else {
-        //                     alertUtil.alert(data.msg)
-        //                 }
-        //             },false);
-        //         //    数据能正常入库，只是刚刚加入的数据无法正常同步，不知道为什么？？
-        //
-        //         }
-        //
-        //     };
-        //     var myaddModuleModal = modalUtil.init(myAddModuleModalData);
-        //
-        //     var pl = dictUtil.getDictByCode(dictUtil.DICT_LIST.PROJECT_LIST);
-        //     $("#projectID").selectUtil(pl).on('change',function () {
-        //         var ml = dictUtil.getDictByCode(dictUtil.DICT_LIST.Module_LIST,$("#projectID").val(),true);
-        //         $("#moduleName").selectUtil(ml);
-        //     });
-        //
-        //     var ml = dictUtil.getDictByCode(dictUtil.DICT_LIST.Module_LIST,stringUtil.isBlank(row) ? $("#projectID").val() : row.projectID ,true);
-        //     $("#moduleName").selectUtil(ml);
-        //
-        //     myaddModuleModal.show();
-        // }
-
-        //修改事件
-        window.orgEvents = {
-            'click .edit' : function(e, value, row, index) {
-                addUpdate("update",row)
-            },
-            'click .delete': function (e, value, row, index) {
-                var myDeleteModalData ={
-                    modalBodyID : "myDeleteModalProject",
-                    modalTitle : "删除项目",
-                    modalClass : "modal-lg",
-                    confirmButtonClass : "btn-danger",
-                    modalConfirmFun:function () {
-                        var projectEntity = {
-                            projectID: row.projectID
-                        };
-                        var isSuccess = false;
-                        ajaxUtil.myAjax(null,"/api/project/deleteProject",projectEntity,function (data) {
-                            if(ajaxUtil.success(data)){
-                                alertUtil.info("删除项目成功");
-                                isSuccess = true;
-                                refreshTable();
-                            }
-                        },false);
-                        return isSuccess;
-                    }
-
-                };
-                var myDeleteModal = modalUtil.init(myDeleteModalData);
-                myDeleteModal.show();
-            }
-        };
-
-
-        $("#search").unbind().on("click",function () {
-            var param = {
-
-            };
-            $('#table').bootstrapTable("destroy");
-            bootstrapTableUtil.myBootStrapTableInit("table", url, param, aCol);
+        $("#btn_addTask").unbind().on('click',function () {
+            localStorage.removeItem("rowData");
+            orange.redirect(addUrl);
         });
 
-        $("#btn_addProject").unbind().on('click',function () {
-            addUpdate("add");
-        });
-
-        // $("#btn_addModule").unbind().on('click',function () {
-        //     addModule();
-        // });
-
+        var pl = dictUtil.getDictByCode(dictUtil.DICT_LIST.showStatus);
+        $("#chargePersonSearch").selectUtil(pl);
 
         var aCol = [
             {field: 'dataTitle', title: '新闻标题'},
-            {field: 'fileName', title: '新闻图片'},
+            {field: 'filePath', title: '新闻图片', formatter:function (value, row, index) {
+                if(value == "已经损坏了"){
+                    return '<p>'+value+'</p>';
+                }else{
+                    return '<img  src='+value+' width="100" height="100" class="img-rounded" >';
+                }
+            }},
             {field: 'dataLocation', title: '所属位置'},
             {field: 'itemcreateat', title: '创建时间'},
             {field: 'dataStatus', title: '展示状态'},
@@ -181,5 +92,49 @@
             myTable.free();
             myTable = bootstrapTableUtil.myBootStrapTableInit("table", url, param, aCol);
         }
+            var oTab=document.getElementById("table");
+            var oBt=document.getElementsByClassName("atext");
+            for (var i=0;i<oBt.length;i++){
+            oBt[i].onclick=function () {
+                console.log(oTab.tHead.rows[0].cells[3])
+                    // var str1=oTab.tBodies[0].rows[i].cells[3].innerText.toLowerCase();
+                //                     // var str2=oBt[i].value.toLowerCase();
+                //                     // if (str1==str2){
+                //                     // }
+                }
+            }
+
+
+
+
+            // var btnSearch=document.getElementById("btnSearch")
+            // btnSearch.onclick=function(){
+            //     console.log(oTab.tHead.rows[0].childNodes[5].innerText);
+            //     for(var i=0;i<oTab.tBodies[0].rows.length;i++)
+            //     {
+            //         var str1=oTab.tBodies[0].rows[i].innerText.toLowerCase();
+            //         var str2=oBt.value.toLowerCase();
+            //         console.log(str2);
+            //         if (str2==""||str2=="请输入"){
+            //             refreshTable();
+            //         }
+            //         /***********************************JS实现表格的模糊搜索*************************************/
+            //         //表格的模糊搜索的就是通过JS中的一个search()方法，使用格式，string1.search(string2);如果
+            //         //用户输入的字符串是其一个子串，就会返回该子串在主串的位置，不匹配则会返回-1，故操作如下
+            //         if(str1.search(str2)!=-1){oTab.tBodies[0].rows[i].hidden= false;}
+            //         else{oTab.tBodies[0].rows[i].hidden= true;}
+            //         /***********************************JS实现表格的多关键字搜索********************************/
+            //             //表格的多关键字搜索，加入用户所输入的多个关键字之间用空格隔开，就用split方法把一个长字符串以空格为标准，分成一个字符串数组，
+            //             //然后以一个循环将切成的数组的子字符串与信息表中的字符串比较
+            //         var arr=str2.split(' ');
+            //         for(var j=0;j<arr.length;j++)
+            //         {
+            //             if(str1.search(arr[j])!=-1){oTab.tBodies[0].rows[i].hidden= false;}
+            //         }
+            //
+            //     }
+            //
+            // }
+
     })
 })();

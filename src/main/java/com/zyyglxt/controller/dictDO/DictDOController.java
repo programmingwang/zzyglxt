@@ -38,6 +38,7 @@ public class DictDOController {
      */
     @RequestMapping(value = "/deleteDictDO/{itemID}/{itemCode}",method = RequestMethod.DELETE)
     @ResponseBody
+    @LogAnnotation(appCode ="",logTitle ="删除数据字典",logLevel ="4",creater ="",updater = "")
     public ResponseData deleteByPrimaryKey(@PathVariable("itemID") Integer itemid, @PathVariable("itemCode") String itemCode){
         DictDOKey key = new DictDOKey();
         key.setItemcode(itemCode);
@@ -51,6 +52,7 @@ public class DictDOController {
      */
     @RequestMapping(value = "/insertDictDO", method = RequestMethod.POST)
     @ResponseBody
+    @LogAnnotation(appCode ="",logTitle ="新增数据字典",logLevel ="3",creater ="",updater = "")
     public ResponseData insertSelective(@RequestBody DictDO record) throws BusinessException {
         iDictDOService.insertSelective(record);
         return new ResponseData(EmBusinessError.success);
@@ -59,8 +61,9 @@ public class DictDOController {
     /**
      * 更新数据字典
      */
-    @RequestMapping(value = "updateDictDO", method = RequestMethod.PUT)
+    @RequestMapping(value = "/updateDictDO", method = RequestMethod.PUT)
     @ResponseBody
+    @LogAnnotation(appCode ="",logTitle ="更新数据字典",logLevel ="2",creater ="",updater = "")
     public ResponseData updateByPrimaryKeySelective(@RequestBody DictDO record) throws BusinessException {
         iDictDOService.updateByPrimaryKeySelective(record);
         return new ResponseData(EmBusinessError.success);

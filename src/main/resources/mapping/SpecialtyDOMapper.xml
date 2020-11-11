@@ -287,4 +287,16 @@
         where itemCode = #{itemcode}
     </select>
 
+    <select id="selectByHospCode" resultMap="ResultMapWithBLOBs">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from tb_culpro_specialty
+        where itemCode IN (
+              SELECT SPECIALTY_CODE
+              FROM tb_culpro_hosp_specialty_ref
+              WHERE HOSPITAL_CODE = #{hospCode}
+        )
+    </select>
 </mapper>

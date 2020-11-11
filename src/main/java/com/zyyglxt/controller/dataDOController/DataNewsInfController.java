@@ -53,12 +53,12 @@ public class DataNewsInfController {
     }
 
     /**
-     * 查看新闻管理的所有数据
+     * 查看新闻轮播图的所有数据
      * @return
      */
-    @RequestMapping(value = "/selectAll", method = RequestMethod.GET)
-    public ResponseData selectNewsInfList(){
-        List<DataDO> dataDOList = dataDOService.selectNewsInfList();
+    @RequestMapping(value = "/selectAllNewsRot", method = RequestMethod.GET)
+    public ResponseData selectNewsRotList(){
+        List<DataDO> dataDOList = dataDOService.selectNewsRotList();
         List<DataDto> dataDtoList = new ArrayList<>();
         for (DataDO dataDO:dataDOList) {
             dataDtoList.add(
@@ -67,6 +67,16 @@ public class DataNewsInfController {
                                     dataDO.getItemcode()).getFilePath()));
         }
         return new ResponseData(EmBusinessError.success,dataDtoList);
+    }
+
+    /**
+     * 查看新闻管理的所有数据
+     * @return
+     */
+    @RequestMapping(value = "/selectAllNewsInf", method = RequestMethod.GET)
+    public ResponseData selectNewsInfList(){
+        List<DataDO> dataDOList = dataDOService.selectNewsInfList();
+        return new ResponseData(EmBusinessError.success,dataDOList);
     }
 
     /**
@@ -98,7 +108,7 @@ public class DataNewsInfController {
      * 更新新闻数据记录
      * @param record
      */
-    @RequestMapping(value = "updateNewsInf", method = RequestMethod.PUT)
+    @RequestMapping(value = "updateNewsInf", method = RequestMethod.POST)
     @ResponseBody
     public ResponseData updateNewsInf(@RequestBody DataDO record) {
         dataDOService.updateNewsInf(record);

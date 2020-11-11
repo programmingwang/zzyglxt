@@ -89,26 +89,16 @@
         //
             var oTab=document.getElementById("table");
             var oBt=document.getElementById("taskNameSearch");
-            var aaaa=document.getElementById("aaaa")
-            aaaa.onclick=function(){
-                console.log(oTab.tBodies[0].rows);
+            var btnSearch=document.getElementById("btnSearch")
+            btnSearch.onclick=function(){
+                console.log(oTab.tHead.rows[0].childNodes[5].innerText);
                 for(var i=0;i<oTab.tBodies[0].rows.length;i++)
                 {
-                    var str1=oTab.tBodies[0].rows[i].cells[1].innerHTML.toUpperCase();
-                    var str2=oBt.value.toUpperCase();
-                    if (str2==null||str2==""){
-                        refreshTable()
-                    }
-                    //使用string.toUpperCase()(将字符串中的字符全部转换成大写)或string.toLowerCase()(将字符串中的字符全部转换成小写)
-                    //所谓忽略大小写的搜索就是将用户输入的字符串全部转换大写或小写，然后把信息表中的字符串的全部转换成大写或小写，最后再去比较两者转换后的字符就行了
-                    /*******************************JS实现表格忽略大小写搜索*********************************/
-                    if(str1==str2){
-                        console.log("aaaa")
-                        console.log(oTab.tBodies[0].rows[i])
-                        oTab.tBodies[0].rows[i].hidden= false;
-                    }
-                    else{
-                        oTab.tBodies[0].rows[i].hidden= true;
+                    var str1=oTab.tBodies[0].rows[i].innerText.toLowerCase();
+                    var str2=oBt.value.toLowerCase();
+                    console.log(str2);
+                    if (str2==""||str2=="请输入"){
+                        refreshTable();
                     }
                     /***********************************JS实现表格的模糊搜索*************************************/
                     //表格的模糊搜索的就是通过JS中的一个search()方法，使用格式，string1.search(string2);如果
@@ -126,6 +116,16 @@
 
                 }
 
+            }
+
+            document.getElementById('closeAndOpen').onclick = function(){
+                var aria=this.ariaExpanded;
+                this.innerText="";
+                if (aria=="true"){
+                    this.innerText="展开";
+                } else {
+                    this.innerText="收起";
+                }
             }
 
 

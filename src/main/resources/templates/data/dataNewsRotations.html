@@ -3,22 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <title>新闻轮播图</title>
-    <link rel="stylesheet" th:href="@{CSS/taskList.css}">
+    <link rel="stylesheet" th:href="@{CSS/dataNewsrotations.css}">
 </head>
 <body>
     <div id="fir_body">
 
         <div class="row test-border" id="accordion2">
-            <div class="col-lg-4 col-md-4">
+            <div class="col-lg-11 col-md-11">
                 <div class="input-group mb-4" >
-                    <input type="text" id="taskNameSearch" class="form-control" value="请输入" onfocus="if (value=='请输入'){value =''}" onblur="if (value ==''){value='请输入'}" >
-                    <div class="input-group-prepend">
-                        <span class="input-group-text">搜索</span>
-                    </div>
-
+                    <a class="input-text" >所属位置：   </a>
+                    <a class="atext" id="btns">全部</a>
+                    <a class="atext" id="btns1">位置一</a>
+                    <a class="atext" id="btns2">位置二</a>
+                    <a class="atext" id="btns3">位置三</a>
+                    <a class="atext" id="btns4">位置四</a>
+                    <a class="atext" id="btns5">位置五</a>
                 </div>
             </div>
-            <div class="col-lg-7 col-md-7"></div>
             <div class="col-lg-1 col-md-1 pull-right" >
                 <a data-toggle="collapse" data-parent="#accordion2" href="#collapseOne" style="text-decoration: none; color: red;" aria-expanded="false">
                     >

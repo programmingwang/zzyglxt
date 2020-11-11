@@ -4165,7 +4165,7 @@ var WINDOW = typeof window !== 'undefined' ? window : {};
 var NAMESPACE = 'distpicker';
 var EVENT_CHANGE = 'change';
 
-var DEFAULT_CODE = 130000;
+var DEFAULT_CODE = 100000;
 var PROVINCE = 'province';
 var CITY = 'city';
 var DISTRICT = 'district';

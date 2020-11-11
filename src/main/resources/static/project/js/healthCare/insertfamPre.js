@@ -1,6 +1,6 @@
 (function () {
-    require(['jquery','wangEditor','ajaxUtil','alertUtil','stringUtil'],
-        function (jquery,wangEditor,ajaxUtil,alertUtil,stringUtil) {
+    require(['jquery','wangEditor','ajaxUtil','alertUtil','stringUtil','fileUtil'],
+        function (jquery,wangEditor,ajaxUtil,alertUtil,stringUtil,fileUtil) {
             const editor = new wangEditor('#div1')
             // 或者 const editor = new E( document.getElementById('div1') )
             //菜单配置
@@ -44,43 +44,71 @@
                     alert("字数不能超过10000");                  //将替换的值赋值给当前对象
                 }
             });
-
             $("#cancel").unbind().on('click',function () {
-                $("#main_body").html("");
                 var url = "/healthCare/famPre";
-                orange.loadPage({url: url, target: 'main_body', selector: '#fir_body', success: function(data){
-                        if(data == null||data == ""){
-                            return alertUtil.error( url+'加载失败');
-                        }
-                        $("#main_body").html(data);
-                    }})
+                orange.redirect(url);
             });
 
             $("#btn_insert").unbind().on('click',function () {
-                var inCuHeEntity = {
-                    itemcode: stringUtil.getUUID(),
-                    name : $("#name").val(),
-                    source : $("#source").val(),
-                    prescription:$("#prescription").val(),
-                    status:$("#status").val(),
-                    creater : $("#creater").val(),
-                    content : editor.txt.html()
-                };
+                var famPreEntity;
+                var addUpdateUrl;
+                var operateMessage;
+                if(!isUpdate()){
+                    addUpdateUrl = "insertfampredo";
+                    operateMessage = "新增历史名方成功";
+                    famPreEntity = {
+                        itemcode: stringUtil.getUUID(),
+                        name : $("#name").val(),
+                        source : $("#source").val(),
+                        prescription : $("#prescription").val(),
+                        status : $("#status").val(),
+                        creater : $("#creater").val(),
+                        content : editor.txt.html()
+                    };
+                }else{
+                    var needData = JSON.parse(localStorage.getItem("rowData"));
+                    addUpdateUrl = "updatefampredo";
+                    famPreEntity = {
+                        itemid: needData.itemid,
+                        itemcode: needData.itemcode,
+                        name : $("#name").val(),
+                        source : $("#source").val(),
+                        prescription : $("#prescription").val(),
+                        status : $("#status").val(),
+                        creater : $("#creater").val(),
+                        content : editor.txt.html()
+                    }
+                    operateMessage = "更新历史名方成功";
+                }
+               /* fileUtil.handleFile(isUpdate(), famPreEntity.itemcode, $("#upload_file")[0].files[0]);*/
 
-                ajaxUtil.myAjax(null,"insertfampredo",inCuHeEntity,function (data) {
+                ajaxUtil.myAjax(null,addUpdateUrl,famPreEntity,function (data) {
                     if(ajaxUtil.success(data)){
-                        alertUtil.info("新增历史名方成功");
+                        alertUtil.info(operateMessage);
                         var url = "/healthCare/famPre";
-                        orange.loadPage({url: url, target: 'main_body', selector: '#fir_body', success: function(data){
-                                if(data == null||data == ""){
-                                    return alertUtil.error( url+'加载失败');
-                                }
-                                $("#main_body").html(data);
-                            }})
+                        orange.redirect(url);
                     }else {
                         alertUtil.alert(data.msg);
                     }
                 },false,true);
+
             });
+            (function init() {
+                if (isUpdate()){
+                    var tempdata = JSON.parse(localStorage.getItem("rowData"));
+                    $("#name").val(tempdata.name);
+                    $("#source").val(tempdata.source);
+                    $("#prescription").val(tempdata.prescription);
+                    $("#status").val(tempdata.status);
+                    $("#creater").val(tempdata.creater);
+                    editor.txt.html(tempdata.content);
+                    var img = tempdata.filePath;
+                    $("#upimg").attr("src",img);
+                }
+            }());
+
+            function isUpdate() {
+                return (localStorage.getItem("rowData") != null || localStorage.getItem("rowData") != undefined)
+            }
         })
 })();

@@ -9,6 +9,7 @@ import com.zyyglxt.dataobject.SpecialtyDOKey;
 import com.zyyglxt.dto.SpecialtyDto;
 import com.zyyglxt.error.BusinessException;
 import com.zyyglxt.error.EmBusinessError;
+import com.zyyglxt.service.IChineseMedicineService;
 import com.zyyglxt.service.ISpecialtyService;
 import com.zyyglxt.validator.ValidatorImpl;
 import com.zyyglxt.validator.ValidatorResult;
@@ -35,6 +36,8 @@ public class SpecialtyServiceImpl implements ISpecialtyService {
     private HospSpecialtyRefDOMapper hospSpecialtyRefDOMapper;
     @Autowired
     private ValidatorImpl validator;
+    @Resource
+    private IChineseMedicineService chineseMedicineService;
 
     private SpecialtyDO specialtyDO = new SpecialtyDO();
 
@@ -88,6 +91,10 @@ public class SpecialtyServiceImpl implements ISpecialtyService {
         if(result.isHasErrors()){
             throw new BusinessException(result.getErrMsg(), EmBusinessError.PARAMETER_VALIDATION_ERROR);
         }
+        /*判断该科室是否能删除*/
+        if (!(chineseMedicineService.selectBySpecialtyCode(specialtyDOKey.getItemcode())).isEmpty()){
+            throw new BusinessException("该科室下还有医生，不能删除",EmBusinessError.INTEGRITY_CONSTRAINT_ERROE);
+        }
         hospSpecialtyRefDOMapper.deleteBySpecialtyCode(specialtyDOKey.getItemcode());
         specialtyDOMapper.deleteByPrimaryKey(specialtyDOKey);
     }
@@ -103,7 +110,7 @@ public class SpecialtyServiceImpl implements ISpecialtyService {
      */
     @Override
     public List<SpecialtyDO> searchSpecialty(String keyWord) {
-        if(keyWord.isEmpty()){
+        if(keyWord == null || keyWord == ""){
             throw new BusinessException("关键字不能为空", EmBusinessError.PARAMETER_VALIDATION_ERROR);
         }
         return specialtyDOMapper.searchSpecialty(keyWord);
@@ -117,7 +124,7 @@ public class SpecialtyServiceImpl implements ISpecialtyService {
 
     @Override
     public List<SpecialtyDO> selectByHospCode(String hospCode) {
-        if(hospCode.isEmpty()){
+        if(hospCode == null || hospCode == ""){
             throw new BusinessException("医院code不能为空", EmBusinessError.PARAMETER_VALIDATION_ERROR);
         }
         return specialtyDOMapper.selectByHospCode(hospCode);

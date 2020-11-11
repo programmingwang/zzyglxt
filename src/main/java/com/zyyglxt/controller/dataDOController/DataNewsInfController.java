@@ -74,16 +74,6 @@ public class DataNewsInfController {
     }
 
     /**
-     * 查看新闻管理的所有数据
-     * @return
-     */
-    @RequestMapping(value = "/selectAllNewsInf", method = RequestMethod.GET)
-    public ResponseData selectNewsInfList(){
-        List<DataDO> dataDOList = dataDOService.selectNewsInfList();
-        return new ResponseData(EmBusinessError.success,dataDOList);
-    }
-
-    /**
      * 删除新闻数据记录
      * @param itemID
      * @param itemCode

@@ -48,12 +48,7 @@
             $("#cancel").unbind().on('click',function () {
                 $("#main_body").html("");
                 var url = "/chineseCultural/resource/traditionalCultural";
-                orange.loadPage({url: url, target: 'main_body', selector: '#fir_body', success: function(data){
-                        if(data == null||data == ""){
-                            return alertUtil.error( url+'加载失败');
-                        }
-                        $("#main_body").html(data);
-                    }})
+                orange.redirect(url);
             });
 
             $("#btn_insert").unbind().on('click',function () {
@@ -69,12 +64,7 @@
                     if(ajaxUtil.success(data)){
                         alertUtil.info("新增中医医史成功");
                         var url = "/chineseCultural/resource/traditionalCultural";
-                        orange.loadPage({url: url, target: 'main_body', selector: '#fir_body', success: function(data){
-                                if(data == null||data == ""){
-                                    return alertUtil.error( url+'加载失败');
-                                }
-                                $("#main_body").html(data);
-                            }})
+                        orange.redirect(url);
                     }else {
                         alertUtil.alert(data.msg);
                     }

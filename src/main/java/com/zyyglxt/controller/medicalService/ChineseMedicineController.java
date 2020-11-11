@@ -86,13 +86,15 @@ public class ChineseMedicineController {
     private List<ChineseMedicineDto> DoToDto(List<ChineseMedicineDO> DOList){
         List<ChineseMedicineDto> DtoList = new ArrayList<>();
         if (!DOList.isEmpty()){
-            ChineseMedicineDto Dto = new ChineseMedicineDto();
             for (ChineseMedicineDO DO:DOList){
+                ChineseMedicineDto Dto = new ChineseMedicineDto();
                 BeanUtils.copyProperties(DO,Dto);
                 HospDO hospDO = hospService.selectHospByItemCode(Dto.getHospCode());
                 SpecialtyDO specialtyDO = specialtyDOMapper.selectSpecialtyByItemCode(Dto.getDeptCode());
-                BeanUtils.copyProperties(hospDO,Dto);
-                BeanUtils.copyProperties(specialtyDO,Dto);
+                Dto.setHospitalName(hospDO.getHospitalName());
+                Dto.setHospCode(hospDO.getItemcode());
+                Dto.setSpecialtyName(specialtyDO.getSpecialtyName());
+                Dto.setDeptCode(specialtyDO.getItemcode());
                 FileDO fileDO= fileService.selectFileByDataCode(Dto.getItemcode());
                 Dto.setFilePath(fileDO == null ? null:fileDO.getFilePath());
                 DtoList.add(Dto);

@@ -41,4 +41,10 @@ public class SerProController {
         serProService.deleteByPrimaryKey(record.getItemid(),record.getItemcode());
         return new ResponseData(EmBusinessError.success);
     }
+
+    @ResponseBody
+    @GetMapping(value = "/ser-pro")
+    public ResponseData getSerPro(){
+        return new ResponseData(EmBusinessError.success,serProService.selectAll());
+    }
 }

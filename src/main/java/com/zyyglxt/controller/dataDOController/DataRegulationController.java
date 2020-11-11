@@ -104,7 +104,7 @@ public class DataRegulationController {
      * 更新政策法规记录
      * @param record
      */
-    @RequestMapping(value = "updateRegulation", method = RequestMethod.PUT)
+    @RequestMapping(value = "updateRegulation", method = RequestMethod.POST)
     @ResponseBody
     @LogAnnotation(appCode ="",logTitle ="更新政策法规记录",logLevel ="2",creater ="",updater = "")
     public ResponseData updateRegulation(@RequestBody DataDO record) {

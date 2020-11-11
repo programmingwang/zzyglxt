@@ -104,7 +104,7 @@ public class DataProcessController {
      * 更新办事流程记录
      * @param record
      */
-    @RequestMapping(value = "updateProcess", method = RequestMethod.PUT)
+    @RequestMapping(value = "updateProcess", method = RequestMethod.POST)
     @ResponseBody
     @LogAnnotation(appCode ="",logTitle ="更新办事流程记录",logLevel ="2",creater ="",updater = "")
     public ResponseData updateProcess(@RequestBody DataDO record) {

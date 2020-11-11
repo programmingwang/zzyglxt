@@ -45,7 +45,7 @@ public class HospController {
         return new ResponseData(EmBusinessError.success);
     }
 
-    @DeleteMapping(value = "delete")
+    @DeleteMapping(value = "/delete")
     @ResponseBody
     @LogAnnotation(appCode ="",logTitle ="删除医院数据",logLevel ="4",creater ="",updater = "")
     public ResponseData deleteHosp(@RequestBody HospDOKey hospDOKey){
@@ -81,8 +81,8 @@ public class HospController {
     private List<HospDto> DoToDto(List<HospDO> DOList){
         List<HospDto> DtoList = new ArrayList<>();
         if (!DOList.isEmpty()){
-            HospDto Dto = new HospDto();
             for (HospDO DO:DOList){
+                HospDto Dto = new HospDto();
                 BeanUtils.copyProperties(DO,Dto);
                 FileDO fileDO= fileService.selectFileByDataCode(Dto.getItemcode());
                 Dto.setFilePath(fileDO == null ? null:fileDO.getFilePath());

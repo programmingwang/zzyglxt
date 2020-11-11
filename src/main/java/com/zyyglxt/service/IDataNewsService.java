@@ -18,6 +18,9 @@ public interface IDataNewsService {
     //查询所有新闻信息
     List<DataDO> selectNewsInfList();
 
+    //查询所有新闻轮播图
+    List<DataDO> selectNewsRotList();
+
     //增加一个信息
     int insertNewsInf(DataDO record);
 

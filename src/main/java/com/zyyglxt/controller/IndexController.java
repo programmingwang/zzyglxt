@@ -35,4 +35,9 @@ public class IndexController {
     public String main(){
         return "/index";
     }
+
+    @RequestMapping(value = "/toUserMsg")
+    public String userMsg(){
+        return "/user/usermsg";
+    }
 }

@@ -46,13 +46,7 @@ public class CulturalRelicsController {
         return new ResponseData(EmBusinessError.success,chineseCulturalDtoList);
     }
 
-//    //查询一个文化古迹
-//
-//    //去增加页面,这个是为了跳转到增加的页面
-//    @RequestMapping(value = "/toAddPage" , method = RequestMethod.GET)
-//    public String toAddPage(){
-//        return "to add page";
-//    }
+
 
     //增加一个文化古迹
     @RequestMapping(value = "/addCulRel" , method = RequestMethod.POST)
@@ -73,16 +67,7 @@ public class CulturalRelicsController {
         return new ResponseData(EmBusinessError.success);
     }
 
-    //去修改的页面
-    @RequestMapping(value = "/toUpdCulRel/{itemID}/{itemCode}" , method = RequestMethod.GET)
-    @ResponseBody
-    public ResponseData toUpdatePage(@PathVariable("itemID") Integer itemID, @PathVariable("itemCode")String itemCode){
-        ChineseCulturalDOKey chineseCulturalDOKey = new ChineseCulturalDOKey();
-        chineseCulturalDOKey.setItemid(itemID);
-        chineseCulturalDOKey.setItemcode(itemCode);
-        ChineseCulturalDO chineseCultural = iCulturalRelicsService.getCulturalRelics(chineseCulturalDOKey);
-        return new ResponseData(EmBusinessError.success,chineseCultural);
-    }
+
 
     //修改一个文化古迹
     @RequestMapping(value = "/updCulRel" , method = RequestMethod.POST)

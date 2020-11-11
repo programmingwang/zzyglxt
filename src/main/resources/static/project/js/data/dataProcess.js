@@ -4,6 +4,7 @@
 
 
         var url = "/datado/process/selectAll";
+        var addUrl = "/data/add/addProcess";
         var aParam = {
 
         };
@@ -17,158 +18,69 @@
         }
 
 
-        function addUpdate(addOrUpdate,row){
-            var myUpdateModalData ={
-                modalBodyID : "myAddUpdateModalProject",
-                modalTitle : addOrUpdate === "add" ? "新增项目" :"修改项目",
-                modalConfirmFun:function () {
-                    var projectEntity = {
-                        projectName: $("#projectName").val(),
-                        projectNo: $("#projectNo").val(),
-                };
-
-                    if(addOrUpdate === "add"){
-                        ajaxUtil.myAjax(null,"api/project/addProject",projectEntity,function (data) {
-                            if(ajaxUtil.success(data)){
-                                alertUtil.info("新增项目成功");
-                                refreshTable();
-                                myUpdateModal.hide();
-                            }else {
-                                alertUtil.alert(data.msg)
-                            }
-                        },false);
-                    }
-
-                    if(addOrUpdate === "update"){
-                        projectEntity.projectID = row.projectID;
-                        ajaxUtil.myAjax(null,"api/project/updateProject",projectEntity,function (data) {
-                            if(ajaxUtil.success(data)){
-                                alertUtil.info("更新项目成功");
-                                refreshTable();
-                                myUpdateModal.hide();
-                            }else {
-                                alertUtil.alert(data.msg)
-                            }
-                        },false);
-                    }
-
-
-                }
-
-            };
-            var myUpdateModal = modalUtil.init(myUpdateModalData);
-
-
-            var pl = dictUtil.getDictByCode(dictUtil.DICT_LIST.PROJECT_LIST);
-            $("#projectName").selectUtil(pl).on('change',function () {
-                var ml = dictUtil.getDictByCode(dictUtil.DICT_LIST.Module_LIST,$("#projectName").val(),true);
-                $("#moduleName").selectUtil(ml);
-            });
-
-            var ml = dictUtil.getDictByCode(dictUtil.DICT_LIST.Module_LIST,stringUtil.isBlank(row) ? $("#projectName").val() : row.projectID ,true);
-            $("#moduleName").selectUtil(ml);
-
-            if(addOrUpdate === "update"){
-                $("#projectName").val(row.projectName);
-                $("#projectNo").val(row.projectNo);
-                $("#createBy").val(row.createBy);
-                $("#createAt").val(stringUtil.formatDateTime(row.createAt));
-            }
-            myUpdateModal.show();
-        }
-
-        // function addModule(row){
-        //     var myAddModuleModalData ={
-        //         modalBodyID : "myAddModuleModal",
-        //         modalTitle : "新增模块",
-        //         modalConfirmFun:function () {
-        //             var moduleEntity = {
-        //                 moduleName: $("#moduleName").val(),
-        //                 projectID: $("#projectID").val(),
-        //             };
-        //
-        //             ajaxUtil.myAjax(null,"api/project/addModule",moduleEntity,function (data) {
-        //                 if(ajaxUtil.success(data)){
-        //                     alertUtil.info("新增模块成功");
-        //                     refreshTable();
-        //                     myaddModuleModal.hide();
-        //                 }else {
-        //                     alertUtil.alert(data.msg)
-        //                 }
-        //             },false);
-        //         //    数据能正常入库，只是刚刚加入的数据无法正常同步，不知道为什么？？
-        //
-        //         }
-        //
-        //     };
-        //     var myaddModuleModal = modalUtil.init(myAddModuleModalData);
-        //
-        //     var pl = dictUtil.getDictByCode(dictUtil.DICT_LIST.PROJECT_LIST);
-        //     $("#projectID").selectUtil(pl).on('change',function () {
-        //         var ml = dictUtil.getDictByCode(dictUtil.DICT_LIST.Module_LIST,$("#projectID").val(),true);
-        //         $("#moduleName").selectUtil(ml);
-        //     });
-        //
-        //     var ml = dictUtil.getDictByCode(dictUtil.DICT_LIST.Module_LIST,stringUtil.isBlank(row) ? $("#projectID").val() : row.projectID ,true);
-        //     $("#moduleName").selectUtil(ml);
-        //
-        //     myaddModuleModal.show();
-        // }
-
         //修改事件
         window.orgEvents = {
             'click .edit' : function(e, value, row, index) {
-                addUpdate("update",row)
+                localStorage.setItem("rowData", JSON.stringify(row));
+                orange.redirect(addUrl);
             },
+
             'click .delete': function (e, value, row, index) {
                 var myDeleteModalData ={
-                    modalBodyID : "myDeleteModalProject",
-                    modalTitle : "删除项目",
+                    modalBodyID : "myDeleteProcess",
+                    modalTitle : "删除办事流程",
                     modalClass : "modal-lg",
                     confirmButtonClass : "btn-danger",
                     modalConfirmFun:function () {
-                        var projectEntity = {
-                            projectID: row.projectID
-                        };
                         var isSuccess = false;
-                        ajaxUtil.myAjax(null,"/api/project/deleteProject",projectEntity,function (data) {
+                        ajaxUtil.myAjax(null,"/datado/process/deleteByPrimaryKey/"+row.itemid+"/"+row.itemcode,null,function (data) {
                             if(ajaxUtil.success(data)){
-                                alertUtil.info("删除项目成功");
+                                ajaxUtil.myAjax(null,"/file/delete?dataCode="+row.itemcode,null,function (data) {
+                                    if(!ajaxUtil.success(data)){
+                                        return alertUtil.error("附件删除失败");
+                                    }
+                                },false,"","get");
+                                alertUtil.info("删除办事流程成功");
                                 isSuccess = true;
                                 refreshTable();
                             }
-                        },false);
+                        },false,true,"delete");
                         return isSuccess;
                     }
 
                 };
                 var myDeleteModal = modalUtil.init(myDeleteModalData);
                 myDeleteModal.show();
-            }
+            },
+
+            'click .pass' : function (e, value, row, index) {
+
+            },
+
+            'click .fail' : function (e, value, row, index) {
+
+            },
         };
 
-
-        $("#search").unbind().on("click",function () {
-            var param = {
-
-            };
-            $('#table').bootstrapTable("destroy");
-            bootstrapTableUtil.myBootStrapTableInit("table", url, param, aCol);
+        $("#btn_addTask").unbind().on('click',function () {
+            localStorage.removeItem("rowData");
+            orange.redirect(addUrl);
         });
 
-        $("#btn_addProject").unbind().on('click',function () {
-            addUpdate("add");
-        });
-
-        // $("#btn_addModule").unbind().on('click',function () {
-        //     addModule();
-        // });
+        var pl = dictUtil.getDictByCode(dictUtil.DICT_LIST.showStatus);
+        $("#chargePersonSearch").selectUtil(pl);
 
 
         var aCol = [
             {field: 'dataTitle', title: '办事指南名称'},
             {field: 'dataSource', title: '来源'},
-            {field: 'fileName', title: '附件'},
+            {field: 'filePath', title: '附件', formatter:function (value, row, index) {
+                    if(value == "已经损坏了"){
+                        return '<p>'+value+'</p>';
+                    }else{
+                        return '<a href="'+value+'">办事流程</a>'
+                    }
+                }},
             {field: 'itemcreateat', title: '发布时间'},
             {field: 'action',  title: '操作',formatter: operation,events:orgEvents}
         ];

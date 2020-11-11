@@ -67,6 +67,12 @@
                 return param;
             }
 
+            $("#upload_file").change(function () {
+                var file = $("#upload_file")[0].files[0];
+                var file_span = $("#filename_span");
+                file_span.text(file.name)
+            });
+
             $("#saveBtn").unbind().on('click',function () {
                 var param = generateParam();
                 param.status = "——";
@@ -103,7 +109,7 @@
                     $("#phone").val(tempdata.phone);
                     $(".w-e-text").html(tempdata.projectIntroduce);
                 }
-            }());
+            })();
 
 
             function isUpdate() {

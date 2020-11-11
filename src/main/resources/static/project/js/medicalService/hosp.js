@@ -4,8 +4,8 @@
 
 
             var url = "/medicalService/hosp/selectAll";
+            var addUrl = "/medicalService/add/addHosp"
             var aParam = {
-
             };
 
             //操作
@@ -16,127 +16,61 @@
                 ].join('');
             }
 
-
-            function addUpdate(addOrUpdate,row){
-                var myUpdateModalData ={
-                    modalBodyID : "myAddUpdateModalProject",
-                    modalTitle : addOrUpdate === "add" ? "新增项目" :"修改项目",
-                    modalConfirmFun:function () {
-                        var projectEntity = {
-                            projectName: $("#projectName").val(),
-                            projectNo: $("#projectNo").val(),
-                        };
-
-                        if(addOrUpdate === "add"){
-                            ajaxUtil.myAjax(null,"api/project/addProject",projectEntity,function (data) {
-                                if(ajaxUtil.success(data)){
-                                    alertUtil.info("新增项目成功");
-                                    refreshTable();
-                                    myUpdateModal.hide();
-                                }else {
-                                    alertUtil.alert(data.msg)
-                                }
-                            },false);
-                        }
-
-                        if(addOrUpdate === "update"){
-                            projectEntity.projectID = row.projectID;
-                            ajaxUtil.myAjax(null,"api/project/updateProject",projectEntity,function (data) {
-                                if(ajaxUtil.success(data)){
-                                    alertUtil.info("更新项目成功");
-                                    refreshTable();
-                                    myUpdateModal.hide();
-                                }else {
-                                    alertUtil.alert(data.msg)
-                                }
-                            },false);
-                        }
-
-
-                    }
-
-                };
-                var myUpdateModal = modalUtil.init(myUpdateModalData);
-
-
-                var pl = dictUtil.getDictByCode(dictUtil.DICT_LIST.PROJECT_LIST);
-                $("#projectName").selectUtil(pl).on('change',function () {
-                    var ml = dictUtil.getDictByCode(dictUtil.DICT_LIST.Module_LIST,$("#projectName").val(),true);
-                    $("#moduleName").selectUtil(ml);
-                });
-
-                var ml = dictUtil.getDictByCode(dictUtil.DICT_LIST.Module_LIST,stringUtil.isBlank(row) ? $("#projectName").val() : row.projectID ,true);
-                $("#moduleName").selectUtil(ml);
-
-                if(addOrUpdate === "update"){
-                    $("#projectName").val(row.projectName);
-                    $("#projectNo").val(row.projectNo);
-                    $("#createBy").val(row.createBy);
-                    $("#createAt").val(stringUtil.formatDateTime(row.createAt));
-                }
-                myUpdateModal.show();
-            }
-
             //修改事件
             window.orgEvents = {
                 'click .edit' : function(e, value, row, index) {
-                    addUpdate("update",row)
+                    localStorage.setItem("rowData", JSON.stringify(row));
+                    orange.redirect(addUrl);
                 },
                 'click .delete': function (e, value, row, index) {
                     var myDeleteModalData ={
-                        modalBodyID : "myDeleteModalProject",
-                        modalTitle : "删除项目",
+                        modalBodyID : "myDeleteHospital",
+                        modalTitle : "删除医院",
                         modalClass : "modal-lg",
                         confirmButtonClass : "btn-danger",
                         modalConfirmFun:function () {
-                            var projectEntity = {
-                                projectID: row.projectID
+                            var hospKey = {
+                                itemid : row.itemid,
+                                itemcode : row.itemcode
                             };
-                            var isSuccess = false;
-                            ajaxUtil.myAjax(null,"/api/project/deleteProject",projectEntity,function (data) {
+                            ajaxUtil.myAjax(null,"/medicalService/hosp/delete",hospKey,function (data) {
                                 if(ajaxUtil.success(data)){
-                                    alertUtil.info("删除项目成功");
+                                    ajaxUtil.myAjax(null,"/file/delete?dataCode="+row.itemcode,null,function (data) {
+                                        if(!ajaxUtil.success(data)){
+                                            return alertUtil.error("文件删除失败");
+                                        }
+                                    },false,"","get");
+                                    alertUtil.info("删除医院信息成功");
                                     isSuccess = true;
                                     refreshTable();
                                 }
-                            },false);
+                            },false,true,"delete");
                             return isSuccess;
                         }
-
                     };
                     var myDeleteModal = modalUtil.init(myDeleteModalData);
                     myDeleteModal.show();
                 }
             };
 
-
-            // $("#search").unbind().on("click",function () {
-            //     var param = {
-            //
-            //     };
-            //     $('#table').bootstrapTable("destroy");
-            //     bootstrapTableUtil.myBootStrapTableInit("table", url, param, aCol);
-            // });
-
+            /*新增医院*/
             $("#btn_addTask").unbind().on('click',function () {
-                $("#main_body").html("");
-                var url = "/medicalService/add/addHosp";
-                orange.loadPage({url: url, target: 'main_body', selector: '#fir_body', success: function(data){
-
-                        if(data == null||data == ""){
-                            return alertUtil.error( url+'加载失败');
-                        }
-
-                        $("#main_body").html(data);
-                    }})
+                localStorage.removeItem("rowData");
+                orange.redirect(addUrl)
             });
-
-
 
             var aCol = [
                 {field: 'hospitalName', title: '医院名称'},
-                {field: 'filePath', title: '图片'},
-                {field: 'hospitalAddress', title: '地址'},
+                {field: 'filePath', title: '图片',formatter:function (value, row, index) {
+                        if(value == "已经损坏了"){
+                            return '<p>'+value+'</p>';
+                        }else{
+                            return '<img  src='+value+' width="100" height="100" class="img-rounded" >';
+                        }
+                    }},
+                {field: 'hospitalAddress', title: '地址',formatter:function (value, row, index) {
+                        return row.hospitalAddressCity + row.hospitalAddressCountry + value
+                    }},
                 {field: 'hospitalTelephone', title: '联系电话'},
                 {field: 'itemcreateat', title: '发布时间'},
                 {field: 'action',  title: '操作',formatter: operation,events:orgEvents}

@@ -110,9 +110,6 @@ public class ResourcesServiceImpl implements ResourcesService {
     @Override
     public List<ResourcesDO> SelectPermissionByRoleCode(UserDO userDO) {
         RoleDO roleDO = roleDOMapper.selectByUserid(userDO.getItemcode());
-        List<ResourcesDO> resourcesDOS = resourcesDOMapper.SelectPermissionByRoleCode(roleDO.getItemcode());
-        MenuTreeUtil menuTreeUtil = new MenuTreeUtil(resourcesDOS, null);
-        return menuTreeUtil.buildTreeGrid();
+        return resourcesDOMapper.SelectPermissionByRoleCode(roleDO.getItemcode());
     }
-
 }

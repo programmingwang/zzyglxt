@@ -1,12 +1,16 @@
 (function () {
-    require(['jquery','ajaxUtil','wangEditor'],
-        function (jquery,ajaxUtil, wangEditor) {
+    require(['jquery','ajaxUtil','stringUtil','uploadImg','wangEditor'],
+        function ($,ajaxUtil,stringUtil,uploadImg, wangEditor) {
 
             var url = "/industrialdevelop/tec-ser-org";
 
             var pathUrl = "/industrialdevelop/tecserviceorg";
 
+            var itemcode = stringUtil.getUUID();
+
             var type = isUpdate() ? "put":"post";
+
+            uploadImg.init();
 
             const editor = new wangEditor('#div1');
             // 或者 const editor = new E( document.getElementById('div1') )
@@ -70,10 +74,23 @@
                 return param;
             }
 
-            $("#saveBtn").unbind().on('click',function () {
+            $("#saveBtn").unbind('click').on('click',function () {
                 var param = generateParam();
                 param.status = "——";
 
+                ajaxUtil.myAjax(null,url,param,function (data) {
+                    if(ajaxUtil.success(data)){
+                        orange.redirect(pathUrl);
+                    }else {
+                        alert(data.msg);
+                    }
+                },true,"123",type);
+                return false;
+            });
+
+            $("#submitBtn").unbind('click').on('click',function () {
+                var param = generateParam();
+                param.status = "——";
                 ajaxUtil.myAjax(null,url,param,function (data) {
                     if(ajaxUtil.success(data)){
                         orange.redirect(pathUrl)
@@ -83,19 +100,6 @@
                 },true,"123",type);
                 return false;
             });
-
-            $("#submitBtn").unbind().on('click',function () {
-                var param = generateParam();
-                param.status = "——";
-                ajaxUtil.myAjax(null,url,param,function (data) {
-                    if(ajaxUtil.success(data)){
-                        orange.redirect(pathUrl)
-                    }else {
-                        alert(data.msg)
-                    }
-                },true,"123",type);
-                return false;
-            })
 
             (function init() {
                 if (isUpdate()){
@@ -108,8 +112,12 @@
                     $("#addressCity").val(tempdata.addressCity);
                     $("#addressCountry").val(tempdata.addressCity);
                     $(".w-e-text").html(tempdata.projectIntroduce);
+                    $(".upload-content").attr('data-code', tempdata.itemcode);
+                    itemcode = tempdata.itemcode;
+                }else {
+                    $(".upload-content").attr('data-code', itemcode);
                 }
-            }());
+            })();
 
 
             function isUpdate() {

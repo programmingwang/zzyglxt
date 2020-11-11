@@ -444,18 +444,6 @@
                 },false)
             });
 
-
-            $("#queryUserMsg").on("click", function () {
-                ajaxUtil.myAjax(null, "/user/usermsg", null, function (data) {
-                    if(data && data.code === 88888) {
-                        console.log(data);
-                        window.location.href = "/user/usermsg"
-                    }else{
-                        alertUtil.error(data.msg)
-                    }
-                }, false,"","get")
-            });
-
             if(!stringUtil.isBlank(currentUrlHash)){
                 loadPage(currentUrlHash);
             }

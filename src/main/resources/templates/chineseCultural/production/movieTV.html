@@ -12,21 +12,21 @@
                 <div class="input-group mb-4" >
                     <input type="text" id="taskNameSearch" class="form-control" value="请输入" onfocus="if (value=='请输入'){value =''}" onblur="if (value ==''){value='请输入'}" >
                     <div class="input-group-prepend">
-                        <span class="input-group-text" id="aaaa" style="z-index: 1;">搜索</span>
+                        <span class="input-group-text" id="btnSearch" style="z-index: 1;">搜索</span>
                     </div>
 
                 </div>
             </div>
             <div class="col-lg-7 col-md-7"></div>
             <div class="col-lg-1 col-md-1 pull-right" >
-                <a data-toggle="collapse" data-parent="#accordion2" href="#collapseOne" style="text-decoration: none; color: red;" aria-expanded="false">
-                    >
+                <a id="closeAndOpen" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne" style="text-decoration: none; color: red;" aria-expanded="false">
+                    展开
                 </a>
             </div>
 
             <div id="collapseOne" class="collapse col-md-12 col-lg-12 row" style="height: 0px; ">
-            <hr size="1" style="color: #EBEBEB;border-style:dashed;width:100%">
-            <div class="col-lg-3 col-md-3">
+            <hr size="1" style="color: #EBEBEB;border-style:dashed;width:100%;margin-bottom:10px;">
+            <div class="col-lg-6 col-md-6">
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
                         <span class="input-text" >其他选项： 展示状态：</span>
@@ -34,9 +34,9 @@
                     <select class="custom-select" id="chargePersonSearch"></select>
                 </div>
             </div>
-            <div class="col-lg-3"></div>
+            <div class="col-lg-2"></div>
 
-            <div class="col-lg-3 col-md-3">
+            <div class="col-lg-4 col-md-4">
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
                         <span class="input-group-text" >创建时间</span>

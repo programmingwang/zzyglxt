@@ -65,15 +65,6 @@
         $("#btn_addTask").unbind().on('click',function () {
             localStorage.removeItem("rowData");
             orange.redirect(addUrl);
-
-            $("#main_body").html("");
-            var url = "/data/add/addAnnouncement";
-            orange.loadPage({url: url, target: 'main_body', selector: '#fir_body', success: function(data){
-                    if(data == null||data == ""){
-                        return alertUtil.error( url+'加载失败');
-                    }
-                    $("#main_body").html(data);
-                }})
         });
 
         var pl = dictUtil.getDictByCode(dictUtil.DICT_LIST.showStatus);

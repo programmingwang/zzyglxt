@@ -55,16 +55,8 @@
             $("#chargePersonSearch").selectUtil(pl);
 
             $("#btn_addTask").unbind().on('click',function () {
-                $("#main_body").html("");
                 var url = "/chineseCultural/resource/insertTraditionalSchool";
-                orange.loadPage({url: url, target: 'main_body', selector: '#fir_body', success: function(data){
-
-                        if(data == null||data == ""){
-                            return alertUtil.error( url+'加载失败');
-                        }
-
-                        $("#main_body").html(data);
-                    }})
+                orange.redirect(url);
             });
 
 

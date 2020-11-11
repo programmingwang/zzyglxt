@@ -65,7 +65,7 @@
                     content : editor.txt.html()
                 };
 
-                ajaxUtil.myAjax(null,"inserthealthsciknowdo",inCuHeEntity,function (data) {
+                ajaxUtil.myAjax(null,"inserthealthcarefampredo",inCuHeEntity,function (data) {
                     if(ajaxUtil.success(data)){
                         alertUtil.info("新增国医话健康成功");
                         var url = "/healthCare/healthcarefamPre";

@@ -20,7 +20,8 @@
             //修改事件
             window.orgEvents = {
                 'click .edit' : function(e, value, row, index) {
-
+                    localStorage.setItem("rowData", JSON.stringify(row));
+                    orange.redirect("/chineseCultural/resource/insertTraditionalDoctor");
                 },
                 'click .delete': function (e, value, row, index) {
                     var myDeleteModalData ={
@@ -53,16 +54,9 @@
 
 
             $("#btn_addTask").unbind().on('click',function () {
-                $("#main_body").html("");
                 var url = "/chineseCultural/resource/insertTraditionalDoctor";
-                orange.loadPage({url: url, target: 'main_body', selector: '#fir_body', success: function(data){
-
-                        if(data == null||data == ""){
-                            return alertUtil.error( url+'加载失败');
-                        }
-
-                        $("#main_body").html(data);
-                    }})
+                localStorage.removeItem("rowData");
+                orange.redirect(url);
             });
 
             var pl = dictUtil.getDictByCode(dictUtil.DICT_LIST.showStatus);

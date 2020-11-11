@@ -42,14 +42,12 @@
     select 
     <include refid="Base_Column_List" />
     from tb_industrial_develop_chi_med
-    where itemID = #{itemid,jdbcType=INTEGER}
-      and itemCode = #{itemcode,jdbcType=CHAR}
+    where itemCode = #{itemcode,jdbcType=CHAR}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="map">
     <!--@mbg.generated-->
     delete from tb_industrial_develop_chi_med
-    where itemID = #{itemid,jdbcType=INTEGER}
-      and itemCode = #{itemcode,jdbcType=CHAR}
+    where itemCode = #{itemcode,jdbcType=CHAR}
   </delete>
   <insert id="insert" parameterType="com.zyyglxt.dataobject.IndustrialDevelopChiMed">
     <!--@mbg.generated-->
@@ -304,8 +302,7 @@
         itemUpdateAt = #{itemupdateat,jdbcType=TIMESTAMP},
       </if>
     </set>
-    where itemID = #{itemid,jdbcType=INTEGER}
-      and itemCode = #{itemcode,jdbcType=CHAR}
+    where itemCode = #{itemcode,jdbcType=CHAR}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.zyyglxt.dataobject.IndustrialDevelopChiMed">
     <!--@mbg.generated-->
@@ -333,7 +330,9 @@
       itemCreateAt = #{itemcreateat,jdbcType=TIMESTAMP},
       UPDATER = #{updater,jdbcType=VARCHAR},
       itemUpdateAt = #{itemupdateat,jdbcType=TIMESTAMP}
-    where itemID = #{itemid,jdbcType=INTEGER}
-      and itemCode = #{itemcode,jdbcType=CHAR}
+    where itemCode = #{itemcode,jdbcType=CHAR}
   </update>
+    <select id="selectAll" resultMap="BaseResultMap">
+      select * from tb_industrial_develop_chi_med where TYPE = #{type}
+    </select>
 </mapper>

@@ -2,9 +2,11 @@
     require(['jquery','ajaxUtil','stringUtil','uploadImg','wangEditor'],
         function ($,ajaxUtil,stringUtil,uploadImg, wangEditor) {
 
-            var url = "/industrialdevelop/tec-ser-org";
+            var url = "/industrialdevelop/chi-med";
 
-            var pathUrl = "/industrialdevelop/tecserviceorg";
+            var pathUrl = "/industrialdevelop/chinesemed-sale";
+
+            var orgType = 'sale'
 
             var itemcode = stringUtil.getUUID();
 
@@ -63,15 +65,16 @@
             function generateParam(){
                 var param = {};
                 param.name = $("#name").val();
-                param.projectCost = $("#projectCost").val();
+                param.salesCategory = $("#salesCategory").val();
+                param.sellingDrugs = $("#sellingDrugs").val();
                 param.contacts = $("#contacts").val();
                 param.phone = $("#phone").val();
-                param.addressPro = $("#addressPro").val();
-                param.addressCity = $("#addressCity").val();
-                param.addressCountry = $("#addressCountry").val();
+                param.addressPro = $("#addressPro").val()
+                param.addressCity = $("#addressCity").val()
+                param.addressCountry = $("#addressCountry").val()
                 param.address = $("#address").val()
                 param.intruduce = $(".w-e-text").html();
-                param.orgCode = "未定义";
+                param.type = orgType
                 return param;
             }
 
@@ -79,7 +82,6 @@
                 var param = generateParam();
                 param.status = "——";
                 param.itemcode = itemcode;
-                console.log(uploadImg.isUpdate())
                 if (uploadImg.isUpdate()){
                     ajaxUtil.fileAjax(itemcode,uploadImg.getFiles()[0],"undefined","undefined")
                 }
@@ -111,15 +113,17 @@
                 if (isUpdate()){
                     var tempdata = JSON.parse(localStorage.getItem("rowData"));
                     $("#name").val(tempdata.name);
-                    $("#projectCost").val(tempdata.projectCost);
+                    $("#salesCategory").val(tempdata.salesCategory);
+                    $("#sellingDrugs").val(tempdata.sellingDrugs);
                     $("#contacts").val(tempdata.contacts);
-                    $("#phone").val(tempdata.phone);
                     $("#addressPro").val(tempdata.addressPro);
                     $("#addressCity").val(tempdata.addressCity);
                     $("#addressCountry").val(tempdata.addressCity);
                     $("#address").val(tempdata.address);
-                    $("#intruduce").val(tempdata.intruduce)
-                    $(".w-e-text").html(tempdata.projectIntroduce);
+                    $("#phone").val(tempdata.phone);
+                    $(".w-e-text").html(tempdata.intruduce);
+                    itemcode = tempdata.itemcode
+                    uploadImg.setImgSrc(tempdata.filePath)
                 }
             }());
 

@@ -43,8 +43,8 @@
     <div class="col-12">
         <form>
             <div class="form-group row">
-                <label class="col-sm-2 col-form-label">院所照片：</label>
-                <div class="upload-content" data-limit="5">
+                <label class="col-sm-2 col-form-label">企业照片：</label>
+                <div class="upload-content" data-limit="1">
                     <div class="content-img">
                         <ul class="content-img-list"></ul>
                         <div class="file">
@@ -63,11 +63,23 @@
             </div>
 
             <div class="form-group row">
-                <label class="col-sm-2 col-form-label">院所名称：</label>
+                <label class="col-sm-2 col-form-label">企业名称：</label>
                 <div class="col-sm-3">
                     <input id="name" type="text" class="form-control" placeholder="请输入">
                 </div>
+
+                <label class="col-sm-2 col-form-label">生产种类：</label>
+                <div class="col-sm-3">
+                    <input id="peoduceType" type="text" class="form-control" placeholder="请输入">
+                </div>
             </div>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">生产药品：</label>
+                <div class="col-sm-3">
+                    <input id="peoduceDrug" type="text" class="form-control" placeholder="请输入">
+                </div>
+            </div>
+
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label">联系人：</label>
                 <div class="col-sm-3">
@@ -78,8 +90,8 @@
                 <div class="col-sm-3">
                     <input id="phone" type="text" class="form-control" placeholder="请输入">
                 </div>
-            </div>
 
+            </div>
             <div data-toggle="distpicker" class="form-group row">
                 <label for="addressPro" class="col-sm-2 col-form-label">省：</label>
                 <div class="col-sm-2">
@@ -96,7 +108,6 @@
                     <select id="addressCountry" class="form-control" data-district="———选择区———"></select>
                 </div>
             </div>
-
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label">地址：</label>
                 <div class="col-sm-3">
@@ -104,7 +115,7 @@
                 </div>
             </div>
             <div class="form-group row">
-                <label class="col-sm-2 col-form-label">介绍：</label>
+                <label class="col-sm-2 col-form-label">企业简介：</label>
                 <div id="div1" class="col-sm-8">
                 </div>
             </div>
@@ -125,12 +136,11 @@
                 </div>
             </div>
         </form>
-
     </div>
 
 </div>
 <script type="text/javascript" data-main="/main/main.js" th:src="@{/component/require@2.3.6/require-2.3.6.js}"></script>
-<script type="text/javascript" th:src="@{/project/js/industrialdevelop/tecserviceorg_add.js}"></script>
+<script type="text/javascript" th:src="@{/project/js/industrialdevelop/chinesemed-produce_add.js}"></script>
 <script type="text/javascript" th:src="@{/component/jquery@3.5.1/jquery.js}"></script>
 <script type="text/javascript" th:src="@{/component/distSelect/distpicker.common.js}"></script>
 <link type="text/css" rel="stylesheet" href="/component/uploadImg/css/uploadImg.css"

@@ -38,8 +38,12 @@ public enum EmBusinessError implements CommonError {
     NEWPASSWORD_NOT_EQUAL(2016, "两次输入的新密码不一致，请重新输入"),
     /* 业务错误 */
     NO_PERMISSION(10001, "没有权限"),
-    ;
+    INTEGRITY_CONSTRAINT_ERROE(40001,"违反数据完整性，请检查是否有其他数据关联"),
 
+
+
+
+    ;
     EmBusinessError(int errCode, String msg) {
         this.errCode = errCode;
         this.errMsg = msg;

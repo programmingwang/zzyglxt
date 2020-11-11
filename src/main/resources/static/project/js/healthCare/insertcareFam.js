@@ -1,6 +1,6 @@
 (function () {
-    require(['jquery','wangEditor','ajaxUtil','alertUtil','stringUtil'],
-        function (jquery,wangEditor,ajaxUtil,alertUtil,stringUtil) {
+    require(['jquery','wangEditor','ajaxUtil','alertUtil','stringUtil','fileUtil'],
+        function (jquery,wangEditor,ajaxUtil,alertUtil,stringUtil,fileUtil) {
             const editor = new wangEditor('#div1')
             // 或者 const editor = new E( document.getElementById('div1') )
             //菜单配置
@@ -46,39 +46,64 @@
             });
 
             $("#cancel").unbind().on('click',function () {
-                $("#main_body").html("");
                 var url = "/healthCare/healthcarefamPre";
-                orange.loadPage({url: url, target: 'main_body', selector: '#fir_body', success: function(data){
-                        if(data == null||data == ""){
-                            return alertUtil.error( url+'加载失败');
-                        }
-                        $("#main_body").html(data);
-                    }})
+                orange.redirect(url);
             });
 
             $("#btn_insert").unbind().on('click',function () {
-                var inCuHeEntity = {
-                    itemcode: stringUtil.getUUID(),
-                    name : $("#name").val(),
-                    source : $("#source").val(),
-                    author : $("#author").val(),
-                    content : editor.txt.html()
-                };
+                var careFamEntity;
+                var addUpdateUrl;
+                var operateMessage;
+                if(!isUpdate()){
+                    addUpdateUrl = "inserthealthcarefampredo";
+                    operateMessage = "新增国医话健康成功";
+                    careFamEntity = {
+                        itemcode: stringUtil.getUUID(),
+                        name : $("#name").val(),
+                        source : $("#source").val(),
+                        author : $("#author").val(),
+                        content : editor.txt.html()
+                    };
+                }else{
+                    var needData = JSON.parse(localStorage.getItem("rowData"));
+                    addUpdateUrl = "updatehealthcarefampredo";
+                    careFamEntity = {
+                        itemid: needData.itemid,
+                        itemcode: needData.itemcode,
+                        name : $("#name").val(),
+                        source : $("#source").val(),
+                        author : $("#author").val(),
+                        content : editor.txt.html()
+                    }
+                    operateMessage = "更新国医话健康成功";
+                }
+                /* fileUtil.handleFile(isUpdate(), careFamEntity.itemcode, $("#upload_file")[0].files[0]);*/
 
-                ajaxUtil.myAjax(null,"inserthealthcarefampredo",inCuHeEntity,function (data) {
+                ajaxUtil.myAjax(null,addUpdateUrl,careFamEntity,function (data) {
                     if(ajaxUtil.success(data)){
-                        alertUtil.info("新增国医话健康成功");
+                        alertUtil.info(operateMessage);
                         var url = "/healthCare/healthcarefamPre";
-                        orange.loadPage({url: url, target: 'main_body', selector: '#fir_body', success: function(data){
-                                if(data == null||data == ""){
-                                    return alertUtil.error( url+'加载失败');
-                                }
-                                $("#main_body").html(data);
-                            }})
+                        orange.redirect(url);
                     }else {
                         alertUtil.alert(data.msg);
                     }
                 },false,true);
+
             });
+            (function init() {
+                if (isUpdate()){
+                    var tempdata = JSON.parse(localStorage.getItem("rowData"));
+                    $("#name").val(tempdata.name);
+                    $("#source").val(tempdata.source);
+                    $("#author").val(tempdata.author);
+                    editor.txt.html(tempdata.content);
+                    var img = tempdata.filePath;
+                    $("#upimg").attr("src",img);
+                }
+            }());
+
+            function isUpdate() {
+                return (localStorage.getItem("rowData") != null || localStorage.getItem("rowData") != undefined)
+            }
         })
 })();

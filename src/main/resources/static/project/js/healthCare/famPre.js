@@ -2,12 +2,10 @@
     require(['jquery', 'ajaxUtil','bootstrapTableUtil','objectUtil','alertUtil','modalUtil','selectUtil','stringUtil','dictUtil'],
         function (jquery,ajaxUtil,bootstrapTableUtil,objectUtil,alertUtil,modalUtil,selectUtil,stringUtil,dictUtil) {
 
-
             var url = "selectallfampredo";
             var aParam = {
 
             };
-
             //操作
             function operation(value, row, index){
                 return [
@@ -15,8 +13,6 @@
                     '<button type="button" class="delete btn btn-danger btn-sm"  data-toggle="modal" data-target="#staticBackdrop" >删除</button>',
                 ].join('');
             }
-
-
             //修改事件
             window.orgEvents = {
                 'click .edit' : function(e, value, row, index) {
@@ -45,18 +41,13 @@
                             },false,true,"delete");
                             return isSuccess;
                         }
-
                     };
                     var myDeleteModal = modalUtil.init(myDeleteModalData);
                     myDeleteModal.show();
                 },
-
                 'click .pass' : function (e, value, row, index) {
-
                 },
-
                 'click .fail' : function (e, value, row, index) {
-
                 },
             };
 

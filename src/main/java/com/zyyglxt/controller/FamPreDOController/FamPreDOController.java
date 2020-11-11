@@ -29,7 +29,7 @@ public class FamPreDOController {
      private FamPreDOService famPreDOService;
   /*历史名方数据添加*/
   @RequestMapping(value = "insertfampredo",method = RequestMethod.POST)
-  @LogAnnotation(appCode ="",logTitle ="历史名方数据添加",logLevel ="3",creater ="",updater = "")
+  @LogAnnotation(appCode ="",logTitle ="历史名方数据添加",logLevel ="3",creater ="huangwj",updater = "huangwj")
     public ResponseData insertFamPreDOMapper(@RequestBody FamPreDO key) throws BusinessException {
           System.out.println("历史名方名称: " + key.getName());
           famPreDOService.insertSelective(key);
@@ -38,7 +38,7 @@ public class FamPreDOController {
   /*历史名方数据删除*/
     @RequestMapping(value ="deletefamprerdo/{itemID}/{itemCode}",method = RequestMethod.DELETE)
     @ResponseBody
-    @LogAnnotation(appCode ="",logTitle ="删除历史名方",logLevel ="4",creater ="",updater = "")
+    @LogAnnotation(appCode ="",logTitle ="删除历史名方",logLevel ="4",creater ="huangwj",updater = "huangwj")
     public ResponseData deleteFamPreDOMapper(@PathVariable("itemID") Integer itemID, @PathVariable("itemCode")String itemCode){
             FamPreDOKey famPreDOKey=new FamPreDOKey();
             famPreDOKey.setItemid(itemID);
@@ -49,7 +49,7 @@ public class FamPreDOController {
         }
     /*历史名方数据修改*/
     @RequestMapping(value ="updatefampredo",method = RequestMethod.POST )
-    @LogAnnotation(appCode ="",logTitle ="修改历史名方",logLevel ="2",creater ="",updater = "")
+    @LogAnnotation(appCode ="",logTitle ="修改历史名方",logLevel ="2",creater ="huangwj",updater = "huangwj")
     public ResponseData updateFamPreDOMapper(@RequestBody FamPreDO key) throws BusinessException {
         famPreDOService.updateByPrimaryKeySelective(key);
         System.out.println("要修改历史名方编号为："+key.getItemid());
@@ -57,7 +57,7 @@ public class FamPreDOController {
     }
     /*历史名方数据查询(通过id和编号)*/
     @RequestMapping(value ="selectfampredo",method = RequestMethod.POST )
-    @LogAnnotation(appCode ="",logTitle ="通过ID及Code查询历史名方",logLevel ="1",creater ="",updater = "")
+    @LogAnnotation(appCode ="",logTitle ="通过ID及Code查询历史名方",logLevel ="1",creater ="huangwj",updater = "huangwj")
     public ResponseData selectFamPreDOMapper(@RequestBody FamPreDOKey key){
         famPreDOService.selectByPrimaryKey(key);
         return new ResponseData(EmBusinessError.success);
@@ -75,7 +75,7 @@ public class FamPreDOController {
      * @param key
      */
     @RequestMapping(value = "visitnumfampredo", method = RequestMethod.POST)
-    @LogAnnotation(appCode ="",logTitle ="历史名方点击浏览数",logLevel ="2",creater ="",updater = "")
+    @LogAnnotation(appCode ="",logTitle ="历史名方点击浏览数",logLevel ="2",creater ="huangwj",updater = "huangwj")
     public int increaseVisitNum(@RequestBody FamPreDOKey key) {
         return famPreDOService.increaseVisitNumFamPre(key);
     }

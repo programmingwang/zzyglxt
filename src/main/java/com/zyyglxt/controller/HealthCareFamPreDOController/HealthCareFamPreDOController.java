@@ -29,7 +29,7 @@ HealthCareFamPreDOController {
      国医话健康相关数据插入
    */
     @RequestMapping(value ="inserthealthcarefampredo",method = RequestMethod.POST )
-    @LogAnnotation(appCode ="",logTitle ="国医话健康数据的添加",logLevel ="3",creater ="",updater = "")
+    @LogAnnotation(appCode ="",logTitle ="国医话健康数据的添加",logLevel ="3",creater ="huangwj",updater = "huangwj")
     public ResponseData insertHealthCareFamPreDOMapper(@RequestBody HealthCareFamPreDO key) throws BusinessException {
 
         System.out.println("国医话健康标题名称: " + key.getName());
@@ -41,7 +41,7 @@ HealthCareFamPreDOController {
     */
     @RequestMapping(value ="deletehealthcarefampredo/{itemID}/{itemCode}",method = RequestMethod.DELETE )
     @ResponseBody
-    @LogAnnotation(appCode ="",logTitle ="删除国医话健康数据",logLevel ="4",creater ="",updater = "")
+    @LogAnnotation(appCode ="",logTitle ="删除国医话健康数据",logLevel ="4",creater ="huangwj",updater = "huangwj")
     public ResponseData deleteHealthCareFamPreDOMapper(@PathVariable("itemID")Integer itemID,@PathVariable("itemCode")String itemCode){
         HealthCareFamPreDOKey healthCareFamPreDOKey=new HealthCareFamPreDOKey();
         healthCareFamPreDOKey.setItemid(itemID);
@@ -53,7 +53,7 @@ HealthCareFamPreDOController {
      国医话健康相关数据的修改
    */
     @RequestMapping(value ="updatehealthcarefampredo",method = RequestMethod.POST )
-    @LogAnnotation(appCode ="",logTitle ="国医话健康数据的修改",logLevel ="2",creater ="",updater = "")
+    @LogAnnotation(appCode ="",logTitle ="国医话健康数据的修改",logLevel ="2",creater ="huangwj",updater = "huangwj")
     public ResponseData updateHealthCareFamPreDOMapper(@RequestBody HealthCareFamPreDO key) throws BusinessException {
       healthCareFamPreDOService.updateByPrimaryKeySelective(key);
         System.out.println("要修改标题名称编号为："+key.getItemid());
@@ -63,14 +63,14 @@ HealthCareFamPreDOController {
      国医话健康相关数据的查询
    */
     @RequestMapping(value ="selecthealthcarefampredo",method = RequestMethod.POST )
-    @LogAnnotation(appCode ="",logTitle ="通过id及编号查询国医话健康数据",logLevel ="1",creater ="",updater = "")
+    @LogAnnotation(appCode ="",logTitle ="通过id及编号查询国医话健康数据",logLevel ="1",creater ="huangwj",updater = "huangwj")
     public ResponseData selectHealthCareFamPreDOMapper(@RequestBody HealthCareFamPreDOKey key){
        healthCareFamPreDOService.selectByPrimaryKey(key);
         return new ResponseData(EmBusinessError.success);
     }
     /*查询所有国医话健康所有数据*/
     @RequestMapping(value ="selectallhealthcarefampredo",method = RequestMethod.GET )
-    @LogAnnotation(appCode ="",logTitle ="查询所有国医话健康数据",logLevel ="1",creater ="",updater = "")
+    @LogAnnotation(appCode ="",logTitle ="查询所有国医话健康数据",logLevel ="1",creater ="huangwj",updater = "huangwj")
     /*public List<HealthCareFamPreDO> selectAllHealthCareFamPreDOMapper(){
         return healthCareFamPreDOService.selectAllHealthCareFamPre();
     }*/
@@ -83,7 +83,7 @@ HealthCareFamPreDOController {
      * @param key
      */
     @RequestMapping(value = "visitnumhealthcarefampredo", method = RequestMethod.POST)
-    @LogAnnotation(appCode ="",logTitle ="国医话健康点击浏览数",logLevel ="2",creater ="",updater = "")
+    @LogAnnotation(appCode ="",logTitle ="国医话健康点击浏览数",logLevel ="2",creater ="huangwj",updater = "huangwj")
     public void increaseVisitNum(@RequestBody HealthCareFamPreDOKey key) {
         healthCareFamPreDOService.updateVisitNumHealthCareFamPre(key);
     }

@@ -48,42 +48,6 @@
                 var url = "/healthCare/famPre";
                 orange.redirect(url);
             });
-            /*$("#cancel").unbind().on('click',function () {
-                $("#main_body").html("");
-                var url = "/healthCare/famPre";
-                orange.loadPage({url: url, target: 'main_body', selector: '#fir_body', success: function(data){
-                        if(data == null||data == ""){
-                            return alertUtil.error( url+'加载失败');
-                        }
-                        $("#main_body").html(data);
-                    }})
-            });*/
-
-        /*    $("#btn_insert").unbind().on('click',function () {
-                var inCuHeEntity = {
-                    itemcode: stringUtil.getUUID(),
-                    name : $("#name").val(),
-                    source : $("#source").val(),
-                    prescription:$("#prescription").val(),
-                    status:$("#status").val(),
-                    creater : $("#creater").val(),
-                    content : editor.txt.html()
-                };
-                ajaxUtil.myAjax(null,"insertfampredo",inCuHeEntity,function (data) {
-                    if(ajaxUtil.success(data)){
-                        alertUtil.info("新增历史名方成功");
-                        var url = "/healthCare/famPre";
-                        orange.loadPage({url: url, target: 'main_body', selector: '#fir_body', success: function(data){
-                                if(data == null||data == ""){
-                                    return alertUtil.error( url+'加载失败');
-                                }
-                                $("#main_body").html(data);
-                            }})
-                    }else {
-                        alertUtil.alert(data.msg);
-                    }
-                },false,true);
-            });*/
 
             $("#btn_insert").unbind().on('click',function () {
                 var famPreEntity;
@@ -116,7 +80,6 @@
                     }
                     operateMessage = "更新历史名方成功";
                 }
-
                /* fileUtil.handleFile(isUpdate(), famPreEntity.itemcode, $("#upload_file")[0].files[0]);*/
 
                 ajaxUtil.myAjax(null,addUpdateUrl,famPreEntity,function (data) {
@@ -130,7 +93,6 @@
                 },false,true);
 
             });
-
             (function init() {
                 if (isUpdate()){
                     var tempdata = JSON.parse(localStorage.getItem("rowData"));
@@ -142,10 +104,8 @@
                     editor.txt.html(tempdata.content);
                     var img = tempdata.filePath;
                     $("#upimg").attr("src",img);
-
                 }
             }());
-
 
             function isUpdate() {
                 return (localStorage.getItem("rowData") != null || localStorage.getItem("rowData") != undefined)

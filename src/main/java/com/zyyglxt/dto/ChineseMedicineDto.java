@@ -22,10 +22,6 @@ public class ChineseMedicineDto extends ChineseMedicineDO {
     @NotBlank(message = "专科code不能为空")
     private String specialtyCode;
 
-    @NotBlank(message = "医院名称不能为空")
-    private String hospitalName;
-
-
     @NotBlank(message = "专科名称不能为空")
     private String specialtyName;
 

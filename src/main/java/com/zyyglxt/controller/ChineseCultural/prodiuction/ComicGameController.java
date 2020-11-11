@@ -73,16 +73,6 @@ public class ComicGameController {
         return new ResponseData(EmBusinessError.success);
     }
 
-    //去修改的页面
-    @RequestMapping(value = "/toUpdComGam/{itemID}/{itemCode}" , method = RequestMethod.GET)
-    @ResponseBody
-    public ResponseData toUpdatePage(@PathVariable("itemID") Integer itemID, @PathVariable("itemCode")String itemCode){
-        ChineseCulturalDOKey chineseCulturalDOKey = new ChineseCulturalDOKey();
-        chineseCulturalDOKey.setItemid(itemID);
-        chineseCulturalDOKey.setItemcode(itemCode);
-        ChineseCulturalDO chineseCultural = iComicGameService.getComicGame(chineseCulturalDOKey);
-        return new ResponseData(EmBusinessError.success,chineseCultural);
-    }
 
     //修改一个动漫游戏
     @RequestMapping(value = "/updComGam" , method = RequestMethod.POST)

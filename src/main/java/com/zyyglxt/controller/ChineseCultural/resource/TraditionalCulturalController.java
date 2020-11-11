@@ -37,13 +37,7 @@ public class TraditionalCulturalController {
         return new ResponseData(EmBusinessError.success,traditionalCulturalList);
     }
 
-    //查询一个中医医史
 
-//    //去增加页面,这个是为了跳转到增加的页面
-//    @RequestMapping(value = "/toAddPage")
-//    public String toAddPage(){
-//        return "/add/js/add";
-//    }
 
     //增加一个中医医史
     @RequestMapping(value = "/addTraCul" , method = RequestMethod.POST)
@@ -64,16 +58,6 @@ public class TraditionalCulturalController {
         return new ResponseData(EmBusinessError.success);
     }
 
-    //去修改的页面
-    @RequestMapping(value = "/toUpdTraCul/{itemID}/{itemCode}" , method = RequestMethod.GET)
-    @ResponseBody
-    public ResponseData toUpdatePage(@PathVariable("itemID") Integer itemID, @PathVariable("itemCode")String itemCode){
-        CulturalResourcesDOKey culturalResourcesDOKey = new CulturalResourcesDOKey();
-        culturalResourcesDOKey.setItemid(itemID);
-        culturalResourcesDOKey.setItemcode(itemCode);
-        CulturalResourcesDO culturalResources = traditionalCulturalService.getTraditionalCultural(culturalResourcesDOKey);
-        return new ResponseData(EmBusinessError.success,culturalResources);
-    }
 
     //修改一个中医医史
     @RequestMapping(value = "/updTraCul" , method = RequestMethod.POST)

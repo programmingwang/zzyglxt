@@ -59,12 +59,15 @@
                     operateMessage = "新增中医药成功";
                     chinesemedicineEntity = {
                         itemcode: stringUtil.getUUID(),
-                        chineseMedicineName : $("#chineseMedicineName").val(),
-                        chineseMedicineSource : $("#chineseMedicineSource").val(),
-                        creater : $("#creater").val(),
-                        chineseMedicineAlias : $("#chineseMedicineAlias").val(),
-                        chineseMedicineEffect : $("#chineseMedicineEffect").val(),
-                        chineseMedicineUsage : editor.txt.html()
+                        chineseMedicineName : $("#chineseMedicineName").val(),//中药材名称
+                        chineseMedicineAlias : $("#chineseMedicineAlias").val(),//别名
+                        chineseMedicineEffect : $("#chineseMedicineEffect").val(),//功效分类
+                        chineseMedicineHarvesting : $("#chineseMedicineHarvesting").val(),//采制
+                        chineseMedicineTaste : $("#chineseMedicineTaste").val(),//性味
+                        chineseMedicineMerTro : $("#chineseMedicineMerTro").val(),//归经
+                        chineseMedicineSource : $("#chineseMedicineSource").val(),//功能主治
+                        chineseMedicineUsage :$("#chineseMedicineUsage").val(),//用法用量
+                        /*chineseMedicineUsage : editor.txt.html()*/
                     };
                 }else{
                     var needData = JSON.parse(localStorage.getItem("rowData"));
@@ -72,12 +75,15 @@
                     chinesemedicineEntity = {
                         itemid: needData.itemid,
                         itemcode: needData.itemcode,
-                        chineseMedicineName : $("#chineseMedicineName").val(),
-                        chineseMedicineSource : $("#chineseMedicineSource").val(),
-                        creater : $("#creater").val(),
-                        chineseMedicineAlias : $("#chineseMedicineAlias").val(),
-                        chineseMedicineEffect : $("#chineseMedicineEffect").val(),
-                        chineseMedicineUsage : editor.txt.html()
+                        chineseMedicineName : $("#chineseMedicineName").val(),//中药材名称
+                        chineseMedicineAlias : $("#chineseMedicineAlias").val(),//别名
+                        chineseMedicineEffect : $("#chineseMedicineEffect").val(),//功效分类
+                        chineseMedicineHarvesting : $("#chineseMedicineHarvesting").val(),//采制
+                        chineseMedicineTaste : $("#chineseMedicineTaste").val(),//性味
+                        chineseMedicineMerTro : $("#chineseMedicineMerTro").val(),//归经
+                        chineseMedicineSource : $("#chineseMedicineSource").val(),//功能主治
+                        chineseMedicineUsage :$("#chineseMedicineUsage").val(),//用法用量
+                       /* chineseMedicineUsage : editor.txt.html()*/
                     }
                     operateMessage = "更新中医药成功";
                 }
@@ -98,11 +104,14 @@
                 if (isUpdate()){
                     var tempdata = JSON.parse(localStorage.getItem("rowData"));
                     $("#chineseMedicineName").val(tempdata.chineseMedicineName);
-                    $("#chineseMedicineSource").val(tempdata.chineseMedicineSource);
-                    $("#creater").val(tempdata.creater);
                     $("#chineseMedicineAlias").val(tempdata.chineseMedicineAlias);
                     $("#chineseMedicineEffect").val(tempdata.chineseMedicineEffect);
-                    editor.txt.html(tempdata.chineseMedicineUsage);
+                    $("#chineseMedicineHarvesting").val(tempdata.chineseMedicineHarvesting);
+                    $("#chineseMedicineTaste").val(tempdata.chineseMedicineTaste);
+                    $("#chineseMedicineMerTro").val(tempdata.chineseMedicineMerTro);
+                    $("#chineseMedicineSource").val(tempdata.chineseMedicineSource);
+                    $("#chineseMedicineUsage").val(tempdata.chineseMedicineUsage);
+                   /* editor.txt.html(tempdata.chineseMedicineUsage);*/
                     var img = tempdata.filePath;
                     $("#upimg").attr("src",img);
                 }

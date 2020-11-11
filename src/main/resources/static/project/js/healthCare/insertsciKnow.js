@@ -77,7 +77,7 @@
                     }
                     operateMessage = "更新科普知识成功";
                 }
-                /* fileUtil.handleFile(isUpdate(), sciKnowEntity.itemcode, $("#upload_file")[0].files[0]);*/
+               /*fileUtil.handleFile(isUpdate(), sciKnowEntity.itemcode, upload_file.getFiles()[0]);*/
 
                 ajaxUtil.myAjax(null,addUpdateUrl,sciKnowEntity,function (data) {
                     if(ajaxUtil.success(data)){

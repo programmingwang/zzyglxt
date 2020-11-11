@@ -8,6 +8,7 @@ import com.zyyglxt.error.EmBusinessError;
 import com.zyyglxt.response.ResponseData;
 import com.zyyglxt.service.HealthSciKnowDOService;
 import com.zyyglxt.service.IFileService;
+import io.swagger.annotations.Api;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,13 +21,12 @@ import java.util.List;
  * @Author huangwj
  * @time 2020/10/30 15:30
  */
+@Api(tags="养生保健-科普知识")
 @RestController
 public class HealthSciKnowDOController {
     @Resource
      private HealthSciKnowDOService healthSciKnowDOService;
 
-    @Resource
-    private IFileService iFileService;
     /*
     科普知识相关数据插入
     */

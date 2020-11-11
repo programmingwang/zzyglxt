@@ -10,6 +10,7 @@ import com.zyyglxt.error.EmBusinessError;
 import com.zyyglxt.response.ResponseData;
 import com.zyyglxt.service.HealthCareChineseMedicineDOService;
 import com.zyyglxt.service.IFileService;
+import io.swagger.annotations.Api;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.ui.Model;
@@ -24,6 +25,7 @@ import java.util.List;
  * @Author huangwj
  * @time 2020/10/28 22:45
  */
+@Api(tags="养生保健-中医药常识")
 @RestController
                 /*（控制器类实现数据交互）*/
 public class HealthCareChineseMedicineDOController {

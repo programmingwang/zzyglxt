@@ -7,6 +7,7 @@ import com.zyyglxt.error.BusinessException;
 import com.zyyglxt.error.EmBusinessError;
 import com.zyyglxt.response.ResponseData;
 import com.zyyglxt.service.HealthCareFamPreDOService;
+import io.swagger.annotations.Api;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,6 +19,7 @@ import java.util.List;
  * @Author huangwj
  * @time 2020/10/30 15:11
  */
+@Api(tags="养生保健-国医话健康")
 @RestController
 public class
 HealthCareFamPreDOController {

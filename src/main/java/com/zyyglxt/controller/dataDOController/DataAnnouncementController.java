@@ -99,7 +99,7 @@ public class DataAnnouncementController {
      * 更新通知公告记录
      * @param record
      */
-    @RequestMapping(value = "updateAnn", method = RequestMethod.PUT)
+    @RequestMapping(value = "updateAnn", method = RequestMethod.POST)
     @ResponseBody
     public ResponseData updateAnnouncement(@RequestBody DataDO record) {
         dataAnnouncementService.updateAnnouncement(record);

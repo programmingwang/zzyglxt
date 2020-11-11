@@ -86,4 +86,9 @@ public class ChineseMedicineServiceImpl implements IChineseMedicineService {
     public List<ChineseMedicineDO> top5ChineseMedicine() {
         return chineseMedicineDOMapper.top5ChineseMedicine();
     }
+
+    @Override
+    public List<ChineseMedicineDO> selectBySpecialtyCode(String specialtyCode) {
+        return chineseMedicineDOMapper.selectBySpecialtyCode(specialtyCode);
+    }
 }

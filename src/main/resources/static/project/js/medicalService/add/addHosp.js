@@ -1,6 +1,6 @@
 (function () {
-    require(['jquery','wangEditor','ajaxUtil','alertUtil','stringUtil','dictUtil'],
-        function (jquery,wangEditor,ajaxUtil,alertUtil,stringUtil,dictUtil) {
+    require(['jquery','wangEditor','ajaxUtil','alertUtil','stringUtil','dictUtil','fileUtil','uploadImg'],
+        function (jquery,wangEditor,ajaxUtil,alertUtil,stringUtil,dictUtil,fileUtil,uploadImg) {
             const editor = new wangEditor('#div1')
             // 或者 const editor = new E( document.getElementById('div1') )
             //菜单配置
@@ -45,78 +45,71 @@
                 }
             });
 
+            /*q全局变量*/
+            var tempdata = JSON.parse(localStorage.getItem("rowData"));
+            var updateStatus = isUpdate()
+            var jumpUrl = "/medicalService/hosp"
+
+            /*设置下拉框的值*/
+            $("#hospitalLevel").selectUtil(dictUtil.getDictByCode(dictUtil.DICT_LIST.hospitalLevel));
+            /*返回按钮处理*/
             $("#cancel").unbind().on('click',function () {
-                $("#main_body").html("");
-                var url = "/medicalService/hosp";
-                orange.loadPage({url: url, target: 'main_body', selector: '#fir_body', success: function(data){
-                        if(data == null||data == ""){
-                            return alertUtil.error( url+'加载失败');
-                        }
-                        $("#main_body").html(data);
-                    }})
+                orange.redirect(jumpUrl);
             });
 
+            /*确认按钮处理*/
             $("#btn_insert").unbind().on('click',function () {
-                var hospEntity = {
-                    itemcode: stringUtil.getUUID(),
-                    hospitalName : $("#hospitalName").val(),
-                    hospitalLevel : $("#hospitalLevel").val(),
-                    hospitalTelephone : $("#hospitalTelephone").val(),
-                    hospitalAddressCity : $("#hospitalAddressCity").val(),
-                    hospitalAddressCountry : $("#hospitalAddressCountry").val(),
-                    hospitalAddress : $("#hospitalAddress").val(),
-                    hospitalLink : $("#hospitalLink").val(),
-                    hospitalIntroduce : editor.txt.html()
-                };
+                var entity;
+                var requestUrl;
+                var operateMessage;
+                if (!updateStatus){
+                    requestUrl = "/medicalService/hosp/add";
+                    operateMessage = "新增医院成功";
+                    entity = {
+                        itemcode: stringUtil.getUUID(),
+                    };
+                }
+                else {
+                    requestUrl = "/medicalService/hosp/update";
+                    operateMessage = "更新医院成功";
+                    entity = {
+                        itemid: tempdata.itemid,
+                        itemcode: tempdata.itemcode
+                    };
+                }
+                entity["hospitalName"] = $("#hospitalName").val();
+                entity["hospitalLevel"] = $("#hospitalLevel").val();
+                entity["hospitalTelephone"] = $("#hospitalTelephone").val();
+                entity["hospitalAddressCity"] = $("#hospitalAddressCity").val();
+                entity["hospitalAddressCountry"] = $("#hospitalAddressCountry").val();
+                entity["hospitalAddress"] = $("#hospitalAddress").val();
+                entity["hospitalLink"] = $("#hospitalLink").val();
+                entity["hospitalIntroduce"] = editor.txt.html()
 
-                var formData = new FormData();
-                formData.append("dataCode",hospEntity.itemcode);
-                formData.append("file",$("#upload_file")[0].files[0]);
-                formData.append("itemcode",stringUtil.getUUID());
-                formData.append("uploader","admin");
-                formData.append("uploaderCode","qweqwqwewasdasd");
-                $.ajax({
-                    url:"/file/upload",
-                    type:'POST',
-                    data: formData,
-                    processData: false,   // jQuery不要去处理发送的数据
-                    contentType: false,   // jQuery不要去设置Content-Type请求头
-                    success:function(data){
-                        alertUtil.success(data.msg);
-                    },
-                    error: function(data){
-                        alertUtil.error(data.msg)
-                    }
-                });
+                fileUtil.handleFile(updateStatus, entity.itemcode, uploadImg.getFiles()[0]);
 
-                ajaxUtil.myAjax(null,"/medicalService/hosp/add",hospEntity,function (data) {
+                ajaxUtil.myAjax(null,requestUrl,entity,function (data) {
                     if(ajaxUtil.success(data)){
-                        alertUtil.info("新增医院成功");
-                        var url = "/medicalService/hosp";
-                        orange.loadPage({url: url, target: 'main_body', selector: '#fir_body', success: function(data){
-                                if(data == null||data == ""){
-                                    return alertUtil.error( url+'加载失败');
-                                }
-                                $("#main_body").html(data);
-                            }})
+                        alertUtil.info(operateMessage);
+                        orange.redirect(jumpUrl);
                     }else {
                         alertUtil.alert(data.msg);
                     }
                 },false,true);
-
             });
 
-            var pl = dictUtil.getDictByCode(dictUtil.DICT_LIST.hospitalLevel);
-            $("#hospitalLevel").selectUtil(pl);
+            function isUpdate() {
+                return (tempdata != null || tempdata != undefined)
+            }
 
+            /*初始化数据*/
             (function init() {
-                if (isUpdate()){
-                    var tempdata = JSON.parse(localStorage.getItem("rowData"));
+                if (updateStatus){
                     $("#hospitalName").val(tempdata.hospitalName);
-                    $("#hospitalLevel").val(tempdata.hospitalLevel);
+                    $("#hospitalLevel  option[value="+tempdata.hospitalLevel+"] ").attr("selected",true);
                     $("#hospitalTelephone").val(tempdata.hospitalTelephone);
-                    $("#hospitalAddressCity").val(tempdata.hospitalAddressCity);
-                    $("#hospitalAddressCountry").val(tempdata.hospitalAddressCountry);
+                    $("#hospitalAddressCity  option[value="+tempdata.hospitalAddressCity+"] ").attr("selected",true);
+                    $("#hospitalAddressCountry  option[value="+tempdata.hospitalAddressCountry+"] ").attr("selected",true);
                     $("#hospitalAddress").val(tempdata.hospitalAddress);
                     $("#hospitalLink").val(tempdata.hospitalLink);
                     $("#hospitalAddressCountry").val(tempdata.hospitalAddressCountry);
@@ -124,8 +117,6 @@
                 }
             }());
 
-            function isUpdate() {
-                return (localStorage.getItem("rowData") != null || localStorage.getItem("rowData") != undefined)
-            }
+            uploadImg.init();
         });
 })();

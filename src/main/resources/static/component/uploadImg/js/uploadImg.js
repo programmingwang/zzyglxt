@@ -1,28 +1,30 @@
 (function () {
-    define('uploadImg',['jquery'],function ($) {
+    define('uploadImg', ['jquery'], function ($) {
         var imgFile = []; //文件流
         var imgSrc = []; //图片路径
         var imgName = []; //图片名字
         var limit = 5;//限制数量，默认为 5
-        var updated = false
-        var selectElement = $(".upload-content");
+        var updated = false;
+
         function init() {
-            $(function() {
-                updated = false
+            $(function () {
+                console.log($(".upload-content"));
+                localStorage.setItem('limit',$(".upload-content").attr('data-limit'));
+                updated = false;
                 imgFile = []; //文件流
                 imgSrc = []; //图片路径
                 imgName = []; //图片名字
-                limit = selectElement.attr('data-limit');
+                limit = $(".upload-content").attr('data-limit');
                 // 鼠标经过显示删除按钮
-                $('.content-img-list').on('mouseover', '.content-img-list-item', function() {
+                $('.content-img-list').on('mouseover', '.content-img-list-item', function () {
                     $(this).children('div').removeClass('hide');
                 });
                 // 鼠标离开隐藏删除按钮
-                $('.content-img-list').on('mouseleave', '.content-img-list-item', function() {
+                $('.content-img-list').on('mouseleave', '.content-img-list-item', function () {
                     $(this).children('div').addClass('hide');
                 });
                 // 单个图片删除
-                $(".content-img-list").on("click", '.content-img-list-item a .gcllajitong', function() {
+                $(".content-img-list").on("click", '.content-img-list-item a .gcllajitong', function () {
                     var index = $(this).parent().parent().parent().index();
                     imgSrc.splice(index, 1);
                     imgFile.splice(index, 1);
@@ -35,7 +37,7 @@
                 });
 
 
-                $(".content-img-list").on("click", '.content-img-list-item a .gclfangda', function() {
+                $(".content-img-list").on("click", '.content-img-list-item a .gclfangda', function () {
                     var index = $(this).parent().parent().parent().index();
                     $(".modal-content").html("");
 
@@ -46,27 +48,27 @@
                     // );
 
 
-
                 });
-
-
 
 
             });
             //图片上传
-            $('#upload').unbind().on('change', function(e) {
-                updated = true
+            $('#upload').unbind().on('change', function (e) {
+                var limit = localStorage.getItem('limit');
+                updated = true;
                 var imgSize = this.files[0].size;
                 if (imgSize > 1024 * 1024 * 1) { //1M
                     return alert("上传图片不能超过1M");
-                };
+                }
+                ;
                 if (this.files[0].type != 'image/png' && this.files[0].type != 'image/jpeg' && this.files[0].type != 'image/gif') {
                     return alert("图片上传格式不正确");
-                };
-                if (imgSrc.length+1 > limit){
-                    return alert("不能超过"+limit+"张");
                 }
-                if (imgSrc.length+2 > limit){
+                ;
+                if (imgSrc.length + 1 > limit) {
+                    return alert("不能超过" + limit + "张");
+                }
+                if (imgSrc.length + 2 > limit) {
                     $(".file").hide();
                 }
 
@@ -98,9 +100,13 @@
 
 //图片展示
         function addNewContent(obj) {
-            // console.log(imgSrc)
+            var limit = localStorage.getItem('limit');
             $(obj).html("");
             for (var a = 0; a < imgSrc.length; a++) {
+                console.log(imgSrc.length)
+                if (imgSrc.length + 1 > limit) {
+                    $(".file").hide();
+                }
                 var oldBox = $(obj).html();
                 $(obj).html(oldBox + '<li class="content-img-list-item"><img src="' + imgSrc[a] + '" alt="">' +
                     '<div class="hide"><a index="' + a + '" class="delete-btn"><i class="gcl gcllajitong"></i></a>' +
@@ -130,6 +136,13 @@
         }
 
         function setImgSrc(src) {
+            for (var i = 0;i<imgSrc.length;i++){
+                console.log(imgSrc[i])
+                console.log(src)
+                if (imgSrc[i] === src){
+                    return
+                }
+            }
             imgSrc.push(src);
             var boxId = ".content-img-list";
             addNewContent(boxId);

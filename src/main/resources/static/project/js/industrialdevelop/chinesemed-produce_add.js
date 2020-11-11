@@ -6,6 +6,8 @@
 
             var pathUrl = "/industrialdevelop/chinesemed-produce";
 
+            var orgType = "produce";
+
             var itemcode = stringUtil.getUUID();
 
             var type = isUpdate() ? "put":"post";
@@ -72,6 +74,7 @@
                 param.addressCountry = $("#addressCountry").val()
                 param.address = $("#address").val()
                 param.intruduce = $(".w-e-text").html();
+                param.type = orgType;
                 return param;
             }
 
@@ -106,7 +109,7 @@
                 return false;
             });
 
-            (function init() {
+            $(function init() {
                 if (isUpdate()){
                     var tempdata = JSON.parse(localStorage.getItem("rowData"));
                     $("#name").val(tempdata.name);
@@ -120,6 +123,7 @@
                     $("#phone").val(tempdata.phone);
                     $(".w-e-text").html(tempdata.intruduce);
                     itemcode = tempdata.itemcode
+                    uploadImg.setImgSrc(tempdata.filePath)
                 }
             }());
 

@@ -6,6 +6,8 @@
 
             var pathUrl = "/industrialdevelop/chinesemed-sale";
 
+            var orgType = 'sale'
+
             var itemcode = stringUtil.getUUID();
 
             var type = isUpdate() ? "put":"post";
@@ -72,6 +74,7 @@
                 param.addressCountry = $("#addressCountry").val()
                 param.address = $("#address").val()
                 param.intruduce = $(".w-e-text").html();
+                param.type = orgType
                 return param;
             }
 
@@ -120,6 +123,7 @@
                     $("#phone").val(tempdata.phone);
                     $(".w-e-text").html(tempdata.intruduce);
                     itemcode = tempdata.itemcode
+                    uploadImg.setImgSrc(tempdata.filePath)
                 }
             }());
 

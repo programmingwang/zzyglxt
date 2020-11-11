@@ -3,7 +3,7 @@
         function (jquery,ajaxUtil,bootstrapTableUtil,objectUtil,alertUtil,modalUtil,selectUtil,stringUtil,dictUtil) {
 
 
-            var url = "/industrialdevelop/chi-med";
+            var url = "/industrialdevelop/chi-med/sale";
 
             var pathUrl = "/industrialdevelop/chinesemed-sale";
             var addUrl = pathUrl+"_add";

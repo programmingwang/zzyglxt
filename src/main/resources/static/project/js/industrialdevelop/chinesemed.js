@@ -3,7 +3,7 @@
         function (jquery,ajaxUtil,bootstrapTableUtil,objectUtil,alertUtil,modalUtil,selectUtil,stringUtil,dictUtil) {
 
 
-            var url = "/industrialdevelop/chi-med";
+            var url = "/industrialdevelop/chi-med/process";
 
             var pathUrl = "/industrialdevelop/chinesemed";
             var addUrl = pathUrl+"_add";
@@ -73,7 +73,7 @@
 
 
             var aCol = [
-                {field: 'serviceProject', title: '企业名称'},
+                {field: 'name', title: '企业名称'},
                 {field: 'filePath', title: '企业图片', formatter:function (value, row, index) {
                         if(value == "已经损坏了"){
                             return '<p>'+value+'</p>';

@@ -7,6 +7,7 @@ import com.zyyglxt.error.BusinessException;
 import com.zyyglxt.error.EmBusinessError;
 import com.zyyglxt.response.ResponseData;
 import com.zyyglxt.service.FamPreDOService;
+import com.zyyglxt.service.IFileService;
 import io.swagger.annotations.Api;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -27,7 +28,8 @@ public class FamPreDOController {
     */
     @Resource
      private FamPreDOService famPreDOService;
-  /*历史名方数据添加*/
+
+    /*历史名方数据添加*/
   @RequestMapping(value = "insertfampredo",method = RequestMethod.POST)
   @LogAnnotation(appCode ="",logTitle ="历史名方数据添加",logLevel ="3",creater ="huangwj",updater = "huangwj")
     public ResponseData insertFamPreDOMapper(@RequestBody FamPreDO key) throws BusinessException {
@@ -70,6 +72,7 @@ public class FamPreDOController {
         model.addAttribute("traditionalCulturalList",famPreDOList);
         return new ResponseData(EmBusinessError.success,famPreDOList);
     }
+
     /**
      * 增加点击数
      * @param key

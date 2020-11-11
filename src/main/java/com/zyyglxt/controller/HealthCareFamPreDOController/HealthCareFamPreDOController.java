@@ -1,17 +1,25 @@
 package com.zyyglxt.controller.HealthCareFamPreDOController;
 
 import com.zyyglxt.annotation.LogAnnotation;
+import com.zyyglxt.dataobject.CulturalResourcesDO;
+import com.zyyglxt.dataobject.FileDO;
 import com.zyyglxt.dataobject.HealthCareFamPreDO;
 import com.zyyglxt.dataobject.HealthCareFamPreDOKey;
+import com.zyyglxt.dto.CulturalResourcesDto;
+import com.zyyglxt.dto.HealthCareFamPreDto;
 import com.zyyglxt.error.BusinessException;
 import com.zyyglxt.error.EmBusinessError;
 import com.zyyglxt.response.ResponseData;
 import com.zyyglxt.service.HealthCareFamPreDOService;
+import com.zyyglxt.service.IFileService;
+import com.zyyglxt.util.ConvertDOToCareFamPre;
+import com.zyyglxt.util.ConvertDOToDTOUtil;
 import io.swagger.annotations.Api;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -25,6 +33,9 @@ public class
 HealthCareFamPreDOController {
     @Resource
      private HealthCareFamPreDOService healthCareFamPreDOService;
+
+    @Resource
+    private IFileService iFileService;
     /*
      国医话健康相关数据插入
    */
@@ -71,12 +82,20 @@ HealthCareFamPreDOController {
     /*查询所有国医话健康所有数据*/
     @RequestMapping(value ="selectallhealthcarefampredo",method = RequestMethod.GET )
     @LogAnnotation(appCode ="",logTitle ="查询所有国医话健康数据",logLevel ="1",creater ="huangwj",updater = "huangwj")
-    /*public List<HealthCareFamPreDO> selectAllHealthCareFamPreDOMapper(){
-        return healthCareFamPreDOService.selectAllHealthCareFamPre();
+    /*public ResponseData selectAllHealthCareFamPreDOMapper(){
+        List<HealthCareFamPreDO> healthCareFamPreDOSList = healthCareFamPreDOService.selectAllHealthCareFamPre();
+        return new ResponseData(EmBusinessError.success,healthCareFamPreDOSList);
     }*/
     public ResponseData selectAllHealthCareFamPreDOMapper(){
         List<HealthCareFamPreDO> healthCareFamPreDOSList = healthCareFamPreDOService.selectAllHealthCareFamPre();
-        return new ResponseData(EmBusinessError.success,healthCareFamPreDOSList);
+        List<HealthCareFamPreDto> healthCareFamPreDtoList = new ArrayList<>();
+        for (HealthCareFamPreDO healthCareFamPreDO : healthCareFamPreDOSList) {
+            FileDO fileDO = iFileService.selectFileByDataCode(healthCareFamPreDO.getItemcode());
+            healthCareFamPreDtoList.add(
+                    ConvertDOToCareFamPre.convertFromCareFamPre(
+                            healthCareFamPreDO,fileDO.getFilePath(),fileDO.getFileName()));
+        }
+        return new ResponseData(EmBusinessError.success,healthCareFamPreDtoList);
     }
     /**
      * 增加点击数

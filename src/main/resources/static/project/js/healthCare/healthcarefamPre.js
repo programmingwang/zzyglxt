@@ -61,6 +61,13 @@
                 {field: 'name', title: '国医话健康标题'},
                 {field: 'source', title: '来源'},
                 {field: 'author', title: '作者'},
+                {field: 'filePath', title: '附件', formatter:function (value, row, index) {
+                        if(value == "已经损坏了"){
+                            return '<p>'+value+'</p>';
+                        }else{
+                            return '<a href="'+value+'">'+row.fileName+'</a>'
+                        }
+                    }},
                 {field:'itemcreateat',title:'发布时间'},
                 {field: 'action',  title: '操作',formatter: operation,events:orgEvents}
             ];

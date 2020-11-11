@@ -1,5 +1,6 @@
 package com.zyyglxt.controller.HealthCareChineseMedicineDOController;
 
+import com.zyyglxt.annotation.LogAnnotation;
 import com.zyyglxt.dataobject.HealthCareChineseMedicineDO;
 import com.zyyglxt.dataobject.HealthCareChineseMedicineDOKey;
 
@@ -35,6 +36,7 @@ public class HealthCareChineseMedicineDOController {
      中医药名称相关数据插入
    */
    @RequestMapping(value ="inserthealthcarechinesemedicinedo",method = RequestMethod.POST )
+   @LogAnnotation(appCode ="",logTitle ="中医药数据添加",logLevel ="3",creater ="",updater = "")
    public ResponseData insertHealthCareChineseMedicineDOMapper(@RequestBody HealthCareChineseMedicineDO key) throws BusinessException {
 
            System.out.println("中医药名称: " + key.getChineseMedicineName());
@@ -46,6 +48,7 @@ public class HealthCareChineseMedicineDOController {
     */
     @RequestMapping(value ="deletehealthcarechinesemedicinedo/{itemID}/{itemCode}",method = RequestMethod.DELETE )
     @ResponseBody
+    @LogAnnotation(appCode ="",logTitle ="中医药数据删除",logLevel ="4",creater ="",updater = "")
     /*public ResponseData deleteHealthCareChineseMedicineDOMapper(@RequestBody HealthCareChineseMedicineDOKey key){
         healthCareChineseMedicineDOService.deleteByPrimaryKey(key);
         System.out.println("要删除中医药编号为："+key.getItemid());
@@ -63,6 +66,7 @@ public class HealthCareChineseMedicineDOController {
      中医药名称相关数据的修改
    */
     @RequestMapping(value ="updatehealthcarechinesemedicinedo",method = RequestMethod.POST )
+    @LogAnnotation(appCode ="",logTitle ="中医药数据修改",logLevel ="2",creater ="",updater = "")
     public ResponseData updateHealthCareChineseMedicineDOMapper(@RequestBody HealthCareChineseMedicineDO key) throws BusinessException {
             healthCareChineseMedicineDOService.updateByPrimaryKeySelective(key);
             System.out.println("要修改中医药编号为："+key.getItemid());
@@ -72,12 +76,14 @@ public class HealthCareChineseMedicineDOController {
      中医药名称相关数据的查询(通过id和编号)
    */
     @RequestMapping(value ="selecthealthcarechinesemedicinedo",method = RequestMethod.POST )
+    @LogAnnotation(appCode ="",logTitle ="通过id及编号查询中医药数据",logLevel ="1",creater ="",updater = "")
     public ResponseData selectHealthCareChineseMedicineDOMapper(@RequestBody HealthCareChineseMedicineDOKey key){
         healthCareChineseMedicineDOService.selectByPrimaryKey(key);
         return new ResponseData(EmBusinessError.success);
     }
     /*中医药常识数据所有查询*/
     @RequestMapping(value ="selectallhealthcarechinesemedicinedo",method = RequestMethod.GET )
+    @LogAnnotation(appCode ="",logTitle ="查寻所有中医药数据",logLevel ="1",creater ="",updater = "")
     /*public List<HealthCareChineseMedicineDO> selectAllHealthCareChineseMedicineDOMapper(){
         return healthCareChineseMedicineDOService.selectAllHealthCareChineseMedicine();
     }*/

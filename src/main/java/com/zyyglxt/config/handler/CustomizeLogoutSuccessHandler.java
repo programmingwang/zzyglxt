@@ -3,6 +3,9 @@ package com.zyyglxt.config.handler;
 import com.alibaba.fastjson.JSON;
 import com.zyyglxt.dao.UserDOMapper;
 import com.zyyglxt.dataobject.UserDO;
+import com.zyyglxt.dto.UserSessionDto;
+import com.zyyglxt.service.impl.IUserServiceImpl;
+import com.zyyglxt.util.ContextUtil;
 import com.zyyglxt.util.JsonResult;
 import com.zyyglxt.util.ResultTool;
 import com.zyyglxt.util.UserUtil;
@@ -25,13 +28,6 @@ public class CustomizeLogoutSuccessHandler implements LogoutSuccessHandler {
 
     @Override
     public void onLogoutSuccess(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Authentication authentication) throws IOException {
-        UserUtil userUtil = new UserUtil();
-        UserDO userDO = new UserDO();
-        userDO.setState("出");
-        userDO.setItemid(Integer.parseInt(userUtil.getUser().get("itemid")));
-        userDO.setItemcode(userUtil.getUser().get("itemcode"));
-
-        userDOMapper.updateByPrimaryKeySelective(userDO);
         JsonResult result = ResultTool.success();
         httpServletResponse.setContentType("text/json;charset=utf-8");
         httpServletResponse.getWriter().write(JSON.toJSONString(result));

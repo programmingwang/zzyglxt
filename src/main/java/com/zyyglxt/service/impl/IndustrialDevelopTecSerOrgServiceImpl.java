@@ -5,6 +5,9 @@ import javax.annotation.Resource;
 import com.zyyglxt.dao.IndustrialDevelopTecSerOrgMapper;
 import com.zyyglxt.dataobject.IndustrialDevelopTecSerOrg;
 import com.zyyglxt.service.IndustrialDevelopTecSerOrgService;
+
+import java.util.List;
+
 /**
    *@Author lrt
    *@Date 2020/11/6 20:00
@@ -44,6 +47,11 @@ public class IndustrialDevelopTecSerOrgServiceImpl implements IndustrialDevelopT
     @Override
     public int updateByPrimaryKey(IndustrialDevelopTecSerOrg record) {
         return industrialDevelopTecSerOrgMapper.updateByPrimaryKey(record);
+    }
+
+    @Override
+    public List<IndustrialDevelopTecSerOrg> selectAll() {
+        return industrialDevelopTecSerOrgMapper.selectAll();
     }
 
 }

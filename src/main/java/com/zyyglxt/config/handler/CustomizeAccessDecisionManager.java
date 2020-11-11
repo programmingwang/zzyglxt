@@ -18,6 +18,9 @@ import java.util.Iterator;
 public class CustomizeAccessDecisionManager implements AccessDecisionManager {
     @Override
     public void decide(Authentication authentication, Object o, Collection<ConfigAttribute> collection) throws AccessDeniedException, InsufficientAuthenticationException {
+        for (ConfigAttribute attribute : collection) {
+            System.out.println("+++++++needRole+++++++"+attribute.getAttribute());
+        }
         Iterator<ConfigAttribute> iterator = collection.iterator();
         while (iterator.hasNext()) {
             ConfigAttribute ca = iterator.next();

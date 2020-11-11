@@ -46,7 +46,6 @@
             });
 
             $("#cancel").unbind().on('click',function () {
-                $("#main_body").html("");
                 var url = "/chineseCultural/resource/traditionalCultural";
                 orange.redirect(url);
             });

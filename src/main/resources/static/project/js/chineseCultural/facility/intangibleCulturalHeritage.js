@@ -22,7 +22,8 @@
             //修改事件
             window.orgEvents = {
                 'click .edit' : function(e, value, row, index) {
-                    alertUtil.info(row.itemid+":::"+row.itemcode);
+                    localStorage.setItem("rowData", JSON.stringify(row));
+                    orange.redirect("/chineseCultural/facility/insertIntangibleCulturalHeritage");
                 },
                 'click .delete': function (e, value, row, index) {
                     var myDeleteModalData ={
@@ -32,7 +33,7 @@
                         confirmButtonClass : "btn-danger",
                         modalConfirmFun:function () {
                             var isSuccess = false;
-                            ajaxUtil.myAjax(null,"/cul/fac/inCuHe//delInCuHe/"+row.itemid+"/"+row.itemcode,null,function (data) {
+                            ajaxUtil.myAjax(null,"/cul/fac/inCuHe/delInCuHe/"+row.itemid+"/"+row.itemcode,null,function (data) {
                                 if(ajaxUtil.success(data)){
                                     alertUtil.info("删除非物质文化遗产信息成功");
                                     isSuccess = true;
@@ -50,8 +51,8 @@
 
 
             $("#btn_addTask").unbind().on('click',function () {
-                $("#main_body").html("");
                 var url = "/chineseCultural/facility/insertIntangibleCulturalHeritage";
+                localStorage.removeItem("rowData");
                 orange.redirect(url);
             });
 
@@ -73,5 +74,7 @@
                 myTable.free();
                 myTable = bootstrapTableUtil.myBootStrapTableInit("table", url, param, aCol);
             }
+
+            bootstrapTableUtil.globalSearch("table",url,aParam, aCol);
         })
 })();

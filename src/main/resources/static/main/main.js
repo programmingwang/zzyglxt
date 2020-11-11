@@ -82,6 +82,7 @@
             modalUtil:'../utils/modalUtil',
             selectUtil:'../utils/selectUtil',
             modalHtml:'../utils/modalHtml',
+            fileUtil:'../utils/fileUtil',
 
 
             //project

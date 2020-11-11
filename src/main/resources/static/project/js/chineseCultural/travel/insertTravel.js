@@ -1,6 +1,6 @@
 (function () {
-    require(['jquery','wangEditor','ajaxUtil','alertUtil','stringUtil'],
-        function (jquery,wangEditor,ajaxUtil,alertUtil,stringUtil) {
+    require(['jquery','wangEditor','ajaxUtil','alertUtil','stringUtil','fileUtil'],
+        function (jquery,wangEditor,ajaxUtil,alertUtil,stringUtil,fileUtil) {
             const editor = new wangEditor('#div1')
             // 或者 const editor = new E( document.getElementById('div1') )
             //菜单配置
@@ -78,20 +78,9 @@
                     }
                     operateMessage = "更新旅游景点成功";
                 }
-                // 如果当前是新增或者图片没有修改那么就不修改文件了
-                // 如果当前是修改并且不是原来的那张图片，那么就修改,并且要删除原来的那一张图片
-                if(!isUpdate()){
-                    ajaxUtil.fileAjax(travelEntity.itemcode,$("#upload_file")[0].files[0],
-                        "admin","qeqweasd");
-                }else if(isUpdate() && $("#upload_file")[0].files[0] != null){
-                    ajaxUtil.myAjax(null,"/file/delete?dataCode="+travelEntity.itemcode,null,function (data) {
-                        if(!ajaxUtil.success(data)){
-                            return alertUtil.error("文件删除失败");
-                        }
-                    },false,"","get");
-                    ajaxUtil.fileAjax(travelEntity.itemcode,$("#upload_file")[0].files[0],
-                        stringUtil.getUUID(),"admin","qeqweasd");
-                }
+
+                fileUtil.handleFile(isUpdate(), travelEntity.itemcode, $("#upload_file")[0].files[0]);
+
                 ajaxUtil.myAjax(null,addUpdateUrl,travelEntity,function (data) {
                     if(ajaxUtil.success(data)){
                         alertUtil.info(operateMessage);

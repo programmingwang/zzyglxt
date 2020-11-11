@@ -1,12 +1,14 @@
 package com.zyyglxt.service.impl;
 
 import com.zyyglxt.dao.ResourcesRoleRefDOMapper;
+import com.zyyglxt.dataobject.ResourcesDO;
 import com.zyyglxt.dataobject.ResourcesRoleRefDO;
 import com.zyyglxt.dataobject.ResourcesRoleRefDOKey;
 import com.zyyglxt.error.BusinessException;
 import com.zyyglxt.error.EmBusinessError;
 import com.zyyglxt.service.ResourcesRoleRefService;
 
+import com.zyyglxt.service.ResourcesService;
 import com.zyyglxt.util.DateUtils;
 
 import com.zyyglxt.util.UUIDUtils;
@@ -14,6 +16,8 @@ import com.zyyglxt.validator.ValidatorImpl;
 import com.zyyglxt.validator.ValidatorResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * @Author wanglx
@@ -56,4 +60,5 @@ public class ResourcesRoleRefServiceImpl implements ResourcesRoleRefService {
     public ResourcesRoleRefDO selectByResCode(String itemcode) {
         return rRRMapper.selectByResCode(itemcode);
     }
+
 }

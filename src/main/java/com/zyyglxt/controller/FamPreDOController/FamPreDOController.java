@@ -1,5 +1,6 @@
 package com.zyyglxt.controller.FamPreDOController;
 
+import com.zyyglxt.annotation.LogAnnotation;
 import com.zyyglxt.dataobject.DataDO;
 import com.zyyglxt.dataobject.FamPreDO;
 import com.zyyglxt.dataobject.FamPreDOKey;
@@ -27,6 +28,7 @@ public class FamPreDOController {
      private FamPreDOService famPreDOService;
   /*历史名方数据添加*/
   @RequestMapping(value = "insertfampredo",method = RequestMethod.POST)
+  @LogAnnotation(appCode ="",logTitle ="查看数据字典",logLevel ="3",creater ="",updater = "")
     public ResponseData insertFamPreDOMapper(@RequestBody FamPreDO key) throws BusinessException {
           System.out.println("历史名方名称: " + key.getName());
           famPreDOService.insertSelective(key);
@@ -35,6 +37,7 @@ public class FamPreDOController {
   /*历史名方数据删除*/
     @RequestMapping(value ="deletefamprerdo/{itemID}/{itemCode}",method = RequestMethod.DELETE)
     @ResponseBody
+    @LogAnnotation(appCode ="",logTitle ="查看数据字典",logLevel ="4",creater ="",updater = "")
     public ResponseData deleteFamPreDOMapper(@PathVariable("itemID") Integer itemID, @PathVariable("itemCode")String itemCode){
             FamPreDOKey famPreDOKey=new FamPreDOKey();
             famPreDOKey.setItemid(itemID);
@@ -45,6 +48,7 @@ public class FamPreDOController {
         }
     /*历史名方数据修改*/
     @RequestMapping(value ="updatefampredo",method = RequestMethod.POST )
+    @LogAnnotation(appCode ="",logTitle ="查看数据字典",logLevel ="2",creater ="",updater = "")
     public ResponseData updateFamPreDOMapper(@RequestBody FamPreDO key) throws BusinessException {
         famPreDOService.updateByPrimaryKeySelective(key);
         System.out.println("要修改历史名方编号为："+key.getItemid());
@@ -52,12 +56,14 @@ public class FamPreDOController {
     }
     /*历史名方数据查询(通过id和编号)*/
     @RequestMapping(value ="selectfampredo",method = RequestMethod.POST )
+    @LogAnnotation(appCode ="",logTitle ="查看数据字典",logLevel ="1",creater ="",updater = "")
     public ResponseData selectFamPreDOMapper(@RequestBody FamPreDOKey key){
         famPreDOService.selectByPrimaryKey(key);
         return new ResponseData(EmBusinessError.success);
     }
     /*历史名方所有数据查询*/
     @RequestMapping(value ="selectallfampredo",method = RequestMethod.GET )
+    @LogAnnotation(appCode ="",logTitle ="查看数据字典",logLevel ="1",creater ="",updater = "")
     public ResponseData selectAllFamPreDOMapper(Model model){
         List<FamPreDO> famPreDOList = famPreDOService.selectAllFamPre();
         model.addAttribute("traditionalCulturalList",famPreDOList);

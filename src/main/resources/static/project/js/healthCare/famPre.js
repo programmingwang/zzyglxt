@@ -23,8 +23,8 @@
                     modalTitle : addOrUpdate === "add" ? "新增项目" :"修改项目",
                     modalConfirmFun:function () {
                         var projectEntity = {
-                            projectName: $("#projectName").val(),
-                            projectNo: $("#projectNo").val(),
+                            itemid: $("#itemid").val(),
+                            itemcode: $("#proitemcodejectNo").val(),
                         };
 
                         if(addOrUpdate === "add"){
@@ -41,7 +41,7 @@
 
                         if(addOrUpdate === "update"){
                             projectEntity.projectID = row.projectID;
-                            ajaxUtil.myAjax(null,"api/project/updateProject",projectEntity,function (data) {
+                            ajaxUtil.myAjax(null,"updatefampredo",projectEntity,function (data) {
                                 if(ajaxUtil.success(data)){
                                     alertUtil.info("更新项目成功");
                                     refreshTable();
@@ -91,6 +91,8 @@
                         modalConfirmFun:function () {
                             /*var projectEntity = {
                                 projectID: row.projectID
+                                itemid: row.itemid,
+                                itemcode: row.itemcode
                             };*/
                             var isSuccess = false;
                             ajaxUtil.myAjax(null,"deletefamprerdo/"+row.itemid+"/"+row.itemcode,null,function (data) {

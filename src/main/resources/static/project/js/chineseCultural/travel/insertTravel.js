@@ -83,11 +83,15 @@
 
                 ajaxUtil.myAjax(null,addUpdateUrl,travelEntity,function (data) {
                     if(ajaxUtil.success(data)){
-                        alertUtil.info(operateMessage);
-                        var url = "/chineseCultural/travel/travel";
-                        orange.redirect(url);
+                        if(data.code == ajaxUtil.successCode) {
+                            alertUtil.info(operateMessage);
+                            var url = "/chineseCultural/travel/travel";
+                            orange.redirect(url);
+                        }else{
+                            alertUtil.error(data.msg);
+                        }
                     }else {
-                        alertUtil.alert(data.msg);
+                        alertUtil.error(data.msg);
                     }
                 },false,true);
 

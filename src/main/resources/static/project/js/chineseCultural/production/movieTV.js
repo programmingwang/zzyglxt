@@ -19,7 +19,8 @@
         //修改事件
         window.orgEvents = {
             'click .edit' : function(e, value, row, index) {
-
+                localStorage.setItem("rowData", JSON.stringify(row));
+                orange.redirect("/chineseCultural/production/insertMovieTV");
             },
             'click .delete': function (e, value, row, index) {
                 var myDeleteModalData ={
@@ -28,9 +29,6 @@
                     modalClass : "modal-lg",
                     confirmButtonClass : "btn-danger",
                     modalConfirmFun:function () {
-                        var projectEntity = {
-                            projectID: row.projectID
-                        };
                         var isSuccess = false;
                         ajaxUtil.myAjax(null,"/cul/pro/movTv/delMovTv/"+row.itemid+"/"+row.itemcode,null,function (data) {
                             if(ajaxUtil.success(data)){
@@ -55,8 +53,8 @@
 
 
             $("#btn_addTask").unbind().on('click',function () {
-                $("#main_body").html("");
                 var url = "/chineseCultural/production/insertMovieTV";
+                localStorage.removeItem("rowData");
                 orange.redirect(url);
             });
 

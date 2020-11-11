@@ -34,10 +34,10 @@
                 paginationNextText: '下一页',
                 // showColumns: true,               //是否显示所有的列（选择显示的列）
                 // minimumCountColumns: 2,          //最少允许的列数
-                search: true,                       //显示搜索框
+                // search: true,                       //显示搜索框
                 // searchOnEnterKey:true,              //回车后查询
                 clickToSelect: true,                //是否启用点击选中行
-                search:true,                        //显示搜索框
+                // search:true,                        //显示搜索框
                 //height: 500,                      //行高，如果没有设置height属性，表格自动根据记录条数觉得表格高度
                 uniqueId: "ID",                     //每一行的唯一标识，一般为主键列
                 queryParams: function (params) {

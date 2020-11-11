@@ -3,6 +3,7 @@ package com.zyyglxt.controller.dataDOController;
 import com.zyyglxt.annotation.LogAnnotation;
 import com.zyyglxt.dataobject.DataDO;
 import com.zyyglxt.dataobject.DataDOKey;
+import com.zyyglxt.dataobject.FileDO;
 import com.zyyglxt.dto.DataDto;
 import com.zyyglxt.error.EmBusinessError;
 import com.zyyglxt.response.ResponseData;
@@ -38,7 +39,6 @@ public class DataNewsInfController {
      * @return
      */
     @RequestMapping(value = "/selectByPrimaryKey/{itemID}/{itemCode}", method = RequestMethod.GET)
-    @LogAnnotation(appCode ="",logTitle ="查看一条新闻管理记录",logLevel ="1",creater ="",updater = "")
     public ResponseData selectByPrimaryKey(@PathVariable("itemID") Integer itemID, @PathVariable("itemCode")String itemCode){
         DataDOKey dataDOKey = new DataDOKey();
         dataDOKey.setItemid(itemID);
@@ -58,21 +58,24 @@ public class DataNewsInfController {
      * 查看新闻轮播图的所有数据
      * @return
      */
-
-    @RequestMapping(value = "/selectAll", method = RequestMethod.GET)
-    @LogAnnotation(appCode ="",logTitle ="查看所有新闻管理数据",logLevel ="1",creater ="",updater = "")
-    public ResponseData selectNewsInfList(){
-        List<DataDO> dataDOList = dataDOService.selectNewsInfList();
-        List<DataDto> dataDtoList = new ArrayList<>();
-        for (DataDO dataDO:dataDOList) {
-            dataDtoList.add(
-                    this.convertFromDOToDTO(
-                            dataDO,fileService.selectFileByDataCode(
-                                    dataDO.getItemcode()).getFilePath()));
-        }
-        return new ResponseData(EmBusinessError.success,dataDtoList);
+    @RequestMapping(value = "/selectAllNewsRot", method = RequestMethod.GET)
+    @LogAnnotation(appCode ="",logTitle ="查看所有新闻轮播图",logLevel ="1",creater ="",updater = "")
+    public ResponseData selectNewsRotList(){
+        List<DataDO> dataDOList = dataDOService.selectNewsRotList();
+        return new ResponseData(EmBusinessError.success,DoToDto(dataDOList));
     }
 
+
+    /**
+     * 查看新闻管理的所有数据
+     * @return
+     */
+    @RequestMapping(value = "/selectAllNewsInf", method = RequestMethod.GET)
+    @LogAnnotation(appCode ="",logTitle ="查看所有新闻信息",logLevel ="1",creater ="",updater = "")
+    public ResponseData selectNewsInfList(){
+        List<DataDO> dataDOList = dataDOService.selectNewsInfList();
+        return new ResponseData(EmBusinessError.success,dataDOList);
+    }
 
     /**
      * 删除新闻数据记录
@@ -80,7 +83,7 @@ public class DataNewsInfController {
      * @param itemCode
      */
     @RequestMapping(value = "/deleteByPrimaryKey/{itemID}/{itemCode}", method = RequestMethod.DELETE)
-    @LogAnnotation(appCode ="",logTitle ="删除新闻数据",logLevel ="4",creater ="",updater = "")
+    @LogAnnotation(appCode ="",logTitle ="删除新闻",logLevel ="4",creater ="",updater = "")
     public ResponseData deleteByPrimaryKey(@PathVariable("itemID") Integer itemID, @PathVariable("itemCode")String itemCode){
         DataDOKey dataDOKey = new DataDOKey();
         dataDOKey.setItemid(itemID);
@@ -95,7 +98,7 @@ public class DataNewsInfController {
      */
     @RequestMapping(value = "/insertNewsInf", method = RequestMethod.POST)
     @ResponseBody
-    @LogAnnotation(appCode ="",logTitle ="增加新闻数据记录",logLevel ="3",creater ="",updater = "")
+    @LogAnnotation(appCode ="",logTitle ="增加新闻",logLevel ="3",creater ="",updater = "")
     public ResponseData insertNewsInf(@RequestBody DataDO record) {
         dataDOService.insertNewsInf(record);
         return new ResponseData(EmBusinessError.success);
@@ -107,7 +110,7 @@ public class DataNewsInfController {
      */
     @RequestMapping(value = "updateNewsInf", method = RequestMethod.POST)
     @ResponseBody
-    @LogAnnotation(appCode ="",logTitle ="更新新闻数据记录",logLevel ="2",creater ="",updater = "")
+    @LogAnnotation(appCode ="",logTitle ="更新新闻",logLevel ="2",creater ="",updater = "")
     public ResponseData updateNewsInf(@RequestBody DataDO record) {
         dataDOService.updateNewsInf(record);
         return new ResponseData(EmBusinessError.success);
@@ -116,7 +119,6 @@ public class DataNewsInfController {
     //修改展示状态
     @RequestMapping(value = "changeStatus/{itemID}/{itemCode}", method = RequestMethod.PUT)
     @ResponseBody
-    @LogAnnotation(appCode ="",logTitle ="修改展示状态",logLevel ="2",creater ="",updater = "")
     public ResponseData changeStatus(@RequestParam("dataStatus") String dataStatus, @PathVariable("itemID") Integer itemID, @PathVariable("itemCode")String itemCode){
         DataDOKey dataDOKey = new DataDOKey();
         dataDOKey.setItemid(itemID);
@@ -132,10 +134,24 @@ public class DataNewsInfController {
      */
     @GetMapping("/searchDataDO/{keyWord}")
     @ResponseBody
-    @LogAnnotation(appCode ="",logTitle ="关键字搜索",logLevel ="1",creater ="",updater = "")
     public ResponseData searchDataDO(@PathVariable("keyWord") String keyWord) {
         List<DataDO> dataDOList = dataDOService.searchDataDO(keyWord);
         return new ResponseData(EmBusinessError.success,dataDOList);
+    }
+
+    private List<DataDto> DoToDto(List<DataDO> DOList){
+        List<DataDto> DtoList = new ArrayList<>();
+        if (!DOList.isEmpty()){
+            for (DataDO DO:DOList){
+                DataDto Dto = new DataDto();
+                BeanUtils.copyProperties(DO,Dto);
+                FileDO fileDO= fileService.selectFileByDataCode(Dto.getItemcode());
+                Dto.setFileName(fileDO == null ? null:fileDO.getFileName());
+                Dto.setFilePath(fileDO == null ? null:fileDO.getFilePath());
+                DtoList.add(Dto);
+            }
+        }
+        return DtoList;
     }
 
 }

@@ -112,4 +112,9 @@ public class ResourcesServiceImpl implements ResourcesService {
         RoleDO roleDO = roleDOMapper.selectByUserid(userDO.getItemcode());
         return resourcesDOMapper.SelectPermissionByRoleCode(roleDO.getItemcode());
     }
+
+    @Override
+    public List<ResourcesDO> selectPres() {
+        return resourcesDOMapper.selectPres();
+    }
 }

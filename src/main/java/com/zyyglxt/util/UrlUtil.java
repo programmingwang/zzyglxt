@@ -7,10 +7,6 @@ package com.zyyglxt.util;
  */
 public class UrlUtil {
     public static String getUrl(String requestUrl){
-        int index = requestUrl.indexOf("?");
-        if (index != -1) {
-            requestUrl = requestUrl.substring(0, index);
-        }
         if (requestUrl.contains("/cul/fac/culRel/delCulRel")
                 ||requestUrl.contains("/cul/fac/culRel/toUpdCulRel")
                 ||requestUrl.contains("/cul/fac/culRel/cgCulRelSta")
@@ -80,6 +76,58 @@ public class UrlUtil {
         ){
             requestUrl = requestUrl.substring(0, requestUrl.lastIndexOf("/"));
             requestUrl = requestUrl.substring(0, requestUrl.lastIndexOf("/"));
+        }
+        if (requestUrl.contains("/datado/announcement/deleteByPrimaryKey")
+                ||requestUrl.contains("/datado/announcement/changeStatus")
+                ||requestUrl.contains("/datado/announcement/selectByPrimaryKey")
+        ){
+            requestUrl = requestUrl.substring(0, requestUrl.lastIndexOf("/"));
+            requestUrl = requestUrl.substring(0, requestUrl.lastIndexOf("/"));
+        }
+        if (requestUrl.contains("/datado/newsInf/selectByPrimaryKey")
+                ||requestUrl.contains("/datado/newsInf/deleteByPrimaryKey")
+                ||requestUrl.contains("/datado/newsInf/changeStatus")
+        ){
+            requestUrl = requestUrl.substring(0, requestUrl.lastIndexOf("/"));
+            requestUrl = requestUrl.substring(0, requestUrl.lastIndexOf("/"));
+        }
+        if (requestUrl.contains("/datado/process/selectByPrimaryKey")
+                ||requestUrl.contains("/datado/process/deleteByPrimaryKey")
+                ||requestUrl.contains("/datado/process/changeStatus")
+        ){
+            requestUrl = requestUrl.substring(0, requestUrl.lastIndexOf("/"));
+            requestUrl = requestUrl.substring(0, requestUrl.lastIndexOf("/"));
+        }
+        if (requestUrl.contains("/datado/regulation/selectByPrimaryKey")
+                ||requestUrl.contains("/datado/regulation/deleteByPrimaryKey")
+                ||requestUrl.contains("/datado/regulation/changeStatus")
+        ){
+            requestUrl = requestUrl.substring(0, requestUrl.lastIndexOf("/"));
+            requestUrl = requestUrl.substring(0, requestUrl.lastIndexOf("/"));
+        }
+        if (requestUrl.contains("/dictdo/selectDictDO")
+                ||requestUrl.contains("/dictdo/deleteDictDO")
+        ){
+            requestUrl = requestUrl.substring(0, requestUrl.lastIndexOf("/"));
+            requestUrl = requestUrl.substring(0, requestUrl.lastIndexOf("/"));
+        }
+        if (requestUrl.contains("/dictitemdo/selectDictitemDO")
+                ||requestUrl.contains("/dictitemdo/deleteDictitemDO")
+        ){
+            requestUrl = requestUrl.substring(0, requestUrl.lastIndexOf("/"));
+            requestUrl = requestUrl.substring(0, requestUrl.lastIndexOf("/"));
+        }
+        return requestUrl;
+    }
+    public static String getUrl(String requestUrl, String method){
+        if (method.equals("POST")){
+            requestUrl = requestUrl+"-add";
+        }
+        if (method.equals("PUT")){
+            requestUrl = requestUrl+"-upd";
+        }
+        if (method.equals("DELETE")){
+            requestUrl = requestUrl+"-del";
         }
         return requestUrl;
     }

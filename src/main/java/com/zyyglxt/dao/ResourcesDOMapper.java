@@ -28,4 +28,6 @@ public interface ResourcesDOMapper {
     List<ResourcesDO> selectListByPath(String requestUrl);
 
     List<ResourcesDO> SelectPermissionByRoleCode(String itemcode);
+
+    List<ResourcesDO> selectPres();
 }

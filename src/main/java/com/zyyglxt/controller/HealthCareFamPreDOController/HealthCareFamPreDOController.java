@@ -28,7 +28,7 @@ HealthCareFamPreDOController {
     @RequestMapping(value ="inserthealthcarefampredo",method = RequestMethod.POST )
     public ResponseData insertHealthCareFamPreDOMapper(@RequestBody HealthCareFamPreDO key) throws BusinessException {
 
-        System.out.println("标题名称: " + key.getName());
+        System.out.println("国医话健康标题名称: " + key.getName());
         healthCareFamPreDOService.insertSelective(key);
         return new ResponseData(EmBusinessError.success);
     }

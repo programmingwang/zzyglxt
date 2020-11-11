@@ -145,7 +145,8 @@
                     id: "6-4",
                     level: "2",
                     pid: "6"
-
+                },
+                {
                     menu_name : "名老中医",
                     menu_url: "",
                     id:"7",
@@ -335,7 +336,7 @@
 
             function getHTML_dropdown_menu_item(astr,aurl,show_active) {
                 var str = "<a class=\"dropdown-item  "+  (show_active ? "active" : "")  +" \" url=\"" + aurl +"\">" + astr + "</a>\n" +
-                    "<hr size=\"1\" style=\"color: #E8E8E8;border-style:dashed;width:100%\">" ;
+                    "<hr size=\"1\" style=\"color: #E8E8E8;border-style:dashed;width:90%\">" ;
                 return str;
             }
 

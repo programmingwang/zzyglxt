@@ -1,10 +1,7 @@
 package com.zyyglxt.controller.medicalService;
 
 import com.zyyglxt.dao.HospSpecialtyRefDOMapper;
-import com.zyyglxt.dataobject.FileDO;
-import com.zyyglxt.dataobject.HospDO;
-import com.zyyglxt.dataobject.HospSpecialtyRefDO;
-import com.zyyglxt.dataobject.SpecialtyDO;
+import com.zyyglxt.dataobject.*;
 import com.zyyglxt.dto.SpecialtyDto;
 import com.zyyglxt.error.EmBusinessError;
 import com.zyyglxt.response.ResponseData;
@@ -51,8 +48,8 @@ public class SpecialtyController {
 
     @ResponseBody
     @DeleteMapping(value = "delete")
-    public ResponseData deleteSpecialty(@RequestBody SpecialtyDto specialtyDto){
-        specialtyService.deleteSpecialty(specialtyDto);
+    public ResponseData deleteSpecialty(@RequestBody SpecialtyDOKey specialtyDOKey){
+        specialtyService.deleteSpecialty(specialtyDOKey);
         return new ResponseData(EmBusinessError.success);
     }
 
@@ -77,12 +74,18 @@ public class SpecialtyController {
         return new ResponseData(EmBusinessError.success,DoToDto(specialtyDOList));
     }
 
+    @ResponseBody
+    @GetMapping(value = "selectByHospCode")
+    public ResponseData selectByHospCode(String hospCode){
+        List<SpecialtyDO> specialtyDOList = specialtyService.selectByHospCode(hospCode);
+        return new ResponseData(EmBusinessError.success,DoToDto(specialtyDOList));
+    }
 
     private List<SpecialtyDto> DoToDto(List<SpecialtyDO> DOList){
         List<SpecialtyDto> DtoList = new ArrayList<>();
         if (!DOList.isEmpty()){
-            SpecialtyDto Dto = new SpecialtyDto();
             for (SpecialtyDO DO:DOList){
+                SpecialtyDto Dto = new SpecialtyDto();
                 BeanUtils.copyProperties(DO,Dto);
                 HospSpecialtyRefDO hospSpecialtyRefDO = hospSpecialtyRefDOMapper.selectHospBySpecialtyCode(Dto.getItemcode());
                 HospDO hospDO = hospService.selectHospByItemCode(hospSpecialtyRefDO.getHospitalCode());
@@ -90,6 +93,7 @@ public class SpecialtyController {
                 Dto.setHospitalName(hospDO.getHospitalName());
                 Dto.setSpecialtyAddressCity(hospDO.getHospitalAddressCity());
                 Dto.setSpecialtyAddressCounty(hospDO.getHospitalAddressCountry());
+                Dto.setSpecialtyAddress(hospDO.getHospitalAddress());
                 FileDO fileDO= fileService.selectFileByDataCode(Dto.getItemcode());
                 Dto.setFilePath(fileDO == null ? null:fileDO.getFilePath());
                 DtoList.add(Dto);

@@ -49,13 +49,6 @@ public class TraditionalDoctorController {
         return new ResponseData(EmBusinessError.success,chineseCulturalDtoList);
     }
 
-    //查询一个历代名家
-
-//    //去增加页面,这个是为了跳转到增加的页面
-//    @RequestMapping(value = "/toAddPage" , method = RequestMethod.GET)
-//    public String toAddPage(){
-//        return "to add page";
-//    }
 
     //增加一个中医医史
     @RequestMapping(value = "/addTraDoc" , method = RequestMethod.POST)
@@ -76,16 +69,7 @@ public class TraditionalDoctorController {
         return new ResponseData(EmBusinessError.success);
     }
 
-    //去修改的页面
-    @RequestMapping(value = "/toUpdTraDoc/{itemID}/{itemCode}" , method = RequestMethod.GET)
-    @ResponseBody
-    public ResponseData toUpdatePage(@PathVariable("itemID") Integer itemID, @PathVariable("itemCode")String itemCode){
-        CulturalResourcesDOKey culturalResourcesDOKey = new CulturalResourcesDOKey();
-        culturalResourcesDOKey.setItemid(itemID);
-        culturalResourcesDOKey.setItemcode(itemCode);
-        CulturalResourcesDO culturalResources = iTraditionalDoctorService.getTraditionalDoctor(culturalResourcesDOKey);
-        return new ResponseData(EmBusinessError.success,culturalResources);
-    }
+
 
     //修改一个历代名家
     @RequestMapping(value = "/updTraDoc" , method = RequestMethod.POST)

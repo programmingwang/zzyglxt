@@ -135,4 +135,16 @@
         where SPECIALTY_CODE = #{specialtyCode}
     </select>
 
+    <delete id="deleteBySpecialtyCode">
+        delete from tb_culpro_hosp_specialty_ref
+        where SPECIALTY_CODE = #{specialtyCode}
+    </delete>
+
+    <select id="selectSpecialtyByHospCode" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from tb_culpro_hosp_specialty_ref
+        where HOSPITAL_CODE = #{hospCode}
+    </select>
+
 </mapper>

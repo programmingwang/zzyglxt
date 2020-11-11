@@ -93,5 +93,35 @@
                 myTable.free();
                 myTable = bootstrapTableUtil.myBootStrapTableInit("table", url, param, aCol);
             }
+            function getObjectURL(file) {
+                var url = null ;
+                if (window.createObjectURL!=undefined) { // basic
+                    url = window.createObjectURL(file) ;
+                } else if (window.URL!=undefined) { // mozilla(firefox)
+                    url = window.URL.createObjectURL(file) ;
+                } else if (window.webkitURL!=undefined) { // webkit or chrome
+                    url = window.webkitURL.createObjectURL(file) ;
+                }
+
+                return url ;
+            };
+
+            function isUpdate() {
+                return (localStorage.getItem("rowData") != null || localStorage.getItem("rowData") != undefined)
+            };
+
+            document.getElementById('upload_img').onchange = function() {
+                var strsrc=getObjectURL(this.files[0]);
+                var imgSize = this.files[0].size;  //b
+                if(imgSize>1024*1024*1){//1M
+                    return alert("上传图片不能超过1M");
+                }
+                if(this.files[0].type != 'image/png' && this.files[0].type != 'image/jpeg' && this.files[0].type != 'image/gif'){
+                    return alert("图片上传格式不正确");
+                }
+                //console.log(strsrc);
+                $("#upimg").attr("src",strsrc);
+
+            }
         })
 })();

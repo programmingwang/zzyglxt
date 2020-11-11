@@ -12,15 +12,15 @@
                 <div class="input-group mb-4" >
                     <input type="text" id="taskNameSearch" class="form-control" value="请输入" onfocus="if (value=='请输入'){value =''}" onblur="if (value ==''){value='请输入'}" >
                     <div class="input-group-prepend">
-                        <span class="input-group-text">搜索</span>
+                        <span class="input-group-text" id="btnSearch" style="z-index: 1;">搜索</span>
                     </div>
 
                 </div>
             </div>
             <div class="col-lg-7 col-md-7"></div>
             <div class="col-lg-1 col-md-1 pull-right" >
-                <a data-toggle="collapse" data-parent="#accordion2" href="#collapseOne" style="text-decoration: none; color: red;" aria-expanded="false">
-                    >
+                <a id="closeAndOpen" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne" style="text-decoration: none; color: red;" aria-expanded="false">
+                    展开
                 </a>
             </div>
             <div id="collapseOne" class="collapse col-md-12 col-lg-12 row" style="height: 0px; ">
@@ -64,5 +64,5 @@
 
 </body>
 <script type="text/javascript" data-main="/main/main.js" th:src="@{/component/require@2.3.6/require-2.3.6.js}"></script>
-<script type="text/javascript" th:src="@{/project/js/chineseCultural/facility/culturalVenues.js}"></script>
+<script type="text/javascript" th:src="@{/project/js/chineseCultural/facility/culturalRelics.js}"></script>
 </html>

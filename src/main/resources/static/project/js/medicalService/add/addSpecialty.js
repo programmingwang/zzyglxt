@@ -1,6 +1,6 @@
 (function () {
-    require(['jquery','wangEditor','ajaxUtil','alertUtil','stringUtil','dictUtil'],
-        function (jquery,wangEditor,ajaxUtil,alertUtil,stringUtil,dictUtil) {
+    require(['jquery','wangEditor','ajaxUtil','alertUtil','stringUtil','dictUtil','fileUtil','uploadImg'],
+        function (jquery,wangEditor,ajaxUtil,alertUtil,stringUtil,dictUtil,fileUtil,uploadImg) {
             const editor = new wangEditor('#div1')
             // 或者 const editor = new E( document.getElementById('div1') )
             //菜单配置
@@ -45,68 +45,61 @@
                 }
             });
 
+
+
+            /*q全局变量*/
+            var tempdata = JSON.parse(localStorage.getItem("rowData"));
+            var updateStatus = isUpdate()
+            var jumpUrl = "/medicalService/specialty"
+            var hosps = {}
+
+            /*设置科室下拉框的值*/
+            $("#specialtyName").selectUtil(dictUtil.getDictByCode(dictUtil.DICT_LIST.dept));
+
+            /*点击返回按钮*/
             $("#cancel").unbind().on('click',function () {
-                $("#main_body").html("");
-                var url = "/medicalService/specialty";
-                orange.loadPage({url: url, target: 'main_body', selector: '#fir_body', success: function(data){
-                        if(data == null||data == ""){
-                            return alertUtil.error( url+'加载失败');
-                        }
-                        $("#main_body").html(data);
-                    }})
+                orange.redirect(jumpUrl);
             });
 
+            /*点击提交按钮*/
             $("#btn_insert").unbind().on('click',function () {
                 var hosp;
-                $.each(hosps,function (i,it) {
-                    if (it.itemcode == $("#hospitalName").val()){
-                        hosp = it;
-                    }
-                });
-                var specialtyEntity = {
-                    itemcode: stringUtil.getUUID(),
-                    specialtyName : $("#specialtyName").val(),
-                    specialtyPhone : $("#specialtyPhone").val(),
-                    specialtyAddressCity : hosp.hospitalAddressCity,
-                    specialtyAddressCounty : hosp.hospitalAddressCountry,
-                    specialtyAddress : hosp.hospitalAddress,
-                    specialtyLink : hosp.hospitalLink,
-                    specialtyDescribe : editor.txt.html(),
-                    hospitalCode : hosp.itemcode,
-                    hospitalName : hosp.hospitalName
-                };
+                var entity;
+                var requestUrl;
+                var operateMessage;
+                /*拿到下拉框所选医院的信息*/
+                hosp = hosps.find(function (obj) {return obj.itemcode === $("#hospitalName").val()});
+                if (!updateStatus){
+                    requestUrl = "/medicalService/specialty/add";
+                    operateMessage = "新增科室成功";
+                    entity = {
+                        itemcode: stringUtil.getUUID(),
+                    };
+                }
+                else {
+                    requestUrl = "/medicalService/specialty/update";
+                    operateMessage = "更新科室成功";
+                    entity = {
+                        itemid: tempdata.itemid,
+                        itemcode: tempdata.itemcode
+                    };
+                }
+                entity["specialtyName"] = $("#specialtyName").val();
+                entity["specialtyPhone"] = $("#specialtyPhone").val();
+                entity["specialtyAddressCity"] = hosp.hospitalAddressCity;
+                entity["specialtyAddressCounty"] = hosp.hospitalAddressCountry;
+                entity["specialtyAddress"] = hosp.hospitalAddress;
+                entity["specialtyLink"] = hosp.specialtyLink;
+                entity["specialtyDescribe"] = editor.txt.html();
+                entity["hospitalCode"] = hosp.itemcode;
+                entity["hospitalName"] = hosp.hospitalName;
 
-                var formData = new FormData();
-                formData.append("dataCode",specialtyEntity.itemcode);
-                formData.append("file",$("#upload_file")[0].files[0]);
-                formData.append("itemcode",stringUtil.getUUID());
-                formData.append("uploader","admin");
-                formData.append("uploaderCode","qweqwqwewasdasd");
-                $.ajax({
-                    url:"/file/upload",
-                    type:'POST',
-                    data: formData,
-                    processData: false,   // jQuery不要去处理发送的数据
-                    contentType: false,   // jQuery不要去设置Content-Type请求头
-                    success:function(data){
-                        alertUtil.success(data.msg);
-                    },
-                    error: function(data){
-                        alertUtil.error(data.msg)
-                        alertUtil.error(data.msg)
-                    }
-                });
+                fileUtil.handleFile(updateStatus, entity.itemcode, uploadImg.getFiles()[0]);
 
-                ajaxUtil.myAjax(null,"/medicalService/specialty/add",specialtyEntity,function (data) {
+                ajaxUtil.myAjax(null,requestUrl,entity,function (data) {
                     if(ajaxUtil.success(data)){
-                        alertUtil.info("新增科室成功");
-                        var url = "/medicalService/specialty";
-                        orange.loadPage({url: url, target: 'main_body', selector: '#fir_body', success: function(data){
-                                if(data == null||data == ""){
-                                    return alertUtil.error( url+'加载失败');
-                                }
-                                $("#main_body").html(data);
-                            }})
+                        alertUtil.info(operateMessage);
+                        orange.redirect(jumpUrl);
                     }else {
                         alertUtil.alert(data.msg);
                     }
@@ -114,10 +107,13 @@
 
             });
 
-            var pl = dictUtil.getDictByCode(dictUtil.DICT_LIST.dept);
-            $("#specialtyName").selectUtil(pl);
-            var hosps = {}
+            function isUpdate() {
+                return (tempdata != null || tempdata != undefined)
+            }
+
+            /*初始化数据*/
             (function init() {
+                uploadImg.init();
                 ajaxUtil.myAjax(null,"/medicalService/hosp/selectAll",null,function (data) {
                     if(ajaxUtil.success(data)){
                         hosps = data.data
@@ -129,17 +125,19 @@
                         $("#hospitalName").append(html);
                     }
                 },false,true,"get");
-                if (isUpdate()){
+                if (hosps.length == 0) {
+                    alertUtil.info("医院信息为空，请先添加医院")
+                }
+                if (updateStatus){
                     var tempdata = JSON.parse(localStorage.getItem("rowData"));
                     $("#specialtyName").val(tempdata.specialtyName);
-                    $("#hospitalName").val(tempdata.hospitalName);
+                    uploadImg.setImgSrc(tempdata.filePath)
+                    $("#hospitalName  option[value="+tempdata.hospitalCode+"] ").attr("selected",true)
                     $("#specialtyPhone").val(tempdata.specialtyPhone);
                     $(".w-e-text").html(tempdata.specialtyDescribe);
                 }
             }());
 
-            function isUpdate() {
-                return (localStorage.getItem("rowData") != null || localStorage.getItem("rowData") != undefined)
-            }
+
         });
 })();

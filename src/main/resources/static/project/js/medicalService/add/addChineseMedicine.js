@@ -168,6 +168,7 @@
             /*初始化数据*/
             (function init() {
                 ajaxUtil.myAjax(null,"/medicalService/hosp/selectAll",null,function (data) {
+                    uploadImg.init();
                     if(ajaxUtil.success(data)){
                         hosps = data.data
                         var html = "";
@@ -182,13 +183,14 @@
                     alertUtil.info("医院信息为空，请先添加医院")
                 }
                 if (isUpdate()){
-                    specialtySelect()
                     var tempdata = JSON.parse(localStorage.getItem("rowData"));
                     $("#chineseMedicineName").val(tempdata.chineseMedicineName);
+                    uploadImg.setImgSrc(tempdata.filePath)
                     $("#chineseMedicineTitle").val(tempdata.chineseMedicineTitle);
                     $("#chineseMedicineType  option[value="+tempdata.chineseMedicineType+"] ").attr("selected",true);
-                    $("#hospitalName  option[value="+tempdata.hospitalName+"] ").attr("selected",true);
-                    $("#specialtyName  option[value="+tempdata.specialtyName+"] ").attr("selected",true);
+                    $("#hospitalName  option[value="+tempdata.hospCode+"] ").attr("selected",true);
+                    specialtySelect()
+                    $("#specialtyName  option[value="+tempdata.deptCode+"] ").attr("selected",true);
                     $("#visitTime").val(tempdata.visitTime);
                     $("#phone").val(tempdata.phone);
                     $("#mainVisit").val(tempdata.mainVisit);
@@ -219,7 +221,7 @@
                 },false,true,"get");
             }
 
-            uploadImg.init();
+
 
         });
 })();

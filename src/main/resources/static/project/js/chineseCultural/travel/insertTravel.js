@@ -128,8 +128,8 @@
             };
 
             document.getElementById('upload_file').onchange = function() {
-                var tempdata = JSON.parse(localStorage.getItem("rowData"));
-                var firstUrl= tempdata.filePath;
+                // var tempdata = JSON.parse(localStorage.getItem("rowData"));
+                // var firstUrl= tempdata.filePath;
                 var strsrc=getObjectURL(this.files[0]);
                 var imgSize = this.files[0].size;  //b
                 if(imgSize>1024*1024*1){//1M

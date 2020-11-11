@@ -28,6 +28,17 @@ public class CustomizeFilterInvocationSecurityMetadataSource implements FilterIn
     public Collection<ConfigAttribute> getAttributes(Object o) throws IllegalArgumentException {
         //获取请求地址
         String requestUrl = ((FilterInvocation) o).getRequestUrl();
+        if (requestUrl.contains("/component")
+                |requestUrl.contains("/project")
+                |requestUrl.contains("/main")
+                |requestUrl.contains("/css")
+                |requestUrl.contains("/system")
+                |requestUrl.contains("/images")
+                |requestUrl.contains("/fonts")
+                |requestUrl.contains("/api")
+                |requestUrl.contains("/utils")){
+            return null;
+        }
         int index = requestUrl.indexOf("?");
         if (index != -1) {
             requestUrl = requestUrl.substring(0, index);

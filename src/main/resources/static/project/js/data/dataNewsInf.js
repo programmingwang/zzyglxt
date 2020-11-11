@@ -3,7 +3,7 @@
         function (jquery,ajaxUtil,bootstrapTableUtil,objectUtil,alertUtil,modalUtil,selectUtil,stringUtil,dictUtil) {
 
 
-        var url = "/datado/newsInf/selectAll";
+        var url = "/datado/newsInf/selectAllNewsInf";
         var addUrl = "/data/add/addNewsInf";
         var aParam = {
 
@@ -34,6 +34,11 @@
                         var isSuccess = false;
                         ajaxUtil.myAjax(null,"/datado/newsInf/deleteByPrimaryKey/"+row.itemid+"/"+row.itemcode,null,function (data) {
                             if(ajaxUtil.success(data)){
+                                ajaxUtil.myAjax(null,"/file/delete?dataCode="+row.itemcode,null,function (data) {
+                                    if(!ajaxUtil.success(data)){
+                                        return alertUtil.error("图片删除失败");
+                                    }
+                                },false,"","get");
                                 alertUtil.info("删除新闻信息成功");
                                 isSuccess = true;
                                 refreshTable();
@@ -60,15 +65,6 @@
         $("#btn_addTask").unbind().on('click',function () {
             localStorage.removeItem("rowData");
             orange.redirect(addUrl);
-
-            $("#main_body").html("");
-            var url = "/data/add/addNewsInf";
-            orange.loadPage({url: url, target: 'main_body', selector: '#fir_body', success: function(data){
-                    if(data == null||data == ""){
-                        return alertUtil.error( url+'加载失败');
-                    }
-                    $("#main_body").html(data);
-                }})
         });
 
         var pl = dictUtil.getDictByCode(dictUtil.DICT_LIST.showStatus);

@@ -129,7 +129,7 @@
                     $("#div1 .w-e-text").html(tempdata.postDuty);
                     $("#div2 .w-e-text").html(tempdata.postDescr)
                 }
-            }());
+            })();
 
 
             function isUpdate() {

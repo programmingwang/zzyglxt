@@ -37,22 +37,7 @@ public class FileController {
     @PostMapping("/upload")
     @ResponseBody
     public ResponseData upload(FileDto fileDto) throws IOException {
-        FileDO fileDO = new FileDO();
-        BeanUtils.copyProperties(fileDto,fileDO);
-        /*从数据传输对象中拿到文件*/
-        MultipartFile multipartFile = fileDto.getFile();
-        StorePath storePath = fastFileStorageClient.uploadFile(
-                multipartFile.getInputStream(),
-                multipartFile.getSize(),
-                FilenameUtils.getExtension(multipartFile.getOriginalFilename()),
-                null);
-        String fileName = multipartFile.getOriginalFilename();
-        fileDO.setFileName(fileName);
-        fileDO.setFileType(FilenameUtils.getExtension(fileName));//文件扩展名
-        fileDO.setFileSize((double) multipartFile.getSize());
-        String path = "http://" + nginx.substring(0,nginx.indexOf(":")+1) + port + "/" + storePath.getFullPath();//字符串拼接路径
-        fileDO.setFilePath(path);
-        fileService.uploadFile(fileDO);
+        fileService.uploadFile(saveFile(fileDto));
         return new ResponseData(EmBusinessError.success);
     }
 
@@ -63,5 +48,38 @@ public class FileController {
         fastFileStorageClient.deleteFile(fileDO.getFilePath());
         fileService.deleteFileByDataCode(dataCode);
         return new ResponseData(EmBusinessError.success);
+    }
+
+    @PostMapping("/update")
+    @ResponseBody
+    public ResponseData update(FileDto fileDto){
+        delete(fileDto.getDataCode());
+        fileService.updateFile(saveFile(fileDto));
+        return new ResponseData(EmBusinessError.success);
+    }
+
+
+    private FileDO saveFile(FileDto fileDto) {
+        FileDO fileDO = new FileDO();
+        BeanUtils.copyProperties(fileDto,fileDO);
+        /*从数据传输对象中拿到文件*/
+        MultipartFile multipartFile = fileDto.getFile();
+        StorePath storePath = null;
+        try {
+            storePath = fastFileStorageClient.uploadFile(
+                    multipartFile.getInputStream(),
+                    multipartFile.getSize(),
+                    FilenameUtils.getExtension(multipartFile.getOriginalFilename()),
+                    null);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        String fileName = multipartFile.getOriginalFilename();
+        fileDO.setFileName(fileName);
+        fileDO.setFileType(FilenameUtils.getExtension(fileName));//文件扩展名
+        fileDO.setFileSize((double) multipartFile.getSize());
+        String path = "http://" + nginx.substring(0,nginx.indexOf(":")+1) + port + "/" + storePath.getFullPath();//字符串拼接路径
+        fileDO.setFilePath(path);
+        return fileDO;
     }
 }

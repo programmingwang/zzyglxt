@@ -117,5 +117,6 @@
                     this.innerText="收起";
                 }
             }
+            bootstrapTableUtil.globalSearch("table",url,aParam, aCol);
         })
 })();

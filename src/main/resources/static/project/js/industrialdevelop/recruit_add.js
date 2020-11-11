@@ -90,7 +90,7 @@
                 return param;
             }
 
-            $("#saveBtn").unbind().on('click',function () {
+            $("#saveBtn").unbind('click').on('click',function () {
                 var param = generateParam();
                 param.status = "——";
 
@@ -104,7 +104,7 @@
                 return false;
             })
 
-            $("#submitBtn").unbind().on('click',function () {
+            $("#submitBtn").unbind('click').on('click',function () {
                 var param = generateParam();
                 param.status = "——";
                 ajaxUtil.myAjax(null,url,param,function (data) {
@@ -118,6 +118,7 @@
             })
 
             (function init() {
+                console.log("1233")
                 if (isUpdate()){
                     var tempdata = JSON.parse(localStorage.getItem("rowData"));
                     $("#recruitmentTitle").val(tempdata.recruitmentTitle);
@@ -129,10 +130,11 @@
                     $("#div1 .w-e-text").html(tempdata.postDuty);
                     $("#div2 .w-e-text").html(tempdata.postDescr)
                 }
-            })();
+            }());
 
 
             function isUpdate() {
+                console.log(localStorage.getItem("rowData"));
                 return (localStorage.getItem("rowData") != null || localStorage.getItem("rowData") != undefined)
             }
     })

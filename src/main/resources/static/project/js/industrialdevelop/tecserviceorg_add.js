@@ -69,7 +69,8 @@
                 param.addressPro = $("#addressPro").val();
                 param.addressCity = $("#addressCity").val();
                 param.addressCountry = $("#addressCountry").val();
-                param.projectIntroduce = $(".w-e-text").html();
+                param.address = $("#address").val()
+                param.intruduce = $(".w-e-text").html();
                 param.orgCode = "未定义";
                 return param;
             }
@@ -77,6 +78,10 @@
             $("#saveBtn").unbind('click').on('click',function () {
                 var param = generateParam();
                 param.status = "——";
+                param.itemcode = itemcode;
+                if (uploadImg.isUpdate()){
+                    ajaxUtil.fileAjax(itemcode,uploadImg.getFiles()[0],"undefined","undefined")
+                }
 
                 ajaxUtil.myAjax(null,url,param,function (data) {
                     if(ajaxUtil.success(data)){
@@ -111,13 +116,11 @@
                     $("#addressPro").val(tempdata.addressPro);
                     $("#addressCity").val(tempdata.addressCity);
                     $("#addressCountry").val(tempdata.addressCity);
+                    $("#address").val(tempdata.address);
+                    $("#intruduce").val(tempdata.intruduce)
                     $(".w-e-text").html(tempdata.projectIntroduce);
-                    $(".upload-content").attr('data-code', tempdata.itemcode);
-                    itemcode = tempdata.itemcode;
-                }else {
-                    $(".upload-content").attr('data-code', itemcode);
                 }
-            })();
+            }());
 
 
             function isUpdate() {

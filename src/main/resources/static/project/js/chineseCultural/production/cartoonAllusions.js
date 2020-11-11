@@ -20,7 +20,8 @@
         //修改事件
         window.orgEvents = {
             'click .edit' : function(e, value, row, index) {
-
+                localStorage.setItem("rowData", JSON.stringify(row));
+                orange.redirect("/chineseCultural/production/insertCartoonAllusions");
             },
             'click .delete': function (e, value, row, index) {
                 var myDeleteModalData ={
@@ -53,8 +54,8 @@
 
 
             $("#btn_addTask").unbind().on('click',function () {
-                $("#main_body").html("");
                 var url = "/chineseCultural/production/insertCartoonAllusions";
+                localStorage.removeItem("rowData");
                 orange.redirect(url);
             });
 
@@ -84,5 +85,7 @@
             myTable.free();
             myTable = bootstrapTableUtil.myBootStrapTableInit("table", url, param, aCol);
         }
+
+            bootstrapTableUtil.globalSearch("table",url,aParam, aCol);
     })
 })();

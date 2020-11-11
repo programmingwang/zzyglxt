@@ -77,7 +77,7 @@
                     }
                     operateMessage = "更新国医话健康成功";
                 }
-                fileUtil.handleFile(isUpdate(), traSchEntity.itemcode, $("#upload_file")[0].files[0]);
+                fileUtil.handleFile(isUpdate(), careFamEntity.itemcode, $("#upload_file")[0].files[0]);
 
                 ajaxUtil.myAjax(null,addUpdateUrl,careFamEntity,function (data) {
                     if(ajaxUtil.success(data)){

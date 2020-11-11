@@ -1,14 +1,16 @@
 (function () {
-    require(['jquery','ajaxUtil','stringUtil','uploadImg','wangEditor'],
-        function ($,ajaxUtil,stringUtil,uploadImg, wangEditor) {
+    require(['jquery', 'ajaxUtil', 'stringUtil', 'uploadImg', 'wangEditor'],
+        function ($, ajaxUtil, stringUtil, uploadImg, wangEditor) {
 
-            var url = "/industrialdevelop/tec-ser-org";
+            var url = "/industrialdevelop/chi-med";
 
-            var pathUrl = "/industrialdevelop/tecserviceorg";
+            var pathUrl = "/industrialdevelop/chinesemed";
+
+            var orgType = "process";
 
             var itemcode = stringUtil.getUUID();
 
-            var type = isUpdate() ? "put":"post";
+            var type = isUpdate() ? "put" : "post";
 
             uploadImg.init();
 
@@ -46,11 +48,11 @@
             editor.create();
             editor.txt.html('<p></p>');
 
-            $("#div1").on("input propertychange", function() {
-                var textNUm=editor.txt.text();
+            $("#div1").on("input propertychange", function () {
+                var textNUm = editor.txt.text();
                 var str;
-                if(textNUm.length>=100000){
-                    str = textNUm.substring(0,10000)+"";  //使用字符串截取，获取前30个字符，多余的字符使用“......”代替
+                if (textNUm.length >= 100000) {
+                    str = textNUm.substring(0, 10000) + "";  //使用字符串截取，获取前30个字符，多余的字符使用“......”代替
                     editor.txt.html(str);
                     alert("字数不能超过10000");                 //将替换的值赋值给当前对象
                 }
@@ -60,66 +62,68 @@
                 orange.redirect(pathUrl)
             });
 
-            function generateParam(){
+            function generateParam() {
                 var param = {};
                 param.name = $("#name").val();
-                param.projectCost = $("#projectCost").val();
+                param.areaCoverd = $("#areaCoverd").val();
+                param.processingType = $("#processingType").val();
                 param.contacts = $("#contacts").val();
                 param.phone = $("#phone").val();
-                param.addressPro = $("#addressPro").val();
-                param.addressCity = $("#addressCity").val();
-                param.addressCountry = $("#addressCountry").val();
+                param.addressPro = $("#addressPro").val()
+                param.addressCity = $("#addressCity").val()
+                param.addressCountry = $("#addressCountry").val()
                 param.address = $("#address").val()
                 param.intruduce = $(".w-e-text").html();
-                param.orgCode = "未定义";
+                param.type = orgType;
                 return param;
             }
 
-            $("#saveBtn").unbind('click').on('click',function () {
+            $("#saveBtn").unbind('click').on('click', function () {
                 var param = generateParam();
                 param.status = "——";
                 param.itemcode = itemcode;
-                console.log(uploadImg.isUpdate())
-                if (uploadImg.isUpdate()){
-                    ajaxUtil.fileAjax(itemcode,uploadImg.getFiles()[0],"undefined","undefined")
+                if (uploadImg.isUpdate()) {
+                    ajaxUtil.fileAjax(itemcode, uploadImg.getFiles()[0], "undefined", "undefined")
                 }
 
-                ajaxUtil.myAjax(null,url,param,function (data) {
-                    if(ajaxUtil.success(data)){
+                ajaxUtil.myAjax(null, url, param, function (data) {
+                    if (ajaxUtil.success(data)) {
                         orange.redirect(pathUrl);
-                    }else {
+                    } else {
                         alert(data.msg);
                     }
-                },true,"123",type);
+                }, true, "123", type);
                 return false;
             });
 
-            $("#submitBtn").unbind('click').on('click',function () {
+            $("#submitBtn").unbind('click').on('click', function () {
                 var param = generateParam();
                 param.status = "——";
-                ajaxUtil.myAjax(null,url,param,function (data) {
-                    if(ajaxUtil.success(data)){
+                ajaxUtil.myAjax(null, url, param, function (data) {
+                    if (ajaxUtil.success(data)) {
                         orange.redirect(pathUrl)
-                    }else {
+                    } else {
                         alert(data.msg)
                     }
-                },true,"123",type);
+                }, true, "123", type);
                 return false;
             });
 
             (function init() {
-                if (isUpdate()){
+                if (isUpdate()) {
                     var tempdata = JSON.parse(localStorage.getItem("rowData"));
                     $("#name").val(tempdata.name);
-                    $("#projectCost").val(tempdata.projectCost);
+                    $("#areaCoverd").val(tempdata.areaCoverd);
+                    $("#processingType").val(tempdata.processingType);
                     $("#contacts").val(tempdata.contacts);
-                    $("#phone").val(tempdata.phone);
                     $("#addressPro").val(tempdata.addressPro);
                     $("#addressCity").val(tempdata.addressCity);
                     $("#addressCountry").val(tempdata.addressCity);
                     $("#address").val(tempdata.address);
-                    $("#intruduce").val(tempdata.intruduce)
-                    $(".w-e-text").html(tempdata.projectIntroduce);
+                    $("#phone").val(tempdata.phone);
+                    $(".w-e-text").html(tempdata.intruduce);
+                    itemcode = tempdata.itemcode
+                    uploadImg.setImgSrc(tempdata.filePath)
                 }
             }());
 
@@ -127,7 +131,7 @@
             function isUpdate() {
                 return (localStorage.getItem("rowData") != null || localStorage.getItem("rowData") != undefined)
             }
-    })
+        })
 })();
 
 

@@ -4,7 +4,7 @@
 
             var url = "/industrialdevelop/tec-ser-org";
 
-            var pathUrl = "/industrialdevelop/tecserviceorg";
+            var pathUrl = "/industrialdevelop/style";
 
             var itemcode = stringUtil.getUUID();
 
@@ -63,15 +63,14 @@
             function generateParam(){
                 var param = {};
                 param.name = $("#name").val();
-                param.projectCost = $("#projectCost").val();
+                param.areaCoverd = $("#areaCoverd").val();
                 param.contacts = $("#contacts").val();
                 param.phone = $("#phone").val();
-                param.addressPro = $("#addressPro").val();
-                param.addressCity = $("#addressCity").val();
-                param.addressCountry = $("#addressCountry").val();
+                param.addressPro = $("#addressPro").val()
+                param.addressCity = $("#addressCity").val()
+                param.addressCountry = $("#addressCountry").val()
                 param.address = $("#address").val()
                 param.intruduce = $(".w-e-text").html();
-                param.orgCode = "未定义";
                 return param;
             }
 
@@ -79,7 +78,6 @@
                 var param = generateParam();
                 param.status = "——";
                 param.itemcode = itemcode;
-                console.log(uploadImg.isUpdate())
                 if (uploadImg.isUpdate()){
                     ajaxUtil.fileAjax(itemcode,uploadImg.getFiles()[0],"undefined","undefined")
                 }
@@ -111,7 +109,7 @@
                 if (isUpdate()){
                     var tempdata = JSON.parse(localStorage.getItem("rowData"));
                     $("#name").val(tempdata.name);
-                    $("#projectCost").val(tempdata.projectCost);
+                    $("#areaCoverd").val(tempdata.areaCoverd);
                     $("#contacts").val(tempdata.contacts);
                     $("#phone").val(tempdata.phone);
                     $("#addressPro").val(tempdata.addressPro);
@@ -120,6 +118,7 @@
                     $("#address").val(tempdata.address);
                     $("#intruduce").val(tempdata.intruduce)
                     $(".w-e-text").html(tempdata.projectIntroduce);
+                    itemcode = tempdata.itemcode
                 }
             }());
 

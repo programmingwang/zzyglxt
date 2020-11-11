@@ -1,8 +1,11 @@
 package com.zyyglxt.dao;
 
 import com.zyyglxt.dataobject.IndustrialDevelopChiMed;
+import com.zyyglxt.dto.industrialDevelop.IndustrialDevelopChiMedDto;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 /**
    *@Author lrt
@@ -22,4 +25,6 @@ public interface IndustrialDevelopChiMedMapper {
     int updateByPrimaryKeySelective(IndustrialDevelopChiMed record);
 
     int updateByPrimaryKey(IndustrialDevelopChiMed record);
+
+    List<IndustrialDevelopChiMed> selectAll(String type);
 }

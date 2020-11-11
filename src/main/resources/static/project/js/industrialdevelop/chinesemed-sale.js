@@ -3,9 +3,9 @@
         function (jquery,ajaxUtil,bootstrapTableUtil,objectUtil,alertUtil,modalUtil,selectUtil,stringUtil,dictUtil) {
 
 
-            var url = "/industrialdevelop/tec-ser-org";
+            var url = "/industrialdevelop/chi-med/sale";
 
-            var pathUrl = "/industrialdevelop/tecserviceorg";
+            var pathUrl = "/industrialdevelop/chinesemed-sale";
             var addUrl = pathUrl+"_add";
             var aParam = {
 
@@ -73,8 +73,8 @@
 
 
             var aCol = [
-                {field: 'name', title: '院所名称'},
-                {field: 'filePath', title: '图片', formatter:function (value, row, index) {
+                {field: 'serviceProject', title: '企业名称'},
+                {field: 'filePath', title: '企业图片', formatter:function (value, row, index) {
                         if(value == "已经损坏了"){
                             return '<p>'+value+'</p>';
                         }else{

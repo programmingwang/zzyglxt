@@ -113,6 +113,7 @@
 
             /*初始化数据*/
             (function init() {
+                uploadImg.init();
                 ajaxUtil.myAjax(null,"/medicalService/hosp/selectAll",null,function (data) {
                     if(ajaxUtil.success(data)){
                         hosps = data.data
@@ -130,12 +131,13 @@
                 if (updateStatus){
                     var tempdata = JSON.parse(localStorage.getItem("rowData"));
                     $("#specialtyName").val(tempdata.specialtyName);
-                    $("#hospitalName  option[value="+tempdata.hospitalName+"] ").attr("selected",true)
+                    uploadImg.setImgSrc(tempdata.filePath)
+                    $("#hospitalName  option[value="+tempdata.hospitalCode+"] ").attr("selected",true)
                     $("#specialtyPhone").val(tempdata.specialtyPhone);
                     $(".w-e-text").html(tempdata.specialtyDescribe);
                 }
             }());
 
-            uploadImg.init();
+
         });
 })();

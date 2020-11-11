@@ -119,7 +119,7 @@
                     $(".w-e-text").html(tempdata.context);
                     itemcode = tempdata.itemcode
                 }
-            }());
+            })();
 
 
             function isUpdate() {

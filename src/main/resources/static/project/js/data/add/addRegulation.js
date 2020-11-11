@@ -1,7 +1,6 @@
 (function () {
-    require(['jquery','wangEditor','ajaxUtil','alertUtil','stringUtil'],
-        function (jquery,wangEditor,ajaxUtil,alertUtil,stringUtil) {
-            var type = isUpdate() ? "put":"post";
+    require(['jquery','wangEditor','ajaxUtil','alertUtil','stringUtil','fileUtil'],
+        function (jquery,wangEditor,ajaxUtil,alertUtil,stringUtil,fileUtil) {
             const editor = new wangEditor('#div1')
             // 或者 const editor = new E( document.getElementById('div1') )
             //菜单配置
@@ -47,60 +46,45 @@
             });
 
             $("#cancelbtn").unbind().on('click',function () {
-                $("#main_body").html("");
                 var url = "/data/dataRegulation";
-                orange.loadPage({url: url, target: 'main_body', selector: '#fir_body', success: function(data){
-                        if(data == null||data == ""){
-                            return alertUtil.error( url+'加载失败');
-                        }
-                        $("#main_body").html(data);
-                    }})
+                orange.redirect(url);
             });
 
             $("#submitbtn").unbind().on('click',function () {
-                var regulationEntity = {
-                    itemcode: stringUtil.getUUID(),
-                    dataTitle : $("#dataTitle").val(),
-                    dataSource : $("#dataSource").val(),
-                    dataFileType : $("#dataFileType").val(),
-                    dataContent : editor.txt.html()
-                };
-
-                var formData = new FormData();
-                formData.append("dataCode",regulationEntity.itemcode);
-                formData.append("file",$("#upload_file")[0].files[0]);
-                formData.append("itemcode",stringUtil.getUUID());
-                formData.append("uploader","admin");
-                formData.append("uploaderCode","qweqwqwewasdasd");
-                $.ajax({
-                    url:"/file/upload",
-                    type:'POST',
-                    data: formData,
-                    processData: false,   // jQuery不要去处理发送的数据
-                    contentType: false,   // jQuery不要去设置Content-Type请求头
-                    success:function(data){
-                        if(data.code === 88888){
-                            alertUtil.success("上传附件成功");
-                        }else{
-                            alertUtil.error(data.msg)
-                        }
-                    },
-                    error: function(data){
-                        alertUtil.error(data.msg)
+                var RegulationEntity;
+                var addUpdateUrl;
+                var operateMessage;
+                if(!isUpdate()){
+                    addUpdateUrl = "/datado/regulation/insertRegulation";
+                    operateMessage = "新增政策法规成功";
+                    RegulationEntity = {
+                        itemcode: stringUtil.getUUID(),
+                        dataTitle : $("#dataTitle").val(),
+                        dataSource : $("#dataSource").val(),
+                        dataFileType : $("#dataFileType").val(),
+                        dataContent : editor.txt.html()
+                    };
+                }else{
+                    var needData = JSON.parse(localStorage.getItem("rowData"));
+                    addUpdateUrl = "/datado/regulation/insertRegulation";
+                    RegulationEntity = {
+                        itemid: needData.itemid,
+                        itemcode: needData.itemcode,
+                        dataTitle : $("#dataTitle").val(),
+                        dataSource : $("#dataSource").val(),
+                        dataFileType : $("#dataFileType").val(),
+                        dataContent : editor.txt.html()
                     }
-                });
+                    operateMessage = "更新政策法规成功";
+                }
 
+                fileUtil.handleFile(isUpdate(), RegulationEntity.itemcode, $("#upload_file")[0].files[0]);
 
-                ajaxUtil.myAjax(null,"/datado/regulation/insertRegulation",regulationEntity,function (data) {
+                ajaxUtil.myAjax(null,addUpdateUrl,RegulationEntity,function (data) {
                     if(ajaxUtil.success(data)){
-                        alertUtil.info("新增政策法规成功");
+                        alertUtil.info(operateMessage);
                         var url = "/data/dataRegulation";
-                        orange.loadPage({url: url, target: 'main_body', selector: '#fir_body', success: function(data){
-                                if(data == null||data == ""){
-                                    return alertUtil.error( url+'加载失败');
-                                }
-                                $("#main_body").html(data);
-                            }})
+                        orange.redirect(url);
                     }else {
                         alertUtil.alert(data.msg);
                     }
@@ -114,7 +98,9 @@
                     $("#dataTitle").val(tempdata.dataTitle);
                     $("#dataSource").val(tempdata.dataSource);
                     $("#dataFileType").val(tempdata.dataFileType);
-                    $(".w-e-text").html(tempdata.dataContent);
+                    editor.txt.html(tempdata.dataContent);
+                    var img = tempdata.filePath;
+                    $("#upimg").attr("src",img);
                 }
             }());
 

@@ -1,5 +1,14 @@
-#portrait{
-    height: 500px;
+#portrait {
+    width: 227px;
+}
+
+#userMessage {
+    margin-top: 50px;
+}
+
+div {
+    margin-bottom: 10px;
+    justify-content: center;
 }
 
 label {

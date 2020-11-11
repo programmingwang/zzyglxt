@@ -28,7 +28,16 @@ public class CustomizeFilterInvocationSecurityMetadataSource implements FilterIn
     public Collection<ConfigAttribute> getAttributes(Object o) throws IllegalArgumentException {
         //获取请求地址
         String requestUrl = ((FilterInvocation) o).getRequestUrl();
-        requestUrl = UrlUtil.getUrl(requestUrl);
+        int index = requestUrl.indexOf("?");
+        if (index != -1) {
+            requestUrl = requestUrl.substring(0, index);
+        }
+        if (requestUrl.contains("/industrialdevelop")){
+            String method = ((FilterInvocation) o).getHttpRequest().getMethod();
+            requestUrl = UrlUtil.getUrl(requestUrl, method);
+        }else {
+            requestUrl = UrlUtil.getUrl(requestUrl);
+        }
         //查询具体某个接口的权限
         List<ResourcesDO> permissionList = resService.selectListByPath(requestUrl);
         if (permissionList == null || permissionList.size() == 0) {

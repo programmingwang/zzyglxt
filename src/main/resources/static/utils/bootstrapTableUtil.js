@@ -28,16 +28,16 @@
                 sortOrder: "asc",                   //排序方式
                 sidePagination: "client",           //分页方式：client客户端分页，server服务端分页（*）
                 page: 1,                      //初始化加载第一页，默认第一页,并记录
-                pageSize: 10,                       //每页的记录行数（*）
-                pageList: [10, 25, 50, 100],        //可供选择的每页的行数（*）
+                pageSize: 5,                       //每页的记录行数（*）
+                pageList: [5, 10, 20, 50],        //可供选择的每页的行数（*）
                 paginationPreText: '上一页',
                 paginationNextText: '下一页',
                 // showColumns: true,               //是否显示所有的列（选择显示的列）
                 // minimumCountColumns: 2,          //最少允许的列数
-                // search: true,                       //显示搜索框
+                search: false,                       //显示搜索框
                 // searchOnEnterKey:true,              //回车后查询
                 clickToSelect: true,                //是否启用点击选中行
-                // search:true,                        //显示搜索框
+                //search:true,                        //显示搜索框
                 //height: 500,                      //行高，如果没有设置height属性，表格自动根据记录条数觉得表格高度
                 uniqueId: "ID",                     //每一行的唯一标识，一般为主键列
                 queryParams: function (params) {
@@ -105,6 +105,7 @@
         function myBootStrapTableDestory(aTableID) {
             $("#"+aTableID).bootstrapTable("destroy");
         }
+        //$(".float-right").attr("display",block);
 
         return {
             myBootStrapTableInit:myBootStrapTableInit,

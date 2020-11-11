@@ -42,6 +42,11 @@ public class DataNewsServiceImpl implements IDataNewsService {
     }
 
     @Override
+    public List<DataDO> selectNewsRotList() {
+        return dataDOMapper.getAllNewsRot("新闻管理");
+    }
+
+    @Override
     public int insertNewsInf(DataDO record) {
         ValidatorResult result = validator.validate(record);
         if(result.isHasErrors()){

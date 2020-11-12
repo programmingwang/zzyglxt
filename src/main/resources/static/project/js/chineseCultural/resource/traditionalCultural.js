@@ -19,7 +19,8 @@
             //修改事件
             window.orgEvents = {
                 'click .edit' : function(e, value, row, index) {
-
+                    localStorage.setItem("rowData", JSON.stringify(row));
+                    orange.redirect("/chineseCultural/resource/insertTraditionalCultural");
                 },
                 'click .delete': function (e, value, row, index) {
                     var myDeleteModalData ={
@@ -48,6 +49,7 @@
 
             $("#btn_addTask").unbind().on('click',function () {
                 var url = "/chineseCultural/resource/insertTraditionalCultural";
+                localStorage.removeItem("rowData");
                 orange.redirect(url);
             });
 
@@ -69,5 +71,7 @@
                 myTable.free();
                 myTable = bootstrapTableUtil.myBootStrapTableInit("table", url, param, aCol);
             }
+
+            bootstrapTableUtil.globalSearch("table",url,aParam, aCol);
         })
 })();

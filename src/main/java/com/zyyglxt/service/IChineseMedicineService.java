@@ -17,4 +17,5 @@ public interface IChineseMedicineService {
     List<ChineseMedicineDO> selectAllChineseMedicine();
     List<ChineseMedicineDO> searchChineseMedicine(String keyWord);
     List<ChineseMedicineDO> top5ChineseMedicine();
+    List<ChineseMedicineDO> selectBySpecialtyCode(String specialtyCode);
 }

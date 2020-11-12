@@ -1,6 +1,6 @@
 (function () {
-    require(['jquery','wangEditor','ajaxUtil','alertUtil','stringUtil','dictUtil'],
-        function (jquery,wangEditor,ajaxUtil,alertUtil,stringUtil,dictUtil) {
+    require(['jquery','wangEditor','ajaxUtil','alertUtil','stringUtil','dictUtil','fileUtil','uploadImg'],
+        function (jquery,wangEditor,ajaxUtil,alertUtil,stringUtil,dictUtil,fileUtil,uploadImg) {
             const editor = new wangEditor('#div1')
             // 或者 const editor = new E( document.getElementById('div1') )
             //菜单配置
@@ -88,110 +88,87 @@
                 }
             });
 
+            /*q全局变量*/
+            var tempdata = JSON.parse(localStorage.getItem("rowData"));
+            var updateStatus = isUpdate()
+            var jumpUrl = "/medicalService/specialty"
             var specialtys = {}
-            function specialtySelect(){
-                ajaxUtil.myAjax(null,"/medicalService/specialty/selectByHospCode?hospCode=" + $("#hospitalName").val(),null,function (data) {
-                    if(ajaxUtil.success(data)){
-                        specialtys = data.data
-                        var html = "";
-                        $.each(specialtys,function (i,it) {
-                            html = html + '<option value="'+it.itemcode+'">'+it.specialtyName+'</option>';
-                        });
-                        $("#specialtyName").html("");
-                        $("#specialtyName").append(html);
-                    }
-                },false,true,"get");
-            }
-            $("#hospitalName").change(specialtySelect)
+            var hosps = {}
+
+            /*设置中医类型下拉框的值*/
+            $("#chineseMedicineType").selectUtil(dictUtil.getDictByCode(dictUtil.DICT_LIST.expertType));
+
+            /*处理出诊医院下拉框，改变则发送请求获取科室*/
+            $("#hospitalName").unbind().on("change",specialtySelect)
+
+            /*处理科室下拉框点击事件，若选择默认医院，则请求默认医院信息*/
             $("#specialtyName").unbind().on('click',function () {
-                if (JSON.stringify(specialtys) === '{}'){
+                if (specialtys.length === undefined || JSON.stringify(specialtys)==="{}"){
                     specialtySelect()
                 }
             })
 
+            /*点击返回按钮*/
             $("#cancel").unbind().on('click',function () {
-                $("#main_body").html("");
-                var url = "/medicalService/chineseMedicine";
-                orange.loadPage({url: url, target: 'main_body', selector: '#fir_body', success: function(data){
-                        if(data == null||data == ""){
-                            return alertUtil.error( url+'加载失败');
-                        }
-                        $("#main_body").html(data);
-                    }})
+                orange.redirect(jumpUrl);
             });
 
+            /*处理提交按钮*/
             $("#btn_insert").unbind().on('click',function () {
                 var hosp;
-                $.each(hosps,function (i,it) {
-                    if (it.itemcode == $("#hospitalName").val()){
-                        hosp = it;
-                    }
-                });
                 var specialty;
-                $.each(specialtys,function (i,it) {
-                    if (it.itemcode == $("#specialtyName").val()){
-                        specialty = it;
-                    }
-                });
-                var hospEntity = {
-                    itemcode: stringUtil.getUUID(),
-                    chineseMedicineName : $("#chineseMedicineName").val(),
-                    chineseMedicineTitle : $("#chineseMedicineTitle").val(),
-                    chineseMedicineType : $("#chineseMedicineType").val(),
-                    hospCode : hosp.itemcode,
-                    hospitalName : hosp.hospitalName,
-                    deptCode : specialty.itemcode,
-                    specialtyName : specialty.specialtyName,
-                    visitTime : $("#visitTime").val(),
-                    phone : $("#phone").val(),
-                    mainVisit : $("#mainVisit").val(),
-                    expertIntroduce : editor.txt.html(),
-                    medicineRecords : editor2.txt.html()
-                };
+                var entity;
+                var requestUrl;
+                var operateMessage;
 
-                var formData = new FormData();
-                formData.append("dataCode",hospEntity.itemcode);
-                formData.append("file",$("#upload_file")[0].files[0]);
-                formData.append("itemcode",stringUtil.getUUID());
-                formData.append("uploader","admin");
-                formData.append("uploaderCode","qweqwqwewasdasd");
-                $.ajax({
-                    url:"/file/upload",
-                    type:'POST',
-                    data: formData,
-                    processData: false,   // jQuery不要去处理发送的数据
-                    contentType: false,   // jQuery不要去设置Content-Type请求头
-                    success:function(data){
-                        alertUtil.success(data.msg);
-                    },
-                    error: function(data){
-                        alertUtil.error(data.msg)
-                    }
-                });
+                /*拿到下拉框所选的值的其他信息*/
+                hosp = hosps.find(function (obj) {return obj.itemcode === $("#hospitalName").val()});
+                specialty = specialtys.find(function (obj) {return obj.itemcode === $("#specialtyName").val()});
 
-                ajaxUtil.myAjax(null,"/medicalService/chineseMedicine/add",hospEntity,function (data) {
+                if (!updateStatus){
+                    requestUrl = "/medicalService/chineseMedicine/add";
+                    operateMessage = "新增名老中医成功";
+                    entity = {
+                        itemcode: stringUtil.getUUID(),
+                    };
+                }
+                else {
+                    requestUrl = "/medicalService/chineseMedicine/update";
+                    operateMessage = "更新名老中医成功";
+                    entity = {
+                        itemid: tempdata.itemid,
+                        itemcode: tempdata.itemcode
+                    };
+                }
+                entity["chineseMedicineName"] = $("#chineseMedicineName").val();
+                entity["chineseMedicineTitle"] = $("#chineseMedicineTitle").val();
+                entity["chineseMedicineType"] = $("#chineseMedicineType").val();
+                entity["hospCode"] = hosp.itemcode;
+                entity["hospitalName"] = hosp.hospitalName;
+                entity["deptCode"] = specialty.itemcode;
+                entity["specialtyName"] = specialty.specialtyName;
+                entity["visitTime"] = $("#visitTime").val()
+                entity["phone"] = $("#phone").val();
+                entity["mainVisit"] = $("#mainVisit").val();
+                entity["expertIntroduce"] = editor.txt.html();
+                entity["medicineRecords"] = editor2.txt.html();
+
+                fileUtil.handleFile(updateStatus, entity.itemcode, uploadImg.getFiles()[0]);
+
+                ajaxUtil.myAjax(null,requestUrl,entity,function (data) {
                     if(ajaxUtil.success(data)){
-                        alertUtil.info("新增名老中医成功");
-                        var url = "/medicalService/chineseMedicine";
-                        orange.loadPage({url: url, target: 'main_body', selector: '#fir_body', success: function(data){
-                                if(data == null||data == ""){
-                                    return alertUtil.error( url+'加载失败');
-                                }
-                                $("#main_body").html(data);
-                            }})
+                        alertUtil.info(operateMessage);
+                        orange.redirect(jumpUrl);
                     }else {
                         alertUtil.alert(data.msg);
                     }
                 },false,true);
-
             });
 
-
-            var pl = dictUtil.getDictByCode(dictUtil.DICT_LIST.expertType);
-            $("#chineseMedicineType").selectUtil(pl);
-            var hosps = {}
+            /*初始化数据*/
             (function init() {
                 ajaxUtil.myAjax(null,"/medicalService/hosp/selectAll",null,function (data) {
+                    uploadImg.init();
                     if(ajaxUtil.success(data)){
                         hosps = data.data
                         var html = "";
@@ -202,13 +179,18 @@
                         $("#hospitalName").append(html);
                     }
                 },false,true,"get");
+                if (hosps.length == 0) {
+                    alertUtil.info("医院信息为空，请先添加医院")
+                }
                 if (isUpdate()){
                     var tempdata = JSON.parse(localStorage.getItem("rowData"));
                     $("#chineseMedicineName").val(tempdata.chineseMedicineName);
+                    uploadImg.setImgSrc(tempdata.filePath)
                     $("#chineseMedicineTitle").val(tempdata.chineseMedicineTitle);
-                    $("#chineseMedicineType").val(tempdata.chineseMedicineType);
-                    $("#hospitalName").val(tempdata.hospitalName);
-                    $("#specialtyName").val(tempdata.specialtyName);
+                    $("#chineseMedicineType  option[value="+tempdata.chineseMedicineType+"] ").attr("selected",true);
+                    $("#hospitalName  option[value="+tempdata.hospCode+"] ").attr("selected",true);
+                    specialtySelect()
+                    $("#specialtyName  option[value="+tempdata.deptCode+"] ").attr("selected",true);
                     $("#visitTime").val(tempdata.visitTime);
                     $("#phone").val(tempdata.phone);
                     $("#mainVisit").val(tempdata.mainVisit);
@@ -220,5 +202,26 @@
             function isUpdate() {
                 return (localStorage.getItem("rowData") != null || localStorage.getItem("rowData") != undefined)
             }
+
+            /*请求科室信息*/
+            function specialtySelect(){
+                ajaxUtil.myAjax(null,"/medicalService/specialty/selectByHospCode?hospCode=" + $("#hospitalName").val(),null,function (data) {
+                    if(ajaxUtil.success(data)){
+                        specialtys = data.data
+                        if (specialtys.length == 0) {
+                            alertUtil.info("该医院的科室信息为空，请先为该医院添加科室")
+                        }
+                        var html = "";
+                        $.each(specialtys,function (i,it) {
+                            html = html + '<option value="'+it.itemcode+'">'+it.specialtyName+'</option>';
+                        });
+                        $("#specialtyName").html("");
+                        $("#specialtyName").append(html);
+                    }
+                },false,true,"get");
+            }
+
+
+
         });
 })();

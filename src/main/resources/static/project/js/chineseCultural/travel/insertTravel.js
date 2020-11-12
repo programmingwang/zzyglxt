@@ -1,6 +1,6 @@
 (function () {
-    require(['jquery','wangEditor','ajaxUtil','alertUtil','stringUtil','fileUtil'],
-        function (jquery,wangEditor,ajaxUtil,alertUtil,stringUtil,fileUtil) {
+    require(['jquery','wangEditor','ajaxUtil','alertUtil','stringUtil','fileUtil','uploadImg'],
+        function (jquery,wangEditor,ajaxUtil,alertUtil,stringUtil,fileUtil,uploadImg) {
             const editor = new wangEditor('#div1')
             // 或者 const editor = new E( document.getElementById('div1') )
             //菜单配置
@@ -35,6 +35,8 @@
             editor.config.uploadImgShowBase64 = true
             editor.create()
             editor.txt.html('')
+
+            uploadImg.init();
 
             $("#div1").on("input propertychange", function() {
                 var textNUm=editor.txt.text()
@@ -79,15 +81,19 @@
                     operateMessage = "更新旅游景点成功";
                 }
 
-                fileUtil.handleFile(isUpdate(), travelEntity.itemcode, $("#upload_file")[0].files[0]);
+                fileUtil.handleFile(isUpdate(), travelEntity.itemcode, uploadImg.getFiles()[0]);
 
                 ajaxUtil.myAjax(null,addUpdateUrl,travelEntity,function (data) {
                     if(ajaxUtil.success(data)){
-                        alertUtil.info(operateMessage);
-                        var url = "/chineseCultural/travel/travel";
-                        orange.redirect(url);
+                        if(data.code == ajaxUtil.successCode) {
+                            alertUtil.info(operateMessage);
+                            var url = "/chineseCultural/travel/travel";
+                            orange.redirect(url);
+                        }else{
+                            alertUtil.error(data.msg);
+                        }
                     }else {
-                        alertUtil.alert(data.msg);
+                        alertUtil.error(data.msg);
                     }
                 },false,true);
 
@@ -110,40 +116,8 @@
                 }
             }());
 
-            function getObjectURL(file) {
-                var url = null ;
-                if (window.createObjectURL!=undefined) { // basic
-                    url = window.createObjectURL(file) ;
-                } else if (window.URL!=undefined) { // mozilla(firefox)
-                    url = window.URL.createObjectURL(file) ;
-                } else if (window.webkitURL!=undefined) { // webkit or chrome
-                    url = window.webkitURL.createObjectURL(file) ;
-                }
-
-                return url ;
-            };
-
             function isUpdate() {
                 return (localStorage.getItem("rowData") != null || localStorage.getItem("rowData") != undefined)
             };
-
-            document.getElementById('upload_file').onchange = function() {
-                // var tempdata = JSON.parse(localStorage.getItem("rowData"));
-                // var firstUrl= tempdata.filePath;
-                var strsrc=getObjectURL(this.files[0]);
-                var imgSize = this.files[0].size;  //b
-                if(imgSize>1024*1024*1){//1M
-                    return alert("上传图片不能超过1M");
-                }
-                if(this.files[0].type != 'image/png' && this.files[0].type != 'image/jpeg' && this.files[0].type != 'image/gif'){
-                    return alert("图片上传格式不正确");
-                }
-                //console.log(strsrc);
-                $("#upimg").attr("src",strsrc);
-
-                if(strsrc==null){
-                    $("#upimg").attr("src",firstUrl);
-                }
-            }
         })
 })();

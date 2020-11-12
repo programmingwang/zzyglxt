@@ -53,7 +53,7 @@
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>druid</artifactId>
-            <version>1.1.21</version>
+            <version>1.1.22</version>
         </dependency>
 
         <dependency>
@@ -210,32 +210,32 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
-            <plugin>
-                <groupId>org.mybatis.generator</groupId>
-                <artifactId>mybatis-generator-maven-plugin</artifactId>
-                <version>${mybatis-generator-maven-plugin.version}</version>
-                <configuration>
-                    <!--允许移动生成的文件-->
-                    <verbose>false</verbose>
-                    <!--允许自动覆盖文件-->
-                    <overwrite>false</overwrite>
-                    <configurationFile>
-                        src/main/resources/mybatis-generator.xml
-                    </configurationFile>
-                </configuration>
-                <dependencies>
-                    <dependency>
-                        <groupId>org.mybatis.generator</groupId>
-                        <artifactId>mybatis-generator-core</artifactId>
-                        <version>${mybatis-generator-core.version}</version>
-                    </dependency>
-                    <dependency>
-                        <groupId>mysql</groupId>
-                        <artifactId>mysql-connector-java</artifactId>
-                        <version>${mysql.version}</version>
-                    </dependency>
-                </dependencies>
-            </plugin>
+            <!--<plugin>-->
+                <!--<groupId>org.mybatis.generator</groupId>-->
+                <!--<artifactId>mybatis-generator-maven-plugin</artifactId>-->
+                <!--<version>${mybatis-generator-maven-plugin.version}</version>-->
+                <!--<configuration>-->
+                    <!--&lt;!&ndash;允许移动生成的文件&ndash;&gt;-->
+                    <!--<verbose>false</verbose>-->
+                    <!--&lt;!&ndash;允许自动覆盖文件&ndash;&gt;-->
+                    <!--<overwrite>false</overwrite>-->
+                    <!--<configurationFile>-->
+                        <!--src/main/resources/mybatis-generator.xml-->
+                    <!--</configurationFile>-->
+                <!--</configuration>-->
+                <!--<dependencies>-->
+                    <!--<dependency>-->
+                        <!--<groupId>org.mybatis.generator</groupId>-->
+                        <!--<artifactId>mybatis-generator-core</artifactId>-->
+                        <!--<version>${mybatis-generator-core.version}</version>-->
+                    <!--</dependency>-->
+                    <!--<dependency>-->
+                        <!--<groupId>mysql</groupId>-->
+                        <!--<artifactId>mysql-connector-java</artifactId>-->
+                        <!--<version>${mysql.version}</version>-->
+                    <!--</dependency>-->
+                <!--</dependencies>-->
+            <!--</plugin>-->
         </plugins>
     </build>
 </project>

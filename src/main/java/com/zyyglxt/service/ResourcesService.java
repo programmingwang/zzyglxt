@@ -32,4 +32,6 @@ public interface ResourcesService {
     List<ResourcesDO> selectListByPath(String requestUrl);
 
     List<ResourcesDO> SelectPermissionByRoleCode(UserDO userDO);
+
+    List<ResourcesDO> selectPres();
 }

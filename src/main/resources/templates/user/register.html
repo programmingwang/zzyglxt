@@ -2,91 +2,189 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>用户注册</title>
-    <!--<link rel="stylesheet" type="text/css"  th:href="@{/css/user/user.css}">-->
+    <link rel="stylesheet" type="text/css" th:href="@{/component/bootstrap@4.5.2/css/bootstrap.min.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/project/css/user/register.css}">
+    <title>注册</title>
 </head>
 <body>
-    <div id="fir_body">
-        <header>
-            <div class="layout content">
-                <div>
-                    <img src="/images/u11.png">
-                </div>
-                <div class="contentTitle">
-                    <span><h3>多源异构中医科学数据汇交系统</h3></span><span></span><br>
-                    <span><h3>Multi-source heterogeneous data TCM Science Concurrent Systems</h3></span>
-                </div>
-            </div>
-        </header>
-        <div class="register_body">
-            <div id="tmc_content" class="tcm_content">
-                <div id="left_content" class="left_content-reg">
-                    <div>
-                        <!--<h4 class="">注册须知</h4>-->
-                        <!--<div class="left_content-reg-notes">-->
-                            <!--<p>1、用户名称由6~20位的英文字母和数字组成</p>-->
-                            <!--<p>2、密码的长度不能小于6位,可以是英文字母和数字的任意组合</p>-->
-                            <!--<p>3、请如实填写您的真实姓名和真实身份号码</p>-->
-                            <!--<p>4、真实姓名和身份号码将作为您找回密码的重要依据</p>-->
-                        <!--</div>-->
+
+<div class="container-fluid reg-content-body" >
+    <div class="row clearfix">
+        <div class="  col-sm-12 offset-md-4 col-md-4 reg-content" >
+                <form action="/user/register"  method="post" onsubmit="return validateLogin()">
+                    <div class="form-group row form-item">
+                    <label for="orgName" class="col-sm-4 col-form-label form-text">企业名称：</label>
+                    <div class="col-sm-8 form-input">
+                        <input type="text"  class="form-control-plaintext" id="orgName" placeholder="请输入企业名称">
                     </div>
                 </div>
-                <div id="right_content" class="right_content-reg">
-                    <div class="right_content-reg-header">
-                        <p style="cursor: pointer; text-align: right; padding-right: 10px">
-                            <img src="/images/return.png" style="width: 32px;height: 32px" id="return">
-                        </p>
-                    </div>
-                    <div class="regMenu">
-                        <div class="loginMenuText">
-                            <label class="regLabel">用户名称：</label>
-                            <input type="text" id="userAccountName" class="regMenuInput" placeholder="用户名（6-12英文、数字组合）">
+                    <div class="form-group row form-item">
+                        <label for="orgType" class="col-sm-4 col-form-label form-text">机构类型：</label>
+                        <div class="col-sm-8 form-input">
+                            <select id="orgType">
+                                <option  value="中药材种植园">中药材种植园</option>
+                                <option  value="中药材加工企业">中药材加工企业</option>
+                                <option  value="中药材制药企业">中药材制药企业</option>
+                                <option  value="中医医疗机构">中医医疗机构&nbsp;&nbsp; </option>
+                                <option  value="高等医学院校">高等医学院校&nbsp;&nbsp; </option>
+                                <option  value="科研院所">科研院所</option>
+                                <option  value="技术服务机构">技术服务机构</option>
+                                <option  value="旅游康养机构">旅游康养机构</option>
+                            </select>
                         </div>
                     </div>
-                    <div class="regMenu">
-                        <div class="loginMenuText">
-                            <label class="regLabel">真实姓名：</label>
-                            <input type="text" id="userRealName" class="regMenuInput" placeholder="真实姓名">
+                    <div class="form-group row form-item">
+                        <label for="orgCode" class="col-sm-4 col-form-label form-text">组织机构代码：</label>
+                        <div class="col-sm-8 form-input">
+                            <input type="text" class="form-control-plaintext" id="orgCode" placeholder="请输入组织机构代码">
                         </div>
                     </div>
-                    <div class="regMenu">
-                        <div class="loginMenuText">
-                            <label class="regLabel">证件类型：</label>
-                            <select id="cardType"></select>
+                    <div class="form-group row form-item">
+                        <label for="username" class="col-sm-4 col-form-label form-text">用户名：</label>
+                        <div class="col-sm-8 form-input">
+                            <input type="text"  class="form-control-plaintext" id="username" placeholder="请输入用户名">
                         </div>
                     </div>
-                    <div class="regMenu">
-                        <div class="loginMenuText">
-                            <label class="regLabel">证件号码：</label>
-                            <input type="text" id="idNum" class="regMenuInput" placeholder="证件号码">
+                    <div class="form-group row form-item">
+                        <label for="phone" class="col-sm-4 col-form-label form-text">手机号：</label>
+                        <div class="col-sm-8 form-input">
+                            <input type="text"  class="form-control-plaintext" id="phone" placeholder="请输入手机号">
                         </div>
                     </div>
-                    <div class="regMenu">
-                        <div class="loginMenuText">
-                            <label class="regLabel">登录密码：</label>
-                            <input type="password" id="userPassword" class="regMenuInput" placeholder="登录密码">
+
+                    <div class="form-group row form-item">
+                        <label for="password" class="col-sm-4 col-form-label form-text">密&nbsp;&nbsp;&nbsp;码：</label>
+                        <div class="col-sm-8 form-input">
+                            <input type="password"name="password" class="form-control" id="password" placeholder="请输入密码">
                         </div>
                     </div>
-                    <div class="regMenu">
-                        <div class="loginMenuText">
-                            <label class="regLabel">确认密码：</label>
-                            <input type="password" id="userVPassword" class="regMenuInput" placeholder="确认密码">
+                    <div class="form-group row form-item">
+                        <label for="reg-code" class="col-sm-4 col-form-label form-text">验证码：</label>
+                        <div class="col-sm-4 form-input">
+                            <input type="text" class="form-control" id="reg-code" placeholder="请输入验证码">
+                        </div>
+                        <div class="col-sm-4">
+                            <span>
+                                 <canvas id="canvas" width="100" height="28"></canvas>
+                            </span>
                         </div>
                     </div>
-                    <div class="regMenu">
-                        <div class="loginMenuText-button">
-                            <input type="button" id="btn_reg"  class="loginButton-reg" value="注册">
+                    <div class="form-group row form-item">
+                        <label class="col-sm-4 col-form-label form-text"></label>
+                        <div class="col-sm-8 form-input">
+                            <button  class="btn form-button ">注    册</button>
                         </div>
                     </div>
-                </div>
-            </div>
+                </form>
+
         </div>
-        <!--页脚-->
-        <div id="main_foot">
-            <span>Copyright © 2018   中科软科技股份有限公司</span>
-        </div>
+
     </div>
+</div>
+<script type="text/javascript" th:src="@{/component/jquery@3.5.1/jquery.min.js}"></script>
+<script type="text/javascript" th:src="@{/component/bootstrap@4.5.2/js/bootstrap.min.js}"></script>
+<script>
+    var codeStr = [];
+    /**生成一个随机数**/
+    function randomNum(min,max){
+        return Math.floor( Math.random()*(max-min)+min);
+    }
+    /**生成一个随机色**/
+    function randomColor(min,max){
+        var r = randomNum(min,max);
+        var g = randomNum(min,max);
+        var b = randomNum(min,max);
+        return "rgb("+r+","+g+","+b+")";
+    }
+    drawPic(codeStr);
+    document.getElementById("canvas").onclick = function(e){
+        e.preventDefault();
+        drawPic(codeStr);
+    }
+
+    /**绘制验证码图片**/
+    function drawPic(codeStr){
+        var canvas=document.getElementById("canvas");
+        var width=canvas.width;
+        var height=canvas.height;
+        var ctx = canvas.getContext('2d');
+        ctx.textBaseline = 'bottom';
+
+        /**绘制背景色**/
+        ctx.fillStyle = randomColor(180,240); //颜色若太深可能导致看不清
+        ctx.fillRect(0,0,width,height);
+        /**绘制文字**/
+        var str = 'ABCEFGHJKLMNPQRSTWXY123456789';
+        for(var i=0; i<4; i++){
+            var txt = str[randomNum(0,str.length)];
+            codeStr[i] = txt;
+            ctx.fillStyle = randomColor(50,160);  //随机生成字体颜色
+            ctx.font = randomNum(16,25)+'px SimHei'; //随机生成字体大小
+            var x = 10+i*25;
+            var y = randomNum(25,30);
+            var deg = randomNum(-45, 45);
+            //修改坐标原点和旋转角度
+            ctx.translate(x,y);
+            ctx.rotate(deg*Math.PI/180);
+            ctx.fillText(txt, 0,0);
+            //恢复坐标原点和旋转角度
+            ctx.rotate(-deg*Math.PI/180);
+            ctx.translate(-x,-y);
+        }
+    }
+
+
+    function validateLogin() {
+        let orgName =  $("#orgName").val();
+        let orgType = $("#orgType option:selected").val();
+        let orgCode =  $("#orgCode").val();
+        let username =  $("#username").val();
+        let password =  $("#password").val();
+        let phone =  $("#phone").val();
+
+        let inputCode =  $("#reg-code").val().toLowerCase();
+        let canvasCode = codeStr.join("").toLowerCase();
+
+        if (orgName == ''){
+            alert('请输入机构名字！');
+            return false;
+        }
+        if (orgType == ''){
+            alert('请选择机构类型！');
+            return false;
+        }
+        if (orgCode == ''){
+            alert('请输入机构代码！');
+            return false;
+        }
+        if (username == ''){
+            alert('请输入用户名！');
+            return false;
+        }
+        if (password == ''){
+            alert('请输入密码！');
+            return false;
+        }
+        if (phone == ''){
+            alert('请输入手机号码！');
+            return false;
+        }else if(!(/^1[3456789]\d{9}$/.test(phone))){
+            alert("手机号码有误，请重填");
+            return false;
+        }
+
+
+        if(inputCode==''){
+            alert('请输入验证码！');
+            return false;
+        }else if(inputCode == canvasCode){
+            alert('提交成功！');
+            return true;
+        }else{
+            alert('验证码错误！请重新输入！');
+            return false
+        }
+    }
+</script>
 </body>
-<script type="text/javascript" data-main="/main/main.js" th:src="@{/component/require@2.3.6/require-2.3.6.js}"></script>
-<script type="text/javascript" th:src="@{/project/js/user/register.js}"></script>
 </html>

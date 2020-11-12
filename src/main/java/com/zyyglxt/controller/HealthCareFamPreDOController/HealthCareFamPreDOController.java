@@ -1,11 +1,9 @@
 package com.zyyglxt.controller.HealthCareFamPreDOController;
 
 import com.zyyglxt.annotation.LogAnnotation;
-import com.zyyglxt.dataobject.CulturalResourcesDO;
 import com.zyyglxt.dataobject.FileDO;
 import com.zyyglxt.dataobject.HealthCareFamPreDO;
 import com.zyyglxt.dataobject.HealthCareFamPreDOKey;
-import com.zyyglxt.dto.CulturalResourcesDto;
 import com.zyyglxt.dto.HealthCareFamPreDto;
 import com.zyyglxt.error.BusinessException;
 import com.zyyglxt.error.EmBusinessError;
@@ -13,9 +11,7 @@ import com.zyyglxt.response.ResponseData;
 import com.zyyglxt.service.HealthCareFamPreDOService;
 import com.zyyglxt.service.IFileService;
 import com.zyyglxt.util.ConvertDOToCareFamPre;
-import com.zyyglxt.util.ConvertDOToDTOUtil;
 import io.swagger.annotations.Api;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;

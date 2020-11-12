@@ -59,7 +59,8 @@
             });
 
             $("#cancelBtn").click(function () {
-                orange.redirect(pathUrl)
+                console.log(uploadImg.getFiles());
+                // orange.redirect(pathUrl)
             });
 
             function generateParam() {
@@ -69,10 +70,10 @@
                 param.processingType = $("#processingType").val();
                 param.contacts = $("#contacts").val();
                 param.phone = $("#phone").val();
-                param.addressPro = $("#addressPro").val()
-                param.addressCity = $("#addressCity").val()
-                param.addressCountry = $("#addressCountry").val()
-                param.address = $("#address").val()
+                param.addressPro = $("#addressPro").val();
+                param.addressCity = $("#addressCity").val();
+                param.addressCountry = $("#addressCountry").val();
+                param.address = $("#address").val();
                 param.intruduce = $(".w-e-text").html();
                 param.type = orgType;
                 return param;
@@ -109,23 +110,27 @@
                 return false;
             });
 
-            (function init() {
+            var init = function () {
                 if (isUpdate()) {
                     var tempdata = JSON.parse(localStorage.getItem("rowData"));
                     $("#name").val(tempdata.name);
                     $("#areaCoverd").val(tempdata.areaCoverd);
                     $("#processingType").val(tempdata.processingType);
                     $("#contacts").val(tempdata.contacts);
-                    $("#addressPro").val(tempdata.addressPro);
-                    $("#addressCity").val(tempdata.addressCity);
-                    $("#addressCountry").val(tempdata.addressCity);
+                    $("#addressPro").attr('data-province',tempdata.addressPro);
+                    $("#addressCity").attr('data-city',tempdata.addressCity);
+                    $("#addressCountry").attr('data-district',tempdata.addressCountry);
                     $("#address").val(tempdata.address);
                     $("#phone").val(tempdata.phone);
                     $(".w-e-text").html(tempdata.intruduce);
                     itemcode = tempdata.itemcode
                     uploadImg.setImgSrc(tempdata.filePath)
                 }
-            }());
+                init = function () {
+
+                }
+            };
+            init();
 
 
             function isUpdate() {

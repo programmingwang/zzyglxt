@@ -109,23 +109,27 @@
                 return false;
             });
 
-            (function init() {
+            var init = function () {
                 if (isUpdate()){
                     var tempdata = JSON.parse(localStorage.getItem("rowData"));
                     $("#name").val(tempdata.name);
                     $("#salesCategory").val(tempdata.salesCategory);
                     $("#sellingDrugs").val(tempdata.sellingDrugs);
                     $("#contacts").val(tempdata.contacts);
-                    $("#addressPro").val(tempdata.addressPro);
-                    $("#addressCity").val(tempdata.addressCity);
-                    $("#addressCountry").val(tempdata.addressCity);
+                    $("#addressPro").attr('data-province',tempdata.addressPro);
+                    $("#addressCity").attr('data-city',tempdata.addressCity);
+                    $("#addressCountry").attr('data-district',tempdata.addressCountry);
                     $("#address").val(tempdata.address);
                     $("#phone").val(tempdata.phone);
                     $(".w-e-text").html(tempdata.intruduce);
                     itemcode = tempdata.itemcode
                     uploadImg.setImgSrc(tempdata.filePath)
                 }
-            }());
+                init = function () {
+
+                }
+            };
+            init();
 
 
             function isUpdate() {

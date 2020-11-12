@@ -65,15 +65,6 @@
         $("#btn_addTask").unbind().on('click',function () {
             localStorage.removeItem("rowData");
             orange.redirect(addUrl);
-
-            $("#main_body").html("");
-            var url = "/data/add/addProcess";
-            orange.loadPage({url: url, target: 'main_body', selector: '#fir_body', success: function(data){
-                    if(data == null||data == ""){
-                        return alertUtil.error( url+'加载失败');
-                    }
-                    $("#main_body").html(data);
-                }})
         });
 
         var pl = dictUtil.getDictByCode(dictUtil.DICT_LIST.showStatus);
@@ -86,8 +77,10 @@
             {field: 'filePath', title: '附件', formatter:function (value, row, index) {
                     if(value == "已经损坏了"){
                         return '<p>'+value+'</p>';
+                    }else if (row.fileName == null){
+                        return '<p>————</p>';
                     }else{
-                        return '<a href="'+value+'">办事流程</a>'
+                        return '<a href="'+value+'">'+row.fileName+'</a>'
                     }
                 }},
             {field: 'itemcreateat', title: '发布时间'},
@@ -101,5 +94,8 @@
             myTable.free();
             myTable = bootstrapTableUtil.myBootStrapTableInit("table", url, param, aCol);
         }
+
+        bootstrapTableUtil.globalSearch("table",url,aParam, aCol);
+
     })
 })();

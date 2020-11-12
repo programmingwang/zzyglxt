@@ -91,17 +91,10 @@
                 },
                 {
                     menu_name: "健康旅游",
-                    menu_url: "",
+                    menu_url: "/chineseCultural/travel/travel",
                     id: "4",
                     level: "1",
                     pid: ""
-                },
-                {
-                    menu_name: "健康旅游",
-                    menu_url: "/chineseCultural/travel/travel",
-                    id: "4-1",
-                    level: "2",
-                    pid: "4"
                 },
                 /*{
                     menu_name: "中药常识",
@@ -168,41 +161,14 @@
                     level: "2",
                     pid: "6"
                 },
-                {
-                    menu_name : "名老中医",
-                    menu_url: "",
-                    id:"7",
-                    level:"1",
-                    pid:""
-                },
-                {
-                    menu_name : "名老中医",
-                    menu_url: "/medicalService/chineseMedicine",
-                    id:"7-1",
-                    level:"2",
-                    pid:"7"
-                }/*,
+                /*
                 {
                     menu_name: "历史名方",
                     menu_url: "/knowledgeDb/dataBack",
                     id: "8",
                     level: "1",
                     pid: ""
-                }*/,
-                {
-                    menu_name : "中医药名院",
-                    menu_url: "",
-                    id:"9",
-                    level:"1",
-                    pid:""
-                },
-                {
-                    menu_name : "＞中医药名院",
-                    menu_url: "/medicalService/hosp",
-                    id:"9-1",
-                    level:"2",
-                    pid:"9"
-                },
+                },*/
                 {
 
                     menu_name : "中医药名院",
@@ -328,6 +294,48 @@
                     menu_name: "＞科研院所",
                     menu_url: "/industrialdevelop/tecserviceorg",
                     id: "99-5",
+                    level: "2",
+                    pid: "99"
+                },
+                {
+                    menu_name: "＞高等院校",
+                    menu_url: "/industrialdevelop/school",
+                    id: "99-6",
+                    level: "2",
+                    pid: "99"
+                },
+                {
+                    menu_name: "＞基地风采",
+                    menu_url: "/industrialdevelop/style",
+                    id: "99-6",
+                    level: "2",
+                    pid: "99"
+                },
+                {
+                    menu_name: "＞中药材加工企业",
+                    menu_url: "/industrialdevelop/chinesemed",
+                    id: "99-7",
+                    level: "2",
+                    pid: "99"
+                },
+                {
+                    menu_name: "＞中药材销售企业",
+                    menu_url: "/industrialdevelop/chinesemed-sale",
+                    id: "99-8",
+                    level: "2",
+                    pid: "99"
+                },
+                {
+                    menu_name: "＞中药材制造企业",
+                    menu_url: "/industrialdevelop/chinesemed-produce",
+                    id: "99-9",
+                    level: "2",
+                    pid: "99"
+                },
+                {
+                    menu_name: "＞种植园管理",
+                    menu_url: "/industrialdevelop/plantation",
+                    id: "99-10",
                     level: "2",
                     pid: "99"
                 }

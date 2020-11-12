@@ -67,6 +67,7 @@
             myBootstrapTable: '../component/bootstrap-table@1.15.3/bootstrap-table.min',
             bootstrapTableLocalAll: '../component/bootstrap-table@1.15.3/bootstrap-table-locale-all.min',
             wangEditor: '../component/wangEditor/wangEditor.min',
+            uploadImg: '../component/uploadImg/js/uploadImg',
 
 
 
@@ -82,6 +83,7 @@
             modalUtil:'../utils/modalUtil',
             selectUtil:'../utils/selectUtil',
             modalHtml:'../utils/modalHtml',
+            fileUtil:'../utils/fileUtil',
 
 
             //project
@@ -91,6 +93,7 @@
             userMsg: '../project/js/user/usermsg'
 
         },
+        waitSeconds: 0,
         map: {
             '*': {
                 'popper.js': 'popper'

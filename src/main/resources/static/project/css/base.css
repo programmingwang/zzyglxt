@@ -166,3 +166,18 @@ hr {
 .nullmenu{
     display:none;
 }
+.page-item.active .page-link {
+    z-index: 3;
+    color: #fff;
+    background-color: #775637;
+     border-color: #775637;
+}
+.page-link {
+    color: black;
+}
+.fixed-table-pagination {
+    font-size: smaller;
+}
+.page-link {
+    margin-left: 9px;
+}

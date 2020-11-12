@@ -1,12 +1,16 @@
 (function () {
-    require(['jquery','ajaxUtil','wangEditor'],
-        function (jquery,ajaxUtil, wangEditor) {
+    require(['jquery','ajaxUtil','stringUtil','uploadImg','wangEditor'],
+        function ($,ajaxUtil,stringUtil,uploadImg, wangEditor) {
 
             var url = "/industrialdevelop/tec-ser-org";
 
             var pathUrl = "/industrialdevelop/tecserviceorg";
 
+            var itemcode = stringUtil.getUUID();
+
             var type = isUpdate() ? "put":"post";
+
+            uploadImg.init();
 
             const editor = new wangEditor('#div1');
             // 或者 const editor = new E( document.getElementById('div1') )
@@ -58,22 +62,41 @@
 
             function generateParam(){
                 var param = {};
-                param.serviceProject = $("#serviceProject").val();
+                param.name = $("#name").val();
                 param.projectCost = $("#projectCost").val();
                 param.contacts = $("#contacts").val();
                 param.phone = $("#phone").val();
                 param.addressPro = $("#addressPro").val();
                 param.addressCity = $("#addressCity").val();
                 param.addressCountry = $("#addressCountry").val();
-                param.projectIntroduce = $(".w-e-text").html();
+                param.address = $("#address").val()
+                param.intruduce = $(".w-e-text").html();
                 param.orgCode = "未定义";
                 return param;
             }
 
-            $("#saveBtn").unbind().on('click',function () {
+            $("#saveBtn").unbind('click').on('click',function () {
                 var param = generateParam();
                 param.status = "——";
+                param.itemcode = itemcode;
+                console.log(uploadImg.isUpdate())
+                if (uploadImg.isUpdate()){
+                    ajaxUtil.fileAjax(itemcode,uploadImg.getFiles()[0],"undefined","undefined")
+                }
 
+                ajaxUtil.myAjax(null,url,param,function (data) {
+                    if(ajaxUtil.success(data)){
+                        orange.redirect(pathUrl);
+                    }else {
+                        alert(data.msg);
+                    }
+                },true,"123",type);
+                return false;
+            });
+
+            $("#submitBtn").unbind('click').on('click',function () {
+                var param = generateParam();
+                param.status = "——";
                 ajaxUtil.myAjax(null,url,param,function (data) {
                     if(ajaxUtil.success(data)){
                         orange.redirect(pathUrl)
@@ -84,29 +107,18 @@
                 return false;
             });
 
-            $("#submitBtn").unbind().on('click',function () {
-                var param = generateParam();
-                param.status = "——";
-                ajaxUtil.myAjax(null,url,param,function (data) {
-                    if(ajaxUtil.success(data)){
-                        orange.redirect(pathUrl)
-                    }else {
-                        alert(data.msg)
-                    }
-                },true,"123",type);
-                return false;
-            })
-
             (function init() {
                 if (isUpdate()){
                     var tempdata = JSON.parse(localStorage.getItem("rowData"));
-                    $("#serviceProject").val(tempdata.serviceProject);
+                    $("#name").val(tempdata.name);
                     $("#projectCost").val(tempdata.projectCost);
                     $("#contacts").val(tempdata.contacts);
                     $("#phone").val(tempdata.phone);
                     $("#addressPro").val(tempdata.addressPro);
                     $("#addressCity").val(tempdata.addressCity);
                     $("#addressCountry").val(tempdata.addressCity);
+                    $("#address").val(tempdata.address);
+                    $("#intruduce").val(tempdata.intruduce)
                     $(".w-e-text").html(tempdata.projectIntroduce);
                 }
             }());

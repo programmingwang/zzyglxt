@@ -80,7 +80,7 @@
                 file_span.text(file.name)
             });
 
-            $("#saveBtn").unbind().on('click',function () {
+            $("#saveBtn").unbind('click').on('click',function () {
                 var param = generateParam();
                 param.industrialDevelopStatus = "——";
                 var file = $("#upload_file")[0].files[0];
@@ -95,7 +95,7 @@
                 },true,"123",type);
             });
 
-            $("#submitBtn").unbind().on('click',function () {
+            $("#submitBtn").unbind('click').on('click',function () {
                 var param = generateParam();
                 param.industrialDevelopStatus = "——";
                 ajaxUtil.myAjax(null,url,param,function (data) {

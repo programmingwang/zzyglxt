@@ -8,12 +8,37 @@
 
             };
 
+
+
             //操作
             function operation(value, row, index){
-                return [
-                    '<button type="button" class="edit btn btn-primary btn-sm" style="margin-right: 5px" data-toggle="modal" data-target="" >编辑</button>',
-                    '<button type="button" class="delete btn btn-danger btn-sm"  data-toggle="modal" data-target="#staticBackdrop" >删除</button>',
-                ].join('');
+                if(sessionStorage.getItem("rolename") === "文化宣传科员"){
+                    $('#btn_addTask').attr('style',"display:block");
+                    return [
+                        '<button type="button" class="edit btn btn-primary btn-sm" style="margin-right: 5px" data-toggle="modal" data-target="" >编辑</button>',
+                        '<button type="button" class="delete btn btn-danger btn-sm"  data-toggle="modal" data-target="#staticBackdrop" >删除</button>',
+                    ].join('');
+                }else if(sessionStorage.getItem("rolename") === "文化宣传处长"){
+                    return [
+                        '<button type="button" class="pass btn btn-primary btn-sm"  data-toggle="modal" data-target="#staticBackdrop" >通过</button>',
+                        '<button type="button" class="view btn btn-primary btn-sm" style="margin-right: 5px;display: none" data-toggle="modal" data-target="" >查看</button>',
+                        '<button type="button" class="fail btn btn-danger btn-sm"  data-toggle="modal" data-target="#staticBackdrop" >不通过</button>',
+                    ].join('');
+                }else if(sessionStorage.getItem("rolename") === "文化宣传综合处处长"){
+                    return [
+                        '<button id="pass_btn" type="button" class="pass btn btn-primary btn-sm" style="margin-right: 5px" data-toggle="modal" data-target="#staticBackdrop" >通过</button>',
+                        '<button id="view_btn" type="button" class="view btn btn-primary btn-sm" style="margin-right: 5px;display: none" data-toggle="modal" data-target="" >查看</button>',
+                        '<button id="under-shelf_btn" type="button" class="under-shelf btn btn-danger btn-sm"  style="display: none" data-toggle="modal" data-target="#staticBackdrop" >下架</button>',
+                        '<button id="fail_btn" type="button" class="fail btn btn-danger btn-sm"  data-toggle="modal" data-target="#staticBackdrop" >不通过</button>',
+                    ].join('');
+                }else{
+                    $('#btn_addTask').attr('style',"display:block");
+                    return [
+                        '<button type="button" class="edit btn btn-primary btn-sm" style="margin-right: 5px" data-toggle="modal" data-target="" >编辑</button>',
+                        '<button type="button" class="delete btn btn-danger btn-sm"  data-toggle="modal" data-target="#staticBackdrop" >删除</button>',
+                    ].join('');
+                }
+
             }
 
             //修改事件
@@ -52,11 +77,19 @@
                 },
 
                 'click .pass' : function (e, value, row, index) {
-
+                    alertUtil.info("通过");
+                    $('#')
                 },
 
                 'click .fail' : function (e, value, row, index) {
+                    alertUtil.info("不通过");
+                },
 
+                'click .under-shelf' : function (e, value, row, index) {
+                    alertUtil.info("下架");
+                },
+                'click .view' : function (e, value, row, index) {
+                    alertUtil.info("查看详情");
                 },
             };
 
@@ -93,5 +126,6 @@
                 myTable.free();
                 myTable = bootstrapTableUtil.myBootStrapTableInit("table", url, param, aCol);
             }
+            bootstrapTableUtil.globalSearch("table",url,aParam, aCol);
         })
 })();

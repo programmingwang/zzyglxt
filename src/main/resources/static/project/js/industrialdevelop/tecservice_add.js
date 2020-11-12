@@ -67,7 +67,7 @@
                 return param;
             }
 
-            $("#saveBtn").unbind().on('click',function () {
+            $("#saveBtn").unbind('click').on('click',function () {
                 var param = generateParam();
                 param.status = "——";
 
@@ -81,7 +81,7 @@
                 return false;
             });
 
-            $("#submitBtn").unbind().on('click',function () {
+            $("#submitBtn").unbind('click').on('click',function () {
                 var param = generateParam();
                 param.status = "——";
                 ajaxUtil.myAjax(null,url,param,function (data) {

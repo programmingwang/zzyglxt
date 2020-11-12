@@ -27,5 +27,6 @@ public interface ChineseMedicineDOMapper {
 
     List<ChineseMedicineDO> top5ChineseMedicine();
 
+    List<ChineseMedicineDO> selectBySpecialtyCode(String specialtyCode);
 
 }

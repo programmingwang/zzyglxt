@@ -3,7 +3,7 @@
         function (jquery,ajaxUtil,bootstrapTableUtil,objectUtil,alertUtil,modalUtil,selectUtil,stringUtil,dictUtil) {
 
 
-        var url = "/datado/newsInf/selectAll";
+        var url = "/datado/newsInf/selectAllNewsRot";
         var addUrl = "/data/add/addNewsRotations";
         var aParam = {
 
@@ -65,17 +65,6 @@
         $("#btn_addTask").unbind().on('click',function () {
             localStorage.removeItem("rowData");
             orange.redirect(addUrl);
-
-            $("#main_body").html("");
-            var url = "/data/add/addNewsRotations";
-            orange.loadPage({url: url, target: 'main_body', selector: '#fir_body', success: function(data){
-
-                    if(data == null||data == ""){
-                        return alertUtil.error( url+'加载失败');
-                    }
-
-                    $("#main_body").html(data);
-                }})
         });
 
         var pl = dictUtil.getDictByCode(dictUtil.DICT_LIST.showStatus);
@@ -103,5 +92,8 @@
             myTable.free();
             myTable = bootstrapTableUtil.myBootStrapTableInit("table", url, param, aCol);
         }
+
+        bootstrapTableUtil.globalSearch("table",url,aParam, aCol);
+
     })
 })();

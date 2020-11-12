@@ -1,35 +1,39 @@
 <!DOCTYPE html>
-<html lang="en"xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://at.alicdn.com/t/font_1805932_ysrcp4y0uy9.css">
     <title>Document</title>
     <style>
-        .upload-wrap{
+        .upload-wrap {
             position: relative;
             display: inline-block;
             overflow: hidden;
 
             border-radius: 3px;
         }
-        .upload-wrap .file-ele{
+
+        .upload-wrap .file-ele {
             position: absolute;
-            top:0;
-            right:0;
+            top: 0;
+            right: 0;
             opacity: 0;
             height: 100%;
             width: 100%;
             cursor: pointer;
         }
-        .upload-wrap .file-open{
-            width:90px;
-            height:36px;
-            line-height:36px;
+
+        .upload-wrap .file-open {
+            width: 90px;
+            height: 36px;
+            line-height: 36px;
             text-align: center;
-            color:#fff;
+            color: #fff;
             background: red;
         }
-        label{
+
+        label {
             text-align: right;
         }
     </style>
@@ -40,21 +44,28 @@
         <form>
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label">院所照片：</label>
-                <div class="upload-wrap anticon col-sm-3" nv-file-drop="" uploader="uploader">
-                    <input id="upload_file" class="file-ele" type="file" file-model="image" name="image" nv-file-select uploader="uploader" multiple />
-                    <div class="file-open"><img id="upimg" src="#" alt="选择图片"/></div>
+                <div class="upload-content" data-limit="5">
+                    <div class="content-img">
+                        <ul class="content-img-list"></ul>
+                        <div class="file">
+                            <i class="gcl gcladd"></i>
+                            <input type="file" name="file" accept="image/*" id="upload" multiple>
+                        </div>
+                    </div>
+                    <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog"
+                         aria-labelledby="myLargeModalLabel">
+                        <div class="modal-dialog modal-lg" role="document">
+                            <div class="modal-content">
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
+
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label">院所名称：</label>
                 <div class="col-sm-3">
-                    <input id="cooperationExchangeName" type="text" class="form-control" placeholder="请输入">
-                </div>
-            </div>
-            <div class="form-group row">
-                <label class="col-sm-2 col-form-label">项目收费：</label>
-                <div class="col-sm-3">
-                    <input id="cooperativeOrg" type="text" class="form-control" placeholder="请输入">
+                    <input id="name" type="text" class="form-control" placeholder="请输入">
                 </div>
             </div>
             <div class="form-group row">
@@ -93,23 +104,24 @@
                 </div>
             </div>
             <div class="form-group row">
-                <label class="col-sm-2 col-form-label">服务项目介绍：</label>
+                <label class="col-sm-2 col-form-label">介绍：</label>
                 <div id="div1" class="col-sm-8">
                 </div>
             </div>
 
 
             <div class="form-group row">
-                <div class="col-sm-8" ></div>
-                <div class=" col-sm-4 row" >
+                <div class="col-sm-8"></div>
+                <div class=" col-sm-4 row">
                     <div class="col">
                         <button id="cancelBtn" type="button" class="btn btn-light col">取消</button>
                     </div>
                     <div class="col">
                         <button id="saveBtn" type="button" class="btn btn-danger col">保存</button>
-                    </div><div class="col">
-                    <button id="submitBtn" type="submit" class="btn btn-primary col">提交</button>
-                </div>
+                    </div>
+                    <div class="col">
+                        <button id="submitBtn" type="submit" class="btn btn-primary col">提交</button>
+                    </div>
                 </div>
             </div>
         </form>
@@ -121,6 +133,8 @@
 <script type="text/javascript" th:src="@{/project/js/industrialdevelop/tecserviceorg_add.js}"></script>
 <script type="text/javascript" th:src="@{/component/jquery@3.5.1/jquery.js}"></script>
 <script type="text/javascript" th:src="@{/component/distSelect/distpicker.common.js}"></script>
-<script type="text/javascript"  th:src="@{/component/distSelect/distpicker.min.js}"></script>
+<link type="text/css" rel="stylesheet" href="/component/uploadImg/css/uploadImg.css"
+      th:src="@{/component/uploadImg/css/uploadImg.css}">
+<script type="text/javascript" th:src="@{/component/uploadImg/js/bootstrap.min.js}"></script>
 </body>
 </html>

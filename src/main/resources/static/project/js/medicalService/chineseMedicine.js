@@ -59,6 +59,9 @@
                 orange.redirect(addUrl)
             });
 
+            var pl = dictUtil.getDictByCode(dictUtil.DICT_LIST.showStatus);
+            $("#chargePersonSearch").selectUtil(pl);
+
             var aCol = [
                 {field: 'chineseMedicineName', title: '专家名称'},
                 {field: 'filePath', title: '专家照片',formatter:function (value, row, index) {
@@ -82,5 +85,7 @@
                 myTable.free();
                 myTable = bootstrapTableUtil.myBootStrapTableInit("table", url, param, aCol);
             }
+
+            bootstrapTableUtil.globalSearch("table",url,aParam, aCol);
         })
 })();

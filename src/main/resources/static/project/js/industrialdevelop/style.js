@@ -3,7 +3,7 @@
         function (jquery,ajaxUtil,bootstrapTableUtil,objectUtil,alertUtil,modalUtil,selectUtil,stringUtil,dictUtil) {
 
 
-            var url = "/industrialdevelop/style";
+            var url = "/industrialdevelop/base-style";
 
             var pathUrl = "/industrialdevelop/style";
             var addUrl = pathUrl+"_add";
@@ -92,5 +92,7 @@
                 myTable.free();
                 myTable = bootstrapTableUtil.myBootStrapTableInit("table", url, param, aCol);
             }
+
+            bootstrapTableUtil.globalSearch("table",url,aParam, aCol);
         })
 })();

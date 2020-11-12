@@ -94,7 +94,7 @@
                 return false;
             })
 
-            (function init() {
+            var init = function () {
                 if (isUpdate()){
                     var tempdata = JSON.parse(localStorage.getItem("rowData"));
                     $("#serviceProject").val(tempdata.serviceProject);
@@ -103,7 +103,11 @@
                     $("#phone").val(tempdata.phone);
                     $(".w-e-text").html(tempdata.projectIntroduce);
                 }
-            }());
+                init = function () {
+
+                }
+            };
+            init();
 
 
             function isUpdate() {

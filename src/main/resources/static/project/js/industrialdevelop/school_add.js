@@ -108,16 +108,16 @@
                 return false;
             });
 
-            (function init() {
+            var init = function () {
                 if (isUpdate()){
                     var tempdata = JSON.parse(localStorage.getItem("rowData"));
                     $("#schoolName").val(tempdata.schoolName);
                     $("#schoolIntroduce").val(tempdata.schoolIntroduce);
                     $("#secondaryCollege").val(tempdata.secondaryCollege);
                     $("#enrollmentMajor").val(tempdata.enrollmentMajor);
-                    $("#addressPro").val(tempdata.addressPro);
-                    $("#addressCity").val(tempdata.addressCity);
-                    $("#addressCountry").val(tempdata.addressCity);
+                    $("#addressPro").attr('data-province',tempdata.addressPro);
+                    $("#addressCity").attr('data-city',tempdata.addressCity);
+                    $("#addressCountry").attr('data-district',tempdata.addressCountry);
                     $("#address").val(tempdata.address);
                     $("#graduateEnrollmentMajor").val(tempdata.graduateEnrollmentMajor);
                     $("#phone").val(tempdata.phone);
@@ -126,7 +126,11 @@
                     $(".w-e-text").html(tempdata.schoolText);
                     itemcode = tempdata.itemcode
                 }
-            }());
+                init = function () {
+
+                }
+            };
+            init();
 
 
             function isUpdate() {

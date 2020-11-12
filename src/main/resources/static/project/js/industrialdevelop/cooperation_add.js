@@ -100,7 +100,7 @@
                 return false;
             })
 
-            (function init() {
+            var init = function () {
                 if (isUpdate()){
                     var tempdata = JSON.parse(localStorage.getItem("rowData"));
                     $("#cooperationExchangeName").val(tempdata.cooperationExchangeName);
@@ -109,7 +109,11 @@
                     $("#phone").val(tempdata.phone);
                     $(".w-e-text").html(tempdata.projectIntroduce);
                 }
-            }());
+                init = function () {
+
+                }
+            };
+            init();
 
 
             function isUpdate() {

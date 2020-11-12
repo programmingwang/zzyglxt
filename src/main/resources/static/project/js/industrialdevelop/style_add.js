@@ -2,7 +2,7 @@
     require(['jquery','ajaxUtil','stringUtil','uploadImg','wangEditor'],
         function ($,ajaxUtil,stringUtil,uploadImg, wangEditor) {
 
-            var url = "/industrialdevelop/tec-ser-org";
+            var url = "/industrialdevelop/base-style";
 
             var pathUrl = "/industrialdevelop/style";
 
@@ -105,22 +105,26 @@
                 return false;
             });
 
-            (function init() {
+            var init = function () {
                 if (isUpdate()){
                     var tempdata = JSON.parse(localStorage.getItem("rowData"));
                     $("#name").val(tempdata.name);
                     $("#areaCoverd").val(tempdata.areaCoverd);
                     $("#contacts").val(tempdata.contacts);
                     $("#phone").val(tempdata.phone);
-                    $("#addressPro").val(tempdata.addressPro);
-                    $("#addressCity").val(tempdata.addressCity);
-                    $("#addressCountry").val(tempdata.addressCity);
+                    $("#addressPro").attr('data-province',tempdata.addressPro);
+                    $("#addressCity").attr('data-city',tempdata.addressCity);
+                    $("#addressCountry").attr('data-district',tempdata.addressCountry);
                     $("#address").val(tempdata.address);
                     $("#intruduce").val(tempdata.intruduce)
                     $(".w-e-text").html(tempdata.projectIntroduce);
                     itemcode = tempdata.itemcode
                 }
-            }());
+                init = function () {
+
+                }
+            };
+            init();
 
 
             function isUpdate() {

@@ -117,8 +117,7 @@
                 return false;
             })
 
-            (function init() {
-                console.log("1233")
+            var init = function () {
                 if (isUpdate()){
                     var tempdata = JSON.parse(localStorage.getItem("rowData"));
                     $("#recruitmentTitle").val(tempdata.recruitmentTitle);
@@ -130,7 +129,11 @@
                     $("#div1 .w-e-text").html(tempdata.postDuty);
                     $("#div2 .w-e-text").html(tempdata.postDescr)
                 }
-            }());
+                init = function () {
+
+                }
+            };
+            init();
 
 
             function isUpdate() {

@@ -91,20 +91,20 @@
                 </div>
 
             </div>
-            <div data-toggle="distpicker" class="form-group row">
+            <div id="distpicker" class="form-group row">
                 <label for="addressPro" class="col-sm-2 col-form-label">省：</label>
                 <div class="col-sm-2">
-                    <select id="addressPro" class="form-control" data-province="———选择省———"></select>
+                    <select id="addressPro" class="form-control"></select>
                 </div>
 
                 <label for="addressCity" class="col-sm-1 col-form-label">市：</label>
                 <div class="col-sm-2">
-                    <select id="addressCity" class="form-control" data-city="———选择市———"></select>
+                    <select id="addressCity" class="form-control"></select>
                 </div>
 
                 <label for="addressCountry" class="col-sm-1 col-form-label">区：</label>
                 <div class="col-sm-2">
-                    <select id="addressCountry" class="form-control" data-district="———选择区———"></select>
+                    <select id="addressCountry" class="form-control"></select>
                 </div>
             </div>
             <div class="form-group row">
@@ -141,10 +141,9 @@
 </div>
 <script type="text/javascript" data-main="/main/main.js" th:src="@{/component/require@2.3.6/require-2.3.6.js}"></script>
 <script type="text/javascript" th:src="@{/project/js/industrialdevelop/chinesemed_add.js}"></script>
-<script type="text/javascript" th:src="@{/component/jquery@3.5.1/jquery.js}"></script>
-<script type="text/javascript" th:src="@{/component/distSelect/distpicker.common.js}"></script>
 <link type="text/css" rel="stylesheet" href="/component/uploadImg/css/uploadImg.css"
       th:src="@{/component/uploadImg/css/uploadImg.css}">
 <script type="text/javascript" th:src="@{/component/uploadImg/js/bootstrap.min.js}"></script>
+<script type="text/javascript" th:src="@{/component/distSelect/distpicker.common.js}"></script>
 </body>
 </html>

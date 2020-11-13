@@ -1,6 +1,7 @@
 package com.zyyglxt.service;
 
 import com.zyyglxt.dataobject.IndustrialDevelopTecSerOrg;
+import com.zyyglxt.dto.industrialDevelop.IndustrialDevelopTecSerOrgDto;
 
 import java.util.List;
 
@@ -24,6 +25,6 @@ public interface IndustrialDevelopTecSerOrgService{
 
     int updateByPrimaryKey(IndustrialDevelopTecSerOrg record);
 
-    List<IndustrialDevelopTecSerOrg> selectAll();
+    List<IndustrialDevelopTecSerOrgDto> selectAll();
 
 }

@@ -44,31 +44,11 @@
 <div class="row">
     <div class="col-12">
         <form>
-            <!--上传图片的div-->
-            <div class="form-group row">
-                <label for="exampleFormControlFile1" class="col-sm-2 col-form-label">中医药材图片：</label>
-                <div class="upload-wrap anticon col-sm-3" nv-file-drop="" uploader="uploader">
-                    <input id="upload_file" class="file-ele" type="file" file-model="image" nv-file-select uploader="uploader" multiple />
-                    <div class="file-open" id="upimg"> <p id="upimg"> 选择图片</p> </div>
-                </div>
-            </div>
 
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label">中医药名称：</label>
                 <div class="col-sm-3">
                     <input id="chineseMedicineName" type="text" class="form-control" placeholder="请输入">
-                </div>
-            </div>
-            <div class="form-group row">
-                <label class="col-sm-2 col-form-label">来源：</label>
-                <div class="col-sm-3">
-                    <input id="chineseMedicineSource" type="text" class="form-control" placeholder="请输入">
-                </div>
-            </div>
-            <div class="form-group row">
-                <label class="col-sm-2 col-form-label">创建者：</label>
-                <div class="col-sm-3">
-                    <input id="creater" type="text" class="form-control" placeholder="请输入">
                 </div>
             </div>
             <div class="form-group row">
@@ -83,11 +63,49 @@
                     <input id="chineseMedicineEffect" type="text" class="form-control" placeholder="请输入">
                 </div>
             </div>
+            <!--上传图片的div-->
             <div class="form-group row">
-                <label class="col-sm-2 col-form-label">正文（用法用量）：</label>
-                <div id="div1" class="col-sm-8">
+                <label for="exampleFormControlFile1" class="col-sm-2 col-form-label">中医药材图片：</label>
+                <div class="upload-wrap anticon col-sm-3" nv-file-drop="" uploader="uploader">
+                    <input id="upload_file" class="file-ele" type="file" file-model="image" nv-file-select uploader="uploader" multiple />
+                    <div class="file-open" id="upimg"> <p id="upimg"> 选择图片</p> </div>
                 </div>
             </div>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">采制：</label>
+                <div class="col-sm-3">
+                    <input id="chineseMedicineHarvesting" type="text" class="form-control" placeholder="请输入">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">性味：</label>
+                <div class="col-sm-3">
+                    <input id="chineseMedicineTaste" type="text" class="form-control" placeholder="请输入">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">归经：</label>
+                <div class="col-sm-3">
+                    <input id="chineseMedicineMerTro" type="text" class="form-control" placeholder="请输入">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">功能主治：</label>
+                <div class="col-sm-3">
+                    <input id="chineseMedicineSource" type="text" class="form-control" placeholder="请输入">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">用法用量：</label>
+                <div class="col-sm-3">
+                    <input id="chineseMedicineUsage" type="text" class="form-control" placeholder="请输入">
+                </div>
+            </div>
+            <!--<div class="form-group row">
+                <label class="col-sm-2 col-form-label">用法用量：</label>
+                <div id="div1" class="col-sm-8">
+                </div>
+            </div>-->
 
             <div class="form-group row">
                 <div class="col-sm-8" ></div>

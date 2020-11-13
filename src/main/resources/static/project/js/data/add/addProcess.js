@@ -96,8 +96,6 @@
                     $("#dataTitle").val(tempdata.dataTitle);
                     $("#dataSource").val(tempdata.dataSource);
                     editor.txt.html(tempdata.dataContent);
-                    var img = tempdata.filePath;
-                    $("#upimg").attr("src",img);
                 }
             }());
 

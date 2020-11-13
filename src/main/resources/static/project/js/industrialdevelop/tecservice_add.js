@@ -67,7 +67,7 @@
                 return param;
             }
 
-            $("#saveBtn").unbind().on('click',function () {
+            $("#saveBtn").unbind('click').on('click',function () {
                 var param = generateParam();
                 param.status = "——";
 
@@ -81,7 +81,7 @@
                 return false;
             });
 
-            $("#submitBtn").unbind().on('click',function () {
+            $("#submitBtn").unbind('click').on('click',function () {
                 var param = generateParam();
                 param.status = "——";
                 ajaxUtil.myAjax(null,url,param,function (data) {
@@ -94,7 +94,7 @@
                 return false;
             })
 
-            (function init() {
+            var init = function () {
                 if (isUpdate()){
                     var tempdata = JSON.parse(localStorage.getItem("rowData"));
                     $("#serviceProject").val(tempdata.serviceProject);
@@ -103,7 +103,11 @@
                     $("#phone").val(tempdata.phone);
                     $(".w-e-text").html(tempdata.projectIntroduce);
                 }
-            })();
+                init = function () {
+
+                }
+            };
+            init();
 
 
             function isUpdate() {

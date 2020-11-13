@@ -73,7 +73,7 @@
 
 
             var aCol = [
-                {field: 'serviceProject', title: '院所名称'},
+                {field: 'name', title: '院所名称'},
                 {field: 'filePath', title: '图片', formatter:function (value, row, index) {
                         if(value == "已经损坏了"){
                             return '<p>'+value+'</p>';
@@ -93,5 +93,7 @@
                 myTable.free();
                 myTable = bootstrapTableUtil.myBootStrapTableInit("table", url, param, aCol);
             }
+
+            bootstrapTableUtil.globalSearch("table",url,aParam, aCol);
         })
 })();

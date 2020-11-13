@@ -22,6 +22,11 @@ public class ChiMedController {
     @Resource
     IndustrialDevelopChiMedService chiMedService;
 
+    @GetMapping(value = "chi-med/{type}")
+    public ResponseData getChiMed(@PathVariable String type){
+        return new ResponseData(EmBusinessError.success,chiMedService.selectAll(type));
+    }
+
     @ResponseBody
     @PostMapping(value = "/chi-med")
     public ResponseData addChiMed(@RequestBody IndustrialDevelopChiMed record){

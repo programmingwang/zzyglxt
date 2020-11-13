@@ -1,7 +1,11 @@
 package com.zyyglxt.service;
 
 import com.zyyglxt.dataobject.IndustrialDevelopSchool;
-    /**
+import com.zyyglxt.dto.industrialDevelop.IndustrialDevelopSchoolDto;
+
+import java.util.List;
+
+/**
    *@Author lrt
    *@Date 2020/11/6 20:00
    *@Version 1.0
@@ -20,5 +24,7 @@ public interface IndustrialDevelopSchoolService{
     int updateByPrimaryKeySelective(IndustrialDevelopSchool record);
 
     int updateByPrimaryKey(IndustrialDevelopSchool record);
+
+    List<IndustrialDevelopSchoolDto> selectAll();
 
 }

@@ -115,9 +115,11 @@
                     $("#schoolIntroduce").val(tempdata.schoolIntroduce);
                     $("#secondaryCollege").val(tempdata.secondaryCollege);
                     $("#enrollmentMajor").val(tempdata.enrollmentMajor);
-                    $("#addressPro").attr('data-province',tempdata.addressPro);
-                    $("#addressCity").attr('data-city',tempdata.addressCity);
-                    $("#addressCountry").attr('data-district',tempdata.addressCountry);
+                    $("#distpicker").distpicker({
+                        province: tempdata.addressPro,
+                        city: tempdata.addressCity,
+                        district: tempdata.addressCountry
+                    });
                     $("#address").val(tempdata.address);
                     $("#graduateEnrollmentMajor").val(tempdata.graduateEnrollmentMajor);
                     $("#phone").val(tempdata.phone);
@@ -125,6 +127,8 @@
                     $("#intruduce").val(tempdata.intruduce)
                     $(".w-e-text").html(tempdata.schoolText);
                     itemcode = tempdata.itemcode
+                }else {
+                    $("#distpicker").distpicker();
                 }
                 init = function () {
 

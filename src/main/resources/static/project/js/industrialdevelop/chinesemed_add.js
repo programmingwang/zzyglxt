@@ -10,9 +10,9 @@
 
             var itemcode = stringUtil.getUUID();
 
-            var type = isUpdate() ? "put" : "post";
-
             uploadImg.init();
+
+            var type = isUpdate() ? "put" : "post";
 
             const editor = new wangEditor('#div1');
             // 或者 const editor = new E( document.getElementById('div1') )
@@ -59,7 +59,7 @@
             });
 
             $("#cancelBtn").click(function () {
-                console.log(uploadImg.getFiles());
+                console.log(generateParam())
                 // orange.redirect(pathUrl)
             });
 
@@ -117,14 +117,18 @@
                     $("#areaCoverd").val(tempdata.areaCoverd);
                     $("#processingType").val(tempdata.processingType);
                     $("#contacts").val(tempdata.contacts);
-                    $("#addressPro").attr('data-province',tempdata.addressPro);
-                    $("#addressCity").attr('data-city',tempdata.addressCity);
-                    $("#addressCountry").attr('data-district',tempdata.addressCountry);
+                    $("#distpicker").distpicker({
+                        province: tempdata.addressPro,
+                        city: tempdata.addressCity,
+                        district: tempdata.addressCountry
+                    });
                     $("#address").val(tempdata.address);
                     $("#phone").val(tempdata.phone);
                     $(".w-e-text").html(tempdata.intruduce);
-                    itemcode = tempdata.itemcode
+                    itemcode = tempdata.itemcode;
                     uploadImg.setImgSrc(tempdata.filePath)
+                }else {
+                    $("#distpicker").distpicker();
                 }
                 init = function () {
 
@@ -133,9 +137,16 @@
             init();
 
 
+
+
+
+
+
+
             function isUpdate() {
                 return (localStorage.getItem("rowData") != null || localStorage.getItem("rowData") != undefined)
             }
+
         })
 })();
 

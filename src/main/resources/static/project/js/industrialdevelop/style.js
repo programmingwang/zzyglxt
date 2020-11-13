@@ -39,6 +39,7 @@
                             var isSuccess = false;
                             ajaxUtil.myAjax(null,url,projectEntity,function (data) {
                                 if(ajaxUtil.success(data)){
+                                    ajaxUtil.deleteFile(row.itemcode)
                                     alertUtil.info("删除项目成功");
                                     isSuccess = true;
                                     refreshTable();

@@ -110,7 +110,7 @@
                     var img = tempdata.filePath;
                     // console.log(tempdata);
                     // var imgName=tempdata.fileName;
-                    $("#upimg").attr("src",img);
+                    uploadImg.setImgSrc(img);
                     // $("#upload_file").attr("value",imgName);
 
                 }

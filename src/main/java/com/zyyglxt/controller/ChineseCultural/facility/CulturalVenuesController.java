@@ -37,8 +37,8 @@ public class   CulturalVenuesController {
     @RequestMapping(value = "/getAll" , method = RequestMethod.GET)
     @ResponseBody
     @LogAnnotation(logTitle = "查询所有的文化场馆", logLevel = "1")
-    public ResponseData getAllCulturalVenues(){
-        List<ChineseCulturalDO> culturalVenuesList = iCulturalVenuesService.getCulturalVenuesList();
+    public ResponseData getAllCulturalVenues(String chineseCulturalStatus){
+        List<ChineseCulturalDO> culturalVenuesList = iCulturalVenuesService.getCulturalVenuesList(chineseCulturalStatus);
         List<ChineseCulturalDto> chineseCulturalDtoList = new ArrayList<>();
         for (ChineseCulturalDO chineseCulturalDO : culturalVenuesList) {
             chineseCulturalDtoList.add(

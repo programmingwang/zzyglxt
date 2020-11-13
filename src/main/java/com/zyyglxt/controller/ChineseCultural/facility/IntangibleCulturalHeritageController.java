@@ -32,8 +32,8 @@ public class IntangibleCulturalHeritageController {
     @RequestMapping(value = "/getAll" , method = RequestMethod.GET)
     @ResponseBody
     @LogAnnotation(logTitle = "查询非物质文化遗产", logLevel = "1")
-    public ResponseData getAllIntangibleCulturalHeritage(){
-        List<ChineseCulturalDO> intangibleCulturalHeritageList = iIntangibleCulturalHeritageService.getIntangibleCulturalHeritageList();
+    public ResponseData getAllIntangibleCulturalHeritage(String chineseCulturalStatus){
+        List<ChineseCulturalDO> intangibleCulturalHeritageList = iIntangibleCulturalHeritageService.getIntangibleCulturalHeritageList(chineseCulturalStatus);
         return new ResponseData(EmBusinessError.success,intangibleCulturalHeritageList);
     }
 

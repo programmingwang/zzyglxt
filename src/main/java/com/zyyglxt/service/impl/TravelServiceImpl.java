@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -34,12 +35,16 @@ public class TravelServiceImpl implements ITravelService {
 
     @Override
     public ChineseCulturalDO getTravel(ChineseCulturalDOKey key) {
-        return chineseCulturalDOMapper.selectByPrimaryKey(key,"健康旅游信息");
+        return chineseCulturalDOMapper.selectByPrimaryKey(key,"健康旅游");
     }
 
     @Override
-    public List<ChineseCulturalDO> getTravelList() {
-        return chineseCulturalDOMapper.selectChineseCulturalList("健康旅游信息");
+    public List<ChineseCulturalDO> getTravelList(List<String> chineseCulturalStatus) {
+        List<ChineseCulturalDO> chineseCulturalDOList = new ArrayList<>();
+        for (String culturalStatus : chineseCulturalStatus) {
+            chineseCulturalDOList.addAll(chineseCulturalDOMapper.selectChineseCulturalList("健康旅游", culturalStatus));
+        }
+        return chineseCulturalDOList;
     }
 
     @Override
@@ -52,8 +57,8 @@ public class TravelServiceImpl implements ITravelService {
         record.setCreater("测试");
         record.setItemcreateat(DateUtils.getDate());
         record.setUpdater("测试");
-        record.setChineseCulturalType("健康旅游信息");
-        record.setChineseCulturalStatus("待上架");
+        record.setChineseCulturalType("健康旅游");
+        record.setChineseCulturalStatus("--");
         //如果前台没有插入图片或者附件，就自己生成uuid
         if(record.getItemcode() == null){
             record.setItemcode(UUIDUtils.getUUID());

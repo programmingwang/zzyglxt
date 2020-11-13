@@ -127,7 +127,7 @@
                 {
                     menu_name: "＞国医话健康",
                     menu_url: "/healthCare/healthcarefamPre",
-                    id: "6-3",
+                    id: "6-2",
                     level: "2",
                     pid: "6"
                 },
@@ -135,6 +135,13 @@
 
                     menu_name: "＞中药常识",
                     menu_url: "/healthCare/healthcarechineseMedicine",
+                    id: "6-3",
+                    level: "2",
+                    pid: "6"
+                },
+                {
+                    menu_name: "＞历史名方",
+                    menu_url: "/healthCare/famPre",
                     id: "6-4",
                     level: "2",
                     pid: "6"
@@ -153,13 +160,6 @@
                     level:"2",
                     pid:"7"
 
-                },
-                {
-                    menu_name: "＞历史名方",
-                    menu_url: "/healthCare/famPre",
-                    id: "6-5",
-                    level: "2",
-                    pid: "6"
                 },
                 /*
                 {

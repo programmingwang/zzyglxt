@@ -29,7 +29,7 @@
   </sql>
   <select id="selectByPrimaryKey" parameterType="com.zyyglxt.dataobject.HealthCareChineseMedicineDOKey" resultMap="BaseResultMap">
 
-    select 
+    select
     <include refid="Base_Column_List" />
     from tb_health_care_chinese_medicine
     where itemID = #{itemid,jdbcType=INTEGER}

@@ -62,11 +62,11 @@
                         itemcode: stringUtil.getUUID(),
                         chineseMedicineName : $("#chineseMedicineName").val(),//中药材名称
                         chineseMedicineAlias : $("#chineseMedicineAlias").val(),//别名
-                        chineseMedicineEffect : $("#chineseMedicineEffect").val(),//功效分类
+                        chineseMedicineType : $("#chineseMedicineType").val(),//功效分类
                         chineseMedicineHarvesting : $("#chineseMedicineHarvesting").val(),//采制
                         chineseMedicineTaste : $("#chineseMedicineTaste").val(),//性味
                         chineseMedicineMerTro : $("#chineseMedicineMerTro").val(),//归经
-                        chineseMedicineSource : $("#chineseMedicineSource").val(),//功能主治
+                        chineseMedicineEffect : $("#chineseMedicineEffect").val(),//功能主治
                         chineseMedicineUsage :$("#chineseMedicineUsage").val(),//用法用量
                         /*chineseMedicineUsage : editor.txt.html()*/
                     };
@@ -78,18 +78,17 @@
                         itemcode: needData.itemcode,
                         chineseMedicineName : $("#chineseMedicineName").val(),//中药材名称
                         chineseMedicineAlias : $("#chineseMedicineAlias").val(),//别名
-                        chineseMedicineEffect : $("#chineseMedicineEffect").val(),//功效分类
+                        chineseMedicineType : $("#chineseMedicineType").val(),//功效分类
                         chineseMedicineHarvesting : $("#chineseMedicineHarvesting").val(),//采制
                         chineseMedicineTaste : $("#chineseMedicineTaste").val(),//性味
                         chineseMedicineMerTro : $("#chineseMedicineMerTro").val(),//归经
-                        chineseMedicineSource : $("#chineseMedicineSource").val(),//功能主治
+                        chineseMedicineEffect : $("#chineseMedicineEffect").val(),//功能主治
                         chineseMedicineUsage :$("#chineseMedicineUsage").val(),//用法用量
                        /* chineseMedicineUsage : editor.txt.html()*/
                     }
                     operateMessage = "更新中医药成功";
                 }
                 fileUtil.handleFile(isUpdate(), chinesemedicineEntity.itemcode, uploadImg.getFiles()[0]);
-
                 ajaxUtil.myAjax(null,addUpdateUrl,chinesemedicineEntity,function (data) {
                     if(ajaxUtil.success(data)){
                         alertUtil.info(operateMessage);
@@ -106,11 +105,11 @@
                     var tempdata = JSON.parse(localStorage.getItem("rowData"));
                     $("#chineseMedicineName").val(tempdata.chineseMedicineName);
                     $("#chineseMedicineAlias").val(tempdata.chineseMedicineAlias);
-                    $("#chineseMedicineEffect").val(tempdata.chineseMedicineEffect);
+                    $("#chineseMedicineType").val(tempdata.chineseMedicineType);
                     $("#chineseMedicineHarvesting").val(tempdata.chineseMedicineHarvesting);
                     $("#chineseMedicineTaste").val(tempdata.chineseMedicineTaste);
                     $("#chineseMedicineMerTro").val(tempdata.chineseMedicineMerTro);
-                    $("#chineseMedicineSource").val(tempdata.chineseMedicineSource);
+                    $("#chineseMedicineEffect").val(tempdata.chineseMedicineEffect);
                     $("#chineseMedicineUsage").val(tempdata.chineseMedicineUsage);
                    /* editor.txt.html(tempdata.chineseMedicineUsage);*/
                     var img = tempdata.filePath;

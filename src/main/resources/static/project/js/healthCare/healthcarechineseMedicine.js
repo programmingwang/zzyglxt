@@ -59,20 +59,20 @@
                 orange.redirect(url);
             });
 
-            var pl = dictUtil.getDictByCode(dictUtil.DICT_LIST.showStatus);
+            var pl = dictUtil.getDictByCode(dictUtil.DICT_LIST.effectType);
             $("#chargePersonSearch").selectUtil(pl);
 
             var aCol = [
                         {field: 'chineseMedicineName', title: '中医药名称'},
+                        {field: 'chineseMedicineAlias', title: '别名'},
+                        {field:'chineseMedicineType',title:'功效分类'},
                         {field: 'filePath', title: '药材图片', formatter:function (value, row, index) {
                                 if(value == "已经损坏了"){
                                     return '<p>'+value+'</p>';
                                 }else{
                                     return '<img  src='+value+' width="100" height="100" class="img-rounded" >';
                                 }
-                        }},
-                        {field: 'chineseMedicineAlias', title: '别名'},
-                        {field:'chineseMedicineEffect',title:'功效分类'},
+                            }},
                         {field: 'action',  title: '操作',formatter: operation,events:orgEvents}
                     ];
 

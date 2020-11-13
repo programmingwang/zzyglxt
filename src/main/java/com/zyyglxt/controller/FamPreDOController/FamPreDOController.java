@@ -3,6 +3,8 @@ package com.zyyglxt.controller.FamPreDOController;
 import com.zyyglxt.annotation.LogAnnotation;
 import com.zyyglxt.dataobject.FamPreDO;
 import com.zyyglxt.dataobject.FamPreDOKey;
+import com.zyyglxt.dataobject.HealthCareChineseMedicineDO;
+import com.zyyglxt.dto.HealthCareChineseMedicineDto;
 import com.zyyglxt.error.BusinessException;
 import com.zyyglxt.error.EmBusinessError;
 import com.zyyglxt.response.ResponseData;
@@ -13,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -73,6 +76,13 @@ public class FamPreDOController {
         return new ResponseData(EmBusinessError.success,famPreDOList);
     }
 
+    /*查询所有历史名方数据状态*//*
+    @RequestMapping(value ="selectallstatusfampredo",method = RequestMethod.GET )
+    @LogAnnotation(appCode ="",logTitle ="查看所有历史名方数据状态",logLevel ="1",creater ="huangwj",updater = "huangwj")
+    public ResponseData selectAllStatusFamPreDOMapper(@RequestParam(value = "status")List status){
+        List<FamPreDO> healthCareChineseMedicineDOSList = famPreDOService.selectAllStatusFamPre(status);
+        return new ResponseData(EmBusinessError.success,healthCareChineseMedicineDOSList);
+    }*/
     /**
      * 增加点击数
      * @param key

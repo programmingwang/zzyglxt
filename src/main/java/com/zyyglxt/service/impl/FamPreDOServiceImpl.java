@@ -1,7 +1,6 @@
 package com.zyyglxt.service.impl;
 
 import com.zyyglxt.dao.FamPreDOMapper;
-import com.zyyglxt.dao.FileDOMapper;
 import com.zyyglxt.dataobject.FamPreDO;
 import com.zyyglxt.dataobject.FamPreDOKey;
 import com.zyyglxt.error.BusinessException;
@@ -15,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -67,7 +67,17 @@ public class FamPreDOServiceImpl implements FamPreDOService {
     public List<FamPreDO> selectAllFamPre() {
         return famPreDOMapper.selectAllFamPre();
     }
-     /*点击浏览次数*/
+     /*查询所有历史名方的状态*/
+    @Override
+    public List<FamPreDO> selectAllStatusFamPreList(List<String> status) {
+        List<FamPreDO> famPreDOList=new ArrayList<>();
+        for(String fampreStatus: status){
+            //famPreDOList.addAll(famPreDOMapper.selectAllStatusFamPreList("",fampreStatus));
+        }
+        return famPreDOList;
+    }
+
+        /*点击浏览次数*/
     @Override
     public int increaseVisitNumFamPre(FamPreDOKey key) {
         famPreDOMapper.updateVisitNumFamPre(key);

@@ -9,13 +9,13 @@
 
         };
 
-        //操作
-        function operation(value, row, index){
-            return [
-                '<button type="button" class="edit btn btn-primary btn-sm" style="margin-right: 5px" data-toggle="modal" data-target="" >编辑</button>',
-                '<button type="button" class="delete btn btn-danger btn-sm"  data-toggle="modal" data-target="#staticBackdrop" >删除</button>',
-            ].join('');
-        }
+            //操作
+            function operation(value, row, index){
+                return [
+                    '<button type="button" class="edit btn btn-primary btn-sm" style="margin-right: 5px" data-toggle="modal" data-target="" >编辑</button>',
+                    '<button type="button" class="delete btn btn-danger btn-sm"  data-toggle="modal" data-target="#staticBackdrop" >删除</button>',
+                ].join('');
+            }
 
 
         //修改事件
@@ -71,6 +71,7 @@
         var pl = dictUtil.getDictByCode(dictUtil.DICT_LIST.showStatus);
         $("#chargePersonSearch").selectUtil(pl);
 
+
         var aCol = [
             {field: 'dataTitle', title: '政策法规名称'},
             {field: 'dataSource', title: '来源'},
@@ -78,8 +79,10 @@
             {field: 'filePath', title: '附件', formatter:function (value, row, index) {
                     if(value == "已经损坏了"){
                         return '<p>'+value+'</p>';
+                    }else if (row.fileName == null){
+                        return '<p>————</p>';
                     }else{
-                        return '<a href="'+value+'">政策法规</a>'
+                        return '<a href="'+value+'">'+row.fileName+'</a>'
                     }
                 }},
             {field: 'itemcreateat', title: '发布时间'},
@@ -93,5 +96,8 @@
             myTable.free();
             myTable = bootstrapTableUtil.myBootStrapTableInit("table", url, param, aCol);
         }
+
+        bootstrapTableUtil.globalSearch("table",url,aParam, aCol);
+
     })
 })();

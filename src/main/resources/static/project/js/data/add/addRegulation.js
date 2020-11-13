@@ -1,5 +1,5 @@
 (function () {
-    require(['jquery','wangEditor','ajaxUtil','alertUtil','stringUtil','fileUtil'],
+    require(['jquery','wangEditor','ajaxUtil','alertUtil','stringUtil','fileUtil',],
         function (jquery,wangEditor,ajaxUtil,alertUtil,stringUtil,fileUtil) {
             const editor = new wangEditor('#div1')
             // 或者 const editor = new E( document.getElementById('div1') )
@@ -99,8 +99,6 @@
                     $("#dataSource").val(tempdata.dataSource);
                     $("#dataFileType").val(tempdata.dataFileType);
                     editor.txt.html(tempdata.dataContent);
-                    var img = tempdata.filePath;
-                    $("#upimg").attr("src",img);
                 }
             }());
 

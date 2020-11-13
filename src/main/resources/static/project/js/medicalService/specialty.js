@@ -59,6 +59,9 @@
                 orange.redirect(addUrl)
             });
 
+            var pl = dictUtil.getDictByCode(dictUtil.DICT_LIST.showStatus);
+            $("#chargePersonSearch").selectUtil(pl);
+
             var aCol = [
                 {field: 'specialtyName', title: '科室名称'},
                 {field: 'hospitalName', title: '所属医院'},
@@ -84,5 +87,7 @@
                 myTable.free();
                 myTable = bootstrapTableUtil.myBootStrapTableInit("table", url, param, aCol);
             }
+
+            bootstrapTableUtil.globalSearch("table",url,aParam, aCol);
         })
 })();

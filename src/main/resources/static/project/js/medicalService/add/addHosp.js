@@ -102,11 +102,14 @@
                 return (tempdata != null || tempdata != undefined)
             }
 
+
             /*初始化数据*/
             (function init() {
+                uploadImg.init();
                 if (updateStatus){
                     $("#hospitalName").val(tempdata.hospitalName);
                     $("#hospitalLevel  option[value="+tempdata.hospitalLevel+"] ").attr("selected",true);
+                    uploadImg.setImgSrc(tempdata.filePath)
                     $("#hospitalTelephone").val(tempdata.hospitalTelephone);
                     $("#hospitalAddressCity  option[value="+tempdata.hospitalAddressCity+"] ").attr("selected",true);
                     $("#hospitalAddressCountry  option[value="+tempdata.hospitalAddressCountry+"] ").attr("selected",true);
@@ -117,6 +120,6 @@
                 }
             }());
 
-            uploadImg.init();
+
         });
 })();

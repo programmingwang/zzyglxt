@@ -93,6 +93,7 @@
             userMsg: '../project/js/user/usermsg'
 
         },
+        waitSeconds: 0,
         map: {
             '*': {
                 'popper.js': 'popper'

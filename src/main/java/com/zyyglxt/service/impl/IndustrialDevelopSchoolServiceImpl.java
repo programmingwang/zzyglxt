@@ -1,10 +1,17 @@
 package com.zyyglxt.service.impl;
 
+import com.zyyglxt.dto.industrialDevelop.IndustrialDevelopSchoolDto;
+import com.zyyglxt.service.IFileService;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import com.zyyglxt.dao.IndustrialDevelopSchoolMapper;
 import com.zyyglxt.dataobject.IndustrialDevelopSchool;
 import com.zyyglxt.service.IndustrialDevelopSchoolService;
+
+import java.util.ArrayList;
+import java.util.List;
+
 /**
    *@Author lrt
    *@Date 2020/11/6 20:00
@@ -15,6 +22,9 @@ public class IndustrialDevelopSchoolServiceImpl implements IndustrialDevelopScho
 
     @Resource
     private IndustrialDevelopSchoolMapper industrialDevelopSchoolMapper;
+
+    @Resource
+    private IFileService fileService;
 
     @Override
     public int deleteByPrimaryKey(Integer itemid,String itemcode) {
@@ -44,6 +54,21 @@ public class IndustrialDevelopSchoolServiceImpl implements IndustrialDevelopScho
     @Override
     public int updateByPrimaryKey(IndustrialDevelopSchool record) {
         return industrialDevelopSchoolMapper.updateByPrimaryKey(record);
+    }
+
+    @Override
+    public List<IndustrialDevelopSchoolDto> selectAll() {
+        List<IndustrialDevelopSchoolDto> resList = new ArrayList<>();
+        List<IndustrialDevelopSchool> list = industrialDevelopSchoolMapper.selectAll();
+        for (IndustrialDevelopSchool item: list){
+            IndustrialDevelopSchoolDto obj = new IndustrialDevelopSchoolDto();
+            BeanUtils.copyProperties(item, obj);
+            resList.add(obj);
+        }
+        for (IndustrialDevelopSchoolDto item : resList){
+            item.setFilePath(fileService.selectFileByDataCode(item.getItemcode()).getFilePath());
+        }
+        return resList;
     }
 
 }

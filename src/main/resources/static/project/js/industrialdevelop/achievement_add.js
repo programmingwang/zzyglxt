@@ -73,6 +73,7 @@
                 return param;
             }
 
+            //附件名显示
             $("#upload_file").change(function () {
                 var file = $("#upload_file")[0].files[0];
                 var file_span = $("#filename_span");
@@ -86,7 +87,9 @@
 
                 ajaxUtil.myAjax(null, url, param, function (data) {
                     if (ajaxUtil.success(data)) {
-                        ajaxUtil.fileAjax(itemcode, file, "admin", "aaaaaaa");
+                        if (file != null){
+                            ajaxUtil.fileAjax(itemcode, file, "admin", "aaaaaaa");
+                        }
                         orange.redirect(url)
                     } else {
                         alert(data.msg)

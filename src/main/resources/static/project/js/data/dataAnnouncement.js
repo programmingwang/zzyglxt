@@ -77,8 +77,10 @@
             {field: 'filePath', title: '附件名称', formatter:function (value, row, index) {
                     if(value == "已经损坏了"){
                         return '<p>'+value+'</p>';
+                    }else if (row.fileName == null){
+                        return '<p>————</p>';
                     }else{
-                        return '<a href="'+value+'">通知公告</a>'
+                        return '<a href="'+value+'">'+row.fileName+'</a>'
                     }
                 }},
             {field: 'itemcreateat', title: '发布时间'},
@@ -92,5 +94,8 @@
             myTable.free();
             myTable = bootstrapTableUtil.myBootStrapTableInit("table", url, param, aCol);
         }
+
+        bootstrapTableUtil.globalSearch("table",url,aParam, aCol);
+
     })
 })();

@@ -92,42 +92,8 @@
             myTable.free();
             myTable = bootstrapTableUtil.myBootStrapTableInit("table", url, param, aCol);
         }
-            var oTab=document.getElementById("table");
-            var btns=document.getElementsByClassName("atext");
-            for(var i=1;i<btns.length;i++){
-                btns[i].onclick=function(){
-                    for(var l=0;l<btns.length;l++){
-                        btns[l].setAttribute("style","background-color:")
-                    }
-                    //btns.setAttribute("style","backgroundColor:''")
 
-                    this.setAttribute("style","background-color:red")
-                    //btns.style(backgroundColor,'');
-                    //this.style(backgroundColor,'red');
-                    // console.log(oTab.tBodies[0].rows);
-                    for(var j=0;j<oTab.tBodies[0].rows.length;j++)
-                    {
-                        var str1=oTab.tBodies[0].rows[j].cells[3].innerText;
-                        var str2=this.innerHTML;
-                        // console.log(str1);
-                        // console.log(str2);
-                        if(str1==str2){
-                            // console.log("aaaa")
-                            // console.log(oTab.tBodies[0].rows[j])
-                            oTab.tBodies[0].rows[j].hidden=false;
-                        }
-                        else{
-                            oTab.tBodies[0].rows[j].hidden=true;
-                        }
-                    }
-                }
-            }
-            btns[0].onclick=function(){
-                for(var l=0;l<btns.length;l++){
-                    btns[l].setAttribute("style","background-color:")
-                }
-                refreshTable();
-            }
+        bootstrapTableUtil.globalSearch("table",url,aParam, aCol);
 
     })
 })();

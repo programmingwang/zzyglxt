@@ -90,5 +90,7 @@
                 myTable.free();
                 myTable = bootstrapTableUtil.myBootStrapTableInit("table", url, param, aCol);
             }
+
+            bootstrapTableUtil.globalSearch("table",url,aParam, aCol);
         })
 })();

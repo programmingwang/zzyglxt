@@ -1,10 +1,17 @@
 package com.zyyglxt.service.impl;
 
+import com.zyyglxt.dto.industrialDevelop.IndustrialDevelopChiMedDto;
+import com.zyyglxt.service.IFileService;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import com.zyyglxt.dao.IndustrialDevelopChiMedMapper;
 import com.zyyglxt.dataobject.IndustrialDevelopChiMed;
 import com.zyyglxt.service.IndustrialDevelopChiMedService;
+
+import java.util.ArrayList;
+import java.util.List;
+
 /**
    *@Author lrt
    *@Date 2020/11/6 20:00
@@ -15,6 +22,9 @@ public class IndustrialDevelopChiMedServiceImpl implements IndustrialDevelopChiM
 
     @Resource
     private IndustrialDevelopChiMedMapper industrialDevelopChiMedMapper;
+
+    @Resource
+    private IFileService fileService;
 
     @Override
     public int deleteByPrimaryKey(Integer itemid,String itemcode) {
@@ -44,6 +54,22 @@ public class IndustrialDevelopChiMedServiceImpl implements IndustrialDevelopChiM
     @Override
     public int updateByPrimaryKey(IndustrialDevelopChiMed record) {
         return industrialDevelopChiMedMapper.updateByPrimaryKey(record);
+    }
+
+    @Override
+    public List<IndustrialDevelopChiMedDto> selectAll(String type) {
+        List<IndustrialDevelopChiMed> list = industrialDevelopChiMedMapper.selectAll(type);
+        List<IndustrialDevelopChiMedDto> resList = new ArrayList<>();
+        for (IndustrialDevelopChiMed item: list){
+            IndustrialDevelopChiMedDto newObj = new IndustrialDevelopChiMedDto();
+            BeanUtils.copyProperties(item,newObj);
+            resList.add(newObj);
+        }
+        BeanUtils.copyProperties(list,resList);
+        for (IndustrialDevelopChiMedDto item: resList){
+            item.setFilePath(fileService.selectFileByDataCode(item.getItemcode()).getFilePath());
+        }
+        return resList;
     }
 
 }

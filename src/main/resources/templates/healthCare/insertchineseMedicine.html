@@ -38,6 +38,16 @@
             width: 10em;
             background-color: #CBCECE;
         }
+        #CMT{
+           left: 95px;
+        }
+        #chineseMedicineType{
+
+            left: 32px;
+        }
+        #IN{
+
+        }
     </style>
     <link rel="stylesheet" href="https://at.alicdn.com/t/font_1805932_ysrcp4y0uy9.css">
 </head>
@@ -58,12 +68,22 @@
                     <input id="chineseMedicineAlias" type="text" class="form-control" placeholder="请输入">
                 </div>
             </div>
-            <div class="form-group row">
+            <!--<div class="form-group row">
                 <label class="col-sm-2 col-form-label">功效分类：</label>
                 <div class="col-sm-3">
                     <input id="chineseMedicineType" type="text" class="form-control" placeholder="请输入">
                 </div>
+            </div>-->
+
+            <div class="col-lg-3 col-md-3" id="CMT">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend" >
+                        <span  class="input-text" >功效分类：</span>
+                    </div>
+                    <select  class="form-control" id="chineseMedicineType"></select>
+                </div>
             </div>
+
 
             <div class="form-group row">
                 <label for="exampleFormControlFile1" class="col-sm-2 col-form-label">药材图片：</label>
@@ -133,7 +153,6 @@
 
 
             </div>
-    </div>
     </form>
 
 </div>

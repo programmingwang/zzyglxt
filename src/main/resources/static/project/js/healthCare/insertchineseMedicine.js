@@ -1,6 +1,6 @@
 (function () {
-    require(['jquery','wangEditor','ajaxUtil','alertUtil','stringUtil','fileUtil','uploadImg'],
-        function (jquery,wangEditor,ajaxUtil,alertUtil,stringUtil,fileUtil,uploadImg) {
+    require(['jquery','wangEditor','ajaxUtil','alertUtil','stringUtil','fileUtil','uploadImg','dictUtil'],
+        function (jquery,wangEditor,ajaxUtil,alertUtil,stringUtil,fileUtil,uploadImg,dictUtil) {
             const editor = new wangEditor('#div1')
             // 或者 const editor = new E( document.getElementById('div1') )
             //菜单配置
@@ -44,6 +44,8 @@
                     alert("字数不能超过10000");                  //将替换的值赋值给当前对象
                 }
             });
+            var pl = dictUtil.getDictByCode(dictUtil.DICT_LIST.effectType);
+            $("#chineseMedicineType").selectUtil(pl);
 
             $("#cancel").unbind().on('click',function () {
                 $("#main_body").html("");

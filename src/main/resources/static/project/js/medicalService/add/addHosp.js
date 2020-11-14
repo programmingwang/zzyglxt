@@ -104,21 +104,33 @@
 
 
             /*初始化数据*/
-            (function init() {
+            var  init = function () {
                 uploadImg.init();
                 if (updateStatus){
                     $("#hospitalName").val(tempdata.hospitalName);
                     $("#hospitalLevel  option[value="+tempdata.hospitalLevel+"] ").attr("selected",true);
-                    uploadImg.setImgSrc(tempdata.filePath)
+                    uploadImg.setImgSrc(tempdata.filePath);
                     $("#hospitalTelephone").val(tempdata.hospitalTelephone);
-                    $("#hospitalAddressCity  option[value="+tempdata.hospitalAddressCity+"] ").attr("selected",true);
-                    $("#hospitalAddressCountry  option[value="+tempdata.hospitalAddressCountry+"] ").attr("selected",true);
+                    $("#distpicker").distpicker({
+                        province: "河北省",
+                        city: tempdata.hospitalAddressCity,
+                        district: tempdata.hospitalAddressCountry
+                    });
                     $("#hospitalAddress").val(tempdata.hospitalAddress);
                     $("#hospitalLink").val(tempdata.hospitalLink);
                     $("#hospitalAddressCountry").val(tempdata.hospitalAddressCountry);
                     $(".w-e-text").html(tempdata.hospitalIntroduce);
+                }else {
+                    localStorage.removeItem("rowData");
+                    $("#distpicker").distpicker({
+                        province: "河北省",
+                    });//新增页面使用
                 }
-            }());
+                init = function () {
+
+                }
+            }
+            init();
 
 
         });

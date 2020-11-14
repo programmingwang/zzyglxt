@@ -299,4 +299,20 @@
               WHERE HOSPITAL_CODE = #{hospCode}
         )
     </select>
+
+    <select id="selectByStatus" resultMap="ResultMapWithBLOBs">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from tb_culpro_specialty
+        WHERE SPECIALTY_STATUS = #{status}
+    </select>
+
+    <update id="updateStatusByPrimaryKey" parameterType="com.zyyglxt.dto.MedicalServiceDto">
+        UPDATE tb_culpro_specialty
+        SET SPECIALTY_STATUS = #{status}, UPDATER = #{updater}
+        WHERE itemID = #{itemid,jdbcType=INTEGER}
+        AND itemCode = #{itemcode,jdbcType=CHAR}
+    </update>
 </mapper>

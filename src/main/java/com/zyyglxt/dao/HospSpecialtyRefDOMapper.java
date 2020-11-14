@@ -24,4 +24,6 @@ public interface HospSpecialtyRefDOMapper {
     int deleteBySpecialtyCode(String specialtyCode);
 
     List<HospSpecialtyRefDO> selectSpecialtyByHospCode(String hospCode);
+
+    int updateBySpecialtyCodeSelective(String specialtyCode);
 }

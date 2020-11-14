@@ -5,6 +5,7 @@ import com.zyyglxt.dataobject.FileDO;
 import com.zyyglxt.dataobject.HospDO;
 import com.zyyglxt.dataobject.HospDOKey;
 import com.zyyglxt.dto.HospDto;
+import com.zyyglxt.dto.MedicalServiceDto;
 import com.zyyglxt.error.EmBusinessError;
 import com.zyyglxt.response.ResponseData;
 import com.zyyglxt.service.IFileService;
@@ -56,8 +57,8 @@ public class HospController {
     @GetMapping(value = "selectAll")
     @ResponseBody
     @LogAnnotation(appCode ="",logTitle ="查看所有医院数据",logLevel ="1",creater ="",updater = "")
-    public ResponseData selectAllHosp(){
-        List<HospDO> hospDOList = hospService.selectAllHosp();
+    public ResponseData selectAllHosp(@RequestParam(value = "hospitalStatus")List hospitalStatus){
+        List<HospDO> hospDOList = hospService.selectAllHosp(hospitalStatus);
         return new ResponseData(EmBusinessError.success,DoToDto(hospDOList));
     }
 
@@ -70,13 +71,20 @@ public class HospController {
     }
 
     @ResponseBody
-    @GetMapping(value = "top5")
-    @LogAnnotation(appCode ="",logTitle ="查看前5条医院数据",logLevel ="1",creater ="",updater = "")
-    public ResponseData top5Hosp(){
-        List<HospDO> hospDOList = hospService.top5Hosp();
+    @GetMapping("selectByStatus")
+    @LogAnnotation(appCode = "",logTitle = "根据状态查看医院数据",logLevel = "1")
+    public ResponseData selectByStatus(String status){
+        List<HospDO> hospDOList = hospService.selectByStatus(status);
         return new ResponseData(EmBusinessError.success,DoToDto(hospDOList));
     }
 
+    @ResponseBody
+    @PostMapping("updateStatus")
+    @LogAnnotation(logTitle = "改变数据状态",logLevel = "2")
+    public ResponseData updateStatus(MedicalServiceDto medicalServiceDto){
+        hospService.updateStatus(medicalServiceDto);
+        return new ResponseData(EmBusinessError.success);
+    }
 
     private List<HospDto> DoToDto(List<HospDO> DOList){
         List<HospDto> DtoList = new ArrayList<>();

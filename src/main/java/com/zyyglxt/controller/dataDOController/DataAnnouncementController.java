@@ -33,13 +33,8 @@ public class DataAnnouncementController {
     @Resource
     private IFileService fileService;
 
-    /**
-     * 查看一条通知公告
-     * @param itemID
-     * @param itemCode
-     * @return
-     */
-    @RequestMapping(value = "/selectByPrimaryKey/{itemID}/{itemCode}", method = RequestMethod.GET)
+    /*查看一条通知公告*/
+    /*@RequestMapping(value = "/selectByPrimaryKey/{itemID}/{itemCode}", method = RequestMethod.GET)
     @LogAnnotation(appCode ="",logTitle ="查看一条通知公告",logLevel ="1",creater ="",updater = "")
     public ResponseData selectByPrimaryKey(@PathVariable("itemID") Integer itemID, @PathVariable("itemCode")String itemCode){
         DataDOKey dataDOKey = new DataDOKey();
@@ -47,14 +42,8 @@ public class DataAnnouncementController {
         dataDOKey.setItemcode(itemCode);
         DataDO data = dataAnnouncementService.selectAnnouncement(dataDOKey);
         return new ResponseData(EmBusinessError.success, data);
-    }
+    }*/
 
-    private DataDto convertFromDOToDTO(DataDO dataDo, String filePath) {
-        DataDto dataDto = new DataDto();
-        BeanUtils.copyProperties(dataDo,dataDto);
-        dataDto.setFilePath(filePath);
-        return dataDto;
-    }
 
     /**
      * 查看通知公告的所有数据
@@ -62,8 +51,8 @@ public class DataAnnouncementController {
      */
     @RequestMapping(value = "/selectAll", method = RequestMethod.GET)
     @LogAnnotation(appCode ="",logTitle ="查看所有通知公告",logLevel ="1",creater ="",updater = "")
-    public ResponseData selectAnnouncementList(){
-        List<DataDO> dataDOList = dataAnnouncementService.selectAnnouncementList();
+    public ResponseData selectAnnouncementList(@RequestParam(value = "dataStatus")List dataStatus){
+        List<DataDO> dataDOList = dataAnnouncementService.selectAnnouncementList(dataStatus);
         return new ResponseData(EmBusinessError.success,DoToDto(dataDOList));
     }
 
@@ -107,7 +96,7 @@ public class DataAnnouncementController {
     }
 
     //修改展示状态
-    @RequestMapping(value = "changeStatus/{itemID}/{itemCode}", method = RequestMethod.PUT)
+    @RequestMapping(value = "changeAnnStatus/{itemID}/{itemCode}", method = RequestMethod.PUT)
     @ResponseBody
     @LogAnnotation(appCode ="",logTitle ="修改展示状态",logLevel ="2",creater ="",updater = "")
     public ResponseData changeStatus(@RequestParam("dataStatus") String dataStatus, @PathVariable("itemID") Integer itemID, @PathVariable("itemCode")String itemCode){

@@ -32,27 +32,16 @@ public class DataNewsInfController {
     @Resource
     private IFileService fileService;
 
-    /**
-     * 查看一条记录
-     * @param itemID
-     * @param itemCode
-     * @return
-     */
-    @RequestMapping(value = "/selectByPrimaryKey/{itemID}/{itemCode}", method = RequestMethod.GET)
+    /*查看一条记录*/
+    /*@RequestMapping(value = "/selectByPrimaryKey/{itemID}/{itemCode}", method = RequestMethod.GET)
     public ResponseData selectByPrimaryKey(@PathVariable("itemID") Integer itemID, @PathVariable("itemCode")String itemCode){
         DataDOKey dataDOKey = new DataDOKey();
         dataDOKey.setItemid(itemID);
         dataDOKey.setItemcode(itemCode);
         DataDO data = dataDOService.selectNewsInf(dataDOKey);
         return new ResponseData(EmBusinessError.success, data);
-    }
+    }*/
 
-    private DataDto convertFromDOToDTO(DataDO dataDo,String filePath) {
-        DataDto dataDto = new DataDto();
-        BeanUtils.copyProperties(dataDo,dataDto);
-        dataDto.setFilePath(filePath);
-        return dataDto;
-    }
 
     /**
      * 查看新闻轮播图的所有数据
@@ -60,8 +49,8 @@ public class DataNewsInfController {
      */
     @RequestMapping(value = "/selectAllNewsRot", method = RequestMethod.GET)
     @LogAnnotation(appCode ="",logTitle ="查看所有新闻轮播图",logLevel ="1",creater ="",updater = "")
-    public ResponseData selectNewsRotList(){
-        List<DataDO> dataDOList = dataDOService.selectNewsRotList();
+    public ResponseData selectNewsRotList(@RequestParam(value = "dataStatus")List dataStatus){
+        List dataDOList = dataDOService.selectNewsRotList(dataStatus);
         return new ResponseData(EmBusinessError.success,DoToDto(dataDOList));
     }
 
@@ -72,8 +61,8 @@ public class DataNewsInfController {
      */
     @RequestMapping(value = "/selectAllNewsInf", method = RequestMethod.GET)
     @LogAnnotation(appCode ="",logTitle ="查看所有新闻信息",logLevel ="1",creater ="",updater = "")
-    public ResponseData selectNewsInfList(){
-        List<DataDO> dataDOList = dataDOService.selectNewsInfList();
+    public ResponseData selectNewsInfList(@RequestParam(value = "dataStatus")List dataStatus){
+        List<DataDO> dataDOList = dataDOService.selectNewsInfList(dataStatus);
         return new ResponseData(EmBusinessError.success,dataDOList);
     }
 
@@ -117,8 +106,9 @@ public class DataNewsInfController {
     }
 
     //修改展示状态
-    @RequestMapping(value = "changeStatus/{itemID}/{itemCode}", method = RequestMethod.PUT)
+    @RequestMapping(value = "changeNewsStatus/{itemID}/{itemCode}", method = RequestMethod.POST)
     @ResponseBody
+    @LogAnnotation(appCode ="",logTitle ="修改展示状态",logLevel ="2",creater ="",updater = "")
     public ResponseData changeStatus(@RequestParam("dataStatus") String dataStatus, @PathVariable("itemID") Integer itemID, @PathVariable("itemCode")String itemCode){
         DataDOKey dataDOKey = new DataDOKey();
         dataDOKey.setItemid(itemID);

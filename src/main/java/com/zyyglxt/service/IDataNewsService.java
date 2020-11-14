@@ -16,10 +16,10 @@ public interface IDataNewsService {
     DataDO selectNewsInf(DataDOKey key);
 
     //查询所有新闻信息
-    List<DataDO> selectNewsInfList();
+    List<DataDO> selectNewsInfList(List<String> dataStatus);
 
     //查询所有新闻轮播图
-    List<DataDO> selectNewsRotList();
+    List<DataDO> selectNewsRotList(List<String> dataStatus);
 
     //增加一个信息
     int insertNewsInf(DataDO record);

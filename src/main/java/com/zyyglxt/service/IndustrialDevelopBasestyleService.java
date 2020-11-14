@@ -1,24 +1,29 @@
 package com.zyyglxt.service;
 
 import com.zyyglxt.dataobject.IndustrialDevelopBasestyle;
-    /**
-   *@Author lrt
-   *@Date 2020/11/6 20:00
-   *@Version 1.0
-**/
-public interface IndustrialDevelopBasestyleService{
+import com.zyyglxt.dto.industrialDevelop.IndustrialDevelopBasestyleDto;
+
+import java.util.List;
+
+/**
+ * @Author lrt
+ * @Date 2020/11/6 20:00
+ * @Version 1.0
+ **/
+public interface IndustrialDevelopBasestyleService {
 
 
-    int deleteByPrimaryKey(Integer itemid,String itemcode);
+    int deleteByPrimaryKey(Integer itemid, String itemcode);
 
     int insert(IndustrialDevelopBasestyle record);
 
     int insertSelective(IndustrialDevelopBasestyle record);
 
-    IndustrialDevelopBasestyle selectByPrimaryKey(Integer itemid,String itemcode);
+    IndustrialDevelopBasestyle selectByPrimaryKey(Integer itemid, String itemcode);
 
     int updateByPrimaryKeySelective(IndustrialDevelopBasestyle record);
 
     int updateByPrimaryKey(IndustrialDevelopBasestyle record);
 
+    List<IndustrialDevelopBasestyleDto> selectAll();
 }

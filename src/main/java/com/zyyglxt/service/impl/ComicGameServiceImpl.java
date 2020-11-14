@@ -37,8 +37,8 @@ public class ComicGameServiceImpl implements IComicGameService {
     }
 
     @Override
-    public List<ChineseCulturalDO> getComicGameList() {
-        return chineseCulturalDOMapper.selectChineseCulturalList("动漫游戏");
+    public List<ChineseCulturalDO> getComicGameList(String chineseCulturalStatus) {
+        return chineseCulturalDOMapper.selectChineseCulturalList("动漫游戏",chineseCulturalStatus);
 
     }
 
@@ -53,7 +53,7 @@ public class ComicGameServiceImpl implements IComicGameService {
         record.setItemcreateat(DateUtils.getDate());
         record.setUpdater("");
         record.setChineseCulturalType("动漫游戏");
-        record.setChineseCulturalStatus("待上架");
+        record.setChineseCulturalStatus("--");
         //如果前台没有插入图片或者附件，就自己生成uuid
         if(record.getItemcode() == null){
             record.setItemcode(UUIDUtils.getUUID());

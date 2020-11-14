@@ -41,7 +41,9 @@ public class CustomizeFilterInvocationSecurityMetadataSource implements FilterIn
                 |requestUrl.contains("/images")
                 |requestUrl.contains("/fonts")
                 |requestUrl.contains("/api")
-                |requestUrl.contains("/utils")){
+                |requestUrl.contains("/utils")
+                |requestUrl.contains("/userLogin")
+                |requestUrl.contains("/CSS")){
             return null;
         }
         int index = requestUrl.indexOf("?");

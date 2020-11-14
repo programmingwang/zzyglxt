@@ -71,7 +71,13 @@
                     }
                 }
             };
-            _setting.error = function () {
+            _setting.error = function (data) {
+                if(data.responseJSON.msg){
+                    alertUtil.error(data.responseJSON.msg);
+                }else{
+                    alertUtil.error(data.responseJSON.message);
+                }
+
                 console.log("请求失败URI："+ url);
             };
             _setting.complete = function (XMLHttpRequest) {
@@ -97,7 +103,59 @@
                 processData: false,   // jQuery不要去处理发送的数据
                 contentType: false,   // jQuery不要去设置Content-Type请求头
                 success:function(data){
-                    alertUtil.success(data.msg);
+                    if(data && data.code == successCode){
+                        alertUtil.success(data.msg);
+                    }else{
+                        alertUtil.error(data.msg);
+                    }
+                },
+                error: function(data){
+                    alertUtil.error(data.msg)
+                }
+            });
+        }
+
+        function deleteFile(dataCode){
+            var formData = new FormData();
+            formData.append("dataCode",dataCode);
+            $.ajax({
+                url:"/file/delete",
+                type:'GET',
+                data: formData,
+                processData: false,   // jQuery不要去处理发送的数据
+                contentType: false,   // jQuery不要去设置Content-Type请求头
+                success:function(data){
+                    if(data && data.code == successCode){
+                        alertUtil.success(data.msg);
+                    }else{
+                        alertUtil.error(data.msg);
+                    }
+                },
+                error: function(data){
+                    alertUtil.error(data.msg)
+                }
+            });
+        }
+
+        function updateFile(dataCode, file, uploader,uploaderCode,itemcode){
+            var formData = new FormData();
+            formData.append("dataCode",dataCode);
+            formData.append("file",file);
+            formData.append("itemcode",itemcode);
+            formData.append("uploader",uploader);
+            formData.append("uploaderCode",uploaderCode);
+            $.ajax({
+                url:"/file/update",
+                type:'POST',
+                data: formData,
+                processData: false,   // jQuery不要去处理发送的数据
+                contentType: false,   // jQuery不要去设置Content-Type请求头
+                success:function(data){
+                    if(data && data.code == successCode){
+                        alertUtil.success(data.msg);
+                    }else{
+                        alertUtil.error(data.msg);
+                    }
                 },
                 error: function(data){
                     alertUtil.error(data.msg)
@@ -117,7 +175,10 @@
             success:success,
             notLoggedIn:notLoggedIn,
             myAjax:myAjax,
-            fileAjax: fileAjax
+            fileAjax: fileAjax,
+            successCode:successCode,
+            deleteFile: deleteFile,
+            updateFile: updateFile
         }
     })
 })();

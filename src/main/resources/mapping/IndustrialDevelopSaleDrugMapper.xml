@@ -33,14 +33,12 @@
     select 
     <include refid="Base_Column_List" />
     from tb_industrial_develop_sale_drug
-    where itemID = #{itemid,jdbcType=INTEGER}
-      and itemCode = #{itemcode,jdbcType=CHAR}
+    where itemCode = #{itemcode,jdbcType=CHAR}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="map">
     <!--@mbg.generated-->
     delete from tb_industrial_develop_sale_drug
-    where itemID = #{itemid,jdbcType=INTEGER}
-      and itemCode = #{itemcode,jdbcType=CHAR}
+    where itemCode = #{itemcode,jdbcType=CHAR}
   </delete>
   <insert id="insert" keyColumn="itemID" keyProperty="itemid" parameterType="com.zyyglxt.dataobject.IndustrialDevelopSaleDrug" useGeneratedKeys="true">
     <!--@mbg.generated-->
@@ -211,8 +209,7 @@
         itemUpdateAt = #{itemupdateat,jdbcType=TIMESTAMP},
       </if>
     </set>
-    where itemID = #{itemid,jdbcType=INTEGER}
-      and itemCode = #{itemcode,jdbcType=CHAR}
+    where itemCode = #{itemcode,jdbcType=CHAR}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.zyyglxt.dataobject.IndustrialDevelopSaleDrug">
     <!--@mbg.generated-->
@@ -232,7 +229,6 @@
       itemCreateAt = #{itemcreateat,jdbcType=TIMESTAMP},
       UPDATER = #{updater,jdbcType=VARCHAR},
       itemUpdateAt = #{itemupdateat,jdbcType=TIMESTAMP}
-    where itemID = #{itemid,jdbcType=INTEGER}
-      and itemCode = #{itemcode,jdbcType=CHAR}
+    where itemCode = #{itemcode,jdbcType=CHAR}
   </update>
 </mapper>

@@ -1,5 +1,6 @@
 package com.zyyglxt.controller.ChineseCultural.prodiuction;
 
+import com.zyyglxt.annotation.LogAnnotation;
 import com.zyyglxt.dataobject.ChineseCulturalDO;
 import com.zyyglxt.dataobject.ChineseCulturalDOKey;
 import com.zyyglxt.dto.ChineseCulturalDto;
@@ -34,8 +35,9 @@ public class MovieTVController {
     //获取所有的电影电视
     @RequestMapping(value = "/getAll" , method = RequestMethod.GET)
     @ResponseBody
-    public ResponseData getAllMovieTV(){
-        List<ChineseCulturalDO> movieTVList = iMovieTVService.getMovieTVList();
+    @LogAnnotation(logTitle = "获得所有电视电影", logLevel = "1")
+    public ResponseData getAllMovieTV(String chineseCulturalStatus){
+        List<ChineseCulturalDO> movieTVList = iMovieTVService.getMovieTVList(chineseCulturalStatus);
         List<ChineseCulturalDto> chineseCulturalDtoList = new ArrayList<>();
         for (ChineseCulturalDO chineseCulturalDO : movieTVList) {
             chineseCulturalDtoList.add(
@@ -47,9 +49,10 @@ public class MovieTVController {
     }
 
 
-    //增加一个漫画典故
+    //增加一个电视电影
     @RequestMapping(value = "/addMovTv" , method = RequestMethod.POST)
     @ResponseBody
+    @LogAnnotation(logTitle = "增加一个电视电影", logLevel = "3")
     public ResponseData addMovieTV(@RequestBody ChineseCulturalDO chineseCulturalDO){
         iMovieTVService.addMovieTV(chineseCulturalDO);
         return new ResponseData(EmBusinessError.success);
@@ -58,6 +61,7 @@ public class MovieTVController {
     //删除一个电影电视（真正的数据库中删除）
     @RequestMapping(value = "/delMovTv/{itemID}/{itemCode}" , method = RequestMethod.DELETE)
     @ResponseBody
+    @LogAnnotation(logTitle = "删除一个电视电影", logLevel = "4")
     public ResponseData deleteMovieTV(@PathVariable("itemID") Integer itemID, @PathVariable("itemCode")String itemCode){
         ChineseCulturalDOKey chineseCulturalDOKey = new ChineseCulturalDOKey();
         chineseCulturalDOKey.setItemid(itemID);
@@ -71,6 +75,7 @@ public class MovieTVController {
     //修改一个电影电视
     @RequestMapping(value = "/updMovTv" , method = RequestMethod.POST)
     @ResponseBody
+    @LogAnnotation(logTitle = "修改一个电视电影", logLevel = "2")
     public ResponseData updateMovieTV(@RequestBody ChineseCulturalDO chineseCulturalDO){
         iMovieTVService.updateMovieTV(chineseCulturalDO);
         return new ResponseData(EmBusinessError.success);
@@ -79,6 +84,7 @@ public class MovieTVController {
     //修改一个电影电视状态 （逻辑删除，但是是将状态改成下架状态,也可以是处长页面 通过->上架， 未通过->下架）
     @RequestMapping(value = "/cgMovTvSta/{itemID}/{itemCode}" , method = RequestMethod.POST)
     @ResponseBody
+    @LogAnnotation(logTitle = "修改一个电视电影状态", logLevel = "2")
     public ResponseData changeStatus(@RequestParam("chineseCulturalStatus") String chineseCulturalStatus ,@PathVariable("itemID") Integer itemID, @PathVariable("itemCode")String itemCode){
         ChineseCulturalDOKey chineseCulturalDOKey = new ChineseCulturalDOKey();
         chineseCulturalDOKey.setItemid(itemID);

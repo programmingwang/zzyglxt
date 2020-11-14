@@ -1,12 +1,14 @@
 (function () {
-    require(['jquery','ajaxUtil','wangEditor'],
-        function (jquery,ajaxUtil, wangEditor) {
+    require(['jquery','ajaxUtil','stringUtil','wangEditor'],
+        function (jquery,ajaxUtil,stringUtil, wangEditor) {
 
             var url = "/industrialdevelop/coorecord";
 
             var pathUrl = "/industrialdevelop/cooperation"
 
             var type = isUpdate() ? "put":"post";
+
+            var itemcode = stringUtil.getUUID();
 
             const editor = new wangEditor('#div1');
             // 或者 const editor = new E( document.getElementById('div1') )
@@ -64,6 +66,7 @@
                 param.phone = $("#phone").val();
                 param.projectIntroduce = $(".w-e-text").html();
                 param.orgCode = "未定义";
+                param.itemcode = itemcode;
                 return param;
             }
 
@@ -73,7 +76,7 @@
                 file_span.text(file.name)
             });
 
-            $("#saveBtn").unbind().on('click',function () {
+            $("#saveBtn").unbind('click').on('click',function () {
                 var param = generateParam();
                 param.status = "——";
 
@@ -87,7 +90,7 @@
                 return false;
             });
 
-            $("#submitBtn").unbind().on('click',function () {
+            $("#submitBtn").unbind('click').on('click',function () {
                 var param = generateParam();
                 param.status = "——";
                 ajaxUtil.myAjax(null,url,param,function (data) {
@@ -100,7 +103,7 @@
                 return false;
             })
 
-            (function init() {
+            var init = function () {
                 if (isUpdate()){
                     var tempdata = JSON.parse(localStorage.getItem("rowData"));
                     $("#cooperationExchangeName").val(tempdata.cooperationExchangeName);
@@ -108,8 +111,13 @@
                     $("#contacts").val(tempdata.contacts);
                     $("#phone").val(tempdata.phone);
                     $(".w-e-text").html(tempdata.projectIntroduce);
+                    itemcode = tempdata.itemcode
                 }
-            }());
+                init = function () {
+
+                }
+            };
+            init();
 
 
             function isUpdate() {

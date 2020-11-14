@@ -1,7 +1,6 @@
 (function () {
-    require(['jquery','wangEditor','ajaxUtil','alertUtil','stringUtil'],
-        function (jquery,wangEditor,ajaxUtil,alertUtil,stringUtil) {
-            var type = isUpdate() ? "put":"post";
+    require(['jquery','wangEditor','ajaxUtil','alertUtil','stringUtil','fileUtil','uploadImg'],
+        function (jquery,wangEditor,ajaxUtil,alertUtil,stringUtil,fileUtil,uploadImg) {
             const editor = new wangEditor('#div1')
             // 或者 const editor = new E( document.getElementById('div1') )
             //菜单配置
@@ -47,60 +46,47 @@
             });
 
             $("#cancelbtn").unbind().on('click',function () {
-                $("#main_body").html("");
                 var url = "/data/dataNewsRotations";
-                orange.loadPage({url: url, target: 'main_body', selector: '#fir_body', success: function(data){
-                        if(data == null||data == ""){
-                            return alertUtil.error( url+'加载失败');
-                        }
-                        $("#main_body").html(data);
-                    }})
+                orange.redirect(url);
             });
 
             $("#submitbtn").unbind().on('click',function () {
-                var newsRotationsEntity = {
-                    itemcode: stringUtil.getUUID(),
-                    dataTitle : $("#dataTitle").val(),
-                    dataSource : $("#dataSource").val(),
-                    dataAuthor : $("#dataAuthor").val(),
-                    dataContent : editor.txt.html(),
-                    dataLocation : $("#dataLocation").val(),
-                };
+                var newsRotationsEntity;
+                var addUpdateUrl;
+                var operateMessage;
+                if(!isUpdate()){
+                    addUpdateUrl = "/datado/newsInf/insertNewsInf";
+                    newsRotationsEntity = {
+                        itemcode: stringUtil.getUUID(),
+                        dataTitle : $("#dataTitle").val(),
+                        dataSource : $("#dataSource").val(),
+                        dataAuthor : $("#dataAuthor").val(),
+                        dataContent : editor.txt.html(),
+                        dataLocation : $("#dataLocation").val(),
+                    };
+                    operateMessage = "新增新闻轮播图成功";
+                }else{
+                    var needData = JSON.parse(localStorage.getItem("rowData"));
+                    addUpdateUrl = "/datado/newsInf/updateNewsInf";
+                    newsRotationsEntity = {
+                        itemid: needData.itemid,
+                        itemcode: needData.itemcode,
+                        dataTitle : $("#dataTitle").val(),
+                        dataSource : $("#dataSource").val(),
+                        dataAuthor : $("#dataAuthor").val(),
+                        dataContent : editor.txt.html(),
+                        dataLocation : $("#dataLocation").val(),
+                    };
+                    operateMessage = "更新新闻轮播图成功";
+                }
 
-                var formData = new FormData();
-                formData.append("dataCode",newsRotationsEntity.itemcode);
-                formData.append("file",$("#upload_file")[0].files[0]);
-                formData.append("itemcode",stringUtil.getUUID());
-                formData.append("uploader","admin");
-                formData.append("uploaderCode","qweqwqwewasdasd");
-                $.ajax({
-                    url:"/file/upload",
-                    type:'POST',
-                    data: formData,
-                    processData: false,   // jQuery不要去处理发送的数据
-                    contentType: false,   // jQuery不要去设置Content-Type请求头
-                    success:function(data){
-                        if(data.code === 88888){
-                            alertUtil.success("上传图片成功");
-                        }else{
-                            alertUtil.error(data.msg)
-                        }
-                    },
-                    error: function(data){
-                        alertUtil.error(data.msg)
-                    }
-                });
+                fileUtil.handleFile(isUpdate(), newsRotationsEntity.itemcode, uploadImg.getFiles()[0]);
 
-                ajaxUtil.myAjax(null,"/datado/newsInf/insertNewsInf",newsRotationsEntity,function (data) {
+                ajaxUtil.myAjax(null,addUpdateUrl,newsRotationsEntity,function (data) {
                     if(ajaxUtil.success(data)){
-                        alertUtil.info("新增新闻轮播图成功");
+                        alertUtil.info(operateMessage);
                         var url = "/data/dataNewsRotations";
-                        orange.loadPage({url: url, target: 'main_body', selector: '#fir_body', success: function(data){
-                                if(data == null||data == ""){
-                                    return alertUtil.error( url+'加载失败');
-                                }
-                                $("#main_body").html(data);
-                            }})
+                        orange.redirect(url);
                     }else {
                         alertUtil.alert(data.msg);
                     }
@@ -114,7 +100,9 @@
                     $("#dataTitle").val(tempdata.dataTitle);
                     $("#dataSource").val(tempdata.dataSource);
                     $("#dataAuthor").val(tempdata.dataAuthor);
-                    $(".w-e-text").html(tempdata.dataContent);
+                    editor.txt.html(tempdata.dataContent);
+                    var img = tempdata.filePath;
+                    $("#upimg").attr("src",img);
                     $("#dataLocation").val(tempdata.dataLocation);
                 }
             }());
@@ -123,5 +111,10 @@
                 return (localStorage.getItem("rowData") != null || localStorage.getItem("rowData") != undefined)
             }
 
+            uploadImg.init();
+
         })
 })();
+
+
+

@@ -1,8 +1,10 @@
 package com.zyyglxt.service.impl;
 
 import com.zyyglxt.dao.HospDOMapper;
+import com.zyyglxt.dao.HospSpecialtyRefDOMapper;
 import com.zyyglxt.dataobject.HospDO;
 import com.zyyglxt.dataobject.HospDOKey;
+import com.zyyglxt.dataobject.HospSpecialtyRefDO;
 import com.zyyglxt.error.BusinessException;
 import com.zyyglxt.error.EmBusinessError;
 import com.zyyglxt.service.IHospService;
@@ -24,9 +26,11 @@ import java.util.UUID;
 @Service
 public class HospServiceImpl implements IHospService {
     @Resource
-    HospDOMapper hospDOMapper;
+    private HospDOMapper hospDOMapper;
     @Autowired
     private ValidatorImpl validator;
+    @Resource
+    private HospSpecialtyRefDOMapper hospSpecialtyRefDOMapper;
 
     @Override
     public int addHosp(HospDO hospDO) {
@@ -52,6 +56,10 @@ public class HospServiceImpl implements IHospService {
         ValidatorResult result = validator.validate(hospDOKey);
         if(result.isHasErrors()){
             throw new BusinessException(result.getErrMsg(), EmBusinessError.PARAMETER_VALIDATION_ERROR);
+        }
+        /*判断该医院是否能删除*/
+        if (!(hospSpecialtyRefDOMapper.selectSpecialtyByHospCode(hospDOKey.getItemcode())).isEmpty()){
+            throw new BusinessException("该医院下还有科室，不能删除",EmBusinessError.INTEGRITY_CONSTRAINT_ERROE);
         }
         return hospDOMapper.deleteByPrimaryKey(hospDOKey);
     }

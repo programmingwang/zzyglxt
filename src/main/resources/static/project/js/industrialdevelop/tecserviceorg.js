@@ -39,6 +39,7 @@
                             var isSuccess = false;
                             ajaxUtil.myAjax(null,url,projectEntity,function (data) {
                                 if(ajaxUtil.success(data)){
+                                    ajaxUtil.deleteFile(row.itemcode)
                                     alertUtil.info("删除项目成功");
                                     isSuccess = true;
                                     refreshTable();
@@ -73,7 +74,7 @@
 
 
             var aCol = [
-                {field: 'serviceProject', title: '院所名称'},
+                {field: 'name', title: '院所名称'},
                 {field: 'filePath', title: '图片', formatter:function (value, row, index) {
                         if(value == "已经损坏了"){
                             return '<p>'+value+'</p>';
@@ -93,5 +94,7 @@
                 myTable.free();
                 myTable = bootstrapTableUtil.myBootStrapTableInit("table", url, param, aCol);
             }
+
+            bootstrapTableUtil.globalSearch("table",url,aParam, aCol);
         })
 })();

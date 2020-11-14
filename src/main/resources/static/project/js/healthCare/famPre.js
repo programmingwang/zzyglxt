@@ -176,6 +176,33 @@
                     var mySubmitModal = modalUtil.init(mySubmitFamPreModalData);
                     mySubmitModal.show();
                 },
+                'click .no-submit' : function (e, value, row, index) {
+                    var myNoSubmitFamPreModalData ={
+                        modalBodyID :"myNoSubmitModal",
+                        modalTitle : "取消提交",
+                        modalClass : "modal-lg",
+                        modalConfirmFun:function () {
+                            var isSuccess = false;
+                            var submitStatus = {
+                                "status": "--"
+                            };
+                            ajaxUtil.myAjax(null,"changestatustofampre/"+row.itemid+"/"+row.itemcode,submitStatus,function (data) {
+                                if(ajaxUtil.success(data)){
+                                    if(data.code == 88888){
+                                        alertUtil.info("已提交");
+                                        isSuccess = true;
+                                        refreshTable();
+                                    }else{
+                                        alertUtil.error(data.msg);
+                                    }
+                                }
+                            },false);
+                            return isSuccess;
+                        }
+                    };
+                    var mySubmitModal = modalUtil.init(myNoSubmitFamPreModalData);
+                    mySubmitModal.show();
+                },
             };
 
 

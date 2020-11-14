@@ -27,7 +27,9 @@ public interface HealthCareFamPreDOMapper {
 
     int updateByPrimaryKey(HealthCareFamPreDO record);
 
-    List<HealthCareFamPreDO> selectAllHealthCareFamPre();//查询所有国医话健康所有数据
+    List<HealthCareFamPreDO> selectAllHealthCareFamPre(@Param("status") String status);//查询所有国医话健康所有数据
 
     int updateVisitNumHealthCareFamPre(HealthCareFamPreDOKey key);
+
+    int changeStatusToCareFam(@Param("key") HealthCareFamPreDOKey key,@Param("status") String status);//国医话健康数据状态
 }

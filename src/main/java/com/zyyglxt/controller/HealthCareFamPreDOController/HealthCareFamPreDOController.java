@@ -1,6 +1,7 @@
 package com.zyyglxt.controller.HealthCareFamPreDOController;
 
 import com.zyyglxt.annotation.LogAnnotation;
+import com.zyyglxt.dataobject.FamPreDOKey;
 import com.zyyglxt.dataobject.FileDO;
 import com.zyyglxt.dataobject.HealthCareFamPreDO;
 import com.zyyglxt.dataobject.HealthCareFamPreDOKey;
@@ -82,8 +83,8 @@ HealthCareFamPreDOController {
         List<HealthCareFamPreDO> healthCareFamPreDOSList = healthCareFamPreDOService.selectAllHealthCareFamPre();
         return new ResponseData(EmBusinessError.success,healthCareFamPreDOSList);
     }*/
-    public ResponseData selectAllHealthCareFamPreDOMapper(){
-        List<HealthCareFamPreDO> healthCareFamPreDOSList = healthCareFamPreDOService.selectAllHealthCareFamPre();
+    public ResponseData selectAllHealthCareFamPreDOMapper(@RequestParam(value = "status")List status){
+        List<HealthCareFamPreDO> healthCareFamPreDOSList = healthCareFamPreDOService.selectAllHealthCareFamPre(status);
         List<HealthCareFamPreDto> healthCareFamPreDtoList = new ArrayList<>();
         for (HealthCareFamPreDO healthCareFamPreDO : healthCareFamPreDOSList) {
             FileDO fileDO = iFileService.selectFileByDataCode(healthCareFamPreDO.getItemcode());
@@ -92,6 +93,18 @@ HealthCareFamPreDOController {
                             healthCareFamPreDO,fileDO.getFilePath(),fileDO.getFileName()));
         }
         return new ResponseData(EmBusinessError.success,healthCareFamPreDtoList);
+    }
+
+    /*国医话健康数据状态*/
+    @RequestMapping(value = "changestatustocarefam/{itemID}/{itemCode}" , method = RequestMethod.POST)
+    @ResponseBody
+    @LogAnnotation(logTitle = "修改国医话健康数据状态", logLevel = "2")
+    public ResponseData changeStatusToCareFam(@RequestParam("status") String status , @PathVariable("itemID") Integer itemID , @PathVariable("itemCode")String itemCode){
+       HealthCareFamPreDOKey healthCareFamPreDOKey=new HealthCareFamPreDOKey();
+        healthCareFamPreDOKey.setItemid(itemID);
+        healthCareFamPreDOKey.setItemcode(itemCode);
+        healthCareFamPreDOService.changeStatusToCareFam(healthCareFamPreDOKey,status);
+        return new ResponseData(EmBusinessError.success);
     }
     /**
      * 增加点击数

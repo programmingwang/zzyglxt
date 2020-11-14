@@ -2,16 +2,14 @@
     require(['jquery', 'ajaxUtil','bootstrapTableUtil','objectUtil','alertUtil','modalUtil','selectUtil','stringUtil','dictUtil'],
         function (jquery,ajaxUtil,bootstrapTableUtil,objectUtil,alertUtil,modalUtil,selectUtil,stringUtil,dictUtil) {
 
-            var url = "selectallhealthcarefampredo";
+            var url = "selectallhealthcarefampredo?status=已下架&status=展示中&status=待审核&status=--";
+            url = selectUtil.getRoleTable(sessionStorage.getItem("rolename"),url);
             var aParam = {
             };
 
             //操作
             function operation(value, row, index){
-                return [
-                    '<button type="button" class="edit btn btn-primary btn-sm" style="margin-right: 5px" data-toggle="modal" data-target="" >编辑</button>',
-                    '<button type="button" class="delete btn btn-danger btn-sm"  data-toggle="modal" data-target="#staticBackdrop" >删除</button>',
-                ].join('');
+                return selectUtil.getRoleOperate(value,row,index,sessionStorage.getItem("rolename"),row.status)
             }
 
             //修改事件
@@ -42,10 +40,174 @@
                     var myDeleteModal = modalUtil.init(myDeleteModalData);
                     myDeleteModal.show();
                 },
-            'click .pass' : function (e, value, row, index) {
-            },
-            'click .fail' : function (e, value, row, index) {
-              },
+
+                'click .pass' : function (e, value, row, index) {
+                    var myPassCareFamModalData ={
+                        modalBodyID :"myPassModal",
+                        modalTitle : "审核通过",
+                        modalClass : "modal-lg",
+                        modalConfirmFun:function () {
+                            var isSuccess = false;
+                            var submitStatus = {
+                                "status": selectUtil.getStatus(sessionStorage.getItem("rolename"))
+                            };
+                            ajaxUtil.myAjax(null,"changestatustocarefam/"+row.itemid+"/"+row.itemcode,submitStatus,function (data) {
+                                if(ajaxUtil.success(data)){
+                                    if(data.code == 88888){
+                                        if(selectUtil.getStatus(sessionStorage.getItem("rolename")) == "处长已审核"){
+                                            alertUtil.info("审核已通过，已发送给综合处处长做最后审核！");
+                                        }else{
+                                            alertUtil.info("审核已通过，已上架！");
+                                        }
+                                        isSuccess = true;
+                                        refreshTable();
+                                    }else{
+                                        alertUtil.error(data.msg);
+                                    }
+                                }
+                            },false);
+                            return isSuccess;
+                        }
+
+                    };
+                    var myPassModal = modalUtil.init(myPassCareFamModalData);
+                    myPassModal.show();
+                },
+
+                'click .fail' : function (e, value, row, index) {
+                    var myFailCareFamModalData ={
+                        modalBodyID :"myFailModal",
+                        modalTitle : "审核不通过",
+                        modalClass : "modal-lg",
+                        modalConfirmFun:function () {
+                            var isSuccess = false;
+                            var submitStatus = {
+                                "status": "已下架"
+                            };
+                            ajaxUtil.myAjax(null,"changestatustocarefam/"+row.itemid+"/"+row.itemcode,submitStatus,function (data) {
+                                if(ajaxUtil.success(data)){
+                                    if(data.code == 88888){
+                                        alertUtil.info("操作成功");
+                                        isSuccess = true;
+                                        refreshTable();
+                                    }else{
+                                        alertUtil.error(data.msg);
+                                    }
+                                }
+                            },false);
+                            return isSuccess;
+                        }
+
+                    };
+                    var myFailModal = modalUtil.init(myFailCareFamModalData);
+                    myFailModal.show();
+                },
+
+                'click .under-shelf' : function (e, value, row, index) {
+                    var myUnderShelfCareFamModalData ={
+                        modalBodyID :"myUnderShelfModal",
+                        modalTitle : "下架",
+                        modalClass : "modal-lg",
+                        modalConfirmFun:function () {
+                            var isSuccess = false;
+                            var submitStatus = {
+                                "status": "已下架"
+                            };
+                            ajaxUtil.myAjax(null,"changestatustocarefam/"+row.itemid+"/"+row.itemcode,submitStatus,function (data) {
+                                if(ajaxUtil.success(data)){
+                                    if(data.code == 88888){
+                                        alertUtil.success("下架成功");
+                                        isSuccess = true;
+                                        refreshTable();
+                                    }else{
+                                        alertUtil.error(data.msg);
+                                    }
+                                }
+                            },false);
+                            return isSuccess;
+                        }
+
+                    };
+                    var myUnderShelfModal = modalUtil.init(myUnderShelfCareFamModalData);
+                    myUnderShelfModal.show();
+                },
+
+                'click .view' : function (e, value, row, index) {
+                    var myViewCareFamModalData ={
+                        modalBodyID : "myViewCareFamModal", //公用的在后面给span加不同的内容就行了，其他模块同理
+                        modalTitle : "查看详情",
+                        modalClass : "modal-lg",
+                        confirmButtonStyle: "display:none",
+                    };
+                    var myCareFamModal = modalUtil.init(myViewCareFamModalData);
+                    $("#name").val(row.name);
+                    $("#source").val(row.source);
+                    $("#author").val(row.author);
+                    $("#content").val(row.content);
+                    $("#status").val(row.status);
+                   /* $("#culturalImg").attr("src",row.filePath)*/
+                    myCareFamModal.show();
+                },
+
+                'click .submit' : function (e, value, row, index) {
+                    var mySubmitCareFamModalData ={
+                        modalBodyID :"mySubmitModal",
+                        modalTitle : "提交",
+                        modalClass : "modal-lg",
+                        modalConfirmFun:function () {
+                            var isSuccess = false;
+                            var submitStatus = {
+                                "status": selectUtil.getStatus(sessionStorage.getItem("rolename"))
+                            };
+                            ajaxUtil.myAjax(null,"changestatustocarefam/"+row.itemid+"/"+row.itemcode,submitStatus,function (data) {
+                                if(ajaxUtil.success(data)){
+                                    if(data.code == 88888){
+                                        alertUtil.info("已提交");
+                                        isSuccess = true;
+                                        refreshTable();
+                                    }else{
+                                        alertUtil.error(data.msg);
+                                    }
+
+                                }
+                            },false);
+                            return isSuccess;
+                        }
+
+                    };
+                    var mySubmitModal = modalUtil.init(mySubmitCareFamModalData);
+                    mySubmitModal.show();
+                },
+
+                'click .no-submit' : function (e, value, row, index) {
+                    var myNoSubmitCareFamModalData ={
+                        modalBodyID :"myNoSubmitModal",
+                        modalTitle : "取消提交",
+                        modalClass : "modal-lg",
+                        modalConfirmFun:function () {
+                            var isSuccess = false;
+                            var submitStatus = {
+                                "status": "--"
+                            };
+                            ajaxUtil.myAjax(null,"changestatustocarefam/"+row.itemid+"/"+row.itemcode,submitStatus,function (data) {
+                                if(ajaxUtil.success(data)){
+                                    if(data.code == 88888){
+                                        alertUtil.info("已提交");
+                                        isSuccess = true;
+                                        refreshTable();
+                                    }else{
+                                        alertUtil.error(data.msg);
+                                    }
+
+                                }
+                            },false);
+                            return isSuccess;
+                        }
+
+                    };
+                    var mySubmitModal = modalUtil.init(myNoSubmitCareFamModalData);
+                    mySubmitModal.show();
+                },
             };
 
             $("#btn_addTask").unbind().on('click',function () {

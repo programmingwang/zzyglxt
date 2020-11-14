@@ -28,7 +28,7 @@
         };
         modalHtml.myViewCulturalModal =
             '<div class="row">'+
-            '            <div class="col-lg-12 col-md-12">\n' +
+            '            <div id="imgDiv" class="col-lg-12 col-md-12">\n' +
             '                <fieldset disabled>'+
             '                <div class="input-group mb-3">\n' +
             '                    <div class="input-group-prepend">\n' +
@@ -88,6 +88,16 @@
             '                </div>\n' +
             '            </div>\n' +
             '\n' +
+            '            <div id="fileDiv" class="col-lg-12 col-md-12" style="display: none">\n' +
+            '                <fieldset disabled>'+
+            '                <div class="input-group mb-3">\n' +
+            '                    <div class="input-group-prepend">\n' +
+            '                        <span class="input-group-text">附件</span>\n' +
+            '                    </div>\n' +
+            '                    <a src="#"></a>\n' +
+            '                </div>\n' +
+            '            </div>\n' +
+            '\n' +
             '            <div class="col-lg-6 col-md-6">\n' +
             '                <fieldset disabled>'+
             '                <div class="input-group mb-3">\n' +
@@ -125,7 +135,8 @@
         modalHtml.mySubmitModal = '确认提交吗？';
         modalHtml.myPassModal = '确认通过吗？';
         modalHtml.myFailModal = '确认不通过吗？';
-        modalHtml.myUnderShelfModal = '确认下架吗？'
+        modalHtml.myUnderShelfModal = '确认下架吗？';
+        modalHtml.myNoSubmitModal = '确认修改为初始状态吗？';
 
         modalHtml.myDeleteAchievement = '是否删除科研成果?';
 

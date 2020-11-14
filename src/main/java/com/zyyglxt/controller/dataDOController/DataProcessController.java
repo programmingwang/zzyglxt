@@ -33,13 +33,8 @@ public class DataProcessController {
     @Resource
     private IFileService fileService;
 
-    /**
-     * 查看一条办事流程
-     * @param itemID
-     * @param itemCode
-     * @return
-     */
-    @RequestMapping(value = "/selectByPrimaryKey/{itemID}/{itemCode}", method = RequestMethod.GET)
+    /*查看一条办事流程*/
+    /*@RequestMapping(value = "/selectByPrimaryKey/{itemID}/{itemCode}", method = RequestMethod.GET)
     @LogAnnotation(appCode ="",logTitle ="查看一条办事流程",logLevel ="1",creater ="",updater = "")
     public ResponseData selectByPrimaryKey(@PathVariable("itemID") Integer itemID, @PathVariable("itemCode")String itemCode){
         DataDOKey dataDOKey = new DataDOKey();
@@ -47,14 +42,8 @@ public class DataProcessController {
         dataDOKey.setItemcode(itemCode);
         DataDO data = dataProcessService.selectProcess(dataDOKey);
         return new ResponseData(EmBusinessError.success, data);
-    }
+    }*/
 
-    private DataDto convertFromDOToDTO(DataDO dataDo, String filePath) {
-        DataDto dataDto = new DataDto();
-        BeanUtils.copyProperties(dataDo,dataDto);
-        dataDto.setFilePath(filePath);
-        return dataDto;
-    }
 
     /**
      * 查看办事流程的所有数据
@@ -62,8 +51,8 @@ public class DataProcessController {
      */
     @RequestMapping(value = "/selectAll", method = RequestMethod.GET)
     @LogAnnotation(appCode ="",logTitle ="查看所有办事流程数据",logLevel ="1",creater ="",updater = "")
-    public ResponseData selectProcessList(){
-        List<DataDO> dataDOList = dataProcessService.selectProcessList();
+    public ResponseData selectProcessList(@RequestParam(value = "dataStatus")List dataStatus){
+        List<DataDO> dataDOList = dataProcessService.selectProcessList(dataStatus);
         return new ResponseData(EmBusinessError.success,DoToDto(dataDOList));
     }
 
@@ -107,7 +96,7 @@ public class DataProcessController {
     }
 
     //修改展示状态
-    @RequestMapping(value = "changeStatus/{itemID}/{itemCode}", method = RequestMethod.PUT)
+    @RequestMapping(value = "changeProcessStatus/{itemID}/{itemCode}", method = RequestMethod.PUT)
     @ResponseBody
     @LogAnnotation(appCode ="",logTitle ="修改展示状态",logLevel ="2",creater ="",updater = "")
     public ResponseData changeStatus(@RequestParam("dataStatus") String dataStatus, @PathVariable("itemID") Integer itemID, @PathVariable("itemCode")String itemCode){

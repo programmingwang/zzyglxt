@@ -8,6 +8,7 @@
 
             var type = isUpdate() ? "put":"post";
 
+
             var itemcode = stringUtil.getUUID();
 
             const editor = new wangEditor('#div1');

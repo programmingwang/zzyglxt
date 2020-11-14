@@ -4,9 +4,11 @@
 
             var url = "/industrialdevelop/tec-ser-org";
 
-            var pathUrl = "/industrialdevelop/tecserviceorg";
+            var pathUrl = "/industrialdevelop/organization/lab";
 
             var itemcode = stringUtil.getUUID();
+
+            var orgType = "lab";
 
             var type = isUpdate() ? "put":"post";
 
@@ -73,6 +75,7 @@
                 param.intruduce = $(".w-e-text").html();
                 param.orgCode = "未定义";
                 param.itemcode = itemcode;
+                param.type = orgType;
                 return param;
             }
 
@@ -119,8 +122,8 @@
                         district: tempdata.addressCountry
                     });
                     $("#address").val(tempdata.address);
-                    $("#intruduce").val(tempdata.intruduce)
-                    $(".w-e-text").html(tempdata.projectIntroduce);
+                    $(".w-e-text").html(tempdata.intruduce);
+                    uploadImg.setImgSrc(tempdata.filePath)
                     itemcode = tempdata.itemcode;
                 }else {
                     $("#distpicker").distpicker();

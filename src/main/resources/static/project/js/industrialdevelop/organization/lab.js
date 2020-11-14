@@ -3,12 +3,13 @@
         function (jquery,ajaxUtil,bootstrapTableUtil,objectUtil,alertUtil,modalUtil,selectUtil,stringUtil,dictUtil) {
 
 
-            var url = "/industrialdevelop/tec-ser-org";
+            var url = "/industrialdevelop/tec-ser-org/lab";
 
-            var pathUrl = "/industrialdevelop/tecserviceorg";
+            var opUrl = "/industrialdevelop/tec-ser-org";
+
+            var pathUrl = "/industrialdevelop/organization/lab";
             var addUrl = pathUrl+"_add";
             var aParam = {
-
             };
 
             //操作
@@ -37,7 +38,7 @@
                                 itemcode: row.itemcode
                             };
                             var isSuccess = false;
-                            ajaxUtil.myAjax(null,url,projectEntity,function (data) {
+                            ajaxUtil.myAjax(null,opUrl,projectEntity,function (data) {
                                 if(ajaxUtil.success(data)){
                                     ajaxUtil.deleteFile(row.itemcode)
                                     alertUtil.info("删除项目成功");

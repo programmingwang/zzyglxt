@@ -3,16 +3,12 @@ package com.zyyglxt.controller.ChineseCultural.facility;
 import com.zyyglxt.annotation.LogAnnotation;
 import com.zyyglxt.dataobject.ChineseCulturalDO;
 import com.zyyglxt.dataobject.ChineseCulturalDOKey;
-import com.zyyglxt.dto.ChineseCulturalDto;
 import com.zyyglxt.error.EmBusinessError;
 import com.zyyglxt.response.ResponseData;
-import com.zyyglxt.service.IFileService;
 import com.zyyglxt.service.IIntangibleCulturalHeritageService;
-import com.zyyglxt.util.ConvertDOToDTOUtil;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -24,6 +20,7 @@ import java.util.List;
 //@Controller
 @RestController
 @RequestMapping("/cul/fac/inCuHe")
+@SuppressWarnings("unchecked")
 public class IntangibleCulturalHeritageController {
     @Resource
     private IIntangibleCulturalHeritageService iIntangibleCulturalHeritageService;
@@ -32,7 +29,7 @@ public class IntangibleCulturalHeritageController {
     @RequestMapping(value = "/getAll" , method = RequestMethod.GET)
     @ResponseBody
     @LogAnnotation(logTitle = "查询非物质文化遗产", logLevel = "1")
-    public ResponseData getAllIntangibleCulturalHeritage(String chineseCulturalStatus){
+    public ResponseData getAllIntangibleCulturalHeritage(@RequestParam(value = "chineseCulturalStatus")List chineseCulturalStatus){
         List<ChineseCulturalDO> intangibleCulturalHeritageList = iIntangibleCulturalHeritageService.getIntangibleCulturalHeritageList(chineseCulturalStatus);
         return new ResponseData(EmBusinessError.success,intangibleCulturalHeritageList);
     }

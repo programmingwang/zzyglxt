@@ -9,6 +9,7 @@ import com.zyyglxt.util.DateUtils;
 import com.zyyglxt.util.UUIDUtils;
 import com.zyyglxt.service.ICulturalRelicsService;
 import com.zyyglxt.util.DOKeyAndValidateUtil;
+import com.zyyglxt.util.UsernameUtil;
 import com.zyyglxt.validator.ValidatorImpl;
 import com.zyyglxt.validator.ValidatorResult;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -32,14 +34,21 @@ public class CulturalRelicsServiceImpl implements ICulturalRelicsService {
     @Autowired
     private ValidatorImpl validator;
 
+    @Autowired
+    private UsernameUtil usernameUtil;
+
     @Override
     public ChineseCulturalDO getCulturalRelics(ChineseCulturalDOKey key) {
         return chineseCulturalDOMapper.selectByPrimaryKey(key,"文化古迹");
     }
 
     @Override
-    public List<ChineseCulturalDO> getCulturalRelicsList(String chineseCulturalStatus) {
-        return chineseCulturalDOMapper.selectChineseCulturalList("文化古迹",chineseCulturalStatus);
+    public List<ChineseCulturalDO> getCulturalRelicsList(List<String> chineseCulturalStatus) {
+        List<ChineseCulturalDO> chineseCulturalDOList = new ArrayList<>();
+        for (String culturalStatus : chineseCulturalStatus) {
+            chineseCulturalDOList.addAll(chineseCulturalDOMapper.selectChineseCulturalList("文化古迹",culturalStatus));
+        }
+        return chineseCulturalDOList;
 
     }
 
@@ -50,9 +59,9 @@ public class CulturalRelicsServiceImpl implements ICulturalRelicsService {
         if(result.isHasErrors()){
             throw new BusinessException(result.getErrMsg(), EmBusinessError.PARAMETER_VALIDATION_ERROR);
         }
-        record.setCreater("");
+        record.setCreater(usernameUtil.getOperateUser());
         record.setItemcreateat(DateUtils.getDate());
-        record.setUpdater("");
+        record.setUpdater(usernameUtil.getOperateUser());
         record.setChineseCulturalType("文化古迹");
         record.setChineseCulturalStatus("--");
         //如果前台没有插入图片或者附件，就自己生成uuid
@@ -71,7 +80,7 @@ public class CulturalRelicsServiceImpl implements ICulturalRelicsService {
     @Override
     @Transactional
     public int updateCulturalRelics(ChineseCulturalDO record) {
-        return DOKeyAndValidateUtil.updateUtil(record, validator, chineseCulturalDOMapper);
+        return DOKeyAndValidateUtil.updateUtil(record, validator, chineseCulturalDOMapper,usernameUtil);
     }
 
     @Override

@@ -8,6 +8,7 @@ import com.zyyglxt.error.BusinessException;
 import com.zyyglxt.error.EmBusinessError;
 import com.zyyglxt.validator.ValidatorImpl;
 import com.zyyglxt.validator.ValidatorResult;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
@@ -21,7 +22,7 @@ import java.util.Date;
 @Component
 public class DOKeyAndValidateUtil{
 
-    public static int updateUtil(ChineseCulturalDO record, ValidatorImpl validator, ChineseCulturalDOMapper chineseCulturalDOMapper) {
+    public static int updateUtil(ChineseCulturalDO record, ValidatorImpl validator, ChineseCulturalDOMapper chineseCulturalDOMapper, UsernameUtil usernameUtil) {
         ValidatorResult result = validator.validate(record);
         if(result.isHasErrors()){
             throw new BusinessException(result.getErrMsg(), EmBusinessError.PARAMETER_VALIDATION_ERROR);
@@ -29,7 +30,7 @@ public class DOKeyAndValidateUtil{
         ChineseCulturalDOKey key = new ChineseCulturalDOKey();
         key.setItemid(record.getItemid());
         key.setItemcode(record.getItemcode());
-        record.setUpdater("");
+        record.setUpdater(usernameUtil.getOperateUser());
         return chineseCulturalDOMapper.updateByPrimaryKeySelective(key,record);
     }
 

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -25,6 +26,7 @@ import java.util.List;
 //@Controller
 @RestController
 @RequestMapping("/cul/trav/trav")
+@SuppressWarnings("unchecked")
 public class TravelController {
 
     @Resource
@@ -37,8 +39,9 @@ public class TravelController {
     @RequestMapping(value = "/getAll" , method = RequestMethod.GET)
     @ResponseBody
     @LogAnnotation(logTitle = "查询所有健康旅游", logLevel = "1")
-    public ResponseData getAllTravel(){
-        List<ChineseCulturalDO> cartoonAllusionsList = iTravelService.getTravelList();
+    public ResponseData getAllTravel(@RequestParam(value = "chineseCulturalStatus")List chineseCulturalStatus){
+
+        List<ChineseCulturalDO> cartoonAllusionsList = iTravelService.getTravelList(chineseCulturalStatus);
         List<ChineseCulturalDto> chineseCulturalDtoList = new ArrayList<>();
         for (ChineseCulturalDO chineseCulturalDO : cartoonAllusionsList) {
             chineseCulturalDtoList.add(
@@ -47,6 +50,7 @@ public class TravelController {
                                     chineseCulturalDO.getItemcode()).getFilePath()));
         }
         return new ResponseData(EmBusinessError.success,chineseCulturalDtoList);
+
     }
 
     //查询一个健康旅游

@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -38,8 +39,12 @@ public class TraditionalDoctorServiceImpl implements ITraditionalDoctorService {
     }
 
     @Override
-    public List<CulturalResourcesDO> getTraditionalDoctorList() {
-        return culturalResourcesDOMapper.selectCulturalResourcesList("历代名家");
+    public List<CulturalResourcesDO> getTraditionalDoctorList(List<String> chineseCulturalStatus) {
+        List<CulturalResourcesDO> culturalResourcesDOList = new ArrayList<>();
+        for (String culturalStatus : chineseCulturalStatus) {
+            culturalResourcesDOList.addAll(culturalResourcesDOMapper.selectCulturalResourcesList("历代名家",culturalStatus));
+        }
+        return culturalResourcesDOList;
     }
 
     @Override
@@ -53,7 +58,7 @@ public class TraditionalDoctorServiceImpl implements ITraditionalDoctorService {
         record.setItemcreateat(DateUtils.getDate());
         record.setUpdater("");
         record.setChineseCulturalType("历代名家");
-        record.setChineseCulturalStatus("待上架");
+        record.setChineseCulturalStatus("--");
         //如果前台没有插入图片或者附件，就自己生成uuid
         if(record.getItemcode() == null){
             record.setItemcode(UUIDUtils.getUUID());

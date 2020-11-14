@@ -109,23 +109,31 @@
                 return false;
             });
 
-            (function init() {
+            var init = function () {
                 if (isUpdate()){
                     var tempdata = JSON.parse(localStorage.getItem("rowData"));
                     $("#name").val(tempdata.name);
                     $("#plantType").val(tempdata.plantType);
                     $("#areaCoverd").val(tempdata.areaCoverd);
                     $("#contacts").val(tempdata.contacts);
-                    $("#addressPro").val(tempdata.addressPro);
-                    $("#addressCity").val(tempdata.addressCity);
-                    $("#addressCountry").val(tempdata.addressCity);
+                    $("#distpicker").distpicker({
+                        province: tempdata.addressPro,
+                        city: tempdata.addressCity,
+                        district: tempdata.addressCountry
+                    });
                     $("#address").val(tempdata.address);
                     $("#phone").val(tempdata.phone);
                     $(".w-e-text").html(tempdata.intruduce);
-                    itemcode = tempdata.itemcode
+                    itemcode = tempdata.itemcode;
                     uploadImg.setImgSrc(tempdata.filePath)
+                }else {
+                    $("#distpicker").distpicker();
                 }
-            }());
+                init = function () {
+
+                }
+            };
+            init();
 
 
             function isUpdate() {

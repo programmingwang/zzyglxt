@@ -2,11 +2,9 @@ package com.zyyglxt.config;
 
 import com.zyyglxt.config.handler.*;
 import com.zyyglxt.config.service.UserDetailsServiceImpl;
-import com.zyyglxt.util.UserUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.annotation.ObjectPostProcessor;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -75,23 +73,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.cors().and().csrf().disable();
-        http.authorizeRequests().
-                withObjectPostProcessor(new ObjectPostProcessor<FilterSecurityInterceptor>() {
-                    @Override
-                    public <O extends FilterSecurityInterceptor> O postProcess(O o) {
-                        o.setAccessDecisionManager(accessDecisionManager);//决策管理器
-                        o.setSecurityMetadataSource(securityMetadataSource);//安全元数据源
-                        return o;
-                    }
-                }).
-                //登出
+        http.cors().and().csrf().disable().
+                authorizeRequests().antMatchers("/component/**","/css/**", "/fonts/**",
+                "/images/**","/main/**", "/project/**", "/utils/**", "/").permitAll().
+                    anyRequest().authenticated().
                 and().logout().
                     permitAll().//允许所有用户
                     logoutSuccessHandler(logoutSuccessHandler).//登出成功处理逻辑
                     invalidateHttpSession(true).//登出成功后使session失效
                 //登入
-                and().formLogin().loginPage("/userLogin").
+                and().formLogin().loginPage("/userLogin").successForwardUrl("/main").
                     permitAll().//允许所有用户
                     successHandler(authenticationSuccessHandler).//登录成功处理逻辑
                     failureHandler(authenticationFailureHandler).//登录失败处理逻辑

@@ -14,7 +14,7 @@ import javax.annotation.Resource;
  * @Date 2020/11/6 21:18
  * @Version 1.0
  **/
-@Api(tags = "产业发展-科研院所")
+@Api(tags = "产业发展-技术服务机构、科研院所、旅游养生机构信息记录表")
 @RestController
 @RequestMapping(value = "industrialdevelop")
 public class TecSerOrgController {

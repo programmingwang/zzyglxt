@@ -1,11 +1,15 @@
 package com.zyyglxt.service.impl;
 
-import org.springframework.stereotype.Service;
-import javax.annotation.Resource;
 import com.zyyglxt.dao.IndustrialDevelopTecSerOrgMapper;
 import com.zyyglxt.dataobject.IndustrialDevelopTecSerOrg;
+import com.zyyglxt.dto.industrialDevelop.IndustrialDevelopTecSerOrgDto;
+import com.zyyglxt.service.IFileService;
 import com.zyyglxt.service.IndustrialDevelopTecSerOrgService;
+import org.springframework.beans.BeanUtils;
+import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -18,6 +22,9 @@ public class IndustrialDevelopTecSerOrgServiceImpl implements IndustrialDevelopT
 
     @Resource
     private IndustrialDevelopTecSerOrgMapper industrialDevelopTecSerOrgMapper;
+    
+    @Resource
+    private IFileService fileService;
 
     @Override
     public int deleteByPrimaryKey(Integer itemid,String itemcode) {
@@ -50,8 +57,19 @@ public class IndustrialDevelopTecSerOrgServiceImpl implements IndustrialDevelopT
     }
 
     @Override
-    public List<IndustrialDevelopTecSerOrg> selectAll() {
-        return industrialDevelopTecSerOrgMapper.selectAll();
+    public List<IndustrialDevelopTecSerOrgDto> selectAll() {
+        List<IndustrialDevelopTecSerOrg> list = industrialDevelopTecSerOrgMapper.selectAll();
+        List<IndustrialDevelopTecSerOrgDto> resList = new ArrayList<>();
+        for (IndustrialDevelopTecSerOrg item: list){
+            IndustrialDevelopTecSerOrgDto newObj = new IndustrialDevelopTecSerOrgDto();
+            BeanUtils.copyProperties(item,newObj);
+            resList.add(newObj);
+        }
+        BeanUtils.copyProperties(list,resList);
+        for (IndustrialDevelopTecSerOrgDto item: resList){
+            item.setFilePath(fileService.selectFileByDataCode(item.getItemcode()).getFilePath());
+        }
+        return resList;
     }
 
 }

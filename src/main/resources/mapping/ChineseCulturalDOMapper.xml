@@ -37,16 +37,15 @@
     where itemID = #{key.itemid,jdbcType=INTEGER}
       and itemCode = #{key.itemcode,jdbcType=CHAR}
       and CHINESE_CULTURAL_TYPE = #{chineseCulturalType}
---    and CHINESE_CULTURAL_STATUS = '已审核'
   </select>
-  <select id="selectChineseCulturalList" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+  <select id="selectChineseCulturalList"  resultMap="ResultMapWithBLOBs">
     select
     <include refid="Base_Column_List" />
     ,
     <include refid="Blob_Column_List" />
     from tb_culpro_chinese_cultural
-    where CHINESE_CULTURAL_TYPE = #{chineseCulturalType}
---    and CHINESE_CULTURAL_STATUS = '已审核'
+    where CHINESE_CULTURAL_TYPE = #{type}
+    and CHINESE_CULTURAL_STATUS = #{status}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="com.zyyglxt.dataobject.ChineseCulturalDOKey">
 

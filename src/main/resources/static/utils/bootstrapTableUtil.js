@@ -65,7 +65,6 @@
                     if (data.code === 88888) {
                         for(var i=0; i<data.data.length; i++){
                             data.data[i].itemcreateat = stringUtil.formatDateTime(data.data[i].itemcreateat);
-
                         }
                         return {
                             total: data.data.length,

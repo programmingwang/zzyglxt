@@ -28,7 +28,7 @@ public class IndexController {
 
     @RequestMapping(value = "/")
     public String index(){
-        return "redirect:/main";
+        return "redirect:/userLogin";
     }
 
     @RequestMapping(value = "/main")

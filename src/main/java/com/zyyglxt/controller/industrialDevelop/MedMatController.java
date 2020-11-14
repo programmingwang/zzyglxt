@@ -14,7 +14,7 @@ import javax.annotation.Resource;
  * @Date 2020/11/6 21:05
  * @Version 1.0
  **/
-@Api(tags = "产业发展-加工企业在售药材、种植园信息")
+@Api(tags = "产业发展-加工企业在售药材、种植园在售药材")
 @RestController
 @RequestMapping(value = "industrialdevelop")
 public class MedMatController {

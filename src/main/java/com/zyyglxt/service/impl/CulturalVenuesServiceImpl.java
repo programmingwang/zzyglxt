@@ -38,8 +38,8 @@ public class CulturalVenuesServiceImpl implements ICulturalVenuesService {
     }
 
     @Override
-    public List<ChineseCulturalDO> getCulturalVenuesList() {
-        return chineseCulturalDOMapper.selectChineseCulturalList("文化场馆");
+    public List<ChineseCulturalDO> getCulturalVenuesList(String chineseCulturalStatus) {
+        return chineseCulturalDOMapper.selectChineseCulturalList("文化场馆",chineseCulturalStatus);
     }
 
     @Override
@@ -53,7 +53,7 @@ public class CulturalVenuesServiceImpl implements ICulturalVenuesService {
         record.setItemcreateat(DateUtils.getDate());
         record.setUpdater("");
         record.setChineseCulturalType("文化场馆");
-        record.setChineseCulturalStatus("待上架");
+        record.setChineseCulturalStatus("--");
         //如果前台没有插入图片或者附件，就自己生成uuid
         if(record.getItemcode() == null){
             record.setItemcode(UUIDUtils.getUUID());

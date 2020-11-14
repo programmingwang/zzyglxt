@@ -9,6 +9,7 @@ import com.zyyglxt.util.DateUtils;
 import com.zyyglxt.util.UUIDUtils;
 import com.zyyglxt.service.IMovieTVService;
 import com.zyyglxt.util.DOKeyAndValidateUtil;
+import com.zyyglxt.util.UsernameUtil;
 import com.zyyglxt.validator.ValidatorImpl;
 import com.zyyglxt.validator.ValidatorResult;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -31,14 +33,21 @@ public class MovieTVServiceImpl implements IMovieTVService {
     @Autowired
     private ValidatorImpl validator;
 
+    @Autowired
+    private UsernameUtil usernameUtil;
+
     @Override
     public ChineseCulturalDO getMovieTV(ChineseCulturalDOKey key) {
         return chineseCulturalDOMapper.selectByPrimaryKey(key,"电视电影");
     }
 
     @Override
-    public List<ChineseCulturalDO> getMovieTVList(String chineseCulturalStatus) {
-        return chineseCulturalDOMapper.selectChineseCulturalList("电视电影",chineseCulturalStatus);
+    public List<ChineseCulturalDO> getMovieTVList(List<String> chineseCulturalStatus) {
+        List<ChineseCulturalDO> chineseCulturalDOList = new ArrayList<>();
+        for (String culturalStatus : chineseCulturalStatus) {
+            chineseCulturalDOList.addAll(chineseCulturalDOMapper.selectChineseCulturalList("电视电影",culturalStatus));
+        }
+        return chineseCulturalDOList;
     }
 
     @Override
@@ -48,9 +57,9 @@ public class MovieTVServiceImpl implements IMovieTVService {
         if(result.isHasErrors()){
             throw new BusinessException(result.getErrMsg(), EmBusinessError.PARAMETER_VALIDATION_ERROR);
         }
-        record.setCreater("");
+        record.setCreater(usernameUtil.getOperateUser());
         record.setItemcreateat(DateUtils.getDate());
-        record.setUpdater("");
+        record.setUpdater(usernameUtil.getOperateUser());
         record.setChineseCulturalType("电视电影");
         record.setChineseCulturalStatus("--");
         //如果前台没有插入图片或者附件，就自己生成uuid
@@ -69,7 +78,7 @@ public class MovieTVServiceImpl implements IMovieTVService {
     @Override
     @Transactional
     public int updateMovieTV(ChineseCulturalDO record){
-        return DOKeyAndValidateUtil.updateUtil(record, validator, chineseCulturalDOMapper);
+        return DOKeyAndValidateUtil.updateUtil(record, validator, chineseCulturalDOMapper, usernameUtil);
     }
 
     @Override

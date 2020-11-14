@@ -3,10 +3,10 @@
         function (jquery,ajaxUtil,bootstrapTableUtil,objectUtil,alertUtil,modalUtil,selectUtil,stringUtil,dictUtil) {
 
 
-            var url = "/cul/pro/comGam/getAll?chineseCulturalStatus=已下架&chineseCulturalStatus=展示中";
+            var url = "/cul/pro/comGam/getAll";
 
             //角色加载工具
-            url = selectUtil.getRoleTable(sessionStorage.getItem("rolename"),url);
+            url = selectUtil.getRoleTable(sessionStorage.getItem("rolename"),url,"chineseCulturalStatus");
 
             var aParam = {
 

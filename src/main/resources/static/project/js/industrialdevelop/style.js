@@ -3,7 +3,7 @@
         function (jquery,ajaxUtil,bootstrapTableUtil,objectUtil,alertUtil,modalUtil,selectUtil,stringUtil,dictUtil) {
 
 
-            var url = "/industrialdevelop/style";
+            var url = "/industrialdevelop/base-style";
 
             var pathUrl = "/industrialdevelop/style";
             var addUrl = pathUrl+"_add";
@@ -39,6 +39,7 @@
                             var isSuccess = false;
                             ajaxUtil.myAjax(null,url,projectEntity,function (data) {
                                 if(ajaxUtil.success(data)){
+                                    ajaxUtil.deleteFile(row.itemcode)
                                     alertUtil.info("删除项目成功");
                                     isSuccess = true;
                                     refreshTable();
@@ -92,5 +93,7 @@
                 myTable.free();
                 myTable = bootstrapTableUtil.myBootStrapTableInit("table", url, param, aCol);
             }
+
+            bootstrapTableUtil.globalSearch("table",url,aParam, aCol);
         })
 })();

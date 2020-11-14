@@ -17,7 +17,7 @@ public interface ICulturalRelicsService {
     ChineseCulturalDO getCulturalRelics(ChineseCulturalDOKey key);
 
     //查询所有文化古迹
-    List<ChineseCulturalDO> getCulturalRelicsList();
+    List<ChineseCulturalDO> getCulturalRelicsList(String chineseCulturalStatus);
 
     //增加一个文化古迹
     int addCulturalRelics(ChineseCulturalDO record);

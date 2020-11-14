@@ -1,57 +1,56 @@
+var imgFile = []; //文件流
+var imgSrc = []; //图片路径
+var imgName = []; //图片名字
+var limit = 5;//限制数量，默认为 5
+var updated = false;
 (function () {
     define('uploadImg', ['jquery'], function ($) {
-        var imgFile = []; //文件流
-        var imgSrc = []; //图片路径
-        var imgName = []; //图片名字
-        var limit = 5;//限制数量，默认为 5
-        var updated = false;
-
-        function init() {
-            $(function () {
-                console.log($(".upload-content"));
-                localStorage.setItem('limit',$(".upload-content").attr('data-limit'));
-                updated = false;
-                imgFile = []; //文件流
-                imgSrc = []; //图片路径
-                imgName = []; //图片名字
-                limit = $(".upload-content").attr('data-limit');
-                // 鼠标经过显示删除按钮
-                $('.content-img-list').on('mouseover', '.content-img-list-item', function () {
-                    $(this).children('div').removeClass('hide');
-                });
-                // 鼠标离开隐藏删除按钮
-                $('.content-img-list').on('mouseleave', '.content-img-list-item', function () {
-                    $(this).children('div').addClass('hide');
-                });
-                // 单个图片删除
-                $(".content-img-list").on("click", '.content-img-list-item a .gcllajitong', function () {
-                    var index = $(this).parent().parent().parent().index();
-                    imgSrc.splice(index, 1);
-                    imgFile.splice(index, 1);
-                    imgName.splice(index, 1);
-                    var boxId = ".content-img-list";
-                    addNewContent(boxId);
-                    if (imgSrc.length < limit) { //显示上传按钮
-                        $('.content-img .file').show();
-                    }
-                });
 
 
-                $(".content-img-list").on("click", '.content-img-list-item a .gclfangda', function () {
-                    var index = $(this).parent().parent().parent().index();
-                    $(".modal-content").html("");
+        var init = function () {
+            console.log("init");
+            localStorage.setItem('limit', $(".upload-content").attr('data-limit'));
+            imgSrc = [];
+            updated = false;
+            limit = $(".upload-content").attr('data-limit');
+            // 鼠标经过显示删除按钮
+            $('.content-img-list').on('mouseover', '.content-img-list-item', function () {
+                $(this).children('div').removeClass('hide');
+            });
+            // 鼠标离开隐藏删除按钮
+            $('.content-img-list').on('mouseleave', '.content-img-list-item', function () {
+                $(this).children('div').addClass('hide');
+            });
+            // 单个图片删除
+            $(".content-img-list").on("click", '.content-img-list-item a .gcllajitong', function () {
+                var index = $(this).parent().parent().parent().index();
+                imgSrc.splice(index, 1);
+                imgFile.splice(index, 1);
+                imgName.splice(index, 1);
+                var boxId = ".content-img-list";
+                addNewContent(boxId);
+                if (imgSrc.length < limit) { //显示上传按钮
+                    $('.content-img .file').show();
+                }
+            });
 
-                    var bigimg = $(".modal-content").html();
-                    $(".modal-content").html(bigimg + '<div class="show"><img src="' + imgSrc[index] + '" alt=""><div>');
-                    // $(".modal-content").append(
-                    //     '<div class="show"><img src="' + imgSrc[a] + '" alt=""><div>'
-                    // );
 
+            $(".content-img-list").on("click", '.content-img-list-item a .gclfangda', function () {
+                var index = $(this).parent().parent().parent().index();
+                console.log(index)
+                console.log(imgSrc)
+                $(".modal-content").html("");
 
-                });
+                var bigimg = $(".modal-content").html();
+                $(".modal-content").html(bigimg + '<div class="show"><img src="' + imgSrc[index] + '" alt=""><div>');
+                // $(".modal-content").append(
+                //     '<div class="show"><img src="' + imgSrc[a] + '" alt=""><div>'
+                // );
 
 
             });
+
+
             //图片上传
             $('#upload').unbind().on('change', function (e) {
                 var limit = localStorage.getItem('limit');
@@ -84,8 +83,14 @@
                 addNewContent(imgBox);
                 this.value = null; //上传相同图片
             });
+            if (imgSrc.length != 0) {
+                var boxId = ".content-img-list";
+                addNewContent(boxId);
+            }
+            init = function () {
 
-        }
+            }
+        };
 
 
 //删除
@@ -103,7 +108,6 @@
             var limit = localStorage.getItem('limit');
             $(obj).html("");
             for (var a = 0; a < imgSrc.length; a++) {
-                console.log(imgSrc.length)
                 if (imgSrc.length + 1 > limit) {
                     $(".file").hide();
                 }
@@ -136,10 +140,9 @@
         }
 
         function setImgSrc(src) {
-            for (var i = 0;i<imgSrc.length;i++){
-                console.log(imgSrc[i])
-                console.log(src)
-                if (imgSrc[i] === src){
+            console.log("setSrc")
+            for (var i = 0; i < imgSrc.length; i++) {
+                if (imgSrc[i] === src) {
                     return
                 }
             }

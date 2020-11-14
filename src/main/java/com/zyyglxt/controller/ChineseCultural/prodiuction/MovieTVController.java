@@ -36,8 +36,8 @@ public class MovieTVController {
     @RequestMapping(value = "/getAll" , method = RequestMethod.GET)
     @ResponseBody
     @LogAnnotation(logTitle = "获得所有电视电影", logLevel = "1")
-    public ResponseData getAllMovieTV(){
-        List<ChineseCulturalDO> movieTVList = iMovieTVService.getMovieTVList();
+    public ResponseData getAllMovieTV(String chineseCulturalStatus){
+        List<ChineseCulturalDO> movieTVList = iMovieTVService.getMovieTVList(chineseCulturalStatus);
         List<ChineseCulturalDto> chineseCulturalDtoList = new ArrayList<>();
         for (ChineseCulturalDO chineseCulturalDO : movieTVList) {
             chineseCulturalDtoList.add(

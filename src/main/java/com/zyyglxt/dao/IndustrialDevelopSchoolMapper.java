@@ -4,6 +4,8 @@ import com.zyyglxt.dataobject.IndustrialDevelopSchool;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
+
 /**
    *@Author lrt
    *@Date 2020/11/6 20:00
@@ -22,4 +24,6 @@ public interface IndustrialDevelopSchoolMapper {
     int updateByPrimaryKeySelective(IndustrialDevelopSchool record);
 
     int updateByPrimaryKey(IndustrialDevelopSchool record);
+
+    List<IndustrialDevelopSchool> selectAll();
 }

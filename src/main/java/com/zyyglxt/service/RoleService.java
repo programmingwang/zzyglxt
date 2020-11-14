@@ -30,4 +30,6 @@ public interface RoleService {
     List<RoleDO> selectAllRole();
 
     RoleDO selectByRoleType(Integer type);
+
+    RoleDO selectRoleByUserid(String itemcode);
 }

@@ -17,7 +17,7 @@ public interface IComicGameService {
     ChineseCulturalDO getComicGame(ChineseCulturalDOKey key);
 
     //查询所有动漫游戏
-    List<ChineseCulturalDO> getComicGameList();
+    List<ChineseCulturalDO> getComicGameList(String chineseCulturalStatus);
 
     //增加一个动漫游戏
     int addComicGame(ChineseCulturalDO record);

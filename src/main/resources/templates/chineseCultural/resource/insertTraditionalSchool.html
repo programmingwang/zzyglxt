@@ -4,41 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <style>
-        .upload-wrap{
-            position: relative;
-            display: inline-block;
-            overflow: hidden;
-
-            border-radius: 3px;
-        }
-        .upload-wrap .file-ele{
-            position: absolute;
-            top:0;
-            right:0;
-            opacity: 0;
-            height: 100%;
-            width: 100%;
-            cursor: pointer;
-        }
-        .upload-wrap .file-open{
-            width:90px;
-            height:36px;
-            line-height:36px;
-            text-align: center;
-            color:#fff;
-            background: red;
-        }
-        label{
-            text-align: right;
-        }
-        div#upimg {
-            padding-top: 23%;
-            height: 10em;
-            width: 10em;
-            background-color: #CBCECE;
-        }
-    </style>
 </head>
 <body>
 <div class="row">
@@ -51,17 +16,18 @@
                 </div>
             </div>
             <div class="form-group row">
-                <label class="col-sm-2 col-form-label">来源：</label>
-                <div class="col-sm-3">
-                    <input id="chineseCulturalSource" type="text" class="form-control" placeholder="请输入">
-                </div>
-            </div>
-            <div class="form-group row">
                 <label class="col-sm-2 col-form-label">作者：</label>
                 <div class="col-sm-3">
                     <input id="chineseCulturalAuthor" type="text" class="form-control" placeholder="请输入">
                 </div>
             </div>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">来源：</label>
+                <div class="col-sm-3">
+                    <input id="chineseCulturalSource" type="text" class="form-control" placeholder="请输入">
+                </div>
+            </div>
+
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label">正文：</label>
                 <div id="div1" class="col-sm-8">
@@ -88,7 +54,6 @@
 
 
                 </div>
-            </div>
         </form>
 
     </div>

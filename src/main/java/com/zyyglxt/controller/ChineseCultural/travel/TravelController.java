@@ -1,6 +1,7 @@
 package com.zyyglxt.controller.ChineseCultural.travel;
 
 
+import com.zyyglxt.annotation.LogAnnotation;
 import com.zyyglxt.dataobject.ChineseCulturalDO;
 import com.zyyglxt.dataobject.ChineseCulturalDOKey;
 import com.zyyglxt.dto.ChineseCulturalDto;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -24,6 +26,7 @@ import java.util.List;
 //@Controller
 @RestController
 @RequestMapping("/cul/trav/trav")
+@SuppressWarnings("unchecked")
 public class TravelController {
 
     @Resource
@@ -35,8 +38,9 @@ public class TravelController {
     //获取所有的健康旅游
     @RequestMapping(value = "/getAll" , method = RequestMethod.GET)
     @ResponseBody
-    public ResponseData getAllTravel(){
-        List<ChineseCulturalDO> cartoonAllusionsList = iTravelService.getTravelList();
+    @LogAnnotation(logTitle = "查询所有健康旅游", logLevel = "1")
+    public ResponseData getAllTravel(@RequestParam(value = "chineseCulturalStatus")List chineseCulturalStatus){
+        List<ChineseCulturalDO> cartoonAllusionsList = iTravelService.getTravelList(chineseCulturalStatus);
         List<ChineseCulturalDto> chineseCulturalDtoList = new ArrayList<>();
         for (ChineseCulturalDO chineseCulturalDO : cartoonAllusionsList) {
             chineseCulturalDtoList.add(
@@ -45,6 +49,7 @@ public class TravelController {
                                     chineseCulturalDO.getItemcode()).getFilePath()));
         }
         return new ResponseData(EmBusinessError.success,chineseCulturalDtoList);
+
     }
 
     //查询一个健康旅游
@@ -54,6 +59,7 @@ public class TravelController {
     //增加一个健康旅游
     @RequestMapping(value = "/addTrav" , method = RequestMethod.POST)
     @ResponseBody
+    @LogAnnotation(logTitle = "增加一个健康旅游", logLevel = "3")
 //    public ResponseData addTravel(@RequestBody ChineseCulturalDO chineseCulturalDO , @RequestBody(required = false) FileDO fileDO) throws BusinessException {
     public ResponseData addTravel(@RequestBody ChineseCulturalDO chineseCulturalDO) {
         iTravelService.addTravel(chineseCulturalDO);
@@ -63,6 +69,7 @@ public class TravelController {
     //删除一个健康旅游（真正的数据库中删除）
     @RequestMapping(value = "/delTrav/{itemID}/{itemCode}" , method = RequestMethod.DELETE)
     @ResponseBody
+    @LogAnnotation(logTitle = "删除一个健康旅游", logLevel = "4")
     public ResponseData deleteTravel(@PathVariable("itemID") Integer itemID,@PathVariable("itemCode")String itemCode){
         ChineseCulturalDOKey chineseCulturalDOKey = new ChineseCulturalDOKey();
         chineseCulturalDOKey.setItemid(itemID);
@@ -71,23 +78,12 @@ public class TravelController {
         return new ResponseData(EmBusinessError.success);
     }
 
-    //去修改的页面
-    @RequestMapping(value = "/toUpdTrav/{itemID}/{itemCode}" , method = RequestMethod.GET)
-    @ResponseBody
-    public ResponseData toUpdatePage(@PathVariable("itemID") Integer itemID,@PathVariable("itemCode")String itemCode){
-        ChineseCulturalDOKey chineseCulturalDOKey = new ChineseCulturalDOKey();
-        chineseCulturalDOKey.setItemid(itemID);
-        chineseCulturalDOKey.setItemcode(itemCode);
-        ChineseCulturalDO chineseCultural = iTravelService.getTravel(chineseCulturalDOKey);
-        //在update的页面就可以拿到对应的数据了
-//        model.addAttribute("chineseCultural",chineseCultural);
-        //点击修改按钮，先调用这个接口？获得对应的实体类，然后前端跳转页面
-        return new ResponseData(EmBusinessError.success,chineseCultural);
-    }
+
 
     //修改一个健康旅游
     @RequestMapping(value = "/updTrav" , method = RequestMethod.POST)
     @ResponseBody
+    @LogAnnotation(logTitle = "修改一个健康旅游", logLevel = "2")
     public ResponseData updateTravel(@RequestBody ChineseCulturalDO chineseCulturalDO) {
         iTravelService.updateTravel(chineseCulturalDO);
         return new ResponseData(EmBusinessError.success);
@@ -96,6 +92,8 @@ public class TravelController {
     //修改一个健康旅游状态 （逻辑删除，但是是将状态改成下架状态,也可以是处长页面 通过->上架， 未通过->下架）
     //@RequestParam只能接收到form-data和x-www-form-urlencoded类型的数据
     @RequestMapping(value = "/cgTravSta/{itemID}/{itemCode}" , method = RequestMethod.POST)
+    @ResponseBody
+    @LogAnnotation(logTitle = "修改一个健康旅游状态", logLevel = "2")
     public ResponseData changeStatus(@RequestParam("chineseCulturalStatus") String chineseCulturalStatus , @PathVariable("itemID") Integer itemID , @PathVariable("itemCode")String itemCode){
         ChineseCulturalDOKey chineseCulturalDOKey = new ChineseCulturalDOKey();
         chineseCulturalDOKey.setItemid(itemID);

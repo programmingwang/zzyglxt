@@ -18,7 +18,7 @@ public interface ITravelService {
     ChineseCulturalDO getTravel(ChineseCulturalDOKey key);
 
     //查询所有健康旅游信息
-    List<ChineseCulturalDO> getTravelList();
+    List<ChineseCulturalDO> getTravelList(List<String> chineseCulturalStatus);
 
     //增加一个健康旅游信息
     int addTravel(ChineseCulturalDO record);

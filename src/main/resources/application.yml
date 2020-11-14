@@ -16,12 +16,17 @@ spring:
     username: root
     password: root1234
     type: com.alibaba.druid.pool.DruidDataSource
+
 #     使项目能访问图片
   resources:
     static-locations: classpath:/static/
   devtools:
     restart:
       enabled: false
+  cache:
+    ehcache:
+      config: ehcache.xml
+
 
 
 

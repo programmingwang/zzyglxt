@@ -16,7 +16,7 @@ public interface CulturalResourcesDOMapper {
 
     CulturalResourcesDO selectByPrimaryKey(@Param("key")CulturalResourcesDOKey key, @Param("chineseCulturalType") String chineseCulturalType);
 
-    List<CulturalResourcesDO> selectCulturalResourcesList(String chineseCulturalType);
+    List<CulturalResourcesDO> selectCulturalResourcesList(@Param("type") String chineseCulturalType, @Param("status") String chineseCulturalStatus);
 
     int updateByPrimaryKeySelective(CulturalResourcesDO record);
 

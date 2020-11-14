@@ -46,40 +46,66 @@
             });
 
             $("#cancel").unbind().on('click',function () {
-                $("#main_body").html("");
                 var url = "/chineseCultural/resource/traditionalCultural";
-                orange.loadPage({url: url, target: 'main_body', selector: '#fir_body', success: function(data){
-                        if(data == null||data == ""){
-                            return alertUtil.error( url+'加载失败');
-                        }
-                        $("#main_body").html(data);
-                    }})
+                orange.redirect(url);
             });
 
             $("#btn_insert").unbind().on('click',function () {
-                var traCulEntity = {
-                    itemcode: stringUtil.getUUID(),
-                    chineseCulturalName : $("#chineseCulturalName").val(),
-                    chineseCulturalSource : $("#chineseCulturalSource").val(),
-                    chineseCulturalAuthor : $("#chineseCulturalAuthor").val(),
-                    chineseCulturalContent : editor.txt.html()
-                };
+                var traCulEntity ;
+                var addUpdateUrl;
+                var operateMessage;
+                if(!isUpdate()){
+                    addUpdateUrl = "/cul/res/traCul/addTraCul";
+                    operateMessage = "新增中医医史成功";
+                    traCulEntity = {
+                        itemcode: stringUtil.getUUID(),
+                        chineseCulturalName : $("#chineseCulturalName").val(),
+                        chineseCulturalSource : $("#chineseCulturalSource").val(),
+                        chineseCulturalAuthor : $("#chineseCulturalAuthor").val(),
+                        chineseCulturalContent : editor.txt.html()
+                    };
+                }else{
+                    var needData = JSON.parse(localStorage.getItem("rowData"));
+                    addUpdateUrl = "/cul/res/traCul/updTraCul";
+                    traCulEntity = {
+                        itemid: needData.itemid,
+                        itemcode: needData.itemcode,
+                        chineseCulturalName : $("#chineseCulturalName").val(),
+                        chineseCulturalSource : $("#chineseCulturalSource").val(),
+                        chineseCulturalAuthor : $("#chineseCulturalAuthor").val(),
+                        chineseCulturalContent : editor.txt.html()
+                    }
+                    operateMessage = "更新中医医史记成功";
+                }
 
-                ajaxUtil.myAjax(null,"/cul/res/traCul/addTraCul",traCulEntity,function (data) {
+                ajaxUtil.myAjax(null,addUpdateUrl,traCulEntity,function (data) {
                     if(ajaxUtil.success(data)){
-                        alertUtil.info("新增中医医史成功");
+                        alertUtil.info(operateMessage);
                         var url = "/chineseCultural/resource/traditionalCultural";
-                        orange.loadPage({url: url, target: 'main_body', selector: '#fir_body', success: function(data){
-                                if(data == null||data == ""){
-                                    return alertUtil.error( url+'加载失败');
-                                }
-                                $("#main_body").html(data);
-                            }})
+                        orange.redirect(url);
                     }else {
                         alertUtil.alert(data.msg);
                     }
                 },false,true);
 
             });
+
+            (function init() {
+                if (isUpdate()){
+                    var tempdata = JSON.parse(localStorage.getItem("rowData"));
+                    $("#chineseCulturalName").val(tempdata.chineseCulturalName);
+                    $("#chineseCulturalSource").val(tempdata.chineseCulturalSource);
+                    $("#chineseCulturalAuthor").val(tempdata.chineseCulturalAuthor);
+                    editor.txt.html(tempdata.chineseCulturalContent);
+                    var img = tempdata.filePath;
+                    console.log(img);
+                    $("#upimg").attr("src",img);
+                }
+            }());
+
+
+            function isUpdate() {
+                return (localStorage.getItem("rowData") != null || localStorage.getItem("rowData") != undefined)
+            }
         })
 })();

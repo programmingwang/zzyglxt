@@ -29,4 +29,5 @@ public interface SpecialtyDOMapper {
 
     SpecialtyDO selectSpecialtyByItemCode(String itemCode);
 
+    List<SpecialtyDO> selectByHospCode(String hospCode);
 }

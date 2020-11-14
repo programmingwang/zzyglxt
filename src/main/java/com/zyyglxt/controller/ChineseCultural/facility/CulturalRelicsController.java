@@ -1,5 +1,6 @@
 package com.zyyglxt.controller.ChineseCultural.facility;
 
+import com.zyyglxt.annotation.LogAnnotation;
 import com.zyyglxt.dataobject.ChineseCulturalDO;
 import com.zyyglxt.dataobject.ChineseCulturalDOKey;
 import com.zyyglxt.dto.ChineseCulturalDto;
@@ -34,8 +35,9 @@ public class CulturalRelicsController {
     //获取所有的文化古迹
     @RequestMapping(value = "/getAll" , method = RequestMethod.GET)
     @ResponseBody
-    public ResponseData getAllCulturalRelics(){
-        List<ChineseCulturalDO> culturalRelicsList = iCulturalRelicsService.getCulturalRelicsList();
+    @LogAnnotation(logTitle = "查看所有文化古迹", logLevel = "1")
+    public ResponseData getAllCulturalRelics(@RequestParam(value = "chineseCulturalStatus")List chineseCulturalStatus){
+        List<ChineseCulturalDO> culturalRelicsList = iCulturalRelicsService.getCulturalRelicsList(chineseCulturalStatus);
         List<ChineseCulturalDto> chineseCulturalDtoList = new ArrayList<>();
         for (ChineseCulturalDO chineseCulturalDO : culturalRelicsList) {
             chineseCulturalDtoList.add(
@@ -46,17 +48,12 @@ public class CulturalRelicsController {
         return new ResponseData(EmBusinessError.success,chineseCulturalDtoList);
     }
 
-//    //查询一个文化古迹
-//
-//    //去增加页面,这个是为了跳转到增加的页面
-//    @RequestMapping(value = "/toAddPage" , method = RequestMethod.GET)
-//    public String toAddPage(){
-//        return "to add page";
-//    }
+
 
     //增加一个文化古迹
     @RequestMapping(value = "/addCulRel" , method = RequestMethod.POST)
     @ResponseBody
+    @LogAnnotation(logTitle = "增加一个文化古迹", logLevel = "3")
     public ResponseData addCulturalRelics(@RequestBody ChineseCulturalDO chineseCulturalDO){
         iCulturalRelicsService.addCulturalRelics(chineseCulturalDO);
         return new ResponseData(EmBusinessError.success);
@@ -65,6 +62,7 @@ public class CulturalRelicsController {
     //删除一个文化古迹（真正的数据库中删除）
     @RequestMapping(value = "/delCulRel/{itemID}/{itemCode}" , method = RequestMethod.DELETE)
     @ResponseBody
+    @LogAnnotation(logTitle = "删除一个文化古迹", logLevel = "4")
     public ResponseData deleteCulturalRelics(@PathVariable("itemID") Integer itemID, @PathVariable("itemCode")String itemCode){
         ChineseCulturalDOKey chineseCulturalDOKey = new ChineseCulturalDOKey();
         chineseCulturalDOKey.setItemid(itemID);
@@ -73,20 +71,12 @@ public class CulturalRelicsController {
         return new ResponseData(EmBusinessError.success);
     }
 
-    //去修改的页面
-    @RequestMapping(value = "/toUpdCulRel/{itemID}/{itemCode}" , method = RequestMethod.GET)
-    @ResponseBody
-    public ResponseData toUpdatePage(@PathVariable("itemID") Integer itemID, @PathVariable("itemCode")String itemCode){
-        ChineseCulturalDOKey chineseCulturalDOKey = new ChineseCulturalDOKey();
-        chineseCulturalDOKey.setItemid(itemID);
-        chineseCulturalDOKey.setItemcode(itemCode);
-        ChineseCulturalDO chineseCultural = iCulturalRelicsService.getCulturalRelics(chineseCulturalDOKey);
-        return new ResponseData(EmBusinessError.success,chineseCultural);
-    }
+
 
     //修改一个文化古迹
     @RequestMapping(value = "/updCulRel" , method = RequestMethod.POST)
     @ResponseBody
+    @LogAnnotation(logTitle = "修改一个文化古迹", logLevel = "2")
     public ResponseData updateCulturalRelics(@RequestBody ChineseCulturalDO chineseCulturalDO){
         iCulturalRelicsService.updateCulturalRelics(chineseCulturalDO);
         return new ResponseData(EmBusinessError.success);
@@ -95,6 +85,7 @@ public class CulturalRelicsController {
     //修改一个文化古迹状态 （逻辑删除，但是是将状态改成下架状态,也可以是处长页面 通过->上架， 未通过->下架）
     @RequestMapping(value = "/cgCulRelSta/{itemID}/{itemCode}" , method = RequestMethod.POST)
     @ResponseBody
+    @LogAnnotation(logTitle = "修改一个文化古迹信息状态", logLevel = "2")
     public ResponseData changeStatus(@RequestParam("chineseCulturalStatus") String chineseCulturalStatus , @PathVariable("itemID") Integer itemID, @PathVariable("itemCode")String itemCode){
         ChineseCulturalDOKey chineseCulturalDOKey = new ChineseCulturalDOKey();
         chineseCulturalDOKey.setItemid(itemID);

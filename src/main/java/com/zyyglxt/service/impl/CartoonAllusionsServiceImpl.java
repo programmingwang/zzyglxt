@@ -12,6 +12,7 @@ import com.zyyglxt.util.DOKeyAndValidateUtil;
 
 import com.zyyglxt.service.IFileService;
 
+import com.zyyglxt.util.UsernameUtil;
 import com.zyyglxt.validator.ValidatorImpl;
 import com.zyyglxt.validator.ValidatorResult;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -36,7 +38,7 @@ public class CartoonAllusionsServiceImpl implements ICartoonAllusionsService {
     private ValidatorImpl validator;
 
     @Autowired
-    private IFileService iFileService;
+    private UsernameUtil usernameUtil;
 
     @Override
     public ChineseCulturalDO getCartoonAllusions(ChineseCulturalDOKey key) {
@@ -44,8 +46,12 @@ public class CartoonAllusionsServiceImpl implements ICartoonAllusionsService {
     }
 
     @Override
-    public List<ChineseCulturalDO> getCartoonAllusionsList() {
-        return chineseCulturalDOMapper.selectChineseCulturalList("漫画典故");
+    public List<ChineseCulturalDO> getCartoonAllusionsList(List<String> chineseCulturalStatus) {
+        List<ChineseCulturalDO> chineseCulturalDOList = new ArrayList<>();
+        for (String culturalStatus : chineseCulturalStatus) {
+            chineseCulturalDOList.addAll(chineseCulturalDOMapper.selectChineseCulturalList("漫画典故",culturalStatus));
+        }
+        return chineseCulturalDOList;
     }
 
     @Override
@@ -55,11 +61,11 @@ public class CartoonAllusionsServiceImpl implements ICartoonAllusionsService {
     if(result.isHasErrors()){
         throw new BusinessException(result.getErrMsg(), EmBusinessError.PARAMETER_VALIDATION_ERROR);
     }
-        record.setCreater("");
+        record.setCreater(usernameUtil.getOperateUser());
         record.setItemcreateat(DateUtils.getDate());
-        record.setUpdater("");
+        record.setUpdater(usernameUtil.getOperateUser());
         record.setChineseCulturalType("漫画典故");
-        record.setChineseCulturalStatus("待上架");
+        record.setChineseCulturalStatus("--");
         //如果前台没有插入图片或者附件，就自己生成uuid
         if(record.getItemcode() == null){
             record.setItemcode(UUIDUtils.getUUID());
@@ -77,7 +83,7 @@ public class CartoonAllusionsServiceImpl implements ICartoonAllusionsService {
     @Override
     @Transactional
     public int updateCartoonAllusions(ChineseCulturalDO record){
-        return DOKeyAndValidateUtil.updateUtil(record, validator, chineseCulturalDOMapper);
+        return DOKeyAndValidateUtil.updateUtil(record, validator, chineseCulturalDOMapper, usernameUtil);
     }
 
     @Override

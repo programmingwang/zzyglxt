@@ -17,7 +17,7 @@ public interface ICartoonAllusionsService {
     ChineseCulturalDO getCartoonAllusions(ChineseCulturalDOKey key);
 
     //查询所有漫画典故
-    List<ChineseCulturalDO> getCartoonAllusionsList();
+    List<ChineseCulturalDO> getCartoonAllusionsList(List<String> chineseCulturalStatus);
 
     //增加一个漫画典故
     int addCartoonAllusions(ChineseCulturalDO record);

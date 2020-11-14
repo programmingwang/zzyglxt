@@ -2,100 +2,265 @@
     require(['jquery', 'ajaxUtil','bootstrapTableUtil','objectUtil','alertUtil','modalUtil','selectUtil','stringUtil','dictUtil'],
         function (jquery,ajaxUtil,bootstrapTableUtil,objectUtil,alertUtil,modalUtil,selectUtil,stringUtil,dictUtil) {
 
+            var url = "/cul/trav/trav/getAll";
 
-        var url = "/cul/trav/trav/getAll";
-        var aParam = {
+            //角色加载工具
+            url = selectUtil.getRoleTable(sessionStorage.getItem("rolename"),url,"chineseCulturalStatus");
 
-        };
+            var aParam = {
 
-        //操作
-        function operation(value, row, index){
-            return [
-                '<button type="button" class="edit btn btn-primary btn-sm" style="margin-right: 5px" data-toggle="modal" data-target="" >编辑</button>',
-                '<button type="button" class="delete btn btn-danger btn-sm"  data-toggle="modal" data-target="#staticBackdrop" >删除</button>',
-            ].join('');
-        }
+            };
 
-        //修改事件
-        window.orgEvents = {
-            'click .edit' : function(e, value, row, index) {
 
-            },
 
-            'click .delete': function (e, value, row, index) {
-                var myDeleteModalData ={
-                    modalBodyID : "myDeleteModalTravel",
-                    modalTitle : "删除景点信息",
-                    modalClass : "modal-lg",
-                    confirmButtonClass : "btn-danger",
-                    modalConfirmFun:function () {
-                        var isSuccess = false;
-                        ajaxUtil.myAjax(null,"/cul/trav/trav/delTrav/"+row.itemid+"/"+row.itemcode,null,function (data) {
-                            if(ajaxUtil.success(data)){
-                                ajaxUtil.myAjax(null,"/file/delete?dataCode="+row.itemcode,null,function (data) {
-                                    if(!ajaxUtil.success(data)){
-                                        return alertUtil.error("文件删除失败");
+            //操作
+            function operation(value, row, index){
+                return selectUtil.getRoleOperate(value,row,index,sessionStorage.getItem("rolename"),row.chineseCulturalStatus)
+            }
+
+            //修改事件
+            window.orgEvents = {
+                'click .edit' : function(e, value, row, index) {
+                    localStorage.setItem("rowData", JSON.stringify(row));
+                    orange.redirect("/chineseCultural/travel/insertTravel");
+                },
+
+                'click .delete': function (e, value, row, index) {
+                    var myDeleteModalData ={
+                        modalBodyID : "myDeleteModalTravel",
+                        modalTitle : "删除景点信息",
+                        modalClass : "modal-lg",
+                        confirmButtonClass : "btn-danger",
+                        modalConfirmFun:function () {
+                            var isSuccess = false;
+                            ajaxUtil.myAjax(null,"/cul/trav/trav/delTrav/"+row.itemid+"/"+row.itemcode,null,function (data) {
+                                if(ajaxUtil.success(data)){
+                                    ajaxUtil.myAjax(null,"/file/delete?dataCode="+row.itemcode,null,function (data) {
+                                        if(!ajaxUtil.success(data)){
+                                            return alertUtil.error("文件删除失败");
+                                        }
+                                    },false,"","get");
+                                    alertUtil.info("删除景点信息成功");
+                                    isSuccess = true;
+                                    refreshTable();
+                                }
+                            },false,true,"delete");
+                            return isSuccess;
+                        }
+
+                    };
+                    var myDeleteModal = modalUtil.init(myDeleteModalData);
+                    myDeleteModal.show();
+                },
+
+                'click .pass' : function (e, value, row, index) {
+                    var myPassTravelModalData ={
+                        modalBodyID :"myPassModal",
+                        modalTitle : "审核通过",
+                        modalClass : "modal-lg",
+                        modalConfirmFun:function () {
+                            var isSuccess = false;
+                            var submitStatus = {
+                                "chineseCulturalStatus": selectUtil.getStatus(sessionStorage.getItem("rolename"))
+                            };
+                            ajaxUtil.myAjax(null,"/cul/trav/trav/cgTravSta/"+row.itemid+"/"+row.itemcode,submitStatus,function (data) {
+                                if(ajaxUtil.success(data)){
+                                    if(data.code == 88888){
+                                        if(selectUtil.getStatus(sessionStorage.getItem("rolename")) == "处长已审核"){
+                                            alertUtil.info("审核已通过，已发送给综合处处长做最后审核！");
+                                        }else{
+                                            alertUtil.info("审核已通过，已上架！");
+                                        }
+                                        isSuccess = true;
+                                        refreshTable();
+                                    }else{
+                                        alertUtil.error(data.msg);
                                     }
-                                },false,"","get");
-                                alertUtil.info("删除景点信息成功");
-                                isSuccess = true;
-                                refreshTable();
-                            }
-                        },false,true,"delete");
-                        return isSuccess;
-                    }
+                                }
+                            },false);
+                            return isSuccess;
+                        }
 
-                };
-                var myDeleteModal = modalUtil.init(myDeleteModalData);
-                myDeleteModal.show();
-            },
+                    };
+                    var myPassModal = modalUtil.init(myPassTravelModalData);
+                    myPassModal.show();
+                },
 
-            'click .pass' : function (e, value, row, index) {
+                'click .fail' : function (e, value, row, index) {
+                    var myFailTravelModalData ={
+                        modalBodyID :"myFailModal",
+                        modalTitle : "审核不通过",
+                        modalClass : "modal-lg",
+                        modalConfirmFun:function () {
+                            var isSuccess = false;
+                            var submitStatus = {
+                                "chineseCulturalStatus": "已下架"
+                            };
+                            ajaxUtil.myAjax(null,"/cul/trav/trav/cgTravSta/"+row.itemid+"/"+row.itemcode,submitStatus,function (data) {
+                                if(ajaxUtil.success(data)){
+                                    if(data.code == 88888){
+                                        alertUtil.info("操作成功");
+                                        isSuccess = true;
+                                        refreshTable();
+                                    }else{
+                                        alertUtil.error(data.msg);
+                                    }
+                                }
+                            },false);
+                            return isSuccess;
+                        }
 
-            },
+                    };
+                    var myFailModal = modalUtil.init(myFailTravelModalData);
+                    myFailModal.show();
+                },
 
-            'click .fail' : function (e, value, row, index) {
+                'click .under-shelf' : function (e, value, row, index) {
+                    var myUnderShelfTravelModalData ={
+                        modalBodyID :"myUnderShelfModal",
+                        modalTitle : "下架",
+                        modalClass : "modal-lg",
+                        modalConfirmFun:function () {
+                            var isSuccess = false;
+                            var submitStatus = {
+                                "chineseCulturalStatus": "已下架"
+                            };
+                            ajaxUtil.myAjax(null,"/cul/trav/trav/cgTravSta/"+row.itemid+"/"+row.itemcode,submitStatus,function (data) {
+                                if(ajaxUtil.success(data)){
+                                    if(data.code == 88888){
+                                        alertUtil.success("下架成功");
+                                        isSuccess = true;
+                                        refreshTable();
+                                    }else{
+                                        alertUtil.error(data.msg);
+                                    }
+                                }
+                            },false);
+                            return isSuccess;
+                        }
 
-            },
-        };
+                    };
+                    var myUnderShelfModal = modalUtil.init(myUnderShelfTravelModalData);
+                    myUnderShelfModal.show();
+                },
+
+                'click .view' : function (e, value, row, index) {
+                    var myViewTravelModalData ={
+                        modalBodyID : "myViewCulturalModal", //公用的在后面给span加不同的内容就行了，其他模块同理
+                        modalTitle : "查看详情",
+                        modalClass : "modal-lg",
+                        confirmButtonStyle: "display:none",
+                    };
+                    var myTravelModal = modalUtil.init(myViewTravelModalData);
+                    $("#chineseCulturalName").val(row.chineseCulturalName);
+                    $("#chineseCulturalSource").val(row.chineseCulturalSource);
+                    $("#chineseCulturalAuthor").val(row.chineseCulturalAuthor);
+                    $("#chineseCulturalContent").val(row.chineseCulturalContent);
+                    $("#creater").val(row.creater);
+                    $("#itemCreateAt").val(row.itemcreateat);
+                    $("#chineseCulturalStatus").val(row.chineseCulturalStatus);
+                    $("#culturalImg").attr("src",row.filePath)
+                    $('#culturalImgSpan').html("景点图片");
+                    $('#culturalNameSpan').html("景点名称");
+                    $('#culturalContentSpan').html("景点介绍");
+
+                    myTravelModal.show();
+                },
+
+                'click .submit' : function (e, value, row, index) {
+                    var mySubmitTravelModalData ={
+                        modalBodyID :"mySubmitModal",
+                        modalTitle : "提交",
+                        modalClass : "modal-lg",
+                        modalConfirmFun:function () {
+                            var isSuccess = false;
+                            var submitStatus = {
+                                "chineseCulturalStatus": selectUtil.getStatus(sessionStorage.getItem("rolename"))
+                            };
+                            ajaxUtil.myAjax(null,"/cul/trav/trav/cgTravSta/"+row.itemid+"/"+row.itemcode,submitStatus,function (data) {
+                                if(ajaxUtil.success(data)){
+                                    if(data.code == 88888){
+                                        alertUtil.info("已提交");
+                                        isSuccess = true;
+                                        refreshTable();
+                                    }else{
+                                        alertUtil.error(data.msg);
+                                    }
+
+                                }
+                            },false);
+                            return isSuccess;
+                        }
+
+                    };
+                    var mySubmitModal = modalUtil.init(mySubmitTravelModalData);
+                    mySubmitModal.show();
+                },
+
+                'click .no-submit' : function (e, value, row, index) {
+                    var myNoSubmitTravelModalData ={
+                        modalBodyID :"myNoSubmitModal",
+                        modalTitle : "取消提交",
+                        modalClass : "modal-lg",
+                        modalConfirmFun:function () {
+                            var isSuccess = false;
+                            var submitStatus = {
+                                "chineseCulturalStatus": "--"
+                            };
+                            ajaxUtil.myAjax(null,"/cul/trav/trav/cgTravSta/"+row.itemid+"/"+row.itemcode,submitStatus,function (data) {
+                                if(ajaxUtil.success(data)){
+                                    if(data.code == 88888){
+                                        alertUtil.info("已提交");
+                                        isSuccess = true;
+                                        refreshTable();
+                                    }else{
+                                        alertUtil.error(data.msg);
+                                    }
+
+                                }
+                            },false);
+                            return isSuccess;
+                        }
+
+                    };
+                    var mySubmitModal = modalUtil.init(myNoSubmitTravelModalData);
+                    mySubmitModal.show();
+                },
+            };
 
 
             $("#btn_addTask").unbind().on('click',function () {
-                $("#main_body").html("");
                 var url = "/chineseCultural/travel/insertTravel";
-                orange.loadPage({url: url, target: 'main_body', selector: '#fir_body', success: function(data){
-                    if(data == null||data == ""){
-                        return alertUtil.error( url+'加载失败');
-                    }
-                    $("#main_body").html(data);
-                }})
+                localStorage.removeItem("rowData");
+                orange.redirect(url);
             });
 
             var pl = dictUtil.getDictByCode(dictUtil.DICT_LIST.showStatus);
             $("#chargePersonSearch").selectUtil(pl);
 
 
-        var aCol = [
-            {field: 'chineseCulturalName', title: '景点名称'},
-            {field: 'filePath', title: '景点图片', formatter:function (value, row, index) {
-                if(value == "已经损坏了"){
-                    return '<p>'+value+'</p>';
-                }else{
-                    return '<img  src='+value+' width="100" height="100" class="img-rounded" >';
-                }
-            }},
-            {field: 'chineseCulturalSource', title: '来源'},
-            {field: 'chineseCulturalAuthor', title: '作者'},
-            {field: 'itemcreateat', title: '发布时间'},
-            {field: 'action',  title: '操作',formatter: operation,events:orgEvents}
-        ];
+            var aCol = [
+                {field: 'chineseCulturalName', title: '景点名称'},
+                {field: 'filePath', title: '景点图片', formatter:function (value, row, index) {
+                        if(value == "已经损坏了"){
+                            return '<p>'+value+'</p>';
+                        }else{
+                            return '<img  src='+value+' width="100" height="100" class="img-rounded" >';
+                        }
+                    }},
+                {field: 'chineseCulturalSource', title: '来源'},
+                {field: 'chineseCulturalAuthor', title: '作者'},
+                {field: 'itemcreateat', title: '发布时间'},
+                {field: 'action',  title: '操作',formatter: operation,events:orgEvents}
+            ];
 
-        var myTable = bootstrapTableUtil.myBootStrapTableInit("table", url, aParam, aCol);
+            var myTable = bootstrapTableUtil.myBootStrapTableInit("table", url, aParam, aCol);
 
-        function refreshTable() {
-            var param = {};
-            myTable.free();
-            myTable = bootstrapTableUtil.myBootStrapTableInit("table", url, param, aCol);
-        }
-    })
+            function refreshTable() {
+                var param = {};
+                myTable.free();
+                myTable = bootstrapTableUtil.myBootStrapTableInit("table", url, param, aCol);
+            }
+            bootstrapTableUtil.globalSearch("table",url,aParam, aCol);
+        })
 })();

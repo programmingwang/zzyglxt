@@ -2,6 +2,7 @@ package com.zyyglxt.controller.fileController;
 
 import com.github.tobato.fastdfs.domain.fdfs.StorePath;
 import com.github.tobato.fastdfs.service.FastFileStorageClient;
+import com.zyyglxt.annotation.LogAnnotation;
 import com.zyyglxt.dataobject.FileDO;
 import com.zyyglxt.dto.FileDto;
 import com.zyyglxt.error.EmBusinessError;
@@ -36,32 +37,52 @@ public class FileController {
 
     @PostMapping("/upload")
     @ResponseBody
+    @LogAnnotation(appCode ="",logTitle ="更新文件加载",logLevel ="1",creater ="",updater = "")
     public ResponseData upload(FileDto fileDto) throws IOException {
+        fileService.uploadFile(saveFile(fileDto));
+        return new ResponseData(EmBusinessError.success);
+    }
+
+    @GetMapping("/delete")
+    @ResponseBody
+    @LogAnnotation(appCode ="",logTitle ="删除文件",logLevel ="4",creater ="",updater = "")
+    public ResponseData delete(String dataCode){
+        FileDO fileDO = fileService.selectFileByDataCode(dataCode);
+        fastFileStorageClient.deleteFile(fileDO.getFilePath());
+        fileService.deleteFileByDataCode(dataCode);
+        return new ResponseData(EmBusinessError.success);
+    }
+
+    @PostMapping("/update")
+    @ResponseBody
+    public ResponseData update(FileDto fileDto){
+        delete(fileDto.getDataCode());
+        fileService.updateFile(saveFile(fileDto));
+        return new ResponseData(EmBusinessError.success);
+    }
+
+
+    private FileDO saveFile(FileDto fileDto) {
         FileDO fileDO = new FileDO();
         BeanUtils.copyProperties(fileDto,fileDO);
         /*从数据传输对象中拿到文件*/
         MultipartFile multipartFile = fileDto.getFile();
-        StorePath storePath = fastFileStorageClient.uploadFile(
-                multipartFile.getInputStream(),
-                multipartFile.getSize(),
-                FilenameUtils.getExtension(multipartFile.getOriginalFilename()),
-                null);
+        StorePath storePath = null;
+        try {
+            storePath = fastFileStorageClient.uploadFile(
+                    multipartFile.getInputStream(),
+                    multipartFile.getSize(),
+                    FilenameUtils.getExtension(multipartFile.getOriginalFilename()),
+                    null);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         String fileName = multipartFile.getOriginalFilename();
         fileDO.setFileName(fileName);
         fileDO.setFileType(FilenameUtils.getExtension(fileName));//文件扩展名
         fileDO.setFileSize((double) multipartFile.getSize());
         String path = "http://" + nginx.substring(0,nginx.indexOf(":")+1) + port + "/" + storePath.getFullPath();//字符串拼接路径
         fileDO.setFilePath(path);
-        fileService.uploadFile(fileDO);
-        return new ResponseData(EmBusinessError.success);
-    }
-
-    @GetMapping("/delete")
-    @ResponseBody
-    public ResponseData delete(String dataCode){
-        FileDO fileDO = fileService.selectFileByDataCode(dataCode);
-        fastFileStorageClient.deleteFile(fileDO.getFilePath());
-        fileService.deleteFileByDataCode(dataCode);
-        return new ResponseData(EmBusinessError.success);
+        return fileDO;
     }
 }

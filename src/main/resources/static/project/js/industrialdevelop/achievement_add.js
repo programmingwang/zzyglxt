@@ -1,8 +1,10 @@
 (function () {
-    require(['jquery','ajaxUtil','wangEditor'],
-        function (jquery,ajaxUtil, wangEditor) {
+    require(['jquery', 'ajaxUtil', 'stringUtil', 'wangEditor'],
+        function (jquery, ajaxUtil, stringUtil, wangEditor) {
 
-            var type = isUpdate() ? "put":"post";
+            var type = isUpdate() ? "put" : "post";
+
+            var itemcode = stringUtil.getUUID();
 
             //后台数据交互地址
             var url = "/industrialdevelop/achievement";
@@ -44,23 +46,23 @@
             editor.create()
             editor.txt.html('<p></p>')
 
-            $("#div1").on("input propertychange", function() {
-                var textNUm=editor.txt.text();
-                if(textNUm.length>=100000){
-                    str=textNUm.substring(0,10000)+"";  //使用字符串截取，获取前30个字符，多余的字符使用“......”代替
+            $("#div1").on("input propertychange", function () {
+                var textNUm = editor.txt.text();
+                if (textNUm.length >= 100000) {
+                    str = textNUm.substring(0, 10000) + "";  //使用字符串截取，获取前30个字符，多余的字符使用“......”代替
                     editor.txt.html(str);
                     alert("字数不能超过10000");                  //将替换的值赋值给当前对象
                 }
             });
 
 
-
-            $("#cancelBtn").click(function () {
+            $("#cancelBtn").unbind().on('click', function () {
                 orange.redirect(purl);
             });
 
-            function generateParam(){
+            function generateParam() {
                 var param = {};
+                param.itemcode = itemcode;
                 param.industrialDevelopLeader = $("#industrialDevelopLeader").val();
                 param.industrialDevelopName = $("#industrialDevelopName").val();
                 param.projectName = $("#projectName").val();
@@ -71,34 +73,44 @@
                 return param;
             }
 
-            $("#saveBtn").unbind().on('click',function () {
-                var param = generateParam();
-                param.industrialDevelopStatus = "——";
-
-                ajaxUtil.myAjax(null,url,param,function (data) {
-                    if(ajaxUtil.success(data)){
-                        orange.redirect(url)
-                    }else {
-                        alert(data.msg)
-                    }
-                },true,"123",type);
+            //附件名显示
+            $("#upload_file").change(function () {
+                var file = $("#upload_file")[0].files[0];
+                var file_span = $("#filename_span");
+                file_span.text(file.name)
             });
 
-            $("#submitBtn").unbind().on('click',function () {
+            $("#saveBtn").unbind('click').on('click', function () {
                 var param = generateParam();
                 param.industrialDevelopStatus = "——";
-                ajaxUtil.myAjax(null,url,param,function (data) {
-                    if(ajaxUtil.success(data)){
+                var file = $("#upload_file")[0].files[0];
+
+                ajaxUtil.myAjax(null, url, param, function (data) {
+                    if (ajaxUtil.success(data)) {
+                        if (file != null){
+                            ajaxUtil.fileAjax(itemcode, file, "admin", "aaaaaaa");
+                        }
+                        orange.redirect(url)
+                    } else {
+                        alert(data.msg)
+                    }
+                }, true, "123", type);
+            });
+
+            $("#submitBtn").unbind('click').on('click', function () {
+                var param = generateParam();
+                param.industrialDevelopStatus = "——";
+                ajaxUtil.myAjax(null, url, param, function (data) {
+                    if (ajaxUtil.success(data)) {
                         orange.redirect(url)
                     }
-                },true,"123",type);
+                }, true, "123", type);
                 return false;
-            })
+            });
 
 
-
-            (function init() {
-                if (isUpdate()){
+            var init = function () {
+                if (isUpdate()) {
                     var tempdata = JSON.parse(localStorage.getItem("rowData"));
                     $("#industrialDevelopLeader").val(tempdata.industrialDevelopLeader);
                     $("#industrialDevelopName").val(tempdata.industrialDevelopName);
@@ -106,15 +118,18 @@
                     $("#phone").val(tempdata.phone);
                     $("#projectName").val(tempdata.projectName);
                     $(".w-e-text").html(tempdata.context);
+                    itemcode = tempdata.itemcode
                 }
-            }());
+                init = function () {}
+            };
+            init();
 
 
             function isUpdate() {
                 return (localStorage.getItem("rowData") != null || localStorage.getItem("rowData") != undefined)
             }
 
-    })
+        })
 })();
 
 

@@ -17,7 +17,7 @@ public interface IMovieTVService {
     ChineseCulturalDO getMovieTV(ChineseCulturalDOKey key);
 
     //查询所有电视电影
-    List<ChineseCulturalDO> getMovieTVList();
+    List<ChineseCulturalDO> getMovieTVList(List<String> chineseCulturalStatus);
 
     //增加一个电视电影
     int addMovieTV(ChineseCulturalDO record);

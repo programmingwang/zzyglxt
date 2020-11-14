@@ -117,6 +117,14 @@ public class UrlUtil {
             requestUrl = requestUrl.substring(0, requestUrl.lastIndexOf("/"));
             requestUrl = requestUrl.substring(0, requestUrl.lastIndexOf("/"));
         }
+        if (requestUrl.contains("/deletefamprerdo")
+                ||requestUrl.contains("/deletehealthcarechinesemedicinedo")
+                ||requestUrl.contains("/deletehealthcarefampredo")
+                ||requestUrl.contains("/deletehealthsciknowdo")
+        ){
+            requestUrl = requestUrl.substring(0, requestUrl.lastIndexOf("/"));
+            requestUrl = requestUrl.substring(0, requestUrl.lastIndexOf("/"));
+        }
         return requestUrl;
     }
     public static String getUrl(String requestUrl, String method){

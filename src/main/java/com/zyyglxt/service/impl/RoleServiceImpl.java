@@ -93,4 +93,9 @@ public class RoleServiceImpl implements RoleService {
     public RoleDO selectByRoleType(Integer type) {
         return roleDOMapper.selectByRoleType(type);
     }
+
+    @Override
+    public RoleDO selectRoleByUserid(String itemcode) {
+        return roleDOMapper.selectByUserid(itemcode);
+    }
 }

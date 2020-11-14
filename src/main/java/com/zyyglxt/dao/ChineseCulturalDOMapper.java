@@ -17,7 +17,7 @@ public interface ChineseCulturalDOMapper {
 
     ChineseCulturalDO selectByPrimaryKey(@Param("key") ChineseCulturalDOKey key , @Param("chineseCulturalType") String chineseCulturalType);
 
-    List<ChineseCulturalDO> selectChineseCulturalList(String chineseCulturalType);
+    List<ChineseCulturalDO> selectChineseCulturalList(@Param("type") String chineseCulturalType, @Param("status") String chineseCulturalStatus);
 
     int updateByPrimaryKeySelective(@Param("key")ChineseCulturalDOKey key ,@Param("chineseCulturalDO") ChineseCulturalDO record);
 

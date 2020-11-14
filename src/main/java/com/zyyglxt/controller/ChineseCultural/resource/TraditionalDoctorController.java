@@ -39,8 +39,8 @@ public class TraditionalDoctorController {
     @RequestMapping(value = "/getAll" , method = RequestMethod.GET)
     @ResponseBody
     @LogAnnotation(logTitle = "查询所有历代名家", logLevel = "1")
-    public ResponseData getAllTraditionalDoctor(){
-        List<CulturalResourcesDO> traditionalDoctorList = iTraditionalDoctorService.getTraditionalDoctorList();
+    public ResponseData getAllTraditionalDoctor(@RequestParam(value = "chineseCulturalStatus")List chineseCulturalStatus){
+        List<CulturalResourcesDO> traditionalDoctorList = iTraditionalDoctorService.getTraditionalDoctorList(chineseCulturalStatus);
         List<CulturalResourcesDto> chineseCulturalDtoList = new ArrayList<>();
         for (CulturalResourcesDO culturalResourcesDO : traditionalDoctorList) {
             chineseCulturalDtoList.add(

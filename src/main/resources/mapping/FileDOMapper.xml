@@ -182,6 +182,7 @@
         <include refid="Base_Column_List"/>
         FROM tb_culpro_file
         WHERE DATA_CODE = #{dataCode}
+        limit 1
     </select>
 
     <delete id="deleteByDataCode">

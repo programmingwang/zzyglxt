@@ -36,8 +36,8 @@ public class ComicGameController {
     @RequestMapping(value = "/getAll" , method = RequestMethod.GET)
     @ResponseBody
     @LogAnnotation(logTitle = "查询所有动漫游戏", logLevel = "1")
-    public ResponseData getAllComicGame(){
-        List<ChineseCulturalDO> comicGameList = iComicGameService.getComicGameList();
+    public ResponseData getAllComicGame(String chineseCulturalStatus){
+        List<ChineseCulturalDO> comicGameList = iComicGameService.getComicGameList(chineseCulturalStatus);
         List<ChineseCulturalDto> chineseCulturalDtoList = new ArrayList<>();
         for (ChineseCulturalDO chineseCulturalDO : comicGameList) {
             chineseCulturalDtoList.add(

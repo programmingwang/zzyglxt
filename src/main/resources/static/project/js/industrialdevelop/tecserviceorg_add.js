@@ -72,14 +72,13 @@
                 param.address = $("#address").val()
                 param.intruduce = $(".w-e-text").html();
                 param.orgCode = "未定义";
+                param.itemcode = itemcode;
                 return param;
             }
 
             $("#saveBtn").unbind('click').on('click',function () {
                 var param = generateParam();
                 param.status = "——";
-                param.itemcode = itemcode;
-                console.log(uploadImg.isUpdate())
                 if (uploadImg.isUpdate()){
                     ajaxUtil.fileAjax(itemcode,uploadImg.getFiles()[0],"undefined","undefined")
                 }
@@ -107,21 +106,30 @@
                 return false;
             });
 
-            (function init() {
+            var init = function () {
                 if (isUpdate()){
                     var tempdata = JSON.parse(localStorage.getItem("rowData"));
                     $("#name").val(tempdata.name);
                     $("#projectCost").val(tempdata.projectCost);
                     $("#contacts").val(tempdata.contacts);
                     $("#phone").val(tempdata.phone);
-                    $("#addressPro").val(tempdata.addressPro);
-                    $("#addressCity").val(tempdata.addressCity);
-                    $("#addressCountry").val(tempdata.addressCity);
+                    $("#distpicker").distpicker({
+                        province: tempdata.addressPro,
+                        city: tempdata.addressCity,
+                        district: tempdata.addressCountry
+                    });
                     $("#address").val(tempdata.address);
                     $("#intruduce").val(tempdata.intruduce)
                     $(".w-e-text").html(tempdata.projectIntroduce);
+                    itemcode = tempdata.itemcode;
+                }else {
+                    $("#distpicker").distpicker();
                 }
-            }());
+                init = function () {
+
+                }
+            };
+            init();
 
 
             function isUpdate() {

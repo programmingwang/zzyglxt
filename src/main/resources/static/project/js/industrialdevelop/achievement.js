@@ -41,6 +41,7 @@
                             var isSuccess = false;
                             ajaxUtil.myAjax(null,"/industrialdevelop/achievement",projectEntity,function (data) {
                                 if(ajaxUtil.success(data)){
+                                    ajaxUtil.deleteFile(row.itemcode);
                                     alertUtil.info("删除项目成功");
                                     isSuccess = true;
                                     refreshTable();
@@ -89,5 +90,7 @@
                 myTable.free();
                 myTable = bootstrapTableUtil.myBootStrapTableInit("table", url, param, aCol);
             }
+
+            bootstrapTableUtil.globalSearch("table",url,aParam, aCol);
         })
 })();

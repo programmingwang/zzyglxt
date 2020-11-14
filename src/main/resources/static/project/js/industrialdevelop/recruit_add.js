@@ -1,6 +1,6 @@
 (function () {
-    require(['jquery','ajaxUtil','wangEditor'],
-        function (jquery,ajaxUtil, wangEditor) {
+    require(['jquery','ajaxUtil','stringUtil','wangEditor'],
+        function (jquery,ajaxUtil,stringUtil, wangEditor) {
 
             var type = isUpdate() ? "put":"post";
 
@@ -13,6 +13,8 @@
             const editor = new wangEditor('#div1');
 
             const editor2 = new wangEditor('#div2');
+
+            var itemcode = stringUtil.getUUID();
             // 或者 const editor = new E( document.getElementById('div1') )
             //菜单配置
             editor.config.menus = [
@@ -87,6 +89,7 @@
                 param.postDuty = $("#div1 .w-e-text").html();
                 param.postDescr  = $("#div2 .w-e-text").html();
                 param.orgCode = "未定义";
+                param.itemcode = itemcode;
                 return param;
             }
 
@@ -117,8 +120,7 @@
                 return false;
             })
 
-            (function init() {
-                console.log("1233")
+            var init = function () {
                 if (isUpdate()){
                     var tempdata = JSON.parse(localStorage.getItem("rowData"));
                     $("#recruitmentTitle").val(tempdata.recruitmentTitle);
@@ -128,9 +130,14 @@
                     $("#education").val(tempdata.education);
                     $("#emali").val(tempdata.emali);
                     $("#div1 .w-e-text").html(tempdata.postDuty);
-                    $("#div2 .w-e-text").html(tempdata.postDescr)
+                    $("#div2 .w-e-text").html(tempdata.postDescr);
+                    itemcode = tempdata.itemcode;
                 }
-            }());
+                init = function () {
+
+                }
+            };
+            init();
 
 
             function isUpdate() {

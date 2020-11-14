@@ -10,9 +10,9 @@
 
             var itemcode = stringUtil.getUUID();
 
-            var type = isUpdate() ? "put" : "post";
-
             uploadImg.init();
+
+            var type = isUpdate() ? "put" : "post";
 
             const editor = new wangEditor('#div1');
             // 或者 const editor = new E( document.getElementById('div1') )
@@ -59,7 +59,8 @@
             });
 
             $("#cancelBtn").click(function () {
-                orange.redirect(pathUrl)
+                console.log(generateParam())
+                // orange.redirect(pathUrl)
             });
 
             function generateParam() {
@@ -69,10 +70,10 @@
                 param.processingType = $("#processingType").val();
                 param.contacts = $("#contacts").val();
                 param.phone = $("#phone").val();
-                param.addressPro = $("#addressPro").val()
-                param.addressCity = $("#addressCity").val()
-                param.addressCountry = $("#addressCountry").val()
-                param.address = $("#address").val()
+                param.addressPro = $("#addressPro").val();
+                param.addressCity = $("#addressCity").val();
+                param.addressCountry = $("#addressCountry").val();
+                param.address = $("#address").val();
                 param.intruduce = $(".w-e-text").html();
                 param.type = orgType;
                 return param;
@@ -109,28 +110,43 @@
                 return false;
             });
 
-            (function init() {
+            var init = function () {
                 if (isUpdate()) {
                     var tempdata = JSON.parse(localStorage.getItem("rowData"));
                     $("#name").val(tempdata.name);
                     $("#areaCoverd").val(tempdata.areaCoverd);
                     $("#processingType").val(tempdata.processingType);
                     $("#contacts").val(tempdata.contacts);
-                    $("#addressPro").val(tempdata.addressPro);
-                    $("#addressCity").val(tempdata.addressCity);
-                    $("#addressCountry").val(tempdata.addressCity);
+                    $("#distpicker").distpicker({
+                        province: tempdata.addressPro,
+                        city: tempdata.addressCity,
+                        district: tempdata.addressCountry
+                    });
                     $("#address").val(tempdata.address);
                     $("#phone").val(tempdata.phone);
                     $(".w-e-text").html(tempdata.intruduce);
-                    itemcode = tempdata.itemcode
+                    itemcode = tempdata.itemcode;
                     uploadImg.setImgSrc(tempdata.filePath)
+                }else {
+                    $("#distpicker").distpicker();
                 }
-            }());
+                init = function () {
+
+                }
+            };
+            init();
+
+
+
+
+
+
 
 
             function isUpdate() {
                 return (localStorage.getItem("rowData") != null || localStorage.getItem("rowData") != undefined)
             }
+
         })
 })();
 

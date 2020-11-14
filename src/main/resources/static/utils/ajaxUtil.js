@@ -115,6 +115,54 @@
             });
         }
 
+        function deleteFile(dataCode){
+            var formData = new FormData();
+            formData.append("dataCode",dataCode);
+            $.ajax({
+                url:"/file/delete",
+                type:'GET',
+                data: formData,
+                processData: false,   // jQuery不要去处理发送的数据
+                contentType: false,   // jQuery不要去设置Content-Type请求头
+                success:function(data){
+                    if(data && data.code == successCode){
+                        alertUtil.success(data.msg);
+                    }else{
+                        alertUtil.error(data.msg);
+                    }
+                },
+                error: function(data){
+                    alertUtil.error(data.msg)
+                }
+            });
+        }
+
+        function updateFile(dataCode, file, uploader,uploaderCode,itemcode){
+            var formData = new FormData();
+            formData.append("dataCode",dataCode);
+            formData.append("file",file);
+            formData.append("itemcode",itemcode);
+            formData.append("uploader",uploader);
+            formData.append("uploaderCode",uploaderCode);
+            $.ajax({
+                url:"/file/update",
+                type:'POST',
+                data: formData,
+                processData: false,   // jQuery不要去处理发送的数据
+                contentType: false,   // jQuery不要去设置Content-Type请求头
+                success:function(data){
+                    if(data && data.code == successCode){
+                        alertUtil.success(data.msg);
+                    }else{
+                        alertUtil.error(data.msg);
+                    }
+                },
+                error: function(data){
+                    alertUtil.error(data.msg)
+                }
+            });
+        }
+
 
 
 
@@ -128,7 +176,9 @@
             notLoggedIn:notLoggedIn,
             myAjax:myAjax,
             fileAjax: fileAjax,
-            successCode:successCode
+            successCode:successCode,
+            deleteFile: deleteFile,
+            updateFile: updateFile
         }
     })
 })();

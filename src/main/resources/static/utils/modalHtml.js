@@ -94,7 +94,7 @@
             '                    <div class="input-group-prepend">\n' +
             '                        <span class="input-group-text">附件</span>\n' +
             '                    </div>\n' +
-            '                    <a src="#"></a>\n' +
+            '                    <span id="upFile" src="#"></span>\n' +
             '                </div>\n' +
             '            </div>\n' +
             '\n' +

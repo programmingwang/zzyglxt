@@ -8,6 +8,7 @@ import com.zyyglxt.error.EmBusinessError;
 import com.zyyglxt.util.DateUtils;
 import com.zyyglxt.util.UUIDUtils;
 import com.zyyglxt.service.ITraditionalDoctorService;
+import com.zyyglxt.util.UsernameUtil;
 import com.zyyglxt.validator.ValidatorImpl;
 import com.zyyglxt.validator.ValidatorResult;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +34,10 @@ public class TraditionalDoctorServiceImpl implements ITraditionalDoctorService {
     @Autowired
     private ValidatorImpl validator;
 
+    @Autowired
+    private UsernameUtil usernameUtil;
+
+
     @Override
     public CulturalResourcesDO getTraditionalDoctor(CulturalResourcesDOKey key) {
         return culturalResourcesDOMapper.selectByPrimaryKey(key,"历代名家");
@@ -54,9 +59,9 @@ public class TraditionalDoctorServiceImpl implements ITraditionalDoctorService {
         if(result.isHasErrors()){
             throw new BusinessException(result.getErrMsg(), EmBusinessError.PARAMETER_VALIDATION_ERROR);
         }
-        record.setCreater("");
+        record.setCreater(usernameUtil.getOperateUser());
         record.setItemcreateat(DateUtils.getDate());
-        record.setUpdater("");
+        record.setUpdater(usernameUtil.getOperateUser());
         record.setChineseCulturalType("历代名家");
         record.setChineseCulturalStatus("--");
         //如果前台没有插入图片或者附件，就自己生成uuid
@@ -79,7 +84,7 @@ public class TraditionalDoctorServiceImpl implements ITraditionalDoctorService {
         if(result.isHasErrors()){
             throw new BusinessException(result.getErrMsg(), EmBusinessError.PARAMETER_VALIDATION_ERROR);
         }
-        record.setUpdater("");
+        record.setUpdater(usernameUtil.getOperateUser());
         record.setItemupdateat(new Date());
         return culturalResourcesDOMapper.updateByPrimaryKeySelective(record);
     }

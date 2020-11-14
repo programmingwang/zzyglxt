@@ -18,7 +18,7 @@ public class OrganizationDO {
 
     private String backup1;
 
-    private String backup2;
+    private String auditStatus;
 
     private Integer left;
 
@@ -90,12 +90,12 @@ public class OrganizationDO {
         this.backup1 = backup1 == null ? null : backup1.trim();
     }
 
-    public String getBackup2() {
-        return backup2;
+    public String getAuditStatus() {
+        return auditStatus;
     }
 
-    public void setBackup2(String backup2) {
-        this.backup2 = backup2 == null ? null : backup2.trim();
+    public void setAuditStatus(String auditStatus) {
+        this.auditStatus = auditStatus == null ? null : auditStatus.trim();
     }
 
     public Integer getLeft() {

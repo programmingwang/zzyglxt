@@ -44,30 +44,6 @@ public class UserController {
     }
 
     /**
-     * 用户登录，接收前段传递的数据，到service层
-     *
-     * @param userDto
-     */
-    /*@RequestMapping(value = "/login", method = RequestMethod.POST)
-    public ResponseData Login(UserDto userDto) throws BusinessException {
-        int result = userService.Login(userDto.getUsername(), userDto.getPassword());
-        if (result == 200) {
-            return new ResponseData(EmBusinessError.success);
-        } else {
-            return new ResponseData(EmBusinessError.USER_LOGIN_FAILED);
-        }
-    }*/
-
-    /**
-     * 用户登出
-     */
-    /*@RequestMapping(value = "/logout", method = RequestMethod.GET)
-    public ResponseData Logout() {
-        userService.Logout();
-        return new ResponseData(EmBusinessError.success);
-    }*/
-
-    /**
      * 根据电话号码来修改密码
      *
      * @param updatePwdDto

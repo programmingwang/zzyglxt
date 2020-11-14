@@ -2,7 +2,7 @@
     margin-top: 8%;
     width: 100%;
     height: 100%;
-    background-image: url('static/images/bg-border.png');
+    background-image: url('../../../images/bg-border.png');
     background-size: 100% 100%;
     background-repeat: no-repeat;
     padding: 40px 50px;
@@ -46,8 +46,9 @@
     background-color: #9c7049;
     color: white;
     width: 100%;
-    height: 30px;
-    margin-top: 10px;
+    height: 100%;
+    margin: 15px auto;
+    display: block;
 }
 
 html, body {
@@ -58,7 +59,7 @@ html, body {
 .reg-content-body {
     width: 100%;
     height: 100%;
-    background-image: url('static/images/bg.jpg');
+    background-image: url('../../../images/bg.jpg');
     background-size: 100% auto;
     background-repeat: no-repeat;
 }

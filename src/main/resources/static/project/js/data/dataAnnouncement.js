@@ -75,9 +75,7 @@
             {field: 'dataTitle', title: '通知名称'},
             {field: 'dataSource', title: '来源'},
             {field: 'filePath', title: '附件名称', formatter:function (value, row, index) {
-                    if(value == "已经损坏了"){
-                        return '<p>'+value+'</p>';
-                    }else if (row.fileName == null){
+                    if (row.fileName == null){
                         return '<p>————</p>';
                     }else{
                         return '<a href="'+value+'">'+row.fileName+'</a>'

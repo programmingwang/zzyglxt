@@ -33,12 +33,12 @@ public class DataProcessServiceImpl implements IDataProcessService {
 
     @Override
     public DataDO selectProcess(DataDOKey key) {
-        return dataDOMapper.selectByPrimaryKey(key,"办事流程");
+        return dataDOMapper.selectByPrimaryKey(key,"办事指南");
     }
 
     @Override
     public List<DataDO> selectProcessList() {
-        return dataDOMapper.selectByAllData("办事流程");
+        return dataDOMapper.selectByAllData("办事指南");
     }
 
     @Override
@@ -51,7 +51,7 @@ public class DataProcessServiceImpl implements IDataProcessService {
         record.setCreater("test");
         record.setItemupdateat(new Date());
         record.setUpdater("test");
-        record.setDataType("办事流程");
+        record.setDataType("办事指南");
         record.setDataStatus("待上架");
         if(record.getItemcode() == null){
             record.setItemcode(UUIDUtils.getUUID());

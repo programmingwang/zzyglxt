@@ -1,6 +1,6 @@
 (function () {
-    require(['jquery','wangEditor','ajaxUtil','alertUtil','stringUtil','fileUtil',],
-        function (jquery,wangEditor,ajaxUtil,alertUtil,stringUtil,fileUtil) {
+    require(['jquery','wangEditor','ajaxUtil','alertUtil','stringUtil','fileUtil','dictUtil'],
+        function (jquery,wangEditor,ajaxUtil,alertUtil,stringUtil,fileUtil,dictUtil) {
             const editor = new wangEditor('#div1')
             // 或者 const editor = new E( document.getElementById('div1') )
             //菜单配置
@@ -44,6 +44,9 @@
                     alert("字数不能超过10000");                  //将替换的值赋值给当前对象
                 }
             });
+
+            /*下拉框值*/
+            $("#dataFileType").selectUtil(dictUtil.getDictByCode(dictUtil.DICT_LIST.dataFileType));
 
             $("#cancelbtn").unbind().on('click',function () {
                 var url = "/data/dataRegulation";

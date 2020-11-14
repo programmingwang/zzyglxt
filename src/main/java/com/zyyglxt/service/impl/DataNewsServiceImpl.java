@@ -33,17 +33,17 @@ public class DataNewsServiceImpl implements IDataNewsService {
 
     @Override
     public DataDO selectNewsInf(DataDOKey key) {
-        return dataDOMapper.selectByPrimaryKey(key,"新闻管理");
+        return dataDOMapper.selectByPrimaryKey(key,"新闻");
     }
 
     @Override
     public List<DataDO> selectNewsInfList() {
-        return dataDOMapper.selectByAllData("新闻管理");
+        return dataDOMapper.selectByAllData("新闻");
     }
 
     @Override
     public List<DataDO> selectNewsRotList() {
-        return dataDOMapper.getAllNewsRot("新闻管理");
+        return dataDOMapper.getAllNewsRot("新闻");
     }
 
     @Override
@@ -56,7 +56,7 @@ public class DataNewsServiceImpl implements IDataNewsService {
         record.setCreater("test");
         record.setItemupdateat(new Date());
         record.setUpdater("test");
-        record.setDataType("新闻管理");
+        record.setDataType("新闻");
         record.setDataStatus("待上架");
         //如果前台没有插入图片或者附件，就自己生成uuid
         if(record.getItemcode() == null){

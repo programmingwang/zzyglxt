@@ -17,7 +17,7 @@ public interface IIntangibleCulturalHeritageService {
     ChineseCulturalDO getIntangibleCulturalHeritage(ChineseCulturalDOKey key);
 
     //查询所有非物质文化遗产
-    List<ChineseCulturalDO> getIntangibleCulturalHeritageList();
+    List<ChineseCulturalDO> getIntangibleCulturalHeritageList(String chineseCulturalStatus);
 
     //增加一个非物质文化遗产
     int addIntangibleCulturalHeritage(ChineseCulturalDO record);

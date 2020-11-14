@@ -26,10 +26,10 @@ public class IDUtil {
         try {
             //判断号码的长度 15位或18位
             if (idStr.length() != 15 && idStr.length() != 18) {
-                return "身份证号码长度应该为15位或18位";
+                return "身份证号码错误";
             }
             if (!isStrNum(iDCardNo)) {
-                return "身份证15位号码都应为数字;18位号码除最后一位外,都应为数字";
+                return "身份证号码错误";
             }
             if (idStr.length() == 18) {
                 iDCardNo = idStr.substring(0, 17);
@@ -41,23 +41,23 @@ public class IDUtil {
             String strMonth = iDCardNo.substring(10, 12);// 月份
             String strDay = iDCardNo.substring(12, 14);// 月份
             if (!isStrDate(strYear + "-" + strMonth + "-" + strDay)) {
-                return "身份证生日无效";
+                return "身份证号码错误";
             }
             GregorianCalendar gc = new GregorianCalendar();
             SimpleDateFormat s = new SimpleDateFormat("yyyy-MM-dd");
             if ((gc.get(Calendar.YEAR) - Integer.parseInt(strYear)) > 150 || (gc.getTime().getTime() - s.parse(strYear + "-" + strMonth + "-" + strDay).getTime()) < 0) {
-                return "身份证生日不在有效范围";
+                return "身份证号码错误";
             }
             if (Integer.parseInt(strMonth) > 12 || Integer.parseInt(strMonth) == 0) {
-                return "身份证月份无效";
+                return "身份证号码错误";
             }
             if (Integer.parseInt(strDay) > 31 || Integer.parseInt(strDay) == 0) {
-                return "身份证日期无效";
+                return "身份证号码错误";
             }
             //判断地区码
             Hashtable<String, String> h = GetAreaCode();
             if (h.get(iDCardNo.substring(0, 2)) == null) {
-                return "身份证地区编码错误";
+                return "身份证号码错误";
             }
             //判断最后一位
             int theLastOne = 0;
@@ -68,7 +68,7 @@ public class IDUtil {
             String strVerifyCode = wf[modValue];
             iDCardNo = iDCardNo + strVerifyCode;
             if (idStr.length() == 18 &&!iDCardNo.equals(idStr)) {
-                return "身份证无效，不是合法的身份证号码";
+                return "身份证号码错误";
             }
         }catch (Exception e){
             e.printStackTrace();

@@ -1,5 +1,5 @@
 #portrait {
-    width: 227px;
+    width: auto;
 }
 
 #userMessage {
@@ -9,6 +9,10 @@
 div {
     margin-bottom: 10px;
     justify-content: center;
+}
+
+#returnToMain{
+    margin-right: 100px;
 }
 
 label {

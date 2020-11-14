@@ -2,12 +2,15 @@ package com.zyyglxt.controller.user;
 
 import com.zyyglxt.annotation.LogAnnotation;
 import com.zyyglxt.common.Result;
+import com.zyyglxt.dataobject.OrganizationDO;
 import com.zyyglxt.dataobject.UserDO;
 import com.zyyglxt.dto.UpdatePwdDto;
 import com.zyyglxt.dto.UserDto;
+import com.zyyglxt.dto.UserSessionDto;
 import com.zyyglxt.error.BusinessException;
 import com.zyyglxt.error.EmBusinessError;
 import com.zyyglxt.response.ResponseData;
+import com.zyyglxt.service.IOrganizationService;
 import com.zyyglxt.service.IUserService;
 import com.zyyglxt.util.UserUtil;
 import com.zyyglxt.validator.ValidatorImpl;
@@ -16,6 +19,9 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 /**
  * @Author nongcn
@@ -28,6 +34,10 @@ public class UserController {
 
     @Autowired
     IUserService userService;
+    @Autowired
+    IOrganizationService organizationService;
+    @Autowired
+    HttpServletRequest request;
 
     /**
      * 用户注册，接收前段传递的数据，到service层
@@ -42,30 +52,6 @@ public class UserController {
             return new ResponseData(EmBusinessError.USER_REGISTER_FAILED);
         }
     }
-
-    /**
-     * 用户登录，接收前段传递的数据，到service层
-     *
-     * @param userDto
-     */
-    /*@RequestMapping(value = "/login", method = RequestMethod.POST)
-    public ResponseData Login(UserDto userDto) throws BusinessException {
-        int result = userService.Login(userDto.getUsername(), userDto.getPassword());
-        if (result == 200) {
-            return new ResponseData(EmBusinessError.success);
-        } else {
-            return new ResponseData(EmBusinessError.USER_LOGIN_FAILED);
-        }
-    }*/
-
-    /**
-     * 用户登出
-     */
-    /*@RequestMapping(value = "/logout", method = RequestMethod.GET)
-    public ResponseData Logout() {
-        userService.Logout();
-        return new ResponseData(EmBusinessError.success);
-    }*/
 
     /**
      * 根据电话号码来修改密码
@@ -104,6 +90,71 @@ public class UserController {
     @RequestMapping(value = "/updateusermsg", method = RequestMethod.POST)
     public ResponseData updateUserMsg(UserDO userDO) {
         userService.UpdateUserMsg(userDO);
+        return new ResponseData(EmBusinessError.success);
+    }
+
+    /**
+     * 查询出所有机构用于渲染在 市局审核 表格上
+     *
+     * @return
+     */
+    @LogAnnotation(logTitle = "查询所有机构（市局）", logLevel = "1")
+    @RequestMapping(value = "/queryAllOrg", method = RequestMethod.GET)
+    public ResponseData selectOrganization1() {
+        List<OrganizationDO> organizationDO = organizationService.selectAllOrgByAuditStatus1();
+        return new ResponseData(EmBusinessError.success, organizationDO);
+    }
+
+    /**
+     * 查询出所有机构用于渲染在 省局审核 表格上
+     *
+     * @return
+     */
+    @LogAnnotation(logTitle = "查询所有机构（省局）", logLevel = "1")
+    @RequestMapping(value = "/selectAllOrg", method = RequestMethod.GET)
+    public ResponseData selectOrganization2() {
+        List<OrganizationDO> organizationDO = organizationService.selectAllOrgByAuditStatus2();
+        return new ResponseData(EmBusinessError.success, organizationDO);
+    }
+
+    @LogAnnotation(logTitle = "机构通过审核", logLevel = "2")
+    @RequestMapping(value = "/checkOrgPass", method = RequestMethod.POST)
+    public ResponseData orgAudit1(@RequestBody OrganizationDO organizationDO) {
+        UserSessionDto user = (UserSessionDto) request.getSession().getAttribute("user");
+        if ("市级中医药管理部门".equals(user.getRolename())) {
+            if ("待审核".equals(organizationDO.getAuditStatus())) {
+                organizationDO.setAuditStatus("市局审核已通过");
+            }
+        } else if ("省局中医药管理部门".equals(user.getRolename())){
+            if ("待审核".equals(organizationDO.getAuditStatus())) {
+                organizationDO.setAuditStatus("省局审核已通过");
+            }
+            if ("市局审核已通过".equals(organizationDO.getAuditStatus())) {
+                organizationDO.setAuditStatus("省局审核已通过");
+            }
+        }
+
+        organizationService.orgAudit(organizationDO);
+        return new ResponseData(EmBusinessError.success);
+    }
+
+    @LogAnnotation(logTitle = "机构未通过审核", logLevel = "2")
+    @RequestMapping(value = "/checkOrgNotPass", method = RequestMethod.POST)
+    public ResponseData orgAudit2(@RequestBody OrganizationDO organizationDO) {
+        UserSessionDto user = (UserSessionDto) request.getSession().getAttribute("user");
+        if ("市级中医药管理部门".equals(user.getRolename())) {
+            if ("待审核".equals(organizationDO.getAuditStatus())) {
+                organizationDO.setAuditStatus("市局审核未通过");
+            }
+        } else if ("省局中医药管理部门".equals(user.getRolename())){
+            if ("待审核".equals(organizationDO.getAuditStatus())) {
+                organizationDO.setAuditStatus("省局审核未通过");
+            }
+            if ("市局审核已通过".equals(organizationDO.getAuditStatus())) {
+                organizationDO.setAuditStatus("省局审核未通过");
+            }
+        }
+        organizationService.orgAudit(organizationDO);
         return new ResponseData(EmBusinessError.success);
     }
 }

@@ -22,13 +22,12 @@
                 return preUrl + "&"+status+"=处长已审核&"+status+"=待审核"
             }else if(role === "文化宣传综合处处长"){
                 return preUrl + "&"+status+"=处长已审核"
-                return preUrl + "&chineseCulturalStatus=处长已审核"
             }else if(role === "政务资源科员"){
-                return preUrl + "&dataStatus=--&&dataStatus=待审核"
+                return preUrl + "&"+status+"=--&"+status+"=待审核"
             }else if(role === "政务资源处长"){
-                return preUrl + "&dataStatus=处长已审核&&dataStatus=待审核"
+                return preUrl + "&"+status+"=处长已审核&"+status+"=待审核"
             }else if(role === "政务资源综合处处长") {
-                return preUrl + "&dataStatus=处长已审核"
+                return preUrl + "&"+status+"=处长已审核"
             }
         }
         

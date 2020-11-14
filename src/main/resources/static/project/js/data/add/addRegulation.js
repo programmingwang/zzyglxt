@@ -69,7 +69,7 @@
                     };
                 }else{
                     var needData = JSON.parse(localStorage.getItem("rowData"));
-                    addUpdateUrl = "/datado/regulation/insertRegulation";
+                    addUpdateUrl = "/datado/regulation/updateRegulation";
                     RegulationEntity = {
                         itemid: needData.itemid,
                         itemcode: needData.itemcode,

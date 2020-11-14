@@ -1,5 +1,6 @@
 package com.zyyglxt.dao;
 
+import com.zyyglxt.dataobject.ChineseCulturalDOKey;
 import com.zyyglxt.dataobject.FamPreDO;
 import com.zyyglxt.dataobject.FamPreDOKey;
 import org.apache.ibatis.annotations.Mapper;
@@ -27,9 +28,9 @@ public interface FamPreDOMapper {
 
     int updateByPrimaryKey(FamPreDO record);
 
-    List<FamPreDO> selectAllFamPre();//查询所有历史名方
+    List<FamPreDO> selectAllFamPre(@Param("status") String status);//查询所有历史名方
 
-    List<FamPreDO> selectAllStatusFamPreList(List<String> status);//查询所有历史名方的状态
+    int changeStatusToFamPre(@Param("key") FamPreDOKey key , @Param("status") String status);//历史名方数据状态
 
     int updateVisitNumFamPre(FamPreDOKey key);
 

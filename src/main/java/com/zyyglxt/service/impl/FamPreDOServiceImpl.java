@@ -64,18 +64,23 @@ public class FamPreDOServiceImpl implements FamPreDOService {
     }
 
     @Override
-    public List<FamPreDO> selectAllFamPre() {
-        return famPreDOMapper.selectAllFamPre();
-    }
-     /*查询所有历史名方的状态*/
-    @Override
-    public List<FamPreDO> selectAllStatusFamPreList(List<String> status) {
+    public List<FamPreDO> selectAllFamPre(List<String> status) {
         List<FamPreDO> famPreDOList=new ArrayList<>();
         for(String fampreStatus: status){
-            //famPreDOList.addAll(famPreDOMapper.selectAllStatusFamPreList("",fampreStatus));
+            famPreDOList.addAll(famPreDOMapper.selectAllFamPre(fampreStatus));
         }
         return famPreDOList;
     }
+            /*历史名方数据状态*/
+    @Override
+    public int changeStatusToFamPre(FamPreDOKey key, String status) {
+        return famPreDOMapper.changeStatusToFamPre(key,status);
+    }
+
+    /*@Override
+    public List<FamPreDO> selectAllFamPre() {
+        return famPreDOMapper.selectAllFamPre();
+    }*/
 
         /*点击浏览次数*/
     @Override

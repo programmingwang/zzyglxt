@@ -236,7 +236,17 @@
   <select id="selectAllHealthCareChineseMedicine" resultMap="BaseResultMap">
         SELECT *
         FROM tb_health_care_chinese_medicine
-        ORDER BY itemCreateAt
+        WHERE CHINESE_MEDICINE_STATUS = #{chineseMedicineStatus,jdbcType=VARCHAR}
     </select>
 
+  <update id="changeStatusToMedicine">
+    update tb_health_care_chinese_medicine
+    <set>
+      <if test="status != null">
+        CHINESE_MEDICINE_STATUS = #{chineseMedicineStatus,jdbcType=VARCHAR}
+      </if>
+    </set>
+    where itemID = #{key.itemid,jdbcType=INTEGER}
+    and itemCode = #{key.itemcode,jdbcType=CHAR}
+  </update>
 </mapper>

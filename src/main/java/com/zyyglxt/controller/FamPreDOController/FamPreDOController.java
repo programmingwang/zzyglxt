@@ -1,6 +1,7 @@
 package com.zyyglxt.controller.FamPreDOController;
 
 import com.zyyglxt.annotation.LogAnnotation;
+import com.zyyglxt.dataobject.ChineseCulturalDOKey;
 import com.zyyglxt.dataobject.FamPreDO;
 import com.zyyglxt.dataobject.FamPreDOKey;
 import com.zyyglxt.dataobject.HealthCareChineseMedicineDO;
@@ -69,20 +70,23 @@ public class FamPreDOController {
     }
     /*历史名方所有数据查询*/
     @RequestMapping(value ="selectallfampredo",method = RequestMethod.GET )
-    @LogAnnotation(appCode ="",logTitle ="查看所有历史名方",logLevel ="1",creater ="",updater = "")
-    public ResponseData selectAllFamPreDOMapper(Model model){
-        List<FamPreDO> famPreDOList = famPreDOService.selectAllFamPre();
-        model.addAttribute("traditionalCulturalList",famPreDOList);
+    @ResponseBody
+    @LogAnnotation(appCode ="",logTitle ="查看所有历史名方",logLevel ="1",creater ="huangwj",updater = "huangwj")
+    public ResponseData selectAllFamPreDOMapper(@RequestParam(value = "status")List status){
+        List<FamPreDO> famPreDOList = famPreDOService.selectAllFamPre(status);
         return new ResponseData(EmBusinessError.success,famPreDOList);
     }
-
-    /*查询所有历史名方数据状态*//*
-    @RequestMapping(value ="selectallstatusfampredo",method = RequestMethod.GET )
-    @LogAnnotation(appCode ="",logTitle ="查看所有历史名方数据状态",logLevel ="1",creater ="huangwj",updater = "huangwj")
-    public ResponseData selectAllStatusFamPreDOMapper(@RequestParam(value = "status")List status){
-        List<FamPreDO> healthCareChineseMedicineDOSList = famPreDOService.selectAllStatusFamPre(status);
-        return new ResponseData(EmBusinessError.success,healthCareChineseMedicineDOSList);
-    }*/
+         /*历史名方数据状态*/
+    @RequestMapping(value = "changestatustofampre/{itemID}/{itemCode}" , method = RequestMethod.POST)
+    @ResponseBody
+    @LogAnnotation(logTitle = "修改历史名方数据状态", logLevel = "2")
+    public ResponseData changeStatusToFamPre(@RequestParam("status") String status , @PathVariable("itemID") Integer itemID , @PathVariable("itemCode")String itemCode){
+        FamPreDOKey famPreDOKey = new FamPreDOKey();
+        famPreDOKey.setItemid(itemID);
+        famPreDOKey.setItemcode(itemCode);
+        famPreDOService.changeStatusToFamPre(famPreDOKey,status);
+        return new ResponseData(EmBusinessError.success);
+    }
     /**
      * 增加点击数
      * @param key

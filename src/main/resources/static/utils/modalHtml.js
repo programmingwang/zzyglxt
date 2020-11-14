@@ -111,6 +111,59 @@
             '            </div>\n'+
 
             '</div>';
+        modalHtml.myViewFamPreModal =
+            '<div class="row">'+
+            '            <div class="col-lg-12 col-md-12">\n' +
+            '                <fieldset disabled>'+
+            '                <div class="input-group mb-3">\n' +
+            '                    <div class="input-group-prepend">\n' +
+            '                        <span class="input-group-text" >方名</span>\n' +
+            '                    </div>\n' +
+            '                    <input type="text" id="name" class="form-control">\n' +
+            '                </div>\n' +
+            '            </div>\n' +
+            '\n' +
+            '            <div class="col-lg-12 col-md-12">\n' +
+            '                <fieldset disabled>'+
+            '                <div class="input-group mb-3">\n' +
+            '                    <div class="input-group-prepend">\n' +
+            '                        <span class="input-group-text" >出处</span>\n' +
+            '                    </div>\n' +
+            '                   <input type="text" id="source" class="form-control">\n' +
+            '                </div>\n' +
+            '            </div>\n' +
+            '\n' +
+            '            <div class="col-lg-12 col-md-12">\n' +
+            '                <fieldset disabled>'+
+            '                <div class="input-group mb-3">\n' +
+            '                    <div class="input-group-prepend">\n' +
+            '                        <span id="culturalContentSpan" class="input-group-text" >处方</span>\n' +
+            '                    </div>\n' +
+            '                    <input type="text" id="prescription" class="form-control">\n' +
+            '                </div>\n' +
+            '            </div>\n' +
+            '\n' +
+            '            <div class="col-lg-12 col-md-12">\n' +
+            '                <fieldset disabled>'+
+            '                <div class="input-group mb-3">\n' +
+            '                    <div class="input-group-prepend">\n' +
+            '                        <span class="input-group-text" >制法及用法</span>\n' +
+            '                    </div>\n' +
+            '                    <input type="text" id="content" class="form-control">\n' +
+            '                </div>\n' +
+            '            </div>\n' +
+            '\n' +
+            '            <div class="col-lg-6 col-md-6">\n' +
+            '                <fieldset disabled>'+
+            '                <div class="input-group mb-3">\n' +
+            '                    <div class="input-group-prepend">\n' +
+            '                        <label class="input-group-text" for="applicant">数据状态</label>\n' +
+            '                    </div>\n' +
+            '                    <input type="text"  id="status" class="form-control">\n' +
+            '                </div>\n' +
+            '                </fieldset>'+
+            '            </div>\n'+
+            '</div>';
 
         modalHtml.myDeleteModalTravel = '是否删除景点信息?';
         modalHtml.myDeleteModalTraditionalCul = '是否删除中医医史信息?';

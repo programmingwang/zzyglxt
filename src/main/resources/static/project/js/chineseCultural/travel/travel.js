@@ -151,7 +151,6 @@
                         modalClass : "modal-lg",
                         confirmButtonStyle: "display:none",
                     };
-                    console.log(row);
                     var myTravelModal = modalUtil.init(myViewTravelModalData);
                     $("#chineseCulturalName").val(row.chineseCulturalName);
                     $("#chineseCulturalSource").val(row.chineseCulturalSource);

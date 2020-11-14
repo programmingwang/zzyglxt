@@ -90,7 +90,8 @@
             orange: '../project/js/orange',
             userLogin: '../project/js/user/login',
             index: '../project/js/index',
-            userMsg: '../project/js/user/usermsg'
+            userMsg: '../project/js/user/usermsg',
+            register: '../project/js/user/register'
 
         },
         waitSeconds: 0,
@@ -106,7 +107,8 @@
     var rArr = [
         {path:"/main",jspath:"index"},
         {path:"/userLogin",jspath:"userLogin"},
-        {path:"/toUserMsg",jspath:"userMsg"}
+        {path:"/toUserMsg",jspath:"userMsg"},
+        {path:"/register",jspath:"register"}
 
     ];
 

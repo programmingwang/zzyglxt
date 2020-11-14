@@ -3,8 +3,8 @@
         function (jquery,ajaxUtil,bootstrapTableUtil,objectUtil,alertUtil,modalUtil,selectUtil,stringUtil,dictUtil) {
 
 
-            var url = "selectallhealthsciknowdo?scienceKnowledgeStatus=已下架&scienceKnowledgeStatus=展示中&scienceKnowledgeStatus=待审核&scienceKnowledgeStatus=--";
-            url = selectUtil.getRoleTable(sessionStorage.getItem("rolename"),url);
+            var url = "selectallhealthsciknowdo";
+            url = selectUtil.getRoleTable(sessionStorage.getItem("rolename"),url,"scienceKnowledgeStatus");
             var aParam = {
 
             };

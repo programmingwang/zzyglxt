@@ -2,9 +2,9 @@
     require(['jquery', 'ajaxUtil','bootstrapTableUtil','objectUtil','alertUtil','modalUtil','selectUtil','stringUtil','dictUtil'],
         function (jquery,ajaxUtil,bootstrapTableUtil,objectUtil,alertUtil,modalUtil,selectUtil,stringUtil,dictUtil) {
 
-            var url = "selectallfampredo?status=已下架&status=展示中&status=待审核&status=--";
+            var url = "selectallfampredo";
             //角色加载工具
-            url = selectUtil.getRoleTable(sessionStorage.getItem("rolename"),url);
+            url = selectUtil.getRoleTable(sessionStorage.getItem("rolename"),url,"status");
 
             var aParam = {
 

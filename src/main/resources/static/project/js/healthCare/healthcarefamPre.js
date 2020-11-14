@@ -2,8 +2,8 @@
     require(['jquery', 'ajaxUtil','bootstrapTableUtil','objectUtil','alertUtil','modalUtil','selectUtil','stringUtil','dictUtil'],
         function (jquery,ajaxUtil,bootstrapTableUtil,objectUtil,alertUtil,modalUtil,selectUtil,stringUtil,dictUtil) {
 
-            var url = "selectallhealthcarefampredo?status=已下架&status=展示中&status=待审核&status=--";
-            url = selectUtil.getRoleTable(sessionStorage.getItem("rolename"),url);
+            var url = "selectallhealthcarefampredo";
+            url = selectUtil.getRoleTable(sessionStorage.getItem("rolename"),url,"status");
             var aParam = {
             };
 
@@ -49,7 +49,7 @@
                         modalConfirmFun:function () {
                             var isSuccess = false;
                             var submitStatus = {
-                                "status": selectUtil.getStatus(sessionStorage.getItem("rolename"))
+                                "status":selectUtil.getStatus(sessionStorage.getItem("rolename"))
                             };
                             ajaxUtil.myAjax(null,"changestatustocarefam/"+row.itemid+"/"+row.itemcode,submitStatus,function (data) {
                                 if(ajaxUtil.success(data)){

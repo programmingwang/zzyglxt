@@ -2,9 +2,9 @@
     require(['jquery', 'ajaxUtil','bootstrapTableUtil','objectUtil','alertUtil','modalUtil','selectUtil','stringUtil','dictUtil'],
         function (jquery,ajaxUtil,bootstrapTableUtil,objectUtil,alertUtil,modalUtil,selectUtil,stringUtil,dictUtil) {
 
-            var url = "selectallhealthcarechinesemedicinedo?chineseMedicineStatus=已下架&chineseMedicineStatus=展示中&chineseMedicineStatus=待审核&chineseMedicineStatus=--";
+            var url = "selectallhealthcarechinesemedicinedo";
 
-            url = selectUtil.getRoleTable(sessionStorage.getItem("rolename"),url);
+            url = selectUtil.getRoleTable(sessionStorage.getItem("rolename"),url,"chineseMedicineStatus");
             var aParam = {
 
             };
@@ -50,7 +50,7 @@
                         modalConfirmFun:function () {
                             var isSuccess = false;
                             var submitStatus = {
-                                "chineseMedicineStatus": selectUtil.getStatus(sessionStorage.getItem("rolename"))
+                                "chineseMedicineStatus":selectUtil.getStatus(sessionStorage.getItem("rolename"))
                             };
                             ajaxUtil.myAjax(null,"changestatustomedicine/"+row.itemid+"/"+row.itemcode,submitStatus,function (data) {
                                 if(ajaxUtil.success(data)){

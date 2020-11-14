@@ -199,20 +199,20 @@
                     level:"2",
                     pid:"10"
                 },
-                {
-                    menu_name: "中医药名校",
-                    menu_url: "/knowledgeDb/dataBack",
-                    id: "11",
-                    level: "1",
-                    pid: ""
-                },
-                {
-                    menu_name: "中医药名企",
-                    menu_url: "/knowledgeDb/dataBack",
-                    id: "12",
-                    level: "1",
-                    pid: ""
-                },
+                // {
+                //     menu_name: "中医药名校",
+                //     menu_url: "/knowledgeDb/dataBack",
+                //     id: "11",
+                //     level: "1",
+                //     pid: ""
+                // },
+                // {
+                //     menu_name: "中医药名企",
+                //     menu_url: "/knowledgeDb/dataBack",
+                //     id: "12",
+                //     level: "1",
+                //     pid: ""
+                // },
                 {
                     menu_name: "信息发布",
                     menu_url: "/data/dataNewsRotations",

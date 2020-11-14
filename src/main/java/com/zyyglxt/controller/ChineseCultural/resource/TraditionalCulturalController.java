@@ -34,8 +34,8 @@ public class TraditionalCulturalController {
     @RequestMapping(value = "/getAll" , method = RequestMethod.GET)
     @ResponseBody
     @LogAnnotation(logTitle = "查询所有中医医史", logLevel = "1")
-    public ResponseData getAllTraditionalCultural(){
-        List<CulturalResourcesDO> traditionalCulturalList = traditionalCulturalService.getTraditionalCulturalList();
+    public ResponseData getAllTraditionalCultural(@RequestParam(value = "chineseCulturalStatus")List chineseCulturalStatus){
+        List<CulturalResourcesDO> traditionalCulturalList = traditionalCulturalService.getTraditionalCulturalList(chineseCulturalStatus);
         return new ResponseData(EmBusinessError.success,traditionalCulturalList);
     }
 

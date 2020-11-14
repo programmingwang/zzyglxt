@@ -70,6 +70,7 @@ public class UserServiceImpl implements UserService {
         //查询角色role_code
         RoleDO roleDO = roleDOMapper.selectByRoleType(record.getType());
         UserRoleRefDO userRoleRefDO = new UserRoleRefDO();
+        userRoleRefDO.setItemcode(UUIDUtils.getUUID());
         userRoleRefDO.setRoleCode(roleDO.getItemcode());
         userRoleRefDO.setUserCode(record.getItemcode());
         userRoleRefDOMapper.insertSelective(userRoleRefDO);

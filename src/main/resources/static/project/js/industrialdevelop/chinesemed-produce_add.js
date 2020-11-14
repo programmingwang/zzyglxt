@@ -116,14 +116,18 @@
                     $("#peoduceType").val(tempdata.peoduceType);
                     $("#peoduceDrug").val(tempdata.peoduceDrug);
                     $("#contacts").val(tempdata.contacts);
-                    $("#addressPro").attr('data-province',tempdata.addressPro);
-                    $("#addressCity").attr('data-city',tempdata.addressCity);
-                    $("#addressCountry").attr('data-district',tempdata.addressCountry);
+                    $("#distpicker").distpicker({
+                        province: tempdata.addressPro,
+                        city: tempdata.addressCity,
+                        district: tempdata.addressCountry
+                    });
                     $("#address").val(tempdata.address);
                     $("#phone").val(tempdata.phone);
                     $(".w-e-text").html(tempdata.intruduce);
                     itemcode = tempdata.itemcode
                     uploadImg.setImgSrc(tempdata.filePath)
+                }else {
+                    $("#distpicker").distpicker();
                 }
                 init = function () {}
             };

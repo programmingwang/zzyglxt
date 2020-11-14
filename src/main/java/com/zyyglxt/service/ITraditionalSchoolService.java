@@ -19,7 +19,7 @@ public interface ITraditionalSchoolService {
     CulturalResourcesDO getTraditionalSchool(CulturalResourcesDOKey key);
 
     //查询所有中医流派
-    List<CulturalResourcesDO> getTraditionalSchoolList();
+    List<CulturalResourcesDO> getTraditionalSchoolList(List<String> chineseCulturalStatus);
 
     //增加一个中医流派
     int addTraditionalSchool(CulturalResourcesDO record);

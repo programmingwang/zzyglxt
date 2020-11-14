@@ -196,6 +196,36 @@
                     var mySubmitModal = modalUtil.init(mySubmitTravelModalData);
                     mySubmitModal.show();
                 },
+
+                'click .no-submit' : function (e, value, row, index) {
+                    var myNoSubmitTravelModalData ={
+                        modalBodyID :"myNoSubmitModal",
+                        modalTitle : "取消提交",
+                        modalClass : "modal-lg",
+                        modalConfirmFun:function () {
+                            var isSuccess = false;
+                            var submitStatus = {
+                                "chineseCulturalStatus": "--"
+                            };
+                            ajaxUtil.myAjax(null,"/cul/trav/trav/cgTravSta/"+row.itemid+"/"+row.itemcode,submitStatus,function (data) {
+                                if(ajaxUtil.success(data)){
+                                    if(data.code == 88888){
+                                        alertUtil.info("已提交");
+                                        isSuccess = true;
+                                        refreshTable();
+                                    }else{
+                                        alertUtil.error(data.msg);
+                                    }
+
+                                }
+                            },false);
+                            return isSuccess;
+                        }
+
+                    };
+                    var mySubmitModal = modalUtil.init(myNoSubmitTravelModalData);
+                    mySubmitModal.show();
+                },
             };
 
 

@@ -36,9 +36,14 @@
                         '<button type="button" class="submit btn btn-danger btn-sm"  data-toggle="modal" data-target="#staticBackdrop" >提交</button>',
                         '<button type="button" class="delete btn btn-danger btn-sm" style="margin-right: 10px"  data-toggle="modal" data-target="#staticBackdrop" >删除</button>',
                     ].join('');
-                }else if(status == "待审核" || status == "已下架" ||status == "展示中"){
+                }else if(status == "待审核"||status == "展示中"){
                     return [
                         '<button type="button" class="view btn btn-primary btn-sm" style="margin-right: 5px" data-toggle="modal" data-target="" >查看</button>',
+                    ].join('');
+                }else if(status == "已下架"){
+                    return [
+                        '<button type="button" class="view btn btn-primary btn-sm" style="margin-right: 5px" data-toggle="modal" data-target="" >查看</button>',
+                        '<button type="button" class="delete btn btn-danger btn-sm" data-toggle="modal" data-target="#staticBackdrop" >删除</button>',
                     ].join('');
                 }
 

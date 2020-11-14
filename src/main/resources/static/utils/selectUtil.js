@@ -14,17 +14,15 @@
             }
         });
         
-        function getRoleTable(role,preUrl) {
+        function getRoleTable(role,preUrl,status) {
+            preUrl = preUrl + "?"+status+"=已下架&"+status+"=展示中"
             if(role === "文化宣传科员"){
-                return preUrl + "&chineseCulturalStatus=--&&chineseCulturalStatus=待审核"
+                return preUrl + "&"+status+"=--&"+status+"=待审核"
             }else if(role === "文化宣传处长"){
-                return preUrl + "&chineseCulturalStatus=处长已审核&&chineseCulturalStatus=待审核"
+                return preUrl + "&"+status+"=处长已审核&"+status+"=待审核"
             }else if(role === "文化宣传综合处处长"){
-                return preUrl + "&chineseCulturalStatus=处长已审核"
+                return preUrl + "&"+status+"=处长已审核"
             }
-            // else if(role === "管理员") {
-            //     return preUrl + "&chineseCulturalStatus=--&&chineseCulturalStatus=待审核"
-            // }
         }
         
         function getRoleOperate(value, row, index, role, status) {

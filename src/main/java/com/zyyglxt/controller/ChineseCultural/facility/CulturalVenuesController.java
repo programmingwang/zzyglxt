@@ -24,6 +24,7 @@ import java.util.List;
 //@Controller
 @RestController
 @RequestMapping("/cul/fac/culVen")
+@SuppressWarnings("unchecked")
 public class   CulturalVenuesController {
 
     @Resource
@@ -37,7 +38,7 @@ public class   CulturalVenuesController {
     @RequestMapping(value = "/getAll" , method = RequestMethod.GET)
     @ResponseBody
     @LogAnnotation(logTitle = "查询所有的文化场馆", logLevel = "1")
-    public ResponseData getAllCulturalVenues(String chineseCulturalStatus){
+    public ResponseData getAllCulturalVenues(@RequestParam(value = "chineseCulturalStatus")List chineseCulturalStatus){
         List<ChineseCulturalDO> culturalVenuesList = iCulturalVenuesService.getCulturalVenuesList(chineseCulturalStatus);
         List<ChineseCulturalDto> chineseCulturalDtoList = new ArrayList<>();
         for (ChineseCulturalDO chineseCulturalDO : culturalVenuesList) {

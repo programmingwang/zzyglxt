@@ -28,11 +28,11 @@
         };
         modalHtml.myViewCulturalModal =
             '<div class="row">'+
-            '            <div class="col-lg-12 col-md-12">\n' +
+            '            <div id="imgDiv" class="col-lg-12 col-md-12">\n' +
             '                <fieldset disabled>'+
             '                <div class="input-group mb-3">\n' +
             '                    <div class="input-group-prepend">\n' +
-            '                        <span id="culturalImgSpan" class="input-group-text"></span>\n' +
+            '                        <button type="button" id="culturalImgSpan" class="btn btn-primary btn-sm"></button>\n' +
             '                    </div>\n' +
             '                    <img id="culturalImg" src="#"/>\n' +
             '                </div>\n' +
@@ -42,7 +42,7 @@
             '                <fieldset disabled>'+
             '                <div class="input-group mb-3">\n' +
             '                    <div class="input-group-prepend">\n' +
-            '                        <span id="culturalNameSpan" class="input-group-text"></span>\n' +
+            '                        <button type="button" id="culturalNameSpan" class="btn btn-primary btn-sm"></button>\n' +
             '                    </div>\n' +
             '                    <input type="text" id="chineseCulturalName" class="form-control">\n' +
             '                </div>\n' +
@@ -52,7 +52,7 @@
             '                <fieldset disabled>'+
             '                <div class="input-group mb-3">\n' +
             '                    <div class="input-group-prepend">\n' +
-            '                        <span class="input-group-text" >作者</span>\n' +
+            '                        <button type="button" class="btn btn-primary btn-sm" >作&emsp;&emsp;者</button>\n' +
             '                    </div>\n' +
             '                    <input type="text" id="chineseCulturalAuthor" class="form-control">\n' +
             '                </div>\n' +
@@ -62,7 +62,7 @@
             '                <fieldset disabled>'+
             '                <div class="input-group mb-3">\n' +
             '                    <div class="input-group-prepend">\n' +
-            '                        <span class="input-group-text" >来源</span>\n' +
+            '                        <button type="button" class="btn btn-primary btn-sm" >来&emsp;&emsp;源</button>\n' +
             '                    </div>\n' +
             '                   <input type="text" id="chineseCulturalSource" class="form-control">\n' +
             '                </div>\n' +
@@ -72,7 +72,7 @@
             '                <fieldset disabled>'+
             '                <div class="input-group mb-3">\n' +
             '                    <div class="input-group-prepend">\n' +
-            '                        <span id="culturalContentSpan" class="input-group-text" >正文</span>\n' +
+            '                        <button type="button" id="culturalContentSpan" class="btn btn-primary btn-sm" >正&emsp;&emsp;文</button>\n' +
             '                    </div>\n' +
             '                    <input type="text" id="chineseCulturalContent" class="form-control">\n' +
             '                </div>\n' +
@@ -82,9 +82,19 @@
             '                <fieldset disabled>'+
             '                <div class="input-group mb-3">\n' +
             '                    <div class="input-group-prepend">\n' +
-            '                        <span class="input-group-text" >数据状态</span>\n' +
+            '                        <button type="button" class="btn btn-primary btn-sm" >数据状态</button>\n' +
             '                    </div>\n' +
             '                    <input type="text" id="chineseCulturalStatus" class="form-control">\n' +
+            '                </div>\n' +
+            '            </div>\n' +
+            '\n' +
+            '            <div id="fileDiv" class="col-lg-12 col-md-12" style="display: none">\n' +
+            '                <fieldset disabled>'+
+            '                <div class="input-group mb-3">\n' +
+            '                    <div class="input-group-prepend">\n' +
+            '                        <button type="button" class="btn btn-primary btn-sm" >附&emsp;&emsp;件</button>\n' +
+            '                    </div>\n' +
+            '                    <span id="upFile" src="#" style="margin-left: 9px;margin-top: 2px;"></span>\n' +
             '                </div>\n' +
             '            </div>\n' +
             '\n' +
@@ -92,7 +102,7 @@
             '                <fieldset disabled>'+
             '                <div class="input-group mb-3">\n' +
             '                    <div class="input-group-prepend">\n' +
-            '                        <label class="input-group-text" for="applicant">创建人</label>\n' +
+            '                        <label class="input-group-text" for="applicant">创&ensp;建&ensp;人</label>\n' +
             '                    </div>\n' +
             '                    <input type="text"  id="creater" class="form-control">\n' +
             '                </div>\n' +
@@ -125,7 +135,8 @@
         modalHtml.mySubmitModal = '确认提交吗？';
         modalHtml.myPassModal = '确认通过吗？';
         modalHtml.myFailModal = '确认不通过吗？';
-        modalHtml.myUnderShelfModal = '确认下架吗？'
+        modalHtml.myUnderShelfModal = '确认下架吗？';
+        modalHtml.myNoSubmitModal = '确认修改为初始状态吗？';
 
         modalHtml.myDeleteAchievement = '是否删除科研成果?';
 

@@ -36,7 +36,7 @@ public class CulturalRelicsController {
     @RequestMapping(value = "/getAll" , method = RequestMethod.GET)
     @ResponseBody
     @LogAnnotation(logTitle = "查看所有文化古迹", logLevel = "1")
-    public ResponseData getAllCulturalRelics(String chineseCulturalStatus){
+    public ResponseData getAllCulturalRelics(@RequestParam(value = "chineseCulturalStatus")List chineseCulturalStatus){
         List<ChineseCulturalDO> culturalRelicsList = iCulturalRelicsService.getCulturalRelicsList(chineseCulturalStatus);
         List<ChineseCulturalDto> chineseCulturalDtoList = new ArrayList<>();
         for (ChineseCulturalDO chineseCulturalDO : culturalRelicsList) {

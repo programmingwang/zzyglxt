@@ -11,7 +11,7 @@
 <div class="container-fluid reg-content-body">
     <div class="row clearfix">
         <div class="  col-sm-12 offset-md-4 col-md-4 reg-content">
-            <form action="/user/register" method="post" onsubmit="return validateLogin()">
+<!--            <form action="/user/register" method="post" onsubmit="return validateLogin()">-->
                 <div class="form-group row form-item">
                     <label for="orgName" class="col-sm-4 col-form-label form-text">企业名称：</label>
                     <div class="col-sm-8 form-input">
@@ -69,9 +69,9 @@
                     </div>
                 </div>
                 <div class="form-group row form-item">
-                    <button class="btn form-button col-sm-8">注      册</button>
+                    <button class="btn form-button col-sm-8" id="btn_register" type="submit">注      册</button>
                 </div>
-            </form>
+<!--            </form>-->
 
         </div>
 
@@ -79,7 +79,9 @@
 </div>
 <!--<script type="text/javascript" data-main="/main/main.js" th:src="@{/component/require@2.3.6/require-2.3.6.js}"></script>-->
 <script type="text/javascript" th:src="@{/component/jquery@3.5.1/jquery.min.js}"></script>
-<script type="text/javascript" th:src="@{/component/bootstrap@4.5.2/js/bootstrap.min.js}"></script>
+<!--<script type="text/javascript" th:src="@{/utils/objectUtil.js}"></script>-->
+<!--<script type="text/javascript" th:src="@{/utils/ajaxUtil.js}"></script>-->
+<!--<script type="text/javascript" th:src="@{/utils/alertUtil.js}"></script>-->
 <script type="text/javascript" th:src="@{/project/js/user/register.js}"></script>
 </body>
 </html>

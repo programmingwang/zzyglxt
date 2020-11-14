@@ -89,6 +89,7 @@ public class IUserServiceImpl implements IUserService {
         organizationDO.setOrgIdentify(userDto.getOrgIdentify());
         organizationDO.setOrgCode(userDto.getOrgCode());
         organizationDO.setOrgDescription(userDto.getOrgIdentify());
+        organizationDO.setAuditStatus("待审核");
         organizationDO.setCreater(userDto.getUsername());
         organizationDO.setUpdater(userDto.getUsername());
 
@@ -105,7 +106,7 @@ public class IUserServiceImpl implements IUserService {
         userDO.setMobilephone(userDto.getMobilePhone());
         userDO.setCreater(userDto.getUsername());// 注册时，注册用户为 创建人
         userDO.setUpdater(userDto.getUsername());// 注册时，注册用户为 修改人
-        userDO.setType(0);// 设置为普通用户（0：普通，1：管理员）
+//        userDO.setType(0);// 设置为普通用户（0：普通，1：管理员）
 
 
         // user_role_ref 表唯一标识UUID

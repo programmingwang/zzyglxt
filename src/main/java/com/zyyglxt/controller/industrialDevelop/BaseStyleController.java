@@ -1,5 +1,6 @@
-package com.zyyglxt.controller.industrialDevelop;
+package com.zyyglxt.controller.IndustrialDevelop;
 
+import com.zyyglxt.annotation.LogAnnotation;
 import com.zyyglxt.dataobject.IndustrialDevelopBasestyle;
 import com.zyyglxt.error.EmBusinessError;
 import com.zyyglxt.response.ResponseData;
@@ -24,6 +25,7 @@ public class BaseStyleController {
 
     @ResponseBody
     @PostMapping(value = "/base-style")
+    @LogAnnotation(appCode ="",logTitle ="添加产业发展-基地风采记录",logLevel ="3",creater ="",updater = "")
     public ResponseData addBaseStyle(@RequestBody IndustrialDevelopBasestyle record) {
         basestyleService.insertSelective(record);
         return new ResponseData(EmBusinessError.success);
@@ -31,6 +33,7 @@ public class BaseStyleController {
 
     @ResponseBody
     @DeleteMapping(value = "/base-style")
+    @LogAnnotation(appCode ="",logTitle ="删除产业发展-基地风采记录",logLevel ="4",creater ="",updater = "")
     public ResponseData delBaseStyle(@RequestBody IndustrialDevelopBasestyle record) {
         basestyleService.deleteByPrimaryKey(record.getItemid(), record.getItemcode());
         return new ResponseData(EmBusinessError.success);
@@ -38,6 +41,7 @@ public class BaseStyleController {
 
     @ResponseBody
     @PutMapping(value = "/base-style")
+    @LogAnnotation(appCode ="",logTitle ="更新产业发展-基地风采记录",logLevel ="2",creater ="",updater = "")
     public ResponseData updBaseStyle(@RequestBody IndustrialDevelopBasestyle record) {
         basestyleService.updateByPrimaryKeySelective(record);
         return new ResponseData(EmBusinessError.success);

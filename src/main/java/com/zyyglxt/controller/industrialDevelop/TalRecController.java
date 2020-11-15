@@ -1,5 +1,6 @@
-package com.zyyglxt.controller.industrialDevelop;
+package com.zyyglxt.controller.IndustrialDevelop;
 
+import com.zyyglxt.annotation.LogAnnotation;
 import com.zyyglxt.dataobject.IndustrialDevelopTalRecDO;
 import com.zyyglxt.dataobject.IndustrialDevelopTalRecDOKey;
 import com.zyyglxt.error.EmBusinessError;
@@ -24,6 +25,7 @@ public class TalRecController {
 
     @RequestMapping(value = "/talrec", method = RequestMethod.POST)
     @ResponseBody
+    @LogAnnotation(appCode ="",logTitle ="添加产业发展-人才招募",logLevel ="3",creater ="",updater = "")
     public ResponseData addTalRec(@RequestBody IndustrialDevelopTalRecDO record) {
         talRecService.addTalRec(record);
         return new ResponseData(EmBusinessError.success);
@@ -31,6 +33,7 @@ public class TalRecController {
 
     @RequestMapping(value = "/talrec", method = RequestMethod.PUT)
     @ResponseBody
+    @LogAnnotation(appCode ="",logTitle ="更新产业发展-人才招募",logLevel ="2",creater ="",updater = "")
     public ResponseData updTalRec(@RequestBody IndustrialDevelopTalRecDO record) {
         talRecService.updTalRec(record);
         return new ResponseData(EmBusinessError.success);
@@ -38,6 +41,7 @@ public class TalRecController {
 
     @RequestMapping(value = "/talrec", method = RequestMethod.DELETE)
     @ResponseBody
+    @LogAnnotation(appCode ="",logTitle ="删除产业发展-人才招募",logLevel ="4",creater ="",updater = "")
     public ResponseData delTalRec(@RequestBody IndustrialDevelopTalRecDOKey key) {
         talRecService.delTalRec(key);
         return new ResponseData(EmBusinessError.success);
@@ -45,6 +49,7 @@ public class TalRecController {
 
     @GetMapping(value = "/talrec")
     @ResponseBody
+    @LogAnnotation(appCode ="",logTitle ="查看产业发展-人才招募",logLevel ="1",creater ="",updater = "")
     public ResponseData getTalRec(){
         return new ResponseData(EmBusinessError.success, talRecService.getTalRecs());
     }

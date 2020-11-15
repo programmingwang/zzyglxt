@@ -1,5 +1,6 @@
-package com.zyyglxt.controller.industrialDevelop;
+package com.zyyglxt.controller.IndustrialDevelop;
 
+import com.zyyglxt.annotation.LogAnnotation;
 import com.zyyglxt.dataobject.IndustrialDevelopChiMed;
 import com.zyyglxt.error.EmBusinessError;
 import com.zyyglxt.response.ResponseData;
@@ -24,6 +25,7 @@ public class ChiMedController {
 
     @ResponseBody
     @PostMapping(value = "/chi-med")
+    @LogAnnotation(appCode ="",logTitle ="添加产业发展-中药材加工企业、中药材销售企业、中药材制药企业信息记录",logLevel ="3",creater ="",updater = "")
     public ResponseData addChiMed(@RequestBody IndustrialDevelopChiMed record){
         chiMedService.insertSelective(record);
         return new ResponseData(EmBusinessError.success);
@@ -31,6 +33,7 @@ public class ChiMedController {
 
     @ResponseBody
     @RequestMapping(value = "/chi-med", method = RequestMethod.PUT)
+    @LogAnnotation(appCode ="",logTitle ="更新产业发展-中药材加工企业、中药材销售企业、中药材制药企业信息记录",logLevel ="2",creater ="",updater = "")
     public ResponseData updChiMed(@RequestBody IndustrialDevelopChiMed record){
         chiMedService.updateByPrimaryKeySelective(record);
         return new ResponseData(EmBusinessError.success);
@@ -38,6 +41,7 @@ public class ChiMedController {
 
     @ResponseBody
     @RequestMapping(value = "/chi-med", method = RequestMethod.DELETE)
+    @LogAnnotation(appCode ="",logTitle ="删除产业发展-中药材加工企业、中药材销售企业、中药材制药企业信息记录",logLevel ="4",creater ="",updater = "")
     public ResponseData delChiMed(@RequestBody IndustrialDevelopChiMed record){
         chiMedService.deleteByPrimaryKey(record.getItemid(),record.getItemcode());
         return new ResponseData(EmBusinessError.success);

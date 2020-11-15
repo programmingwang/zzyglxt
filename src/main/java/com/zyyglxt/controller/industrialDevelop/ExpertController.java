@@ -1,5 +1,6 @@
-package com.zyyglxt.controller.industrialDevelop;
+package com.zyyglxt.controller.IndustrialDevelop;
 
+import com.zyyglxt.annotation.LogAnnotation;
 import com.zyyglxt.dataobject.IndustrialDevelopExpertDO;
 import com.zyyglxt.dataobject.IndustrialDevelopExpertDOKey;
 import com.zyyglxt.dataobject.IndustrialDevelopExpertRefDO;
@@ -26,6 +27,7 @@ public class ExpertController {
 
     @RequestMapping(value = "/expert", method = RequestMethod.POST)
     @ResponseBody
+    @LogAnnotation(appCode ="",logTitle ="添加产业发展-专家信息",logLevel ="3",creater ="",updater = "")
     public ResponseData addExpert(@RequestBody IndustrialDevelopExpertDO developExpertDO) {
         industrialExpertService.addExpert(developExpertDO);
         return new ResponseData(EmBusinessError.success);
@@ -33,6 +35,7 @@ public class ExpertController {
 
     @RequestMapping(value = "/expert", method = RequestMethod.PUT)
     @ResponseBody
+    @LogAnnotation(appCode ="",logTitle ="更新产业发展-专家信息",logLevel ="2",creater ="",updater = "")
     public ResponseData updExpert(@RequestBody IndustrialDevelopExpertDO developExpertDO) {
         industrialExpertService.updExpert(developExpertDO);
         return new ResponseData(EmBusinessError.success);
@@ -40,6 +43,7 @@ public class ExpertController {
 
     @RequestMapping(value = "/expert", method = RequestMethod.DELETE)
     @ResponseBody
+    @LogAnnotation(appCode ="",logTitle ="删除产业发展-专家信息",logLevel ="4",creater ="",updater = "")
     public ResponseData delExpert(@RequestBody IndustrialDevelopExpertDOKey key) {
         industrialExpertService.delExpert(key);
         return new ResponseData(EmBusinessError.success);
@@ -47,6 +51,7 @@ public class ExpertController {
 
     @RequestMapping(value = "/expert-ref", method = RequestMethod.POST)
     @ResponseBody
+    @LogAnnotation(appCode ="",logTitle ="添加产业发展专家信息",logLevel ="3",creater ="",updater = "")
     public ResponseData addExpertRef(@RequestBody IndustrialDevelopExpertRefDO record) {
         industrialExpertService.addExpertRef(record);
         return new ResponseData(EmBusinessError.success);
@@ -54,6 +59,7 @@ public class ExpertController {
 
     @RequestMapping(value = "/expert-ref", method = RequestMethod.PUT)
     @ResponseBody
+    @LogAnnotation(appCode ="",logTitle ="更新产业发展专家信息",logLevel ="2",creater ="",updater = "")
     public ResponseData updExpertRef(@RequestBody IndustrialDevelopExpertRefDO record) {
         industrialExpertService.updExpertRef(record);
         return new ResponseData(EmBusinessError.success);
@@ -61,6 +67,7 @@ public class ExpertController {
 
     @RequestMapping(value = "/expert-ref", method = RequestMethod.DELETE)
     @ResponseBody
+    @LogAnnotation(appCode ="",logTitle ="删除产业发展专家信息",logLevel ="4",creater ="",updater = "")
     public ResponseData delExpertRef(@RequestBody IndustrialDevelopExpertRefDOKey key) {
         industrialExpertService.delExpertRef(key);
         return new ResponseData(EmBusinessError.success);
@@ -68,6 +75,7 @@ public class ExpertController {
 
     @GetMapping(value = "/expert")
     @ResponseBody
+    @LogAnnotation(appCode ="",logTitle ="查看产业发展-专家信息",logLevel ="1",creater ="",updater = "")
     public ResponseData getExpert() {
         return new ResponseData(EmBusinessError.success,industrialExpertService.getExperts());
     }

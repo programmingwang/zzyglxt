@@ -1,5 +1,6 @@
-package com.zyyglxt.controller.industrialDevelop;
+package com.zyyglxt.controller.IndustrialDevelop;
 
+import com.zyyglxt.annotation.LogAnnotation;
 import com.zyyglxt.dataobject.IndustrialDevelopSciAchiDO;
 import com.zyyglxt.dataobject.IndustrialDevelopSciAchiDOKey;
 import com.zyyglxt.error.EmBusinessError;
@@ -30,6 +31,7 @@ public class SciAchiController {
      */
     @ResponseBody
     @RequestMapping(value = "/achievement", method = RequestMethod.POST)
+    @LogAnnotation(appCode ="",logTitle ="添加产业发展-科研成果",logLevel ="3",creater ="",updater = "")
     public ResponseData addAchievement(@RequestBody IndustrialDevelopSciAchiDO sciAchiDO) {
         System.out.println(sciAchiDO.toString());
         sciAchiService.addAchievement(sciAchiDO);
@@ -43,6 +45,7 @@ public class SciAchiController {
      */
     @ResponseBody
     @RequestMapping(value = "/achievement", method = RequestMethod.PUT)
+    @LogAnnotation(appCode ="",logTitle ="更新产业发展-科研成果",logLevel ="2",creater ="",updater = "")
     public ResponseData updateAchievement(@RequestBody IndustrialDevelopSciAchiDO sciAchiDO) {
         sciAchiService.updAchievement(sciAchiDO);
         return new ResponseData(EmBusinessError.success);
@@ -55,6 +58,7 @@ public class SciAchiController {
      */
     @ResponseBody
     @RequestMapping(value = "/achievement", method = RequestMethod.DELETE)
+    @LogAnnotation(appCode ="",logTitle ="删除产业发展-科研成果",logLevel ="4",creater ="",updater = "")
     public ResponseData delAchievement(@RequestBody IndustrialDevelopSciAchiDOKey key) {
         sciAchiService.delAchievement(key);
         return new ResponseData(EmBusinessError.success);
@@ -66,12 +70,14 @@ public class SciAchiController {
      * @param key
      */
     @RequestMapping(value = "visit-num", method = RequestMethod.PUT)
+    @LogAnnotation(appCode ="",logTitle ="增加点击数",logLevel ="3",creater ="",updater = "")
     public ResponseData increaseVisitNum(@RequestBody IndustrialDevelopSciAchiDOKey key) {
         sciAchiService.increaseVisitNum(key);
         return new ResponseData(EmBusinessError.success);
     }
 
     @RequestMapping(value = "/achievement", method = RequestMethod.GET)
+    @LogAnnotation(appCode ="",logTitle ="查看产业发展-科研成果",logLevel ="1",creater ="",updater = "")
     public ResponseData getAchievement() {
         ResponseData responseData = new ResponseData(EmBusinessError.success);
         responseData.setData(sciAchiService.getAchievement());

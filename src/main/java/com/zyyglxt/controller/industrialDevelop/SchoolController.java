@@ -1,5 +1,6 @@
-package com.zyyglxt.controller.industrialDevelop;
+package com.zyyglxt.controller.IndustrialDevelop;
 
+import com.zyyglxt.annotation.LogAnnotation;
 import com.zyyglxt.dataobject.IndustrialDevelopSchool;
 import com.zyyglxt.error.EmBusinessError;
 import com.zyyglxt.response.ResponseData;
@@ -24,6 +25,7 @@ public class SchoolController {
 
     @ResponseBody
     @RequestMapping(value = "/school", method = RequestMethod.POST)
+    @LogAnnotation(appCode ="",logTitle ="添加产业发展-高等学院记录",logLevel ="3",creater ="",updater = "")
     public ResponseData addSchool(@RequestBody IndustrialDevelopSchool record){
         schoolService.insertSelective(record);
         return new ResponseData(EmBusinessError.success);
@@ -31,6 +33,7 @@ public class SchoolController {
 
     @ResponseBody
     @RequestMapping(value = "/school", method = RequestMethod.PUT)
+    @LogAnnotation(appCode ="",logTitle ="更新产业发展-高等学院记录",logLevel ="2",creater ="",updater = "")
     public ResponseData updSchool(@RequestBody IndustrialDevelopSchool record){
         schoolService.updateByPrimaryKeySelective(record);
         return new ResponseData(EmBusinessError.success);
@@ -38,6 +41,7 @@ public class SchoolController {
 
     @ResponseBody
     @RequestMapping(value = "/school", method = RequestMethod.DELETE)
+    @LogAnnotation(appCode ="",logTitle ="删除产业发展-高等学院记录",logLevel ="4",creater ="",updater = "")
     public ResponseData delSchool(@RequestBody IndustrialDevelopSchool record){
         schoolService.deleteByPrimaryKey(record.getItemid(), record.getItemcode());
         return new ResponseData(EmBusinessError.success);

@@ -16,9 +16,11 @@ public class OrganizationDO {
 
     private String orgIdentify;
 
-    private String backup1;
+    private String orgLocate;
 
-    private String backup2;
+    private String auditStatus;
+
+    private String reason;
 
     private Integer left;
 
@@ -82,20 +84,28 @@ public class OrganizationDO {
         this.orgIdentify = orgIdentify == null ? null : orgIdentify.trim();
     }
 
-    public String getBackup1() {
-        return backup1;
+    public String getOrgLocate() {
+        return orgLocate;
     }
 
-    public void setBackup1(String backup1) {
-        this.backup1 = backup1 == null ? null : backup1.trim();
+    public void setOrgLocate(String orgLocate) {
+        this.orgLocate = orgLocate == null ? null : orgLocate.trim();
     }
 
-    public String getBackup2() {
-        return backup2;
+    public String getAuditStatus() {
+        return auditStatus;
     }
 
-    public void setBackup2(String backup2) {
-        this.backup2 = backup2 == null ? null : backup2.trim();
+    public void setAuditStatus(String auditStatus) {
+        this.auditStatus = auditStatus == null ? null : auditStatus.trim();
+    }
+
+    public String getReason() {
+        return reason;
+    }
+
+    public void setReason(String reason) {
+        this.reason = reason == null ? null : reason.trim();
     }
 
     public Integer getLeft() {

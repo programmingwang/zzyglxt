@@ -43,7 +43,9 @@ public class CustomizeFilterInvocationSecurityMetadataSource implements FilterIn
                 |requestUrl.contains("/api")
                 |requestUrl.contains("/utils")
                 |requestUrl.contains("/userLogin")
-                |requestUrl.contains("/CSS")){
+                |requestUrl.contains("/CSS")
+                |requestUrl.contains("/upload")
+                |requestUrl.contains("/error")){
             return null;
         }
         int index = requestUrl.indexOf("?");

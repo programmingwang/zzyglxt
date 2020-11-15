@@ -1,6 +1,6 @@
 (function () {
-    require(['jquery','wangEditor','ajaxUtil','alertUtil','stringUtil','fileUtil','uploadImg'],
-        function (jquery,wangEditor,ajaxUtil,alertUtil,stringUtil,fileUtil,uploadImg) {
+    require(['jquery','wangEditor','ajaxUtil','alertUtil','stringUtil','fileUtil','dictUtil','uploadImg'],
+        function (jquery,wangEditor,ajaxUtil,alertUtil,stringUtil,fileUtil,dictUtil,uploadImg) {
             const editor = new wangEditor('#div1')
             // 或者 const editor = new E( document.getElementById('div1') )
             //菜单配置
@@ -44,6 +44,9 @@
                     alert("字数不能超过10000");                  //将替换的值赋值给当前对象
                 }
             });
+
+            /*下拉框值*/
+            $("#dataLocation").selectUtil(dictUtil.getDictByCode(dictUtil.DICT_LIST.dataLocation));
 
             $("#cancelbtn").unbind().on('click',function () {
                 var url = "/data/dataNewsRotations";
@@ -103,7 +106,7 @@
                     editor.txt.html(tempdata.dataContent);
                     var img = tempdata.filePath;
                     $("#upimg").attr("src",img);
-                    $("#dataLocation").val(tempdata.dataLocation);
+                    $("#dataLocation option[value="+tempdata.dataLocation+"] ").attr("selected",true);
                 }
             }());
 

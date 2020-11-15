@@ -1,6 +1,6 @@
 (function () {
-    require(['jquery','wangEditor','ajaxUtil','alertUtil','stringUtil','fileUtil',],
-        function (jquery,wangEditor,ajaxUtil,alertUtil,stringUtil,fileUtil) {
+    require(['jquery','wangEditor','ajaxUtil','alertUtil','stringUtil','fileUtil','dictUtil'],
+        function (jquery,wangEditor,ajaxUtil,alertUtil,stringUtil,fileUtil,dictUtil) {
             const editor = new wangEditor('#div1')
             // 或者 const editor = new E( document.getElementById('div1') )
             //菜单配置
@@ -45,6 +45,9 @@
                 }
             });
 
+            /*下拉框值*/
+            $("#dataFileType").selectUtil(dictUtil.getDictByCode(dictUtil.DICT_LIST.dataFileType));
+
             $("#cancelbtn").unbind().on('click',function () {
                 var url = "/data/dataRegulation";
                 orange.redirect(url);
@@ -66,7 +69,7 @@
                     };
                 }else{
                     var needData = JSON.parse(localStorage.getItem("rowData"));
-                    addUpdateUrl = "/datado/regulation/insertRegulation";
+                    addUpdateUrl = "/datado/regulation/updateRegulation";
                     RegulationEntity = {
                         itemid: needData.itemid,
                         itemcode: needData.itemcode,

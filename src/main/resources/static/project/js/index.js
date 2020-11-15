@@ -514,64 +514,57 @@
                     },
                     {
                         menu_name: "＞技术服务机构",
-                        menu_url: "/industrialdevelop/organization/tecserviceorg",
+                        menu_url: "/industrialdevelop/tecservice",
                         id: "99-4",
                         level: "2",
                         pid: "99"
                     },
                     {
                         menu_name: "＞科研院所",
-                        menu_url: "/industrialdevelop/organization/lab",
+                        menu_url: "/industrialdevelop/tecserviceorg",
                         id: "99-5",
-                        level: "2",
-                        pid: "99"
-                    },
-                    {
-                        menu_name: "＞旅游康养机构",
-                        menu_url: "/industrialdevelop/organization/tour",
-                        id: "99-6",
                         level: "2",
                         pid: "99"
                     },
                     {
                         menu_name: "＞高等院校",
                         menu_url: "/industrialdevelop/school",
-                        id: "99-7",
+                        id: "99-6",
                         level: "2",
                         pid: "99"
                     },
                     {
                         menu_name: "＞基地风采",
                         menu_url: "/industrialdevelop/style",
-                        id: "99-8",
+                        id: "99-6",
                         level: "2",
                         pid: "99"
                     },
                     {
                         menu_name: "＞中药材加工企业",
-                        menu_url: "/industrialdevelop/chinesemed/chinesemed-process",
-                        id: "99-9",
+                        menu_url: "/industrialdevelop/chinesemed",
+                        id: "99-7",
                         level: "2",
                         pid: "99"
                     },
                     {
                         menu_name: "＞中药材销售企业",
-                        menu_url: "/industrialdevelop/chinesemed/chinesemed-sale",
-                        id: "99-10",
+                        menu_url: "/industrialdevelop/chinesemed-sale",
+                        id: "99-8",
                         level: "2",
                         pid: "99"
                     },
                     {
                         menu_name: "＞中药材制造企业",
-                        menu_url: "/industrialdevelop/chinesemed/chinesemed-produce",
-                        id: "99-11",
+                        menu_url: "/industrialdevelop/chinesemed-produce",
+                        id: "99-9",
                         level: "2",
                         pid: "99"
                     },
                     {
                         menu_name: "＞种植园管理",
-                        menu_url: "/industrialdevelop/chinesemed/plantation",
-                        id: "99-12",
+                        menu_url: "/industrialdevelop/plantation",
+                        id: "99-10",
                         level: "2",
                         pid: "99"
                     }
@@ -589,12 +582,12 @@
             }
 
 
-        function getHTML_dropdown_menu(itemStr) {
-            var str = "<div class=\"dropdown-menu left-menu-dropdown-menu\">\n" +
-                itemStr +
-                "</div>";
-            return str;
-        }
+            function getHTML_dropdown_menu(itemStr) {
+                var str = "<div class=\"dropdown-menu left-menu-dropdown-menu\">\n" +
+                    itemStr +
+                    "</div>";
+                return str;
+            }
 
 
             function getHTML(item,dropdownStr,show_active) {
@@ -663,11 +656,11 @@
                     htmlStr = htmlStr + getHTML(tm_item,dropdowStr,show);
                 });
 
-            return htmlStr;
-        }
+                return htmlStr;
+            }
 
 
-        $("#left_menu").html(getMenuStr(menu_list));
+            $("#left_menu").html(getMenuStr(menu_list));
 
 
             $(".collapse-btn").unbind().on("click",function () {

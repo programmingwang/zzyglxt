@@ -70,6 +70,7 @@
     <include refid="Base_Column_List" />
     from resource
     where RESOURCE_TYPE = 'p'
+    and itemID in (89,93,94,101)
   </select>
   <delete id="deleteByPrimaryKey" parameterType="com.zyyglxt.dataobject.ResourcesDOKey">
     delete from resource

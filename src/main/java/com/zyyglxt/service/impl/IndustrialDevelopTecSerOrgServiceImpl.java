@@ -57,8 +57,8 @@ public class IndustrialDevelopTecSerOrgServiceImpl implements IndustrialDevelopT
     }
 
     @Override
-    public List<IndustrialDevelopTecSerOrgDto> selectAll() {
-        List<IndustrialDevelopTecSerOrg> list = industrialDevelopTecSerOrgMapper.selectAll();
+    public List<IndustrialDevelopTecSerOrgDto> selectAll(String type) {
+        List<IndustrialDevelopTecSerOrg> list = industrialDevelopTecSerOrgMapper.selectAll(type);
         List<IndustrialDevelopTecSerOrgDto> resList = new ArrayList<>();
         for (IndustrialDevelopTecSerOrg item: list){
             IndustrialDevelopTecSerOrgDto newObj = new IndustrialDevelopTecSerOrgDto();

@@ -3,12 +3,15 @@
         function (jquery,ajaxUtil,bootstrapTableUtil,objectUtil,alertUtil,modalUtil,selectUtil,stringUtil,dictUtil) {
 
 
-            var url = "/industrialdevelop/ser-pro";
+            var getUrl = "/industrialdevelop/tec-ser-org/tec";
 
-            var pathUrl = "/industrialdevelop/tecservice";
+            var opUrl = "/industrialdevelop/tec-ser-org";
+
+            var pathUrl = "/industrialdevelop/organization/tecserviceorg";
+
             var addUrl = pathUrl+"_add";
-            var aParam = {
 
+            var aParam = {
             };
 
             //操作
@@ -37,8 +40,9 @@
                                 itemcode: row.itemcode
                             };
                             var isSuccess = false;
-                            ajaxUtil.myAjax(null,url,projectEntity,function (data) {
+                            ajaxUtil.myAjax(null,getUrl,projectEntity,function (data) {
                                 if(ajaxUtil.success(data)){
+                                    ajaxUtil.deleteFile(row.itemcode)
                                     alertUtil.info("删除项目成功");
                                     isSuccess = true;
                                     refreshTable();
@@ -59,7 +63,7 @@
 
                 };
                 $('#table').bootstrapTable("destroy");
-                bootstrapTableUtil.myBootStrapTableInit("table", url, param, aCol);
+                bootstrapTableUtil.myBootStrapTableInit("table", getUrl, param, aCol);
             });
 
 
@@ -73,21 +77,27 @@
 
 
             var aCol = [
-                {field: 'serviceProject', title: '服务项目名称'},
-                {field: 'projectCost', title: '项目收费'},
+                {field: 'name', title: '企业名称'},
+                {field: 'filePath', title: '图片', formatter:function (value, row, index) {
+                        if(value == "已经损坏了"){
+                            return '<p>'+value+'</p>';
+                        }else{
+                            return '<img  src='+value+' width="100" height="100" class="img-rounded" >';
+                        }
+                    }},
                 {field: 'contacts', title: '联系人'},
-                {field: 'status', title: '项目状态'},
+                {field: 'status', title: '数据状态'},
                 {field: 'action',  title: '操作',formatter: operation,events:orgEvents}
             ];
 
-            var myTable = bootstrapTableUtil.myBootStrapTableInit("table", url, aParam, aCol);
+            var myTable = bootstrapTableUtil.myBootStrapTableInit("table", getUrl, aParam, aCol);
 
             function refreshTable() {
                 var param = {};
                 myTable.free();
-                myTable = bootstrapTableUtil.myBootStrapTableInit("table", url, param, aCol);
+                myTable = bootstrapTableUtil.myBootStrapTableInit("table", getUrl, param, aCol);
             }
 
-            bootstrapTableUtil.globalSearch("table",url,aParam, aCol);
+            bootstrapTableUtil.globalSearch("table",getUrl,aParam, aCol);
         })
 })();

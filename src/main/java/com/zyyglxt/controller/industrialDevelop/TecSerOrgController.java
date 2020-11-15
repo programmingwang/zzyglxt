@@ -44,8 +44,8 @@ public class TecSerOrgController {
     }
 
     @ResponseBody
-    @GetMapping(value = "/tec-ser-org")
-    public ResponseData getTec(){
-        return new ResponseData(EmBusinessError.success,tecSerOrgService.selectAll());
+    @GetMapping(value = "/tec-ser-org/{type}")
+    public ResponseData getTec(@PathVariable String type){
+        return new ResponseData(EmBusinessError.success,tecSerOrgService.selectAll(type));
     }
 }

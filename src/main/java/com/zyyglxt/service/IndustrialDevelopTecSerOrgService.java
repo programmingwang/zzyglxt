@@ -25,6 +25,6 @@ public interface IndustrialDevelopTecSerOrgService{
 
     int updateByPrimaryKey(IndustrialDevelopTecSerOrg record);
 
-    List<IndustrialDevelopTecSerOrgDto> selectAll();
+    List<IndustrialDevelopTecSerOrgDto> selectAll(String type);
 
 }

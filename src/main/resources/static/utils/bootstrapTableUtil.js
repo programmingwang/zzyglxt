@@ -120,54 +120,78 @@
             var param = {};
             btnSearch.onclick=function() {
                 var myTable = myBootStrapTableInit(tableID, url, needParam, aCol);
-                var stratTime=document.getElementById("stratTime").children;
-                var endTime=document.getElementById("endTime").children;
-                stratTime=stratTime[0].value+":"+stratTime[1].value+":"+stratTime[2].value;
-                endTime=endTime[0].value+":"+endTime[1].value+":"+endTime[2].value;
-                var newArry = [];
-                var str = document.getElementById("taskNameSearch").value.toLowerCase();
-                var allTableData = $("#table").bootstrapTable("getData");
-                console.log(allTableData);
-                console.log(str);
-                if (str=='请输入'||str==''){
-                    myTable.free();
-                    myTable = myBootStrapTableInit(tableID,url,param,aCol)
-                }
-
-                for (var i in allTableData) {
-                    for (var v in aCol){
-                        var textP = allTableData[i][aCol[v].field];
-                        var makeTime=allTableData[i][aCol[4].field];
-                        var isTimeSlot=false;
-                        makeTime=makeTime.substring(11,19);
-                        console.log(makeTime);
-                        console.log("开始时间："+stratTime);
-                        console.log("结束时间"+endTime);
-                        console.log(makeTime>=stratTime);
-                        console.log(makeTime<=endTime);
-                        if (textP == null || textP == undefined || textP == '') {
-                            textP = "1";
-                        }
-                        if(makeTime>=stratTime && makeTime<=endTime){
-                            console.log('true')
-                            isTimeSlot=true;
-                        }
-                        if(stratTime==endTime){
-                            isTimeSlot=true;
-                        }
-
-                        if (textP.search(str)!= -1&&isTimeSlot){
-                            newArry.push(allTableData[i]);
-                        }
+                // 先刷新列表------------
+                // myTable.free();
+                // myTable = myBootStrapTableInit(tableID,url,param,aCol);
+                //-----------------------
+                function search(){
+                    if(document.getElementById("stratTime")){
+                        var stratTime=document.getElementById("stratTime").children;
+                        var endTime=document.getElementById("endTime").children;
+                        stratTime=stratTime[0].value+":"+stratTime[1].value+":"+stratTime[2].value;
+                        endTime=endTime[0].value+":"+endTime[1].value+":"+endTime[2].value;
+                    }
+                    var newArry = [];
+                    var addstr=document.getElementById("chargePersonSearch").value;
+                    var str = document.getElementById("taskNameSearch").value.toLowerCase();
+                    var allTableData = $("#table").bootstrapTable("getData");
+                    console.log(allTableData);
+                    console.log(str);
+                    // console.log("状态"+addstr);
+                    if (str=='请输入'||str==''){
+                        myTable.free();
+                        myTable = myBootStrapTableInit(tableID,url,param,aCol)
                     }
 
-                    // var chineseCulturalName = allTableData[i].chineseCulturalName;
-                    // console.log(chineseCulturalName);
-                    // if (chineseCulturalName.search(str) != -1) {
-                    //     newArry.push(allTableData[i]);
-                    // }
+                    for (var i in allTableData) {
+                        for (var v in aCol){
+                            var textP = allTableData[i][aCol[v].field];
+                            var makeTime=allTableData[i][aCol[4].field];
+                            var isTimeSlot=false;
+                            makeTime=makeTime.substring(11,19);
+                            // console.log(makeTime);
+                            // console.log("开始时间："+stratTime);
+                            // console.log("结束时间"+endTime);
+                            // console.log(makeTime>=stratTime);
+                            // console.log(makeTime<=endTime);
+                            if (textP == null || textP == undefined || textP == '') {
+                                textP = "1";
+                            }
+                            if(makeTime>=stratTime && makeTime<=endTime){
+                                console.log('true')
+                                isTimeSlot=true;
+                            }
+                            if(stratTime==endTime){
+                                isTimeSlot=true;
+                            }
+
+                            if (textP.search(str)!= -1&&isTimeSlot){
+                                newArry.push(allTableData[i]);
+                            }
+                            if (addstr=="展示中"||addstr=="已下架"){
+                                str=str+" "+addstr;
+                                var arr=str.split(' ');
+                                for(var j=0;j<arr.length;j++)
+                                {
+                                    if(textP.search(arr[j])!=-1){
+                                        newArry.push(allTableData[i]);
+                                    }
+                                }
+                            }
+                        }
+
+                        // var chineseCulturalName = allTableData[i].chineseCulturalName;
+                        // console.log(chineseCulturalName);
+                        // if (chineseCulturalName.search(str) != -1) {
+                        //     newArry.push(allTableData[i]);
+                        // }
+                    }
+                    $("#table").bootstrapTable("load", newArry);
+
                 }
-                $("#table").bootstrapTable("load", newArry);
+                search();
+
+
             }
 
 

@@ -2,13 +2,13 @@
     require(['jquery','ajaxUtil','stringUtil','uploadImg','wangEditor'],
         function ($,ajaxUtil,stringUtil,uploadImg, wangEditor) {
 
-            var url = "/industrialdevelop/chi-med";
+            var url = "/industrialdevelop/tec-ser-org";
 
-            var pathUrl = "/industrialdevelop/chinesemed-sale";
-
-            var orgType = 'sale'
+            var pathUrl = "/industrialdevelop/organization/lab";
 
             var itemcode = stringUtil.getUUID();
+
+            var orgType = "lab";
 
             var type = isUpdate() ? "put":"post";
 
@@ -65,23 +65,23 @@
             function generateParam(){
                 var param = {};
                 param.name = $("#name").val();
-                param.salesCategory = $("#salesCategory").val();
-                param.sellingDrugs = $("#sellingDrugs").val();
+                param.projectCost = $("#projectCost").val();
                 param.contacts = $("#contacts").val();
                 param.phone = $("#phone").val();
-                param.addressPro = $("#addressPro").val()
-                param.addressCity = $("#addressCity").val()
-                param.addressCountry = $("#addressCountry").val()
+                param.addressPro = $("#addressPro").val();
+                param.addressCity = $("#addressCity").val();
+                param.addressCountry = $("#addressCountry").val();
                 param.address = $("#address").val()
                 param.intruduce = $(".w-e-text").html();
-                param.type = orgType
+                param.orgCode = "未定义";
+                param.itemcode = itemcode;
+                param.type = orgType;
                 return param;
             }
 
             $("#saveBtn").unbind('click').on('click',function () {
                 var param = generateParam();
                 param.status = "——";
-                param.itemcode = itemcode;
                 if (uploadImg.isUpdate()){
                     ajaxUtil.fileAjax(itemcode,uploadImg.getFiles()[0],"undefined","undefined")
                 }
@@ -113,19 +113,18 @@
                 if (isUpdate()){
                     var tempdata = JSON.parse(localStorage.getItem("rowData"));
                     $("#name").val(tempdata.name);
-                    $("#salesCategory").val(tempdata.salesCategory);
-                    $("#sellingDrugs").val(tempdata.sellingDrugs);
+                    $("#projectCost").val(tempdata.projectCost);
                     $("#contacts").val(tempdata.contacts);
+                    $("#phone").val(tempdata.phone);
                     $("#distpicker").distpicker({
                         province: tempdata.addressPro,
                         city: tempdata.addressCity,
                         district: tempdata.addressCountry
                     });
                     $("#address").val(tempdata.address);
-                    $("#phone").val(tempdata.phone);
                     $(".w-e-text").html(tempdata.intruduce);
-                    itemcode = tempdata.itemcode
                     uploadImg.setImgSrc(tempdata.filePath)
+                    itemcode = tempdata.itemcode;
                 }else {
                     $("#distpicker").distpicker();
                 }

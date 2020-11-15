@@ -1,18 +1,15 @@
 (function () {
-    require(['jquery','ajaxUtil','stringUtil','uploadImg','wangEditor'],
-        function ($,ajaxUtil,stringUtil,uploadImg, wangEditor) {
+    require(['jquery','ajaxUtil','stringUtil','wangEditor'],
+        function (jquery,ajaxUtil,stringUtil, wangEditor) {
 
-            var url = "/industrialdevelop/chi-med";
+            var url = "/industrialdevelop/ser-pro";
 
-            var pathUrl = "/industrialdevelop/chinesemed-produce";
-
-            var orgType = "produce";
-
-            var itemcode = stringUtil.getUUID();
+            var pathUrl = "/industrialdevelop/tecservice"
 
             var type = isUpdate() ? "put":"post";
 
-            uploadImg.init();
+
+            var itemcode = stringUtil.getUUID();
 
             const editor = new wangEditor('#div1');
             // 或者 const editor = new E( document.getElementById('div1') )
@@ -64,33 +61,25 @@
 
             function generateParam(){
                 var param = {};
-                param.name = $("#name").val();
-                param.peoduceType = $("#peoduceType").val();
-                param.peoduceDrug = $("#peoduceDrug").val();
+                param.serviceProject = $("#serviceProject").val();
+                param.projectCost = $("#projectCost").val();
                 param.contacts = $("#contacts").val();
                 param.phone = $("#phone").val();
-                param.addressPro = $("#addressPro").val()
-                param.addressCity = $("#addressCity").val()
-                param.addressCountry = $("#addressCountry").val()
-                param.address = $("#address").val()
-                param.intruduce = $(".w-e-text").html();
-                param.type = orgType;
+                param.projectIntroduce = $(".w-e-text").html();
+                param.orgCode = "未定义";
+                param.itemcode = itemcode;
                 return param;
             }
 
             $("#saveBtn").unbind('click').on('click',function () {
                 var param = generateParam();
                 param.status = "——";
-                param.itemcode = itemcode;
-                if (uploadImg.isUpdate()){
-                    ajaxUtil.fileAjax(itemcode,uploadImg.getFiles()[0],"undefined","undefined")
-                }
 
                 ajaxUtil.myAjax(null,url,param,function (data) {
                     if(ajaxUtil.success(data)){
-                        orange.redirect(pathUrl);
+                        orange.redirect(pathUrl)
                     }else {
-                        alert(data.msg);
+                        alert(data.msg)
                     }
                 },true,"123",type);
                 return false;
@@ -107,29 +96,21 @@
                     }
                 },true,"123",type);
                 return false;
-            });
+            })
 
             var init = function () {
                 if (isUpdate()){
                     var tempdata = JSON.parse(localStorage.getItem("rowData"));
-                    $("#name").val(tempdata.name);
-                    $("#peoduceType").val(tempdata.peoduceType);
-                    $("#peoduceDrug").val(tempdata.peoduceDrug);
+                    $("#serviceProject").val(tempdata.serviceProject);
+                    $("#projectCost").val(tempdata.projectCost);
                     $("#contacts").val(tempdata.contacts);
-                    $("#distpicker").distpicker({
-                        province: tempdata.addressPro,
-                        city: tempdata.addressCity,
-                        district: tempdata.addressCountry
-                    });
-                    $("#address").val(tempdata.address);
                     $("#phone").val(tempdata.phone);
-                    $(".w-e-text").html(tempdata.intruduce);
-                    itemcode = tempdata.itemcode
-                    uploadImg.setImgSrc(tempdata.filePath)
-                }else {
-                    $("#distpicker").distpicker();
+                    $(".w-e-text").html(tempdata.projectIntroduce);
+                    itemcode = tempdata.itemcode;
                 }
-                init = function () {}
+                init = function () {
+
+                }
             };
             init();
 

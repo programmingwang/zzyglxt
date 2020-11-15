@@ -1,6 +1,7 @@
 package com.zyyglxt.service.impl;
 
 import com.zyyglxt.dao.IndustrialDevelopCooExcDOMapper;
+import com.zyyglxt.dataobject.HealthSciKnowDO;
 import com.zyyglxt.dataobject.IndustrialDevelopCooExcDO;
 import com.zyyglxt.dataobject.IndustrialDevelopCooExcDOKey;
 import com.zyyglxt.dataobject.validation.ValidationGroups;
@@ -12,6 +13,7 @@ import com.zyyglxt.validator.ValidatorResult;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -74,8 +76,17 @@ public class IndustrialDevelopCooServiceImpl implements IIndustrialDevelopCooSer
     }
 
     @Override
-    public List<IndustrialDevelopCooExcDO> getCooRecord() {
-        return cooExcDOMapper.selectAll();
+    public List<IndustrialDevelopCooExcDO> getCooRecord(List<String> status) {
+        List<IndustrialDevelopCooExcDO> industrialDevelopCooExcDOList=new ArrayList<>();
+        for(String CooExcStatus: status){
+            industrialDevelopCooExcDOList.addAll(cooExcDOMapper.selectAll(CooExcStatus));
+        }
+        return industrialDevelopCooExcDOList;
+    }
+
+    @Override
+    public int changeStatusToCooExc(IndustrialDevelopCooExcDOKey key, String status) {
+        return cooExcDOMapper.changeStatusToCooExc(key,status);
     }
 
 }

@@ -89,8 +89,8 @@ public class HealthCareChineseMedicineDOController {
     /*public List<HealthCareChineseMedicineDO> selectAllHealthCareChineseMedicineDOMapper(){
         return healthCareChineseMedicineDOService.selectAllHealthCareChineseMedicine();
     }*/
-    public ResponseData selectAllHealthCareChineseMedicineDOMapper(){
-        List<HealthCareChineseMedicineDO> healthCareChineseMedicineDOSList = healthCareChineseMedicineDOService.selectAllHealthCareChineseMedicine();
+    public ResponseData selectAllHealthCareChineseMedicineDOMapper(@RequestParam(value="chineseMedicineStatus")List chineseMedicineStatus){
+        List<HealthCareChineseMedicineDO> healthCareChineseMedicineDOSList = healthCareChineseMedicineDOService.selectAllHealthCareChineseMedicine(chineseMedicineStatus);
         List<HealthCareChineseMedicineDto> healthCareChineseMedicineDtoList = new ArrayList<>();
         for (HealthCareChineseMedicineDO healthCareChineseMedicineDO : healthCareChineseMedicineDOSList) {
             healthCareChineseMedicineDtoList.add(
@@ -100,7 +100,17 @@ public class HealthCareChineseMedicineDOController {
         }
         return new ResponseData(EmBusinessError.success,healthCareChineseMedicineDtoList);
     }
-
+     /*中医药数据的状态*/
+     @RequestMapping(value = "changestatustomedicine/{itemID}/{itemCode}" , method = RequestMethod.POST)
+     @ResponseBody
+     @LogAnnotation(logTitle = "中医药数据状态的修改", logLevel = "2")
+    public ResponseData changeStatusToMedicine(@RequestParam("chineseMedicineStatus") String chineseMedicineStatus, @PathVariable("itemID") Integer itemID , @PathVariable("itemCode")String itemCode){
+         HealthCareChineseMedicineDOKey healthCareChineseMedicineDOKey=new HealthCareChineseMedicineDOKey();
+         healthCareChineseMedicineDOKey.setItemid(itemID);
+         healthCareChineseMedicineDOKey.setItemcode(itemCode);
+         healthCareChineseMedicineDOService.changeStatusToMedicine(healthCareChineseMedicineDOKey,chineseMedicineStatus);
+         return new ResponseData(EmBusinessError.success);
+     }
     private HealthCareChineseMedicineDto convertDtoFromDo(HealthCareChineseMedicineDO healthCareChineseMedicineDO, String filePath){
         if(StringUtils.isEmpty(filePath)){
             filePath = "已经损坏了";

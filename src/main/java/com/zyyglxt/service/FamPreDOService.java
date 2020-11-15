@@ -3,6 +3,7 @@ package com.zyyglxt.service;
 import com.zyyglxt.dataobject.FamPreDO;
 import com.zyyglxt.dataobject.FamPreDOKey;
 import com.zyyglxt.error.BusinessException;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -19,7 +20,8 @@ public interface FamPreDOService {
   int deleteByPrimaryKey(FamPreDOKey key);
   int updateByPrimaryKeySelective(FamPreDO record) throws BusinessException;
   FamPreDO selectByPrimaryKey(FamPreDOKey key);
-  List<FamPreDO> selectAllFamPre();//查询所有历史名方
+  List<FamPreDO> selectAllFamPre( List<String> status);//查询所有历史名方
+  int changeStatusToFamPre( FamPreDOKey key , String status);//历史名方数据状态
   int increaseVisitNumFamPre(FamPreDOKey key);//增加浏览次数
   List<FamPreDO> searchFamPre(String keyWord);//关键字查询
 }

@@ -5,6 +5,8 @@
 
             //请求后台url
             var url = "/industrialdevelop/achievement";
+            
+            var getUrl = url + "/" + sessionStorage.getItem("orgCode");
             //请求页面url
             var pathUrl = url;
             //请求新增页面url
@@ -101,14 +103,14 @@
                 {field: 'action',  title: '操作',formatter: operation,events:orgEvents}
             ];
 
-            var myTable = bootstrapTableUtil.myBootStrapTableInit("table", url, aParam, aCol);
+            var myTable = bootstrapTableUtil.myBootStrapTableInit("table", getUrl, aParam, aCol);
 
             function refreshTable() {
                 var param = {};
                 myTable.free();
-                myTable = bootstrapTableUtil.myBootStrapTableInit("table", url, param, aCol);
+                myTable = bootstrapTableUtil.myBootStrapTableInit("table", getUrl, param, aCol);
             }
 
-            bootstrapTableUtil.globalSearch("table",url,aParam, aCol);
+            bootstrapTableUtil.globalSearch("table",getUrl,aParam, aCol);
         })
 })();

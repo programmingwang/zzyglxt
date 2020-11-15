@@ -1,6 +1,5 @@
 package com.zyyglxt.dao;
 
-import com.zyyglxt.dataobject.HealthSciKnowDOKey;
 import com.zyyglxt.dataobject.IndustrialDevelopCooExcDO;
 import com.zyyglxt.dataobject.IndustrialDevelopCooExcDOKey;
 import org.apache.ibatis.annotations.Param;
@@ -60,8 +59,5 @@ public interface IndustrialDevelopCooExcDOMapper {
 
     List<IndustrialDevelopCooExcDO> selectByPage(@Param("start") int start,@Param("end") int end);
 
-    List<IndustrialDevelopCooExcDO> selectAll(@Param("status") String status);
-
-    int changeStatusToCooExc(@Param("key") IndustrialDevelopCooExcDOKey key, @Param("status") String status);//合作交流数据状态
-
+    List<IndustrialDevelopCooExcDO> selectAll(@Param("orgCode") String orgCode);
 }

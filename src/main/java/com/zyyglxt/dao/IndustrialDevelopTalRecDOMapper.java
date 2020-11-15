@@ -65,5 +65,5 @@ public interface IndustrialDevelopTalRecDOMapper {
 
     List<IndustrialDevelopTalRecDO> selectByPage(@Param("start") int start,@Param("end") int end);
 
-    List<IndustrialDevelopTalRecDO> selectAll();
+    List<IndustrialDevelopTalRecDO> selectAll(@Param("orgCode") String orgCode);
 }

@@ -6,6 +6,7 @@ import com.zyyglxt.error.EmBusinessError;
 import com.zyyglxt.response.ResponseData;
 import com.zyyglxt.service.IIndustrialDevelopSciAchiService;
 import io.swagger.annotations.Api;
+import org.springframework.security.core.parameters.P;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -71,10 +72,10 @@ public class SciAchiController {
         return new ResponseData(EmBusinessError.success);
     }
 
-    @RequestMapping(value = "/achievement", method = RequestMethod.GET)
-    public ResponseData getAchievement() {
+    @RequestMapping(value = "/achievement/{orgCode}", method = RequestMethod.GET)
+    public ResponseData getAchievement(@PathVariable String orgCode) {
         ResponseData responseData = new ResponseData(EmBusinessError.success);
-        responseData.setData(sciAchiService.getAchievement());
+        responseData.setData(sciAchiService.getAchievement(orgCode));
         return responseData;
     }
 }

@@ -27,7 +27,7 @@
             }else if(role === "政务资源处长"){
                 return preUrl + "&"+status+"=处长已审核&"+status+"=待审核"
             }else if(role === "政务资源综合处处长") {
-                return preUrl + "&"+status+"=处长已审核"
+                return preUrl + "&"+status+"=处长已审核&"+status+"=待审核"
             }
         }
         
@@ -111,10 +111,16 @@
 
             }else if(role === "政务资源处长"){
                 if(status == "待审核"){
-                    return [
-                        '<button type="button" class="pass btn btn-primary btn-sm"  data-toggle="modal" data-target="#staticBackdrop" >通过</button>',
-                        '<button type="button" class="fail btn btn-danger btn-sm"  data-toggle="modal" data-target="#staticBackdrop" >不通过</button>',
-                    ].join('');
+                    if(row.dataFileType=="转载性新闻" || row.dataFileType=="转载性公告"){
+                        return [
+                            '<button type="button" class="view btn btn-primary btn-sm" style="margin-right: 5px" data-toggle="modal" data-target="" >查看</button>',
+                        ].join('');
+                    }else {
+                        return [
+                            '<button type="button" class="pass btn btn-primary btn-sm"  data-toggle="modal" data-target="#staticBackdrop" >通过</button>',
+                            '<button type="button" class="fail btn btn-danger btn-sm"  data-toggle="modal" data-target="#staticBackdrop" >不通过</button>',
+                        ].join('');
+                    }
                 }else if(status == "处长已审核" || status == "已下架" ||status == "展示中"){
                     return [
                         '<button type="button" class="view btn btn-primary btn-sm" style="margin-right: 5px" data-toggle="modal" data-target="" >查看</button>',
@@ -122,7 +128,18 @@
                 }
 
             }else if(role === "政务资源综合处处长"){
-                if(status == "处长已审核"){
+                if(status == "待审核"){
+                    if(row.dataFileType=="转载性新闻" || row.dataFileType=="转载性公告"){
+                        return [
+                            '<button type="button" class="pass btn btn-primary btn-sm"  data-toggle="modal" data-target="#staticBackdrop" >通过</button>',
+                            '<button type="button" class="fail btn btn-danger btn-sm"  data-toggle="modal" data-target="#staticBackdrop" >不通过</button>',
+                        ].join('');
+                    }else {
+                        return [
+                            '<button id="aa" type="button" class="view btn btn-primary btn-sm" style="margin-right: 5px" data-toggle="modal" data-target="" >查看</button>',
+                        ].join('');
+                    }
+                }else if(status == "处长已审核"){
                     return [
                         '<button type="button" class="pass btn btn-primary btn-sm"  data-toggle="modal" data-target="#staticBackdrop" >通过</button>',
                         '<button type="button" class="fail btn btn-danger btn-sm"  data-toggle="modal" data-target="#staticBackdrop" >不通过</button>',

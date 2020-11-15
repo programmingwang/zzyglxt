@@ -308,6 +308,16 @@
                     id: "99-10",
                     level: "2",
                     pid: "99"
+                },
+                /*
+                技术服务机构后台管理------14
+                */
+                {
+                    menu_name: "服务项目",
+                    menu_url: "/serviceItems/tecserviceorg",
+                    id: "14",
+                    level: "1",
+                    pid: ""
                 }
             ];
 

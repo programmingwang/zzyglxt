@@ -70,9 +70,9 @@ public class IndustrialDevelopSciAchiServiceImpl implements IIndustrialDevelopSc
     }
 
     @Override
-    public List<IndustrialDevelopSciAchiDO> getAchievement() {
+    public List<IndustrialDevelopSciAchiDO> getAchievement(String orgCode) {
 
-        return sciAchiDOMapper.selectAll();
+        return sciAchiDOMapper.selectAll(orgCode);
     }
 
 }

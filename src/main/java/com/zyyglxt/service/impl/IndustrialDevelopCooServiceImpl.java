@@ -74,8 +74,8 @@ public class IndustrialDevelopCooServiceImpl implements IIndustrialDevelopCooSer
     }
 
     @Override
-    public List<IndustrialDevelopCooExcDO> getCooRecord() {
-        return cooExcDOMapper.selectAll();
+    public List<IndustrialDevelopCooExcDO> getCooRecord(String orgCode) {
+        return cooExcDOMapper.selectAll(orgCode);
     }
 
 }

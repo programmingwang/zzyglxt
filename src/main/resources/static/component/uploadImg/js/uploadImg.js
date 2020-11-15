@@ -11,6 +11,7 @@ var updated = false;
             console.log("init");
             localStorage.setItem('limit', $(".upload-content").attr('data-limit'));
             imgSrc = [];
+            imgFile = [];
             updated = false;
             limit = $(".upload-content").attr('data-limit');
             // 鼠标经过显示删除按钮
@@ -37,8 +38,8 @@ var updated = false;
 
             $(".content-img-list").on("click", '.content-img-list-item a .gclfangda', function () {
                 var index = $(this).parent().parent().parent().index();
-                console.log(index)
-                console.log(imgSrc)
+                console.log(index);
+                console.log(imgSrc);
                 $(".modal-content").html("");
 
                 var bigimg = $(".modal-content").html();

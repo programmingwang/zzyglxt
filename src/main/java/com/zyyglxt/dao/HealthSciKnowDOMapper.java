@@ -27,7 +27,10 @@ public interface HealthSciKnowDOMapper {
 
     int updateByPrimaryKey(HealthSciKnowDO record);
 
-    List<HealthSciKnowDO> selectAllHealthSciKnow();//查询所有科普知识所有数据
+    List<HealthSciKnowDO> selectAllHealthSciKnow(@Param("scienceKnowledgeStatus") String scienceKnowledgeStatus);//查询所有科普知识所有数据
 
     int updateVisitNumHealthSciKnow(HealthSciKnowDOKey key);
+
+    int changeStatusToSciKnow(@Param("key") HealthSciKnowDOKey key,@Param("scienceKnowledgeStatus") String scienceKnowledgeStatus);//科普知识数据状态
+
 }

@@ -7,7 +7,7 @@
 
             var opUrl = "/industrialdevelop/chi-med";
 
-            var pathUrl = "/industrialdevelop/chinesemed-produce";
+            var pathUrl = "/industrialdevelop/chinesemed/chinesemed-produce";
             var addUrl = pathUrl+"_add";
             var aParam = {
 

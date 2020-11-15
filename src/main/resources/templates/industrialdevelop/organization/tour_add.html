@@ -43,8 +43,8 @@
     <div class="col-12">
         <form>
             <div class="form-group row">
-                <label class="col-sm-2 col-form-label">企业照片：</label>
-                <div class="upload-content" data-limit="1">
+                <label class="col-sm-2 col-form-label">基地照片：</label>
+                <div class="upload-content" data-limit="5">
                     <div class="content-img">
                         <ul class="content-img-list"></ul>
                         <div class="file">
@@ -63,23 +63,22 @@
             </div>
 
             <div class="form-group row">
-                <label class="col-sm-2 col-form-label">企业名称：</label>
+                <label class="col-sm-2 col-form-label">基地名称：</label>
                 <div class="col-sm-3">
                     <input id="name" type="text" class="form-control" placeholder="请输入">
                 </div>
 
-                <label class="col-sm-2 col-form-label">销售种类：</label>
+                <label class="col-sm-2 col-form-label">占地面积：</label>
                 <div class="col-sm-3">
-                    <input id="salesCategory" type="text" class="form-control" placeholder="请输入">
+                    <input id="areaCoverd" type="text" class="form-control" placeholder="请输入">
                 </div>
             </div>
             <div class="form-group row">
-                <label class="col-sm-2 col-form-label">销售药品：</label>
+                <label class="col-sm-2 col-form-label">特色服务：</label>
                 <div class="col-sm-3">
-                    <input id="sellingDrugs" type="text" class="form-control" placeholder="请输入">
+                    <input id="specialService" type="text" class="form-control" placeholder="请输入">
                 </div>
             </div>
-
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label">联系人：</label>
                 <div class="col-sm-3">
@@ -90,8 +89,8 @@
                 <div class="col-sm-3">
                     <input id="phone" type="text" class="form-control" placeholder="请输入">
                 </div>
-
             </div>
+
             <div id="distpicker" class="form-group row">
                 <label for="addressPro" class="col-sm-2 col-form-label">省：</label>
                 <div class="col-sm-2">
@@ -108,6 +107,7 @@
                     <select id="addressCountry" class="form-control"></select>
                 </div>
             </div>
+
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label">地址：</label>
                 <div class="col-sm-3">
@@ -115,7 +115,7 @@
                 </div>
             </div>
             <div class="form-group row">
-                <label class="col-sm-2 col-form-label">企业简介：</label>
+                <label class="col-sm-2 col-form-label">基地简介：</label>
                 <div id="div1" class="col-sm-8">
                 </div>
             </div>
@@ -136,11 +136,12 @@
                 </div>
             </div>
         </form>
+
     </div>
 
 </div>
 <script type="text/javascript" data-main="/main/main.js" th:src="@{/component/require@2.3.6/require-2.3.6.js}"></script>
-<script type="text/javascript" th:src="@{/project/js/industrialdevelop/chinesemed-sale_add.js}"></script>
+<script type="text/javascript" th:src="@{/project/js/industrialdevelop/organization/tour_add.js}"></script>
 <script type="text/javascript" th:src="@{/component/jquery@3.5.1/jquery.js}"></script>
 <script type="text/javascript" th:src="@{/component/distSelect/distpicker.common.js}"></script>
 <link type="text/css" rel="stylesheet" href="/component/uploadImg/css/uploadImg.css"

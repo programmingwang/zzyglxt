@@ -8,8 +8,10 @@ import com.zyyglxt.dto.FileDto;
 import com.zyyglxt.error.EmBusinessError;
 import com.zyyglxt.response.ResponseData;
 import com.zyyglxt.service.IFileService;
+import com.zyyglxt.util.UsernameUtil;
 import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.web.bind.annotation.*;
@@ -34,10 +36,12 @@ public class FileController {
     private String nginx;
     @Value("${fdfs.http_tracker_http_port}")
     private String port;
+    @Autowired
+    private UsernameUtil usernameUtil;
 
     @PostMapping("/upload")
     @ResponseBody
-    @LogAnnotation(appCode ="",logTitle ="更新文件加载",logLevel ="1",creater ="",updater = "")
+    @LogAnnotation(appCode ="",logTitle ="文件上传",logLevel ="1",creater ="",updater = "")
     public ResponseData upload(FileDto fileDto) throws IOException {
         fileService.uploadFile(saveFile(fileDto));
         return new ResponseData(EmBusinessError.success);
@@ -81,8 +85,9 @@ public class FileController {
         fileDO.setFileName(fileName);
         fileDO.setFileType(FilenameUtils.getExtension(fileName));//文件扩展名
         fileDO.setFileSize((double) multipartFile.getSize());
-        String path = "http://" + nginx.substring(0,nginx.indexOf(":")+1) + port + "/" + storePath.getFullPath();//字符串拼接路径
+        String path = "http://" + nginx.substring(0,nginx.indexOf(":")+1) + port + "/" + storePath.getFullPath() + "?filename=" + fileName;//字符串拼接路径
         fileDO.setFilePath(path);
+        fileDO.setUploader(usernameUtil.getOperateUser());
         return fileDO;
     }
 }

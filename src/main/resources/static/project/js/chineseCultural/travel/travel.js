@@ -2,10 +2,10 @@
     require(['jquery', 'ajaxUtil','bootstrapTableUtil','objectUtil','alertUtil','modalUtil','selectUtil','stringUtil','dictUtil'],
         function (jquery,ajaxUtil,bootstrapTableUtil,objectUtil,alertUtil,modalUtil,selectUtil,stringUtil,dictUtil) {
 
-            var url = "/cul/trav/trav/getAll?chineseCulturalStatus=已下架&chineseCulturalStatus=展示中";
+            var url = "/cul/trav/trav/getAll";
 
             //角色加载工具
-            url = selectUtil.getRoleTable(sessionStorage.getItem("rolename"),url);
+            url = selectUtil.getRoleTable(sessionStorage.getItem("rolename"),url,"chineseCulturalStatus");
 
             var aParam = {
 
@@ -194,6 +194,36 @@
 
                     };
                     var mySubmitModal = modalUtil.init(mySubmitTravelModalData);
+                    mySubmitModal.show();
+                },
+
+                'click .no-submit' : function (e, value, row, index) {
+                    var myNoSubmitTravelModalData ={
+                        modalBodyID :"myNoSubmitModal",
+                        modalTitle : "取消提交",
+                        modalClass : "modal-lg",
+                        modalConfirmFun:function () {
+                            var isSuccess = false;
+                            var submitStatus = {
+                                "chineseCulturalStatus": "--"
+                            };
+                            ajaxUtil.myAjax(null,"/cul/trav/trav/cgTravSta/"+row.itemid+"/"+row.itemcode,submitStatus,function (data) {
+                                if(ajaxUtil.success(data)){
+                                    if(data.code == 88888){
+                                        alertUtil.info("已提交");
+                                        isSuccess = true;
+                                        refreshTable();
+                                    }else{
+                                        alertUtil.error(data.msg);
+                                    }
+
+                                }
+                            },false);
+                            return isSuccess;
+                        }
+
+                    };
+                    var mySubmitModal = modalUtil.init(myNoSubmitTravelModalData);
                     mySubmitModal.show();
                 },
             };

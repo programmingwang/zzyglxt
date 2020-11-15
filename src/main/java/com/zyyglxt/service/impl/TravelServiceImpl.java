@@ -81,7 +81,7 @@ public class TravelServiceImpl implements ITravelService {
     @Override
     @Transactional
     public int updateTravel(ChineseCulturalDO record) {
-        return DOKeyAndValidateUtil.updateUtil(record, validator, chineseCulturalDOMapper);
+        return DOKeyAndValidateUtil.updateUtil(record, validator, chineseCulturalDOMapper,usernameUtil);
     }
 
     @Override

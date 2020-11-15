@@ -14,17 +14,21 @@
             }
         });
         
-        function getRoleTable(role,preUrl) {
+        function getRoleTable(role,preUrl,status) {
+            preUrl = preUrl + "?"+status+"=已下架&"+status+"=展示中"
             if(role === "文化宣传科员"){
-                return preUrl + "&chineseCulturalStatus=--&&chineseCulturalStatus=待审核"
+                return preUrl + "&"+status+"=--&"+status+"=待审核"
             }else if(role === "文化宣传处长"){
-                return preUrl + "&chineseCulturalStatus=处长已审核&&chineseCulturalStatus=待审核"
+                return preUrl + "&"+status+"=处长已审核&"+status+"=待审核"
             }else if(role === "文化宣传综合处处长"){
-                return preUrl + "&chineseCulturalStatus=处长已审核"
+                return preUrl + "&"+status+"=处长已审核"
+            }else if(role === "政务资源科员"){
+                return preUrl + "&"+status+"=--&"+status+"=待审核"
+            }else if(role === "政务资源处长"){
+                return preUrl + "&"+status+"=处长已审核&"+status+"=待审核"
+            }else if(role === "政务资源综合处处长") {
+                return preUrl + "&"+status+"=处长已审核"
             }
-            // else if(role === "管理员") {
-            //     return preUrl + "&chineseCulturalStatus=--&&chineseCulturalStatus=待审核"
-            // }
         }
         
         function getRoleOperate(value, row, index, role, status) {
@@ -36,7 +40,7 @@
                         '<button type="button" class="submit btn btn-danger btn-sm"  data-toggle="modal" data-target="#staticBackdrop" >提交</button>',
                         '<button type="button" class="delete btn btn-danger btn-sm" style="margin-right: 10px"  data-toggle="modal" data-target="#staticBackdrop" >删除</button>',
                     ].join('');
-                }else if(status == "待审核"||status == "展示中"){
+                }else if(status == "展示中"){
                     return [
                         '<button type="button" class="view btn btn-primary btn-sm" style="margin-right: 5px" data-toggle="modal" data-target="" >查看</button>',
                     ].join('');
@@ -44,6 +48,11 @@
                     return [
                         '<button type="button" class="view btn btn-primary btn-sm" style="margin-right: 5px" data-toggle="modal" data-target="" >查看</button>',
                         '<button type="button" class="delete btn btn-danger btn-sm" data-toggle="modal" data-target="#staticBackdrop" >删除</button>',
+                    ].join('');
+                }else if(status == "待审核"){
+                    return [
+                        '<button type="button" class="view btn btn-primary btn-sm" style="margin-right: 5px" data-toggle="modal" data-target="" >查看</button>',
+                        '<button type="button" class="no-submit btn btn-danger btn-sm" data-toggle="modal" data-target="" >取消提交</button>',
                     ].join('');
                 }
 
@@ -76,6 +85,59 @@
                     ].join('');
                 }
 
+            }else if(role === "政务资源科员"){
+                $('#btn_addTask').attr('style',"display:block");
+                if(status === "--"){
+                    return [
+                        '<button type="button" class="edit btn btn-primary btn-sm" style="margin-right: 3px" data-toggle="modal" data-target="" >修改</button>',
+                        '<button type="button" class="submit btn btn-danger btn-sm"  data-toggle="modal" data-target="#staticBackdrop" >提交</button>',
+                        '<button type="button" class="delete btn btn-danger btn-sm" style="margin-right: 10px"  data-toggle="modal" data-target="#staticBackdrop" >删除</button>',
+                    ].join('');
+                }else if(status == "展示中"){
+                    return [
+                        '<button type="button" class="view btn btn-primary btn-sm" style="margin-right: 5px" data-toggle="modal" data-target="" >查看</button>',
+                    ].join('');
+                }else if(status == "已下架"){
+                    return [
+                        '<button type="button" class="view btn btn-primary btn-sm" style="margin-right: 5px" data-toggle="modal" data-target="" >查看</button>',
+                        '<button type="button" class="delete btn btn-danger btn-sm" data-toggle="modal" data-target="#staticBackdrop" >删除</button>',
+                    ].join('');
+                }else if(status == "待审核"){
+                    return [
+                        '<button type="button" class="view btn btn-primary btn-sm" style="margin-right: 5px" data-toggle="modal" data-target="" >查看</button>',
+                        '<button type="button" class="no-submit btn btn-danger btn-sm" data-toggle="modal" data-target="" >取消提交</button>',
+                    ].join('');
+                }
+
+            }else if(role === "政务资源处长"){
+                if(status == "待审核"){
+                    return [
+                        '<button type="button" class="pass btn btn-primary btn-sm"  data-toggle="modal" data-target="#staticBackdrop" >通过</button>',
+                        '<button type="button" class="fail btn btn-danger btn-sm"  data-toggle="modal" data-target="#staticBackdrop" >不通过</button>',
+                    ].join('');
+                }else if(status == "处长已审核" || status == "已下架" ||status == "展示中"){
+                    return [
+                        '<button type="button" class="view btn btn-primary btn-sm" style="margin-right: 5px" data-toggle="modal" data-target="" >查看</button>',
+                    ].join('');
+                }
+
+            }else if(role === "政务资源综合处处长"){
+                if(status == "处长已审核"){
+                    return [
+                        '<button type="button" class="pass btn btn-primary btn-sm"  data-toggle="modal" data-target="#staticBackdrop" >通过</button>',
+                        '<button type="button" class="fail btn btn-danger btn-sm"  data-toggle="modal" data-target="#staticBackdrop" >不通过</button>',
+                    ].join('');
+                }else if(status == "已下架"){
+                    return [
+                        '<button type="button" class="view btn btn-primary btn-sm" style="margin-right: 5px" data-toggle="modal" data-target="" >查看</button>',
+                    ].join('');
+                }else if(status == "展示中"){
+                    return [
+                        '<button type="button" class="view btn btn-primary btn-sm" style="margin-right: 5px" data-toggle="modal" data-target="" >查看</button>',
+                        '<button type="button" class="under-shelf btn btn-danger btn-sm" data-toggle="modal" data-target="#staticBackdrop" >下架</button>',
+                    ].join('');
+                }
+
             }
         }
 
@@ -85,6 +147,12 @@
             }else if(role === "文化宣传处长"){
                 return "处长已审核"
             }else if(role === "文化宣传综合处处长"){
+                return "展示中"
+            }else if(role === "政务资源科员"){
+                return "待审核"
+            }else if(role === "政务资源处长"){
+                return "处长已审核"
+            }else if(role === "政务资源综合处处长"){
                 return "展示中"
             }
             // else if(role === "管理员") {

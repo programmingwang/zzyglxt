@@ -3,6 +3,7 @@ package com.zyyglxt.controller.medicalService;
 import com.zyyglxt.annotation.LogAnnotation;
 import com.zyyglxt.dao.HospSpecialtyRefDOMapper;
 import com.zyyglxt.dataobject.*;
+import com.zyyglxt.dto.MedicalServiceDto;
 import com.zyyglxt.dto.SpecialtyDto;
 import com.zyyglxt.error.EmBusinessError;
 import com.zyyglxt.response.ResponseData;
@@ -60,8 +61,8 @@ public class SpecialtyController {
     @ResponseBody
     @GetMapping(value = "selectAll")
     @LogAnnotation(appCode ="",logTitle ="查看所有科室数据",logLevel ="1",creater ="",updater = "")
-    public ResponseData selectAllSpecialty(){
-        List<SpecialtyDO> specialtyDOList = specialtyService.selectAllSpecialty();
+    public ResponseData selectAllSpecialty(@RequestParam(value = "specialtyStatus")List specialtyStatus){
+        List<SpecialtyDO> specialtyDOList = specialtyService.selectAllSpecialty(specialtyStatus);
         return new ResponseData(EmBusinessError.success,DoToDto(specialtyDOList));
     }
 
@@ -74,19 +75,21 @@ public class SpecialtyController {
     }
 
     @ResponseBody
-    @GetMapping(value = "top5")
-    @LogAnnotation(appCode ="",logTitle ="查看前5条科室数据",logLevel ="1",creater ="",updater = "")
-    public ResponseData top5Specialty(){
-        List<SpecialtyDO> specialtyDOList = specialtyService.top5Specialty();
-        return new ResponseData(EmBusinessError.success,DoToDto(specialtyDOList));
-    }
-
-    @ResponseBody
     @GetMapping(value = "selectByHospCode")
+    @LogAnnotation(appCode ="",logTitle ="通过医院code查看科室数据",logLevel ="1",creater ="",updater = "")
     public ResponseData selectByHospCode(String hospCode){
         List<SpecialtyDO> specialtyDOList = specialtyService.selectByHospCode(hospCode);
         return new ResponseData(EmBusinessError.success,DoToDto(specialtyDOList));
     }
+
+    @ResponseBody
+    @PostMapping("updateStatus")
+    @LogAnnotation(logTitle = "改变数据状态",logLevel = "2")
+    public ResponseData updateStatus(MedicalServiceDto medicalServiceDto){
+        specialtyService.updateStatus(medicalServiceDto);
+        return new ResponseData(EmBusinessError.success);
+    }
+
 
     private List<SpecialtyDto> DoToDto(List<SpecialtyDO> DOList){
         List<SpecialtyDto> DtoList = new ArrayList<>();

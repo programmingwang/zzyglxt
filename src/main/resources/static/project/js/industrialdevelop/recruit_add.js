@@ -88,7 +88,7 @@
                 param.emali = $("#emali").val();
                 param.postDuty = $("#div1 .w-e-text").html();
                 param.postDescr  = $("#div2 .w-e-text").html();
-                param.orgCode = "未定义";
+                param.orgCode = sessionStorage.getItem("orgCode");
                 param.itemcode = itemcode;
                 return param;
             }

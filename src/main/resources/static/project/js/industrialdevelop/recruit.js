@@ -5,6 +5,8 @@
 
             //后台请求地址
             var url = "/industrialdevelop/talrec";
+            
+            var getUrl = url + "/" + sessionStorage.getItem("orgCode");
             //页面请求地址
             var pathUrl = "/industrialdevelop/recruit";
             //新增页面地址
@@ -101,14 +103,14 @@
                 {field: 'action',  title: '操作',formatter: operation,events:orgEvents}
             ];
 
-            var myTable = bootstrapTableUtil.myBootStrapTableInit("table", url, aParam, aCol);
+            var myTable = bootstrapTableUtil.myBootStrapTableInit("table", getUrl, aParam, aCol);
 
             function refreshTable() {
                 var param = {};
                 myTable.free();
-                myTable = bootstrapTableUtil.myBootStrapTableInit("table", url, param, aCol);
+                myTable = bootstrapTableUtil.myBootStrapTableInit("table", getUrl, param, aCol);
             }
 
-            bootstrapTableUtil.globalSearch("table",url,aParam, aCol);
+            bootstrapTableUtil.globalSearch("table",getUrl,aParam, aCol);
         })
 })();

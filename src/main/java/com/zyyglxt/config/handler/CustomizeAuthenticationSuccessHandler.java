@@ -42,7 +42,7 @@ public class CustomizeAuthenticationSuccessHandler implements AuthenticationSucc
         RoleDO roleDO = roleDOMapper.selectByUserid(userDo.getItemcode());
 
         UserSessionDto userSessionDto = new UserSessionDto();
-        userSessionDto.setOrgcode(userDo.getOrgCode());
+        userSessionDto.setOrgCode(userDo.getOrgCode());
         userSessionDto.setUsername(userDo.getUsername());
         userSessionDto.setRolename(roleDO.getRoleName());
         userSessionDto.setItemid(userDo.getItemid());

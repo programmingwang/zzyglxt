@@ -358,6 +358,16 @@
                     id: "15-6",
                     level: "2",
                     pid: "15"
+                },
+                /*
+                技术服务机构后台管理------14
+                */
+                {
+                    menu_name: "服务项目",
+                    menu_url: "/serviceItems/tecserviceorg",
+                    id: "16",
+                    level: "1",
+                    pid: ""
                 }
             ];
 

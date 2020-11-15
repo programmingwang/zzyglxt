@@ -38,18 +38,18 @@ public class CustomizeAuthenticationSuccessHandler implements AuthenticationSucc
         //更新用户表上次登录时间、更新人、更新时间等字段
         User userDetails = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         UserDO userDo = userService.selectByName(userDetails.getUsername());
-        Map<String,String> map = new HashMap<>();
+        /*Map<String,String> map = new HashMap<>();
         UserUtil userUtil = new UserUtil();
         map.put("username", userDo.getUsername());
         map.put("itemid", String.valueOf(userDo.getItemid()));
         map.put("itemcode", userDo.getItemcode());
 
-        userUtil.setUser(map);// 将username、itemid、itemcode存到session
+        userUtil.setUser(map);*/// 将username、itemid、itemcode存到session
 
-        userDo.setState("入");
-        userDo.setItemid(Integer.parseInt(map.get("itemid")));
+//        userDo.setState("入");
+        /*userDo.setItemid(Integer.parseInt(map.get("itemid")));
         userDo.setItemcode(map.get("itemcode"));
-        userService.updateByPrimaryKeySelective(userDo);
+        userService.updateByPrimaryKeySelective(userDo);*/
 
         RoleDO roleDO = roleDOMapper.selectByUserid(userDo.getItemcode());
 
@@ -57,7 +57,7 @@ public class CustomizeAuthenticationSuccessHandler implements AuthenticationSucc
 
         userSessionDto.setUsername(userDo.getUsername());
         userSessionDto.setRolename(roleDO.getRoleName());
-        userSessionDto.setItemid(Integer.parseInt(map.get("itemid")));
+        userSessionDto.setItemid(userDo.getItemid());
         userSessionDto.setItemcode(userDo.getItemcode());
         httpServletRequest.getSession().setAttribute("user", userSessionDto);
 

@@ -12,6 +12,7 @@ import com.zyyglxt.service.ResourcesService;
 import com.zyyglxt.util.DateUtils;
 
 import com.zyyglxt.util.UUIDUtils;
+import com.zyyglxt.util.UsernameUtil;
 import com.zyyglxt.validator.ValidatorImpl;
 import com.zyyglxt.validator.ValidatorResult;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +31,8 @@ public class ResourcesRoleRefServiceImpl implements ResourcesRoleRefService {
     ResourcesRoleRefDOMapper rRRMapper;
     @Autowired
     private ValidatorImpl validator;
+    @Autowired
+    UsernameUtil usernameUtil;
 
     @Override
     public int deleteByPrimaryKey(ResourcesRoleRefDOKey key) {
@@ -42,6 +45,8 @@ public class ResourcesRoleRefServiceImpl implements ResourcesRoleRefService {
         if(result.isHasErrors()){
             throw new BusinessException(result.getErrMsg(), EmBusinessError.PARAMETER_VALIDATION_ERROR);
         }
+//        record.setUpdater(usernameUtil.getOperateUser());
+//        record.setCreater(usernameUtil.getOperateUser());
         record.setItemcode(UUIDUtils.getUUID());
         return rRRMapper.insertSelective(record);
     }
@@ -53,6 +58,7 @@ public class ResourcesRoleRefServiceImpl implements ResourcesRoleRefService {
 
     @Override
     public int updateByPrimaryKeySelective(ResourcesRoleRefDO record) {
+        record.setUpdater(usernameUtil.getOperateUser());
         return rRRMapper.updateByPrimaryKeySelective(record);
     }
 

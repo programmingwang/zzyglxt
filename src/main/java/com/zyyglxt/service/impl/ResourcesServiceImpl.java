@@ -8,9 +8,7 @@ import com.zyyglxt.dataobject.*;
 import com.zyyglxt.error.BusinessException;
 import com.zyyglxt.error.EmBusinessError;
 
-import com.zyyglxt.util.DateUtils;
-import com.zyyglxt.util.MenuTreeUtil;
-import com.zyyglxt.util.UUIDUtils;
+import com.zyyglxt.util.*;
 
 import com.zyyglxt.service.ResourcesService;
 import com.zyyglxt.util.DateUtils;
@@ -38,6 +36,8 @@ public class ResourcesServiceImpl implements ResourcesService {
     ResourcesRoleRefDOMapper resourcesRoleRefDOMapper;
     @Autowired
     private ValidatorImpl validator;
+    @Autowired
+    UsernameUtil usernameUtil;
 
     @Override
     public void deleteByPrimaryKey(ResourcesDO resourcesDO) {
@@ -66,6 +66,8 @@ public class ResourcesServiceImpl implements ResourcesService {
         if(result.isHasErrors()){
             throw new BusinessException(result.getErrMsg(), EmBusinessError.PARAMETER_VALIDATION_ERROR);
         }
+        record.setUpdater(usernameUtil.getOperateUser());
+        record.setCreater(usernameUtil.getOperateUser());
         record.setItemcode(UUIDUtils.getUUID());
         resourcesDOMapper.insertSelective(record);
     }
@@ -77,12 +79,14 @@ public class ResourcesServiceImpl implements ResourcesService {
 
     @Override
     public int updateByPrimaryKeySelective(ResourcesDO record) {
+        record.setUpdater(usernameUtil.getOperateUser());
         record.setItemupdateat(DateUtils.getDate());
         return resourcesDOMapper.updateByPrimaryKeySelective(record);
     }
 
     @Override
     public int updateByPrimaryKey(ResourcesDO record) {
+        record.setUpdater(usernameUtil.getOperateUser());
         return resourcesDOMapper.updateByPrimaryKey(record);
     }
 

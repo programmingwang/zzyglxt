@@ -17,4 +17,6 @@ public class UserSessionDto {
     private String itemcode;
 
     private String rolename;
+
+    private String orgcode;
 }

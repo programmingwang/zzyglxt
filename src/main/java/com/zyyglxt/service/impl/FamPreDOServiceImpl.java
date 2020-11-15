@@ -40,6 +40,7 @@ public class FamPreDOServiceImpl implements FamPreDOService {
         }
         record.setItemcode(UUID.randomUUID().toString());
         record.setItemcreateat(new Date());
+        record.setStatus("保存");
         return famPreDOMapper.insertSelective(record);
     }
     @Transactional

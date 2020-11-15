@@ -49,6 +49,7 @@ public class HealthSciKnowDOServiceImpl implements HealthSciKnowDOService {
         }
         record.setItemcode(UUID.randomUUID().toString());
         record.setItemcreateat(new Date());
+        record.setScienceKnowledgeStatus("保存");
         return healthSciKnowDOMapper.insertSelective(record);
     }
     @Transactional

@@ -50,6 +50,7 @@ public class HealthCareChineseMedicineDOServiceImpl implements HealthCareChinese
             record.setItemcode(UUID.randomUUID().toString());
         }
         record.setItemcreateat(new Date());
+        record.setChineseMedicineStatus("保存");
         return healthCareChineseMedicineDOMapper.insert(record);
     }
     @Transactional

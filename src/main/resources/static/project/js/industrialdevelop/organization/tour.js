@@ -3,14 +3,12 @@
         function (jquery,ajaxUtil,bootstrapTableUtil,objectUtil,alertUtil,modalUtil,selectUtil,stringUtil,dictUtil) {
 
 
-            var getUrl = "/industrialdevelop/chi-med/process";
+            var getUrl = "/industrialdevelop/tec-ser-org/tour";
 
-            var opUrl = "/industrialdevelop/chi-med";
-
-            var pathUrl = "/industrialdevelop/chinesemed";
+            var opUrl = "/industrialdevelop/tec-ser-org";
+            var pathUrl = "/industrialdevelop/organization/tour";
             var addUrl = pathUrl+"_add";
             var aParam = {
-
             };
 
             //操作
@@ -76,8 +74,8 @@
 
 
             var aCol = [
-                {field: 'name', title: '企业名称'},
-                {field: 'filePath', title: '企业图片', formatter:function (value, row, index) {
+                {field: 'name', title: '基地名称'},
+                {field: 'filePath', title: '基地照片', formatter:function (value, row, index) {
                         if(value == "已经损坏了"){
                             return '<p>'+value+'</p>';
                         }else{
@@ -85,7 +83,7 @@
                         }
                     }},
                 {field: 'contacts', title: '联系人'},
-                {field: 'status', title: '项目状态'},
+                {field: 'status', title: '数据状态'},
                 {field: 'action',  title: '操作',formatter: operation,events:orgEvents}
             ];
 

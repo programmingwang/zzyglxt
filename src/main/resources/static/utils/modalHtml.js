@@ -119,8 +119,348 @@
             '                </div>\n' +
             '                </fieldset>'+
             '            </div>\n'+
-
             '</div>';
+
+        modalHtml.myViewFamPreModal =
+            '<div class="row">'+
+            '            <div class="col-lg-12 col-md-12">\n' +
+            '                <fieldset disabled>'+
+            '                <div class="input-group mb-3">\n' +
+            '                    <div class="input-group-prepend">\n' +
+            '                        <span class="input-group-text" >方名</span>\n' +
+            '                    </div>\n' +
+            '                    <input type="text" id="name" class="form-control">\n' +
+            '                </div>\n' +
+            '            </div>\n' +
+            '\n' +
+            '            <div class="col-lg-12 col-md-12">\n' +
+            '                <fieldset disabled>'+
+            '                <div class="input-group mb-3">\n' +
+            '                    <div class="input-group-prepend">\n' +
+            '                        <span class="input-group-text" >出处</span>\n' +
+            '                    </div>\n' +
+            '                   <input type="text" id="source" class="form-control">\n' +
+            '                </div>\n' +
+            '            </div>\n' +
+            '\n' +
+            '            <div class="col-lg-12 col-md-12">\n' +
+            '                <fieldset disabled>'+
+            '                <div class="input-group mb-3">\n' +
+            '                    <div class="input-group-prepend">\n' +
+            '                        <span id="culturalContentSpan" class="input-group-text" >处方</span>\n' +
+            '                    </div>\n' +
+            '                    <input type="text" id="prescription" class="form-control">\n' +
+            '                </div>\n' +
+            '            </div>\n' +
+            '\n' +
+            '            <div class="col-lg-12 col-md-12">\n' +
+            '                <fieldset disabled>'+
+            '                <div class="input-group mb-3">\n' +
+            '                    <div class="input-group-prepend">\n' +
+            '                        <span class="input-group-text" >制法及用法</span>\n' +
+            '                    </div>\n' +
+            '                    <input type="text" id="content" class="form-control">\n' +
+            '                </div>\n' +
+            '            </div>\n' +
+            '\n' +
+            '            <div class="col-lg-6 col-md-6">\n' +
+            '                <fieldset disabled>'+
+            '                <div class="input-group mb-3">\n' +
+            '                    <div class="input-group-prepend">\n' +
+            '                        <label class="input-group-text" for="applicant">数据状态</label>\n' +
+            '                    </div>\n' +
+            '                    <input type="text"  id="status" class="form-control">\n' +
+            '                </div>\n' +
+            '                </fieldset>'+
+            '            </div>\n'+
+            '</div>';
+        modalHtml.myViewChineseMedicineModal =
+            '<div class="row">'+
+            '            <div id="imgDiv" class="col-lg-12 col-md-12">\n' +
+            '                <fieldset disabled>'+
+            '                <div class="input-group mb-3">\n' +
+            '                    <div class="input-group-prepend">\n' +
+            '                        <span id="mediCineImgSpan" class="input-group-text">药材图片</span>\n' +
+            '                    </div>\n' +
+            '                    <img id="mediCineImg" src="#"/>\n' +
+            '                </div>\n' +
+            '            </div>\n' +
+            '\n' +
+            '            <div class="col-lg-12 col-md-12">\n' +
+            '                <fieldset disabled>'+
+            '                <div class="input-group mb-3">\n' +
+            '                    <div class="input-group-prepend">\n' +
+            '                        <span id="culturalNameSpan" class="input-group-text">中药名称</span>\n' +
+            '                    </div>\n' +
+            '                    <input type="text" id="chineseMedicineName" class="form-control">\n' +
+            '                </div>\n' +
+            '            </div>\n' +
+            '\n' +
+            '            <div class="col-lg-12 col-md-12">\n' +
+            '                <fieldset disabled>'+
+            '                <div class="input-group mb-3">\n' +
+            '                    <div class="input-group-prepend">\n' +
+            '                        <span class="input-group-text" >别名</span>\n' +
+            '                    </div>\n' +
+            '                    <input type="text" id="chineseMedicineAlias" class="form-control">\n' +
+            '                </div>\n' +
+            '            </div>\n' +
+            '\n' +
+            '            <div class="col-lg-12 col-md-12">\n' +
+            '                <fieldset disabled>'+
+            '                <div class="input-group mb-3">\n' +
+            '                    <div class="input-group-prepend">\n' +
+            '                        <span class="input-group-text" >功效分类</span>\n' +
+            '                    </div>\n' +
+            '                   <input type="text" id="chineseMedicineType" class="form-control">\n' +
+            '                </div>\n' +
+            '            </div>\n' +
+            '\n' +
+            '           <div class="col-lg-12 col-md-12">\n' +
+            '                <fieldset disabled>'+
+            '                <div class="input-group mb-3">\n' +
+            '                    <div class="input-group-prepend">\n' +
+            '                        <span class="input-group-text" >采制</span>\n' +
+            '                    </div>\n' +
+            '                   <input type="text" id="chineseMedicineHarvesting" class="form-control">\n' +
+            '                </div>\n' +
+            '            </div>\n' +
+            '\n' +
+            '            <div class="col-lg-12 col-md-12">\n' +
+            '                <fieldset disabled>'+
+            '                <div class="input-group mb-3">\n' +
+            '                    <div class="input-group-prepend">\n' +
+            '                        <span class="input-group-text" >性味</span>\n' +
+            '                    </div>\n' +
+            '                    <input type="text" id="chineseMedicineTaste" class="form-control">\n' +
+            '                </div>\n' +
+            '            </div>\n' +
+            '\n' +
+            '            <div class="col-lg-12 col-md-12">\n' +
+            '                <fieldset disabled>'+
+            '                <div class="input-group mb-3">\n' +
+            '                    <div class="input-group-prepend">\n' +
+            '                        <span class="input-group-text" >归经</span>\n' +
+            '                    </div>\n' +
+            '                    <input type="text" id="chineseMedicineMerTro" class="form-control">\n' +
+            '                </div>\n' +
+            '            </div>\n' +
+            '\n' +
+            '            <div class="col-lg-12 col-md-12">\n' +
+            '                <fieldset disabled>'+
+            '                <div class="input-group mb-3">\n' +
+            '                    <div class="input-group-prepend">\n' +
+            '                        <span class="input-group-text" >功效主治</span>\n' +
+            '                    </div>\n' +
+            '                    <input type="text" id="chineseMedicineEffect" class="form-control">\n' +
+            '                </div>\n' +
+            '            </div>\n' +
+            '\n' +
+            '            <div class="col-lg-12 col-md-12">\n' +
+            '                <fieldset disabled>'+
+            '                <div class="input-group mb-3">\n' +
+            '                    <div class="input-group-prepend">\n' +
+            '                        <span class="input-group-text" >用法用量</span>\n' +
+            '                    </div>\n' +
+            '                    <input type="text" id="chineseMedicineUsage" class="form-control">\n' +
+            '                </div>\n' +
+            '            </div>\n' +
+            '  \n' +
+            '            <div class="col-lg-12 col-md-12">\n' +
+            '                <fieldset disabled>'+
+            '                <div class="input-group mb-3">\n' +
+            '                    <div class="input-group-prepend">\n' +
+            '                        <span class="input-group-text" >数据状态</span>\n' +
+            '                    </div>\n' +
+            '                    <input type="text" id="chineseMedicineStatus" class="form-control">\n' +
+            '                </div>\n' +
+            '            </div>\n' +
+            '</div>';
+
+
+
+
+        modalHtml.myViewCareFamModal =
+            '<div class="row">'+
+            '            <div class="col-lg-12 col-md-12">\n' +
+            '                <fieldset disabled>'+
+            '                <div class="input-group mb-3">\n' +
+            '                    <div class="input-group-prepend">\n' +
+            '                        <span id="culturalNameSpan" class="input-group-text">国医话健康标题</span>\n' +
+            '                    </div>\n' +
+            '                    <input type="text" id="name" class="form-control">\n' +
+            '                </div>\n' +
+            '            </div>\n' +
+            '\n' +
+            '            <div class="col-lg-12 col-md-12">\n' +
+            '                <fieldset disabled>'+
+            '                <div class="input-group mb-3">\n' +
+            '                    <div class="input-group-prepend">\n' +
+            '                        <span class="input-group-text" >来源</span>\n' +
+            '                    </div>\n' +
+            '                    <input type="text" id="source" class="form-control">\n' +
+            '                </div>\n' +
+            '            </div>\n' +
+            '\n' +
+            '            <div class="col-lg-12 col-md-12">\n' +
+            '                <fieldset disabled>'+
+            '                <div class="input-group mb-3">\n' +
+            '                    <div class="input-group-prepend">\n' +
+            '                        <span class="input-group-text" >作者</span>\n' +
+            '                    </div>\n' +
+            '                   <input type="text" id="author" class="form-control">\n' +
+            '                </div>\n' +
+            '            </div>\n' +
+            '\n' +
+            '            <div class="col-lg-12 col-md-12">\n' +
+            '                <fieldset disabled>'+
+            '                <div class="input-group mb-3">\n' +
+            '                    <div class="input-group-prepend">\n' +
+            '                        <span id="carefamContentSpan" class="input-group-text" >国医话健康详情</span>\n' +
+            '                    </div>\n' +
+            '                    <input type="text" id="content" class="form-control">\n' +
+            '                </div>\n' +
+            '            </div>\n' +
+            '\n' +
+            '            <div class="col-lg-12 col-md-12">\n' +
+            '                <fieldset disabled>'+
+            '                <div class="input-group mb-3">\n' +
+            '                    <div class="input-group-prepend">\n' +
+            '                        <span class="input-group-text" >数据状态</span>\n' +
+            '                    </div>\n' +
+            '                    <input type="text" id="status" class="form-control">\n' +
+            '                </div>\n' +
+            '            </div>\n' +
+            '\n' +
+            '            <div id="fileDiv" class="col-lg-12 col-md-12" style="display: none">\n' +
+            '                <fieldset disabled>'+
+            '                <div class="input-group mb-3">\n' +
+            '                    <div class="input-group-prepend">\n' +
+            '                        <span class="input-group-text">附件</span>\n' +
+            '                    </div>\n' +
+            '                    <a src="#"></a>\n' +
+            '                </div>\n' +
+            '            </div>\n' +
+            '</div>';
+
+        modalHtml.myViewSciKnowModal =
+            '<div class="row">'+
+            '            <div class="col-lg-12 col-md-12">\n' +
+            '                <fieldset disabled>'+
+            '                <div class="input-group mb-3">\n' +
+            '                    <div class="input-group-prepend">\n' +
+            '                        <span id="scienceKnowledgeNameSpan" class="input-group-text">科普知识名称</span>\n' +
+            '                    </div>\n' +
+            '                    <input type="text" id="scienceKnowledgeName" class="form-control">\n' +
+            '                </div>\n' +
+            '            </div>\n' +
+            '\n' +
+            '            <div class="col-lg-12 col-md-12">\n' +
+            '                <fieldset disabled>'+
+            '                <div class="input-group mb-3">\n' +
+            '                    <div class="input-group-prepend">\n' +
+            '                        <span class="input-group-text" >科普知识来源</span>\n' +
+            '                    </div>\n' +
+            '                    <input type="text" id="scienceKnowledgeSource" class="form-control">\n' +
+            '                </div>\n' +
+            '            </div>\n' +
+            '\n' +
+            '            <div class="col-lg-12 col-md-12">\n' +
+            '                <fieldset disabled>'+
+            '                <div class="input-group mb-3">\n' +
+            '                    <div class="input-group-prepend">\n' +
+            '                        <span class="input-group-text" >作者</span>\n' +
+            '                    </div>\n' +
+            '                   <input type="text" id="scienceKnowledgeAuthor" class="form-control">\n' +
+            '                </div>\n' +
+            '            </div>\n' +
+            '\n' +
+            '            <div class="col-lg-12 col-md-12">\n' +
+            '                <fieldset disabled>'+
+            '                <div class="input-group mb-3">\n' +
+            '                    <div class="input-group-prepend">\n' +
+            '                        <span id="carefamContentSpan" class="input-group-text" >科普知识详情</span>\n' +
+            '                    </div>\n' +
+            '                    <input type="text" id="content" class="form-control">\n' +
+            '                </div>\n' +
+            '            </div>\n' +
+            '\n' +
+            '            <div class="col-lg-12 col-md-12">\n' +
+            '                <fieldset disabled>'+
+            '                <div class="input-group mb-3">\n' +
+            '                    <div class="input-group-prepend">\n' +
+            '                        <span class="input-group-text" >数据状态</span>\n' +
+            '                    </div>\n' +
+            '                    <input type="text" id="statscienceKnowledgeStatusus" class="form-control">\n' +
+            '                </div>\n' +
+            '            </div>\n' +
+            '</div>';
+
+        modalHtml.myViewCooExcModal =
+            '<div class="row">'+
+            '            <div class="col-lg-12 col-md-12">\n' +
+            '                <fieldset disabled>'+
+            '                <div class="input-group mb-3">\n' +
+            '                    <div class="input-group-prepend">\n' +
+            '                        <span id="cooperationExchangeNameSpan" class="input-group-text">合作交流名称</span>\n' +
+            '                    </div>\n' +
+            '                    <input type="text" id="cooperationExchangeName" class="form-control">\n' +
+            '                </div>\n' +
+            '            </div>\n' +
+            '\n' +
+            '            <div class="col-lg-12 col-md-12">\n' +
+            '                <fieldset disabled>'+
+            '                <div class="input-group mb-3">\n' +
+            '                    <div class="input-group-prepend">\n' +
+            '                        <span class="input-group-text" >预期合作机构</span>\n' +
+            '                    </div>\n' +
+            '                    <input type="text" id="cooperativeOrg" class="form-control">\n' +
+            '                </div>\n' +
+            '            </div>\n' +
+            '\n' +
+            '            <div class="col-lg-12 col-md-12">\n' +
+            '                <fieldset disabled>'+
+            '                <div class="input-group mb-3">\n' +
+            '                    <div class="input-group-prepend">\n' +
+            '                        <span class="input-group-text" >联系人</span>\n' +
+            '                    </div>\n' +
+            '                   <input type="text" id="contacts" class="form-control">\n' +
+            '                </div>\n' +
+            '            </div>\n' +
+            '\n' +
+            '            <div class="col-lg-12 col-md-12">\n' +
+            '                <fieldset disabled>'+
+            '                <div class="input-group mb-3">\n' +
+            '                    <div class="input-group-prepend">\n' +
+            '                        <span  class="input-group-text" >联系电话</span>\n' +
+            '                    </div>\n' +
+            '                    <input type="text" id="phone" class="form-control">\n' +
+            '                </div>\n' +
+            '            </div>\n' +
+            '\n' +
+            '            <div class="col-lg-12 col-md-12">\n' +
+            '                <fieldset disabled>'+
+            '                <div class="input-group mb-3">\n' +
+            '                    <div class="input-group-prepend">\n' +
+            '                        <span class="input-group-text" >项目简介</span>\n' +
+            '                    </div>\n' +
+            '                    <input type="text" id="projectIntroduce" class="form-control">\n' +
+            '                </div>\n' +
+            '            </div>\n' +
+            '\n' +
+            '            <div class="col-lg-12 col-md-12">\n' +
+            '                <fieldset disabled>'+
+            '                <div class="input-group mb-3">\n' +
+            '                    <div class="input-group-prepend">\n' +
+            '                        <span class="input-group-text" >数据状态</span>\n' +
+            '                    </div>\n' +
+            '                    <input type="text" id="status" class="form-control">\n' +
+            '                </div>\n' +
+            '            </div>\n' +
+            '</div>';
+
+
+
 
         modalHtml.myViewHospModal =
             '<div class="row">'+
@@ -570,6 +910,7 @@
             '            </div>\n'+
 
             '</div>';
+
 
         modalHtml.myDeleteModalTravel = '是否删除景点信息?';
         modalHtml.myDeleteModalTraditionalCul = '是否删除中医医史信息?';

@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -74,7 +75,16 @@ public class HealthCareChineseMedicineDOServiceImpl implements HealthCareChinese
     }
      /*查询所有中医药常识数据*/
     @Override
-    public List<HealthCareChineseMedicineDO> selectAllHealthCareChineseMedicine() {
-        return healthCareChineseMedicineDOMapper.selectAllHealthCareChineseMedicine();
+    public List<HealthCareChineseMedicineDO> selectAllHealthCareChineseMedicine(List<String> chineseMedicineStatus) {
+        List<HealthCareChineseMedicineDO> healthCareChineseMedicineDOList=new ArrayList<>();
+        for(String status:chineseMedicineStatus){
+            healthCareChineseMedicineDOList.addAll(healthCareChineseMedicineDOMapper.selectAllHealthCareChineseMedicine(status));
+        }
+        return healthCareChineseMedicineDOList;
+    }
+   /*中医药数据状态*/
+    @Override
+    public int changeStatusToMedicine(HealthCareChineseMedicineDOKey key, String chineseMedicineStatus) {
+        return healthCareChineseMedicineDOMapper.changeStatusToMedicine(key,chineseMedicineStatus);
     }
 }

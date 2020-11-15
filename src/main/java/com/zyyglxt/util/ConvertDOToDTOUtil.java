@@ -17,9 +17,7 @@ import org.springframework.beans.BeanUtils;
 public class ConvertDOToDTOUtil {
 
     public static ChineseCulturalDto convertFromDOToDTO(ChineseCulturalDO chineseCulturalDO, String filePath){
-        if(StringUtils.isEmpty(filePath)){
-            filePath = "已经损坏了";
-        }
+        filePath = StringUtils.isEmpty(filePath) ? "已经损坏了" : filePath;
         ChineseCulturalDto chineseCulturalDto = new ChineseCulturalDto();
         BeanUtils.copyProperties(chineseCulturalDO,chineseCulturalDto);
         chineseCulturalDto.setFilePath(filePath);
@@ -27,9 +25,7 @@ public class ConvertDOToDTOUtil {
     }
 
     public static CulturalResourcesDto convertFromDOToDTO(CulturalResourcesDO culturalResourcesDO, String filePath){
-        if(StringUtils.isEmpty(filePath)){
-            filePath = "已经损坏了";
-        }
+        filePath = StringUtils.isEmpty(filePath) ? "已经损坏了" : filePath;
         CulturalResourcesDto culturalResourcesDto = new CulturalResourcesDto();
         BeanUtils.copyProperties(culturalResourcesDO,culturalResourcesDto);
         culturalResourcesDto.setFilePath(filePath);
@@ -37,9 +33,7 @@ public class ConvertDOToDTOUtil {
     }
 
     public static CulturalResourcesDto convertFromDOToDTO(CulturalResourcesDO culturalResourcesDO, String filePath, String fileName){
-        if(StringUtils.isEmpty(filePath)){
-            filePath = "已经损坏了";
-        }
+        filePath = StringUtils.isEmpty(filePath) ? "已经损坏了" : filePath;
         CulturalResourcesDto culturalResourcesDto = new CulturalResourcesDto();
         BeanUtils.copyProperties(culturalResourcesDO,culturalResourcesDto);
         culturalResourcesDto.setFilePath(filePath);

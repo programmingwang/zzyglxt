@@ -1,14 +1,18 @@
 (function () {
-    require(['jquery','ajaxUtil','stringUtil','wangEditor'],
-        function (jquery,ajaxUtil,stringUtil, wangEditor) {
+    require(['jquery','ajaxUtil','stringUtil','uploadImg','wangEditor'],
+        function ($,ajaxUtil,stringUtil,uploadImg, wangEditor) {
 
-            var url = "/industrialdevelop/ser-pro";
+            var url = "/industrialdevelop/chi-med";
 
-            var pathUrl = "/industrialdevelop/tecservice"
+            var pathUrl = "/industrialdevelop/chinesemed/plantation";
+
+            var orgType = "plant"
+
+            var itemcode = stringUtil.getUUID();
 
             var type = isUpdate() ? "put":"post";
 
-            var itemcode = stringUtil.getUUID();
+            uploadImg.init();
 
             const editor = new wangEditor('#div1');
             // 或者 const editor = new E( document.getElementById('div1') )
@@ -60,25 +64,33 @@
 
             function generateParam(){
                 var param = {};
-                param.serviceProject = $("#serviceProject").val();
-                param.projectCost = $("#projectCost").val();
+                param.name = $("#name").val();
+                param.plantType = $("#plantType").val();
+                param.areaCoverd = $("#areaCoverd").val();
                 param.contacts = $("#contacts").val();
                 param.phone = $("#phone").val();
-                param.projectIntroduce = $(".w-e-text").html();
-                param.orgCode = "未定义";
-                param.itemcode = itemcode;
+                param.addressPro = $("#addressPro").val()
+                param.addressCity = $("#addressCity").val()
+                param.addressCountry = $("#addressCountry").val()
+                param.address = $("#address").val()
+                param.intruduce = $(".w-e-text").html();
+                param.type = orgType
                 return param;
             }
 
             $("#saveBtn").unbind('click').on('click',function () {
                 var param = generateParam();
                 param.status = "——";
+                param.itemcode = itemcode;
+                if (uploadImg.isUpdate()){
+                    ajaxUtil.fileAjax(itemcode,uploadImg.getFiles()[0],"undefined","undefined")
+                }
 
                 ajaxUtil.myAjax(null,url,param,function (data) {
                     if(ajaxUtil.success(data)){
-                        orange.redirect(pathUrl)
+                        orange.redirect(pathUrl);
                     }else {
-                        alert(data.msg)
+                        alert(data.msg);
                     }
                 },true,"123",type);
                 return false;
@@ -95,17 +107,27 @@
                     }
                 },true,"123",type);
                 return false;
-            })
+            });
 
             var init = function () {
                 if (isUpdate()){
                     var tempdata = JSON.parse(localStorage.getItem("rowData"));
-                    $("#serviceProject").val(tempdata.serviceProject);
-                    $("#projectCost").val(tempdata.projectCost);
+                    $("#name").val(tempdata.name);
+                    $("#plantType").val(tempdata.plantType);
+                    $("#areaCoverd").val(tempdata.areaCoverd);
                     $("#contacts").val(tempdata.contacts);
+                    $("#distpicker").distpicker({
+                        province: tempdata.addressPro,
+                        city: tempdata.addressCity,
+                        district: tempdata.addressCountry
+                    });
+                    $("#address").val(tempdata.address);
                     $("#phone").val(tempdata.phone);
-                    $(".w-e-text").html(tempdata.projectIntroduce);
+                    $(".w-e-text").html(tempdata.intruduce);
                     itemcode = tempdata.itemcode;
+                    uploadImg.setImgSrc(tempdata.filePath)
+                }else {
+                    $("#distpicker").distpicker();
                 }
                 init = function () {
 

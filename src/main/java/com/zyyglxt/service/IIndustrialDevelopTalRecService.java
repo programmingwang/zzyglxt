@@ -19,5 +19,5 @@ public interface IIndustrialDevelopTalRecService {
 
     void updTalRec(IndustrialDevelopTalRecDO developTalRecDO);
 
-    List<IndustrialDevelopTalRecDO> getTalRecs();
+    List<IndustrialDevelopTalRecDO> getTalRecs(String orgCode);
 }

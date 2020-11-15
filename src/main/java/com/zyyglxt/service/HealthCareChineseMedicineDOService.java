@@ -4,6 +4,7 @@ import com.zyyglxt.dataobject.FileDO;
 import com.zyyglxt.dataobject.HealthCareChineseMedicineDO;
 import com.zyyglxt.dataobject.HealthCareChineseMedicineDOKey;
 import com.zyyglxt.error.BusinessException;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -20,5 +21,7 @@ public interface HealthCareChineseMedicineDOService {
     int deleteByPrimaryKey(HealthCareChineseMedicineDOKey key);
     int updateByPrimaryKeySelective(HealthCareChineseMedicineDO record) throws BusinessException;
     HealthCareChineseMedicineDO selectByPrimaryKey(HealthCareChineseMedicineDOKey key);
-    List<HealthCareChineseMedicineDO> selectAllHealthCareChineseMedicine();//查询所有中医药常识数据
+    List<HealthCareChineseMedicineDO> selectAllHealthCareChineseMedicine(List<String> chineseMedicineStatus);//查询所有中医药常识数据
+    int changeStatusToMedicine( HealthCareChineseMedicineDOKey key , String chineseMedicineStatus);//中医药数据状态
+
 }

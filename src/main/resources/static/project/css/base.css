@@ -5,7 +5,8 @@
 body{
     font-family: "Microsoft YaHei UI";
     table-layout: fixed;
-    background-color: #FCFCFA;
+    background-color: white;
+    zoom:80%
 }
 
 table{
@@ -180,4 +181,8 @@ hr {
 }
 .page-link {
     margin-left: 9px;
+}
+
+.mh {
+    width: 11px;
 }

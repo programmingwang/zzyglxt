@@ -182,132 +182,181 @@
                     id: "12",
                     level: "1",
                     pid: ""
-                },
-                {
-                    menu_name: "信息发布",
-                    menu_url: "/data/dataNewsRotations",
-                    id: "13",
-                    level: "1",
-                    pid: ""
-                },
-                {
-                    menu_name: "＞新闻轮播图",
-                    menu_url: "/data/dataNewsRotations",
-                    id: "13-1",
-                    level: "2",
-                    pid: "13"
-                },
-                {
-                    menu_name: "＞新闻管理",
-                    menu_url: "/data/dataNewsInf",
-                    id: "13-2",
-                    level: "2",
-                    pid: "13"
-                },
-                {
-                    menu_name: "＞通知公告",
-                    menu_url: "/data/dataAnnouncement",
-                    id: "13-3",
-                    level: "2",
-                    pid: "13"
-                },
-                {
-                    menu_name: "＞政策法规",
-                    menu_url: "/data/dataRegulation",
-                    id: "13-4",
-                    level: "2",
-                    pid: "13"
-                },
-                {
-                    menu_name: "＞办事流程",
-                    menu_url: "/data/dataProcess",
-                    id: "13-5",
-                    level: "2",
-                    pid: "13"
-                },
-                {
+                },{
                     menu_name: "产业发展",
                     menu_url: "",
-                    id: "99",
+                    id: "13",
                     level: "1",
                     pid: ""
                 },
                 {
                     menu_name: "＞科研成果",
                     menu_url: "/industrialdevelop/achievement",
-                    id: "99-1",
+                    id: "13-1",
                     level: "2",
-                    pid: "99"
+                    pid: "13"
                 },
                 {
                     menu_name: "＞合作交流",
                     menu_url: "/industrialdevelop/cooperation",
-                    id: "99-2",
+                    id: "13-2",
                     level: "2",
-                    pid: "99"
+                    pid: "13"
                 },
                 {
                     menu_name: "＞人才招募",
                     menu_url: "/industrialdevelop/recruit",
-                    id: "99-3",
+                    id: "13-3",
                     level: "2",
-                    pid: "99"
+                    pid: "13"
                 },
                 {
                     menu_name: "＞技术服务机构",
                     menu_url: "/industrialdevelop/tecservice",
-                    id: "99-4",
+                    id: "13-4",
                     level: "2",
-                    pid: "99"
+                    pid: "13"
                 },
                 {
                     menu_name: "＞科研院所",
                     menu_url: "/industrialdevelop/tecserviceorg",
-                    id: "99-5",
+                    id: "13-5",
                     level: "2",
-                    pid: "99"
+                    pid: "13"
                 },
                 {
                     menu_name: "＞高等院校",
                     menu_url: "/industrialdevelop/school",
-                    id: "99-6",
+                    id: "13-6",
                     level: "2",
-                    pid: "99"
+                    pid: "13"
                 },
                 {
                     menu_name: "＞基地风采",
                     menu_url: "/industrialdevelop/style",
-                    id: "99-6",
+                    id: "13-6",
                     level: "2",
-                    pid: "99"
+                    pid: "13"
                 },
                 {
                     menu_name: "＞中药材加工企业",
                     menu_url: "/industrialdevelop/chinesemed",
-                    id: "99-7",
+                    id: "13-7",
                     level: "2",
-                    pid: "99"
+                    pid: "13"
                 },
                 {
                     menu_name: "＞中药材销售企业",
                     menu_url: "/industrialdevelop/chinesemed-sale",
-                    id: "99-8",
+                    id: "13-8",
                     level: "2",
-                    pid: "99"
+                    pid: "13"
                 },
                 {
                     menu_name: "＞中药材制造企业",
                     menu_url: "/industrialdevelop/chinesemed-produce",
-                    id: "99-9",
+                    id: "13-9",
                     level: "2",
-                    pid: "99"
+                    pid: "13"
                 },
                 {
                     menu_name: "＞种植园管理",
                     menu_url: "/industrialdevelop/plantation",
-                    id: "99-10",
+                    id: "13-10",
                     level: "2",
-                    pid: "99"
+                    pid: "13"
+                },
+                {
+                    menu_name: "信息发布",
+                    menu_url: "/data/dataNewsRotations",
+                    id: "14",
+                    level: "1",
+                    pid: ""
+                },
+                {
+                    menu_name: "＞新闻轮播图",
+                    menu_url: "/data/dataNewsRotations",
+                    id: "14-1",
+                    level: "2",
+                    pid: "14"
+                },
+                {
+                    menu_name: "＞新闻管理",
+                    menu_url: "/data/dataNewsInf",
+                    id: "14-2",
+                    level: "2",
+                    pid: "14"
+                },
+                {
+                    menu_name: "＞通知公告",
+                    menu_url: "/data/dataAnnouncement",
+                    id: "14-3",
+                    level: "2",
+                    pid: "14"
+                },
+                {
+                    menu_name: "＞政策法规",
+                    menu_url: "/data/dataRegulation",
+                    id: "14-4",
+                    level: "2",
+                    pid: "14"
+                },
+                {
+                    menu_name: "＞办事流程",
+                    menu_url: "/data/dataProcess",
+                    id: "14-5",
+                    level: "2",
+                    pid: "14"
+                },
+
+                {
+                    menu_name: "科研项目管理",
+                    menu_url: "",
+                    id: "15",
+                    level: "1",
+                    pid: ""
+                },
+                {
+                    menu_name: "＞设置填报时间",
+                    menu_url: "/scientificProject/setTime",
+                    id: "15-1",
+                    level: "2",
+                    pid: "15"
+                },
+                {
+                    menu_name: "＞账号管理",
+                    menu_url: "/scientificProject/accountManagement",
+                    id: "15-2",
+                    level: "2",
+                    pid: "15"
+                },
+                {
+                    menu_name: "＞课题管理",
+                    menu_url: "/scientificProject/projectManagement",
+                    id: "15-3",
+                    level: "2",
+                    pid: "15"
+                },
+                {
+                    menu_name: "＞专家管理",
+                    menu_url: "/scientificProject/expertManagement",
+                    id: "15-4",
+                    level: "2",
+                    pid: "15"
+                },
+                {
+                    menu_name: "＞分配专家",
+                    menu_url: "/scientificProject/distributionExpert",
+                    id: "15-5",
+                    level: "2",
+                    pid: "15"
+                },
+                {
+                    menu_name: "＞集中评审",
+                    menu_url: "/scientificProject/centralizedReview",
+                    id: "15-6",
+                    level: "2",
+                    pid: "15"
                 }
             ];
 

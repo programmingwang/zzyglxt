@@ -3,14 +3,13 @@
         function (jquery,ajaxUtil,bootstrapTableUtil,objectUtil,alertUtil,modalUtil,selectUtil,stringUtil,dictUtil) {
 
 
-            var getUrl = "/industrialdevelop/chi-med/plant";
+            var url = "/industrialdevelop/tec-ser-org/lab";
 
-            var opUrl = "/industrialdevelop/chi-med";
+            var opUrl = "/industrialdevelop/tec-ser-org";
 
-            var pathUrl = "/industrialdevelop/plantation";
+            var pathUrl = "/industrialdevelop/organization/lab";
             var addUrl = pathUrl+"_add";
             var aParam = {
-
             };
 
             //操作
@@ -62,7 +61,7 @@
 
                 };
                 $('#table').bootstrapTable("destroy");
-                bootstrapTableUtil.myBootStrapTableInit("table", getUrl, param, aCol);
+                bootstrapTableUtil.myBootStrapTableInit("table", url, param, aCol);
             });
 
 
@@ -76,8 +75,8 @@
 
 
             var aCol = [
-                {field: 'name', title: '种植园名称'},
-                {field: 'filePath', title: '种植园图片', formatter:function (value, row, index) {
+                {field: 'name', title: '院所名称'},
+                {field: 'filePath', title: '图片', formatter:function (value, row, index) {
                         if(value == "已经损坏了"){
                             return '<p>'+value+'</p>';
                         }else{
@@ -85,18 +84,18 @@
                         }
                     }},
                 {field: 'contacts', title: '联系人'},
-                {field: 'status', title: '数据状态'},
+                {field: 'status', title: '项目状态'},
                 {field: 'action',  title: '操作',formatter: operation,events:orgEvents}
             ];
 
-            var myTable = bootstrapTableUtil.myBootStrapTableInit("table", getUrl, aParam, aCol);
+            var myTable = bootstrapTableUtil.myBootStrapTableInit("table", url, aParam, aCol);
 
             function refreshTable() {
                 var param = {};
                 myTable.free();
-                myTable = bootstrapTableUtil.myBootStrapTableInit("table", getUrl, param, aCol);
+                myTable = bootstrapTableUtil.myBootStrapTableInit("table", url, param, aCol);
             }
 
-            bootstrapTableUtil.globalSearch("table",getUrl,aParam, aCol);
+            bootstrapTableUtil.globalSearch("table",url,aParam, aCol);
         })
 })();

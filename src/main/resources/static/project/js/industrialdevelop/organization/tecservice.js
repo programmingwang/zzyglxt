@@ -3,9 +3,11 @@
         function (jquery,ajaxUtil,bootstrapTableUtil,objectUtil,alertUtil,modalUtil,selectUtil,stringUtil,dictUtil) {
 
 
-            var url = "/industrialdevelop/coorecord";
+            var getUrl = "/industrialdevelop/ser-pro";
 
-            var pathUrl = "/industrialdevelop/cooperation";
+            var opUrl = "/industrialdevelop/tec-ser-org";
+
+            var pathUrl = "/industrialdevelop/tecservice";
             var addUrl = pathUrl+"_add";
             var aParam = {
 
@@ -13,16 +15,10 @@
 
             //操作
             function operation(value, row, index){
-                if (row.status === '展示中'){
-                    return [
-                        '<button type="button" class="unshelve btn btn-primary btn-sm" style="margin-right: 5px" data-toggle="modal" data-target="" >下架</button>'
-                    ].join('')
-                } else {
-                    return [
-                        '<button type="button" class="edit btn btn-primary btn-sm" style="margin-right: 5px" data-toggle="modal" data-target="" >编辑</button>',
-                        '<button type="button" class="delete btn btn-danger btn-sm"  data-toggle="modal" data-target="#staticBackdrop" >删除</button>',
-                    ].join('');
-                }
+                return [
+                    '<button type="button" class="edit btn btn-primary btn-sm" style="margin-right: 5px" data-toggle="modal" data-target="" >编辑</button>',
+                    '<button type="button" class="delete btn btn-danger btn-sm"  data-toggle="modal" data-target="#staticBackdrop" >删除</button>',
+                ].join('');
             }
 
             //修改事件
@@ -34,7 +30,7 @@
                 'click .delete': function (e, value, row, index) {
                     var myDeleteModalData ={
                         modalBodyID : "myDeleteCooperation",
-                        modalTitle : "删除合作交流",
+                        modalTitle : "删除服务项目",
                         modalClass : "modal-lg",
                         confirmButtonClass : "btn-danger",
                         modalConfirmFun:function () {
@@ -43,9 +39,8 @@
                                 itemcode: row.itemcode
                             };
                             var isSuccess = false;
-                            ajaxUtil.myAjax(null,url,projectEntity,function (data) {
+                            ajaxUtil.myAjax(null,opUrl,projectEntity,function (data) {
                                 if(ajaxUtil.success(data)){
-                                    ajaxUtil.deleteFile(row.itemcode);
                                     alertUtil.info("删除项目成功");
                                     isSuccess = true;
                                     refreshTable();
@@ -57,19 +52,7 @@
                     };
                     var myDeleteModal = modalUtil.init(myDeleteModalData);
                     myDeleteModal.show();
-                },
-                'click .unshelve' : function(e, value, row, index) {
-                    var param = {
-                        itemid: row.itemid,
-                        itemcode: row.itemcode,
-                        status: '已下架'
-                    }
-                    ajaxUtil.myAjax(null, url, param,function (data) {
-                        if (ajaxUtil.success(data)){
-                            refreshTable();
-                        }
-                    },true,true,"put")
-                },
+                }
             };
 
 
@@ -78,7 +61,7 @@
 
                 };
                 $('#table').bootstrapTable("destroy");
-                bootstrapTableUtil.myBootStrapTableInit("table", url, param, aCol);
+                bootstrapTableUtil.myBootStrapTableInit("table", getUrl, param, aCol);
             });
 
 
@@ -92,21 +75,21 @@
 
 
             var aCol = [
-                {field: 'cooperationExchangeName', title: '合作信息'},
-                {field: 'cooperativeOrg', title: '预期合作机构'},
+                {field: 'serviceProject', title: '服务项目名称'},
+                {field: 'projectCost', title: '项目收费'},
                 {field: 'contacts', title: '联系人'},
-                {field: 'status', title: '数据状态'},
+                {field: 'status', title: '项目状态'},
                 {field: 'action',  title: '操作',formatter: operation,events:orgEvents}
             ];
 
-            var myTable = bootstrapTableUtil.myBootStrapTableInit("table", url, aParam, aCol);
+            var myTable = bootstrapTableUtil.myBootStrapTableInit("table", getUrl, aParam, aCol);
 
             function refreshTable() {
                 var param = {};
                 myTable.free();
-                myTable = bootstrapTableUtil.myBootStrapTableInit("table", url, param, aCol);
+                myTable = bootstrapTableUtil.myBootStrapTableInit("table", getUrl, param, aCol);
             }
 
-            bootstrapTableUtil.globalSearch("table",url,aParam, aCol);
+            bootstrapTableUtil.globalSearch("table",getUrl,aParam, aCol);
         })
 })();

@@ -1,14 +1,18 @@
 (function () {
-    require(['jquery','ajaxUtil','stringUtil','wangEditor'],
-        function (jquery,ajaxUtil,stringUtil, wangEditor) {
+    require(['jquery','ajaxUtil','stringUtil','uploadImg','wangEditor'],
+        function ($,ajaxUtil,stringUtil,uploadImg, wangEditor) {
 
-            var url = "/industrialdevelop/coorecord";
+            var url = "/industrialdevelop/tec-ser-org";
 
-            var pathUrl = "/industrialdevelop/cooperation"
+            var pathUrl = "/industrialdevelop/organization/tour";
+
+            var itemcode = stringUtil.getUUID();
+
+            var orgType = "tour";
 
             var type = isUpdate() ? "put":"post";
 
-            var itemcode = stringUtil.getUUID();
+            uploadImg.init();
 
             const editor = new wangEditor('#div1');
             // 或者 const editor = new E( document.getElementById('div1') )
@@ -55,36 +59,45 @@
             });
 
             $("#cancelBtn").click(function () {
-                orange.redirect(pathUrl)
+                console.log(uploadImg.getFiles());
+                // orange.redirect(pathUrl)
             });
 
             function generateParam(){
                 var param = {};
-                param.cooperationExchangeName = $("#cooperationExchangeName").val();
-                param.cooperativeOrg = $("#cooperativeOrg").val();
+                param.name = $("#name").val();
+                param.areaCoverd = $("#areaCoverd").val();
+                param.specialService = $("#specialService").val();
                 param.contacts = $("#contacts").val();
                 param.phone = $("#phone").val();
-                param.projectIntroduce = $(".w-e-text").html();
+                param.addressPro = $("#addressPro").val();
+                param.addressCity = $("#addressCity").val();
+                param.addressCountry = $("#addressCountry").val();
+                param.address = $("#address").val()
+                param.intruduce = $(".w-e-text").html();
                 param.orgCode = "未定义";
                 param.itemcode = itemcode;
+                param.type = orgType;
                 return param;
             }
-
-            $("#upload_file").change(function () {
-                var file = $("#upload_file")[0].files[0];
-                var file_span = $("#filename_span");
-                file_span.text(file.name)
-            });
 
             $("#saveBtn").unbind('click').on('click',function () {
                 var param = generateParam();
                 param.status = "——";
+                if (uploadImg.isUpdate()){
+                    if (isUpdate()){
+                        ajaxUtil.updateFile(itemcode,uploadImg.getFiles()[0],"undefined","undefined");
+                    }else {
+                        ajaxUtil.fileAjax(itemcode,uploadImg.getFiles()[0],"undefined","undefined")
+                    }
+
+                }
 
                 ajaxUtil.myAjax(null,url,param,function (data) {
                     if(ajaxUtil.success(data)){
-                        orange.redirect(pathUrl)
+                        orange.redirect(pathUrl);
                     }else {
-                        alert(data.msg)
+                        alert(data.msg);
                     }
                 },true,"123",type);
                 return false;
@@ -92,7 +105,15 @@
 
             $("#submitBtn").unbind('click').on('click',function () {
                 var param = generateParam();
-                param.status = "展示中";
+                param.status = "——";
+                if (uploadImg.isUpdate()){
+                    if (isUpdate()){
+                        ajaxUtil.updateFile(itemcode,uploadImg.getFiles()[0],"undefined","undefined");
+                    }else {
+                        ajaxUtil.fileAjax(itemcode,uploadImg.getFiles()[0],"undefined","undefined")
+                    }
+
+                }
                 ajaxUtil.myAjax(null,url,param,function (data) {
                     if(ajaxUtil.success(data)){
                         orange.redirect(pathUrl)
@@ -101,17 +122,27 @@
                     }
                 },true,"123",type);
                 return false;
-            })
+            });
 
             var init = function () {
                 if (isUpdate()){
                     var tempdata = JSON.parse(localStorage.getItem("rowData"));
-                    $("#cooperationExchangeName").val(tempdata.cooperationExchangeName);
-                    $("#cooperativeOrg").val(tempdata.cooperativeOrg);
+                    $("#name").val(tempdata.name);
+                    $("#areaCoverd").val(tempdata.areaCoverd);
+                    $("#specialService").val(tempdata.specialService);
                     $("#contacts").val(tempdata.contacts);
                     $("#phone").val(tempdata.phone);
-                    $(".w-e-text").html(tempdata.projectIntroduce);
-                    itemcode = tempdata.itemcode
+                    $("#distpicker").distpicker({
+                        province: tempdata.addressPro,
+                        city: tempdata.addressCity,
+                        district: tempdata.addressCountry
+                    });
+                    $("#address").val(tempdata.address);
+                    $(".w-e-text").html(tempdata.intruduce);
+                    uploadImg.setImgSrc(tempdata.filePath)
+                    itemcode = tempdata.itemcode;
+                }else {
+                    $("#distpicker").distpicker();
                 }
                 init = function () {
 

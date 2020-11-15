@@ -279,5 +279,8 @@
   </update>
     <select id="selectAll" resultMap="BaseResultMap">
       select * from tb_industrial_develop_tec_ser_org
+      <if test="type != null">
+        where TYPE=#{type}
+      </if>
     </select>
 </mapper>

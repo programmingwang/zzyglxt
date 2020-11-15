@@ -91,7 +91,7 @@
             /*q全局变量*/
             var tempdata = JSON.parse(localStorage.getItem("rowData"));
             var updateStatus = isUpdate()
-            var jumpUrl = "/medicalService/specialty"
+            var jumpUrl = "/medicalService/chineseMedicine"
             var specialtys = {}
             var hosps = {}
 
@@ -166,8 +166,8 @@
             });
 
             /*初始化数据*/
-            (function init() {
-                ajaxUtil.myAjax(null,"/medicalService/hosp/selectAll",null,function (data) {
+            var init = function () {
+                ajaxUtil.myAjax(null,"/medicalService/hosp/selectAll?hospitalStatus=展示中",null,function (data) {
                     uploadImg.init();
                     if(ajaxUtil.success(data)){
                         hosps = data.data
@@ -197,7 +197,8 @@
                     $(".w-e-text").html(tempdata.expertIntroduce);
                     $(".w-e-text").html(tempdata.medicineRecords);
                 }
-            }());
+            };
+            init();
 
             function isUpdate() {
                 return (localStorage.getItem("rowData") != null || localStorage.getItem("rowData") != undefined)

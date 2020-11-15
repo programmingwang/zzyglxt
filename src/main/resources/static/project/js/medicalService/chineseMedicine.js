@@ -3,17 +3,15 @@
         function (jquery,ajaxUtil,bootstrapTableUtil,objectUtil,alertUtil,modalUtil,selectUtil,stringUtil,dictUtil) {
 
 
-            var url = "/medicalService/chineseMedicine/selectAll";
+            var url = "/medicalService/chineseMedicine/selectAll?chineseMedicineStatus=已下架&chineseMedicineStatus=展示中";
             var addUrl = "/medicalService/add/addChineseMedicine"
             var aParam = {
             };
-
+            /*对url加工*/
+            url = selectUtil.getRoleTable(sessionStorage.getItem("rolename"),url,"chineseMedicineStatus");
             //操作
             function operation(value, row, index){
-                return [
-                    '<button type="button" class="edit btn btn-primary btn-sm" style="margin-right: 5px" data-toggle="modal" data-target="" >编辑</button>',
-                    '<button type="button" class="delete btn btn-danger btn-sm"  data-toggle="modal" data-target="#staticBackdrop" >删除</button>',
-                ].join('');
+                return selectUtil.getRoleOperate(value,row,index,sessionStorage.getItem("rolename"),row.chineseMedicineStatus)
             }
 
             //修改事件
@@ -22,6 +20,7 @@
                     localStorage.setItem("rowData", JSON.stringify(row));
                     orange.redirect(addUrl);
                 },
+
                 'click .delete': function (e, value, row, index) {
                     var myDeleteModalData ={
                         modalBodyID : "myDeleteChineseMedicine",
@@ -50,7 +49,193 @@
                     };
                     var myDeleteModal = modalUtil.init(myDeleteModalData);
                     myDeleteModal.show();
-                }
+                },
+
+                'click .pass' : function (e, value, row, index) {
+                    var myPassTravelModalData ={
+                        modalBodyID :"myPassModal",
+                        modalTitle : "审核通过",
+                        modalClass : "modal-lg",
+                        modalConfirmFun:function () {
+                            var isSuccess = false;
+                            var submitStatus = {
+                                "itemid": row.itemid,
+                                "itemcode": row.itemcode,
+                                "status": selectUtil.getStatus(sessionStorage.getItem("rolename"))
+                            };
+                            ajaxUtil.myAjax(null,"/medicalService/chineseMedicine/updateStatus",submitStatus,function (data) {
+                                if(ajaxUtil.success(data)){
+                                    if(data.code == 88888){
+                                        if(selectUtil.getStatus(sessionStorage.getItem("rolename")) == "处长已审核"){
+                                            alertUtil.info("审核已通过，已发送给综合处处长做最后审核！");
+                                        }else{
+                                            alertUtil.info("审核已通过，已上架！");
+                                        }
+                                        isSuccess = true;
+                                        refreshTable();
+                                    }else{
+                                        alertUtil.error(data.msg);
+                                    }
+                                }
+                            },false);
+                            return isSuccess;
+                        }
+
+                    };
+                    var myPassModal = modalUtil.init(myPassTravelModalData);
+                    myPassModal.show();
+                },
+
+                'click .fail' : function (e, value, row, index) {
+                    var myFailTravelModalData ={
+                        modalBodyID :"myFailModal",
+                        modalTitle : "审核不通过",
+                        modalClass : "modal-lg",
+                        modalConfirmFun:function () {
+                            var isSuccess = false;
+                            var submitStatus = {
+                                "itemid": row.itemid,
+                                "itemcode": row.itemcode,
+                                "status": "已下架"
+                            };
+                            ajaxUtil.myAjax(null,"/medicalService/chineseMedicine/updateStatus",submitStatus,function (data) {
+                                if(ajaxUtil.success(data)){
+                                    if(data.code == 88888){
+                                        alertUtil.info("操作成功");
+                                        isSuccess = true;
+                                        refreshTable();
+                                    }else{
+                                        alertUtil.error(data.msg);
+                                    }
+                                }
+                            },false);
+                            return isSuccess;
+                        }
+
+                    };
+                    var myFailModal = modalUtil.init(myFailTravelModalData);
+                    myFailModal.show();
+                },
+
+                'click .under-shelf' : function (e, value, row, index) {
+                    var myUnderShelfTravelModalData ={
+                        modalBodyID :"myUnderShelfModal",
+                        modalTitle : "下架",
+                        modalClass : "modal-lg",
+                        modalConfirmFun:function () {
+                            var isSuccess = false;
+                            var submitStatus = {
+                                "itemid": row.itemid,
+                                "itemcode": row.itemcode,
+                                "status": "已下架"
+                            };
+                            ajaxUtil.myAjax(null,"/medicalService/chineseMedicine/updateStatus",submitStatus,function (data) {
+                                if(ajaxUtil.success(data)){
+                                    if(data.code == 88888){
+                                        alertUtil.success("下架成功");
+                                        isSuccess = true;
+                                        refreshTable();
+                                    }else{
+                                        alertUtil.error(data.msg);
+                                    }
+                                }
+                            },false);
+                            return isSuccess;
+                        }
+
+                    };
+                    var myUnderShelfModal = modalUtil.init(myUnderShelfTravelModalData);
+                    myUnderShelfModal.show();
+                },
+
+                'click .view' : function (e, value, row, index) {
+                    var myViewTravelModalData ={
+                        modalBodyID : "myViewChineseMedicineModal", //公用的在后面给span加不同的内容就行了，其他模块同理
+                        modalTitle : "查看详情",
+                        modalClass : "modal-lg",
+                        confirmButtonStyle: "display:none",
+                    };
+                    var myTravelModal = modalUtil.init(myViewTravelModalData);
+                    $("#chineseMedicineImg").attr("src",row.filePath)
+                    $("#chineseMedicineName").val(row.chineseMedicineName);
+                    $("#chineseMedicineType").val(row.chineseMedicineType);
+                    $("#chineseMedicineTitle").val(row.chineseMedicineTitle);
+                    $("#hospitalName").val(row.hospitalName);
+                    $("#specialtyName").val(row.specialtyName);
+                    $("#visitTime").val(row.visitTime);
+                    $("#phone").val(row.phone);
+                    $("#mainVisit").val(row.mainVisit);
+                    $("#expertIntroduce").val(row.expertIntroduce);
+                    $("#medicineRecords").val(row.medicineRecords);
+                    $("#chineseMedicineStatus").val(row.chineseMedicineStatus);
+                    $("#creater").val(row.creater);
+                    $("#itemCreateAt").val(row.itemcreateat);
+                    myTravelModal.show();
+                },
+
+                'click .submit' : function (e, value, row, index) {
+                    var mySubmitTravelModalData ={
+                        modalBodyID :"mySubmitModal",
+                        modalTitle : "提交",
+                        modalClass : "modal-lg",
+                        modalConfirmFun:function () {
+                            var isSuccess = false;
+                            var submitStatus = {
+                                "itemid": row.itemid,
+                                "itemcode": row.itemcode,
+                                "status": selectUtil.getStatus(sessionStorage.getItem("rolename"))
+                            };
+                            ajaxUtil.myAjax(null,"/medicalService/chineseMedicine/updateStatus",submitStatus,function (data) {
+                                if(ajaxUtil.success(data)){
+                                    if(data.code == 88888){
+                                        alertUtil.info("已提交");
+                                        isSuccess = true;
+                                        refreshTable();
+                                    }else{
+                                        alertUtil.error(data.msg);
+                                    }
+
+                                }
+                            },false);
+                            return isSuccess;
+                        }
+
+                    };
+                    var mySubmitModal = modalUtil.init(mySubmitTravelModalData);
+                    mySubmitModal.show();
+                },
+
+                'click .no-submit' : function (e, value, row, index) {
+                    var myNoSubmitTravelModalData ={
+                        modalBodyID :"myNoSubmitModal",
+                        modalTitle : "取消提交",
+                        modalClass : "modal-lg",
+                        modalConfirmFun:function () {
+                            var isSuccess = false;
+                            var submitStatus = {
+                                "itemid": row.itemid,
+                                "itemcode": row.itemcode,
+                                "status": "--"
+                            };
+                            ajaxUtil.myAjax(null,"/medicalService/chineseMedicine/updateStatus",submitStatus,function (data) {
+                                if(ajaxUtil.success(data)){
+                                    if(data.code == 88888){
+                                        alertUtil.info("已取消提交");
+                                        isSuccess = true;
+                                        refreshTable();
+                                    }else{
+                                        alertUtil.error(data.msg);
+                                    }
+
+                                }
+                            },false);
+                            return isSuccess;
+                        }
+
+                    };
+                    var mySubmitModal = modalUtil.init(myNoSubmitTravelModalData);
+                    mySubmitModal.show();
+                },
             };
 
             /*新增名老中医*/

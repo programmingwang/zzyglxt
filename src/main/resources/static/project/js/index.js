@@ -2,9 +2,11 @@
     require(['jquery','urlUtil','stringUtil','alertUtil','ajaxUtil'],
         function (jquery,urlUtil,stringUtil,alertUtil,ajaxUtil) {
 
-            var roleName = sessionStorage.getItem("rolename");
-            // console.log(roleName)
+
             var currentUrlHash = window.location.hash.replace("#", "");
+
+
+
 
             var menu_list = [
                 {
@@ -119,17 +121,29 @@
                     level: "2",
                     pid: "6"
                 },
+
                 /*{
+
+                {
+
                     menu_name: "＞节气养生",
                     menu_url: "/healthCare/healthsciKnow",
                     id: "6-2",
                     level: "2",
                     pid: "6"
+
                 },*/
                 {
                     menu_name: "＞国医话健康",
                     menu_url: "/healthCare/healthcarefamPre",
                     id: "6-2",
+
+                },
+                {
+                    menu_name: "＞国医话健康",
+                    menu_url: "/healthCare/healthcarefamPre",
+                    id: "6-3",
+
                     level: "2",
                     pid: "6"
                 },
@@ -137,6 +151,7 @@
 
                     menu_name: "＞中药常识",
                     menu_url: "/healthCare/healthcarechineseMedicine",
+
                     id: "6-3",
                     level: "2",
                     pid: "6"
@@ -144,18 +159,25 @@
                 {
                     menu_name: "＞历史名方",
                     menu_url: "/healthCare/famPre",
+
+
                     id: "6-4",
                     level: "2",
                     pid: "6"
                 },
                 {
                     menu_name : "名老中医",
+
                     menu_url: "",
+
+                    menu_url: "/medicalService/chineseMedicine",
+
                     id:"7",
                     level:"1",
                     pid:""
                 },
                 {
+
                     menu_name : "名老中医",
                     menu_url: "/medicalService/chineseMedicine",
                     id:"7-1",
@@ -175,11 +197,24 @@
 
                     menu_name : "中医药名院",
                     menu_url: "",
+
+                    menu_name: "＞历史名方",
+                    menu_url: "/healthCare/famPre",
+                    id: "6-5",
+                    level: "2",
+                    pid: "6"
+                },
+                {
+
+                    menu_name : "中医药名院",
+                    menu_url: "/medicalService/hosp",
+
                     id:"9",
                     level:"1",
                     pid:""
                 },
                 {
+
                     menu_name : "＞中医药名院",
                     menu_url: "/medicalService/hosp",
                     id:"9-1",
@@ -190,11 +225,17 @@
 
                     menu_name : "中医药名科",
                     menu_url: "",
+
+
+                    menu_name : "中医药名科",
+                    menu_url: "/medicalService/specialty",
+
                     id:"10",
                     level:"1",
                     pid:""
                 },
                 {
+
                     menu_name : "＞中医药名科",
                     menu_url: "/medicalService/specialty",
                     id:"10-1",
@@ -215,6 +256,21 @@
                 //     level: "1",
                 //     pid: ""
                 // },
+
+                    menu_name: "中医药名校",
+                    menu_url: "/knowledgeDb/dataBack",
+                    id: "11",
+                    level: "1",
+                    pid: ""
+                },
+                {
+                    menu_name: "中医药名企",
+                    menu_url: "/knowledgeDb/dataBack",
+                    id: "12",
+                    level: "1",
+                    pid: ""
+                },
+
                 {
                     menu_name: "信息发布",
                     menu_url: "/data/dataNewsRotations",
@@ -915,6 +971,8 @@
             }
 
 
+
+
             function getHTML_dropdown_menu_item(astr,aurl,show_active) {
                 var str = "<a class=\"dropdown-item  "+  (show_active ? "active" : "")  +" \" url=\"" + aurl +"\">" + astr + "</a>\n" +
                     "<hr size=\"1\" style=\"color: #E8E8E8;border-style:dashed;width:90%\">" ;
@@ -922,12 +980,12 @@
             }
 
 
-            function getHTML_dropdown_menu(itemStr) {
-                var str = "<div class=\"dropdown-menu left-menu-dropdown-menu\">\n" +
-                    itemStr +
-                    "</div>";
-                return str;
-            }
+        function getHTML_dropdown_menu(itemStr) {
+            var str = "<div class=\"dropdown-menu left-menu-dropdown-menu\">\n" +
+                itemStr +
+                "</div>";
+            return str;
+        }
 
 
             function getHTML(item,dropdownStr,show_active) {
@@ -996,11 +1054,11 @@
                     htmlStr = htmlStr + getHTML(tm_item,dropdowStr,show);
                 });
 
-                return htmlStr;
-            }
+            return htmlStr;
+        }
 
 
-            $("#left_menu").html(getMenuStr(menu_list));
+        $("#left_menu").html(getMenuStr(menu_list));
 
 
             $(".collapse-btn").unbind().on("click",function () {

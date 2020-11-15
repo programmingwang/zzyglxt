@@ -23,7 +23,7 @@
                     if(ajaxUtil.success(data)){
                         var al = new Array();
                         $.each(data.data,function (k,v) {
-                            al.push({id:v.value,text:v.value});
+                            al.push({id:k,text:v.value});
                         });
                         dictList[code] = al;
                     }
@@ -55,7 +55,9 @@
             //轮播图位置
             "dataLocation": "dataLocation",
             //政策法规的文件类型
-            "dataFileType": "dataFileType"
+            "dataFileType": "dataFileType",
+            //药材状态
+            "medStatus": "medStatus"
         }
 
         var dictList = {

@@ -1,6 +1,7 @@
 package com.zyyglxt.service.impl;
 
 import com.zyyglxt.dao.HealthCareFamPreDOMapper;
+import com.zyyglxt.dataobject.FamPreDO;
 import com.zyyglxt.dataobject.HealthCareFamPreDO;
 import com.zyyglxt.dataobject.HealthCareFamPreDOKey;
 import com.zyyglxt.error.BusinessException;
@@ -15,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.annotation.Resource;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -66,8 +68,17 @@ public class HealthCareFamPreDOServiceImpl implements HealthCareFamPreDOService 
     }
     /*查询国医话健康所有数据*/
     @Override
-    public List<HealthCareFamPreDO> selectAllHealthCareFamPre() {
-        return healthCareFamPreDOMapper.selectAllHealthCareFamPre();
+    public List<HealthCareFamPreDO> selectAllHealthCareFamPre(List<String> status) {
+        List<HealthCareFamPreDO> healthCareFamPreDOList=new ArrayList<>();
+        for(String careFamStatus: status){
+            healthCareFamPreDOList.addAll(healthCareFamPreDOMapper.selectAllHealthCareFamPre(careFamStatus));
+        }
+        return healthCareFamPreDOList;
+    }
+   /*国医话健康数据状态*/
+    @Override
+    public int changeStatusToCareFam(HealthCareFamPreDOKey key, String status) {
+        return healthCareFamPreDOMapper.changeStatusToCareFam(key,status);
     }
 
     @Override

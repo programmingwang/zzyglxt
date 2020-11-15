@@ -2,6 +2,7 @@ package com.zyyglxt.service;
 
 import com.zyyglxt.dataobject.IndustrialDevelopCooExcDO;
 import com.zyyglxt.dataobject.IndustrialDevelopCooExcDOKey;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -22,7 +23,10 @@ public interface IIndustrialDevelopCooService {
 
     List<IndustrialDevelopCooExcDO> getCooRecord(int page, int page_size);
 
-    List<IndustrialDevelopCooExcDO> getCooRecord();
+    List<IndustrialDevelopCooExcDO> getCooRecord(List<String> status);
+
+    int changeStatusToCooExc( IndustrialDevelopCooExcDOKey key, String status);//合作交流数据状态
+
 
 
 }

@@ -243,7 +243,7 @@
     update tb_health_care_chinese_medicine
     <set>
       <if test="status != null">
-        CHINESE_MEDICINE_STATUS = #{chineseMedicineStatus,jdbcType=VARCHAR}
+        CHINESE_MEDICINE_STATUS = #{status,jdbcType=VARCHAR}
       </if>
     </set>
     where itemID = #{key.itemid,jdbcType=INTEGER}

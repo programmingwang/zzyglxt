@@ -218,7 +218,7 @@
     <update id="changeStatusToSciKnow">
       update tb_health_care_sci_know
       <set>
-        <if test="status != null">
+        <if test="scienceKnowledgeStatus != null">
           SCIENCE_KNOWLEDGE_STATUS = #{scienceKnowledgeStatus,jdbcType=VARCHAR}
         </if>
       </set>

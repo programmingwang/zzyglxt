@@ -25,7 +25,7 @@ public interface HealthCareChineseMedicineDOMapper {
 
     int updateByPrimaryKey(HealthCareChineseMedicineDO record);
 
-    int changeStatusToMedicine(@Param("key") HealthCareChineseMedicineDOKey key , @Param("chineseMedicineStatus") String chineseMedicineStatus);//中医药数据状态
+    int changeStatusToMedicine(@Param("key") HealthCareChineseMedicineDOKey key , @Param("status") String chineseMedicineStatus);//中医药数据状态
 
     List<HealthCareChineseMedicineDO> selectAllHealthCareChineseMedicine(@Param("chineseMedicineStatus") String chineseMedicineStatus);
 }

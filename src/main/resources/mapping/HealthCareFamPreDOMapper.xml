@@ -221,7 +221,7 @@
   <select id="selectAllHealthCareFamPre" resultMap="BaseResultMap">
         SELECT *
         FROM tb_health_care_fam_pre
-       WHERE STATUS = #{status,jdbcType=VARCHAR}
+       WHERE STATUS = #{status}
     </select>
     <update id="updateVisitNumHealthCareFamPre" parameterType="com.zyyglxt.dataobject.HealthCareFamPreDOKey">
       update tb_health_care_fam_pre set VISIT_NUM = VISIT_NUM + 1 where itemID = #{itemid,jdbcType=INTEGER} and itemCode = #{itemcode,jdbcType=CHAR}

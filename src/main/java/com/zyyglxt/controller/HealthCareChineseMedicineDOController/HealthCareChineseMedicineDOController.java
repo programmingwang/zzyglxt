@@ -89,7 +89,7 @@ public class HealthCareChineseMedicineDOController {
     /*public List<HealthCareChineseMedicineDO> selectAllHealthCareChineseMedicineDOMapper(){
         return healthCareChineseMedicineDOService.selectAllHealthCareChineseMedicine();
     }*/
-    public ResponseData selectAllHealthCareChineseMedicineDOMapper(@RequestParam("chineseMedicineStatus")List chineseMedicineStatus){
+    public ResponseData selectAllHealthCareChineseMedicineDOMapper(@RequestParam(value="chineseMedicineStatus")List chineseMedicineStatus){
         List<HealthCareChineseMedicineDO> healthCareChineseMedicineDOSList = healthCareChineseMedicineDOService.selectAllHealthCareChineseMedicine(chineseMedicineStatus);
         List<HealthCareChineseMedicineDto> healthCareChineseMedicineDtoList = new ArrayList<>();
         for (HealthCareChineseMedicineDO healthCareChineseMedicineDO : healthCareChineseMedicineDOSList) {
@@ -104,7 +104,7 @@ public class HealthCareChineseMedicineDOController {
      @RequestMapping(value = "changestatustomedicine/{itemID}/{itemCode}" , method = RequestMethod.POST)
      @ResponseBody
      @LogAnnotation(logTitle = "中医药数据状态的修改", logLevel = "2")
-    public ResponseData changeStatusToMedicine(@RequestParam("chineseMedicineStatus") String chineseMedicineStatus,@PathVariable("itemID") Integer itemID,@PathVariable("itemCode")String itemCode){
+    public ResponseData changeStatusToMedicine(@RequestParam("chineseMedicineStatus") String chineseMedicineStatus, @PathVariable("itemID") Integer itemID , @PathVariable("itemCode")String itemCode){
          HealthCareChineseMedicineDOKey healthCareChineseMedicineDOKey=new HealthCareChineseMedicineDOKey();
          healthCareChineseMedicineDOKey.setItemid(itemID);
          healthCareChineseMedicineDOKey.setItemcode(itemCode);

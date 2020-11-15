@@ -50,7 +50,7 @@
                         modalConfirmFun:function () {
                             var isSuccess = false;
                             var submitStatus = {
-                                "chineseMedicineStatus":selectUtil.getStatus(sessionStorage.getItem("rolename"))
+                                "chineseMedicineStatus": selectUtil.getStatus(sessionStorage.getItem("rolename"))
                             };
                             ajaxUtil.myAjax(null,"changestatustomedicine/"+row.itemid+"/"+row.itemcode,submitStatus,function (data) {
                                 if(ajaxUtil.success(data)){

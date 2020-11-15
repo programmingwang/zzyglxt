@@ -208,7 +208,7 @@
   <select id="selectAllFamPre" resultMap="ResultMapWithBLOBs">
         SELECT *
         FROM tb_culpro_fam_pre
-        WHERE STATUS = #{status,jdbcType=VARCHAR}
+        WHERE STATUS = #{status}
     </select>
 
 

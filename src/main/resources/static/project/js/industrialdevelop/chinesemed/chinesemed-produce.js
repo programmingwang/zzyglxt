@@ -3,11 +3,11 @@
         function (jquery,ajaxUtil,bootstrapTableUtil,objectUtil,alertUtil,modalUtil,selectUtil,stringUtil,dictUtil) {
 
 
-            var getUrl = "/industrialdevelop/chi-med/sale";
+            var getUrl = "/industrialdevelop/chi-med/produce";
 
             var opUrl = "/industrialdevelop/chi-med";
 
-            var pathUrl = "/industrialdevelop/chinesemed-sale";
+            var pathUrl = "/industrialdevelop/chinesemed/chinesemed-produce";
             var addUrl = pathUrl+"_add";
             var aParam = {
 

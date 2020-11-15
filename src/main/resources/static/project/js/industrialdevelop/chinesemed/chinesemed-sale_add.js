@@ -4,7 +4,7 @@
 
             var url = "/industrialdevelop/chi-med";
 
-            var pathUrl = "/industrialdevelop/chinesemed-sale";
+            var pathUrl = "/industrialdevelop/chinesemed/chinesemed-sale";
 
             var orgType = 'sale'
 

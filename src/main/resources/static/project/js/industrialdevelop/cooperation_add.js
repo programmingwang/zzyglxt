@@ -92,7 +92,7 @@
 
             $("#submitBtn").unbind('click').on('click',function () {
                 var param = generateParam();
-                param.status = "——";
+                param.status = "展示中";
                 ajaxUtil.myAjax(null,url,param,function (data) {
                     if(ajaxUtil.success(data)){
                         orange.redirect(pathUrl)

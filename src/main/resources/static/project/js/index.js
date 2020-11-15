@@ -549,28 +549,28 @@
                     },
                     {
                         menu_name: "＞中药材加工企业",
-                        menu_url: "/industrialdevelop/chinesemed",
+                        menu_url: "/industrialdevelop/chinesemed/chinesemed-process",
                         id: "99-9",
                         level: "2",
                         pid: "99"
                     },
                     {
                         menu_name: "＞中药材销售企业",
-                        menu_url: "/industrialdevelop/chinesemed-sale",
+                        menu_url: "/industrialdevelop/chinesemed/chinesemed-sale",
                         id: "99-10",
                         level: "2",
                         pid: "99"
                     },
                     {
                         menu_name: "＞中药材制造企业",
-                        menu_url: "/industrialdevelop/chinesemed-produce",
+                        menu_url: "/industrialdevelop/chinesemed/chinesemed-produce",
                         id: "99-11",
                         level: "2",
                         pid: "99"
                     },
                     {
                         menu_name: "＞种植园管理",
-                        menu_url: "/industrialdevelop/plantation",
+                        menu_url: "/industrialdevelop/chinesemed/plantation",
                         id: "99-12",
                         level: "2",
                         pid: "99"

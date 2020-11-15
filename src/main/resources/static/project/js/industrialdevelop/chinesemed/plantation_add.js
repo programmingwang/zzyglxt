@@ -4,9 +4,9 @@
 
             var url = "/industrialdevelop/chi-med";
 
-            var pathUrl = "/industrialdevelop/chinesemed-produce";
+            var pathUrl = "/industrialdevelop/chinesemed/plantation";
 
-            var orgType = "produce";
+            var orgType = "plant"
 
             var itemcode = stringUtil.getUUID();
 
@@ -65,8 +65,8 @@
             function generateParam(){
                 var param = {};
                 param.name = $("#name").val();
-                param.peoduceType = $("#peoduceType").val();
-                param.peoduceDrug = $("#peoduceDrug").val();
+                param.plantType = $("#plantType").val();
+                param.areaCoverd = $("#areaCoverd").val();
                 param.contacts = $("#contacts").val();
                 param.phone = $("#phone").val();
                 param.addressPro = $("#addressPro").val()
@@ -74,7 +74,7 @@
                 param.addressCountry = $("#addressCountry").val()
                 param.address = $("#address").val()
                 param.intruduce = $(".w-e-text").html();
-                param.type = orgType;
+                param.type = orgType
                 return param;
             }
 
@@ -113,8 +113,8 @@
                 if (isUpdate()){
                     var tempdata = JSON.parse(localStorage.getItem("rowData"));
                     $("#name").val(tempdata.name);
-                    $("#peoduceType").val(tempdata.peoduceType);
-                    $("#peoduceDrug").val(tempdata.peoduceDrug);
+                    $("#plantType").val(tempdata.plantType);
+                    $("#areaCoverd").val(tempdata.areaCoverd);
                     $("#contacts").val(tempdata.contacts);
                     $("#distpicker").distpicker({
                         province: tempdata.addressPro,
@@ -124,12 +124,14 @@
                     $("#address").val(tempdata.address);
                     $("#phone").val(tempdata.phone);
                     $(".w-e-text").html(tempdata.intruduce);
-                    itemcode = tempdata.itemcode
+                    itemcode = tempdata.itemcode;
                     uploadImg.setImgSrc(tempdata.filePath)
                 }else {
                     $("#distpicker").distpicker();
                 }
-                init = function () {}
+                init = function () {
+
+                }
             };
             init();
 

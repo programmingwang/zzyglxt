@@ -40,4 +40,9 @@ public class IndexController {
     public String userMsg(){
         return "/user/usermsg";
     }
+
+    @RequestMapping(value = "/chimed")
+    public String chimed(){
+        return "/industrialdevelop/plantation_add";
+    }
 }

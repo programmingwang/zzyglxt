@@ -76,10 +76,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.cors().and().csrf().disable().
                 authorizeRequests().antMatchers("/component/**","/css/**", "/fonts/**",
                 "/images/**","/main/**", "/project/**", "/utils/**", "/", "/register").permitAll().
-                    anyRequest().authenticated().
+//                    anyRequest().authenticated().
                 and().logout().
                     permitAll().//允许所有用户
                     logoutSuccessHandler(logoutSuccessHandler).//登出成功处理逻辑
+                    deleteCookies("JSESSIONID").//登出后删除cookie
                     invalidateHttpSession(true).//登出成功后使session失效
                 //登入
                 and().formLogin().loginPage("/userLogin").successForwardUrl("/main").

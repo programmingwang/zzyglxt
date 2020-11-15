@@ -43,23 +43,17 @@ public class CustomizeAuthenticationSuccessHandler implements AuthenticationSucc
 
         User userDetails = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         UserDO userDo = userService.selectByName(userDetails.getUsername());
-        Map<String,String> map = new HashMap<>();
-        UserUtil userUtil = new UserUtil();
-        map.put("username", userDo.getUsername());
-        map.put("itemid", String.valueOf(userDo.getItemid()));
-        map.put("itemcode", userDo.getItemcode());
-
-        userUtil.setUser(map);// 将username、itemid、itemcode存到session
+//        Map<String,String> map = new HashMap<>();
+//        UserUtil userUtil = new UserUtil();
+//        map.put("username", userDo.getUsername());
+//        map.put("itemid", String.valueOf(userDo.getItemid()));
+//        map.put("itemcode", userDo.getItemcode());
 //
-//        userDo.setState("入");
-//        userDo.setItemid(Integer.parseInt(map.get("itemid")));
-//        userDo.setItemcode(map.get("itemcode"));
-//        userService.updateByPrimaryKeySelective(userDo);
+//        userUtil.setUser(map);// 将username、itemid、itemcode存到session
 
         RoleDO roleDO = roleDOMapper.selectByUserid(userDo.getItemcode());
 
         UserSessionDto userSessionDto = new UserSessionDto();
-
         userSessionDto.setUsername(userDo.getUsername());
         userSessionDto.setRolename(roleDO.getRoleName());
         userSessionDto.setItemid(userDo.getItemid());

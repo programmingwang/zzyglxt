@@ -1,5 +1,3 @@
-
-
 var codeStr = [];
 
 /**生成一个随机数**/
@@ -53,6 +51,24 @@ function drawPic(codeStr) {
 }
 
 
+// 输入框失去焦点后获取公司名称和机构代码，去数据库查询该机构的审核状态
+$("#orgCode").on("blur", function () {
+    let orgName = $("#orgName").val();
+    let orgCode = $("#orgCode").val();
+    console.log(orgName);
+    console.log(orgCode);
+    var userEntity = {"orgName": orgName, "orgCode": orgCode};
+    myAjax(null, "/user/queryOrgStatus", userEntity, function (data) {
+        console.log(data);
+        if (data && data.code === 88888) {
+            $("#status_text").text(data.data)
+        } else {
+            // error(data.msg)
+            alert("查询失败")
+        }
+    }, false)
+});
+
 function validateLogin() {
     let orgName = $("#orgName").val();
     let orgType = $("#orgType option:selected").val();
@@ -105,7 +121,7 @@ function validateLogin() {
     }
 }
 
-$("#btn_register").unbind("click").bind("click",function () {
+$("#btn_register").unbind("click").bind("click", function () {
     let orgName = $("#orgName").val();
     let orgType = $("#orgType option:selected").val();
     let orgCode = $("#orgCode").val();
@@ -113,41 +129,49 @@ $("#btn_register").unbind("click").bind("click",function () {
     let password = $("#password").val();
     let phone = $("#phone").val();
 
-    var userEntity = {"orgName":orgName,"orgIdentify":orgType,"orgCode":orgCode,"username":username,"password":password,"mobilePhone":phone};
-    if (validateLogin()){
-        myAjax(null,"/user/register",userEntity,function (data) {
-            if(data && data.code === 88888) {
-                window.location.href = "/userLogin"
-            }else{
-                error(data.msg)
+    var userEntity = {
+        "orgName": orgName,
+        "orgIdentify": orgType,
+        "orgCode": orgCode,
+        "username": username,
+        "password": password,
+        "mobilePhone": phone
+    };
+    if (validateLogin()) {
+        myAjax(null, "/user/register", userEntity, function (data) {
+            if (data && data.code === 88888) {
+                window.location.href = data.data
+            } else {
+                // error(data.msg)
+                alert("注册失败")
             }
-        },false)
+        }, false)
     }
 
 })
 
 
 var successCode = 88888;
-var notLoggedInCode= 20001;
+var notLoggedInCode = 20001;
 
 
 function success(data) {
-    if(isEmptyObject(data)){
+    if (isEmptyObject(data)) {
         return false;
     }
-    if(isBlank(data.code)){
+    if (isBlank(data.code)) {
         return false;
     }
-    if(successCode == data.code){
+    if (successCode == data.code) {
         return true;
-    }else{
+    } else {
         return false;
     }
 }
 
 //所要判段的字符串为空
 function isBlank(str) {
-    if(str != "" && str != null && str != "undefined") {
+    if (str != "" && str != null && str != "undefined") {
         return false;
     } else {
         return true;
@@ -155,20 +179,20 @@ function isBlank(str) {
 }
 
 function notLoggedIn(data) {
-    if(isEmptyObject(data)){
+    if (isEmptyObject(data)) {
         return false;
     }
-    if(isBlank(data.code)){
+    if (isBlank(data.code)) {
         return false;
     }
-    if(notLoggedInCode == data.code){
+    if (notLoggedInCode == data.code) {
         return true;
-    }else{
+    } else {
         return false;
     }
 }
 
-function myAjax(aButton, url, param, fun, async, isReqJson, type="post") {
+function myAjax(aButton, url, param, fun, async, isReqJson, type = "post") {
     var _setting =
         {
             url: url,
@@ -180,7 +204,7 @@ function myAjax(aButton, url, param, fun, async, isReqJson, type="post") {
     if (!strIsBlank(isReqJson)) {
         _setting.contentType = "application/json;charset=utf-8";
         _setting.data = JSON.stringify(param);
-    }else{
+    } else {
         _setting.data = param;
     }
 
@@ -190,30 +214,30 @@ function myAjax(aButton, url, param, fun, async, isReqJson, type="post") {
         }
     };
     _setting.success = function (data) {
-        try{
-            if(!isEmptyObject(data)){
-                if(notLoggedInCode == data.code){
+        try {
+            if (!isEmptyObject(data)) {
+                if (notLoggedInCode == data.code) {
                     window.location.href = "/userLogin";
                 }
             }
             fun(data);
-        }catch (e) {
+        } catch (e) {
 
-        }finally {
+        } finally {
             if (aButton != null) {
                 aButton.removeAttr("disabled");
             }
         }
     };
-    _setting.error = function (data) {
-        if(data.responseJSON.msg){
-            error(data.responseJSON.msg);
-        }else{
-            error(data.responseJSON.message);
-        }
-
-        console.log("请求失败URI："+ url);
-    };
+    // _setting.error = function (data) {
+    //     if (data.responseJSON.msg) {
+    //         error(data.responseJSON.msg);
+    //     } else {
+    //         error(data.responseJSON.message);
+    //     }
+    //
+    //     console.log("请求失败URI：" + url);
+    // };
     _setting.complete = function (XMLHttpRequest) {
         if (aButton != null) {
             aButton.removeAttr("disabled");
@@ -225,7 +249,7 @@ function myAjax(aButton, url, param, fun, async, isReqJson, type="post") {
 
 //所要判段的字符串为空
 function strIsBlank(str) {
-    if(str != "" && str != null && str != "undefined") {
+    if (str != "" && str != null && str != "undefined") {
         return false;
     } else {
         return true;
@@ -233,27 +257,28 @@ function strIsBlank(str) {
 }
 
 //判断对象为空对象
-function isEmptyObject(obj){
-    for(var key in obj){
+function isEmptyObject(obj) {
+    for (var key in obj) {
         return false;
-    };
+    }
+    ;
     return true
 };
 
 function error(str) {
-    myNotify("错误信息："+ str,'danger')
+    myNotify("错误信息：" + str, 'danger')
 }
 
-function myNotify(message,type) {
+function myNotify(message, type) {
     $.notify({
         icon: 'glyphicon glyphicon-star',
         message: message
-    },{
-        type:type,
+    }, {
+        type: type,
         placement: {
             from: "top",
             align: "center"
         },
-        offset:50,
+        offset: 50,
     });
 }

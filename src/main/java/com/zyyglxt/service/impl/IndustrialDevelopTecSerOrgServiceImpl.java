@@ -3,9 +3,14 @@ package com.zyyglxt.service.impl;
 import com.zyyglxt.dao.IndustrialDevelopTecSerOrgMapper;
 import com.zyyglxt.dataobject.IndustrialDevelopTecSerOrg;
 import com.zyyglxt.dto.industrialDevelop.IndustrialDevelopTecSerOrgDto;
+import com.zyyglxt.error.BusinessException;
+import com.zyyglxt.error.EmBusinessError;
 import com.zyyglxt.service.IFileService;
 import com.zyyglxt.service.IndustrialDevelopTecSerOrgService;
+import com.zyyglxt.validator.ValidatorImpl;
+import com.zyyglxt.validator.ValidatorResult;
 import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -22,9 +27,12 @@ public class IndustrialDevelopTecSerOrgServiceImpl implements IndustrialDevelopT
 
     @Resource
     private IndustrialDevelopTecSerOrgMapper industrialDevelopTecSerOrgMapper;
-    
+
     @Resource
     private IFileService fileService;
+
+    @Autowired
+    ValidatorImpl validator;
 
     @Override
     public int deleteByPrimaryKey(Integer itemid,String itemcode) {
@@ -38,6 +46,10 @@ public class IndustrialDevelopTecSerOrgServiceImpl implements IndustrialDevelopT
 
     @Override
     public int insertSelective(IndustrialDevelopTecSerOrg record) {
+        ValidatorResult result = validator.validate(record);
+        if (result.isHasErrors()) {
+            throw new BusinessException(result.getErrMsg(), EmBusinessError.PARAMETER_VALIDATION_ERROR);
+        }
         return industrialDevelopTecSerOrgMapper.insertSelective(record);
     }
 

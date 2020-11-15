@@ -2,7 +2,8 @@
     require(['jquery','urlUtil','stringUtil','alertUtil','ajaxUtil'],
         function (jquery,urlUtil,stringUtil,alertUtil,ajaxUtil) {
 
-
+            var roleName = sessionStorage.getItem("rolename");
+            // console.log(roleName)
             var currentUrlHash = window.location.hash.replace("#", "");
             var menu_list = [
                 {

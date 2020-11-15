@@ -132,7 +132,7 @@
 
                 'click .view' : function (e, value, row, index) {
                     var myViewChineseMedicineModalData ={
-                        modalBodyID : "myViewChineseMedicineModal", //公用的在后面给span加不同的内容就行了，其他模块同理
+                        modalBodyID : "myviewChineseMedicineModal", //公用的在后面给span加不同的内容就行了，其他模块同理
                         modalTitle : "查看详情",
                         modalClass : "modal-lg",
                         confirmButtonStyle: "display:none",

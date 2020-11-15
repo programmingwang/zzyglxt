@@ -174,7 +174,7 @@
             '                </fieldset>'+
             '            </div>\n'+
             '</div>';
-        modalHtml.myViewChineseMedicineModal =
+        modalHtml.myviewChineseMedicineModal =
             '<div class="row">'+
             '            <div id="imgDiv" class="col-lg-12 col-md-12">\n' +
             '                <fieldset disabled>'+

@@ -41,7 +41,7 @@
       SELECT * FROM tb_industrial_develop_coo_exc LIMIT #{start},#{end}
     </select>
     <select id="selectAll" resultType="com.zyyglxt.dataobject.IndustrialDevelopCooExcDO" resultMap="BaseResultMap">
-      SELECT * FROM tb_industrial_develop_coo_exc WHERE `STATUS` = #{status,jdbcType=VARCHAR}
+      SELECT * FROM tb_industrial_develop_coo_exc where ORG_CODE = #{orgCode}
     </select>
     <delete id="deleteByPrimaryKey" parameterType="com.zyyglxt.dataobject.IndustrialDevelopCooExcDOKey">
     <!--
@@ -227,16 +227,5 @@
   </update>
   <update id="updateVisitNumByItemidAndItemcode">
     update tb_industrial_develop_coo_exc set VISIT_NUM = VISIT_NUM + 1 where itemID = #{itemid} and itemCode = #{itemcode}
-  </update>
-
-  <update id="changeStatusToCooExc">
-    update tb_industrial_develop_coo_exc
-    <set>
-      <if test="status != null">
-        `STATUS` = #{status,jdbcType=VARCHAR}
-      </if>
-    </set>
-    where itemID = #{key.itemid,jdbcType=INTEGER}
-    and itemCode = #{key.itemcode,jdbcType=CHAR}
   </update>
 </mapper>

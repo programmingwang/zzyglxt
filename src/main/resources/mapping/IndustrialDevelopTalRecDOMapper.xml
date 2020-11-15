@@ -49,6 +49,7 @@
     <select id="selectAll" resultType="com.zyyglxt.dataobject.IndustrialDevelopTalRecDO" resultMap="BaseResultMap">
         SELECT *
         FROM tb_industrial_develop_tal_rec
+        where ORG_CODE = #{orgCode}
     </select>
     <delete id="deleteByPrimaryKey" parameterType="com.zyyglxt.dataobject.IndustrialDevelopTalRecDOKey">
         <!--

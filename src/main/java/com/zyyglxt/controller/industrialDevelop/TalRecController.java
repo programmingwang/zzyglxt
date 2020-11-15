@@ -43,9 +43,9 @@ public class TalRecController {
         return new ResponseData(EmBusinessError.success);
     }
 
-    @GetMapping(value = "/talrec")
+    @GetMapping(value = "/talrec/{orgCode}")
     @ResponseBody
-    public ResponseData getTalRec(){
-        return new ResponseData(EmBusinessError.success, talRecService.getTalRecs());
+    public ResponseData getTalRec(@PathVariable String orgCode){
+        return new ResponseData(EmBusinessError.success, talRecService.getTalRecs(orgCode));
     }
 }

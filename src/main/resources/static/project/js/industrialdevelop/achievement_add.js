@@ -69,7 +69,7 @@
                 param.contacts = $("#contacts").val();
                 param.phone = $("#phone").val();
                 param.context = $(".w-e-text").html();
-                param.orgCode = "未定义";
+                param.orgCode = sessionStorage.getItem("orgCode");
                 return param;
             }
 

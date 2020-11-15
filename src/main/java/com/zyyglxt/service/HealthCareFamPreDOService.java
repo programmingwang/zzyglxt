@@ -3,6 +3,7 @@ package com.zyyglxt.service;
 import com.zyyglxt.dataobject.HealthCareFamPreDO;
 import com.zyyglxt.dataobject.HealthCareFamPreDOKey;
 import com.zyyglxt.error.BusinessException;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -19,6 +20,7 @@ public interface HealthCareFamPreDOService {
     int deleteByPrimaryKey(HealthCareFamPreDOKey key);
     int updateByPrimaryKeySelective(HealthCareFamPreDO record) throws BusinessException;
     HealthCareFamPreDO selectByPrimaryKey(HealthCareFamPreDOKey key);
-    List<HealthCareFamPreDO> selectAllHealthCareFamPre();//查询所有国医话健康所有数据
+    List<HealthCareFamPreDO> selectAllHealthCareFamPre(List<String> status);//查询所有国医话健康所有数据
+    int changeStatusToCareFam( HealthCareFamPreDOKey key, String status);//国医话健康数据状态
     int updateVisitNumHealthCareFamPre(HealthCareFamPreDOKey key);
 }

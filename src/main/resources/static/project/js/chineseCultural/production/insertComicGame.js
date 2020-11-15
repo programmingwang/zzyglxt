@@ -57,7 +57,7 @@
                 var operateMessage;
                 if(!isUpdate()){
                     addUpdateUrl = "/cul/pro/comGam/addComGam";
-                    operateMessage = "新增漫画典故成功";
+                    operateMessage = "新增动漫游戏成功";
                     comGamEntity = {
                         itemcode: stringUtil.getUUID(),
                         chineseCulturalName : $("#chineseCulturalName").val(),
@@ -76,7 +76,7 @@
                         chineseCulturalAuthor : $("#chineseCulturalAuthor").val(),
                         chineseCulturalContent : editor.txt.html()
                     }
-                    operateMessage = "更新漫画典故成功";
+                    operateMessage = "更新动漫游戏成功";
                 }
 
                 fileUtil.handleFile(isUpdate(), comGamEntity.itemcode, uploadImg.getFiles()[0]);

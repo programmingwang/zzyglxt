@@ -147,4 +147,29 @@
         where HOSPITAL_CODE = #{hospCode}
     </select>
 
+    <update id="updateBySpecialtyCodeSelective">
+        update tb_culpro_hosp_specialty_ref
+        <set>
+            <if test="hospitalCode != null">
+                HOSPITAL_CODE = #{hospitalCode,jdbcType=VARCHAR},
+            </if>
+            <if test="specialtyCode != null">
+                SPECIALTY_CODE = #{specialtyCode,jdbcType=VARCHAR},
+            </if>
+            <if test="creater != null">
+                CREATER = #{creater,jdbcType=VARCHAR},
+            </if>
+            <if test="itemcreateat != null">
+                itemCreateAt = #{itemcreateat,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updater != null">
+                UPDATER = #{updater,jdbcType=VARCHAR},
+            </if>
+            <if test="itemupdateat != null">
+                itemUpdateAt = #{itemupdateat,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where SPECIALTY_CODE = #{specialtyCode}
+    </update>
+
 </mapper>

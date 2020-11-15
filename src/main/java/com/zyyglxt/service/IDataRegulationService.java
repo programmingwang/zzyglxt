@@ -15,7 +15,7 @@ public interface IDataRegulationService {
     DataDO selectRegulation(DataDOKey key);
 
     //查询所有政策法规
-    List<DataDO> selectRegulationList();
+    List<DataDO> selectRegulationList(List<String> dataStatus);
 
     //增加一个政策法规
     int insertRegulation(DataDO record);

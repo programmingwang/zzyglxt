@@ -89,7 +89,7 @@
                 entity["specialtyAddressCity"] = hosp.hospitalAddressCity;
                 entity["specialtyAddressCounty"] = hosp.hospitalAddressCountry;
                 entity["specialtyAddress"] = hosp.hospitalAddress;
-                entity["specialtyLink"] = hosp.specialtyLink;
+                entity["specialtyLink"] = hosp.hospitalLink;
                 entity["specialtyDescribe"] = editor.txt.html();
                 entity["hospitalCode"] = hosp.itemcode;
                 entity["hospitalName"] = hosp.hospitalName;
@@ -112,9 +112,9 @@
             }
 
             /*初始化数据*/
-            (function init() {
+            var init = function () {
                 uploadImg.init();
-                ajaxUtil.myAjax(null,"/medicalService/hosp/selectAll",null,function (data) {
+                ajaxUtil.myAjax(null,"/medicalService/hosp/selectAll?hospitalStatus=展示中",null,function (data) {
                     if(ajaxUtil.success(data)){
                         hosps = data.data
                         var html = "";
@@ -136,7 +136,8 @@
                     $("#specialtyPhone").val(tempdata.specialtyPhone);
                     $(".w-e-text").html(tempdata.specialtyDescribe);
                 }
-            }());
+            };
+            init();
 
 
         });

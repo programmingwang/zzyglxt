@@ -7,13 +7,16 @@ import com.zyyglxt.error.BusinessException;
 import com.zyyglxt.error.EmBusinessError;
 import com.zyyglxt.service.IDataAnnouncementService;
 import com.zyyglxt.service.IDataNewsService;
+import com.zyyglxt.util.DateUtils;
 import com.zyyglxt.util.UUIDUtils;
+import com.zyyglxt.util.UsernameUtil;
 import com.zyyglxt.validator.ValidatorImpl;
 import com.zyyglxt.validator.ValidatorResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -31,14 +34,21 @@ public class DataAnnouncementServiceImpl implements IDataAnnouncementService {
     @Autowired
     private ValidatorImpl validator;
 
+    @Autowired
+    private UsernameUtil usernameUtil;
+
     @Override
     public DataDO selectAnnouncement(DataDOKey key) {
         return dataDOMapper.selectByPrimaryKey(key,"通知公告");
     }
 
     @Override
-    public List<DataDO> selectAnnouncementList() {
-        return dataDOMapper.selectByAllData("通知公告");
+    public List<DataDO> selectAnnouncementList(List<String> dataStatus) {
+        List<DataDO> dataDOList = new ArrayList<>();
+        for (String status : dataStatus) {
+            dataDOList.addAll(dataDOMapper.selectByAllData("通知公告", status));
+        }
+        return dataDOList;
     }
 
     @Override
@@ -47,12 +57,10 @@ public class DataAnnouncementServiceImpl implements IDataAnnouncementService {
         if(result.isHasErrors()){
             throw new BusinessException(result.getErrMsg(), EmBusinessError.PARAMETER_VALIDATION_ERROR);
         }
-        record.setItemcreateat(new Date());
-        record.setCreater("test");
-        record.setItemupdateat(new Date());
-        record.setUpdater("test");
+        record.setItemcreateat(DateUtils.getDate());
+        record.setCreater(usernameUtil.getOperateUser());
         record.setDataType("通知公告");
-        record.setDataStatus("待上架");
+        record.setDataStatus("--");
         if(record.getItemcode() == null){
             record.setItemcode(UUIDUtils.getUUID());
         }
@@ -70,8 +78,8 @@ public class DataAnnouncementServiceImpl implements IDataAnnouncementService {
         if(result.isHasErrors()){
             throw new BusinessException(result.getErrMsg(), EmBusinessError.PARAMETER_VALIDATION_ERROR);
         }
-        record.setUpdater("asd");
-        record.setItemupdateat(new Date());
+        record.setUpdater(usernameUtil.getOperateUser());
+        record.setItemupdateat(DateUtils.getDate());
         return dataDOMapper.updateByPrimaryKeySelective(record);
     }
 

@@ -226,6 +226,13 @@
                     pid: "13"
                 },
                 {
+                    menu_name: "在售药材",
+                    menu_url: "/healthCare/healthcarechineseMedicine",
+                    id: "88",
+                    level: "1",
+                    pid: ""
+                },
+                {
                     menu_name: "产业发展",
                     menu_url: "",
                     id: "99",
@@ -283,21 +290,21 @@
                 },
                 {
                     menu_name: "＞中药材加工企业",
-                    menu_url: "/industrialdevelop/chinesemed",
+                    menu_url: "/industrialdevelop/chinesemed/chinesemed-process",
                     id: "99-7",
                     level: "2",
                     pid: "99"
                 },
                 {
                     menu_name: "＞中药材销售企业",
-                    menu_url: "/industrialdevelop/chinesemed-sale",
+                    menu_url: "/industrialdevelop/chinesemed/chinesemed-sale",
                     id: "99-8",
                     level: "2",
                     pid: "99"
                 },
                 {
                     menu_name: "＞中药材制造企业",
-                    menu_url: "/industrialdevelop/chinesemed-produce",
+                    menu_url: "/industrialdevelop/chinesemed/chinesemed-produce",
                     id: "99-9",
                     level: "2",
                     pid: "99"

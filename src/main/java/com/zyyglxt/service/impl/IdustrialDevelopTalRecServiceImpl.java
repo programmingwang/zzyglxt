@@ -62,7 +62,7 @@ public class IdustrialDevelopTalRecServiceImpl implements IIndustrialDevelopTalR
     }
 
     @Override
-    public List<IndustrialDevelopTalRecDO> getTalRecs() {
-        return developTalRecDOMapper.selectAll();
+    public List<IndustrialDevelopTalRecDO> getTalRecs(String orgCode) {
+        return developTalRecDOMapper.selectAll(orgCode);
     }
 }

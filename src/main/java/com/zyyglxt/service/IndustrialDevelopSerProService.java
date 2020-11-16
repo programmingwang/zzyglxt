@@ -26,4 +26,6 @@ public interface IndustrialDevelopSerProService{
 
     List<IndustrialDevelopSerPro> selectAll();
 
+    List<IndustrialDevelopSerPro> selectByorgcode();
+
 }

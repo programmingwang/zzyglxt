@@ -6,6 +6,8 @@
         <id column="itemCode" jdbcType="CHAR" property="itemcode"/>
         <result column="HOSPITAL_NAME" jdbcType="VARCHAR" property="hospitalName"/>
         <result column="HOSPITAL_LEVEL" jdbcType="VARCHAR" property="hospitalLevel"/>
+        <result column="HOSPITAL_BRIEF_INTRODUCE" jdbcType="VARCHAR" property="hospitalBriefIntroduce"/>
+        <result column="HOSPITAL_KEY_SPECIALTY" jdbcType="VARCHAR" property="hospitalKeySpecialty"/>
         <result column="HOSPITAL_TELEPHONE" jdbcType="VARCHAR" property="hospitalTelephone"/>
         <result column="HOSPITAL_ADDRESS_PRO" jdbcType="VARCHAR" property="hospitalAddressPro"/>
         <result column="HOSPITAL_ADDRESS_CITY" jdbcType="VARCHAR" property="hospitalAddressCity"/>
@@ -22,7 +24,7 @@
         <result column="HOSPITAL_INTRODUCE" jdbcType="LONGVARCHAR" property="hospitalIntroduce"/>
     </resultMap>
     <sql id="Base_Column_List">
-        itemID, itemCode, HOSPITAL_NAME, HOSPITAL_LEVEL, HOSPITAL_TELEPHONE, HOSPITAL_ADDRESS_PRO,
+        itemID, itemCode, HOSPITAL_NAME, HOSPITAL_LEVEL, HOSPITAL_BRIEF_INTRODUCE, HOSPITAL_KEY_SPECIALTY, HOSPITAL_TELEPHONE, HOSPITAL_ADDRESS_PRO,
         HOSPITAL_ADDRESS_CITY, HOSPITAL_ADDRESS_COUNTRY, HOSPITAL_ADDRESS, HOSPITAL_LINK,
         HOSPITAL_STATUS, CREATER, itemCreateAt, UPDATER, itemUpdateAt
     </sql>
@@ -74,6 +76,12 @@
             <if test="hospitalLevel != null">
                 HOSPITAL_LEVEL,
             </if>
+            <if test="hospitalBriefIntroduce != null">
+                HOSPITAL_BRIEF_INTRODUCE,
+            </if>
+            <if test="hospitalKeySpecialty != null">
+                HOSPITAL_KEY_SPECIALTY,
+            </if>
             <if test="hospitalTelephone != null">
                 HOSPITAL_TELEPHONE,
             </if>
@@ -124,6 +132,12 @@
             <if test="hospitalLevel != null">
                 #{hospitalLevel,jdbcType=VARCHAR},
             </if>
+            <if test="hospitalBriefIntroduce != null">
+                #{hospitalBriefIntroduce,jdbcType=VARCHAR},
+            </if>
+            <if test="hospitalKeySpecialty != null">
+                #{hospitalKeySpecialty,jdbcType=VARCHAR},
+            </if>
             <if test="hospitalTelephone != null">
                 #{hospitalTelephone,jdbcType=VARCHAR},
             </if>
@@ -171,6 +185,12 @@
             <if test="hospitalLevel != null">
                 HOSPITAL_LEVEL = #{hospitalLevel,jdbcType=VARCHAR},
             </if>
+            <if test="hospitalBriefIntroduce != null">
+                HOSPITAL_BRIEF_INTRODUCE = #{hospitalBriefIntroduce,jdbcType=VARCHAR},
+            </if>
+            <if test="hospitalKeySpecialty != null">
+                HOSPITAL_KEY_SPECIALTY = #{hospitalKeySpecialty,jdbcType=VARCHAR},
+            </if>
             <if test="hospitalTelephone != null">
                 HOSPITAL_TELEPHONE = #{hospitalTelephone,jdbcType=VARCHAR},
             </if>
@@ -215,6 +235,8 @@
         update tb_culpro_hosp
         set HOSPITAL_NAME = #{hospitalName,jdbcType=VARCHAR},
         HOSPITAL_LEVEL = #{hospitalLevel,jdbcType=VARCHAR},
+        HOSPITAL_BRIEF_INTRODUCE = #{hospitalBriefIntroduce,jdbcType=VARCHAR},
+        HOSPITAL_KEY_SPECIALTY = #{hospitalKeySpecialty,jdbcType=VARCHAR},
         HOSPITAL_TELEPHONE = #{hospitalTelephone,jdbcType=VARCHAR},
         HOSPITAL_ADDRESS_PRO = #{hospitalAddressPro,jdbcType=VARCHAR},
         HOSPITAL_ADDRESS_CITY = #{hospitalAddressCity,jdbcType=VARCHAR},
@@ -234,6 +256,8 @@
         update tb_culpro_hosp
         set HOSPITAL_NAME = #{hospitalName,jdbcType=VARCHAR},
         HOSPITAL_LEVEL = #{hospitalLevel,jdbcType=VARCHAR},
+        HOSPITAL_BRIEF_INTRODUCE = #{hospitalBriefIntroduce,jdbcType=VARCHAR},
+        HOSPITAL_KEY_SPECIALTY = #{hospitalKeySpecialty,jdbcType=VARCHAR},
         HOSPITAL_TELEPHONE = #{hospitalTelephone,jdbcType=VARCHAR},
         HOSPITAL_ADDRESS_PRO = #{hospitalAddressPro,jdbcType=VARCHAR},
         HOSPITAL_ADDRESS_CITY = #{hospitalAddressCity,jdbcType=VARCHAR},
@@ -270,16 +294,6 @@
         OR HOSPITAL_ADDRESS_COUNTRY LIKE "%"#{value}"%"
         OR HOSPITAL_ADDRESS LIKE "%"#{value}"%"
         ORDER BY itemCreateAt DESC
-    </select>
-
-    <select id="top5Hosp" resultMap="ResultMapWithBLOBs">
-        select
-        <include refid="Base_Column_List"/>
-        ,
-        <include refid="Blob_Column_List"/>
-        from tb_culpro_hosp
-        ORDER BY itemCreateAt DESC
-        LIMIT 5
     </select>
 
 

@@ -4,7 +4,6 @@ import com.zyyglxt.dao.HospDOMapper;
 import com.zyyglxt.dao.HospSpecialtyRefDOMapper;
 import com.zyyglxt.dataobject.HospDO;
 import com.zyyglxt.dataobject.HospDOKey;
-import com.zyyglxt.dataobject.HospSpecialtyRefDO;
 import com.zyyglxt.dto.MedicalServiceDto;
 import com.zyyglxt.error.BusinessException;
 import com.zyyglxt.error.EmBusinessError;
@@ -19,7 +18,6 @@ import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.UUID;
 
 /**
  * @author qjc
@@ -35,8 +33,6 @@ public class HospServiceImpl implements IHospService {
     @Resource
     private HospSpecialtyRefDOMapper hospSpecialtyRefDOMapper;
     @Resource
-    private IHospService hospService;
-    @Resource
     private UsernameUtil usernameUtil;
 
     @Override
@@ -48,7 +44,6 @@ public class HospServiceImpl implements IHospService {
         hospDO.setItemcreateat(new Date());
         hospDO.setCreater(usernameUtil.getOperateUser());
         hospDO.setUpdater(usernameUtil.getOperateUser());
-        hospDO.setHospitalStatus("--");
 
         return hospDOMapper.insertSelective(hospDO);
     }

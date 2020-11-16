@@ -3,15 +3,16 @@
         function (jquery,ajaxUtil,bootstrapTableUtil,objectUtil,alertUtil,modalUtil,selectUtil,stringUtil,dictUtil) {
 
             var url = "selectallfampredo";
+            var webStatus = dictUtil.getDictByCode(dictUtil.DICT_LIST.webStatus);
             //角色加载工具
-            url = selectUtil.getRoleTable(sessionStorage.getItem("rolename"),url,"status");
+            url = selectUtil.getRoleTable(sessionStorage.getItem("rolename"),url,"status",webStatus);
 
             var aParam = {
 
             };
             //操作
             function operation(value, row, index){
-                return selectUtil.getRoleOperate(value,row,index,sessionStorage.getItem("rolename"),row.status)
+                return selectUtil.getRoleOperate(value,row,index,sessionStorage.getItem("rolename"),row.status,webStatus)
             }
             //修改事件
             window.orgEvents = {
@@ -53,12 +54,12 @@
                         modalConfirmFun:function () {
                             var isSuccess = false;
                             var submitStatus = {
-                                "status": selectUtil.getStatus(sessionStorage.getItem("rolename"))
+                                "status": selectUtil.getStatus(sessionStorage.getItem("rolename"),webStatus)
                             };
                             ajaxUtil.myAjax(null,"changestatustofampre/"+row.itemid+"/"+row.itemcode,submitStatus,function (data) {
                                 if(ajaxUtil.success(data)){
-                                    if(data.code == 88888){
-                                        if(selectUtil.getStatus(sessionStorage.getItem("rolename")) == "处长已审核"){
+                                    if(data.code == ajaxUtil.successCode){
+                                        if(sessionStorage.getItem("rolename") == "文化宣传处长"){
                                             alertUtil.info("审核已通过，已发送给综合处处长做最后审核！");
                                         }else{
                                             alertUtil.info("审核已通过，已上架！");
@@ -85,8 +86,13 @@
                         modalConfirmFun:function () {
                             var isSuccess = false;
                             var submitStatus = {
-                                "status": "已下架"
+                                "status": ""
                             };
+                            if(sessionStorage.getItem("rolename") == "文化宣传处长" || sessionStorage.getItem("rolename") == "政务资源处长"){
+                                submitStatus.chineseCulturalStatus = webStatus[3].text;
+                            }else{
+                                submitStatus.chineseCulturalStatus = webStatus[4].text;
+                            }
                             ajaxUtil.myAjax(null,"changestatustofampre/"+row.itemid+"/"+row.itemcode,submitStatus,function (data) {
                                 if(ajaxUtil.success(data)){
                                     if(data.code == 88888){
@@ -112,7 +118,7 @@
                         modalConfirmFun:function () {
                             var isSuccess = false;
                             var submitStatus = {
-                                "status": "已下架"
+                                "status": webStatus[6].text
                             };
                             ajaxUtil.myAjax(null,"changestatustofampre/"+row.itemid+"/"+row.itemcode,submitStatus,function (data) {
                                 if(ajaxUtil.success(data)){
@@ -143,7 +149,7 @@
                     $("#name").val(row.name);
                     $("#source").val(row.source);
                     $("#prescription").val(row.prescription);
-                    $("#status").val(row.status);
+                    $("#status").val(webStatus[row.status].text);
                     $("#creater").val(row.creater);
                    /* $("#itemCreateAt").val(row.itemcreateat);*/
                     $("#content").val(row.content);
@@ -157,7 +163,7 @@
                         modalConfirmFun:function () {
                             var isSuccess = false;
                             var submitStatus = {
-                                "status": selectUtil.getStatus(sessionStorage.getItem("rolename"))
+                                "status": selectUtil.getStatus(sessionStorage.getItem("rolename"),webStatus)
                             };
                             ajaxUtil.myAjax(null,"changestatustofampre/"+row.itemid+"/"+row.itemcode,submitStatus,function (data) {
                                 if(ajaxUtil.success(data)){
@@ -184,7 +190,7 @@
                         modalConfirmFun:function () {
                             var isSuccess = false;
                             var submitStatus = {
-                                "status": "--"
+                                "status": webStatus[0].text
                             };
                             ajaxUtil.myAjax(null,"changestatustofampre/"+row.itemid+"/"+row.itemcode,submitStatus,function (data) {
                                 if(ajaxUtil.success(data)){
@@ -205,15 +211,13 @@
                 },
             };
 
-
-
             $("#btn_addTask").unbind().on('click',function () {
                 var url = "/healthCare/insertfamPre";
                 localStorage.removeItem("rowData");
                 orange.redirect(url);
             });
 
-            var pl = dictUtil.getDictByCode(dictUtil.DICT_LIST.showStatus);
+            var pl = dictUtil.getDictByCode(dictUtil.DICT_LIST.status);
             $("#chargePersonSearch").selectUtil(pl);
 
             var aCol = [

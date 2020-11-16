@@ -69,7 +69,7 @@ public class DataNewsServiceImpl implements IDataNewsService {
         record.setItemcreateat(DateUtils.getDate());
         record.setCreater(usernameUtil.getOperateUser());
         record.setDataType("新闻");
-        record.setDataStatus("--");
+        record.setDataStatus("保存");
         //如果前台没有插入图片或者附件，就自己生成uuid
         if(record.getItemcode() == null){
             record.setItemcode(UUIDUtils.getUUID());

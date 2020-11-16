@@ -77,7 +77,7 @@
                         dataSource : $("#dataSource").val(),
                         dataFileType : $("#dataFileType").val(),
                         dataContent : editor.txt.html()
-                    }
+                    };
                     operateMessage = "更新政策法规成功";
                 }
 

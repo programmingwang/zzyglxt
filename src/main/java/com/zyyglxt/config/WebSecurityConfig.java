@@ -80,7 +80,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 "/swagger-resources/configuration/security",//安全选项
                 "/swagger-ui.html",
                 "/webjars/**").permitAll().antMatchers("/component/**","/css/**", "/fonts/**",
-                "/images/**","/main/**", "/project/**", "/utils/**", "/", "/register","/user/queryOrgStatus").permitAll().
+                "/images/**","/main/**", "/project/**", "/utils/**", "/", "/register","/user/register","/user/queryOrgStatus",
+                "/plantation_add",
+                "/process_add",
+                "/produce_add",
+                "/school_add",
+                "/lab_add",
+                "/tecservice_add",
+                "/tour_add").permitAll().
                     anyRequest().authenticated().
 
                 and().logout().

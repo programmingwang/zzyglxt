@@ -57,6 +57,7 @@
                 width: '100%',
                 columns: fColumns,
                 ajaxOptions: {
+                    async: false,
                     complete: function (XMLHttpRequest) {
 
                     }
@@ -141,7 +142,7 @@
                 var newArry = [];
                 var addstr=document.getElementById("chargePersonSearch").value;
                 var str = document.getElementById("taskNameSearch").value.toLowerCase();
-                var allTableData = $("#table").bootstrapTable("getData");
+                var allTableData = JSON.parse(localStorage.getItem("2"));
 
                 console.log(allTableData);
                 console.log(str);

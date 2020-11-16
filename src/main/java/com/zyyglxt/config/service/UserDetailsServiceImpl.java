@@ -45,24 +45,17 @@ public class UserDetailsServiceImpl implements UserDetailsService {
             throw new RuntimeException("用户不存在");
         }
 
-        String orgCode = sysUser.getOrgCode();
-        OrganizationDO organizationDO = organizationDOMapper.selectByPrimaryKey(orgCode);
-        String status = organizationDO.getAuditStatus();
-        System.out.println("5555555555555555555555: "+status);
-        if ("省局审核已通过".equals(status)){
-            Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
-            if (sysUser != null) {
-                RoleDO role = roleService.selectRoleByUserid(sysUser.getItemcode());
-                grantedAuthorities.add(new SimpleGrantedAuthority("ROLE_"+role.getRoleName()));
-                //获取该用户所拥有的权限
-                List<ResourcesDO> sysPermissions = resService.SelectPermissionByRoleCode(sysUser);
-                // 声明用户授权
-                sysPermissions.forEach(sysPermission -> {
-                    grantedAuthorities.add(new SimpleGrantedAuthority(sysPermission.getItemcode()));
-                });
-            }
-            return new User(sysUser.getUsername(), sysUser.getPassword(), grantedAuthorities);
+        Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
+        if (sysUser != null) {
+            RoleDO role = roleService.selectRoleByUserid(sysUser.getItemcode());
+            grantedAuthorities.add(new SimpleGrantedAuthority("ROLE_"+role.getRoleName()));
+            //获取该用户所拥有的权限
+            List<ResourcesDO> sysPermissions = resService.SelectPermissionByRoleCode(sysUser);
+            // 声明用户授权
+            sysPermissions.forEach(sysPermission -> {
+                grantedAuthorities.add(new SimpleGrantedAuthority(sysPermission.getItemcode()));
+            });
         }
-        return null;
+        return new User(sysUser.getUsername(), sysUser.getPassword(), grantedAuthorities);
     }
 }

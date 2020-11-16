@@ -107,7 +107,7 @@ public class ResourcesController {
     public ResponseData selectPres() {
         List<ResourcesDO> resourcesDOS = resourcesService.selectPres();
         ResourcesRoleRefDO roleRefDO = new ResourcesRoleRefDO();
-        roleRefDO.setRoleCode("c21ae6ed-b027-45fb-85d7-083bf0fd0c69");
+        roleRefDO.setRoleCode("d767418f-ca2f-4afb-ba0c-e9dd61b414bb");
         for (ResourcesDO aDo : resourcesDOS) {
             roleRefDO.setResourceCode(aDo.getItemcode());
             resRoleRefService.insertSelective(roleRefDO);

@@ -26,4 +26,6 @@ public interface IndustrialDevelopSerProMapper {
     int updateByPrimaryKey(IndustrialDevelopSerPro record);
 
     List<IndustrialDevelopSerPro> selectAll();
+
+    List<IndustrialDevelopSerPro> selectByorgcode(String orgCode);
 }

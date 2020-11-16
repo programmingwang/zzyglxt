@@ -20,6 +20,6 @@ public interface IIndustrialDevelopSciAchiService {
 
     void increaseVisitNum(IndustrialDevelopSciAchiDOKey key);
 
-    List<IndustrialDevelopSciAchiDO> getAchievement();
+    List<IndustrialDevelopSciAchiDO> getAchievement(String orgCode);
 
 }

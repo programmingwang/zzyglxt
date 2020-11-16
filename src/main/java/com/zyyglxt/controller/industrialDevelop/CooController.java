@@ -44,10 +44,10 @@ public class CooController {
         return new ResponseData(EmBusinessError.success);
     }
 
-    @RequestMapping(value = "/coorecord", method = RequestMethod.GET)
+    @RequestMapping(value = "/coorecord/{orgCode}", method = RequestMethod.GET)
     @ResponseBody
-    public ResponseData getCooRecord(){
-        return new ResponseData(EmBusinessError.success,developCooService.getCooRecord());
+    public ResponseData getCooRecord(@PathVariable String orgCode){
+        return new ResponseData(EmBusinessError.success,developCooService.getCooRecord(orgCode));
     }
 
 

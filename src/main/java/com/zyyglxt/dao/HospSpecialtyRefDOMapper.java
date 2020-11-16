@@ -25,5 +25,5 @@ public interface HospSpecialtyRefDOMapper {
 
     List<HospSpecialtyRefDO> selectSpecialtyByHospCode(String hospCode);
 
-    int updateBySpecialtyCodeSelective(String specialtyCode);
+    int updateBySpecialtyCodeSelective(HospSpecialtyRefDO hospSpecialtyRefDO);
 }

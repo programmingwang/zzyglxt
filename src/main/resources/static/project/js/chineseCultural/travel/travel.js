@@ -272,6 +272,45 @@
                 myTable.free();
                 myTable = bootstrapTableUtil.myBootStrapTableInit("table", url, param, aCol);
             }
+
+
             bootstrapTableUtil.globalSearch("table",url,aParam, aCol);
+
+
+
+            // function getAllData(){
+            //     var allTableData = $("#table").bootstrapTable("getData");
+            //     console.log(allTableData);
+            //     localStorage.setItem('2',JSON.stringify(allTableData))
+            //     obj2=JSON.parse(localStorage.getItem("2"));
+            //     console.log(obj2);
+            // }
+            // setTimeout(getAllData,10000);
+            // var addstr=document.getElementById("chargePersonSearch").value;
+            // var addstr=document.getElementById("chargePersonSearch").value;
+            // localStorage.setItem('1',addstr);
+            // //[object Object]
+            //
+            // localStorage.setItem('2',JSON.stringify(addstr));
+            //
+            // obj2=JSON.parse(localStorage.getItem("2"));
+            // console.log(obj2);
+            // obj1=localStorage.getItem("1")
+            // console.log(obj1)
+        //     window.onload=function(){
+        //
+        //         var addstr=document.getElementById("chargePersonSearch").value;
+        //         localStorage.setItem('1',addstr);
+        //         //[object Object]
+        //
+        //         localStorage.setItem('2',JSON.stringify(addstr));
+        //
+        //         obj2=JSON.parse(localStorage.getItem("2"));
+        //         console.log(obj2);
+        //         obj1=localStorage.getItem("1")
+        //         console.log(obj1)
+        //
+        // }
         })
 })();
+

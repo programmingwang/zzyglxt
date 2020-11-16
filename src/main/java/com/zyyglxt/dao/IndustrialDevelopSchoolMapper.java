@@ -26,4 +26,6 @@ public interface IndustrialDevelopSchoolMapper {
     int updateByPrimaryKey(IndustrialDevelopSchool record);
 
     List<IndustrialDevelopSchool> selectAll();
+
+    IndustrialDevelopSchool selectByOrgNameAndCode(String orgName, String orgCode);
 }

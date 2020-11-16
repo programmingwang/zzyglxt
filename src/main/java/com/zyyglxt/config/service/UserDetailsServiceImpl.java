@@ -42,11 +42,11 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         if (sysUser == null) {
             throw new RuntimeException("用户不存在");
         }
-
         Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
         if (sysUser != null) {
             RoleDO role = roleService.selectRoleByUserid(sysUser.getItemcode());
             grantedAuthorities.add(new SimpleGrantedAuthority("ROLE_"+role.getRoleName()));
+
             //获取该用户所拥有的权限
             List<ResourcesDO> sysPermissions = resService.SelectPermissionByRoleCode(sysUser);
             // 声明用户授权

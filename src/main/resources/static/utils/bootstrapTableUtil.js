@@ -149,11 +149,11 @@
                         var makeTime=allTableData[i][aCol[4].field];
                         var isTimeSlot=false;
                         makeTime=makeTime.substring(11,19);
-                        console.log(makeTime);
-                        console.log("开始时间："+stratTime);
-                        console.log("结束时间"+endTime);
-                        console.log(makeTime>=stratTime);
-                        console.log(makeTime<=endTime);
+                        // console.log(makeTime);
+                        // console.log("开始时间："+stratTime);
+                        // console.log("结束时间"+endTime);
+                        // console.log(makeTime>=stratTime);
+                        // console.log(makeTime<=endTime);
                         if (textP == null || textP == undefined || textP == '') {
                             textP = "1";
                         }

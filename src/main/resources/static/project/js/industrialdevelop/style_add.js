@@ -1,8 +1,9 @@
+//旅游康养机构录入界面
 (function () {
     require(['jquery','ajaxUtil','stringUtil','uploadImg','wangEditor'],
         function ($,ajaxUtil,stringUtil,uploadImg, wangEditor) {
 
-            var url = "/industrialdevelop/base-style";
+            var url = "/industrialdevelop/tec-ser-org";
 
             var pathUrl = "/industrialdevelop/style";
 
@@ -44,7 +45,7 @@
             editor.config.showLinkImg = false;
             editor.config.uploadImgShowBase64 = true;
             editor.create();
-            editor.txt.html('<p></p>');
+            editor.txt.html('');
 
             $("#div1").on("input propertychange", function() {
                 var textNUm=editor.txt.text();
@@ -94,7 +95,8 @@
 
             $("#submitBtn").unbind('click').on('click',function () {
                 var param = generateParam();
-                param.status = "——";
+                param.status = "提交";
+                param.type = "tour"
                 ajaxUtil.myAjax(null,url,param,function (data) {
                     if(ajaxUtil.success(data)){
                         orange.redirect(pathUrl)

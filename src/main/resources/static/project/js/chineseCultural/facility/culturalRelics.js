@@ -99,9 +99,9 @@
                                 "chineseCulturalStatus": ""
                             };
                             if(sessionStorage.getItem("rolename") == "文化宣传处长" || sessionStorage.getItem("rolename") == "政务资源处长"){
-                                submitStatus.chineseCulturalStatus = webStatus[3].text;
+                                submitStatus.chineseCulturalStatus = webStatus[3].id;
                             }else{
-                                submitStatus.chineseCulturalStatus = webStatus[4].text;
+                                submitStatus.chineseCulturalStatus = webStatus[4].id;
                             }
                             ajaxUtil.myAjax(null,"/cul/fac/culRel/cgCulRelSta/"+row.itemid+"/"+row.itemcode,submitStatus,function (data) {
                                 if(ajaxUtil.success(data)){
@@ -130,7 +130,7 @@
                         modalConfirmFun:function () {
                             var isSuccess = false;
                             var submitStatus = {
-                                "chineseCulturalStatus": webStatus[6].text
+                                "chineseCulturalStatus": webStatus[6].id
                             };
                             ajaxUtil.myAjax(null,"/cul/fac/culRel/cgCulRelSta/"+row.itemid+"/"+row.itemcode,submitStatus,function (data) {
                                 if(ajaxUtil.success(data)){
@@ -165,7 +165,7 @@
                     $("#chineseCulturalContent").val(row.chineseCulturalContent);
                     $("#creater").val(row.creater);
                     $("#itemCreateAt").val(row.itemcreateat);
-                    $("#chineseCulturalStatus").val(row.chineseCulturalStatus);
+                    $("#chineseCulturalStatus").val(webStatus[row.chineseCulturalStatus].text);
                     $("#culturalImg").attr("src",row.filePath)
                     $('#culturalImgSpan').html("图片");
                     $('#culturalNameSpan').html("文化古迹名称");
@@ -212,7 +212,7 @@
                         modalConfirmFun:function () {
                             var isSuccess = false;
                             var submitStatus = {
-                                "chineseCulturalStatus": webStatus[0].text
+                                "chineseCulturalStatus": webStatus[0].id
                             };
                             ajaxUtil.myAjax(null,"/cul/fac/culRel/cgCulRelSta/"+row.itemid+"/"+row.itemcode,submitStatus,function (data) {
                                 if(ajaxUtil.success(data)){

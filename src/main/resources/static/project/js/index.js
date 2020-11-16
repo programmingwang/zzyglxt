@@ -217,14 +217,14 @@
                     id: "13-5",
                     level: "2",
                     pid: "13"
-                },
+                },/*
                 {
                     menu_name: "＞高等院校",
                     menu_url: "/industrialdevelop/school",
                     id: "13-6",
                     level: "2",
                     pid: "13"
-                },
+                },*/
                 {
                     menu_name: "＞基地风采",
                     menu_url: "/industrialdevelop/style",
@@ -257,6 +257,16 @@
                     menu_name: "＞种植园管理",
                     menu_url: "/industrialdevelop/plantation",
                     id: "13-10",
+                    level: "2",
+                    pid: "13"
+                },
+                /*
+                技术服务机构后台管理------13
+                */
+                {
+                    menu_name: "＞服务项目",
+                    menu_url: "/serviceItems/tecserviceorg",
+                    id: "13-11",
                     level: "2",
                     pid: "13"
                 },
@@ -352,16 +362,6 @@
                     level: "2",
                     pid: "15"
                 },
-                /*
-                技术服务机构后台管理------14
-                */
-                {
-                    menu_name: "服务项目",
-                    menu_url: "/serviceItems/tecserviceorg",
-                    id: "16",
-                    level: "1",
-                    pid: ""
-                },
                 {
                     menu_name: "＞科研成果",
                     menu_url: "/industrialdevelop/achievement",
@@ -369,7 +369,6 @@
                     level: "1",
                     pid: ""
                 },
-
             ];
 
 

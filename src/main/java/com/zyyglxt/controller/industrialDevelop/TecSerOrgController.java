@@ -1,4 +1,4 @@
-package com.zyyglxt.controller.industrialDevelop;
+package com.zyyglxt.controller.IndustrialDevelop;
 
 import com.zyyglxt.dataobject.IndustrialDevelopTecSerOrg;
 import com.zyyglxt.error.EmBusinessError;

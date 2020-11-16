@@ -97,9 +97,9 @@
                             "dataStatus": ""
                         };
                         if(sessionStorage.getItem("rolename") == "文化宣传处长" || sessionStorage.getItem("rolename") == "政务资源处长"){
-                            submitStatus.dataStatus = webStatus[3].text;
+                            submitStatus.dataStatus = webStatus[3].id;
                         }else{
-                            submitStatus.dataStatus = webStatus[4].text;
+                            submitStatus.dataStatus = webStatus[4].id;
                         }
                         ajaxUtil.myAjax(null,"/datado/newsInf/changeNewsStatus/"+row.itemid+"/"+row.itemcode,submitStatus,function (data) {
                             if(ajaxUtil.success(data)){
@@ -127,7 +127,7 @@
                     modalConfirmFun:function () {
                         var isSuccess = false;
                         var submitStatus = {
-                            "dataStatus": webStatus[6].text
+                            "dataStatus": webStatus[6].id
                         };
                         ajaxUtil.myAjax(null,"/datado/newsInf/changeNewsStatus/"+row.itemid+"/"+row.itemcode,submitStatus,function (data) {
                             if(ajaxUtil.success(data)){
@@ -161,7 +161,7 @@
                 $("#dataContent").val(row.dataContent);
                 $("#creater").val(row.creater);
                 $("#itemCreateAt").val(row.itemcreateat);
-                $("#dataStatus").val(row.dataStatus);
+                $("#dataStatus").val(webStatus[row.dataStatus].text);
                 $("#dataFileType").val(row.dataFileType);
                 $("#imgDiv").attr("style","display:none");
                 $("#author").attr("style","display:none");
@@ -184,7 +184,7 @@
                             "dataStatus": ""
                         };
                         if(row.dataFileType=="转载性新闻" || row.dataFileType=="转载性公告"){
-                            submitStatus.dataStatus = "已提交等待综合处处长审核";
+                            submitStatus.dataStatus = webStatus[7].id;
                         }else{
                             submitStatus = {
                                 "dataStatus": selectUtil.getStatus(sessionStorage.getItem("rolename"),webStatus)
@@ -218,7 +218,7 @@
                     modalConfirmFun:function () {
                         var isSuccess = false;
                         var submitStatus = {
-                            "dataStatus": webStatus[0].text
+                            "dataStatus": webStatus[0].id
                         };
                         ajaxUtil.myAjax(null,"/datado/newsInf/changeNewsStatus/"+row.itemid+"/"+row.itemcode,submitStatus,function (data) {
                             if(ajaxUtil.success(data)){

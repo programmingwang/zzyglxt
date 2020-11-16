@@ -103,9 +103,9 @@
                                 "chineseCulturalStatus": ""
                             };
                             if(sessionStorage.getItem("rolename") == "文化宣传处长" || sessionStorage.getItem("rolename") == "政务资源处长"){
-                                submitStatus.chineseCulturalStatus = webStatus[3].text;
+                                submitStatus.chineseCulturalStatus = webStatus[3].id;
                             }else{
-                                submitStatus.chineseCulturalStatus = webStatus[4].text;
+                                submitStatus.chineseCulturalStatus = webStatus[4].id;
                             }
                             ajaxUtil.myAjax(null,"/cul/trav/trav/cgTravSta/"+row.itemid+"/"+row.itemcode,submitStatus,function (data) {
                                 if(ajaxUtil.success(data)){
@@ -134,7 +134,7 @@
                         modalConfirmFun:function () {
                             var isSuccess = false;
                             var submitStatus = {
-                                "chineseCulturalStatus": webStatus[6].text
+                                "chineseCulturalStatus": webStatus[6].id
                             };
                             ajaxUtil.myAjax(null,"/cul/trav/trav/cgTravSta/"+row.itemid+"/"+row.itemcode,submitStatus,function (data) {
                                 if(ajaxUtil.success(data)){
@@ -216,7 +216,7 @@
                         modalConfirmFun:function () {
                             var isSuccess = false;
                             var submitStatus = {
-                                "chineseCulturalStatus": webStatus[0].text
+                                "chineseCulturalStatus": webStatus[0].id
                             };
                             ajaxUtil.myAjax(null,"/cul/trav/trav/cgTravSta/"+row.itemid+"/"+row.itemcode,submitStatus,function (data) {
                                 if(ajaxUtil.success(data)){

@@ -6,7 +6,7 @@
             var url = "/industrialdevelop/base-style";
 
             var pathUrl = "/industrialdevelop/style";
-            var addUrl = pathUrl+"_add";
+            var addUrl = pathUrl+"_add_baseElegant";
             var aParam = {
 
             };

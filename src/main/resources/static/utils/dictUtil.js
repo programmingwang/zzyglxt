@@ -32,6 +32,33 @@
             return dictList[code];
         }
 
+        function getCode(code, name) {
+            if (dictList[code]== null){
+                getDictByCode(code);
+            }
+            let list = dictList[code];
+            for (const t of list){
+                if (name == t.text){
+                    return t.id
+                }
+            }
+            return null;
+        }
+
+        function getName(code, id) {
+            if (dictList[code] == null)
+            {
+                getDictByCode(code);
+            }
+            let list = dictList[code]
+            for (const t of list){
+                if (id == t.id){
+                    return t.text
+                }
+            }
+            return null
+        }
+
 
         var DICT_LIST = {
             //展示状态
@@ -57,7 +84,9 @@
             //政策法规的文件类型
             "dataFileType": "dataFileType",
             //药材状态
-            "medStatus": "medStatus"
+            "medStatus": "medStatus",
+            //机构类型
+            "orgType": "orgType"
         }
 
         var dictList = {
@@ -69,6 +98,8 @@
             getImportanceType:getImportanceType,
             getDictByCode:getDictByCode,
             DICT_LIST:DICT_LIST,
+            getCode: getCode,
+            getName: getName
 
         }
     })

@@ -23,6 +23,11 @@ public class ChiMedController {
     @Resource
     IndustrialDevelopChiMedService chiMedService;
 
+    @GetMapping(value = "chi-med/{type}")
+    public ResponseData getChiMed(@PathVariable String type){
+        return new ResponseData(EmBusinessError.success,chiMedService.selectAll(type));
+    }
+
     @ResponseBody
     @PostMapping(value = "/chi-med")
     @LogAnnotation(appCode ="",logTitle ="添加产业发展-中药材加工企业、中药材销售企业、中药材制药企业信息记录",logLevel ="3",creater ="",updater = "")

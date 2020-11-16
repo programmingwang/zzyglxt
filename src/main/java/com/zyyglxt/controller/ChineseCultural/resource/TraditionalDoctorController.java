@@ -1,5 +1,6 @@
 package com.zyyglxt.controller.ChineseCultural.resource;
 
+import com.zyyglxt.annotation.LogAnnotation;
 import com.zyyglxt.dataobject.CulturalResourcesDO;
 import com.zyyglxt.dataobject.CulturalResourcesDOKey;
 import com.zyyglxt.dto.CulturalResourcesDto;
@@ -37,8 +38,9 @@ public class TraditionalDoctorController {
     //获取所有的历代名家
     @RequestMapping(value = "/getAll" , method = RequestMethod.GET)
     @ResponseBody
-    public ResponseData getAllTraditionalDoctor(){
-        List<CulturalResourcesDO> traditionalDoctorList = iTraditionalDoctorService.getTraditionalDoctorList();
+    @LogAnnotation(logTitle = "查询所有历代名家", logLevel = "1")
+    public ResponseData getAllTraditionalDoctor(@RequestParam(value = "chineseCulturalStatus")List chineseCulturalStatus){
+        List<CulturalResourcesDO> traditionalDoctorList = iTraditionalDoctorService.getTraditionalDoctorList(chineseCulturalStatus);
         List<CulturalResourcesDto> chineseCulturalDtoList = new ArrayList<>();
         for (CulturalResourcesDO culturalResourcesDO : traditionalDoctorList) {
             chineseCulturalDtoList.add(
@@ -49,17 +51,11 @@ public class TraditionalDoctorController {
         return new ResponseData(EmBusinessError.success,chineseCulturalDtoList);
     }
 
-    //查询一个历代名家
-
-//    //去增加页面,这个是为了跳转到增加的页面
-//    @RequestMapping(value = "/toAddPage" , method = RequestMethod.GET)
-//    public String toAddPage(){
-//        return "to add page";
-//    }
 
     //增加一个中医医史
     @RequestMapping(value = "/addTraDoc" , method = RequestMethod.POST)
     @ResponseBody
+    @LogAnnotation(logTitle = "新增一个历代名家", logLevel = "3")
     public ResponseData addTraditionalDoctor(@RequestBody CulturalResourcesDO culturalResourcesDO){
         iTraditionalDoctorService.addTraditionalDoctor(culturalResourcesDO);
         return new ResponseData(EmBusinessError.success);
@@ -68,6 +64,7 @@ public class TraditionalDoctorController {
     //删除一个历代名家（真正的数据库中删除）
     @RequestMapping(value = "/delTraDoc/{itemID}/{itemCode}" , method = RequestMethod.DELETE)
     @ResponseBody
+    @LogAnnotation(logTitle = "删除一个历代名家", logLevel = "4")
     public ResponseData deleteTraditionalDoctor(@PathVariable("itemID") Integer itemID, @PathVariable("itemCode")String itemCode){
         CulturalResourcesDOKey culturalResourcesDOKey = new CulturalResourcesDOKey();
         culturalResourcesDOKey.setItemid(itemID);
@@ -76,20 +73,12 @@ public class TraditionalDoctorController {
         return new ResponseData(EmBusinessError.success);
     }
 
-    //去修改的页面
-    @RequestMapping(value = "/toUpdTraDoc/{itemID}/{itemCode}" , method = RequestMethod.GET)
-    @ResponseBody
-    public ResponseData toUpdatePage(@PathVariable("itemID") Integer itemID, @PathVariable("itemCode")String itemCode){
-        CulturalResourcesDOKey culturalResourcesDOKey = new CulturalResourcesDOKey();
-        culturalResourcesDOKey.setItemid(itemID);
-        culturalResourcesDOKey.setItemcode(itemCode);
-        CulturalResourcesDO culturalResources = iTraditionalDoctorService.getTraditionalDoctor(culturalResourcesDOKey);
-        return new ResponseData(EmBusinessError.success,culturalResources);
-    }
+
 
     //修改一个历代名家
     @RequestMapping(value = "/updTraDoc" , method = RequestMethod.POST)
     @ResponseBody
+    @LogAnnotation(logTitle = "修改一个历代名家", logLevel = "2")
     public ResponseData updateTraditionalDoctor(@RequestBody CulturalResourcesDO culturalResourcesDO) {
         iTraditionalDoctorService.updateTraditionalDoctor(culturalResourcesDO);
         return new ResponseData(EmBusinessError.success);
@@ -98,6 +87,7 @@ public class TraditionalDoctorController {
     //修改一个历代名家状态 （逻辑删除，但是是将状态改成下架状态,也可以是处长页面 通过->上架， 未通过->下架）
     @RequestMapping(value = "/cgTraDocSta/{itemID}/{itemCode}" , method = RequestMethod.POST)
     @ResponseBody
+    @LogAnnotation(logTitle = "修改一个历代名家状态", logLevel = "2")
     public ResponseData changeStatus(@RequestParam("chineseCulturalStatus") String chineseCulturalStatus , @PathVariable("itemID") Integer itemID , @PathVariable("itemCode")String itemCode){
         CulturalResourcesDOKey culturalResourcesDOKey = new CulturalResourcesDOKey();
         culturalResourcesDOKey.setItemid(itemID);

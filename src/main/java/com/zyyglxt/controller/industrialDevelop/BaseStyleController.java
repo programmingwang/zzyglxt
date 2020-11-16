@@ -46,4 +46,9 @@ public class BaseStyleController {
         basestyleService.updateByPrimaryKeySelective(record);
         return new ResponseData(EmBusinessError.success);
     }
+
+    @GetMapping(value = "/base-style")
+    public ResponseData getBaseStyle(){
+        return new ResponseData(EmBusinessError.success,basestyleService.selectAll());
+    }
 }

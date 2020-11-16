@@ -209,9 +209,20 @@
   <select id="selectAllHealthSciKnow" resultMap="BaseResultMap">
         SELECT *
         FROM tb_health_care_sci_know
-        ORDER BY itemCreateAt
+        WHERE SCIENCE_KNOWLEDGE_STATUS = #{scienceKnowledgeStatus,jdbcType=VARCHAR}
     </select>
     <update id="updateVisitNumHealthSciKnow" parameterType="com.zyyglxt.dataobject.HealthSciKnowDOKey">
       update tb_health_care_sci_know set VISIT_NUM = VISIT_NUM + 1 where itemID = #{itemid,jdbcType=INTEGER} and itemCode = #{itemcode,jdbcType=CHAR}
+    </update>
+
+    <update id="changeStatusToSciKnow">
+      update tb_health_care_sci_know
+      <set>
+        <if test="scienceKnowledgeStatus != null">
+          SCIENCE_KNOWLEDGE_STATUS = #{scienceKnowledgeStatus,jdbcType=VARCHAR}
+        </if>
+      </set>
+      where itemID = #{key.itemid,jdbcType=INTEGER}
+      and itemCode = #{key.itemcode,jdbcType=CHAR}
     </update>
 </mapper>

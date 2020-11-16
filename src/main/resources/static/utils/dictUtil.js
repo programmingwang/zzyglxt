@@ -23,7 +23,7 @@
                     if(ajaxUtil.success(data)){
                         var al = new Array();
                         $.each(data.data,function (k,v) {
-                            al.push({id:v.code,text:v.value});
+                            al.push({id:v.value,text:v.value});
                         });
                         dictList[code] = al;
                     }
@@ -51,7 +51,11 @@
             //科研项目数据状态
             "projectStatus": "projectStatus",
             //专家评审状态
-            "exmaineStatus": "exmaineStatus"
+            "exmaineStatus": "exmaineStatus",
+            //轮播图位置
+            "dataLocation": "dataLocation",
+            //政策法规的文件类型
+            "dataFileType": "dataFileType"
         }
 
         var dictList = {

@@ -4,6 +4,8 @@ import com.zyyglxt.dataobject.IndustrialDevelopBasestyle;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
+
 /**
    *@Author lrt
    *@Date 2020/11/6 20:00
@@ -22,4 +24,6 @@ public interface IndustrialDevelopBasestyleMapper {
     int updateByPrimaryKeySelective(IndustrialDevelopBasestyle record);
 
     int updateByPrimaryKey(IndustrialDevelopBasestyle record);
+
+    List<IndustrialDevelopBasestyle> selectAll();
 }

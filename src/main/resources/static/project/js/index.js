@@ -91,25 +91,18 @@
                 },
                 {
                     menu_name: "健康旅游",
-                    menu_url: "",
+                    menu_url: "/chineseCultural/travel/travel",
                     id: "4",
                     level: "1",
                     pid: ""
                 },
-                {
-                    menu_name: "健康旅游",
-                    menu_url: "/chineseCultural/travel/travel",
-                    id: "4-1",
-                    level: "2",
-                    pid: "4"
-                },
-                {
+                /*{
                     menu_name: "中药常识",
                     menu_url: "",
                     id: "5",
                     level: "1",
                     pid: ""
-                }, {
+                }, */{
                     menu_name: "治未病理念",
                     menu_url: "",
                     id: "6",
@@ -119,73 +112,62 @@
 
                 {
                     menu_name: "＞科普知识",
-                    menu_url: "/knowledgeDb/problemSolution",
+                    menu_url: "/healthCare/healthsciKnow",
                     id: "6-1",
                     level: "2",
                     pid: "6"
                 },
                 {
                     menu_name: "＞节气养生",
-                    menu_url: "/knowledgeDb/problemAnswerPlan",
+                    menu_url: "/healthCare/healthsciKnow",
                     id: "6-2",
                     level: "2",
                     pid: "6"
                 },
                 {
                     menu_name: "＞国医话健康",
-                    menu_url: "/knowledgeDb/dataSelect",
+                    menu_url: "/healthCare/healthcarefamPre",
                     id: "6-3",
                     level: "2",
                     pid: "6"
                 },
                 {
+
+                    menu_name: "＞中药常识",
+                    menu_url: "/healthCare/healthcarechineseMedicine",
+                    id: "6-4",
+                    level: "2",
+                    pid: "6"
+                },
+                {
                     menu_name : "名老中医",
-                    menu_url: "",
+                    menu_url: "/medicalService/chineseMedicine",
                     id:"7",
                     level:"1",
                     pid:""
                 },
                 {
-                    menu_name : "名老中医",
-                    menu_url: "/medicalService/chineseMedicine",
-                    id:"7-1",
-                    level:"2",
-                    pid:"7"
+                    menu_name: "＞历史名方",
+                    menu_url: "/healthCare/famPre",
+                    id: "6-5",
+                    level: "2",
+                    pid: "6"
                 },
                 {
-                    menu_name: "历史名方",
-                    menu_url: "/knowledgeDb/dataBack",
-                    id: "8",
-                    level: "1",
-                    pid: ""
-                },
-                {
+
                     menu_name : "中医药名院",
-                    menu_url: "",
+                    menu_url: "/medicalService/hosp",
                     id:"9",
                     level:"1",
                     pid:""
                 },
                 {
-                    menu_name : "＞中医药名院",
-                    menu_url: "/medicalService/hosp",
-                    id:"9-1",
-                    level:"2",
-                    pid:"9"
-                },
-                {
+
                     menu_name : "中医药名科",
-                    menu_url: "",
+                    menu_url: "/medicalService/specialty",
                     id:"10",
                     level:"1",
                     pid:""
-                },
-                {
-                    menu_name : "＞中医药名科",
-                    menu_url: "/medicalService/specialty",
-                    id:"10-1",
-                    level:"2",
-                    pid:"10"
                 },
                 {
                     menu_name: "中医药名校",
@@ -270,23 +252,79 @@
                     id: "99-3",
                     level: "2",
                     pid: "99"
+                },
+                {
+                    menu_name: "＞技术服务机构",
+                    menu_url: "/industrialdevelop/tecservice",
+                    id: "99-4",
+                    level: "2",
+                    pid: "99"
+                },
+                {
+                    menu_name: "＞科研院所",
+                    menu_url: "/industrialdevelop/tecserviceorg",
+                    id: "99-5",
+                    level: "2",
+                    pid: "99"
+                },
+                {
+                    menu_name: "＞高等院校",
+                    menu_url: "/industrialdevelop/school",
+                    id: "99-6",
+                    level: "2",
+                    pid: "99"
+                },
+                {
+                    menu_name: "＞基地风采",
+                    menu_url: "/industrialdevelop/style",
+                    id: "99-6",
+                    level: "2",
+                    pid: "99"
+                },
+                {
+                    menu_name: "＞中药材加工企业",
+                    menu_url: "/industrialdevelop/chinesemed",
+                    id: "99-7",
+                    level: "2",
+                    pid: "99"
+                },
+                {
+                    menu_name: "＞中药材销售企业",
+                    menu_url: "/industrialdevelop/chinesemed-sale",
+                    id: "99-8",
+                    level: "2",
+                    pid: "99"
+                },
+                {
+                    menu_name: "＞中药材制造企业",
+                    menu_url: "/industrialdevelop/chinesemed-produce",
+                    id: "99-9",
+                    level: "2",
+                    pid: "99"
+                },
+                {
+                    menu_name: "＞种植园管理",
+                    menu_url: "/industrialdevelop/plantation",
+                    id: "99-10",
+                    level: "2",
+                    pid: "99"
                 }
             ];
 
 
             function getHTML_dropdown_menu_item(astr,aurl,show_active) {
                 var str = "<a class=\"dropdown-item  "+  (show_active ? "active" : "")  +" \" url=\"" + aurl +"\">" + astr + "</a>\n" +
-                    "<hr size=\"1\" style=\"color: #E8E8E8;border-style:dashed;width:100%\">" ;
+                    "<hr size=\"1\" style=\"color: #E8E8E8;border-style:dashed;width:90%\">" ;
                 return str;
             }
 
 
-        function getHTML_dropdown_menu(itemStr) {
-            var str = "<div class=\"dropdown-menu left-menu-dropdown-menu\">\n" +
-                itemStr +
-                "</div>";
-            return str;
-        }
+            function getHTML_dropdown_menu(itemStr) {
+                var str = "<div class=\"dropdown-menu left-menu-dropdown-menu\">\n" +
+                    itemStr +
+                    "</div>";
+                return str;
+            }
 
 
             function getHTML(item,dropdownStr,show_active) {
@@ -355,11 +393,11 @@
                     htmlStr = htmlStr + getHTML(tm_item,dropdowStr,show);
                 });
 
-            return htmlStr;
-        }
+                return htmlStr;
+            }
 
 
-        $("#left_menu").html(getMenuStr(menu_list));
+            $("#left_menu").html(getMenuStr(menu_list));
 
 
             $(".collapse-btn").unbind().on("click",function () {
@@ -388,31 +426,33 @@
             });
 
 
-        function loadPage(url){
-            orange.loadPage({url: url, target: 'main_body', selector: '#fir_body', success: function(data){
-                    if(typeof data == "string"){
-                        console.log(url + "加载")
-                    } else {
-                        alertUtil.error( url+'加载失败');
+            function loadPage(url){
+                orange.loadPage({url: url, target: 'main_body', selector: '#fir_body', success: function(data){
+                        if(typeof data == "string"){
+                            console.log(url + "加载")
+                        } else {
+                            alertUtil.error( url+'加载失败');
+                        }
+                    }})
+            }
+
+
+            $("#logout").on("click",function () {
+                ajaxUtil.myAjax(null,"/logout",null,function (data) {
+                    if(data && data.code === 88888){
+                        sessionStorage.removeItem('username');
+                        sessionStorage.removeItem('rolename');
+                        window.location.href = "/userLogin";
+                    }else{
+                        alertUtil.alert(data.msg);
                     }
-            }})
-        }
+                },false)
+            });
 
+            if(!stringUtil.isBlank(currentUrlHash)){
+                loadPage(currentUrlHash);
+            }
 
-        $("#logout").on("click",function () {
-            ajaxUtil.myAjax(null,"/api/user/userLogout",null,function (data) {
-                if(ajaxUtil.success(data)){
-                    orange.stop();
-                    window.location.href = "/userLogin";
-                }else{
-                    alertUtil.alert(data.msg);
-                }
-            },false)
-        });
-
-        if(!stringUtil.isBlank(currentUrlHash)){
-            loadPage(currentUrlHash);
-        }
-
-    })
+            $("#userName").text(sessionStorage.getItem('username'))
+        })
 })();

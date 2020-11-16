@@ -14,6 +14,7 @@ import com.zyyglxt.util.UUIDUtils;
 
 import com.zyyglxt.service.RoleService;
 import com.zyyglxt.util.UUIDUtils;
+import com.zyyglxt.util.UsernameUtil;
 import com.zyyglxt.validator.ValidatorImpl;
 import com.zyyglxt.validator.ValidatorResult;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +35,8 @@ public class RoleServiceImpl implements RoleService {
     ResourcesRoleRefDOMapper resRoleRefDOMapper;
     @Autowired
     private ValidatorImpl validator;
+    @Autowired
+    UsernameUtil usernameUtil;
 
     @Override
     public int deleteByPrimaryKey(RoleDOKey key) {
@@ -52,6 +55,8 @@ public class RoleServiceImpl implements RoleService {
             throw new BusinessException(result.getErrMsg(), EmBusinessError.PARAMETER_VALIDATION_ERROR);
         }
         String uuid = UUIDUtils.getUUID();
+        roleDO.setCreater(usernameUtil.getOperateUser());
+        roleDO.setUpdater(usernameUtil.getOperateUser());
         roleDO.setItemcode(uuid);
         roleDOMapper.insertSelective(roleDO);
         //分配resources
@@ -92,5 +97,10 @@ public class RoleServiceImpl implements RoleService {
     @Override
     public RoleDO selectByRoleType(Integer type) {
         return roleDOMapper.selectByRoleType(type);
+    }
+
+    @Override
+    public RoleDO selectRoleByUserid(String itemcode) {
+        return roleDOMapper.selectByUserid(itemcode);
     }
 }

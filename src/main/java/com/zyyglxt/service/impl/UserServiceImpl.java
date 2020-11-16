@@ -11,6 +11,7 @@ import com.zyyglxt.util.UUIDUtils;
 
 import com.zyyglxt.service.UserService;
 import com.zyyglxt.util.UUIDUtils;
+import com.zyyglxt.util.UsernameUtil;
 import com.zyyglxt.validator.ValidatorImpl;
 import com.zyyglxt.validator.ValidatorResult;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +36,8 @@ public class UserServiceImpl implements UserService {
     RoleDOMapper roleDOMapper;
     @Autowired
     private ValidatorImpl validator;
+    @Autowired
+    UsernameUtil usernameUtil;
 
     @Override
     public void deleteUserByUsername(UserDO userDO) {
@@ -63,6 +66,8 @@ public class UserServiceImpl implements UserService {
             throw new BusinessException(result.getErrMsg(), EmBusinessError.PARAMETER_VALIDATION_ERROR);
         }
         //添加用户
+        record.setUpdater(usernameUtil.getOperateUser());
+        record.setCreater(usernameUtil.getOperateUser());
         record.setPassword(new BCryptPasswordEncoder().encode(record.getPassword()));
         record.setItemcode(UUIDUtils.getUUID());
         userDOMapper.insertSelective(record);
@@ -70,6 +75,9 @@ public class UserServiceImpl implements UserService {
         //查询角色role_code
         RoleDO roleDO = roleDOMapper.selectByRoleType(record.getType());
         UserRoleRefDO userRoleRefDO = new UserRoleRefDO();
+        userRoleRefDO.setUpdater(usernameUtil.getOperateUser());
+        userRoleRefDO.setCreater(usernameUtil.getOperateUser());
+        userRoleRefDO.setItemcode(UUIDUtils.getUUID());
         userRoleRefDO.setRoleCode(roleDO.getItemcode());
         userRoleRefDO.setUserCode(record.getItemcode());
         userRoleRefDOMapper.insertSelective(userRoleRefDO);
@@ -88,6 +96,7 @@ public class UserServiceImpl implements UserService {
         userDOKey.setItemcode(userDO.getItemcode());
         UserDO userDO1 = userDOMapper.selectByPrimaryKey(userDOKey);
         //更新用户信息
+        userDO.setUpdater(usernameUtil.getOperateUser());
         userDOMapper.updateByPrimaryKeySelective(userDO);
         //更新角色
         if (!userDO1.getType().equals(userDO.getType())&& userDO.getType()!=null ){
@@ -95,6 +104,7 @@ public class UserServiceImpl implements UserService {
             UserRoleRefDO userRoleRefDO = new UserRoleRefDO();
             //获取需要更新的userRoleRefDO
             UserRoleRefDO userRoleRefDO1 = userRoleRefDOMapper.selectByUserCode(userDO.getItemcode());
+            userRoleRefDO.setUpdater(usernameUtil.getOperateUser());
             userRoleRefDO.setItemid(userRoleRefDO1.getItemid());
             userRoleRefDO.setItemcode(userRoleRefDO1.getItemcode());
             userRoleRefDO.setRoleCode(roleDO.getItemcode());

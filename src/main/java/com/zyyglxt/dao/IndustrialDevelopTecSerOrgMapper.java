@@ -4,6 +4,8 @@ import com.zyyglxt.dataobject.IndustrialDevelopTecSerOrg;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
+
 /**
    *@Author lrt
    *@Date 2020/11/6 20:00
@@ -22,4 +24,7 @@ public interface IndustrialDevelopTecSerOrgMapper {
     int updateByPrimaryKeySelective(IndustrialDevelopTecSerOrg record);
 
     int updateByPrimaryKey(IndustrialDevelopTecSerOrg record);
+
+    List<IndustrialDevelopTecSerOrg> selectAll(@Param("type") String type);
+
 }

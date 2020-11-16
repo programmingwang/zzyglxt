@@ -1,7 +1,10 @@
 package com.zyyglxt.service;
 
 import com.zyyglxt.dataobject.IndustrialDevelopSerPro;
-    /**
+
+import java.util.List;
+
+/**
    *@Author lrt
    *@Date 2020/11/6 20:00
    *@Version 1.0
@@ -20,5 +23,7 @@ public interface IndustrialDevelopSerProService{
     int updateByPrimaryKeySelective(IndustrialDevelopSerPro record);
 
     int updateByPrimaryKey(IndustrialDevelopSerPro record);
+
+    List<IndustrialDevelopSerPro> selectAll();
 
 }

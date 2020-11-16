@@ -1,5 +1,6 @@
 package com.zyyglxt.controller.ChineseCultural.facility;
 
+import com.zyyglxt.annotation.LogAnnotation;
 import com.zyyglxt.dataobject.ChineseCulturalDO;
 import com.zyyglxt.dataobject.ChineseCulturalDOKey;
 import com.zyyglxt.dto.ChineseCulturalDto;
@@ -23,6 +24,7 @@ import java.util.List;
 //@Controller
 @RestController
 @RequestMapping("/cul/fac/culVen")
+@SuppressWarnings("unchecked")
 public class   CulturalVenuesController {
 
     @Resource
@@ -35,8 +37,9 @@ public class   CulturalVenuesController {
     //获取所有的文化场馆
     @RequestMapping(value = "/getAll" , method = RequestMethod.GET)
     @ResponseBody
-    public ResponseData getAllCulturalVenues(){
-        List<ChineseCulturalDO> culturalVenuesList = iCulturalVenuesService.getCulturalVenuesList();
+    @LogAnnotation(logTitle = "查询所有的文化场馆", logLevel = "1")
+    public ResponseData getAllCulturalVenues(@RequestParam(value = "chineseCulturalStatus")List chineseCulturalStatus){
+        List<ChineseCulturalDO> culturalVenuesList = iCulturalVenuesService.getCulturalVenuesList(chineseCulturalStatus);
         List<ChineseCulturalDto> chineseCulturalDtoList = new ArrayList<>();
         for (ChineseCulturalDO chineseCulturalDO : culturalVenuesList) {
             chineseCulturalDtoList.add(
@@ -47,17 +50,12 @@ public class   CulturalVenuesController {
         return new ResponseData(EmBusinessError.success,chineseCulturalDtoList);
     }
 
-//    //查询一个文化场馆
-//
-//    //去增加页面,这个是为了跳转到增加的页面
-//    @RequestMapping(value = "/toAddPage" , method = RequestMethod.GET)
-//    public String toAddPage(){
-//        return "to add page";
-//    }
 
-    //增加一个文化古迹
+
+    //增加一个文化场馆
     @RequestMapping(value = "/addCulVen" , method = RequestMethod.POST)
     @ResponseBody
+    @LogAnnotation(logTitle = "增加一个文化场馆", logLevel = "3")
     public ResponseData addCulturalVenues(@RequestBody ChineseCulturalDO chineseCulturalDO) {
         iCulturalVenuesService.addCulturalVenues(chineseCulturalDO);
         return new ResponseData(EmBusinessError.success);
@@ -66,6 +64,7 @@ public class   CulturalVenuesController {
     //删除一个文化场馆（真正的数据库中删除）
     @RequestMapping(value = "/delCulVen/{itemID}/{itemCode}" , method = RequestMethod.DELETE)
     @ResponseBody
+    @LogAnnotation(logTitle = "删除一个文化场馆", logLevel = "4")
     public ResponseData deleteCulturalVenues(@PathVariable("itemID") Integer itemID, @PathVariable("itemCode")String itemCode){
         ChineseCulturalDOKey chineseCulturalDOKey = new ChineseCulturalDOKey();
         chineseCulturalDOKey.setItemid(itemID);
@@ -74,20 +73,12 @@ public class   CulturalVenuesController {
         return new ResponseData(EmBusinessError.success);
     }
 
-    //去修改的页面
-    @RequestMapping(value = "/toUpdCulVen/{itemID}/{itemCode}" , method = RequestMethod.GET)
-    @ResponseBody
-    public ResponseData toUpdatePage(@PathVariable("itemID") Integer itemID, @PathVariable("itemCode")String itemCode){
-        ChineseCulturalDOKey chineseCulturalDOKey = new ChineseCulturalDOKey();
-        chineseCulturalDOKey.setItemid(itemID);
-        chineseCulturalDOKey.setItemcode(itemCode);
-        ChineseCulturalDO chineseCultural = iCulturalVenuesService.getCulturalVenues(chineseCulturalDOKey);
-        return new ResponseData(EmBusinessError.success,chineseCultural);
-    }
+
 
     //修改一个文化场馆
     @RequestMapping(value = "/updCulVen" , method = RequestMethod.POST)
     @ResponseBody
+    @LogAnnotation(logTitle = "修改一个文化场馆", logLevel = "2")
     public ResponseData updateCulturalVenues(@RequestBody ChineseCulturalDO chineseCulturalDO){
         iCulturalVenuesService.updateCulturalVenues(chineseCulturalDO);
         return new ResponseData(EmBusinessError.success);
@@ -96,6 +87,7 @@ public class   CulturalVenuesController {
     //修改一个文化场馆状态 （逻辑删除，但是是将状态改成下架状态,也可以是处长页面 通过->上架， 未通过->下架）
     @RequestMapping(value = "/cgCulVenSta/{itemID}/{itemCode}" , method = RequestMethod.POST)
     @ResponseBody
+    @LogAnnotation(logTitle = "修改一个文化场馆状态", logLevel = "2")
     public ResponseData changeStatus(@RequestParam("chineseCulturalStatus") String chineseCulturalStatus , @PathVariable("itemID") Integer itemID, @PathVariable("itemCode")String itemCode){
         ChineseCulturalDOKey chineseCulturalDOKey = new ChineseCulturalDOKey();
         chineseCulturalDOKey.setItemid(itemID);

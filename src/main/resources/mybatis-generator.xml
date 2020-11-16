@@ -121,9 +121,9 @@
                <!--enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"-->
                <!--selectByExampleQueryId="false"></table>-->
 
-        <table tableName="tb_culpro_cultural_resources" domainObjectName="CulturalResourcesDO" enableCountByExample="false"
-               enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
-               selectByExampleQueryId="false"></table>
+        <!--<table tableName="tb_culpro_cultural_resources" domainObjectName="CulturalResourcesDO" enableCountByExample="false"-->
+               <!--enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"-->
+               <!--selectByExampleQueryId="false"></table>-->
 
         <!--<table tableName="tb_culpro_data" domainObjectName="DataDO" enableCountByExample="false"-->
                <!--enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"-->
@@ -153,9 +153,9 @@
                <!--enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"-->
                <!--selectByExampleQueryId="false"></table>-->
 
-        <table tableName="tb_culpro_pre_tre" domainObjectName="PreTreDO" enableCountByExample="false"
-                enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
-                selectByExampleQueryId="false"></table>
+        <!--<table tableName="tb_culpro_pre_tre" domainObjectName="PreTreDO" enableCountByExample="false"-->
+                <!--enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"-->
+                <!--selectByExampleQueryId="false"></table>-->
 
         <!--<table tableName="tb_culpro_specialty" domainObjectName="SpecialtyDO" enableCountByExample="false"-->
                <!--enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"-->
@@ -209,9 +209,9 @@
                <!--enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"-->
                <!--selectByExampleQueryId="false"></table>-->
 
-        <table tableName="organization" domainObjectName="OrganizationDO" enableCountByExample="false"
-               enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
-               selectByExampleQueryId="false"></table>
+        <!--<table tableName="organization" domainObjectName="OrganizationDO" enableCountByExample="false"-->
+               <!--enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"-->
+               <!--selectByExampleQueryId="false"></table>-->
 
     </context>
 </generatorConfiguration>

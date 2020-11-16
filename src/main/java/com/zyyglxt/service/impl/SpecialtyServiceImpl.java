@@ -6,10 +6,13 @@ import com.zyyglxt.dataobject.HospSpecialtyRefDO;
 import com.zyyglxt.dataobject.HospSpecialtyRefDOKey;
 import com.zyyglxt.dataobject.SpecialtyDO;
 import com.zyyglxt.dataobject.SpecialtyDOKey;
+import com.zyyglxt.dto.MedicalServiceDto;
 import com.zyyglxt.dto.SpecialtyDto;
 import com.zyyglxt.error.BusinessException;
 import com.zyyglxt.error.EmBusinessError;
+import com.zyyglxt.service.IChineseMedicineService;
 import com.zyyglxt.service.ISpecialtyService;
+import com.zyyglxt.util.UsernameUtil;
 import com.zyyglxt.validator.ValidatorImpl;
 import com.zyyglxt.validator.ValidatorResult;
 import org.springframework.beans.BeanUtils;
@@ -17,6 +20,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -35,6 +39,10 @@ public class SpecialtyServiceImpl implements ISpecialtyService {
     private HospSpecialtyRefDOMapper hospSpecialtyRefDOMapper;
     @Autowired
     private ValidatorImpl validator;
+    @Resource
+    private IChineseMedicineService chineseMedicineService;
+    @Autowired
+    private UsernameUtil usernameUtil;
 
     private SpecialtyDO specialtyDO = new SpecialtyDO();
 
@@ -48,14 +56,18 @@ public class SpecialtyServiceImpl implements ISpecialtyService {
             throw new BusinessException(result.getErrMsg(), EmBusinessError.PARAMETER_VALIDATION_ERROR);
         }
         BeanUtils.copyProperties(specialtyDto,specialtyDO);
+        String user = usernameUtil.getOperateUser();
+        specialtyDO.setCreater(user);
         specialtyDO.setItemcreateat(new Date());
+        specialtyDO.setSpecialtyStatus("--");
+        specialtyDO.setUpdater(user);
 
         hospSpecialtyRefDO.setItemcode(UUID.randomUUID().toString());
         hospSpecialtyRefDO.setHospitalCode(specialtyDto.getHospitalCode());
-        hospSpecialtyRefDO.setSpecialtyCode(specialtyDto.getHospitalCode());
-        hospSpecialtyRefDO.setCreater(specialtyDto.getCreater());
+        hospSpecialtyRefDO.setSpecialtyCode(specialtyDto.getItemcode());
+        hospSpecialtyRefDO.setCreater(user);
         hospSpecialtyRefDO.setItemcreateat(new Date());
-        hospSpecialtyRefDO.setUpdater(specialtyDto.getUpdater());
+        hospSpecialtyRefDO.setUpdater(user);
 
         specialtyDOMapper.insertSelective(specialtyDO);
         hospSpecialtyRefDOMapper.insertSelective(hospSpecialtyRefDO);
@@ -68,39 +80,40 @@ public class SpecialtyServiceImpl implements ISpecialtyService {
         if(result.isHasErrors()){
             throw new BusinessException(result.getErrMsg(), EmBusinessError.PARAMETER_VALIDATION_ERROR);
         }
-        specialtyDO = specialtyDto;
+        BeanUtils.copyProperties(specialtyDto,specialtyDO);
+        String user = usernameUtil.getOperateUser();
+        specialtyDO.setUpdater(user);
 
         hospSpecialtyRefDO.setHospitalCode(specialtyDto.getHospitalCode());
-        hospSpecialtyRefDO.setSpecialtyCode(specialtyDto.getHospitalCode());
-        hospSpecialtyRefDO.setCreater(specialtyDto.getCreater());
-        hospSpecialtyRefDO.setItemcreateat(specialtyDto.getItemcreateat());
-        hospSpecialtyRefDO.setUpdater(specialtyDto.getUpdater());
-        hospSpecialtyRefDO.setItemupdateat(specialtyDto.getItemupdateat());
+        hospSpecialtyRefDO.setUpdater(user);
 
         specialtyDOMapper.updateByPrimaryKeySelective(specialtyDO);
-        hospSpecialtyRefDOMapper.updateByPrimaryKeySelective(hospSpecialtyRefDO);
+        hospSpecialtyRefDOMapper.updateBySpecialtyCodeSelective(specialtyDO.getItemcode());
     }
 
     /*删除科室记录，包括科室表和关系表*/
     @Override
-    public void deleteSpecialty(SpecialtyDto specialtyDto) {
-        ValidatorResult result = validator.validate(specialtyDto);
+    public void deleteSpecialty(SpecialtyDOKey specialtyDOKey) {
+        ValidatorResult result = validator.validate(specialtyDOKey);
         if(result.isHasErrors()){
             throw new BusinessException(result.getErrMsg(), EmBusinessError.PARAMETER_VALIDATION_ERROR);
         }
-        SpecialtyDOKey specialtyDOKey = specialtyDto;
-        HospSpecialtyRefDOKey hospSpecialtyRefDOKey = new HospSpecialtyRefDOKey();
-        hospSpecialtyRefDOKey.setItemid(specialtyDto.getItemid());
-        hospSpecialtyRefDOKey.setItemcode(specialtyDto.getItemcode());
-
-        hospSpecialtyRefDOMapper.deleteByPrimaryKey(hospSpecialtyRefDOKey);
+        /*判断该科室是否能删除*/
+        if (!(chineseMedicineService.selectBySpecialtyCode(specialtyDOKey.getItemcode())).isEmpty()){
+            throw new BusinessException("该科室下还有医生，不能删除",EmBusinessError.INTEGRITY_CONSTRAINT_ERROE);
+        }
+        hospSpecialtyRefDOMapper.deleteBySpecialtyCode(specialtyDOKey.getItemcode());
         specialtyDOMapper.deleteByPrimaryKey(specialtyDOKey);
     }
 
     /*查询所有科室*/
     @Override
-    public List<SpecialtyDO> selectAllSpecialty() {
-        return specialtyDOMapper.selectAllSpecialty();
+    public List<SpecialtyDO> selectAllSpecialty(List<String> specialtyStatus) {
+        List<SpecialtyDO> DOList = new ArrayList<>();
+        for (String status : specialtyStatus) {
+            DOList.addAll(specialtyDOMapper.selectByStatus(status));
+        }
+        return DOList;
     }
 
     /*
@@ -108,16 +121,28 @@ public class SpecialtyServiceImpl implements ISpecialtyService {
      */
     @Override
     public List<SpecialtyDO> searchSpecialty(String keyWord) {
-        if(keyWord.isEmpty()){
+        if(keyWord == null || keyWord == ""){
             throw new BusinessException("关键字不能为空", EmBusinessError.PARAMETER_VALIDATION_ERROR);
         }
         return specialtyDOMapper.searchSpecialty(keyWord);
     }
 
-    /*查询前五条记录*/
     @Override
-    public List<SpecialtyDO> top5Specialty() {
-        return specialtyDOMapper.top5Specialty();
+    public List<SpecialtyDO> selectByHospCode(String hospCode) {
+        if(hospCode == null || hospCode == ""){
+            throw new BusinessException("医院code不能为空", EmBusinessError.PARAMETER_VALIDATION_ERROR);
+        }
+        return specialtyDOMapper.selectByHospCode(hospCode);
+    }
+
+    @Override
+    public int updateStatus(MedicalServiceDto medicalServiceDto) {
+        ValidatorResult result = validator.validate(medicalServiceDto);
+        if(result.isHasErrors()){
+            throw new BusinessException(result.getErrMsg(), EmBusinessError.PARAMETER_VALIDATION_ERROR);
+        }
+        medicalServiceDto.setUpdater(usernameUtil.getOperateUser());
+        return specialtyDOMapper.updateStatusByPrimaryKey(medicalServiceDto);
     }
 
 

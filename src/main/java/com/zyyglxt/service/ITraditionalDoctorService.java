@@ -19,7 +19,7 @@ public interface ITraditionalDoctorService {
     CulturalResourcesDO getTraditionalDoctor(CulturalResourcesDOKey key);
 
     //查询所有历代名家
-    List<CulturalResourcesDO> getTraditionalDoctorList();
+    List<CulturalResourcesDO> getTraditionalDoctorList(List<String> chineseCulturalStatus);
 
     //增加一个历代名家
     int addTraditionalDoctor(CulturalResourcesDO record);

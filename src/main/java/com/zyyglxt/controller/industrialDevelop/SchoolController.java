@@ -46,4 +46,10 @@ public class SchoolController {
         schoolService.deleteByPrimaryKey(record.getItemid(), record.getItemcode());
         return new ResponseData(EmBusinessError.success);
     }
+
+    @ResponseBody
+    @GetMapping(value = "/school")
+    public ResponseData getSchool(){
+        return new ResponseData(EmBusinessError.success, schoolService.selectAll());
+    }
 }

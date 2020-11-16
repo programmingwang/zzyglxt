@@ -1,17 +1,22 @@
 package com.zyyglxt.service.impl;
 
 import com.zyyglxt.dao.HospDOMapper;
+import com.zyyglxt.dao.HospSpecialtyRefDOMapper;
 import com.zyyglxt.dataobject.HospDO;
 import com.zyyglxt.dataobject.HospDOKey;
+import com.zyyglxt.dataobject.HospSpecialtyRefDO;
+import com.zyyglxt.dto.MedicalServiceDto;
 import com.zyyglxt.error.BusinessException;
 import com.zyyglxt.error.EmBusinessError;
 import com.zyyglxt.service.IHospService;
+import com.zyyglxt.util.UsernameUtil;
 import com.zyyglxt.validator.ValidatorImpl;
 import com.zyyglxt.validator.ValidatorResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -24,9 +29,15 @@ import java.util.UUID;
 @Service
 public class HospServiceImpl implements IHospService {
     @Resource
-    HospDOMapper hospDOMapper;
+    private HospDOMapper hospDOMapper;
     @Autowired
     private ValidatorImpl validator;
+    @Resource
+    private HospSpecialtyRefDOMapper hospSpecialtyRefDOMapper;
+    @Resource
+    private IHospService hospService;
+    @Resource
+    private UsernameUtil usernameUtil;
 
     @Override
     public int addHosp(HospDO hospDO) {
@@ -35,6 +46,10 @@ public class HospServiceImpl implements IHospService {
             throw new BusinessException(result.getErrMsg(), EmBusinessError.PARAMETER_VALIDATION_ERROR);
         }
         hospDO.setItemcreateat(new Date());
+        hospDO.setCreater(usernameUtil.getOperateUser());
+        hospDO.setUpdater(usernameUtil.getOperateUser());
+        hospDO.setHospitalStatus("--");
+
         return hospDOMapper.insertSelective(hospDO);
     }
 
@@ -44,6 +59,7 @@ public class HospServiceImpl implements IHospService {
         if(result.isHasErrors()){
             throw new BusinessException(result.getErrMsg(), EmBusinessError.PARAMETER_VALIDATION_ERROR);
         }
+        hospDO.setUpdater(usernameUtil.getOperateUser());
         return hospDOMapper.updateByPrimaryKeySelective(hospDO);
     }
 
@@ -53,12 +69,20 @@ public class HospServiceImpl implements IHospService {
         if(result.isHasErrors()){
             throw new BusinessException(result.getErrMsg(), EmBusinessError.PARAMETER_VALIDATION_ERROR);
         }
+        /*判断该医院是否能删除*/
+        if (!(hospSpecialtyRefDOMapper.selectSpecialtyByHospCode(hospDOKey.getItemcode())).isEmpty()){
+            throw new BusinessException("该医院下还有科室，不能删除",EmBusinessError.INTEGRITY_CONSTRAINT_ERROE);
+        }
         return hospDOMapper.deleteByPrimaryKey(hospDOKey);
     }
 
     @Override
-    public List<HospDO> selectAllHosp() {
-        return hospDOMapper.selectAllHosp();
+    public List<HospDO> selectAllHosp(List<String> specialtyStatus) {
+        List<HospDO> DOList = new ArrayList<>();
+        for (String status : specialtyStatus) {
+            DOList.addAll(hospDOMapper.selectByStatus(status));
+        }
+        return DOList;
     }
 
     /*
@@ -66,20 +90,33 @@ public class HospServiceImpl implements IHospService {
      */
     @Override
     public List<HospDO> searchHosp(String keyWord) {
-        if(keyWord.isEmpty()){
+        if(keyWord == "" || keyWord == null){
             throw new BusinessException("关键字不能为空", EmBusinessError.PARAMETER_VALIDATION_ERROR);
         }
         return hospDOMapper.searchHosp(keyWord);
     }
 
     @Override
-    public List<HospDO> top5Hosp() {
-        return hospDOMapper.top5Hosp();
+    public HospDO selectHospByItemCode(String itemCode) {
+        if(itemCode == "" || itemCode == null){
+            throw new BusinessException("itemcode不能为空", EmBusinessError.PARAMETER_VALIDATION_ERROR);
+        }
+        return hospDOMapper.selectHospByItemCode(itemCode);
     }
 
     @Override
-    public HospDO selectHospByItemCode(String itemCode) {
-        return hospDOMapper.selectHospByItemCode(itemCode);
+    public List<HospDO> selectByStatus(String status) {
+        return hospDOMapper.selectByStatus(status);
+    }
+
+    @Override
+    public int updateStatus(MedicalServiceDto medicalServiceDto) {
+        ValidatorResult result = validator.validate(medicalServiceDto);
+        if(result.isHasErrors()){
+            throw new BusinessException(result.getErrMsg(), EmBusinessError.PARAMETER_VALIDATION_ERROR);
+        }
+        medicalServiceDto.setUpdater(usernameUtil.getOperateUser());
+        return hospDOMapper.updateStatusByPrimaryKey(medicalServiceDto);
     }
 
 }

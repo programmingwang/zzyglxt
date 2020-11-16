@@ -17,7 +17,7 @@ public interface ICulturalVenuesService {
     ChineseCulturalDO getCulturalVenues(ChineseCulturalDOKey key);
 
     //查询所有文化场馆
-    List<ChineseCulturalDO> getCulturalVenuesList();
+    List<ChineseCulturalDO> getCulturalVenuesList(List<String> chineseCulturalStatus);
 
     //增加一个文化场馆
     int addCulturalVenues(ChineseCulturalDO record) ;

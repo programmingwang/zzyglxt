@@ -51,14 +51,6 @@ public class JsonResult<T> implements Serializable {
         this.success = success;
     }
 
-    public Boolean getSuccess() {
-        return success;
-    }
-
-    public void setSuccess(Boolean success) {
-        this.success = success;
-    }
-
     public Integer getCode() {
         return code;
     }

@@ -108,7 +108,14 @@
             $("#"+aTableID).bootstrapTable("destroy");
         }
 
-
+        // $(window).on('load',function(){
+        //     console.log("aaaaaaaaaa");
+        //     var allTableData = $("#table").bootstrapTable("getData");
+        //     console.log(allTableData);
+        //     localStorage.setItem('2',JSON.stringify(allTableData))
+        //     obj2=JSON.parse(localStorage.getItem("2"));
+        //     console.log(obj2);
+        // })
 
         //$(".float-right").attr("display",block);
 
@@ -135,6 +142,7 @@
                 var addstr=document.getElementById("chargePersonSearch").value;
                 var str = document.getElementById("taskNameSearch").value.toLowerCase();
                 var allTableData = $("#table").bootstrapTable("getData");
+
                 console.log(allTableData);
                 console.log(str);
                 console.log("状态"+addstr);

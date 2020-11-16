@@ -35,7 +35,7 @@
         function getRoleOperate(value, row, index, role, status,webStatus) {
             if(role === "文化宣传科员"){
                 $('#btn_addTask').attr('style',"display:block");
-                if(status === webStatus[0].id){
+                if(status == webStatus[0].id){
                     return [
                         '<a class="edit" style="margin:0 1em;text-decoration: none;color:#775637;" data-toggle="modal" data-target="" >编辑</a>',
                         '<a class="submit"  style="margin:0 1em;text-decoration: none;color:#775637;" data-target="#staticBackdrop" >提交</a>',

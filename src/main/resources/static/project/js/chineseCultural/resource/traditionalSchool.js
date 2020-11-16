@@ -164,7 +164,7 @@
                     $("#chineseCulturalContent").val(row.chineseCulturalContent);
                     $("#creater").val(row.creater);
                     $("#itemCreateAt").val(row.itemcreateat);
-                    $("#chineseCulturalStatus").val(row.chineseCulturalStatus);
+                    $("#chineseCulturalStatus").val(webStatus[row.chineseCulturalStatus].text);
                     $("#imgDiv").attr("style","display:none");
                     $('#culturalNameSpan').html("流派名称");
                     $('#culturalContentSpan').html("流派介绍");

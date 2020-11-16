@@ -164,7 +164,7 @@
                 $("#chineseCulturalContent").val(row.chineseCulturalContent);
                 $("#creater").val(row.creater);
                 $("#itemCreateAt").val(row.itemcreateat);
-                $("#chineseCulturalStatus").val(row.chineseCulturalStatus);
+                $("#chineseCulturalStatus").val(webStatus[row.chineseCulturalStatus].text);
                 $("#culturalImg").attr("src",row.filePath)
                 $('#culturalImgSpan').html("电影电视图片");
                 $('#culturalNameSpan').html("电影电视名称");

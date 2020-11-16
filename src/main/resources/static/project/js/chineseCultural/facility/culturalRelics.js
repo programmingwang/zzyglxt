@@ -165,7 +165,7 @@
                     $("#chineseCulturalContent").val(row.chineseCulturalContent);
                     $("#creater").val(row.creater);
                     $("#itemCreateAt").val(row.itemcreateat);
-                    $("#chineseCulturalStatus").val(row.chineseCulturalStatus);
+                    $("#chineseCulturalStatus").val(webStatus[row.chineseCulturalStatus].text);
                     $("#culturalImg").attr("src",row.filePath)
                     $('#culturalImgSpan').html("图片");
                     $('#culturalNameSpan').html("文化古迹名称");

@@ -1,8 +1,13 @@
 package com.zyyglxt.service.impl;
 
 import com.zyyglxt.dto.industrialDevelop.IndustrialDevelopSchoolDto;
+import com.zyyglxt.error.BusinessException;
+import com.zyyglxt.error.EmBusinessError;
 import com.zyyglxt.service.IFileService;
+import com.zyyglxt.validator.ValidatorImpl;
+import com.zyyglxt.validator.ValidatorResult;
 import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import com.zyyglxt.dao.IndustrialDevelopSchoolMapper;
@@ -26,6 +31,9 @@ public class IndustrialDevelopSchoolServiceImpl implements IndustrialDevelopScho
     @Resource
     private IFileService fileService;
 
+    @Autowired
+    ValidatorImpl validator;
+
     @Override
     public int deleteByPrimaryKey(Integer itemid,String itemcode) {
         return industrialDevelopSchoolMapper.deleteByPrimaryKey(itemid,itemcode);
@@ -38,6 +46,10 @@ public class IndustrialDevelopSchoolServiceImpl implements IndustrialDevelopScho
 
     @Override
     public int insertSelective(IndustrialDevelopSchool record) {
+        ValidatorResult result = validator.validate(record);
+        if (result.isHasErrors()) {
+            throw new BusinessException(result.getErrMsg(), EmBusinessError.PARAMETER_VALIDATION_ERROR);
+        }
         return industrialDevelopSchoolMapper.insertSelective(record);
     }
 
@@ -71,4 +83,9 @@ public class IndustrialDevelopSchoolServiceImpl implements IndustrialDevelopScho
         return resList;
     }
 
+    @Override
+    public IndustrialDevelopSchool selectByOrgNameAndCode(String orgName, String orgCode) {
+        IndustrialDevelopSchool developSchool = industrialDevelopSchoolMapper.selectByOrgNameAndCode(orgName, orgCode);
+        return developSchool;
+    }
 }

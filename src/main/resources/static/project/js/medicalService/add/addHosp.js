@@ -49,9 +49,27 @@
             var tempdata = JSON.parse(localStorage.getItem("rowData"));
             var updateStatus = isUpdate()
             var jumpUrl = "/medicalService/hosp"
+            var webStatus = dictUtil.getDictByCode(dictUtil.DICT_LIST.webStatus);
+            var hospitalLevel = dictUtil.getDictByCode(dictUtil.DICT_LIST.hospitalLevel)
+            var specialtyName = dictUtil.getDictByCode(dictUtil.DICT_LIST.dept)
 
             /*设置下拉框的值*/
-            $("#hospitalLevel").selectUtil(dictUtil.getDictByCode(dictUtil.DICT_LIST.hospitalLevel));
+            $("#hospitalLevel").selectUtil(hospitalLevel);
+            /*重点专科操作*/
+            $("#specialtyName").selectUtil(specialtyName);
+            $("#add").unbind().on("click",function () {
+                var str = $("#hospitalKeySpecialty").val();
+                if (str.length === 0){
+                    $("#hospitalKeySpecialty").val(specialtyName[$("#specialtyName").val()].text);
+                }else {
+                    $("#hospitalKeySpecialty").val($("#hospitalKeySpecialty").val() + " " + specialtyName[$("#specialtyName").val()].text);
+                }
+                $("#specialtyName option[value=" + $("#specialtyName").val() + "]").remove();
+            })
+            $("#clear").unbind().on("click",function () {
+                $("#hospitalKeySpecialty").val("")
+                $("#specialtyName").selectUtil(dictUtil.getDictByCode(dictUtil.DICT_LIST.dept));
+            })
             /*返回按钮处理*/
             $("#cancel").unbind().on('click',function () {
                 orange.redirect(jumpUrl);
@@ -78,13 +96,18 @@
                     };
                 }
                 entity["hospitalName"] = $("#hospitalName").val();
-                entity["hospitalLevel"] = $("#hospitalLevel").val();
+                entity["hospitalLevel"] = hospitalLevel[$("#specialtyName").val()].text;
+                entity["hospitalBriefIntroduce"] = $("#hospitalBriefIntroduce").val();
+                entity["hospitalKeySpecialty"] = $("#hospitalKeySpecialty").val();
                 entity["hospitalTelephone"] = $("#hospitalTelephone").val();
+                entity["hospitalAddressPro"] = $("#hospitalAddressPro").val();
                 entity["hospitalAddressCity"] = $("#hospitalAddressCity").val();
                 entity["hospitalAddressCountry"] = $("#hospitalAddressCountry").val();
                 entity["hospitalAddress"] = $("#hospitalAddress").val();
                 entity["hospitalLink"] = $("#hospitalLink").val();
                 entity["hospitalIntroduce"] = editor.txt.html()
+                entity["hospitalStatus"] = webStatus[0].id
+
 
                 fileUtil.handleFile(updateStatus, entity.itemcode, uploadImg.getFiles()[0]);
 
@@ -105,11 +128,18 @@
 
             /*初始化数据*/
             var  init = function () {
-                uploadImg.init();
                 if (updateStatus){
-                    $("#hospitalName").val(tempdata.hospitalName);
-                    $("#hospitalLevel  option[value="+tempdata.hospitalLevel+"] ").attr("selected",true);
                     uploadImg.setImgSrc(tempdata.filePath);
+                    $("#hospitalName").val(tempdata.hospitalName);
+                    $("#hospitalLevel").find("option").each(function (data) {
+                        var $this = $(this);
+                        if($this.text() == tempdata.hospitalLevel) {
+                            $this.attr("selected", true);
+                        }
+                    });
+                    // $("#hospitalLevel  option[text="+tempdata.hospitalLevel+"] ").attr("selected",true);
+                    $("#hospitalBriefIntroduce").val(tempdata.hospitalBriefIntroduce);
+                    $("#hospitalKeySpecialty").val(tempdata.hospitalKeySpecialty);
                     $("#hospitalTelephone").val(tempdata.hospitalTelephone);
                     $("#distpicker").distpicker({
                         province: "河北省",
@@ -130,6 +160,7 @@
 
                 }
             }
+            uploadImg.init();
             init();
 
 

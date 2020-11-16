@@ -107,4 +107,5 @@ public class ChineseMedicineServiceImpl implements IChineseMedicineService {
         medicalServiceDto.setUpdater(usernameUtil.getOperateUser());
         return chineseMedicineDOMapper.updateStatusByPrimaryKey(medicalServiceDto);
     }
+
 }

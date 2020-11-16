@@ -6,6 +6,7 @@ import java.util.Date;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 /**
    *@Author lrt
@@ -16,6 +17,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString
 public class IndustrialDevelopSaleDrug {
     /**
     * 自增id
@@ -94,7 +96,6 @@ public class IndustrialDevelopSaleDrug {
     */
     @ApiModelProperty(value="用户所在机构code")
     private String orgCode;
-
     /**
     * 创建者
     */
@@ -118,4 +119,8 @@ public class IndustrialDevelopSaleDrug {
     */
     @ApiModelProperty(value="修改时间")
     private Date itemupdateat;
+
+    private String fileName;
+
+    private String filePath;
 }

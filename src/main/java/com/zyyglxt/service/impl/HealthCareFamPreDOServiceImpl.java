@@ -7,6 +7,7 @@ import com.zyyglxt.dataobject.HealthCareFamPreDOKey;
 import com.zyyglxt.error.BusinessException;
 import com.zyyglxt.error.EmBusinessError;
 import com.zyyglxt.service.HealthCareFamPreDOService;
+import com.zyyglxt.util.UsernameUtil;
 import com.zyyglxt.validator.ValidatorImpl;
 import com.zyyglxt.validator.ValidatorResult;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +33,8 @@ public class HealthCareFamPreDOServiceImpl implements HealthCareFamPreDOService 
      private HealthCareFamPreDOMapper healthCareFamPreDOMapper;
     @Autowired
     private ValidatorImpl validator;
+    @Autowired
+    private UsernameUtil usernameUtil;
     @Transactional
     /*
       历史名方、国医话健康添加、删除、修改、查询实现方法
@@ -44,6 +47,8 @@ public class HealthCareFamPreDOServiceImpl implements HealthCareFamPreDOService 
         }
         record.setItemcode(UUID.randomUUID().toString());
         record.setItemcreateat(new Date());
+        record.setCreater(usernameUtil.getOperateUser());
+        record.setUpdater(usernameUtil.getOperateUser());
         return healthCareFamPreDOMapper.insertSelective(record);
     }
     @Transactional
@@ -60,6 +65,7 @@ public class HealthCareFamPreDOServiceImpl implements HealthCareFamPreDOService 
             throw new BusinessException(result.getErrMsg(), EmBusinessError.PARAMETER_VALIDATION_ERROR);
         }
         record.setItemupdateat(new Date());
+        record.setUpdater(usernameUtil.getOperateUser());
         return healthCareFamPreDOMapper.updateByPrimaryKeySelective(record);
     }
     @Override

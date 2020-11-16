@@ -225,6 +225,9 @@
             var pl = dictUtil.getDictByCode(dictUtil.DICT_LIST.showStatus);
             $("#chargePersonSearch").selectUtil(pl);
 
+           var p2 = dictUtil.getDictByCode(dictUtil.DICT_LIST.effectType);
+            $("#Search").selectUtil(p2);
+
             var aCol = [
                         {field: 'chineseMedicineName', title: '中医药名称'},
                         {field: 'chineseMedicineAlias', title: '别名'},

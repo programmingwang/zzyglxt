@@ -83,4 +83,9 @@ public class IndustrialDevelopSchoolServiceImpl implements IndustrialDevelopScho
         return resList;
     }
 
+    @Override
+    public IndustrialDevelopSchool selectByOrgNameAndCode(String orgName, String orgCode) {
+        IndustrialDevelopSchool developSchool = industrialDevelopSchoolMapper.selectByOrgNameAndCode(orgName, orgCode);
+        return developSchool;
+    }
 }

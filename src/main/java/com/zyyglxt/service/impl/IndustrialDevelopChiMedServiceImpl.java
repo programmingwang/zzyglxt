@@ -1,5 +1,6 @@
 package com.zyyglxt.service.impl;
 
+import com.zyyglxt.dataobject.OrganizationDO;
 import com.zyyglxt.dto.industrialDevelop.IndustrialDevelopChiMedDto;
 import com.zyyglxt.error.BusinessException;
 import com.zyyglxt.error.EmBusinessError;
@@ -84,4 +85,9 @@ public class IndustrialDevelopChiMedServiceImpl implements IndustrialDevelopChiM
         return resList;
     }
 
+    @Override
+    public IndustrialDevelopChiMed selectByOrgNameAndCode(String orgName, String orgCode){
+        IndustrialDevelopChiMed developChiMed = industrialDevelopChiMedMapper.selectByOrgNameAndCode(orgName, orgCode);
+        return developChiMed;
+    }
 }

@@ -27,4 +27,5 @@ public interface IndustrialDevelopTecSerOrgService{
 
     List<IndustrialDevelopTecSerOrgDto> selectAll();
 
+    IndustrialDevelopTecSerOrg selectByOrgNameAndCode(String orgName, String orgCode);
 }

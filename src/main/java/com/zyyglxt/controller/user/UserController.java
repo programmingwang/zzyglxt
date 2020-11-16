@@ -1,8 +1,7 @@
 package com.zyyglxt.controller.user;
 
 import com.zyyglxt.annotation.LogAnnotation;
-import com.zyyglxt.dataobject.OrganizationDO;
-import com.zyyglxt.dataobject.UserDO;
+import com.zyyglxt.dataobject.*;
 import com.zyyglxt.dto.UpdatePwdDto;
 import com.zyyglxt.dto.UserDto;
 import com.zyyglxt.dto.UserSessionDto;
@@ -10,8 +9,7 @@ import com.zyyglxt.dto.industrialDevelop.OrgStatusDto;
 import com.zyyglxt.error.BusinessException;
 import com.zyyglxt.error.EmBusinessError;
 import com.zyyglxt.response.ResponseData;
-import com.zyyglxt.service.IOrganizationService;
-import com.zyyglxt.service.IUserService;
+import com.zyyglxt.service.*;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -33,6 +31,12 @@ public class UserController {
     @Autowired
     IOrganizationService organizationService;
     @Autowired
+    IndustrialDevelopChiMedService developChiMedService;
+    @Autowired
+    IndustrialDevelopTecSerOrgService developTecSerOrgService;
+    @Autowired
+    IndustrialDevelopSchoolService schoolService;
+    @Autowired
     HttpServletRequest request;
 
     /**
@@ -49,28 +53,50 @@ public class UserController {
         }
     }
 
-//    @LogAnnotation(logTitle = "查询机构审核状态", logLevel = "1")
+    //    @LogAnnotation(logTitle = "查询机构审核状态", logLevel = "1")
     @RequestMapping(value = "/queryOrgStatus", method = RequestMethod.POST)
-    public ResponseData checkOrgStatus(OrgStatusDto orgStatusDto){
-        OrganizationDO organizationDO = userService.selectByOrgNameAndCode(orgStatusDto.getOrgName(),orgStatusDto.getOrgCode());
-        if (organizationDO == null){
-            return new ResponseData(EmBusinessError.success,"该机构还未申请注册，请继续");
+    public ResponseData checkOrgStatus(OrgStatusDto orgStatusDto) {
+        OrganizationDO organizationDO = userService.selectByOrgNameAndCode(orgStatusDto.getOrgName(), orgStatusDto.getOrgCode());
+        if (organizationDO == null) {
+            return new ResponseData(EmBusinessError.success, "该机构还未申请注册，请继续");
         } else {
-            if ("待审核".equals(organizationDO.getAuditStatus())){
-                return new ResponseData(EmBusinessError.success,"您申请注册的机构还在审核中，请耐心等待");
-            } else if ("市局审核未通过".equals(organizationDO.getAuditStatus())){
-                return new ResponseData(EmBusinessError.success,"您申请注册的机构暂未审核通过，审核意见："+organizationDO.getReason()+"，点击此处修改信息");
-            } else if ("市局审核已通过".equals(organizationDO.getAuditStatus())){
-                return new ResponseData(EmBusinessError.success,"您申请注册的机构市局审核已通过，请耐心等待省局审核");
-            } else if ("省局审核未通过".equals(organizationDO.getAuditStatus())){
-                return new ResponseData(EmBusinessError.success,"您申请注册的机构暂未审核通过，审核意见："+organizationDO.getReason()+"，点击此处修改信息");
-            } else if ("省局审核已通过".equals(organizationDO.getAuditStatus())){
-                System.out.println("66666666666666666666666");
-                return new ResponseData(EmBusinessError.success,"您已注册成功，点击此处立即登录");
-            } else {
-                return null;
+            if ("中药材种植园".equals(orgStatusDto.getOrgIdentify()) ||
+                    "中药材加工企业".equals(orgStatusDto.getOrgIdentify()) ||
+                    "中药材制药企业".equals(orgStatusDto.getOrgIdentify())){
+                IndustrialDevelopChiMed chiMed = developChiMedService.selectByOrgNameAndCode(orgStatusDto.getOrgName(),orgStatusDto.getOrgCode());
+                if ("提交".equals(chiMed.getStatus())){
+                    return new ResponseData(EmBusinessError.success,"您申请注册的机构还在审核中，请耐心等待");
+                } else if ("地市局用户审核不通过".equals(chiMed.getStatus())){
+                    return new ResponseData(EmBusinessError.success,"您申请注册的机构暂未审核通过，审核意见："+chiMed.getReason()+"，点击此处修改信息");
+                } else if ("地市局用户审核通过".equals(chiMed.getStatus())){
+                    return new ResponseData(EmBusinessError.success,"您申请注册的机构市局审核已通过，请耐心等待省局审核");
+                } else if ("省局用户审核不通过".equals(chiMed.getStatus())){
+                    return new ResponseData(EmBusinessError.success,"您申请注册的机构暂未审核通过，审核意见："+chiMed.getReason()+"，点击此处修改信息");
+                } else if ("省局用户审核通过".equals(chiMed.getStatus())){
+                    return new ResponseData(EmBusinessError.success,"您已注册成功，点击此处立即登录");
+                } else {
+                    return null;
+                }
             }
-
+            if ("科研院所".equals(orgStatusDto.getOrgIdentify()) ||
+                    "技术服务机构".equals(orgStatusDto.getOrgIdentify()) ||
+                    "旅游康养机构".equals(orgStatusDto.getOrgIdentify())){
+                IndustrialDevelopTecSerOrg tecSerOrg = developTecSerOrgService.selectByOrgNameAndCode(orgStatusDto.getOrgName(),orgStatusDto.getOrgCode());
+                if ("提交".equals(tecSerOrg.getStatus())){
+                    return new ResponseData(EmBusinessError.success,"您申请注册的机构还在审核中，请耐心等待");
+                } else if ("地市局用户审核不通过".equals(tecSerOrg.getStatus())){
+                    return new ResponseData(EmBusinessError.success,"您申请注册的机构暂未审核通过，审核意见："+tecSerOrg.getReason()+"，点击此处修改信息");
+                } else if ("地市局用户审核通过".equals(tecSerOrg.getStatus())){
+                    return new ResponseData(EmBusinessError.success,"您申请注册的机构市局审核已通过，请耐心等待省局审核");
+                } else if ("省局用户审核不通过".equals(tecSerOrg.getStatus())){
+                    return new ResponseData(EmBusinessError.success,"您申请注册的机构暂未审核通过，审核意见："+tecSerOrg.getReason()+"，点击此处修改信息");
+                } else if ("省局用户审核通过".equals(tecSerOrg.getStatus())){
+                    return new ResponseData(EmBusinessError.success,"您已注册成功，点击此处立即登录");
+                } else {
+                    return null;
+                }
+            }
+            return new ResponseData(EmBusinessError.success, "您已注册成功，点击此处立即登录");
         }
     }
 
@@ -134,7 +160,7 @@ public class UserController {
             if ("待审核".equals(organizationDO.getAuditStatus())) {
                 organizationDO.setAuditStatus("市局审核已通过");
             }
-        } else if ("省局中医药管理部门".equals(user.getRolename())){
+        } else if ("省局中医药管理部门".equals(user.getRolename())) {
             if ("待审核".equals(organizationDO.getAuditStatus())) {
                 organizationDO.setAuditStatus("省局审核已通过");
             }
@@ -154,7 +180,7 @@ public class UserController {
             if ("待审核".equals(organizationDO.getAuditStatus())) {
                 organizationDO.setAuditStatus("市局审核未通过");
             }
-        } else if ("省局中医药管理部门".equals(user.getRolename())){
+        } else if ("省局中医药管理部门".equals(user.getRolename())) {
             if ("待审核".equals(organizationDO.getAuditStatus())) {
                 organizationDO.setAuditStatus("省局审核未通过");
             }

@@ -84,4 +84,9 @@ public class IndustrialDevelopTecSerOrgServiceImpl implements IndustrialDevelopT
         return resList;
     }
 
+    @Override
+    public IndustrialDevelopTecSerOrg selectByOrgNameAndCode(String orgName, String orgCode){
+        IndustrialDevelopTecSerOrg developTecSerOrg = industrialDevelopTecSerOrgMapper.selectByOrgNameAndCode(orgName, orgCode);
+        return developTecSerOrg;
+    }
 }

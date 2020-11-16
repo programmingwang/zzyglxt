@@ -28,13 +28,13 @@
   </resultMap>
   <sql id="Base_Column_List">
     <!--@mbg.generated-->
-    itemID, itemCode, `NAME`, AREA_COVERD, SPECIAL_SERVICE, PROJECT_NAME, CONTACTS, PHONE, 
-    ADDRESS_PRO, ADDRESS_CITY, ADDRESS_COUNTRY, ADDRESS, INTRUDUCE, `STATUS`, REASON, 
+    itemID, itemCode, `NAME`, AREA_COVERD, SPECIAL_SERVICE, PROJECT_NAME, CONTACTS, PHONE,
+    ADDRESS_PRO, ADDRESS_CITY, ADDRESS_COUNTRY, ADDRESS, INTRUDUCE, `STATUS`, REASON,
     ORG_CODE, `TYPE`, CREATER, itemCreateAt, UPDATER, itemUpdateAt
   </sql>
   <select id="selectByPrimaryKey" parameterType="map" resultMap="BaseResultMap">
     <!--@mbg.generated-->
-    select 
+    select
     <include refid="Base_Column_List" />
     from tb_industrial_develop_tec_ser_org
     where itemCode = #{itemcode,jdbcType=CHAR}
@@ -46,19 +46,19 @@
   </delete>
   <insert id="insert" keyColumn="itemID" keyProperty="itemid" parameterType="com.zyyglxt.dataobject.IndustrialDevelopTecSerOrg" useGeneratedKeys="true">
     <!--@mbg.generated-->
-    insert into tb_industrial_develop_tec_ser_org (itemCode, `NAME`, AREA_COVERD, 
-      SPECIAL_SERVICE, PROJECT_NAME, CONTACTS, 
-      PHONE, ADDRESS_PRO, ADDRESS_CITY, 
-      ADDRESS_COUNTRY, ADDRESS, INTRUDUCE, 
-      `STATUS`, REASON, ORG_CODE, 
-      `TYPE`, CREATER, itemCreateAt, 
+    insert into tb_industrial_develop_tec_ser_org (itemCode, `NAME`, AREA_COVERD,
+      SPECIAL_SERVICE, PROJECT_NAME, CONTACTS,
+      PHONE, ADDRESS_PRO, ADDRESS_CITY,
+      ADDRESS_COUNTRY, ADDRESS, INTRUDUCE,
+      `STATUS`, REASON, ORG_CODE,
+      `TYPE`, CREATER, itemCreateAt,
       UPDATER, itemUpdateAt)
-    values (#{itemcode,jdbcType=CHAR}, #{name,jdbcType=VARCHAR}, #{areaCoverd,jdbcType=VARCHAR}, 
-      #{specialService,jdbcType=VARCHAR}, #{projectName,jdbcType=VARCHAR}, #{contacts,jdbcType=VARCHAR}, 
-      #{phone,jdbcType=VARCHAR}, #{addressPro,jdbcType=VARCHAR}, #{addressCity,jdbcType=VARCHAR}, 
-      #{addressCountry,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{intruduce,jdbcType=LONGVARCHAR}, 
-      #{status,jdbcType=VARCHAR}, #{reason,jdbcType=VARCHAR}, #{orgCode,jdbcType=CHAR}, 
-      #{type,jdbcType=VARCHAR}, #{creater,jdbcType=VARCHAR}, #{itemcreateat,jdbcType=TIMESTAMP}, 
+    values (#{itemcode,jdbcType=CHAR}, #{name,jdbcType=VARCHAR}, #{areaCoverd,jdbcType=VARCHAR},
+      #{specialService,jdbcType=VARCHAR}, #{projectName,jdbcType=VARCHAR}, #{contacts,jdbcType=VARCHAR},
+      #{phone,jdbcType=VARCHAR}, #{addressPro,jdbcType=VARCHAR}, #{addressCity,jdbcType=VARCHAR},
+      #{addressCountry,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{intruduce,jdbcType=LONGVARCHAR},
+      #{status,jdbcType=VARCHAR}, #{reason,jdbcType=VARCHAR}, #{orgCode,jdbcType=CHAR},
+      #{type,jdbcType=VARCHAR}, #{creater,jdbcType=VARCHAR}, #{itemcreateat,jdbcType=TIMESTAMP},
       #{updater,jdbcType=VARCHAR}, #{itemupdateat,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" keyColumn="itemID" keyProperty="itemid" parameterType="com.zyyglxt.dataobject.IndustrialDevelopTecSerOrg" useGeneratedKeys="true">
@@ -279,5 +279,12 @@
   </update>
     <select id="selectAll" resultMap="BaseResultMap">
       select * from tb_industrial_develop_tec_ser_org
-    </select>
+  </select>
+  <select id="selectByOrgNameAndCode" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from tb_industrial_develop_tec_ser_org
+    where NAME = #{orgName,jdbcType=VARCHAR}
+    and ORG_CODE = #{orgCode,jdbcType=VARCHAR}
+  </select>
 </mapper>

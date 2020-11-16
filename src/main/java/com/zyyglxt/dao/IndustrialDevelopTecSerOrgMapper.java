@@ -27,4 +27,5 @@ public interface IndustrialDevelopTecSerOrgMapper {
 
     List<IndustrialDevelopTecSerOrg> selectAll();
 
+    IndustrialDevelopTecSerOrg selectByOrgNameAndCode(String orgName, String orgCode);
 }

@@ -54,10 +54,9 @@ function drawPic(codeStr) {
 // 输入框失去焦点后获取公司名称和机构代码，去数据库查询该机构的审核状态
 $("#orgCode").on("blur", function () {
     let orgName = $("#orgName").val();
+    let orgType = $("#orgType option:selected").val();
     let orgCode = $("#orgCode").val();
-    console.log(orgName);
-    console.log(orgCode);
-    var userEntity = {"orgName": orgName, "orgCode": orgCode};
+    var userEntity = {"orgName": orgName, "orgIdentify": orgType, "orgCode": orgCode};
     myAjax(null, "/user/queryOrgStatus", userEntity, function (data) {
         console.log(data);
         if (data && data.code === 88888) {

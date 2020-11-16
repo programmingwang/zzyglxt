@@ -10,5 +10,6 @@ import lombok.Data;
 @Data
 public class OrgStatusDto {
     private String orgName;
+    private String orgIdentify;
     private String orgCode;
 }

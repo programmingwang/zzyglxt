@@ -7,6 +7,8 @@
 
         var webStatus = dictUtil.getDictByCode(dictUtil.DICT_LIST.webStatus);
 
+        var webLocation = dictUtil.getDictByCode(dictUtil.DICT_LIST.dataLocation);
+
         //角色加载工具
         url = selectUtil.getRoleTable(sessionStorage.getItem("rolename"),url,"dataStatus",webStatus);
 
@@ -99,9 +101,9 @@
                                 "dataStatus": ""
                             };
                             if(sessionStorage.getItem("rolename") == "文化宣传处长" || sessionStorage.getItem("rolename") == "政务资源处长"){
-                                submitStatus.dataStatus = webStatus[3].text;
+                                submitStatus.dataStatus = webStatus[3].id;
                             }else{
-                                submitStatus.dataStatus = webStatus[4].text;
+                                submitStatus.dataStatus = webStatus[4].id;
                             }
                             ajaxUtil.myAjax(null,"/datado/newsInf/changeNewsStatus/"+row.itemid+"/"+row.itemcode,submitStatus,function (data) {
                                 if(ajaxUtil.success(data)){
@@ -130,7 +132,7 @@
                         modalConfirmFun:function () {
                             var isSuccess = false;
                             var submitStatus = {
-                                "dataStatus": webStatus[6].text
+                                "dataStatus": webStatus[6].id
                             };
                             ajaxUtil.myAjax(null,"/datado/newsInf/changeNewsStatus/"+row.itemid+"/"+row.itemcode,submitStatus,function (data) {
                                 if(ajaxUtil.success(data)){
@@ -165,9 +167,9 @@
                     $("#dataContent").val(row.dataContent);
                     $("#creater").val(row.creater);
                     $("#itemCreateAt").val(row.itemcreateat);
-                    $("#dataStatus").val(row.dataStatus);
-                    $("#dataFileType").val(row.dataLocation);
-                    $("#newsImg").attr("src",row.filePath)
+                    $("#dataStatus").val(webStatus[row.dataStatus].text);
+                    $("#dataFileType").val(webLocation[row.dataLocation].text);
+                    $("#newsImg").attr("src",row.filePath);
                     $('#newsImgSpan').html("新闻图片");
                     $('#dataTitleSpan').html("新闻标题");
                     $('#dataFileTypeSpan').html("所属位置");
@@ -213,7 +215,7 @@
                         modalConfirmFun:function () {
                             var isSuccess = false;
                             var submitStatus = {
-                                "dataStatus": webStatus[0].text
+                                "dataStatus": webStatus[0].id
                             };
                             ajaxUtil.myAjax(null,"/datado/newsInf/changeNewsStatus/"+row.itemid+"/"+row.itemcode,submitStatus,function (data) {
                                 if(ajaxUtil.success(data)){
@@ -254,9 +256,13 @@
                     return '<img  src='+value+' width="100" height="100" class="img-rounded" >';
                 }
             }},
-            {field: 'dataLocation', title: '所属位置'},
+            {field: 'dataLocation', title: '所属位置', formatter: function (value) {
+                    return '</p>'+webLocation[value].text+'</p>'
+                }},
             {field: 'itemcreateat', title: '创建时间'},
-            {field: 'dataStatus', title: '展示状态'},
+            {field: 'dataStatus', title: '展示状态', formatter: function (value) {
+                    return '</p>'+webStatus[value].text+'</p>'
+                }},
             {field: 'action',  title: '操作',formatter: operation,events:orgEvents}
         ];
 
@@ -267,8 +273,37 @@
             myTable.free();
             myTable = bootstrapTableUtil.myBootStrapTableInit("table", url, param, aCol);
         }
+            var allTableData = $("#table").bootstrapTable("getData");
+            //console.log(allTableData);
+            localStorage.setItem('2',JSON.stringify(allTableData))
+            obj2=JSON.parse(localStorage.getItem("2"));
+            //console.log(obj2);
 
-        bootstrapTableUtil.globalSearch("table",url,aParam, aCol);
+        var allPosition = document.getElementById("allPosition").children;
+        for(var i=1;i<allPosition.length;i++){
+            console.log(allPosition[i].innerHTML)
+            allPosition[i].onclick=function () {
+                for(var j=1;j<allPosition.length;j++){
+                    allPosition[j].classList.remove("addC");
+                }
+                this.classList.add("addC");
+                var newArry = [];
+                var allTableData = JSON.parse(localStorage.getItem("2"));
+                var str=this.innerHTML;
+                console.log(str)
+
+                if (str=='全部'){
+                    refreshTable()
+                }
+                for (var i in allTableData) {
+                    var thisPosition=allTableData[i][aCol[2].field];
+                    if (thisPosition==str){
+                        newArry.push(allTableData[i]);
+                    }
+                }
+                $("#table").bootstrapTable("load", newArry);
+            }
+        }
 
     })
 })();

@@ -57,6 +57,7 @@
                 width: '100%',
                 columns: fColumns,
                 ajaxOptions: {
+                    async: false,
                     complete: function (XMLHttpRequest) {
 
                     }
@@ -108,27 +109,44 @@
             $("#"+aTableID).bootstrapTable("destroy");
         }
 
-
+        // $(window).on('load',function(){
+        //     console.log("aaaaaaaaaa");
+        //     var allTableData = $("#table").bootstrapTable("getData");
+        //     console.log(allTableData);
+        //     localStorage.setItem('2',JSON.stringify(allTableData))
+        //     obj2=JSON.parse(localStorage.getItem("2"));
+        //     console.log(obj2);
+        // })
 
         //$(".float-right").attr("display",block);
 
         function globalSearch(tableID,url,needParam,aCol) {
 
 
-            var oTab=document.getElementById("table");
+            // var oTab=document.getElementById("table");
             var btnSearch=document.getElementById("btnSearch");
             var param = {};
+            console.log(needParam);
             btnSearch.onclick=function() {
                 var myTable = myBootStrapTableInit(tableID, url, needParam, aCol);
-                var stratTime=document.getElementById("stratTime").children;
-                var endTime=document.getElementById("endTime").children;
-                stratTime=stratTime[0].value+":"+stratTime[1].value+":"+stratTime[2].value;
-                endTime=endTime[0].value+":"+endTime[1].value+":"+endTime[2].value;
+                // 先刷新列表------------
+                // myTable.free();
+                // myTable = myBootStrapTableInit(tableID,url,param,aCol);
+                //-----------------------
+                if(document.getElementById("stratTime")){
+                    var stratTime=document.getElementById("stratTime").children;
+                    var endTime=document.getElementById("endTime").children;
+                    stratTime=stratTime[0].value+":"+stratTime[1].value+":"+stratTime[2].value;
+                    endTime=endTime[0].value+":"+endTime[1].value+":"+endTime[2].value;
+                }
                 var newArry = [];
+                var addstr=document.getElementById("chargePersonSearch").value;
                 var str = document.getElementById("taskNameSearch").value.toLowerCase();
-                var allTableData = $("#table").bootstrapTable("getData");
+                var allTableData = JSON.parse(localStorage.getItem("2"));
+
                 console.log(allTableData);
                 console.log(str);
+                console.log("状态"+addstr);
                 if (str=='请输入'||str==''){
                     myTable.free();
                     myTable = myBootStrapTableInit(tableID,url,param,aCol)
@@ -140,11 +158,11 @@
                         var makeTime=allTableData[i][aCol[4].field];
                         var isTimeSlot=false;
                         makeTime=makeTime.substring(11,19);
-                        console.log(makeTime);
-                        console.log("开始时间："+stratTime);
-                        console.log("结束时间"+endTime);
-                        console.log(makeTime>=stratTime);
-                        console.log(makeTime<=endTime);
+                        // console.log(makeTime);
+                        // console.log("开始时间："+stratTime);
+                        // console.log("结束时间"+endTime);
+                        // console.log(makeTime>=stratTime);
+                        // console.log(makeTime<=endTime);
                         if (textP == null || textP == undefined || textP == '') {
                             textP = "1";
                         }
@@ -158,6 +176,16 @@
 
                         if (textP.search(str)!= -1&&isTimeSlot){
                             newArry.push(allTableData[i]);
+                        }
+                        if (addstr=="展示中"||addstr=="已下架"){
+                            str=str+" "+addstr;
+                            var arr=str.split(' ');
+                            for(var j=0;j<arr.length;j++)
+                                {
+                                    if(textP.search(arr[j])!=-1){
+                                        newArry.push(allTableData[i]);
+                                    }
+                                }
                         }
                     }
 

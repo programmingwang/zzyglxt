@@ -103,9 +103,9 @@
                                 "chineseCulturalStatus": ""
                             };
                             if(sessionStorage.getItem("rolename") == "文化宣传处长" || sessionStorage.getItem("rolename") == "政务资源处长"){
-                                submitStatus.chineseCulturalStatus = webStatus[3].text;
+                                submitStatus.chineseCulturalStatus = webStatus[3].id;
                             }else{
-                                submitStatus.chineseCulturalStatus = webStatus[4].text;
+                                submitStatus.chineseCulturalStatus = webStatus[4].id;
                             }
                             ajaxUtil.myAjax(null,"/cul/trav/trav/cgTravSta/"+row.itemid+"/"+row.itemcode,submitStatus,function (data) {
                                 if(ajaxUtil.success(data)){
@@ -134,7 +134,7 @@
                         modalConfirmFun:function () {
                             var isSuccess = false;
                             var submitStatus = {
-                                "chineseCulturalStatus": webStatus[6].text
+                                "chineseCulturalStatus": webStatus[6].id
                             };
                             ajaxUtil.myAjax(null,"/cul/trav/trav/cgTravSta/"+row.itemid+"/"+row.itemcode,submitStatus,function (data) {
                                 if(ajaxUtil.success(data)){
@@ -216,7 +216,7 @@
                         modalConfirmFun:function () {
                             var isSuccess = false;
                             var submitStatus = {
-                                "chineseCulturalStatus": webStatus[0].text
+                                "chineseCulturalStatus": webStatus[0].id
                             };
                             ajaxUtil.myAjax(null,"/cul/trav/trav/cgTravSta/"+row.itemid+"/"+row.itemcode,submitStatus,function (data) {
                                 if(ajaxUtil.success(data)){
@@ -272,6 +272,48 @@
                 myTable.free();
                 myTable = bootstrapTableUtil.myBootStrapTableInit("table", url, param, aCol);
             }
+
+
             bootstrapTableUtil.globalSearch("table",url,aParam, aCol);
+
+                var allTableData = $("#table").bootstrapTable("getData");
+                //console.log(allTableData);
+                localStorage.setItem('2',JSON.stringify(allTableData))
+                obj2=JSON.parse(localStorage.getItem("2"));
+                //console.log(obj2);
+            // function getAllData(){
+            //     var allTableData = $("#table").bootstrapTable("getData");
+            //     console.log(allTableData);
+            //     localStorage.setItem('2',JSON.stringify(allTableData))
+            //     obj2=JSON.parse(localStorage.getItem("2"));
+            //     console.log(obj2);
+            // }
+            // setTimeout(getAllData,10000);
+            // var addstr=document.getElementById("chargePersonSearch").value;
+            // var addstr=document.getElementById("chargePersonSearch").value;
+            // localStorage.setItem('1',addstr);
+            // //[object Object]
+            //
+            // localStorage.setItem('2',JSON.stringify(addstr));
+            //
+            // obj2=JSON.parse(localStorage.getItem("2"));
+            // console.log(obj2);
+            // obj1=localStorage.getItem("1")
+            // console.log(obj1)
+        //     window.onload=function(){
+        //
+        //         var addstr=document.getElementById("chargePersonSearch").value;
+        //         localStorage.setItem('1',addstr);
+        //         //[object Object]
+        //
+        //         localStorage.setItem('2',JSON.stringify(addstr));
+        //
+        //         obj2=JSON.parse(localStorage.getItem("2"));
+        //         console.log(obj2);
+        //         obj1=localStorage.getItem("1")
+        //         console.log(obj1)
+        //
+        // }
         })
 })();
+

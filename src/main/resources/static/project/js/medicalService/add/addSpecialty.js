@@ -52,6 +52,8 @@
             var updateStatus = isUpdate()
             var jumpUrl = "/medicalService/specialty"
             var hosps = {}
+            var webStatus = dictUtil.getDictByCode(dictUtil.DICT_LIST.webStatus);
+            var specialtyName = dictUtil.getDictByCode(dictUtil.DICT_LIST.dept)
 
             /*设置科室下拉框的值*/
             $("#specialtyName").selectUtil(dictUtil.getDictByCode(dictUtil.DICT_LIST.dept));
@@ -84,8 +86,9 @@
                         itemcode: tempdata.itemcode
                     };
                 }
-                entity["specialtyName"] = $("#specialtyName").val();
+                entity["specialtyName"] = specialtyName[$("#specialtyName").val()].text;
                 entity["specialtyPhone"] = $("#specialtyPhone").val();
+                entity["specialtyAddressPro"] = hosp.hospitalAddressPro;
                 entity["specialtyAddressCity"] = hosp.hospitalAddressCity;
                 entity["specialtyAddressCounty"] = hosp.hospitalAddressCountry;
                 entity["specialtyAddress"] = hosp.hospitalAddress;
@@ -93,6 +96,7 @@
                 entity["specialtyDescribe"] = editor.txt.html();
                 entity["hospitalCode"] = hosp.itemcode;
                 entity["hospitalName"] = hosp.hospitalName;
+                entity["specialtyStatus"] = webStatus[0].id
 
                 fileUtil.handleFile(updateStatus, entity.itemcode, uploadImg.getFiles()[0]);
 
@@ -113,8 +117,7 @@
 
             /*初始化数据*/
             var init = function () {
-                uploadImg.init();
-                ajaxUtil.myAjax(null,"/medicalService/hosp/selectAll?hospitalStatus=展示中",null,function (data) {
+                ajaxUtil.myAjax(null,"/medicalService/hosp/selectAll?hospitalStatus=" + webStatus[5].id,null,function (data) {
                     if(ajaxUtil.success(data)){
                         hosps = data.data
                         var html = "";
@@ -130,13 +133,19 @@
                 }
                 if (updateStatus){
                     var tempdata = JSON.parse(localStorage.getItem("rowData"));
-                    $("#specialtyName").val(tempdata.specialtyName);
+                    $("#specialtyName").find("option").each(function (data) {
+                        var $this = $(this);
+                        if($this.text() == tempdata.specialtyName) {
+                            $this.attr("selected", true);
+                        }
+                    });
                     uploadImg.setImgSrc(tempdata.filePath)
                     $("#hospitalName  option[value="+tempdata.hospitalCode+"] ").attr("selected",true)
                     $("#specialtyPhone").val(tempdata.specialtyPhone);
                     $(".w-e-text").html(tempdata.specialtyDescribe);
                 }
             };
+            uploadImg.init();
             init();
 
 

@@ -4,6 +4,43 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        .upload-wrap{
+            position: relative;
+            display: inline-block;
+            overflow: hidden;
+
+            border-radius: 3px;
+        }
+        .upload-wrap .file-ele{
+            position: absolute;
+            top:0;
+            right:0;
+            opacity: 0;
+            height: 100%;
+            width: 100%;
+            cursor: pointer;
+        }
+        .upload-wrap .file-open{
+            width:90px;
+            height:36px;
+            line-height:36px;
+            text-align: center;
+            color:#fff;
+            background: red;
+        }
+        label{
+            text-align: right;
+        }
+        #clsfile{
+            height: 36px;
+            margin-left: -92px;
+            display: none;
+            margin-right: 18px;
+            background-color: red;
+            z-index: 1;
+        }
+    </style>
 </head>
 <body>
 <div class="row">
@@ -40,6 +77,10 @@
                 <div class="upload-wrap anticon" nv-file-drop="" uploader="uploader">
                     <input id="upload_file" class="file-ele" type="file" file-model="image" name="image" nv-file-select uploader="uploader" multiple />
                     <div class="file-open"><em class="upload"></em>&nbsp;选择附件</div>
+                </div>
+                <button type="button" class="btn btn-danger" id="clsfile">清除文件</button>
+                <div  id="addFile">
+                    <!-- <p> </p> -->
                 </div>
             </div>
 

@@ -34,8 +34,7 @@ public class IndustrialDevelopSerProServiceImpl implements IndustrialDevelopSerP
 
     @Override
     public int insertSelective(IndustrialDevelopSerPro record) {
-        record.setStatus("售卖中");
-        record.setItemcode(UUIDUtils.getUUID());
+//        record.setItemcode(UUIDUtils.getUUID());
         record.setOrgCode(usernameUtil.getOrgCode());
         return industrialDevelopSerProMapper.insertSelective(record);
     }

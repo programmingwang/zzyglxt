@@ -1,6 +1,7 @@
 package com.zyyglxt.service;
 
 import com.zyyglxt.dataobject.IndustrialDevelopSaleDrug;
+import com.zyyglxt.error.BusinessException;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -15,16 +16,16 @@ public interface IndustrialDevelopSaleDrugService{
 
     int deleteByPrimaryKey(Integer itemid,String itemcode);
 
-    int insert(IndustrialDevelopSaleDrug record);
+    int insert(IndustrialDevelopSaleDrug record)  throws BusinessException;;
 
     int insertSelective(IndustrialDevelopSaleDrug record);
 
     IndustrialDevelopSaleDrug selectByPrimaryKey(Integer itemid,String itemcode);
 
-    int updateByPrimaryKeySelective(IndustrialDevelopSaleDrug record);
+    int updateByPrimaryKeySelective(IndustrialDevelopSaleDrug record)  throws BusinessException;;
 
     int updateByPrimaryKey(IndustrialDevelopSaleDrug record);
 
-   List< IndustrialDevelopSaleDrug> selectAllSaleDrug( String orgCode);//查询所有售药记录信息
+   List< IndustrialDevelopSaleDrug> selectAllSaleDrug(String orgCode);//查询所有售药记录信息
 
 }

@@ -1,8 +1,6 @@
 package com.zyyglxt.service.impl;
 
-import com.zyyglxt.dao.FileDOMapper;
 import com.zyyglxt.dao.HealthCareChineseMedicineDOMapper;
-import com.zyyglxt.dataobject.FileDO;
 import com.zyyglxt.dataobject.HealthCareChineseMedicineDO;
 import com.zyyglxt.dataobject.HealthCareChineseMedicineDOKey;
 import com.zyyglxt.error.BusinessException;

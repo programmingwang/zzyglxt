@@ -4,6 +4,7 @@ import com.zyyglxt.annotation.LogAnnotation;
 import com.zyyglxt.dataobject.HealthCareChineseMedicineDO;
 import com.zyyglxt.dataobject.IndustrialDevelopSaleDrug;
 import com.zyyglxt.dto.HealthCareChineseMedicineDto;
+import com.zyyglxt.dto.industrialDevelop.IndustrialDevelopSaleDrugDto;
 import com.zyyglxt.error.EmBusinessError;
 import com.zyyglxt.response.ResponseData;
 import com.zyyglxt.service.IFileService;
@@ -36,21 +37,24 @@ public class SaleDrugController {
     UsernameUtil usernameUtil;
 
     @ResponseBody
-    @RequestMapping(value = "sale-drug-add", method = RequestMethod.POST)
-    public ResponseData addSaleDrug(@RequestBody IndustrialDevelopSaleDrug record){
+    @RequestMapping(value = "insertsaledrug", method = RequestMethod.POST)
+    @LogAnnotation(appCode ="",logTitle ="售药添加",logLevel ="3",creater ="",updater = "")
+    public ResponseData addSaleDrug(@RequestBody IndustrialDevelopSaleDrug record) {
         saleDrugService.insertSelective(record);
         return new ResponseData(EmBusinessError.success);
     }
 
     @ResponseBody
-    @RequestMapping(value = "sale-drug-update", method = RequestMethod.PUT)
+    @RequestMapping(value = "updatehealthcarechinesemedicinedo", method = RequestMethod.PUT)
+    @LogAnnotation(appCode ="",logTitle ="售药数据修改",logLevel ="2",creater ="",updater = "")
     public ResponseData updSaleDrug(@RequestBody IndustrialDevelopSaleDrug record){
         saleDrugService.updateByPrimaryKeySelective(record);
         return new ResponseData(EmBusinessError.success);
     }
 
+    @RequestMapping(value ="deletesaledrug/{itemID}/{itemCode}",method = RequestMethod.DELETE )
     @ResponseBody
-    @RequestMapping(value = "sale-drug-del", method = RequestMethod.DELETE)
+    @LogAnnotation(appCode ="",logTitle ="售药数据删除",logLevel ="4",creater ="",updater = "")
     public ResponseData delSaleDrug(@RequestBody IndustrialDevelopSaleDrug record){
         saleDrugService.deleteByPrimaryKey(record.getItemid(),record.getItemcode());
         return new ResponseData(EmBusinessError.success);
@@ -61,17 +65,25 @@ public class SaleDrugController {
     @LogAnnotation(appCode ="",logTitle ="查寻所有售药数据",logLevel ="1",creater ="",updater = "")
     @ResponseBody
     public ResponseData selectAllSaleDrug(){
-        List<IndustrialDevelopSaleDrug> industrialDevelopSaleDrug = saleDrugService.selectAllSaleDrug(usernameUtil.getOrgCode());
-        return new ResponseData(EmBusinessError.success,industrialDevelopSaleDrug);
+        List<IndustrialDevelopSaleDrug> industrialDevelopSaleDrugList = saleDrugService.selectAllSaleDrug(usernameUtil.getOrgCode());
+//        return new ResponseData(EmBusinessError.success,industrialDevelopSaleDrug);
+        List<IndustrialDevelopSaleDrugDto> industrialDevelopSaleDrugDtoList= new ArrayList<>();
+        for (IndustrialDevelopSaleDrug industrialDevelopSaleDrug : industrialDevelopSaleDrugList) {
+            industrialDevelopSaleDrugDtoList.add(
+                    this.convertDtoFromDo(
+                            industrialDevelopSaleDrug,iFileService.selectFileByDataCode(
+                                    industrialDevelopSaleDrug.getItemcode()).getFilePath()));
+        }
+        return new ResponseData(EmBusinessError.success,industrialDevelopSaleDrugDtoList);
     }
-
-    private IndustrialDevelopSaleDrug convertDtoFromDo(IndustrialDevelopSaleDrug industrialDevelopSaleDrug, String filePath){
+      //   usernameUtil.getOrgCode()
+    private IndustrialDevelopSaleDrugDto convertDtoFromDo(IndustrialDevelopSaleDrug industrialDevelopSaleDrug, String filePath){
         if(StringUtils.isEmpty(filePath)){
             filePath = "已经损坏了";
         }
-        IndustrialDevelopSaleDrug industrialDevelopSaleDrug1 = new IndustrialDevelopSaleDrug();
-        BeanUtils.copyProperties(industrialDevelopSaleDrug,industrialDevelopSaleDrug1);
-        industrialDevelopSaleDrug1.setFilePath(filePath);
-        return industrialDevelopSaleDrug1;
+        IndustrialDevelopSaleDrugDto industrialDevelopSaleDrugDto = new IndustrialDevelopSaleDrugDto();
+        BeanUtils.copyProperties(industrialDevelopSaleDrug,industrialDevelopSaleDrugDto);
+        industrialDevelopSaleDrugDto.setFilePath(filePath);
+        return industrialDevelopSaleDrugDto;
     }
 }

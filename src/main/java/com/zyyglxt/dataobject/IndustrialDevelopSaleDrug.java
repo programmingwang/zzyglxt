@@ -122,5 +122,140 @@ public class IndustrialDevelopSaleDrug {
 
     private String fileName;
 
-    private String filePath;
+    public Integer getItemid() {
+        return itemid;
+    }
+
+    public void setItemid(Integer itemid) {
+        this.itemid = itemid;
+    }
+
+    public String getItemcode() {
+        return itemcode;
+    }
+
+    public void setItemcode(String itemcode) {
+        this.itemcode = itemcode;
+    }
+
+    public String getDrugName() {
+        return drugName;
+    }
+
+    public void setDrugName(String drugName) {
+        this.drugName = drugName;
+    }
+
+    public String getFunctionIndications() {
+        return functionIndications;
+    }
+
+    public void setFunctionIndications(String functionIndications) {
+        this.functionIndications = functionIndications;
+    }
+
+    public String getUsage() {
+        return usage;
+    }
+
+    public void setUsage(String usage) {
+        this.usage = usage;
+    }
+
+    public String getAdverseReactions() {
+        return adverseReactions;
+    }
+
+    public void setAdverseReactions(String adverseReactions) {
+        this.adverseReactions = adverseReactions;
+    }
+
+    public String getTaboo() {
+        return taboo;
+    }
+
+    public void setTaboo(String taboo) {
+        this.taboo = taboo;
+    }
+
+    public String getSpecifications() {
+        return specifications;
+    }
+
+    public void setSpecifications(String specifications) {
+        this.specifications = specifications;
+    }
+
+    public String getCareful() {
+        return careful;
+    }
+
+    public void setCareful(String careful) {
+        this.careful = careful;
+    }
+
+    public String getStorage() {
+        return storage;
+    }
+
+    public void setStorage(String storage) {
+        this.storage = storage;
+    }
+
+    public String getPacking() {
+        return packing;
+    }
+
+    public void setPacking(String packing) {
+        this.packing = packing;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getOrgCode() {
+        return orgCode;
+    }
+
+    public void setOrgCode(String orgCode) {
+        this.orgCode = orgCode;
+    }
+
+    public String getCreater() {
+        return creater;
+    }
+
+    public void setCreater(String creater) {
+        this.creater = creater;
+    }
+
+    public Date getItemcreateat() {
+        return itemcreateat;
+    }
+
+    public void setItemcreateat(Date itemcreateat) {
+        this.itemcreateat = itemcreateat;
+    }
+
+    public String getUpdater() {
+        return updater;
+    }
+
+    public void setUpdater(String updater) {
+        this.updater = updater;
+    }
+
+    public Date getItemupdateat() {
+        return itemupdateat;
+    }
+
+    public void setItemupdateat(Date itemupdateat) {
+        this.itemupdateat = itemupdateat;
+    }
+
 }

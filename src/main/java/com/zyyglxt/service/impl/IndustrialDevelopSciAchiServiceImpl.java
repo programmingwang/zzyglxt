@@ -7,8 +7,11 @@ import com.zyyglxt.dataobject.validation.ValidationGroups;
 import com.zyyglxt.error.BusinessException;
 import com.zyyglxt.error.EmBusinessError;
 import com.zyyglxt.service.IIndustrialDevelopSciAchiService;
+import com.zyyglxt.util.DateUtils;
+import com.zyyglxt.util.UsernameUtil;
 import com.zyyglxt.validator.ValidatorImpl;
 import com.zyyglxt.validator.ValidatorResult;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -29,12 +32,15 @@ public class IndustrialDevelopSciAchiServiceImpl implements IIndustrialDevelopSc
 
     @Resource
     ValidatorImpl validator;
+
+    @Autowired
+    UsernameUtil usernameUtil;
+
     @Override
     public void addAchievement(IndustrialDevelopSciAchiDO record) {
-        record.setItemcreateat(new Date());
-        record.setItemupdateat(new Date());
-        record.setCreater("未定义");
-        record.setUpdater("未定义");
+        record.setItemcreateat(DateUtils.getDate());
+        record.setCreater(usernameUtil.getOperateUser());
+        record.setUpdater(usernameUtil.getOperateUser());
         ValidatorResult result = validator.validate(record, ValidationGroups.Insert.class);
         if (result.isHasErrors()){
             throw new BusinessException(result.getErrMsg(), EmBusinessError.PARAMETER_VALIDATION_ERROR);
@@ -60,7 +66,7 @@ public class IndustrialDevelopSciAchiServiceImpl implements IIndustrialDevelopSc
         if (result.isHasErrors()){
             throw new BusinessException(result.getErrMsg(), EmBusinessError.PARAMETER_VALIDATION_ERROR);
         }
-        record.setItemupdateat(new Date());
+        record.setUpdater(usernameUtil.getOperateUser());
         sciAchiDOMapper.updateByPrimaryKeySelective(record);
     }
 
@@ -70,9 +76,9 @@ public class IndustrialDevelopSciAchiServiceImpl implements IIndustrialDevelopSc
     }
 
     @Override
-    public List<IndustrialDevelopSciAchiDO> getAchievement() {
+    public List<IndustrialDevelopSciAchiDO> getAchievement(String orgCode) {
 
-        return sciAchiDOMapper.selectAll();
+        return sciAchiDOMapper.selectAll(orgCode);
     }
 
 }

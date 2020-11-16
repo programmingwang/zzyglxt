@@ -8,10 +8,13 @@
             $.extend(fColumns,aColumns);
             fColumns.splice(0,0,
                 {
-                    width:'60px', title: '序号', align: 'center', formatter: function (value, row, index) {
+                    width:'64px', title: '序号', align: 'center', formatter: function (value, row, index) {
+                        //获取每页显示的数量
                         var pageSize = $("#"+aTableID).bootstrapTable('getOptions').pageSize;
+                        //获取当前是第几页
                         var pageNumber = $("#"+aTableID).bootstrapTable('getOptions').pageNumber;
-                        return pageSize * (pageNumber - 1) + index + 1;
+                        // return pageSize * (pageNumber - 1) + index + 1;  // 分页后出现断层
+                        return index +1;
                     }
                 }
             );
@@ -105,43 +108,166 @@
             $("#"+aTableID).bootstrapTable("destroy");
         }
 
+
+
         //$(".float-right").attr("display",block);
 
         function globalSearch(tableID,url,needParam,aCol) {
-            //
-            var myTable = myBootStrapTableInit(tableID, url, needParam, aCol);
-            var oTab=document.getElementById("table");
-            var oBt=document.getElementById("taskNameSearch");
+
+
+            // var oTab=document.getElementById("table");
             var btnSearch=document.getElementById("btnSearch");
             var param = {};
-            btnSearch.onclick=function(){
-                console.log(oTab.tHead.rows[0].childNodes[5].innerText);
-                for(var i=0;i<oTab.tBodies[0].rows.length;i++)
-                {
-                    var str1=oTab.tBodies[0].rows[i].innerText.toLowerCase();
-                    var str2=oBt.value.toLowerCase();
-                    console.log(typeof oTab.id);
-                    if (str2==="请输入"){
-                        myTable.free();
-                        myTable = myBootStrapTableInit(tableID,url,param,aCol)
-                    }
-                    /***********************************JS实现表格的模糊搜索*************************************/
-                    //表格的模糊搜索的就是通过JS中的一个search()方法，使用格式，string1.search(string2);如果
-                    //用户输入的字符串是其一个子串，就会返回该子串在主串的位置，不匹配则会返回-1，故操作如下
-                    if(str1.search(str2)!=-1){oTab.tBodies[0].rows[i].hidden= false;}
-                    else{oTab.tBodies[0].rows[i].hidden= true;}
-                    /***********************************JS实现表格的多关键字搜索********************************/
-                        //表格的多关键字搜索，加入用户所输入的多个关键字之间用空格隔开，就用split方法把一个长字符串以空格为标准，分成一个字符串数组，
-                        //然后以一个循环将切成的数组的子字符串与信息表中的字符串比较
-                    var arr=str2.split(' ');
-                    for(var j=0;j<arr.length;j++)
-                    {
-                        if(str1.search(arr[j])!=-1){oTab.tBodies[0].rows[i].hidden= false;}
-                    }
-
+            console.log(needParam);
+            btnSearch.onclick=function() {
+                var myTable = myBootStrapTableInit(tableID, url, needParam, aCol);
+                // 先刷新列表------------
+                // myTable.free();
+                // myTable = myBootStrapTableInit(tableID,url,param,aCol);
+                //-----------------------
+                if(document.getElementById("stratTime")){
+                    var stratTime=document.getElementById("stratTime").children;
+                    var endTime=document.getElementById("endTime").children;
+                    stratTime=stratTime[0].value+":"+stratTime[1].value+":"+stratTime[2].value;
+                    endTime=endTime[0].value+":"+endTime[1].value+":"+endTime[2].value;
+                }
+                var newArry = [];
+                var addstr=document.getElementById("chargePersonSearch").value;
+                var str = document.getElementById("taskNameSearch").value.toLowerCase();
+                var allTableData = $("#table").bootstrapTable("getData");
+                console.log(allTableData);
+                console.log(str);
+                console.log("状态"+addstr);
+                if (str=='请输入'||str==''){
+                    myTable.free();
+                    myTable = myBootStrapTableInit(tableID,url,param,aCol)
                 }
 
+                for (var i in allTableData) {
+                    for (var v in aCol){
+                        var textP = allTableData[i][aCol[v].field];
+                        var makeTime=allTableData[i][aCol[4].field];
+                        var isTimeSlot=false;
+                        makeTime=makeTime.substring(11,19);
+                        // console.log(makeTime);
+                        // console.log("开始时间："+stratTime);
+                        // console.log("结束时间"+endTime);
+                        // console.log(makeTime>=stratTime);
+                        // console.log(makeTime<=endTime);
+                        if (textP == null || textP == undefined || textP == '') {
+                            textP = "1";
+                        }
+                        if(makeTime>=stratTime && makeTime<=endTime){
+                            console.log('true')
+                            isTimeSlot=true;
+                        }
+                        if(stratTime==endTime){
+                            isTimeSlot=true;
+                        }
+
+                        if (textP.search(str)!= -1&&isTimeSlot){
+                            newArry.push(allTableData[i]);
+                        }
+                        if (addstr=="展示中"||addstr=="已下架"){
+                            str=str+" "+addstr;
+                            var arr=str.split(' ');
+                            for(var j=0;j<arr.length;j++)
+                                {
+                                    if(textP.search(arr[j])!=-1){
+                                        newArry.push(allTableData[i]);
+                                    }
+                                }
+                        }
+                    }
+
+                    // var chineseCulturalName = allTableData[i].chineseCulturalName;
+                    // console.log(chineseCulturalName);
+                    // if (chineseCulturalName.search(str) != -1) {
+                    //     newArry.push(allTableData[i]);
+                    // }
+                }
+                $("#table").bootstrapTable("load", newArry);
             }
+
+
+            //
+
+            // var oTab=document.getElementById("table");
+            // var btnSearch=document.getElementById("btnSearch");
+            //var param = {};
+            // btnSearch.onclick=function(){
+            //     var newArry=[];
+            //     var str=document.getElementById("taskNameSearch").value.toLowerCase();
+            //     var allTableData = $("#table").bootstrapTable("getData");
+            //     console.log(allTableData);
+            //     for(var i in allTableData){
+            //         var chineseCulturalName = allTableData[i][chineseCulturalName];
+            //
+            //         if (chineseCulturalName.search(chineseCulturalName)!=-1){
+            //             newArry.push(allTableData[i]);
+            //         }
+            //     }
+            //     $("#table").bootstrapTable("load",newArry);
+
+
+
+            // var stratTime=document.getElementById("stratTime").children;
+            // var endTime=document.getElementById("endTime").children;
+            // stratTime=stratTime[0].value+":"+stratTime[1].value+":"+stratTime[2].value;
+            // endTime=endTime[0].value+":"+endTime[1].value+":"+endTime[2].value;
+            //
+            // console.log(oTab.tHead.rows[0].childNodes[5].innerText);
+            // for(var i=0;i<oTab.tBodies[0].rows.length;i++)
+            // {
+            //     var str1=oTab.tBodies[0].rows[i].innerText.toLowerCase();
+            //     var str2=oBt.value.toLowerCase();
+            //     console.log(oTab.tBodies[0].rows);
+            //     var time=oTab.tBodies[0].rows[i].childNodes[5].innerText;
+            //     time=time.substring(11,19)
+            //     console.log(time>stratTime);
+            //     console.log(time<endTime);
+            //     console.log(time)
+            //     if (str2==="请输入"){
+            //         myTable.free();
+            //         myTable = myBootStrapTableInit(tableID,url,param,aCol)
+            //     }
+            /***********************************JS实现表格的模糊搜索*************************************/
+            //表格的模糊搜索的就是通过JS中的一个search()方法，使用格式，string1.search(string2);如果
+            //用户输入的字符串是其一个子串，就会返回该子串在主串的位置，不匹配则会返回-1，故操作如下
+            // if(str1.search(str2)!=-1){
+            //     oTab.tBodies[0].rows[i].hidden= false;
+            // if (startTime=endTime||stratTime>time||endTime<time){
+            //     oTab.tBodies[0].rows[i].hidden= true;
+            // }
+            // }
+            // else{
+            //     oTab.tBodies[0].rows[i].hidden= true;
+            // if (stratTime<time&&time<endTime){
+            //     oTab.tBodies[0].rows[i].hidden= false;
+            // }
+            // }
+            /***********************************JS实现表格的多关键字搜索********************************/
+                //表格的多关键字搜索，加入用户所输入的多个关键字之间用空格隔开，就用split方法把一个长字符串以空格为标准，分成一个字符串数组，
+                //然后以一个循环将切成的数组的子字符串与信息表中的字符串比较
+                // var arr=str2.split(' ');
+                // for(var j=0;j<arr.length;j++)
+                // {
+                //     if(str1.search(arr[j])!=-1){oTab.tBodies[0].rows[i].hidden= false;}
+                // }
+
+
+                // if (oTab.tBodies[0].rows[i].hidden== false||oTab.tBodies[0].rows[i].hidden==""){
+                //     if(stratTime<time&&endTime>time){
+                //         oTab.tBodies[0].rows[i].hidden= false;
+                //     } else {
+                //         oTab.tBodies[0].rows[i].hidden= true;
+                //     }
+                //
+                // }
+
+                //}
+
+                //}
 
             var aria=this.ariaExpanded; ;
             document.getElementById('closeAndOpen').onclick = function(){

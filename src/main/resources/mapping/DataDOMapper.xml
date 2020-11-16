@@ -76,6 +76,7 @@
     from tb_culpro_data
     where DATA_TYPE = #{dataType,jdbcType=VARCHAR}
     and DATA_STATUS = #{dataStatus,jdbcType=VARCHAR}
+    and DATA_LOCATION = ""
   </select>
   <select id="getAllNewsRot" parameterType="com.zyyglxt.dataobject.DataDOKey" resultMap="ResultMapWithBLOBs">
     <!--

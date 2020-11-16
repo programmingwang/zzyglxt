@@ -25,7 +25,7 @@ public interface IndustrialDevelopTecSerOrgMapper {
 
     int updateByPrimaryKey(IndustrialDevelopTecSerOrg record);
 
-    List<IndustrialDevelopTecSerOrg> selectAll();
+    List<IndustrialDevelopTecSerOrg> selectAll(@Param("type") String type);
 
     IndustrialDevelopTecSerOrg selectByOrgNameAndCode(String orgName, String orgCode);
 }

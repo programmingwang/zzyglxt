@@ -1,6 +1,7 @@
 package com.zyyglxt.service.impl;
 
 import com.zyyglxt.dao.HealthSciKnowDOMapper;
+import com.zyyglxt.dataobject.HealthCareFamPreDO;
 import com.zyyglxt.dataobject.HealthSciKnowDO;
 import com.zyyglxt.dataobject.HealthSciKnowDOKey;
 import com.zyyglxt.error.BusinessException;
@@ -15,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.annotation.Resource;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -72,13 +74,22 @@ public class HealthSciKnowDOServiceImpl implements HealthSciKnowDOService {
     }
     /*查询所有科普知识数据*/
     @Override
-    public List<HealthSciKnowDO> selectAllHealthSciKnow() {
-        return healthSciKnowDOMapper.selectAllHealthSciKnow();
+    public List<HealthSciKnowDO> selectAllHealthSciKnow(List<String> scienceKnowledgeStatus) {
+        List<HealthSciKnowDO> healthSciKnowDOList=new ArrayList<>();
+        for(String SciKnowStatus: scienceKnowledgeStatus){
+            healthSciKnowDOList.addAll(healthSciKnowDOMapper.selectAllHealthSciKnow(SciKnowStatus));
+        }
+        return healthSciKnowDOList;
     }
 
     @Override
     public int updateVisitNumHealthSciKnow(HealthSciKnowDOKey key) {
         healthSciKnowDOMapper.updateVisitNumHealthSciKnow(key);
         return 0;
+    }
+      /*科普知识数据状态*/
+    @Override
+    public int changeStatusToSciKnow(HealthSciKnowDOKey key, String scienceKnowledgeStatus) {
+        return healthSciKnowDOMapper.changeStatusToSciKnow(key,scienceKnowledgeStatus);
     }
 }

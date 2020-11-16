@@ -1,6 +1,6 @@
 package com.zyyglxt.dao;
 
-import com.zyyglxt.dataobject.FileDO;
+import com.zyyglxt.dataobject.FamPreDOKey;
 import com.zyyglxt.dataobject.HealthCareChineseMedicineDO;
 import com.zyyglxt.dataobject.HealthCareChineseMedicineDOKey;
 import org.apache.ibatis.annotations.Mapper;
@@ -25,5 +25,7 @@ public interface HealthCareChineseMedicineDOMapper {
 
     int updateByPrimaryKey(HealthCareChineseMedicineDO record);
 
-    List<HealthCareChineseMedicineDO> selectAllHealthCareChineseMedicine();
+    int changeStatusToMedicine(@Param("key") HealthCareChineseMedicineDOKey key , @Param("status") String chineseMedicineStatus);//中医药数据状态
+
+    List<HealthCareChineseMedicineDO> selectAllHealthCareChineseMedicine(@Param("chineseMedicineStatus") String chineseMedicineStatus);
 }

@@ -2,7 +2,8 @@
     require(['jquery','urlUtil','stringUtil','alertUtil','ajaxUtil'],
         function (jquery,urlUtil,stringUtil,alertUtil,ajaxUtil) {
 
-
+            var roleName = sessionStorage.getItem("rolename");
+            // console.log(roleName)
             var currentUrlHash = window.location.hash.replace("#", "");
             var menu_list = [
                 {
@@ -182,133 +183,224 @@
                     id: "12",
                     level: "1",
                     pid: ""
+                },{
+                    menu_name: "产业发展",
+                    menu_url: "",
+                    id: "13",
+                    level: "1",
+                    pid: ""
+                },
+                {
+                    menu_name: "＞合作交流",
+                    menu_url: "/industrialdevelop/cooperation",
+                    id: "13-2",
+                    level: "2",
+                    pid: "13"
+                },
+                {
+                    menu_name: "＞人才招募",
+                    menu_url: "/industrialdevelop/recruit",
+                    id: "13-3",
+                    level: "2",
+                    pid: "13"
+                },
+                {
+                    menu_name: "＞技术服务机构",
+                    menu_url: "/industrialdevelop/tecservice",
+                    id: "13-4",
+                    level: "2",
+                    pid: "13"
+                },
+                {
+                    menu_name: "＞科研院所",
+                    menu_url: "/industrialdevelop/tecserviceorg",
+                    id: "13-5",
+                    level: "2",
+                    pid: "13"
+                },
+                {
+<<<<<<< HEAD
+                    menu_name: "在售药材",
+                    menu_url: "/healthCare/healthcarechineseMedicine",
+                    id: "88",
+                    level: "1",
+                    pid: ""
+                },
+                {
+                    menu_name: "产业发展",
+                    menu_url: "",
+                    id: "99",
+=======
+                    menu_name: "＞高等院校",
+                    menu_url: "/industrialdevelop/school",
+                    id: "13-6",
+                    level: "2",
+                    pid: "13"
+                },
+                {
+                    menu_name: "＞基地风采",
+                    menu_url: "/industrialdevelop/style",
+                    id: "13-6",
+                    level: "2",
+                    pid: "13"
+                },
+                {
+                    menu_name: "＞中药材加工企业",
+                    menu_url: "/industrialdevelop/chinesemed",
+                    id: "13-7",
+                    level: "2",
+                    pid: "13"
+                },
+                {
+                    menu_name: "＞中药材销售企业",
+                    menu_url: "/industrialdevelop/chinesemed-sale",
+                    id: "13-8",
+                    level: "2",
+                    pid: "13"
+                },
+                {
+                    menu_name: "＞中药材制造企业",
+                    menu_url: "/industrialdevelop/chinesemed-produce",
+                    id: "13-9",
+                    level: "2",
+                    pid: "13"
+                },
+                {
+                    menu_name: "＞种植园管理",
+                    menu_url: "/industrialdevelop/plantation",
+                    id: "13-10",
+                    level: "2",
+                    pid: "13"
                 },
                 {
                     menu_name: "信息发布",
                     menu_url: "/data/dataNewsRotations",
-                    id: "13",
+                    id: "14",
+>>>>>>> 6af220ba059eb2aaa03a4e9c025f0c22bc43e7aa
                     level: "1",
                     pid: ""
                 },
                 {
                     menu_name: "＞新闻轮播图",
                     menu_url: "/data/dataNewsRotations",
-                    id: "13-1",
+                    id: "14-1",
                     level: "2",
-                    pid: "13"
+                    pid: "14"
                 },
                 {
                     menu_name: "＞新闻管理",
                     menu_url: "/data/dataNewsInf",
-                    id: "13-2",
+                    id: "14-2",
                     level: "2",
-                    pid: "13"
+                    pid: "14"
                 },
                 {
                     menu_name: "＞通知公告",
                     menu_url: "/data/dataAnnouncement",
-                    id: "13-3",
+                    id: "14-3",
                     level: "2",
-                    pid: "13"
+                    pid: "14"
                 },
                 {
                     menu_name: "＞政策法规",
                     menu_url: "/data/dataRegulation",
-                    id: "13-4",
+                    id: "14-4",
                     level: "2",
-                    pid: "13"
+                    pid: "14"
                 },
                 {
                     menu_name: "＞办事流程",
                     menu_url: "/data/dataProcess",
-                    id: "13-5",
+                    id: "14-5",
                     level: "2",
-                    pid: "13"
+                    pid: "14"
+                },
+
+                {
+                    menu_name: "科研项目管理",
+                    menu_url: "",
+                    id: "15",
+                    level: "1",
+                    pid: ""
                 },
                 {
-                    menu_name: "产业发展",
-                    menu_url: "",
-                    id: "99",
+                    menu_name: "＞设置填报时间",
+                    menu_url: "/scientificProject/setTime",
+                    id: "15-1",
+                    level: "2",
+                    pid: "15"
+                },
+                {
+                    menu_name: "＞账号管理",
+                    menu_url: "/scientificProject/accountManagement",
+                    id: "15-2",
+                    level: "2",
+                    pid: "15"
+                },
+                {
+<<<<<<< HEAD
+                    menu_name: "＞中药材加工企业",
+                    menu_url: "/industrialdevelop/chinesemed/chinesemed-process",
+                    id: "99-7",
+=======
+                    menu_name: "＞课题管理",
+                    menu_url: "/scientificProject/projectManagement",
+                    id: "15-3",
+>>>>>>> 6af220ba059eb2aaa03a4e9c025f0c22bc43e7aa
+                    level: "2",
+                    pid: "15"
+                },
+                {
+<<<<<<< HEAD
+                    menu_name: "＞中药材销售企业",
+                    menu_url: "/industrialdevelop/chinesemed/chinesemed-sale",
+                    id: "99-8",
+=======
+                    menu_name: "＞专家管理",
+                    menu_url: "/scientificProject/expertManagement",
+                    id: "15-4",
+>>>>>>> 6af220ba059eb2aaa03a4e9c025f0c22bc43e7aa
+                    level: "2",
+                    pid: "15"
+                },
+                {
+<<<<<<< HEAD
+                    menu_name: "＞中药材制造企业",
+                    menu_url: "/industrialdevelop/chinesemed/chinesemed-produce",
+                    id: "99-9",
+=======
+                    menu_name: "＞分配专家",
+                    menu_url: "/scientificProject/distributionExpert",
+                    id: "15-5",
+>>>>>>> 6af220ba059eb2aaa03a4e9c025f0c22bc43e7aa
+                    level: "2",
+                    pid: "15"
+                },
+                {
+                    menu_name: "＞集中评审",
+                    menu_url: "/scientificProject/centralizedReview",
+                    id: "15-6",
+                    level: "2",
+                    pid: "15"
+                },
+                /*
+                技术服务机构后台管理------14
+                */
+                {
+                    menu_name: "服务项目",
+                    menu_url: "/serviceItems/tecserviceorg",
+                    id: "16",
                     level: "1",
                     pid: ""
                 },
                 {
                     menu_name: "＞科研成果",
                     menu_url: "/industrialdevelop/achievement",
-                    id: "99-1",
-                    level: "2",
-                    pid: "99"
+                    id: "20",
+                    level: "1",
+                    pid: ""
                 },
-                {
-                    menu_name: "＞合作交流",
-                    menu_url: "/industrialdevelop/cooperation",
-                    id: "99-2",
-                    level: "2",
-                    pid: "99"
-                },
-                {
-                    menu_name: "＞人才招募",
-                    menu_url: "/industrialdevelop/recruit",
-                    id: "99-3",
-                    level: "2",
-                    pid: "99"
-                },
-                {
-                    menu_name: "＞技术服务机构",
-                    menu_url: "/industrialdevelop/tecservice",
-                    id: "99-4",
-                    level: "2",
-                    pid: "99"
-                },
-                {
-                    menu_name: "＞科研院所",
-                    menu_url: "/industrialdevelop/tecserviceorg",
-                    id: "99-5",
-                    level: "2",
-                    pid: "99"
-                },
-                {
-                    menu_name: "＞高等院校",
-                    menu_url: "/industrialdevelop/school",
-                    id: "99-6",
-                    level: "2",
-                    pid: "99"
-                },
-                {
-                    menu_name: "＞基地风采",
-                    menu_url: "/industrialdevelop/style",
-                    id: "99-6",
-                    level: "2",
-                    pid: "99"
-                },
-                {
-                    menu_name: "＞中药材加工企业",
-                    menu_url: "/industrialdevelop/chinesemed",
-                    id: "99-7",
-                    level: "2",
-                    pid: "99"
-                },
-                {
-                    menu_name: "＞中药材销售企业",
-                    menu_url: "/industrialdevelop/chinesemed-sale",
-                    id: "99-8",
-                    level: "2",
-                    pid: "99"
-                },
-                {
-                    menu_name: "＞中药材制造企业",
-                    menu_url: "/industrialdevelop/chinesemed-produce",
-                    id: "99-9",
-                    level: "2",
-                    pid: "99"
-                },
-                {
-                    menu_name: "＞种植园管理",
-                    menu_url: "/industrialdevelop/plantation",
-                    id: "99-10",
-                    level: "2",
-                    pid: "99"
-                }
+
             ];
 
 
@@ -319,12 +411,12 @@
             }
 
 
-        function getHTML_dropdown_menu(itemStr) {
-            var str = "<div class=\"dropdown-menu left-menu-dropdown-menu\">\n" +
-                itemStr +
-                "</div>";
-            return str;
-        }
+            function getHTML_dropdown_menu(itemStr) {
+                var str = "<div class=\"dropdown-menu left-menu-dropdown-menu\">\n" +
+                    itemStr +
+                    "</div>";
+                return str;
+            }
 
 
             function getHTML(item,dropdownStr,show_active) {
@@ -393,11 +485,11 @@
                     htmlStr = htmlStr + getHTML(tm_item,dropdowStr,show);
                 });
 
-            return htmlStr;
-        }
+                return htmlStr;
+            }
 
 
-        $("#left_menu").html(getMenuStr(menu_list));
+            $("#left_menu").html(getMenuStr(menu_list));
 
 
             $(".collapse-btn").unbind().on("click",function () {

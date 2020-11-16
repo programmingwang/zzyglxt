@@ -3,7 +3,7 @@
 <mapper namespace="com.zyyglxt.dao.DictMapper">
 
     <select id="selectDictItemByCode" resultType="com.zyyglxt.dataobject.DictItem">
-        select dictitem.itemCode as code, dictitem.DITEM_VALUE as value
+        select dictitem.DITEM_CODE as code, dictitem.DITEM_VALUE as value
         from dict,
              dictitem
         where dict.itemCode = dictitem.DICT_CODE

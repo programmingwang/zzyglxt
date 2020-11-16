@@ -1,15 +1,22 @@
-package com.zyyglxt.controller.industrialDevelop;
+package com.zyyglxt.controller.IndustrialDevelop;
 
+
+import com.zyyglxt.dataobject.FileDO;
 import com.zyyglxt.dataobject.IndustrialDevelopSciAchiDO;
 import com.zyyglxt.dataobject.IndustrialDevelopSciAchiDOKey;
+import com.zyyglxt.dto.industrialDevelop.IndustrialDevelopSciAchiDODto;
 import com.zyyglxt.error.EmBusinessError;
 import com.zyyglxt.response.ResponseData;
+import com.zyyglxt.service.IFileService;
 import com.zyyglxt.service.IIndustrialDevelopSciAchiService;
+import com.zyyglxt.util.ConvertDOToDTOUtil;
 import io.swagger.annotations.Api;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import javax.validation.Valid;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @Author lrt
@@ -22,6 +29,9 @@ import javax.validation.Valid;
 public class SciAchiController {
     @Resource
     IIndustrialDevelopSciAchiService sciAchiService;
+
+    @Autowired
+    IFileService iFileService;
 
     /**
      * 增加科研成果
@@ -71,11 +81,18 @@ public class SciAchiController {
         return new ResponseData(EmBusinessError.success);
     }
 
-    @RequestMapping(value = "/achievement", method = RequestMethod.GET)
-    public ResponseData getAchievement() {
-        ResponseData responseData = new ResponseData(EmBusinessError.success);
-        responseData.setData(sciAchiService.getAchievement());
-        return responseData;
+    @RequestMapping(value = "/achievement/{orgCode}", method = RequestMethod.GET)
+    public ResponseData getAchievement(@PathVariable String orgCode) {
+        List<IndustrialDevelopSciAchiDO> achievement = sciAchiService.getAchievement(orgCode);
+        List<IndustrialDevelopSciAchiDODto> industrialDevelopSciAchiDODtoList = new ArrayList<>();
+
+        for (IndustrialDevelopSciAchiDO industrialDevelopSciAchiDO : achievement) {
+            FileDO fileDO = iFileService.selectFileByDataCode(industrialDevelopSciAchiDO.getItemcode());
+            industrialDevelopSciAchiDODtoList.add(
+                    ConvertDOToDTOUtil.convertFromDOToDTO(industrialDevelopSciAchiDO, fileDO.getFilePath(),
+                                        fileDO.getFileName()));
+        }
+        return new ResponseData(EmBusinessError.success,industrialDevelopSciAchiDODtoList);
     }
 }
 

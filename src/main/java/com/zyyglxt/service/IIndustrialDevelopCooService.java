@@ -22,7 +22,7 @@ public interface IIndustrialDevelopCooService {
 
     List<IndustrialDevelopCooExcDO> getCooRecord(int page, int page_size);
 
-    List<IndustrialDevelopCooExcDO> getCooRecord();
+    List<IndustrialDevelopCooExcDO> getCooRecord(String orgCode);
 
 
 }

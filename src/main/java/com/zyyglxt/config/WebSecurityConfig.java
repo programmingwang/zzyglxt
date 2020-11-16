@@ -74,9 +74,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.cors().and().csrf().disable().
-                authorizeRequests().antMatchers("/component/**","/css/**", "/fonts/**",
+                authorizeRequests().antMatchers("/v2/api-docs",//swagger api json
+                "/swagger-resources/configuration/ui",//用来获取支持的动作
+                "/swagger-resources",//用来获取api-docs的URI
+                "/swagger-resources/configuration/security",//安全选项
+                "/swagger-ui.html",
+                "/webjars/**").permitAll().antMatchers("/component/**","/css/**", "/fonts/**",
                 "/images/**","/main/**", "/project/**", "/utils/**", "/", "/register","/user/queryOrgStatus").permitAll().
                     anyRequest().authenticated().
+
                 and().logout().
                     permitAll().//允许所有用户
                     logoutSuccessHandler(logoutSuccessHandler).//登出成功处理逻辑

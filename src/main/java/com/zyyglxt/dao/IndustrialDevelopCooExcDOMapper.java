@@ -59,5 +59,5 @@ public interface IndustrialDevelopCooExcDOMapper {
 
     List<IndustrialDevelopCooExcDO> selectByPage(@Param("start") int start,@Param("end") int end);
 
-    List<IndustrialDevelopCooExcDO> selectAll();
+    List<IndustrialDevelopCooExcDO> selectAll(@Param("orgCode") String orgCode);
 }

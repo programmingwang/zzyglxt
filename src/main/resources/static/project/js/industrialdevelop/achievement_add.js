@@ -44,7 +44,7 @@
             editor.config.showLinkImg = false
             editor.config.uploadImgShowBase64 = true
             editor.create()
-            editor.txt.html('<p></p>')
+            editor.txt.html('')
 
             $("#div1").on("input propertychange", function () {
                 var textNUm = editor.txt.text();
@@ -69,7 +69,7 @@
                 param.contacts = $("#contacts").val();
                 param.phone = $("#phone").val();
                 param.context = $(".w-e-text").html();
-                param.orgCode = "未定义";
+                param.orgCode = sessionStorage.getItem("orgCode");
                 return param;
             }
 
@@ -87,7 +87,7 @@
 
                 ajaxUtil.myAjax(null, url, param, function (data) {
                     if (ajaxUtil.success(data)) {
-                        if (file != null){
+                        if (file != null) {
                             ajaxUtil.fileAjax(itemcode, file, "admin", "aaaaaaa");
                         }
                         orange.redirect(url)
@@ -99,7 +99,11 @@
 
             $("#submitBtn").unbind('click').on('click', function () {
                 var param = generateParam();
-                param.industrialDevelopStatus = "——";
+                param.industrialDevelopStatus = "展示中";
+                var file = $("#upload_file")[0].files[0];
+                if (file != null) {
+                    ajaxUtil.updateFile(itemcode, file,"admin","aaaaa");
+                }
                 ajaxUtil.myAjax(null, url, param, function (data) {
                     if (ajaxUtil.success(data)) {
                         orange.redirect(url)
@@ -120,7 +124,8 @@
                     $(".w-e-text").html(tempdata.context);
                     itemcode = tempdata.itemcode
                 }
-                init = function () {}
+                init = function () {
+                }
             };
             init();
 

@@ -45,6 +45,8 @@
                 }
             });
 
+            uploadImg.init();
+
             /*下拉框值*/
             $("#dataLocation").selectUtil(dictUtil.getDictByCode(dictUtil.DICT_LIST.dataLocation));
 
@@ -59,6 +61,7 @@
                 var operateMessage;
                 if(!isUpdate()){
                     addUpdateUrl = "/datado/newsInf/insertNewsInf";
+                    operateMessage = "新增新闻轮播图成功";
                     newsRotationsEntity = {
                         itemcode: stringUtil.getUUID(),
                         dataTitle : $("#dataTitle").val(),
@@ -67,7 +70,6 @@
                         dataContent : editor.txt.html(),
                         dataLocation : $("#dataLocation").val(),
                     };
-                    operateMessage = "新增新闻轮播图成功";
                 }else{
                     var needData = JSON.parse(localStorage.getItem("rowData"));
                     addUpdateUrl = "/datado/newsInf/updateNewsInf";
@@ -79,7 +81,7 @@
                         dataAuthor : $("#dataAuthor").val(),
                         dataContent : editor.txt.html(),
                         dataLocation : $("#dataLocation").val(),
-                    };
+                    }
                     operateMessage = "更新新闻轮播图成功";
                 }
 
@@ -87,11 +89,15 @@
 
                 ajaxUtil.myAjax(null,addUpdateUrl,newsRotationsEntity,function (data) {
                     if(ajaxUtil.success(data)){
-                        alertUtil.info(operateMessage);
-                        var url = "/data/dataNewsRotations";
-                        orange.redirect(url);
+                        if(data.code == ajaxUtil.successCode) {
+                            alertUtil.info(operateMessage);
+                            var url = "/data/dataNewsRotations";
+                            orange.redirect(url);
+                        }else{
+                            alertUtil.error(data.msg);
+                        }
                     }else {
-                        alertUtil.alert(data.msg);
+                        alertUtil.error(data.msg);
                     }
                 },false,true);
 
@@ -103,18 +109,17 @@
                     $("#dataTitle").val(tempdata.dataTitle);
                     $("#dataSource").val(tempdata.dataSource);
                     $("#dataAuthor").val(tempdata.dataAuthor);
+                    $("#dataLocation").val(tempdata.dataLocation);
                     editor.txt.html(tempdata.dataContent);
                     var img = tempdata.filePath;
-                    $("#upimg").attr("src",img);
-                    $("#dataLocation option[value="+tempdata.dataLocation+"] ").attr("selected",true);
+                    uploadImg.setImgSrc(img);
+                    //$("#dataLocation option[value="+tempdata.dataLocation+"] ").attr("selected",true);
                 }
             }());
 
             function isUpdate() {
                 return (localStorage.getItem("rowData") != null || localStorage.getItem("rowData") != undefined)
             }
-
-            uploadImg.init();
 
         })
 })();

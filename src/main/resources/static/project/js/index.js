@@ -217,7 +217,7 @@
                     id: "13-5",
                     level: "2",
                     pid: "13"
-                },
+                },/*
                 {
                     menu_name: "在售药材",
                     menu_url: "/healthCare/healthcarechineseMedicine",
@@ -229,19 +229,15 @@
                     menu_name: "产业发展",
                     menu_url: "",
                     id: "99",
+                },
+                {
                     menu_name: "＞高等院校",
                     menu_url: "/industrialdevelop/school",
                     id: "13-6",
                     level: "2",
                     pid: "13"
                 },
-                {
-                    menu_name: "＞基地风采",
-                    menu_url: "/industrialdevelop/style",
-                    id: "13-6",
-                    level: "2",
-                    pid: "13"
-                },
+
                 {
                     menu_name: "＞中药材加工企业",
                     menu_url: "/industrialdevelop/chinesemed",
@@ -338,6 +334,9 @@
                     menu_name: "＞中药材加工企业",
                     menu_url: "/industrialdevelop/chinesemed/chinesemed-process",
                     id: "99-7",
+
+                },
+                {
                     menu_name: "＞课题管理",
                     menu_url: "/scientificProject/projectManagement",
                     id: "15-3",
@@ -347,7 +346,8 @@
                 {
                     menu_name: "＞中药材销售企业",
                     menu_url: "/industrialdevelop/chinesemed/chinesemed-sale",
-                    id: "99-8",
+                },
+                {
                     menu_name: "＞专家管理",
                     menu_url: "/scientificProject/expertManagement",
                     id: "15-4",
@@ -358,6 +358,8 @@
                     menu_name: "＞中药材制造企业",
                     menu_url: "/industrialdevelop/chinesemed/chinesemed-produce",
                     id: "99-9",
+                },
+                {
                     menu_name: "＞分配专家",
                     menu_url: "/scientificProject/distributionExpert",
                     id: "15-5",
@@ -382,9 +384,16 @@
                     pid: ""
                 },
                 {
-                    menu_name: "＞科研成果",
+                    menu_name: "科研成果",
                     menu_url: "/industrialdevelop/achievement",
                     id: "20",
+                    level: "1",
+                    pid: ""
+                },
+                {
+                    menu_name: "基地风采",
+                    menu_url: "/industrialdevelop/style",
+                    id: "21",
                     level: "1",
                     pid: ""
                 },

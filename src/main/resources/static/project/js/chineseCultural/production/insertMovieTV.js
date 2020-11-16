@@ -105,8 +105,7 @@
                     $("#chineseCulturalAuthor").val(tempdata.chineseCulturalAuthor);
                     editor.txt.html(tempdata.chineseCulturalContent);
                     var img = tempdata.filePath;
-                    $("#upimg").attr("src",img);
-
+                    uploadImg.setImgSrc(img);
                 }
             }());
 

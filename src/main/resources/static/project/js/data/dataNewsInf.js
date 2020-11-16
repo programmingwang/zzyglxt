@@ -4,8 +4,10 @@
 
         var url = "/datado/newsInf/selectAllNewsInf";
 
+        var webStatus = dictUtil.getDictByCode(dictUtil.DICT_LIST.webStatus);
+
         //角色加载工具
-        url = selectUtil.getRoleTable(sessionStorage.getItem("rolename"),url,"dataStatus");
+        url = selectUtil.getRoleTable(sessionStorage.getItem("rolename"),url,"dataStatus",webStatus);
 
         var addUrl = "/data/add/addNewsInf";
         var aParam = {
@@ -14,7 +16,7 @@
 
         //操作
         function operation(value, row, index){
-            return selectUtil.getRoleOperate(value,row,index,sessionStorage.getItem("rolename"),row.dataStatus);
+            return selectUtil.getRoleOperate(value,row,index,sessionStorage.getItem("rolename"),row.dataStatus,webStatus);
         }
 
         //修改事件
@@ -60,12 +62,12 @@
                     modalConfirmFun:function () {
                         var isSuccess = false;
                         var submitStatus = {
-                            "dataStatus": selectUtil.getStatus(sessionStorage.getItem("rolename"))
+                            "dataStatus": selectUtil.getStatus(sessionStorage.getItem("rolename"),webStatus)
                         };
                         ajaxUtil.myAjax(null,"/datado/newsInf/changeNewsStatus/"+row.itemid+"/"+row.itemcode,submitStatus,function (data) {
                             if(ajaxUtil.success(data)){
                                 if(data.code == 88888){
-                                    if(selectUtil.getStatus(sessionStorage.getItem("rolename")) == "处长已审核"){
+                                    if(sessionStorage.getItem("rolename") == "政务资源处长"){
                                         alertUtil.info("审核已通过，已发送给综合处处长做最后审核！");
                                     }else{
                                         alertUtil.info("审核已通过，已上架！");
@@ -92,8 +94,13 @@
                     modalConfirmFun:function () {
                         var isSuccess = false;
                         var submitStatus = {
-                            "dataStatus": "已下架"
+                            "dataStatus": ""
                         };
+                        if(sessionStorage.getItem("rolename") == "文化宣传处长" || sessionStorage.getItem("rolename") == "政务资源处长"){
+                            submitStatus.dataStatus = webStatus[3].text;
+                        }else{
+                            submitStatus.dataStatus = webStatus[4].text;
+                        }
                         ajaxUtil.myAjax(null,"/datado/newsInf/changeNewsStatus/"+row.itemid+"/"+row.itemcode,submitStatus,function (data) {
                             if(ajaxUtil.success(data)){
                                 if(data.code == 88888){
@@ -121,7 +128,7 @@
                     modalConfirmFun:function () {
                         var isSuccess = false;
                         var submitStatus = {
-                            "dataStatus": "已下架"
+                            "dataStatus": webStatus[6].text
                         };
                         ajaxUtil.myAjax(null,"/datado/newsInf/changeNewsStatus/"+row.itemid+"/"+row.itemcode,submitStatus,function (data) {
                             if(ajaxUtil.success(data)){
@@ -173,8 +180,15 @@
                     modalConfirmFun:function () {
                         var isSuccess = false;
                         var submitStatus = {
-                            "dataStatus": selectUtil.getStatus(sessionStorage.getItem("rolename"))
+                            "dataStatus": ""
                         };
+                        if(row.dataFileType=="转载性新闻" || row.dataFileType=="转载性公告"){
+                            submitStatus.dataStatus = "已提交等待综合处处长审核";
+                        }else{
+                            submitStatus = {
+                                "dataStatus": selectUtil.getStatus(sessionStorage.getItem("rolename"),webStatus)
+                            }
+                        }
                         ajaxUtil.myAjax(null,"/datado/newsInf/changeNewsStatus/"+row.itemid+"/"+row.itemcode,submitStatus,function (data) {
                             if(ajaxUtil.success(data)){
                                 if(data.code == 88888){
@@ -203,7 +217,7 @@
                     modalConfirmFun:function () {
                         var isSuccess = false;
                         var submitStatus = {
-                            "dataStatus": "--"
+                            "dataStatus": webStatus[0].text
                         };
                         ajaxUtil.myAjax(null,"/datado/newsInf/changeNewsStatus/"+row.itemid+"/"+row.itemcode,submitStatus,function (data) {
                             if(ajaxUtil.success(data)){

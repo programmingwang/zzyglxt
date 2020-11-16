@@ -5,8 +5,10 @@
 
         var url = "/datado/newsInf/selectAllNewsRot";
 
+        var webStatus = dictUtil.getDictByCode(dictUtil.DICT_LIST.webStatus);
+
         //角色加载工具
-        url = selectUtil.getRoleTable(sessionStorage.getItem("rolename"),url,"dataStatus");
+        url = selectUtil.getRoleTable(sessionStorage.getItem("rolename"),url,"dataStatus",webStatus);
 
         var addUrl = "/data/add/addNewsRotations";
         var aParam = {
@@ -15,11 +17,7 @@
 
         //操作
         function operation(value, row, index){
-            return selectUtil.getRoleOperate(value,row,index,sessionStorage.getItem("rolename"),row.dataStatus);
-            /*return [
-                '<button type="button" class="edit btn btn-primary btn-sm" style="margin-right: 5px" data-toggle="modal" data-target="" >编辑</button>',
-                '<button type="button" class="delete btn btn-danger btn-sm"  data-toggle="modal" data-target="#staticBackdrop" >删除</button>',
-            ].join('');*/
+            return selectUtil.getRoleOperate(value,row,index,sessionStorage.getItem("rolename"),row.dataStatus,webStatus);
         }
 
 
@@ -65,12 +63,12 @@
                         modalConfirmFun:function () {
                             var isSuccess = false;
                             var submitStatus = {
-                                "dataStatus": selectUtil.getStatus(sessionStorage.getItem("rolename"))
+                                "dataStatus": selectUtil.getStatus(sessionStorage.getItem("rolename"),webStatus)
                             };
                             ajaxUtil.myAjax(null,"/datado/newsInf/changeNewsStatus/"+row.itemid+"/"+row.itemcode,submitStatus,function (data) {
                                 if(ajaxUtil.success(data)){
                                     if(data.code == 88888){
-                                        if(selectUtil.getStatus(sessionStorage.getItem("rolename")) == "处长已审核"){
+                                        if(sessionStorage.getItem("rolename") == "政务资源处长"){
                                             alertUtil.info("审核已通过，已发送给综合处处长做最后审核！");
                                         }else{
                                             alertUtil.info("审核已通过，已上架！");
@@ -98,8 +96,13 @@
                         modalConfirmFun:function () {
                             var isSuccess = false;
                             var submitStatus = {
-                                "dataStatus": "已下架"
+                                "dataStatus": ""
                             };
+                            if(sessionStorage.getItem("rolename") == "文化宣传处长" || sessionStorage.getItem("rolename") == "政务资源处长"){
+                                submitStatus.dataStatus = webStatus[3].text;
+                            }else{
+                                submitStatus.dataStatus = webStatus[4].text;
+                            }
                             ajaxUtil.myAjax(null,"/datado/newsInf/changeNewsStatus/"+row.itemid+"/"+row.itemcode,submitStatus,function (data) {
                                 if(ajaxUtil.success(data)){
                                     if(data.code == 88888){
@@ -127,7 +130,7 @@
                         modalConfirmFun:function () {
                             var isSuccess = false;
                             var submitStatus = {
-                                "dataStatus": "已下架"
+                                "dataStatus": webStatus[6].text
                             };
                             ajaxUtil.myAjax(null,"/datado/newsInf/changeNewsStatus/"+row.itemid+"/"+row.itemcode,submitStatus,function (data) {
                                 if(ajaxUtil.success(data)){
@@ -180,7 +183,7 @@
                         modalConfirmFun:function () {
                             var isSuccess = false;
                             var submitStatus = {
-                                "dataStatus": selectUtil.getStatus(sessionStorage.getItem("rolename"))
+                                "dataStatus": selectUtil.getStatus(sessionStorage.getItem("rolename"),webStatus)
                             };
                             ajaxUtil.myAjax(null,"/datado/newsInf/changeNewsStatus/"+row.itemid+"/"+row.itemcode,submitStatus,function (data) {
                                 if(ajaxUtil.success(data)){
@@ -210,7 +213,7 @@
                         modalConfirmFun:function () {
                             var isSuccess = false;
                             var submitStatus = {
-                                "dataStatus": "--"
+                                "dataStatus": webStatus[0].text
                             };
                             ajaxUtil.myAjax(null,"/datado/newsInf/changeNewsStatus/"+row.itemid+"/"+row.itemcode,submitStatus,function (data) {
                                 if(ajaxUtil.success(data)){

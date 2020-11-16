@@ -16,7 +16,6 @@
 
         
         function getRoleTable(role,preUrl,status,webStatus) {
-            console.log(webStatus);
             if(role === "文化宣传科员"){
                 return preUrl + "?"+status+"="+webStatus[0].id+"&"+status+"="+webStatus[1].id+"&"+status+"="+webStatus[3].id+"&"+status+"="+webStatus[4].id+"&"+status+"="+webStatus[6].id;
             }else if(role === "文化宣传处长"){
@@ -33,7 +32,6 @@
         }
         
         function getRoleOperate(value, row, index, role, status,webStatus) {
-            console.log(webStatus);
             if(role === "文化宣传科员"){
                 $('#btn_addTask').attr('style',"display:block");
                 if(status == webStatus[0].id){
@@ -41,10 +39,6 @@
                         '<a class="edit" style="margin:0 1em;text-decoration: none;color:#775637;" data-toggle="modal" data-target="" >编辑</a>',
                         '<a class="submit"  style="margin:0 1em;text-decoration: none;color:#775637;" data-target="#staticBackdrop" >提交</a>',
                         '<a class="delete" style="margin:0 1em;text-decoration: none;color:#D60000;"  data-toggle="modal" data-target="#staticBackdrop" >删除</a>',
-                    ].join('');
-                }else if(status == webStatus[5].id){
-                    return [
-                        '<a class="view" style="margin:0 1em;text-decoration: none;color:#775637;" data-toggle="modal" data-target="" >查看</a>',
                     ].join('');
                 }else if(status == webStatus[3].id || status == webStatus[4].id || status == webStatus[6].id){
                     return [
@@ -78,15 +72,6 @@
                     ].join('');
                 }else if(status == webStatus[5].id){
                     return [
-                        '<a class="pass"  data-toggle="modal" style="margin:0 1em;text-decoration: none;color:#775637;" data-target="#staticBackdrop" >通过</a>',
-                        '<a class="fail"  data-toggle="modal" style="margin:0 1em;text-decoration: none;color:#D60000;" data-target="#staticBackdrop" >不通过</a>',
-                    ].join('');
-                }else if(status == webStatus[5].id){
-                    return [
-                        '<a class="view"  style="margin:0 1em;text-decoration: none;color:#775637;" data-toggle="modal" data-target="" >查看</a>',
-                    ].join('');
-                }else if(status == webStatus[3].id || status == webStatus[4].id || status == webStatus[6].id){
-                    return [
                         '<a  class="view"  style="margin:0 1em;text-decoration: none;color:#775637;" data-toggle="modal" data-target="" >查看</a>',
                         '<a  class="under-shelf" style="margin:0 1em;text-decoration: none;color:#775637;" data-toggle="modal" data-target="#staticBackdrop" >下架</a>',
                     ].join('');
@@ -99,10 +84,6 @@
                         '<a class="edit" style="margin:0 1em;text-decoration: none;color:#775637;" data-toggle="modal" data-target="" >修改</a>',
                         '<a class="submit"  style="margin:0 1em;text-decoration: none;color:#775637;" data-target="#staticBackdrop" >提交</a>',
                         '<a class="delete" style="margin:0 1em;text-decoration: none;color:#D60000;"  data-toggle="modal" data-target="#staticBackdrop" >删除</a>',
-                    ].join('');
-                }else if(status == webStatus[5].id){
-                    return [
-                        '<a class="view" style="margin:0 1em;text-decoration: none;color:#775637;" data-toggle="modal" data-target="" >查看</a>',
                     ].join('');
                 }else if(status == webStatus[3].id || status == webStatus[4].id || status == webStatus[6].id){
                     return [

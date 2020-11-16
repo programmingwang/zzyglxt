@@ -44,7 +44,6 @@ public class HealthCareFamPreDOServiceImpl implements HealthCareFamPreDOService 
         }
         record.setItemcode(UUID.randomUUID().toString());
         record.setItemcreateat(new Date());
-        record.setStatus("保存");
         return healthCareFamPreDOMapper.insertSelective(record);
     }
     @Transactional

@@ -149,7 +149,7 @@
                     $("#name").val(row.name);
                     $("#source").val(row.source);
                     $("#prescription").val(row.prescription);
-                    $("#status").val(row.status);
+                    $("#status").val(webStatus[row.status].text);
                     $("#creater").val(row.creater);
                    /* $("#itemCreateAt").val(row.itemcreateat);*/
                     $("#content").val(row.content);

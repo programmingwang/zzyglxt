@@ -150,7 +150,7 @@
                     $("#source").val(row.source);
                     $("#author").val(row.author);
                     $("#content").val(row.content);
-                    $("#status").val(row.status);
+                    $("#status").val(webStatus[row.status].text);
                    /* $("#culturalImg").attr("src",row.filePath)*/
                     myCareFamModal.show();
                 },

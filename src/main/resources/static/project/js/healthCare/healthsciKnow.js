@@ -149,7 +149,7 @@
                     $("#scienceKnowledgeName").val(row.scienceKnowledgeName);
                     $("#scienceKnowledgeSource").val(row.scienceKnowledgeSource);
                     $("#scienceKnowledgeAuthor").val(row.scienceKnowledgeAuthor);
-                    $("#scienceKnowledgeStatus").val(row.scienceKnowledgeStatus);
+                    $("#scienceKnowledgeStatus").val(webStatus[row.scienceKnowledgeStatus].text);
                     /* $("#itemCreateAt").val(row.itemcreateat);*/
                     $("#content").val(row.content);
                     mySciKnowModal.show();

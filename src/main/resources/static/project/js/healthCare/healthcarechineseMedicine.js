@@ -151,7 +151,7 @@
                     $("#chineseMedicineMerTro").val(row.chineseMedicineMerTro);
                     $("#chineseMedicineEffect").val(row.chineseMedicineEffect);
                     $("#chineseMedicineUsage").val(row.chineseMedicineUsage);
-                    $("#chineseMedicineStatus").val(row.chineseMedicineStatus);
+                    $("#chineseMedicineStatus").val(webStatus[ row.chineseMedicineStatus].text);
                     $("#mediCineImg").attr("src",row.filePath)
                     $('#mediCineImgSpan').html("药材图片");
 

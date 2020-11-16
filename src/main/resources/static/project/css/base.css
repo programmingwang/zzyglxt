@@ -150,10 +150,10 @@ hr {
     margin-bottom: 0;
 }
 .aaaa {
-    height: 30px;
-    margin-top: 3px;
-    margin-left: 2px;
-    margin-bottom: 3px;
+
+    padding: .12rem .3rem;
+    padding: -0.625rem .75rem;
+    margin-bottom: 10px;
 }
 .AFirstMenu {
 

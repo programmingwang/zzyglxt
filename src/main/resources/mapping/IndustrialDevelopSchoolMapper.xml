@@ -26,13 +26,13 @@
   </resultMap>
   <sql id="Base_Column_List">
     <!--@mbg.generated-->
-    itemID, itemCode, SCHOOL_NAME, SCHOOL_INTRODUCE, SECONDARY_COLLEGE, ENROLLMENT_MAJOR, 
-    GRADUATE_ENROLLMENT_MAJOR, PHONE, ONLINE_ADDRESS, SCHOOL_TEXT, ADDRESS_PRO, ADDRESS_CITY, 
+    itemID, itemCode, SCHOOL_NAME, SCHOOL_INTRODUCE, SECONDARY_COLLEGE, ENROLLMENT_MAJOR,
+    GRADUATE_ENROLLMENT_MAJOR, PHONE, ONLINE_ADDRESS, SCHOOL_TEXT, ADDRESS_PRO, ADDRESS_CITY,
     ADDRESS_COUNTRY, ADDRESS, `STATUS`, CREATER, itemCreateAt, UPDATER, itemUpdateAt
   </sql>
   <select id="selectByPrimaryKey" parameterType="map" resultMap="BaseResultMap">
     <!--@mbg.generated-->
-    select 
+    select
     <include refid="Base_Column_List" />
     from tb_industrial_develop_school
     where itemCode = #{itemcode,jdbcType=CHAR}
@@ -44,19 +44,19 @@
   </delete>
   <insert id="insert" keyColumn="itemID" keyProperty="itemid" parameterType="com.zyyglxt.dataobject.IndustrialDevelopSchool" useGeneratedKeys="true">
     <!--@mbg.generated-->
-    insert into tb_industrial_develop_school (itemCode, SCHOOL_NAME, SCHOOL_INTRODUCE, 
-      SECONDARY_COLLEGE, ENROLLMENT_MAJOR, 
-      GRADUATE_ENROLLMENT_MAJOR, PHONE, ONLINE_ADDRESS, 
-      SCHOOL_TEXT, ADDRESS_PRO, ADDRESS_CITY, 
-      ADDRESS_COUNTRY, ADDRESS, `STATUS`, 
-      CREATER, itemCreateAt, UPDATER, 
+    insert into tb_industrial_develop_school (itemCode, SCHOOL_NAME, SCHOOL_INTRODUCE,
+      SECONDARY_COLLEGE, ENROLLMENT_MAJOR,
+      GRADUATE_ENROLLMENT_MAJOR, PHONE, ONLINE_ADDRESS,
+      SCHOOL_TEXT, ADDRESS_PRO, ADDRESS_CITY,
+      ADDRESS_COUNTRY, ADDRESS, `STATUS`,
+      CREATER, itemCreateAt, UPDATER,
       itemUpdateAt)
-    values (#{itemcode,jdbcType=CHAR}, #{schoolName,jdbcType=VARCHAR}, #{schoolIntroduce,jdbcType=VARCHAR}, 
-      #{secondaryCollege,jdbcType=LONGVARCHAR}, #{enrollmentMajor,jdbcType=LONGVARCHAR}, 
-      #{graduateEnrollmentMajor,jdbcType=LONGVARCHAR}, #{phone,jdbcType=VARCHAR}, #{onlineAddress,jdbcType=VARCHAR}, 
-      #{schoolText,jdbcType=LONGVARCHAR}, #{addressPro,jdbcType=VARCHAR}, #{addressCity,jdbcType=VARCHAR}, 
-      #{addressCountry,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, 
-      #{creater,jdbcType=VARCHAR}, #{itemcreateat,jdbcType=TIMESTAMP}, #{updater,jdbcType=VARCHAR}, 
+    values (#{itemcode,jdbcType=CHAR}, #{schoolName,jdbcType=VARCHAR}, #{schoolIntroduce,jdbcType=VARCHAR},
+      #{secondaryCollege,jdbcType=LONGVARCHAR}, #{enrollmentMajor,jdbcType=LONGVARCHAR},
+      #{graduateEnrollmentMajor,jdbcType=LONGVARCHAR}, #{phone,jdbcType=VARCHAR}, #{onlineAddress,jdbcType=VARCHAR},
+      #{schoolText,jdbcType=LONGVARCHAR}, #{addressPro,jdbcType=VARCHAR}, #{addressCity,jdbcType=VARCHAR},
+      #{addressCountry,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR},
+      #{creater,jdbcType=VARCHAR}, #{itemcreateat,jdbcType=TIMESTAMP}, #{updater,jdbcType=VARCHAR},
       #{itemupdateat,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" keyColumn="itemID" keyProperty="itemid" parameterType="com.zyyglxt.dataobject.IndustrialDevelopSchool" useGeneratedKeys="true">
@@ -259,4 +259,11 @@
       select *
       from tb_industrial_develop_school;
     </select>
+  <select id="selectByOrgNameAndCode" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from tb_industrial_develop_school
+    where NAME = #{orgName,jdbcType=VARCHAR}
+    and ORG_CODE = #{orgCode,jdbcType=VARCHAR}
+  </select>
 </mapper>

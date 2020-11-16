@@ -27,36 +27,51 @@
                 }
             }
 
+            $(".view").on("click",function (e, value, row, index) {
+                var projectEntity = {
+                    "itemid": row.itemid,
+                    "itemcode": row.itemcode,
+                    "status": "已下架"
+                };
+                ajaxUtil.myAjax(null,"/industrialdevelop/ser-pro",projectEntity,function (data) {
+                    if(data && data.code == 88888){
+                        alertUtil.success(data.msg);
+                    }else{
+                        alertUtil.error(data.msg);
+                    }
+                },false)
+            });
+
             //修改事件
             window.orgEvents = {
                 'click .edit': function (e, value, row, index) {
                     localStorage.setItem("rowData", JSON.stringify(row));
                     orange.redirect(addUrl);
                 },
-                'click .view': function (e, value, row, index) {
-                    var projectEntity = {
-                        itemid: row.itemid,
-                        itemcode: row.itemcode,
-                        status: "已下架"
-                    };
-                    $.ajax({
-                        url:"/industrialdevelop/ser-pro",
-                        type:'PUT',
-                        data: projectEntity,
-                        processData: false,   // jQuery不要去处理发送的数据
-                        contentType: 'application/json',   // jQuery不要去设置Content-Type请求头
-                        success:function(data){
-                            if(data && data.code == 88888){
-                                alertUtil.success(data.msg);
-                            }else{
-                                alertUtil.error(data.msg);
-                            }
-                        },
-                        error: function(data){
-                            alertUtil.error(data.msg)
-                        }
-                    });
-                },
+                // 'click .view': function (e, value, row, index) {
+                //     var projectEntity = {
+                //         "itemid": row.itemid,
+                //         "itemcode": row.itemcode,
+                //         "status": "已下架"
+                //     };
+                //     $.ajax({
+                //         url:"/industrialdevelop/ser-pro",
+                //         type:'PUT',
+                //         data: projectEntity,
+                //         processData: false,   // jQuery不要去处理发送的数据
+                //         contentType: 'application/json',   // jQuery不要去设置Content-Type请求头
+                //         success:function(data){
+                //             if(data && data.code == 88888){
+                //                 alertUtil.success(data.msg);
+                //             }else{
+                //                 alertUtil.error(data.msg);
+                //             }
+                //         },
+                //         error: function(data){
+                //             alertUtil.error(data.msg)
+                //         }
+                //     });
+                // },
                 'click .delete': function (e, value, row, index) {
                     var myDeleteModalData = {
                         modalBodyID: "myDeleteCooperation",

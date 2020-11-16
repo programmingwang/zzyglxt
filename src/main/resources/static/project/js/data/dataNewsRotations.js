@@ -268,7 +268,29 @@
             myTable = bootstrapTableUtil.myBootStrapTableInit("table", url, param, aCol);
         }
 
-        bootstrapTableUtil.globalSearch("table",url,aParam, aCol);
+        var allPosition = document.getElementById("allPosition").children;
+        for(var i=1;i<allPosition.length;i++){
+            console.log(allPosition[i].innerHTML)
+            allPosition[i].onclick=function () {
+                for(var j=1;j<allPosition.length;j++){
+                    allPosition[j].classList.remove("addC");
+                }
+                this.classList.add("addC");
+                var newArry = [];
+                var allTableData = $("#table").bootstrapTable("getData");
+                var str=this.innerHTML;
+                if (str=='全部'){
+                    refreshTable()
+                }
+                for (var i in allTableData) {
+                    var thisPosition=allTableData[i][aCol[2].field];
+                    if (thisPosition==str){
+                        newArry.push(allTableData[i]);
+                    }
+                }
+                $("#table").bootstrapTable("load", newArry);
+            }
+        }
 
     })
 })();

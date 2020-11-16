@@ -217,7 +217,7 @@
                     id: "13-5",
                     level: "2",
                     pid: "13"
-                },
+                },/*
                 {
                     menu_name: "在售药材",
                     menu_url: "/healthCare/healthcarechineseMedicine",

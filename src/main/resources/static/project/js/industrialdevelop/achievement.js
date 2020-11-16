@@ -6,7 +6,8 @@
             //请求后台url
             var url = "/industrialdevelop/achievement";
             
-            var getUrl = url + "/" + sessionStorage.getItem("orgCode");
+            // var getUrl = url + "/" + sessionStorage.getItem("orgCode");
+            var getUrl = url + "/0002";
             //请求页面url
             var pathUrl = url;
             //请求新增页面url

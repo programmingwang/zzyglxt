@@ -14,43 +14,43 @@
             }
         });
 
-
+        
         function getRoleTable(role,preUrl,status,webStatus) {
             console.log(webStatus);
             if(role === "文化宣传科员"){
-                return preUrl + "?"+status+"="+webStatus[0].text+"&"+status+"="+webStatus[1].text+"&"+status+"="+webStatus[3].text+"&"+status+"="+webStatus[4].text+"&"+status+"="+webStatus[6].text;
+                return preUrl + "?"+status+"="+webStatus[0].id+"&"+status+"="+webStatus[1].id+"&"+status+"="+webStatus[3].id+"&"+status+"="+webStatus[4].id+"&"+status+"="+webStatus[6].id;
             }else if(role === "文化宣传处长"){
-                return preUrl + "?"+status+"="+webStatus[1].text+"&"+status+"="+webStatus[2].text+"&"+status+"="+webStatus[3].text;
+                return preUrl + "?"+status+"="+webStatus[1].id+"&"+status+"="+webStatus[2].id+"&"+status+"="+webStatus[3].id;
             }else if(role === "文化宣传综合处处长"){
-                return preUrl + "?"+status+"="+webStatus[2].text+"&"+status+"="+webStatus[5].text;
+                return preUrl + "?"+status+"="+webStatus[2].id+"&"+status+"="+webStatus[5].id;
             }else if(role === "政务资源科员"){
-                return preUrl + "?"+status+"="+webStatus[0].text+"&"+status+"="+webStatus[1].text+"&"+status+"="+webStatus[3].text+"&"+status+"="+webStatus[4].text+"&"+status+"="+webStatus[5].text+"&"+status+"="+webStatus[6].text+"&"+status+"="+"已提交等待综合处处长审核";
+                return preUrl + "?"+status+"="+webStatus[0].id+"&"+status+"="+webStatus[1].id+"&"+status+"="+webStatus[3].id+"&"+status+"="+webStatus[4].id+"&"+status+"="+webStatus[6].id;
             }else if(role === "政务资源处长"){
-                return preUrl + "?"+status+"="+webStatus[1].text+"&"+status+"="+webStatus[2].text+"&"+status+"="+webStatus[3].text;
+                return preUrl + "?"+status+"="+webStatus[1].id+"&"+status+"="+webStatus[2].id+"&"+status+"="+webStatus[3].id;
             }else if(role === "政务资源综合处处长") {
-                return preUrl + "?"+status+"="+webStatus[2].text+"&"+status+"="+webStatus[5].text+"&"+status+"="+"已提交等待综合处处长审核";
+                return preUrl + "?"+status+"="+webStatus[2].id+"&"+status+"="+webStatus[5].id;
             }
         }
-
+        
         function getRoleOperate(value, row, index, role, status,webStatus) {
             if(role === "文化宣传科员"){
                 $('#btn_addTask').attr('style',"display:block");
-                if(status === webStatus[0].text){
+                if(status === webStatus[0].id){
                     return [
                         '<a class="edit" style="margin:0 1em;text-decoration: none;color:#775637;" data-toggle="modal" data-target="" >编辑</a>',
                         '<a class="submit"  style="margin:0 1em;text-decoration: none;color:#775637;" data-target="#staticBackdrop" >提交</a>',
                         '<a class="delete" style="margin:0 1em;text-decoration: none;color:#D60000;"  data-toggle="modal" data-target="#staticBackdrop" >删除</a>',
                     ].join('');
-                }else if(status == webStatus[5].text){
+                }else if(status == webStatus[5].id){
                     return [
                         '<a class="view" style="margin:0 1em;text-decoration: none;color:#775637;" data-toggle="modal" data-target="" >查看</a>',
                     ].join('');
-                }else if(status == webStatus[3].text || status == webStatus[4].text || status == webStatus[6].text){
+                }else if(status == webStatus[3].id || status == webStatus[4].id || status == webStatus[6].id){
                     return [
                         '<a class="view" style="margin:0 1em;text-decoration: none;color:#775637;" data-toggle="modal" data-target="" >查看</a>',
                         '<a class="delete" style="margin:0 1em;text-decoration: none;color:#D60000;" data-toggle="modal" data-target="#staticBackdrop" >删除</a>',
                     ].join('');
-                }else if(status == webStatus[1].text){
+                }else if(status == webStatus[1].id){
                     return [
                         '<button type="button" class="view btn btn-primary btn-sm" style="margin-right: 5px" data-toggle="modal" data-target="" >查看</button>',
                         '<button type="button" class="no-submit btn btn-danger btn-sm" data-toggle="modal" data-target="" >取消提交</button>',
@@ -58,82 +58,33 @@
                 }
 
             }else if(role === "文化宣传处长"){
-                if(status == webStatus[1].text){
+                if(status == webStatus[1].id){
                     return [
                         '<a  class="pass"  data-toggle="modal" style="margin:0 1em;text-decoration: none;color:#775637;" data-target="#staticBackdrop" >通过</a>',
                         '<a  class="fail"  data-toggle="modal" style="margin:0 1em;text-decoration: none;color:#D60000;" data-target="#staticBackdrop" >不通过</a>',
                     ].join('');
-                }else if(status == webStatus[2].text || status == webStatus[3].text){
+                }else if(status == webStatus[2].id || status == webStatus[3].id){
                     return [
                         '<a class="view" data-toggle="modal" style="margin:0 1em;text-decoration: none;color:#775637;" data-target="" >查看</a>',
                     ].join('');
                 }
 
             }else if(role === "文化宣传综合处处长"){
-                if(status == webStatus[2].text){
+                if(status == webStatus[2].id){
                     return [
                         '<button type="button" class="pass btn btn-primary btn-sm"  data-toggle="modal" data-target="#staticBackdrop" >通过</button>',
                         '<button type="button" class="fail btn btn-danger btn-sm"  data-toggle="modal" data-target="#staticBackdrop" >不通过</button>',
                     ].join('');
-                }else if(status == webStatus[5].text){
+                }else if(status == webStatus[5].id){
                     return [
                         '<a class="pass"  data-toggle="modal" style="margin:0 1em;text-decoration: none;color:#775637;" data-target="#staticBackdrop" >通过</a>',
                         '<a class="fail"  data-toggle="modal" style="margin:0 1em;text-decoration: none;color:#D60000;" data-target="#staticBackdrop" >不通过</a>',
                     ].join('');
-                }else if(status == webStatus[5].text){
+                }else if(status == webStatus[5].id){
                     return [
                         '<a class="view"  style="margin:0 1em;text-decoration: none;color:#775637;" data-toggle="modal" data-target="" >查看</a>',
                     ].join('');
-                }else if(status == webStatus[3].text || status == webStatus[4].text || status == webStatus[6].text){
-                    return [
-                        '<a  class="view"  style="margin:0 1em;text-decoration: none;color:#775637;" data-toggle="modal" data-target="" >查看</a>',
-                        '<a  class="under-shelf" style="margin:0 1em;text-decoration: none;color:#775637;" data-toggle="modal" data-target="#staticBackdrop" >下架</a>',
-                    ].join('');
-                }
-
-            }else if(role === "政务资源科员"){
-                $('#btn_addTask').attr('style',"display:block");
-                if(status === webStatus[0].text){
-                    return [
-                        '<a class="edit" style="margin:0 1em;text-decoration: none;color:#775637;" data-toggle="modal" data-target="" >修改</a>',
-                        '<a class="submit"  style="margin:0 1em;text-decoration: none;color:#775637;" data-target="#staticBackdrop" >提交</a>',
-                        '<a class="delete" style="margin:0 1em;text-decoration: none;color:#D60000;"  data-toggle="modal" data-target="#staticBackdrop" >删除</a>',
-                    ].join('');
-                }else if(status == webStatus[5].text){
-                    return [
-                        '<a class="view" style="margin:0 1em;text-decoration: none;color:#775637;" data-toggle="modal" data-target="" >查看</a>',
-                    ].join('');
-                }else if(status == webStatus[3].text || status == webStatus[4].text || status == webStatus[6].text){
-                    return [
-                        '<a class="view" style="margin:0 1em;text-decoration: none;color:#775637;" data-toggle="modal" data-target="" >查看</a>',
-                        '<a class="delete" style="margin:0 1em;text-decoration: none;color:#D60000;" data-toggle="modal" data-target="#staticBackdrop" >删除</a>',
-                    ].join('');
-                }else if(status == webStatus[1].text || status == "已提交等待综合处处长审核"){
-                    return [
-                        '<button type="button" class="view btn btn-primary btn-sm" style="margin-right: 5px" data-toggle="modal" data-target="" >查看</button>',
-                        '<button type="button" class="no-submit btn btn-danger btn-sm" data-toggle="modal" data-target="" >取消提交</button>',
-                    ].join('');
-                }
-
-            }else if(role === "政务资源处长"){
-                if(status == webStatus[1].text){
-                    return [
-                        '<a  class="pass"  data-toggle="modal" style="margin:0 1em;text-decoration: none;color:#775637;" data-target="#staticBackdrop" >通过</a>',
-                        '<a  class="fail"  data-toggle="modal" style="margin:0 1em;text-decoration: none;color:#D60000;" data-target="#staticBackdrop" >不通过</a>',
-                    ].join('');
-                }else if(status == webStatus[2].text || status == webStatus[3].text){
-                    return [
-                        '<a class="view" data-toggle="modal" style="margin:0 1em;text-decoration: none;color:#775637;" data-target="" >查看</a>',
-                    ].join('');
-                }
-
-            }else if(role === "政务资源综合处处长"){
-                if(status == webStatus[2].text || status == "已提交等待综合处处长审核"){
-                    return [
-                        '<a  class="pass"  data-toggle="modal" style="margin:0 1em;text-decoration: none;color:#775637;" data-target="#staticBackdrop" >通过</a>',
-                        '<a  class="fail"  data-toggle="modal" style="margin:0 1em;text-decoration: none;color:#D60000;" data-target="#staticBackdrop" >不通过</a>',
-                    ].join('');
-                }else if(status == webStatus[5].text){
+                }else if(status == webStatus[3].id || status == webStatus[4].id || status == webStatus[6].id){
                     return [
                         '<a  class="view"  style="margin:0 1em;text-decoration: none;color:#775637;" data-toggle="modal" data-target="" >查看</a>',
                         '<a  class="under-shelf" style="margin:0 1em;text-decoration: none;color:#775637;" data-toggle="modal" data-target="#staticBackdrop" >下架</a>',
@@ -145,17 +96,17 @@
 
         function getStatus(role,webStatus) {
             if(role === "文化宣传科员"){
-                return webStatus[1].text
+                return webStatus[1].id
             }else if(role === "文化宣传处长"){
-                return webStatus[2].text
+                return webStatus[2].id
             }else if(role === "文化宣传综合处处长"){
-                return webStatus[5].text
+                return webStatus[5].id
             }else if(role === "政务资源科员"){
-                return webStatus[1].text
+                return webStatus[1].id
             }else if(role === "政务资源处长"){
-                return webStatus[2].text
+                return webStatus[2].id
             }else if(role === "政务资源综合处处长"){
-                return webStatus[5].text
+                return webStatus[5].id
             }
             // else if(role === "管理员") {
             //     return

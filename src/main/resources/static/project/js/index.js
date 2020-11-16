@@ -191,13 +191,6 @@
                     pid: ""
                 },
                 {
-                    menu_name: "＞科研成果",
-                    menu_url: "/industrialdevelop/achievement",
-                    id: "13-1",
-                    level: "2",
-                    pid: "13"
-                },
-                {
                     menu_name: "＞合作交流",
                     menu_url: "/industrialdevelop/cooperation",
                     id: "13-2",
@@ -368,7 +361,15 @@
                     id: "16",
                     level: "1",
                     pid: ""
-                }
+                },
+                {
+                    menu_name: "＞科研成果",
+                    menu_url: "/industrialdevelop/achievement",
+                    id: "20",
+                    level: "1",
+                    pid: ""
+                },
+
             ];
 
 

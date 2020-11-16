@@ -3,14 +3,14 @@
         function (jquery,ajaxUtil,bootstrapTableUtil,objectUtil,alertUtil,modalUtil,selectUtil,stringUtil,dictUtil) {
 
             var url = "selectallhealthcarechinesemedicinedo";
-
-            url = selectUtil.getRoleTable(sessionStorage.getItem("rolename"),url,"chineseMedicineStatus");
+            var webStatus = dictUtil.getDictByCode(dictUtil.DICT_LIST.webStatus);
+            url = selectUtil.getRoleTable(sessionStorage.getItem("rolename"),url,"chineseMedicineStatus",webStatus);
             var aParam = {
 
             };
             //操作
             function operation(value, row, index){
-                return selectUtil.getRoleOperate(value,row,index,sessionStorage.getItem("rolename"),row.chineseMedicineStatus)
+                return selectUtil.getRoleOperate(value,row,index,sessionStorage.getItem("rolename"),row.chineseMedicineStatus,webStatus)
             }
 
             //修改事件
@@ -50,12 +50,12 @@
                         modalConfirmFun:function () {
                             var isSuccess = false;
                             var submitStatus = {
-                                "chineseMedicineStatus": selectUtil.getStatus(sessionStorage.getItem("rolename"))
+                                "chineseMedicineStatus": selectUtil.getStatus(sessionStorage.getItem("rolename"),webStatus)
                             };
                             ajaxUtil.myAjax(null,"changestatustomedicine/"+row.itemid+"/"+row.itemcode,submitStatus,function (data) {
                                 if(ajaxUtil.success(data)){
-                                    if(data.code == 88888){
-                                        if(selectUtil.getStatus(sessionStorage.getItem("rolename")) == "处长已审核"){
+                                    if(data.code == ajaxUtil.successCode){
+                                        if(sessionStorage.getItem("rolename") == "文化宣传处长"){
                                             alertUtil.info("审核已通过，已发送给综合处处长做最后审核！");
                                         }else{
                                             alertUtil.info("审核已通过，已上架！");
@@ -82,8 +82,13 @@
                         modalConfirmFun:function () {
                             var isSuccess = false;
                             var submitStatus = {
-                                "chineseMedicineStatus": "已下架"
+                                "chineseMedicineStatus": ""
                             };
+                            if(sessionStorage.getItem("rolename") == "文化宣传处长" || sessionStorage.getItem("rolename") == "政务资源处长"){
+                                submitStatus.chineseCulturalStatus = webStatus[3].text;
+                            }else{
+                                submitStatus.chineseCulturalStatus = webStatus[4].text;
+                            }
                             ajaxUtil.myAjax(null,"changestatustomedicine/"+row.itemid+"/"+row.itemcode,submitStatus,function (data) {
                                 if(ajaxUtil.success(data)){
                                     if(data.code == 88888){
@@ -109,7 +114,7 @@
                         modalConfirmFun:function () {
                             var isSuccess = false;
                             var submitStatus = {
-                                "chineseMedicineStatus": "已下架"
+                                "chineseMedicineStatus": webStatus[6].text
                             };
                             ajaxUtil.myAjax(null,"changestatustomedicine/"+row.itemid+"/"+row.itemcode,submitStatus,function (data) {
                                 if(ajaxUtil.success(data)){
@@ -132,7 +137,7 @@
 
                 'click .view' : function (e, value, row, index) {
                     var myViewChineseMedicineModalData ={
-                        modalBodyID : "myViewChineseMedicineModal", //公用的在后面给span加不同的内容就行了，其他模块同理
+                        modalBodyID : "myviewChineseMedicineModal", //公用的在后面给span加不同的内容就行了，其他模块同理
                         modalTitle : "查看详情",
                         modalClass : "modal-lg",
                         confirmButtonStyle: "display:none",
@@ -146,7 +151,7 @@
                     $("#chineseMedicineMerTro").val(row.chineseMedicineMerTro);
                     $("#chineseMedicineEffect").val(row.chineseMedicineEffect);
                     $("#chineseMedicineUsage").val(row.chineseMedicineUsage);
-                    $("#chineseMedicineStatus").val(row.chineseMedicineStatus);
+                    $("#chineseMedicineStatus").val(webStatus[ row.chineseMedicineStatus].text);
                     $("#mediCineImg").attr("src",row.filePath)
                     $('#mediCineImgSpan').html("药材图片");
 
@@ -161,7 +166,7 @@
                         modalConfirmFun:function () {
                             var isSuccess = false;
                             var submitStatus = {
-                                "chineseMedicineStatus": selectUtil.getStatus(sessionStorage.getItem("rolename"))
+                                "chineseMedicineStatus": selectUtil.getStatus(sessionStorage.getItem("rolename"),webStatus)
                             };
                             ajaxUtil.myAjax(null,"changestatustomedicine/"+row.itemid+"/"+row.itemcode,submitStatus,function (data) {
                                 if(ajaxUtil.success(data)){
@@ -189,7 +194,7 @@
                         modalConfirmFun:function () {
                             var isSuccess = false;
                             var submitStatus = {
-                                "chineseMedicineStatus": "--"
+                                "chineseMedicineStatus": webStatus[0].text
                             };
                             ajaxUtil.myAjax(null,"changestatustomedicine/"+row.itemid+"/"+row.itemcode,submitStatus,function (data) {
                                 if(ajaxUtil.success(data)){

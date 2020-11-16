@@ -18,5 +18,5 @@ public class UserSessionDto {
 
     private String rolename;
 
-    private String orgcode;
+    private String orgCode;
 }

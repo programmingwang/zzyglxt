@@ -22,5 +22,9 @@ public class UsernameUtil {
         UserSessionDto user = (UserSessionDto) request.getSession().getAttribute("user");
         return user.getUsername();
     }
+    public String getOrgCode(){
+        UserSessionDto user = (UserSessionDto) request.getSession().getAttribute("user");
+        return user.getOrgCode();
+    }
 
 }

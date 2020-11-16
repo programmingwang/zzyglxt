@@ -273,6 +273,11 @@
             myTable.free();
             myTable = bootstrapTableUtil.myBootStrapTableInit("table", url, param, aCol);
         }
+            var allTableData = $("#table").bootstrapTable("getData");
+            //console.log(allTableData);
+            localStorage.setItem('2',JSON.stringify(allTableData))
+            obj2=JSON.parse(localStorage.getItem("2"));
+            //console.log(obj2);
 
         var allPosition = document.getElementById("allPosition").children;
         for(var i=1;i<allPosition.length;i++){
@@ -283,8 +288,10 @@
                 }
                 this.classList.add("addC");
                 var newArry = [];
-                var allTableData = $("#table").bootstrapTable("getData");
+                var allTableData = JSON.parse(localStorage.getItem("2"));
                 var str=this.innerHTML;
+                console.log(str)
+
                 if (str=='全部'){
                     refreshTable()
                 }

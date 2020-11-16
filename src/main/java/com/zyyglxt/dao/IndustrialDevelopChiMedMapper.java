@@ -27,4 +27,6 @@ public interface IndustrialDevelopChiMedMapper {
     int updateByPrimaryKey(IndustrialDevelopChiMed record);
 
     List<IndustrialDevelopChiMed> selectAll(String type);
+
+    IndustrialDevelopChiMed selectByOrgNameAndCode(String orgName, String orgCode);
 }

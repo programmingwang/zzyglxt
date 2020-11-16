@@ -174,7 +174,7 @@
             '                </fieldset>'+
             '            </div>\n'+
             '</div>';
-        modalHtml.myViewChineseMedicineModal =
+        modalHtml.myviewChineseMedicineModal =
             '<div class="row">'+
             '            <div id="imgDiv" class="col-lg-12 col-md-12">\n' +
             '                <fieldset disabled>'+
@@ -391,7 +391,7 @@
             '                    <div class="input-group-prepend">\n' +
             '                        <span class="input-group-text" >数据状态</span>\n' +
             '                    </div>\n' +
-            '                    <input type="text" id="statscienceKnowledgeStatusus" class="form-control">\n' +
+            '                    <input type="text" id="scienceKnowledgeStatus" class="form-control">\n' +
             '                </div>\n' +
             '            </div>\n' +
             '</div>';

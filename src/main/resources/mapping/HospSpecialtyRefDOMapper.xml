@@ -147,7 +147,7 @@
         where HOSPITAL_CODE = #{hospCode}
     </select>
 
-    <update id="updateBySpecialtyCodeSelective">
+    <update id="updateBySpecialtyCodeSelective" parameterType="com.zyyglxt.dataobject.HospSpecialtyRefDO">
         update tb_culpro_hosp_specialty_ref
         <set>
             <if test="hospitalCode != null">
@@ -155,12 +155,6 @@
             </if>
             <if test="specialtyCode != null">
                 SPECIALTY_CODE = #{specialtyCode,jdbcType=VARCHAR},
-            </if>
-            <if test="creater != null">
-                CREATER = #{creater,jdbcType=VARCHAR},
-            </if>
-            <if test="itemcreateat != null">
-                itemCreateAt = #{itemcreateat,jdbcType=TIMESTAMP},
             </if>
             <if test="updater != null">
                 UPDATER = #{updater,jdbcType=VARCHAR},

@@ -169,7 +169,7 @@
                     $("#chineseCulturalContent").val(row.chineseCulturalContent);
                     $("#creater").val(row.creater);
                     $("#itemCreateAt").val(row.itemcreateat);
-                    $("#chineseCulturalStatus").val(row.chineseCulturalStatus);
+                    $("#chineseCulturalStatus").val(webStatus[row.chineseCulturalStatus].text);
                     $("#culturalImg").attr("src",row.filePath)
                     $('#culturalImgSpan').html("景点图片");
                     $('#culturalNameSpan').html("景点名称");
@@ -273,5 +273,30 @@
                 myTable = bootstrapTableUtil.myBootStrapTableInit("table", url, param, aCol);
             }
             bootstrapTableUtil.globalSearch("table",url,aParam, aCol);
+            // var addstr=document.getElementById("chargePersonSearch").value;
+            // var addstr=document.getElementById("chargePersonSearch").value;
+            // localStorage.setItem('1',addstr);
+            // //[object Object]
+            //
+            // localStorage.setItem('2',JSON.stringify(addstr));
+            //
+            // obj2=JSON.parse(localStorage.getItem("2"));
+            // console.log(obj2);
+            // obj1=localStorage.getItem("1")
+            // console.log(obj1)
+        //     window.onload=function(){
+        //
+        //         var addstr=document.getElementById("chargePersonSearch").value;
+        //         localStorage.setItem('1',addstr);
+        //         //[object Object]
+        //
+        //         localStorage.setItem('2',JSON.stringify(addstr));
+        //
+        //         obj2=JSON.parse(localStorage.getItem("2"));
+        //         console.log(obj2);
+        //         obj1=localStorage.getItem("1")
+        //         console.log(obj1)
+        //
+        // }
         })
 })();

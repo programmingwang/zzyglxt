@@ -15,6 +15,8 @@ import javax.servlet.http.HttpServletRequest;
 public class UsernameUtil {
     @Autowired
     private HttpServletRequest request;
+    @Autowired
+    UsernameUtil usernameUtil;
 
     public String getOperateUser(){
         UserSessionDto user = (UserSessionDto) request.getSession().getAttribute("user");

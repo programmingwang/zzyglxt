@@ -38,9 +38,7 @@ public class CustomizeAuthenticationSuccessHandler implements AuthenticationSucc
         //更新用户表上次登录时间、更新人、更新时间等字段
         User userDetails = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         UserDO userDo = userService.selectByName(userDetails.getUsername());
-
         RoleDO roleDO = roleDOMapper.selectByUserid(userDo.getItemcode());
-
         UserSessionDto userSessionDto = new UserSessionDto();
         userSessionDto.setOrgCode(userDo.getOrgCode());
         userSessionDto.setUsername(userDo.getUsername());

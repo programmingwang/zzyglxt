@@ -27,4 +27,5 @@ public interface IndustrialDevelopSchoolService{
 
     List<IndustrialDevelopSchoolDto> selectAll();
 
+    IndustrialDevelopSchool selectByOrgNameAndCode(String orgName, String orgCode);
 }

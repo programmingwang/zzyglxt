@@ -50,6 +50,7 @@ public class HealthCareChineseMedicineDOServiceImpl implements HealthCareChinese
         if(record.getItemcode()==null){
             record.setItemcode(UUID.randomUUID().toString());
         }
+        record.setChineseMedicineStatus("0");
         record.setItemcreateat(new Date());
         record.setCreater(usernameUtil.getOperateUser());
         record.setUpdater(usernameUtil.getOperateUser());

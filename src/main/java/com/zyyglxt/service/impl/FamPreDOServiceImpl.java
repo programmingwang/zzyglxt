@@ -41,6 +41,7 @@ public class FamPreDOServiceImpl implements FamPreDOService {
         if(result.isHasErrors()){
             throw new BusinessException(result.getErrMsg(), EmBusinessError.PARAMETER_VALIDATION_ERROR);
         }
+        record.setStatus("0");
         record.setItemcode(UUID.randomUUID().toString());
         record.setItemcreateat(new Date());
         record.setCreater(usernameUtil.getOperateUser());

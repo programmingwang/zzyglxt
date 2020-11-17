@@ -154,13 +154,13 @@
                     level: "2",
                     pid: "6"
                 },
-                {
+                /*{
                     menu_name: "＞药品销售",
                     menu_url: "",
-                    id: "6-5",
+                    id: "6-6",
                     level: "2",
                     pid: "6"
-                },
+                },*/
                 {
 
                     menu_name : "中医药名院",

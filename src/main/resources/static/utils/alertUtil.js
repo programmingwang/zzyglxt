@@ -30,7 +30,7 @@
                     from: "top",
                     align: "center"
                 },
-                offset:1000,
+                offset:50,
             });
         }
 

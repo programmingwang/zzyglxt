@@ -3,18 +3,15 @@
         function (jquery,ajaxUtil,bootstrapTableUtil,objectUtil,alertUtil,modalUtil,selectUtil,stringUtil,dictUtil) {
 
 
-            var url = "/medicalService/chineseMedicine/selectAll";
+            var url = "/medicalService/chineseMedicine/selectAll?chineseMedicineStatus=已下架&chineseMedicineStatus=展示中";
             var addUrl = "/medicalService/add/addChineseMedicine"
             var aParam = {
             };
-
-            var webStatus = dictUtil.getDictByCode(dictUtil.DICT_LIST.webStatus);
             /*对url加工*/
-            url = selectUtil.getRoleTable(sessionStorage.getItem("rolename"),url,"chineseMedicineStatus",webStatus);
-
+            url = selectUtil.getRoleTable(sessionStorage.getItem("rolename"),url,"chineseMedicineStatus");
             //操作
             function operation(value, row, index){
-                return selectUtil.getRoleOperate(value,row,index,sessionStorage.getItem("rolename"),row.chineseMedicineStatus,webStatus)
+                return selectUtil.getRoleOperate(value,row,index,sessionStorage.getItem("rolename"),row.chineseMedicineStatus)
             }
 
             //修改事件
@@ -64,12 +61,12 @@
                             var submitStatus = {
                                 "itemid": row.itemid,
                                 "itemcode": row.itemcode,
-                                "status": selectUtil.getStatus(sessionStorage.getItem("rolename"),webStatus)
+                                "status": selectUtil.getStatus(sessionStorage.getItem("rolename"))
                             };
                             ajaxUtil.myAjax(null,"/medicalService/chineseMedicine/updateStatus",submitStatus,function (data) {
                                 if(ajaxUtil.success(data)){
-                                    if(data.code == ajaxUtil.successCode){
-                                        if(sessionStorage.getItem("rolename") == "文化宣传处长"){
+                                    if(data.code == 88888){
+                                        if(selectUtil.getStatus(sessionStorage.getItem("rolename")) == "处长已审核"){
                                             alertUtil.info("审核已通过，已发送给综合处处长做最后审核！");
                                         }else{
                                             alertUtil.info("审核已通过，已上架！");
@@ -99,13 +96,8 @@
                             var submitStatus = {
                                 "itemid": row.itemid,
                                 "itemcode": row.itemcode,
-                                "status": ""
+                                "status": "已下架"
                             };
-                            if(sessionStorage.getItem("rolename") == "文化宣传处长" || sessionStorage.getItem("rolename") == "政务资源处长"){
-                                submitStatus.status = webStatus[3].id;
-                            }else{
-                                submitStatus.status = webStatus[4].id;
-                            }
                             ajaxUtil.myAjax(null,"/medicalService/chineseMedicine/updateStatus",submitStatus,function (data) {
                                 if(ajaxUtil.success(data)){
                                     if(data.code == 88888){
@@ -135,7 +127,7 @@
                             var submitStatus = {
                                 "itemid": row.itemid,
                                 "itemcode": row.itemcode,
-                                "status": webStatus[6].id
+                                "status": "已下架"
                             };
                             ajaxUtil.myAjax(null,"/medicalService/chineseMedicine/updateStatus",submitStatus,function (data) {
                                 if(ajaxUtil.success(data)){
@@ -173,9 +165,11 @@
                     $("#visitTime").val(row.visitTime);
                     $("#phone").val(row.phone);
                     $("#mainVisit").val(row.mainVisit);
+
                     $("#expertIntroduce").html(row.expertIntroduce);
                     $("#medicineRecords").html(row.medicineRecords);
                     $("#chineseMedicineStatus").val(webStatus[row.chineseMedicineStatus].text);
+
                     $("#creater").val(row.creater);
                     $("#itemCreateAt").val(row.itemcreateat);
                     myTravelModal.show();
@@ -191,7 +185,7 @@
                             var submitStatus = {
                                 "itemid": row.itemid,
                                 "itemcode": row.itemcode,
-                                "status": selectUtil.getStatus(sessionStorage.getItem("rolename"),webStatus)
+                                "status": selectUtil.getStatus(sessionStorage.getItem("rolename"))
                             };
                             ajaxUtil.myAjax(null,"/medicalService/chineseMedicine/updateStatus",submitStatus,function (data) {
                                 if(ajaxUtil.success(data)){
@@ -223,7 +217,7 @@
                             var submitStatus = {
                                 "itemid": row.itemid,
                                 "itemcode": row.itemcode,
-                                "status": webStatus[0].id
+                                "status": "--"
                             };
                             ajaxUtil.myAjax(null,"/medicalService/chineseMedicine/updateStatus",submitStatus,function (data) {
                                 if(ajaxUtil.success(data)){
@@ -267,6 +261,7 @@
                 {field: 'specialtyName', title: '所在科室'},
                 {field: 'hospitalName', title: '所属医院'},
                 {field: 'phone', title: '联系电话'},
+                {field: 'itemcreateat', title: '发布时间'},
                 {field: 'action',  title: '操作',formatter: operation,events:orgEvents}
             ];
 

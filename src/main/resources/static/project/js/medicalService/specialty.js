@@ -3,18 +3,17 @@
         function (jquery,ajaxUtil,bootstrapTableUtil,objectUtil,alertUtil,modalUtil,selectUtil,stringUtil,dictUtil) {
 
 
-            var url = "/medicalService/specialty/selectAll";
+            var url = "/medicalService/specialty/selectAll?specialtyStatus=已下架&specialtyStatus=展示中";
             var addUrl = "/medicalService/add/addSpecialty"
             var aParam = {
             };
 
-            var webStatus = dictUtil.getDictByCode(dictUtil.DICT_LIST.webStatus);
             /*对url加工*/
-            url = selectUtil.getRoleTable(sessionStorage.getItem("rolename"),url,"specialtyStatus",webStatus);
+            url = selectUtil.getRoleTable(sessionStorage.getItem("rolename"),url,"specialtyStatus");
 
             //操作
             function operation(value, row, index){
-                return selectUtil.getRoleOperate(value,row,index,sessionStorage.getItem("rolename"),row.specialtyStatus,webStatus)
+                return selectUtil.getRoleOperate(value,row,index,sessionStorage.getItem("rolename"),row.specialtyStatus)
             }
 
             //修改事件
@@ -64,12 +63,12 @@
                             var submitStatus = {
                                 "itemid": row.itemid,
                                 "itemcode": row.itemcode,
-                                "status": selectUtil.getStatus(sessionStorage.getItem("rolename"),webStatus)
+                                "status": selectUtil.getStatus(sessionStorage.getItem("rolename"))
                             };
                             ajaxUtil.myAjax(null,"/medicalService/specialty/updateStatus",submitStatus,function (data) {
                                 if(ajaxUtil.success(data)){
-                                    if(data.code == ajaxUtil.successCode){
-                                        if(sessionStorage.getItem("rolename") == "文化宣传处长"){
+                                    if(data.code == 88888){
+                                        if(selectUtil.getStatus(sessionStorage.getItem("rolename")) == "处长已审核"){
                                             alertUtil.info("审核已通过，已发送给综合处处长做最后审核！");
                                         }else{
                                             alertUtil.info("审核已通过，已上架！");
@@ -99,13 +98,8 @@
                             var submitStatus = {
                                 "itemid": row.itemid,
                                 "itemcode": row.itemcode,
-                                "status": ""
+                                "status": "已下架"
                             };
-                            if(sessionStorage.getItem("rolename") == "文化宣传处长" || sessionStorage.getItem("rolename") == "政务资源处长"){
-                                submitStatus.status = webStatus[3].id;
-                            }else{
-                                submitStatus.status = webStatus[4].id;
-                            }
                             ajaxUtil.myAjax(null,"/medicalService/specialty/updateStatus",submitStatus,function (data) {
                                 if(ajaxUtil.success(data)){
                                     if(data.code == 88888){
@@ -135,7 +129,7 @@
                             var submitStatus = {
                                 "itemid": row.itemid,
                                 "itemcode": row.itemcode,
-                                "status": webStatus[6].id
+                                "status": "已下架"
                             };
                             ajaxUtil.myAjax(null,"/medicalService/specialty/updateStatus",submitStatus,function (data) {
                                 if(ajaxUtil.success(data)){
@@ -169,8 +163,10 @@
                     $("#specialtyPhone").val(row.specialtyPhone);
                     $("#specialtyAddress").val(row.specialtyAddressCity + row.specialtyAddressCounty + row.specialtyAddress);
                     $("#specialtyLink").val(row.specialtyLink);
+                  
                     $("#specialtyDescribe").html(row.specialtyDescribe)
                     $("#specialtyStatus").val(webStatus[row.specialtyStatus].text);
+
                     $("#creater").val(row.creater);
                     $("#itemCreateAt").val(row.itemcreateat);
                     myTravelModal.show();
@@ -186,7 +182,7 @@
                             var submitStatus = {
                                 "itemid": row.itemid,
                                 "itemcode": row.itemcode,
-                                "status": selectUtil.getStatus(sessionStorage.getItem("rolename"),webStatus)
+                                "status": selectUtil.getStatus(sessionStorage.getItem("rolename"))
                             };
                             ajaxUtil.myAjax(null,"/medicalService/specialty/updateStatus",submitStatus,function (data) {
                                 if(ajaxUtil.success(data)){
@@ -218,7 +214,7 @@
                             var submitStatus = {
                                 "itemid": row.itemid,
                                 "itemcode": row.itemcode,
-                                "status": webStatus[0].id
+                                "status": "--"
                             };
                             ajaxUtil.myAjax(null,"/medicalService/specialty/updateStatus",submitStatus,function (data) {
                                 if(ajaxUtil.success(data)){
@@ -261,13 +257,10 @@
                         }
                     }},
                 {field: 'specialtyAddress', title: '地址',formatter:function (value, row, index) {
-                        if (row.specialtyAddressPro===null || row.specialtyAddressPro==="null" ||
-                            row.specialtyAddressPro==="NULL" || row.specialtyAddressPro==="河北省"){
-                            row.specialtyAddressPro = ""
-                        }
-                        return row.specialtyAddressPro + row.specialtyAddressCity + row.specialtyAddressCity + value
+                        return row.specialtyAddressCity + row.specialtyAddressCounty + value
                     }},
                 {field: 'specialtyPhone', title: '联系电话'},
+                {field: 'itemcreateat', title: '发布时间'},
                 {field: 'action',  title: '操作',formatter: operation,events:orgEvents}
             ];
 

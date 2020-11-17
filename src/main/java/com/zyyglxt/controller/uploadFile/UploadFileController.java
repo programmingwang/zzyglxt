@@ -24,6 +24,7 @@ public class UploadFileController {
     public WangEditor uploadFile(@Param("file") MultipartFile file) {
         //本地使用,上传位置
         String rootPath = "D://uploads//";
+//        String rootPath = "/var/www/zyyglxt/upload";
         //文件的完整名称,如spring.jpeg
         String filename = file.getOriginalFilename();
         //文件名,如spring

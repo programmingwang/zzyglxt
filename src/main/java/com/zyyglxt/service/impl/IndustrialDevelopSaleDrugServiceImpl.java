@@ -42,6 +42,12 @@ public class IndustrialDevelopSaleDrugServiceImpl implements IndustrialDevelopSa
     @Transactional
     @Override
     public int insert(IndustrialDevelopSaleDrug record) throws BusinessException {
+        return industrialDevelopSaleDrugMapper.insert(record);
+    }
+/*添加有判断*/
+    @Transactional
+    @Override
+    public int insertSelective(IndustrialDevelopSaleDrug record) {
         ValidatorResult result = validator.validate(record);
         if(result.isHasErrors()){
             throw new BusinessException(result.getErrMsg(), EmBusinessError.PARAMETER_VALIDATION_ERROR);
@@ -51,12 +57,6 @@ public class IndustrialDevelopSaleDrugServiceImpl implements IndustrialDevelopSa
         record.setCreater(usernameUtil.getOperateUser());
         record.setUpdater(usernameUtil.getOperateUser());
         record.setOrgCode(usernameUtil.getOrgCode());
-        return industrialDevelopSaleDrugMapper.insert(record);
-    }
-/*添加有判断*/
-    @Transactional
-    @Override
-    public int insertSelective(IndustrialDevelopSaleDrug record) {
         return industrialDevelopSaleDrugMapper.insertSelective(record);
     }
 /*通过id和code查询记录*/

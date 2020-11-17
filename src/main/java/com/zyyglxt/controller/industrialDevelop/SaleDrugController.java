@@ -66,7 +66,7 @@ public class SaleDrugController {
     @ResponseBody
     public ResponseData selectAllSaleDrug(){
         List<IndustrialDevelopSaleDrug> industrialDevelopSaleDrugList = saleDrugService.selectAllSaleDrug(usernameUtil.getOrgCode());
-//        return new ResponseData(EmBusinessError.success,industrialDevelopSaleDrug);
+     // return new ResponseData(EmBusinessError.success,industrialDevelopSaleDrug);
         List<IndustrialDevelopSaleDrugDto> industrialDevelopSaleDrugDtoList= new ArrayList<>();
         for (IndustrialDevelopSaleDrug industrialDevelopSaleDrug : industrialDevelopSaleDrugList) {
             industrialDevelopSaleDrugDtoList.add(
@@ -76,7 +76,7 @@ public class SaleDrugController {
         }
         return new ResponseData(EmBusinessError.success,industrialDevelopSaleDrugDtoList);
     }
-      //   usernameUtil.getOrgCode()
+    // usernameUtil.getOrgCode()
     private IndustrialDevelopSaleDrugDto convertDtoFromDo(IndustrialDevelopSaleDrug industrialDevelopSaleDrug, String filePath){
         if(StringUtils.isEmpty(filePath)){
             filePath = "已经损坏了";

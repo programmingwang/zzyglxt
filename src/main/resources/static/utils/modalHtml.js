@@ -880,10 +880,7 @@
             '                    <div class="input-group-prepend">\n' +
             '                        <button type="button" class="btn btn-primary btn-sm" >展示状态</button>\n' +
             '                    </div>\n' +
-            '                  <div>\n' +
-            '                       <div id="dataContent" style="height:300px;width:750px; margin-top:-1px;clear:both;overflow:hidden;overflow:scroll;" class="form-control">\n' +
-            '                       </div>\n' +
-            '                  </div>\n' +
+            '                   <input type="text" id="dataStatus" class="form-control">\n' +
             '                </div>\n' +
             '            </div>\n' +
             '\n' +

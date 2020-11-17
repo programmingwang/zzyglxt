@@ -1,6 +1,6 @@
 (function () {
-    require(['jquery','wangEditor','ajaxUtil','alertUtil','stringUtil','fileUtil','uploadImg','dictUtil'],
-        function (jquery,wangEditor,ajaxUtil,alertUtil,stringUtil,fileUtil,uploadImg,dictUtil) {
+    require(['jquery','wangEditor','ajaxUtil','alertUtil','stringUtil','fileUtil','uploadImg','dictUtil','selectUtil'],
+        function (jquery,wangEditor,ajaxUtil,alertUtil,stringUtil,fileUtil,uploadImg,dictUtil,selectUtil) {
             const editor = new wangEditor('#div1')
             // 或者 const editor = new E( document.getElementById('div1') )
             //菜单配置
@@ -46,6 +46,9 @@
             });
             var pl = dictUtil.getDictByCode(dictUtil.DICT_LIST.effectType);
             $("#chineseMedicineType").selectUtil(pl);
+
+
+
 
             $("#cancel").unbind().on('click',function () {
                 $("#main_body").html("");
@@ -107,21 +110,32 @@
                     var tempdata = JSON.parse(localStorage.getItem("rowData"));
                     $("#chineseMedicineName").val(tempdata.chineseMedicineName);
                     $("#chineseMedicineAlias").val(tempdata.chineseMedicineAlias);
-                    $("#chineseMedicineType").val(tempdata.chineseMedicineType);
+                    // $("#chineseMedicineType").val(tempdata.chineseMedicineType);
+                    $("#chineseMedicineType").find("option[value='请选择']").attr("selected", false);
+                    var selectedVal;
+                    for(var i = 0;i<pl.length;i++){
+                        if(pl[i].text == tempdata.chineseMedicineType){
+                            selectedVal = i;
+                            break;
+                        }
+                    }
+                    $("#chineseMedicineType").val(selectedVal);
                     $("#chineseMedicineHarvesting").val(tempdata.chineseMedicineHarvesting);
                     $("#chineseMedicineTaste").val(tempdata.chineseMedicineTaste);
-                    $("#chineseMedicineMerTro").val(tempdata.chineseMedicineMerTro);
                     $("#chineseMedicineEffect").val(tempdata.chineseMedicineEffect);
                     $("#chineseMedicineUsage").val(tempdata.chineseMedicineUsage);
+                    $("#chineseMedicineMerTro").val(tempdata.chineseMedicineMerTro);
                    /* editor.txt.html(tempdata.chineseMedicineUsage);*/
                     var img = tempdata.filePath;
-                    $("#upimg").attr("src",img);
+                    uploadImg.setImgSrc(img);
+                }else{
+                    $( "<option value=\"请选择\" selected='selected'>请选择</option>").prependTo($( "#chineseMedicineType"));
                 }
             }());
 
             function isUpdate() {
                 return (localStorage.getItem("rowData") != null || localStorage.getItem("rowData") != undefined)
             }
-            $( "<option value=\"请选择\" selected='selected'>请选择</option>").prependTo($( "#chineseMedicineType"));
+
         })
 })();

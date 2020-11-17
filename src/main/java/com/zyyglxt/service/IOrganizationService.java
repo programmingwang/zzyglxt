@@ -12,9 +12,11 @@ import java.util.List;
  */
 public interface IOrganizationService {
 
-    public List<OrganizationDO> selectAllOrgByAuditStatus1();
+    public List<OrganizationDO> selectAllOrgByAuditStatus();
 
-    public List<OrganizationDO> selectAllOrgByAuditStatus2();
+//    public List<OrganizationDO> selectAllOrgByAuditStatus2();
 
     public ResponseData orgAudit(OrganizationDO organizationDO);
+
+    public void insertChiMedMsg();
 }

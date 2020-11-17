@@ -2,13 +2,8 @@ package com.zyyglxt.config.handler;
 
 import com.alibaba.fastjson.JSON;
 import com.zyyglxt.dao.UserDOMapper;
-import com.zyyglxt.dataobject.UserDO;
-import com.zyyglxt.dto.UserSessionDto;
-import com.zyyglxt.service.impl.IUserServiceImpl;
-import com.zyyglxt.util.ContextUtil;
 import com.zyyglxt.util.JsonResult;
 import com.zyyglxt.util.ResultTool;
-import com.zyyglxt.util.UserUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;

@@ -322,7 +322,7 @@
                 },
                 {
                     menu_name: "＞设置填报时间",
-                    menu_url: "/scientificProject/setTime",
+                    menu_url: "/timeRecord/timerecord",
                     id: "15-1",
                     level: "2",
                     pid: "15"

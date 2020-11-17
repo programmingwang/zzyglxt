@@ -161,7 +161,7 @@
                 var myRegulationModal = modalUtil.init(myViewRegulationModalData);
                 $("#dataTitle").val(row.dataTitle);
                 $("#dataSource").val(row.dataSource);
-                $("#dataContent").val(row.dataContent);
+                $("#dataContent").html(row.dataContent);
                 $("#creater").val(row.creater);
                 $("#itemCreateAt").val(row.itemcreateat);
                 $("#dataStatus").val(webStatus[row.dataStatus].text);

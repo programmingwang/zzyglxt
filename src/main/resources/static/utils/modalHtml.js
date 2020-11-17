@@ -78,6 +78,8 @@
             '                       <div style="height:300px;width:750px; margin-top:-1px;clear:both;overflow:hidden;overflow:scroll;"id="chineseCulturalContent" class="form-control">\n' +
             '                       </div>\n' +
             '                  </div>\n' +
+            '                    <div  id="chineseCulturalContent" class="form-control">\n' +
+            '                    </div>\n' +
             '                </div>\n' +
             '            </div>\n' +
             '\n' +

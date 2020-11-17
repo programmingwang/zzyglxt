@@ -259,11 +259,4 @@
       select *
       from tb_industrial_develop_school;
     </select>
-  <select id="selectByOrgNameAndCode" resultMap="BaseResultMap">
-    select
-    <include refid="Base_Column_List" />
-    from tb_industrial_develop_school
-    where NAME = #{orgName,jdbcType=VARCHAR}
-    and ORG_CODE = #{orgCode,jdbcType=VARCHAR}
-  </select>
 </mapper>

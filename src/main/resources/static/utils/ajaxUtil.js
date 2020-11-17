@@ -102,6 +102,7 @@
                 data: formData,
                 processData: false,   // jQuery不要去处理发送的数据
                 contentType: false,   // jQuery不要去设置Content-Type请求头
+                async: false,
                 success:function(data){
                     if(data && data.code == successCode){
                         alertUtil.success(data.msg);

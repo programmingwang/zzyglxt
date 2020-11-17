@@ -85,21 +85,21 @@ public class IUserServiceImpl implements IUserService {
                 if (MobileUtil.checkPhone(userDto.getMobilePhone())) {
                     register2(userDto);
                     if ("中药材种植园".equals(userDto.getOrgIdentify())) {
-                        return new ResponseData(EmBusinessError.success, "/chimed");
+                        return new ResponseData(EmBusinessError.success, "/plantation_add");
                     } else if ("中药材加工企业".equals(userDto.getOrgIdentify())) {
-                        return new ResponseData(EmBusinessError.success, "industrialdevelop/plantation_add");
+                        return new ResponseData(EmBusinessError.success, "/process_add");
                     } else if ("中药材制药企业".equals(userDto.getOrgIdentify())) {
-                        return new ResponseData(EmBusinessError.success, "industrialdevelop/plantation_add");
+                        return new ResponseData(EmBusinessError.success, "/produce_add");
                     } else if ("中医医疗机构".equals(userDto.getOrgIdentify())) {
-                        return new ResponseData(EmBusinessError.success, "industrialdevelop/plantation_add");
+                        return new ResponseData(EmBusinessError.success, "/school_add");
                     } else if ("高等医学院校".equals(userDto.getOrgIdentify())) {
-                        return new ResponseData(EmBusinessError.success, "industrialdevelop/plantation_add");
+                        return new ResponseData(EmBusinessError.success, "/school_add");
                     } else if ("科研院所".equals(userDto.getOrgIdentify())) {
-                        return new ResponseData(EmBusinessError.success, "industrialdevelop/plantation_add");
+                        return new ResponseData(EmBusinessError.success, "/lab_add");
                     } else if ("技术服务机构".equals(userDto.getOrgIdentify())) {
-                        return new ResponseData(EmBusinessError.success, "industrialdevelop/plantation_add");
+                        return new ResponseData(EmBusinessError.success, "/tecservice_add");
                     } else if ("旅游康养机构".equals(userDto.getOrgIdentify())) {
-                        return new ResponseData(EmBusinessError.success, "industrialdevelop/plantation_add");
+                        return new ResponseData(EmBusinessError.success, "/tour_add");
                     }
                     return new ResponseData(EmBusinessError.success);
                 } else {

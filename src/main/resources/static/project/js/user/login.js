@@ -1,6 +1,7 @@
 (function() {
     require(['jquery','stringUtil','alertUtil','ajaxUtil'], function (jquery,stringUtil,alertUtil,ajaxUtil) {
 
+
         $("#btn_Login").unbind("click").bind("click",function () {
             //获取表单中的值
             var inputUsername = $("#inputUsername").val();

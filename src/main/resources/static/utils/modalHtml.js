@@ -74,6 +74,10 @@
             '                    <div class="input-group-prepend">\n' +
             '                        <button type="button" id="culturalContentSpan" class="btn btn-primary btn-sm" >正&emsp;&emsp;文</button>\n' +
             '                    </div>\n' +
+            '                  <div>\n' +
+            '                       <div style="height:300px;width:750px; margin-top:-1px;clear:both;overflow:hidden;overflow:scroll;"id="chineseCulturalContent" class="form-control">\n' +
+            '                       </div>\n' +
+            '                  </div>\n' +
             '                    <div  id="chineseCulturalContent" class="form-control">\n' +
             '                    </div>\n' +
             '                </div>\n' +
@@ -160,7 +164,10 @@
             '                    <div class="input-group-prepend">\n' +
             '                        <span class="input-group-text" >制法及用法</span>\n' +
             '                    </div>\n' +
-            '                    <input type="text" id="content" class="form-control">\n' +
+            '                  <div>\n' +
+            '                       <div id="content" style="height:300px;width:750px; margin-top:-1px;clear:both;overflow:hidden;overflow:scroll;" class="form-control">\n' +
+            '                       </div>\n' +
+            '                  </div>\n' +
             '                </div>\n' +
             '            </div>\n' +
             '\n' +
@@ -319,7 +326,10 @@
             '                    <div class="input-group-prepend">\n' +
             '                        <span id="carefamContentSpan" class="input-group-text" >国医话健康详情</span>\n' +
             '                    </div>\n' +
-            '                    <input type="text" id="content" class="form-control">\n' +
+            '                  <div>\n' +
+            '                       <div id="content" style="height:300px;width:750px; margin-top:-1px;clear:both;overflow:hidden;overflow:scroll;" class="form-control">\n' +
+            '                       </div>\n' +
+            '                  </div>\n' +
             '                </div>\n' +
             '            </div>\n' +
             '\n' +
@@ -382,7 +392,10 @@
             '                    <div class="input-group-prepend">\n' +
             '                        <span id="carefamContentSpan" class="input-group-text" >科普知识详情</span>\n' +
             '                    </div>\n' +
-            '                    <input type="text" id="content" class="form-control">\n' +
+            '                  <div>\n' +
+            '                       <div id="content" style="height:300px;width:750px; margin-top:-1px;clear:both;overflow:hidden;overflow:scroll;" class="form-control">\n' +
+            '                       </div>\n' +
+            '                  </div>\n' +
             '                </div>\n' +
             '            </div>\n' +
             '\n' +
@@ -854,7 +867,10 @@
             '                    <div class="input-group-prepend">\n' +
             '                        <button type="button" class="btn btn-primary btn-sm" >正&emsp;&emsp;文</button>\n' +
             '                    </div>\n' +
-            '                    <input type="text" id="dataContent" class="form-control">\n' +
+            '                  <div>\n' +
+            '                       <div id="dataContent" style="height:300px;width:750px; margin-top:-1px;clear:both;overflow:hidden;overflow:scroll;" class="form-control">\n' +
+            '                       </div>\n' +
+            '                  </div>\n' +
             '                </div>\n' +
             '            </div>\n' +
             '\n' +
@@ -864,7 +880,10 @@
             '                    <div class="input-group-prepend">\n' +
             '                        <button type="button" class="btn btn-primary btn-sm" >展示状态</button>\n' +
             '                    </div>\n' +
-            '                    <input type="text" id="dataStatus" class="form-control">\n' +
+            '                  <div>\n' +
+            '                       <div id="dataContent" style="height:300px;width:750px; margin-top:-1px;clear:both;overflow:hidden;overflow:scroll;" class="form-control">\n' +
+            '                       </div>\n' +
+            '                  </div>\n' +
             '                </div>\n' +
             '            </div>\n' +
             '\n' +

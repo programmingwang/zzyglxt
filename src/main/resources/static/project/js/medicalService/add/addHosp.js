@@ -1,75 +1,21 @@
 (function () {
-    require(['jquery','wangEditor','ajaxUtil','alertUtil','stringUtil','dictUtil','fileUtil','uploadImg'],
-        function (jquery,wangEditor,ajaxUtil,alertUtil,stringUtil,dictUtil,fileUtil,uploadImg) {
-            const editor = new wangEditor('#div1')
-            // 或者 const editor = new E( document.getElementById('div1') )
-            //菜单配置
-            editor.config.menus = [
-                'head',
-                'bold',
-                'fontSize',
-                'fontName',
-                'italic',
-                'underline',
-                'strikeThrough',
-                'indent',
-                'lineHeight',
-                'foreColor',
-                'backColor',
-                'link',
-                'list',
-                'justify',
-                'image',
-                'table',
-                'splitLine',
-                'undo',
-                'redo',
+    require(['jquery','objectUtil','ajaxUtil','alertUtil','stringUtil','dictUtil','fileUtil','uploadImg'],
+        function (jquery,objectUtil,ajaxUtil,alertUtil,stringUtil,dictUtil,fileUtil,uploadImg) {
 
-            ]
-            //取消粘贴后的样式
-            editor.config.pasteFilterStyle = false
-            //不粘贴图片
-            editor.config.pasteIgnoreImg = true
-            //隐藏上传网络图片
-            editor.config.showLinkImg = false
-            editor.config.uploadImgShowBase64 = true
-            editor.create()
-            editor.txt.html('')
-
-            $("#div1").on("input propertychange", function() {
-                var textNUm=editor.txt.text()
-                if(textNUm.length>=100000){
-                    str=textNUm.substring(0,10000)+"";  //使用字符串截取，获取前30个字符，多余的字符使用“......”代替
-                    editor.txt.html(str);
-                    alert("字数不能超过10000");                  //将替换的值赋值给当前对象
-                }
-            });
 
             /*q全局变量*/
             var tempdata = JSON.parse(localStorage.getItem("rowData"));
             var updateStatus = isUpdate()
             var jumpUrl = "/medicalService/hosp"
+
             var webStatus = dictUtil.getDictByCode(dictUtil.DICT_LIST.webStatus);
             var hospitalLevel = dictUtil.getDictByCode(dictUtil.DICT_LIST.hospitalLevel)
             var specialtyName = dictUtil.getDictByCode(dictUtil.DICT_LIST.dept)
+            const editor = objectUtil.wangEditorUtil();
+
 
             /*设置下拉框的值*/
-            $("#hospitalLevel").selectUtil(hospitalLevel);
-            /*重点专科操作*/
-            $("#specialtyName").selectUtil(specialtyName);
-            $("#add").unbind().on("click",function () {
-                var str = $("#hospitalKeySpecialty").val();
-                if (str.length === 0){
-                    $("#hospitalKeySpecialty").val(specialtyName[$("#specialtyName").val()].text);
-                }else {
-                    $("#hospitalKeySpecialty").val($("#hospitalKeySpecialty").val() + " " + specialtyName[$("#specialtyName").val()].text);
-                }
-                $("#specialtyName option[value=" + $("#specialtyName").val() + "]").remove();
-            })
-            $("#clear").unbind().on("click",function () {
-                $("#hospitalKeySpecialty").val("")
-                $("#specialtyName").selectUtil(dictUtil.getDictByCode(dictUtil.DICT_LIST.dept));
-            })
+            $("#hospitalLevel").selectUtil(dictUtil.getDictByCode(dictUtil.DICT_LIST.hospitalLevel));
             /*返回按钮处理*/
             $("#cancel").unbind().on('click',function () {
                 orange.redirect(jumpUrl);
@@ -96,18 +42,13 @@
                     };
                 }
                 entity["hospitalName"] = $("#hospitalName").val();
-                entity["hospitalLevel"] = hospitalLevel[$("#specialtyName").val()].text;
-                entity["hospitalBriefIntroduce"] = $("#hospitalBriefIntroduce").val();
-                entity["hospitalKeySpecialty"] = $("#hospitalKeySpecialty").val();
+                entity["hospitalLevel"] = $("#hospitalLevel").val();
                 entity["hospitalTelephone"] = $("#hospitalTelephone").val();
-                entity["hospitalAddressPro"] = $("#hospitalAddressPro").val();
                 entity["hospitalAddressCity"] = $("#hospitalAddressCity").val();
                 entity["hospitalAddressCountry"] = $("#hospitalAddressCountry").val();
                 entity["hospitalAddress"] = $("#hospitalAddress").val();
                 entity["hospitalLink"] = $("#hospitalLink").val();
                 entity["hospitalIntroduce"] = editor.txt.html()
-                entity["hospitalStatus"] = webStatus[0].id
-
 
                 fileUtil.handleFile(updateStatus, entity.itemcode, uploadImg.getFiles()[0]);
 
@@ -128,18 +69,11 @@
 
             /*初始化数据*/
             var  init = function () {
+                uploadImg.init();
                 if (updateStatus){
-                    uploadImg.setImgSrc(tempdata.filePath);
                     $("#hospitalName").val(tempdata.hospitalName);
-                    $("#hospitalLevel").find("option").each(function (data) {
-                        var $this = $(this);
-                        if($this.text() == tempdata.hospitalLevel) {
-                            $this.attr("selected", true);
-                        }
-                    });
-                    // $("#hospitalLevel  option[text="+tempdata.hospitalLevel+"] ").attr("selected",true);
-                    $("#hospitalBriefIntroduce").val(tempdata.hospitalBriefIntroduce);
-                    $("#hospitalKeySpecialty").val(tempdata.hospitalKeySpecialty);
+                    $("#hospitalLevel  option[value="+tempdata.hospitalLevel+"] ").attr("selected",true);
+                    uploadImg.setImgSrc(tempdata.filePath);
                     $("#hospitalTelephone").val(tempdata.hospitalTelephone);
                     $("#distpicker").distpicker({
                         province: "河北省",
@@ -160,7 +94,6 @@
 
                 }
             }
-            uploadImg.init();
             init();
 
 

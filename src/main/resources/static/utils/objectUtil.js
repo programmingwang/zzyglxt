@@ -20,8 +20,8 @@
             return true
         };
         
-        function wangEditorUtil() {
-            const editor = new wangEditor('#div1')
+        function wangEditorUtil(element = "#div1") {
+            const editor = new wangEditor(element)
             // 或者 const editor = new E( document.getElementById('div1') )
             //菜单配置
             editor.config.menus = [
@@ -63,7 +63,7 @@
 
 
 
-            $("#div1").on("input propertychange", function() {
+            $(element).on("input propertychange", function() {
                 var textNUm=editor.txt.text()
                 if(textNUm.length>=100000){
                     str=textNUm.substring(0,10000)+"";  //使用字符串截取，获取前30个字符，多余的字符使用“......”代替

@@ -165,9 +165,11 @@
                     $("#visitTime").val(row.visitTime);
                     $("#phone").val(row.phone);
                     $("#mainVisit").val(row.mainVisit);
-                    $("#expertIntroduce").val(row.expertIntroduce);
-                    $("#medicineRecords").val(row.medicineRecords);
-                    $("#chineseMedicineStatus").val(row.chineseMedicineStatus);
+
+                    $("#expertIntroduce").html(row.expertIntroduce);
+                    $("#medicineRecords").html(row.medicineRecords);
+                    $("#chineseMedicineStatus").val(webStatus[row.chineseMedicineStatus].text);
+
                     $("#creater").val(row.creater);
                     $("#itemCreateAt").val(row.itemcreateat);
                     myTravelModal.show();

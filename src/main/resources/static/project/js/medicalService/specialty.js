@@ -163,8 +163,10 @@
                     $("#specialtyPhone").val(row.specialtyPhone);
                     $("#specialtyAddress").val(row.specialtyAddressCity + row.specialtyAddressCounty + row.specialtyAddress);
                     $("#specialtyLink").val(row.specialtyLink);
-                    $("#specialtyDescribe").val(row.specialtyDescribe)
-                    $("#specialtyStatus").val(row.specialtyStatus);
+                  
+                    $("#specialtyDescribe").html(row.specialtyDescribe)
+                    $("#specialtyStatus").val(webStatus[row.specialtyStatus].text);
+
                     $("#creater").val(row.creater);
                     $("#itemCreateAt").val(row.itemcreateat);
                     myTravelModal.show();

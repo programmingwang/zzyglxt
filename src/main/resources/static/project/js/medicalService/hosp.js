@@ -170,7 +170,7 @@
                     $("#hospitalAddress").val(row.hospitalAddressCity + row.hospitalAddressCountry + row.hospitalAddress);
                     $("#hospitalTelephone").val(row.hospitalTelephone);
                     $("#hospitalLink").val(row.hospitalLink);
-                    $("#hospitalIntroduce").val(row.hospitalIntroduce)
+                    $("#hospitalIntroduce").html(row.hospitalIntroduce)
                     $("#hospitalStatus").val(webStatus[row.hospitalStatus].text);
                     $("#creater").val(row.creater);
                     $("#itemCreateAt").val(row.itemcreateat);

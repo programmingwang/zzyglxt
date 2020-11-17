@@ -1,4 +1,4 @@
-package com.zyyglxt.controller.IndustrialDevelop;
+package com.zyyglxt.controller.industrialDevelop;
 
 import com.zyyglxt.annotation.LogAnnotation;
 import com.zyyglxt.dataobject.IndustrialDevelopChiMed;
@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 
 /**
- * @Author lrt
+ * @Author lrti
  * @Date 2020/11/6 21:01
  * @Version 1.0
  **/

@@ -20,6 +20,8 @@ public interface OrganizationDOMapper {
 
     List<OrganizationDO> queryAllOrgByAuditStatus();
 
+    OrganizationDO selectByOrgNameAndCode(String orgName, String orgCode);
+
     int updateByPrimaryKeySelective(OrganizationDO record);
 
     int updateByPrimaryKey(OrganizationDO record);

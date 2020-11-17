@@ -1,10 +1,8 @@
-package com.zyyglxt.controller.IndustrialDevelop;
+package com.zyyglxt.controller.industrialDevelop;
 
 import com.zyyglxt.annotation.LogAnnotation;
-import com.zyyglxt.dataobject.IndustrialDevelopExpertDO;
-import com.zyyglxt.dataobject.IndustrialDevelopExpertDOKey;
-import com.zyyglxt.dataobject.IndustrialDevelopExpertRefDO;
-import com.zyyglxt.dataobject.IndustrialDevelopExpertRefDOKey;
+import com.zyyglxt.dataobject.*;
+import com.zyyglxt.dto.industrialDevelop.IndustrialDevelopExpertDto;
 import com.zyyglxt.error.EmBusinessError;
 import com.zyyglxt.response.ResponseData;
 import com.zyyglxt.service.IIndustrialDevelopExpertService;
@@ -13,9 +11,9 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 
-/**
- * @Author lrt
- * @Date 2020/10/29 12:00
+/**i
+ * @Author zs
+ * @Date 2020/11/15 17:08
  * @Version 1.0
  **/
 @Api(tags = "产业发展-专家信息")
@@ -25,58 +23,43 @@ public class ExpertController {
     @Resource
     IIndustrialDevelopExpertService industrialExpertService;
 
-    @RequestMapping(value = "/expert", method = RequestMethod.POST)
+
+    @RequestMapping(value = "/expert/insert", method = RequestMethod.POST)
     @ResponseBody
-    @LogAnnotation(appCode ="",logTitle ="添加产业发展-专家信息",logLevel ="3",creater ="",updater = "")
-    public ResponseData addExpert(@RequestBody IndustrialDevelopExpertDO developExpertDO) {
-        industrialExpertService.addExpert(developExpertDO);
+    @LogAnnotation(appCode ="",logTitle ="产业发展-专家管理-新增专家账号",logLevel ="3",creater ="",updater = "")
+        public ResponseData addExpert(@RequestBody IndustrialDevelopExpertDto industrialDevelopExpertDto) {
+        industrialExpertService.addExpert(industrialDevelopExpertDto);
         return new ResponseData(EmBusinessError.success);
     }
 
-    @RequestMapping(value = "/expert", method = RequestMethod.PUT)
+    @RequestMapping(value = "/expert/resetPassword/{itemID}/{itemCode}", method = RequestMethod.PUT)
     @ResponseBody
-    @LogAnnotation(appCode ="",logTitle ="更新产业发展-专家信息",logLevel ="2",creater ="",updater = "")
-    public ResponseData updExpert(@RequestBody IndustrialDevelopExpertDO developExpertDO) {
-        industrialExpertService.updExpert(developExpertDO);
+    @LogAnnotation(appCode ="",logTitle ="产业发展-专家管理-重置密码",logLevel ="2",creater ="",updater = "")
+    public ResponseData resetPassword(@PathVariable("itemID") Integer itemid,@PathVariable("itemCode") String itemCode) {
+        industrialExpertService.resetPassword(itemid,itemCode);
         return new ResponseData(EmBusinessError.success);
     }
 
-    @RequestMapping(value = "/expert", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/expert/delete/{itemCode}", method = RequestMethod.DELETE)
     @ResponseBody
-    @LogAnnotation(appCode ="",logTitle ="删除产业发展-专家信息",logLevel ="4",creater ="",updater = "")
-    public ResponseData delExpert(@RequestBody IndustrialDevelopExpertDOKey key) {
-        industrialExpertService.delExpert(key);
+    @LogAnnotation(appCode ="",logTitle ="产业发展-专家管理-删除",logLevel ="4",creater ="",updater = "")
+    public ResponseData delExpert(@PathVariable("itemCode") String itemCode) {
+        industrialExpertService.delExpert(itemCode);
         return new ResponseData(EmBusinessError.success);
     }
 
-    @RequestMapping(value = "/expert-ref", method = RequestMethod.POST)
+    @GetMapping(value = "/expert/selectAll")
     @ResponseBody
-    @LogAnnotation(appCode ="",logTitle ="添加产业发展专家信息",logLevel ="3",creater ="",updater = "")
-    public ResponseData addExpertRef(@RequestBody IndustrialDevelopExpertRefDO record) {
-        industrialExpertService.addExpertRef(record);
-        return new ResponseData(EmBusinessError.success);
-    }
-
-    @RequestMapping(value = "/expert-ref", method = RequestMethod.PUT)
-    @ResponseBody
-    @LogAnnotation(appCode ="",logTitle ="更新产业发展专家信息",logLevel ="2",creater ="",updater = "")
-    public ResponseData updExpertRef(@RequestBody IndustrialDevelopExpertRefDO record) {
-        industrialExpertService.updExpertRef(record);
-        return new ResponseData(EmBusinessError.success);
-    }
-
-    @RequestMapping(value = "/expert-ref", method = RequestMethod.DELETE)
-    @ResponseBody
-    @LogAnnotation(appCode ="",logTitle ="删除产业发展专家信息",logLevel ="4",creater ="",updater = "")
-    public ResponseData delExpertRef(@RequestBody IndustrialDevelopExpertRefDOKey key) {
-        industrialExpertService.delExpertRef(key);
-        return new ResponseData(EmBusinessError.success);
-    }
-
-    @GetMapping(value = "/expert")
-    @ResponseBody
-    @LogAnnotation(appCode ="",logTitle ="查看产业发展-专家信息",logLevel ="1",creater ="",updater = "")
+    @LogAnnotation(appCode ="",logTitle ="产业发展-专家管理-显示所有信息",logLevel ="1",creater ="",updater = "")
     public ResponseData getExpert() {
         return new ResponseData(EmBusinessError.success,industrialExpertService.getExperts());
+    }
+
+    @RequestMapping(value = "/expert/select/{itemCode}",method = RequestMethod.GET)
+    @ResponseBody
+    @LogAnnotation(appCode ="",logTitle ="产业发展-专家管理-查看个人信息",logLevel ="1",creater ="",updater = "")
+    public ResponseData selectByPrimaryKey( @PathVariable("itemCode") String itemCode){
+        UserDO expertDto = industrialExpertService.selectByPrimaryKey(itemCode);
+        return new ResponseData(EmBusinessError.success,expertDto);
     }
 }

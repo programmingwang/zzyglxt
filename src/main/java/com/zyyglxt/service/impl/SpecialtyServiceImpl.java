@@ -3,7 +3,6 @@ package com.zyyglxt.service.impl;
 import com.zyyglxt.dao.HospSpecialtyRefDOMapper;
 import com.zyyglxt.dao.SpecialtyDOMapper;
 import com.zyyglxt.dataobject.HospSpecialtyRefDO;
-import com.zyyglxt.dataobject.HospSpecialtyRefDOKey;
 import com.zyyglxt.dataobject.SpecialtyDO;
 import com.zyyglxt.dataobject.SpecialtyDOKey;
 import com.zyyglxt.dto.MedicalServiceDto;
@@ -59,7 +58,6 @@ public class SpecialtyServiceImpl implements ISpecialtyService {
         String user = usernameUtil.getOperateUser();
         specialtyDO.setCreater(user);
         specialtyDO.setItemcreateat(new Date());
-        specialtyDO.setSpecialtyStatus("--");
         specialtyDO.setUpdater(user);
 
         hospSpecialtyRefDO.setItemcode(UUID.randomUUID().toString());
@@ -88,7 +86,7 @@ public class SpecialtyServiceImpl implements ISpecialtyService {
         hospSpecialtyRefDO.setUpdater(user);
 
         specialtyDOMapper.updateByPrimaryKeySelective(specialtyDO);
-        hospSpecialtyRefDOMapper.updateBySpecialtyCodeSelective(specialtyDO.getItemcode());
+        hospSpecialtyRefDOMapper.updateBySpecialtyCodeSelective(hospSpecialtyRefDO);
     }
 
     /*删除科室记录，包括科室表和关系表*/

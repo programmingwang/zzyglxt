@@ -1,4 +1,4 @@
-package com.zyyglxt.controller.IndustrialDevelop;
+package com.zyyglxt.controller.industrialDevelop;
 
 import com.zyyglxt.annotation.LogAnnotation;
 import com.zyyglxt.dataobject.IndustrialDevelopSerPro;
@@ -6,6 +6,7 @@ import com.zyyglxt.error.EmBusinessError;
 import com.zyyglxt.response.ResponseData;
 import com.zyyglxt.service.IndustrialDevelopSerProService;
 import io.swagger.annotations.Api;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -49,6 +50,12 @@ public class SerProController {
     @ResponseBody
     @GetMapping(value = "/ser-pro")
     public ResponseData getSerPro(){
-        return new ResponseData(EmBusinessError.success,serProService.selectAll());
+        return new ResponseData(EmBusinessError.success,serProService.selectByorgcode());
     }
+
+    /*@ResponseBody
+    @GetMapping(value = "/cg-ser-pro-sts")
+    public ResponseData changeStatus(@RequestBody IndustrialDevelopSerPro record){
+        return new ResponseData(EmBusinessError.success,serProService.changeStatus(record.getItemcode(), record.getStatus()));
+    }*/
 }

@@ -1,4 +1,4 @@
-package com.zyyglxt.controller.IndustrialDevelop;
+package com.zyyglxt.controller.industrialDevelop;
 
 import com.zyyglxt.annotation.LogAnnotation;
 import com.zyyglxt.dataobject.IndustrialDevelopBasestyle;
@@ -12,7 +12,7 @@ import javax.annotation.Resource;
 
 /**
  * @Author lrt
- * @Date 2020/11/6 20:54
+ * @Date 2020/11/6 20:54i
  * @Version 1.0
  **/
 @Api(tags = "产业发展-基地风采记录")

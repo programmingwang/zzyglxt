@@ -16,5 +16,6 @@ import java.util.Date;
 @NoArgsConstructor
 public class IndustrialDevelopSciAchiDODto extends IndustrialDevelopSciAchiDO {
     private String filePath;
+    private String fileName;
 
 }

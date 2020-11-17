@@ -53,7 +53,7 @@ public class UserController {
         }
     }
 
-    //    @LogAnnotation(logTitle = "查询机构审核状态", logLevel = "1")
+    @LogAnnotation(logTitle = "查询机构审核状态", logLevel = "1")
     @RequestMapping(value = "/queryOrgStatus", method = RequestMethod.POST)
     public ResponseData checkOrgStatus(OrgStatusDto orgStatusDto) {
         OrganizationDO organizationDO = userService.selectByOrgNameAndCode(orgStatusDto.getOrgName(), orgStatusDto.getOrgCode());

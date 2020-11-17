@@ -27,6 +27,8 @@ public class UserDO extends UserDOKey {
 
     private String state;
 
+    private String contacts;
+
     private String mobilephone;
 
     private String creater;
@@ -125,6 +127,14 @@ public class UserDO extends UserDOKey {
 
     public void setState(String state) {
         this.state = state == null ? null : state.trim();
+    }
+
+    public String getContacts() {
+        return contacts;
+    }
+
+    public void setContacts(String contacts) {
+        this.contacts = contacts == null ? null : contacts.trim();
     }
 
     public String getMobilephone() {

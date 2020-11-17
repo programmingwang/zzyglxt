@@ -544,7 +544,10 @@
             '                    <div class="input-group-prepend">\n' +
             '                        <button type="button" class="btn btn-primary btn-sm" >医院介绍</button>\n' +
             '                    </div>\n' +
-            '                    <input type="text" id="hospitalIntroduce" class="form-control">\n' +
+            '                  <div>\n' +
+            '                       <div id="hospitalIntroduce" style="height:300px;width:750px; margin-top:-1px;clear:both;overflow:hidden;overflow:scroll;" class="form-control">\n' +
+            '                       </div>\n' +
+            '                  </div>\n' +
             '                </div>\n' +
             '            </div>\n' +
             '\n' +
@@ -638,7 +641,10 @@
             '                    <div class="input-group-prepend">\n' +
             '                        <button type="button" class="btn btn-primary btn-sm" >科室介绍</button>\n' +
             '                    </div>\n' +
-            '                    <input type="text" id="specialtyDescribe" class="form-control">\n' +
+            '                  <div>\n' +
+            '                       <div id="specialtyDescribe" style="height:300px;width:750px; margin-top:-1px;clear:both;overflow:hidden;overflow:scroll;" class="form-control">\n' +
+            '                       </div>\n' +
+            '                  </div>\n' +
             '                </div>\n' +
             '            </div>\n' +
             '\n' +
@@ -772,7 +778,10 @@
             '                    <div class="input-group-prepend">\n' +
             '                        <button type="button" class="btn btn-primary btn-sm" >专家介绍</button>\n' +
             '                    </div>\n' +
-            '                    <input type="text" id="expertIntroduce" class="form-control">\n' +
+            '                  <div>\n' +
+            '                       <div id="expertIntroduce" style="height:300px;width:750px; margin-top:-1px;clear:both;overflow:hidden;overflow:scroll;" class="form-control">\n' +
+            '                       </div>\n' +
+            '                  </div>\n' +
             '                </div>\n' +
             '            </div>\n' +
             '\n' +
@@ -782,7 +791,10 @@
             '                    <div class="input-group-prepend">\n' +
             '                        <button type="button" class="btn btn-primary btn-sm" >重点医案</button>\n' +
             '                    </div>\n' +
-            '                    <input type="text" id="medicineRecords" class="form-control">\n' +
+            '                  <div>\n' +
+            '                       <div id="medicineRecords" style="height:300px;width:750px; margin-top:-1px;clear:both;overflow:hidden;overflow:scroll;" class="form-control">\n' +
+            '                       </div>\n' +
+            '                  </div>\n' +
             '                </div>\n' +
             '            </div>\n' +
             '\n' +

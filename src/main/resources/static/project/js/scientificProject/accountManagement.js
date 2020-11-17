@@ -86,20 +86,19 @@
                             var submitStatus = {
                                 "itemid": row.itemid,
                                 "itemcode": row.itemcode,
-                                "status": selectUtil.getStatus(sessionStorage.getItem("rolename"),webStatus)
                             };
-                            ajaxUtil.myAjax(null,"/medicalService/chineseMedicine/updateStatus",submitStatus,function (data) {
+                            ajaxUtil.myAjax(null,"/industrialdevelop/expert/resetPassword/"+row.itemid+"/"+row.itemcode,submitStatus,function (data) {
                                 if(ajaxUtil.success(data)){
                                     if(data.code == 88888){
-                                        alertUtil.info("已提交");
+                                        alertUtil.info("重置密码成功");
                                         isSuccess = true;
-                                        refreshTable();
+                                        // refreshTable();
                                     }else{
                                         alertUtil.error(data.msg);
                                     }
 
                                 }
-                            },false);
+                            },false,true,"put");
                             return isSuccess;
                         }
 

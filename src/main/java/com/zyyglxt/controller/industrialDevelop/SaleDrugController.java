@@ -1,10 +1,7 @@
 package com.zyyglxt.controller.industrialDevelop;
 
 import com.zyyglxt.annotation.LogAnnotation;
-
 import com.zyyglxt.dataobject.HealthCareChineseMedicineDO;
-
-
 import com.zyyglxt.dataobject.IndustrialDevelopSaleDrug;
 import com.zyyglxt.dto.HealthCareChineseMedicineDto;
 import com.zyyglxt.dto.industrialDevelop.IndustrialDevelopSaleDrugDto;
@@ -40,27 +37,16 @@ public class SaleDrugController {
     UsernameUtil usernameUtil;
 
     @ResponseBody
-
     @RequestMapping(value = "insertsaledrug", method = RequestMethod.POST)
     @LogAnnotation(appCode ="",logTitle ="售药添加",logLevel ="3",creater ="",updater = "")
     public ResponseData addSaleDrug(@RequestBody IndustrialDevelopSaleDrug record) {
-
-    @RequestMapping(value = "sale-drug", method = RequestMethod.POST)
-    @LogAnnotation(appCode ="",logTitle ="添加产业发展-销售企业、制药企业在售药品",logLevel ="3",creater ="",updater = "")
-    public ResponseData addSaleDrug(@RequestBody IndustrialDevelopSaleDrug record){
-
         saleDrugService.insertSelective(record);
         return new ResponseData(EmBusinessError.success);
     }
 
     @ResponseBody
-
     @RequestMapping(value = "updatehealthcarechinesemedicinedo", method = RequestMethod.PUT)
     @LogAnnotation(appCode ="",logTitle ="售药数据修改",logLevel ="2",creater ="",updater = "")
-
-    @RequestMapping(value = "sale-drug", method = RequestMethod.PUT)
-    @LogAnnotation(appCode ="",logTitle ="更新产业发展-销售企业、制药企业在售药品",logLevel ="2",creater ="",updater = "")
-
     public ResponseData updSaleDrug(@RequestBody IndustrialDevelopSaleDrug record){
         saleDrugService.updateByPrimaryKeySelective(record);
         return new ResponseData(EmBusinessError.success);
@@ -68,12 +54,7 @@ public class SaleDrugController {
 
     @RequestMapping(value ="deletesaledrug/{itemID}/{itemCode}",method = RequestMethod.DELETE )
     @ResponseBody
-
     @LogAnnotation(appCode ="",logTitle ="售药数据删除",logLevel ="4",creater ="",updater = "")
-
-    @RequestMapping(value = "sale-drug", method = RequestMethod.DELETE)
-    @LogAnnotation(appCode ="",logTitle ="删除产业发展-销售企业、制药企业在售药品",logLevel ="4",creater ="",updater = "")
-
     public ResponseData delSaleDrug(@RequestBody IndustrialDevelopSaleDrug record){
         saleDrugService.deleteByPrimaryKey(record.getItemid(),record.getItemcode());
         return new ResponseData(EmBusinessError.success);

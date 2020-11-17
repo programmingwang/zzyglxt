@@ -1187,7 +1187,7 @@
         modalHtml.myDeleteHospital = "是否删除医院信息？";
         modalHtml.myDeleteSpecialty = "是否删除科室信息？";
         modalHtml.myDeleteChineseMedicine = "是否删除名老中医信息？";
-        modalHtml.myDeleteAccount = "是否该账号？";
+        modalHtml.myDeleteAccount = "是否删除该账号？";
 
         return modalHtml;
 

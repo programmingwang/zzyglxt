@@ -43,6 +43,21 @@
     <div class="col-12">
         <form>
 
+
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">医院名称：</label>
+                <div class="col-sm-3">
+                    <input id="hospitalName" type="text" class="form-control" placeholder="请输入">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">医院等级：</label>
+                <div class="col-sm-3">
+                    <select id="hospitalLevel" class="form-control"></select>
+                </div>
+            </div>
+
             <!--上传图片的div-->
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label">医院图片：</label>
@@ -61,41 +76,6 @@
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-
-            <div class="form-group row">
-                <label class="col-sm-2 col-form-label">医院名称：</label>
-                <div class="col-sm-3">
-                    <input id="hospitalName" type="text" class="form-control" placeholder="请输入">
-                </div>
-            </div>
-
-            <div class="form-group row">
-                <label class="col-sm-2 col-form-label">医院等级：</label>
-                <div class="col-sm-3">
-                    <select id="hospitalLevel" class="form-control"></select>
-                </div>
-            </div>
-
-            <div class="form-group row">
-                <label class="col-sm-2 col-form-label">医院简介：</label>
-                <div class="col-sm-3">
-                    <input id="hospitalBriefIntroduce" type="text" class="form-control" placeholder="请输入（限30字）" maxlength="30">
-                </div>
-            </div>
-
-            <div class="form-group row">
-                <label class="col-sm-2 col-form-label">重点专科：</label>
-                <div class="col-sm-3">
-                    <input id="hospitalKeySpecialty" type="text" class="form-control" placeholder="添加重点专科名称" readonly="readonly">
-                </div>
-                <div class="col-sm-2">
-                    <select id="specialtyName" class="form-control"></select>
-                </div>
-                <div class="col-sm-2">
-                    <button id="add" type="button">添加</button>
-                    <button id="clear" type="button">清空</button>
                 </div>
             </div>
 
@@ -123,7 +103,7 @@
                 </div>
             </div>
 
-
+            
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label">医院详细地址：</label>
                 <div class="col-sm-3">

@@ -164,7 +164,7 @@
                     $("#dataTitle").val(row.dataTitle);
                     $("#dataSource").val(row.dataSource);
                     $("#dataAuthor").val(row.dataAuthor);
-                    $("#dataContent").val(row.dataContent);
+                    $("#dataContent").html(row.dataContent);
                     $("#creater").val(row.creater);
                     $("#itemCreateAt").val(row.itemcreateat);
                     $("#dataStatus").val(webStatus[row.dataStatus].text);
@@ -281,7 +281,7 @@
 
         var allPosition = document.getElementById("allPosition").children;
         for(var i=1;i<allPosition.length;i++){
-            console.log(allPosition[i].innerHTML)
+            //console.log(allPosition[i].innerHTML)
             allPosition[i].onclick=function () {
                 for(var j=1;j<allPosition.length;j++){
                     allPosition[j].classList.remove("addC");
@@ -290,18 +290,30 @@
                 var newArry = [];
                 var allTableData = JSON.parse(localStorage.getItem("2"));
                 var str=this.innerHTML;
-                console.log(str)
+                if (str=='位置一'){
+                    str=0;
+                }else if (str=='位置二'){
+                    str=1;
+                }else if (str=='位置三'){
+                    str=2;
+                }else if (str=='位置四'){
+                    str=3;
+                }else if (str=='位置五'){
+                    str=4;
+                }
+                //console.log(str)
 
                 if (str=='全部'){
                     refreshTable()
-                }
-                for (var i in allTableData) {
-                    var thisPosition=allTableData[i][aCol[2].field];
-                    if (thisPosition==str){
-                        newArry.push(allTableData[i]);
+                }else {
+                    for (var i in allTableData) {
+                        var thisPosition = allTableData[i][aCol[2].field];
+                        if (thisPosition == str) {
+                            newArry.push(allTableData[i]);
+                        }
                     }
+                    $("#table").bootstrapTable("load", newArry);
                 }
-                $("#table").bootstrapTable("load", newArry);
             }
         }
 

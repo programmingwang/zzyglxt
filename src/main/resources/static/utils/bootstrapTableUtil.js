@@ -125,8 +125,8 @@
 
             // var oTab=document.getElementById("table");
             var btnSearch=document.getElementById("btnSearch");
-            var param = {};
-            console.log(needParam);
+
+            // console.log(needParam);
             btnSearch.onclick=function() {
                 var myTable = myBootStrapTableInit(tableID, url, needParam, aCol);
                 // 先刷新列表------------
@@ -144,20 +144,24 @@
                 var str = document.getElementById("taskNameSearch").value.toLowerCase();
                 var allTableData = JSON.parse(localStorage.getItem("2"));
 
-                console.log(allTableData);
-                console.log(str);
-                console.log("状态"+addstr);
+
+                // console.log(allTableData);
+                // console.log(str);
+                // console.log("状态"+addstr);
                 if (str=='请输入'||str==''){
-                    myTable.free();
-                    myTable = myBootStrapTableInit(tableID,url,param,aCol)
+                    $("#table").bootstrapTable("load", allTableData);
                 }
 
                 for (var i in allTableData) {
                     for (var v in aCol){
                         var textP = allTableData[i][aCol[v].field];
-                        var makeTime=allTableData[i][aCol[4].field];
                         var isTimeSlot=false;
-                        makeTime=makeTime.substring(11,19);
+                        var makeTime=allTableData[i][aCol[4].field];
+                        console.log(makeTime)
+                        // if(makeTime.length>18){
+                        //     makeTime=makeTime.substring(11,19);
+                        // }
+
                         // console.log(makeTime);
                         // console.log("开始时间："+stratTime);
                         // console.log("结束时间"+endTime);

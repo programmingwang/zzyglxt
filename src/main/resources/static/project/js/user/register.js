@@ -136,17 +136,17 @@ $("#btn_register").unbind("click").bind("click", function () {
         "password": password,
         "mobilePhone": phone
     };
+    console.log(userEntity)
     if (validateLogin()) {
         myAjax(null, "/user/register", userEntity, function (data) {
             if (data && data.code === 88888) {
                 window.location.href = data.data
             } else {
-                // error(data.msg)
                 alert("注册失败")
+                window.location.href = "/register"
             }
         }, false)
     }
-
 })
 
 

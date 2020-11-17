@@ -57,6 +57,7 @@
                 width: '100%',
                 columns: fColumns,
                 ajaxOptions: {
+                    async: false,
                     complete: function (XMLHttpRequest) {
 
                     }
@@ -108,7 +109,14 @@
             $("#"+aTableID).bootstrapTable("destroy");
         }
 
-
+        // $(window).on('load',function(){
+        //     console.log("aaaaaaaaaa");
+        //     var allTableData = $("#table").bootstrapTable("getData");
+        //     console.log(allTableData);
+        //     localStorage.setItem('2',JSON.stringify(allTableData))
+        //     obj2=JSON.parse(localStorage.getItem("2"));
+        //     console.log(obj2);
+        // })
 
         //$(".float-right").attr("display",block);
 
@@ -117,8 +125,8 @@
 
             // var oTab=document.getElementById("table");
             var btnSearch=document.getElementById("btnSearch");
-            var param = {};
-            console.log(needParam);
+
+            // console.log(needParam);
             btnSearch.onclick=function() {
                 var myTable = myBootStrapTableInit(tableID, url, needParam, aCol);
                 // 先刷新列表------------
@@ -134,13 +142,14 @@
                 var newArry = [];
                 var addstr=document.getElementById("chargePersonSearch").value;
                 var str = document.getElementById("taskNameSearch").value.toLowerCase();
-                var allTableData = $("#table").bootstrapTable("getData");
-                console.log(allTableData);
-                console.log(str);
-                console.log("状态"+addstr);
+                var allTableData = JSON.parse(localStorage.getItem("2"));
+
+
+                // console.log(allTableData);
+                // console.log(str);
+                // console.log("状态"+addstr);
                 if (str=='请输入'||str==''){
-                    myTable.free();
-                    myTable = myBootStrapTableInit(tableID,url,param,aCol)
+                    $("#table").bootstrapTable("load", allTableData);
                 }
 
                 for (var i in allTableData) {

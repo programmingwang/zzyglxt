@@ -81,10 +81,10 @@ public class HealthSciKnowDOController {
     }
 
     /*科普知识数据状态*/
-    @RequestMapping(value = "changestatustosciknow/{itemID}/{itemCode}" , method = RequestMethod.POST)
+    @RequestMapping(value = "/changestatustosciknow/{itemID}/{itemCode}" , method = RequestMethod.POST)
     @ResponseBody
     @LogAnnotation(logTitle = "修改科普知识数据状态", logLevel = "2")
-    public ResponseData changeStatusToSciKnow(@RequestBody String scienceKnowledgeStatus , @PathVariable("itemID") Integer itemID , @PathVariable("itemCode")String itemCode){
+    public ResponseData changeStatusToSciKnow(@RequestParam("scienceKnowledgeStatus") String scienceKnowledgeStatus , @PathVariable("itemID") Integer itemID , @PathVariable("itemCode")String itemCode){
         HealthSciKnowDOKey healthCareFamPreDOKey=new HealthSciKnowDOKey();
         healthCareFamPreDOKey.setItemid(itemID);
         healthCareFamPreDOKey.setItemcode(itemCode);

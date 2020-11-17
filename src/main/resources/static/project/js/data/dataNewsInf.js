@@ -36,11 +36,6 @@
                         var isSuccess = false;
                         ajaxUtil.myAjax(null,"/datado/newsInf/deleteByPrimaryKey/"+row.itemid+"/"+row.itemcode,null,function (data) {
                             if(ajaxUtil.success(data)){
-                                ajaxUtil.myAjax(null,"/file/delete?dataCode="+row.itemcode,null,function (data) {
-                                    if(!ajaxUtil.success(data)){
-                                        return alertUtil.error("图片删除失败");
-                                    }
-                                },false,"","get");
                                 alertUtil.info("删除新闻信息成功");
                                 isSuccess = true;
                                 refreshTable();
@@ -97,9 +92,9 @@
                             "dataStatus": ""
                         };
                         if(sessionStorage.getItem("rolename") == "文化宣传处长" || sessionStorage.getItem("rolename") == "政务资源处长"){
-                            submitStatus.dataStatus = webStatus[3].text;
+                            submitStatus.dataStatus = webStatus[3].id;
                         }else{
-                            submitStatus.dataStatus = webStatus[4].text;
+                            submitStatus.dataStatus = webStatus[4].id;
                         }
                         ajaxUtil.myAjax(null,"/datado/newsInf/changeNewsStatus/"+row.itemid+"/"+row.itemcode,submitStatus,function (data) {
                             if(ajaxUtil.success(data)){
@@ -128,7 +123,7 @@
                     modalConfirmFun:function () {
                         var isSuccess = false;
                         var submitStatus = {
-                            "dataStatus": webStatus[6].text
+                            "dataStatus": webStatus[6].id
                         };
                         ajaxUtil.myAjax(null,"/datado/newsInf/changeNewsStatus/"+row.itemid+"/"+row.itemcode,submitStatus,function (data) {
                             if(ajaxUtil.success(data)){
@@ -160,10 +155,10 @@
                 $("#dataTitle").val(row.dataTitle);
                 $("#dataSource").val(row.dataSource);
                 $("#dataAuthor").val(row.dataAuthor);
-                $("#dataContent").val(row.dataContent);
+                $("#dataContent").html(row.dataContent);
                 $("#creater").val(row.creater);
                 $("#itemCreateAt").val(row.itemcreateat);
-                $("#dataStatus").val(row.dataStatus);
+                $("#dataStatus").val(webStatus[row.dataStatus].text);
                 $("#dataFileType").val(row.dataFileType);
                 $("#imgDiv").attr("style","display:none");
                 $('#dataTitleSpan').html("新闻标题");
@@ -183,7 +178,7 @@
                             "dataStatus": ""
                         };
                         if(row.dataFileType=="转载性新闻" || row.dataFileType=="转载性公告"){
-                            submitStatus.dataStatus = "已提交等待综合处处长审核";
+                            submitStatus.dataStatus = webStatus[7].id;
                         }else{
                             submitStatus = {
                                 "dataStatus": selectUtil.getStatus(sessionStorage.getItem("rolename"),webStatus)
@@ -217,7 +212,7 @@
                     modalConfirmFun:function () {
                         var isSuccess = false;
                         var submitStatus = {
-                            "dataStatus": webStatus[0].text
+                            "dataStatus": webStatus[0].id
                         };
                         ajaxUtil.myAjax(null,"/datado/newsInf/changeNewsStatus/"+row.itemid+"/"+row.itemcode,submitStatus,function (data) {
                             if(ajaxUtil.success(data)){
@@ -266,6 +261,11 @@
         }
 
         bootstrapTableUtil.globalSearch("table",url,aParam, aCol);
+            var allTableData = $("#table").bootstrapTable("getData");
+            //console.log(allTableData);
+            localStorage.setItem('2',JSON.stringify(allTableData))
+            obj2=JSON.parse(localStorage.getItem("2"));
+            //console.log(obj2);
 
     })
 })();

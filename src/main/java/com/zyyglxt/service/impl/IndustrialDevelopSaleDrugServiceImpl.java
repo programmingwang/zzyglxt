@@ -13,6 +13,7 @@ import com.zyyglxt.dataobject.IndustrialDevelopSaleDrug;
 import com.zyyglxt.service.IndustrialDevelopSaleDrugService;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -54,6 +55,7 @@ public class IndustrialDevelopSaleDrugServiceImpl implements IndustrialDevelopSa
         }
         record.setItemcode(UUID.randomUUID().toString());
         record.setItemcreateat(new Date());
+        record.setStatus("0");
         record.setCreater(usernameUtil.getOperateUser());
         record.setUpdater(usernameUtil.getOperateUser());
         record.setOrgCode(usernameUtil.getOrgCode());
@@ -84,14 +86,17 @@ public class IndustrialDevelopSaleDrugServiceImpl implements IndustrialDevelopSa
     }
 
     @Override
-    public List< IndustrialDevelopSaleDrug> selectAllSaleDrug(String orgCode) {
-        return industrialDevelopSaleDrugMapper.selectAllSaleDrug(orgCode);
-       /* List<IndustrialDevelopSaleDrug> industrialDevelopSaleDrugList = new ArrayList<>();
-        for (String orgcode : orgCode) {
-            industrialDevelopSaleDrugList.addAll(industrialDevelopSaleDrugMapper.selectAllSaleDrug (orgcode));
+    public List< IndustrialDevelopSaleDrug> selectAllSaleDrug( List<String> status) {
+//        return industrialDevelopSaleDrugMapper.selectAllSaleDrug(status);
+       List<IndustrialDevelopSaleDrug> industrialDevelopSaleDrugList = new ArrayList<>();
+        for (String Status : status) {
+            industrialDevelopSaleDrugList.addAll(industrialDevelopSaleDrugMapper.selectAllSaleDrug (Status));
         }
         return industrialDevelopSaleDrugList;
-    }*/
+    }
 
+    @Override
+    public int changeStatusToSaleDrug(IndustrialDevelopSaleDrug key, String status) {
+        return industrialDevelopSaleDrugMapper.changeStatusToSaleDrug(key,status);
     }
 }

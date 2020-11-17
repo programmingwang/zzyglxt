@@ -21,7 +21,7 @@
                         name : $("#name").val(),
                         source : $("#source").val(),
                         prescription : $("#prescription").val(),
-                       /* status : $("#status").val(),*/
+                        status : $("#status").val(),
                         creater : $("#creater").val(),
                         content : editor.txt.html()
                     };
@@ -34,7 +34,7 @@
                         name : $("#name").val(),
                         source : $("#source").val(),
                         prescription : $("#prescription").val(),
-                        /*status : $("#status").val(),*/
+                        status : $("#status").val(),
                         creater : $("#creater").val(),
                         content : editor.txt.html()
                     }
@@ -59,7 +59,7 @@
                     $("#name").val(tempdata.name);
                     $("#source").val(tempdata.source);
                     $("#prescription").val(tempdata.prescription);
-                 /*   $("#status").val(tempdata.status);*/
+                    $("#status").val(tempdata.status);
                     $("#creater").val(tempdata.creater);
                     editor.txt.html(tempdata.content);
                     var img = tempdata.filePath;

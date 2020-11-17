@@ -5,6 +5,8 @@
 
             //后台请求地址
             var url = "/industrialdevelop/talrec";
+            
+            var getUrl = url + "/" + sessionStorage.getItem("orgCode");
             //页面请求地址
             var pathUrl = "/industrialdevelop/recruit";
             //新增页面地址
@@ -17,12 +19,12 @@
             function operation(value, row, index){
                 if (row.status === '展示中'){
                     return [
-                        '<button type="button" class="unshelve btn btn-primary btn-sm" style="margin-right: 5px" data-toggle="modal" data-target="" >下架</button>'
+                        '<a class="unshelve" style="margin:0 1em;text-decoration: none;color: #775637" data-toggle="modal" data-target="" >下架</a>'
                     ].join('')
                 } else {
                     return [
-                        '<button type="button" class="edit btn btn-primary btn-sm" style="margin-right: 5px" data-toggle="modal" data-target="" >编辑</button>',
-                        '<button type="button" class="delete btn btn-danger btn-sm"  data-toggle="modal" data-target="#staticBackdrop" >删除</button>',
+                        '<a class="edit" style="margin:0 1em;text-decoration: none;color: #775637" data-toggle="modal" data-target="" >编辑</a>',
+                        '<a class="delete" style="margin:0 1em;text-decoration: none;color:#D60000;"  data-toggle="modal" data-target="#staticBackdrop" >删除</a>',
                     ].join('');
                 }
             }
@@ -101,14 +103,19 @@
                 {field: 'action',  title: '操作',formatter: operation,events:orgEvents}
             ];
 
-            var myTable = bootstrapTableUtil.myBootStrapTableInit("table", url, aParam, aCol);
+            var myTable = bootstrapTableUtil.myBootStrapTableInit("table", getUrl, aParam, aCol);
 
             function refreshTable() {
                 var param = {};
                 myTable.free();
-                myTable = bootstrapTableUtil.myBootStrapTableInit("table", url, param, aCol);
+                myTable = bootstrapTableUtil.myBootStrapTableInit("table", getUrl, param, aCol);
             }
 
-            bootstrapTableUtil.globalSearch("table",url,aParam, aCol);
+            bootstrapTableUtil.globalSearch("table",getUrl,aParam, aCol);
+            var allTableData = $("#table").bootstrapTable("getData");
+            //console.log(allTableData);
+            localStorage.setItem('2',JSON.stringify(allTableData))
+            obj2=JSON.parse(localStorage.getItem("2"));
+            //console.log(obj2);
         })
 })();

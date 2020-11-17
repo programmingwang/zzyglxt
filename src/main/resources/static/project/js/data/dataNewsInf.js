@@ -4,8 +4,10 @@
 
         var url = "/datado/newsInf/selectAllNewsInf";
 
+        var webStatus = dictUtil.getDictByCode(dictUtil.DICT_LIST.webStatus);
+
         //角色加载工具
-        url = selectUtil.getRoleTable(sessionStorage.getItem("rolename"),url,"dataStatus");
+        url = selectUtil.getRoleTable(sessionStorage.getItem("rolename"),url,"dataStatus",webStatus);
 
         var addUrl = "/data/add/addNewsInf";
         var aParam = {
@@ -14,7 +16,7 @@
 
         //操作
         function operation(value, row, index){
-            return selectUtil.getRoleOperate(value,row,index,sessionStorage.getItem("rolename"),row.dataStatus);
+            return selectUtil.getRoleOperate(value,row,index,sessionStorage.getItem("rolename"),row.dataStatus,webStatus);
         }
 
         //修改事件
@@ -34,11 +36,6 @@
                         var isSuccess = false;
                         ajaxUtil.myAjax(null,"/datado/newsInf/deleteByPrimaryKey/"+row.itemid+"/"+row.itemcode,null,function (data) {
                             if(ajaxUtil.success(data)){
-                                ajaxUtil.myAjax(null,"/file/delete?dataCode="+row.itemcode,null,function (data) {
-                                    if(!ajaxUtil.success(data)){
-                                        return alertUtil.error("图片删除失败");
-                                    }
-                                },false,"","get");
                                 alertUtil.info("删除新闻信息成功");
                                 isSuccess = true;
                                 refreshTable();
@@ -60,12 +57,12 @@
                     modalConfirmFun:function () {
                         var isSuccess = false;
                         var submitStatus = {
-                            "dataStatus": selectUtil.getStatus(sessionStorage.getItem("rolename"))
+                            "dataStatus": selectUtil.getStatus(sessionStorage.getItem("rolename"),webStatus)
                         };
                         ajaxUtil.myAjax(null,"/datado/newsInf/changeNewsStatus/"+row.itemid+"/"+row.itemcode,submitStatus,function (data) {
                             if(ajaxUtil.success(data)){
                                 if(data.code == 88888){
-                                    if(selectUtil.getStatus(sessionStorage.getItem("rolename")) == "处长已审核"){
+                                    if(sessionStorage.getItem("rolename") == "政务资源处长"){
                                         alertUtil.info("审核已通过，已发送给综合处处长做最后审核！");
                                     }else{
                                         alertUtil.info("审核已通过，已上架！");
@@ -92,8 +89,13 @@
                     modalConfirmFun:function () {
                         var isSuccess = false;
                         var submitStatus = {
-                            "dataStatus": "已下架"
+                            "dataStatus": ""
                         };
+                        if(sessionStorage.getItem("rolename") == "文化宣传处长" || sessionStorage.getItem("rolename") == "政务资源处长"){
+                            submitStatus.dataStatus = webStatus[3].id;
+                        }else{
+                            submitStatus.dataStatus = webStatus[4].id;
+                        }
                         ajaxUtil.myAjax(null,"/datado/newsInf/changeNewsStatus/"+row.itemid+"/"+row.itemcode,submitStatus,function (data) {
                             if(ajaxUtil.success(data)){
                                 if(data.code == 88888){
@@ -121,7 +123,7 @@
                     modalConfirmFun:function () {
                         var isSuccess = false;
                         var submitStatus = {
-                            "dataStatus": "已下架"
+                            "dataStatus": webStatus[6].id
                         };
                         ajaxUtil.myAjax(null,"/datado/newsInf/changeNewsStatus/"+row.itemid+"/"+row.itemcode,submitStatus,function (data) {
                             if(ajaxUtil.success(data)){
@@ -153,10 +155,10 @@
                 $("#dataTitle").val(row.dataTitle);
                 $("#dataSource").val(row.dataSource);
                 $("#dataAuthor").val(row.dataAuthor);
-                $("#dataContent").val(row.dataContent);
+                $("#dataContent").html(row.dataContent);
                 $("#creater").val(row.creater);
                 $("#itemCreateAt").val(row.itemcreateat);
-                $("#dataStatus").val(row.dataStatus);
+                $("#dataStatus").val(webStatus[row.dataStatus].text);
                 $("#dataFileType").val(row.dataFileType);
                 $("#imgDiv").attr("style","display:none");
                 $('#dataTitleSpan').html("新闻标题");
@@ -173,8 +175,15 @@
                     modalConfirmFun:function () {
                         var isSuccess = false;
                         var submitStatus = {
-                            "dataStatus": selectUtil.getStatus(sessionStorage.getItem("rolename"))
+                            "dataStatus": ""
                         };
+                        if(row.dataFileType=="转载性新闻" || row.dataFileType=="转载性公告"){
+                            submitStatus.dataStatus = webStatus[7].id;
+                        }else{
+                            submitStatus = {
+                                "dataStatus": selectUtil.getStatus(sessionStorage.getItem("rolename"),webStatus)
+                            }
+                        }
                         ajaxUtil.myAjax(null,"/datado/newsInf/changeNewsStatus/"+row.itemid+"/"+row.itemcode,submitStatus,function (data) {
                             if(ajaxUtil.success(data)){
                                 if(data.code == 88888){
@@ -203,7 +212,7 @@
                     modalConfirmFun:function () {
                         var isSuccess = false;
                         var submitStatus = {
-                            "dataStatus": "--"
+                            "dataStatus": webStatus[0].id
                         };
                         ajaxUtil.myAjax(null,"/datado/newsInf/changeNewsStatus/"+row.itemid+"/"+row.itemcode,submitStatus,function (data) {
                             if(ajaxUtil.success(data)){
@@ -252,6 +261,11 @@
         }
 
         bootstrapTableUtil.globalSearch("table",url,aParam, aCol);
+            var allTableData = $("#table").bootstrapTable("getData");
+            //console.log(allTableData);
+            localStorage.setItem('2',JSON.stringify(allTableData))
+            obj2=JSON.parse(localStorage.getItem("2"));
+            //console.log(obj2);
 
     })
 })();

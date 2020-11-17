@@ -5,7 +5,8 @@
 body{
     font-family: "Microsoft YaHei UI";
     table-layout: fixed;
-    background-color: #FCFCFA;
+    background-color: white;
+    zoom:80%
 }
 
 table{
@@ -149,10 +150,10 @@ hr {
     margin-bottom: 0;
 }
 .aaaa {
-    height: 30px;
-    margin-top: 3px;
-    margin-left: 2px;
-    margin-bottom: 3px;
+
+    padding: .12rem .3rem;
+    padding: -0.625rem .75rem;
+    margin-bottom: 10px;
 }
 .AFirstMenu {
 
@@ -180,4 +181,17 @@ hr {
 }
 .page-link {
     margin-left: 9px;
+}
+
+.mh {
+    width: 11px;
+}
+.modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1040;
+    width: 100%;
+    height: 100%;
+    background-color: #000;
 }

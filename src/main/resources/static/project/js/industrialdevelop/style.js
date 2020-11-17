@@ -6,7 +6,7 @@
             var url = "/industrialdevelop/base-style";
 
             var pathUrl = "/industrialdevelop/style";
-            var addUrl = pathUrl+"_add";
+            var addUrl = pathUrl+"_add_baseElegant";
             var aParam = {
 
             };
@@ -95,5 +95,10 @@
             }
 
             bootstrapTableUtil.globalSearch("table",url,aParam, aCol);
+            var allTableData = $("#table").bootstrapTable("getData");
+            //console.log(allTableData);
+            localStorage.setItem('2',JSON.stringify(allTableData))
+            obj2=JSON.parse(localStorage.getItem("2"));
+            //console.log(obj2);
         })
 })();

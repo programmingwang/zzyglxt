@@ -4,19 +4,22 @@
 
         var url = "/datado/regulation/selectAll";
 
+        var webStatus = dictUtil.getDictByCode(dictUtil.DICT_LIST.webStatus);
+
+        var webFileType = dictUtil.getDictByCode(dictUtil.DICT_LIST.dataFileType);
+
         //角色加载工具
-        url = selectUtil.getRoleTable(sessionStorage.getItem("rolename"),url,"dataStatus");
+        url = selectUtil.getRoleTable(sessionStorage.getItem("rolename"),url,"dataStatus",webStatus);
 
         var addUrl = "/data/add/addRegulation";
         var aParam = {
 
         };
 
-            //操作
-            function operation(value, row, index){
-                return selectUtil.getRoleOperate(value,row,index,sessionStorage.getItem("rolename"),row.dataStatus);
-            }
-
+        //操作
+        function operation(value, row, index){
+            return selectUtil.getRoleOperate(value,row,index,sessionStorage.getItem("rolename"),row.dataStatus,webStatus);
+        }
 
         //修改事件
         window.orgEvents = {
@@ -61,12 +64,12 @@
                     modalConfirmFun:function () {
                         var isSuccess = false;
                         var submitStatus = {
-                            "dataStatus": selectUtil.getStatus(sessionStorage.getItem("rolename"))
+                            "dataStatus": selectUtil.getStatus(sessionStorage.getItem("rolename"),webStatus)
                         };
                         ajaxUtil.myAjax(null,"/datado/newsInf/changeNewsStatus/"+row.itemid+"/"+row.itemcode,submitStatus,function (data) {
                             if(ajaxUtil.success(data)){
                                 if(data.code == 88888){
-                                    if(selectUtil.getStatus(sessionStorage.getItem("rolename")) == "处长已审核"){
+                                    if(sessionStorage.getItem("rolename") == "政务资源处长"){
                                         alertUtil.info("审核已通过，已发送给综合处处长做最后审核！");
                                     }else{
                                         alertUtil.info("审核已通过，已上架！");
@@ -93,8 +96,13 @@
                     modalConfirmFun:function () {
                         var isSuccess = false;
                         var submitStatus = {
-                            "dataStatus": "已下架"
+                            "dataStatus": ""
                         };
+                        if(sessionStorage.getItem("rolename") == "文化宣传处长" || sessionStorage.getItem("rolename") == "政务资源处长"){
+                            submitStatus.dataStatus = webStatus[3].id;
+                        }else{
+                            submitStatus.dataStatus = webStatus[4].id;
+                        }
                         ajaxUtil.myAjax(null,"/datado/newsInf/changeNewsStatus/"+row.itemid+"/"+row.itemcode,submitStatus,function (data) {
                             if(ajaxUtil.success(data)){
                                 if(data.code == 88888){
@@ -122,7 +130,7 @@
                     modalConfirmFun:function () {
                         var isSuccess = false;
                         var submitStatus = {
-                            "dataStatus": "已下架"
+                            "dataStatus": webStatus[6].id
                         };
                         ajaxUtil.myAjax(null,"/datado/newsInf/changeNewsStatus/"+row.itemid+"/"+row.itemcode,submitStatus,function (data) {
                             if(ajaxUtil.success(data)){
@@ -153,11 +161,11 @@
                 var myRegulationModal = modalUtil.init(myViewRegulationModalData);
                 $("#dataTitle").val(row.dataTitle);
                 $("#dataSource").val(row.dataSource);
-                $("#dataContent").val(row.dataContent);
+                $("#dataContent").html(row.dataContent);
                 $("#creater").val(row.creater);
                 $("#itemCreateAt").val(row.itemcreateat);
-                $("#dataStatus").val(row.dataStatus);
-                $("#dataFileType").val(row.dataFileType);
+                $("#dataStatus").val(webStatus[row.dataStatus].text);
+                $("#dataFileType").val(webFileType[row.dataFileType].text);
                 $("#imgDiv").attr("style","display:none");
                 $("#author").attr("style","display:none");
                 $('#dataTitleSpan').html("政策法规名称");
@@ -176,7 +184,7 @@
                     modalConfirmFun:function () {
                         var isSuccess = false;
                         var submitStatus = {
-                            "dataStatus": selectUtil.getStatus(sessionStorage.getItem("rolename"))
+                            "dataStatus": selectUtil.getStatus(sessionStorage.getItem("rolename"),webStatus)
                         };
                         ajaxUtil.myAjax(null,"/datado/newsInf/changeNewsStatus/"+row.itemid+"/"+row.itemcode,submitStatus,function (data) {
                             if(ajaxUtil.success(data)){
@@ -205,7 +213,7 @@
                     modalConfirmFun:function () {
                         var isSuccess = false;
                         var submitStatus = {
-                            "dataStatus": "--"
+                            "dataStatus": webStatus[0].id
                         };
                         ajaxUtil.myAjax(null,"/datado/newsInf/changeNewsStatus/"+row.itemid+"/"+row.itemcode,submitStatus,function (data) {
                             if(ajaxUtil.success(data)){
@@ -240,7 +248,9 @@
         var aCol = [
             {field: 'dataTitle', title: '政策法规名称'},
             {field: 'dataSource', title: '来源'},
-            {field: 'dataFileType', title: '文件类型'},
+            {field: 'dataFileType', title: '文件类型', formatter:function (value) {
+                    return '</p>'+webFileType[value].text+'</p>'
+                }},
             {field: 'filePath', title: '附件', formatter:function (value, row, index) {
                     if(value == "已经损坏了"){
                         return '<p>'+value+'</p>';
@@ -263,6 +273,11 @@
         }
 
         bootstrapTableUtil.globalSearch("table",url,aParam, aCol);
+            var allTableData = $("#table").bootstrapTable("getData");
+            //console.log(allTableData);
+            localStorage.setItem('2',JSON.stringify(allTableData))
+            obj2=JSON.parse(localStorage.getItem("2"));
+            //console.log(obj2);
 
     })
 })();

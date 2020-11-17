@@ -4,14 +4,15 @@
 
 
             var url = "selectallhealthsciknowdo";
-            url = selectUtil.getRoleTable(sessionStorage.getItem("rolename"),url,"scienceKnowledgeStatus");
+            var webStatus = dictUtil.getDictByCode(dictUtil.DICT_LIST.webStatus);
+            url = selectUtil.getRoleTable(sessionStorage.getItem("rolename"),url,"scienceKnowledgeStatus",webStatus);
             var aParam = {
 
             };
 
             //操作
             function operation(value, row, index){
-                return selectUtil.getRoleOperate(value,row,index,sessionStorage.getItem("rolename"),row.scienceKnowledgeStatus)
+                return selectUtil.getRoleOperate(value,row,index,sessionStorage.getItem("rolename"),row.scienceKnowledgeStatus,webStatus)
             }
 
 
@@ -51,12 +52,14 @@
                         modalConfirmFun:function () {
                             var isSuccess = false;
                             var submitStatus = {
-                                "scienceKnowledgeStatus": selectUtil.getStatus(sessionStorage.getItem("rolename"))
+                                "scienceKnowledgeStatus": selectUtil.getStatus(sessionStorage.getItem("rolename"),webStatus)
                             };
                             ajaxUtil.myAjax(null,"changestatustosciknow/"+row.itemid+"/"+row.itemcode,submitStatus,function (data) {
                                 if(ajaxUtil.success(data)){
-                                    if(data.code == 88888){
-                                        if(selectUtil.getStatus(sessionStorage.getItem("rolename")) == "处长已审核"){
+                                    if(data.code == ajaxUtil.successCode){
+                                        /*if(selectUtil.getStatus(sessionStorage.getItem("rolename")) == "处长已审核")*/
+                                        if(sessionStorage.getItem("rolename") == "文化宣传处长")
+                                        {
                                             alertUtil.info("审核已通过，已发送给综合处处长做最后审核！");
                                         }else{
                                             alertUtil.info("审核已通过，已上架！");
@@ -83,8 +86,13 @@
                         modalConfirmFun:function () {
                             var isSuccess = false;
                             var submitStatus = {
-                                "statscienceKnowledgeStatusus": "已下架"
+                                "statscienceKnowledgeStatusus": ""
                             };
+                            if(sessionStorage.getItem("rolename") == "文化宣传处长" || sessionStorage.getItem("rolename") == "政务资源处长"){
+                                submitStatus.chineseCulturalStatus = webStatus[3].id;
+                            }else{
+                                submitStatus.chineseCulturalStatus = webStatus[4].id;
+                            }
                             ajaxUtil.myAjax(null,"changestatustosciknow/"+row.itemid+"/"+row.itemcode,submitStatus,function (data) {
                                 if(ajaxUtil.success(data)){
                                     if(data.code == 88888){
@@ -110,7 +118,7 @@
                         modalConfirmFun:function () {
                             var isSuccess = false;
                             var submitStatus = {
-                                "statscienceKnowledgeStatusus": "已下架"
+                                "statscienceKnowledgeStatusus":  webStatus[6].id
                             };
                             ajaxUtil.myAjax(null,"changestatustosciknow/"+row.itemid+"/"+row.itemcode,submitStatus,function (data) {
                                 if(ajaxUtil.success(data)){
@@ -141,7 +149,7 @@
                     $("#scienceKnowledgeName").val(row.scienceKnowledgeName);
                     $("#scienceKnowledgeSource").val(row.scienceKnowledgeSource);
                     $("#scienceKnowledgeAuthor").val(row.scienceKnowledgeAuthor);
-                    $("#statscienceKnowledgeStatusus").val(row.statscienceKnowledgeStatusus);
+                    $("#scienceKnowledgeStatus").val(webStatus[row.scienceKnowledgeStatus].text);
                     /* $("#itemCreateAt").val(row.itemcreateat);*/
                     $("#content").val(row.content);
                     mySciKnowModal.show();
@@ -154,9 +162,9 @@
                         modalConfirmFun:function () {
                             var isSuccess = false;
                             var submitStatus = {
-                                "statscienceKnowledgeStatusus": selectUtil.getStatus(sessionStorage.getItem("rolename"))
+                                "scienceKnowledgeStatus": selectUtil.getStatus(sessionStorage.getItem("rolename"),webStatus)
                             };
-                            ajaxUtil.myAjax(null,"changestatustosciknow/"+row.itemid+"/"+row.itemcode,submitStatus,function (data) {
+                            ajaxUtil.myAjax(null,"/changestatustosciknow/"+row.itemid+"/"+row.itemcode,submitStatus,function (data) {
                                 if(ajaxUtil.success(data)){
                                     if(data.code == 88888){
                                         alertUtil.info("已提交");
@@ -181,7 +189,7 @@
                         modalConfirmFun:function () {
                             var isSuccess = false;
                             var submitStatus = {
-                                "statscienceKnowledgeStatusus": "--"
+                                "statscienceKnowledgeStatusus":  webStatus[0].id
                             };
                             ajaxUtil.myAjax(null,"changestatustosciknow/"+row.itemid+"/"+row.itemcode,submitStatus,function (data) {
                                 if(ajaxUtil.success(data)){
@@ -269,5 +277,10 @@
                 }
             }
             bootstrapTableUtil.globalSearch("table",url,aParam, aCol);
+            var allTableData = $("#table").bootstrapTable("getData");
+            //console.log(allTableData);
+            localStorage.setItem('2',JSON.stringify(allTableData))
+            obj2=JSON.parse(localStorage.getItem("2"));
+            //console.log(obj2);
         })
 })();

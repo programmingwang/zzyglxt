@@ -4,9 +4,12 @@
 
             var url = "/cul/trav/trav/getAll";
 
-            //角色加载工具
-            url = selectUtil.getRoleTable(sessionStorage.getItem("rolename"),url,"chineseCulturalStatus");
+            var webStatus = dictUtil.getDictByCode(dictUtil.DICT_LIST.webStatus);
 
+            //角色加载工具
+            url = selectUtil.getRoleTable(sessionStorage.getItem("rolename"),url,"chineseCulturalStatus",webStatus);
+
+            console.log(url);
             var aParam = {
 
             };
@@ -15,8 +18,10 @@
 
             //操作
             function operation(value, row, index){
-                return selectUtil.getRoleOperate(value,row,index,sessionStorage.getItem("rolename"),row.chineseCulturalStatus)
+                return selectUtil.getRoleOperate(value,row,index,sessionStorage.getItem("rolename"),row.chineseCulturalStatus,webStatus)
             }
+
+
 
             //修改事件
             window.orgEvents = {
@@ -61,12 +66,13 @@
                         modalConfirmFun:function () {
                             var isSuccess = false;
                             var submitStatus = {
-                                "chineseCulturalStatus": selectUtil.getStatus(sessionStorage.getItem("rolename"))
+                                "chineseCulturalStatus": selectUtil.getStatus(sessionStorage.getItem("rolename"),webStatus)
                             };
                             ajaxUtil.myAjax(null,"/cul/trav/trav/cgTravSta/"+row.itemid+"/"+row.itemcode,submitStatus,function (data) {
+                                console.log(data);
                                 if(ajaxUtil.success(data)){
-                                    if(data.code == 88888){
-                                        if(selectUtil.getStatus(sessionStorage.getItem("rolename")) == "处长已审核"){
+                                    if(data.code == ajaxUtil.successCode){
+                                        if(sessionStorage.getItem("rolename") == "文化宣传处长"){
                                             alertUtil.info("审核已通过，已发送给综合处处长做最后审核！");
                                         }else{
                                             alertUtil.info("审核已通过，已上架！");
@@ -94,8 +100,13 @@
                         modalConfirmFun:function () {
                             var isSuccess = false;
                             var submitStatus = {
-                                "chineseCulturalStatus": "已下架"
+                                "chineseCulturalStatus": ""
                             };
+                            if(sessionStorage.getItem("rolename") == "文化宣传处长" || sessionStorage.getItem("rolename") == "政务资源处长"){
+                                submitStatus.chineseCulturalStatus = webStatus[3].id;
+                            }else{
+                                submitStatus.chineseCulturalStatus = webStatus[4].id;
+                            }
                             ajaxUtil.myAjax(null,"/cul/trav/trav/cgTravSta/"+row.itemid+"/"+row.itemcode,submitStatus,function (data) {
                                 if(ajaxUtil.success(data)){
                                     if(data.code == 88888){
@@ -123,7 +134,7 @@
                         modalConfirmFun:function () {
                             var isSuccess = false;
                             var submitStatus = {
-                                "chineseCulturalStatus": "已下架"
+                                "chineseCulturalStatus": webStatus[6].id
                             };
                             ajaxUtil.myAjax(null,"/cul/trav/trav/cgTravSta/"+row.itemid+"/"+row.itemcode,submitStatus,function (data) {
                                 if(ajaxUtil.success(data)){
@@ -155,10 +166,10 @@
                     $("#chineseCulturalName").val(row.chineseCulturalName);
                     $("#chineseCulturalSource").val(row.chineseCulturalSource);
                     $("#chineseCulturalAuthor").val(row.chineseCulturalAuthor);
-                    $("#chineseCulturalContent").val(row.chineseCulturalContent);
+                    $("#chineseCulturalContent").html(row.chineseCulturalContent);
                     $("#creater").val(row.creater);
                     $("#itemCreateAt").val(row.itemcreateat);
-                    $("#chineseCulturalStatus").val(row.chineseCulturalStatus);
+                    $("#chineseCulturalStatus").val(webStatus[row.chineseCulturalStatus].text);
                     $("#culturalImg").attr("src",row.filePath)
                     $('#culturalImgSpan').html("景点图片");
                     $('#culturalNameSpan').html("景点名称");
@@ -175,7 +186,7 @@
                         modalConfirmFun:function () {
                             var isSuccess = false;
                             var submitStatus = {
-                                "chineseCulturalStatus": selectUtil.getStatus(sessionStorage.getItem("rolename"))
+                                "chineseCulturalStatus": selectUtil.getStatus(sessionStorage.getItem("rolename"),webStatus)
                             };
                             ajaxUtil.myAjax(null,"/cul/trav/trav/cgTravSta/"+row.itemid+"/"+row.itemcode,submitStatus,function (data) {
                                 if(ajaxUtil.success(data)){
@@ -205,7 +216,7 @@
                         modalConfirmFun:function () {
                             var isSuccess = false;
                             var submitStatus = {
-                                "chineseCulturalStatus": "--"
+                                "chineseCulturalStatus": webStatus[0].id
                             };
                             ajaxUtil.myAjax(null,"/cul/trav/trav/cgTravSta/"+row.itemid+"/"+row.itemcode,submitStatus,function (data) {
                                 if(ajaxUtil.success(data)){
@@ -261,6 +272,48 @@
                 myTable.free();
                 myTable = bootstrapTableUtil.myBootStrapTableInit("table", url, param, aCol);
             }
+
+
             bootstrapTableUtil.globalSearch("table",url,aParam, aCol);
+
+                var allTableData = $("#table").bootstrapTable("getData");
+                //console.log(allTableData);
+                localStorage.setItem('2',JSON.stringify(allTableData))
+                obj2=JSON.parse(localStorage.getItem("2"));
+                //console.log(obj2);
+            // function getAllData(){
+            //     var allTableData = $("#table").bootstrapTable("getData");
+            //     console.log(allTableData);
+            //     localStorage.setItem('2',JSON.stringify(allTableData))
+            //     obj2=JSON.parse(localStorage.getItem("2"));
+            //     console.log(obj2);
+            // }
+            // setTimeout(getAllData,10000);
+            // var addstr=document.getElementById("chargePersonSearch").value;
+            // var addstr=document.getElementById("chargePersonSearch").value;
+            // localStorage.setItem('1',addstr);
+            // //[object Object]
+            //
+            // localStorage.setItem('2',JSON.stringify(addstr));
+            //
+            // obj2=JSON.parse(localStorage.getItem("2"));
+            // console.log(obj2);
+            // obj1=localStorage.getItem("1")
+            // console.log(obj1)
+        //     window.onload=function(){
+        //
+        //         var addstr=document.getElementById("chargePersonSearch").value;
+        //         localStorage.setItem('1',addstr);
+        //         //[object Object]
+        //
+        //         localStorage.setItem('2',JSON.stringify(addstr));
+        //
+        //         obj2=JSON.parse(localStorage.getItem("2"));
+        //         console.log(obj2);
+        //         obj1=localStorage.getItem("1")
+        //         console.log(obj1)
+        //
+        // }
         })
 })();
+

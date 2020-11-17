@@ -231,4 +231,10 @@
       itemUpdateAt = #{itemupdateat,jdbcType=TIMESTAMP}
     where itemCode = #{itemcode,jdbcType=CHAR}
   </update>
+
+  <select id="selectAllSaleDrug" resultMap="BaseResultMap">
+        SELECT *
+        FROM tb_industrial_develop_sale_drug
+        WHERE ORG_CODE = #{orgCode,jdbcType=CHAR}
+    </select>
 </mapper>

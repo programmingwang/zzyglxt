@@ -33,6 +33,29 @@
             //隐藏上传网络图片
             editor.config.showLinkImg = false
             editor.config.uploadImgShowBase64 = true
+
+            //editor.customConfig.uploadImgServer = 'upload.do'; //设置上传文件的服务器路径
+            editor.customConfig.uploadImgMaxSize = 3 * 1024 * 1024; // 将图片大小限制为 3M
+
+            //自定义上传图片事件
+            editor.customConfig.uploadImgHooks = {
+                before : function(xhr, editor, files) {
+
+                },
+                success : function(xhr, editor, result) {
+                    console.log("上传成功");
+                },
+                fail : function(xhr, editor, result) {
+                    console.log("上传失败,原因是"+result);
+                },
+                error : function(xhr, editor) {
+                    console.log("上传出错");
+                },
+                timeout : function(xhr, editor) {
+                    console.log("上传超时");
+                }
+            }
+
             editor.create()
             editor.txt.html('')
 

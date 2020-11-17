@@ -74,7 +74,8 @@
             '                    <div class="input-group-prepend">\n' +
             '                        <button type="button" id="culturalContentSpan" class="btn btn-primary btn-sm" >正&emsp;&emsp;文</button>\n' +
             '                    </div>\n' +
-            '                    <input type="text" id="chineseCulturalContent" class="form-control">\n' +
+            '                    <div  id="chineseCulturalContent" class="form-control">\n' +
+            '                    </div>\n' +
             '                </div>\n' +
             '            </div>\n' +
             '\n' +

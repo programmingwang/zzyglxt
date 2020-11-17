@@ -159,7 +159,7 @@
                     $("#chineseCulturalName").val(row.chineseCulturalName);
                     $("#chineseCulturalSource").val(row.chineseCulturalSource);
                     $("#chineseCulturalAuthor").val(row.chineseCulturalAuthor);
-                    $("#chineseCulturalContent").val(row.chineseCulturalContent);
+                    $("#chineseCulturalContent").html(row.chineseCulturalContent);
                     $("#creater").val(row.creater);
                     $("#itemCreateAt").val(row.itemcreateat);
                     $("#chineseCulturalStatus").val(webStatus[row.chineseCulturalStatus].text);

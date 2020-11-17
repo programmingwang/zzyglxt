@@ -44,7 +44,7 @@
             editor.config.showLinkImg = false
             editor.config.uploadImgShowBase64 = true
             editor.create()
-            editor.txt.html('')
+            editor.txt.html('<p></p>')
 
             $("#div1").on("input propertychange", function () {
                 var textNUm = editor.txt.text();
@@ -69,7 +69,7 @@
                 param.contacts = $("#contacts").val();
                 param.phone = $("#phone").val();
                 param.context = $(".w-e-text").html();
-                param.orgCode = sessionStorage.getItem("orgCode");
+                param.orgCode = "未定义";
                 return param;
             }
 

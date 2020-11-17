@@ -2,26 +2,31 @@
     require(['jquery', 'ajaxUtil','bootstrapTableUtil','objectUtil','alertUtil','modalUtil','selectUtil','stringUtil','dictUtil'],
         function (jquery,ajaxUtil,bootstrapTableUtil,objectUtil,alertUtil,modalUtil,selectUtil,stringUtil,dictUtil) {
 
+            var url = "/industrialdevelop/topic";
 
-        var url = "/datado/newsInf/selectAllNewsRot";
+            //var webStatus = dictUtil.getDictByCode(dictUtil.DICT_LIST.webStatus);
 
-        var webStatus = dictUtil.getDictByCode(dictUtil.DICT_LIST.webStatus);
+            //角色加载工具
+            //url = selectUtil.getRoleTable(sessionStorage.getItem("rolename"),url,"dataStatus",webStatus);
 
-        var webLocation = dictUtil.getDictByCode(dictUtil.DICT_LIST.dataLocation);
+            var addUrl = "/scientificProject/topicManagement";
+            var aParam = {
 
-        //角色加载工具
-        url = selectUtil.getRoleTable(sessionStorage.getItem("rolename"),url,"dataStatus",webStatus);
+            };
 
-        var addUrl = "/data/add/addNewsRotations";
-        var aParam = {
-
-        };
-
-        //操作
-        function operation(value, row, index){
-            return selectUtil.getRoleOperate(value,row,index,sessionStorage.getItem("rolename"),row.dataStatus,webStatus);
-        }
-
+            //操作
+            function operation(value, row, index){
+                if (row.industrialDevelopStatus === '展示中'){
+                    return [
+                        '<a class="unshelve" style="margin:0 1em;text-decoration: none;color: #775637" data-toggle="modal" data-target="" >下架</a>'
+                    ].join('')
+                } else {
+                    return [
+                        '<a class="edit" style="margin:0 1em;text-decoration: none;color: #775637" data-toggle="modal" data-target="" >编辑</a>',
+                        '<a class="delete" style="margin:0 1em;text-decoration: none;color:#D60000;"  data-toggle="modal" data-target="#staticBackdrop" >删除</a>',
+                    ].join('');
+                }
+            }
 
             //修改事件
             window.orgEvents = {
@@ -32,33 +37,34 @@
 
                 'click .delete': function (e, value, row, index) {
                     var myDeleteModalData ={
-                        modalBodyID : "myDeleteNewsRotations",
-                        modalTitle : "删除新闻轮播图",
+                        modalBodyID : "myDeleteRegulation",
+                        modalTitle : "删除政策法规",
                         modalClass : "modal-lg",
                         confirmButtonClass : "btn-danger",
                         modalConfirmFun:function () {
                             var isSuccess = false;
-                            ajaxUtil.myAjax(null,"/datado/newsInf/deleteByPrimaryKey/"+row.itemid+"/"+row.itemcode,null,function (data) {
+                            ajaxUtil.myAjax(null,"/datado/regulation/deleteByPrimaryKey/"+row.itemid+"/"+row.itemcode,null,function (data) {
                                 if(ajaxUtil.success(data)){
                                     ajaxUtil.myAjax(null,"/file/delete?dataCode="+row.itemcode,null,function (data) {
                                         if(!ajaxUtil.success(data)){
-                                            return alertUtil.error("图片删除失败");
+                                            return alertUtil.error("附件删除失败");
                                         }
                                     },false,"","get");
-                                    alertUtil.info("删除新闻轮播图成功");
+                                    alertUtil.info("删除政策法规成功");
                                     isSuccess = true;
                                     refreshTable();
                                 }
                             },false,true,"delete");
                             return isSuccess;
                         }
+
                     };
                     var myDeleteModal = modalUtil.init(myDeleteModalData);
                     myDeleteModal.show();
                 },
 
                 'click .pass' : function (e, value, row, index) {
-                    var myPassNewsRotationsModalData ={
+                    var myPassRegulationModalData ={
                         modalBodyID :"myPassModal",
                         modalTitle : "审核通过",
                         modalClass : "modal-lg",
@@ -84,14 +90,13 @@
                             },false);
                             return isSuccess;
                         }
-
                     };
-                    var myPassModal = modalUtil.init(myPassNewsRotationsModalData);
+                    var myPassModal = modalUtil.init(myPassRegulationModalData);
                     myPassModal.show();
                 },
 
                 'click .fail' : function (e, value, row, index) {
-                    var myFailNewsRotationsModalData ={
+                    var myFailRegulationModalData ={
                         modalBodyID :"myFailModal",
                         modalTitle : "审核不通过",
                         modalClass : "modal-lg",
@@ -120,12 +125,12 @@
                         }
 
                     };
-                    var myFailModal = modalUtil.init(myFailNewsRotationsModalData);
+                    var myFailModal = modalUtil.init(myFailRegulationModalData);
                     myFailModal.show();
                 },
 
                 'click .under-shelf' : function (e, value, row, index) {
-                    var myUnderShelfNewsRotationsModalData ={
+                    var myUnderShelfRegulationModalData ={
                         modalBodyID :"myUnderShelfModal",
                         modalTitle : "下架",
                         modalClass : "modal-lg",
@@ -149,36 +154,37 @@
                         }
 
                     };
-                    var myUnderShelfModal = modalUtil.init(myUnderShelfNewsRotationsModalData);
+                    var myUnderShelfModal = modalUtil.init(myUnderShelfRegulationModalData);
                     myUnderShelfModal.show();
                 },
 
                 'click .view' : function (e, value, row, index) {
-                    var myViewNewsRotationsModalData ={
+                    var myViewRegulationModalData ={
                         modalBodyID : "myViewDataModal", //公用的在后面给span加不同的内容就行了，其他模块同理
                         modalTitle : "查看详情",
                         modalClass : "modal-lg",
                         confirmButtonStyle: "display:none",
                     };
-                    var myNewsRotationsModal = modalUtil.init(myViewNewsRotationsModalData);
+                    var myRegulationModal = modalUtil.init(myViewRegulationModalData);
                     $("#dataTitle").val(row.dataTitle);
                     $("#dataSource").val(row.dataSource);
-                    $("#dataAuthor").val(row.dataAuthor);
-                    $("#dataContent").html(row.dataContent);
+                    $("#dataContent").val(row.dataContent);
                     $("#creater").val(row.creater);
                     $("#itemCreateAt").val(row.itemcreateat);
                     $("#dataStatus").val(webStatus[row.dataStatus].text);
-                    $("#dataFileType").val(webLocation[row.dataLocation].text);
-                    $("#newsImg").attr("src",row.filePath);
-                    $('#newsImgSpan').html("新闻图片");
-                    $('#dataTitleSpan').html("新闻标题");
-                    $('#dataFileTypeSpan').html("所属位置");
+                    $("#dataFileType").val(webFileType[row.dataFileType].text);
+                    $("#imgDiv").attr("style","display:none");
+                    $("#author").attr("style","display:none");
+                    $('#dataTitleSpan').html("政策法规名称");
+                    $('#dataFileTypeSpan').html("文件类型");
+                    $("#fileDiv").attr("style","display:block");
+                    $("#upFile").html(row.fileName);
 
-                    myNewsRotationsModal.show();
+                    myRegulationModal.show();
                 },
 
                 'click .submit' : function (e, value, row, index) {
-                    var mySubmitNewsRotationsModalData ={
+                    var mySubmitRegulationModalData ={
                         modalBodyID :"mySubmitModal",
                         modalTitle : "提交",
                         modalClass : "modal-lg",
@@ -201,14 +207,13 @@
                             },false);
                             return isSuccess;
                         }
-
                     };
-                    var mySubmitModal = modalUtil.init(mySubmitNewsRotationsModalData);
+                    var mySubmitModal = modalUtil.init(mySubmitRegulationModalData);
                     mySubmitModal.show();
                 },
 
                 'click .no-submit' : function (e, value, row, index) {
-                    var myNoSubmitNewsRotationsModalData ={
+                    var myNoSubmitRegulationModalData ={
                         modalBodyID :"myNoSubmitModal",
                         modalTitle : "取消提交",
                         modalClass : "modal-lg",
@@ -232,90 +237,54 @@
                             return isSuccess;
                         }
                     };
-                    var mySubmitModal = modalUtil.init(myNoSubmitNewsRotationsModalData);
+                    var mySubmitModal = modalUtil.init(myNoSubmitRegulationModalData);
                     mySubmitModal.show();
                 },
-
             };
 
 
-        $("#btn_addTask").unbind().on('click',function () {
-            localStorage.removeItem("rowData");
-            orange.redirect(addUrl);
-        });
+            $("#btn_addTask").unbind().on('click',function () {
+                localStorage.removeItem("rowData");
+                orange.redirect(addUrl);
+            });
 
-        var pl = dictUtil.getDictByCode(dictUtil.DICT_LIST.showStatus);
-        $("#chargePersonSearch").selectUtil(pl);
+            var pl = dictUtil.getDictByCode(dictUtil.DICT_LIST.showStatus);
+            $("#chargePersonSearch").selectUtil(pl);
 
-        var aCol = [
-            {field: 'dataTitle', title: '新闻标题'},
-            {field: 'filePath', title: '新闻图片', formatter:function (value, row, index) {
-                if(value == "已经损坏了"){
-                    return '<p>'+value+'</p>';
-                }else{
-                    return '<img  src='+value+' width="100" height="100" class="img-rounded" >';
-                }
-            }},
-            {field: 'dataLocation', title: '所属位置', formatter: function (value) {
-                    return '</p>'+webLocation[value].text+'</p>'
-                }},
-            {field: 'itemcreateat', title: '创建时间'},
-            {field: 'dataStatus', title: '展示状态', formatter: function (value) {
-                    return '</p>'+webStatus[value].text+'</p>'
-                }},
-            {field: 'action',  title: '操作',formatter: operation,events:orgEvents}
-        ];
 
-        var myTable = bootstrapTableUtil.myBootStrapTableInit("table", url, aParam, aCol);
+            var aCol = [
+                {field: 'dataTitle', title: '政策法规名称'},
+                {field: 'dataSource', title: '来源'},
+                {field: 'dataFileType', title: '文件类型', formatter:function (value) {
+                        return '</p>'+webFileType[value].text+'</p>'
+                    }},
+                {field: 'filePath', title: '附件', formatter:function (value, row, index) {
+                        if(value == "已经损坏了"){
+                            return '<p>'+value+'</p>';
+                        }else if (row.fileName == null){
+                            return '<p>————</p>';
+                        }else{
+                            return '<a href="'+value+'">'+row.fileName+'</a>'
+                        }
+                    }},
+                {field: 'itemcreateat', title: '发布时间'},
+                {field: 'action',  title: '操作',formatter: operation,events:orgEvents}
+            ];
 
-        function refreshTable() {
-            var param = {};
-            myTable.free();
-            myTable = bootstrapTableUtil.myBootStrapTableInit("table", url, param, aCol);
-        }
+            var myTable = bootstrapTableUtil.myBootStrapTableInit("table", url, aParam, aCol);
+
+            function refreshTable() {
+                var param = {};
+                myTable.free();
+                myTable = bootstrapTableUtil.myBootStrapTableInit("table", url, param, aCol);
+            }
+
+            bootstrapTableUtil.globalSearch("table",url,aParam, aCol);
             var allTableData = $("#table").bootstrapTable("getData");
             //console.log(allTableData);
             localStorage.setItem('2',JSON.stringify(allTableData))
             obj2=JSON.parse(localStorage.getItem("2"));
             //console.log(obj2);
 
-        var allPosition = document.getElementById("allPosition").children;
-        for(var i=1;i<allPosition.length;i++){
-            //console.log(allPosition[i].innerHTML)
-            allPosition[i].onclick=function () {
-                for(var j=1;j<allPosition.length;j++){
-                    allPosition[j].classList.remove("addC");
-                }
-                this.classList.add("addC");
-                var newArry = [];
-                var allTableData = JSON.parse(localStorage.getItem("2"));
-                var str=this.innerHTML;
-                if (str=='位置一'){
-                    str=0;
-                }else if (str=='位置二'){
-                    str=1;
-                }else if (str=='位置三'){
-                    str=2;
-                }else if (str=='位置四'){
-                    str=3;
-                }else if (str=='位置五'){
-                    str=4;
-                }
-                //console.log(str)
-
-                if (str=='全部'){
-                    refreshTable()
-                }else {
-                    for (var i in allTableData) {
-                        var thisPosition = allTableData[i][aCol[2].field];
-                        if (thisPosition == str) {
-                            newArry.push(allTableData[i]);
-                        }
-                    }
-                    $("#table").bootstrapTable("load", newArry);
-                }
-            }
-        }
-
-    })
+        })
 })();

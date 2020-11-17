@@ -217,7 +217,7 @@
                     id: "13-5",
                     level: "2",
                     pid: "13"
-                },/*
+                },
                 {
                     menu_name: "在售药材",
                     menu_url: "/healthCare/healthcarechineseMedicine",
@@ -338,7 +338,7 @@
                 },
                 {
                     menu_name: "＞课题管理",
-                    menu_url: "/scientificProject/projectManagement",
+                    menu_url: "/scientificProject/topicManagement",
                     id: "15-3",
                     level: "2",
                     pid: "15"

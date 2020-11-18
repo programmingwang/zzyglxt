@@ -11,7 +11,7 @@ import javax.validation.constraints.NotNull;
  * @date 2020/11/14 21:57
  */
 @Data
-public class MedicalServiceDto {
+public class StatusDto {
     @NotNull(message = "id不能为空")
     private Integer itemid;
     @NotBlank(message = "code不能为空")

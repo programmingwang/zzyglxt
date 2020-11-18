@@ -1,12 +1,10 @@
 package com.zyyglxt.controller.industrialDevelop;
 
+import com.zyyglxt.dto.industrialDevelop.AuditDto;
 import com.zyyglxt.error.EmBusinessError;
 import com.zyyglxt.response.ResponseData;
 import com.zyyglxt.service.IAuditService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 
@@ -68,6 +66,27 @@ public class OrgAuditController {
                 return new ResponseData(EmBusinessError.success, auditService.getDetailSchool(null,itemcode));
             case "hospital":
                 return new ResponseData(EmBusinessError.success, auditService.getDetailHospital(null,itemcode));
+        }
+        return new ResponseData(EmBusinessError.fail);
+    }
+
+    @PutMapping(value = "/audits")
+    public ResponseData changeStatus(@RequestBody AuditDto record)
+    {
+        switch (record.getType()){
+            case "tec":
+            case "lab":
+            case "tour":
+                return new ResponseData(EmBusinessError.success, auditService.changeTecSerOrgStatus(record));
+            case "plant":
+            case "process":
+            case "sale":
+            case "produce":
+                return new ResponseData(EmBusinessError.success, auditService.changeChiMedStatus(record));
+            case "school":
+                return new ResponseData(EmBusinessError.success, auditService.changeSchoolStatus(record));
+            case "hospital":
+                return new ResponseData(EmBusinessError.success, auditService.changeHospitalStatus(record));
         }
         return new ResponseData(EmBusinessError.fail);
     }

@@ -64,6 +64,44 @@
         </if>
         limit 1
     </select>
+    <update id="changeChiMedStatus">
+        update tb_industrial_develop_chi_med
+        set STATUS = #{status}
+        <if test="reason != null and reason != ''">
+            , REASON = #{reason}
+        </if>
+        where itemCode = #{itemcode}
+        <if test="itemid != null and itemid != ''">
+            and itemID = #{itemid}
+        </if>
+    </update>
+    <update id="changeTecSerOrgStatus">
+        update tb_industrial_develop_tec_ser_org
+        set STATUS = #{status}
+        <if test="reason != null and reason != ''">
+            , REASON = #{reason}
+        </if>
+        where itemCode = #{itemcode}
+        <if test="itemid != null and itemid != ''">
+            and itemID = #{itemid}
+        </if>
+    </update>
+    <update id="changeHospitalStatus">
+        update tb_culpro_hosp
+        set HOSPITAL_STATUS = #{status,jdbcType=VARCHAR}
+        where itemCode = #{itemcode}
+        <if test="itemid != null and itemid != ''">
+            and itemID = #{itemid}
+        </if>
+    </update>
+    <update id="changeSchoolStatus">
+        update tb_industrial_develop_school
+        set STATUS = #{status,jdbcType=VARCHAR}
+        where itemCode = #{itemcode}
+        <if test="itemid != null and itemid != ''">
+            and itemID = #{itemid}
+        </if>
+    </update>
 
 
 </mapper>

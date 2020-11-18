@@ -5,7 +5,7 @@ import com.zyyglxt.dao.SpecialtyDOMapper;
 import com.zyyglxt.dataobject.HospSpecialtyRefDO;
 import com.zyyglxt.dataobject.SpecialtyDO;
 import com.zyyglxt.dataobject.SpecialtyDOKey;
-import com.zyyglxt.dto.MedicalServiceDto;
+import com.zyyglxt.dto.StatusDto;
 import com.zyyglxt.dto.SpecialtyDto;
 import com.zyyglxt.error.BusinessException;
 import com.zyyglxt.error.EmBusinessError;
@@ -134,15 +134,12 @@ public class SpecialtyServiceImpl implements ISpecialtyService {
     }
 
     @Override
-    public int updateStatus(MedicalServiceDto medicalServiceDto) {
-        ValidatorResult result = validator.validate(medicalServiceDto);
+    public int updateStatus(StatusDto statusDto) {
+        ValidatorResult result = validator.validate(statusDto);
         if(result.isHasErrors()){
             throw new BusinessException(result.getErrMsg(), EmBusinessError.PARAMETER_VALIDATION_ERROR);
         }
-        medicalServiceDto.setUpdater(usernameUtil.getOperateUser());
-        return specialtyDOMapper.updateStatusByPrimaryKey(medicalServiceDto);
+        statusDto.setUpdater(usernameUtil.getOperateUser());
+        return specialtyDOMapper.updateStatusByPrimaryKey(statusDto);
     }
-
-
-
 }

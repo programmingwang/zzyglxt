@@ -25,7 +25,7 @@ public class OffController {
 
     @RequestMapping(value = "/Off", method = RequestMethod.POST)
     @ResponseBody
-    @LogAnnotation(appCode ="",logTitle ="添加产业发展-填报时间记录",logLevel ="3",creater ="",updater = "")
+    @LogAnnotation(appCode ="",logTitle ="添加产业发展-填报时间记录",logLevel ="3")
     public ResponseData addOff(@RequestBody IndustrialDevelopOffDO record) {
         developOffService.addOff(record);
         return new ResponseData(EmBusinessError.success);
@@ -33,7 +33,7 @@ public class OffController {
 
     @RequestMapping(value = "/Off", method = RequestMethod.PUT)
     @ResponseBody
-    @LogAnnotation(appCode ="",logTitle ="更新产业发展-填报时间记录",logLevel ="2",creater ="",updater = "")
+    @LogAnnotation(appCode ="",logTitle ="更新产业发展-填报时间记录",logLevel ="2")
     public ResponseData updOff(@RequestBody IndustrialDevelopOffDO record) {
         developOffService.updOff(record);
         return new ResponseData(EmBusinessError.success);
@@ -41,7 +41,7 @@ public class OffController {
 
     @RequestMapping(value = "/Off", method = RequestMethod.DELETE)
     @ResponseBody
-    @LogAnnotation(appCode ="",logTitle ="删除产业发展-填报时间记录",logLevel ="4",creater ="",updater = "")
+    @LogAnnotation(appCode ="",logTitle ="删除产业发展-填报时间记录",logLevel ="4")
     public ResponseData delOff(@RequestBody IndustrialDevelopOffDOKey key) {
         developOffService.delOff(key);
         return new ResponseData(EmBusinessError.success);
@@ -49,7 +49,7 @@ public class OffController {
 
     @GetMapping
     @ResponseBody
-    @LogAnnotation(appCode ="",logTitle ="查看产业发展-填报时间记录",logLevel ="1",creater ="",updater = "")
+    @LogAnnotation(appCode ="",logTitle ="查看产业发展-填报时间记录",logLevel ="1")
     public ResponseData getOff(){
         return new ResponseData(EmBusinessError.success,developOffService.getOff());
     }

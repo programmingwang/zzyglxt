@@ -6,7 +6,7 @@
 
             uploadImg.init();
 
-
+            var type = isUpdate() ? "put":"post";
 
             $("#btn_insert").unbind().on('click',function () {
                 var traDocEntity ;
@@ -59,7 +59,7 @@
                     }else {
                         alertUtil.alert(data.msg);
                     }
-                },false,true);
+                },true,"123",type);
 
 
             });

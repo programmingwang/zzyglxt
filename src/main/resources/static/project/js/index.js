@@ -397,6 +397,13 @@
                     level: "1",
                     pid: ""
                 },
+                {
+                    menu_name: "专家管理",
+                    menu_url: "/industrialdevelop/expert",
+                    id: "22",
+                    level: "1",
+                    pid: ""
+                },
 
             ];
 

@@ -2,7 +2,7 @@ package com.zyyglxt.dao;
 
 import com.zyyglxt.dataobject.SpecialtyDO;
 import com.zyyglxt.dataobject.SpecialtyDOKey;
-import com.zyyglxt.dto.MedicalServiceDto;
+import com.zyyglxt.dto.StatusDto;
 
 import java.util.List;
 
@@ -32,5 +32,5 @@ public interface SpecialtyDOMapper {
 
     List<SpecialtyDO> selectByStatus(String status);
 
-    int updateStatusByPrimaryKey(MedicalServiceDto medicalServiceDto);
+    int updateStatusByPrimaryKey(StatusDto statusDto);
 }

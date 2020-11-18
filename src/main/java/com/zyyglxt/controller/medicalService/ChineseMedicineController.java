@@ -3,15 +3,13 @@ package com.zyyglxt.controller.medicalService;
 import com.zyyglxt.annotation.LogAnnotation;
 import com.zyyglxt.dao.SpecialtyDOMapper;
 import com.zyyglxt.dataobject.*;
-import com.zyyglxt.dto.ChineseCulturalDto;
 import com.zyyglxt.dto.ChineseMedicineDto;
-import com.zyyglxt.dto.MedicalServiceDto;
+import com.zyyglxt.dto.StatusDto;
 import com.zyyglxt.error.EmBusinessError;
 import com.zyyglxt.response.ResponseData;
 import com.zyyglxt.service.IChineseMedicineService;
 import com.zyyglxt.service.IFileService;
 import com.zyyglxt.service.IHospService;
-import com.zyyglxt.service.ISpecialtyService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.web.bind.annotation.*;
 
@@ -79,8 +77,8 @@ public class ChineseMedicineController {
     @ResponseBody
     @PostMapping("updateStatus")
     @LogAnnotation(logTitle = "改变数据状态",logLevel = "2")
-    public ResponseData updateStatus(MedicalServiceDto medicalServiceDto){
-        chineseMedicineService.updateStatus(medicalServiceDto);
+    public ResponseData updateStatus(StatusDto statusDto){
+        chineseMedicineService.updateStatus(statusDto);
         return new ResponseData(EmBusinessError.success);
     }
 

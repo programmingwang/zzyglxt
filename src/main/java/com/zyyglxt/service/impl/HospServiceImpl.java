@@ -4,7 +4,7 @@ import com.zyyglxt.dao.HospDOMapper;
 import com.zyyglxt.dao.HospSpecialtyRefDOMapper;
 import com.zyyglxt.dataobject.HospDO;
 import com.zyyglxt.dataobject.HospDOKey;
-import com.zyyglxt.dto.MedicalServiceDto;
+import com.zyyglxt.dto.StatusDto;
 import com.zyyglxt.error.BusinessException;
 import com.zyyglxt.error.EmBusinessError;
 import com.zyyglxt.service.IHospService;
@@ -105,13 +105,14 @@ public class HospServiceImpl implements IHospService {
     }
 
     @Override
-    public int updateStatus(MedicalServiceDto medicalServiceDto) {
-        ValidatorResult result = validator.validate(medicalServiceDto);
+    public int updateStatus(StatusDto statusDto) {
+        ValidatorResult result = validator.validate(statusDto);
         if(result.isHasErrors()){
             throw new BusinessException(result.getErrMsg(), EmBusinessError.PARAMETER_VALIDATION_ERROR);
         }
-        medicalServiceDto.setUpdater(usernameUtil.getOperateUser());
-        return hospDOMapper.updateStatusByPrimaryKey(medicalServiceDto);
+        statusDto.setUpdater(usernameUtil.getOperateUser());
+        return hospDOMapper.updateStatusByPrimaryKey(statusDto);
     }
 
 }
+

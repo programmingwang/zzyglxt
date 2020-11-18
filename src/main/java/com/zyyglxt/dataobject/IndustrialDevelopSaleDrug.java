@@ -6,6 +6,7 @@ import java.util.Date;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 /**
    *@Author lrt
@@ -16,6 +17,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString
 public class IndustrialDevelopSaleDrug {
     /**
     * 自增id
@@ -94,7 +96,6 @@ public class IndustrialDevelopSaleDrug {
     */
     @ApiModelProperty(value="用户所在机构code")
     private String orgCode;
-
     /**
     * 创建者
     */
@@ -118,4 +119,143 @@ public class IndustrialDevelopSaleDrug {
     */
     @ApiModelProperty(value="修改时间")
     private Date itemupdateat;
+
+    private String fileName;
+
+    public Integer getItemid() {
+        return itemid;
+    }
+
+    public void setItemid(Integer itemid) {
+        this.itemid = itemid;
+    }
+
+    public String getItemcode() {
+        return itemcode;
+    }
+
+    public void setItemcode(String itemcode) {
+        this.itemcode = itemcode;
+    }
+
+    public String getDrugName() {
+        return drugName;
+    }
+
+    public void setDrugName(String drugName) {
+        this.drugName = drugName;
+    }
+
+    public String getFunctionIndications() {
+        return functionIndications;
+    }
+
+    public void setFunctionIndications(String functionIndications) {
+        this.functionIndications = functionIndications;
+    }
+
+    public String getUsage() {
+        return usage;
+    }
+
+    public void setUsage(String usage) {
+        this.usage = usage;
+    }
+
+    public String getAdverseReactions() {
+        return adverseReactions;
+    }
+
+    public void setAdverseReactions(String adverseReactions) {
+        this.adverseReactions = adverseReactions;
+    }
+
+    public String getTaboo() {
+        return taboo;
+    }
+
+    public void setTaboo(String taboo) {
+        this.taboo = taboo;
+    }
+
+    public String getSpecifications() {
+        return specifications;
+    }
+
+    public void setSpecifications(String specifications) {
+        this.specifications = specifications;
+    }
+
+    public String getCareful() {
+        return careful;
+    }
+
+    public void setCareful(String careful) {
+        this.careful = careful;
+    }
+
+    public String getStorage() {
+        return storage;
+    }
+
+    public void setStorage(String storage) {
+        this.storage = storage;
+    }
+
+    public String getPacking() {
+        return packing;
+    }
+
+    public void setPacking(String packing) {
+        this.packing = packing;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getOrgCode() {
+        return orgCode;
+    }
+
+    public void setOrgCode(String orgCode) {
+        this.orgCode = orgCode;
+    }
+
+    public String getCreater() {
+        return creater;
+    }
+
+    public void setCreater(String creater) {
+        this.creater = creater;
+    }
+
+    public Date getItemcreateat() {
+        return itemcreateat;
+    }
+
+    public void setItemcreateat(Date itemcreateat) {
+        this.itemcreateat = itemcreateat;
+    }
+
+    public String getUpdater() {
+        return updater;
+    }
+
+    public void setUpdater(String updater) {
+        this.updater = updater;
+    }
+
+    public Date getItemupdateat() {
+        return itemupdateat;
+    }
+
+    public void setItemupdateat(Date itemupdateat) {
+        this.itemupdateat = itemupdateat;
+    }
+
 }

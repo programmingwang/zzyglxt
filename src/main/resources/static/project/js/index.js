@@ -118,13 +118,13 @@
                     level: "2",
                     pid: "6"
                 },
-                {
+               /* {
                     menu_name: "＞节气养生",
                     menu_url: "/healthCare/healthsciKnow",
                     id: "6-2",
                     level: "2",
                     pid: "6"
-                },
+                },*/
                 {
                     menu_name: "＞国医话健康",
                     menu_url: "/healthCare/healthcarefamPre",
@@ -154,6 +154,13 @@
                     level: "2",
                     pid: "6"
                 },
+                /*{
+                    menu_name: "＞药品销售",
+                    menu_url: "",
+                    id: "6-6",
+                    level: "2",
+                    pid: "6"
+                },*/
                 {
 
                     menu_name : "中医药名院",
@@ -217,7 +224,7 @@
                     id: "13-5",
                     level: "2",
                     pid: "13"
-                },/*
+                },
                 {
                     menu_name: "在售药材",
                     menu_url: "/healthCare/healthcarechineseMedicine",
@@ -338,7 +345,7 @@
                 },
                 {
                     menu_name: "＞课题管理",
-                    menu_url: "/scientificProject/projectManagement",
+                    menu_url: "/scientificProject/topicManagement",
                     id: "15-3",
                     level: "2",
                     pid: "15"

@@ -78,8 +78,6 @@
             '                       <div style="height:300px;width:750px; margin-top:-1px;clear:both;overflow:hidden;overflow:scroll;"id="chineseCulturalContent" class="form-control">\n' +
             '                       </div>\n' +
             '                  </div>\n' +
-            '                    <div  id="chineseCulturalContent" class="form-control">\n' +
-            '                    </div>\n' +
             '                </div>\n' +
             '            </div>\n' +
             '\n' +
@@ -132,7 +130,7 @@
             '                <fieldset disabled>'+
             '                <div class="input-group mb-3">\n' +
             '                    <div class="input-group-prepend">\n' +
-            '                        <span class="input-group-text" >方名</span>\n' +
+            '                        <button class="btn btn-primary btn-sm" >方名</button>\n' +
             '                    </div>\n' +
             '                    <input type="text" id="name" class="form-control">\n' +
             '                </div>\n' +
@@ -142,7 +140,7 @@
             '                <fieldset disabled>'+
             '                <div class="input-group mb-3">\n' +
             '                    <div class="input-group-prepend">\n' +
-            '                        <span class="input-group-text" >出处</span>\n' +
+            '                        <button class="btn btn-primary btn-sm" >出处</span>\n' +
             '                    </div>\n' +
             '                   <input type="text" id="source" class="form-control">\n' +
             '                </div>\n' +
@@ -152,7 +150,7 @@
             '                <fieldset disabled>'+
             '                <div class="input-group mb-3">\n' +
             '                    <div class="input-group-prepend">\n' +
-            '                        <span id="culturalContentSpan" class="input-group-text" >处方</span>\n' +
+            '                        <button id="culturalContentSpan" class="btn btn-primary btn-sm" >处方</button>\n' +
             '                    </div>\n' +
             '                    <input type="text" id="prescription" class="form-control">\n' +
             '                </div>\n' +
@@ -162,7 +160,7 @@
             '                <fieldset disabled>'+
             '                <div class="input-group mb-3">\n' +
             '                    <div class="input-group-prepend">\n' +
-            '                        <span class="input-group-text" >制法及用法</span>\n' +
+            '                        <button class="btn btn-primary btn-sm" >制法及用法</button>\n' +
             '                    </div>\n' +
             '                  <div>\n' +
             '                       <div id="content" style="height:300px;width:750px; margin-top:-1px;clear:both;overflow:hidden;overflow:scroll;" class="form-control">\n' +
@@ -181,6 +179,28 @@
             '                </div>\n' +
             '                </fieldset>'+
             '            </div>\n'+
+            '\n' +
+            '           <div class="col-lg-6 col-md-6">\n' +
+            '                <fieldset disabled>'+
+            '                <div class="input-group mb-3">\n' +
+            '                    <div class="input-group-prepend">\n' +
+            '                        <label class="input-group-text" for="applicant">创&ensp;建&ensp;人</label>\n' +
+            '                    </div>\n' +
+            '                    <input type="text"  id="creater" class="form-control">\n' +
+            '                </div>\n' +
+            '                </fieldset>'+
+            '            </div>\n'+
+            '\n' +
+            '            <div class="col-lg-6 col-md-6">\n' +
+            '                <fieldset disabled>'+
+            '                <div class="input-group mb-3">\n' +
+            '                    <div class="input-group-prepend">\n' +
+            '                        <label class="input-group-text" for="applicant">创建时间</label>\n' +
+            '                    </div>\n' +
+            '                    <input type="text"  id="itemCreateAt" class="form-control">\n' +
+            '                </div>\n' +
+            '                </fieldset>'+
+            '            </div>\n'+
             '</div>';
         modalHtml.myviewChineseMedicineModal =
             '<div class="row">'+
@@ -188,7 +208,7 @@
             '                <fieldset disabled>'+
             '                <div class="input-group mb-3">\n' +
             '                    <div class="input-group-prepend">\n' +
-            '                        <span id="mediCineImgSpan" class="input-group-text">药材图片</span>\n' +
+            '                        <button id="mediCineImgSpan" class="btn btn-primary btn-sm">药材图片</button>\n' +
             '                    </div>\n' +
             '                    <img id="mediCineImg" src="#"/>\n' +
             '                </div>\n' +
@@ -198,7 +218,7 @@
             '                <fieldset disabled>'+
             '                <div class="input-group mb-3">\n' +
             '                    <div class="input-group-prepend">\n' +
-            '                        <span id="culturalNameSpan" class="input-group-text">中药名称</span>\n' +
+            '                        <button id="btn btn-primary btn-sm" class="btn btn-primary btn-sm"">中药名称</button>\n' +
             '                    </div>\n' +
             '                    <input type="text" id="chineseMedicineName" class="form-control">\n' +
             '                </div>\n' +
@@ -208,7 +228,7 @@
             '                <fieldset disabled>'+
             '                <div class="input-group mb-3">\n' +
             '                    <div class="input-group-prepend">\n' +
-            '                        <span class="input-group-text" >别名</span>\n' +
+            '                        <button class="btn btn-primary btn-sm" >别名</button>\n' +
             '                    </div>\n' +
             '                    <input type="text" id="chineseMedicineAlias" class="form-control">\n' +
             '                </div>\n' +
@@ -218,7 +238,7 @@
             '                <fieldset disabled>'+
             '                <div class="input-group mb-3">\n' +
             '                    <div class="input-group-prepend">\n' +
-            '                        <span class="input-group-text" >功效分类</span>\n' +
+            '                        <button class="btn btn-primary btn-sm" >功效分类</button>\n' +
             '                    </div>\n' +
             '                   <input type="text" id="chineseMedicineType" class="form-control">\n' +
             '                </div>\n' +
@@ -228,7 +248,7 @@
             '                <fieldset disabled>'+
             '                <div class="input-group mb-3">\n' +
             '                    <div class="input-group-prepend">\n' +
-            '                        <span class="input-group-text" >采制</span>\n' +
+            '                        <button class="btn btn-primary btn-sm" >采制</button>\n' +
             '                    </div>\n' +
             '                   <input type="text" id="chineseMedicineHarvesting" class="form-control">\n' +
             '                </div>\n' +
@@ -238,7 +258,7 @@
             '                <fieldset disabled>'+
             '                <div class="input-group mb-3">\n' +
             '                    <div class="input-group-prepend">\n' +
-            '                        <span class="input-group-text" >性味</span>\n' +
+            '                        <button class="btn btn-primary btn-sm" >性味</button>\n' +
             '                    </div>\n' +
             '                    <input type="text" id="chineseMedicineTaste" class="form-control">\n' +
             '                </div>\n' +
@@ -248,7 +268,7 @@
             '                <fieldset disabled>'+
             '                <div class="input-group mb-3">\n' +
             '                    <div class="input-group-prepend">\n' +
-            '                        <span class="input-group-text" >归经</span>\n' +
+            '                        <button class="btn btn-primary btn-sm" >归经</button>\n' +
             '                    </div>\n' +
             '                    <input type="text" id="chineseMedicineMerTro" class="form-control">\n' +
             '                </div>\n' +
@@ -258,7 +278,7 @@
             '                <fieldset disabled>'+
             '                <div class="input-group mb-3">\n' +
             '                    <div class="input-group-prepend">\n' +
-            '                        <span class="input-group-text" >功效主治</span>\n' +
+            '                        <button class="btn btn-primary btn-sm" >功效主治</button>\n' +
             '                    </div>\n' +
             '                    <input type="text" id="chineseMedicineEffect" class="form-control">\n' +
             '                </div>\n' +
@@ -268,7 +288,7 @@
             '                <fieldset disabled>'+
             '                <div class="input-group mb-3">\n' +
             '                    <div class="input-group-prepend">\n' +
-            '                        <span class="input-group-text" >用法用量</span>\n' +
+            '                        <button class="btn btn-primary btn-sm" >用法用量</button>\n' +
             '                    </div>\n' +
             '                    <input type="text" id="chineseMedicineUsage" class="form-control">\n' +
             '                </div>\n' +
@@ -278,11 +298,33 @@
             '                <fieldset disabled>'+
             '                <div class="input-group mb-3">\n' +
             '                    <div class="input-group-prepend">\n' +
-            '                        <span class="input-group-text" >数据状态</span>\n' +
+            '                        <button class="btn btn-primary btn-sm" >数据状态</button>\n' +
             '                    </div>\n' +
             '                    <input type="text" id="chineseMedicineStatus" class="form-control">\n' +
             '                </div>\n' +
             '            </div>\n' +
+            '\n' +
+            '           <div class="col-lg-6 col-md-6">\n' +
+            '                <fieldset disabled>'+
+            '                <div class="input-group mb-3">\n' +
+            '                    <div class="input-group-prepend">\n' +
+            '                        <label class="input-group-text" for="applicant">创&ensp;建&ensp;人</label>\n' +
+            '                    </div>\n' +
+            '                    <input type="text"  id="creater" class="form-control">\n' +
+            '                </div>\n' +
+            '                </fieldset>'+
+            '            </div>\n'+
+            '\n' +
+            '            <div class="col-lg-6 col-md-6">\n' +
+            '                <fieldset disabled>'+
+            '                <div class="input-group mb-3">\n' +
+            '                    <div class="input-group-prepend">\n' +
+            '                        <label class="input-group-text" for="applicant">创建时间</label>\n' +
+            '                    </div>\n' +
+            '                    <input type="text"  id="itemCreateAt" class="form-control">\n' +
+            '                </div>\n' +
+            '                </fieldset>'+
+            '            </div>\n'+
             '</div>';
 
 
@@ -294,7 +336,7 @@
             '                <fieldset disabled>'+
             '                <div class="input-group mb-3">\n' +
             '                    <div class="input-group-prepend">\n' +
-            '                        <span id="culturalNameSpan" class="input-group-text">国医话健康标题</span>\n' +
+            '                        <button id="culturalNameSpan" class="btn btn-primary btn-sm">国医话健康标题</button>\n' +
             '                    </div>\n' +
             '                    <input type="text" id="name" class="form-control">\n' +
             '                </div>\n' +
@@ -304,7 +346,7 @@
             '                <fieldset disabled>'+
             '                <div class="input-group mb-3">\n' +
             '                    <div class="input-group-prepend">\n' +
-            '                        <span class="input-group-text" >来源</span>\n' +
+            '                        <button class="btn btn-primary btn-sm" >来源</button>\n' +
             '                    </div>\n' +
             '                    <input type="text" id="source" class="form-control">\n' +
             '                </div>\n' +
@@ -314,7 +356,7 @@
             '                <fieldset disabled>'+
             '                <div class="input-group mb-3">\n' +
             '                    <div class="input-group-prepend">\n' +
-            '                        <span class="input-group-text" >作者</span>\n' +
+            '                        <button class="btn btn-primary btn-sm" >作者</button>\n' +
             '                    </div>\n' +
             '                   <input type="text" id="author" class="form-control">\n' +
             '                </div>\n' +
@@ -324,7 +366,7 @@
             '                <fieldset disabled>'+
             '                <div class="input-group mb-3">\n' +
             '                    <div class="input-group-prepend">\n' +
-            '                        <span id="carefamContentSpan" class="input-group-text" >国医话健康详情</span>\n' +
+            '                        <button id="carefamContentSpan" class="btn btn-primary btn-sm" >国医话健康详情</button>\n' +
             '                    </div>\n' +
             '                  <div>\n' +
             '                       <div id="content" style="height:300px;width:750px; margin-top:-1px;clear:both;overflow:hidden;overflow:scroll;" class="form-control">\n' +
@@ -337,7 +379,7 @@
             '                <fieldset disabled>'+
             '                <div class="input-group mb-3">\n' +
             '                    <div class="input-group-prepend">\n' +
-            '                        <span class="input-group-text" >数据状态</span>\n' +
+            '                        <button class="btn btn-primary btn-sm" >数据状态</button>\n' +
             '                    </div>\n' +
             '                    <input type="text" id="status" class="form-control">\n' +
             '                </div>\n' +
@@ -347,11 +389,33 @@
             '                <fieldset disabled>'+
             '                <div class="input-group mb-3">\n' +
             '                    <div class="input-group-prepend">\n' +
-            '                        <span class="input-group-text">附件</span>\n' +
+            '                        <button class="btn btn-primary btn-sm">附件</button>\n' +
             '                    </div>\n' +
             '                    <a src="#"></a>\n' +
             '                </div>\n' +
             '            </div>\n' +
+            '\n' +
+            '           <div class="col-lg-6 col-md-6">\n' +
+            '                <fieldset disabled>'+
+            '                <div class="input-group mb-3">\n' +
+            '                    <div class="input-group-prepend">\n' +
+            '                        <label class="input-group-text" for="applicant">创&ensp;建&ensp;人</label>\n' +
+            '                    </div>\n' +
+            '                    <input type="text"  id="creater" class="form-control">\n' +
+            '                </div>\n' +
+            '                </fieldset>'+
+            '            </div>\n'+
+            '\n' +
+            '            <div class="col-lg-6 col-md-6">\n' +
+            '                <fieldset disabled>'+
+            '                <div class="input-group mb-3">\n' +
+            '                    <div class="input-group-prepend">\n' +
+            '                        <label class="input-group-text" for="applicant">创建时间</label>\n' +
+            '                    </div>\n' +
+            '                    <input type="text"  id="itemCreateAt" class="form-control">\n' +
+            '                </div>\n' +
+            '                </fieldset>'+
+            '            </div>\n'+
             '</div>';
 
         modalHtml.myViewSciKnowModal =
@@ -360,7 +424,7 @@
             '                <fieldset disabled>'+
             '                <div class="input-group mb-3">\n' +
             '                    <div class="input-group-prepend">\n' +
-            '                        <span id="scienceKnowledgeNameSpan" class="input-group-text">科普知识名称</span>\n' +
+            '                        <button type="button" id="scienceKnowledgeNameSpan" class="btn btn-primary btn-sm">科普知识名称</button>\n' +
             '                    </div>\n' +
             '                    <input type="text" id="scienceKnowledgeName" class="form-control">\n' +
             '                </div>\n' +
@@ -370,7 +434,7 @@
             '                <fieldset disabled>'+
             '                <div class="input-group mb-3">\n' +
             '                    <div class="input-group-prepend">\n' +
-            '                        <span class="input-group-text" >科普知识来源</span>\n' +
+            '                        <button type="button" class="btn btn-primary btn-sm" >科普知识来源</button>\n' +
             '                    </div>\n' +
             '                    <input type="text" id="scienceKnowledgeSource" class="form-control">\n' +
             '                </div>\n' +
@@ -380,7 +444,7 @@
             '                <fieldset disabled>'+
             '                <div class="input-group mb-3">\n' +
             '                    <div class="input-group-prepend">\n' +
-            '                        <span class="input-group-text" >作者</span>\n' +
+            '                        <button class="btn btn-primary btn-sm" >作者</button>\n' +
             '                    </div>\n' +
             '                   <input type="text" id="scienceKnowledgeAuthor" class="form-control">\n' +
             '                </div>\n' +
@@ -390,7 +454,7 @@
             '                <fieldset disabled>'+
             '                <div class="input-group mb-3">\n' +
             '                    <div class="input-group-prepend">\n' +
-            '                        <span id="carefamContentSpan" class="input-group-text" >科普知识详情</span>\n' +
+            '                        <button id="carefamContentSpan" class="btn btn-primary btn-sm" >科普知识详情</button>\n' +
             '                    </div>\n' +
             '                  <div>\n' +
             '                       <div id="content" style="height:300px;width:750px; margin-top:-1px;clear:both;overflow:hidden;overflow:scroll;" class="form-control">\n' +
@@ -403,11 +467,33 @@
             '                <fieldset disabled>'+
             '                <div class="input-group mb-3">\n' +
             '                    <div class="input-group-prepend">\n' +
-            '                        <span class="input-group-text" >数据状态</span>\n' +
+            '                        <button class="btn btn-primary btn-sm" >数据状态</button>\n' +
             '                    </div>\n' +
             '                    <input type="text" id="scienceKnowledgeStatus" class="form-control">\n' +
             '                </div>\n' +
             '            </div>\n' +
+            '\n' +
+            '           <div class="col-lg-6 col-md-6">\n' +
+            '                <fieldset disabled>'+
+            '                <div class="input-group mb-3">\n' +
+            '                    <div class="input-group-prepend">\n' +
+            '                        <label class="input-group-text" for="applicant">创&ensp;建&ensp;人</label>\n' +
+            '                    </div>\n' +
+            '                    <input type="text"  id="creater" class="form-control">\n' +
+            '                </div>\n' +
+            '                </fieldset>'+
+            '            </div>\n'+
+            '\n' +
+            '            <div class="col-lg-6 col-md-6">\n' +
+            '                <fieldset disabled>'+
+            '                <div class="input-group mb-3">\n' +
+            '                    <div class="input-group-prepend">\n' +
+            '                        <label class="input-group-text" for="applicant">创建时间</label>\n' +
+            '                    </div>\n' +
+            '                    <input type="text"  id="itemCreateAt" class="form-control">\n' +
+            '                </div>\n' +
+            '                </fieldset>'+
+            '            </div>\n'+
             '</div>';
 
         modalHtml.myViewCooExcModal =
@@ -416,7 +502,7 @@
             '                <fieldset disabled>'+
             '                <div class="input-group mb-3">\n' +
             '                    <div class="input-group-prepend">\n' +
-            '                        <span id="cooperationExchangeNameSpan" class="input-group-text">合作交流名称</span>\n' +
+            '                        <button id="cooperationExchangeNameSpan" class="btn btn-primary btn-sm">合作交流名称</button>\n' +
             '                    </div>\n' +
             '                    <input type="text" id="cooperationExchangeName" class="form-control">\n' +
             '                </div>\n' +
@@ -426,7 +512,7 @@
             '                <fieldset disabled>'+
             '                <div class="input-group mb-3">\n' +
             '                    <div class="input-group-prepend">\n' +
-            '                        <span class="input-group-text" >预期合作机构</span>\n' +
+            '                        <button class="btn btn-primary btn-sm" >预期合作机构</button>\n' +
             '                    </div>\n' +
             '                    <input type="text" id="cooperativeOrg" class="form-control">\n' +
             '                </div>\n' +
@@ -436,7 +522,7 @@
             '                <fieldset disabled>'+
             '                <div class="input-group mb-3">\n' +
             '                    <div class="input-group-prepend">\n' +
-            '                        <span class="input-group-text" >联系人</span>\n' +
+            '                        <button class="btn btn-primary btn-sm" >联系人</button>\n' +
             '                    </div>\n' +
             '                   <input type="text" id="contacts" class="form-control">\n' +
             '                </div>\n' +
@@ -446,7 +532,7 @@
             '                <fieldset disabled>'+
             '                <div class="input-group mb-3">\n' +
             '                    <div class="input-group-prepend">\n' +
-            '                        <span  class="input-group-text" >联系电话</span>\n' +
+            '                        <button  class="btn btn-primary btn-sm" >联系电话</button>\n' +
             '                    </div>\n' +
             '                    <input type="text" id="phone" class="form-control">\n' +
             '                </div>\n' +
@@ -456,7 +542,7 @@
             '                <fieldset disabled>'+
             '                <div class="input-group mb-3">\n' +
             '                    <div class="input-group-prepend">\n' +
-            '                        <span class="input-group-text" >项目简介</span>\n' +
+            '                        <button class="btn btn-primary btn-sm" >项目简介</button>\n' +
             '                    </div>\n' +
             '                    <input type="text" id="projectIntroduce" class="form-control">\n' +
             '                </div>\n' +
@@ -466,7 +552,7 @@
             '                <fieldset disabled>'+
             '                <div class="input-group mb-3">\n' +
             '                    <div class="input-group-prepend">\n' +
-            '                        <span class="input-group-text" >数据状态</span>\n' +
+            '                        <button class="btn btn-primary btn-sm" >数据状态</button>\n' +
             '                    </div>\n' +
             '                    <input type="text" id="status" class="form-control">\n' +
             '                </div>\n' +
@@ -892,10 +978,7 @@
             '                    <div class="input-group-prepend">\n' +
             '                        <button type="button" class="btn btn-primary btn-sm" >展示状态</button>\n' +
             '                    </div>\n' +
-            '                  <div>\n' +
-            '                       <div id="dataContent" style="height:300px;width:750px; margin-top:-1px;clear:both;overflow:hidden;overflow:scroll;" class="form-control">\n' +
-            '                       </div>\n' +
-            '                  </div>\n' +
+            '                   <input type="text" id="dataStatus" class="form-control">\n' +
             '                </div>\n' +
             '            </div>\n' +
             '\n' +
@@ -964,6 +1047,7 @@
 
         modalHtml.myDeleteRecruit = '是否删除招聘信息?';
         modalHtml.myDeleteCooperation = '是否删除合作交流信息?';
+        modalHtml.myDeleteBaseStyle = '是否删除基地风采?';
         modalHtml.myDeleteModalfamPre='是否删除历史名方';
         modalHtml.myDeleteModalMedicine='是否删除中医药';
         modalHtml.myDeleteModalcareFam='是否删除国医话健康';

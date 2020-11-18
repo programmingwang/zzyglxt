@@ -40,10 +40,16 @@ mybatis:
 server:
   port: 8989
 
+upload:
+  addr: 47.113.104.120
+  port: 8085
+
 #  servlet:
 #    context-path: /zyyglxt
     
 #logging:
 #  file:
 #    path: E:/Desktop
+
+
 

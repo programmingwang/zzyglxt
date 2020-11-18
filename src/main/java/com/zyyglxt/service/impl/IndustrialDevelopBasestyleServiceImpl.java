@@ -2,7 +2,12 @@ package com.zyyglxt.service.impl;
 
 import com.zyyglxt.dto.industrialDevelop.IndustrialDevelopBasestyleDto;
 import com.zyyglxt.service.IFileService;
+import com.zyyglxt.util.DateUtils;
+import com.zyyglxt.util.UUIDUtils;
+import com.zyyglxt.util.UsernameUtil;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -20,6 +25,7 @@ import java.util.List;
  * @Version 1.0
  **/
 @Service
+@Slf4j
 public class IndustrialDevelopBasestyleServiceImpl implements IndustrialDevelopBasestyleService {
 
     @Resource
@@ -27,6 +33,11 @@ public class IndustrialDevelopBasestyleServiceImpl implements IndustrialDevelopB
 
     @Resource
     private IFileService fileService;
+
+    @Resource
+    private UsernameUtil usernameUtil;
+
+
 
     @Override
     public int deleteByPrimaryKey(Integer itemid, String itemcode) {
@@ -40,6 +51,15 @@ public class IndustrialDevelopBasestyleServiceImpl implements IndustrialDevelopB
 
     @Override
     public int insertSelective(IndustrialDevelopBasestyle record) {
+        if(record == null){
+            record.setItemcode(UUIDUtils.getUUID());
+        }
+        record.setCreater(usernameUtil.getOperateUser());
+        record.setItemcreateat(DateUtils.getDate());
+        record.setUpdater(usernameUtil.getOperateUser());
+        record.setOrgCode(usernameUtil.getOrgCode());
+        log.warn("aaaaaaaaaaaaaaaaaaaaaaaaa:::::"+fileService.selectFileByDataCode(record.getItemcode()).getItemcode());
+        record.setFileCode(fileService.selectFileByDataCode(record.getItemcode()).getItemcode());
         return industrialDevelopBasestyleMapper.insertSelective(record);
     }
 

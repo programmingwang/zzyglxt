@@ -62,10 +62,10 @@ public class IndustrialDevelopExpertServiceImpl implements IIndustrialDevelopExp
 
     //重置密码
     @Override
-    public int resetPassword(Integer itemid, String itemcode) {
+    public int resetPassword( String userCode) {
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         String password = encoder.encode("1234");
-        return developExpertDtoMapper.resetPassword(itemid,itemcode,password);
+        return developExpertDtoMapper.resetPassword(userCode,password);
     }
     //查看所有专家信息
     @Override

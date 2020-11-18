@@ -43,6 +43,12 @@
     <include refid="Base_Column_List" />
     from role
   </select>
+  <select id="selectByRoleName" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from role
+    where ROLE_NAME = #{roleName,jdbcType=VARCHAR}
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="com.zyyglxt.dataobject.RoleDOKey">
     delete from role
     where itemID = #{itemid,jdbcType=INTEGER}

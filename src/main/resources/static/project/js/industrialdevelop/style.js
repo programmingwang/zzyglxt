@@ -11,6 +11,8 @@
 
             };
 
+            var showStatus = dictUtil.getDictByCode(dictUtil.DICT_LIST.showStatus);
+
             //操作
             function operation(value, row, index){
                 return [
@@ -27,20 +29,20 @@
                 },
                 'click .delete': function (e, value, row, index) {
                     var myDeleteModalData ={
-                        modalBodyID : "myDeleteCooperation",
-                        modalTitle : "删除服务项目",
+                        modalBodyID : "myDeleteBaseStyle",
+                        modalTitle : "删除基地风采",
                         modalClass : "modal-lg",
                         confirmButtonClass : "btn-danger",
                         modalConfirmFun:function () {
-                            var projectEntity = {
+                            var baseStyleEntity = {
                                 itemid: row.itemid,
                                 itemcode: row.itemcode
                             };
                             var isSuccess = false;
-                            ajaxUtil.myAjax(null,url,projectEntity,function (data) {
+                            ajaxUtil.myAjax(null,url,baseStyleEntity,function (data) {
                                 if(ajaxUtil.success(data)){
                                     ajaxUtil.deleteFile(row.itemcode)
-                                    alertUtil.info("删除项目成功");
+                                    alertUtil.info("删除基地风采成功");
                                     isSuccess = true;
                                     refreshTable();
                                 }
@@ -82,7 +84,9 @@
                         }
                     }},
                 {field: 'itemcreateat', title: '上传时间'},
-                {field: 'status', title: '照片状态'},
+                {field: 'status', title: '照片状态', formatter:function (value) {
+                        return '<p>' +showStatus[value].text +'</p>';
+                    }},
                 {field: 'action',  title: '操作',formatter: operation,events:orgEvents}
             ];
 

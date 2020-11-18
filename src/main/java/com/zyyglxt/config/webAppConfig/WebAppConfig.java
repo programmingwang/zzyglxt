@@ -26,6 +26,5 @@ public class WebAppConfig implements WebMvcConfigurer {
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/uploads/**").addResourceLocations("file:D:/uploads/");
-//        registry.addResourceHandler("/uploads/**").addResourceLocations("file:/var/www/zyyglxt/upload");
     }
 }

@@ -1077,7 +1077,7 @@
             '                    <div class="input-group-prepend">\n' +
             '                        <button type="button" class="btn btn-primary btn-sm" >主管市区</button>\n' +
             '                    </div>\n' +
-            '                    <input type="text" id="cityid" class="form-control">\n' +
+            '                    <select id="cityid" class="form-control"></select>\n' +
             '                </div>\n' +
             '            </div>\n' +
             '\n' +
@@ -1086,7 +1086,7 @@
             '                    <div class="input-group-prepend">\n' +
             '                        <button type="button" class="btn btn-primary btn-sm" >用户角色</button>\n' +
             '                    </div>\n' +
-            '                    <input type="text" id="roleName" class="form-control">\n' +
+            '                    <select id="roleName" class="form-control"></select>\n' +
             '                </div>\n' +
             '            </div>\n' +
             '\n' +

@@ -4,13 +4,8 @@
 
 
             var url = "/user/alluser";
-            // var addUrl = "/medicalService/add/addChineseMedicine"
             var aParam = {
             };
-
-            // /ar webStatus = dictUtil.getDictByCode(dictUtil.DICT_LIST.webStatus);
-            /*对url加工*/
-            // url = selectUtil.getRoleTable(sessionStorage.getItem("rolename"),url,"chineseMedicineStatus",webStatus);
 
             //操作
             function operation(value, row, index){
@@ -57,7 +52,7 @@
                         confirmButtonStyle: "display:none",
                     };
                     var myTravelModal = modalUtil.init(myViewTravelModalData);
-                    $("#portrait").attr("src",row.filePath);
+                    $("#portrait").attr("src",row.portrait);
                     $("#username").val(row.username);
                     $("#name").val(row.name);
                     $("#gender").val(row.gender);
@@ -107,6 +102,7 @@
 
             /*新增用户账号*/
             $("#btn_addTask").unbind().on('click',function () {
+
                 var myViewTravelModalData ={
                     modalBodyID : "myAddAccountModal", //公用的在后面给span加不同的内容就行了，其他模块同理
                     modalTitle : "新增用户账户",
@@ -116,10 +112,13 @@
 
                         var username = $("#username").val();
                         var name = $("#name").val();
-                        var roleName = $("#roleName").val();
-                        var contacts = $("#contacts").val();
+                        var roleName = dictUtil.getName(dictUtil.DICT_LIST.userRole,$("#roleName").val());
+                        var contacts = dictUtil.getName(dictUtil.DICT_LIST.userRole,$("#contacts").val());
                         var mobilephone = $("#mobilephone").val();
                         var cityid = $("#cityid").val();
+
+                        console.log(roleName);
+                        console.log(cityid);
 
                         var submitStatus = {
                             "username": username,
@@ -129,22 +128,31 @@
                             "mobilephone": mobilephone,
                             "cityid": cityid
                         };
-                        ajaxUtil.myAjax(null,"/user/adduser",submitStatus,function (data) {
-                            if(ajaxUtil.success(data)){
-                                if(data.code == 88888){
-                                    alertUtil.info("重置密码成功");
-                                    isSuccess = true;
-                                    // refreshTable();
-                                }else{
-                                    alertUtil.error(data.msg);
-                                }
+                        if ((/^1[3456789]\d{9}$/.test(phone))){
+                            ajaxUtil.myAjax(null,"/user/adduser",submitStatus,function (data) {
+                                if(ajaxUtil.success(data)){
+                                    if(data.code == 88888){
+                                        alertUtil.info("新增用户账号成功");
+                                        isSuccess = true;
+                                        // refreshTable();
+                                    }else{
+                                        alertUtil.error(data.msg);
+                                    }
 
-                            }
-                        },false,true,"put");
+                                }
+                            },false,true);
+                        } else {
+                            alertUtil.error("手机号码错误")
+                        }
+
                         return isSuccess;
                     }
                 };
                 var myTravelModal = modalUtil.init(myViewTravelModalData);
+                let sel = dictUtil.getDictByCode(dictUtil.DICT_LIST.areaAdmin);
+                $("#cityid").selectUtil(sel);
+                let select = dictUtil.getDictByCode(dictUtil.DICT_LIST.userRole);
+                $("#roleName").selectUtil(select);
                 myTravelModal.show();
             });
 
@@ -152,6 +160,7 @@
 
             var pl = dictUtil.getDictByCode(dictUtil.DICT_LIST.showStatus);
             $("#chargePersonSearch").selectUtil(pl);
+
 
             var aCol = [
                 {field: 'username', title: '用户账号'},

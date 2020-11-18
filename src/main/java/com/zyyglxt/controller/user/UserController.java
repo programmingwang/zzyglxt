@@ -170,7 +170,7 @@ public class UserController {
      */
     @LogAnnotation(logTitle = "账号管理新增用户", logLevel = "3")
     @RequestMapping(value = "/adduser",method = RequestMethod.POST)
-    public ResponseData insertUser(UserDO userDO){
+    public ResponseData insertUser(@RequestBody UserDO userDO){
         userService.insertUserSelective(userDO);
         return new ResponseData(EmBusinessError.success);
     }

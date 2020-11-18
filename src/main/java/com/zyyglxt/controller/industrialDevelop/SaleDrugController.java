@@ -38,7 +38,7 @@ public class SaleDrugController {
     UsernameUtil usernameUtil;
 
     @ResponseBody
-    @RequestMapping(value = "insertsaledrug", method = RequestMethod.POST)
+    @RequestMapping(value = "/sale-drug", method = RequestMethod.POST)
     @LogAnnotation(appCode ="",logTitle ="售药添加",logLevel ="3",creater ="",updater = "")
     public ResponseData addSaleDrug(@RequestBody IndustrialDevelopSaleDrug record) {
         saleDrugService.insertSelective(record);
@@ -46,14 +46,14 @@ public class SaleDrugController {
     }
 
     @ResponseBody
-    @RequestMapping(value = "updatesaledrug", method = RequestMethod.PUT)
+    @RequestMapping(value = "/sale-drug", method = RequestMethod.PUT)
     @LogAnnotation(appCode ="",logTitle ="售药数据修改",logLevel ="2",creater ="",updater = "")
     public ResponseData updSaleDrug(@RequestBody IndustrialDevelopSaleDrug record){
         saleDrugService.updateByPrimaryKeySelective(record);
         return new ResponseData(EmBusinessError.success);
     }
 
-    @RequestMapping(value ="deletesaledrug/{itemID}/{itemCode}",method = RequestMethod.DELETE )
+    @RequestMapping(value ="/sale-drug",method = RequestMethod.DELETE )
     @ResponseBody
     @LogAnnotation(appCode ="",logTitle ="售药数据删除",logLevel ="4",creater ="",updater = "")
     public ResponseData delSaleDrug(@RequestBody IndustrialDevelopSaleDrug record){
@@ -62,8 +62,8 @@ public class SaleDrugController {
     }
 
     /*售药数据所有查询*/
-    @RequestMapping(value ="selecallsaledrug",method = RequestMethod.GET )
-    @LogAnnotation(appCode ="",logTitle ="查寻所有售药数据",logLevel ="1",creater ="",updater = "")
+    @RequestMapping(value ="/sale-drug",method = RequestMethod.GET )
+    @LogAnnotation(appCode ="",logTitle ="查寻所有售药数据",logLevel ="1")
     @ResponseBody
     public ResponseData selectAllSaleDrug(@RequestParam("status") List status){
         List<IndustrialDevelopSaleDrug> industrialDevelopSaleDrugList = saleDrugService.selectAllSaleDrug(status);

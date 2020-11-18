@@ -15,13 +15,13 @@
         });
 
         function getRoleTabletwo(role,preUrl,status,medStatus) {
-            if (role === "文化宣传科员" || role === "文化宣传处长" || role === "文化宣传综合处处长" || role === "政务资源科员" || role === "政务资源科员" || role === "政务资源处长" || role === "政务资源综合处处长") {
+            if (role !=null) {
                 return preUrl + "?" + status + "=" + medStatus[0].id + "&" + status + "=" + medStatus[1].id + "&" + status + "=" + medStatus[2].id;
             }
         }
 
         function getRoleOperatetwo(value, row, index, role, status,medStatus) {
-            if(role === "文化宣传科员" || role === "文化宣传处长" || role === "文化宣传综合处处长" || role === "政务资源科员" || role === "政务资源科员" || role === "政务资源处长" || role === "政务资源综合处处长") {
+            if(role != null) {
                 $('#btn_addTask').attr('style', "display:block");
                 if (status == medStatus[0].id) {
                     return [

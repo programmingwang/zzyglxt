@@ -7,17 +7,13 @@
             uploadImg.init();
 
 
-            $("#cancel").unbind().on('click',function () {
-                var url = "/industrialdevelop/chinesemed/saledrug";
-                orange.redirect(url);
-            });
 
             $("#btn_insert").unbind().on('click',function () {
                 var traDocEntity ;
                 var addUpdateUrl;
                 var operateMessage;
                 if(!isUpdate()){
-                    addUpdateUrl = "/industrialdevelop/insertsaledrug";
+                    addUpdateUrl = "/industrialdevelop/sale-drug";
                     operateMessage = "保存药品成功";
                     traDocEntity = {
                         itemcode: stringUtil.getUUID(),
@@ -33,7 +29,7 @@
                     };
                 }else{
                     var needData = JSON.parse(localStorage.getItem("rowData"));
-                    addUpdateUrl = "/industrialdevelop/updatesaledrug";
+                    addUpdateUrl = "/industrialdevelop/sale-drug";
                     traDocEntity = {
                         itemid: needData.itemid,
                         itemcode: needData.itemcode,

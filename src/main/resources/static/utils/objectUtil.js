@@ -20,8 +20,8 @@
             return true
         };
         
-        function wangEditorUtil() {
-            const editor = new wangEditor('#div1')
+        function wangEditorUtil(element = "#div1") {
+            const editor = new wangEditor(element)
             // 或者 const editor = new E( document.getElementById('div1') )
             //菜单配置
             editor.config.menus = [
@@ -55,7 +55,7 @@
             //设置上传的参数名
             editor.config.uploadFileName = 'file';
             // 上传图片到服务器
-            editor.config.uploadImgServer = 'http://localhost:8989/uploadFile '
+            editor.config.uploadImgServer = 'http://47.113.104.120:8989/uploadFile'
             // 将图片大小限制为 10M
             editor.config.uploadImgMaxSize = 10 * 1024 * 1024;
             editor.create()
@@ -63,7 +63,7 @@
 
 
 
-            $("#div1").on("input propertychange", function() {
+            $(element).on("input propertychange", function() {
                 var textNUm=editor.txt.text()
                 if(textNUm.length>=100000){
                     str=textNUm.substring(0,10000)+"";  //使用字符串截取，获取前30个字符，多余的字符使用“......”代替

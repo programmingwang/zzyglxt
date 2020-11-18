@@ -1,8 +1,11 @@
 package com.zyyglxt.dao;
 
+import com.zyyglxt.dataobject.HealthCareChineseMedicineDO;
 import com.zyyglxt.dataobject.IndustrialDevelopSaleDrug;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 /**
    *@Author lrt
@@ -22,4 +25,7 @@ public interface IndustrialDevelopSaleDrugMapper {
     int updateByPrimaryKeySelective(IndustrialDevelopSaleDrug record);
 
     int updateByPrimaryKey(IndustrialDevelopSaleDrug record);
+/*通过orgCode查询所有售药记录*/
+    List< IndustrialDevelopSaleDrug> selectAllSaleDrug( @Param("orgCode") String orgCode);
+
 }

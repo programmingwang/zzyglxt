@@ -1,14 +1,13 @@
 package com.zyyglxt.service.impl;
 
-import com.zyyglxt.dao.FileDOMapper;
 import com.zyyglxt.dao.HealthCareChineseMedicineDOMapper;
-import com.zyyglxt.dataobject.FileDO;
 import com.zyyglxt.dataobject.HealthCareChineseMedicineDO;
 import com.zyyglxt.dataobject.HealthCareChineseMedicineDOKey;
 import com.zyyglxt.error.BusinessException;
 import com.zyyglxt.error.EmBusinessError;
 import com.zyyglxt.service.HealthCareChineseMedicineDOService;
 import com.zyyglxt.service.IFileService;
+import com.zyyglxt.util.UsernameUtil;
 import com.zyyglxt.validator.ValidatorImpl;
 import com.zyyglxt.validator.ValidatorResult;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +33,8 @@ public class HealthCareChineseMedicineDOServiceImpl implements HealthCareChinese
     private IFileService iFileService;
     @Autowired
     private ValidatorImpl validator;
+    @Autowired
+    private UsernameUtil usernameUtil;
     @Transactional
     /*
   中医药常识添加、删除、修改、查询实现方法
@@ -49,7 +50,10 @@ public class HealthCareChineseMedicineDOServiceImpl implements HealthCareChinese
         if(record.getItemcode()==null){
             record.setItemcode(UUID.randomUUID().toString());
         }
+        record.setChineseMedicineStatus("0");
         record.setItemcreateat(new Date());
+        record.setCreater(usernameUtil.getOperateUser());
+        record.setUpdater(usernameUtil.getOperateUser());
         return healthCareChineseMedicineDOMapper.insert(record);
     }
     @Transactional
@@ -66,6 +70,7 @@ public class HealthCareChineseMedicineDOServiceImpl implements HealthCareChinese
             throw new BusinessException(result.getErrMsg(), EmBusinessError.PARAMETER_VALIDATION_ERROR);
         }
         record.setItemupdateat(new Date());
+        record.setUpdater(usernameUtil.getOperateUser());
         return healthCareChineseMedicineDOMapper.updateByPrimaryKeySelective(record);
     }
 

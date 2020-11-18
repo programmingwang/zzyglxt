@@ -1,50 +1,6 @@
 (function () {
-    require(['jquery','wangEditor','ajaxUtil','alertUtil','stringUtil','dictUtil','fileUtil','uploadImg'],
-        function (jquery,wangEditor,ajaxUtil,alertUtil,stringUtil,dictUtil,fileUtil,uploadImg) {
-            const editor = new wangEditor('#div1')
-            // 或者 const editor = new E( document.getElementById('div1') )
-            //菜单配置
-            editor.config.menus = [
-                'head',
-                'bold',
-                'fontSize',
-                'fontName',
-                'italic',
-                'underline',
-                'strikeThrough',
-                'indent',
-                'lineHeight',
-                'foreColor',
-                'backColor',
-                'link',
-                'list',
-                'justify',
-                'image',
-                'table',
-                'splitLine',
-                'undo',
-                'redo',
-
-            ]
-            //取消粘贴后的样式
-            editor.config.pasteFilterStyle = false
-            //不粘贴图片
-            editor.config.pasteIgnoreImg = true
-            //隐藏上传网络图片
-            editor.config.showLinkImg = false
-            editor.config.uploadImgShowBase64 = true
-            editor.create()
-            editor.txt.html('')
-
-            $("#div1").on("input propertychange", function() {
-                var textNUm=editor.txt.text()
-                if(textNUm.length>=100000){
-                    str=textNUm.substring(0,10000)+"";  //使用字符串截取，获取前30个字符，多余的字符使用“......”代替
-                    editor.txt.html(str);
-                    alert("字数不能超过10000");                  //将替换的值赋值给当前对象
-                }
-            });
-
+    require(['jquery','objectUtil','ajaxUtil','alertUtil','stringUtil','dictUtil','fileUtil','uploadImg'],
+        function (jquery,objectUtil,ajaxUtil,alertUtil,stringUtil,dictUtil,fileUtil,uploadImg) {
 
 
             /*q全局变量*/
@@ -52,6 +8,9 @@
             var updateStatus = isUpdate()
             var jumpUrl = "/medicalService/specialty"
             var hosps = {}
+            var webStatus = dictUtil.getDictByCode(dictUtil.DICT_LIST.webStatus);
+            var specialtyName = dictUtil.getDictByCode(dictUtil.DICT_LIST.dept)
+            const editor = objectUtil.wangEditorUtil();
 
             /*设置科室下拉框的值*/
             $("#specialtyName").selectUtil(dictUtil.getDictByCode(dictUtil.DICT_LIST.dept));
@@ -84,8 +43,9 @@
                         itemcode: tempdata.itemcode
                     };
                 }
-                entity["specialtyName"] = $("#specialtyName").val();
+                entity["specialtyName"] = specialtyName[$("#specialtyName").val()].text;
                 entity["specialtyPhone"] = $("#specialtyPhone").val();
+                entity["specialtyAddressPro"] = hosp.hospitalAddressPro;
                 entity["specialtyAddressCity"] = hosp.hospitalAddressCity;
                 entity["specialtyAddressCounty"] = hosp.hospitalAddressCountry;
                 entity["specialtyAddress"] = hosp.hospitalAddress;
@@ -93,6 +53,7 @@
                 entity["specialtyDescribe"] = editor.txt.html();
                 entity["hospitalCode"] = hosp.itemcode;
                 entity["hospitalName"] = hosp.hospitalName;
+                entity["specialtyStatus"] = webStatus[0].id
 
                 fileUtil.handleFile(updateStatus, entity.itemcode, uploadImg.getFiles()[0]);
 
@@ -113,8 +74,7 @@
 
             /*初始化数据*/
             var init = function () {
-                uploadImg.init();
-                ajaxUtil.myAjax(null,"/medicalService/hosp/selectAll?hospitalStatus=展示中",null,function (data) {
+                ajaxUtil.myAjax(null,"/medicalService/hosp/selectAll?hospitalStatus=" + webStatus[5].id,null,function (data) {
                     if(ajaxUtil.success(data)){
                         hosps = data.data
                         var html = "";
@@ -130,13 +90,19 @@
                 }
                 if (updateStatus){
                     var tempdata = JSON.parse(localStorage.getItem("rowData"));
-                    $("#specialtyName").val(tempdata.specialtyName);
+                    $("#specialtyName").find("option").each(function (data) {
+                        var $this = $(this);
+                        if($this.text() == tempdata.specialtyName) {
+                            $this.attr("selected", true);
+                        }
+                    });
                     uploadImg.setImgSrc(tempdata.filePath)
                     $("#hospitalName  option[value="+tempdata.hospitalCode+"] ").attr("selected",true)
                     $("#specialtyPhone").val(tempdata.specialtyPhone);
                     $(".w-e-text").html(tempdata.specialtyDescribe);
                 }
             };
+            uploadImg.init();
             init();
 
 

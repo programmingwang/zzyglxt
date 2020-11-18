@@ -15,7 +15,7 @@ import javax.annotation.Resource;
  * @Date 2020/11/6 21:01
  * @Version 1.0
  **/
-@Api(tags = "产业发展-中药材加工企业、中药材销售企业、中药材制药企业信息记录")
+@Api(tags = "产业发展-中药材加工企业、中药材销售企业、中药材制药企业信息、种植园记录")
 @RestController
 @RequestMapping(value = "industrialdevelop")
 public class ChiMedController {

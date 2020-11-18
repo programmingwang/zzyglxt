@@ -151,6 +151,8 @@
                     $("#chineseMedicineMerTro").val(row.chineseMedicineMerTro);
                     $("#chineseMedicineEffect").val(row.chineseMedicineEffect);
                     $("#chineseMedicineUsage").val(row.chineseMedicineUsage);
+                    $("#creater").val(row.creater);
+                    $("#itemCreateAt").val(row.itemcreateat);
                     $("#chineseMedicineStatus").val(webStatus[ row.chineseMedicineStatus].text);
                     $("#mediCineImg").attr("src",row.filePath)
                     $('#mediCineImgSpan').html("药材图片");
@@ -224,6 +226,9 @@
 
             var pl = dictUtil.getDictByCode(dictUtil.DICT_LIST.showStatus);
             $("#chargePersonSearch").selectUtil(pl);
+
+           var p2 = dictUtil.getDictByCode(dictUtil.DICT_LIST.effectType);
+            $("#Search").selectUtil(p2);
 
             var aCol = [
                         {field: 'chineseMedicineName', title: '中医药名称'},

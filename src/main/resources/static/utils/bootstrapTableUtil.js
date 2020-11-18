@@ -155,9 +155,13 @@
                 for (var i in allTableData) {
                     for (var v in aCol){
                         var textP = allTableData[i][aCol[v].field];
-                        var makeTime=allTableData[i][aCol[4].field];
                         var isTimeSlot=false;
-                        makeTime=makeTime.substring(11,19);
+                        var makeTime=allTableData[i][aCol[4].field];
+                        console.log(makeTime)
+                        // if(makeTime.length>18){
+                        //     makeTime=makeTime.substring(11,19);
+                        // }
+
                         // console.log(makeTime);
                         // console.log("开始时间："+stratTime);
                         // console.log("结束时间"+endTime);

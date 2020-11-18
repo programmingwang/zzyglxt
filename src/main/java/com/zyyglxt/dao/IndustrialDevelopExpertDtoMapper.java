@@ -20,7 +20,7 @@ public interface IndustrialDevelopExpertDtoMapper {
     //查看专家个人信息
     UserDO selectByPrimaryKey(@Param("itemcode") String itemcode);
     //重置密码
-    int resetPassword(@Param("itemid") Integer itemid, @Param("itemcode") String itemcode,@Param("password") String password);
+    int resetPassword(@Param("userCode") String userCode,@Param("password") String password);
     //查看所有专家信息
     List<IndustrialDevelopExpertDto> selectAll();
 }

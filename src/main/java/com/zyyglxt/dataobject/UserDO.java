@@ -45,6 +45,8 @@ public class UserDO extends UserDOKey {
 
     private byte[] portrait;
 
+    private String roleName;
+
     public UserDO() {
 
     }
@@ -204,5 +206,13 @@ public class UserDO extends UserDOKey {
 
     public void setPortrait(byte[] portrait) {
         this.portrait = portrait;
+    }
+
+    public String getRoleName() {
+        return roleName;
+    }
+
+    public void setRoleName(String roleName) {
+        this.roleName = roleName == null ? null : roleName.trim();
     }
 }

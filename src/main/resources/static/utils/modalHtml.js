@@ -989,6 +989,16 @@
             '                </div>\n' +
             '            </div>\n' +
             '\n' +
+            '            <div class="col-lg-12 col-md-12">\n' +
+            '                <fieldset disabled>'+
+            '                <div class="input-group mb-3">\n' +
+            '                    <div class="input-group-prepend">\n' +
+            '                        <button type="button" class="btn btn-primary btn-sm" >用户角色</button>\n' +
+            '                    </div>\n' +
+            '                    <input type="text" id="roleName" class="form-control">\n' +
+            '                </div>\n' +
+            '            </div>\n' +
+            '\n' +
             '            <div class="col-lg-6 col-md-6">\n' +
             '                <fieldset disabled>'+
             '                <div class="input-group mb-3">\n' +
@@ -1040,6 +1050,63 @@
             '                </div>\n' +
             '                </fieldset>'+
             '            </div>\n'+
+            '</div>';
+
+        modalHtml.myAddAccountModal =
+            '<div class="row">'+
+            '            <div class="col-lg-12 col-md-12">\n' +
+            '                <div class="input-group mb-3">\n' +
+            '                    <div class="input-group-prepend">\n' +
+            '                        <button type="button" class="btn btn-primary btn-sm">用户账号</button>\n' +
+            '                    </div>\n' +
+            '                    <input type="text" id="username" class="form-control">\n' +
+            '                </div>\n' +
+            '            </div>\n' +
+            '\n' +
+            '            <div class="col-lg-12 col-md-12">\n' +
+            '                <div class="input-group mb-3">\n' +
+            '                    <div class="input-group-prepend">\n' +
+            '                        <button type="button" class="btn btn-primary btn-sm" >账号名称</button>\n' +
+            '                    </div>\n' +
+            '                    <input type="text" id="name" class="form-control">\n' +
+            '                </div>\n' +
+            '            </div>\n' +
+            '\n' +
+            '            <div class="col-lg-12 col-md-12">\n' +
+            '                <div class="input-group mb-3">\n' +
+            '                    <div class="input-group-prepend">\n' +
+            '                        <button type="button" class="btn btn-primary btn-sm" >主管市区</button>\n' +
+            '                    </div>\n' +
+            '                    <input type="text" id="cityid" class="form-control">\n' +
+            '                </div>\n' +
+            '            </div>\n' +
+            '\n' +
+            '            <div class="col-lg-12 col-md-12">\n' +
+            '                <div class="input-group mb-3">\n' +
+            '                    <div class="input-group-prepend">\n' +
+            '                        <button type="button" class="btn btn-primary btn-sm" >用户角色</button>\n' +
+            '                    </div>\n' +
+            '                    <input type="text" id="roleName" class="form-control">\n' +
+            '                </div>\n' +
+            '            </div>\n' +
+            '\n' +
+            '            <div class="col-lg-12 col-md-12">\n' +
+            '                <div class="input-group mb-3">\n' +
+            '                    <div class="input-group-prepend">\n' +
+            '                        <button type="button" class="btn btn-primary btn-sm" >联系人</button>\n' +
+            '                    </div>\n' +
+            '                    <input type="text" id="contacts" class="form-control">\n' +
+            '                </div>\n' +
+            '            </div>\n' +
+            '\n' +
+            '            <div class="col-lg-12 col-md-12">\n' +
+            '                <div class="input-group mb-3">\n' +
+            '                    <div class="input-group-prepend">\n' +
+            '                        <button type="button" class="btn btn-primary btn-sm" >联系电话</button>\n' +
+            '                    </div>\n' +
+            '                    <input type="text" id="mobilephone" class="form-control">\n' +
+            '                </div>\n' +
+            '            </div>\n' +
             '</div>';
 
         modalHtml.myViewDataModal =

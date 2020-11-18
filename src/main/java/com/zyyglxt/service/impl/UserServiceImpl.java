@@ -80,6 +80,7 @@ public class UserServiceImpl implements UserService {
         userRoleRefDO.setItemcode(UUIDUtils.getUUID());
         userRoleRefDO.setRoleCode(roleDO.getItemcode());
         userRoleRefDO.setUserCode(record.getItemcode());
+        userRoleRefDO.setPlatRole(roleDO.getRoleName());
         userRoleRefDOMapper.insertSelective(userRoleRefDO);
     }
 
@@ -109,6 +110,7 @@ public class UserServiceImpl implements UserService {
             userRoleRefDO.setItemcode(userRoleRefDO1.getItemcode());
             userRoleRefDO.setRoleCode(roleDO.getItemcode());
             userRoleRefDO.setUserCode(userDO.getItemcode());
+            userRoleRefDO.setPlatRole(roleDO.getRoleName());
             userRoleRefDOMapper.updateByPrimaryKeySelective(userRoleRefDO);
         }
     }

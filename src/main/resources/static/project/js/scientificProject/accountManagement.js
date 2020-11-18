@@ -23,10 +23,6 @@
 
             //修改事件
             window.orgEvents = {
-                // 'click .edit' : function(e, value, row, index) {
-                //     localStorage.setItem("rowData", JSON.stringify(row));
-                //     orange.redirect(addUrl);
-                // },
 
                 'click .delete': function (e, value, row, index) {
                     var myDeleteModalData ={
@@ -68,6 +64,7 @@
                     $("#IDCardType").val(row.idcardType);
                     $("#IDCardNo").val(row.idcardNo);
                     $("#email").val(row.email);
+                    $("#roleName").val(row.roleName);
                     $("#contacts").val(row.contacts);
                     $("#mobilephone").val(row.mobilephone);
                     $("#cityid").val(row.cityid);
@@ -108,11 +105,50 @@
                 }
             };
 
-            /*新增名老中医*/
-            // $("#btn_addTask").unbind().on('click',function () {
-            //     localStorage.removeItem("rowData");
-            //     orange.redirect(addUrl)
-            // });
+            /*新增用户账号*/
+            $("#btn_addTask").unbind().on('click',function () {
+                var myViewTravelModalData ={
+                    modalBodyID : "myAddAccountModal", //公用的在后面给span加不同的内容就行了，其他模块同理
+                    modalTitle : "新增用户账户",
+                    modalClass : "modal-lg",
+                    modalConfirmFun:function () {
+                        var isSuccess = false;
+
+                        var username = $("#username").val();
+                        var name = $("#name").val();
+                        var roleName = $("#roleName").val();
+                        var contacts = $("#contacts").val();
+                        var mobilephone = $("#mobilephone").val();
+                        var cityid = $("#cityid").val();
+
+                        var submitStatus = {
+                            "username": username,
+                            "name": name,
+                            "roleName": roleName,
+                            "contacts": contacts,
+                            "mobilephone": mobilephone,
+                            "cityid": cityid
+                        };
+                        ajaxUtil.myAjax(null,"/user/adduser",submitStatus,function (data) {
+                            if(ajaxUtil.success(data)){
+                                if(data.code == 88888){
+                                    alertUtil.info("重置密码成功");
+                                    isSuccess = true;
+                                    // refreshTable();
+                                }else{
+                                    alertUtil.error(data.msg);
+                                }
+
+                            }
+                        },false,true,"put");
+                        return isSuccess;
+                    }
+                };
+                var myTravelModal = modalUtil.init(myViewTravelModalData);
+                myTravelModal.show();
+            });
+
+
 
             var pl = dictUtil.getDictByCode(dictUtil.DICT_LIST.showStatus);
             $("#chargePersonSearch").selectUtil(pl);
@@ -121,8 +157,8 @@
                 {field: 'username', title: '用户账号'},
                 {field: 'name', title: '账号名称'},
                 {field: 'cityid', title: '主管市区'},
+                {field: 'roleName', title: '用户角色'},
                 {field: 'contacts', title: '联系人'},
-                {field: 'mobilephone', title: '联系电话'},
                 {field: 'action',  title: '操作',formatter: operation,events:orgEvents}
             ];
 

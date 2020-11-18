@@ -21,24 +21,24 @@
         }
 
         function getRoleOperatetwo(value, row, index, role, status,medStatus) {
-            if(role != null) {
                 $('#btn_addTask').attr('style', "display:block");
                 if (status == medStatus[0].id) {
                     return [
                         '<a class="edit" style="margin:0 1em;text-decoration: none;color:#775637;" data-toggle="modal" data-target="" >编辑</a>',
                         '<a class="delete" style="margin:0 1em;text-decoration: none;color:#D60000;"  data-toggle="modal" data-target="#staticBackdrop" >删除</a>',
+                        '<a class="shelf" style="margin:0 1em;text-decoration: none;color:#D60000;" data-toggle="modal" data-target="" >上架</a>',
                     ].join('');
                 } else if (status == medStatus[1].id ) {
                     return [
-                        '<a  class="under-shelf" style="margin:0 1em;text-decoration: none;color:#775637;" data-toggle="modal" data-target="#staticBackdrop" >下架</a>',
+                        '<a  class="under-shelf" style="margin:0 1em;text-decoration: none;color:#D60000;" data-toggle="modal" data-target="#staticBackdrop" >下架</a>',
                     ].join('');
                 } else if (status == medStatus[2].id) {
                     return [
                         '<a class="edit" style="margin:0 1em;text-decoration: none;color:#775637;" data-toggle="modal" data-target="" >编辑</a>',
                         '<a class="delete" style="margin:0 1em;text-decoration: none;color:#D60000;"  data-toggle="modal" data-target="#staticBackdrop" >删除</a>',
+                        '<a class="shelf" style="margin:0 1em;text-decoration: none;color:#D60000;" data-toggle="modal" data-target="" >上架</a>',
                     ].join('');
                 }
-            }
         }
         
         function getRoleTable(role,preUrl,status,webStatus) {

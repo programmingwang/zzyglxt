@@ -1189,6 +1189,7 @@
         modalHtml.myPassModal = '确认通过吗？';
         modalHtml.myFailModal = '确认不通过吗？';
         modalHtml.myUnderShelfModal = '确认下架吗？';
+        modalHtml.myShelfSaleDrugModal='确认是否上架';
         modalHtml.myNoSubmitModal = '确认修改为初始状态吗？';
 
         modalHtml.myDeleteAchievement = '是否删除科研成果?';

@@ -33,7 +33,7 @@
                             var isSuccess = false;
                             ajaxUtil.myAjax(null,"/industrialdevelop/sale-drug",pmst,function (data) {
                                 if(ajaxUtil.success(data)){
-                                    alertUtil.info("删除中医药名称成功");
+                                    alertUtil.info("删除药品成功");
                                     isSuccess = true;
                                     refreshTable();
                                 }
@@ -54,9 +54,9 @@
                         modalConfirmFun:function () {
                             var isSuccess = false;
                             var submitStatus = {
-                                "chineseMedicineStatus": medStatus[1].id
+                                "status": medStatus[2].id
                             };
-                            ajaxUtil.myAjax(null,"changestatustosaledrug/"+row.itemid+"/"+row.itemcode,submitStatus,function (data) {
+                            ajaxUtil.myAjax(null,"/industrialdevelop/changestatustosaledrug/"+row.itemid+"/"+row.itemcode,submitStatus,function (data) {
                                 if(ajaxUtil.success(data)){
                                     if(data.code == 88888){
                                         alertUtil.success("下架成功");
@@ -72,6 +72,33 @@
                     };
                     var myUnderShelfModal = modalUtil.init(myUnderShelfSaleDrugModalData);
                     myUnderShelfModal.show();
+                },
+                'click .shelf' : function (e, value, row, index){
+                    var ShelfSaleDrugData ={
+                        modalBodyID :"myShelfSaleDrugModal",
+                        modalTitle : "上架",
+                        modalClass : "modal-lg",
+                        modalConfirmFun:function () {
+                            var isSuccess = false;
+                            var submitStatus = {
+                                "status": medStatus[1].id
+                            };
+                            ajaxUtil.myAjax(null,"/industrialdevelop/changestatustosaledrug/"+row.itemid+"/"+row.itemcode,submitStatus,function (data) {
+                                if(ajaxUtil.success(data)){
+                                    if(data.code == 88888){
+                                        alertUtil.info("已上架");
+                                        isSuccess = true;
+                                        refreshTable();
+                                    }else{
+                                        alertUtil.error(data.msg);
+                                    }
+                                }
+                            },false);
+                            return isSuccess;
+                        }
+                    };
+                    var mySubmitModal = modalUtil.init(ShelfSaleDrugData);
+                    mySubmitModal.show();
                 },
 
                'click .view' : function (e, value, row, index) {
@@ -108,34 +135,7 @@
                 orange.redirect(url);
             });
 
-           /* $("#saveBtn").unbind().on('click',function () {
-                var ShelfSaleDrugData ={
-                    modalBodyID :"myShelfSaleDrugModal",
-                    modalTitle : "上架",
-                    modalClass : "modal-lg",
-                    modalConfirmFun:function () {
-                        var isSuccess = false;
-                        var submitStatus = {
-                            "chineseMedicineStatus": medStatus[1].id
-                        };
-                        ajaxUtil.myAjax(null,"/industrialdevelop/changestatustosaledrug"+row.itemid+"/"+row.itemcode,submitStatus,function (data) {
-                            if(ajaxUtil.success(data)){
-                                if(data.code == 88888){
-                                    alertUtil.info("已上架");
-                                    isSuccess = true;
-                                    refreshTable();
-                                }else{
-                                    alertUtil.error(data.msg);
-                                }
-                            }
-                        },false);
-                        return isSuccess;
-                    }
-                };
-                var mySubmitModal = modalUtil.init(ShelfSaleDrugData);
-                mySubmitModal.show();
-            });
-*/
+
             $("#btn_addTask").unbind().on('click',function () {
                 var url = "/industrialdevelop/chinesemed/saledrug_add";
                 localStorage.removeItem("rowData");

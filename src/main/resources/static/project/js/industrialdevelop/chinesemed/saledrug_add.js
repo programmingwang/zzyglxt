@@ -14,7 +14,7 @@
                 var operateMessage;
                 if(!isUpdate()){
                     addUpdateUrl = "/industrialdevelop/sale-drug";
-                    operateMessage = "保存药品成功";
+                    operateMessage = "添加药品成功";
                     traDocEntity = {
                         itemcode: stringUtil.getUUID(),
                         drugName : $("#drugName").val(),

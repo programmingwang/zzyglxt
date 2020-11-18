@@ -190,4 +190,11 @@
         where DATA_CODE = #{dataCode}
     </delete>
 
+    <select id="selectMultipleFileByDataCode" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM tb_culpro_file
+        WHERE DATA_CODE = #{dataCode}
+    </select>
+
 </mapper>

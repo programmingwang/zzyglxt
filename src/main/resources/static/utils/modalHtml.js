@@ -1934,6 +1934,9 @@
         modalHtml.myDeleteSpecialty = "是否删除科室信息？";
         modalHtml.myDeleteChineseMedicine = "是否删除名老中医信息？";
 
+        modalHtml.myDeleteMedMat = "是否删除药材信息？"
+        modalHtml.myShelveMedMat = "点击上架将药材信息发送到河北中医药网，确认上架？"
+
         return modalHtml;
 
     });

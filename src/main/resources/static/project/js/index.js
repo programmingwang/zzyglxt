@@ -405,8 +405,8 @@
                     pid: ""
                 },
                 {
-                    menu_name: "专家管理",
-                    menu_url: "/industrialdevelop/expert",
+                    menu_name: "机构审核",
+                    menu_url: "/industrialdevelop/audit",
                     id: "22",
                     level: "1",
                     pid: ""

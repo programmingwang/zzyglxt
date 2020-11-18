@@ -23,7 +23,7 @@
                     if(ajaxUtil.success(data)){
                         var al = new Array();
                         $.each(data.data,function (k,v) {
-                            al.push({id:k,text:v.value});
+                            al.push({id:v.code,text:v.value});
                         });
                         dictList[code] = al;
                     }

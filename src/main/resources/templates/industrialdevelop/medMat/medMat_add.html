@@ -6,38 +6,35 @@
     <link rel="stylesheet" href="https://at.alicdn.com/t/font_1805932_ysrcp4y0uy9.css">
     <title>Document</title>
     <style>
-        .upload-wrap{
+        .upload-wrap {
             position: relative;
             display: inline-block;
             overflow: hidden;
 
             border-radius: 3px;
         }
-        .upload-wrap .file-ele{
+
+        .upload-wrap .file-ele {
             position: absolute;
-            top:0;
-            right:0;
+            top: 0;
+            right: 0;
             opacity: 0;
             height: 100%;
             width: 100%;
             cursor: pointer;
         }
-        .upload-wrap .file-open{
-            width:90px;
-            height:36px;
-            line-height:36px;
+
+        .upload-wrap .file-open {
+            width: 90px;
+            height: 36px;
+            line-height: 36px;
             text-align: center;
-            color:#fff;
+            color: #fff;
             background: red;
         }
-        label{
+
+        label {
             text-align: right;
-        }
-        div#upimg {
-            padding-top: 23%;
-            height: 10em;
-            width: 10em;
-            background-color: #CBCECE;
         }
     </style>
 </head>
@@ -45,17 +42,53 @@
 <div class="row">
     <div class="col-12">
         <form>
+
+
             <div class="form-group row">
-                <label class="col-sm-2 col-form-label">科室名称：</label>
+                <label class="col-sm-2 col-form-label">药材名称：</label>
                 <div class="col-sm-3">
-                    <select id="specialtyName" class="form-control"></select>
+                    <input id="name" type="text" class="form-control" placeholder="请输入">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">规格：</label>
+                <div class="col-sm-3">
+                    <input id="specifications" type="text" class="form-control" placeholder="请输入">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">价格：</label>
+                <div class="col-sm-3">
+                    <input id="price" type="text" class="form-control" placeholder="请输入">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">产地：</label>
+                <div class="col-sm-3">
+                    <input id="place" type="text" class="form-control" placeholder="请输入药材产地">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">联系人：</label>
+                <div class="col-sm-3">
+                    <input id="contacts" type="text" class="form-control" placeholder="请输入">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">联系电话：</label>
+                <div class="col-sm-3">
+                    <input id="phone" type="text" class="form-control" placeholder="请输入">
                 </div>
             </div>
 
             <!--上传图片的div-->
             <div class="form-group row">
-                <label class="col-sm-2 col-form-label">科室图片：</label>
-                <div class="upload-content" data-limit="1">
+                <label class="col-sm-2 col-form-label">药材照片：</label>
+                <div class="upload-content" data-limit="5">
                     <div class="content-img">
                         <ul class="content-img-list"></ul>
                         <div class="file">
@@ -74,32 +107,17 @@
             </div>
 
             <div class="form-group row">
-                <label class="col-sm-2 col-form-label">所属医院：</label>
-                <div class="col-sm-3">
-                    <select id="hospitalName"  class="form-control"></select>
-                </div>
-            </div>
-            <div class="form-group row">
-                <label class="col-sm-2 col-form-label">联系电话：</label>
-                <div class="col-sm-3">
-                    <input id="specialtyPhone" type="text" class="form-control" placeholder="请输入">
-                </div>
-            </div>
-
-            <div class="form-group row">
-                <label class="col-sm-2 col-form-label">科室描述：</label>
-                <div id="div1" class="col-sm-8">
-                </div>
-            </div>
-
-            <div class="form-group row">
                 <div class="col-sm-8" ></div>
                 <div class=" col-sm-4 row" >
                     <div class="col">
                         <button id="cancel" type="button" class="btn btn-light col">取消</button>
                     </div>
 
-                    <button id="btn_insert" type="submit" class="btn btn-primary col">提交</button>
+                    <button id="btn_insert" type="submit" class="btn btn-primary col">保存</button>
+
+                    <div class="col">
+                        <button id="shelve" type="button" class="btn btn-primary col">上架</button>
+                    </div>
                 </div>
             </div>
         </form>
@@ -108,7 +126,7 @@
 
 </div>
 <script type="text/javascript" data-main="/main/main.js" th:src="@{/component/require@2.3.6/require-2.3.6.js}"></script>
-<script type="text/javascript" th:src="@{/project/js/medicalService/add/addSpecialty.js}"></script>
+<script type="text/javascript" th:src="@{/project/js/industrialdevelop/medMat/medMat_add.js}"></script>
 <link type="text/css" rel="stylesheet" href="/component/uploadImg/css/uploadImg.css"
       th:src="@{/component/uploadImg/css/uploadImg.css}">
 <script type="text/javascript" th:src="@{/component/uploadImg/js/bootstrap.min.js}"></script>

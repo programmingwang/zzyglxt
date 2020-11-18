@@ -152,7 +152,7 @@
                     $("#scienceKnowledgeStatus").val(webStatus[row.scienceKnowledgeStatus].text);
                     $("#creater").val(row.creater);
                     $("#itemCreateAt").val(row.itemcreateat);
-                    $("#content").val(row.content);
+                    $("#content").html(row.content);
                     mySciKnowModal.show();
                 },
                 'click .submit' : function (e, value, row, index) {

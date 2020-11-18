@@ -319,7 +319,7 @@
         WHERE CHINESE_MEDICINE_STATUS = #{status}
     </select>
 
-    <update id="updateStatusByPrimaryKey" parameterType="com.zyyglxt.dto.MedicalServiceDto">
+    <update id="updateStatusByPrimaryKey" parameterType="com.zyyglxt.dto.StatusDto">
         UPDATE tb_culpro_chinese_medicine
         SET CHINESE_MEDICINE_STATUS = #{status}, UPDATER = #{updater}
         WHERE itemID = #{itemid,jdbcType=INTEGER}

@@ -309,7 +309,7 @@
         WHERE SPECIALTY_STATUS = #{status}
     </select>
 
-    <update id="updateStatusByPrimaryKey" parameterType="com.zyyglxt.dto.MedicalServiceDto">
+    <update id="updateStatusByPrimaryKey" parameterType="com.zyyglxt.dto.StatusDto">
         UPDATE tb_culpro_specialty
         SET SPECIALTY_STATUS = #{status}, UPDATER = #{updater}
         WHERE itemID = #{itemid,jdbcType=INTEGER}

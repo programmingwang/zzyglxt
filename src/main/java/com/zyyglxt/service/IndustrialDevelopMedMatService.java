@@ -1,7 +1,11 @@
 package com.zyyglxt.service;
 
 import com.zyyglxt.dataobject.IndustrialDevelopMedMat;
-    /**
+import com.zyyglxt.dto.StatusDto;
+
+import java.util.List;
+
+/**
    *@Author lrt
    *@Date 2020/11/6 20:00
    *@Version 1.0
@@ -21,4 +25,7 @@ public interface IndustrialDevelopMedMatService{
 
     int updateByPrimaryKey(IndustrialDevelopMedMat record);
 
+    List<IndustrialDevelopMedMat> selectMedMatByORGCode();
+
+    int updateStatus(StatusDto statusDto);
 }

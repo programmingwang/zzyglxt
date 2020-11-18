@@ -20,17 +20,9 @@ public interface FileDOMapper {
 
     int updateByPrimaryKey(FileDO record);
 
-    List<FileDO> selectAllFile();
-
-    List<FileDO> searchFile(String keyWord);
-
-    List<FileDO> top5File();
-
     FileDO selectFileByDataCode(String dataCode);
-
 
     int deleteByDataCode(String dataCode);
 
-
-
+    List<FileDO> selectMultipleFileByDataCode(String dataCode);
 }

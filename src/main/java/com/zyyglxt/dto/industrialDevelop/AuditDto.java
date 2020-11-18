@@ -26,6 +26,8 @@ public class AuditDto {
 
     private String addressCity;
 
+    private String reason;
+
     private String type;
 
     private Date itemcreateat;

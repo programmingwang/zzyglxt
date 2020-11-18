@@ -324,7 +324,7 @@
                 },
                 {
                     menu_name: "＞课题管理",
-                    menu_url: "/scientificProject/projectManagement",
+                    menu_url: "/scientificProject/topicManagement",
                     id: "15-3",
                     level: "2",
                     pid: "15"
@@ -383,7 +383,20 @@
                     level: "1",
                     pid: ""
                 },
-
+                {
+                    menu_name: "在售药材",
+                    menu_url: "/industrialdevelop/medMat/medMat",
+                    id: "22",
+                    level: "1",
+                    pid: ""
+                },
+              {
+                    menu_name: "机构审核",
+                    menu_url: "/industrialdevelop/audit",
+                    id: "23",
+                    level: "1",
+                    pid: ""
+                },
             ];
 
 

@@ -1,10 +1,12 @@
 package com.zyyglxt.controller.industrialDevelop;
 
 import com.zyyglxt.annotation.LogAnnotation;
+
 import com.zyyglxt.dataobject.HealthCareChineseMedicineDO;
 import com.zyyglxt.dataobject.HealthCareChineseMedicineDOKey;
+
+
 import com.zyyglxt.dataobject.IndustrialDevelopSaleDrug;
-import com.zyyglxt.dto.HealthCareChineseMedicineDto;
 import com.zyyglxt.dto.industrialDevelop.IndustrialDevelopSaleDrugDto;
 import com.zyyglxt.error.EmBusinessError;
 import com.zyyglxt.response.ResponseData;
@@ -38,7 +40,11 @@ public class SaleDrugController {
     UsernameUtil usernameUtil;
 
     @ResponseBody
+
     @RequestMapping(value = "/sale-drug", method = RequestMethod.POST)
+
+    @RequestMapping(value = "insertsaledrug", method = RequestMethod.POST)
+
     @LogAnnotation(appCode ="",logTitle ="售药添加",logLevel ="3",creater ="",updater = "")
     public ResponseData addSaleDrug(@RequestBody IndustrialDevelopSaleDrug record) {
         saleDrugService.insertSelective(record);
@@ -46,7 +52,11 @@ public class SaleDrugController {
     }
 
     @ResponseBody
+
     @RequestMapping(value = "/sale-drug", method = RequestMethod.PUT)
+
+    @RequestMapping(value = "updatehealthcarechinesemedicinedo", method = RequestMethod.PUT)
+
     @LogAnnotation(appCode ="",logTitle ="售药数据修改",logLevel ="2",creater ="",updater = "")
     public ResponseData updSaleDrug(@RequestBody IndustrialDevelopSaleDrug record){
         saleDrugService.updateByPrimaryKeySelective(record);

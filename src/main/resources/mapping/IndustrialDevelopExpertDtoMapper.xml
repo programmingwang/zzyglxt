@@ -30,7 +30,7 @@
 
 
   <select id="selectAll" resultType="com.zyyglxt.dto.industrialDevelop.IndustrialDevelopExpertDto">
-    SELECT u.username,u.name,ex.filed,u.gender,u.mobilePhone
+    SELECT ex.itemID,ex.itemCode,ex.USER_CODE as userCode,u.username,u.name,ex.filed,u.gender,u.mobilePhone
     FROM tb_industrial_develop_expert ex,user u WHERE u.itemCode=ex.USER_CODE
   </select>
 
@@ -96,13 +96,9 @@
   </insert>
   <update id="resetPassword" parameterType="com.zyyglxt.dto.industrialDevelop.IndustrialDevelopExpertDto">
     update user
-    <set>
-      <if test="password != null">
-        PASSWORD = #{password,jdbcType=VARCHAR},
-      </if>
-    </set>
-    where itemID = #{itemid,jdbcType=INTEGER}
-    and itemCode = #{itemcode,jdbcType=CHAR}
+    set
+    PASSWORD = #{password,jdbcType=VARCHAR}
+    where  itemCode = #{userCode,jdbcType=VARCHAR}
   </update>
 
 </mapper>

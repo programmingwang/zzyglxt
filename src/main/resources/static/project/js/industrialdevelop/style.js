@@ -12,13 +12,25 @@
             };
 
             var showStatus = dictUtil.getDictByCode(dictUtil.DICT_LIST.showStatus);
+            // 0 —— 1 展示中 2 已下架
 
             //操作
             function operation(value, row, index){
-                return [
-                    '<button type="button" class="edit btn btn-primary btn-sm" style="margin-right: 5px" data-toggle="modal" data-target="" >编辑</button>',
-                    '<button type="button" class="delete btn btn-danger btn-sm"  data-toggle="modal" data-target="#staticBackdrop" >删除</button>',
-                ].join('');
+                if(row.status == showStatus[0].id){
+                    return [
+                        '<a class="edit" style="margin:0 1em;text-decoration: none;color:#775637;" data-toggle="modal" data-target="" >编辑</a>',
+                        '<a class="submit"  style="margin:0 1em;text-decoration: none;color:#775637;" data-target="#staticBackdrop" >上架</a>',
+                        '<a class="delete" style="margin:0 1em;text-decoration: none;color:#D60000;"  data-toggle="modal" data-target="#staticBackdrop" >删除</a>',
+                    ].join('');
+                }else if(row.status == showStatus[1].id){
+                    return [
+                        '<a  class="under-shelf" style="margin:0 1em;text-decoration: none;color:#775637;" data-toggle="modal" data-target="#staticBackdrop" >下架</a>',
+                    ].join('');
+                }else if(row.status == showStatus[2].id){
+                    return [
+                        '<a class="delete" style="margin:0 1em;text-decoration: none;color:#D60000;"  data-toggle="modal" data-target="#staticBackdrop" >删除</a>',
+                    ].join('');
+                }
             }
 
             //修改事件
@@ -27,6 +39,7 @@
                     localStorage.setItem("rowData", JSON.stringify(row));
                     orange.redirect(addUrl);
                 },
+
                 'click .delete': function (e, value, row, index) {
                     var myDeleteModalData ={
                         modalBodyID : "myDeleteBaseStyle",
@@ -53,7 +66,69 @@
                     };
                     var myDeleteModal = modalUtil.init(myDeleteModalData);
                     myDeleteModal.show();
-                }
+                },
+
+                'click .under-shelf' : function (e, value, row, index) {
+                    var myUnderShelfStyleModalData ={
+                        modalBodyID :"myUnderShelfModal",
+                        modalTitle : "下架",
+                        modalClass : "modal-lg",
+                        modalConfirmFun:function () {
+                            var isSuccess = false;
+                            var submitStatus = {
+                                "status": showStatus[2].id,
+                                "itemid" : row.itemid,
+                                "itemcode" : row.itemcode
+                            };
+                            ajaxUtil.myAjax(null,"/industrialdevelop/base-style",submitStatus,function (data) {
+                                if(ajaxUtil.success(data)){
+                                    if(data.code == ajaxUtil.successCode){
+                                        alertUtil.success("下架成功");
+                                        isSuccess = true;
+                                        refreshTable();
+                                    }else{
+                                        alertUtil.error(data.msg);
+                                    }
+                                }
+                            },false,true,"put");
+                            return isSuccess;
+                        }
+
+                    };
+                    var myUnderShelfModal = modalUtil.init(myUnderShelfStyleModalData);
+                    myUnderShelfModal.show();
+                },
+
+                'click .submit' : function (e, value, row, index) {
+                    var myUnderShelfStyleModalData ={
+                        modalBodyID :"myShowModal",
+                        modalTitle : "上架",
+                        modalClass : "modal-lg",
+                        modalConfirmFun:function () {
+                            var isSuccess = false;
+                            var submitStatus = {
+                                "status": showStatus[1].id,
+                                "itemid" : row.itemid,
+                                "itemcode" : row.itemcode
+                            };
+                            ajaxUtil.myAjax(null,"/industrialdevelop/base-style",submitStatus,function (data) {
+                                if(ajaxUtil.success(data)){
+                                    if(data.code == ajaxUtil.successCode){
+                                        alertUtil.success("展示成功");
+                                        isSuccess = true;
+                                        refreshTable();
+                                    }else{
+                                        alertUtil.error(data.msg);
+                                    }
+                                }
+                            },false,true,"put");
+                            return isSuccess;
+                        }
+
+                    };
+                    var myUnderShelfModal = modalUtil.init(myUnderShelfStyleModalData);
+                    myUnderShelfModal.show();
+                },
             };
 
 

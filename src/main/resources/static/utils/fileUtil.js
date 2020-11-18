@@ -11,7 +11,7 @@
                     if(!ajaxUtil.success(data)){
                         return alertUtil.error("文件删除失败");
                     }
-                },false,"","get");
+                },undefined,"","get");
                 ajaxUtil.fileAjax(itemcode,file, stringUtil.getUUID(),"admin","qeqweasd");
             }
         }

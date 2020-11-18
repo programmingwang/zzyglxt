@@ -58,7 +58,6 @@ public class IndustrialDevelopBasestyleServiceImpl implements IndustrialDevelopB
         record.setItemcreateat(DateUtils.getDate());
         record.setUpdater(usernameUtil.getOperateUser());
         record.setOrgCode(usernameUtil.getOrgCode());
-        log.warn("aaaaaaaaaaaaaaaaaaaaaaaaa:::::"+fileService.selectFileByDataCode(record.getItemcode()).getItemcode());
         record.setFileCode(fileService.selectFileByDataCode(record.getItemcode()).getItemcode());
         return industrialDevelopBasestyleMapper.insertSelective(record);
     }
@@ -70,6 +69,8 @@ public class IndustrialDevelopBasestyleServiceImpl implements IndustrialDevelopB
 
     @Override
     public int updateByPrimaryKeySelective(IndustrialDevelopBasestyle record) {
+        record.setFileCode(fileService.selectFileByDataCode(record.getItemcode()).getItemcode());
+        record.setUpdater(usernameUtil.getOperateUser());
         return industrialDevelopBasestyleMapper.updateByPrimaryKeySelective(record);
     }
 

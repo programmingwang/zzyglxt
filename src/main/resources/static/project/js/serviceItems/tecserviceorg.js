@@ -15,25 +15,17 @@
 
             //操作
             function operation(value, row, index) {
-                if (row.status == "——" || row.status == "已下架") {
+                if (row.status === '售卖中'){
                     return [
-                        '<button type="button" class="edit btn btn-primary btn-sm" style="margin-right: 5px" data-toggle="modal" data-target="" >编辑</button>',
-                        '<button type="button" class="delete btn btn-danger btn-sm"  data-toggle="modal" data-target="#staticBackdrop" >删除</button>',
-                    ].join('');
-                } else if (row.status == "售卖中") {
+                        '<a class="unshelve" style="margin:0 1em;text-decoration: none;color: #775637" data-toggle="modal" data-target="" >下架</a>'
+                    ].join('')
+                } else {
                     return [
-                        '<button type="button" class="view btn btn-primary btn-sm" style="margin-right: 5px" data-toggle="modal" data-target="" >下架</button>',
+                        '<a class="edit" style="margin:0 1em;text-decoration: none;color: #775637" data-toggle="modal" data-target="" >编辑</a>',
+                        '<a class="delete" style="margin:0 1em;text-decoration: none;color:#D60000;"  data-toggle="modal" data-target="#staticBackdrop" >删除</a>',
                     ].join('');
                 }
             }
-
-            /*$(".view").on("click",function (e, value, row, index) {
-                var projectEntity = {
-                    "itemid": row.itemid,
-                    "itemcode": row.itemcode,
-                    "status": "已下架"
-                };
-            });*/
 
             //修改事件
             window.orgEvents = {
@@ -41,7 +33,7 @@
                     localStorage.setItem("rowData", JSON.stringify(row));
                     orange.redirect(addUrl);
                 },
-                'click .view': function (e, value, row, index) {
+                'click .unshelve': function (e, value, row, index) {
                     var projectEntity = {
                         itemid: row.itemid,
                         itemcode: row.itemcode,

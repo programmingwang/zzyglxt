@@ -59,6 +59,11 @@ public class IndustrialDevelopTecSerOrgServiceImpl implements IndustrialDevelopT
     }
 
     @Override
+    public IndustrialDevelopTecSerOrg selectByOrgcode(String orgCode) {
+        return industrialDevelopTecSerOrgMapper.selectByOrgcode(orgCode);
+    }
+
+    @Override
     public int updateByPrimaryKeySelective(IndustrialDevelopTecSerOrg record) {
         return industrialDevelopTecSerOrgMapper.updateByPrimaryKeySelective(record);
     }

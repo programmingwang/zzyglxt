@@ -4,7 +4,7 @@
 
             var url = "/industrialdevelop/tec-ser-org";
 
-            var pathUrl = "/industrialdevelop/organization/tecserviceorg";
+            var pathUrl = "/serviceItems/tecserviceorg_msg";
 
             var itemcode = stringUtil.getUUID();
 
@@ -50,7 +50,7 @@
                     }else {
                         alert(data.msg);
                     }
-                },true,"123",type);
+                },true,"123","put");
                 return false;
             });
 
@@ -63,7 +63,7 @@
                     }else {
                         alert(data.msg)
                     }
-                },true,"123",type);
+                },true,"123","put");
                 return false;
             });
 
@@ -82,7 +82,6 @@
                     $("#address").val(tempdata.address);
                     $(".w-e-text").html(tempdata.intruduce);
                     itemcode = tempdata.itemcode;
-                    uploadImg.setImgSrc(tempdata.filePath)
                 }else {
                     $("#distpicker").distpicker();
                 }
@@ -90,12 +89,13 @@
 
                 }
             };
-            init();
-
-
-            function isUpdate() {
-                return (localStorage.getItem("rowData") != null || localStorage.getItem("rowData") != undefined)
-            }
+            ajaxUtil.myAjax(null, url, function (data) {
+                if (data && data.code == 88888) {
+                    init();
+                } else {
+                    alertUtil.error(data.msg);
+                }
+            }, false, "123", "get");
     })
 })();
 

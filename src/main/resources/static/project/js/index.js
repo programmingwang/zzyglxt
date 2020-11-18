@@ -377,11 +377,25 @@
                 技术服务机构后台管理------14
                 */
                 {
-                    menu_name: "服务项目",
-                    menu_url: "/serviceItems/tecserviceorg",
+                    menu_name: "技术服务机构",
+                    menu_url: "",
                     id: "16",
                     level: "1",
                     pid: ""
+                },
+                {
+                    menu_name: "服务项目",
+                    menu_url: "/serviceItems/tecserviceorg",
+                    id: "16-1",
+                    level: "2",
+                    pid: "16"
+                },
+                {
+                    menu_name: "信息维护",
+                    menu_url: "/serviceItems/tecserviceorg_msg",
+                    id: "16-4",
+                    level: "2",
+                    pid: "16"
                 },
                 {
                     menu_name: "科研成果",

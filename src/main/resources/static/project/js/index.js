@@ -341,7 +341,6 @@
                     menu_name: "＞中药材加工企业",
                     menu_url: "/industrialdevelop/chinesemed/chinesemed-process",
                     id: "99-7",
-
                 },
                 {
                     menu_name: "＞课题管理",

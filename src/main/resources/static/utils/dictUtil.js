@@ -86,7 +86,11 @@
             //药材状态
             "medStatus": "medStatus",
             //机构类型
-            "orgType": "orgType"
+            "orgType": "orgType",
+            //主管市区
+            "areaAdmin":"areaAdmin",
+            //用户角色
+            "userRole":"userRole"
         }
 
         var dictList = {

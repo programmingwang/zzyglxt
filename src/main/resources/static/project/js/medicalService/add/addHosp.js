@@ -12,9 +12,10 @@
             var specialtyName = dictUtil.getDictByCode(dictUtil.DICT_LIST.dept)
             const editor = objectUtil.wangEditorUtil();
 
-            /*设置下拉框的值*/
+            /*设置医院级别下拉框的值*/
             $("#hospitalLevel").selectUtil(hospitalLevel);
-            /*重点专科操作*/
+
+            /*重点专科h处理录入*/
             $("#specialtyName").selectUtil(specialtyName);
             $("#add").unbind().on("click",function () {
                 var str = $("#hospitalKeySpecialty").val();
@@ -29,6 +30,7 @@
                 $("#hospitalKeySpecialty").val("")
                 $("#specialtyName").selectUtil(dictUtil.getDictByCode(dictUtil.DICT_LIST.dept));
             })
+
             /*返回按钮处理*/
             $("#cancel").unbind().on('click',function () {
                 orange.redirect(jumpUrl);
@@ -101,13 +103,12 @@
                     $("#hospitalKeySpecialty").val(tempdata.hospitalKeySpecialty);
                     $("#hospitalTelephone").val(tempdata.hospitalTelephone);
                     $("#distpicker").distpicker({
-                        province: "河北省",
+                        province: tempdata.hospitalAddressPro,
                         city: tempdata.hospitalAddressCity,
                         district: tempdata.hospitalAddressCountry
                     });
                     $("#hospitalAddress").val(tempdata.hospitalAddress);
                     $("#hospitalLink").val(tempdata.hospitalLink);
-                    $("#hospitalAddressCountry").val(tempdata.hospitalAddressCountry);
                     $(".w-e-text").html(tempdata.hospitalIntroduce);
                 }else {
                     localStorage.removeItem("rowData");

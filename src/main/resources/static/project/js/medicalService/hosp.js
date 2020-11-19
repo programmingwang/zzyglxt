@@ -17,6 +17,16 @@
                 return selectUtil.getRoleOperate(value,row,index,sessionStorage.getItem("rolename"),row.hospitalStatus,webStatus)
             }
 
+            function handlePro(pro){
+                if (pro == "河北省" ||
+                    pro == null ||
+                    pro == undefined ||
+                    pro.toLowerCase() == "null") {
+                    pro = ""
+                }
+                return pro;
+            }
+
             //修改事件
             window.orgEvents = {
                 'click .edit' : function(e, value, row, index) {
@@ -167,8 +177,10 @@
                     $("#hospitalImg").attr("src",row.filePath)
                     $("#hospitalName").val(row.hospitalName);
                     $("#hospitalLevel").val(row.hospitalLevel);
-                    $("#hospitalAddress").val(row.hospitalAddressCity + row.hospitalAddressCountry + row.hospitalAddress);
+                    $("#hospitalBriefIntroduce").val(row.hospitalBriefIntroduce);
+                    $("#hospitalKeySpecialty").val(row.hospitalKeySpecialty);
                     $("#hospitalTelephone").val(row.hospitalTelephone);
+                    $("#hospitalAddress").val(handlePro(row.hospitalAddressPro) + row.hospitalAddressCity + row.hospitalAddressCountry + row.hospitalAddress);
                     $("#hospitalLink").val(row.hospitalLink);
                     $("#hospitalIntroduce").html(row.hospitalIntroduce)
                     $("#hospitalStatus").val(webStatus[row.hospitalStatus].text);
@@ -261,11 +273,7 @@
                         }
                     }},
                 {field: 'hospitalAddress', title: '地址',formatter:function (value, row, index) {
-                        if (row.hospitalAddressPro===null || row.hospitalAddressPro==="null" ||
-                            row.hospitalAddressPro==="NULL" || row.hospitalAddressPro==="河北省"){
-                            row.hospitalAddressPro = ""
-                        }
-                        return row.hospitalAddressPro + row.hospitalAddressCity + row.hospitalAddressCountry + value
+                        return handlePro(row.hospitalAddressPro) + row.hospitalAddressCity + row.hospitalAddressCountry + value
                     }},
                 {field: 'hospitalTelephone', title: '联系电话'},
                 {field: 'action',  title: '操作',formatter: operation,events:orgEvents}

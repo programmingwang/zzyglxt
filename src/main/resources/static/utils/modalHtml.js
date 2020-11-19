@@ -1896,7 +1896,6 @@
 
 
 
-
         modalHtml.myDeleteModalTravel = '是否删除景点信息?';
         modalHtml.myDeleteModalTraditionalCul = '是否删除中医医史信息?';
         modalHtml.myDeleteModalTraditionalDoc = '是否删除历代名家信息?';

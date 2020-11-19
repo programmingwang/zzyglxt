@@ -206,7 +206,7 @@
                     pid: "13"
                 },
                 {
-                    menu_name: "在售药材",
+                    menu_name: "在售药品",
                     menu_url: "/industrialdevelop/chinesemed/saledrug",
                     id: "88",
                     level: "1",

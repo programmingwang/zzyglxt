@@ -2,64 +2,42 @@
     require(['jquery', 'ajaxUtil','bootstrapTableUtil','objectUtil','alertUtil','modalUtil','selectUtil','stringUtil','dictUtil'],
         function (jquery,ajaxUtil,bootstrapTableUtil,objectUtil,alertUtil,modalUtil,selectUtil,stringUtil,dictUtil) {
 
-
-            var url = "/industrialdevelop/base-style";
-
-            var pathUrl = "/industrialdevelop/style";
-            var addUrl = pathUrl+"_add_baseElegant";
+            var url = "/industrialdevelop/sale-drug";
+            var medStatus = dictUtil.getDictByCode(dictUtil.DICT_LIST.medStatus);
+            url = selectUtil.getRoleTabletwo(sessionStorage.getItem("rolename"),url,"status",medStatus);
             var aParam = {
 
             };
-
-            var showStatus = dictUtil.getDictByCode(dictUtil.DICT_LIST.showStatus);
-            // 0 —— 1 展示中 2 已下架
-
             //操作
             function operation(value, row, index){
-                if(row.status == showStatus[0].id){
-                    return [
-                        '<a class="edit" style="margin:0 1em;text-decoration: none;color:#775637;" data-toggle="modal" data-target="" >编辑</a>',
-                        '<a class="submit"  style="margin:0 1em;text-decoration: none;color:#775637;" data-target="#staticBackdrop" >上架</a>',
-                        '<a class="delete" style="margin:0 1em;text-decoration: none;color:#D60000;"  data-toggle="modal" data-target="#staticBackdrop" >删除</a>',
-                    ].join('');
-                }else if(row.status == showStatus[1].id){
-                    return [
-                        '<a  class="under-shelf" style="margin:0 1em;text-decoration: none;color:#775637;" data-toggle="modal" data-target="#staticBackdrop" >下架</a>',
-                    ].join('');
-                }else if(row.status == showStatus[2].id){
-                    return [
-                        '<a class="delete" style="margin:0 1em;text-decoration: none;color:#D60000;"  data-toggle="modal" data-target="#staticBackdrop" >删除</a>',
-                    ].join('');
-                }
+                return selectUtil.getRoleOperatetwo(value,row,index,sessionStorage.getItem("rolename"),row.status,medStatus)
             }
 
             //修改事件
             window.orgEvents = {
                 'click .edit' : function(e, value, row, index) {
                     localStorage.setItem("rowData", JSON.stringify(row));
-                    orange.redirect(addUrl);
+                    orange.redirect("/industrialdevelop/chinesemed/saledrug_add");
                 },
-
                 'click .delete': function (e, value, row, index) {
                     var myDeleteModalData ={
-                        modalBodyID : "myDeleteBaseStyle",
-                        modalTitle : "删除基地风采",
+                        modalBodyID : "myDeleteModalSaleDrug",
+                        modalTitle : "删除药品名称",
                         modalClass : "modal-lg",
                         confirmButtonClass : "btn-danger",
                         modalConfirmFun:function () {
-                            var baseStyleEntity = {
-                                itemid: row.itemid,
-                                itemcode: row.itemcode
+                            var pmst={
+                                itemid:row.itemid,
+                                itemcode:row.itemcode
                             };
                             var isSuccess = false;
-                            ajaxUtil.myAjax(null,url,baseStyleEntity,function (data) {
+                            ajaxUtil.myAjax(null,"/industrialdevelop/sale-drug",pmst,function (data) {
                                 if(ajaxUtil.success(data)){
-                                    ajaxUtil.deleteFile(row.itemcode)
-                                    alertUtil.info("删除基地风采成功");
+                                    alertUtil.info("删除药品成功");
                                     isSuccess = true;
                                     refreshTable();
                                 }
-                            },false,"123","delete");
+                            },false,true,"delete");
                             return isSuccess;
                         }
 
@@ -69,20 +47,18 @@
                 },
 
                 'click .under-shelf' : function (e, value, row, index) {
-                    var myUnderShelfStyleModalData ={
+                    var myUnderShelfSaleDrugModalData ={
                         modalBodyID :"myUnderShelfModal",
                         modalTitle : "下架",
                         modalClass : "modal-lg",
                         modalConfirmFun:function () {
                             var isSuccess = false;
                             var submitStatus = {
-                                "status": showStatus[2].id,
-                                "itemid" : row.itemid,
-                                "itemcode" : row.itemcode
+                                "status": medStatus[2].id
                             };
-                            ajaxUtil.myAjax(null,"/industrialdevelop/base-style",submitStatus,function (data) {
+                            ajaxUtil.myAjax(null,"/industrialdevelop/changestatustosaledrug/"+row.itemid+"/"+row.itemcode,submitStatus,function (data) {
                                 if(ajaxUtil.success(data)){
-                                    if(data.code == ajaxUtil.successCode){
+                                    if(data.code == 88888){
                                         alertUtil.success("下架成功");
                                         isSuccess = true;
                                         refreshTable();
@@ -90,77 +66,98 @@
                                         alertUtil.error(data.msg);
                                     }
                                 }
-                            },false,true,"put");
+                            },false);
                             return isSuccess;
                         }
-
                     };
-                    var myUnderShelfModal = modalUtil.init(myUnderShelfStyleModalData);
+                    var myUnderShelfModal = modalUtil.init(myUnderShelfSaleDrugModalData);
                     myUnderShelfModal.show();
                 },
-
-                'click .submit' : function (e, value, row, index) {
-                    var mySubmitStyleModalData ={
-                        modalBodyID :"myShowModal",
+                'click .shelf' : function (e, value, row, index){
+                    var ShelfSaleDrugData ={
+                        modalBodyID :"myShelfSaleDrugModal",
                         modalTitle : "上架",
                         modalClass : "modal-lg",
                         modalConfirmFun:function () {
                             var isSuccess = false;
                             var submitStatus = {
-                                "status": showStatus[1].id,
-                                "itemid" : row.itemid,
-                                "itemcode" : row.itemcode
+                                "status": medStatus[1].id
                             };
-                            ajaxUtil.myAjax(null,"/industrialdevelop/base-style",submitStatus,function (data) {
+                            ajaxUtil.myAjax(null,"/industrialdevelop/changestatustosaledrug/"+row.itemid+"/"+row.itemcode,submitStatus,function (data) {
                                 if(ajaxUtil.success(data)){
-                                    if(data.code == ajaxUtil.successCode){
-                                        alertUtil.success("展示成功");
+                                    if(data.code == 88888){
+                                        alertUtil.info("已上架");
                                         isSuccess = true;
                                         refreshTable();
                                     }else{
                                         alertUtil.error(data.msg);
                                     }
                                 }
-                            },false,true,"put");
+                            },false);
                             return isSuccess;
                         }
-
                     };
-                    var myUnderShelfModal = modalUtil.init(mySubmitStyleModalData);
-                    myUnderShelfModal.show();
+                    var mySubmitModal = modalUtil.init(ShelfSaleDrugData);
+                    mySubmitModal.show();
+                },
+
+               'click .view' : function (e, value, row, index) {
+                    var myViewSaleDrugModalData ={
+                        modalBodyID : "myviewSaleDrugModal", //公用的在后面给span加不同的内容就行了，其他模块同理
+                        modalTitle : "查看详情",
+                        modalClass : "modal-lg",
+                        confirmButtonStyle: "display:none",
+                    };
+                    var mySaleDrugModal = modalUtil.init(myViewSaleDrugModalData);
+                    $("#drugName").val(row.drugName);
+                    $("#functionIndications").val(row.functionIndications);
+                    $("#usage").val(row.usage);
+                    $("#adverseReactions").val(row.adverseReactions);
+                    $("#taboo").val(row.taboo);
+                    $("#specifications").val(row.specifications);
+                    $("#careful").val(row.careful);
+                    $("#packing").val(row.packing);
+                   $("#mediCineImg").attr("src",row.filePath)
+                   $('#mediCineImgSpan').html("药品图片");
+                    $("#status").val(medStatus[row.status].text);
+                    $("#orgCode").val(row.orgCode);
+                    $("#creater").vai(row.creater);
+                    $("#itemCreateAt").val(row.itemcreateat);
+
+                   mySaleDrugModal.show();
                 },
             };
 
 
-            $("#search").unbind().on("click",function () {
-                var param = {
 
-                };
-                $('#table').bootstrapTable("destroy");
-                bootstrapTableUtil.myBootStrapTableInit("table", url, param, aCol);
+            $("#cancel").unbind().on('click',function () {
+                var url = "/industrialdevelop/chinesemed/saledrug";
+                orange.redirect(url);
             });
 
 
             $("#btn_addTask").unbind().on('click',function () {
+                var url = "/industrialdevelop/chinesemed/saledrug_add";
                 localStorage.removeItem("rowData");
-                orange.redirect(addUrl);
+                orange.redirect(url);
             });
 
-            var pl = dictUtil.getDictByCode(dictUtil.DICT_LIST.showStatus);
+            var pl = dictUtil.getDictByCode(dictUtil.DICT_LIST.medStatus);
             $("#chargePersonSearch").selectUtil(pl);
 
 
             var aCol = [
-                {field: 'filePath', title: '基地照片', formatter:function (value, row, index) {
+                {field: 'drugName', title: '药品名称'},
+                {field: 'filePath', title: '药品图片', formatter:function (value, row, index) {
                         if(value == "已经损坏了"){
                             return '<p>'+value+'</p>';
                         }else{
                             return '<img  src='+value+' width="100" height="100" class="img-rounded" >';
                         }
                     }},
-                {field: 'itemcreateat', title: '上传时间'},
-                {field: 'status', title: '照片状态', formatter:function (value) {
-                        return '<p>' +showStatus[value].text +'</p>';
+                {field: 'specifications', title: '规格'},
+                {field: 'status', title: '药品状态',formatter:function (row) {
+                        return '<p>'+medStatus[row].text+'</p>';
                     }},
                 {field: 'action',  title: '操作',formatter: operation,events:orgEvents}
             ];

@@ -26,6 +26,8 @@ public interface IndustrialDevelopSaleDrugService{
 
     int updateByPrimaryKey(IndustrialDevelopSaleDrug record);
 
-   List< IndustrialDevelopSaleDrug> selectAllSaleDrug(String orgCode);//查询所有售药记录信息
+   List< IndustrialDevelopSaleDrug> selectAllSaleDrug(List<String> status);//查询所有售药记录信息
+
+    int changeStatusToSaleDrug(IndustrialDevelopSaleDrug key, String status);
 
 }

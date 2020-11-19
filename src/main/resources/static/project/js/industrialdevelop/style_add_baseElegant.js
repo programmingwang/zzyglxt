@@ -12,6 +12,44 @@
                 orange.redirect(url);
             });
 
+            $("#btn_save").unbind().on('click',function () {
+                var baseStyleEntity;
+                var addUpdateUrl;
+                var operateMessage;
+                if(!isUpdate()){
+                    addUpdateUrl = "/industrialdevelop/base-style";
+                    operateMessage = "保存成功";
+                    baseStyleEntity = {
+                        itemcode : stringUtil.getUUID(),
+                        status : showStatus[0].id,
+                    };
+                }else{
+                    var needData = JSON.parse(localStorage.getItem("rowData"));
+                    addUpdateUrl = "/industrialdevelop/base-style";
+                    baseStyleEntity = {
+                        itemid: needData.itemid,
+                        itemcode: needData.itemcode,
+                    }
+                    operateMessage = "更新基地风采成功";
+                }
+
+                fileUtil.handleFile(isUpdate(), baseStyleEntity.itemcode, uploadImg.getFiles()[0]);
+
+                ajaxUtil.myAjax(null,addUpdateUrl,baseStyleEntity,function (data) {
+                    if(ajaxUtil.success(data)){
+                        if(data.code == ajaxUtil.successCode) {
+                            alertUtil.info(operateMessage);
+                            var url = "/industrialdevelop/style";
+                            orange.redirect(url);
+                        }else{
+                            alertUtil.error(data.msg);
+                        }
+                    }else {
+                        alertUtil.error(data.msg);
+                    }
+                },false,true,type);
+
+            });
 
             $("#btn_insert").unbind().on('click',function () {
                 var baseStyleEntity;
@@ -26,16 +64,12 @@
                     };
                 }else{
                     var needData = JSON.parse(localStorage.getItem("rowData"));
-                    addUpdateUrl = "/cul/trav/trav/updTrav";
+                    addUpdateUrl = "/industrialdevelop/base-style";
                     baseStyleEntity = {
                         itemid: needData.itemid,
                         itemcode: needData.itemcode,
-                        chineseCulturalName : $("#chineseCulturalName").val(),
-                        chineseCulturalSource : $("#chineseCulturalSource").val(),
-                        chineseCulturalAuthor : $("#chineseCulturalAuthor").val(),
-                        chineseCulturalContent : editor.txt.html()
                     }
-                    operateMessage = "更新旅游景点成功";
+                    operateMessage = "更新基地风采成功";
                 }
 
                 fileUtil.handleFile(isUpdate(), baseStyleEntity.itemcode, uploadImg.getFiles()[0]);
@@ -43,7 +77,7 @@
                 ajaxUtil.myAjax(null,addUpdateUrl,baseStyleEntity,function (data) {
                     if(ajaxUtil.success(data)){
                         if(data.code == ajaxUtil.successCode) {
-                            alertUtil.info(operateMessage);
+                            alertUtil.info(operateMessage+"，信息将展示在主页");
                             var url = "/industrialdevelop/style";
                             orange.redirect(url);
                         }else{

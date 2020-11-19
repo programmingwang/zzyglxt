@@ -25,4 +25,6 @@ public interface OrganizationDOMapper {
     int updateByPrimaryKeySelective(OrganizationDO record);
 
     int updateByPrimaryKey(OrganizationDO record);
+
+    String selectByItemCode(String itemCode);
 }

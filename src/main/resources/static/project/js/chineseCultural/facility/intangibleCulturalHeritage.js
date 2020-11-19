@@ -39,6 +39,11 @@
                             var isSuccess = false;
                             ajaxUtil.myAjax(null,"/cul/fac/inCuHe/delInCuHe/"+row.itemid+"/"+row.itemcode,null,function (data) {
                                 if(ajaxUtil.success(data)){
+                                    ajaxUtil.myAjax(null,"/file/delete?dataCode="+row.itemcode,null,function (data) {
+                                        if(!ajaxUtil.success(data)){
+                                            return alertUtil.error("文件删除失败，可能已经损坏了");
+                                        }
+                                    },false,"","get");
                                     alertUtil.info("删除非物质文化遗产信息成功");
                                     isSuccess = true;
                                     refreshTable();
@@ -53,7 +58,7 @@
                 },
 
                 'click .pass' : function (e, value, row, index) {
-                    var myPassTravelModalData ={
+                    var myPassInCuHeModalData ={
                         modalBodyID :"myPassModal",
                         modalTitle : "审核通过",
                         modalClass : "modal-lg",
@@ -81,12 +86,12 @@
                         }
 
                     };
-                    var myPassModal = modalUtil.init(myPassTravelModalData);
+                    var myPassModal = modalUtil.init(myPassInCuHeModalData);
                     myPassModal.show();
                 },
 
                 'click .fail' : function (e, value, row, index) {
-                    var myFailTravelModalData ={
+                    var myFailInCuHeModalData ={
                         modalBodyID :"myFailModal",
                         modalTitle : "审核不通过",
                         modalClass : "modal-lg",
@@ -115,12 +120,12 @@
                         }
 
                     };
-                    var myFailModal = modalUtil.init(myFailTravelModalData);
+                    var myFailModal = modalUtil.init(myFailInCuHeModalData);
                     myFailModal.show();
                 },
 
                 'click .under-shelf' : function (e, value, row, index) {
-                    var myUnderShelfTravelModalData ={
+                    var myUnderShelfInCuHeModalData ={
                         modalBodyID :"myUnderShelfModal",
                         modalTitle : "下架",
                         modalClass : "modal-lg",
@@ -144,18 +149,18 @@
                         }
 
                     };
-                    var myUnderShelfModal = modalUtil.init(myUnderShelfTravelModalData);
+                    var myUnderShelfModal = modalUtil.init(myUnderShelfInCuHeModalData);
                     myUnderShelfModal.show();
                 },
 
                 'click .view' : function (e, value, row, index) {
-                    var myViewTravelModalData ={
+                    var myViewInCuHeModalData ={
                         modalBodyID : "myViewCulturalModal", //公用的在后面给span加不同的内容就行了，其他模块同理
                         modalTitle : "查看详情",
                         modalClass : "modal-lg",
                         confirmButtonStyle: "display:none",
                     };
-                    var myTravelModal = modalUtil.init(myViewTravelModalData);
+                    var myTravelModal = modalUtil.init(myViewInCuHeModalData);
                     $("#chineseCulturalName").val(row.chineseCulturalName);
                     $("#chineseCulturalSource").val(row.chineseCulturalSource);
                     $("#chineseCulturalAuthor").val(row.chineseCulturalAuthor);
@@ -163,7 +168,8 @@
                     $("#creater").val(row.creater);
                     $("#itemCreateAt").val(row.itemcreateat);
                     $("#chineseCulturalStatus").val(webStatus[row.chineseCulturalStatus].text);
-                    $("#imgDiv").attr("style","display:none");
+                    $("#culturalImg").attr("src",row.filePath)
+                    $('#culturalImgSpan').html("非物质文化遗产图片");
                     $('#culturalNameSpan').html("非物质文化遗产名称");
                     $('#culturalContentSpan').html("非物质文化遗产介绍");
 
@@ -171,7 +177,7 @@
                 },
 
                 'click .submit' : function (e, value, row, index) {
-                    var mySubmitTravelModalData ={
+                    var mySubmitInCuHeModalData ={
                         modalBodyID :"mySubmitModal",
                         modalTitle : "提交",
                         modalClass : "modal-lg",
@@ -196,12 +202,12 @@
                         }
 
                     };
-                    var mySubmitModal = modalUtil.init(mySubmitTravelModalData);
+                    var mySubmitModal = modalUtil.init(mySubmitInCuHeModalData);
                     mySubmitModal.show();
                 },
 
                 'click .no-submit' : function (e, value, row, index) {
-                    var myNoSubmitTravelModalData ={
+                    var myNoSubmitInCuHeModalData ={
                         modalBodyID :"myNoSubmitModal",
                         modalTitle : "取消提交",
                         modalClass : "modal-lg",
@@ -226,7 +232,7 @@
                         }
 
                     };
-                    var mySubmitModal = modalUtil.init(myNoSubmitTravelModalData);
+                    var mySubmitModal = modalUtil.init(myNoSubmitInCuHeModalData);
                     mySubmitModal.show();
                 },
             };
@@ -243,6 +249,13 @@
 
             var aCol = [
                 {field: 'chineseCulturalName', title: '非物质文化遗产名称'},
+                {field: 'filePath', title: '图片', formatter:function (value, row, index) {
+                        if(value == "已经损坏了"){
+                            return '<p>'+value+'</p>';
+                        }else{
+                            return '<img  src='+value+' width="100" height="100" class="img-rounded" >';
+                        }
+                    }},
                 {field: 'chineseCulturalSource', title: '来源'},
                 {field: 'chineseCulturalAuthor', title: '作者'},
                 {field: 'itemcreateat', title: '发布时间'},

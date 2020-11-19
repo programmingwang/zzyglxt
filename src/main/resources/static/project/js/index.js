@@ -192,13 +192,6 @@
                     pid: "13"
                 },
                 {
-                    menu_name: "＞技术服务机构",
-                    menu_url: "/industrialdevelop/tecservice",
-                    id: "13-4",
-                    level: "2",
-                    pid: "13"
-                },
-                {
                     menu_name: "＞科研院所",
                     menu_url: "/industrialdevelop/tecserviceorg",
                     id: "13-5",
@@ -211,11 +204,6 @@
                     id: "88",
                     level: "1",
                     pid: ""
-                },
-                {
-                    menu_name: "产业发展",
-                    menu_url: "",
-                    id: "99",
                 },
                 {
                     menu_name: "＞高等院校",

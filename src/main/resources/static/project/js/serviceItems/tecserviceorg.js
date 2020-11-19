@@ -13,9 +13,11 @@
 
             var aParam = {};
 
+            var medStatus = dictUtil.getDictByCode(dictUtil.DICT_LIST.medStatus);
+
             //操作
             function operation(value, row, index) {
-                if (row.status === '售卖中'){
+                if (row.status === "1"){
                     return [
                         '<a class="unshelve" style="margin:0 1em;text-decoration: none;color: #775637" data-toggle="modal" data-target="" >下架</a>'
                     ].join('')
@@ -33,11 +35,11 @@
                     localStorage.setItem("rowData", JSON.stringify(row));
                     orange.redirect(addUrl);
                 },
-                'click .unshelve': function (e, value, row, index) {
+                'click .unshelve': function (e, value, row) {
                     var projectEntity = {
                         itemid: row.itemid,
                         itemcode: row.itemcode,
-                        status: "已下架"
+                        status: 2
                     };
                     ajaxUtil.myAjax(null, "/industrialdevelop/ser-pro", projectEntity, function (data) {
                         if (data && data.code == 88888) {
@@ -96,7 +98,9 @@
                 {field: 'serviceProject', title: '服务项目名称'},
                 {field: 'projectCost', title: '项目收费'},
                 {field: 'contacts', title: '联系人'},
-                {field: 'status', title: '项目状态'},
+                {field: 'status', title: '项目状态',formatter:function (row) {
+                        return '<p>'+medStatus[row].text+'</p>';
+                    }},
                 {field: 'action', title: '操作', formatter: operation, events: orgEvents}
             ];
 

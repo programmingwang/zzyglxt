@@ -7,6 +7,7 @@ import com.zyyglxt.error.BusinessException;
 import com.zyyglxt.error.EmBusinessError;
 import com.zyyglxt.service.IFileService;
 import com.zyyglxt.service.IndustrialDevelopTecSerOrgService;
+import com.zyyglxt.util.UsernameUtil;
 import com.zyyglxt.validator.ValidatorImpl;
 import com.zyyglxt.validator.ValidatorResult;
 import org.springframework.beans.BeanUtils;
@@ -30,6 +31,9 @@ public class IndustrialDevelopTecSerOrgServiceImpl implements IndustrialDevelopT
 
     @Resource
     private IFileService fileService;
+
+    @Resource
+    UsernameUtil usernameUtil;
 
     @Autowired
     ValidatorImpl validator;
@@ -59,8 +63,8 @@ public class IndustrialDevelopTecSerOrgServiceImpl implements IndustrialDevelopT
     }
 
     @Override
-    public IndustrialDevelopTecSerOrg selectByOrgcode(String orgCode) {
-        return industrialDevelopTecSerOrgMapper.selectByOrgcode(orgCode);
+    public IndustrialDevelopTecSerOrg selectByOrgcode() {
+        return industrialDevelopTecSerOrgMapper.selectByOrgcode(usernameUtil.getOrgCode());
     }
 
     @Override

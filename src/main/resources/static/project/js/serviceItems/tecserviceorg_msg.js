@@ -1,16 +1,14 @@
 (function () {
-    require(['jquery','ajaxUtil','stringUtil','uploadImg','objectUtil'],
-        function ($,ajaxUtil,stringUtil,uploadImg, objectUtil) {
+    require(['jquery', 'ajaxUtil', 'stringUtil', 'uploadImg', 'objectUtil','alertUtil'],
+        function ($, ajaxUtil, stringUtil, uploadImg, objectUtil,alertUtil) {
 
-            var url = "/industrialdevelop/tec-ser-org";
+            var url = "/industrialdevelop/tec-ser-org/selectbyorgcode";
 
             var pathUrl = "/serviceItems/tecserviceorg_msg";
 
             var itemcode = stringUtil.getUUID();
 
-            var orgType = "tec";
-
-            var type = isUpdate() ? "put":"post";
+            var type = isUpdate() ? "put" : "post";
 
             uploadImg.init();
 
@@ -20,7 +18,7 @@
                 orange.redirect(pathUrl)
             });
 
-            function generateParam(){
+            function generateParam() {
                 var param = {};
                 param.name = $("#name").val();
                 param.projectName = $("#projectName").val();
@@ -37,66 +35,65 @@
                 return param;
             }
 
-            $("#saveBtn").unbind('click').on('click',function () {
+            $("#saveBtn").unbind('click').on('click', function () {
                 var param = generateParam();
                 param.status = "——";
-                if (uploadImg.isUpdate()){
-                    ajaxUtil.fileAjax(itemcode,uploadImg.getFiles()[0],"undefined","undefined")
+                if (uploadImg.isUpdate()) {
+                    ajaxUtil.fileAjax(itemcode, uploadImg.getFiles()[0], "undefined", "undefined")
                 }
 
-                ajaxUtil.myAjax(null,url,param,function (data) {
-                    if(ajaxUtil.success(data)){
+                ajaxUtil.myAjax(null, url, param, function (data) {
+                    if (ajaxUtil.success(data)) {
                         orange.redirect(pathUrl);
-                    }else {
+                    } else {
                         alert(data.msg);
                     }
-                },true,"123","put");
+                }, true, "123", type);
                 return false;
             });
 
-            $("#submitBtn").unbind('click').on('click',function () {
+            $("#submitBtn").unbind('click').on('click', function () {
                 var param = generateParam();
                 param.status = "——";
-                ajaxUtil.myAjax(null,url,param,function (data) {
-                    if(ajaxUtil.success(data)){
+                ajaxUtil.myAjax(null, url, param, function (data) {
+                    if (ajaxUtil.success(data)) {
                         orange.redirect(pathUrl)
-                    }else {
+                    } else {
                         alert(data.msg)
                     }
-                },true,"123","put");
+                }, true, "123", type);
                 return false;
             });
 
             var init = function () {
-                if (isUpdate()){
-                    var tempdata = JSON.parse(localStorage.getItem("rowData"));
-                    $("#name").val(tempdata.name);
-                    $("#projectName").val(tempdata.projectName);
-                    $("#contacts").val(tempdata.contacts);
-                    $("#phone").val(tempdata.phone);
-                    $("#distpicker").distpicker({
-                        province: tempdata.addressPro,
-                        city: tempdata.addressCity,
-                        district: tempdata.addressCountry
-                    });
-                    $("#address").val(tempdata.address);
-                    $(".w-e-text").html(tempdata.intruduce);
-                    itemcode = tempdata.itemcode;
-                }else {
-                    $("#distpicker").distpicker();
-                }
-                init = function () {
-
-                }
+                var tempdata;
+                ajaxUtil.myAjax(null, url, null,function (data) {
+                    if(data && data.code === "88888") {
+                        tempdata = data.data
+                    }else{
+                        alertUtil.error(data.msg)
+                    }
+                },false,"","get");
+                $("#name").val(tempdata.name);
+                $("#projectName").val(tempdata.projectName);
+                $("#contacts").val(tempdata.contacts);
+                $("#phone").val(tempdata.phone);
+                $("#distpicker").distpicker({
+                    province: tempdata.addressPro,
+                    city: tempdata.addressCity,
+                    district: tempdata.addressCountry
+                });
+                $("#address").val(tempdata.address);
+                $(".w-e-text").html(tempdata.intruduce);
+                itemcode = tempdata.itemcode;
+                uploadImg.setImgSrc(tempdata.filePath)
             };
-            ajaxUtil.myAjax(null, url, function (data) {
-                if (data && data.code == 88888) {
-                    init();
-                } else {
-                    alertUtil.error(data.msg);
-                }
-            }, false, "123", "get");
-    })
+            init();
+
+            function isUpdate() {
+                return (localStorage.getItem("rowData") != null || localStorage.getItem("rowData") != undefined)
+            }
+        })
 })();
 
 

@@ -2239,7 +2239,7 @@
             '                    <div class="input-group-prepend">\n' +
             '                        <button type="button" class="btn btn-primary btn-sm">年份</button>\n' +
             '                    </div>\n' +
-            '                    <input type="text" id="year" class="form-control">\n' +
+            '                    <input type="text" id="year" class="form-control" placeholder="请选择年份">\n' +
             '                </div>\n' +
             '            </div>\n' +
             '\n' +
@@ -2248,16 +2248,16 @@
             '                    <div class="input-group-prepend">\n' +
             '                        <button type="button" class="btn btn-primary btn-sm" >开启时间</button>\n' +
             '                    </div>\n' +
-            '                    <input type="text" id="startTime" class="form-control">\n' +
+            '                    <input type="text" id="startTime" class="form-control" placeholder="请选择日期" >\n' +
             '                </div>\n' +
             '            </div>\n' +
             '\n' +
             '            <div class="col-lg-12 col-md-12">\n' +
             '                <div class="input-group mb-3">\n' +
             '                    <div class="input-group-prepend">\n' +
-            '                        <button type="button" class="btn btn-primary btn-sm" >结束时间</button>\n' +
+            '                        <button type="button" class="btn btn-primary btn-sm"  >结束时间</button>\n' +
             '                    </div>\n' +
-            '                    <input type="text" id="endTime" class="form-control">\n' +
+            '                    <input type="text" id="endTime" class="form-control" placeholder="请选择日期">\n' +
             '                </div>\n' +
             '            </div>\n' +
             '</div>';

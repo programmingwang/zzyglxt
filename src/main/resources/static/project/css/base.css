@@ -125,14 +125,14 @@ table{
     font-family: 'Arial Narrow', 'Arial', sans-serif;
     font-weight: 400;
     font-style: normal;
-    font-size: 12px;
+    font-size: 1rem;
     background-color: #F8F9FB;
 }
 .btn-block>h4 {
     font-family: 'Arial Negreta', 'Arial Normal', 'Arial', sans-serif;
     font-weight: 700;
     font-style: normal;
-    font-size: 14px;
+    font-size: 1rem;
 }
 
 .dropdown-menu.left-menu-dropdown-menu {
@@ -151,7 +151,7 @@ hr {
 }
 .aaaa {
 
-    padding: .12rem .3rem;
+    padding: .12rem .1rem;
     padding: -0.625rem .75rem;
     margin-bottom: 10px;
 }
@@ -162,7 +162,7 @@ hr {
     font-family: 'Arial Negreta', 'Arial Normal', 'Arial', sans-serif;
     font-weight: 700;
     font-style: normal;
-    font-size: 14px;
+    font-size: 1rem;
 }
 .nullmenu{
     display:none;
@@ -194,4 +194,8 @@ hr {
     width: 100%;
     height: 100%;
     background-color: #000;
+}
+
+thead.self-thead {
+    text-align: center;
 }

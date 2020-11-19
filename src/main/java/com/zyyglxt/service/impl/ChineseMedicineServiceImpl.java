@@ -87,7 +87,7 @@ public class ChineseMedicineServiceImpl implements IChineseMedicineService {
     * */
     @Override
     public List<ChineseMedicineDO> searchChineseMedicine(String keyWord) {
-        if(keyWord.isEmpty()){
+        if(keyWord == "" || keyWord == null){
             throw new BusinessException("关键字不能为空", EmBusinessError.PARAMETER_VALIDATION_ERROR);
         }
         return chineseMedicineDOMapper.searchChineseMedicine(keyWord);

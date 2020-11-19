@@ -114,5 +114,10 @@ public class HospServiceImpl implements IHospService {
         return hospDOMapper.updateStatusByPrimaryKey(statusDto);
     }
 
+    @Override
+    public List<HospDO> selectAllNoStatus() {
+        return hospDOMapper.selectAllHosp();
+    }
+
 }
 

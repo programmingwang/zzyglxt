@@ -168,10 +168,11 @@
                     $("#chineseMedicineName").val(row.chineseMedicineName);
                     $("#chineseMedicineType").val(row.chineseMedicineType);
                     $("#chineseMedicineTitle").val(row.chineseMedicineTitle);
-                    $("#hospitalName").val(row.hospitalName);
                     $("#specialtyName").val(row.specialtyName);
+                    $("#hospitalName").val(row.hospitalName);
                     $("#visitTime").val(row.visitTime);
                     $("#phone").val(row.phone);
+                    $("#expertBriefIntroduce").val(row.expertBriefIntroduce);
                     $("#mainVisit").val(row.mainVisit);
                     $("#expertIntroduce").html(row.expertIntroduce);
                     $("#medicineRecords").html(row.medicineRecords);

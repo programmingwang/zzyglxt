@@ -7,6 +7,7 @@ import com.zyyglxt.dataobject.validation.ValidationGroups;
 import com.zyyglxt.error.BusinessException;
 import com.zyyglxt.error.EmBusinessError;
 import com.zyyglxt.service.IIndustrialDevelopOffService;
+import com.zyyglxt.util.UsernameUtil;
 import com.zyyglxt.validator.ValidatorImpl;
 import com.zyyglxt.validator.ValidatorResult;
 import org.springframework.stereotype.Service;
@@ -25,14 +26,15 @@ import java.util.UUID;
 public class IndustrialDevelopOffServiceImpl implements IIndustrialDevelopOffService {
     @Resource
     IndustrialDevelopOffDOMapper developOffDOMapper;
-
+    @Resource
+    UsernameUtil usernameUtil;
     @Resource
     ValidatorImpl validator;
 
     @Override
     public void addOff(IndustrialDevelopOffDO record) {
-        record.setCreater("未定义");
-        record.setUpdater("未定义");
+        record.setCreater(usernameUtil.getOperateUser());
+        record.setUpdater(usernameUtil.getOperateUser());
         record.setItemcreateat(new Date());
         record.setItemupdateat(new Date());
         ValidatorResult result = validator.validate(record, ValidationGroups.Insert.class);
@@ -51,7 +53,7 @@ public class IndustrialDevelopOffServiceImpl implements IIndustrialDevelopOffSer
         if (result.isHasErrors()){
             throw new BusinessException(result.getErrMsg(), EmBusinessError.PARAMETER_VALIDATION_ERROR);
         }
-        record.setUpdater("未定义");
+        record.setUpdater(usernameUtil.getOperateUser());
         record.setItemupdateat(new Date());
         developOffDOMapper.updateByPrimaryKeySelective(record);
     }

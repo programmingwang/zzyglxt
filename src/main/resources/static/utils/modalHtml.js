@@ -2232,6 +2232,36 @@
             '</div>';
 
 
+        modalHtml.myTimeModal =
+            '<div class="row">'+
+            '            <div class="col-lg-12 col-md-12">\n' +
+            '                <div class="input-group mb-3">\n' +
+            '                    <div class="input-group-prepend">\n' +
+            '                        <button type="button" class="btn btn-primary btn-sm">年份</button>\n' +
+            '                    </div>\n' +
+            '                    <input type="text" id="year" class="form-control">\n' +
+            '                </div>\n' +
+            '            </div>\n' +
+            '\n' +
+            '            <div class="col-lg-12 col-md-12">\n' +
+            '                <div class="input-group mb-3">\n' +
+            '                    <div class="input-group-prepend">\n' +
+            '                        <button type="button" class="btn btn-primary btn-sm" >开启时间</button>\n' +
+            '                    </div>\n' +
+            '                    <input type="text" id="startTime" class="form-control">\n' +
+            '                </div>\n' +
+            '            </div>\n' +
+            '\n' +
+            '            <div class="col-lg-12 col-md-12">\n' +
+            '                <div class="input-group mb-3">\n' +
+            '                    <div class="input-group-prepend">\n' +
+            '                        <button type="button" class="btn btn-primary btn-sm" >结束时间</button>\n' +
+            '                    </div>\n' +
+            '                    <input type="text" id="endTime" class="form-control">\n' +
+            '                </div>\n' +
+            '            </div>\n' +
+            '</div>';
+
 
         modalHtml.myDeleteModalTravel = '是否删除景点信息?';
         modalHtml.myDeleteModalTraditionalCul = '是否删除中医医史信息?';
@@ -2249,7 +2279,7 @@
         modalHtml.myFailModal = '确认不通过吗？';
         modalHtml.myUnderShelfModal = '确认下架吗？';
 
-        modalHtml.myShelfSaleDrugModal='确认是否上架';
+        modalHtml.myShelfSaleDrugModal='点击确认将上传到河北中医药网，是否上架';
 
         modalHtml.myShowModal = '确认展示吗？';
 

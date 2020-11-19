@@ -14,6 +14,7 @@
         <result column="HOSPITAL_ADDRESS_COUNTRY" jdbcType="VARCHAR" property="hospitalAddressCountry"/>
         <result column="HOSPITAL_ADDRESS" jdbcType="VARCHAR" property="hospitalAddress"/>
         <result column="HOSPITAL_LINK" jdbcType="VARCHAR" property="hospitalLink"/>
+        <result column="REASON" jdbcType="VARCHAR" property="reason"/>
         <result column="HOSPITAL_STATUS" jdbcType="VARCHAR" property="hospitalStatus"/>
         <result column="CREATER" jdbcType="VARCHAR" property="creater"/>
         <result column="itemCreateAt" jdbcType="TIMESTAMP" property="itemcreateat"/>
@@ -25,7 +26,7 @@
     </resultMap>
     <sql id="Base_Column_List">
         itemID, itemCode, HOSPITAL_NAME, HOSPITAL_LEVEL, HOSPITAL_BRIEF_INTRODUCE, HOSPITAL_KEY_SPECIALTY, HOSPITAL_TELEPHONE, HOSPITAL_ADDRESS_PRO,
-        HOSPITAL_ADDRESS_CITY, HOSPITAL_ADDRESS_COUNTRY, HOSPITAL_ADDRESS, HOSPITAL_LINK,
+        HOSPITAL_ADDRESS_CITY, HOSPITAL_ADDRESS_COUNTRY, HOSPITAL_ADDRESS, HOSPITAL_LINK, REASON,
         HOSPITAL_STATUS, CREATER, itemCreateAt, UPDATER, itemUpdateAt
     </sql>
     <sql id="Blob_Column_List">
@@ -46,20 +47,43 @@
         and itemCode = #{itemcode,jdbcType=CHAR}
     </delete>
     <insert id="insert" parameterType="com.zyyglxt.dataobject.HospDO">
-        insert into tb_culpro_hosp (itemID, itemCode, HOSPITAL_NAME,
-        HOSPITAL_LEVEL, HOSPITAL_TELEPHONE, HOSPITAL_ADDRESS_PRO,
-        HOSPITAL_ADDRESS_CITY, HOSPITAL_ADDRESS_COUNTRY,
-        HOSPITAL_ADDRESS, HOSPITAL_LINK, HOSPITAL_STATUS,
-        CREATER, itemCreateAt, UPDATER,
-        itemUpdateAt, HOSPITAL_INTRODUCE)
-        values (#{itemid,jdbcType=INTEGER}, #{itemcode,jdbcType=CHAR}, #{hospitalName,jdbcType=VARCHAR},
+        insert into tb_culpro_hosp (itemID, itemCode,
+        HOSPITAL_NAME,
+        HOSPITAL_LEVEL,
+        HOSPITAL_BRIEF_INTRODUCE,
+        HOSPITAL_KEY_SPECIALTY,
+        HOSPITAL_TELEPHONE,
+        HOSPITAL_ADDRESS_PRO,
+        HOSPITAL_ADDRESS_CITY,
+        HOSPITAL_ADDRESS_COUNTRY,
+        HOSPITAL_ADDRESS,
+        HOSPITAL_LINK,
+        REASON,
+        HOSPITAL_STATUS,
+        CREATER,
+        itemCreateAt,
+        UPDATER,
+        itemUpdateAt,
+        HOSPITAL_INTRODUCE)
+        values (#{itemid,jdbcType=INTEGER},
+        #{itemcode,jdbcType=CHAR},
+        #{hospitalName,jdbcType=VARCHAR},
         #{hospitalLevel,jdbcType=VARCHAR},
+        #{hospitalBriefIntroduce,jdbcType=VARCHAR},
+        #{hospitalKeySpecialty,jdbcType=VARCHAR},
         #{hospitalTelephone,jdbcType=VARCHAR},
         #{hospitalAddressPro,jdbcType=VARCHAR},
-        #{hospitalAddressCity,jdbcType=VARCHAR}, #{hospitalAddressCountry,jdbcType=VARCHAR},
-        #{hospitalAddress,jdbcType=VARCHAR}, #{hospitalLink,jdbcType=VARCHAR}, #{hospitalStatus,jdbcType=VARCHAR},
-        #{creater,jdbcType=VARCHAR}, #{itemcreateat,jdbcType=TIMESTAMP}, #{updater,jdbcType=VARCHAR},
-        #{itemupdateat,jdbcType=TIMESTAMP}, #{hospitalIntroduce,jdbcType=LONGVARCHAR})
+        #{hospitalAddressCity,jdbcType=VARCHAR},
+        #{hospitalAddressCountry,jdbcType=VARCHAR},
+        #{hospitalAddress,jdbcType=VARCHAR},
+        #{hospitalLink,jdbcType=VARCHAR},
+        #{reason,jdbcType=VARCHAR},
+        #{hospitalStatus,jdbcType=VARCHAR},
+        #{creater,jdbcType=VARCHAR},
+        #{itemcreateat,jdbcType=TIMESTAMP},
+        #{updater,jdbcType=VARCHAR},
+        #{itemupdateat,jdbcType=TIMESTAMP},
+        #{hospitalIntroduce,jdbcType=LONGVARCHAR})
     </insert>
     <insert id="insertSelective" parameterType="com.zyyglxt.dataobject.HospDO">
         insert into tb_culpro_hosp
@@ -99,6 +123,9 @@
             </if>
             <if test="hospitalLink != null">
                 HOSPITAL_LINK,
+            </if>
+            <if test="reason != null">
+                REASON,
             </if>
             <if test="hospitalStatus != null">
                 HOSPITAL_STATUS,
@@ -156,6 +183,9 @@
             <if test="hospitalLink != null">
                 #{hospitalLink,jdbcType=VARCHAR},
             </if>
+            <if test="reason != null">
+                #{reason,jdbcType=VARCHAR},
+            </if>
             <if test="hospitalStatus != null">
                 #{hospitalStatus,jdbcType=VARCHAR},
             </if>
@@ -209,6 +239,9 @@
             <if test="hospitalLink != null">
                 HOSPITAL_LINK = #{hospitalLink,jdbcType=VARCHAR},
             </if>
+            <if test="reason != null">
+                REASON = #{reason,jdbcType=VARCHAR},
+            </if>
             <if test="hospitalStatus != null">
                 HOSPITAL_STATUS = #{hospitalStatus,jdbcType=VARCHAR},
             </if>
@@ -243,6 +276,7 @@
         HOSPITAL_ADDRESS_COUNTRY = #{hospitalAddressCountry,jdbcType=VARCHAR},
         HOSPITAL_ADDRESS = #{hospitalAddress,jdbcType=VARCHAR},
         HOSPITAL_LINK = #{hospitalLink,jdbcType=VARCHAR},
+        REASON = #{reason,jdbcType=VARCHAR},
         HOSPITAL_STATUS = #{hospitalStatus,jdbcType=VARCHAR},
         CREATER = #{creater,jdbcType=VARCHAR},
         itemCreateAt = #{itemcreateat,jdbcType=TIMESTAMP},
@@ -264,6 +298,7 @@
         HOSPITAL_ADDRESS_COUNTRY = #{hospitalAddressCountry,jdbcType=VARCHAR},
         HOSPITAL_ADDRESS = #{hospitalAddress,jdbcType=VARCHAR},
         HOSPITAL_LINK = #{hospitalLink,jdbcType=VARCHAR},
+        REASON = #{reason,jdbcType=VARCHAR},
         HOSPITAL_STATUS = #{hospitalStatus,jdbcType=VARCHAR},
         CREATER = #{creater,jdbcType=VARCHAR},
         itemCreateAt = #{itemcreateat,jdbcType=TIMESTAMP},
@@ -279,7 +314,7 @@
         ,
         <include refid="Blob_Column_List"/>
         FROM tb_culpro_hosp
-        ORDER BY itemCreateAt DESC
+        ORDER BY itemUpdateAt DESC
     </select>
 
     <select id="searchHosp" resultMap="ResultMapWithBLOBs">
@@ -293,7 +328,7 @@
         OR HOSPITAL_ADDRESS_CITY LIKE "%"#{value}"%"
         OR HOSPITAL_ADDRESS_COUNTRY LIKE "%"#{value}"%"
         OR HOSPITAL_ADDRESS LIKE "%"#{value}"%"
-        ORDER BY itemCreateAt DESC
+        ORDER BY itemUpdateAt DESC
     </select>
 
 

@@ -17,6 +17,16 @@
                 return selectUtil.getRoleOperate(value,row,index,sessionStorage.getItem("rolename"),row.specialtyStatus,webStatus)
             }
 
+            function handlePro(pro){
+                if (pro == "河北省" ||
+                    pro == null ||
+                    pro == undefined ||
+                    pro.toLowerCase() == "null") {
+                    pro = ""
+                }
+                return pro;
+            }
+
             //修改事件
             window.orgEvents = {
                 'click .edit' : function(e, value, row, index) {
@@ -166,10 +176,11 @@
                     var myTravelModal = modalUtil.init(myViewTravelModalData);
                     $("#specialtyImg").attr("src",row.filePath)
                     $("#specialtyName").val(row.specialtyName);
+                    $("#specialtyBriefIntroduce").val(row.specialtyBriefIntroduce);
                     $("#specialtyPhone").val(row.specialtyPhone);
-                    $("#specialtyAddress").val(row.specialtyAddressCity + row.specialtyAddressCounty + row.specialtyAddress);
+                    $("#specialtyAddress").val(handlePro(row.specialtyAddressPro) + row.specialtyAddressCity + row.specialtyAddressCounty + row.specialtyAddress);
                     $("#specialtyLink").val(row.specialtyLink);
-                    $("#specialtyDescribe").html(row.specialtyDescribe)
+                    $("#specialtyIntroduce").html(row.specialtyIntroduce)
                     $("#specialtyStatus").val(webStatus[row.specialtyStatus].text);
                     $("#creater").val(row.creater);
                     $("#itemCreateAt").val(row.itemcreateat);
@@ -261,13 +272,9 @@
                         }
                     }},
                 {field: 'specialtyAddress', title: '地址',formatter:function (value, row, index) {
-                        if (row.specialtyAddressPro===null || row.specialtyAddressPro==="null" ||
-                            row.specialtyAddressPro==="NULL" || row.specialtyAddressPro==="河北省"){
-                            row.specialtyAddressPro = ""
-                        }
-                        return row.specialtyAddressPro + row.specialtyAddressCity + row.specialtyAddressCity + value
+                        return handlePro(row.specialtyAddressPro) + row.specialtyAddressPro + row.specialtyAddressCity + row.specialtyAddressCity + value
                     }},
-                {field: 'specialtyPhone', title: '联系电话'},
+                {field: 'specialtyPhone', title: '联系电话',width:'120px'},
                 {field: 'action',  title: '操作',formatter: operation,events:orgEvents}
             ];
 

@@ -5,7 +5,7 @@
         <id column="itemID" jdbcType="INTEGER" property="itemid"/>
         <id column="itemCode" jdbcType="CHAR" property="itemcode"/>
         <result column="SPECIALTY_NAME" jdbcType="VARCHAR" property="specialtyName"/>
-        <result column="SPECIALTY_PICTURE" jdbcType="VARCHAR" property="specialtyPicture"/>
+        <result column="SPECIALTY_BRIEF_INTRODUCE" jdbcType="VARCHAR" property="specialtyBriefIntroduce"/>
         <result column="SPECIALTY_PHONE" jdbcType="VARCHAR" property="specialtyPhone"/>
         <result column="SPECIALTY_ADDRESS_PRO" jdbcType="VARCHAR" property="specialtyAddressPro"/>
         <result column="SPECIALTY_ADDRESS_CITY" jdbcType="VARCHAR" property="specialtyAddressCity"/>
@@ -19,15 +19,15 @@
         <result column="itemUpdateAt" jdbcType="TIMESTAMP" property="itemupdateat"/>
     </resultMap>
     <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.zyyglxt.dataobject.SpecialtyDO">
-        <result column="SPECIALTY_DESCRIBE" jdbcType="LONGVARCHAR" property="specialtyDescribe"/>
+        <result column="SPECIALTY_INTRODUCE" jdbcType="LONGVARCHAR" property="specialtyIntroduce"/>
     </resultMap>
     <sql id="Base_Column_List">
-        itemID, itemCode, SPECIALTY_NAME, SPECIALTY_PHONE, SPECIALTY_ADDRESS_PRO, SPECIALTY_ADDRESS_CITY,
+        itemID, itemCode, SPECIALTY_NAME, SPECIALTY_BRIEF_INTRODUCE, SPECIALTY_PHONE, SPECIALTY_ADDRESS_PRO, SPECIALTY_ADDRESS_CITY,
         SPECIALTY_ADDRESS_COUNTY, SPECIALTY_ADDRESS, SPECIALTY_LINK, SPECIALTY_STATUS, CREATER,
         itemCreateAt, UPDATER, itemUpdateAt
     </sql>
     <sql id="Blob_Column_List">
-        SPECIALTY_DESCRIBE
+        SPECIALTY_INTRODUCE
     </sql>
     <select id="selectByPrimaryKey" parameterType="com.zyyglxt.dataobject.SpecialtyDOKey"
             resultMap="ResultMapWithBLOBs">
@@ -45,19 +45,37 @@
         and itemCode = #{itemcode,jdbcType=CHAR}
     </delete>
     <insert id="insert" parameterType="com.zyyglxt.dataobject.SpecialtyDO">
-        insert into tb_culpro_specialty (itemID, itemCode, SPECIALTY_NAME,
-        SPECIALTY_PHONE, SPECIALTY_ADDRESS_PRO, SPECIALTY_ADDRESS_CITY,
-        SPECIALTY_ADDRESS_COUNTY, SPECIALTY_ADDRESS,
-        SPECIALTY_LINK, SPECIALTY_STATUS, CREATER,
-        itemCreateAt, UPDATER, itemUpdateAt,
-        SPECIALTY_DESCRIBE)
-        values (#{itemid,jdbcType=INTEGER}, #{itemcode,jdbcType=CHAR}, #{specialtyName,jdbcType=VARCHAR},
-        #{specialtyPhone,jdbcType=VARCHAR}, #{specialtyAddressPro,jdbcType=VARCHAR},
+        insert into tb_culpro_specialty (itemID, itemCode,
+        SPECIALTY_NAME,
+        SPECIALTY_BRIEF_INTRODUCE,
+        SPECIALTY_PHONE,
+        SPECIALTY_ADDRESS_PRO,
+        SPECIALTY_ADDRESS_CITY,
+        SPECIALTY_ADDRESS_COUNTY,
+        SPECIALTY_ADDRESS,
+        SPECIALTY_LINK,
+        SPECIALTY_STATUS,
+        CREATER,
+        itemCreateAt,
+        UPDATER,
+        itemUpdateAt,
+        SPECIALTY_INTRODUCE)
+        values (#{itemid,jdbcType=INTEGER},
+        #{itemcode,jdbcType=CHAR},
+        #{specialtyName,jdbcType=VARCHAR},
+        #{specialtyBriefIntroduce,jdbcType=VARCHAR},
+        #{specialtyPhone,jdbcType=VARCHAR},
+        #{specialtyAddressPro,jdbcType=VARCHAR},
         #{specialtyAddressCity,jdbcType=VARCHAR},
-        #{specialtyAddressCounty,jdbcType=VARCHAR}, #{specialtyAddress,jdbcType=VARCHAR},
-        #{specialtyLink,jdbcType=VARCHAR}, #{specialtyStatus,jdbcType=VARCHAR}, #{creater,jdbcType=VARCHAR},
-        #{itemcreateat,jdbcType=TIMESTAMP}, #{updater,jdbcType=VARCHAR}, #{itemupdateat,jdbcType=TIMESTAMP},
-        #{specialtyDescribe,jdbcType=LONGVARCHAR})
+        #{specialtyAddressCounty,jdbcType=VARCHAR},
+        #{specialtyAddress,jdbcType=VARCHAR},
+        #{specialtyLink,jdbcType=VARCHAR},
+        #{specialtyStatus,jdbcType=VARCHAR},
+        #{creater,jdbcType=VARCHAR},
+        #{itemcreateat,jdbcType=TIMESTAMP},
+        #{updater,jdbcType=VARCHAR},
+        #{itemupdateat,jdbcType=TIMESTAMP},
+        #{specialtyIntroduce,jdbcType=LONGVARCHAR})
     </insert>
     <insert id="insertSelective" parameterType="com.zyyglxt.dataobject.SpecialtyDO">
         insert into tb_culpro_specialty
@@ -70,6 +88,9 @@
             </if>
             <if test="specialtyName != null">
                 SPECIALTY_NAME,
+            </if>
+            <if test="specialtyBriefIntroduce != null">
+                SPECIALTY_BRIEF_INTRODUCE,
             </if>
             <if test="specialtyPhone != null">
                 SPECIALTY_PHONE,
@@ -104,8 +125,8 @@
             <if test="itemupdateat != null">
                 itemUpdateAt,
             </if>
-            <if test="specialtyDescribe != null">
-                SPECIALTY_DESCRIBE,
+            <if test="specialtyIntroduce != null">
+                SPECIALTY_INTRODUCE,
             </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -117,6 +138,9 @@
             </if>
             <if test="specialtyName != null">
                 #{specialtyName,jdbcType=VARCHAR},
+            </if>
+            <if test="specialtyBriefIntroduce != null">
+                #{specialtyBriefIntroduce,jdbcType=VARCHAR},
             </if>
             <if test="specialtyPhone != null">
                 #{specialtyPhone,jdbcType=VARCHAR},
@@ -151,8 +175,8 @@
             <if test="itemupdateat != null">
                 #{itemupdateat,jdbcType=TIMESTAMP},
             </if>
-            <if test="specialtyDescribe != null">
-                #{specialtyDescribe,jdbcType=LONGVARCHAR},
+            <if test="specialtyIntroduce != null">
+                #{specialtyIntroduce,jdbcType=LONGVARCHAR},
             </if>
         </trim>
     </insert>
@@ -161,6 +185,9 @@
         <set>
             <if test="specialtyName != null">
                 SPECIALTY_NAME = #{specialtyName,jdbcType=VARCHAR},
+            </if>
+            <if test="specialtyBriefIntroduce != null">
+                SPECIALTY_BRIEF_INTRODUCE = #{specialtyBriefIntroduce,jdbcType=VARCHAR},
             </if>
             <if test="specialtyPhone != null">
                 SPECIALTY_PHONE = #{specialtyPhone,jdbcType=VARCHAR},
@@ -195,8 +222,8 @@
             <if test="itemupdateat != null">
                 itemUpdateAt = #{itemupdateat,jdbcType=TIMESTAMP},
             </if>
-            <if test="specialtyDescribe != null">
-                SPECIALTY_DESCRIBE = #{specialtyDescribe,jdbcType=LONGVARCHAR},
+            <if test="specialtyIntroduce != null">
+                SPECIALTY_INTRODUCE = #{specialtyIntroduce,jdbcType=LONGVARCHAR},
             </if>
         </set>
         where itemID = #{itemid,jdbcType=INTEGER}
@@ -205,6 +232,7 @@
     <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.zyyglxt.dataobject.SpecialtyDO">
         update tb_culpro_specialty
         set SPECIALTY_NAME = #{specialtyName,jdbcType=VARCHAR},
+        SPECIALTY_BRIEF_INTRODUCE = #{specialtyBriefIntroduce,jdbcType=VARCHAR},
         SPECIALTY_PHONE = #{specialtyPhone,jdbcType=VARCHAR},
         SPECIALTY_ADDRESS_PRO = #{specialtyAddressPro,jdbcType=VARCHAR},
         SPECIALTY_ADDRESS_CITY = #{specialtyAddressCity,jdbcType=VARCHAR},
@@ -216,13 +244,14 @@
         itemCreateAt = #{itemcreateat,jdbcType=TIMESTAMP},
         UPDATER = #{updater,jdbcType=VARCHAR},
         itemUpdateAt = #{itemupdateat,jdbcType=TIMESTAMP},
-        SPECIALTY_DESCRIBE = #{specialtyDescribe,jdbcType=LONGVARCHAR}
+        SPECIALTY_INTRODUCE = #{specialtyIntroduce,jdbcType=LONGVARCHAR}
         where itemID = #{itemid,jdbcType=INTEGER}
         and itemCode = #{itemcode,jdbcType=CHAR}
     </update>
     <update id="updateByPrimaryKey" parameterType="com.zyyglxt.dataobject.SpecialtyDO">
         update tb_culpro_specialty
         set SPECIALTY_NAME = #{specialtyName,jdbcType=VARCHAR},
+        SPECIALTY_BRIEF_INTRODUCE = #{specialtyBriefIntroduce,jdbcType=VARCHAR},
         SPECIALTY_PHONE = #{specialtyPhone,jdbcType=VARCHAR},
         SPECIALTY_ADDRESS_PRO = #{specialtyAddressPro,jdbcType=VARCHAR},
         SPECIALTY_ADDRESS_CITY = #{specialtyAddressCity,jdbcType=VARCHAR},
@@ -256,7 +285,7 @@
         <include refid="Blob_Column_List"/>
         from tb_culpro_specialty
         WHERE SPECIALTY_NAME LIKE "%"#{value}"%"
-        OR SPECIALTY_DESCRIBE LIKE "%"#{value}"%"
+        OR SPECIALTY_INTRODUCE LIKE "%"#{value}"%"
         OR SPECIALTY_ADDRESS_PRO LIKE "%"#{value}"%"
         OR SPECIALTY_ADDRESS_CITY LIKE "%"#{value}"%"
         OR SPECIALTY_ADDRESS_COUNTY LIKE "%"#{value}"%"

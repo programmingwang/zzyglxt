@@ -45,16 +45,9 @@
 <div class="row">
     <div class="col-12">
         <form>
-            <div class="form-group row">
-                <label class="col-sm-2 col-form-label">科室名称：</label>
-                <div class="col-sm-3">
-                    <select id="specialtyName" class="form-control"></select>
-                </div>
-            </div>
-
             <!--上传图片的div-->
             <div class="form-group row">
-                <label class="col-sm-2 col-form-label">科室图片：</label>
+                <label class="col-sm-2 col-form-label">科室照片：</label>
                 <div class="upload-content" data-limit="1">
                     <div class="content-img">
                         <ul class="content-img-list"></ul>
@@ -74,9 +67,26 @@
             </div>
 
             <div class="form-group row">
-                <label class="col-sm-2 col-form-label">所属医院：</label>
+                <label class="col-sm-2 col-form-label">科室名称：</label>
+                <div class="col-sm-3">
+                    <select id="specialtyName" class="form-control"></select>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">科室简介：</label>
+                <div class="col-sm-3">
+                    <input id="specialtyIntroduce" type="text" class="form-control" placeholder="请输入（限30字）" maxlength="30">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">所在机构：</label>
                 <div class="col-sm-3">
                     <select id="hospitalName"  class="form-control"></select>
+                </div>
+                <div class="col-sm-4">
+                    <a id="addHosp">没有所属医院？点击创建医院信息</a>
                 </div>
             </div>
             <div class="form-group row">
@@ -87,20 +97,21 @@
             </div>
 
             <div class="form-group row">
-                <label class="col-sm-2 col-form-label">科室描述：</label>
+                <label class="col-sm-2 col-form-label">科室介绍：</label>
                 <div id="div1" class="col-sm-8">
                 </div>
             </div>
 
             <div class="form-group row">
-                <div class="col-sm-8" ></div>
-                <div class=" col-sm-4 row" >
+                <div class="col-lg-4 col-md-4" ></div>
+                <div class=" col-lg-4 row" >
                     <div class="col">
                         <button id="cancel" type="button" class="btn btn-light col">取消</button>
                     </div>
 
                     <button id="btn_insert" type="submit" class="btn btn-primary col">提交</button>
                 </div>
+                <div class="col-lg-4 col-md-4" ></div>
             </div>
         </form>
 

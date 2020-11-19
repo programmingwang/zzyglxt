@@ -57,10 +57,11 @@ $("#orgCode").on("blur", function () {
     let orgType = $("#orgType option:selected").val();
     let orgCode = $("#orgCode").val();
     var userEntity = {"orgName": orgName, "orgIdentify": orgType, "orgCode": orgCode};
+    // console.log(userEntity)
     myAjax(null, "/user/queryOrgStatus", userEntity, function (data) {
-        console.log(data);
+        console.log(data.data);
         if (data && data.code === 88888) {
-            $("#status_text").text(data.data)
+            $("#showStatus").text(data.data)
         } else {
             // error(data.msg)
             alert("查询失败")

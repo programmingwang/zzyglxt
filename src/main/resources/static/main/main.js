@@ -93,7 +93,12 @@
             index: '../project/js/index',
             userMsg: '../project/js/user/usermsg',
             register: '../project/js/user/register',
-            addPlantation: '../project/js/industrialdevelop/chinesemed/plantation_add'
+            addPlantation: '../project/js/industrialdevelop/chinesemed/plantation_add',
+            addProcess: '../project/js/industrialdevelop/chinesemed/chinesemed-process_add',
+            addProduce: '../project/js/industrialdevelop/chinesemed/chinesemed-produce_add',
+            addSale: '../project/js/industrialdevelop/chinesemed/chinesemed-sale_add',
+            addSchool: '../project/js/industrialdevelop/school_add',
+            addAchievement: '../project/js/industrialdevelop/achievement_add'
 
         },
         waitSeconds: 0,
@@ -111,7 +116,12 @@
         {path:"/userLogin",jspath:"userLogin"},
         {path:"/toUserMsg",jspath:"userMsg"},
         {path:"/register",jspath:"register"},
-        {path:"/plantation_add",jspath:"addPlantation"}
+        {path:"/plantation_add",jspath:"addPlantation"},
+        {path:"/process_add",jspath:"addProcess"},
+        {path:"/produce_add",jspath:"addProduce"},
+        {path:"/sale_add",jspath:"addSale"},
+        {path:"/school_add",jspath:"addSchool"},
+        {path:"/achievement_add",jspath:"addAchievement"}
 
     ];
 

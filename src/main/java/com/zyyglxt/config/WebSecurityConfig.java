@@ -85,6 +85,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 "/process_add",
                 "/produce_add",
                 "/school_add",
+                "/sale_add",
+                "/achievement_add",
                 "/lab_add",
                 "/tecservice_add",
                 "/tour_add").permitAll().

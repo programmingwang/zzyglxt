@@ -39,9 +39,6 @@ public class SaleDrugController {
     @ResponseBody
 
     @RequestMapping(value = "/sale-drug", method = RequestMethod.POST)
-
-    @RequestMapping(value = "insertsaledrug", method = RequestMethod.POST)
-
     @LogAnnotation(appCode ="",logTitle ="售药添加",logLevel ="3",creater ="",updater = "")
     public ResponseData addSaleDrug(@RequestBody IndustrialDevelopSaleDrug record) {
         saleDrugService.insertSelective(record);
@@ -51,9 +48,6 @@ public class SaleDrugController {
     @ResponseBody
 
     @RequestMapping(value = "/sale-drug", method = RequestMethod.PUT)
-
-    @RequestMapping(value = "updatehealthcarechinesemedicinedo", method = RequestMethod.PUT)
-
     @LogAnnotation(appCode ="",logTitle ="售药数据修改",logLevel ="2",creater ="",updater = "")
     public ResponseData updSaleDrug(@RequestBody IndustrialDevelopSaleDrug record){
         saleDrugService.updateByPrimaryKeySelective(record);

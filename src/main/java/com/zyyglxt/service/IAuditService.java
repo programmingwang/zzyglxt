@@ -1,10 +1,10 @@
 package com.zyyglxt.service;
 
-import com.zyyglxt.dataobject.HospDO;
-import com.zyyglxt.dataobject.IndustrialDevelopChiMed;
-import com.zyyglxt.dataobject.IndustrialDevelopSchool;
-import com.zyyglxt.dataobject.IndustrialDevelopTecSerOrg;
+import com.zyyglxt.dto.HospDto;
 import com.zyyglxt.dto.industrialDevelop.AuditDto;
+import com.zyyglxt.dto.industrialDevelop.IndustrialDevelopChiMedDto;
+import com.zyyglxt.dto.industrialDevelop.IndustrialDevelopSchoolDto;
+import com.zyyglxt.dto.industrialDevelop.IndustrialDevelopTecSerOrgDto;
 
 import java.util.List;
 
@@ -19,13 +19,21 @@ public interface IAuditService {
 
     List<AuditDto> getAllByType(String type);
 
-    IndustrialDevelopChiMed getDetailChiMed(Integer itemid, String itemcode);
+    IndustrialDevelopChiMedDto getDetailChiMed(Integer itemid, String itemcode);
 
-    IndustrialDevelopTecSerOrg getDetailTecSerOrg(Integer itemid, String itemcode);
+    IndustrialDevelopTecSerOrgDto getDetailTecSerOrg(Integer itemid, String itemcode);
 
-    IndustrialDevelopSchool getDetailSchool(Integer itemid, String itemcode);
+    IndustrialDevelopSchoolDto getDetailSchool(Integer itemid, String itemcode);
 
-    HospDO getDetailHospital(Integer itemid, String itemcode);
+    HospDto getDetailHospital(Integer itemid, String itemcode);
+
+    int changeChiMedStatus(AuditDto record);
+
+    int changeTecSerOrgStatus(AuditDto record);
+
+    int changeSchoolStatus(AuditDto record);
+
+    int changeHospitalStatus(AuditDto record);
 
 
 }

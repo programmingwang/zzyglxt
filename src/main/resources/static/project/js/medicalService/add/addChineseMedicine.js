@@ -11,6 +11,8 @@
             var jumpUrl = "/medicalService/chineseMedicine"
             var specialtys = {}
             var hosps = {}
+            var webStatus = dictUtil.getDictByCode(dictUtil.DICT_LIST.webStatus);
+            var chineseMedicineType = dictUtil.getDictByCode(dictUtil.DICT_LIST.expertType)
 
             uploadImg.init();
 
@@ -61,7 +63,7 @@
                 }
                 entity["chineseMedicineName"] = $("#chineseMedicineName").val();
                 entity["chineseMedicineTitle"] = $("#chineseMedicineTitle").val();
-                entity["chineseMedicineType"] = $("#chineseMedicineType").val();
+                entity["chineseMedicineType"] = chineseMedicineType[$("#chineseMedicineType").val()].text;
                 entity["hospCode"] = hosp.itemcode;
                 entity["hospitalName"] = hosp.hospitalName;
                 entity["deptCode"] = specialty.itemcode;
@@ -71,6 +73,7 @@
                 entity["mainVisit"] = $("#mainVisit").val();
                 entity["expertIntroduce"] = editor.txt.html();
                 entity["medicineRecords"] = editor2.txt.html();
+                entity["chineseMedicineStatus"] = webStatus[0].id
 
                 fileUtil.handleFile(updateStatus, entity.itemcode, uploadImg.getFiles()[0]);
 
@@ -85,7 +88,6 @@
             });
 
             /*初始化数据*/
-
             (function init() {
                 ajaxUtil.myAjax(null,"/medicalService/hosp/selectAll?hospitalStatus=" + webStatus[5].id,null,function (data) {
                     if(ajaxUtil.success(data)){
@@ -106,10 +108,20 @@
                     $("#chineseMedicineName").val(tempdata.chineseMedicineName);
                     uploadImg.setImgSrc(tempdata.filePath)
                     $("#chineseMedicineTitle").val(tempdata.chineseMedicineTitle);
-                    $("#chineseMedicineType  option[value="+tempdata.chineseMedicineType+"] ").attr("selected",true);
+                    $("#chineseMedicineType").find("option").each(function (data) {
+                        var $this = $(this);
+                        if($this.text() == tempdata.chineseMedicineType) {
+                            $this.attr("selected", true);
+                        }
+                    });
                     $("#hospitalName  option[value="+tempdata.hospCode+"] ").attr("selected",true);
                     specialtySelect()
-                    $("#specialtyName  option[value="+tempdata.deptCode+"] ").attr("selected",true);
+                    $("#specialtyName").find("option").each(function (data) {
+                        var $this = $(this);
+                        if($this.text() == tempdata.specialtyName) {
+                            $this.attr("selected", true);
+                        }
+                    });
                     $("#visitTime").val(tempdata.visitTime);
                     $("#phone").val(tempdata.phone);
                     $("#mainVisit").val(tempdata.mainVisit);

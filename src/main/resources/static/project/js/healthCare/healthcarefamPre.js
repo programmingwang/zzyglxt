@@ -69,7 +69,6 @@
                             },false);
                             return isSuccess;
                         }
-
                     };
                     var myPassModal = modalUtil.init(myPassCareFamModalData);
                     myPassModal.show();
@@ -149,7 +148,7 @@
                     $("#name").val(row.name);
                     $("#source").val(row.source);
                     $("#author").val(row.author);
-                    $("#content").val(row.content);
+                    $("#content").html(row.content);
                     $("#creater").val(row.creater);
                     $("#itemCreateat").val(row.itemcreateat);
                     $("#status").val(webStatus[row.status].text);

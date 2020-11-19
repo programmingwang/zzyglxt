@@ -5,7 +5,7 @@ import com.zyyglxt.dataobject.FileDO;
 import com.zyyglxt.dataobject.HospDO;
 import com.zyyglxt.dataobject.HospDOKey;
 import com.zyyglxt.dto.HospDto;
-import com.zyyglxt.dto.MedicalServiceDto;
+import com.zyyglxt.dto.StatusDto;
 import com.zyyglxt.error.EmBusinessError;
 import com.zyyglxt.response.ResponseData;
 import com.zyyglxt.service.IFileService;
@@ -81,8 +81,8 @@ public class HospController {
     @ResponseBody
     @PostMapping("updateStatus")
     @LogAnnotation(logTitle = "改变数据状态",logLevel = "2")
-    public ResponseData updateStatus(MedicalServiceDto medicalServiceDto){
-        hospService.updateStatus(medicalServiceDto);
+    public ResponseData updateStatus(StatusDto statusDto){
+        hospService.updateStatus(statusDto);
         return new ResponseData(EmBusinessError.success);
     }
 

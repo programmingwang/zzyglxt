@@ -3,6 +3,7 @@ package com.zyyglxt.service;
 import com.zyyglxt.dataobject.DictItem;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Author lrt
@@ -11,5 +12,7 @@ import java.util.List;
  **/
 public interface IDictService {
 
-    List<DictItem> getDictMapByCode(String dictCode);
+    List<DictItem> getDictListByCode(String dictCode);
+
+    Map<String,String> getDictMapByCode(String dictCode);
 }

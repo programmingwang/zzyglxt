@@ -2,8 +2,7 @@ package com.zyyglxt.dao;
 
 import com.zyyglxt.dataobject.HospDO;
 import com.zyyglxt.dataobject.HospDOKey;
-import com.zyyglxt.dto.MedicalServiceDto;
-import org.apache.ibatis.annotations.Param;
+import com.zyyglxt.dto.StatusDto;
 
 import java.util.List;
 
@@ -33,6 +32,6 @@ public interface HospDOMapper {
 
     List<HospDO> selectByStatus(String status);
 
-    int updateStatusByPrimaryKey(MedicalServiceDto medicalServiceDto);
+    int updateStatusByPrimaryKey(StatusDto statusDto);
 
 }

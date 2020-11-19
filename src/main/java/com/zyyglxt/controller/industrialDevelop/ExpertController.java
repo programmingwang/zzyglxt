@@ -32,15 +32,15 @@ public class ExpertController {
         return new ResponseData(EmBusinessError.success);
     }
 
-    @RequestMapping(value = "/expert/resetPassword/{itemID}/{itemCode}", method = RequestMethod.PUT)
+    @RequestMapping(value = "/expert/resetPassword/{userCode}", method = RequestMethod.PUT)
     @ResponseBody
     @LogAnnotation(appCode ="",logTitle ="产业发展-专家管理-重置密码",logLevel ="2",creater ="",updater = "")
-    public ResponseData resetPassword(@PathVariable("itemID") Integer itemid,@PathVariable("itemCode") String itemCode) {
-        industrialExpertService.resetPassword(itemid,itemCode);
+    public ResponseData resetPassword(@PathVariable("userCode") String userCode) {
+        industrialExpertService.resetPassword(userCode);
         return new ResponseData(EmBusinessError.success);
     }
 
-    @RequestMapping(value = "/expert/delete/{itemCode}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/expert/{itemCode}", method = RequestMethod.DELETE)
     @ResponseBody
     @LogAnnotation(appCode ="",logTitle ="产业发展-专家管理-删除",logLevel ="4",creater ="",updater = "")
     public ResponseData delExpert(@PathVariable("itemCode") String itemCode) {

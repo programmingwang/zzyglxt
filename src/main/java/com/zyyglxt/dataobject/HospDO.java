@@ -38,6 +38,8 @@ public class HospDO extends HospDOKey {
 
     private String hospitalStatus;
 
+    private String reason;
+
     private String creater;
 
     private Date itemcreateat;

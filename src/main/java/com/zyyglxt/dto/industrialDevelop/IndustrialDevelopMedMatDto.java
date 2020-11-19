@@ -8,6 +8,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * @Author lrt
@@ -19,5 +20,5 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 public class IndustrialDevelopMedMatDto extends IndustrialDevelopMedMat {
-    private String filePath;
+    private List<String> filePath;
 }

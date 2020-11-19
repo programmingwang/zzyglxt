@@ -26,6 +26,8 @@ public interface IndustrialDevelopSaleDrugMapper {
 
     int updateByPrimaryKey(IndustrialDevelopSaleDrug record);
 /*通过orgCode查询所有售药记录*/
-    List< IndustrialDevelopSaleDrug> selectAllSaleDrug( @Param("orgCode") String orgCode);
+    List< IndustrialDevelopSaleDrug> selectAllSaleDrug( @Param("status") String status);
+
+    int changeStatusToSaleDrug(@Param("key")IndustrialDevelopSaleDrug key,@Param("status") String status);
 
 }

@@ -68,18 +68,19 @@ public class UserServiceImpl implements UserService {
         //添加用户
         record.setUpdater(usernameUtil.getOperateUser());
         record.setCreater(usernameUtil.getOperateUser());
-        record.setPassword(new BCryptPasswordEncoder().encode(record.getPassword()));
+        record.setPassword(new BCryptPasswordEncoder().encode("123456"));
         record.setItemcode(UUIDUtils.getUUID());
         userDOMapper.insertSelective(record);
         //分配角色
         //查询角色role_code
-        RoleDO roleDO = roleDOMapper.selectByRoleType(record.getType());
+        RoleDO roleDO = roleDOMapper.selectByRoleName(record.getRoleName());
         UserRoleRefDO userRoleRefDO = new UserRoleRefDO();
         userRoleRefDO.setUpdater(usernameUtil.getOperateUser());
         userRoleRefDO.setCreater(usernameUtil.getOperateUser());
         userRoleRefDO.setItemcode(UUIDUtils.getUUID());
         userRoleRefDO.setRoleCode(roleDO.getItemcode());
         userRoleRefDO.setUserCode(record.getItemcode());
+        userRoleRefDO.setPlatRole(roleDO.getRoleName());
         userRoleRefDOMapper.insertSelective(userRoleRefDO);
     }
 
@@ -109,6 +110,7 @@ public class UserServiceImpl implements UserService {
             userRoleRefDO.setItemcode(userRoleRefDO1.getItemcode());
             userRoleRefDO.setRoleCode(roleDO.getItemcode());
             userRoleRefDO.setUserCode(userDO.getItemcode());
+            userRoleRefDO.setPlatRole(roleDO.getRoleName());
             userRoleRefDOMapper.updateByPrimaryKeySelective(userRoleRefDO);
         }
     }

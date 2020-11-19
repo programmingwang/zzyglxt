@@ -1,4 +1,4 @@
-package com.zyyglxt.controller.IndustrialDevelop;
+package com.zyyglxt.controller.industrialDevelop;
 
 import com.zyyglxt.annotation.LogAnnotation;
 import com.zyyglxt.dataobject.IndustrialDevelopTopicDO;

@@ -3,6 +3,7 @@ package com.zyyglxt.controller.uploadFile;
 import com.zyyglxt.util.WangEditor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -19,6 +20,12 @@ import java.io.File;
 @Controller
 @Slf4j
 public class UploadFileController {
+
+    @Value("${upload.addr}")
+    private String nginx;
+    @Value("${upload.port}")
+    private String port;
+
     @RequestMapping(value = "/uploadFile", method = RequestMethod.POST)
     @ResponseBody
     public WangEditor uploadFile(@Param("file") MultipartFile file) {
@@ -56,6 +63,7 @@ public class UploadFileController {
         }
         //完整的url
         String fileUrl = "http://localhost:8989/uploads/" + newFilename;
+//        String fileUrl = "http://"+nginx+":"+port+"/upload/" + newFilename;
         //System.out.println(fileUrl);
         String[] data = {fileUrl};
         WangEditor we = new WangEditor(data);

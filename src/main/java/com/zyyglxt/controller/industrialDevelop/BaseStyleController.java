@@ -17,7 +17,7 @@ import javax.annotation.Resource;
  **/
 @Api(tags = "产业发展-基地风采记录")
 @RestController
-@RequestMapping(value = "industrialdevelop")
+@RequestMapping(value = "/industrialdevelop")
 public class BaseStyleController {
 
     @Resource

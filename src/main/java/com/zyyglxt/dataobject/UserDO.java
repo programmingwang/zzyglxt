@@ -27,6 +27,8 @@ public class UserDO extends UserDOKey {
 
     private String state;
 
+    private String contacts;
+
     private String mobilephone;
 
     private String creater;
@@ -42,6 +44,8 @@ public class UserDO extends UserDOKey {
     private Integer type;
 
     private byte[] portrait;
+
+    private String roleName;
 
     public UserDO() {
 
@@ -127,6 +131,14 @@ public class UserDO extends UserDOKey {
         this.state = state == null ? null : state.trim();
     }
 
+    public String getContacts() {
+        return contacts;
+    }
+
+    public void setContacts(String contacts) {
+        this.contacts = contacts == null ? null : contacts.trim();
+    }
+
     public String getMobilephone() {
         return mobilephone;
     }
@@ -194,5 +206,13 @@ public class UserDO extends UserDOKey {
 
     public void setPortrait(byte[] portrait) {
         this.portrait = portrait;
+    }
+
+    public String getRoleName() {
+        return roleName;
+    }
+
+    public void setRoleName(String roleName) {
+        this.roleName = roleName == null ? null : roleName.trim();
     }
 }

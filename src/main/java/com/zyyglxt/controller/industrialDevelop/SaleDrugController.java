@@ -1,6 +1,8 @@
 package com.zyyglxt.controller.industrialDevelop;
 
 import com.zyyglxt.annotation.LogAnnotation;
+import com.zyyglxt.dataobject.HealthCareChineseMedicineDO;
+import com.zyyglxt.dataobject.HealthCareChineseMedicineDOKey;
 import com.zyyglxt.dataobject.IndustrialDevelopSaleDrug;
 import com.zyyglxt.dto.industrialDevelop.IndustrialDevelopSaleDrugDto;
 import com.zyyglxt.error.EmBusinessError;
@@ -35,7 +37,11 @@ public class SaleDrugController {
     UsernameUtil usernameUtil;
 
     @ResponseBody
+
+    @RequestMapping(value = "/sale-drug", method = RequestMethod.POST)
+
     @RequestMapping(value = "insertsaledrug", method = RequestMethod.POST)
+
     @LogAnnotation(appCode ="",logTitle ="售药添加",logLevel ="3",creater ="",updater = "")
     public ResponseData addSaleDrug(@RequestBody IndustrialDevelopSaleDrug record) {
         saleDrugService.insertSelective(record);
@@ -43,14 +49,18 @@ public class SaleDrugController {
     }
 
     @ResponseBody
+
+    @RequestMapping(value = "/sale-drug", method = RequestMethod.PUT)
+
     @RequestMapping(value = "updatehealthcarechinesemedicinedo", method = RequestMethod.PUT)
+
     @LogAnnotation(appCode ="",logTitle ="售药数据修改",logLevel ="2",creater ="",updater = "")
     public ResponseData updSaleDrug(@RequestBody IndustrialDevelopSaleDrug record){
         saleDrugService.updateByPrimaryKeySelective(record);
         return new ResponseData(EmBusinessError.success);
     }
 
-    @RequestMapping(value ="deletesaledrug/{itemID}/{itemCode}",method = RequestMethod.DELETE )
+    @RequestMapping(value ="/sale-drug",method = RequestMethod.DELETE )
     @ResponseBody
     @LogAnnotation(appCode ="",logTitle ="售药数据删除",logLevel ="4",creater ="",updater = "")
     public ResponseData delSaleDrug(@RequestBody IndustrialDevelopSaleDrug record){
@@ -59,11 +69,11 @@ public class SaleDrugController {
     }
 
     /*售药数据所有查询*/
-    @RequestMapping(value ="selecallsaledrug",method = RequestMethod.GET )
-    @LogAnnotation(appCode ="",logTitle ="查寻所有售药数据",logLevel ="1",creater ="",updater = "")
+    @RequestMapping(value ="/sale-drug",method = RequestMethod.GET )
+    @LogAnnotation(appCode ="",logTitle ="查寻所有售药数据",logLevel ="1")
     @ResponseBody
-    public ResponseData selectAllSaleDrug(){
-        List<IndustrialDevelopSaleDrug> industrialDevelopSaleDrugList = saleDrugService.selectAllSaleDrug(usernameUtil.getOrgCode());
+    public ResponseData selectAllSaleDrug(@RequestParam("status") List status){
+        List<IndustrialDevelopSaleDrug> industrialDevelopSaleDrugList = saleDrugService.selectAllSaleDrug(status);
      // return new ResponseData(EmBusinessError.success,industrialDevelopSaleDrug);
         List<IndustrialDevelopSaleDrugDto> industrialDevelopSaleDrugDtoList= new ArrayList<>();
         for (IndustrialDevelopSaleDrug industrialDevelopSaleDrug : industrialDevelopSaleDrugList) {
@@ -83,5 +93,17 @@ public class SaleDrugController {
         BeanUtils.copyProperties(industrialDevelopSaleDrug,industrialDevelopSaleDrugDto);
         industrialDevelopSaleDrugDto.setFilePath(filePath);
         return industrialDevelopSaleDrugDto;
+    }
+
+    /*药品数据的状态*/
+    @RequestMapping(value = "changestatustosaledrug/{itemID}/{itemCode}" , method = RequestMethod.POST)
+    @ResponseBody
+    @LogAnnotation(logTitle = "药品数据状态的修改", logLevel = "2")
+    public ResponseData changeStatusToSaleDrug(@RequestParam("status") String status, @PathVariable("itemID") Integer itemID , @PathVariable("itemCode")String itemCode){
+        IndustrialDevelopSaleDrug industrialDevelopSaleDrug=new IndustrialDevelopSaleDrug();
+        industrialDevelopSaleDrug.setItemid(itemID);
+        industrialDevelopSaleDrug.setItemcode(itemCode);
+        saleDrugService.changeStatusToSaleDrug(industrialDevelopSaleDrug,status);
+        return new ResponseData(EmBusinessError.success);
     }
 }

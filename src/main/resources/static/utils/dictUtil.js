@@ -23,7 +23,7 @@
                     if(ajaxUtil.success(data)){
                         var al = new Array();
                         $.each(data.data,function (k,v) {
-                            al.push({id:k,text:v.value});
+                            al.push({id:v.code,text:v.value});
                         });
                         dictList[code] = al;
                     }
@@ -86,7 +86,11 @@
             //药材状态
             "medStatus": "medStatus",
             //机构类型
-            "orgType": "orgType"
+            "orgType": "orgType",
+            //主管市区
+            "areaAdmin":"areaAdmin",
+            //用户角色
+            "userRole":"userRole"
         }
 
         var dictList = {

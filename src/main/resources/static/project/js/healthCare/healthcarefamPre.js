@@ -69,7 +69,6 @@
                             },false);
                             return isSuccess;
                         }
-
                     };
                     var myPassModal = modalUtil.init(myPassCareFamModalData);
                     myPassModal.show();

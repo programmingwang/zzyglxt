@@ -39,6 +39,12 @@
     from tb_industrial_develop_tec_ser_org
     where itemCode = #{itemcode,jdbcType=CHAR}
   </select>
+  <select id="selectByOrgcode" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from tb_industrial_develop_tec_ser_org
+    where ORG_CODE = #{orgCode,jdbcType=CHAR}
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="map">
     <!--@mbg.generated-->
     delete from tb_industrial_develop_tec_ser_org
@@ -277,7 +283,7 @@
       itemUpdateAt = #{itemupdateat,jdbcType=TIMESTAMP}
     where itemCode = #{itemcode,jdbcType=CHAR}
   </update>
-    <select id="selectAll" resultMap="BaseResultMap">
+  <select id="selectAll" resultMap="BaseResultMap">
       select * from tb_industrial_develop_tec_ser_org
   </select>
   <select id="selectByOrgNameAndCode" resultMap="BaseResultMap">

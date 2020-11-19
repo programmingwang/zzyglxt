@@ -1,11 +1,13 @@
 package com.zyyglxt.service.impl;
 
 import com.zyyglxt.dao.IndustrialDevelopTalRecDOMapper;
+import com.zyyglxt.dataobject.IndustrialDevelopCooExcDO;
 import com.zyyglxt.dataobject.IndustrialDevelopTalRecDOKey;
 import com.zyyglxt.dataobject.IndustrialDevelopTalRecDO;
 import com.zyyglxt.dataobject.validation.ValidationGroups;
 import com.zyyglxt.error.BusinessException;
 import com.zyyglxt.error.EmBusinessError;
+import com.zyyglxt.service.IDictService;
 import com.zyyglxt.service.IIndustrialDevelopTalRecService;
 import com.zyyglxt.validator.ValidatorImpl;
 import com.zyyglxt.validator.ValidatorResult;
@@ -25,6 +27,9 @@ import java.util.UUID;
 public class IdustrialDevelopTalRecServiceImpl implements IIndustrialDevelopTalRecService {
     @Resource
     IndustrialDevelopTalRecDOMapper developTalRecDOMapper;
+
+    @Resource
+    IDictService dictService;
 
     @Resource
     ValidatorImpl validator;
@@ -63,6 +68,10 @@ public class IdustrialDevelopTalRecServiceImpl implements IIndustrialDevelopTalR
 
     @Override
     public List<IndustrialDevelopTalRecDO> getTalRecs(String orgCode) {
-        return developTalRecDOMapper.selectAll(orgCode);
+        List<IndustrialDevelopTalRecDO> list = developTalRecDOMapper.selectAll(orgCode);
+        for (IndustrialDevelopTalRecDO item : list) {
+            item.setStatus(dictService.getDictMapByCode("showStatus").get(item.getStatus()));
+        }
+        return list;
     }
 }

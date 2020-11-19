@@ -68,6 +68,7 @@
             bootstrapTableLocalAll: '../component/bootstrap-table@1.15.3/bootstrap-table-locale-all.min',
             wangEditor: '../component/wangEditor/wangEditor.min',
             uploadImg: '../component/uploadImg/js/uploadImg',
+            distpicker: '../component/distSelect/distpicker.common',
 
 
 
@@ -91,7 +92,8 @@
             userLogin: '../project/js/user/login',
             index: '../project/js/index',
             userMsg: '../project/js/user/usermsg',
-            register: '../project/js/user/register'
+            register: '../project/js/user/register',
+            addPlantation: '../project/js/industrialdevelop/chinesemed/plantation_add'
 
         },
         waitSeconds: 0,
@@ -108,7 +110,8 @@
         {path:"/main",jspath:"index"},
         {path:"/userLogin",jspath:"userLogin"},
         {path:"/toUserMsg",jspath:"userMsg"},
-        {path:"/register",jspath:"register"}
+        {path:"/register",jspath:"register"},
+        {path:"/plantation_add",jspath:"addPlantation"}
 
     ];
 

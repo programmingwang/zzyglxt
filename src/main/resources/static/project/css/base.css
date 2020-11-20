@@ -118,6 +118,11 @@ table{
     text-decoration: none;
     background-color: #52beff;
 }
+.aaaa.active, .aaaa:active {
+    color: #F8F9FB;
+    text-decoration: none;
+    background-color: #52beff;
+}
 .btn-link{
     color:black;
 }

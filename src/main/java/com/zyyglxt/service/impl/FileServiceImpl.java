@@ -68,7 +68,7 @@ public class FileServiceImpl implements IFileService {
 
     @Override
     public FileDO selectFileByDataCode(String dataCode) {
-        if(dataCode.isEmpty()){
+        if(dataCode == null || dataCode == ""){
             throw new BusinessException("数据源code不能为空", EmBusinessError.PARAMETER_VALIDATION_ERROR);
         }
         FileDO fileDO = fileDOMapper.selectFileByDataCode(dataCode);
@@ -80,7 +80,7 @@ public class FileServiceImpl implements IFileService {
 
     @Override
     public int deleteFileByDataCode(String dataCode) {
-        if(dataCode.isEmpty()){
+        if(dataCode == null || dataCode == ""){
             throw new BusinessException("数据源code不能为空", EmBusinessError.PARAMETER_VALIDATION_ERROR);
         }
         return fileDOMapper.deleteByDataCode(dataCode);
@@ -104,7 +104,7 @@ public class FileServiceImpl implements IFileService {
 
     @Override
     public List<FileDO> selectMultipleFileByDataCode(String dataCode) {
-        if(dataCode.isEmpty()){
+        if(dataCode == null || dataCode == ""){
             throw new BusinessException("数据源code不能为空", EmBusinessError.PARAMETER_VALIDATION_ERROR);
         }
         List<FileDO> fileDOList = fileDOMapper.selectMultipleFileByDataCode(dataCode);

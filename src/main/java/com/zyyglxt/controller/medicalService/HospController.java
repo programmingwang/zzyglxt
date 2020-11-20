@@ -56,9 +56,17 @@ public class HospController {
 
     @GetMapping(value = "selectAll")
     @ResponseBody
-    @LogAnnotation(appCode ="",logTitle ="查看所有医院数据",logLevel ="1",creater ="",updater = "")
+    @LogAnnotation(appCode ="",logTitle ="根据身份查看医院数据",logLevel ="1",creater ="",updater = "")
     public ResponseData selectAllHosp(@RequestParam(value = "hospitalStatus")List hospitalStatus){
         List<HospDO> hospDOList = hospService.selectAllHosp(hospitalStatus);
+        return new ResponseData(EmBusinessError.success,DoToDto(hospDOList));
+    }
+
+    @GetMapping(value = "selectAllHosp")
+    @ResponseBody
+    @LogAnnotation(appCode ="",logTitle ="查看所有医院数据",logLevel ="1",creater ="",updater = "")
+    public ResponseData selectAllNoStatus(){
+        List<HospDO> hospDOList = hospService.selectAllNoStatus();
         return new ResponseData(EmBusinessError.success,DoToDto(hospDOList));
     }
 

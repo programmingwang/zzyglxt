@@ -26,6 +26,9 @@ public class ChineseMedicineDO extends ChineseMedicineDOKey {
 
     private String phone;
 
+    @NotBlank(message = "专家简介不能为空")
+    private String expertBriefIntroduce;
+
     @NotBlank(message = "专家介绍不能为空")
     private String expertIntroduce;
 

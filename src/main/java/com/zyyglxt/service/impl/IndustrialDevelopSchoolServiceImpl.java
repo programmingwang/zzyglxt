@@ -4,6 +4,7 @@ import com.zyyglxt.dto.industrialDevelop.IndustrialDevelopSchoolDto;
 import com.zyyglxt.error.BusinessException;
 import com.zyyglxt.error.EmBusinessError;
 import com.zyyglxt.service.IFileService;
+import com.zyyglxt.util.UsernameUtil;
 import com.zyyglxt.validator.ValidatorImpl;
 import com.zyyglxt.validator.ValidatorResult;
 import org.springframework.beans.BeanUtils;
@@ -31,8 +32,11 @@ public class IndustrialDevelopSchoolServiceImpl implements IndustrialDevelopScho
     @Resource
     private IFileService fileService;
 
-    @Autowired
+    @Resource
     ValidatorImpl validator;
+
+    @Resource
+    UsernameUtil usernameUtil;
 
     @Override
     public int deleteByPrimaryKey(Integer itemid,String itemcode) {
@@ -81,5 +85,14 @@ public class IndustrialDevelopSchoolServiceImpl implements IndustrialDevelopScho
             item.setFilePath(fileService.selectFileByDataCode(item.getItemcode()).getFilePath());
         }
         return resList;
+    }
+
+    @Override
+    public IndustrialDevelopSchoolDto selectByorgcode() {
+        IndustrialDevelopSchoolDto schoolDto = new IndustrialDevelopSchoolDto();
+        IndustrialDevelopSchool developSchoolDto = industrialDevelopSchoolMapper.selectByorgcode(usernameUtil.getOrgCode());
+        BeanUtils.copyProperties(developSchoolDto, schoolDto);
+        schoolDto.setFilePath(fileService.selectFileByDataCode(developSchoolDto.getItemcode()).getFilePath());
+        return schoolDto;
     }
 }

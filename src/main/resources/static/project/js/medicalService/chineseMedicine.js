@@ -168,10 +168,11 @@
                     $("#chineseMedicineName").val(row.chineseMedicineName);
                     $("#chineseMedicineType").val(row.chineseMedicineType);
                     $("#chineseMedicineTitle").val(row.chineseMedicineTitle);
-                    $("#hospitalName").val(row.hospitalName);
                     $("#specialtyName").val(row.specialtyName);
+                    $("#hospitalName").val(row.hospitalName);
                     $("#visitTime").val(row.visitTime);
                     $("#phone").val(row.phone);
+                    $("#expertBriefIntroduce").val(row.expertBriefIntroduce);
                     $("#mainVisit").val(row.mainVisit);
                     $("#expertIntroduce").html(row.expertIntroduce);
                     $("#medicineRecords").html(row.medicineRecords);
@@ -266,7 +267,7 @@
                     }},
                 {field: 'specialtyName', title: '所在科室'},
                 {field: 'hospitalName', title: '所属医院'},
-                {field: 'phone', title: '联系电话'},
+                {field: 'phone', title: '联系电话', width: '120px'},
                 {field: 'action',  title: '操作',formatter: operation,events:orgEvents}
             ];
 

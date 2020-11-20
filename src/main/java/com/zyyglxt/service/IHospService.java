@@ -20,4 +20,5 @@ public interface IHospService {
     HospDO selectHospByItemCode(String itemCode);
     List<HospDO> selectByStatus(String status);
     int updateStatus(StatusDto statusDto);
+    List<HospDO> selectAllNoStatus();
 }

@@ -86,7 +86,7 @@
                             ajaxUtil.myAjax(null,"/industrialdevelop/changestatustosaledrug/"+row.itemid+"/"+row.itemcode,submitStatus,function (data) {
                                 if(ajaxUtil.success(data)){
                                     if(data.code == 88888){
-                                        alertUtil.info("已上架");
+                                        alertUtil.info("已经上传到河北中医药网");
                                         isSuccess = true;
                                         refreshTable();
                                     }else{
@@ -152,7 +152,8 @@
                         if(value == "已经损坏了"){
                             return '<p>'+value+'</p>';
                         }else{
-                            return '<img  src='+value+' width="100" height="100" class="img-rounded" >';
+                                return '<img  src=' + value + ' width="100" height="100" class="img-rounded" >';
+
                         }
                     }},
                 {field: 'specifications', title: '规格'},

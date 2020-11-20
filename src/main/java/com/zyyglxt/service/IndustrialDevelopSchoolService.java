@@ -27,4 +27,5 @@ public interface IndustrialDevelopSchoolService{
 
     List<IndustrialDevelopSchoolDto> selectAll();
 
+    IndustrialDevelopSchoolDto selectByorgcode();
 }

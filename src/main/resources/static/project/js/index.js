@@ -199,7 +199,7 @@
                     pid: "13"
                 },
                 {
-                    menu_name: "在售药材",
+                    menu_name: "在售药品",
                     menu_url: "/industrialdevelop/chinesemed/saledrug",
                     id: "88",
                     level: "1",
@@ -293,7 +293,11 @@
                 },
                 {
                     menu_name: "＞设置填报时间",
+
+                    menu_url: "/industrialdevelop/chinesemed/timerecord",
+
                     menu_url: "/timeRecord/timerecord",
+
                     id: "15-1",
                     level: "2",
                     pid: "15"
@@ -348,7 +352,7 @@
                     pid: "15"
                 },
                 /*
-                技术服务机构后台管理------14
+                技术服务机构后台管理------16
                 */
                 {
                     menu_name: "技术服务机构",
@@ -370,6 +374,30 @@
                     id: "16-4",
                     level: "2",
                     pid: "16"
+                },
+                /*
+                高等院校后台管理------17
+                */
+                {
+                    menu_name: "高等医学院校",
+                    menu_url: "",
+                    id: "17",
+                    level: "1",
+                    pid: ""
+                },
+                {
+                    menu_name: "服务项目",
+                    menu_url: "/school/school",
+                    id: "17-1",
+                    level: "2",
+                    pid: "17"
+                },
+                {
+                    menu_name: "信息维护",
+                    menu_url: "/school/school_msg",
+                    id: "17-4",
+                    level: "2",
+                    pid: "17"
                 },
                 {
                     menu_name: "科研成果",

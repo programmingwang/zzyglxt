@@ -1,13 +1,14 @@
-//旅游康养机构录入界面
 (function () {
-    require(['jquery','ajaxUtil','stringUtil','uploadImg','objectUtil','distpicker','alertUtil'],
-        function ($,ajaxUtil,stringUtil,uploadImg, objectUtil, distpicker, alertUtil) {
+    require(['jquery','ajaxUtil','stringUtil','uploadImg','objectUtil'],
+        function ($,ajaxUtil,stringUtil,uploadImg, objectUtil) {
 
-            var url = "/industrialdevelop/tec-ser-org/selectbyorgcode";
+            var url = "/industrialdevelop/ser-pro";
 
-            var pathUrl = "/industrialdevelop/style";
+            var pathUrl = "/serviceItems/tecserviceorg";
 
             var itemcode = stringUtil.getUUID();
+
+            var orgType = "tec";
 
             var type = isUpdate() ? "put":"post";
 
@@ -21,22 +22,18 @@
 
             function generateParam(){
                 var param = {};
-                param.name = $("#name").val();
-                param.areaCoverd = $("#areaCoverd").val();
+                param.serviceProject = $("#serviceProject").val();
+                param.projectCost = $("#projectCost").val();
                 param.contacts = $("#contacts").val();
                 param.phone = $("#phone").val();
-                param.addressPro = $("#addressPro").val()
-                param.addressCity = $("#addressCity").val()
-                param.addressCountry = $("#addressCountry").val()
-                param.address = $("#address").val()
-                param.intruduce = editor.txt.html();
+                param.projectIntroduce = $(".w-e-text").html();
+                param.itemcode = itemcode;
                 return param;
             }
 
             $("#saveBtn").unbind('click').on('click',function () {
                 var param = generateParam();
-                param.status = "0";
-                param.itemcode = itemcode;
+                param.status = 0;
                 if (uploadImg.isUpdate()){
                     ajaxUtil.fileAjax(itemcode,uploadImg.getFiles()[0],"undefined","undefined")
                 }
@@ -53,8 +50,7 @@
 
             $("#submitBtn").unbind('click').on('click',function () {
                 var param = generateParam();
-                param.status = "1";
-                param.type = "tour"
+                param.status = 1;
                 ajaxUtil.myAjax(null,url,param,function (data) {
                     if(ajaxUtil.success(data)){
                         orange.redirect(pathUrl)
@@ -67,32 +63,14 @@
 
             var init = function () {
                 if (isUpdate()){
-                    var tempdata;
-                    ajaxUtil.myAjax(null, url, null,function (data) {
-                        if(data && data.code == ajaxUtil.successCode) {
-                            tempdata = data.data
-                        }else{
-                            alertUtil.error(data.msg)
-                        }
-                    },false,"","get");
-                    console.log(tempdata);
-                    $("#name").val(tempdata.name);
-                    $("#areaCoverd").val(tempdata.areaCoverd);
-                    $("#specialService").val(tempdata.specialService);
+                    var tempdata = JSON.parse(localStorage.getItem("rowData"));
+                    $("#serviceProject").val(tempdata.serviceProject);
+                    $("#projectCost").val(tempdata.projectCost);
                     $("#contacts").val(tempdata.contacts);
                     $("#phone").val(tempdata.phone);
-                    $("#distpicker").distpicker({
-                        province: tempdata.addressPro,
-                        city: tempdata.addressCity,
-                        district: tempdata.addressCountry
-                    });
-                    $("#address").val(tempdata.address);
-                    editor.txt.html(tempdata.intruduce);
+                    $(".w-e-text").html(tempdata.projectIntroduce);
                     itemcode = tempdata.itemcode;
-                    var img = tempdata.filePath;
-                    // console.log(tempdata);
-                    // var imgName=tempdata.fileName;
-                    uploadImg.setImgSrc(img);
+                    // uploadImg.setImgSrc(tempdata.filePath)
                 }else {
                     $("#distpicker").distpicker();
                 }
@@ -101,7 +79,6 @@
                 }
             };
             init();
-
 
             function isUpdate() {
                 return (localStorage.getItem("rowData") != null || localStorage.getItem("rowData") != undefined)

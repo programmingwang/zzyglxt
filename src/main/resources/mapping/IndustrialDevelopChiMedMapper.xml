@@ -342,4 +342,12 @@
     <select id="selectAll" resultMap="BaseResultMap">
       select * from tb_industrial_develop_chi_med where TYPE = #{type}
     </select>
+  <select id="selectByOrgNameAndCode" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select
+    <include refid="Base_Column_List" />
+    from tb_industrial_develop_chi_med
+    where ORG_CODE = #{orgCode,jdbcType=VARCHAR}
+    and NAME = #{name,jdbcType=VARCHAR}
+  </select>
 </mapper>

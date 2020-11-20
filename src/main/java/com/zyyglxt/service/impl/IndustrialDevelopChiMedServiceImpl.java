@@ -92,4 +92,9 @@ public class IndustrialDevelopChiMedServiceImpl implements IndustrialDevelopChiM
     public IndustrialDevelopChiMed selectByOrgCode(){
         return industrialDevelopChiMedMapper.selectByOrgCode(usernameUtil.getOrgCode());
     }
+
+    @Override
+    public IndustrialDevelopChiMed selectByOrgNameAndCode(String orgName, String orgCode) {
+        return industrialDevelopChiMedMapper.selectByOrgNameAndCode(orgName,orgCode);
+    }
 }

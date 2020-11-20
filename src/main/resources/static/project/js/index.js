@@ -534,12 +534,15 @@
 
             $(".dropdown-item").unbind().on("click",function () {
                 $(".dropdown-item").removeClass("active");
+                $(".aaaa").removeClass("active");
                 $(this).addClass("active");
                 loadPage($(this).attr("url"));
             });
             $(".AFirstMenu").unbind().on("click",function () {
-                $(".AFirstMenu").removeClass("active");
-                $(this).addClass("active");
+                $(".aaaa").removeClass("active");
+                $(".dropdown-item").removeClass("active");
+                $(".collapse").removeClass("show");
+                $(this).parent(".aaaa").addClass("active");
                 loadPage($(this).attr("url"));
             });
 

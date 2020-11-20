@@ -52,4 +52,10 @@ public class TecSerOrgController {
     public ResponseData getTec(@PathVariable String type){
         return new ResponseData(EmBusinessError.success,tecSerOrgService.selectAll(type));
     }
+
+    @ResponseBody
+    @GetMapping(value = "/tec-ser-org/selectbyorgcode")
+    public ResponseData getTecByOrgcode(){
+        return new ResponseData(EmBusinessError.success,tecSerOrgService.selectByOrgcode());
+    }
 }

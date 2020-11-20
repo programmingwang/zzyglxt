@@ -13,27 +13,21 @@
 
             var aParam = {};
 
+            var medStatus = dictUtil.getDictByCode(dictUtil.DICT_LIST.medStatus);
+
             //操作
             function operation(value, row, index) {
-                if (row.status == "——" || row.status == "已下架") {
+                if (row.status === "1"){
                     return [
-                        '<button type="button" class="edit btn btn-primary btn-sm" style="margin-right: 5px" data-toggle="modal" data-target="" >编辑</button>',
-                        '<button type="button" class="delete btn btn-danger btn-sm"  data-toggle="modal" data-target="#staticBackdrop" >删除</button>',
-                    ].join('');
-                } else if (row.status == "售卖中") {
+                        '<a class="unshelve" style="margin:0 1em;text-decoration: none;color: #775637" data-toggle="modal" data-target="" >下架</a>'
+                    ].join('')
+                } else {
                     return [
-                        '<button type="button" class="view btn btn-primary btn-sm" style="margin-right: 5px" data-toggle="modal" data-target="" >下架</button>',
+                        '<a class="edit" style="margin:0 1em;text-decoration: none;color: #775637" data-toggle="modal" data-target="" >编辑</a>',
+                        '<a class="delete" style="margin:0 1em;text-decoration: none;color:#D60000;"  data-toggle="modal" data-target="#staticBackdrop" >删除</a>',
                     ].join('');
                 }
             }
-
-            /*$(".view").on("click",function (e, value, row, index) {
-                var projectEntity = {
-                    "itemid": row.itemid,
-                    "itemcode": row.itemcode,
-                    "status": "已下架"
-                };
-            });*/
 
             //修改事件
             window.orgEvents = {
@@ -41,11 +35,11 @@
                     localStorage.setItem("rowData", JSON.stringify(row));
                     orange.redirect(addUrl);
                 },
-                'click .view': function (e, value, row, index) {
+                'click .unshelve': function (e, value, row) {
                     var projectEntity = {
                         itemid: row.itemid,
                         itemcode: row.itemcode,
-                        status: "已下架"
+                        status: 2
                     };
                     ajaxUtil.myAjax(null, "/industrialdevelop/ser-pro", projectEntity, function (data) {
                         if (data && data.code == 88888) {
@@ -70,7 +64,6 @@
                             var isSuccess = false;
                             ajaxUtil.myAjax(null, getUrl, projectEntity, function (data) {
                                 if (ajaxUtil.success(data)) {
-                                    ajaxUtil.deleteFile(row.itemcode)
                                     alertUtil.info("删除项目成功");
                                     isSuccess = true;
                                     refreshTable();
@@ -100,12 +93,13 @@
             var pl = dictUtil.getDictByCode(dictUtil.DICT_LIST.showStatus);
             $("#chargePersonSearch").selectUtil(pl);
 
-
             var aCol = [
                 {field: 'serviceProject', title: '服务项目名称'},
                 {field: 'projectCost', title: '项目收费'},
                 {field: 'contacts', title: '联系人'},
-                {field: 'status', title: '项目状态'},
+                {field: 'status', title: '项目状态',formatter:function (row) {
+                        return '<p>'+medStatus[row].text+'</p>';
+                    }},
                 {field: 'action', title: '操作', formatter: operation, events: orgEvents}
             ];
 

@@ -23,7 +23,7 @@ public class ChiMedController {
     @Resource
     IndustrialDevelopChiMedService chiMedService;
 
-    @GetMapping(value = "chi-med/{type}")
+    @GetMapping(value = "/chi-med/{type}")
     public ResponseData getChiMed(@PathVariable String type){
         return new ResponseData(EmBusinessError.success,chiMedService.selectAll(type));
     }
@@ -50,5 +50,11 @@ public class ChiMedController {
     public ResponseData delChiMed(@RequestBody IndustrialDevelopChiMed record){
         chiMedService.deleteByPrimaryKey(record.getItemid(),record.getItemcode());
         return new ResponseData(EmBusinessError.success);
+    }
+
+    @ResponseBody
+    @GetMapping(value = "/chi-med/getByOrgCode")
+    public ResponseData getByOrgCode(){
+        return new ResponseData(EmBusinessError.success,chiMedService.selectByOrgCode());
     }
 }

@@ -23,6 +23,14 @@
                         itemcode : stringUtil.getUUID(),
                         status : showStatus[0].id,
                     };
+                }else{
+                    var needData = JSON.parse(localStorage.getItem("rowData"));
+                    addUpdateUrl = "/industrialdevelop/base-style";
+                    baseStyleEntity = {
+                        itemid: needData.itemid,
+                        itemcode: needData.itemcode,
+                    }
+                    operateMessage = "更新基地风采成功";
                 }
 
                 fileUtil.handleFile(isUpdate(), baseStyleEntity.itemcode, uploadImg.getFiles()[0]);
@@ -61,7 +69,6 @@
                         itemid: needData.itemid,
                         itemcode: needData.itemcode,
                     }
-                    console.log(baseStyleEntity.itemcode);
                     operateMessage = "更新基地风采成功";
                 }
 
@@ -70,7 +77,7 @@
                 ajaxUtil.myAjax(null,addUpdateUrl,baseStyleEntity,function (data) {
                     if(ajaxUtil.success(data)){
                         if(data.code == ajaxUtil.successCode) {
-                            alertUtil.info(operateMessage);
+                            alertUtil.info(operateMessage+"，信息将展示在主页");
                             var url = "/industrialdevelop/style";
                             orange.redirect(url);
                         }else{

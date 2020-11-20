@@ -1,5 +1,6 @@
 package com.zyyglxt.controller.industrialDevelop;
 
+import com.zyyglxt.annotation.LogAnnotation;
 import com.zyyglxt.dto.industrialDevelop.AuditDto;
 import com.zyyglxt.error.EmBusinessError;
 import com.zyyglxt.response.ResponseData;
@@ -16,6 +17,7 @@ import javax.annotation.Resource;
 @RestController
 @RequestMapping(value = "industrialdevelop")
 public class OrgAuditController {
+
 
     @Resource
     IAuditService auditService;
@@ -71,6 +73,7 @@ public class OrgAuditController {
     }
 
     @PutMapping(value = "/audits")
+    @LogAnnotation(appCode = "",logTitle = "机构审核",logLevel = "2",updater = "")
     public ResponseData changeStatus(@RequestBody AuditDto record)
     {
         switch (record.getType()){

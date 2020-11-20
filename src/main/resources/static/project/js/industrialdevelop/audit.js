@@ -10,6 +10,18 @@
 
             var rolename = sessionStorage.getItem("rolename");
 
+            var dictMap = new Map();
+
+            var dicList = dictUtil.getDictByCode(dictUtil.DICT_LIST.projectStatus);
+
+            for (const t of dicList){
+                if (t.id === "1"){
+                    dictMap.set("待审核", t.id);
+                }else {
+                    dictMap.set(t.text, t.id );
+                }
+            }
+
             var pass;
 
             var nopass;
@@ -33,11 +45,11 @@
 
             //操作
             function operation(value, row, index){
-                let code = dictUtil.getCode(dictUtil.DICT_LIST.projectStatus, row.status);
+                let code = dictMap.get(row.status)
                 let tcode = parseInt(code);
                 let tpass = parseInt(pass);
                 let tnopass = parseInt(nopass);
-                if ((tcode < tpass && tcode % 2 === 0 && tcode !== 0) || tcode === 1){
+                if ((tcode < tpass && tcode % 2 === 0 && tcode !== 0) || (tcode === 1 && rolename === "市级中医药管理部门")){
                     return [
                         '<a class="view" style="margin:0 1em;text-decoration: none;color: #775637" data-toggle="modal" data-target="" >查看</a>',
                         '<a class="pass" style="margin:0 1em;text-decoration: none;color: #775637" data-toggle="modal" data-target="" >通过</a>',

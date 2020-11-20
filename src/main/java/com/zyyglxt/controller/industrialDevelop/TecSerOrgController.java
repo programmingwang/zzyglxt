@@ -56,7 +56,6 @@ public class TecSerOrgController {
     @ResponseBody
     @GetMapping(value = "/tec-ser-org/selectbyorgcode")
     public ResponseData getTecByOrgcode(){
-
         return new ResponseData(EmBusinessError.success,tecSerOrgService.selectByOrgcode());
     }
 }

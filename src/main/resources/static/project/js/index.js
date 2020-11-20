@@ -373,17 +373,45 @@
                 },
                 {
                     menu_name: "科研成果",
-                    menu_url: "/industrialdevelop/achievement",
+                    menu_url: "",
                     id: "20",
+                    level: "1",
+                    pid: ""
+                },
+                {
+                    menu_name: "科研成果",
+                    menu_url: "/industrialdevelop/achievement",
+                    id: "20-1",
+                    level: "2",
+                    pid: "20"
+                },
+                {
+                    menu_name: "信息维护",
+                    menu_url: "/industrialdevelop/organization/tour_add",
+                    id: "20-4",
+                    level: "2",
+                    pid: "20"
+                },
+                {
+                    menu_name: "基地风采",
+                    menu_url: "",
+                    id: "21",
                     level: "1",
                     pid: ""
                 },
                 {
                     menu_name: "基地风采",
                     menu_url: "/industrialdevelop/style",
-                    id: "21",
-                    level: "1",
-                    pid: ""
+                    id: "21-1",
+                    level: "2",
+                    pid: "21"
+                },
+                {
+                    menu_name: "信息维护",
+                    menu_url: "/industrialdevelop/style_add",
+                    id: "21-3",
+                    level: "2",
+                    pid: "21"
                 },
                 {
                     menu_name: "在售药材",
@@ -518,9 +546,11 @@
 
             function loadPage(url){
                 orange.loadPage({url: url, target: 'main_body', selector: '#fir_body', success: function(data){
+                    console.log(typeof data);
                         if(typeof data == "string"){
+                            $("#main_body").html(data);
                             console.log(url + "加载")
-                        } else {
+                        }else {
                             alertUtil.error( url+'加载失败');
                         }
                     }})
@@ -532,6 +562,7 @@
                     if(data && data.code === 88888){
                         sessionStorage.removeItem('username');
                         sessionStorage.removeItem('rolename');
+                        sessionStorage.removeItem('orgCode');
                         window.location.href = "/userLogin";
                     }else{
                         alertUtil.alert(data.msg);

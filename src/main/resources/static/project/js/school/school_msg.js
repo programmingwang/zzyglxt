@@ -2,9 +2,9 @@
     require(['jquery', 'ajaxUtil', 'stringUtil', 'uploadImg', 'objectUtil', 'distpicker'],
         function ($, ajaxUtil, stringUtil, uploadImg, objectUtil, distpicker) {
 
-            var url = "/industrialdevelop/tec-ser-org/selectbyorgcode";
+            var url = "/industrialdevelop/schoolmsg";
 
-            var pathUrl = "/serviceItems/tecserviceorg_msg";
+            var pathUrl = "/school/school_msg";
 
             var itemcode = stringUtil.getUUID();
 
@@ -18,23 +18,25 @@
 
             function generateParam() {
                 var param = {};
-                param.name = $("#name").val();
-                param.projectName = $("#projectName").val();
-                param.contacts = $("#contacts").val();
+                param.schoolName = $("#schoolName").val();
+                param.schoolIntroduce = $("#schoolIntroduce").val();
+                param.secondaryCollege = $("#secondaryCollege").val();
+                param.enrollmentMajor = $("#enrollmentMajor").val();
+                param.graduateEnrollmentMajor = $("#graduateEnrollmentMajor").val();
                 param.phone = $("#phone").val();
-                param.addressPro = $("#addressPro").val();
-                param.addressCity = $("#addressCity").val();
-                param.addressCountry = $("#addressCountry").val();
+                param.onlineAddress = $("#onlineAddress").val();
+                param.addressPro = $("#addressPro").val()
+                param.addressCity = $("#addressCity").val()
+                param.addressCountry = $("#addressCountry").val()
                 param.address = $("#address").val()
-                param.intruduce = $(".w-e-text").html();
-                param.orgCode = sessionStorage.getItem("orgCode");
-                param.itemcode = itemcode;
+                param.schoolText = $(".w-e-text").html();
                 return param;
             }
 
             $("#saveBtn").unbind('click').on('click', function () {
                 var param = generateParam();
                 param.status = "——";
+                param.itemcode = itemcode;
                 if (uploadImg.isUpdate()) {
                     ajaxUtil.fileAjax(itemcode, uploadImg.getFiles()[0], "undefined", "undefined")
                 }
@@ -63,26 +65,29 @@
             });
 
             var init = function () {
-                ajaxUtil.myAjax(null,url,null,function (data) {
-                    if(data && data.code == 88888) {
+                ajaxUtil.myAjax(null, url, null, function (data) {
+                    if (data && data.code == 88888) {
                         var tempdata = data.data;
-                        $("#name").val(tempdata.name);
-                        $("#projectName").val(tempdata.projectName);
-                        $("#contacts").val(tempdata.contacts);
-                        $("#phone").val(tempdata.phone);
+                        $("#schoolName").val(tempdata.schoolName);
+                        $("#schoolIntroduce").val(tempdata.schoolIntroduce);
+                        $("#secondaryCollege").val(tempdata.secondaryCollege);
+                        $("#enrollmentMajor").val(tempdata.enrollmentMajor);
                         $("#distpicker").distpicker({
                             province: tempdata.addressPro,
                             city: tempdata.addressCity,
                             district: tempdata.addressCountry
                         });
                         $("#address").val(tempdata.address);
-                        $(".w-e-text").html(tempdata.intruduce);
-                        itemcode = tempdata.itemcode;
-                        uploadImg.setImgSrc(tempdata.filePath)
-                    }else{
+                        $("#graduateEnrollmentMajor").val(tempdata.graduateEnrollmentMajor);
+                        $("#phone").val(tempdata.phone);
+                        $("#onlineAddress").val(tempdata.onlineAddress);
+                        $("#intruduce").val(tempdata.intruduce);
+                        $(".w-e-text").html(tempdata.schoolText);
+                        itemcode = tempdata.itemcode
+                    } else {
                         alertUtil.error(data.msg)
                     }
-                },null,"123","get")
+                }, null, "123", "get")
             };
             init();
 
@@ -91,3 +96,5 @@
             }
         })
 })();
+
+

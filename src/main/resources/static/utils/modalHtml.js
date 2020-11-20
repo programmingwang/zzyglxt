@@ -919,13 +919,18 @@
 
         modalHtml.myViewAccountMessageModal =
             '<div class="row">'+
-            '            <div id="imgDiv" class="col-lg-12 col-md-12">\n' +
-            '                <fieldset disabled>'+
-            '                <div class="input-group mb-3">\n' +
-            '                    <div class="input-group-prepend">\n' +
-            '                        <button type="button" class="btn btn-primary btn-sm">头像</button>\n' +
+            '            <div class="upload-content" data-limit="1">\n' +
+            '                <div class="content-img">\n' +
+            '                    <ul class="content-img-list"></ul>\n' +
+            '                    <div class="file">\n' +
+            '                        <input type="file" name="file" accept="image/*" id="upload" multiple>\n' +
             '                    </div>\n' +
-            '                    <img id="portrait" src="#"/>\n' +
+            '                </div>\n' +
+            '                <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">\n' +
+            '                    <div class="modal-dialog modal-lg" role="document">\n' +
+            '                        <div class="modal-content">\n' +
+            '                        </div>\n' +
+            '                    </div>\n' +
             '                </div>\n' +
             '            </div>\n' +
             '\n' +

@@ -35,9 +35,7 @@ public class SaleDrugController {
     private IFileService iFileService;
     @Resource
     UsernameUtil usernameUtil;
-
     @ResponseBody
-
     @RequestMapping(value = "/sale-drug", method = RequestMethod.POST)
     @LogAnnotation(appCode ="",logTitle ="售药添加",logLevel ="3",creater ="",updater = "")
     public ResponseData addSaleDrug(@RequestBody IndustrialDevelopSaleDrug record) {
@@ -46,7 +44,6 @@ public class SaleDrugController {
     }
 
     @ResponseBody
-
     @RequestMapping(value = "/sale-drug", method = RequestMethod.PUT)
     @LogAnnotation(appCode ="",logTitle ="售药数据修改",logLevel ="2",creater ="",updater = "")
     public ResponseData updSaleDrug(@RequestBody IndustrialDevelopSaleDrug record){

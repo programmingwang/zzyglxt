@@ -73,7 +73,7 @@
                 'click .submit' : function (e, value, row, index) {
                     var mySubmitTravelModalData ={
                         modalBodyID :"mySubmitModal",
-                        modalTitle : "提交",
+                        modalTitle : "重置密码",
                         modalClass : "modal-lg",
                         modalConfirmFun:function () {
                             var isSuccess = false;

@@ -80,7 +80,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 "/swagger-resources/configuration/security",//安全选项
                 "/swagger-ui.html",
                 "/webjars/**").permitAll().antMatchers("/component/**","/css/**", "/fonts/**",
-                "/images/**","/main/**", "/project/**", "/utils/**", "/", "/register","/user/register","/user/queryOrgStatus",
+                "/images/**","/main/**", "/project/**", "/utils/**", "/", "/register","/user/register","/user/queryOrgStatus","/dict/getDictByCode",
                 "/plantation_add",
                 "/process_add",
                 "/produce_add",
@@ -90,7 +90,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 "/lab_add",
                 "/tecservice_add",
                 "/tour_add").permitAll().
-                   anyRequest().authenticated().
+                anyRequest().authenticated().
                     and().logout().
                     permitAll().//允许所有用户
                     logoutSuccessHandler(logoutSuccessHandler).//登出成功处理逻辑

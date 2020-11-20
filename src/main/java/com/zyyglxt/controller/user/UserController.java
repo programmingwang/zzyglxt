@@ -64,39 +64,48 @@ public class UserController {
     public ResponseData checkOrgStatus(OrgStatusDto orgStatusDto) {
         OrganizationDO organizationDO = iuserService.selectByOrgNameAndCode(orgStatusDto.getOrgName(), orgStatusDto.getOrgCode());
         if (organizationDO != null) {
-            if ("中药材种植园".equals(organizationDO.getOrgIdentify()) ||
-                    "中药材加工企业".equals(organizationDO.getOrgIdentify()) ||
-                    "中药材制药企业".equals(organizationDO.getOrgIdentify())) {
-                IndustrialDevelopChiMed chiMed = developChiMedService.selectByOrgNameAndCode(orgStatusDto.getOrgName(), orgStatusDto.getOrgCode());
-                if ("提交".equals(chiMed.getStatus())) {
-                    return new ResponseData(EmBusinessError.success, "您申请注册的机构还在审核中，请耐心等待");
-                } else if ("地市局用户审核不通过".equals(chiMed.getStatus()) || "省局用户审核不通过".equals(chiMed.getStatus())) {
-                    return new ResponseData(EmBusinessError.success, "您申请注册的机构暂未审核通过，审核意见：" + chiMed.getReason() + "，点击此处修改信息");
-                } else if ("地市局用户审核通过".equals(chiMed.getStatus())) {
-                    return new ResponseData(EmBusinessError.success, "您申请注册的机构市局审核已通过，请耐心等待省局审核");
-                } else if ("省局用户审核通过".equals(chiMed.getStatus())) {
-                    return new ResponseData(EmBusinessError.success, "该机构审核已通过");
+            if (organizationDO.getOrgIdentify().equals(orgStatusDto.getOrgIdentify())) {
+                switch (orgStatusDto.getOrgIdentify()) {
+                    case "中药材种植园":
+                    case "中药材加工企业":
+                    case "中药材制药企业":
+                        IndustrialDevelopChiMed chiMed = developChiMedService.selectByOrgNameAndCode(orgStatusDto.getOrgName(), orgStatusDto.getOrgCode());
+                        switch (chiMed.getStatus()) {
+                            case "提交":
+                                return new ResponseData(EmBusinessError.success, "您申请注册的机构还在审核中，请耐心等待");
+                            case "地市局用户审核不通过":
+                            case "省局用户审核不通过":
+                                return new ResponseData(EmBusinessError.success, "您申请注册的机构暂未审核通过，审核意见：" + chiMed.getReason() + "，点击此处修改信息");
+                            case "地市局用户审核通过":
+                                return new ResponseData(EmBusinessError.success, "您申请注册的机构市局审核已通过，请耐心等待省局审核");
+                            case "省局用户审核通过":
+                                return new ResponseData(EmBusinessError.success, "该机构审核已通过");
+                        }
+                        return new ResponseData(EmBusinessError.success, "非法状态：" + chiMed.getStatus());
+                    case "科研院所":
+                    case "技术服务机构":
+                    case "旅游康养机构":
+                        IndustrialDevelopTecSerOrg tecSerOrg = developTecSerOrgService.selectByOrgNameAndCode(orgStatusDto.getOrgName(), orgStatusDto.getOrgCode());
+                        switch (tecSerOrg.getStatus()) {
+                            case "提交":
+                                return new ResponseData(EmBusinessError.success, "您申请注册的机构还在审核中，请耐心等待");
+                            case "地市局用户审核不通过":
+                            case "省局用户审核不通过":
+                                return new ResponseData(EmBusinessError.success, "您申请注册的机构暂未审核通过，审核意见：" + tecSerOrg.getReason() + "，点击此处修改信息");
+                            case "地市局用户审核通过":
+                                return new ResponseData(EmBusinessError.success, "您申请注册的机构市局审核已通过，请耐心等待省局审核");
+                            case "省局用户审核通过":
+                                return new ResponseData(EmBusinessError.success, "该机构审核已通过");
+                        }
+                        return new ResponseData(EmBusinessError.success, "非法状态：" + tecSerOrg.getStatus());
+                    case "中医医疗机构":
+                    case "高等医学院校":
+                        return new ResponseData(EmBusinessError.success, "该机构类型无需审核");
+                    default:
+                        return new ResponseData(EmBusinessError.success, "无此机构类型");
                 }
-                return new ResponseData(EmBusinessError.success, "非法状态：" + chiMed.getStatus());
-            } else if ("科研院所".equals(organizationDO.getOrgIdentify()) ||
-                    "技术服务机构".equals(organizationDO.getOrgIdentify()) ||
-                    "旅游康养机构".equals(organizationDO.getOrgIdentify())) {
-                IndustrialDevelopTecSerOrg tecSerOrg = developTecSerOrgService.selectByOrgNameAndCode(orgStatusDto.getOrgName(), orgStatusDto.getOrgCode());
-                if ("提交".equals(tecSerOrg.getStatus())) {
-                    return new ResponseData(EmBusinessError.success, "您申请注册的机构还在审核中，请耐心等待");
-                } else if ("地市局用户审核不通过".equals(tecSerOrg.getStatus()) || "省局用户审核不通过".equals(tecSerOrg.getStatus())) {
-                    return new ResponseData(EmBusinessError.success, "您申请注册的机构暂未审核通过，审核意见：" + tecSerOrg.getReason() + "，点击此处修改信息");
-                } else if ("地市局用户审核通过".equals(tecSerOrg.getStatus())) {
-                    return new ResponseData(EmBusinessError.success, "您申请注册的机构市局审核已通过，请耐心等待省局审核");
-                } else if ("省局用户审核通过".equals(tecSerOrg.getStatus())) {
-                    return new ResponseData(EmBusinessError.success, "该机构审核已通过");
-                }
-                return new ResponseData(EmBusinessError.success, "非法状态：" + tecSerOrg.getStatus());
-            } else if ("中医医疗机构".equals(organizationDO.getOrgIdentify()) ||
-                    "高等医学院校".equals(organizationDO.getOrgIdentify())) {
-                return new ResponseData(EmBusinessError.success, "该机构类型无需审核");
             } else {
-                return new ResponseData(EmBusinessError.fail, "无此机构");
+                return new ResponseData(EmBusinessError.success, "该机构不属于此机构类型");
             }
         } else {
             return new ResponseData(EmBusinessError.success, "该机构还未申请注册，请继续");

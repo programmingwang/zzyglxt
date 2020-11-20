@@ -275,7 +275,7 @@
                 {field: 'hospitalAddress', title: '地址',formatter:function (value, row, index) {
                         return handlePro(row.hospitalAddressPro) + row.hospitalAddressCity + row.hospitalAddressCountry + value
                     }},
-                {field: 'hospitalTelephone', title: '联系电话',width:'120px'},
+                {field: 'hospitalTelephone', title: '联系电话', width:'120px'},
                 {field: 'action',  title: '操作',formatter: operation,events:orgEvents}
             ];
 

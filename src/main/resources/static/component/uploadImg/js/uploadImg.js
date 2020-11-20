@@ -3,6 +3,7 @@ var imgSrc = []; //图片路径
 var imgName = []; //图片名字
 var limit = 5;//限制数量，默认为 5
 var updated = false;
+var base64Code = "";
 (function () {
     define('uploadImg', ['jquery'], function ($) {
 
@@ -38,8 +39,6 @@ var updated = false;
 
             $(".content-img-list").on("click", '.content-img-list-item a .gclfangda', function () {
                 var index = $(this).parent().parent().parent().index();
-                console.log(index);
-                console.log(imgSrc);
                 $(".modal-content").html("");
 
                 var bigimg = $(".modal-content").html();
@@ -80,6 +79,7 @@ var updated = false;
                     imgSrc.push(imgSrcI);
                     imgFile.push(fileList[i]);
                 }
+                genBase64();
 
                 addNewContent(imgBox);
                 this.value = null; //上传相同图片
@@ -136,6 +136,18 @@ var updated = false;
             return imgFile;
         }
 
+        function genBase64() {
+            r = new FileReader();
+            r.onload = function(){
+                base64Code = r.result
+            };
+            r.readAsDataURL(imgFile[0]);
+        }
+
+        function getBase64() {
+            return base64Code;
+        }
+
         function isUpdate() {
             return updated;
         }
@@ -163,7 +175,8 @@ var updated = false;
             isUpdate: isUpdate,
             setImgSrc: setImgSrc,
             setImgSrcs: setImgSrcs,
-            init: init
+            init: init,
+            getBase64: getBase64
         }
 
     })

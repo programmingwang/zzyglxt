@@ -57,8 +57,7 @@
                     $("#chineseCulturalSource").val(tempdata.chineseCulturalSource);
                     $("#chineseCulturalAuthor").val(tempdata.chineseCulturalAuthor);
                     editor.txt.html(tempdata.chineseCulturalContent);
-
-
+                    $("#addFile").text(tempdata.fileName);
                 }
             }());
 
@@ -77,7 +76,6 @@
                     var name = this.files[i].name;
                     var j=i+1;
                     $("#addFile").append('<p>附件'+j+'：&nbsp;'+ name +'&nbsp;</p>');
-                    console.log(name);
                 };
                 if(len>0){
                     $("#clsfile").css("display","block")

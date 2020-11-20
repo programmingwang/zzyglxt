@@ -235,6 +235,16 @@
   <select id="selectAllSaleDrug" resultMap="BaseResultMap">
         SELECT *
         FROM tb_industrial_develop_sale_drug
-        WHERE ORG_CODE = #{orgCode,jdbcType=CHAR}
+        WHERE STATUS = #{status,jdbcType=VARCHAR}
     </select>
+  <update id="changeStatusToSaleDrug">
+    update tb_industrial_develop_sale_drug
+    <set>
+      <if test="status != null">
+        STATUS = #{status,jdbcType=VARCHAR}
+      </if>
+    </set>
+    where itemID = #{key.itemid,jdbcType=INTEGER}
+    and itemCode = #{key.itemcode,jdbcType=CHAR}
+  </update>
 </mapper>

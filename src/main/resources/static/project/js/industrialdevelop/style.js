@@ -100,7 +100,7 @@
                 },
 
                 'click .submit' : function (e, value, row, index) {
-                    var myUnderShelfStyleModalData ={
+                    var mySubmitStyleModalData ={
                         modalBodyID :"myShowModal",
                         modalTitle : "上架",
                         modalClass : "modal-lg",
@@ -126,7 +126,7 @@
                         }
 
                     };
-                    var myUnderShelfModal = modalUtil.init(myUnderShelfStyleModalData);
+                    var myUnderShelfModal = modalUtil.init(mySubmitStyleModalData);
                     myUnderShelfModal.show();
                 },
             };

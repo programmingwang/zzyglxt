@@ -15,7 +15,7 @@
 
             //操作
             function operation(value, row, index){
-                if (row.status === '展示中'){
+                if (dictUtil.getCode(dictUtil.DICT_LIST.showStatus,row.status) === '1'){
                     return [
                         '<a class="unshelve" style="margin:0 1em;text-decoration: none;color: #775637" data-toggle="modal" data-target="" >下架</a>'
                     ].join('')
@@ -64,7 +64,7 @@
                     var param = {
                         itemid: row.itemid,
                         itemcode: row.itemcode,
-                        status: '已下架'
+                        status: '2'
                     }
                     ajaxUtil.myAjax(null, url, param,function (data) {
                         if (ajaxUtil.success(data)){

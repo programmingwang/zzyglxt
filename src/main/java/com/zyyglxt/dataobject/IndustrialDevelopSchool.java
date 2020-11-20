@@ -130,4 +130,10 @@ public class IndustrialDevelopSchool {
     */
     @ApiModelProperty(value="修改时间")
     private Date itemupdateat;
+
+    /**
+     * 机构编号
+     */
+    @ApiModelProperty(value="机构编号")
+    private String orgCode;
 }

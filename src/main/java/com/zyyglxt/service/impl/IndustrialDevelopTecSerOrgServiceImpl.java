@@ -63,8 +63,12 @@ public class IndustrialDevelopTecSerOrgServiceImpl implements IndustrialDevelopT
     }
 
     @Override
-    public IndustrialDevelopTecSerOrg selectByOrgcode() {
-        return industrialDevelopTecSerOrgMapper.selectByOrgcode(usernameUtil.getOrgCode());
+    public IndustrialDevelopTecSerOrgDto selectByOrgcode() {
+        IndustrialDevelopTecSerOrg developTecSerOrg = industrialDevelopTecSerOrgMapper.selectByOrgcode(usernameUtil.getOrgCode());
+        IndustrialDevelopTecSerOrgDto dto = new IndustrialDevelopTecSerOrgDto();
+        BeanUtils.copyProperties(developTecSerOrg, dto);
+        dto.setFilePath(fileService.selectFileByDataCode(developTecSerOrg.getItemcode()).getFilePath());
+        return dto;
     }
 
     @Override

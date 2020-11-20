@@ -7,7 +7,7 @@
 
             var opUrl = "/industrialdevelop/ser-pro";
 
-            var pathUrl = "/serviceItems/tecserviceorg";
+            var pathUrl = "/school/school";
 
             var addUrl = pathUrl + "_add";
 
@@ -41,10 +41,10 @@
                         itemcode: row.itemcode,
                         status: 2
                     };
-                    ajaxUtil.myAjax(null, "/industrialdevelop/ser-pro", projectEntity, function (data) {
+                    ajaxUtil.myAjax(null, url, projectEntity, function (data) {
                         if (data && data.code == 88888) {
                             alertUtil.success(data.msg);
-                            orange.redirect("/serviceItems/tecserviceorg")
+                            orange.redirect(pathUrl)
                         } else {
                             alertUtil.error(data.msg);
                         }

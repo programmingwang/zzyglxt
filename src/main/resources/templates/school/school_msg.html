@@ -43,7 +43,7 @@
     <div class="col-12">
         <form>
             <div class="form-group row">
-                <label class="col-sm-2 col-form-label">企业照片：</label>
+                <label class="col-sm-2 col-form-label">学校图片：</label>
                 <div class="upload-content" data-limit="1">
                     <div class="content-img">
                         <ul class="content-img-list"></ul>
@@ -63,29 +63,45 @@
             </div>
 
             <div class="form-group row">
-                <label class="col-sm-2 col-form-label">企业名称：</label>
+                <label class="col-sm-2 col-form-label">学校名称：</label>
                 <div class="col-sm-3">
-                    <input id="name" type="text" class="form-control" placeholder="请输入">
-                </div>
-            </div>
-            <div class="form-group row">
-                <label class="col-sm-2 col-form-label">服务项目：</label>
-                <div class="col-sm-3">
-                    <input id="projectName" type="text" class="form-control" placeholder="请输入">
-                </div>
-            </div>
-            <div class="form-group row">
-                <label class="col-sm-2 col-form-label">联系人：</label>
-                <div class="col-sm-3">
-                    <input id="contacts" type="text" class="form-control" placeholder="请输入">
+                    <input id="schoolName" type="text" class="form-control" placeholder="请输入">
                 </div>
 
+                <label class="col-sm-2 col-form-label">学校简介：</label>
+                <div class="col-sm-3">
+                    <input id="schoolIntroduce" type="text" class="form-control" placeholder="请输入">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">二级学院名称：</label>
+                <div class="col-sm-3">
+                    <input id="secondaryCollege" type="text" class="form-control" placeholder="请输入">
+                </div>
+
+                <label class="col-sm-2 col-form-label">本科招生专业：</label>
+                <div class="col-sm-3">
+                    <input id="enrollmentMajor" type="text" class="form-control" placeholder="请输入">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">研究生招生专业：</label>
+                <div class="col-sm-3">
+                    <input id="graduateEnrollmentMajor" type="text" class="form-control" placeholder="请输入">
+                </div>
+            </div>
+            <div class="form-group row">
                 <label class="col-sm-2 col-form-label">联系电话：</label>
                 <div class="col-sm-3">
                     <input id="phone" type="text" class="form-control" placeholder="请输入">
                 </div>
-            </div>
 
+                <label class="col-sm-2 col-form-label">在线地址：</label>
+                <div class="col-sm-3">
+                    <input id="onlineAddress" type="text" class="form-control" placeholder="请输入">
+                </div>
+            </div>
             <div id="distpicker" class="form-group row">
                 <label for="addressPro" class="col-sm-2 col-form-label">省：</label>
                 <div class="col-sm-2">
@@ -102,15 +118,14 @@
                     <select id="addressCountry" class="form-control"></select>
                 </div>
             </div>
-
             <div class="form-group row">
-                <label class="col-sm-2 col-form-label">地址：</label>
+                <label class="col-sm-2 col-form-label">学校地址：</label>
                 <div class="col-sm-3">
                     <input id="address" type="text" class="form-control" placeholder="请输入">
                 </div>
             </div>
             <div class="form-group row">
-                <label class="col-sm-2 col-form-label">企业简介：</label>
+                <label class="col-sm-2 col-form-label">学校简介：</label>
                 <div id="div1" class="col-sm-8">
                 </div>
             </div>
@@ -137,8 +152,8 @@
 
 </div>
 <script type="text/javascript" data-main="/main/main.js" th:src="@{/component/require@2.3.6/require-2.3.6.js}"></script>
-<script type="text/javascript" th:src="@{/project/js/serviceItems/school_msg.js}"></script>
-<link type="text/css" rel="stylesheet" href="../../static/component/uploadImg/css/uploadImg.css"
+<script type="text/javascript" th:src="@{/project/js/industrialdevelop/school_add.js}"></script>
+<link type="text/css" rel="stylesheet" href="/component/uploadImg/css/uploadImg.css"
       th:src="@{/component/uploadImg/css/uploadImg.css}">
 <script type="text/javascript" th:src="@{/component/uploadImg/js/bootstrap.min.js}"></script>
 </body>

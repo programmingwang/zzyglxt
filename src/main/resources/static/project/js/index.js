@@ -455,6 +455,20 @@
                     level: "1",
                     pid: ""
                 },
+                {
+                    menu_name: "信息维护(中药材加工)",
+                    menu_url: "/industrialdevelop/chinesemed/chinesemed-process_add",
+                    id: "24",
+                    level: "1",
+                    pid: ""
+                },
+                {
+                    menu_name: "信息维护(种植园)",
+                    menu_url: "/industrialdevelop/chinesemed/plantation_add",
+                    id: "25",
+                    level: "1",
+                    pid: ""
+                },
             ];
 
 

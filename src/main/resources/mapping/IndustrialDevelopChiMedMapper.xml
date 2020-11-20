@@ -44,13 +44,12 @@
     from tb_industrial_develop_chi_med
     where itemCode = #{itemcode,jdbcType=CHAR}
   </select>
-  <select id="selectByOrgNameAndCode" resultMap="BaseResultMap">
+  <select id="selectByOrgCode" resultMap="BaseResultMap">
     <!--@mbg.generated-->
     select
     <include refid="Base_Column_List" />
     from tb_industrial_develop_chi_med
-    where NAME = #{orgName,jdbcType=VARCHAR}
-    and ORG_CODE = #{orgCode,jdbcType=VARCHAR}
+    where ORG_CODE = #{orgCode,jdbcType=VARCHAR}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="map">
     <!--@mbg.generated-->

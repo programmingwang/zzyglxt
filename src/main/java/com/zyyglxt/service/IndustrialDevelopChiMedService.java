@@ -29,5 +29,5 @@ public interface IndustrialDevelopChiMedService {
 
     List<IndustrialDevelopChiMedDto> selectAll( String type);
 
-    IndustrialDevelopChiMed selectByOrgNameAndCode(String orgName, String orgCode);
+    IndustrialDevelopChiMed selectByOrgCode();
 }

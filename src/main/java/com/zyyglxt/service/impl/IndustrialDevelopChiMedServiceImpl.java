@@ -1,10 +1,10 @@
 package com.zyyglxt.service.impl;
 
-import com.zyyglxt.dataobject.OrganizationDO;
 import com.zyyglxt.dto.industrialDevelop.IndustrialDevelopChiMedDto;
 import com.zyyglxt.error.BusinessException;
 import com.zyyglxt.error.EmBusinessError;
 import com.zyyglxt.service.IFileService;
+import com.zyyglxt.util.UsernameUtil;
 import com.zyyglxt.validator.ValidatorImpl;
 import com.zyyglxt.validator.ValidatorResult;
 import org.springframework.beans.BeanUtils;
@@ -31,6 +31,9 @@ public class IndustrialDevelopChiMedServiceImpl implements IndustrialDevelopChiM
 
     @Resource
     private IFileService fileService;
+
+    @Resource
+    private UsernameUtil usernameUtil;
 
     @Autowired
     ValidatorImpl validator;
@@ -86,8 +89,7 @@ public class IndustrialDevelopChiMedServiceImpl implements IndustrialDevelopChiM
     }
 
     @Override
-    public IndustrialDevelopChiMed selectByOrgNameAndCode(String orgName, String orgCode){
-        IndustrialDevelopChiMed developChiMed = industrialDevelopChiMedMapper.selectByOrgNameAndCode(orgName, orgCode);
-        return developChiMed;
+    public IndustrialDevelopChiMed selectByOrgCode(){
+        return industrialDevelopChiMedMapper.selectByOrgCode(usernameUtil.getOrgCode());
     }
 }

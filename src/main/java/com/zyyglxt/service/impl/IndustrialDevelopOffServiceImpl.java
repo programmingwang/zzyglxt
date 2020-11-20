@@ -13,6 +13,7 @@ import com.zyyglxt.validator.ValidatorResult;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -33,10 +34,12 @@ public class IndustrialDevelopOffServiceImpl implements IIndustrialDevelopOffSer
 
     @Override
     public void addOff(IndustrialDevelopOffDO record) {
+
         record.setCreater(usernameUtil.getOperateUser());
         record.setUpdater(usernameUtil.getOperateUser());
         record.setItemcreateat(new Date());
         record.setItemupdateat(new Date());
+
         ValidatorResult result = validator.validate(record, ValidationGroups.Insert.class);
         if (result.isHasErrors()){
             throw new BusinessException(result.getErrMsg(), EmBusinessError.PARAMETER_VALIDATION_ERROR);

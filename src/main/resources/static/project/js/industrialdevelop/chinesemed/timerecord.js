@@ -1,6 +1,6 @@
 (function () {
-    require(['jquery', 'ajaxUtil', 'bootstrapTableUtil', 'objectUtil', 'alertUtil', 'modalUtil', 'selectUtil', 'stringUtil', 'dictUtil'],
-        function (jquery, ajaxUtil, bootstrapTableUtil, objectUtil, alertUtil, modalUtil, selectUtil, stringUtil, dictUtil) {
+    require(['jquery', 'ajaxUtil', 'bootstrapTableUtil', 'objectUtil', 'alertUtil', 'modalUtil', 'selectUtil', 'stringUtil', 'dictUtil','myDatePicker'],
+        function (jquery, ajaxUtil, bootstrapTableUtil, objectUtil, alertUtil, modalUtil, selectUtil, stringUtil, dictUtil, myDatePicker) {
 
 
             var getUrl = "/industrialdevelop";
@@ -31,8 +31,15 @@
                         var startTime = $("#startTime").val();
                         var endTime = $("#endTime").val();
 
+
+                        var submitStatus = {
+                            "year": year,
+                            "startTime": startTime,
+                            "endTime": endTime,
+                        };
+
                         var isSuccess = false;
-                        ajaxUtil.myAjax(null,opUrl,null,function (data) {
+                        ajaxUtil.myAjax(null,opUrl,submitStatus,function (data) {
                             if(ajaxUtil.success(data)){
                                 alertUtil.info("设置时间成功");
                                 isSuccess = true;
@@ -44,6 +51,41 @@
                 }
                 var myTravelModal = modalUtil.init(myViewTimeModalData);
                 myTravelModal.show();
+
+                //调用日期插件
+                $("#startTime").myDatePicker({
+                    'startDate':'2014-01-01 18:45:20',
+                    'endDate':(new Date()).Format("yyyy-mm-dd hh:ii:ss"),
+                    //指定父元素，不指定默认为body
+                    parent:$("#startTime").parent(),
+                    //定位方式是否用fixed
+                    positionFixed:$("#position-1").is(':checked'),
+
+                });
+
+                let _input=$(" #startTime");
+                let view=7;
+                _input[0].resetDatePicker({
+                    'view':7,
+                });
+                _input.focus();
+                //调用日期插件
+                $("#endTime").myDatePicker({
+                    'startDate':'2014-01-01 18:45:20',
+                    'endDate':(new Date()).Format("yyyy-mm-dd hh:ii:ss"),
+                    //指定父元素，不指定默认为body
+                    parent:$("#endTime").parent(),
+                    //定位方式是否用fixed
+                    positionFixed:$("#position-1").is(':checked'),
+
+                });
+
+                let _inputE=$(" #endTime");
+                let viewE=7;
+                _inputE[0].resetDatePicker({
+                    'view':7,
+                });
+                _input.focus();
             });
 
             var pl = dictUtil.getDictByCode(dictUtil.DICT_LIST.showStatus);
@@ -52,8 +94,8 @@
 
             var aCol = [
                 {field: 'year', title: '年份'},
-                {field: 'startTime', title: '开启时间'},
-                {field: 'endTime', title: '结束时间'},
+                {field: 'itemcreateat', title: '开启时间'},
+                {field: 'itemupdateat', title: '结束时间'},
                 {field: 'creater', title: '操作人'},
                 {field: 'itemcreateat', title: '操作时间'}
             ];
@@ -66,6 +108,11 @@
                 myTable = bootstrapTableUtil.myBootStrapTableInit("table", getUrl, param, aCol);
             }
 
+            var allTableData = $("#table").bootstrapTable("getData");
+            console.log(allTableData);
             bootstrapTableUtil.globalSearch("table", getUrl, aParam, aCol);
+
+
+
         })
 })();

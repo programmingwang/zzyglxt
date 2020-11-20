@@ -13,6 +13,7 @@ import com.zyyglxt.dto.industrialDevelop.IndustrialDevelopTecSerOrgDto;
 import com.zyyglxt.service.IAuditService;
 import com.zyyglxt.service.IDictService;
 import com.zyyglxt.service.IFileService;
+import com.zyyglxt.util.UsernameUtil;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
@@ -37,6 +38,9 @@ public class AuditServiceImpl implements IAuditService {
 
     @Resource
     IFileService fileService;
+
+    @Resource
+    UsernameUtil usernameUtil;
 
     @Override
     public List<AuditDto> getAll() {

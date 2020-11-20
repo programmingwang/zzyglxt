@@ -46,28 +46,24 @@
                 },
 
                 'click .view' : function (e, value, row, index) {
-                    var myViewTravelModalData ={
-                        modalBodyID : "myViewChineseMedicineModal", //公用的在后面给span加不同的内容就行了，其他模块同理
+                    var myViewExpertModalData ={
+                        modalBodyID : "myViewExpertModal", //公用的在后面给span加不同的内容就行了，其他模块同理
                         modalTitle : "查看",
                         modalClass : "modal-lg",
                         confirmButtonStyle: "display:none",
                     };
-                    var myTravelModal = modalUtil.init(myViewTravelModalData);
-                    $("#chineseMedicineImg").attr("src",row.filePath)
-                    $("#chineseMedicineName").val(row.chineseMedicineName);
-                    $("#chineseMedicineType").val(row.chineseMedicineType);
-                    $("#chineseMedicineTitle").val(row.chineseMedicineTitle);
-                    $("#hospitalName").val(row.hospitalName);
-                    $("#specialtyName").val(row.specialtyName);
-                    $("#visitTime").val(row.visitTime);
-                    $("#phone").val(row.phone);
-                    $("#mainVisit").val(row.mainVisit);
-                    $("#expertIntroduce").val(row.expertIntroduce);
-                    $("#medicineRecords").val(row.medicineRecords);
-                    $("#chineseMedicineStatus").val(row.chineseMedicineStatus);
-                    $("#creater").val(row.creater);
-                    $("#itemCreateAt").val(row.itemcreateat);
-                    myTravelModal.show();
+                    var myViewExpertModal = modalUtil.init(myViewExpertModalData);
+                    $("#username").val(row.username);
+                    $("#name").val(row.name);
+                    $("#gender").val(row.gender);
+                    $("#idcardType").val(row.idcardType);
+                    $("#idcardNo").val(row.idcardNo);
+                    $("#email").val(row.email);
+                    $("#mobilephone").val(row.mobilephone);
+                    $("#cityid").val(row.cityid);
+                    $("#portrait").val(row.portrait);
+                    $("#filed").val(row.filed);
+                    myViewExpertModal.show();
                 },
 
                 'click .resetpassword' : function (e, value, row, index) {
@@ -102,9 +98,33 @@
             };
 
             /*新增专家账号*/
-            $("#btn_addTask").unbind().on('click',function () {
-                localStorage.removeItem("rowData");
-                orange.redirect(addUrl)
+            $("#btn_addTask").unbind().on('click',function (e, value, row, index) {
+                var myaddExpertModalData ={
+                    modalBodyID :"myaddExpertModal",
+                    modalTitle : "新增专家账号",
+                    modalClass : "modal-lg",
+                    confirmButtonClass : "btn-danger",
+                    modalConfirmFun : function () {
+                       var param = {
+                           username:$("#expertAccount").val(),
+                           name:$("#expertName").val(),
+                           filed : $("#expertFiled").val(),
+                           gender:$("#expertGender").val(),
+                           phone:$("#expertPhone").val()
+                       }
+                        ajaxUtil.myAjax(null, addUrl, param, function (data) {
+                            if (ajaxUtil.success(data)) {
+                                alertUtil.alert("新增成功");
+
+                                myaddExpertModal.hide();
+                            } else {
+                                alertUtil.alert("新增失败");
+                            }
+                        }, true, "123", 'post');
+                    }
+                };
+                var myaddExpertModal = modalUtil.init(myaddExpertModalData);
+                myaddExpertModal.show();
             });
 
             var pl = dictUtil.getDictByCode(dictUtil.DICT_LIST.showStatus);
@@ -114,8 +134,8 @@
                 {field: 'username', title: '用户账号'},
                 {field: 'name', title: '专家姓名'},
                 {field: 'filed', title: '擅长领域'},
-                {field: 'gender', title: '性别'},
-                {field: 'mobilephone', title: '联系电话'},
+                {field: 'gender', title: '性别',width:'120px'},
+                {field: 'mobilephone', title: '联系电话',width:'120px'},
                 {field: 'action',  title: '操作',formatter: operation,events:orgEvents}
             ];
 

@@ -267,7 +267,7 @@
                     }},
                 {field: 'specialtyName', title: '所在科室'},
                 {field: 'hospitalName', title: '所属医院'},
-                {field: 'phone', title: '联系电话'},
+                {field: 'phone', title: '联系电话', width: '120px'},
                 {field: 'action',  title: '操作',formatter: operation,events:orgEvents}
             ];
 

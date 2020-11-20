@@ -274,7 +274,7 @@
                 {field: 'specialtyAddress', title: '地址',formatter:function (value, row, index) {
                         return handlePro(row.specialtyAddressPro) + row.specialtyAddressPro + row.specialtyAddressCity + row.specialtyAddressCity + value
                     }},
-                {field: 'specialtyPhone', title: '联系电话'},
+                {field: 'specialtyPhone', title: '联系电话', width:'120px'},
                 {field: 'action',  title: '操作',formatter: operation,events:orgEvents}
             ];
 

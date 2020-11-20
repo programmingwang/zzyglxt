@@ -168,7 +168,7 @@
                 {field: 'cityid', title: '主管市区'},
                 {field: 'roleName', title: '用户角色'},
                 {field: 'contacts', title: '联系人'},
-                {field: 'action',  title: '操作',formatter: operation,events:orgEvents}
+                {field: 'action',  title: '操作',width: "254px",formatter: operation,events:orgEvents}
             ];
 
             var myTable = bootstrapTableUtil.myBootStrapTableInit("table", url, aParam, aCol);

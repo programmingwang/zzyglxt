@@ -356,7 +356,7 @@
                 },
                 {
                     menu_name: "＞专家管理",
-                    menu_url: "/scientificProject/expertManagement",
+                    menu_url: "/industrialdevelop/expert",
                     id: "15-4",
                     level: "2",
                     pid: "15"

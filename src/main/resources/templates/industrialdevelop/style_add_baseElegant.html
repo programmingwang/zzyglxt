@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en"xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://at.alicdn.com/t/font_1805932_ysrcp4y0uy9.css">
+    <style>
+        label{
+            text-align: right;
+        }
+    </style>
+</head>
+<body>
+<div class="row">
+    <div class="col-12">
+        <form>
+            <!--上传图片的div-->
+            <div class="form-group row">
+                <label for="exampleFormControlFile1" class="col-sm-2 col-form-label">基地照片：</label>
+                <div class="upload-content" data-limit="1">
+                    <div class="content-img">
+                        <ul class="content-img-list"></ul>
+                        <div class="file">
+                            <i class="gcl gcladd"></i>
+                            <input type="file" name="file" accept="image/*" id="upload" multiple>
+                        </div>
+                    </div>
+                    <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog"
+                         aria-labelledby="myLargeModalLabel">
+                        <div class="modal-dialog modal-lg" role="document">
+                            <div class="modal-content">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group row" >
+                <div class="col-lg-4 col-md-4"></div>
+                <div class="col-lg-4 col-md-4 row">
+                    <button id="cancel" type="button" class="btn btn-light small">取消</button>
+
+                    <button id="btn_save" type="submit" class="btn btn-danger small">保存</button>
+
+                    <button id="btn_insert" type="submit" class="btn btn-danger small">上架</button>
+                </div>
+                <div class="col-lg-4 col-md-4"></div>
+            </div>
+
+        </form>
+    </div>
+
+</div>
+<script type="text/javascript" data-main="/main/main.js" th:src="@{/component/require@2.3.6/require-2.3.6.js}"></script>
+<script type="text/javascript" th:src="@{/project/js/industrialdevelop/style_add_baseElegant.js}"></script>
+<link type="text/css" rel="stylesheet" href="/component/uploadImg/css/uploadImg.css"
+      th:src="@{/component/uploadImg/css/uploadImg.css}">
+<script type="text/javascript" th:src="@{/component/uploadImg/js/bootstrap.min.js}"></script>
+</body>
+</html>

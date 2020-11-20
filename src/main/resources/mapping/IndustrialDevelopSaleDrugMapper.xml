@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zyyglxt.dao.IndustrialDevelopSaleDrugMapper">
+  <resultMap id="BaseResultMap" type="com.zyyglxt.dataobject.IndustrialDevelopSaleDrug">
+    <!--@mbg.generated-->
+    <!--@Table tb_industrial_develop_sale_drug-->
+    <id column="itemID" jdbcType="INTEGER" property="itemid" />
+    <id column="itemCode" jdbcType="CHAR" property="itemcode" />
+    <result column="DRUG_NAME" jdbcType="VARCHAR" property="drugName" />
+    <result column="FUNCTION_INDICATIONS" jdbcType="VARCHAR" property="functionIndications" />
+    <result column="USAGE" jdbcType="VARCHAR" property="usage" />
+    <result column="ADVERSE_REACTIONS" jdbcType="VARCHAR" property="adverseReactions" />
+    <result column="TABOO" jdbcType="VARCHAR" property="taboo" />
+    <result column="SPECIFICATIONS" jdbcType="VARCHAR" property="specifications" />
+    <result column="CAREFUL" jdbcType="VARCHAR" property="careful" />
+    <result column="STORAGE" jdbcType="VARCHAR" property="storage" />
+    <result column="PACKING" jdbcType="VARCHAR" property="packing" />
+    <result column="STATUS" jdbcType="VARCHAR" property="status" />
+    <result column="ORG_CODE" jdbcType="CHAR" property="orgCode" />
+    <result column="CREATER" jdbcType="VARCHAR" property="creater" />
+    <result column="itemCreateAt" jdbcType="TIMESTAMP" property="itemcreateat" />
+    <result column="UPDATER" jdbcType="VARCHAR" property="updater" />
+    <result column="itemUpdateAt" jdbcType="TIMESTAMP" property="itemupdateat" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    itemID, itemCode, DRUG_NAME, FUNCTION_INDICATIONS, `USAGE`, ADVERSE_REACTIONS, TABOO, 
+    SPECIFICATIONS, CAREFUL, `STORAGE`, PACKING, `STATUS`, ORG_CODE, CREATER, itemCreateAt, 
+    UPDATER, itemUpdateAt
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="map" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from tb_industrial_develop_sale_drug
+    where itemCode = #{itemcode,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="map">
+    <!--@mbg.generated-->
+    delete from tb_industrial_develop_sale_drug
+    where itemCode = #{itemcode,jdbcType=CHAR}
+  </delete>
+  <insert id="insert" keyColumn="itemID" keyProperty="itemid" parameterType="com.zyyglxt.dataobject.IndustrialDevelopSaleDrug" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into tb_industrial_develop_sale_drug (itemCode, DRUG_NAME, FUNCTION_INDICATIONS, 
+      `USAGE`, ADVERSE_REACTIONS, TABOO, 
+      SPECIFICATIONS, CAREFUL, `STORAGE`, 
+      PACKING, `STATUS`, ORG_CODE, 
+      CREATER, itemCreateAt, UPDATER, 
+      itemUpdateAt)
+    values (#{itemcode,jdbcType=CHAR}, #{drugName,jdbcType=VARCHAR}, #{functionIndications,jdbcType=VARCHAR}, 
+      #{usage,jdbcType=VARCHAR}, #{adverseReactions,jdbcType=VARCHAR}, #{taboo,jdbcType=VARCHAR}, 
+      #{specifications,jdbcType=VARCHAR}, #{careful,jdbcType=VARCHAR}, #{storage,jdbcType=VARCHAR}, 
+      #{packing,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, #{orgCode,jdbcType=CHAR}, 
+      #{creater,jdbcType=VARCHAR}, #{itemcreateat,jdbcType=TIMESTAMP}, #{updater,jdbcType=VARCHAR}, 
+      #{itemupdateat,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" keyColumn="itemID" keyProperty="itemid" parameterType="com.zyyglxt.dataobject.IndustrialDevelopSaleDrug" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into tb_industrial_develop_sale_drug
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="itemcode != null">
+        itemCode,
+      </if>
+      <if test="drugName != null">
+        DRUG_NAME,
+      </if>
+      <if test="functionIndications != null">
+        FUNCTION_INDICATIONS,
+      </if>
+      <if test="usage != null">
+        `USAGE`,
+      </if>
+      <if test="adverseReactions != null">
+        ADVERSE_REACTIONS,
+      </if>
+      <if test="taboo != null">
+        TABOO,
+      </if>
+      <if test="specifications != null">
+        SPECIFICATIONS,
+      </if>
+      <if test="careful != null">
+        CAREFUL,
+      </if>
+      <if test="storage != null">
+        `STORAGE`,
+      </if>
+      <if test="packing != null">
+        PACKING,
+      </if>
+      <if test="status != null">
+        `STATUS`,
+      </if>
+      <if test="orgCode != null">
+        ORG_CODE,
+      </if>
+      <if test="creater != null">
+        CREATER,
+      </if>
+      <if test="itemcreateat != null">
+        itemCreateAt,
+      </if>
+      <if test="updater != null">
+        UPDATER,
+      </if>
+      <if test="itemupdateat != null">
+        itemUpdateAt,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="itemcode != null">
+        #{itemcode,jdbcType=CHAR},
+      </if>
+      <if test="drugName != null">
+        #{drugName,jdbcType=VARCHAR},
+      </if>
+      <if test="functionIndications != null">
+        #{functionIndications,jdbcType=VARCHAR},
+      </if>
+      <if test="usage != null">
+        #{usage,jdbcType=VARCHAR},
+      </if>
+      <if test="adverseReactions != null">
+        #{adverseReactions,jdbcType=VARCHAR},
+      </if>
+      <if test="taboo != null">
+        #{taboo,jdbcType=VARCHAR},
+      </if>
+      <if test="specifications != null">
+        #{specifications,jdbcType=VARCHAR},
+      </if>
+      <if test="careful != null">
+        #{careful,jdbcType=VARCHAR},
+      </if>
+      <if test="storage != null">
+        #{storage,jdbcType=VARCHAR},
+      </if>
+      <if test="packing != null">
+        #{packing,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="orgCode != null">
+        #{orgCode,jdbcType=CHAR},
+      </if>
+      <if test="creater != null">
+        #{creater,jdbcType=VARCHAR},
+      </if>
+      <if test="itemcreateat != null">
+        #{itemcreateat,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updater != null">
+        #{updater,jdbcType=VARCHAR},
+      </if>
+      <if test="itemupdateat != null">
+        #{itemupdateat,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zyyglxt.dataobject.IndustrialDevelopSaleDrug">
+    <!--@mbg.generated-->
+    update tb_industrial_develop_sale_drug
+    <set>
+      <if test="drugName != null">
+        DRUG_NAME = #{drugName,jdbcType=VARCHAR},
+      </if>
+      <if test="functionIndications != null">
+        FUNCTION_INDICATIONS = #{functionIndications,jdbcType=VARCHAR},
+      </if>
+      <if test="usage != null">
+        `USAGE` = #{usage,jdbcType=VARCHAR},
+      </if>
+      <if test="adverseReactions != null">
+        ADVERSE_REACTIONS = #{adverseReactions,jdbcType=VARCHAR},
+      </if>
+      <if test="taboo != null">
+        TABOO = #{taboo,jdbcType=VARCHAR},
+      </if>
+      <if test="specifications != null">
+        SPECIFICATIONS = #{specifications,jdbcType=VARCHAR},
+      </if>
+      <if test="careful != null">
+        CAREFUL = #{careful,jdbcType=VARCHAR},
+      </if>
+      <if test="storage != null">
+        `STORAGE` = #{storage,jdbcType=VARCHAR},
+      </if>
+      <if test="packing != null">
+        PACKING = #{packing,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        `STATUS` = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="orgCode != null">
+        ORG_CODE = #{orgCode,jdbcType=CHAR},
+      </if>
+      <if test="creater != null">
+        CREATER = #{creater,jdbcType=VARCHAR},
+      </if>
+      <if test="itemcreateat != null">
+        itemCreateAt = #{itemcreateat,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updater != null">
+        UPDATER = #{updater,jdbcType=VARCHAR},
+      </if>
+      <if test="itemupdateat != null">
+        itemUpdateAt = #{itemupdateat,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where itemCode = #{itemcode,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zyyglxt.dataobject.IndustrialDevelopSaleDrug">
+    <!--@mbg.generated-->
+    update tb_industrial_develop_sale_drug
+    set DRUG_NAME = #{drugName,jdbcType=VARCHAR},
+      FUNCTION_INDICATIONS = #{functionIndications,jdbcType=VARCHAR},
+      `USAGE` = #{usage,jdbcType=VARCHAR},
+      ADVERSE_REACTIONS = #{adverseReactions,jdbcType=VARCHAR},
+      TABOO = #{taboo,jdbcType=VARCHAR},
+      SPECIFICATIONS = #{specifications,jdbcType=VARCHAR},
+      CAREFUL = #{careful,jdbcType=VARCHAR},
+      `STORAGE` = #{storage,jdbcType=VARCHAR},
+      PACKING = #{packing,jdbcType=VARCHAR},
+      `STATUS` = #{status,jdbcType=VARCHAR},
+      ORG_CODE = #{orgCode,jdbcType=CHAR},
+      CREATER = #{creater,jdbcType=VARCHAR},
+      itemCreateAt = #{itemcreateat,jdbcType=TIMESTAMP},
+      UPDATER = #{updater,jdbcType=VARCHAR},
+      itemUpdateAt = #{itemupdateat,jdbcType=TIMESTAMP}
+    where itemCode = #{itemcode,jdbcType=CHAR}
+  </update>
+
+  <select id="selectAllSaleDrug" resultMap="BaseResultMap">
+        SELECT *
+        FROM tb_industrial_develop_sale_drug
+        WHERE STATUS = #{status,jdbcType=VARCHAR}
+    </select>
+  <update id="changeStatusToSaleDrug">
+    update tb_industrial_develop_sale_drug
+    <set>
+      <if test="status != null">
+        STATUS = #{status,jdbcType=VARCHAR}
+      </if>
+    </set>
+    where itemID = #{key.itemid,jdbcType=INTEGER}
+    and itemCode = #{key.itemcode,jdbcType=CHAR}
+  </update>
+</mapper>

@@ -1,0 +1,206 @@
+/**
+    base.css 勿改动
+ */
+
+body{
+    font-family: "Microsoft YaHei UI";
+    table-layout: fixed;
+    background-color: white;
+    zoom:80%
+}
+
+table{
+    table-layout: fixed;
+    word-break:break-all;
+    word-wrap:break-word;
+}
+
+.header-bg{
+    background-color: #775637;
+}
+
+.W20 {
+    width:20px !important;
+}
+
+.h10{
+    height: 10px;
+}
+.h20{
+    height: 20px;
+}
+.h30{
+    height: 30px;
+}
+.h40{
+    height: 40px;
+}
+.h50{
+    height: 50px;
+}
+.h60{
+    height: 60px;
+}
+.h70{
+    height: 87px;
+}
+.h100{
+    height: 100px;
+}
+.h120{
+    height: 120px;
+}
+.h150{
+    height: 150px;
+}
+.h200{
+    height: 200px;
+}
+.h300{
+    height: 300px;
+}
+.h400{
+    height: 400px;
+}
+.h500{
+    /*height: 500px;*/
+}
+
+.cursor{
+    cursor: pointer;
+}
+
+.p-r{
+    padding-right: 0px
+}
+
+
+
+
+
+.test-border{
+    border: 0px solid red;
+    margin-left: 0px!important;
+    margin-right: 0px!important;
+    padding-left: 0px!important;
+    padding-right: 0px!important;
+}
+
+.importanceType-veryUrgent{
+    font-weight: bold;
+    color: rgba(255,4,247,0.95);
+}
+.importanceType-urgent{
+    color: rgba(255, 13, 30, 0.95);
+}
+.importanceType-generalUrgent{
+    color: rgba(50, 49, 49, 0.95);
+}
+.importanceType-plan{
+    color: rgba(93, 223, 255, 0.95);
+}
+.importanceType-longtime{
+    color: rgba(46, 175, 187, 0.8);
+}
+
+
+
+.left-menu-dropdown-menu{
+    position: static;
+    display: block;
+    width: 100%;
+    border: none;
+}
+
+
+.dropdown-item.active, .dropdown-item:active {
+    color: #F8F9FB;
+    text-decoration: none;
+    background-color: #52beff;
+}
+.aaaa.active, .aaaa:active {
+    color: #F8F9FB;
+    text-decoration: none;
+    background-color: #52beff;
+}
+.btn-link{
+    color:black;
+}
+.dropdown-item {
+    font-family: 'Arial Narrow', 'Arial', sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 1rem;
+    background-color: #F8F9FB;
+}
+.btn-block>h4 {
+    font-family: 'Arial Negreta', 'Arial Normal', 'Arial', sans-serif;
+    font-weight: 700;
+    font-style: normal;
+    font-size: 1rem;
+}
+
+.dropdown-menu.left-menu-dropdown-menu {
+    padding-bottom: 0px;
+    padding-top: 0;
+    background-color: #F8F9FB;
+}
+
+.card{
+    background-color: #FCFCFA;
+}
+hr {
+    margin-top: 0;
+    border-top: 1px solid;
+    margin-bottom: 0;
+}
+.aaaa {
+
+    padding: .12rem .1rem;
+    padding: -0.625rem .75rem;
+    margin-bottom: 10px;
+}
+.AFirstMenu {
+
+    color: black;
+    margin-left: 11px;
+    font-family: 'Arial Negreta', 'Arial Normal', 'Arial', sans-serif;
+    font-weight: 700;
+    font-style: normal;
+    font-size: 1rem;
+}
+.nullmenu{
+    display:none;
+}
+.page-item.active .page-link {
+    z-index: 3;
+    color: #fff;
+    background-color: #775637;
+     border-color: #775637;
+}
+.page-link {
+    color: black;
+}
+.fixed-table-pagination {
+    font-size: smaller;
+}
+.page-link {
+    margin-left: 9px;
+}
+
+.mh {
+    width: 11px;
+}
+.modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1040;
+    width: 100%;
+    height: 100%;
+    background-color: #000;
+}
+
+thead.self-thead {
+    text-align: center;
+}

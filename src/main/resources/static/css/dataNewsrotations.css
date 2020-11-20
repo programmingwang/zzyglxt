@@ -1,0 +1,61 @@
+thead.self-thead {
+    background-color: #775637;
+}
+.th-inner {
+    color: #fff;
+}
+.input-group-text {
+    background-color: #D60000;
+    font-family: 'Microsoft YaHei ', 'Microsoft YaHei', sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 12px;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 4px;
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+    /* width: 64px; */
+    /* height: 37px; */
+    /* background: inherit; */
+}
+.input-text {
+    margin-top: 6px;
+}
+
+.atext {
+    margin-top: 5px;
+    margin-left: 11px;
+    padding-right: 20px;
+    align-self: center;
+    padding-left: 20px;
+    z-index: 1;
+}
+
+a{
+    color: black;
+    text-decoration: none;
+}
+a:link{
+    color: black;
+     text-decoration: none;
+ }
+a:visited{
+    color: black;
+    text-decoration: none;
+}
+a:hover{
+    color: black;
+    text-decoration: none;
+    background-color: #fafafa;
+}
+a:active{
+    color: black;
+    text-decoration: none;
+}
+.reC{
+    background-color: white;
+}
+.addC{
+    background-color: red;
+}

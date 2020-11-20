@@ -2,6 +2,9 @@ package com.zyyglxt.dao;
 
 import com.zyyglxt.dataobject.IndustrialDevelopCooExcDO;
 import com.zyyglxt.dataobject.IndustrialDevelopCooExcDOKey;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface IndustrialDevelopCooExcDOMapper {
     /**
@@ -51,4 +54,10 @@ public interface IndustrialDevelopCooExcDOMapper {
      * @mbg.generated Wed Oct 28 16:25:52 CST 2020
      */
     int updateByPrimaryKey(IndustrialDevelopCooExcDO record);
+
+    int updateVisitNumByItemidAndItemcode(IndustrialDevelopCooExcDOKey key);
+
+    List<IndustrialDevelopCooExcDO> selectByPage(@Param("start") int start,@Param("end") int end);
+
+    List<IndustrialDevelopCooExcDO> selectAll(@Param("orgCode") String orgCode);
 }

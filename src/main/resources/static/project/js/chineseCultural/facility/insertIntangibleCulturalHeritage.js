@@ -1,7 +1,9 @@
 (function () {
-    require(['jquery','objectUtil','ajaxUtil','alertUtil','stringUtil'],
-        function (jquery,objectUtil,ajaxUtil,alertUtil,stringUtil) {
+    require(['jquery','objectUtil','ajaxUtil','alertUtil','stringUtil','fileUtil','uploadImg'],
+        function (jquery,objectUtil,ajaxUtil,alertUtil,stringUtil,fileUtil,uploadImg) {
             const editor = objectUtil.wangEditorUtil();
+
+            uploadImg.init();
 
             $("#cancel").unbind().on('click',function () {
                 var url = "/chineseCultural/facility/intangibleCulturalHeritage";
@@ -36,6 +38,8 @@
                     operateMessage = "更新非物质文化遗产成功";
                 }
 
+                fileUtil.handleFile(isUpdate(), inCuHeEntity.itemcode, uploadImg.getFiles()[0]);
+
                 ajaxUtil.myAjax(null,addUpdateUrl,inCuHeEntity,function (data) {
                     if(ajaxUtil.success(data)){
                         alertUtil.info(operateMessage);
@@ -55,6 +59,8 @@
                     $("#chineseCulturalSource").val(tempdata.chineseCulturalSource);
                     $("#chineseCulturalAuthor").val(tempdata.chineseCulturalAuthor);
                     editor.txt.html(tempdata.chineseCulturalContent);
+                    var img = tempdata.filePath;
+                    uploadImg.setImgSrc(img);
                 }
             }());
 

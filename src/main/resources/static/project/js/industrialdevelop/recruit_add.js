@@ -88,14 +88,14 @@
                 param.emali = $("#emali").val();
                 param.postDuty = $("#div1 .w-e-text").html();
                 param.postDescr  = $("#div2 .w-e-text").html();
-                param.orgCode = "未定义";
+                param.orgCode = sessionStorage.getItem("orgCode");
                 param.itemcode = itemcode;
                 return param;
             }
 
             $("#saveBtn").unbind('click').on('click',function () {
                 var param = generateParam();
-                param.status = "——";
+                param.status = "0";
 
                 ajaxUtil.myAjax(null,url,param,function (data) {
                     if(ajaxUtil.success(data)){
@@ -109,7 +109,7 @@
 
             $("#submitBtn").unbind('click').on('click',function () {
                 var param = generateParam();
-                param.status = "展示中";
+                param.status = "1";
                 ajaxUtil.myAjax(null,url,param,function (data) {
                     if(ajaxUtil.success(data)){
                         orange.redirect(purl)

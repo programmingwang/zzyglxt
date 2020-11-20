@@ -1,6 +1,7 @@
 package com.zyyglxt.dao;
 
 import com.zyyglxt.dataobject.UserDO;
+import com.zyyglxt.dataobject.UserRoleRefDO;
 import com.zyyglxt.dto.industrialDevelop.IndustrialDevelopExpertDto;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -17,6 +18,7 @@ public interface IndustrialDevelopExpertDtoMapper {
     int deleteByPrimaryKey(@Param("itemcode") String itemcode);
     //新增专家信息
     int insertSelective(IndustrialDevelopExpertDto record);
+    int insertUserRoleRefSelective(UserRoleRefDO record);
     //查看专家个人信息
     UserDO selectByPrimaryKey(@Param("itemcode") String itemcode);
     //重置密码

@@ -45,16 +45,10 @@
 <div class="row">
     <div class="col-12">
         <form>
-            <div class="form-group row">
-                <label class="col-sm-2 col-form-label">专家姓名：</label>
-                <div class="col-sm-3">
-                    <input id="chineseMedicineName" type="text" class="form-control" placeholder="请输入">
-                </div>
-            </div>
 
             <!--上传图片的div-->
             <div class="form-group row">
-                <label class="col-sm-2 col-form-label">医院图片：</label>
+                <label class="col-sm-2 col-form-label">专家照片：</label>
                 <div class="upload-content" data-limit="1">
                     <div class="content-img">
                         <ul class="content-img-list"></ul>
@@ -74,33 +68,25 @@
             </div>
 
             <div class="form-group row">
+                <label class="col-sm-2 col-form-label">专家姓名：</label>
+                <div class="col-sm-3">
+                    <input id="chineseMedicineName" type="text" class="form-control" placeholder="请输入">
+                </div>
+            </div>
+
+
+
+            <div class="form-group row">
                 <label class="col-sm-2 col-form-label">职务职称：</label>
                 <div class="col-sm-3">
                     <input id="chineseMedicineTitle" type="text" class="form-control" placeholder="请输入">
                 </div>
             </div>
+
             <div class="form-group row">
-                <label class="col-sm-2 col-form-label">专家类别：</label>
+                <label class="col-sm-2 col-form-label">荣誉称号：</label>
                 <div class="col-sm-3">
                     <select id="chineseMedicineType" type="text" class="form-control" placeholder="请输入"></select>
-                </div>
-            </div>
-            <div class="form-group row">
-                <label class="col-sm-2 col-form-label">出诊医院：</label>
-                <div class="col-sm-3">
-                    <select id="hospitalName" type="text" class="form-control"></select>
-                </div>
-            </div>
-            <div class="form-group row">
-                <label class="col-sm-2 col-form-label">出诊科室：</label>
-                <div class="col-sm-3">
-                    <select id="specialtyName" type="text" class="form-control" placeholder="请输入"></select>
-                </div>
-            </div>
-            <div class="form-group row">
-                <label class="col-sm-2 col-form-label">出诊时间：</label>
-                <div class="col-sm-3">
-                    <input id="visitTime" type="text" class="form-control" placeholder="请输入">
                 </div>
             </div>
             <div class="form-group row">
@@ -109,10 +95,32 @@
                     <input id="phone" type="text" class="form-control" placeholder="请输入">
                 </div>
             </div>
+
             <div class="form-group row">
-                <label class="col-sm-2 col-form-label">主要诊治：</label>
+                <label class="col-sm-2 col-form-label">出诊地点：</label>
                 <div class="col-sm-3">
-                    <input id="mainVisit" type="text" class="form-control" placeholder="请输入">
+                    <select id="hospitalName" type="text" class="form-control"></select>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">出诊科室：</label>
+                <div class="col-sm-3">
+                    <select id="specialtyName" type="text" class="form-control" placeholder="请输入"></select>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">出诊时间：</label>
+                <div class="col-sm-3">
+                    <input id="visitTime" type="text" class="form-control" placeholder="请输入">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">专家简介：</label>
+                <div class="col-sm-3">
+                    <input id="expertBriefIntroduce" type="text" class="form-control" placeholder="请输入">
                 </div>
             </div>
             <div class="form-group row">
@@ -120,6 +128,14 @@
                 <div id="div1" class="col-sm-8">
                 </div>
             </div>
+
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">主要诊治：</label>
+                <div class="col-sm-3">
+                    <input id="mainVisit" type="text" class="form-control" placeholder="请输入">
+                </div>
+            </div>
+
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label">重点医案信息：</label>
                 <div id="div2" class="col-sm-8">
@@ -129,14 +145,15 @@
 
 
             <div class="form-group row">
-                <div class="col-sm-8" ></div>
-                <div class=" col-sm-4 row" >
+                <div class="col-lg-4 col-md-4" ></div>
+                <div class=" col-lg-4 row" >
                     <div class="col">
                         <button id="cancel" type="button" class="btn btn-light col">取消</button>
                     </div>
 
                     <button id="btn_insert" type="submit" class="btn btn-primary col">提交</button>
                 </div>
+                <div class="col-lg-4 col-md-4" ></div>
             </div>
         </form>
 

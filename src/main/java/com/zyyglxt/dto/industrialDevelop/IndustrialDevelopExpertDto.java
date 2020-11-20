@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class IndustrialDevelopExpertDto extends UserDO {
+public class IndustrialDevelopExpertDto extends UserDO  {
     private String filed;
     private String userCode;
 }

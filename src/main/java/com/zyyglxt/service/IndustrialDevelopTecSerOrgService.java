@@ -21,6 +21,8 @@ public interface IndustrialDevelopTecSerOrgService{
 
     IndustrialDevelopTecSerOrg selectByPrimaryKey(Integer itemid,String itemcode);
 
+    IndustrialDevelopTecSerOrg selectByOrgcode();
+
     int updateByPrimaryKeySelective(IndustrialDevelopTecSerOrg record);
 
     int updateByPrimaryKey(IndustrialDevelopTecSerOrg record);

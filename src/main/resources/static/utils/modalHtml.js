@@ -2373,6 +2373,40 @@
 
 
 
+        modalHtml.myTimeModal =
+            '<div class="row" style="    height: 30em;\n' +
+            '    width: 30em;">'+
+            '            <div class="col-lg-12 col-md-12">\n' +
+            '                <div class="input-group mb-3">\n' +
+            '                    <div class="input-group-prepend">\n' +
+            '                        <label class="input-group-text" for="applicant">年份</label>\n' +
+            '                    </div>\n' +
+            '                    <input type="text"  id="year" class="form-control" placeholder="请输入年份">\n' +
+            '                </div>\n' +
+            '            </div>\n'+
+            '\n' +
+            '            <div class="col-lg-12 col-md-12" style="margin-bottom: 10px;">\n' +
+            '                <div class="input-group mb-3">\n' +
+            '                    <div class="input-group-prepend">\n' +
+            '                        <label class=\'input-label\'>开启时间</label>\n' +
+            '                       <div style=\'display: flex;\'>\n' +
+            '                           <input type="text" id=\'startTime\' style=\'width:13em;display: block;margin-left: 2em\'>\n' +
+            '                       </div>\n' +
+            '                    </div>\n' +
+            '                </div>\n' +
+            '            </div>\n' +
+            '\n' +
+            '            <div class="col-lg-12 col-md-12" style="margin-bottom: 10px;">\n' +
+            '                <div class="input-group mb-3">\n' +
+            '                    <div class="input-group-prepend">\n' +
+            '                        <label class=\'input-label\'>结束时间</label>\n' +
+            '                       <div style=\'display: flex;\'>\n' +
+            '                           <input type="text" id=\'endTime\' style=\'width:13em;display: block;margin-left: 2em\'>\n' +
+            '                       </div>\n' +'                    </div>\n' +
+            '                </div>\n' +
+            '            </div>\n' +
+            '</div>';
+
 
         modalHtml.myDeleteModalTravel = '是否删除景点信息?';
         modalHtml.myDeleteModalTraditionalCul = '是否删除中医医史信息?';
@@ -2390,7 +2424,7 @@
         modalHtml.myFailModal = '确认不通过吗？';
         modalHtml.myUnderShelfModal = '确认下架吗？';
 
-        modalHtml.myShelfSaleDrugModal='确认是否上架';
+        modalHtml.myShelfSaleDrugModal='点击确认将上传到河北中医药网，是否上架';
 
         modalHtml.myShowModal = '确认展示吗？';
 

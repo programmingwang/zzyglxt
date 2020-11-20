@@ -199,7 +199,7 @@
                     pid: "13"
                 },
                 {
-                    menu_name: "在售药材",
+                    menu_name: "在售药品",
                     menu_url: "/industrialdevelop/chinesemed/saledrug",
                     id: "88",
                     level: "1",
@@ -293,7 +293,11 @@
                 },
                 {
                     menu_name: "＞设置填报时间",
+
+                    menu_url: "/industrialdevelop/chinesemed/timerecord",
+
                     menu_url: "/timeRecord/timerecord",
+
                     id: "15-1",
                     level: "2",
                     pid: "15"
@@ -323,7 +327,7 @@
                 },
                 {
                     menu_name: "＞专家管理",
-                    menu_url: "/scientificProject/expertManagement",
+                    menu_url: "/industrialdevelop/expert",
                     id: "15-4",
                     level: "2",
                     pid: "15"

@@ -1,6 +1,6 @@
 (function () {
-    require(['jquery','ajaxUtil','stringUtil','uploadImg','wangEditor'],
-        function ($,ajaxUtil,stringUtil,uploadImg, wangEditor) {
+    require(['jquery','ajaxUtil','stringUtil','uploadImg','wangEditor','distpicker'],
+        function (jquery,ajaxUtil,stringUtil,uploadImg, wangEditor,distpicker) {
 
             var url = "/industrialdevelop/chi-med";
 

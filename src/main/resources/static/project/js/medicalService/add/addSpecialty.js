@@ -20,6 +20,10 @@
                 orange.redirect(jumpUrl);
             });
 
+            $("#addHosp").unbind().on('click', function () {
+                orange.redirect("/medicalService/add/addHosp");
+            })
+
             /*点击提交按钮*/
             $("#btn_insert").unbind().on('click',function () {
                 var hosp;
@@ -45,12 +49,13 @@
                 }
                 entity["specialtyName"] = specialtyName[$("#specialtyName").val()].text;
                 entity["specialtyPhone"] = $("#specialtyPhone").val();
+                entity["specialtyBriefIntroduce"] = $("#specialtyBriefIntroduce").val();
                 entity["specialtyAddressPro"] = hosp.hospitalAddressPro;
                 entity["specialtyAddressCity"] = hosp.hospitalAddressCity;
                 entity["specialtyAddressCounty"] = hosp.hospitalAddressCountry;
                 entity["specialtyAddress"] = hosp.hospitalAddress;
                 entity["specialtyLink"] = hosp.hospitalLink;
-                entity["specialtyDescribe"] = editor.txt.html();
+                entity["specialtyIntroduce"] = editor.txt.html();
                 entity["hospitalCode"] = hosp.itemcode;
                 entity["hospitalName"] = hosp.hospitalName;
                 entity["specialtyStatus"] = webStatus[0].id
@@ -74,7 +79,7 @@
 
             /*初始化数据*/
             var init = function () {
-                ajaxUtil.myAjax(null,"/medicalService/hosp/selectAll?hospitalStatus=" + webStatus[5].id,null,function (data) {
+                ajaxUtil.myAjax(null,"/medicalService/hosp/selectAllHosp",null,function (data) {
                     if(ajaxUtil.success(data)){
                         hosps = data.data
                         var html = "";
@@ -90,14 +95,16 @@
                 }
                 if (updateStatus){
                     var tempdata = JSON.parse(localStorage.getItem("rowData"));
+                    uploadImg.setImgSrc(tempdata.filePath)
                     $("#specialtyName").find("option").each(function (data) {
                         var $this = $(this);
                         if($this.text() == tempdata.specialtyName) {
                             $this.attr("selected", true);
                         }
                     });
-                    uploadImg.setImgSrc(tempdata.filePath)
+                    $("#specialtyIntroduce").val(tempdata.specialtyIntroduce);
                     $("#hospitalName  option[value="+tempdata.hospitalCode+"] ").attr("selected",true)
+
                     $("#specialtyPhone").val(tempdata.specialtyPhone);
                     $(".w-e-text").html(tempdata.specialtyDescribe);
                 }

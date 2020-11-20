@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en"xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>销售药品</title>
+    <style>
+        .upload-wrap{
+            position: relative;
+            display: inline-block;
+            overflow: hidden;
+
+            border-radius: 3px;
+        }
+        .upload-wrap .file-ele{
+            position: absolute;
+            top:0;
+            right:0;
+            opacity: 0;
+            height: 100%;
+            width: 100%;
+            cursor: pointer;
+        }
+        .upload-wrap .file-open{
+            width:90px;
+            height:36px;
+            line-height:36px;
+            text-align: center;
+            color:#fff;
+            background: red;
+        }
+        label{
+            text-align: right;
+        }
+        div#upimg {
+            padding-top: 23%;
+            height: 10em;
+            width: 10em;
+            background-color: #CBCECE;
+        }
+    </style>
+    <link rel="stylesheet" href="https://at.alicdn.com/t/font_1805932_ysrcp4y0uy9.css">
+</head>
+<body>
+<div class="row">
+    <div class="col-12">
+        <form>
+
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">药品名称：</label>
+                <div class="col-sm-3">
+                    <input id="drugName" type="text" class="form-control" placeholder="请输入">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">功能主治：</label>
+                <div class="col-sm-3">
+                    <input id="functionIndications" type="text" class="form-control" placeholder="请输入">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">用法用量：</label>
+                <div class="col-sm-3">
+                    <input id="usage" type="text" class="form-control" placeholder="请输入">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">不良反应：</label>
+                <div class="col-sm-3">
+                    <input id="adverseReactions" type="text" class="form-control" placeholder="请输入">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">禁忌：</label>
+                <div class="col-sm-3">
+                    <input id="taboo" type="text" class="form-control" placeholder="请输入">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">规格：</label>
+                <div class="col-sm-3">
+                    <input id="specifications" type="text" class="form-control" placeholder="请输入">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">注意事项：</label>
+                <div class="col-sm-3">
+                    <input id="careful" type="text" class="form-control" placeholder="请输入">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">贮藏：</label>
+                <div class="col-sm-3">
+                    <input id="storage" type="text" class="form-control" placeholder="请输入">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">包装：</label>
+                <div class="col-sm-3">
+                    <input id="packing" type="text" class="form-control" placeholder="请输入">
+                </div>
+            </div>
+            <!--上传图片的div-->
+            <div class="form-group row">
+                <label for="exampleFormControlFile1" class="col-sm-2 col-form-label">药品照片：</label>
+                <div class="upload-content" data-limit="1">
+                    <div class="content-img">
+                        <ul class="content-img-list"></ul>
+                        <div class="file">
+                            <i class="gcl gcladd"></i>
+                            <input type="file" name="file" accept="image/*" id="upload" multiple>
+                        </div>
+                    </div>
+                    <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog"
+                         aria-labelledby="myLargeModalLabel">
+                        <div class="modal-dialog modal-lg" role="document">
+                            <div class="modal-content">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- <div class="form-group row">
+                 <label class="col-sm-2 col-form-label">正文：</label>
+                 <div id="div1" class="col-sm-8">
+                 </div>
+             </div>-->
+
+            <div class="form-group row">
+                <div class="col-lg-4 col-md-4" ></div>
+                <div class=" col-lg-4 row" >
+                    <div class="col">
+                        <button id="cancel" type="button" class="btn btn-light col">取消</button>
+                    </div>
+                    <div class="col">
+                        <button id="btn_insert" type="button" class="btn btn-danger col">提交</button>
+                    </div>
+                    <!--<div class="col">
+                        <button id="saveBtn" type="submit" class="btn btn-primary col">上架</button>
+                    </div>-->
+                </div>
+                <div class="col-lg-4 col-md-4" ></div>
+
+
+            </div>
+    </form>
+
+</div>
+
+</div>
+<script type="text/javascript" data-main="/main/main.js" th:src="@{/component/require@2.3.6/require-2.3.6.js}"></script>
+<script type="text/javascript" th:src="@{/project/js/industrialdevelop/chinesemed/saledrug.js}"></script>
+<link type="text/css" rel="stylesheet" href="/component/uploadImg/css/uploadImg.css"
+      th:src="@{/component/uploadImg/css/uploadImg.css}">
+<script type="text/javascript" th:src="@{/component/uploadImg/js/bootstrap.min.js}"></script>
+</body>
+</html>

@@ -1,6 +1,7 @@
 package com.zyyglxt.dao;
 
 import com.zyyglxt.dataobject.IndustrialDevelopSchool;
+import com.zyyglxt.dto.industrialDevelop.IndustrialDevelopSchoolDto;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -26,4 +27,6 @@ public interface IndustrialDevelopSchoolMapper {
     int updateByPrimaryKey(IndustrialDevelopSchool record);
 
     List<IndustrialDevelopSchool> selectAll();
+
+    IndustrialDevelopSchool selectByorgcode(String orgcode);
 }

@@ -42,6 +42,7 @@ public class AuditServiceImpl implements IAuditService {
     @Resource
     UsernameUtil usernameUtil;
 
+
     @Override
     public List<AuditDto> getAll() {
         List<AuditDto> resList = new ArrayList<>();
@@ -133,21 +134,25 @@ public class AuditServiceImpl implements IAuditService {
 
     @Override
     public int changeChiMedStatus(AuditDto record) {
+        record.setUpdater(usernameUtil.getOperateUser());
         return auditMapper.changeChiMedStatus(record);
     }
 
     @Override
     public int changeTecSerOrgStatus(AuditDto record) {
+        record.setUpdater(usernameUtil.getOperateUser());
         return auditMapper.changeTecSerOrgStatus(record);
     }
 
     @Override
     public int changeSchoolStatus(AuditDto record) {
+        record.setUpdater(usernameUtil.getOperateUser());
         return auditMapper.changeSchoolStatus(record);
     }
 
     @Override
     public int changeHospitalStatus(AuditDto record) {
+        record.setUpdater(usernameUtil.getOperateUser());
         return auditMapper.changeHospitalStatus(record);
     }
 
@@ -171,6 +176,7 @@ public class AuditServiceImpl implements IAuditService {
         for (IndustrialDevelopSchool item : source) {
             AuditDto obj = new AuditDto();
             BeanUtils.copyProperties(item, obj);
+            obj.setName(item.getSchoolName());
             obj.setType("school");
             target.add(obj);
         }
@@ -192,9 +198,19 @@ public class AuditServiceImpl implements IAuditService {
         Map<String, String> proMap = dictService.getDictMapByCode("projectStatus");
         Map<String, String> typeMap = dictService.getDictMapByCode("orgType");
         target.removeIf(item -> item.getStatus().equals("0"));
+        if (usernameUtil.getRoleName().equals("省局中医药管理部门")){
+            target.removeIf(item -> item.getStatus().equals("1"));
+            target.removeIf(item -> item.getStatus().equals("2"));
+            target.removeIf(item -> item.getStatus().equals("3"));
+            target.removeIf(item -> item.getStatus().equals("5"));
+        }
         for (AuditDto item : target) {
             item.setType(typeMap.get(item.getType()));
-            item.setStatus(proMap.get(item.getStatus()));
+            if (item.getStatus().equals("1")){
+                item.setStatus("待审核");
+            }else {
+                item.setStatus(proMap.get(item.getStatus()));
+            }
         }
     }
 }

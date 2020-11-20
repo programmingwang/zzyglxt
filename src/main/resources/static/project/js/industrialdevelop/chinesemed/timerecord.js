@@ -91,7 +91,6 @@
             var pl = dictUtil.getDictByCode(dictUtil.DICT_LIST.showStatus);
             $("#chargePersonSearch").selectUtil(pl);
 
-
             var aCol = [
                 {field: 'year', title: '年份'},
                 {field: 'itemcreateat', title: '开启时间'},
@@ -100,7 +99,11 @@
                 {field: 'itemcreateat', title: '操作时间'}
             ];
 
+
             var myTable = bootstrapTableUtil.myBootStrapTableInit("table", getUrl, aParam, aCol);
+
+            var allTableData = $("#table").bootstrapTable("getData");
+            console.log(allTableData);
 
             function refreshTable() {
                 var param = {};
@@ -108,11 +111,7 @@
                 myTable = bootstrapTableUtil.myBootStrapTableInit("table", getUrl, param, aCol);
             }
 
-            var allTableData = $("#table").bootstrapTable("getData");
-            console.log(allTableData);
             bootstrapTableUtil.globalSearch("table", getUrl, aParam, aCol);
-
-
 
         })
 })();

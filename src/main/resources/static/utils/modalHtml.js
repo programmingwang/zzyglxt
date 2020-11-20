@@ -202,6 +202,7 @@
             '                </fieldset>'+
             '            </div>\n'+
             '</div>';
+
         modalHtml.myviewChineseMedicineModal =
             '<div class="row">'+
             '            <div id="imgDiv" class="col-lg-12 col-md-12">\n' +
@@ -598,6 +599,26 @@
             '                <fieldset disabled>'+
             '                <div class="input-group mb-3">\n' +
             '                    <div class="input-group-prepend">\n' +
+            '                        <button type="button" class="btn btn-primary btn-sm" >医院简介</button>\n' +
+            '                    </div>\n' +
+            '                   <input type="text" id="hospitalBriefIntroduce" class="form-control">\n' +
+            '                </div>\n' +
+            '            </div>\n' +
+            '\n' +
+            '            <div class="col-lg-12 col-md-12">\n' +
+            '                <fieldset disabled>'+
+            '                <div class="input-group mb-3">\n' +
+            '                    <div class="input-group-prepend">\n' +
+            '                        <button type="button" class="btn btn-primary btn-sm" >重点专科</button>\n' +
+            '                    </div>\n' +
+            '                   <input type="text" id="hospitalKeySpecialty" class="form-control">\n' +
+            '                </div>\n' +
+            '            </div>\n' +
+            '\n' +
+            '            <div class="col-lg-12 col-md-12">\n' +
+            '                <fieldset disabled>'+
+            '                <div class="input-group mb-3">\n' +
+            '                    <div class="input-group-prepend">\n' +
             '                        <button type="button" class="btn btn-primary btn-sm" >联系电话</button>\n' +
             '                    </div>\n' +
             '                   <input type="text" id="hospitalTelephone" class="form-control">\n' +
@@ -688,6 +709,16 @@
             '                        <button type="button" class="btn btn-primary btn-sm">科室名称</button>\n' +
             '                    </div>\n' +
             '                    <input type="text" id="specialtyName" class="form-control">\n' +
+            '                </div>\n' +
+            '            </div>\n' +
+            '\n' +
+            '            <div class="col-lg-12 col-md-12">\n' +
+            '                <fieldset disabled>'+
+            '                <div class="input-group mb-3">\n' +
+            '                    <div class="input-group-prepend">\n' +
+            '                        <button type="button" class="btn btn-primary btn-sm">科室介绍</button>\n' +
+            '                    </div>\n' +
+            '                    <input type="text" id="specialtyBriefIntroduce" class="form-control">\n' +
             '                </div>\n' +
             '            </div>\n' +
             '\n' +
@@ -845,6 +876,16 @@
             '                        <button type="button" class="btn btn-primary btn-sm" >联系电话</button>\n' +
             '                    </div>\n' +
             '                    <input type="text" id="phone" class="form-control">\n' +
+            '                </div>\n' +
+            '            </div>\n' +
+            '\n' +
+            '            <div class="col-lg-12 col-md-12">\n' +
+            '                <fieldset disabled>'+
+            '                <div class="input-group mb-3">\n' +
+            '                    <div class="input-group-prepend">\n' +
+            '                        <button type="button" class="btn btn-primary btn-sm">专家简介</button>\n' +
+            '                    </div>\n' +
+            '                    <input type="text" id="expertBriefIntroduce" class="form-control">\n' +
             '                </div>\n' +
             '            </div>\n' +
             '\n' +
@@ -2230,7 +2271,6 @@
             '                </fieldset>'+
             '            </div>\n'+
             '</div>';
-
 
 
         modalHtml.myDeleteModalTravel = '是否删除景点信息?';

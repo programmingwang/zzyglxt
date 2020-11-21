@@ -54,9 +54,8 @@
 
                 //调用日期插件
                 $("#startTime").myDatePicker({
-
-                    'startDate':'2014-01-01 00:00:00',
-                    'endDate':'2050-01-01 00:00:00',
+                    'startDate':'2014-01-01 18:45:20',
+                    'endDate':'2099-01-01 18:45:20',
                     //指定父元素，不指定默认为body
                     parent:$("#startTime").parent(),
                     //定位方式是否用fixed
@@ -72,8 +71,8 @@
                 _input.focus();
                 //调用日期插件
                 $("#endTime").myDatePicker({
-                    'startDate':'2014-01-01 00:00:00',
-                    'endDate':'2050-01-01 00:00:00',
+                    'startDate':'2014-01-01 18:45:20',
+                    'endDate':'2099-01-01 18:45:20',
                     //指定父元素，不指定默认为body
                     parent:$("#endTime").parent(),
                     //定位方式是否用fixed
@@ -94,8 +93,8 @@
 
             var aCol = [
                 {field: 'year', title: '年份'},
-                {field: 'itemcreateat', title: '开启时间'},
-                {field: 'itemupdateat', title: '结束时间'},
+                {field: 'startTime', title: '开启时间'},
+                {field: 'endTime', title: '结束时间'},
                 {field: 'creater', title: '操作人'},
                 {field: 'itemcreateat', title: '操作时间'}
             ];

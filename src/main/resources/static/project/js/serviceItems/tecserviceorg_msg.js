@@ -4,6 +4,8 @@
 
             var url = "/industrialdevelop/tec-ser-org/selectbyorgcode";
 
+            var opurl = "/industrialdevelop/tec-ser-org";
+
             var pathUrl = "/serviceItems/tecserviceorg_msg";
 
             var itemcode = stringUtil.getUUID();
@@ -25,9 +27,8 @@
                 param.addressPro = $("#addressPro").val();
                 param.addressCity = $("#addressCity").val();
                 param.addressCountry = $("#addressCountry").val();
-                param.address = $("#address").val()
-                param.intruduce = $(".w-e-text").html();
-                param.orgCode = sessionStorage.getItem("orgCode");
+                param.address = $("#address").val();
+                param.intruduce = editor.txt.html();
                 param.itemcode = itemcode;
                 return param;
             }
@@ -35,11 +36,14 @@
             $("#saveBtn").unbind('click').on('click', function () {
                 var param = generateParam();
                 param.status = "——";
-                if (uploadImg.isUpdate()) {
-                    ajaxUtil.fileAjax(itemcode, uploadImg.getFiles()[0], "undefined", "undefined")
+                if (uploadImg.isUpdate()){
+                    if (isUpdate()){
+                        ajaxUtil.updateFile(itemcode,uploadImg.getFiles()[0],"undefined","undefined");
+                    }else {
+                        ajaxUtil.fileAjax(itemcode,uploadImg.getFiles()[0],"undefined","undefined")
+                    }
                 }
-
-                ajaxUtil.myAjax(null, url, param, function (data) {
+                ajaxUtil.myAjax(null, opurl, param, function (data) {
                     if (ajaxUtil.success(data)) {
                         orange.redirect(pathUrl);
                     } else {
@@ -52,7 +56,14 @@
             $("#submitBtn").unbind('click').on('click', function () {
                 var param = generateParam();
                 param.status = "——";
-                ajaxUtil.myAjax(null, url, param, function (data) {
+                if (uploadImg.isUpdate()){
+                    if (isUpdate()){
+                        ajaxUtil.updateFile(itemcode,uploadImg.getFiles()[0],"undefined","undefined");
+                    }else {
+                        ajaxUtil.fileAjax(itemcode,uploadImg.getFiles()[0],"undefined","undefined")
+                    }
+                }
+                ajaxUtil.myAjax(null, opurl, param, function (data) {
                     if (ajaxUtil.success(data)) {
                         orange.redirect(pathUrl)
                     } else {
@@ -64,7 +75,7 @@
 
             var init = function () {
                 ajaxUtil.myAjax(null,url,null,function (data) {
-                    if(data && data.code == 88888) {
+                    if(ajaxUtil.success(data)) {
                         var tempdata = data.data;
                         $("#name").val(tempdata.name);
                         $("#projectName").val(tempdata.projectName);

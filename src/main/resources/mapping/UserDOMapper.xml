@@ -28,8 +28,7 @@
   </resultMap>
   <sql id="Base_Column_List">
     itemID, itemCode, ORG_CODE, USERNAME, PASSWORD, SALT, NAME, GENDER, IDCARD_TYPE,
-    IDCARD_NO, EMAIL, STATE, CONTACTS, mobilePhone, CREATER, itemCreateAt, UPDATER, itemUpdateAt,
-    CITYID, TYPE
+    IDCARD_NO, EMAIL, STATE, CONTACTS, mobilePhone, CITYID, TYPE
   </sql>
   <sql id="Blob_Column_List">
      PORTRAIT

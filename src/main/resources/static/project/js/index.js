@@ -199,13 +199,6 @@
                     pid: "13"
                 },
                 {
-                    menu_name: "在售药品",
-                    menu_url: "/industrialdevelop/chinesemed/saledrug",
-                    id: "88",
-                    level: "1",
-                    pid: ""
-                },
-                {
                     menu_name: "＞高等院校",
                     menu_url: "/industrialdevelop/school",
                     id: "13-6",
@@ -240,6 +233,34 @@
                     id: "13-10",
                     level: "2",
                     pid: "13"
+                },
+                {//////////////////////////////////////////////////////////////////////////////
+                    menu_name: "中药企业",
+                    menu_url: "",
+                    id: "66",
+                    level: "1",
+                    pid: ""
+                },
+                {
+                    menu_name: "＞在售药品",
+                    menu_url: "/industrialdevelop/chinesemed/saledrug",
+                    id: "66-1",
+                    level: "2",
+                    pid: "66"
+                },
+                {
+                    menu_name: "＞中药销售企业信息维护",
+                    menu_url: "/industrialdevelop/chinesemed/chinesemed-sale_add",
+                    id: "66-2",
+                    level: "2",
+                    pid: "66"
+                },
+                {
+                    menu_name: "＞中药制药企业信息维护",
+                    menu_url: "/industrialdevelop/chinesemed/chinesemed-produce_add",
+                    id: "66-3",
+                    level: "2",
+                    pid: "66"
                 },
                 {
                     menu_name: "信息发布",

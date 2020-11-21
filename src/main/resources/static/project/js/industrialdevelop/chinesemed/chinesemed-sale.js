@@ -2,7 +2,7 @@
     require(['jquery', 'ajaxUtil','bootstrapTableUtil','objectUtil','alertUtil','modalUtil','selectUtil','stringUtil','dictUtil'],
         function (jquery,ajaxUtil,bootstrapTableUtil,objectUtil,alertUtil,modalUtil,selectUtil,stringUtil,dictUtil) {
 
-
+            var status = dictUtil.getDictByCode(dictUtil.DICT_LIST.projectStatus);
             var getUrl = "/industrialdevelop/chi-med/sale";
 
             var opUrl = "/industrialdevelop/chi-med";
@@ -29,8 +29,8 @@
                 },
                 'click .delete': function (e, value, row, index) {
                     var myDeleteModalData ={
-                        modalBodyID : "myDeleteCooperation",
-                        modalTitle : "删除服务项目",
+                        modalBodyID : "myDeleteCStion",
+                        modalTitle : "删除中药销售企业信息",
                         modalClass : "modal-lg",
                         confirmButtonClass : "btn-danger",
                         modalConfirmFun:function () {
@@ -42,7 +42,7 @@
                             ajaxUtil.myAjax(null,opUrl,projectEntity,function (data) {
                                 if(ajaxUtil.success(data)){
                                     ajaxUtil.deleteFile(row.itemcode)
-                                    alertUtil.info("删除项目成功");
+                                    alertUtil.info("删除中药销售企业信息成功");
                                     isSuccess = true;
                                     refreshTable();
                                 }

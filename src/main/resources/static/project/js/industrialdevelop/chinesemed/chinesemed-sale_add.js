@@ -1,3 +1,4 @@
+
 (function () {
     require(['jquery','ajaxUtil','stringUtil','uploadImg','wangEditor'],
         function ($,ajaxUtil,stringUtil,uploadImg, wangEditor) {
@@ -80,7 +81,7 @@
 
             $("#saveBtn").unbind('click').on('click',function () {
                 var param = generateParam();
-                param.status = "——";
+                param.status = "0";
                 param.itemcode = itemcode;
                 if (uploadImg.isUpdate()){
                     ajaxUtil.fileAjax(itemcode,uploadImg.getFiles()[0],"undefined","undefined")
@@ -98,7 +99,7 @@
 
             $("#submitBtn").unbind('click').on('click',function () {
                 var param = generateParam();
-                param.status = "——";
+                param.status = "1";
                 ajaxUtil.myAjax(null,url,param,function (data) {
                     if(ajaxUtil.success(data)){
                         orange.redirect(pathUrl)
@@ -141,5 +142,6 @@
             }
     })
 })();
+
 
 

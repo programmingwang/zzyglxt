@@ -55,7 +55,7 @@
                 //调用日期插件
                 $("#startTime").myDatePicker({
                     'startDate':'2014-01-01 18:45:20',
-                    'endDate':(new Date()).Format("yyyy-mm-dd hh:ii:ss"),
+                    'endDate':'2099-01-01 18:45:20',
                     //指定父元素，不指定默认为body
                     parent:$("#startTime").parent(),
                     //定位方式是否用fixed
@@ -72,7 +72,7 @@
                 //调用日期插件
                 $("#endTime").myDatePicker({
                     'startDate':'2014-01-01 18:45:20',
-                    'endDate':(new Date()).Format("yyyy-mm-dd hh:ii:ss"),
+                    'endDate':'2099-01-01 18:45:20',
                     //指定父元素，不指定默认为body
                     parent:$("#endTime").parent(),
                     //定位方式是否用fixed

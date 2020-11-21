@@ -20,7 +20,7 @@
             let options={
                 view:2,//0 1 2 3 4 5 6 7 表示 年 月 日 周 季 时 分 秒
                 startDate:'2014-01-01 00:00:00',
-                endDate:(new Date()).Format("yyyy-mm-dd hh:ii:ss"),
+                endDate:'2099-01-01 00:00:00',
                 onDateChange:function(value,lastValue){
 
                 },

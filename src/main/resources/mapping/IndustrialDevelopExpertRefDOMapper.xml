@@ -28,6 +28,12 @@
     from tb_industrial_develop_expert_ref
     where itemCode = #{itemcode,jdbcType=CHAR}
   </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select
+    <include refid="Base_Column_List" />
+    from tb_industrial_develop_expert_ref
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="com.zyyglxt.dataobject.IndustrialDevelopExpertRefDOKey">
     <!--
       WARNING - @mbg.generated

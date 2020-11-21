@@ -2374,21 +2374,21 @@
 
 
         modalHtml.myTimeModal =
-            '<div class="row" style="    height: 30em;\n' +
-            '    width: 30em;">'+
-            '            <div class="col-lg-12 col-md-12">\n' +
+            '<div class="row" >'+
+            '            <div class="col-lg-4 col-md-4" style="margin-left: 2rem">\n' +
             '                <div class="input-group mb-3">\n' +
             '                    <div class="input-group-prepend">\n' +
             '                        <label class="input-group-text" for="applicant">年份</label>\n' +
             '                    </div>\n' +
             '                    <input type="text"  id="year" class="form-control" placeholder="请输入年份">\n' +
             '                </div>\n' +
-            '            </div>\n'+
+            '            </div><div class="col-lg-8 col-md-8"></div>\n'+
             '\n' +
-            '            <div class="col-lg-12 col-md-12" style="margin-bottom: 10px;">\n' +
+            '                        <label class=\'input-label col-lg-6 col-md-6 row\' style="margin-left: 2rem">开启时间</label>\n' +
+            '                        <label class=\'input-label col-lg-4 col-md-4 row\' style="margin-left: 1rem">结束时间</label>\n' +
+            '            <div class="col-lg-6 col-md-6" style="margin-bottom: 10px;">\n' +
             '                <div class="input-group mb-3">\n' +
             '                    <div class="input-group-prepend">\n' +
-            '                        <label class=\'input-label\'>开启时间</label>\n' +
             '                       <div style=\'display: flex;\'>\n' +
             '                           <input type="text" id=\'startTime\' style=\'width:13em;display: block;margin-left: 2em\'>\n' +
             '                       </div>\n' +
@@ -2396,10 +2396,11 @@
             '                </div>\n' +
             '            </div>\n' +
             '\n' +
-            '            <div class="col-lg-12 col-md-12" style="margin-bottom: 10px;">\n' +
+
+            '            <div class="col-lg-6 col-md-6" style="margin-bottom: 10px;">\n' +
             '                <div class="input-group mb-3">\n' +
             '                    <div class="input-group-prepend">\n' +
-            '                        <label class=\'input-label\'>结束时间</label>\n' +
+
             '                       <div style=\'display: flex;\'>\n' +
             '                           <input type="text" id=\'endTime\' style=\'width:13em;display: block;margin-left: 2em\'>\n' +
             '                       </div>\n' +'                    </div>\n' +

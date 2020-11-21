@@ -1,6 +1,6 @@
 (function () {
-    require(['jquery','ajaxUtil','stringUtil','uploadImg','wangEditor'],
-        function ($,ajaxUtil,stringUtil,uploadImg, wangEditor) {
+    require(['jquery','ajaxUtil','stringUtil','uploadImg','wangEditor', 'distpicker'],
+        function ($,ajaxUtil,stringUtil,uploadImg, wangEditor,distpicker) {
 
             var url = "/industrialdevelop/chi-med";
 
@@ -74,6 +74,7 @@
                 param.addressCountry = $("#addressCountry").val()
                 param.address = $("#address").val()
                 param.intruduce = $(".w-e-text").html();
+                param.orgCode = sessionStorage.getItem("orgCode");
                 param.type = orgType;
                 return param;
             }

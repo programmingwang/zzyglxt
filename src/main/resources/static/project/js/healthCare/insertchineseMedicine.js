@@ -1,6 +1,6 @@
 (function () {
-    require(['jquery','objectUtil','ajaxUtil','alertUtil','stringUtil','fileUtil','uploadImg','dictUtil','selectUtil'],
-        function (jquery,objectUtil,ajaxUtil,alertUtil,stringUtil,fileUtil,uploadImg,dictUtil,selectUtil) {
+    require(['jquery','objectUtil','ajaxUtil','alertUtil','stringUtil','fileUtil','uploadImg','dictUtil','selectUtil','distpicker'],
+        function (jquery,objectUtil,ajaxUtil,alertUtil,stringUtil,fileUtil,uploadImg,dictUtil,selectUtil,distpicker) {
 
             const editor = objectUtil.wangEditorUtil();
 
@@ -91,6 +91,10 @@
                     uploadImg.setImgSrc(img);
                 }else{
                     $( "<option value=\"请选择\" selected='selected'>请选择</option>").prependTo($( "#chineseMedicineType"));
+                    $("#distpicker").distpicker();
+                }
+                init = function () {
+
                 }
             }());
 

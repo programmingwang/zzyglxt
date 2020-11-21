@@ -2425,6 +2425,8 @@
         modalHtml.myFailModal = '确认不通过吗？';
         modalHtml.myUnderShelfModal = '确认下架吗？';
 
+        modalHtml.myDeleteCStion='是否删除中药销售企业信息';
+        modalHtml.myDeleteCPtion='是否删除中药制药企业信息';
         modalHtml.myShelfSaleDrugModal='点击确认将上传到河北中医药网，是否上架';
 
         modalHtml.myShowModal = '确认展示吗？';

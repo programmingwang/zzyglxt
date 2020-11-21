@@ -415,7 +415,7 @@
                 },
                 {
                     menu_name: "信息维护",
-                    menu_url: "/industrialdevelop/organization/tour_add",
+                    menu_url: "/industrialdevelop/organization/lab_add",
                     id: "20-4",
                     level: "2",
                     pid: "20"
@@ -436,7 +436,7 @@
                 },
                 {
                     menu_name: "信息维护",
-                    menu_url: "/industrialdevelop/style_add",
+                    menu_url: "/industrialdevelop/organization/tour_add",
                     id: "21-3",
                     level: "2",
                     pid: "21"

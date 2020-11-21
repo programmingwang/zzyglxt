@@ -54,8 +54,9 @@
 
                 //调用日期插件
                 $("#startTime").myDatePicker({
-                    'startDate':'2014-01-01 18:45:20',
-                    'endDate':(new Date()).Format("yyyy-mm-dd hh:ii:ss"),
+
+                    'startDate':'2014-01-01 00:00:00',
+                    'endDate':'2050-01-01 00:00:00',
                     //指定父元素，不指定默认为body
                     parent:$("#startTime").parent(),
                     //定位方式是否用fixed
@@ -71,8 +72,8 @@
                 _input.focus();
                 //调用日期插件
                 $("#endTime").myDatePicker({
-                    'startDate':'2014-01-01 18:45:20',
-                    'endDate':(new Date()).Format("yyyy-mm-dd hh:ii:ss"),
+                    'startDate':'2014-01-01 00:00:00',
+                    'endDate':'2050-01-01 00:00:00',
                     //指定父元素，不指定默认为body
                     parent:$("#endTime").parent(),
                     //定位方式是否用fixed

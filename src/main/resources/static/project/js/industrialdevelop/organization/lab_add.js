@@ -1,8 +1,8 @@
 (function () {
-    require(['jquery','ajaxUtil','stringUtil','uploadImg','wangEditor'],
-        function ($,ajaxUtil,stringUtil,uploadImg, wangEditor) {
+    require(['jquery','ajaxUtil','stringUtil','uploadImg','objectUtil'],
+        function ($,ajaxUtil,stringUtil,uploadImg, objectUtil) {
 
-            var url = "/industrialdevelop/tec-ser-org";
+            var url = "/industrialdevelop/tec-ser-org/selectbyorgcode";
 
             var pathUrl = "/industrialdevelop/organization/lab";
 
@@ -14,49 +14,7 @@
 
             uploadImg.init();
 
-            const editor = new wangEditor('#div1');
-            // 或者 const editor = new E( document.getElementById('div1') )
-            //菜单配置
-            editor.config.menus = [
-                'head',
-                'bold',
-                'fontSize',
-                'fontName',
-                'italic',
-                'underline',
-                'strikeThrough',
-                'indent',
-                'lineHeight',
-                'foreColor',
-                'backColor',
-                'link',
-                'list',
-                'justify',
-                'image',
-                'table',
-                'splitLine',
-                'undo',
-                'redo'
-            ];
-            //取消粘贴后的样式
-            editor.config.pasteFilterStyle = false;
-            //不粘贴图片
-            editor.config.pasteIgnoreImg = true;
-            //隐藏上传网络图片
-            editor.config.showLinkImg = false;
-            editor.config.uploadImgShowBase64 = true;
-            editor.create();
-            editor.txt.html('');
-
-            $("#div1").on("input propertychange", function() {
-                var textNUm=editor.txt.text();
-                var str;
-                if(textNUm.length>=100000){
-                    str = textNUm.substring(0,10000)+"";  //使用字符串截取，获取前30个字符，多余的字符使用“......”代替
-                    editor.txt.html(str);
-                    alert("字数不能超过10000");                 //将替换的值赋值给当前对象
-                }
-            });
+            const editor = objectUtil.wangEditorUtil();
 
             $("#cancelBtn").click(function () {
                 orange.redirect(pathUrl)
@@ -113,7 +71,15 @@
 
             var init = function () {
                 if (isUpdate()){
-                    var tempdata = JSON.parse(localStorage.getItem("rowData"));
+                    var tempdata;
+                    ajaxUtil.myAjax(null, url, null,function (data) {
+                        if(data && data.code == ajaxUtil.successCode) {
+                            tempdata = data.data
+                        }else{
+                            alertUtil.error(data.msg)
+                        }
+                    },false,"","get");
+                    console.log(tempdata);
                     $("#name").val(tempdata.name);
                     $("#projectCost").val(tempdata.projectCost);
                     $("#contacts").val(tempdata.contacts);
@@ -124,7 +90,7 @@
                         district: tempdata.addressCountry
                     });
                     $("#address").val(tempdata.address);
-                    $(".w-e-text").html(tempdata.intruduce);
+                    editor.txt.html(tempdata.intruduce);
                     uploadImg.setImgSrc(tempdata.filePath)
                     itemcode = tempdata.itemcode;
                 }else {

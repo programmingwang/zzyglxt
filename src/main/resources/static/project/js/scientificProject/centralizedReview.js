@@ -2,7 +2,7 @@
     require(['jquery', 'ajaxUtil','bootstrapTableUtil','objectUtil','alertUtil','modalUtil','selectUtil','stringUtil','dictUtil'],
         function (jquery,ajaxUtil,bootstrapTableUtil,objectUtil,alertUtil,modalUtil,selectUtil,stringUtil,dictUtil) {
 
-            var url = "/industrialdevelop/topic";
+            var url = "/exmain/exmain";
 
             //角色加载工具
 
@@ -24,39 +24,17 @@
             //修改事件
             window.orgEvents = {
                 'click .view' : function (e, value, row, index) {
-                    var myViewTravelModalData ={
-                        modalBodyID : "myViewCulturalModal", //公用的在后面给span加不同的内容就行了，其他模块同理
-                        modalTitle : "查看详情",
-                        modalClass : "modal-lg",
-                        confirmButtonStyle: "display:none",
-                    };
-                    var myTravelModal = modalUtil.init(myViewTravelModalData);
-                    $("#chineseCulturalName").val(row.chineseCulturalName);
-                    $("#chineseCulturalSource").val(row.chineseCulturalSource);
-                    $("#chineseCulturalAuthor").val(row.chineseCulturalAuthor);
-                    $("#chineseCulturalContent").html(row.chineseCulturalContent);
-                    $("#creater").val(row.creater);
-                    $("#itemCreateAt").val(row.itemcreateat);
-                    $("#chineseCulturalStatus").val(webStatus[row.chineseCulturalStatus].text);
-                    $("#culturalImg").attr("src",row.filePath)
-                    $('#culturalImgSpan').html("景点图片");
-                    $('#culturalNameSpan').html("景点名称");
-                    $('#culturalContentSpan').html("景点介绍");
-
-                    myTravelModal.show();
                 },
             };
 
-
-            var pl = dictUtil.getDictByCode(dictUtil.DICT_LIST.showStatus);
+            var pl = dictUtil.getDictByCode(dictUtil.DICT_LIST.exmaineStatus);
             $("#chargePersonSearch").selectUtil(pl);
-
 
             var aCol = [
                 {field: 'projectNo', title: '项目编号'},
                 {field: 'projectName', title: '项目名称'},
                 {field: 'company', title: '申报单位'},
-                {field: 'status', title: '状态'},
+                {field: 'exmaineStatus', title: '状态'},
                 {field: 'action',  title: '操作',formatter: operation,events:orgEvents}
             ];
 

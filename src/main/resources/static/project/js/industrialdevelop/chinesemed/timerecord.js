@@ -93,8 +93,8 @@
 
             var aCol = [
                 {field: 'year', title: '年份'},
-                {field: 'itemcreateat', title: '开启时间'},
-                {field: 'itemupdateat', title: '结束时间'},
+                {field: 'startTime', title: '开启时间'},
+                {field: 'endTime', title: '结束时间'},
                 {field: 'creater', title: '操作人'},
                 {field: 'itemcreateat', title: '操作时间'}
             ];

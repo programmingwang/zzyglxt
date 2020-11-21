@@ -296,8 +296,6 @@
 
                     menu_url: "/industrialdevelop/chinesemed/timerecord",
 
-                    menu_url: "/timeRecord/timerecord",
-
                     id: "15-1",
                     level: "2",
                     pid: "15"

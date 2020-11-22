@@ -2465,14 +2465,12 @@
         modalHtml.myDeleteRegulation = '是否删除政策法规?';
         modalHtml.myDeleteProcess = '是否删除办事流程?';
 
-
         modalHtml.myDeleteHospital = "是否删除医院信息？";
         modalHtml.myDeleteSpecialty = "是否删除科室信息？";
         modalHtml.myDeleteChineseMedicine = "是否删除名老中医信息？";
         modalHtml.myDeleteAccount = "是否删除该账号？";
 
         modalHtml.myDeleteMedMat = "是否删除药材信息？"
-        modalHtml.myShelveMedMat = "点击上架将药材信息发送到河北中医药网，确认上架？"
 
         modalHtml.myDeleteExpert="是否删除该专家信息？"
         modalHtml.myResetPassword="是否重置密码？"

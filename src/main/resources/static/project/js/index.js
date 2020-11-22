@@ -217,7 +217,7 @@
                     }
                 ];
             }
-            if (roleName === '主研人'||roleName === '科研项目申报单位'||roleName === '市级中医药管理部门'){
+            if (roleName === '主研人'||roleName === '科研项目申报单位'){
                 var menu_list = [
                     {
                         menu_name: "科研项目管理",
@@ -285,6 +285,38 @@
                         id: "15-6",
                         level: "2",
                         pid: "15"
+                    },
+                    {
+                        menu_name: "机构审核",
+                        menu_url: "/industrialdevelop/audit",
+                        id: "16",
+                        level: "1",
+                        pid: ""
+                    }
+                ];
+            }
+            if (roleName === '市级中医药管理部门'){
+                var menu_list = [
+                    {
+                        menu_name: "科研项目管理",
+                        menu_url: "",
+                        id: "15",
+                        level: "1",
+                        pid: ""
+                    },
+                    {
+                        menu_name: "＞课题管理",
+                        menu_url: "/scientificProject/topicManagement",
+                        id: "15-1",
+                        level: "2",
+                        pid: "15"
+                    },
+                    {
+                        menu_name: "机构审核",
+                        menu_url: "/industrialdevelop/audit",
+                        id: "16",
+                        level: "1",
+                        pid: ""
                     }
                 ];
             }

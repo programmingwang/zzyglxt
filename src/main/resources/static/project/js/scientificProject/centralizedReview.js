@@ -15,6 +15,7 @@
 
             //操作
             function operation(value, row, index){
+                // if(sessionStorage.getItem("rolename") == "省局中医管理部门"){}
                 if(row.exmaineStatus == pl[1].id){
                     return [
                         '<a class="exmaine" style="margin:0 1em;text-decoration: none;color:#775637;" data-toggle="modal" data-target="" >评审</a>',
@@ -29,7 +30,9 @@
                         '<a class="view" style="margin:0 1em;text-decoration: none;color:#775637;" data-toggle="modal" data-target="" >查看</a>',
                     ].join('');
                 }
-
+            //    else if (sessionStorage.getItem("rolename") == "专家"){
+                // '<a class="view" style="margin:0 1em;text-decoration: none;color:#775637;" data-toggle="modal" data-target="" >查看</a>',
+                // }
             }
 
             $(function(){

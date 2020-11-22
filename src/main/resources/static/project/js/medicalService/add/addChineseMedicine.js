@@ -26,7 +26,7 @@
 
             /*处理科室下拉框点击事件，若选择默认医院，则请求默认医院信息*/
             $("#specialtyName").unbind().on('click',function () {
-                if (specialtys.length === undefined || JSON.stringify(specialtys)==="{}"){
+                if (specialtys.length == undefined || JSON.stringify(specialtys)=="{}"){
                     specialtySelect()
                 }
             })

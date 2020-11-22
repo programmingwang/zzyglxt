@@ -29,8 +29,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     private ResourcesService resService;
     @Autowired
     private RoleService roleService;
-    @Autowired
-    private OrganizationDOMapper organizationDOMapper;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

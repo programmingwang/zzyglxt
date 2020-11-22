@@ -67,6 +67,7 @@
                         window.location.href = "/userLogin";
                     }
                     if (data.code === 88888) {
+                        console.log(data.data)
                         for(var i=0; i<data.data.length; i++){
                             data.data[i].itemcreateat = stringUtil.formatDateTime(data.data[i].itemcreateat);
                         }

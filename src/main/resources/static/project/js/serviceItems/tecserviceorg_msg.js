@@ -1,6 +1,6 @@
 (function () {
-    require(['jquery', 'ajaxUtil', 'stringUtil', 'uploadImg', 'objectUtil', 'distpicker'],
-        function ($, ajaxUtil, stringUtil, uploadImg, objectUtil, distpicker) {
+    require(['jquery', 'ajaxUtil', 'stringUtil', 'uploadImg', 'objectUtil', 'distpicker', 'urlUtil'],
+        function ($, ajaxUtil, stringUtil, uploadImg, objectUtil, distpicker, urlUtil) {
 
             var url = "/industrialdevelop/tec-ser-org/selectbyorgcode";
 
@@ -35,7 +35,7 @@
 
             $("#saveBtn").unbind('click').on('click', function () {
                 var param = generateParam();
-                param.status = "——";
+                param.status = 1;
                 if (uploadImg.isUpdate()){
                     if (isUpdate()){
                         ajaxUtil.updateFile(itemcode,uploadImg.getFiles()[0],"undefined","undefined");
@@ -55,7 +55,7 @@
 
             $("#submitBtn").unbind('click').on('click', function () {
                 var param = generateParam();
-                param.status = "——";
+                param.status = 1;
                 if (uploadImg.isUpdate()){
                     if (isUpdate()){
                         ajaxUtil.updateFile(itemcode,uploadImg.getFiles()[0],"undefined","undefined");
@@ -98,7 +98,7 @@
             init();
 
             function isUpdate() {
-                return (localStorage.getItem("rowData") != null || localStorage.getItem("rowData") != undefined)
+                return (urlUtil.getFullUrl().indexOf("/main#") != -1)
             }
         })
 })();

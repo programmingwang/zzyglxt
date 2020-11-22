@@ -12,5 +12,5 @@ import lombok.NoArgsConstructor;
 public class IndustrialDevelopTopicDODto extends IndustrialDevelopTopicDO {
     private String filePath;
     private String fileName;
-
+    private String expertCode;
 }

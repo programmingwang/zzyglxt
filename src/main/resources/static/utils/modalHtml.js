@@ -2407,7 +2407,16 @@
             '                </div>\n' +
             '            </div>\n' +
             '</div>';
-
+        modalHtml.addExperModal='<div>\n' +
+            '        <div >\n' +
+            '            <span>请选择专家</span>\n' +
+            '                <div style="margin-top: 1em;">\n' +
+            '                    <select id="experName" class="form-control" >\n' +
+            '                        <option value ="volvo">请选择专家姓名</option>\n' +
+            '                    </select>\n' +
+            '                </div>\n' +
+            '        </div>\n' +
+            '    </div>\n';
 
         modalHtml.myDeleteModalTravel = '是否删除景点信息?';
         modalHtml.myDeleteModalTraditionalCul = '是否删除中医医史信息?';
@@ -2460,6 +2469,9 @@
 
         modalHtml.myDeleteExpert="是否删除该专家信息？"
         modalHtml.myResetPassword="是否重置密码？"
+
+        modalHtml.myCencelDistribution = "是否取消分配专家？"
+
 
         return modalHtml;
 

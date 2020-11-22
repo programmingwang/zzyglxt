@@ -12,10 +12,7 @@
                         return alertUtil.error("文件删除失败,可能是文件损坏或不存在了");
                     }
                 },false,"","get");
-                var fileUUID = stringUtil.getUUID();
-                console.log(itemcode);
-                console.log(fileUUID);
-                ajaxUtil.fileAjax(itemcode,file,fileUUID ,"admin","qeqweasd");
+                ajaxUtil.fileAjax(itemcode,file,stringUtil.getUUID(),"admin","qeqweasd");
             }
         }
 

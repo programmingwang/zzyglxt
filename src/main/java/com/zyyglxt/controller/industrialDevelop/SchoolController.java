@@ -6,6 +6,7 @@ import com.zyyglxt.error.EmBusinessError;
 import com.zyyglxt.response.ResponseData;
 import com.zyyglxt.service.IndustrialDevelopSchoolService;
 import io.swagger.annotations.Api;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -55,5 +56,11 @@ public class SchoolController {
     @GetMapping(value = "/school")
     public ResponseData getSchool(){
         return new ResponseData(EmBusinessError.success, schoolService.selectAll());
+    }
+
+    @ResponseBody
+    @GetMapping(value = "/schoolmsg")
+    public ResponseData getSchoolByorgcode(){
+        return new ResponseData(EmBusinessError.success, schoolService.selectByorgcode());
     }
 }

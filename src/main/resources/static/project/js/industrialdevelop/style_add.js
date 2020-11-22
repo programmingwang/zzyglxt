@@ -1,9 +1,9 @@
 //旅游康养机构录入界面
 (function () {
-    require(['jquery','ajaxUtil','stringUtil','uploadImg','objectUtil'],
-        function ($,ajaxUtil,stringUtil,uploadImg, objectUtil) {
+    require(['jquery','ajaxUtil','stringUtil','uploadImg','objectUtil','distpicker','alertUtil'],
+        function ($,ajaxUtil,stringUtil,uploadImg, objectUtil, distpicker, alertUtil) {
 
-            var url = "/industrialdevelop/tec-ser-org";
+            var url = "/industrialdevelop/tec-ser-org/selectbyorgcode";
 
             var pathUrl = "/industrialdevelop/style";
 
@@ -35,7 +35,7 @@
 
             $("#saveBtn").unbind('click').on('click',function () {
                 var param = generateParam();
-                param.status = "——";
+                param.status = "0";
                 param.itemcode = itemcode;
                 if (uploadImg.isUpdate()){
                     ajaxUtil.fileAjax(itemcode,uploadImg.getFiles()[0],"undefined","undefined")
@@ -53,7 +53,7 @@
 
             $("#submitBtn").unbind('click').on('click',function () {
                 var param = generateParam();
-                param.status = "提交";
+                param.status = "1";
                 param.type = "tour"
                 ajaxUtil.myAjax(null,url,param,function (data) {
                     if(ajaxUtil.success(data)){
@@ -67,9 +67,18 @@
 
             var init = function () {
                 if (isUpdate()){
-                    var tempdata = JSON.parse(localStorage.getItem("rowData"));
+                    var tempdata;
+                    ajaxUtil.myAjax(null, url, null,function (data) {
+                        if(data && data.code == ajaxUtil.successCode) {
+                            tempdata = data.data
+                        }else{
+                            alertUtil.error(data.msg)
+                        }
+                    },false,"","get");
+                    console.log(tempdata);
                     $("#name").val(tempdata.name);
                     $("#areaCoverd").val(tempdata.areaCoverd);
+                    $("#specialService").val(tempdata.specialService);
                     $("#contacts").val(tempdata.contacts);
                     $("#phone").val(tempdata.phone);
                     $("#distpicker").distpicker({
@@ -78,9 +87,12 @@
                         district: tempdata.addressCountry
                     });
                     $("#address").val(tempdata.address);
-                    $("#intruduce").val(tempdata.intruduce)
-                    editor.txt.html(tempdata.projectIntroduce);
-                    itemcode = tempdata.itemcode
+                    editor.txt.html(tempdata.intruduce);
+                    itemcode = tempdata.itemcode;
+                    var img = tempdata.filePath;
+                    // console.log(tempdata);
+                    // var imgName=tempdata.fileName;
+                    uploadImg.setImgSrc(img);
                 }else {
                     $("#distpicker").distpicker();
                 }

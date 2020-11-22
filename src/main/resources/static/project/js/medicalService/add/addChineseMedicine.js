@@ -14,17 +14,19 @@
             var webStatus = dictUtil.getDictByCode(dictUtil.DICT_LIST.webStatus);
             var chineseMedicineType = dictUtil.getDictByCode(dictUtil.DICT_LIST.expertType)
 
+
             uploadImg.init();
 
             /*设置中医类型下拉框的值*/
-            $("#chineseMedicineType").selectUtil(dictUtil.getDictByCode(dictUtil.DICT_LIST.expertType));
+            $("#chineseMedicineType").selectUtil(chineseMedicineType);
 
-            /*处理出诊医院下拉框，改变则发送请求获取科室*/
+
+            /*处理出诊地点下拉框，改变则发送请求获取科室*/
             $("#hospitalName").unbind().on("change",specialtySelect)
 
             /*处理科室下拉框点击事件，若选择默认医院，则请求默认医院信息*/
             $("#specialtyName").unbind().on('click',function () {
-                if (specialtys.length === undefined || JSON.stringify(specialtys)==="{}"){
+                if (specialtys.length == undefined || JSON.stringify(specialtys)=="{}"){
                     specialtySelect()
                 }
             })
@@ -71,6 +73,7 @@
                 entity["visitTime"] = $("#visitTime").val()
                 entity["phone"] = $("#phone").val();
                 entity["mainVisit"] = $("#mainVisit").val();
+                entity["expertBriefIntroduce"] = $("#expertBriefIntroduce").val();
                 entity["expertIntroduce"] = editor.txt.html();
                 entity["medicineRecords"] = editor2.txt.html();
                 entity["chineseMedicineStatus"] = webStatus[0].id
@@ -89,7 +92,7 @@
 
             /*初始化数据*/
             (function init() {
-                ajaxUtil.myAjax(null,"/medicalService/hosp/selectAll?hospitalStatus=" + webStatus[5].id,null,function (data) {
+                ajaxUtil.myAjax(null,"/medicalService/hosp/selectAllHosp",null,function (data) {
                     if(ajaxUtil.success(data)){
                         hosps = data.data
                         var html = "";
@@ -125,6 +128,7 @@
                     $("#visitTime").val(tempdata.visitTime);
                     $("#phone").val(tempdata.phone);
                     $("#mainVisit").val(tempdata.mainVisit);
+                    $("#expertBriefIntroduce").val(tempdata.expertBriefIntroduce);
                     editor.txt.html(tempdata.expertIntroduce);
                     editor2.txt.html(tempdata.medicineRecords);
                 }

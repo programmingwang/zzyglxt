@@ -1,6 +1,6 @@
 (function () {
-    require(['jquery', 'ajaxUtil', 'stringUtil', 'objectUtil', 'dictUtil', 'alertUtil'],
-        function (jquery, ajaxUtil, stringUtil, objectUtil, dictUtil, alertUtil) {
+    require(['jquery', 'ajaxUtil', 'stringUtil', 'objectUtil', 'dictUtil', 'alertUtil','fileUtil'],
+        function (jquery, ajaxUtil, stringUtil, objectUtil, dictUtil, alertUtil, fileUtil) {
 
             var type = isUpdate() ? "put" : "post";
 
@@ -8,7 +8,14 @@
 
             const editor = objectUtil.wangEditorUtil();
 
-            var showStatus = dictUtil.getDictByCode(dictUtil.DICT_LIST.showStatus)
+            var showStatus = dictUtil.getDictByCode(dictUtil.DICT_LIST.showStatus);
+
+            var operateMsg;
+            if(!isUpdate()){
+                operateMsg = "新增成功";
+            }else{
+                operateMsg = "更新成功";
+            }
 
             //后台数据交互地址
             var url = "/industrialdevelop/achievement";
@@ -22,7 +29,6 @@
 
             function generateParam() {
                 var param = {};
-                param.itemcode = itemcode;
                 param.industrialDevelopLeader = $("#industrialDevelopLeader").val();
                 param.industrialDevelopName = $("#industrialDevelopName").val();
                 param.projectName = $("#projectName").val();
@@ -30,26 +36,26 @@
                 param.phone = $("#phone").val();
                 param.context = editor.txt.html();
                 param.orgCode = sessionStorage.getItem("orgCode");
+                if(!isUpdate()){
+                    param.itemcode = itemcode;
+                }else{
+                    var needData = JSON.parse(localStorage.getItem("rowData"));
+                    param.itemcode = needData.itemcode;
+                    param.itemid =  needData.itemid;
+                }
+
                 return param;
             }
 
-            //附件名显示
-            $("#upload_file").change(function () {
-                var file = $("#upload_file")[0].files[0];
-                var file_span = $("#filename_span");
-                file_span.text(file.name)
-            });
 
             $("#saveBtn").unbind('click').on('click', function () {
                 var param = generateParam();
                 param.industrialDevelopStatus = showStatus[0].id;
-                var file = $("#upload_file")[0].files[0];
 
                 ajaxUtil.myAjax(null, url, param, function (data) {
                     if (ajaxUtil.success(data)) {
-                        if (file != null) {
-                            ajaxUtil.fileAjax(itemcode, file, "admin", "aaaaaaa");
-                        }
+                        fileUtil.handleFile(isUpdate(), param.itemcode, $("#upload_file")[0].files[0]);
+                        alertUtil.success(operateMsg);
                         orange.redirect(url)
                     } else {
                         alert(data.msg)
@@ -60,12 +66,10 @@
             $("#submitBtn").unbind('click').on('click', function () {
                 var param = generateParam();
                 param.industrialDevelopStatus = showStatus[1].id;
-                var file = $("#upload_file")[0].files[0];
-                if (file != null) {
-                    ajaxUtil.updateFile(itemcode, file, "admin", "aaaaa");
-                }
                 ajaxUtil.myAjax(null, url, param, function (data) {
                     if (ajaxUtil.success(data)) {
+                        fileUtil.handleFile(isUpdate(), param.itemcode, $("#upload_file")[0].files[0]);
+                        alertUtil.success(operateMsg+"，信息将展示在主页");
                         orange.redirect(url)
                     }
                 }, true, "123", type);
@@ -82,7 +86,7 @@
                     $("#phone").val(tempdata.phone);
                     $("#projectName").val(tempdata.projectName);
                     editor.txt.html(tempdata.context);
-                    itemcode = tempdata.itemcode
+                    $("#addFile").text(tempdata.fileName);
                 }
                 init = function () {
                 }

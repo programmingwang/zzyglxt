@@ -4,6 +4,7 @@ package com.zyyglxt.service.impl;
 import com.zyyglxt.dao.IndustrialDevelopExpertDtoMapper;
 import com.zyyglxt.dao.UserDOMapper;
 import com.zyyglxt.dataobject.UserDO;
+import com.zyyglxt.dataobject.UserRoleRefDO;
 import com.zyyglxt.dto.industrialDevelop.IndustrialDevelopExpertDto;
 import com.zyyglxt.service.IIndustrialDevelopExpertService;
 import com.zyyglxt.validator.ValidatorImpl;
@@ -51,7 +52,15 @@ public class IndustrialDevelopExpertServiceImpl implements IIndustrialDevelopExp
         record.setUserCode(itemCode);
         record.setItemcode(UUID.randomUUID().toString());
         developExpertDtoMapper.insertSelective(record);
-
+        record.setItemcode(UUID.randomUUID().toString());
+        UserRoleRefDO userRoleRefDO=new UserRoleRefDO();
+        userRoleRefDO.setItemcode(UUID.randomUUID().toString());
+        userRoleRefDO.setUserCode(itemCode);
+        userRoleRefDO.setRoleCode("b956f871-d813-4a82-9361-276196bb63b7");
+        userRoleRefDO.setPlatRole("专家");
+        userRoleRefDO.setCreater(record.getCreater());
+        userRoleRefDO.setUpdater(record.getUpdater());
+        developExpertDtoMapper.insertUserRoleRefSelective(userRoleRefDO);
     }
 
     //删除专家信息

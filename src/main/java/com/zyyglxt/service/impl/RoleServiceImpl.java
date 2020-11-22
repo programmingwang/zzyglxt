@@ -55,8 +55,8 @@ public class RoleServiceImpl implements RoleService {
             throw new BusinessException(result.getErrMsg(), EmBusinessError.PARAMETER_VALIDATION_ERROR);
         }
         String uuid = UUIDUtils.getUUID();
-        roleDO.setCreater(usernameUtil.getOperateUser());
-        roleDO.setUpdater(usernameUtil.getOperateUser());
+//        roleDO.setCreater(usernameUtil.getOperateUser());
+//        roleDO.setUpdater(usernameUtil.getOperateUser());
         roleDO.setItemcode(uuid);
         roleDOMapper.insertSelective(roleDO);
         //分配resources

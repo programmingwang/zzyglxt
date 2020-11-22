@@ -45,7 +45,7 @@
         <form>
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label">基地照片：</label>
-                <div class="upload-content" data-limit="5">
+                <div class="upload-content" data-limit="1">
                     <div class="content-img">
                         <ul class="content-img-list"></ul>
                         <div class="file">
@@ -90,8 +90,8 @@
                 <div class="col-sm-3">
                     <input id="phone" type="text" class="form-control" placeholder="请输入">
                 </div>
-            </div>
 
+            </div>
             <div id="distpicker" class="form-group row">
                 <label for="addressPro" class="col-sm-2 col-form-label">省：</label>
                 <div class="col-sm-2">
@@ -108,7 +108,6 @@
                     <select id="addressCountry" class="form-control"></select>
                 </div>
             </div>
-
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label">地址：</label>
                 <div class="col-sm-3">
@@ -128,9 +127,9 @@
                     <div class="col">
                         <button id="cancelBtn" type="button" class="btn btn-light col">取消</button>
                     </div>
-                    <div class="col">
-                        <button id="saveBtn" type="button" class="btn btn-danger col">保存</button>
-                    </div>
+                    <!--<div class="col">-->
+                    <!--<button id="saveBtn" type="button" class="btn btn-danger col">保存</button>-->
+                    <!--</div>-->
                     <div class="col">
                         <button id="submitBtn" type="submit" class="btn btn-primary col">提交</button>
                     </div>
@@ -143,6 +142,7 @@
 
 </div>
 <script type="text/javascript" data-main="/main/main.js" th:src="@{/component/require@2.3.6/require-2.3.6.js}"></script>
+<script type="text/javascript" th:src="@{/project/js/industrialdevelop/organization/tour_add.js}"></script>
 <link type="text/css" rel="stylesheet" href="/component/uploadImg/css/uploadImg.css"
       th:src="@{/component/uploadImg/css/uploadImg.css}">
 </body>

@@ -69,6 +69,7 @@
             wangEditor: '../component/wangEditor/wangEditor.min',
             uploadImg: '../component/uploadImg/js/uploadImg',
             distpicker: '../component/distSelect/distpicker.common',
+            myDatePicker: '../component/dataP/myDatePicker',
 
 
 

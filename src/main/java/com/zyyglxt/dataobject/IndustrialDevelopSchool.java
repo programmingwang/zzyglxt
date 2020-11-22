@@ -136,4 +136,5 @@ public class IndustrialDevelopSchool {
      */
     @ApiModelProperty(value="机构编号 ")
     private String orgCode;
+
 }

@@ -22,8 +22,10 @@
                 if(data && data.code === 88888) {
                     var userName = data.data.username;
                     var rolename = data.data.rolename;
+                    var orgCode = data.data.orgCode;
                     sessionStorage.setItem('username',userName);
                     sessionStorage.setItem('rolename',rolename);
+                    sessionStorage.setItem('orgCode',orgCode);
                     window.location.href = "/main"
                 }else{
                     alertUtil.error(data.msg)

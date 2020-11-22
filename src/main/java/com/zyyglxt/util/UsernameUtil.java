@@ -27,4 +27,9 @@ public class UsernameUtil {
         return user.getOrgCode();
     }
 
+    public String getRoleName(){
+        UserSessionDto user = (UserSessionDto) request.getSession().getAttribute("user");
+        return user.getRolename();
+    }
+
 }

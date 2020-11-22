@@ -1,7 +1,9 @@
 
 (function () {
+
     require(['jquery','ajaxUtil','stringUtil','uploadImg','objectUtil',"distpicker","urlUtil"],
         function ($,ajaxUtil,stringUtil,uploadImg, objectUtil,distpicker,urlUtil) {
+
             var url = "/industrialdevelop/chi-med";
 
             var pathUrl = "/industrialdevelop/chinesemed/chinesemed-sale";
@@ -10,7 +12,7 @@
 
             var itemcode = stringUtil.getUUID();
 
-            var type = isUpdate() ? "put":"post";
+            // var type = isUpdate() ? "put":"post";
 
             uploadImg.init();
 
@@ -33,7 +35,6 @@
                 param.addressCountry = $("#addressCountry").val()
                 param.address = $("#address").val()
                 param.intruduce = $(".w-e-text").html();
-                param.orgCode = sessionStorage.getItem("orgCode");
                 param.type = orgType
                 return param;
             }
@@ -47,12 +48,14 @@
                 }
 
                 ajaxUtil.myAjax(null,url,param,function (data) {
+
                     if(ajaxUtil.success(data)){
                         orange.redirect(pathUrl);
+
                     }else {
                         alert(data.msg);
                     }
-                },true,"123",type);
+                },true,"123","PUT");
                 return false;
             });
 
@@ -62,10 +65,11 @@
                 ajaxUtil.myAjax(null,url,param,function (data) {
                     if(ajaxUtil.success(data)){
                         orange.redirect(pathUrl)
+
                     }else {
                         alert(data.msg)
                     }
-                },true,"123",type);
+                },true,"123","POST");
                 return false;
             });
 
@@ -105,7 +109,7 @@
             function isUpdate() {
                 return (urlUtil.getFullUrl().indexOf("/main#") != -1)
             }
-    })
+        })
 })();
 
 

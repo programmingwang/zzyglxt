@@ -676,15 +676,17 @@
 
             $("#left_menu").html(getMenuStr(menu_list));
 
-            $(".collapse-btn").unbind().on("click", function () {
+            sessionStorage.setItem('aNumber', '1')
+
+            $(".collapse-btn").unbind().on("click",function () {
                 $(".collapse").removeClass("show");
-                var a = 1;
-                if (a = 1) {
+                var a=sessionStorage.getItem('aNumber');
+                if(a==1){
                     $($(this).attr("data-target")).addClass("show");
-                    a = a + 1;
-                } else {
+                    sessionStorage.setItem('aNumber', '2')
+                }else {
                     $($(this).attr("data-target")).removeClass("show");
-                    a = 1;
+                    sessionStorage.setItem('aNumber', '1')
                 }
 
             });

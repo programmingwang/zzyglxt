@@ -1,14 +1,14 @@
 (function () {
-    require(['jquery','ajaxUtil','stringUtil','uploadImg','wangEditor',"distpicker"],
-        function ($,ajaxUtil,stringUtil,uploadImg, wangEditor,distpicker) {
+    require(['jquery','ajaxUtil','stringUtil','uploadImg','urlUtil','wangEditor','distpicker'],
+        function ($,ajaxUtil,stringUtil,uploadImg,urlUtil, wangEditor,distpicker) {
 
-            var url = "/industrialdevelop/chi-med";
+            var url = "/industrialdevelop/tec-ser-org";
 
-            var pathUrl = "/industrialdevelop/chinesemed/chinesemed-produce";
-
-            var orgType = "produce";
+            var pathUrl = "/userLogin";
 
             var itemcode = stringUtil.getUUID();
+
+            var orgType = "tour";
 
             var type = isUpdate() ? "put":"post";
 
@@ -59,37 +59,44 @@
             });
 
             $("#cancelBtn").click(function () {
-                orange.redirect(pathUrl)
+                window.history.back()
+                // console.log(uploadImg.getFiles());
+                // orange.redirect(pathUrl)
             });
 
             function generateParam(){
                 var param = {};
                 param.name = $("#name").val();
-                param.peoduceType = $("#peoduceType").val();
-                param.peoduceDrug = $("#peoduceDrug").val();
+                param.areaCoverd = $("#areaCoverd").val();
+                param.specialService = $("#specialService").val();
                 param.contacts = $("#contacts").val();
                 param.phone = $("#phone").val();
-                param.addressPro = $("#addressPro").val()
-                param.addressCity = $("#addressCity").val()
-                param.addressCountry = $("#addressCountry").val()
+                param.addressPro = $("#addressPro").val();
+                param.addressCity = $("#addressCity").val();
+                param.addressCountry = $("#addressCountry").val();
                 param.address = $("#address").val()
                 param.intruduce = $(".w-e-text").html();
-                param.orgCode = sessionStorage.getItem("orgCode");
+                param.orgCode = "未定义";
+                param.itemcode = itemcode;
                 param.type = orgType;
                 return param;
             }
 
             $("#saveBtn").unbind('click').on('click',function () {
                 var param = generateParam();
-                param.status = "0";
-                param.itemcode = itemcode;
+                param.status = "——";
                 if (uploadImg.isUpdate()){
-                    ajaxUtil.fileAjax(itemcode,uploadImg.getFiles()[0],"undefined","undefined")
+                    if (isUpdate()){
+                        ajaxUtil.updateFile(itemcode,uploadImg.getFiles()[0],"undefined","undefined");
+                    }else {
+                        ajaxUtil.fileAjax(itemcode,uploadImg.getFiles()[0],"undefined","undefined")
+                    }
+
                 }
 
                 ajaxUtil.myAjax(null,url,param,function (data) {
                     if(ajaxUtil.success(data)){
-                        orange.redirect(pathUrl);
+                        orange.redirect('/tour_add');
                     }else {
                         alert(data.msg);
                     }
@@ -100,9 +107,18 @@
             $("#submitBtn").unbind('click').on('click',function () {
                 var param = generateParam();
                 param.status = "1";
+                if (uploadImg.isUpdate()){
+                    if (isUpdate()){
+                        ajaxUtil.updateFile(itemcode,uploadImg.getFiles()[0],"undefined","undefined");
+                    }else {
+                        ajaxUtil.fileAjax(itemcode,uploadImg.getFiles()[0],"undefined","undefined")
+                    }
+
+                }
                 ajaxUtil.myAjax(null,url,param,function (data) {
                     if(ajaxUtil.success(data)){
-                        orange.redirect(pathUrl)
+                        window.location.href = pathUrl;
+                        // orange.redirect(pathUrl)
                     }else {
                         alert(data.msg)
                     }
@@ -114,31 +130,34 @@
                 if (isUpdate()){
                     var tempdata = JSON.parse(localStorage.getItem("rowData"));
                     $("#name").val(tempdata.name);
-                    $("#peoduceType").val(tempdata.peoduceType);
-                    $("#peoduceDrug").val(tempdata.peoduceDrug);
+                    $("#areaCoverd").val(tempdata.areaCoverd);
+                    $("#specialService").val(tempdata.specialService);
                     $("#contacts").val(tempdata.contacts);
+                    $("#phone").val(tempdata.phone);
                     $("#distpicker").distpicker({
                         province: tempdata.addressPro,
                         city: tempdata.addressCity,
                         district: tempdata.addressCountry
                     });
                     $("#address").val(tempdata.address);
-                    $("#phone").val(tempdata.phone);
                     $(".w-e-text").html(tempdata.intruduce);
-                    itemcode = tempdata.itemcode
                     uploadImg.setImgSrc(tempdata.filePath)
+                    itemcode = tempdata.itemcode;
                 }else {
                     $("#distpicker").distpicker();
                 }
-                init = function () {}
+                init = function () {
+
+                }
             };
             init();
 
 
             function isUpdate() {
-                return (localStorage.getItem("rowData") != null || localStorage.getItem("rowData") != undefined)
+                return (urlUtil.getFullUrl().indexOf("/main#") != -1)
             }
-    })
+
+        })
 })();
 
 

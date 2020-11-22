@@ -67,7 +67,6 @@
                         window.location.href = "/userLogin";
                     }
                     if (data.code === 88888) {
-                        console.log(data.data)
                         for(var i=0; i<data.data.length; i++){
                             data.data[i].itemcreateat = stringUtil.formatDateTime(data.data[i].itemcreateat);
                         }
@@ -125,10 +124,10 @@
 
 
             // var oTab=document.getElementById("table");
-            var btnSearch=document.getElementById("btnSearch");
+            // var btnSearch=document.getElementById("btnSearch");
 
             // console.log(needParam);
-            btnSearch.onclick=function() {
+            $("#btnSearch").unbind().on('click',function() {
                 var myTable = myBootStrapTableInit(tableID, url, needParam, aCol);
                 // 先刷新列表------------
                 // myTable.free();
@@ -201,7 +200,7 @@
                     // }
                 }
                 $("#table").bootstrapTable("load", newArry);
-            }
+            })
 
 
             //
@@ -283,9 +282,8 @@
 
                 //}
 
-            var aria=this.ariaExpanded; ;
-            document.getElementById('closeAndOpen').onclick = function(){
-
+            var aria=this.ariaExpanded;
+            $("#closeAndOpen").unbind().on('click',function(){
                 this.innerText="";
                 if (aria==="true"){
                     this.innerText="展开";
@@ -294,7 +292,7 @@
                     this.innerText="收起";
                     aria = "true";
                 }
-            }
+            })
         }
 
         return {

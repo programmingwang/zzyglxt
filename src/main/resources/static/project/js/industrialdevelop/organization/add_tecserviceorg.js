@@ -1,13 +1,14 @@
-//旅游康养机构录入界面
 (function () {
-    require(['jquery','ajaxUtil','stringUtil','uploadImg','objectUtil','distpicker','alertUtil','urlUtil'],
-        function ($,ajaxUtil,stringUtil,uploadImg, objectUtil, distpicker, alertUtil,urlUtil) {
+    require(['jquery','ajaxUtil','stringUtil','uploadImg','urlUtil','objectUtil','distpicker'],
+        function ($,ajaxUtil,stringUtil,uploadImg,urlUtil, objectUtil,distpicker) {
 
-            var url = "/industrialdevelop/tec-ser-org/selectbyorgcode";
+            var url = "/industrialdevelop/tec-ser-org";
 
-            var pathUrl = "/industrialdevelop/style";
+            var pathUrl = "/userLogin";
 
             var itemcode = stringUtil.getUUID();
+
+            var orgType = "tec";
 
             var type = isUpdate() ? "put":"post";
 
@@ -16,34 +17,36 @@
             const editor = objectUtil.wangEditorUtil();
 
             $("#cancelBtn").click(function () {
-                orange.redirect(pathUrl)
+                window.history.back()
             });
 
             function generateParam(){
                 var param = {};
                 param.name = $("#name").val();
-                param.areaCoverd = $("#areaCoverd").val();
+                param.projectName = $("#projectName").val();
                 param.contacts = $("#contacts").val();
                 param.phone = $("#phone").val();
-                param.addressPro = $("#addressPro").val()
-                param.addressCity = $("#addressCity").val()
-                param.addressCountry = $("#addressCountry").val()
+                param.addressPro = $("#addressPro").val();
+                param.addressCity = $("#addressCity").val();
+                param.addressCountry = $("#addressCountry").val();
                 param.address = $("#address").val()
-                param.intruduce = editor.txt.html();
+                param.intruduce = $(".w-e-text").html();
+                param.orgCode = "未定义";
+                param.itemcode = itemcode;
+                param.type = orgType;
                 return param;
             }
 
             $("#saveBtn").unbind('click').on('click',function () {
                 var param = generateParam();
-                param.status = "0";
-                param.itemcode = itemcode;
+                param.status = "——";
                 if (uploadImg.isUpdate()){
                     ajaxUtil.fileAjax(itemcode,uploadImg.getFiles()[0],"undefined","undefined")
                 }
 
                 ajaxUtil.myAjax(null,url,param,function (data) {
                     if(ajaxUtil.success(data)){
-                        orange.redirect(pathUrl);
+                        orange.redirect('/tecserviceorg_add');
                     }else {
                         alert(data.msg);
                     }
@@ -54,10 +57,10 @@
             $("#submitBtn").unbind('click').on('click',function () {
                 var param = generateParam();
                 param.status = "1";
-                param.type = "tour"
                 ajaxUtil.myAjax(null,url,param,function (data) {
                     if(ajaxUtil.success(data)){
-                        orange.redirect(pathUrl)
+                        window.location.href = pathUrl;
+                        // orange.redirect(pathUrl)
                     }else {
                         alert(data.msg)
                     }
@@ -67,18 +70,9 @@
 
             var init = function () {
                 if (isUpdate()){
-                    var tempdata;
-                    ajaxUtil.myAjax(null, url, null,function (data) {
-                        if(data && data.code == ajaxUtil.successCode) {
-                            tempdata = data.data
-                        }else{
-                            alertUtil.error(data.msg)
-                        }
-                    },false,"","get");
-                    console.log(tempdata);
+                    var tempdata = JSON.parse(localStorage.getItem("rowData"));
                     $("#name").val(tempdata.name);
-                    $("#areaCoverd").val(tempdata.areaCoverd);
-                    $("#specialService").val(tempdata.specialService);
+                    $("#projectName").val(tempdata.projectName);
                     $("#contacts").val(tempdata.contacts);
                     $("#phone").val(tempdata.phone);
                     $("#distpicker").distpicker({
@@ -87,12 +81,9 @@
                         district: tempdata.addressCountry
                     });
                     $("#address").val(tempdata.address);
-                    editor.txt.html(tempdata.intruduce);
+                    $(".w-e-text").html(tempdata.intruduce);
                     itemcode = tempdata.itemcode;
-                    var img = tempdata.filePath;
-                    // console.log(tempdata);
-                    // var imgName=tempdata.fileName;
-                    uploadImg.setImgSrc(img);
+                    uploadImg.setImgSrc(tempdata.filePath)
                 }else {
                     $("#distpicker").distpicker();
                 }
@@ -106,6 +97,7 @@
             function isUpdate() {
                 return (urlUtil.getFullUrl().indexOf("/main#") != -1)
             }
+
         })
 })();
 

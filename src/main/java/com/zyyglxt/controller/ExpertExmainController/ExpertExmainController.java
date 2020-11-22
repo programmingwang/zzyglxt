@@ -1,4 +1,4 @@
-package com.zyyglxt.controller;
+package com.zyyglxt.controller.ExpertExmainController;
 
 import com.zyyglxt.dataobject.IndustrialDevelopExpertRefDO;
 import com.zyyglxt.dto.ExmaineDto;
@@ -28,6 +28,13 @@ public class ExpertExmainController {
     public ResponseData getAllExmainTopic(){
         List<ExmaineDto> exmaineDtos = exmaineService.selectAll();
         return new ResponseData(EmBusinessError.success,exmaineDtos);
+    }
+
+    @RequestMapping(value = "/exmain" , method = RequestMethod.PUT)
+    @ResponseBody
+    public ResponseData updExmain(@RequestBody IndustrialDevelopExpertRefDO developExpertRefDO){
+        exmaineService.updateByPrimaryKeySelective(developExpertRefDO);
+        return new ResponseData(EmBusinessError.success);
     }
 
     @DeleteMapping("/exmain")

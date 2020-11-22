@@ -1,6 +1,6 @@
 (function () {
-    require(['jquery', 'ajaxUtil','bootstrapTableUtil','objectUtil','alertUtil','modalUtil','selectUtil','stringUtil','dictUtil'],
-        function (jquery,ajaxUtil,bootstrapTableUtil,objectUtil,alertUtil,modalUtil,selectUtil,stringUtil,dictUtil) {
+    require(['jquery', 'ajaxUtil','bootstrapTableUtil','objectUtil','alertUtil','modalUtil','selectUtil','stringUtil','dictUtil','uploadImg'],
+        function (jquery,ajaxUtil,bootstrapTableUtil,objectUtil,alertUtil,modalUtil,selectUtil,stringUtil,dictUtil,uploadImg) {
 
 
             var url = "/user/alluser";
@@ -52,7 +52,9 @@
                         confirmButtonStyle: "display:none",
                     };
                     var myTravelModal = modalUtil.init(myViewTravelModalData);
-                    $("#portrait").attr("src",row.portrait);
+                    uploadImg.init();
+                    uploadImg.disable();
+                    uploadImg.setImgSrc(row.portrait);
                     $("#username").val(row.username);
                     $("#name").val(row.name);
                     $("#gender").val(row.gender);
@@ -71,7 +73,7 @@
                 'click .submit' : function (e, value, row, index) {
                     var mySubmitTravelModalData ={
                         modalBodyID :"mySubmitModal",
-                        modalTitle : "提交",
+                        modalTitle : "重置密码",
                         modalClass : "modal-lg",
                         modalConfirmFun:function () {
                             var isSuccess = false;

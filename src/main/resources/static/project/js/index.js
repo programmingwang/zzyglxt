@@ -614,7 +614,6 @@
                 var uuid = stringUtil.getUUID();
                 var header = item.menu_name;
                 var furl = item.menu_url;
-                console.log(furl);
                 var str = "<div class=\"card\">\n" +
                     "                    <div class=\"\" id=\"headingOne\">\n" +
                     "                        <button class=\"collapse-btn btn btn-link btn-block text-left\" type=\"button\" data-toggle=\"collapse\" data-target=\"#" + uuid + "\" aria-expanded=\"true\" aria-controls=\"collapseOne\">\n" +

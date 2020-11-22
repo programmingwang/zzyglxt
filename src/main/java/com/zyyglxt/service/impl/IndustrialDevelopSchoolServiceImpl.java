@@ -1,5 +1,7 @@
 package com.zyyglxt.service.impl;
 
+import com.zyyglxt.dao.OrganizationDOMapper;
+import com.zyyglxt.dataobject.OrganizationDO;
 import com.zyyglxt.dto.industrialDevelop.IndustrialDevelopSchoolDto;
 import com.zyyglxt.error.BusinessException;
 import com.zyyglxt.error.EmBusinessError;
@@ -30,6 +32,9 @@ public class IndustrialDevelopSchoolServiceImpl implements IndustrialDevelopScho
     private IndustrialDevelopSchoolMapper industrialDevelopSchoolMapper;
 
     @Resource
+    OrganizationDOMapper organizationDOMapper;
+
+    @Resource
     private IFileService fileService;
 
     @Resource
@@ -54,7 +59,13 @@ public class IndustrialDevelopSchoolServiceImpl implements IndustrialDevelopScho
         if (result.isHasErrors()) {
             throw new BusinessException(result.getErrMsg(), EmBusinessError.PARAMETER_VALIDATION_ERROR);
         }
-        return industrialDevelopSchoolMapper.insertSelective(record);
+        OrganizationDO organizationDO = organizationDOMapper.selectByOrgName(record.getSchoolName());
+        if (organizationDO == null){
+            return -1;
+        } else {
+            record.setOrgCode(organizationDO.getOrgCode());
+            return industrialDevelopSchoolMapper.insertSelective(record);
+        }
     }
 
     @Override

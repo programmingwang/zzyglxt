@@ -1,10 +1,10 @@
 (function () {
-    require(['jquery','ajaxUtil','stringUtil','uploadImg','wangEditor',"distpicker"],
-        function ($,ajaxUtil,stringUtil,uploadImg, wangEditor,distpicker) {
+    require(['jquery','ajaxUtil','stringUtil','uploadImg','urlUtil','wangEditor',"distpicker"],
+        function ($,ajaxUtil,stringUtil,uploadImg,urlUtil, wangEditor,distpicker) {
 
             var url = "/industrialdevelop/chi-med";
 
-            var pathUrl = "/industrialdevelop/chinesemed/chinesemed-produce";
+            var pathUrl = "/userLogin";
 
             var orgType = "produce";
 
@@ -59,7 +59,7 @@
             });
 
             $("#cancelBtn").click(function () {
-                orange.redirect(pathUrl)
+                window.history.back();
             });
 
             function generateParam(){
@@ -74,14 +74,14 @@
                 param.addressCountry = $("#addressCountry").val()
                 param.address = $("#address").val()
                 param.intruduce = $(".w-e-text").html();
-                param.orgCode = sessionStorage.getItem("orgCode");
                 param.type = orgType;
+                param.itemcode = itemcode;
                 return param;
             }
 
             $("#saveBtn").unbind('click').on('click',function () {
                 var param = generateParam();
-                param.status = "0";
+                param.status = "——";
                 param.itemcode = itemcode;
                 if (uploadImg.isUpdate()){
                     ajaxUtil.fileAjax(itemcode,uploadImg.getFiles()[0],"undefined","undefined")
@@ -89,7 +89,7 @@
 
                 ajaxUtil.myAjax(null,url,param,function (data) {
                     if(ajaxUtil.success(data)){
-                        orange.redirect(pathUrl);
+                        orange.redirect("/produce_add");
                     }else {
                         alert(data.msg);
                     }
@@ -102,7 +102,7 @@
                 param.status = "1";
                 ajaxUtil.myAjax(null,url,param,function (data) {
                     if(ajaxUtil.success(data)){
-                        orange.redirect(pathUrl)
+                        window.location.href = pathUrl;
                     }else {
                         alert(data.msg)
                     }
@@ -136,7 +136,7 @@
 
 
             function isUpdate() {
-                return (localStorage.getItem("rowData") != null || localStorage.getItem("rowData") != undefined)
+                return (urlUtil.getFullUrl().indexOf("/main#") != -1)
             }
     })
 })();

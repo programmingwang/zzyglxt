@@ -1,12 +1,12 @@
 (function () {
-    require(['jquery','ajaxUtil','stringUtil','uploadImg','wangEditor',"distpicker"],
-        function ($,ajaxUtil,stringUtil,uploadImg, wangEditor,distpicker) {
+    require(['jquery','ajaxUtil','stringUtil','uploadImg','urlUtil','wangEditor',"distpicker"],
+        function ($,ajaxUtil,stringUtil,uploadImg,urlUtil, wangEditor,distpicker) {
 
             var url = "/industrialdevelop/chi-med";
 
-            var pathUrl = "/industrialdevelop/chinesemed/chinesemed-produce";
+            var pathUrl = "/userLogin";
 
-            var orgType = "produce";
+            var orgType = 'sale'
 
             var itemcode = stringUtil.getUUID();
 
@@ -59,29 +59,29 @@
             });
 
             $("#cancelBtn").click(function () {
-                orange.redirect(pathUrl)
+                window.history.back()
             });
 
             function generateParam(){
                 var param = {};
                 param.name = $("#name").val();
-                param.peoduceType = $("#peoduceType").val();
-                param.peoduceDrug = $("#peoduceDrug").val();
+                param.salesCategory = $("#salesCategory").val();
+                param.sellingDrugs = $("#sellingDrugs").val();
                 param.contacts = $("#contacts").val();
                 param.phone = $("#phone").val();
-                param.addressPro = $("#addressPro").val()
-                param.addressCity = $("#addressCity").val()
-                param.addressCountry = $("#addressCountry").val()
-                param.address = $("#address").val()
+                param.addressPro = $("#addressPro").val();
+                param.addressCity = $("#addressCity").val();
+                param.addressCountry = $("#addressCountry").val();
+                param.address = $("#address").val();
                 param.intruduce = $(".w-e-text").html();
-                param.orgCode = sessionStorage.getItem("orgCode");
                 param.type = orgType;
+                param.itemcode = itemcode;
                 return param;
             }
 
             $("#saveBtn").unbind('click').on('click',function () {
                 var param = generateParam();
-                param.status = "0";
+                param.status = "——";
                 param.itemcode = itemcode;
                 if (uploadImg.isUpdate()){
                     ajaxUtil.fileAjax(itemcode,uploadImg.getFiles()[0],"undefined","undefined")
@@ -89,7 +89,7 @@
 
                 ajaxUtil.myAjax(null,url,param,function (data) {
                     if(ajaxUtil.success(data)){
-                        orange.redirect(pathUrl);
+                        orange.redirect("/sale_add");
                     }else {
                         alert(data.msg);
                     }
@@ -102,7 +102,8 @@
                 param.status = "1";
                 ajaxUtil.myAjax(null,url,param,function (data) {
                     if(ajaxUtil.success(data)){
-                        orange.redirect(pathUrl)
+                        window.location.href = pathUrl;
+                        // orange.redirect(pathUrl)
                     }else {
                         alert(data.msg)
                     }
@@ -114,8 +115,8 @@
                 if (isUpdate()){
                     var tempdata = JSON.parse(localStorage.getItem("rowData"));
                     $("#name").val(tempdata.name);
-                    $("#peoduceType").val(tempdata.peoduceType);
-                    $("#peoduceDrug").val(tempdata.peoduceDrug);
+                    $("#salesCategory").val(tempdata.salesCategory);
+                    $("#sellingDrugs").val(tempdata.sellingDrugs);
                     $("#contacts").val(tempdata.contacts);
                     $("#distpicker").distpicker({
                         province: tempdata.addressPro,
@@ -130,15 +131,18 @@
                 }else {
                     $("#distpicker").distpicker();
                 }
-                init = function () {}
+                init = function () {
+
+                }
             };
             init();
 
 
             function isUpdate() {
-                return (localStorage.getItem("rowData") != null || localStorage.getItem("rowData") != undefined)
+                return (urlUtil.getFullUrl().indexOf("/main#") != -1)
             }
-    })
+
+        })
 })();
 
 

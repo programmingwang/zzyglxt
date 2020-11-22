@@ -1,8 +1,10 @@
 package com.zyyglxt.service.impl;
 
 import com.zyyglxt.dao.IndustrialDevelopTecSerOrgMapper;
+import com.zyyglxt.dao.OrganizationDOMapper;
 import com.zyyglxt.dataobject.FileDO;
 import com.zyyglxt.dataobject.IndustrialDevelopTecSerOrg;
+import com.zyyglxt.dataobject.OrganizationDO;
 import com.zyyglxt.dto.industrialDevelop.IndustrialDevelopTecSerOrgDto;
 import com.zyyglxt.error.BusinessException;
 import com.zyyglxt.error.EmBusinessError;
@@ -32,6 +34,9 @@ public class IndustrialDevelopTecSerOrgServiceImpl implements IndustrialDevelopT
     private IndustrialDevelopTecSerOrgMapper industrialDevelopTecSerOrgMapper;
 
     @Resource
+    OrganizationDOMapper organizationDOMapper;
+
+    @Resource
     private IFileService fileService;
 
     @Resource
@@ -56,7 +61,13 @@ public class IndustrialDevelopTecSerOrgServiceImpl implements IndustrialDevelopT
         if (result.isHasErrors()) {
             throw new BusinessException(result.getErrMsg(), EmBusinessError.PARAMETER_VALIDATION_ERROR);
         }
-        return industrialDevelopTecSerOrgMapper.insertSelective(record);
+        OrganizationDO organizationDO = organizationDOMapper.selectByOrgName(record.getName());
+        if (organizationDO == null){
+            return -1;
+        } else {
+            record.setOrgCode(organizationDO.getOrgCode());
+            return industrialDevelopTecSerOrgMapper.insertSelective(record);
+        }
     }
 
     @Override

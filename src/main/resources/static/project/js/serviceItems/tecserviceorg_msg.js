@@ -1,8 +1,10 @@
 (function () {
-    require(['jquery', 'ajaxUtil', 'stringUtil', 'uploadImg', 'objectUtil', 'distpicker'],
-        function ($, ajaxUtil, stringUtil, uploadImg, objectUtil, distpicker) {
+    require(['jquery', 'ajaxUtil', 'stringUtil', 'uploadImg', 'objectUtil', 'distpicker', 'urlUtil'],
+        function ($, ajaxUtil, stringUtil, uploadImg, objectUtil, distpicker, urlUtil) {
 
             var url = "/industrialdevelop/tec-ser-org/selectbyorgcode";
+
+            var opurl = "/industrialdevelop/tec-ser-org";
 
             var pathUrl = "/serviceItems/tecserviceorg_msg";
 
@@ -25,21 +27,23 @@
                 param.addressPro = $("#addressPro").val();
                 param.addressCity = $("#addressCity").val();
                 param.addressCountry = $("#addressCountry").val();
-                param.address = $("#address").val()
-                param.intruduce = $(".w-e-text").html();
-                param.orgCode = sessionStorage.getItem("orgCode");
+                param.address = $("#address").val();
+                param.intruduce = editor.txt.html();
                 param.itemcode = itemcode;
                 return param;
             }
 
             $("#saveBtn").unbind('click').on('click', function () {
                 var param = generateParam();
-                param.status = "——";
-                if (uploadImg.isUpdate()) {
-                    ajaxUtil.fileAjax(itemcode, uploadImg.getFiles()[0], "undefined", "undefined")
+                param.status = 1;
+                if (uploadImg.isUpdate()){
+                    if (isUpdate()){
+                        ajaxUtil.updateFile(itemcode,uploadImg.getFiles()[0],"undefined","undefined");
+                    }else {
+                        ajaxUtil.fileAjax(itemcode,uploadImg.getFiles()[0],"undefined","undefined")
+                    }
                 }
-
-                ajaxUtil.myAjax(null, url, param, function (data) {
+                ajaxUtil.myAjax(null, opurl, param, function (data) {
                     if (ajaxUtil.success(data)) {
                         orange.redirect(pathUrl);
                     } else {
@@ -51,8 +55,15 @@
 
             $("#submitBtn").unbind('click').on('click', function () {
                 var param = generateParam();
-                param.status = "——";
-                ajaxUtil.myAjax(null, url, param, function (data) {
+                param.status = 1;
+                if (uploadImg.isUpdate()){
+                    if (isUpdate()){
+                        ajaxUtil.updateFile(itemcode,uploadImg.getFiles()[0],"undefined","undefined");
+                    }else {
+                        ajaxUtil.fileAjax(itemcode,uploadImg.getFiles()[0],"undefined","undefined")
+                    }
+                }
+                ajaxUtil.myAjax(null, opurl, param, function (data) {
                     if (ajaxUtil.success(data)) {
                         orange.redirect(pathUrl)
                     } else {
@@ -64,7 +75,7 @@
 
             var init = function () {
                 ajaxUtil.myAjax(null,url,null,function (data) {
-                    if(data && data.code == 88888) {
+                    if(ajaxUtil.success(data)) {
                         var tempdata = data.data;
                         $("#name").val(tempdata.name);
                         $("#projectName").val(tempdata.projectName);
@@ -87,7 +98,7 @@
             init();
 
             function isUpdate() {
-                return (localStorage.getItem("rowData") != null || localStorage.getItem("rowData") != undefined)
+                return (urlUtil.getFullUrl().indexOf("/main#") != -1)
             }
         })
 })();

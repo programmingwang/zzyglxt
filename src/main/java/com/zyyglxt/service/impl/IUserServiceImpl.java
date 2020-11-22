@@ -59,60 +59,49 @@ public class IUserServiceImpl implements IUserService {
     @Override
     @Transactional
     public ResponseData Register(UserDto userDto) throws BusinessException {
+        // 验证参数不能为空
         ValidatorResult result = validator.validate(userDto);
         if (result.isHasErrors()) {
             throw new BusinessException(result.getErrMsg(), EmBusinessError.PARAMETER_VALIDATION_ERROR);
         }
-        OrganizationDO organizationDO = selectByOrgNameAndCode(userDto.getOrgName(),userDto.getOrgCode());
-        // 根据用户名查询数据库，若查询到数据，表示该用户名已存在，不能注册
+        // 验证手机号码
+        if (!MobileUtil.checkPhone(userDto.getMobilePhone())) {
+            throw new BusinessException("手机号码不正确", EmBusinessError.MOBILEPHONE_ERROR);
+        }
+        // 用户名的唯一性
         UserDO userDO = userDOMapper.selectByUsername(userDto.getUsername());
-        if (organizationDO != null) {
-            if (userDO != null) {
-                throw new BusinessException("用户名已存在，请更换", EmBusinessError.USER_REGISTER_FAILED);
-            } else {
-                if (MobileUtil.checkPhone(userDto.getMobilePhone())) {
-                    register1(userDto);
-                    return new ResponseData(EmBusinessError.success,"/userLogin");
-                } else {
-                    throw new BusinessException("手机号不正确", EmBusinessError.MOBILEPHONE_ERROR);
-                }
-            }
+        if (userDO != null) {
+            throw new BusinessException("用户名已存在", EmBusinessError.USER_ACCOUNT_ALREADY_EXIST);
         } else {
-            // 根据用户名查询数据库，若查询到数据，表示该用户名已存在，不能注册
-            if (userDO != null) {
-                throw new BusinessException("用户名已存在，请更换", EmBusinessError.USER_REGISTER_FAILED);
-            } else {
-                if (MobileUtil.checkPhone(userDto.getMobilePhone())) {
-                    register2(userDto);
-                    if ("中药材种植园".equals(userDto.getOrgIdentify())) {
+            OrganizationDO organizationDO = organizationDOMapper.selectByOrgNameAndCode(userDto.getOrgName(),userDto.getOrgCode());
+            if (organizationDO != null) {   // 申请用户所在的机构已经申请过则直接到登录页面
+                register1(userDto);
+                return new ResponseData(EmBusinessError.success,"/userLogin");
+            } else {    // 申请用户所在的机构没有申请过则跳转到信息录入页面
+                register2(userDto);
+                switch (userDto.getOrgIdentify()) {
+                    case "中药材种植园":
                         return new ResponseData(EmBusinessError.success, "/plantation_add");
-                    } else if ("中药材加工企业".equals(userDto.getOrgIdentify())) {
+                    case "中药材加工企业":
                         return new ResponseData(EmBusinessError.success, "/process_add");
-                    } else if ("中药材制药企业".equals(userDto.getOrgIdentify())) {
+                    case "中药材制药企业":
                         return new ResponseData(EmBusinessError.success, "/produce_add");
-                    } else if ("中医医疗机构".equals(userDto.getOrgIdentify())) {
+                    case "中药材销售企业":
+                        return new ResponseData(EmBusinessError.success, "/sale_add");
+                    case "中医医疗机构":
+                        return new ResponseData(EmBusinessError.success, "/hosp_add");
+                    case "高等医学院校":
                         return new ResponseData(EmBusinessError.success, "/school_add");
-                    } else if ("高等医学院校".equals(userDto.getOrgIdentify())) {
-                        return new ResponseData(EmBusinessError.success, "/school_add");
-                    } else if ("科研院所".equals(userDto.getOrgIdentify())) {
+                    case "科研院所":
                         return new ResponseData(EmBusinessError.success, "/lab_add");
-                    } else if ("技术服务机构".equals(userDto.getOrgIdentify())) {
-                        return new ResponseData(EmBusinessError.success, "/tecservice_add");
-                    } else if ("旅游康养机构".equals(userDto.getOrgIdentify())) {
+                    case "技术服务机构":
+                        return new ResponseData(EmBusinessError.success, "/tecserviceorg_add");
+                    case "旅游康养机构":
                         return new ResponseData(EmBusinessError.success, "/tour_add");
-                    }
-                    return new ResponseData(EmBusinessError.success);
-                } else {
-                    throw new BusinessException("手机号不正确", EmBusinessError.MOBILEPHONE_ERROR);
                 }
+                return new ResponseData(EmBusinessError.success);
             }
         }
-    }
-
-    @Override
-    public OrganizationDO selectByOrgNameAndCode(String orgName, String orgCode){
-        OrganizationDO organizationDO = organizationDOMapper.selectByOrgNameAndCode(orgName, orgCode);
-        return organizationDO;
     }
 
     /**
@@ -125,8 +114,8 @@ public class IUserServiceImpl implements IUserService {
         String orgName = userDto.getOrgName();
         String orgCode = userDto.getOrgCode();
         OrganizationDO organizationDO = organizationDOMapper.selectByOrgNameAndCode(orgName, orgCode);
-        // user 表唯一标识UUID
-        String userItemCode = UUID.randomUUID().toString();
+
+        String userItemCode = UUID.randomUUID().toString();// user 表唯一标识UUID
         UserDO userDO = new UserDO();
         userDO.setItemcode(userItemCode);
         userDO.setOrgCode(organizationDO.getItemcode());
@@ -140,13 +129,11 @@ public class IUserServiceImpl implements IUserService {
         userDO.setUpdater(userDto.getUsername());// 注册时，注册用户为 修改人
 //        userDO.setType(0);// 设置为普通用户（0：普通，1：管理员）
 
-
-        // user_role_ref 表唯一标识UUID
-        String userRoleItemCode = UUID.randomUUID().toString();
         UserRoleRefDO userRoleRefDO = new UserRoleRefDO();
-        userRoleRefDO.setItemcode(userRoleItemCode);// 唯一标识UUID
-        userRoleRefDO.setUserCode(userItemCode);// 关联user表itemCode字段
         RoleDO roleDO = roleDOMapper.selectByRoleType(0);//根据角色类型查到itemcode
+
+        userRoleRefDO.setItemcode(UUID.randomUUID().toString());// 唯一标识UUID
+        userRoleRefDO.setUserCode(userItemCode);// 关联user表itemCode字段
         userRoleRefDO.setRoleCode(roleDO.getItemcode());// 关联role表itemCode字段
         userRoleRefDO.setPlatRole("普通用户");
         userRoleRefDO.setCreater(userDto.getUsername());// 设置创建人
@@ -187,15 +174,15 @@ public class IUserServiceImpl implements IUserService {
         userDO.setMobilephone(userDto.getMobilePhone());
         userDO.setCreater(userDto.getUsername());// 注册时，注册用户为 创建人
         userDO.setUpdater(userDto.getUsername());// 注册时，注册用户为 修改人
+
+        RoleDO roleDO = roleDOMapper.selectByRoleName(userDto.getOrgIdentify());
+        userDO.setType(roleDO.getRoleType());
 //        userDO.setType(0);// 设置为普通用户（0：普通，1：管理员）
 
-
-        // user_role_ref 表唯一标识UUID
-        String userRoleItemCode = UUID.randomUUID().toString();
         UserRoleRefDO userRoleRefDO = new UserRoleRefDO();
-        userRoleRefDO.setItemcode(userRoleItemCode);// 唯一标识UUID
+        userRoleRefDO.setItemcode(UUID.randomUUID().toString());// 唯一标识UUID
         userRoleRefDO.setUserCode(userItemCode);// 关联user表itemCode字段
-        RoleDO roleDO = roleDOMapper.selectByRoleType(0);//根据角色类型查到itemcode
+//        roleDO = roleDOMapper.selectByRoleType(roleDO.getRoleType());//根据角色类型查到itemcode
         userRoleRefDO.setRoleCode(roleDO.getItemcode());// 关联role表itemCode字段
         userRoleRefDO.setPlatRole("普通用户");
         userRoleRefDO.setCreater(userDto.getUsername());// 设置创建人
@@ -252,10 +239,6 @@ public class IUserServiceImpl implements IUserService {
     }
 
     /**
-     * 需要新增重置密码
-     */
-
-    /**
      * 查看个人用户信息
      *
      * @return
@@ -263,6 +246,11 @@ public class IUserServiceImpl implements IUserService {
     @Override
     public UserDO selectOne() {
         return userDOMapper.selectByUsername(usernameUtil.getOperateUser());
+    }
+
+    @Override
+    public OrganizationDO selectByOrgNameAndCode(String orgName, String orgCode) {
+        return organizationDOMapper.selectByOrgNameAndCode(orgName, orgCode);
     }
 
     /**

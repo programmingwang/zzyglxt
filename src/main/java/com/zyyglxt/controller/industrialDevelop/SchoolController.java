@@ -28,8 +28,12 @@ public class SchoolController {
     @RequestMapping(value = "/school", method = RequestMethod.POST)
     @LogAnnotation(appCode ="",logTitle ="添加产业发展-高等学院记录",logLevel ="3",creater ="",updater = "")
     public ResponseData addSchool(@RequestBody IndustrialDevelopSchool record){
-        schoolService.insertSelective(record);
-        return new ResponseData(EmBusinessError.success);
+        int res = schoolService.insertSelective(record);
+        if (res == -1){
+            return new ResponseData(EmBusinessError.ORG_NAME_ERROR);
+        }else {
+            return new ResponseData(EmBusinessError.success);
+        }
     }
 
     @ResponseBody

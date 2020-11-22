@@ -1,12 +1,16 @@
 (function () {
-    require(['jquery', 'ajaxUtil', 'stringUtil', 'uploadImg', 'objectUtil', 'distpicker'],
-        function ($, ajaxUtil, stringUtil, uploadImg, objectUtil, distpicker) {
+    require(['jquery', 'ajaxUtil', 'stringUtil', 'uploadImg', 'objectUtil', 'distpicker','fileUtil', 'urlUtil'],
+        function ($, ajaxUtil, stringUtil, uploadImg, objectUtil, distpicker, fileUtil, urlUtil) {
 
             var url = "/industrialdevelop/schoolmsg";
 
+            var opurl = "/industrialdevelop/school";
+
             var pathUrl = "/school/school_msg";
 
-            var itemcode = stringUtil.getUUID();
+            var itemcode = null;
+
+            var fileitemcode = stringUtil.getUUID();
 
             uploadImg.init();
 
@@ -29,19 +33,22 @@
                 param.addressCity = $("#addressCity").val()
                 param.addressCountry = $("#addressCountry").val()
                 param.address = $("#address").val()
-                param.schoolText = $(".w-e-text").html();
+                param.schoolText = editor.txt.html();
+                param.itemcode = itemcode;
                 return param;
             }
 
             $("#saveBtn").unbind('click').on('click', function () {
                 var param = generateParam();
-                param.status = "——";
-                param.itemcode = itemcode;
-                if (uploadImg.isUpdate()) {
-                    ajaxUtil.fileAjax(itemcode, uploadImg.getFiles()[0], "undefined", "undefined")
+                param.status = 1;
+                if (uploadImg.isUpdate()){
+                    if (isUpdate()){
+                        ajaxUtil.updateFile(itemcode,uploadImg.getFiles()[0],"undefined","undefined");
+                    }else {
+                        ajaxUtil.fileAjax(itemcode,uploadImg.getFiles()[0],"undefined","undefined")
+                    }
                 }
-
-                ajaxUtil.myAjax(null, url, param, function (data) {
+                ajaxUtil.myAjax(null, opurl, param, function (data) {
                     if (ajaxUtil.success(data)) {
                         orange.redirect(pathUrl);
                     } else {
@@ -53,8 +60,15 @@
 
             $("#submitBtn").unbind('click').on('click', function () {
                 var param = generateParam();
-                param.status = "——";
-                ajaxUtil.myAjax(null, url, param, function (data) {
+                param.status = 1;
+                if (uploadImg.isUpdate()){
+                    if (isUpdate()){
+                        ajaxUtil.updateFile(itemcode,uploadImg.getFiles()[0],"undefined","undefined");
+                    }else {
+                        ajaxUtil.fileAjax(itemcode,uploadImg.getFiles()[0],"undefined","undefined")
+                    }
+                }
+                ajaxUtil.myAjax(null, opurl, param, function (data) {
                     if (ajaxUtil.success(data)) {
                         orange.redirect(pathUrl)
                     } else {
@@ -66,7 +80,7 @@
 
             var init = function () {
                 ajaxUtil.myAjax(null, url, null, function (data) {
-                    if (data && data.code == 88888) {
+                    if (ajaxUtil.success(data)) {
                         var tempdata = data.data;
                         $("#schoolName").val(tempdata.schoolName);
                         $("#schoolIntroduce").val(tempdata.schoolIntroduce);
@@ -92,7 +106,7 @@
             init();
 
             function isUpdate() {
-                return (localStorage.getItem("rowData") != null || localStorage.getItem("rowData") != undefined)
+                return (urlUtil.getFullUrl().indexOf("/main#") != -1)
             }
         })
 })();

@@ -185,4 +185,16 @@
     OPINION = #{opinion,jdbcType=TIMESTAMP},
     where itemCode = #{itemcode,jdbcType=CHAR}
   </update>
+
+    <select id="selectByTopicCode" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM tb_industrial_develop_expert_ref
+        WHERE TOPIC_CODE = #{topicCode}
+    </select>
+
+    <delete id="deleteByTopicCode">
+        DELETE FROM tb_industrial_develop_expert_ref
+        WHERE TOPIC_CODE = #{topicCode}
+    </delete>
 </mapper>

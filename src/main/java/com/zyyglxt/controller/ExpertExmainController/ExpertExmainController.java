@@ -1,11 +1,10 @@
-package com.zyyglxt.controller.ExpertExmainController;
+package com.zyyglxt.controller;
 
 import com.zyyglxt.dataobject.IndustrialDevelopExpertRefDO;
 import com.zyyglxt.dto.ExmaineDto;
 import com.zyyglxt.error.EmBusinessError;
 import com.zyyglxt.response.ResponseData;
 import com.zyyglxt.service.IExmaineService;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,7 +17,6 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/exmain")
-@Slf4j
 public class ExpertExmainController {
 
     @Autowired
@@ -36,6 +34,20 @@ public class ExpertExmainController {
     @ResponseBody
     public ResponseData updExmain(@RequestBody IndustrialDevelopExpertRefDO developExpertRefDO){
         exmaineService.updateByPrimaryKeySelective(developExpertRefDO);
+        return new ResponseData(EmBusinessError.success);
+    }
+
+    @DeleteMapping("/exmain")
+    @ResponseBody
+    public ResponseData deleteByTopicCode(String topicCode){
+        exmaineService.deleteByTopicCode(topicCode);
+        return new ResponseData(EmBusinessError.success);
+    }
+
+    @PostMapping("/exmain")
+    @ResponseBody
+    public ResponseData insert(@RequestBody IndustrialDevelopExpertRefDO expertRefDO){
+        exmaineService.insertSelective(expertRefDO);
         return new ResponseData(EmBusinessError.success);
     }
 

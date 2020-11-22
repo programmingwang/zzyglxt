@@ -1,7 +1,7 @@
-(function () {
-    require(['jquery','ajaxUtil','stringUtil','uploadImg','wangEditor'],
-        function ($,ajaxUtil,stringUtil,uploadImg, wangEditor) {
 
+(function () {
+    require(['jquery','ajaxUtil','stringUtil','uploadImg','wangEditor',"distpicker"],
+        function ($,ajaxUtil,stringUtil,uploadImg, wangEditor,distpicker) {
             var url = "/industrialdevelop/chi-med";
 
             var pathUrl = "/industrialdevelop/chinesemed/chinesemed-sale";
@@ -74,13 +74,14 @@
                 param.addressCountry = $("#addressCountry").val()
                 param.address = $("#address").val()
                 param.intruduce = $(".w-e-text").html();
+                param.orgCode = sessionStorage.getItem("orgCode");
                 param.type = orgType
                 return param;
             }
 
             $("#saveBtn").unbind('click').on('click',function () {
                 var param = generateParam();
-                param.status = "——";
+                param.status = "0";
                 param.itemcode = itemcode;
                 if (uploadImg.isUpdate()){
                     ajaxUtil.fileAjax(itemcode,uploadImg.getFiles()[0],"undefined","undefined")
@@ -98,7 +99,7 @@
 
             $("#submitBtn").unbind('click').on('click',function () {
                 var param = generateParam();
-                param.status = "——";
+                param.status = "1";
                 ajaxUtil.myAjax(null,url,param,function (data) {
                     if(ajaxUtil.success(data)){
                         orange.redirect(pathUrl)
@@ -141,5 +142,6 @@
             }
     })
 })();
+
 
 

@@ -136,6 +136,11 @@ var base64Code = "";
             return imgFile;
         }
 
+        function disable() {
+            $('.content-img-list').off('mouseover','.content-img-list-item');
+            $('.content-img-list').off('mouseleave','.content-img-list-item');
+            $(".content-img-list").off("click", '.content-img-list-item a .gcllajitong');
+        }
         function genBase64() {
             r = new FileReader();
             r.onload = function(){
@@ -176,7 +181,8 @@ var base64Code = "";
             setImgSrc: setImgSrc,
             setImgSrcs: setImgSrcs,
             init: init,
-            getBase64: getBase64
+            getBase64: getBase64,
+            disable: disable
         }
 
     })

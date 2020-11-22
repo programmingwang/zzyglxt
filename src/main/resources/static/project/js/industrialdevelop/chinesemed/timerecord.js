@@ -55,7 +55,7 @@
                 //调用日期插件
                 $("#startTime").myDatePicker({
                     'startDate':'2014-01-01 18:45:20',
-                    'endDate':(new Date()).Format("yyyy-mm-dd hh:ii:ss"),
+                    'endDate':'2099-01-01 18:45:20',
                     //指定父元素，不指定默认为body
                     parent:$("#startTime").parent(),
                     //定位方式是否用fixed
@@ -72,7 +72,7 @@
                 //调用日期插件
                 $("#endTime").myDatePicker({
                     'startDate':'2014-01-01 18:45:20',
-                    'endDate':(new Date()).Format("yyyy-mm-dd hh:ii:ss"),
+                    'endDate':'2099-01-01 18:45:20',
                     //指定父元素，不指定默认为body
                     parent:$("#endTime").parent(),
                     //定位方式是否用fixed
@@ -91,16 +91,19 @@
             var pl = dictUtil.getDictByCode(dictUtil.DICT_LIST.showStatus);
             $("#chargePersonSearch").selectUtil(pl);
 
-
             var aCol = [
                 {field: 'year', title: '年份'},
-                {field: 'itemcreateat', title: '开启时间'},
-                {field: 'itemupdateat', title: '结束时间'},
+                {field: 'startTime', title: '开启时间'},
+                {field: 'endTime', title: '结束时间'},
                 {field: 'creater', title: '操作人'},
                 {field: 'itemcreateat', title: '操作时间'}
             ];
 
+
             var myTable = bootstrapTableUtil.myBootStrapTableInit("table", getUrl, aParam, aCol);
+
+            var allTableData = $("#table").bootstrapTable("getData");
+            console.log(allTableData);
 
             function refreshTable() {
                 var param = {};
@@ -108,11 +111,7 @@
                 myTable = bootstrapTableUtil.myBootStrapTableInit("table", getUrl, param, aCol);
             }
 
-            var allTableData = $("#table").bootstrapTable("getData");
-            console.log(allTableData);
             bootstrapTableUtil.globalSearch("table", getUrl, aParam, aCol);
-
-
 
         })
 })();

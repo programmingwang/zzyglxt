@@ -14,8 +14,7 @@
     <result column="itemUpdateAt" jdbcType="TIMESTAMP" property="itemupdateat" />
   </resultMap>
   <sql id="Base_Column_List">
-    itemID, itemCode, USER_CODE, APP_CODE, ROLE_CODE, PLAT_ROLE, CREATER, itemCreateAt,
-    UPDATER, itemUpdateAt
+    itemID, itemCode, USER_CODE, APP_CODE, ROLE_CODE, PLAT_ROLE
   </sql>
   <select id="selectByPrimaryKey" parameterType="com.zyyglxt.dataobject.UserRoleRefDOKey" resultMap="BaseResultMap">
     select

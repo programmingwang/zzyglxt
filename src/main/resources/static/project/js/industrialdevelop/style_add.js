@@ -78,6 +78,7 @@
                     console.log(tempdata);
                     $("#name").val(tempdata.name);
                     $("#areaCoverd").val(tempdata.areaCoverd);
+                    $("#specialService").val(tempdata.specialService);
                     $("#contacts").val(tempdata.contacts);
                     $("#phone").val(tempdata.phone);
                     $("#distpicker").distpicker({
@@ -86,9 +87,12 @@
                         district: tempdata.addressCountry
                     });
                     $("#address").val(tempdata.address);
-                    $("#intruduce").val(tempdata.intruduce)
-                    editor.txt.html(tempdata.projectIntroduce);
-                    itemcode = tempdata.itemcode
+                    editor.txt.html(tempdata.intruduce);
+                    itemcode = tempdata.itemcode;
+                    var img = tempdata.filePath;
+                    // console.log(tempdata);
+                    // var imgName=tempdata.fileName;
+                    uploadImg.setImgSrc(img);
                 }else {
                     $("#distpicker").distpicker();
                 }

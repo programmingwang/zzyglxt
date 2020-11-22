@@ -1,11 +1,13 @@
 package com.zyyglxt.service.impl;
 
 import com.zyyglxt.dao.IndustrialDevelopTopicDOMapper;
+import com.zyyglxt.dataobject.IndustrialDevelopExpertRefDO;
 import com.zyyglxt.dataobject.IndustrialDevelopTopicDO;
 import com.zyyglxt.dataobject.IndustrialDevelopTopicDOKey;
 import com.zyyglxt.dataobject.validation.ValidationGroups;
 import com.zyyglxt.error.BusinessException;
 import com.zyyglxt.error.EmBusinessError;
+import com.zyyglxt.service.IExmaineService;
 import com.zyyglxt.service.IIndustrialDevelopTopicService;
 import com.zyyglxt.validator.ValidatorImpl;
 import com.zyyglxt.validator.ValidatorResult;
@@ -30,6 +32,9 @@ public class IndustrialDevelopTopicServiceImpl implements IIndustrialDevelopTopi
     @Resource
     ValidatorImpl validator;
 
+    @Resource
+    IExmaineService iExmaineService;
+
     @Override
     public void addTopic(IndustrialDevelopTopicDO record) {
         record.setCreater("未定义");
@@ -43,6 +48,9 @@ public class IndustrialDevelopTopicServiceImpl implements IIndustrialDevelopTopi
         if (record.getItemcode() == null || record.getItemcode().isEmpty()){
             record.setItemcode(UUID.randomUUID().toString());
         }
+        IndustrialDevelopExpertRefDO industrialDevelopExpertRefDO = new IndustrialDevelopExpertRefDO();
+        industrialDevelopExpertRefDO.setTopicCode(record.getItemcode());
+        iExmaineService.insertSelective(industrialDevelopExpertRefDO);
         developTopicDOMapper.insertSelective(record);
     }
 
@@ -69,5 +77,10 @@ public class IndustrialDevelopTopicServiceImpl implements IIndustrialDevelopTopi
     @Override
     public List<IndustrialDevelopTopicDO> getTopics() {
         return developTopicDOMapper.selectAll();
+    }
+
+    @Override
+    public IndustrialDevelopTopicDO getTopic(String topicCode) {
+        return developTopicDOMapper.selectByItemCode(topicCode);
     }
 }

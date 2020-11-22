@@ -1,9 +1,12 @@
 package com.zyyglxt.service.impl;
 
+import com.zyyglxt.dao.OrganizationDOMapper;
+import com.zyyglxt.dataobject.OrganizationDO;
 import com.zyyglxt.dto.industrialDevelop.IndustrialDevelopSchoolDto;
 import com.zyyglxt.error.BusinessException;
 import com.zyyglxt.error.EmBusinessError;
 import com.zyyglxt.service.IFileService;
+import com.zyyglxt.util.UsernameUtil;
 import com.zyyglxt.validator.ValidatorImpl;
 import com.zyyglxt.validator.ValidatorResult;
 import org.springframework.beans.BeanUtils;
@@ -29,10 +32,16 @@ public class IndustrialDevelopSchoolServiceImpl implements IndustrialDevelopScho
     private IndustrialDevelopSchoolMapper industrialDevelopSchoolMapper;
 
     @Resource
+    OrganizationDOMapper organizationDOMapper;
+
+    @Resource
     private IFileService fileService;
 
-    @Autowired
+    @Resource
     ValidatorImpl validator;
+
+    @Resource
+    UsernameUtil usernameUtil;
 
     @Override
     public int deleteByPrimaryKey(Integer itemid,String itemcode) {
@@ -50,7 +59,13 @@ public class IndustrialDevelopSchoolServiceImpl implements IndustrialDevelopScho
         if (result.isHasErrors()) {
             throw new BusinessException(result.getErrMsg(), EmBusinessError.PARAMETER_VALIDATION_ERROR);
         }
-        return industrialDevelopSchoolMapper.insertSelective(record);
+        OrganizationDO organizationDO = organizationDOMapper.selectByOrgName(record.getSchoolName());
+        if (organizationDO == null){
+            return -1;
+        } else {
+            record.setOrgCode(organizationDO.getOrgCode());
+            return industrialDevelopSchoolMapper.insertSelective(record);
+        }
     }
 
     @Override
@@ -81,5 +96,14 @@ public class IndustrialDevelopSchoolServiceImpl implements IndustrialDevelopScho
             item.setFilePath(fileService.selectFileByDataCode(item.getItemcode()).getFilePath());
         }
         return resList;
+    }
+
+    @Override
+    public IndustrialDevelopSchoolDto selectByorgcode() {
+        IndustrialDevelopSchoolDto schoolDto = new IndustrialDevelopSchoolDto();
+        IndustrialDevelopSchool developSchoolDto = industrialDevelopSchoolMapper.selectByorgcode(usernameUtil.getOrgCode());
+        BeanUtils.copyProperties(developSchoolDto, schoolDto);
+        schoolDto.setFilePath(fileService.selectFileByDataCode(developSchoolDto.getItemcode()).getFilePath());
+        return schoolDto;
     }
 }

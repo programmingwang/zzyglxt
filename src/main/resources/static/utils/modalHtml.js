@@ -960,13 +960,18 @@
 
         modalHtml.myViewAccountMessageModal =
             '<div class="row">'+
-            '            <div id="imgDiv" class="col-lg-12 col-md-12">\n' +
-            '                <fieldset disabled>'+
-            '                <div class="input-group mb-3">\n' +
-            '                    <div class="input-group-prepend">\n' +
-            '                        <button type="button" class="btn btn-primary btn-sm">头像</button>\n' +
+            '            <div class="upload-content" data-limit="1">\n' +
+            '                <div class="content-img">\n' +
+            '                    <ul class="content-img-list"></ul>\n' +
+            '                    <div class="file">\n' +
+            '                        <input type="file" name="file" accept="image/*" id="upload" multiple>\n' +
             '                    </div>\n' +
-            '                    <img id="portrait" src="#"/>\n' +
+            '                </div>\n' +
+            '                <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">\n' +
+            '                    <div class="modal-dialog modal-lg" role="document">\n' +
+            '                        <div class="modal-content">\n' +
+            '                        </div>\n' +
+            '                    </div>\n' +
             '                </div>\n' +
             '            </div>\n' +
             '\n' +
@@ -2374,21 +2379,21 @@
 
 
         modalHtml.myTimeModal =
-            '<div class="row" style="    height: 30em;\n' +
-            '    width: 30em;">'+
-            '            <div class="col-lg-12 col-md-12">\n' +
+            '<div class="row" >'+
+            '            <div class="col-lg-4 col-md-4" style="margin-left: 2rem">\n' +
             '                <div class="input-group mb-3">\n' +
             '                    <div class="input-group-prepend">\n' +
             '                        <label class="input-group-text" for="applicant">年份</label>\n' +
             '                    </div>\n' +
             '                    <input type="text"  id="year" class="form-control" placeholder="请输入年份">\n' +
             '                </div>\n' +
-            '            </div>\n'+
+            '            </div><div class="col-lg-8 col-md-8"></div>\n'+
             '\n' +
-            '            <div class="col-lg-12 col-md-12" style="margin-bottom: 10px;">\n' +
+            '                        <label class=\'input-label col-lg-6 col-md-6 row\' style="margin-left: 2rem">开启时间</label>\n' +
+            '                        <label class=\'input-label col-lg-4 col-md-4 row\' style="margin-left: 1rem">结束时间</label>\n' +
+            '            <div class="col-lg-6 col-md-6" style="margin-bottom: 10px;">\n' +
             '                <div class="input-group mb-3">\n' +
             '                    <div class="input-group-prepend">\n' +
-            '                        <label class=\'input-label\'>开启时间</label>\n' +
             '                       <div style=\'display: flex;\'>\n' +
             '                           <input type="text" id=\'startTime\' style=\'width:13em;display: block;margin-left: 2em\'>\n' +
             '                       </div>\n' +
@@ -2396,16 +2401,28 @@
             '                </div>\n' +
             '            </div>\n' +
             '\n' +
-            '            <div class="col-lg-12 col-md-12" style="margin-bottom: 10px;">\n' +
+
+            '            <div class="col-lg-6 col-md-6" style="margin-bottom: 10px;">\n' +
             '                <div class="input-group mb-3">\n' +
             '                    <div class="input-group-prepend">\n' +
-            '                        <label class=\'input-label\'>结束时间</label>\n' +
+
             '                       <div style=\'display: flex;\'>\n' +
             '                           <input type="text" id=\'endTime\' style=\'width:13em;display: block;margin-left: 2em\'>\n' +
             '                       </div>\n' +'                    </div>\n' +
             '                </div>\n' +
             '            </div>\n' +
             '</div>';
+
+        modalHtml.addExperModal='<div>\n' +
+            '        <div >\n' +
+            '            <span>请选择专家</span>\n' +
+            '                <div style="margin-top: 1em;">\n' +
+            '                    <select id="experName" class="form-control" >\n' +
+            '                        <option value ="volvo">请选择专家姓名</option>\n' +
+            '                    </select>\n' +
+            '                </div>\n' +
+            '        </div>\n' +
+            '    </div>\n';
 
 
         modalHtml.myDeleteModalTravel = '是否删除景点信息?';
@@ -2424,6 +2441,8 @@
         modalHtml.myFailModal = '确认不通过吗？';
         modalHtml.myUnderShelfModal = '确认下架吗？';
 
+        modalHtml.myDeleteCStion='是否删除中药销售企业信息';
+        modalHtml.myDeleteCPtion='是否删除中药制药企业信息';
         modalHtml.myShelfSaleDrugModal='点击确认将上传到河北中医药网，是否上架';
 
         modalHtml.myShowModal = '确认展示吗？';
@@ -2454,6 +2473,12 @@
 
         modalHtml.myDeleteMedMat = "是否删除药材信息？"
         modalHtml.myShelveMedMat = "点击上架将药材信息发送到河北中医药网，确认上架？"
+
+        modalHtml.myDeleteExpert="是否删除该专家信息？"
+        modalHtml.myResetPassword="是否重置密码？"
+
+        modalHtml.myCencelDistribution = "是否取消分配专家？"
+
 
         return modalHtml;
 

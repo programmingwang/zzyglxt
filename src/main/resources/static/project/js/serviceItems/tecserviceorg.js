@@ -93,7 +93,6 @@
             var pl = dictUtil.getDictByCode(dictUtil.DICT_LIST.showStatus);
             $("#chargePersonSearch").selectUtil(pl);
 
-
             var aCol = [
                 {field: 'serviceProject', title: '服务项目名称'},
                 {field: 'projectCost', title: '项目收费'},

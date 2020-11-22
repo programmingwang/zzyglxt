@@ -85,9 +85,9 @@
                                 "status": ""
                             };
                             if(sessionStorage.getItem("rolename") == "文化宣传处长" || sessionStorage.getItem("rolename") == "政务资源处长"){
-                                submitStatus.chineseCulturalStatus = webStatus[3].id;
+                                submitStatus.status = webStatus[3].id;
                             }else{
-                                submitStatus.chineseCulturalStatus = webStatus[4].id;
+                                submitStatus.status = webStatus[4].id;
                             }
                             ajaxUtil.myAjax(null,"changestatustocarefam/"+row.itemid+"/"+row.itemcode,submitStatus,function (data) {
                                 if(ajaxUtil.success(data)){

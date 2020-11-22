@@ -85,9 +85,9 @@
                                 "chineseMedicineStatus": ""
                             };
                             if(sessionStorage.getItem("rolename") == "文化宣传处长" || sessionStorage.getItem("rolename") == "政务资源处长"){
-                                submitStatus.chineseCulturalStatus = webStatus[3].id;
+                                submitStatus.chineseMedicineStatus = webStatus[3].id;
                             }else{
-                                submitStatus.chineseCulturalStatus = webStatus[4].id;
+                                submitStatus.chineseMedicineStatus = webStatus[4].id;
                             }
                             ajaxUtil.myAjax(null,"changestatustomedicine/"+row.itemid+"/"+row.itemcode,submitStatus,function (data) {
                                 if(ajaxUtil.success(data)){

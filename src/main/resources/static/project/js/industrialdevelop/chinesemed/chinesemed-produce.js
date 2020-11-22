@@ -41,7 +41,7 @@
                             var isSuccess = false;
                             ajaxUtil.myAjax(null,opUrl,projectEntity,function (data) {
                                 if(ajaxUtil.success(data)){
-                                    ajaxUtil.deleteFile(row.itemcode)
+                                    ajaxUtil.deleteFile(row.itemid)
                                     alertUtil.info("删除中药制药企业信息成功");
                                     isSuccess = true;
                                     refreshTable();
@@ -85,7 +85,9 @@
                         }
                     }},
                 {field: 'contacts', title: '联系人'},
-                {field: 'status', title: '项目状态'},
+                {field: 'status', title: '项目状态',formatter:function (row) {
+                        return '<p>'+status[row].text+'</p>';
+                    }},
                 {field: 'action',  title: '操作',formatter: operation,events:orgEvents}
             ];
 

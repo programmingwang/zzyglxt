@@ -11,7 +11,7 @@
 
             var itemcode = stringUtil.getUUID();
 
-            var type = isUpdate() ? "put":"post";
+            // var type = isUpdate() ? "put":"post";
 
             uploadImg.init();
 
@@ -75,7 +75,6 @@
                 param.addressCountry = $("#addressCountry").val()
                 param.address = $("#address").val()
                 param.intruduce = $(".w-e-text").html();
-                param.orgCode = sessionStorage.getItem("orgCode");
                 param.type = orgType
                 return param;
             }
@@ -94,7 +93,7 @@
                     }else {
                         alert(data.msg);
                     }
-                },true,"123",type);
+                },true,"123","PUT");
                 return false;
             });
 
@@ -107,12 +106,17 @@
                     }else {
                         alert(data.msg)
                     }
-                },true,"123",type);
+                },true,"123","POST");
                 return false;
             });
 
             var init = function () {
                 if (isUpdate()){
+                    ajaxUtil.myAjax(null,url + "/getByOrgCode",null,function (data) {
+                        if(ajaxUtil.success(data)){
+                            data = data.data;
+                        }
+                    },false,true,"GET");
                     var tempdata = JSON.parse(localStorage.getItem("rowData"));
                     $("#name").val(tempdata.name);
                     $("#salesCategory").val(tempdata.salesCategory);

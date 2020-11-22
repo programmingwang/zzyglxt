@@ -1,14 +1,12 @@
 package com.zyyglxt.controller;
 
+import com.zyyglxt.dataobject.IndustrialDevelopExpertRefDO;
 import com.zyyglxt.dto.ExmaineDto;
 import com.zyyglxt.error.EmBusinessError;
 import com.zyyglxt.response.ResponseData;
 import com.zyyglxt.service.IExmaineService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -30,6 +28,20 @@ public class ExpertExmainController {
     public ResponseData getAllExmainTopic(){
         List<ExmaineDto> exmaineDtos = exmaineService.selectAll();
         return new ResponseData(EmBusinessError.success,exmaineDtos);
+    }
+
+    @DeleteMapping("/exmain")
+    @ResponseBody
+    public ResponseData deleteByTopicCode(String topicCode){
+        exmaineService.deleteByTopicCode(topicCode);
+        return new ResponseData(EmBusinessError.success);
+    }
+
+    @PostMapping("/exmain")
+    @ResponseBody
+    public ResponseData insert(@RequestBody IndustrialDevelopExpertRefDO expertRefDO){
+        exmaineService.insertSelective(expertRefDO);
+        return new ResponseData(EmBusinessError.success);
     }
 
 }

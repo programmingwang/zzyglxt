@@ -4,6 +4,7 @@
 
             var roleName = sessionStorage.getItem("rolename");
             var currentUrlHash = window.location.hash.replace("#", "");
+
             if (roleName === '文化宣传处长'||roleName === '文化宣传科员'||roleName === '文化宣传综合处处长') {
                 var menu_list = [
                     {
@@ -594,6 +595,7 @@
                     }
                 ];
             }
+
 
             function getHTML_dropdown_menu_item(astr, aurl, show_active) {
                 var str = "<a class=\"dropdown-item  " + (show_active ? "active" : "") + " \" url=\"" + aurl + "\">" + astr + "</a>\n" +

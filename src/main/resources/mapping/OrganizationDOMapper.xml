@@ -54,9 +54,15 @@
     from organization
     where itemCode = #{itemcode,jdbcType=VARCHAR}
   </select>
+  <select id="selectByOrgName" resultMap="BaseResultMap">
+    select
+    *
+    from organization
+    where ORG_NAME = #{orgName,jdbcType=VARCHAR}
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from organization
-    where itemID = #{itemid,jdbcType=INTEGER}
+  delete from organization
+  where itemID = #{itemid,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.zyyglxt.dataobject.OrganizationDO">
     insert into organization (itemID, itemCode, ORG_NAME,

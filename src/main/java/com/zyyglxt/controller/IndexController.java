@@ -61,14 +61,14 @@ public class IndexController {
         return "/industrialdevelop/chinesemed/chinesemed-sale_add";
     }
 
+    @RequestMapping(value = "/hosp_add")
+    public String hosp_add() {
+        return "/industrialdevelop/organization/addHosp";
+    }
+
     @RequestMapping(value = "/school_add")
     public String school_add() {
         return "/industrialdevelop/school_add";
-    }
-
-    @RequestMapping(value = "/achievement_add")
-    public String achievement_add() {
-        return "/industrialdevelop/achievement_add";
     }
 
     @RequestMapping(value = "/lab_add")
@@ -76,9 +76,9 @@ public class IndexController {
         return "/industrialdevelop/organization/lab_add";
     }
 
-    @RequestMapping(value = "/tecservice_add")
+    @RequestMapping(value = "/tecserviceorg_add")
     public String tecservice_add() {
-        return "/industrialdevelop/organization/tecservice_add";
+        return "/industrialdevelop/organization/tecserviceorg_add";
     }
 
     @RequestMapping(value = "/tour_add")

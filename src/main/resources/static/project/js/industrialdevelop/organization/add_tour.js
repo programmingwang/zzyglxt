@@ -1,12 +1,14 @@
 (function () {
-    require(['jquery','ajaxUtil','stringUtil','uploadImg','urlUtil','wangEditor',"distpicker"],
+    require(['jquery','ajaxUtil','stringUtil','uploadImg','urlUtil','wangEditor','distpicker'],
         function ($,ajaxUtil,stringUtil,uploadImg,urlUtil, wangEditor,distpicker) {
 
-            var url = "/industrialdevelop/school";
+            var url = "/industrialdevelop/tec-ser-org";
 
             var pathUrl = "/userLogin";
 
             var itemcode = stringUtil.getUUID();
+
+            var orgType = "tour";
 
             var type = isUpdate() ? "put":"post";
 
@@ -58,37 +60,43 @@
 
             $("#cancelBtn").click(function () {
                 window.history.back()
+                // console.log(uploadImg.getFiles());
+                // orange.redirect(pathUrl)
             });
 
             function generateParam(){
                 var param = {};
-                param.schoolName = $("#schoolName").val();
-                param.schoolIntroduce = $("#schoolIntroduce").val();
-                param.secondaryCollege = $("#secondaryCollege").val();
-                param.enrollmentMajor = $("#enrollmentMajor").val();
-                param.graduateEnrollmentMajor = $("#graduateEnrollmentMajor").val();
+                param.name = $("#name").val();
+                param.areaCoverd = $("#areaCoverd").val();
+                param.specialService = $("#specialService").val();
+                param.contacts = $("#contacts").val();
                 param.phone = $("#phone").val();
-                param.onlineAddress = $("#onlineAddress").val();
-                param.addressPro = $("#addressPro").val()
-                param.addressCity = $("#addressCity").val()
-                param.addressCountry = $("#addressCountry").val()
+                param.addressPro = $("#addressPro").val();
+                param.addressCity = $("#addressCity").val();
+                param.addressCountry = $("#addressCountry").val();
                 param.address = $("#address").val()
-                param.schoolText = $(".w-e-text").html();
+                param.intruduce = $(".w-e-text").html();
+                param.orgCode = "未定义";
                 param.itemcode = itemcode;
+                param.type = orgType;
                 return param;
             }
 
             $("#saveBtn").unbind('click').on('click',function () {
                 var param = generateParam();
                 param.status = "——";
-                param.itemcode = itemcode;
                 if (uploadImg.isUpdate()){
-                    ajaxUtil.fileAjax(itemcode,uploadImg.getFiles()[0],"undefined","undefined")
+                    if (isUpdate()){
+                        ajaxUtil.updateFile(itemcode,uploadImg.getFiles()[0],"undefined","undefined");
+                    }else {
+                        ajaxUtil.fileAjax(itemcode,uploadImg.getFiles()[0],"undefined","undefined")
+                    }
+
                 }
 
                 ajaxUtil.myAjax(null,url,param,function (data) {
                     if(ajaxUtil.success(data)){
-                        orange.redirect("/school_add");
+                        orange.redirect('/tour_add');
                     }else {
                         alert(data.msg);
                     }
@@ -99,6 +107,14 @@
             $("#submitBtn").unbind('click').on('click',function () {
                 var param = generateParam();
                 param.status = "1";
+                if (uploadImg.isUpdate()){
+                    if (isUpdate()){
+                        ajaxUtil.updateFile(itemcode,uploadImg.getFiles()[0],"undefined","undefined");
+                    }else {
+                        ajaxUtil.fileAjax(itemcode,uploadImg.getFiles()[0],"undefined","undefined")
+                    }
+
+                }
                 ajaxUtil.myAjax(null,url,param,function (data) {
                     if(ajaxUtil.success(data)){
                         window.location.href = pathUrl;
@@ -113,22 +129,20 @@
             var init = function () {
                 if (isUpdate()){
                     var tempdata = JSON.parse(localStorage.getItem("rowData"));
-                    $("#schoolName").val(tempdata.schoolName);
-                    $("#schoolIntroduce").val(tempdata.schoolIntroduce);
-                    $("#secondaryCollege").val(tempdata.secondaryCollege);
-                    $("#enrollmentMajor").val(tempdata.enrollmentMajor);
+                    $("#name").val(tempdata.name);
+                    $("#areaCoverd").val(tempdata.areaCoverd);
+                    $("#specialService").val(tempdata.specialService);
+                    $("#contacts").val(tempdata.contacts);
+                    $("#phone").val(tempdata.phone);
                     $("#distpicker").distpicker({
                         province: tempdata.addressPro,
                         city: tempdata.addressCity,
                         district: tempdata.addressCountry
                     });
                     $("#address").val(tempdata.address);
-                    $("#graduateEnrollmentMajor").val(tempdata.graduateEnrollmentMajor);
-                    $("#phone").val(tempdata.phone);
-                    $("#onlineAddress").val(tempdata.onlineAddress);
-                    $("#intruduce").val(tempdata.intruduce)
-                    $(".w-e-text").html(tempdata.schoolText);
-                    itemcode = tempdata.itemcode
+                    $(".w-e-text").html(tempdata.intruduce);
+                    uploadImg.setImgSrc(tempdata.filePath)
+                    itemcode = tempdata.itemcode;
                 }else {
                     $("#distpicker").distpicker();
                 }
@@ -138,11 +152,12 @@
             };
             init();
 
+
             function isUpdate() {
                 return (urlUtil.getFullUrl().indexOf("/main#") != -1)
             }
 
-    })
+        })
 })();
 
 

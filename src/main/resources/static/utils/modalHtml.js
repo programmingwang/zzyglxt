@@ -2236,6 +2236,104 @@
             '            </div>\n'+
             '</div>';
 
+        modalHtml.myModifyAccountMessageModal =
+            '<div class="row">'+
+            '            <div class="upload-content" data-limit="1">\n' +
+            '                <div class="content-img">\n' +
+            '                    <ul class="content-img-list"></ul>\n' +
+            '                    <div class="file">\n' +
+            '                        <input type="file" name="file" accept="image/*" id="upload" multiple>\n' +
+            '                    </div>\n' +
+            '                </div>\n' +
+            '                <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">\n' +
+            '                    <div class="modal-dialog modal-lg" role="document">\n' +
+            '                        <div class="modal-content">\n' +
+            '                        </div>\n' +
+            '                    </div>\n' +
+            '                </div>\n' +
+            '            </div>\n' +
+            '\n' +
+            '            <div class="col-lg-12 col-md-12">\n' +
+            '                <fieldset disabled>'+
+            '                <div class="input-group mb-3">\n' +
+            '                    <div class="input-group-prepend">\n' +
+            '                        <button type="button" class="btn btn-primary btn-sm">用户账号</button>\n' +
+            '                    </div>\n' +
+            '                    <input type="text" id="username" class="form-control">\n' +
+            '                </div>\n' +
+            '            </div>\n' +
+            '\n' +
+            '            <div class="col-lg-12 col-md-12">\n' +
+            '                <fieldset disabled>'+
+            '                <div class="input-group mb-3">\n' +
+            '                    <div class="input-group-prepend">\n' +
+            '                        <button type="button" class="btn btn-primary btn-sm" >账号名称</button>\n' +
+            '                    </div>\n' +
+            '                    <input type="text" id="name" class="form-control">\n' +
+            '                </div>\n' +
+            '            </div>\n' +
+            '\n' +
+            '            <div class="col-lg-12 col-md-12">\n' +
+            '                <fieldset disabled>'+
+            '                <div class="input-group mb-3">\n' +
+            '                    <div class="input-group-prepend">\n' +
+            '                        <button type="button" class="btn btn-primary btn-sm" >性别</button>\n' +
+            '                    </div>\n' +
+            '                    <input type="text" id="gender" class="form-control">\n' +
+            '                </div>\n' +
+            '            </div>\n' +
+            '\n' +
+            '            <div class="col-lg-12 col-md-12">\n' +
+            '                <fieldset disabled>'+
+            '                <div class="input-group mb-3">\n' +
+            '                    <div class="input-group-prepend">\n' +
+            '                        <button type="button" class="btn btn-primary btn-sm" >身份证类型</button>\n' +
+            '                    </div>\n' +
+            '                    <input type="text" id="IDCardType" class="form-control">\n' +
+            '                </div>\n' +
+            '            </div>\n' +
+            '\n' +
+            '            <div class="col-lg-12 col-md-12">\n' +
+            '                <fieldset disabled>'+
+            '                <div class="input-group mb-3">\n' +
+            '                    <div class="input-group-prepend">\n' +
+            '                        <button type="button" class="btn btn-primary btn-sm" >身份证号</button>\n' +
+            '                    </div>\n' +
+            '                    <input type="text" id="IDCardNo" class="form-control">\n' +
+            '                </div>\n' +
+            '            </div>\n' +
+            '\n' +
+            '            <div class="col-lg-12 col-md-12">\n' +
+            '                <fieldset disabled>'+
+            '                <div class="input-group mb-3">\n' +
+            '                    <div class="input-group-prepend">\n' +
+            '                        <button type="button" class="btn btn-primary btn-sm" >邮箱</button>\n' +
+            '                    </div>\n' +
+            '                    <input type="text" id="email" class="form-control">\n' +
+            '                </div>\n' +
+            '            </div>\n' +
+            '\n' +
+            '            <div class="col-lg-6 col-md-6">\n' +
+            '                <fieldset disabled>'+
+            '                <div class="input-group mb-3">\n' +
+            '                    <div class="input-group-prepend">\n' +
+            '                        <button type="button" class="btn btn-primary btn-sm" >联系人</button>\n' +
+            '                    </div>\n' +
+            '                    <input type="text" id="contacts" class="form-control">\n' +
+            '                </div>\n' +
+            '            </div>\n' +
+            '\n' +
+            '            <div class="col-lg-6 col-md-6">\n' +
+            '                <fieldset disabled>'+
+            '                <div class="input-group mb-3">\n' +
+            '                    <div class="input-group-prepend">\n' +
+            '                        <button type="button" class="btn btn-primary btn-sm" >联系电话</button>\n' +
+            '                    </div>\n' +
+            '                    <input type="text" id="mobilephone" class="form-control">\n' +
+            '                </div>\n' +
+            '            </div>\n' +
+            '</div>';
+
 
         modalHtml.myDeleteModalTravel = '是否删除景点信息?';
         modalHtml.myDeleteModalTraditionalCul = '是否删除中医医史信息?';

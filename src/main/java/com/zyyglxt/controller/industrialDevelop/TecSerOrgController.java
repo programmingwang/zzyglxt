@@ -27,8 +27,12 @@ public class TecSerOrgController {
     @RequestMapping(value = "/tec-ser-org", method = RequestMethod.POST)
     @LogAnnotation(appCode ="",logTitle ="添加产业发展-服务项目",logLevel ="3",creater ="",updater = "")
     public ResponseData addTec(@RequestBody IndustrialDevelopTecSerOrg record){
-        tecSerOrgService.insertSelective(record);
-        return new ResponseData(EmBusinessError.success);
+        int res = tecSerOrgService.insertSelective(record);
+        if (res == -1){
+            return new ResponseData(EmBusinessError.ORG_NAME_ERROR);
+        }else {
+            return new ResponseData(EmBusinessError.success);
+        }
     }
 
     @ResponseBody

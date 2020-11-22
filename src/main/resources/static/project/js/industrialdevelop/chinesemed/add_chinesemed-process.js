@@ -1,10 +1,10 @@
 (function () {
-    require(['jquery', 'ajaxUtil', 'stringUtil', 'uploadImg', 'wangEditor',"distpicker"],
-        function ($, ajaxUtil, stringUtil, uploadImg, wangEditor,distpicker) {
+    require(['jquery', 'ajaxUtil', 'stringUtil', 'uploadImg','urlUtil', 'wangEditor',"distpicker"],
+        function ($, ajaxUtil, stringUtil, uploadImg,urlUtil, wangEditor,distpicker) {
 
             var url = "/industrialdevelop/chi-med";
 
-            var pathUrl = "/industrialdevelop/chinesemed/chinesemed-process";
+            var pathUrl = "/userLogin";
 
             var orgType = "process";
 
@@ -59,7 +59,7 @@
             });
 
             $("#cancelBtn").click(function () {
-                console.log(generateParam())
+                window.history.back();
                 // orange.redirect(pathUrl)
             });
 
@@ -76,6 +76,7 @@
                 param.address = $("#address").val();
                 param.intruduce = $(".w-e-text").html();
                 param.type = orgType;
+                param.itemcode = itemcode;
                 return param;
             }
 
@@ -89,7 +90,7 @@
 
                 ajaxUtil.myAjax(null, url, param, function (data) {
                     if (ajaxUtil.success(data)) {
-                        orange.redirect(pathUrl);
+                        orange.redirect("/process_add");
                     } else {
                         alert(data.msg);
                     }
@@ -99,10 +100,11 @@
 
             $("#submitBtn").unbind('click').on('click', function () {
                 var param = generateParam();
-                param.status = "——";
+                param.status = "1";
                 ajaxUtil.myAjax(null, url, param, function (data) {
                     if (ajaxUtil.success(data)) {
-                        orange.redirect(pathUrl)
+                        window.location.href = pathUrl;
+                        //orange.redirect(pathUrl)
                     } else {
                         alert(data.msg)
                     }
@@ -144,7 +146,7 @@
 
 
             function isUpdate() {
-                return (localStorage.getItem("rowData") != null || localStorage.getItem("rowData") != undefined)
+                return (urlUtil.getFullUrl().indexOf("/main#") != -1)
             }
 
         })

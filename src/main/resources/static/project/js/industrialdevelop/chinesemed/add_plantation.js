@@ -1,10 +1,10 @@
 (function () {
-    require(['jquery','ajaxUtil','stringUtil','uploadImg','wangEditor','distpicker'],
-        function (jquery,ajaxUtil,stringUtil,uploadImg, wangEditor,distpicker) {
+    require(['jquery','ajaxUtil','stringUtil','uploadImg','urlUtil','wangEditor','distpicker'],
+        function (jquery,ajaxUtil,stringUtil,uploadImg,urlUtil, wangEditor,distpicker) {
 
             var url = "/industrialdevelop/chi-med";
 
-            var pathUrl = "/industrialdevelop/chinesemed/plantation";
+            var pathUrl = "/userLogin";
 
             var orgType = "plant"
 
@@ -59,7 +59,7 @@
             });
 
             $("#cancelBtn").click(function () {
-                orange.redirect(pathUrl)
+                window.history.back()
             });
 
             function generateParam(){
@@ -69,12 +69,13 @@
                 param.areaCoverd = $("#areaCoverd").val();
                 param.contacts = $("#contacts").val();
                 param.phone = $("#phone").val();
-                param.addressPro = $("#addressPro").val()
-                param.addressCity = $("#addressCity").val()
-                param.addressCountry = $("#addressCountry").val()
-                param.address = $("#address").val()
+                param.addressPro = $("#addressPro").val();
+                param.addressCity = $("#addressCity").val();
+                param.addressCountry = $("#addressCountry").val();
+                param.address = $("#address").val();
                 param.intruduce = $(".w-e-text").html();
-                param.type = orgType
+                param.type = orgType;
+                param.itemcode = itemcode;
                 return param;
             }
 
@@ -88,7 +89,7 @@
 
                 ajaxUtil.myAjax(null,url,param,function (data) {
                     if(ajaxUtil.success(data)){
-                        orange.redirect(pathUrl);
+                        orange.redirect("/plantation_add");
                     }else {
                         alert(data.msg);
                     }
@@ -98,10 +99,11 @@
 
             $("#submitBtn").unbind('click').on('click',function () {
                 var param = generateParam();
-                param.status = "——";
+                param.status = "1";
                 ajaxUtil.myAjax(null,url,param,function (data) {
                     if(ajaxUtil.success(data)){
-                        orange.redirect(pathUrl)
+                        window.location.href = pathUrl;
+                        // orange.redirect(pathUrl)
                     }else {
                         alert(data.msg)
                     }
@@ -137,9 +139,10 @@
 
 
             function isUpdate() {
-                return (localStorage.getItem("rowData") != null || localStorage.getItem("rowData") != undefined)
+                return (urlUtil.getFullUrl().indexOf("/main#") != -1)
             }
-    })
+
+        })
 })();
 
 

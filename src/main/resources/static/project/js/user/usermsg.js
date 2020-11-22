@@ -1,32 +1,38 @@
-(function() {
-    require(['jquery','alertUtil','ajaxUtil'], function (jquery,alertUtil,ajaxUtil) {
+(function () {
+    require(['jquery', 'ajaxUtil', 'stringUtil', 'uploadImg', 'modalUtil', 'wangEditor'],
+        function (jquery, ajaxUtil, stringUtil, uploadImg, modalUtil, wangEditor) {
 
-        ajaxUtil.myAjax(null,"/user/usermsg",null,function (data) {
-            if(data && data.code === 88888) {
-                $(".accountName").text(data.data.username);
-                $(".userName").text(data.data.name);
-                $(".sex").text(data.data.gender);
-                $(".IDcardType").text(data.data.idcardType);
-                $(".IDNo").text(data.data.idcardNo);
-                $(".email").text(data.data.email);
-                $(".mobilePhone").text(data.data.mobilephone);
-            }else{
-                alertUtil.error(data.msg)
-            }
-        },false,"","get");
+            ajaxUtil.myAjax(null, "/user/usermsg", null, function (data) {
+                if (data && data.code === 88888) {
+                    localStorage.setItem('user', JSON.stringify(data.data));
+                    uploadImg.init();
+                    uploadImg.setImgSrc(data.data.portrait);
+                    $("#username").val(data.data.username);
+                    $("#name").val(data.data.name);
+                    $("#gender").val(data.data.gender);
+                    $("#email").val(data.data.email);
+                    $("#idcardType").val(data.data.idcardType);
+                    $("#idcardNo").val(data.data.idcardNo);
+                    $("#contacts").val(data.data.contacts);
+                    $("#mobilePhone").val(data.data.mobilephone);
+                } else {
+                    alertUtil.error(data.msg)
+                }
+            }, false, "", "get");
 
-        // $(".btn").on("click",function () {
-        //     ajaxUtil.myAjax(null,"/user/updateusermsg",null,function (data) {
-        //         if(data && data.code === 88888){
-        //             window.location.reload()
-        //         }else{
-        //             alertUtil.alert(data.msg);
-        //         }
-        //     },false)
-        // })
+            $("#cancelBtn").click(function () {
+                window.history.back()
+            });
 
+            $("#modifymsgBtn").unbind().on('click', function () {
+                $("input").removeAttr("disabled");
+            });
 
-    });
+            $("#modifypwdBtn").unbind().on('click', function () {
+                $("input").removeAttr("disabled");
+            });
 
+        });
 })();
+
 

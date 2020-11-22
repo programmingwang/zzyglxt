@@ -4,7 +4,6 @@ import com.zyyglxt.annotation.LogAnnotation;
 import com.zyyglxt.dataobject.*;
 import com.zyyglxt.dto.UpdatePwdDto;
 import com.zyyglxt.dto.UserDto;
-import com.zyyglxt.dto.UserSessionDto;
 import com.zyyglxt.dto.industrialDevelop.OrgStatusDto;
 import com.zyyglxt.error.BusinessException;
 import com.zyyglxt.error.EmBusinessError;
@@ -12,12 +11,11 @@ import com.zyyglxt.response.ResponseData;
 import com.zyyglxt.service.*;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
-import java.util.UUID;
 
 /**
  * @Author nongcn
@@ -59,7 +57,7 @@ public class UserController {
         }
     }
 
-    //    @LogAnnotation(logTitle = "查询机构审核状态", logLevel = "1")
+    @LogAnnotation(logTitle = "查询机构审核状态", logLevel = "1")
     @RequestMapping(value = "/queryOrgStatus", method = RequestMethod.POST)
     public ResponseData checkOrgStatus(OrgStatusDto orgStatusDto) {
         OrganizationDO organizationDO = iuserService.selectByOrgNameAndCode(orgStatusDto.getOrgName(), orgStatusDto.getOrgCode());
@@ -79,7 +77,7 @@ public class UserController {
                             case "地市局用户审核通过":
                                 return new ResponseData(EmBusinessError.success, "您申请注册的机构市局审核已通过，请耐心等待省局审核");
                             case "省局用户审核通过":
-                                return new ResponseData(EmBusinessError.success, "该机构审核已通过");
+                                return new ResponseData(EmBusinessError.success, "该机构审核已通过，已有账号点击此处登录");
                         }
                         return new ResponseData(EmBusinessError.success, "非法状态：" + chiMed.getStatus());
                     case "科研院所":
@@ -95,7 +93,7 @@ public class UserController {
                             case "地市局用户审核通过":
                                 return new ResponseData(EmBusinessError.success, "您申请注册的机构市局审核已通过，请耐心等待省局审核");
                             case "省局用户审核通过":
-                                return new ResponseData(EmBusinessError.success, "该机构审核已通过");
+                                return new ResponseData(EmBusinessError.success, "该机构审核已通过，已有账号点击此处登录");
                         }
                         return new ResponseData(EmBusinessError.success, "非法状态：" + tecSerOrg.getStatus());
                     case "中医医疗机构":
@@ -121,7 +119,6 @@ public class UserController {
     @RequestMapping(value = "/updatepwd", method = RequestMethod.PUT)
     public ResponseData UpdatePassword(UpdatePwdDto updatePwdDto) {
         if (StringUtils.isEmpty(updatePwdDto.getNewPassword()) || StringUtils.isEmpty(updatePwdDto.getCheckNewPassword())) {
-            System.out.println("密码输入不能为空，请重新输入！");
             return new ResponseData(EmBusinessError.INPUT_NOT_NULL);
         } else {
             if (updatePwdDto.getNewPassword().equals(updatePwdDto.getCheckNewPassword())) {
@@ -132,7 +129,6 @@ public class UserController {
                     return new ResponseData(EmBusinessError.MODIFY_USER_MESSAGE_FAILED);
                 }
             } else {
-                System.out.println("两次输入的新密码不一致，请重新输入！");
                 return new ResponseData(EmBusinessError.NEWPASSWORD_NOT_EQUAL);
             }
         }

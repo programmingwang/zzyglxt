@@ -1,7 +1,8 @@
 
 (function () {
-    require(['jquery','ajaxUtil','stringUtil','uploadImg','wangEditor',"distpicker"],
-        function ($,ajaxUtil,stringUtil,uploadImg, wangEditor,distpicker) {
+    require(['jquery','ajaxUtil','stringUtil','uploadImg','wangEditor', 'distpicker'],
+        function ($,ajaxUtil,stringUtil,uploadImg, wangEditor, distpicker) {
+
             var url = "/industrialdevelop/chi-med";
 
             var pathUrl = "/industrialdevelop/chinesemed/chinesemed-sale";
@@ -114,26 +115,26 @@
 
             var init = function () {
                 if (isUpdate()){
-                    var data ;
+                    var tempdata ;
                     ajaxUtil.myAjax(null,url + "/getByOrgCode",null,function (data) {
                         if(ajaxUtil.success(data)){
-                           data = data.data;
+                            tempdata = data.data;
                         }
                     },false,true,"GET");
-                    $("#name").val(data.name);
-                    $("#salesCategory").val(data.salesCategory);
-                    $("#sellingDrugs").val(data.sellingDrugs);
-                    $("#contacts").val(data.contacts);
+                    $("#name").val(tempdata.name);
+                    $("#salesCategory").val(tempdata.salesCategory);
+                    $("#sellingDrugs").val(tempdata.sellingDrugs);
+                    $("#contacts").val(tempdata.contacts);
                     $("#distpicker").distpicker({
-                        province: data.addressPro,
-                        city: data.addressCity,
-                        district: data.addressCountry
+                        province: tempdata.addressPro,
+                        city: tempdata.addressCity,
+                        district: tempdata.addressCountry
                     });
-                    $("#address").val(data.address);
-                    $("#phone").val(data.phone);
-                    $(".w-e-text").html(data.intruduce);
-                    itemcode = data.itemcode
-                    uploadImg.setImgSrc(data.filePath)
+                    $("#address").val(tempdata.address);
+                    $("#phone").val(tempdata.phone);
+                    $(".w-e-text").html(tempdata.intruduce);
+                    itemcode = tempdata.itemcode
+                    uploadImg.setImgSrc(tempdata.filePath)
                 }else {
                     $("#distpicker").distpicker();
                 }

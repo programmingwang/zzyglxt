@@ -111,12 +111,13 @@
 
             var init = function () {
                 if (isUpdate()){
+                    var tempdata;
                     ajaxUtil.myAjax(null,url + "/getByOrgCode",null,function (data) {
                         if(ajaxUtil.success(data)){
-                            data = data.data;
+                            tempdata = data.data;
                         }
                     },false,true,"get");
-                    var tempdata = JSON.parse(localStorage.getItem("rowData"));
+                    // var tempdata = JSON.parse(localStorage.getItem("rowData"));
                     $("#name").val(tempdata.name);
                     $("#peoduceType").val(tempdata.peoduceType);
                     $("#peoduceDrug").val(tempdata.peoduceDrug);

@@ -56,7 +56,11 @@ public class FileController {
         String filePath = null;
         for (FileDO fileDO : fileDOList){
             filePath = fileDO.getFilePath();
-            fastFileStorageClient.deleteFile(filePath.substring(0,filePath.indexOf("?")));//去除掉后面的fileName属性
+            try {
+                fastFileStorageClient.deleteFile(filePath.substring(0, filePath.indexOf("?")));//去除掉后面的fileName属性
+            }catch (Exception e){
+                fastFileStorageClient.deleteFile(filePath);
+            }
         }
         fileService.deleteFileByDataCode(dataCode);
         return new ResponseData(EmBusinessError.success);

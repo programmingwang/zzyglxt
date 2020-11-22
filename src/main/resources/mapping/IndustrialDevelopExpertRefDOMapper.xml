@@ -193,6 +193,13 @@
         WHERE TOPIC_CODE = #{topicCode}
     </select>
 
+    <select id="selectByExpertCode" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM tb_industrial_develop_expert_ref
+        WHERE EXPERT_CODE = #{expertCode,jdbcType=VARCHAR}
+    </select>
+
     <delete id="deleteByTopicCode">
         DELETE FROM tb_industrial_develop_expert_ref
         WHERE TOPIC_CODE = #{topicCode}

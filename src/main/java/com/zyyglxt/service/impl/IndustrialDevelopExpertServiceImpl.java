@@ -87,5 +87,10 @@ public class IndustrialDevelopExpertServiceImpl implements IIndustrialDevelopExp
         return  developExpertDtoMapper.selectByPrimaryKey(itemcode);
     }
 
+    @Override
+    public String selectByUserCode(String userCode) {
+        return developExpertDtoMapper.selectByUserCode(userCode);
+    }
+
 
 }

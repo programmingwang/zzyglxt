@@ -2187,37 +2187,37 @@
 
         modalHtml.myaddExpertModal =
             '<form>\n'+
-                '<div class="form-group row">'+
-                '   <label class="col-sm-2 col-form-label">用户账号：</label>\n'+
-                '   <div class="col-sm-3">\n'+
+                '<div class="form-group">'+
+                '   <label class="col-form-label">用户账号：</label>\n'+
+                '   <div>\n'+
                 '    <input id="expertAccount" type="text" class="form-control" placeholder="请输入">\n'+
                 '    </div>\n'+
                 ' </div>\n' +
                 '\n' +
-                '<div class="form-group row">'+
-                '   <label class="col-sm-2 col-form-label">专家姓名：</label>\n'+
-                '   <div class="col-sm-3">\n'+
+                '<div class="form-group">'+
+                '   <label class="col-form-label">专家姓名：</label>\n'+
+                '   <div>\n'+
                 '    <input id="expertName" type="text" class="form-control" placeholder="请输入">\n'+
                 '    </div>\n'+
                 ' </div>\n' +
                 '\n' +
-                '<div class="form-group row">'+
-                '   <label class="col-sm-2 col-form-label">擅长领域：</label>\n'+
-                '   <div class="col-sm-3">\n'+
+                '<div class="form-group">'+
+                '   <label class="col-form-label">擅长领域：</label>\n'+
+                '   <div>\n'+
                 '    <input id="expertFiled" type="text" class="form-control" placeholder="请输入">\n'+
                 '    </div>\n'+
                 ' </div>\n' +
                 '\n' +
-                '<div class="form-group row">'+
-                '   <label class="col-sm-2 col-form-label">性别：</label>\n'+
-                '   <div class="col-sm-3">\n'+
+                '<div class="form-group">'+
+                '   <label class="col-form-label">性别：</label>\n'+
+                '   <div >\n'+
                 '    <input id="expertGender" type="text" class="form-control" placeholder="请输入">\n'+
                 '    </div>\n'+
                 ' </div>\n' +
                 '\n' +
-                '<div class="form-group row">'+
-                '   <label class="col-sm-2 col-form-label">联系电话：</label>\n'+
-                '   <div class="col-sm-3">\n'+
+                '<div class="form-group">'+
+                '   <label class="col-form-label">联系电话：</label>\n'+
+                '   <div>\n'+
                 '    <input id="expertPhone" type="text" class="form-control" placeholder="请输入">\n'+
                 '    </div>\n'+
                 ' </div>\n' +

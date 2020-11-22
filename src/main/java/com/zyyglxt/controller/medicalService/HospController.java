@@ -10,6 +10,7 @@ import com.zyyglxt.error.EmBusinessError;
 import com.zyyglxt.response.ResponseData;
 import com.zyyglxt.service.IFileService;
 import com.zyyglxt.service.IHospService;
+import com.zyyglxt.util.UsernameUtil;
 import org.springframework.beans.BeanUtils;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,6 +30,8 @@ public class HospController {
     private IHospService hospService;
     @Resource
     private IFileService fileService;
+    @Resource
+    private UsernameUtil usernameUtil;
 
     @PostMapping(value = "add")
     @ResponseBody
@@ -54,7 +57,19 @@ public class HospController {
         return new ResponseData(EmBusinessError.success);
     }
 
-    @GetMapping(value = "selectAll")
+    @GetMapping(value = "/selectByOrgCode")
+    @ResponseBody
+    @LogAnnotation(appCode ="",logTitle ="根据机构数据查看医院数据",logLevel ="1",creater ="",updater = "")
+    public ResponseData selectByOrgCode(){
+        HospDO hospDO = hospService.selectByOrgCode(usernameUtil.getOrgCode());
+        HospDto dto = new HospDto();
+        BeanUtils.copyProperties(hospDO,dto);
+        FileDO fileDO = fileService.selectFileByDataCode(hospDO.getItemcode());
+        String filePath = (fileDO==null) ? "损坏了" : fileDO.getFilePath();
+        dto.setFilePath(filePath);
+        return new ResponseData(EmBusinessError.success,dto);
+    }
+    @GetMapping(value = "/selectAll")
     @ResponseBody
     @LogAnnotation(appCode ="",logTitle ="根据身份查看医院数据",logLevel ="1",creater ="",updater = "")
     public ResponseData selectAllHosp(@RequestParam(value = "hospitalStatus")List hospitalStatus){

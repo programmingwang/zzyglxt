@@ -21,4 +21,5 @@ public interface IHospService {
     List<HospDO> selectByStatus(String status);
     int updateStatus(StatusDto statusDto);
     List<HospDO> selectAllNoStatus();
+    HospDO selectByOrgCode(String orgCode);
 }

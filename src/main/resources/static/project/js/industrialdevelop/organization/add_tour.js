@@ -84,7 +84,7 @@
 
             $("#saveBtn").unbind('click').on('click',function () {
                 var param = generateParam();
-                param.status = "——";
+                param.status = "0";
                 if (uploadImg.isUpdate()){
                     if (isUpdate()){
                         ajaxUtil.updateFile(itemcode,uploadImg.getFiles()[0],"undefined","undefined");

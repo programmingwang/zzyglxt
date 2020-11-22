@@ -88,8 +88,10 @@
                 }
 
                 ajaxUtil.myAjax(null,url,param,function (data) {
+
                     if(ajaxUtil.success(data)){
                         orange.redirect(pathUrl);
+
                     }else {
                         alert(data.msg);
                     }
@@ -103,6 +105,7 @@
                 ajaxUtil.myAjax(null,url,param,function (data) {
                     if(ajaxUtil.success(data)){
                         orange.redirect(pathUrl)
+
                     }else {
                         alert(data.msg)
                     }
@@ -112,26 +115,26 @@
 
             var init = function () {
                 if (isUpdate()){
+                    var data ;
                     ajaxUtil.myAjax(null,url + "/getByOrgCode",null,function (data) {
                         if(ajaxUtil.success(data)){
-                            data = data.data;
+                           data = data.data;
                         }
                     },false,true,"GET");
-                    var tempdata = JSON.parse(localStorage.getItem("rowData"));
-                    $("#name").val(tempdata.name);
-                    $("#salesCategory").val(tempdata.salesCategory);
-                    $("#sellingDrugs").val(tempdata.sellingDrugs);
-                    $("#contacts").val(tempdata.contacts);
+                    $("#name").val(data.name);
+                    $("#salesCategory").val(data.salesCategory);
+                    $("#sellingDrugs").val(data.sellingDrugs);
+                    $("#contacts").val(data.contacts);
                     $("#distpicker").distpicker({
-                        province: tempdata.addressPro,
-                        city: tempdata.addressCity,
-                        district: tempdata.addressCountry
+                        province: data.addressPro,
+                        city: data.addressCity,
+                        district: data.addressCountry
                     });
-                    $("#address").val(tempdata.address);
-                    $("#phone").val(tempdata.phone);
-                    $(".w-e-text").html(tempdata.intruduce);
-                    itemcode = tempdata.itemcode
-                    uploadImg.setImgSrc(tempdata.filePath)
+                    $("#address").val(data.address);
+                    $("#phone").val(data.phone);
+                    $(".w-e-text").html(data.intruduce);
+                    itemcode = data.itemcode
+                    uploadImg.setImgSrc(data.filePath)
                 }else {
                     $("#distpicker").distpicker();
                 }
@@ -145,7 +148,7 @@
             function isUpdate() {
                 return (localStorage.getItem("rowData") != null || localStorage.getItem("rowData") != undefined)
             }
-    })
+        })
 })();
 
 

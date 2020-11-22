@@ -1,12 +1,12 @@
 (function () {
     require(['jquery','ajaxUtil','stringUtil','uploadImg','wangEditor', 'distpicker'],
-        function ($,ajaxUtil,stringUtil,uploadImg, wangEditor,distpicker) {
+        function ($,ajaxUtil,stringUtil,uploadImg, wangEditor, distpicker) {
 
             var url = "/industrialdevelop/chi-med";
 
             var pathUrl = "/industrialdevelop/chinesemed/chinesemed-produce";
 
-            var orgType = "produce";
+            var orgType = 'produce'
 
             var itemcode = stringUtil.getUUID();
 
@@ -74,7 +74,7 @@
                 param.addressCountry = $("#addressCountry").val()
                 param.address = $("#address").val()
                 param.intruduce = $(".w-e-text").html();
-                param.type = orgType;
+                param.type = orgType
                 return param;
             }
 
@@ -87,8 +87,10 @@
                 }
 
                 ajaxUtil.myAjax(null,url,param,function (data) {
+
                     if(ajaxUtil.success(data)){
                         orange.redirect(pathUrl);
+
                     }else {
                         alert(data.msg);
                     }
@@ -108,41 +110,41 @@
                 },true,"123","POST");
                 return false;
             });
-
             var init = function () {
                 if (isUpdate()){
+                    var data;
                     ajaxUtil.myAjax(null,url + "/getByOrgCode",null,function (data) {
                         if(ajaxUtil.success(data)){
                             data = data.data;
                         }
-                    },false,true,"get");
-                    var tempdata = JSON.parse(localStorage.getItem("rowData"));
-                    $("#name").val(tempdata.name);
-                    $("#peoduceType").val(tempdata.peoduceType);
-                    $("#peoduceDrug").val(tempdata.peoduceDrug);
-                    $("#contacts").val(tempdata.contacts);
+                    },false,true,"GET");
+                    // var tempdata = JSON.parse(localStorage.getItem("rowData"));
+                    $("#name").val(data.name);
+                    $("#peoduceType").val(data.peoduceType);
+                    $("#peoduceDrug").val(data.peoduceDrug);
+                    $("#contacts").val(data.contacts);
                     $("#distpicker").distpicker({
-                        province: tempdata.addressPro,
-                        city: tempdata.addressCity,
-                        district: tempdata.addressCountry
+                        province: data.addressPro,
+                        city: data.addressCity,
+                        district: data.addressCountry
                     });
-                    $("#address").val(tempdata.address);
-                    $("#phone").val(tempdata.phone);
-                    $(".w-e-text").html(tempdata.intruduce);
-                    itemcode = tempdata.itemcode
-                    uploadImg.setImgSrc(tempdata.filePath)
+                    $("#address").val(data.address);
+                    $("#phone").val(data.phone);
+                    $(".w-e-text").html(data.intruduce);
+                    itemcode = data.itemcode
+                    uploadImg.setImgSrc(data.filePath)
                 }else {
                     $("#distpicker").distpicker();
                 }
-                init = function () {}
+                init = function () {
+
+                }
             };
             init();
-
 
             function isUpdate() {
                 return (localStorage.getItem("rowData") != null || localStorage.getItem("rowData") != undefined)
             }
-    })
+        })
 })();
-
 

@@ -17,6 +17,7 @@ import com.zyyglxt.service.IndustrialDevelopChiMedService;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 /**
    *@Author lrt
@@ -54,6 +55,10 @@ public class IndustrialDevelopChiMedServiceImpl implements IndustrialDevelopChiM
         if (result.isHasErrors()) {
             throw new BusinessException(result.getErrMsg(), EmBusinessError.PARAMETER_VALIDATION_ERROR);
         }
+        if(record.getItemcode()==null){
+            record.setItemcode(UUID.randomUUID().toString());
+        }
+        record.setOrgCode(usernameUtil.getOrgCode());
         return industrialDevelopChiMedMapper.insertSelective(record);
     }
 

@@ -83,7 +83,7 @@
                         function (res) {
                             let data = res.data;
                             let a = $("<a>");
-                            a.attr('src',data.filePath);
+                            a.attr('href',data.filePath);
                             a.html(data.fileName);
                             $("#filename_span").html("");
                             $("#filename_span").append(a);

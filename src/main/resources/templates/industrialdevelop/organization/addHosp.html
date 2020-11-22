@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en"xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -43,8 +43,10 @@
 <div class="row">
     <div class="col-12">
         <form>
+
+            <!--上传图片的div-->
             <div class="form-group row">
-                <label class="col-sm-2 col-form-label">企业照片：</label>
+                <label class="col-sm-2 col-form-label">医院图片：</label>
                 <div class="upload-content" data-limit="1">
                     <div class="content-img">
                         <ul class="content-img-list"></ul>
@@ -64,71 +66,91 @@
             </div>
 
             <div class="form-group row">
-                <label class="col-sm-2 col-form-label">企业名称：</label>
+                <label class="col-sm-2 col-form-label">医院名称：</label>
                 <div class="col-sm-3">
-                    <input id="name" type="text" class="form-control" placeholder="请输入">
+                    <input id="hospitalName" type="text" class="form-control" placeholder="请输入">
                 </div>
             </div>
-            <div class="form-group row">
-                <label class="col-sm-2 col-form-label">服务项目：</label>
-                <div class="col-sm-3">
-                    <input id="projectName" type="text" class="form-control" placeholder="请输入">
-                </div>
-            </div>
-            <div class="form-group row">
-                <label class="col-sm-2 col-form-label">联系人：</label>
-                <div class="col-sm-3">
-                    <input id="contacts" type="text" class="form-control" placeholder="请输入">
-                </div>
 
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">医院等级：</label>
+                <div class="col-sm-3">
+                    <select id="hospitalLevel" class="form-control"></select>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">医院简介：</label>
+                <div class="col-sm-3">
+                    <input id="hospitalBriefIntroduce" type="text" class="form-control" placeholder="请输入（限30字）" maxlength="30">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">重点专科：</label>
+                <div class="col-sm-3">
+                    <input id="hospitalKeySpecialty" type="text" class="form-control" placeholder="添加重点专科名称" readonly="readonly">
+                </div>
+                <div class="col-sm-2">
+                    <select id="specialtyName" class="form-control"></select>
+                </div>
+                <div class="col-sm-2">
+                    <button id="add" type="button">添加</button>
+                    <button id="clear" type="button">清空</button>
+                </div>
+            </div>
+
+            <div class="form-group row">
                 <label class="col-sm-2 col-form-label">联系电话：</label>
                 <div class="col-sm-3">
-                    <input id="phone" type="text" class="form-control" placeholder="请输入">
+                    <input id="hospitalTelephone" type="text" class="form-control" placeholder="请输入">
                 </div>
             </div>
 
             <div id="distpicker" class="form-group row">
-                <label for="addressPro" class="col-sm-2 col-form-label">省：</label>
+                <label for="hospitalAddressPro" class="col-sm-2 col-form-label">医院所在省：</label>
                 <div class="col-sm-2">
-                    <select id="addressPro" class="form-control"></select>
+                    <select id="hospitalAddressPro" class="form-control"></select>
                 </div>
 
-                <label for="addressCity" class="col-sm-1 col-form-label">市：</label>
+                <label for="hospitalAddressCity" class="col-sm-1 col-form-label">市：</label>
                 <div class="col-sm-2">
-                    <select id="addressCity" class="form-control"></select>
+                    <select id="hospitalAddressCity" class="form-control"></select>
                 </div>
 
-                <label for="addressCountry" class="col-sm-1 col-form-label">区：</label>
+                <label for="hospitalAddressCountry" class="col-sm-1 col-form-label">区：</label>
                 <div class="col-sm-2">
-                    <select id="addressCountry" class="form-control"></select>
+                    <select id="hospitalAddressCountry" class="form-control"></select>
                 </div>
             </div>
 
+
             <div class="form-group row">
-                <label class="col-sm-2 col-form-label">地址：</label>
+                <label class="col-sm-2 col-form-label">医院详细地址：</label>
                 <div class="col-sm-3">
-                    <input id="address" type="text" class="form-control" placeholder="请输入">
+                    <input id="hospitalAddress" type="text" class="form-control" placeholder="请输入">
                 </div>
             </div>
             <div class="form-group row">
-                <label class="col-sm-2 col-form-label">企业简介：</label>
+                <label class="col-sm-2 col-form-label">链接地址：</label>
+                <div class="col-sm-3">
+                    <input id="hospitalLink" type="text" class="form-control" placeholder="请输入">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">医院介绍：</label>
                 <div id="div1" class="col-sm-8">
                 </div>
             </div>
 
-
             <div class="form-group row">
                 <div class="col-lg-4 col-md-4" ></div>
-                <div class=" col-lg-4 row">
+                <div class=" col-lg-4 row" >
                     <div class="col">
-                        <button id="cancelBtn" type="button" class="btn btn-light col">取消</button>
+                        <button id="cancel" type="button" class="btn btn-light col">取消</button>
                     </div>
-                    <div class="col">
-                        <button id="saveBtn" type="button" class="btn btn-danger col">保存</button>
-                    </div>
-                    <div class="col">
-                        <button id="submitBtn" type="submit" class="btn btn-primary col">提交</button>
-                    </div>
+
+                    <button id="btn_insert" type="submit" class="btn btn-primary col">提交</button>
                 </div>
                 <div class="col-lg-4 col-md-4" ></div>
             </div>
@@ -138,9 +160,6 @@
 
 </div>
 <script type="text/javascript" data-main="/main/main.js" th:src="@{/component/require@2.3.6/require-2.3.6.js}"></script>
-<script type="text/javascript" th:src="@{/project/js/industrialdevelop/organization/school_add.js}"></script>
-<script type="text/javascript" th:src="@{/component/jquery@3.5.1/jquery.js}"></script>
-<script type="text/javascript" th:src="@{/component/distSelect/distpicker.common.js}"></script>
 <link type="text/css" rel="stylesheet" href="/component/uploadImg/css/uploadImg.css"
       th:src="@{/component/uploadImg/css/uploadImg.css}">
 </body>

@@ -1,6 +1,6 @@
 (function () {
-    require(['jquery','objectUtil','ajaxUtil','alertUtil','stringUtil','dictUtil','fileUtil','uploadImg','urlUtil'],
-        function (jquery,objectUtil,ajaxUtil,alertUtil,stringUtil,dictUtil,fileUtil,uploadImg,urlUtil) {
+    require(['jquery','objectUtil','ajaxUtil','alertUtil','stringUtil','dictUtil','fileUtil','uploadImg','urlUtil','distpicker'],
+        function (jquery,objectUtil,ajaxUtil,alertUtil,stringUtil,dictUtil,fileUtil,uploadImg,urlUtil,distpicker) {
 
             var url = "/industrialdevelop/chi-med";
             var orgType = "plant"
@@ -61,26 +61,26 @@
 
             var init = function () {
                 if (isUpdate()){
-                    var data;
+                    var needData;
                     ajaxUtil.myAjax(null,url + "/getByOrgCode",null,function (data) {
                         if(ajaxUtil.success(data)){
-                            data = data.data;
+                            needData = data.data;
                         }
                     },false,true,"get");
-                    $("#name").val(data.name);
-                    $("#plantType").val(data.plantType);
-                    $("#areaCoverd").val(data.areaCoverd);
-                    $("#contacts").val(data.contacts);
+                    $("#name").val(needData.name);
+                    $("#plantType").val(needData.plantType);
+                    $("#areaCoverd").val(needData.areaCoverd);
+                    $("#contacts").val(needData.contacts);
                     $("#distpicker").distpicker({
-                        province: data.addressPro,
-                        city: data.addressCity,
-                        district: data.addressCountry
+                        province: needData.addressPro,
+                        city: needData.addressCity,
+                        district: needData.addressCountry
                     });
-                    $("#address").val(data.address);
-                    $("#phone").val(data.phone);
-                    $(".w-e-text").html(data.intruduce);
-                    itemcode = data.itemcode;
-                    uploadImg.setImgSrc(data.filePath)
+                    $("#address").val(needData.address);
+                    $("#phone").val(needData.phone);
+                    $(".w-e-text").html(needData.intruduce);
+                    itemcode = needData.itemcode;
+                    uploadImg.setImgSrc(needData.filePath)
                 }else {
                     $("#distpicker").distpicker({
                         province: "河北省",

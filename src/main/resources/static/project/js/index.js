@@ -35,13 +35,13 @@
                         level: "2",
                         pid: "1"
                     },
-                    {
-                        menu_name: "文化科普",
-                        menu_url: "/chineseCultural/production/movieTV",
-                        id: "2",
-                        level: "1",
-                        pid: ""
-                    },
+                    // {
+                    //     menu_name: "文化科普",
+                    //     menu_url: "/chineseCultural/production/movieTV",
+                    //     id: "2",
+                    //     level: "1",
+                    //     pid: ""
+                    // },
                     {
                         menu_name: "文化资源",
                         menu_url: "",
@@ -134,7 +134,7 @@
                         pid: ""
                     },
                     {
-                        menu_name: "＞历史名方",
+                        menu_name: "历史名方",
                         menu_url: "/healthCare/famPre",
                         id: "8",
                         level: "1",
@@ -156,20 +156,20 @@
                         level: "1",
                         pid: ""
                     },
-                    {
-                        menu_name: "中医药名校",
-                        menu_url: "/knowledgeDb/dataBack",
-                        id: "11",
-                        level: "1",
-                        pid: ""
-                    },
-                    {
-                        menu_name: "中医药名企",
-                        menu_url: "/knowledgeDb/dataBack",
-                        id: "12",
-                        level: "1",
-                        pid: ""
-                    }
+                    // {
+                    //     menu_name: "中医药名校",
+                    //     menu_url: "/knowledgeDb/dataBack",
+                    //     id: "11",
+                    //     level: "1",
+                    //     pid: ""
+                    // },
+                    // {
+                    //     menu_name: "中医药名企",
+                    //     menu_url: "/knowledgeDb/dataBack",
+                    //     id: "12",
+                    //     level: "1",
+                    //     pid: ""
+                    // }
                 ];
             }
             if (roleName === '政务资源处长'||roleName === '政务资源科员'||roleName === '政务资源综合处处长'){
@@ -218,7 +218,7 @@
                     }
                 ];
             }
-            if (roleName === '主研人'||roleName === '科研项目申报单位'||roleName === '市级中医药管理部门'){
+            if (roleName === '主研人'||roleName === '科研项目申报单位'){
                 var menu_list = [
                     {
                         menu_name: "科研项目管理",
@@ -268,7 +268,7 @@
                     },
                     {
                         menu_name: "＞专家管理",
-                        menu_url: "/industrialdevelop/expert",
+                        menu_url: "/scientificProject/expert",
                         id: "15-4",
                         level: "2",
                         pid: "15"
@@ -286,6 +286,38 @@
                         id: "15-6",
                         level: "2",
                         pid: "15"
+                    },
+                    {
+                        menu_name: "机构审核",
+                        menu_url: "/industrialdevelop/audit",
+                        id: "16",
+                        level: "1",
+                        pid: ""
+                    }
+                ];
+            }
+            if (roleName === '市级中医药管理部门'){
+                var menu_list = [
+                    {
+                        menu_name: "科研项目管理",
+                        menu_url: "",
+                        id: "15",
+                        level: "1",
+                        pid: ""
+                    },
+                    {
+                        menu_name: "＞课题管理",
+                        menu_url: "/scientificProject/topicManagement",
+                        id: "15-1",
+                        level: "2",
+                        pid: "15"
+                    },
+                    {
+                        menu_name: "机构审核",
+                        menu_url: "/industrialdevelop/audit",
+                        id: "16",
+                        level: "1",
+                        pid: ""
                     }
                 ];
             }
@@ -310,7 +342,7 @@
             if (roleName === '中药材种植园'){
                 var menu_list = [
                     {
-                        menu_name: "在售药材",
+                        menu_name: "＞在售药材",
                         menu_url: "/industrialdevelop/medMat/medMat",
                         id: "1",
                         level: "1",
@@ -331,7 +363,7 @@
                         pid: ""
                     },
                     {
-                        menu_name: "信息维护",
+                        menu_name: "＞信息维护",
                         menu_url: "/industrialdevelop/chinesemed/plantation_add",
                         id: "4",
                         level: "1",
@@ -342,7 +374,7 @@
             if (roleName === '中药材加工企业'){
                 var menu_list = [
                     {
-                        menu_name: "在售药材",
+                        menu_name: "＞在售药材",
                         menu_url: "/industrialdevelop/medMat/medMat",
                         id: "1",
                         level: "1",
@@ -363,7 +395,7 @@
                         pid: ""
                     },
                     {
-                        menu_name: "信息维护",
+                        menu_name: "＞信息维护",
                         menu_url: "/industrialdevelop/chinesemed/chinesemed-process_add",
                         id: "4",
                         level: "1",
@@ -428,7 +460,7 @@
                     },
                     {
                         menu_name: "＞信息维护",
-                        menu_url: "/industrialdevelop/chinesemed/chinesemed-produce_add",
+                        menu_url: "/industrialdevelop/chinesemed/chinesemed-sale_add",
                         id: "4",
                         level: "1",
                         pid: ""
@@ -460,7 +492,7 @@
                     },
                     {
                         menu_name: "＞信息维护",
-                        menu_url: "/industrialdevelop/organization/lab_add",
+                        menu_url: "/industrialdevelop/organization/addHosp",
                         id: "4",
                         level: "1",
                         pid: ""
@@ -470,7 +502,7 @@
             if (roleName === '高等医学院校'){
                 var menu_list = [
                     {
-                        menu_name: "服务项目",
+                        menu_name: "＞服务项目",
                         menu_url: "/school/school",
                         id: "1",
                         level: "1",
@@ -491,7 +523,7 @@
                         pid: ""
                     },
                     {
-                        menu_name: "信息维护",
+                        menu_name: "＞信息维护",
                         menu_url: "/school/school_msg",
                         id: "4",
                         level: "1",
@@ -567,7 +599,7 @@
                 var menu_list = [
                     {
                         menu_name: "＞基地风采",
-                        menu_url: "/industrialdevelop/style",
+                        menu_url: "/industrialdevelop/organization/tour",
                         id: "1",
                         level: "1",
                         pid: ""

@@ -60,26 +60,26 @@
 
             var init = function () {
                 if (isUpdate()) {
-                    var data;
+                    var needData;
                     ajaxUtil.myAjax(null,url + "/getByOrgCode",null,function (data) {
                         if(ajaxUtil.success(data)){
-                            data = data.data;
+                            needData = data.data;
                         }
                     },false,true,"get");
-                    $("#name").val(data.name);
-                    $("#areaCoverd").val(data.areaCoverd);
-                    $("#processingType").val(data.processingType);
-                    $("#contacts").val(data.contacts);
+                    $("#name").val(needData.name);
+                    $("#areaCoverd").val(needData.areaCoverd);
+                    $("#processingType").val(needData.processingType);
+                    $("#contacts").val(needData.contacts);
                     $("#distpicker").distpicker({
-                        province: data.addressPro,
-                        city: data.addressCity,
-                        district: data.addressCountry
+                        province: needData.addressPro,
+                        city: needData.addressCity,
+                        district: needData.addressCountry
                     });
-                    $("#address").val(data.address);
-                    $("#phone").val(data.phone);
-                    $(".w-e-text").html(data.intruduce);
-                    itemcode = data.itemcode;
-                    uploadImg.setImgSrc(data.filePath)
+                    $("#address").val(needData.address);
+                    $("#phone").val(needData.phone);
+                    $(".w-e-text").html(needData.intruduce);
+                    itemcode = needData.itemcode;
+                    uploadImg.setImgSrc(needData.filePath)
                 }else {
                     $("#distpicker").distpicker({
                         province: "河北省",

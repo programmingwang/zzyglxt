@@ -1,6 +1,6 @@
 (function () {
-    require(['jquery', 'ajaxUtil', 'stringUtil', 'uploadImg', 'objectUtil', 'distpicker','fileUtil'],
-        function ($, ajaxUtil, stringUtil, uploadImg, objectUtil, distpicker, fileUtil) {
+    require(['jquery', 'ajaxUtil', 'stringUtil', 'uploadImg', 'objectUtil', 'distpicker','fileUtil', 'urlUtil'],
+        function ($, ajaxUtil, stringUtil, uploadImg, objectUtil, distpicker, fileUtil, urlUtil) {
 
             var url = "/industrialdevelop/schoolmsg";
 
@@ -40,9 +40,13 @@
 
             $("#saveBtn").unbind('click').on('click', function () {
                 var param = generateParam();
-                // param.status = "——";
-                if (uploadImg.isUpdate()) {
-                    ajaxUtil.fileAjax(fileitemcode, uploadImg.getFiles()[0], "undefined", "undefined")
+                param.status = 1;
+                if (uploadImg.isUpdate()){
+                    if (isUpdate()){
+                        ajaxUtil.updateFile(itemcode,uploadImg.getFiles()[0],"undefined","undefined");
+                    }else {
+                        ajaxUtil.fileAjax(itemcode,uploadImg.getFiles()[0],"undefined","undefined")
+                    }
                 }
                 ajaxUtil.myAjax(null, opurl, param, function (data) {
                     if (ajaxUtil.success(data)) {
@@ -56,9 +60,13 @@
 
             $("#submitBtn").unbind('click').on('click', function () {
                 var param = generateParam();
-                // param.status = "——";
-                if (uploadImg.isUpdate()) {
-                    ajaxUtil.fileAjax(fileitemcode, uploadImg.getFiles()[0], "undefined", "undefined")
+                param.status = 1;
+                if (uploadImg.isUpdate()){
+                    if (isUpdate()){
+                        ajaxUtil.updateFile(itemcode,uploadImg.getFiles()[0],"undefined","undefined");
+                    }else {
+                        ajaxUtil.fileAjax(itemcode,uploadImg.getFiles()[0],"undefined","undefined")
+                    }
                 }
                 ajaxUtil.myAjax(null, opurl, param, function (data) {
                     if (ajaxUtil.success(data)) {
@@ -96,6 +104,10 @@
                 }, null, "123", "get")
             };
             init();
+
+            function isUpdate() {
+                return (urlUtil.getFullUrl().indexOf("/main#") != -1)
+            }
         })
 })();
 

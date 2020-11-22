@@ -66,8 +66,8 @@ public class UserServiceImpl implements UserService {
             throw new BusinessException(result.getErrMsg(), EmBusinessError.PARAMETER_VALIDATION_ERROR);
         }
         //添加用户
-        record.setUpdater(usernameUtil.getOperateUser());
-        record.setCreater(usernameUtil.getOperateUser());
+//        record.setUpdater(usernameUtil.getOperateUser());
+//        record.setCreater(usernameUtil.getOperateUser());
         record.setPassword(new BCryptPasswordEncoder().encode("123456"));
         record.setItemcode(UUIDUtils.getUUID());
         userDOMapper.insertSelective(record);
@@ -75,8 +75,8 @@ public class UserServiceImpl implements UserService {
         //查询角色role_code
         RoleDO roleDO = roleDOMapper.selectByRoleName(record.getRoleName());
         UserRoleRefDO userRoleRefDO = new UserRoleRefDO();
-        userRoleRefDO.setUpdater(usernameUtil.getOperateUser());
-        userRoleRefDO.setCreater(usernameUtil.getOperateUser());
+//        userRoleRefDO.setUpdater(usernameUtil.getOperateUser());
+//        userRoleRefDO.setCreater(usernameUtil.getOperateUser());
         userRoleRefDO.setItemcode(UUIDUtils.getUUID());
         userRoleRefDO.setRoleCode(roleDO.getItemcode());
         userRoleRefDO.setUserCode(record.getItemcode());

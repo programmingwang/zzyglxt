@@ -1,6 +1,6 @@
 (function () {
-    require(['jquery','objectUtil','ajaxUtil','alertUtil','stringUtil','fileUtil','uploadImg'],
-        function (jquery,objectUtil,ajaxUtil,alertUtil,stringUtil,fileUtil,uploadImg) {
+    require(['jquery','objectUtil','ajaxUtil','alertUtil','stringUtil','fileUtil','uploadImg','distpicker'],
+        function (jquery,objectUtil,ajaxUtil,alertUtil,stringUtil,fileUtil,uploadImg,distpicker) {
 
           const editor = objectUtil.wangEditorUtil();
 
@@ -78,6 +78,12 @@
                     $("#packing").val(tempdata.packing);
                     var img = tempdata.filePath;
                     uploadImg.setImgSrc(img);
+                }
+                else {
+                    $("#distpicker").distpicker();
+                }
+                init = function () {
+
                 }
             }());
 

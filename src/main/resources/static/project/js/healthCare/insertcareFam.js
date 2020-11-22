@@ -1,6 +1,6 @@
 (function () {
-    require(['jquery','objectUtil','ajaxUtil','alertUtil','stringUtil','fileUtil'],
-        function (jquery,objectUtil,ajaxUtil,alertUtil,stringUtil,fileUtil) {
+    require(['jquery','objectUtil','ajaxUtil','alertUtil','stringUtil','fileUtil','distpicker'],
+        function (jquery,objectUtil,ajaxUtil,alertUtil,stringUtil,fileUtil,distpicker) {
 
            const editor = objectUtil.wangEditorUtil();
 
@@ -58,6 +58,12 @@
                     editor.txt.html(tempdata.content);
                     var img = tempdata.filePath;
                     $("#upimg").attr("src",img);
+                }
+                else {
+                    $("#distpicker").distpicker();
+                }
+                init = function () {
+
                 }
             }());
 

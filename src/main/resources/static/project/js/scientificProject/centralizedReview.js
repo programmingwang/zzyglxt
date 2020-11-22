@@ -15,24 +15,26 @@
 
             //操作
             function operation(value, row, index){
-                // if(sessionStorage.getItem("rolename") == "省局中医管理部门"){}
-                if(row.exmaineStatus == pl[1].id){
-                    return [
-                        '<a class="exmaine" style="margin:0 1em;text-decoration: none;color:#775637;" data-toggle="modal" data-target="" >评审</a>',
-                    ].join('');
-                }else if(row.exmaineStatus == pl[2].id){
-                    return [
-                        '<a class="exmaine" style="margin:0 1em;text-decoration: none;color:#775637;" data-toggle="modal" data-target="" >评审</a>',
-                        '<a class="submit" style="margin:0 1em;text-decoration: none;color:#775637;" data-toggle="modal" data-target="" >提交</a>',
-                    ].join('');
-                }else if(row.exmaineStatus == pl[0].id){
-                    return [
+                if(sessionStorage.getItem("rolename") == "省局中医管理部门") {
+                    if (row.exmaineStatus == pl[1].id) {
+                        return [
+                            '<a class="exmaine" style="margin:0 1em;text-decoration: none;color:#775637;" data-toggle="modal" data-target="" >评审</a>',
+                        ].join('');
+                    } else if (row.exmaineStatus == pl[2].id) {
+                        return [
+                            '<a class="exmaine" style="margin:0 1em;text-decoration: none;color:#775637;" data-toggle="modal" data-target="" >评审</a>',
+                            '<a class="submit" style="margin:0 1em;text-decoration: none;color:#775637;" data-toggle="modal" data-target="" >提交</a>',
+                        ].join('');
+                    } else if (row.exmaineStatus == pl[0].id) {
+                        return [
+                            '<a class="view" style="margin:0 1em;text-decoration: none;color:#775637;" data-toggle="modal" data-target="" >查看</a>',
+                        ].join('');
+                    }
+                } else if (sessionStorage.getItem("rolename") == "专家"){
+                    return[
                         '<a class="view" style="margin:0 1em;text-decoration: none;color:#775637;" data-toggle="modal" data-target="" >查看</a>',
                     ].join('');
                 }
-            //    else if (sessionStorage.getItem("rolename") == "专家"){
-                // '<a class="view" style="margin:0 1em;text-decoration: none;color:#775637;" data-toggle="modal" data-target="" >查看</a>',
-                // }
             }
 
             $(function(){

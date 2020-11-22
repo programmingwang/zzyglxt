@@ -1,6 +1,6 @@
 (function () {
-    require(['jquery','objectUtil','ajaxUtil','alertUtil','stringUtil','dictUtil','fileUtil','uploadImg'],
-        function (jquery,objectUtil,ajaxUtil,alertUtil,stringUtil,dictUtil,fileUtil,uploadImg) {
+    require(['jquery','objectUtil','ajaxUtil','alertUtil','stringUtil','dictUtil','fileUtil','uploadImg','selectUtil','distpicker','urlUtil'],
+        function (jquery,objectUtil,ajaxUtil,alertUtil,stringUtil,dictUtil,fileUtil,uploadImg,selectUtil,distpicker,urlUtil) {
 
 
             /*q全局变量*/
@@ -83,7 +83,7 @@
             });
 
             function isUpdate() {
-                return (tempdata != null || tempdata != undefined)
+                return (urlUtil.getFullUrl().indexOf("/main#") != -1)
             }
 
 
@@ -109,7 +109,7 @@
                     });
                     $("#hospitalAddress").val(tempdata.hospitalAddress);
                     $("#hospitalLink").val(tempdata.hospitalLink);
-                    $(".w-e-text").html(tempdata.hospitalIntroduce);
+                    editor.txt.html(tempdata.hospitalIntroduce);
                 }else {
                     localStorage.removeItem("rowData");
                     $("#distpicker").distpicker({

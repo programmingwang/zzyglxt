@@ -62,6 +62,12 @@ public class FileController {
         return new ResponseData(EmBusinessError.success);
     }
 
+    @GetMapping("/get/{datacode}")
+    @ResponseBody
+    public ResponseData get(@PathVariable String datacode){
+        return new ResponseData(EmBusinessError.success,fileService.selectFileByDataCode(datacode));
+    }
+
     private FileDO saveFile(FileDto fileDto) {
         FileDO fileDO = new FileDO();
         BeanUtils.copyProperties(fileDto,fileDO);

@@ -1,6 +1,6 @@
 (function () {
-    require(['jquery','ajaxUtil','stringUtil','uploadImg','objectUtil'],
-        function ($,ajaxUtil,stringUtil,uploadImg, objectUtil) {
+    require(['jquery','ajaxUtil','stringUtil','uploadImg','objectUtil','distpicker'],
+        function ($,ajaxUtil,stringUtil,uploadImg, objectUtil, distpicker) {
 
             var url = "/industrialdevelop/tec-ser-org/selectbyorgcode";
 

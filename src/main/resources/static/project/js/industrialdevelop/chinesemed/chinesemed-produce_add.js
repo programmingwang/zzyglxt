@@ -1,6 +1,6 @@
 (function () {
-    require(['jquery','ajaxUtil','stringUtil','uploadImg','wangEditor',"distpicker"],
-        function ($,ajaxUtil,stringUtil,uploadImg, wangEditor,distpicker) {
+    require(['jquery','ajaxUtil','stringUtil','uploadImg','objectUtil',"distpicker",'urlUtil'],
+        function ($,ajaxUtil,stringUtil,uploadImg, objectUtil,distpicker,urlUtil) {
 
             var url = "/industrialdevelop/chi-med";
 
@@ -10,53 +10,11 @@
 
             var itemcode = stringUtil.getUUID();
 
-            // var type = isUpdate() ? "put":"post";
+            var type = isUpdate() ? "put":"post";
 
             uploadImg.init();
 
-            const editor = new wangEditor('#div1');
-            // 或者 const editor = new E( document.getElementById('div1') )
-            //菜单配置
-            editor.config.menus = [
-                'head',
-                'bold',
-                'fontSize',
-                'fontName',
-                'italic',
-                'underline',
-                'strikeThrough',
-                'indent',
-                'lineHeight',
-                'foreColor',
-                'backColor',
-                'link',
-                'list',
-                'justify',
-                'image',
-                'table',
-                'splitLine',
-                'undo',
-                'redo'
-            ];
-            //取消粘贴后的样式
-            editor.config.pasteFilterStyle = false;
-            //不粘贴图片
-            editor.config.pasteIgnoreImg = true;
-            //隐藏上传网络图片
-            editor.config.showLinkImg = false;
-            editor.config.uploadImgShowBase64 = true;
-            editor.create();
-            editor.txt.html('<p></p>');
-
-            $("#div1").on("input propertychange", function() {
-                var textNUm=editor.txt.text();
-                var str;
-                if(textNUm.length>=100000){
-                    str = textNUm.substring(0,10000)+"";  //使用字符串截取，获取前30个字符，多余的字符使用“......”代替
-                    editor.txt.html(str);
-                    alert("字数不能超过10000");                 //将替换的值赋值给当前对象
-                }
-            });
+            const editor = objectUtil.wangEditorUtil();
 
             $("#cancelBtn").click(function () {
                 orange.redirect(pathUrl)
@@ -74,6 +32,7 @@
                 param.addressCountry = $("#addressCountry").val()
                 param.address = $("#address").val()
                 param.intruduce = $(".w-e-text").html();
+                param.orgCode = sessionStorage.getItem("orgCode");
                 param.type = orgType;
                 return param;
             }
@@ -92,7 +51,7 @@
                     }else {
                         alert(data.msg);
                     }
-                },true,"123","PUT");
+                },true,"123",type);
                 return false;
             });
 
@@ -105,33 +64,32 @@
                     }else {
                         alert(data.msg)
                     }
-                },true,"123","POST");
+                },true,"123",type);
                 return false;
             });
 
             var init = function () {
                 if (isUpdate()){
-                    var tempdata;
+                    var needData;
                     ajaxUtil.myAjax(null,url + "/getByOrgCode",null,function (data) {
                         if(ajaxUtil.success(data)){
-                            tempdata = data.data;
+                            needData = data.data;
                         }
                     },false,true,"get");
-                    // var tempdata = JSON.parse(localStorage.getItem("rowData"));
-                    $("#name").val(tempdata.name);
-                    $("#peoduceType").val(tempdata.peoduceType);
-                    $("#peoduceDrug").val(tempdata.peoduceDrug);
-                    $("#contacts").val(tempdata.contacts);
+                    $("#name").val(needData.name);
+                    $("#peoduceType").val(needData.peoduceType);
+                    $("#peoduceDrug").val(needData.peoduceDrug);
+                    $("#contacts").val(needData.contacts);
                     $("#distpicker").distpicker({
-                        province: tempdata.addressPro,
-                        city: tempdata.addressCity,
-                        district: tempdata.addressCountry
+                        province: needData.addressPro,
+                        city: needData.addressCity,
+                        district: needData.addressCountry
                     });
-                    $("#address").val(tempdata.address);
-                    $("#phone").val(tempdata.phone);
-                    $(".w-e-text").html(tempdata.intruduce);
-                    itemcode = tempdata.itemcode
-                    uploadImg.setImgSrc(tempdata.filePath)
+                    $("#address").val(needData.address);
+                    $("#phone").val(needData.phone);
+                    editor.txt.html(needData.intruduce);
+                    itemcode = needData.itemcode
+                    uploadImg.setImgSrc(needData.filePath)
                 }else {
                     $("#distpicker").distpicker();
                 }
@@ -141,7 +99,7 @@
 
 
             function isUpdate() {
-                return (localStorage.getItem("rowData") != null || localStorage.getItem("rowData") != undefined)
+                return (urlUtil.getFullUrl().indexOf("/main#") != -1)
             }
     })
 })();

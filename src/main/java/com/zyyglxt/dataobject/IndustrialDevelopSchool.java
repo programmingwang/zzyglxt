@@ -96,7 +96,7 @@ public class IndustrialDevelopSchool {
     private String addressCountry;
 
     /**
-    * 手动输入地址 
+    * 手动输入地址
     */
     @ApiModelProperty(value="手动输入地址 ")
     private String address;
@@ -134,6 +134,7 @@ public class IndustrialDevelopSchool {
     /**
      * 机构编号
      */
-    @ApiModelProperty(value="机构编号")
+    @ApiModelProperty(value="机构编号 ")
     private String orgCode;
+
 }

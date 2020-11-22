@@ -1,5 +1,7 @@
 package com.zyyglxt.service.impl;
 
+import com.zyyglxt.dao.OrganizationDOMapper;
+import com.zyyglxt.dataobject.OrganizationDO;
 import com.zyyglxt.dto.industrialDevelop.IndustrialDevelopChiMedDto;
 import com.zyyglxt.error.BusinessException;
 import com.zyyglxt.error.EmBusinessError;
@@ -33,7 +35,10 @@ public class IndustrialDevelopChiMedServiceImpl implements IndustrialDevelopChiM
     private IFileService fileService;
 
     @Resource
+    OrganizationDOMapper organizationDOMapper;
+    @Resource
     private UsernameUtil usernameUtil;
+
 
     @Autowired
     ValidatorImpl validator;
@@ -54,7 +59,13 @@ public class IndustrialDevelopChiMedServiceImpl implements IndustrialDevelopChiM
         if (result.isHasErrors()) {
             throw new BusinessException(result.getErrMsg(), EmBusinessError.PARAMETER_VALIDATION_ERROR);
         }
-        return industrialDevelopChiMedMapper.insertSelective(record);
+        OrganizationDO organizationDO = organizationDOMapper.selectByOrgName(record.getName());
+        if (organizationDO == null){
+            return -1;
+        } else {
+            record.setOrgCode(organizationDO.getOrgCode());
+            return industrialDevelopChiMedMapper.insertSelective(record);
+        }
     }
 
     @Override

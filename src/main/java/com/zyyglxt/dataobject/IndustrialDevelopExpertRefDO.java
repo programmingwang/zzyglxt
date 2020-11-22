@@ -5,6 +5,7 @@ import com.zyyglxt.dataobject.validation.ValidationGroups;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import javax.validation.constraints.NotBlank;
 import java.util.Date;
@@ -12,6 +13,7 @@ import java.util.Date;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
 public class IndustrialDevelopExpertRefDO extends IndustrialDevelopExpertRefDOKey {
 
     @NotBlank(message = "专家代码不能为空", groups = ValidationGroups.Insert.class)

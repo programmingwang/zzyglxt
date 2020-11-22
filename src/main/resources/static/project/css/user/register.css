@@ -63,3 +63,14 @@ html, body {
     background-size: 100% auto;
     background-repeat: no-repeat;
 }
+
+#showStatus, #login{
+    display:inline-block;
+    float: left;
+    margin-top: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #9c7049;
+    text-align: center;
+}
+

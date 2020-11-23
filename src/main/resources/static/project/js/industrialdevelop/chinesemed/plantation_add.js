@@ -4,6 +4,7 @@
 
             var url = "/industrialdevelop/chi-med";
             var orgType = "plant"
+            var pathUrl = "/industrialdevelop/medMat/medMat"
             var type = isUpdate() ? "put" : "post";
             var status = dictUtil.getDictByCode(dictUtil.DICT_LIST.projectStatus);
             const editor = objectUtil.wangEditorUtil();
@@ -39,7 +40,7 @@
                     operateMessage = "提交信息成功";
                 }
 
-                fileUtil.handleFile(updateStatus, param.itemcode, uploadImg.getFiles()[0]);
+                fileUtil.handleFile(isUpdate(), param.itemcode, uploadImg.getFiles()[0]);
 
                 ajaxUtil.myAjax(null, url, param, function (data) {
                     if (ajaxUtil.success(data)) {
@@ -59,11 +60,16 @@
                 updateData("submit")
             });
 
+            $("#cancelBtn").unbind().on('click',function () {
+                orange.redirect(pathUrl)
+            })
+
             var init = function () {
                 if (isUpdate()){
                     var needData;
                     ajaxUtil.myAjax(null,url + "/getByOrgCode",null,function (data) {
                         if(ajaxUtil.success(data)){
+                            console.log(data);
                             needData = data.data;
                         }
                     },false,true,"get");
@@ -78,7 +84,7 @@
                     });
                     $("#address").val(needData.address);
                     $("#phone").val(needData.phone);
-                    $(".w-e-text").html(needData.intruduce);
+                    editor.txt.html(needData.intruduce);
                     itemcode = needData.itemcode;
                     uploadImg.setImgSrc(needData.filePath)
                 }else {
@@ -93,7 +99,7 @@
 
 
             function isUpdate() {
-                return (urlUtil.getFullUrl().indexOf("/main#") != -1)
+                return (urlUtil.getFullUrl().indexOf("/main#") != -1 || urlUtil.getFullUrl().indexOf("/main?") != -1)
             }
     })
 })();

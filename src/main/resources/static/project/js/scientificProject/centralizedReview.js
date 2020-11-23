@@ -2,7 +2,13 @@
     require(['jquery', 'ajaxUtil','bootstrapTableUtil','objectUtil','alertUtil','modalUtil','selectUtil','stringUtil','dictUtil'],
         function (jquery,ajaxUtil,bootstrapTableUtil,objectUtil,alertUtil,modalUtil,selectUtil,stringUtil,dictUtil) {
 
-            var url = "/exmain/exmain";
+            var url;
+
+            if(sessionStorage.getItem("rolename") == "专家"){
+                url = "/exmain/getByExpertCode?expertUserCode="+sessionStorage.getItem("itemcode");
+            }else if(sessionStorage.getItem("rolename") == "省局中医药管理部门"){
+                url = "/exmain/exmain";
+            }
 
             //角色加载工具
 
@@ -15,7 +21,7 @@
 
             //操作
             function operation(value, row, index){
-                if(sessionStorage.getItem("rolename") == "省局中医管理部门") {
+                if(sessionStorage.getItem("rolename") == "专家") {
                     if (row.exmaineStatus == pl[1].id) {
                         return [
                             '<a class="exmaine" style="margin:0 1em;text-decoration: none;color:#775637;" data-toggle="modal" data-target="" >评审</a>',
@@ -30,7 +36,7 @@
                             '<a class="view" style="margin:0 1em;text-decoration: none;color:#775637;" data-toggle="modal" data-target="" >查看</a>',
                         ].join('');
                     }
-                } else if (sessionStorage.getItem("rolename") == "专家"){
+                } else if (sessionStorage.getItem("rolename") == "省局中医药管理部门"){
                     return[
                         '<a class="view" style="margin:0 1em;text-decoration: none;color:#775637;" data-toggle="modal" data-target="" >查看</a>',
                     ].join('');
@@ -40,7 +46,6 @@
             $(function(){
                 $("span a").unbind().on('click',function () {
                     //获得当前a的标签
-                    console.log($(this).attr("id"));
                 });
             });
 
@@ -51,6 +56,7 @@
                     var scoreArr = JSON.parse(localStorage.getItem("detailScore"));
                     row.scoreArr = scoreArr;
                     localStorage.setItem("viewDetail",JSON.stringify(row));
+                    localStorage.setItem("isView","true");
                     orange.redirect("/evaluationTable/evaluationTable")
                 },
                 'click .exmaine' : function (e, value, row, index) {
@@ -98,7 +104,8 @@
             var aCol = [
                 {field: 'projectNo', title: '项目编号'},
                 {field: 'projectName', title: '项目名称', formatter: function (value,row) {
-                        return '<span><a id="'+row.topicCode+'">'+value+'</a></span>'
+                    localStorage.setItem("rowData",JSON.stringify(row));
+                        return '<span><a>'+value+'</a></span>'
                     }},
                 {field: 'company', title: '申报单位'},
                 {field: 'exmaineStatus', title: '状态', formatter:function (value) {

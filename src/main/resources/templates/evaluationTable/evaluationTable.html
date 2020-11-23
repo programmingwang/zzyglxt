@@ -4,6 +4,11 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" th:href="@{project/css/evaluationTable/evaluationTable.css}">
     <title>评审</title>
+    <style>
+        button{
+            margin: 0 2rem;
+        }
+    </style>
 </head>
 <body>
 <div class="row">
@@ -115,17 +120,16 @@
                 <td><input id="score11" class="sc" type="text" oninput="if(value>5)value=5;if(value<0)value=0" onkeyup="this.value=this.value.replace(/\D/g,'');" style="outline: none;text-align: center; border: none;width: 100%;height: 100%"></td>
             </tr>
         </table>
-        <div class="form-group row" >
-            <div class="col-lg-4 col-md-4"></div>
-            <div class="col-lg-4 col-md-4 row">
-                <button id="cancel" type="button" class="btn btn-light small">取消</button>
-
+        <div class="form-group row" style="margin-top: 2rem " >
+            <div class="col-lg-3 col-md-3"></div>
+            <div class="col-lg-6 col-md-6 row">
+                <button id="cancel" type="button" class="btn btn-light">取消</button>
                 <!--点击保存，变成评审中-->
-                <button id="btn_save" type="submit" class="btn btn-danger small">保存</button>
+                <button id="btn_save" type="submit" class="btn btn-danger">保存</button>
 
-                <button id="btn_insert" type="submit" class="btn btn-danger small">提交</button>
+                <button id="btn_insert" type="submit" class="btn btn-primary">提交</button>
             </div>
-            <div class="col-lg-4 col-md-4"></div>
+            <div class="col-lg-3 col-md-3"></div>
         </div>
 
     </div>

@@ -3,6 +3,7 @@
         function (jquery,objectUtil,ajaxUtil,alertUtil,stringUtil,dictUtil,fileUtil,uploadImg,urlUtil,distpicker) {
 
             var url = "/industrialdevelop/chi-med";
+            var pathUrl = "/industrialdevelop/medMat/medMat"
             var orgType = "process";
             var type = isUpdate() ? "put" : "post";
             var status = dictUtil.getDictByCode(dictUtil.DICT_LIST.projectStatus);
@@ -38,7 +39,7 @@
                     operateMessage = "提交信息成功";
                 }
 
-                fileUtil.handleFile(updateStatus, param.itemcode, uploadImg.getFiles()[0]);
+                fileUtil.handleFile(isUpdate(), param.itemcode, uploadImg.getFiles()[0]);
 
                 ajaxUtil.myAjax(null, url, param, function (data) {
                     if (ajaxUtil.success(data)) {
@@ -49,6 +50,9 @@
                     }
                 }, true, "123", type);
             }
+            $("#cancelBtn").unbind('click').on('click',function () {
+                orange.redirect(pathUrl)
+            })
 
             $("#saveBtn").unbind('click').on('click', function () {
                 updateData("save");
@@ -62,6 +66,7 @@
                 if (isUpdate()) {
                     var needData;
                     ajaxUtil.myAjax(null,url + "/getByOrgCode",null,function (data) {
+                        console.log(data);
                         if(ajaxUtil.success(data)){
                             needData = data.data;
                         }
@@ -77,7 +82,7 @@
                     });
                     $("#address").val(needData.address);
                     $("#phone").val(needData.phone);
-                    $(".w-e-text").html(needData.intruduce);
+                    editor.txt.html(needData.intruduce);
                     itemcode = needData.itemcode;
                     uploadImg.setImgSrc(needData.filePath)
                 }else {
@@ -91,7 +96,7 @@
             init();
 
             function isUpdate() {
-                return (urlUtil.getFullUrl().indexOf("/main#") != -1)
+                return (urlUtil.getFullUrl().indexOf("/main#") != -1 || urlUtil.getFullUrl().indexOf("/main?") != -1)
             }
 
         })

@@ -46,7 +46,7 @@
             editor.config.showLinkImg = false;
             editor.config.uploadImgShowBase64 = true;
             editor.create();
-            editor.txt.html('<p></p>');
+            editor.txt.html('');
 
             $("#div1").on("input propertychange", function () {
                 var textNUm = editor.txt.text();
@@ -82,7 +82,7 @@
 
             $("#saveBtn").unbind('click').on('click', function () {
                 var param = generateParam();
-                param.status = "——";
+                param.status = "0";
                 param.itemcode = itemcode;
                 if (uploadImg.isUpdate()) {
                     ajaxUtil.fileAjax(itemcode, uploadImg.getFiles()[0], "undefined", "undefined")

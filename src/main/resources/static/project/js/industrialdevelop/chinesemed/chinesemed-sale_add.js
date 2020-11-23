@@ -107,7 +107,7 @@
 
 
             function isUpdate() {
-                return (urlUtil.getFullUrl().indexOf("/main#") != -1)
+                return (urlUtil.getFullUrl().indexOf("/main#") != -1 || urlUtil.getFullUrl().indexOf("/main?") != -1)
             }
         })
 })();

@@ -139,6 +139,20 @@ public class IDUtil {
         Matcher m = pattern.matcher(strDate);
         return m.matches();
     }
+
+    /**
+     * 隐藏省份证号的生日部分
+     * @param idStr
+     * @return
+     */
+    public static String hideMiddleID(String idStr) {
+        if (idStr.length() == 15) {
+            idStr = idStr.substring(0,6) + "******" + idStr.substring(12);
+        } else if (idStr.length() == 18){
+            idStr = idStr.substring(0,6) + "********" + idStr.substring(14);
+        }
+        return idStr;
+    }
 }
 
 

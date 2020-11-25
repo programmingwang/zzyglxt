@@ -59,7 +59,7 @@
             aes: '../component/cryptojsdevelop/aes',
             core: '../component/cryptojsdevelop/core',
             cipher: '../component/cryptojsdevelop/cipher-core',
-            datetimepicker: '../component/bootstrap-datetimepicker@4.7.14/bootstrap-datetimepicker.min',
+            datetimepicker: '../component/bootstrap-datetimepicker@4.7.14/bootstrap-datetimepicker',
             datetimepickerZh: '../component/bootstrap-datetimepicker@4.7.14/bootstrap-datetimepicker.zh-CN',
             popper: '../component/popper@1.16.0/popper.min',
             html5shiv: '../component/html5shiv@3.7.3/html5shiv-printshiv',

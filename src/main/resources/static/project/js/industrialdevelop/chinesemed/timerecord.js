@@ -55,23 +55,26 @@
 
                 var date= new Date();
                 $("#startTime").datetimepicker({
-                    format: 'yyyy-mm-dd hh:ii',//显示格式
+                    format: 'yyyy-mm-dd hh:ii:00',//显示格式
                     startDate: date ,
-                    startView:3,
-                    minView:0,
-                    maxView :4,
+                    startView:2,
+                    minView:1,
+                    maxView :3,
                     language: 'cn',
                     autoclose: 1,//选择后自动关闭
                     clearBtn:true,//清除按钮
                     showMeridian:true,
                 });
                 $("#endTime").datetimepicker({
-                    format: 'yyyy-mm-dd',//显示格式
+                    format: 'yyyy-mm-dd hh:ii:00',//显示格式
+                    startDate: date ,
                     startView:2,
-                    minView:2,
-                    maxView :2,
+                    minView:1,
+                    maxView :3,
                     language: 'cn',
                     autoclose: 1,//选择后自动关闭
+                    clearBtn:true,//清除按钮
+                    showMeridian:true,
                 });
             });
 

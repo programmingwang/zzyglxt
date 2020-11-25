@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import javax.annotation.Resource;
 import java.io.IOException;
+import java.util.List;
 
 /**
  * @author qjc
@@ -51,20 +52,25 @@ public class FileController {
     @ResponseBody
     @LogAnnotation(appCode ="",logTitle ="删除文件",logLevel ="4",creater ="",updater = "")
     public ResponseData delete(String dataCode){
-        FileDO fileDO = fileService.selectFileByDataCode(dataCode);
-        fastFileStorageClient.deleteFile(fileDO.getFilePath());
+        List<FileDO> fileDOList = fileService.selectMultipleFileByDataCode(dataCode);
+        String filePath = null;
+        for (FileDO fileDO : fileDOList){
+            filePath = fileDO.getFilePath();
+            try {
+                fastFileStorageClient.deleteFile(filePath.substring(0, filePath.indexOf("?")));//去除掉后面的fileName属性
+            }catch (Exception e){
+                fastFileStorageClient.deleteFile(filePath);
+            }
+        }
         fileService.deleteFileByDataCode(dataCode);
         return new ResponseData(EmBusinessError.success);
     }
 
-    @PostMapping("/update")
+    @GetMapping("/get/{datacode}")
     @ResponseBody
-    public ResponseData update(FileDto fileDto){
-        delete(fileDto.getDataCode());
-        fileService.updateFile(saveFile(fileDto));
-        return new ResponseData(EmBusinessError.success);
+    public ResponseData get(@PathVariable String datacode){
+        return new ResponseData(EmBusinessError.success,fileService.selectFileByDataCode(datacode));
     }
-
 
     private FileDO saveFile(FileDto fileDto) {
         FileDO fileDO = new FileDO();

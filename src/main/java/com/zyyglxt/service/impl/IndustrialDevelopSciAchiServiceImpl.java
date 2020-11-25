@@ -8,6 +8,7 @@ import com.zyyglxt.error.BusinessException;
 import com.zyyglxt.error.EmBusinessError;
 import com.zyyglxt.service.IIndustrialDevelopSciAchiService;
 import com.zyyglxt.util.DateUtils;
+import com.zyyglxt.util.UUIDUtils;
 import com.zyyglxt.util.UsernameUtil;
 import com.zyyglxt.validator.ValidatorImpl;
 import com.zyyglxt.validator.ValidatorResult;
@@ -41,12 +42,13 @@ public class IndustrialDevelopSciAchiServiceImpl implements IIndustrialDevelopSc
         record.setItemcreateat(DateUtils.getDate());
         record.setCreater(usernameUtil.getOperateUser());
         record.setUpdater(usernameUtil.getOperateUser());
+        record.setOrgCode(usernameUtil.getOrgCode());
         ValidatorResult result = validator.validate(record, ValidationGroups.Insert.class);
         if (result.isHasErrors()){
             throw new BusinessException(result.getErrMsg(), EmBusinessError.PARAMETER_VALIDATION_ERROR);
         }
         if (record.getItemcode() == null || record.getItemcode().isEmpty()){
-            record.setItemcode(UUID.randomUUID().toString());
+            record.setItemcode(UUIDUtils.getUUID());
         }
         sciAchiDOMapper.insertSelective(record);
     }

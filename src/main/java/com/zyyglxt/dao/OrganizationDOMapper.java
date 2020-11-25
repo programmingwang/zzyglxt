@@ -22,7 +22,11 @@ public interface OrganizationDOMapper {
 
     OrganizationDO selectByOrgNameAndCode(String orgName, String orgCode);
 
+    OrganizationDO selectByOrgName(String orgName);
+
     int updateByPrimaryKeySelective(OrganizationDO record);
 
     int updateByPrimaryKey(OrganizationDO record);
+
+    String selectByItemCode(String itemCode);
 }

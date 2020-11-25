@@ -2,7 +2,7 @@
     require(['jquery', 'ajaxUtil','bootstrapTableUtil','objectUtil','alertUtil','modalUtil','selectUtil','stringUtil','dictUtil'],
         function (jquery,ajaxUtil,bootstrapTableUtil,objectUtil,alertUtil,modalUtil,selectUtil,stringUtil,dictUtil) {
 
-
+            var status = dictUtil.getDictByCode(dictUtil.DICT_LIST.projectStatus);
             var getUrl = "/industrialdevelop/chi-med/produce";
 
             var opUrl = "/industrialdevelop/chi-med";
@@ -29,8 +29,8 @@
                 },
                 'click .delete': function (e, value, row, index) {
                     var myDeleteModalData ={
-                        modalBodyID : "myDeleteCooperation",
-                        modalTitle : "删除服务项目",
+                        modalBodyID : "myDeleteCPtion",
+                        modalTitle : "删除中药制药企业信息",
                         modalClass : "modal-lg",
                         confirmButtonClass : "btn-danger",
                         modalConfirmFun:function () {
@@ -42,7 +42,7 @@
                             ajaxUtil.myAjax(null,opUrl,projectEntity,function (data) {
                                 if(ajaxUtil.success(data)){
                                     ajaxUtil.deleteFile(row.itemcode)
-                                    alertUtil.info("删除项目成功");
+                                    alertUtil.info("删除中药制药企业信息成功");
                                     isSuccess = true;
                                     refreshTable();
                                 }
@@ -85,7 +85,9 @@
                         }
                     }},
                 {field: 'contacts', title: '联系人'},
-                {field: 'status', title: '项目状态'},
+                {field: 'status', title: '项目状态', formatter:function (value) {
+                        return '<p>'+status[value].text+'</p>'
+                    }},
                 {field: 'action',  title: '操作',formatter: operation,events:orgEvents}
             ];
 

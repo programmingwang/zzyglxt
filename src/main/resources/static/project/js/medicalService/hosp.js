@@ -3,16 +3,28 @@
         function (jquery,ajaxUtil,bootstrapTableUtil,objectUtil,alertUtil,modalUtil,selectUtil,stringUtil,dictUtil) {
 
 
-            var url = "/medicalService/hosp/selectAll?hospitalStatus=已下架&hospitalStatus=展示中";
+            var url = "/medicalService/hosp/selectAll";
             var addUrl = "/medicalService/add/addHosp"
             var aParam = {
             };
+
+            var webStatus = dictUtil.getDictByCode(dictUtil.DICT_LIST.webStatus);
             /*对url加工*/
-            url = selectUtil.getRoleTable(sessionStorage.getItem("rolename"),url,"hospitalStatus");
+            url = selectUtil.getRoleTable(sessionStorage.getItem("rolename"),url,"hospitalStatus",webStatus);
 
             //操作
             function operation(value, row, index){
-                return selectUtil.getRoleOperate(value,row,index,sessionStorage.getItem("rolename"),row.hospitalStatus)
+                return selectUtil.getRoleOperate(value,row,index,sessionStorage.getItem("rolename"),row.hospitalStatus,webStatus)
+            }
+
+            function handlePro(pro){
+                if (pro == "河北省" ||
+                    pro == null ||
+                    pro == undefined ||
+                    pro.toLowerCase() == "null") {
+                    pro = ""
+                }
+                return pro;
             }
 
             //修改事件
@@ -62,12 +74,12 @@
                             var submitStatus = {
                                 "itemid": row.itemid,
                                 "itemcode": row.itemcode,
-                                "status": selectUtil.getStatus(sessionStorage.getItem("rolename"))
+                                "status": selectUtil.getStatus(sessionStorage.getItem("rolename"),webStatus)
                             };
                             ajaxUtil.myAjax(null,"/medicalService/hosp/updateStatus",submitStatus,function (data) {
                                 if(ajaxUtil.success(data)){
-                                    if(data.code == 88888){
-                                        if(selectUtil.getStatus(sessionStorage.getItem("rolename")) == "处长已审核"){
+                                    if(data.code == ajaxUtil.successCode){
+                                        if(sessionStorage.getItem("rolename") == "文化宣传处长"){
                                             alertUtil.info("审核已通过，已发送给综合处处长做最后审核！");
                                         }else{
                                             alertUtil.info("审核已通过，已上架！");
@@ -97,8 +109,13 @@
                             var submitStatus = {
                                 "itemid": row.itemid,
                                 "itemcode": row.itemcode,
-                                "status": "已下架"
+                                "status": ""
                             };
+                            if(sessionStorage.getItem("rolename") == "文化宣传处长" || sessionStorage.getItem("rolename") == "政务资源处长"){
+                                submitStatus.status = webStatus[3].id;
+                            }else{
+                                submitStatus.status = webStatus[4].id;
+                            }
                             ajaxUtil.myAjax(null,"/medicalService/hosp/updateStatus",submitStatus,function (data) {
                                 if(ajaxUtil.success(data)){
                                     if(data.code == 88888){
@@ -128,7 +145,7 @@
                             var submitStatus = {
                                 "itemid": row.itemid,
                                 "itemcode": row.itemcode,
-                                "status": "已下架"
+                                "status": webStatus[6].id
                             };
                             ajaxUtil.myAjax(null,"/medicalService/hosp/updateStatus",submitStatus,function (data) {
                                 if(ajaxUtil.success(data)){
@@ -160,13 +177,13 @@
                     $("#hospitalImg").attr("src",row.filePath)
                     $("#hospitalName").val(row.hospitalName);
                     $("#hospitalLevel").val(row.hospitalLevel);
-                    $("#hospitalAddress").val(row.hospitalAddressCity + row.hospitalAddressCountry + row.hospitalAddress);
+                    $("#hospitalBriefIntroduce").val(row.hospitalBriefIntroduce);
+                    $("#hospitalKeySpecialty").val(row.hospitalKeySpecialty);
                     $("#hospitalTelephone").val(row.hospitalTelephone);
+                    $("#hospitalAddress").val(handlePro(row.hospitalAddressPro) + row.hospitalAddressCity + row.hospitalAddressCountry + row.hospitalAddress);
                     $("#hospitalLink").val(row.hospitalLink);
-
                     $("#hospitalIntroduce").html(row.hospitalIntroduce)
                     $("#hospitalStatus").val(webStatus[row.hospitalStatus].text);
-
                     $("#creater").val(row.creater);
                     $("#itemCreateAt").val(row.itemcreateat);
                     myTravelModal.show();
@@ -182,7 +199,7 @@
                             var submitStatus = {
                                 "itemid": row.itemid,
                                 "itemcode": row.itemcode,
-                                "status": selectUtil.getStatus(sessionStorage.getItem("rolename"))
+                                "status": selectUtil.getStatus(sessionStorage.getItem("rolename"),webStatus)
                             };
                             ajaxUtil.myAjax(null,"/medicalService/hosp/updateStatus",submitStatus,function (data) {
                                 if(ajaxUtil.success(data)){
@@ -214,7 +231,7 @@
                             var submitStatus = {
                                 "itemid": row.itemid,
                                 "itemcode": row.itemcode,
-                                "status": "--"
+                                "status": webStatus[0].id
                             };
                             ajaxUtil.myAjax(null,"/medicalService/hosp/updateStatus",submitStatus,function (data) {
                                 if(ajaxUtil.success(data)){
@@ -256,10 +273,9 @@
                         }
                     }},
                 {field: 'hospitalAddress', title: '地址',formatter:function (value, row, index) {
-                        return row.hospitalAddressCity + row.hospitalAddressCountry + value
+                        return handlePro(row.hospitalAddressPro) + row.hospitalAddressCity + row.hospitalAddressCountry + value
                     }},
-                {field: 'hospitalTelephone', title: '联系电话'},
-                {field: 'itemcreateat', title: '发布时间'},
+                {field: 'hospitalTelephone', title: '联系电话', width:'120px'},
                 {field: 'action',  title: '操作',formatter: operation,events:orgEvents}
             ];
 

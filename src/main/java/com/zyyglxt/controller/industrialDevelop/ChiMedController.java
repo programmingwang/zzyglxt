@@ -15,7 +15,7 @@ import javax.annotation.Resource;
  * @Date 2020/11/6 21:01
  * @Version 1.0
  **/
-@Api(tags = "产业发展-中药材加工企业、中药材销售企业、中药材制药企业信息记录")
+@Api(tags = "产业发展-中药材加工企业、中药材销售企业、中药材制药企业信息、种植园记录")
 @RestController
 @RequestMapping(value = "industrialdevelop")
 public class ChiMedController {
@@ -23,7 +23,7 @@ public class ChiMedController {
     @Resource
     IndustrialDevelopChiMedService chiMedService;
 
-    @GetMapping(value = "chi-med/{type}")
+    @GetMapping(value = "/chi-med/{type}")
     public ResponseData getChiMed(@PathVariable String type){
         return new ResponseData(EmBusinessError.success,chiMedService.selectAll(type));
     }
@@ -32,8 +32,12 @@ public class ChiMedController {
     @PostMapping(value = "/chi-med")
     @LogAnnotation(appCode ="",logTitle ="添加产业发展-中药材加工企业、中药材销售企业、中药材制药企业信息记录",logLevel ="3",creater ="",updater = "")
     public ResponseData addChiMed(@RequestBody IndustrialDevelopChiMed record){
-        chiMedService.insertSelective(record);
-        return new ResponseData(EmBusinessError.success);
+        int res = chiMedService.insertSelective(record);
+        if (res == -1){
+            return new ResponseData(EmBusinessError.ORG_NAME_ERROR);
+        }else {
+            return new ResponseData(EmBusinessError.success);
+        }
     }
 
     @ResponseBody
@@ -50,5 +54,11 @@ public class ChiMedController {
     public ResponseData delChiMed(@RequestBody IndustrialDevelopChiMed record){
         chiMedService.deleteByPrimaryKey(record.getItemid(),record.getItemcode());
         return new ResponseData(EmBusinessError.success);
+    }
+
+    @ResponseBody
+    @GetMapping(value = "/chi-med/getByOrgCode")
+    public ResponseData getByOrgCode(){
+        return new ResponseData(EmBusinessError.success,chiMedService.selectByOrgCode());
     }
 }

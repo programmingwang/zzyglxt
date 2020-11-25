@@ -5,11 +5,12 @@ import com.zyyglxt.dataobject.FileDO;
 import com.zyyglxt.dataobject.HospDO;
 import com.zyyglxt.dataobject.HospDOKey;
 import com.zyyglxt.dto.HospDto;
-import com.zyyglxt.dto.MedicalServiceDto;
+import com.zyyglxt.dto.StatusDto;
 import com.zyyglxt.error.EmBusinessError;
 import com.zyyglxt.response.ResponseData;
 import com.zyyglxt.service.IFileService;
 import com.zyyglxt.service.IHospService;
+import com.zyyglxt.util.UsernameUtil;
 import org.springframework.beans.BeanUtils;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,6 +30,8 @@ public class HospController {
     private IHospService hospService;
     @Resource
     private IFileService fileService;
+    @Resource
+    private UsernameUtil usernameUtil;
 
     @PostMapping(value = "add")
     @ResponseBody
@@ -54,11 +57,31 @@ public class HospController {
         return new ResponseData(EmBusinessError.success);
     }
 
-    @GetMapping(value = "selectAll")
+    @GetMapping(value = "/selectByOrgCode")
     @ResponseBody
-    @LogAnnotation(appCode ="",logTitle ="查看所有医院数据",logLevel ="1",creater ="",updater = "")
+    @LogAnnotation(appCode ="",logTitle ="根据机构数据查看医院数据",logLevel ="1",creater ="",updater = "")
+    public ResponseData selectByOrgCode(){
+        HospDO hospDO = hospService.selectByOrgCode(usernameUtil.getOrgCode());
+        HospDto dto = new HospDto();
+        BeanUtils.copyProperties(hospDO,dto);
+        FileDO fileDO = fileService.selectFileByDataCode(hospDO.getItemcode());
+        String filePath = (fileDO==null) ? "损坏了" : fileDO.getFilePath();
+        dto.setFilePath(filePath);
+        return new ResponseData(EmBusinessError.success,dto);
+    }
+    @GetMapping(value = "/selectAll")
+    @ResponseBody
+    @LogAnnotation(appCode ="",logTitle ="根据身份查看医院数据",logLevel ="1",creater ="",updater = "")
     public ResponseData selectAllHosp(@RequestParam(value = "hospitalStatus")List hospitalStatus){
         List<HospDO> hospDOList = hospService.selectAllHosp(hospitalStatus);
+        return new ResponseData(EmBusinessError.success,DoToDto(hospDOList));
+    }
+
+    @GetMapping(value = "selectAllHosp")
+    @ResponseBody
+    @LogAnnotation(appCode ="",logTitle ="查看所有医院数据",logLevel ="1",creater ="",updater = "")
+    public ResponseData selectAllNoStatus(){
+        List<HospDO> hospDOList = hospService.selectAllNoStatus();
         return new ResponseData(EmBusinessError.success,DoToDto(hospDOList));
     }
 
@@ -81,8 +104,8 @@ public class HospController {
     @ResponseBody
     @PostMapping("updateStatus")
     @LogAnnotation(logTitle = "改变数据状态",logLevel = "2")
-    public ResponseData updateStatus(MedicalServiceDto medicalServiceDto){
-        hospService.updateStatus(medicalServiceDto);
+    public ResponseData updateStatus(StatusDto statusDto){
+        hospService.updateStatus(statusDto);
         return new ResponseData(EmBusinessError.success);
     }
 

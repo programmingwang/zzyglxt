@@ -12,7 +12,7 @@
     <result column="itemUpdateAt" jdbcType="TIMESTAMP" property="itemupdateat" />
   </resultMap>
   <sql id="Base_Column_List">
-    itemID, itemCode, RESOURCE_CODE, ROLE_CODE, CREATER, itemCreateAt, UPDATER, itemUpdateAt
+    itemID, itemCode, RESOURCE_CODE, ROLE_CODE
   </sql>
   <select id="selectByPrimaryKey" parameterType="com.zyyglxt.dataobject.ResourcesRoleRefDOKey" resultMap="BaseResultMap">
     select

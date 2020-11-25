@@ -1,49 +1,8 @@
 (function () {
-    require(['jquery','wangEditor','ajaxUtil','alertUtil','stringUtil','fileUtil'],
-        function (jquery,wangEditor,ajaxUtil,alertUtil,stringUtil,fileUtil) {
-            const editor = new wangEditor('#div1')
-            // 或者 const editor = new E( document.getElementById('div1') )
-            //菜单配置
-            editor.config.menus = [
-                'head',
-                'bold',
-                'fontSize',
-                'fontName',
-                'italic',
-                'underline',
-                'strikeThrough',
-                'indent',
-                'lineHeight',
-                'foreColor',
-                'backColor',
-                'link',
-                'list',
-                'justify',
-                'image',
-                'table',
-                'splitLine',
-                'undo',
-                'redo',
+    require(['jquery','objectUtil','ajaxUtil','alertUtil','stringUtil','fileUtil','distpicker'],
+        function (jquery,objectUtil,ajaxUtil,alertUtil,stringUtil,fileUtil,distpicker) {
 
-            ]
-            //取消粘贴后的样式
-            editor.config.pasteFilterStyle = false
-            //不粘贴图片
-            editor.config.pasteIgnoreImg = true
-            //隐藏上传网络图片
-            editor.config.showLinkImg = false
-            editor.config.uploadImgShowBase64 = true
-            editor.create()
-            editor.txt.html('')
-
-            $("#div1").on("input propertychange", function() {
-                var textNUm=editor.txt.text()
-                if(textNUm.length>=100000){
-                    str=textNUm.substring(0,10000)+"";  //使用字符串截取，获取前30个字符，多余的字符使用“......”代替
-                    editor.txt.html(str);
-                    alert("字数不能超过10000");                  //将替换的值赋值给当前对象
-                }
-            });
+           const editor = objectUtil.wangEditorUtil();
 
             $("#cancel").unbind().on('click',function () {
                 var url = "/healthCare/healthcarefamPre";
@@ -100,10 +59,38 @@
                     var img = tempdata.filePath;
                     $("#upimg").attr("src",img);
                 }
+                else {
+                    $("#distpicker").distpicker();
+                }
+                init = function () {
+
+                }
             }());
 
             function isUpdate() {
                 return (localStorage.getItem("rowData") != null || localStorage.getItem("rowData") != undefined)
+            }
+
+            /*
+           上传文件
+           */
+            document.getElementById('upload_file').onchange=function(){
+                var len=this.files.length;
+                $("#addFile").empty("p");
+                for (var i = 0; i < len; i++) {
+                    var name = this.files[i].name;
+                    var j=i+1;
+                    $("#addFile").append('<p>附件'+j+'：&nbsp;'+ name +'&nbsp;</p>');
+                };
+                if(len>0){
+                    $("#clsfile").css("display","block")
+                }
+            }
+            document.getElementById('clsfile').onclick = function() {
+                var obj = document.getElementById('upload_file');
+                obj.outerHTML=obj.outerHTML;
+                $("#clsfile").css("display","none");
+                $("#addFile").empty("p");
             }
         })
 })();

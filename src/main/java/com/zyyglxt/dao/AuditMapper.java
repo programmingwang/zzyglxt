@@ -4,6 +4,7 @@ import com.zyyglxt.dataobject.HospDO;
 import com.zyyglxt.dataobject.IndustrialDevelopChiMed;
 import com.zyyglxt.dataobject.IndustrialDevelopSchool;
 import com.zyyglxt.dataobject.IndustrialDevelopTecSerOrg;
+import com.zyyglxt.dto.industrialDevelop.AuditDto;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -33,4 +34,12 @@ public interface AuditMapper {
     IndustrialDevelopSchool getDetailSchool(@Param("itemid") Integer itemid,@Param("itemcode") String itemcode);
 
     HospDO getDetailHospital(@Param("itemid") Integer itemid,@Param("itemcode") String itemcode);
+
+    int changeChiMedStatus(AuditDto record);
+
+    int changeTecSerOrgStatus(AuditDto record);
+
+    int changeHospitalStatus(AuditDto record);
+
+    int changeSchoolStatus(AuditDto record);
 }

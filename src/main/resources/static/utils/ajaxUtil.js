@@ -104,9 +104,7 @@
                 contentType: false,   // jQuery不要去设置Content-Type请求头
                 async: false,
                 success:function(data){
-                    if(data && data.code == successCode){
-                        alertUtil.success(data.msg);
-                    }else{
+                    if(data && data.code == successCode){}else{
                         alertUtil.error(data.msg);
                     }
                 },
@@ -117,12 +115,9 @@
         }
 
         function deleteFile(dataCode){
-            var formData = new FormData();
-            formData.append("dataCode",dataCode);
             $.ajax({
-                url:"/file/delete",
+                url:"/file/delete?dataCode="+dataCode,
                 type:'GET',
-                data: formData,
                 processData: false,   // jQuery不要去处理发送的数据
                 contentType: false,   // jQuery不要去设置Content-Type请求头
                 success:function(data){

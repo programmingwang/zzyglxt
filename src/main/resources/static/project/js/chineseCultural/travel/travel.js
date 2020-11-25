@@ -42,7 +42,7 @@
                                 if(ajaxUtil.success(data)){
                                     ajaxUtil.myAjax(null,"/file/delete?dataCode="+row.itemcode,null,function (data) {
                                         if(!ajaxUtil.success(data)){
-                                            return alertUtil.error("文件删除失败");
+                                            return alertUtil.error("文件删除失败，可能已经损坏了");
                                         }
                                     },false,"","get");
                                     alertUtil.info("删除景点信息成功");

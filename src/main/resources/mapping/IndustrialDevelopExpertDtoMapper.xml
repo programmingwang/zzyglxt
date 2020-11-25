@@ -28,9 +28,15 @@
     WHERE u.itemCode = a.USER_CODE
   </select>
 
+  <select id="selectByUserCode" parameterType="java.lang.String" resultType="java.lang.String">
+    SELECT itemCode
+    FROM tb_industrial_develop_expert
+    WHERE USER_CODE = #{userCode,jdbcType=CHAR}
+  </select>
+
 
   <select id="selectAll" resultType="com.zyyglxt.dto.industrialDevelop.IndustrialDevelopExpertDto">
-    SELECT u.username,u.name,ex.filed,u.gender,u.mobilePhone
+    SELECT ex.itemID,ex.itemCode,ex.USER_CODE as userCode,u.username,u.name,ex.filed,u.gender,u.mobilePhone
     FROM tb_industrial_develop_expert ex,user u WHERE u.itemCode=ex.USER_CODE
   </select>
 
@@ -94,15 +100,78 @@
       </if>
     </trim>
   </insert>
+  <insert id="insertUserRoleRefSelective" parameterType="com.zyyglxt.dataobject.UserRoleRefDO">
+    insert into user_role_ref
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="itemid != null">
+        itemID,
+      </if>
+      <if test="itemcode != null">
+        itemCode,
+      </if>
+      <if test="userCode != null">
+        USER_CODE,
+      </if>
+      <if test="appCode != null">
+        APP_CODE,
+      </if>
+      <if test="roleCode != null">
+        ROLE_CODE,
+      </if>
+      <if test="platRole != null">
+        PLAT_ROLE,
+      </if>
+      <if test="creater != null">
+        CREATER,
+      </if>
+      <if test="itemcreateat != null">
+        itemCreateAt,
+      </if>
+      <if test="updater != null">
+        UPDATER,
+      </if>
+      <if test="itemupdateat != null">
+        itemUpdateAt,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="itemid != null">
+        #{itemid,jdbcType=INTEGER},
+      </if>
+      <if test="itemcode != null">
+        #{itemcode,jdbcType=CHAR},
+      </if>
+      <if test="userCode != null">
+        #{userCode,jdbcType=CHAR},
+      </if>
+      <if test="appCode != null">
+        #{appCode,jdbcType=CHAR},
+      </if>
+      <if test="roleCode != null">
+        #{roleCode,jdbcType=CHAR},
+      </if>
+      <if test="platRole != null">
+        #{platRole,jdbcType=CHAR},
+      </if>
+      <if test="creater != null">
+        #{creater,jdbcType=VARCHAR},
+      </if>
+      <if test="itemcreateat != null">
+        #{itemcreateat,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updater != null">
+        #{updater,jdbcType=VARCHAR},
+      </if>
+      <if test="itemupdateat != null">
+        #{itemupdateat,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
   <update id="resetPassword" parameterType="com.zyyglxt.dto.industrialDevelop.IndustrialDevelopExpertDto">
     update user
-    <set>
-      <if test="password != null">
-        PASSWORD = #{password,jdbcType=VARCHAR},
-      </if>
-    </set>
-    where itemID = #{itemid,jdbcType=INTEGER}
-    and itemCode = #{itemcode,jdbcType=CHAR}
+    set
+    PASSWORD = #{password,jdbcType=VARCHAR}
+    where  itemCode = #{userCode,jdbcType=VARCHAR}
   </update>
 
 </mapper>

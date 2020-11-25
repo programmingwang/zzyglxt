@@ -13,10 +13,8 @@ public interface IFileService {
     int addFile(FileDO fileDO);
     int updateFile(FileDO fileDO);
     int deleteFileByKey(FileDOKey fileDOKey);
-    List<FileDO> selectAllFile();
-    List<FileDO> searchFile(String keyWord);
-    List<FileDO> top5File();
     FileDO selectFileByDataCode(String dataCode);
     int deleteFileByDataCode(String dataCode);
     void uploadFile(FileDO fileDO);
+    List<FileDO> selectMultipleFileByDataCode(String dataCode);
 }

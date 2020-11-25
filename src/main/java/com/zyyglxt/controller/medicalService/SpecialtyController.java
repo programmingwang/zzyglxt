@@ -3,7 +3,7 @@ package com.zyyglxt.controller.medicalService;
 import com.zyyglxt.annotation.LogAnnotation;
 import com.zyyglxt.dao.HospSpecialtyRefDOMapper;
 import com.zyyglxt.dataobject.*;
-import com.zyyglxt.dto.MedicalServiceDto;
+import com.zyyglxt.dto.StatusDto;
 import com.zyyglxt.dto.SpecialtyDto;
 import com.zyyglxt.error.EmBusinessError;
 import com.zyyglxt.response.ResponseData;
@@ -85,8 +85,8 @@ public class SpecialtyController {
     @ResponseBody
     @PostMapping("updateStatus")
     @LogAnnotation(logTitle = "改变数据状态",logLevel = "2")
-    public ResponseData updateStatus(MedicalServiceDto medicalServiceDto){
-        specialtyService.updateStatus(medicalServiceDto);
+    public ResponseData updateStatus(StatusDto statusDto){
+        specialtyService.updateStatus(statusDto);
         return new ResponseData(EmBusinessError.success);
     }
 

@@ -18,6 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.annotation.Resource;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -66,26 +67,8 @@ public class FileServiceImpl implements IFileService {
     }
 
     @Override
-    public List<FileDO> selectAllFile() {
-        return fileDOMapper.selectAllFile();
-    }
-
-    @Override
-    public List<FileDO> searchFile(String keyWord) {
-        if(keyWord.isEmpty()){
-            throw new BusinessException("关键字不能为空", EmBusinessError.PARAMETER_VALIDATION_ERROR);
-        }
-        return fileDOMapper.searchFile(keyWord);
-    }
-
-    @Override
-    public List<FileDO> top5File() {
-        return fileDOMapper.top5File();
-    }
-
-    @Override
     public FileDO selectFileByDataCode(String dataCode) {
-        if(dataCode.isEmpty()){
+        if(dataCode == null || dataCode == ""){
             throw new BusinessException("数据源code不能为空", EmBusinessError.PARAMETER_VALIDATION_ERROR);
         }
         FileDO fileDO = fileDOMapper.selectFileByDataCode(dataCode);
@@ -97,7 +80,7 @@ public class FileServiceImpl implements IFileService {
 
     @Override
     public int deleteFileByDataCode(String dataCode) {
-        if(dataCode.isEmpty()){
+        if(dataCode == null || dataCode == ""){
             throw new BusinessException("数据源code不能为空", EmBusinessError.PARAMETER_VALIDATION_ERROR);
         }
         return fileDOMapper.deleteByDataCode(dataCode);
@@ -117,6 +100,18 @@ public class FileServiceImpl implements IFileService {
         else {
             fileService.updateFile(fileDO);
         }
+    }
+
+    @Override
+    public List<FileDO> selectMultipleFileByDataCode(String dataCode) {
+        if(dataCode == null || dataCode == ""){
+            throw new BusinessException("数据源code不能为空", EmBusinessError.PARAMETER_VALIDATION_ERROR);
+        }
+        List<FileDO> fileDOList = fileDOMapper.selectMultipleFileByDataCode(dataCode);
+        if(fileDOList == null){
+            return new ArrayList<>();
+        }
+        return fileDOList;
     }
 
 

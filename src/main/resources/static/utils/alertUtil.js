@@ -21,7 +21,6 @@
 
 
         function myNotify(message,type) {
-            console.log("myNotify()");
             $.notify({
                 icon: 'glyphicon glyphicon-star',
                 message: message
@@ -32,7 +31,9 @@
                     from: "top",
                     align: "center"
                 },
-                offset:50
+
+                offset:50,
+
             });
         }
 

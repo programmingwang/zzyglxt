@@ -1,21 +1,36 @@
 (function () {
-    require(['jquery','objectUtil','ajaxUtil','alertUtil','stringUtil','dictUtil','fileUtil','uploadImg'],
-        function (jquery,objectUtil,ajaxUtil,alertUtil,stringUtil,dictUtil,fileUtil,uploadImg) {
+    require(['jquery','objectUtil','ajaxUtil','alertUtil','stringUtil','dictUtil','fileUtil','uploadImg','selectUtil','distpicker'],
+        function (jquery,objectUtil,ajaxUtil,alertUtil,stringUtil,dictUtil,fileUtil,uploadImg,selectUtil,distpicker) {
 
 
             /*q全局变量*/
             var tempdata = JSON.parse(localStorage.getItem("rowData"));
             var updateStatus = isUpdate()
             var jumpUrl = "/medicalService/hosp"
-
             var webStatus = dictUtil.getDictByCode(dictUtil.DICT_LIST.webStatus);
             var hospitalLevel = dictUtil.getDictByCode(dictUtil.DICT_LIST.hospitalLevel)
             var specialtyName = dictUtil.getDictByCode(dictUtil.DICT_LIST.dept)
             const editor = objectUtil.wangEditorUtil();
 
+            /*设置医院级别下拉框的值*/
+            $("#hospitalLevel").selectUtil(hospitalLevel);
 
-            /*设置下拉框的值*/
-            $("#hospitalLevel").selectUtil(dictUtil.getDictByCode(dictUtil.DICT_LIST.hospitalLevel));
+            /*重点专科h处理录入*/
+            $("#specialtyName").selectUtil(specialtyName);
+            $("#add").unbind().on("click",function () {
+                var str = $("#hospitalKeySpecialty").val();
+                if (str.length === 0){
+                    $("#hospitalKeySpecialty").val(specialtyName[$("#specialtyName").val()].text);
+                }else {
+                    $("#hospitalKeySpecialty").val($("#hospitalKeySpecialty").val() + " " + specialtyName[$("#specialtyName").val()].text);
+                }
+                $("#specialtyName option[value=" + $("#specialtyName").val() + "]").remove();
+            })
+            $("#clear").unbind().on("click",function () {
+                $("#hospitalKeySpecialty").val("")
+                $("#specialtyName").selectUtil(dictUtil.getDictByCode(dictUtil.DICT_LIST.dept));
+            })
+
             /*返回按钮处理*/
             $("#cancel").unbind().on('click',function () {
                 orange.redirect(jumpUrl);
@@ -42,13 +57,18 @@
                     };
                 }
                 entity["hospitalName"] = $("#hospitalName").val();
-                entity["hospitalLevel"] = $("#hospitalLevel").val();
+                entity["hospitalLevel"] = hospitalLevel[$("#specialtyName").val()].text;
+                entity["hospitalBriefIntroduce"] = $("#hospitalBriefIntroduce").val();
+                entity["hospitalKeySpecialty"] = $("#hospitalKeySpecialty").val();
                 entity["hospitalTelephone"] = $("#hospitalTelephone").val();
+                entity["hospitalAddressPro"] = $("#hospitalAddressPro").val();
                 entity["hospitalAddressCity"] = $("#hospitalAddressCity").val();
                 entity["hospitalAddressCountry"] = $("#hospitalAddressCountry").val();
                 entity["hospitalAddress"] = $("#hospitalAddress").val();
                 entity["hospitalLink"] = $("#hospitalLink").val();
                 entity["hospitalIntroduce"] = editor.txt.html()
+                entity["hospitalStatus"] = webStatus[0].id
+
 
                 fileUtil.handleFile(updateStatus, entity.itemcode, uploadImg.getFiles()[0]);
 
@@ -69,21 +89,27 @@
 
             /*初始化数据*/
             var  init = function () {
-                uploadImg.init();
                 if (updateStatus){
-                    $("#hospitalName").val(tempdata.hospitalName);
-                    $("#hospitalLevel  option[value="+tempdata.hospitalLevel+"] ").attr("selected",true);
                     uploadImg.setImgSrc(tempdata.filePath);
+                    $("#hospitalName").val(tempdata.hospitalName);
+                    $("#hospitalLevel").find("option").each(function (data) {
+                        var $this = $(this);
+                        if($this.text() == tempdata.hospitalLevel) {
+                            $this.attr("selected", true);
+                        }
+                    });
+                    // $("#hospitalLevel  option[text="+tempdata.hospitalLevel+"] ").attr("selected",true);
+                    $("#hospitalBriefIntroduce").val(tempdata.hospitalBriefIntroduce);
+                    $("#hospitalKeySpecialty").val(tempdata.hospitalKeySpecialty);
                     $("#hospitalTelephone").val(tempdata.hospitalTelephone);
                     $("#distpicker").distpicker({
-                        province: "河北省",
+                        province: tempdata.hospitalAddressPro,
                         city: tempdata.hospitalAddressCity,
                         district: tempdata.hospitalAddressCountry
                     });
                     $("#hospitalAddress").val(tempdata.hospitalAddress);
                     $("#hospitalLink").val(tempdata.hospitalLink);
-                    $("#hospitalAddressCountry").val(tempdata.hospitalAddressCountry);
-                    $(".w-e-text").html(tempdata.hospitalIntroduce);
+                    editor.txt.html(tempdata.hospitalIntroduce);
                 }else {
                     localStorage.removeItem("rowData");
                     $("#distpicker").distpicker({
@@ -94,6 +120,7 @@
 
                 }
             }
+            uploadImg.init();
             init();
 
 

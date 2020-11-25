@@ -6,6 +6,7 @@ import com.zyyglxt.dataobject.IndustrialDevelopCooExcDOKey;
 import com.zyyglxt.dataobject.validation.ValidationGroups;
 import com.zyyglxt.error.BusinessException;
 import com.zyyglxt.error.EmBusinessError;
+import com.zyyglxt.service.IDictService;
 import com.zyyglxt.service.IIndustrialDevelopCooService;
 import com.zyyglxt.validator.ValidatorImpl;
 import com.zyyglxt.validator.ValidatorResult;
@@ -27,14 +28,17 @@ public class IndustrialDevelopCooServiceImpl implements IIndustrialDevelopCooSer
     IndustrialDevelopCooExcDOMapper cooExcDOMapper;
 
     @Resource
+    IDictService dictService;
+
+    @Resource
     ValidatorImpl validator;
 
     public void addCooRecord(IndustrialDevelopCooExcDO record) {
-        ValidatorResult result = validator.validate(record,ValidationGroups.Insert.class);
-        if (result.isHasErrors()){
+        ValidatorResult result = validator.validate(record, ValidationGroups.Insert.class);
+        if (result.isHasErrors()) {
             throw new BusinessException(result.getErrMsg(), EmBusinessError.PARAMETER_VALIDATION_ERROR);
         }
-        if (record.getItemcode() == null || record.getItemcode().isEmpty()){
+        if (record.getItemcode() == null || record.getItemcode().isEmpty()) {
             record.setItemcode(UUID.randomUUID().toString());
         }
         record.setItemcreateat(new Date());
@@ -44,8 +48,8 @@ public class IndustrialDevelopCooServiceImpl implements IIndustrialDevelopCooSer
 
     @Override
     public void delCooRecord(IndustrialDevelopCooExcDOKey key) {
-        ValidatorResult result = validator.validate(key,ValidationGroups.UpdateOrDelete.class);
-        if (result.isHasErrors()){
+        ValidatorResult result = validator.validate(key, ValidationGroups.UpdateOrDelete.class);
+        if (result.isHasErrors()) {
             throw new BusinessException(result.getErrMsg(), EmBusinessError.PARAMETER_VALIDATION_ERROR);
         }
         cooExcDOMapper.deleteByPrimaryKey(key);
@@ -53,8 +57,8 @@ public class IndustrialDevelopCooServiceImpl implements IIndustrialDevelopCooSer
 
     @Override
     public void updCooRecord(IndustrialDevelopCooExcDO record) {
-        ValidatorResult result = validator.validate(record,ValidationGroups.UpdateOrDelete.class);
-        if (result.isHasErrors()){
+        ValidatorResult result = validator.validate(record, ValidationGroups.UpdateOrDelete.class);
+        if (result.isHasErrors()) {
             throw new BusinessException(result.getErrMsg(), EmBusinessError.PARAMETER_VALIDATION_ERROR);
         }
         record.setItemupdateat(new Date());
@@ -75,7 +79,11 @@ public class IndustrialDevelopCooServiceImpl implements IIndustrialDevelopCooSer
 
     @Override
     public List<IndustrialDevelopCooExcDO> getCooRecord(String orgCode) {
-        return cooExcDOMapper.selectAll(orgCode);
+        List<IndustrialDevelopCooExcDO> list = cooExcDOMapper.selectAll(orgCode);
+        for (IndustrialDevelopCooExcDO item : list) {
+            item.setStatus(dictService.getDictMapByCode("showStatus").get(item.getStatus()));
+        }
+        return list;
     }
 
 }

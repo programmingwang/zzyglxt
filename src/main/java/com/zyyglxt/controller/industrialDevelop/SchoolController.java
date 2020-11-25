@@ -6,6 +6,7 @@ import com.zyyglxt.error.EmBusinessError;
 import com.zyyglxt.response.ResponseData;
 import com.zyyglxt.service.IndustrialDevelopSchoolService;
 import io.swagger.annotations.Api;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -27,8 +28,12 @@ public class SchoolController {
     @RequestMapping(value = "/school", method = RequestMethod.POST)
     @LogAnnotation(appCode ="",logTitle ="添加产业发展-高等学院记录",logLevel ="3",creater ="",updater = "")
     public ResponseData addSchool(@RequestBody IndustrialDevelopSchool record){
-        schoolService.insertSelective(record);
-        return new ResponseData(EmBusinessError.success);
+        int res = schoolService.insertSelective(record);
+        if (res == -1){
+            return new ResponseData(EmBusinessError.ORG_NAME_ERROR);
+        }else {
+            return new ResponseData(EmBusinessError.success);
+        }
     }
 
     @ResponseBody
@@ -51,5 +56,11 @@ public class SchoolController {
     @GetMapping(value = "/school")
     public ResponseData getSchool(){
         return new ResponseData(EmBusinessError.success, schoolService.selectAll());
+    }
+
+    @ResponseBody
+    @GetMapping(value = "/schoolmsg")
+    public ResponseData getSchoolByorgcode(){
+        return new ResponseData(EmBusinessError.success, schoolService.selectByorgcode());
     }
 }

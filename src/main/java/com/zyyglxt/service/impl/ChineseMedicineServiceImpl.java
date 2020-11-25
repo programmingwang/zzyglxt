@@ -3,7 +3,7 @@ package com.zyyglxt.service.impl;
 import com.zyyglxt.dao.ChineseMedicineDOMapper;
 import com.zyyglxt.dataobject.ChineseMedicineDO;
 import com.zyyglxt.dataobject.ChineseMedicineDOKey;
-import com.zyyglxt.dto.MedicalServiceDto;
+import com.zyyglxt.dto.StatusDto;
 import com.zyyglxt.error.BusinessException;
 import com.zyyglxt.error.EmBusinessError;
 import com.zyyglxt.service.IChineseMedicineService;
@@ -87,7 +87,7 @@ public class ChineseMedicineServiceImpl implements IChineseMedicineService {
     * */
     @Override
     public List<ChineseMedicineDO> searchChineseMedicine(String keyWord) {
-        if(keyWord.isEmpty()){
+        if(keyWord == "" || keyWord == null){
             throw new BusinessException("关键字不能为空", EmBusinessError.PARAMETER_VALIDATION_ERROR);
         }
         return chineseMedicineDOMapper.searchChineseMedicine(keyWord);
@@ -99,13 +99,13 @@ public class ChineseMedicineServiceImpl implements IChineseMedicineService {
     }
 
     @Override
-    public int updateStatus(MedicalServiceDto medicalServiceDto) {
-        ValidatorResult result = validator.validate(medicalServiceDto);
+    public int updateStatus(StatusDto statusDto) {
+        ValidatorResult result = validator.validate(statusDto);
         if(result.isHasErrors()){
             throw new BusinessException(result.getErrMsg(), EmBusinessError.PARAMETER_VALIDATION_ERROR);
         }
-        medicalServiceDto.setUpdater(usernameUtil.getOperateUser());
-        return chineseMedicineDOMapper.updateStatusByPrimaryKey(medicalServiceDto);
+        statusDto.setUpdater(usernameUtil.getOperateUser());
+        return chineseMedicineDOMapper.updateStatusByPrimaryKey(statusDto);
     }
 
 }

@@ -150,8 +150,9 @@
                     $("#scienceKnowledgeSource").val(row.scienceKnowledgeSource);
                     $("#scienceKnowledgeAuthor").val(row.scienceKnowledgeAuthor);
                     $("#scienceKnowledgeStatus").val(webStatus[row.scienceKnowledgeStatus].text);
-                    /* $("#itemCreateAt").val(row.itemcreateat);*/
-                    $("#content").val(row.content);
+                    $("#creater").val(row.creater);
+                    $("#itemCreateAt").val(row.itemcreateat);
+                    $("#content").html(row.content);
                     mySciKnowModal.show();
                 },
                 'click .submit' : function (e, value, row, index) {

@@ -10,6 +10,7 @@
     <result column="TOPIC_CODE" jdbcType="CHAR" property="topicCode" />
     <result column="EXMAINE_STATUS" jdbcType="VARCHAR" property="exmaineStatus" />
     <result column="SUBMIT_STATUS" jdbcType="VARCHAR" property="submitStatus" />
+    <result column="OPINION" jdbcType="VARCHAR" property="opinion" />
     <result column="SCORE" jdbcType="INTEGER" property="score" />
     <result column="CREATER" jdbcType="VARCHAR" property="creater" />
     <result column="itemCreateAt" jdbcType="TIMESTAMP" property="itemcreateat" />
@@ -19,7 +20,7 @@
   <sql id="Base_Column_List">
     <!--@mbg.generated-->
     itemID, itemCode, EXPERT_CODE, TOPIC_CODE, EXMAINE_STATUS, SUBMIT_STATUS, SCORE,
-    CREATER, itemCreateAt, UPDATER, itemUpdateAt
+    CREATER, itemCreateAt, UPDATER, itemUpdateAt, opinion
   </sql>
   <select id="selectByPrimaryKey" parameterType="com.zyyglxt.dataobject.IndustrialDevelopExpertRefDOKey" resultMap="BaseResultMap">
     <!--@mbg.generated-->
@@ -27,6 +28,12 @@
     <include refid="Base_Column_List" />
     from tb_industrial_develop_expert_ref
     where itemCode = #{itemcode,jdbcType=CHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select
+    <include refid="Base_Column_List" />
+    from tb_industrial_develop_expert_ref
   </select>
   <delete id="deleteByPrimaryKey" parameterType="com.zyyglxt.dataobject.IndustrialDevelopExpertRefDOKey">
     <!--
@@ -41,12 +48,12 @@
     <!--@mbg.generated-->
     insert into tb_industrial_develop_expert_ref (itemCode, EXPERT_CODE, TOPIC_CODE,
     EXMAINE_STATUS, SUBMIT_STATUS, SCORE,
-    CREATER, itemCreateAt, UPDATER,
+    CREATER, itemCreateAt, UPDATER, OPINION
     itemUpdateAt)
     values (#{itemcode,jdbcType=CHAR}, #{expertCode,jdbcType=CHAR}, #{topicCode,jdbcType=CHAR},
     #{exmaineStatus,jdbcType=VARCHAR}, #{submitStatus,jdbcType=VARCHAR}, #{score,jdbcType=INTEGER},
     #{creater,jdbcType=VARCHAR}, #{itemcreateat,jdbcType=TIMESTAMP}, #{updater,jdbcType=VARCHAR},
-    #{itemupdateat,jdbcType=TIMESTAMP})
+    #{itemupdateat,jdbcType=TIMESTAMP}, #{opinion,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.zyyglxt.dataobject.IndustrialDevelopExpertRefDO">
     <!--@mbg.generated-->
@@ -82,6 +89,9 @@
       <if test="itemupdateat != null">
         itemUpdateAt,
       </if>
+      <if test="opinion != null">
+        opinion,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="itemcode != null">
@@ -113,6 +123,9 @@
       </if>
       <if test="itemupdateat != null">
         #{itemupdateat,jdbcType=TIMESTAMP},
+      </if>
+      <if test="opinion != null">
+        #{opinion,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -151,6 +164,9 @@
       <if test="itemupdateat != null">
         itemUpdateAt = #{itemupdateat,jdbcType=TIMESTAMP},
       </if>
+      <if test="opinion != null">
+        OPINION = #{opinion,jdbcType=TIMESTAMP},
+      </if>
     </set>
     where itemCode = #{itemcode,jdbcType=CHAR}
   </update>
@@ -165,7 +181,27 @@
     CREATER = #{creater,jdbcType=VARCHAR},
     itemCreateAt = #{itemcreateat,jdbcType=TIMESTAMP},
     UPDATER = #{updater,jdbcType=VARCHAR},
-    itemUpdateAt = #{itemupdateat,jdbcType=TIMESTAMP}
+    itemUpdateAt = #{itemupdateat,jdbcType=TIMESTAMP},
+    OPINION = #{opinion,jdbcType=TIMESTAMP},
     where itemCode = #{itemcode,jdbcType=CHAR}
   </update>
+
+    <select id="selectByTopicCode" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM tb_industrial_develop_expert_ref
+        WHERE TOPIC_CODE = #{topicCode}
+    </select>
+
+    <select id="selectByExpertCode" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM tb_industrial_develop_expert_ref
+        WHERE EXPERT_CODE = #{expertCode,jdbcType=VARCHAR}
+    </select>
+
+    <delete id="deleteByTopicCode">
+        DELETE FROM tb_industrial_develop_expert_ref
+        WHERE TOPIC_CODE = #{topicCode}
+    </delete>
 </mapper>

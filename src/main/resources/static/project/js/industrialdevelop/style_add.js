@@ -1,9 +1,9 @@
 //旅游康养机构录入界面
 (function () {
-    require(['jquery','ajaxUtil','stringUtil','uploadImg','wangEditor'],
-        function ($,ajaxUtil,stringUtil,uploadImg, wangEditor) {
+    require(['jquery','ajaxUtil','stringUtil','uploadImg','objectUtil','distpicker','alertUtil'],
+        function ($,ajaxUtil,stringUtil,uploadImg, objectUtil, distpicker, alertUtil) {
 
-            var url = "/industrialdevelop/tec-ser-org";
+            var url = "/industrialdevelop/tec-ser-org/selectbyorgcode";
 
             var pathUrl = "/industrialdevelop/style";
 
@@ -13,49 +13,7 @@
 
             uploadImg.init();
 
-            const editor = new wangEditor('#div1');
-            // 或者 const editor = new E( document.getElementById('div1') )
-            //菜单配置
-            editor.config.menus = [
-                'head',
-                'bold',
-                'fontSize',
-                'fontName',
-                'italic',
-                'underline',
-                'strikeThrough',
-                'indent',
-                'lineHeight',
-                'foreColor',
-                'backColor',
-                'link',
-                'list',
-                'justify',
-                'image',
-                'table',
-                'splitLine',
-                'undo',
-                'redo'
-            ];
-            //取消粘贴后的样式
-            editor.config.pasteFilterStyle = false;
-            //不粘贴图片
-            editor.config.pasteIgnoreImg = true;
-            //隐藏上传网络图片
-            editor.config.showLinkImg = false;
-            editor.config.uploadImgShowBase64 = true;
-            editor.create();
-            editor.txt.html('');
-
-            $("#div1").on("input propertychange", function() {
-                var textNUm=editor.txt.text();
-                var str;
-                if(textNUm.length>=100000){
-                    str = textNUm.substring(0,10000)+"";  //使用字符串截取，获取前30个字符，多余的字符使用“......”代替
-                    editor.txt.html(str);
-                    alert("字数不能超过10000");                 //将替换的值赋值给当前对象
-                }
-            });
+            const editor = objectUtil.wangEditorUtil();
 
             $("#cancelBtn").click(function () {
                 orange.redirect(pathUrl)
@@ -71,13 +29,13 @@
                 param.addressCity = $("#addressCity").val()
                 param.addressCountry = $("#addressCountry").val()
                 param.address = $("#address").val()
-                param.intruduce = $(".w-e-text").html();
+                param.intruduce = editor.txt.html();
                 return param;
             }
 
             $("#saveBtn").unbind('click').on('click',function () {
                 var param = generateParam();
-                param.status = "——";
+                param.status = "0";
                 param.itemcode = itemcode;
                 if (uploadImg.isUpdate()){
                     ajaxUtil.fileAjax(itemcode,uploadImg.getFiles()[0],"undefined","undefined")
@@ -95,7 +53,7 @@
 
             $("#submitBtn").unbind('click').on('click',function () {
                 var param = generateParam();
-                param.status = "提交";
+                param.status = "1";
                 param.type = "tour"
                 ajaxUtil.myAjax(null,url,param,function (data) {
                     if(ajaxUtil.success(data)){
@@ -109,9 +67,18 @@
 
             var init = function () {
                 if (isUpdate()){
-                    var tempdata = JSON.parse(localStorage.getItem("rowData"));
+                    var tempdata;
+                    ajaxUtil.myAjax(null, url, null,function (data) {
+                        if(data && data.code == ajaxUtil.successCode) {
+                            tempdata = data.data
+                        }else{
+                            alertUtil.error(data.msg)
+                        }
+                    },false,"","get");
+                    console.log(tempdata);
                     $("#name").val(tempdata.name);
                     $("#areaCoverd").val(tempdata.areaCoverd);
+                    $("#specialService").val(tempdata.specialService);
                     $("#contacts").val(tempdata.contacts);
                     $("#phone").val(tempdata.phone);
                     $("#distpicker").distpicker({
@@ -120,9 +87,12 @@
                         district: tempdata.addressCountry
                     });
                     $("#address").val(tempdata.address);
-                    $("#intruduce").val(tempdata.intruduce)
-                    $(".w-e-text").html(tempdata.projectIntroduce);
-                    itemcode = tempdata.itemcode
+                    editor.txt.html(tempdata.intruduce);
+                    itemcode = tempdata.itemcode;
+                    var img = tempdata.filePath;
+                    // console.log(tempdata);
+                    // var imgName=tempdata.fileName;
+                    uploadImg.setImgSrc(img);
                 }else {
                     $("#distpicker").distpicker();
                 }

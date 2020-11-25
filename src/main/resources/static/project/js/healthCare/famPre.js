@@ -139,6 +139,7 @@
                 },
 
                 'click .view' : function (e, value, row, index) {
+                    console.log(row.content);
                     var myViewFamPreModalData ={
                         modalBodyID : "myViewFamPreModal", //公用的在后面给span加不同的内容就行了，其他模块同理
                         modalTitle : "查看详情",
@@ -151,8 +152,8 @@
                     $("#prescription").val(row.prescription);
                     $("#status").val(webStatus[row.status].text);
                     $("#creater").val(row.creater);
-                   /* $("#itemCreateAt").val(row.itemcreateat);*/
-                    $("#content").val(row.content);
+                    $("#itemCreateAt").val(row.itemcreateat);
+                    $("#content").html(row.content);
                     myFamPreModal.show();
                 },
                 'click .submit' : function (e, value, row, index) {
@@ -217,7 +218,7 @@
                 orange.redirect(url);
             });
 
-            var pl = dictUtil.getDictByCode(dictUtil.DICT_LIST.status);
+            var pl = dictUtil.getDictByCode(dictUtil.DICT_LIST.showStatus);
             $("#chargePersonSearch").selectUtil(pl);
 
             var aCol = [
@@ -225,7 +226,9 @@
                 {field: 'source', title: '出处'},
                 {field: 'prescription', title: '处方'},
                 {field:'content',title:'制法及用法'},
-                {field: 'status', title: '状态'},
+                {field: 'status', title: '状态',formatter:function (row) {
+                        return '<p>'+webStatus[row].text+'</p>';
+                    }},
                 {field: 'action',  title: '操作',formatter: operation,events:orgEvents}
             ];
 

@@ -19,4 +19,6 @@ public interface IIndustrialDevelopTopicService {
     void updTopic(IndustrialDevelopTopicDO developTopicDO);
 
     List<IndustrialDevelopTopicDO> getTopics();
+
+    IndustrialDevelopTopicDO getTopic(String topicCode);
 }

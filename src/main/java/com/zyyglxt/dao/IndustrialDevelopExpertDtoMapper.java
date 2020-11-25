@@ -21,6 +21,8 @@ public interface IndustrialDevelopExpertDtoMapper {
     int insertUserRoleRefSelective(UserRoleRefDO record);
     //查看专家个人信息
     UserDO selectByPrimaryKey(@Param("itemcode") String itemcode);
+
+    String selectByUserCode(@Param("userCode") String userCode);
     //重置密码
     int resetPassword(@Param("userCode") String userCode,@Param("password") String password);
     //查看所有专家信息

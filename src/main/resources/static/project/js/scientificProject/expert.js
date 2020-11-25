@@ -32,7 +32,6 @@
                             var isSuccess = false;
                             ajaxUtil.myAjax(null,"/industrialdevelop/expert/"+row.itemcode,projectEntity,function (data) {
                                 if(ajaxUtil.success(data)){
-                                    ajaxUtil.deleteFile(row.itemcode);
                                     alertUtil.info("删除成功");
                                     isSuccess = true;
                                     refreshTable();
@@ -110,15 +109,15 @@
                            name:$("#expertName").val(),
                            filed : $("#expertFiled").val(),
                            gender:$("#expertGender").val(),
-                           phone:$("#expertPhone").val()
+                           mobilephone:$("#expertPhone").val()
                        }
                         ajaxUtil.myAjax(null, addUrl, param, function (data) {
                             if (ajaxUtil.success(data)) {
-                                alertUtil.alert("新增成功");
-
+                                alertUtil.success("新增成功");
                                 myaddExpertModal.hide();
+                                refreshTable();
                             } else {
-                                alertUtil.alert("新增失败");
+                                alertUtil.error("新增失败");
                             }
                         }, true, "123", 'post');
                     }

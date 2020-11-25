@@ -1,7 +1,7 @@
 //旅游康养机构录入界面
 (function () {
-    require(['jquery','ajaxUtil','stringUtil','uploadImg','objectUtil','distpicker','alertUtil'],
-        function ($,ajaxUtil,stringUtil,uploadImg, objectUtil, distpicker, alertUtil) {
+    require(['jquery','ajaxUtil','stringUtil','uploadImg','objectUtil','distpicker','alertUtil','urlUtil'],
+        function ($,ajaxUtil,stringUtil,uploadImg, objectUtil, distpicker, alertUtil,urlUtil) {
 
             var url = "/industrialdevelop/tec-ser-org/selectbyorgcode";
 
@@ -104,7 +104,7 @@
 
 
             function isUpdate() {
-                return (localStorage.getItem("rowData") != null || localStorage.getItem("rowData") != undefined)
+                return (urlUtil.getFullUrl().indexOf("/main#") != -1)
             }
         })
 })();

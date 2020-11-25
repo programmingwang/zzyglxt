@@ -2271,6 +2271,10 @@
             '        </div>\n' +
             '    </div>\n';
 
+        modalHtml.myResonable="<div>\n" +
+            "        <textarea name=\"\" id=\"reason\" cols=\"96\" rows=\"10\"></textarea>\n" +
+            "    </div>";
+
 
         modalHtml.myDeleteModalTravel = '是否删除景点信息?';
         modalHtml.myDeleteModalTraditionalCul = '是否删除中医医史信息?';

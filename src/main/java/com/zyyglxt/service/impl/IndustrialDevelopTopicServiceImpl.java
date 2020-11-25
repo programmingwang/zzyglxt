@@ -9,8 +9,12 @@ import com.zyyglxt.error.BusinessException;
 import com.zyyglxt.error.EmBusinessError;
 import com.zyyglxt.service.IExmaineService;
 import com.zyyglxt.service.IIndustrialDevelopTopicService;
+import com.zyyglxt.util.DateUtils;
+import com.zyyglxt.util.UUIDUtils;
+import com.zyyglxt.util.UsernameUtil;
 import com.zyyglxt.validator.ValidatorImpl;
 import com.zyyglxt.validator.ValidatorResult;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -29,28 +33,27 @@ public class IndustrialDevelopTopicServiceImpl implements IIndustrialDevelopTopi
     @Resource
     IndustrialDevelopTopicDOMapper developTopicDOMapper;
 
+
     @Resource
     ValidatorImpl validator;
 
-    @Resource
-    IExmaineService iExmaineService;
+    @Autowired
+    UsernameUtil usernameUtil;
 
     @Override
     public void addTopic(IndustrialDevelopTopicDO record) {
-        record.setCreater("未定义");
-        record.setUpdater("未定义");
-        record.setItemcreateat(new Date());
-        record.setItemupdateat(new Date());
+        record.setProjectNo("——");
+        record.setApplicationDate(DateUtils.getYMD());
+        record.setCreater(usernameUtil.getOperateUser());
+        record.setUpdater(usernameUtil.getOperateUser());
+        record.setItemcreateat(DateUtils.getDate());
         ValidatorResult result = validator.validate(record, ValidationGroups.Insert.class);
         if (result.isHasErrors()){
             throw new BusinessException(result.getErrMsg(), EmBusinessError.PARAMETER_VALIDATION_ERROR);
         }
         if (record.getItemcode() == null || record.getItemcode().isEmpty()){
-            record.setItemcode(UUID.randomUUID().toString());
+            record.setItemcode(UUIDUtils.getUUID());
         }
-        IndustrialDevelopExpertRefDO industrialDevelopExpertRefDO = new IndustrialDevelopExpertRefDO();
-        industrialDevelopExpertRefDO.setTopicCode(record.getItemcode());
-        iExmaineService.insertSelective(industrialDevelopExpertRefDO);
         developTopicDOMapper.insertSelective(record);
     }
 
@@ -69,8 +72,7 @@ public class IndustrialDevelopTopicServiceImpl implements IIndustrialDevelopTopi
         if (result.isHasErrors()){
             throw new BusinessException(result.getErrMsg(), EmBusinessError.PARAMETER_VALIDATION_ERROR);
         }
-        record.setUpdater("未定义");
-        record.setItemupdateat(new Date());
+        record.setUpdater(usernameUtil.getOperateUser());
         developTopicDOMapper.updateByPrimaryKeySelective(record);
     }
 
@@ -79,8 +81,49 @@ public class IndustrialDevelopTopicServiceImpl implements IIndustrialDevelopTopi
         return developTopicDOMapper.selectAll();
     }
 
+    /*@Override
+    public List<IndustrialDevelopTopicDO> getTopics() {
+        if (usernameUtil.getRoleName().equals("申报单位"))
+        {
+            String orgCode = usernameUtil.getOrgCode();
+            List<String> userCodes = developTopicDOMapper.selectAllUserCode(orgCode);
+            for (String usercode : userCodes){
+                developTopicDOMapper.selectByUserCode(usercode);
+
+            }
+        }
+        return developTopicDOMapper.selectAll();
+    }*/
+
+    @Override
+    public List<IndustrialDevelopTopicDO> getStatus(String code) {
+        return developTopicDOMapper.selectByPrimaryKey(code);
+    }
+
     @Override
     public IndustrialDevelopTopicDO getTopic(String topicCode) {
         return developTopicDOMapper.selectByItemCode(topicCode);
     }
+
+    @Override
+    public int changeStatus(IndustrialDevelopTopicDOKey key, String status) {
+        return developTopicDOMapper.changeStatus(key, status);
+    }
+
+    @Override
+    public int changeExamineStatus(IndustrialDevelopTopicDOKey key, String examineStatus) {
+        return developTopicDOMapper.changeExamineStatus(key, examineStatus);
+    }
+
+    @Override
+    public List<IndustrialDevelopTopicDO> selectByUserCode(String userCode) {
+        return developTopicDOMapper.selectByUserCode(userCode);
+    }
+
+    @Override
+    public List<IndustrialDevelopTopicDO> selectByCompany(String company) {
+        return developTopicDOMapper.selectByCompany(company);
+    }
+
+
 }

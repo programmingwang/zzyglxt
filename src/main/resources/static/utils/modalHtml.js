@@ -2242,7 +2242,7 @@
             '                <div class="input-group mb-3">\n' +
             '                    <div class="input-group-prepend">\n' +
             '                       <div style=\'display: flex;\'>\n' +
-            '                           <input type="text" id=\'startTime\' style=\'width:13em;display: block;margin-left: 2em\'>\n' +
+            '                           <input type="text" id=\'startTime\' >\n' +
             '                       </div>\n' +
             '                    </div>\n' +
             '                </div>\n' +

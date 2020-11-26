@@ -245,7 +245,11 @@ public class IUserServiceImpl implements IUserService {
      */
     @Override
     public UserDO selectOne() {
-        return userDOMapper.selectByUsername(usernameUtil.getOperateUser());
+        UserDO userDO = userDOMapper.selectByUsername(usernameUtil.getOperateUser());
+//        隐藏身份证号的出生年月日和手机号的中间四位
+//        userDO.setMobilephone(MobileUtil.hideMiddleMobile(userDO.getMobilephone()));
+//        userDO.setIdcardNo(IDUtil.hideMiddleID(userDO.getIdcardNo()));
+        return userDO;
     }
 
     @Override
@@ -269,7 +273,7 @@ public class IUserServiceImpl implements IUserService {
         // 验证通过返回 null，不通过则返回一个 字符串，
         // 所以利用判空来判断身份证号码是否合法
         String isValidIDCardNo = IDUtil.IdentityCardVerification(userDO.getIdcardNo());
-        if (!StringUtils.isEmpty(isValidIDCardNo)) {
+        if (StringUtils.isEmpty(isValidIDCardNo)) {
             throw new BusinessException(isValidIDCardNo, EmBusinessError.IDNO_ERROR);
         }
         // 验证电话是否正确
@@ -282,5 +286,6 @@ public class IUserServiceImpl implements IUserService {
         userDO.setItemcode(userSessionDto.getItemcode());
         userDOMapper.updateByPrimaryKeySelective(userDO);
     }
+
 }
 

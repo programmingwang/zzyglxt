@@ -45,7 +45,7 @@
 
             $(function(){
                 $("span a").unbind().on('click',function () {
-                    //获得当前a的标签
+                    // orange.redirect("/scientificProject/viewTopicManagement")
                 });
             });
 

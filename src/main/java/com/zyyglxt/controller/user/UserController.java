@@ -148,6 +148,13 @@ public class UserController {
         return new ResponseData(EmBusinessError.success);
     }
 
+    @LogAnnotation(logTitle = "修改用户头像", logLevel = "2")
+    @RequestMapping(value = "/updateuserimg", method = RequestMethod.POST)
+    public ResponseData updateUserPortrait(@RequestBody UserDO userDO) {
+        iuserService.UpdateUserPortrait(userDO);
+        return new ResponseData(EmBusinessError.success);
+    }
+
     /**
      * 科研项目管理-账号管理-查询所有用户
      *

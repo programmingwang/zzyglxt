@@ -287,5 +287,17 @@ public class IUserServiceImpl implements IUserService {
         userDOMapper.updateByPrimaryKeySelective(userDO);
     }
 
+    /**
+     * 修改用户头像
+     * @param userDO
+     */
+    @Override
+    @Transactional
+    public void UpdateUserPortrait(UserDO userDO) {
+        UserSessionDto userSessionDto = (UserSessionDto) request.getSession().getAttribute("user");
+        userDO.setItemid(userSessionDto.getItemid());
+        userDO.setItemcode(userSessionDto.getItemcode());
+        userDOMapper.updateByPrimaryKeySelective(userDO);
+    }
 }
 

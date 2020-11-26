@@ -17,6 +17,8 @@ public interface IndustrialDevelopExpertRefDOMapper {
 
     List<IndustrialDevelopExpertRefDO> selectAll();
 
+    List<IndustrialDevelopExpertRefDO> selectByExpertCode(String expertCode);
+
     int updateByPrimaryKeySelective(IndustrialDevelopExpertRefDO record);
 
     int updateByPrimaryKey(IndustrialDevelopExpertRefDO record);

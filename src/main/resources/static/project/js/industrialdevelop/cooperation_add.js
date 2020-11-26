@@ -41,6 +41,13 @@
 
                 ajaxUtil.myAjax(null, url, param, function (data) {
                     if (ajaxUtil.success(data)) {
+                        if ($("#upload_file")[0].files[0] != null){
+                            if (isUpdate()){
+                                ajaxUtil.updateFile(itemcode,$("#upload_file")[0].files[0],sessionStorage.getItem("username"),"undefined");
+                            }else {
+                                ajaxUtil.fileAjax(itemcode,$("#upload_file")[0].files[0],sessionStorage.getItem("username"),"undefined");
+                            }
+                        }
                         orange.redirect(pathUrl)
                     } else {
                         alert(data.msg)
@@ -54,6 +61,13 @@
                 param.status = "1";
                 ajaxUtil.myAjax(null, url, param, function (data) {
                     if (ajaxUtil.success(data)) {
+                        if ($("#upload_file")[0].files[0] != null){
+                            if (isUpdate()){
+                                ajaxUtil.updateFile(itemcode,$("#upload_file")[0].files[0],sessionStorage.getItem("username"),"undefined");
+                            }else {
+                                ajaxUtil.fileAjax(itemcode,$("#upload_file")[0].files[0],sessionStorage.getItem("username"),"undefined");
+                            }
+                        }
                         orange.redirect(pathUrl)
                     } else {
                         alert(data.msg)
@@ -65,6 +79,15 @@
             var init = function () {
                 if (isUpdate()) {
                     var tempdata = JSON.parse(localStorage.getItem("rowData"));
+                    ajaxUtil.myAjax(null,"/file/get/"+ tempdata.itemcode,null,
+                        function (res) {
+                            let data = res.data;
+                            let a = $("<a>");
+                            a.attr('href',data.filePath);
+                            a.html(data.fileName);
+                            $("#filename_span").html("");
+                            $("#filename_span").append(a);
+                        },true,true,"get");
                     $("#cooperationExchangeName").val(tempdata.cooperationExchangeName);
                     $("#cooperativeOrg").val(tempdata.cooperativeOrg);
                     $("#contacts").val(tempdata.contacts);

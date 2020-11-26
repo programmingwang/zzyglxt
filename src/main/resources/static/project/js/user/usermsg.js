@@ -1,7 +1,6 @@
 (function () {
-    require(['jquery', 'ajaxUtil', 'stringUtil', 'uploadImg', 'alertUtil', 'modalUtil', 'wangEditor'],
-        function (jquery, ajaxUtil, stringUtil, uploadImg, alertUtil, modalUtil, wangEditor) {
-
+    require(['jquery', 'ajaxUtil', 'stringUtil', 'uploadImg', 'modalUtil', 'objectUtil'],
+        function (jquery, ajaxUtil, stringUtil, uploadImg, modalUtil, objectUtil) {
             ajaxUtil.myAjax(null, "/user/usermsg", null, function (data) {
                 if (data && data.code === 88888) {
                     localStorage.setItem('user', JSON.stringify(data.data));

@@ -1,12 +1,19 @@
 (function () {
-    require(['jquery','objectUtil','ajaxUtil','alertUtil','stringUtil','dictUtil','selectUtil','fileUtil','uploadImg','distpicker'],
-        function (jquery,objectUtil,ajaxUtil,alertUtil,stringUtil,dictUtil,selectUtil,fileUtil,uploadImg,distpicker) {
+    require(['jquery','objectUtil','ajaxUtil','alertUtil','stringUtil','dictUtil','selectUtil','fileUtil','uploadImg','distpicker','urlUtil'],
+        function (jquery,objectUtil,ajaxUtil,alertUtil,stringUtil,dictUtil,selectUtil,fileUtil,uploadImg,distpicker,urlUtil) {
 
 
             /*q全局变量*/
-            var tempdata = JSON.parse(localStorage.getItem("rowData"));
-            var updateStatus = isUpdate()
-            var jumpUrl = "/userLogin"
+            var tempdata;
+            ajaxUtil.myAjax(null, "/medicalService/hosp/selectByOrgCode", null,function (data) {
+                if(data && data.code == ajaxUtil.successCode) {
+                    tempdata = data.data
+                }else{
+                    alertUtil.error(data.msg)
+                }
+            },false,"","get");
+            var updateStatus = isUpdate();
+            var jumpUrl = "/userLogin";
             var webStatus = dictUtil.getDictByCode(dictUtil.DICT_LIST.webStatus);
             var hospitalLevel = dictUtil.getDictByCode(dictUtil.DICT_LIST.hospitalLevel)
             var specialtyName = dictUtil.getDictByCode(dictUtil.DICT_LIST.dept)
@@ -47,14 +54,6 @@
                         itemcode: stringUtil.getUUID(),
                     };
                 }
-                // else {
-                //     requestUrl = "/medicalService/hosp/update";
-                //     operateMessage = "更新医疗机构成功";
-                //     entity = {
-                //         itemid: tempdata.itemid,
-                //         itemcode: tempdata.itemcode
-                //     };
-                // }
                 entity["hospitalName"] = $("#hospitalName").val();
                 entity["hospitalLevel"] = hospitalLevel[$("#specialtyName").val()].text;
                 entity["hospitalBriefIntroduce"] = $("#hospitalBriefIntroduce").val();
@@ -66,7 +65,7 @@
                 entity["hospitalAddress"] = $("#hospitalAddress").val();
                 entity["hospitalLink"] = $("#hospitalLink").val();
                 entity["hospitalIntroduce"] = editor.txt.html()
-                entity["hospitalStatus"] = webStatus[0].id
+                entity["hospitalStatus"] = webStatus[1].id
 
 
                 fileUtil.handleFile(updateStatus, entity.itemcode, uploadImg.getFiles()[0]);
@@ -83,7 +82,7 @@
             });
 
             function isUpdate() {
-                return (tempdata != null || tempdata != undefined)
+                return (urlUtil.getFullUrl().indexOf("/main#") != -1 || urlUtil.getFullUrl().indexOf("/main?") != -1)
             }
 
 

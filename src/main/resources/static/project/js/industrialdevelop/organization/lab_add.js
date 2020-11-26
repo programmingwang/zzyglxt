@@ -1,6 +1,6 @@
 (function () {
-    require(['jquery','ajaxUtil','stringUtil','uploadImg','objectUtil'],
-        function ($,ajaxUtil,stringUtil,uploadImg, objectUtil) {
+    require(['jquery','ajaxUtil','stringUtil','uploadImg','objectUtil','distpicker','urlUtil'],
+        function ($,ajaxUtil,stringUtil,uploadImg, objectUtil, distpicker, urlUtil) {
 
             var url = "/industrialdevelop/tec-ser-org/selectbyorgcode";
 
@@ -104,7 +104,7 @@
 
 
             function isUpdate() {
-                return (localStorage.getItem("rowData") != null || localStorage.getItem("rowData") != undefined)
+                return (urlUtil.getFullUrl().indexOf("/main#") != -1 || urlUtil.getFullUrl().indexOf("/main?") != -1)
             }
     })
 })();

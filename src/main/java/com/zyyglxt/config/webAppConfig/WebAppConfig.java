@@ -23,8 +23,8 @@ public class WebAppConfig implements WebMvcConfigurer {
         return new LogInterceptor();
     }
 
-    @Override
-    public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/uploads/**").addResourceLocations("file:D:/uploads/");
-    }
+//    @Override
+//    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+//        registry.addResourceHandler("/uploads/**").addResourceLocations("file:D:/uploads/");
+//    }
 }

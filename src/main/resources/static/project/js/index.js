@@ -35,13 +35,13 @@
                         level: "2",
                         pid: "1"
                     },
-                    {
-                        menu_name: "文化科普",
-                        menu_url: "/chineseCultural/production/movieTV",
-                        id: "2",
-                        level: "1",
-                        pid: ""
-                    },
+                    // {
+                    //     menu_name: "文化科普",
+                    //     menu_url: "/chineseCultural/production/movieTV",
+                    //     id: "2",
+                    //     level: "1",
+                    //     pid: ""
+                    // },
                     {
                         menu_name: "文化资源",
                         menu_url: "",
@@ -134,7 +134,7 @@
                         pid: ""
                     },
                     {
-                        menu_name: "＞历史名方",
+                        menu_name: "历史名方",
                         menu_url: "/healthCare/famPre",
                         id: "8",
                         level: "1",
@@ -156,21 +156,23 @@
                         level: "1",
                         pid: ""
                     },
-                    {
-                        menu_name: "中医药名校",
-                        menu_url: "/knowledgeDb/dataBack",
-                        id: "11",
-                        level: "1",
-                        pid: ""
-                    },
-                    {
-                        menu_name: "中医药名企",
-                        menu_url: "/knowledgeDb/dataBack",
-                        id: "12",
-                        level: "1",
-                        pid: ""
-                    }
+                    // {
+                    //     menu_name: "中医药名校",
+                    //     menu_url: "/knowledgeDb/dataBack",
+                    //     id: "11",
+                    //     level: "1",
+                    //     pid: ""
+                    // },
+                    // {
+                    //     menu_name: "中医药名企",
+                    //     menu_url: "/knowledgeDb/dataBack",
+                    //     id: "12",
+                    //     level: "1",
+                    //     pid: ""
+                    // }
                 ];
+                $(".tTile").css("display","none");
+                $("#xczy").css("display","block");
             }
             if (roleName === '政务资源处长'||roleName === '政务资源科员'||roleName === '政务资源综合处处长'){
                 var menu_list = [
@@ -217,8 +219,10 @@
                         pid: "13"
                     }
                 ];
+                $(".tTile").css("display","none");
+                $("#zwbg").css("display","block");
             }
-            if (roleName === '主研人'||roleName === '科研项目申报单位'||roleName === '市级中医药管理部门'){
+            if (roleName === '主研人'||roleName === '科研项目申报单位'){
                 var menu_list = [
                     {
                         menu_name: "科研项目管理",
@@ -235,6 +239,8 @@
                         pid: "15"
                     }
                 ];
+                $(".tTile").css("display","none");
+                $("#kyxm").css("display","block");
             }
             if (roleName === '省局中医药管理部门'){
                 var menu_list = [
@@ -268,7 +274,7 @@
                     },
                     {
                         menu_name: "＞专家管理",
-                        menu_url: "/industrialdevelop/expert",
+                        menu_url: "/scientificProject/expert",
                         id: "15-4",
                         level: "2",
                         pid: "15"
@@ -286,8 +292,44 @@
                         id: "15-6",
                         level: "2",
                         pid: "15"
+                    },
+                    {
+                        menu_name: "机构审核",
+                        menu_url: "/industrialdevelop/audit",
+                        id: "16",
+                        level: "1",
+                        pid: ""
                     }
                 ];
+                $(".tTile").css("display","none");
+                $("#kyxm").css("display","block");
+            }
+            if (roleName === '市级中医药管理部门'){
+                var menu_list = [
+                    {
+                        menu_name: "科研项目管理",
+                        menu_url: "",
+                        id: "15",
+                        level: "1",
+                        pid: ""
+                    },
+                    {
+                        menu_name: "＞课题管理",
+                        menu_url: "/scientificProject/topicManagement",
+                        id: "15-1",
+                        level: "2",
+                        pid: "15"
+                    },
+                    {
+                        menu_name: "机构审核",
+                        menu_url: "/industrialdevelop/audit",
+                        id: "16",
+                        level: "1",
+                        pid: ""
+                    }
+                ];
+                $(".tTile").css("display","none");
+                $("#kyxm").css("display","block");
             }
             if (roleName === '专家'){
                 var menu_list = [
@@ -306,6 +348,8 @@
                         pid: "15"
                     }
                 ];
+                $(".tTile").css("display","none");
+                $("#kyxm").css("display","block");
             }
             if (roleName === '中药材种植园'){
                 var menu_list = [
@@ -317,14 +361,14 @@
                         pid: ""
                     },
                     {
-                        menu_name: "＞合作交流",
+                        menu_name: "合作交流",
                         menu_url: "/industrialdevelop/cooperation",
                         id: "2",
                         level: "1",
                         pid: ""
                     },
                     {
-                        menu_name: "＞人才招募",
+                        menu_name: "人才招募",
                         menu_url: "/industrialdevelop/recruit",
                         id: "3",
                         level: "1",
@@ -338,6 +382,8 @@
                         pid: ""
                     }
                 ];
+                $(".tTile").css("display","none");
+                $("#cyfz").css("display","block");
             }
             if (roleName === '中药材加工企业'){
                 var menu_list = [
@@ -349,14 +395,14 @@
                         pid: ""
                     },
                     {
-                        menu_name: "＞合作交流",
+                        menu_name: "合作交流",
                         menu_url: "/industrialdevelop/cooperation",
                         id: "2",
                         level: "1",
                         pid: ""
                     },
                     {
-                        menu_name: "＞人才招募",
+                        menu_name: "人才招募",
                         menu_url: "/industrialdevelop/recruit",
                         id: "3",
                         level: "1",
@@ -370,102 +416,110 @@
                         pid: ""
                     }
                 ];
+                $(".tTile").css("display","none");
+                $("#cyfz").css("display","block");
             }
             if (roleName === '中药材制药企业'){
                 var menu_list = [
                     {
-                        menu_name: "＞在售药品",
+                        menu_name: "在售药品",
                         menu_url: "/industrialdevelop/chinesemed/saledrug",
                         id: "1",
                         level: "1",
                         pid: ""
                     },
                     {
-                        menu_name: "＞合作交流",
+                        menu_name: "合作交流",
                         menu_url: "/industrialdevelop/cooperation",
                         id: "2",
                         level: "1",
                         pid: ""
                     },
                     {
-                        menu_name: "＞人才招募",
+                        menu_name: "人才招募",
                         menu_url: "/industrialdevelop/recruit",
                         id: "3",
                         level: "1",
                         pid: ""
                     },
                     {
-                        menu_name: "＞信息维护",
+                        menu_name: "信息维护",
                         menu_url: "/industrialdevelop/chinesemed/chinesemed-produce_add",
                         id: "4",
                         level: "1",
                         pid: ""
                     }
                 ];
+                $(".tTile").css("display","none");
+                $("#cyfz").css("display","block");
             }
             if (roleName === '中药材销售企业'){
                 var menu_list = [
                     {
-                        menu_name: "＞在售药品",
+                        menu_name: "在售药品",
                         menu_url: "/industrialdevelop/chinesemed/saledrug",
                         id: "1",
                         level: "1",
                         pid: ""
                     },
                     {
-                        menu_name: "＞合作交流",
+                        menu_name: "合作交流",
                         menu_url: "/industrialdevelop/cooperation",
                         id: "2",
                         level: "1",
                         pid: ""
                     },
                     {
-                        menu_name: "＞人才招募",
+                        menu_name: "人才招募",
                         menu_url: "/industrialdevelop/recruit",
                         id: "3",
                         level: "1",
                         pid: ""
                     },
                     {
-                        menu_name: "＞信息维护",
-                        menu_url: "/industrialdevelop/chinesemed/chinesemed-produce_add",
+                        menu_name: "信息维护",
+                        menu_url: "/industrialdevelop/chinesemed/chinesemed-sale_add",
                         id: "4",
                         level: "1",
                         pid: ""
                     }
                 ];
+                $(".tTile").css("display","none");
+                $("#cyfz").css("display","block");
             }
             if (roleName === '中医医疗机构'){
                 var menu_list = [
                     {
-                        menu_name: "＞科研成果",
+                        menu_name: "科研成果",
                         menu_url: "/industrialdevelop/achievement",
                         id: "1",
                         level: "1",
                         pid: ""
                     },
                     {
-                        menu_name: "＞合作交流",
+                        menu_name: "合作交流",
                         menu_url: "/industrialdevelop/cooperation",
                         id: "2",
                         level: "1",
                         pid: ""
                     },
                     {
-                        menu_name: "＞人才招募",
+                        menu_name: "人才招募",
                         menu_url: "/industrialdevelop/recruit",
                         id: "3",
                         level: "1",
                         pid: ""
                     },
                     {
-                        menu_name: "＞信息维护",
-                        menu_url: "/industrialdevelop/organization/lab_add",
+                        menu_name: "信息维护",
+                        menu_url: "/industrialdevelop/organization/addHosp",
                         id: "4",
                         level: "1",
                         pid: ""
                     }
                 ];
+                $(".tTile").css("display","none");
+                $("#cyfz").css("display","block");
             }
             if (roleName === '高等医学院校'){
                 var menu_list = [
@@ -477,14 +531,14 @@
                         pid: ""
                     },
                     {
-                        menu_name: "＞合作交流",
+                        menu_name: "合作交流",
                         menu_url: "/industrialdevelop/cooperation",
                         id: "2",
                         level: "1",
                         pid: ""
                     },
                     {
-                        menu_name: "＞人才招募",
+                        menu_name: "人才招募",
                         menu_url: "/industrialdevelop/recruit",
                         id: "3",
                         level: "1",
@@ -498,102 +552,110 @@
                         pid: ""
                     }
                 ];
+                $(".tTile").css("display","none");
+                $("#cyfz").css("display","block");
             }
             if (roleName === '科研院所'){
                 var menu_list = [
                     {
-                        menu_name: "＞科研成果",
+                        menu_name: "科研成果",
                         menu_url: "/industrialdevelop/achievement",
                         id: "1",
                         level: "1",
                         pid: ""
                     },
                     {
-                        menu_name: "＞合作交流",
+                        menu_name: "合作交流",
                         menu_url: "/industrialdevelop/cooperation",
                         id: "2",
                         level: "1",
                         pid: ""
                     },
                     {
-                        menu_name: "＞人才招募",
+                        menu_name: "人才招募",
                         menu_url: "/industrialdevelop/recruit",
                         id: "3",
                         level: "1",
                         pid: ""
                     },
                     {
-                        menu_name: "＞信息维护",
+                        menu_name: "信息维护",
                         menu_url: "/industrialdevelop/organization/lab_add",
                         id: "4",
                         level: "1",
                         pid: ""
                     }
                 ];
+                $(".tTile").css("display","none");
+                $("#cyfz").css("display","block");
             }
             if (roleName === '技术服务机构'){
                 var menu_list = [
                     {
-                        menu_name: "＞服务项目",
+                        menu_name: "服务项目",
                         menu_url: "/serviceItems/tecserviceorg",
                         id: "1",
                         level: "1",
                         pid: ""
                     },
                     {
-                        menu_name: "＞合作交流",
+                        menu_name: "合作交流",
                         menu_url: "/industrialdevelop/cooperation",
                         id: "2",
                         level: "1",
                         pid: ""
                     },
                     {
-                        menu_name: "＞人才招募",
+                        menu_name: "人才招募",
                         menu_url: "/industrialdevelop/recruit",
                         id: "3",
                         level: "1",
                         pid: ""
                     },
                     {
-                        menu_name: "＞信息维护",
+                        menu_name: "信息维护",
                         menu_url: "/serviceItems/tecserviceorg_msg",
                         id: "4",
                         level: "1",
                         pid: ""
                     }
                 ];
+                $(".tTile").css("display","none");
+                $("#cyfz").css("display","block");
             }
             if (roleName === '旅游康养机构'){
                 var menu_list = [
                     {
-                        menu_name: "＞基地风采",
-                        menu_url: "/industrialdevelop/style",
+                        menu_name: "基地风采",
+                        menu_url: "/industrialdevelop/organization/tour",
                         id: "1",
                         level: "1",
                         pid: ""
                     },
                     {
-                        menu_name: "＞合作交流",
+                        menu_name: "合作交流",
                         menu_url: "/industrialdevelop/cooperation",
                         id: "2",
                         level: "1",
                         pid: ""
                     },
                     {
-                        menu_name: "＞人才招募",
+                        menu_name: "人才招募",
                         menu_url: "/industrialdevelop/recruit",
                         id: "3",
                         level: "1",
                         pid: ""
                     },
                     {
-                        menu_name: "＞信息维护",
+                        menu_name: "信息维护",
                         menu_url: "/industrialdevelop/organization/tour_add",
                         id: "4",
                         level: "1",
                         pid: ""
                     }
                 ];
+                $(".tTile").css("display","none");
+                $("#cyfz").css("display","block");
             }
 
 
@@ -614,7 +676,6 @@
                 var uuid = stringUtil.getUUID();
                 var header = item.menu_name;
                 var furl = item.menu_url;
-                console.log(furl);
                 var str = "<div class=\"card\">\n" +
                     "                    <div class=\"\" id=\"headingOne\">\n" +
                     "                        <button class=\"collapse-btn btn btn-link btn-block text-left\" type=\"button\" data-toggle=\"collapse\" data-target=\"#" + uuid + "\" aria-expanded=\"true\" aria-controls=\"collapseOne\">\n" +
@@ -725,9 +786,8 @@
             $("#logout").on("click", function () {
                 ajaxUtil.myAjax(null, "/logout", null, function (data) {
                     if (data && data.code === 88888) {
-                        sessionStorage.removeItem('username');
-                        sessionStorage.removeItem('rolename');
-                        sessionStorage.removeItem('orgCode');
+                        sessionStorage.clear();
+                        localStorage.clear();
                         window.location.href = "/userLogin";
                     } else {
                         alertUtil.alert(data.msg);

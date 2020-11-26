@@ -56,10 +56,20 @@ public class FileController {
         String filePath = null;
         for (FileDO fileDO : fileDOList){
             filePath = fileDO.getFilePath();
-            fastFileStorageClient.deleteFile(filePath.substring(0,filePath.indexOf("?")));//去除掉后面的fileName属性
+            try {
+                fastFileStorageClient.deleteFile(filePath.substring(0, filePath.indexOf("?")));//去除掉后面的fileName属性
+            }catch (Exception e){
+                fastFileStorageClient.deleteFile(filePath);
+            }
         }
         fileService.deleteFileByDataCode(dataCode);
         return new ResponseData(EmBusinessError.success);
+    }
+
+    @GetMapping("/get/{datacode}")
+    @ResponseBody
+    public ResponseData get(@PathVariable String datacode){
+        return new ResponseData(EmBusinessError.success,fileService.selectFileByDataCode(datacode));
     }
 
     private FileDO saveFile(FileDto fileDto) {

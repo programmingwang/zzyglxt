@@ -1,6 +1,6 @@
 (function () {
-    require(['jquery', 'ajaxUtil', 'stringUtil', 'uploadImg', 'modalUtil', 'objectUtil'],
-        function (jquery, ajaxUtil, stringUtil, uploadImg, modalUtil, objectUtil) {
+    require(['jquery', 'ajaxUtil', 'stringUtil', 'uploadImg','alertUtil', 'modalUtil', 'objectUtil'],
+        function (jquery, ajaxUtil, stringUtil, uploadImg,alertUtil, modalUtil, objectUtil) {
             ajaxUtil.myAjax(null, "/user/usermsg", null, function (data) {
                 if (data && data.code === 88888) {
                     localStorage.setItem('user', JSON.stringify(data.data));
@@ -18,22 +18,6 @@
                     alertUtil.error(data.msg)
                 }
             }, false, "", "get");
-
-            // $("#upload").unbind().on('click', function () {
-            //     uploadImg.init();
-            //     var portrait = uploadImg.getBase64();
-            //     console.log(1111+portrait);
-            //     var uportrait = {"portrait": portrait};
-            //     if ($("#upload").val().length != 0) {
-            //         ajaxUtil.myAjax(null, "/user/updateusermsg",uportrait,function (data) {
-            //             if (data && data.code == 88888) {
-            //                 alertUtil.success('修改头像成功');
-            //             } else {
-            //                 alertUtil.error(data.msg)
-            //             }
-            //         },false,true)
-            //     }
-            // });
 
             $("#cancelBtn").click(function () {
                 window.history.back()
@@ -129,6 +113,18 @@
                         }, false, "", "put")
                     } else {
                         alertUtil.info('输入不能为空')
+                    }
+                    if (portrait !== localportroit){
+                        var uportroit = {
+                            "portrait":portrait
+                        };
+                        ajaxUtil.myAjax(null, "/user/updateuserimg", uportroit, function (data) {
+                            if (data && data.code == 88888) {
+                                alertUtil.success('修改头像成功');
+                            } else {
+                                alertUtil.error(data.msg)
+                            }
+                        }, false, true)
                     }
                 } else {
                     if (portrait !== localportroit){

@@ -57,7 +57,7 @@
                 width: '100%',
                 columns: fColumns,
                 ajaxOptions: {
-                    async: false,
+
                     complete: function (XMLHttpRequest) {
 
                     }
@@ -70,6 +70,8 @@
                         for(var i=0; i<data.data.length; i++){
                             data.data[i].itemcreateat = stringUtil.formatDateTime(data.data[i].itemcreateat);
                         }
+                        var allTableData = data.data
+                        localStorage.setItem('2',JSON.stringify(allTableData))
                         return {
                             total: data.data.length,
                             rows: data.data
@@ -109,30 +111,10 @@
             $("#"+aTableID).bootstrapTable("destroy");
         }
 
-        // $(window).on('load',function(){
-        //     console.log("aaaaaaaaaa");
-        //     var allTableData = $("#table").bootstrapTable("getData");
-        //     console.log(allTableData);
-        //     localStorage.setItem('2',JSON.stringify(allTableData))
-        //     obj2=JSON.parse(localStorage.getItem("2"));
-        //     console.log(obj2);
-        // })
 
-        //$(".float-right").attr("display",block);
 
         function globalSearch(tableID,url,needParam,aCol) {
-
-
-            // var oTab=document.getElementById("table");
-            // var btnSearch=document.getElementById("btnSearch");
-
-            // console.log(needParam);
             $("#btnSearch").unbind().on('click',function() {
-                var myTable = myBootStrapTableInit(tableID, url, needParam, aCol);
-                // 先刷新列表------------
-                // myTable.free();
-                // myTable = myBootStrapTableInit(tableID,url,param,aCol);
-                //-----------------------
                 if(document.getElementById("stratTime")){
                     var stratTime=document.getElementById("stratTime").children;
                     var endTime=document.getElementById("endTime").children;
@@ -144,24 +126,21 @@
                 var str = document.getElementById("taskNameSearch").value.toLowerCase();
                 var allTableData = JSON.parse(localStorage.getItem("2"));
 
-
                 // console.log(allTableData);
-                // console.log(str);
+                console.log(str);
                 // console.log("状态"+addstr);
-                if (str=='请输入'||str==''){
-                    $("#table").bootstrapTable("load", allTableData);
+                if (str==='请输入'||str===''){
+                    str=''
                 }
-
                 for (var i in allTableData) {
                     for (var v in aCol){
                         var textP = allTableData[i][aCol[v].field];
                         var isTimeSlot=false;
-                        var makeTime=allTableData[i][aCol[4].field];
-                        console.log(makeTime)
-                        // if(makeTime.length>18){
-                        //     makeTime=makeTime.substring(11,19);
-                        // }
-
+                        var makeTime=allTableData[i][aCol[3].field];
+                        //console.log(makeTime)
+                        if(makeTime.length>18){
+                            makeTime=makeTime.substring(11,19);
+                        }
                         // console.log(makeTime);
                         // console.log("开始时间："+stratTime);
                         // console.log("结束时间"+endTime);
@@ -171,7 +150,7 @@
                             textP = "1";
                         }
                         if(makeTime>=stratTime && makeTime<=endTime){
-                            console.log('true')
+                            //console.log('true')
                             isTimeSlot=true;
                         }
                         if(stratTime==endTime){
@@ -185,20 +164,17 @@
                             str=str+" "+addstr;
                             var arr=str.split(' ');
                             for(var j=0;j<arr.length;j++)
-                                {
-                                    if(textP.search(arr[j])!=-1){
-                                        newArry.push(allTableData[i]);
-                                    }
+                            {
+                                if(textP.search(arr[j])!=-1){
+                                    newArry.push(allTableData[i]);
                                 }
+                            }
                         }
                     }
-
-                    // var chineseCulturalName = allTableData[i].chineseCulturalName;
-                    // console.log(chineseCulturalName);
-                    // if (chineseCulturalName.search(str) != -1) {
-                    //     newArry.push(allTableData[i]);
-                    // }
                 }
+
+                var newArr=new Set(newArry)
+                newArry=Array.from(newArr)
                 $("#table").bootstrapTable("load", newArry);
             })
 

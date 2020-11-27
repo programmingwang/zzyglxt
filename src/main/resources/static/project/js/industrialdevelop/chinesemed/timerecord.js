@@ -1,6 +1,6 @@
 (function () {
-    require(['jquery', 'ajaxUtil', 'bootstrapTableUtil', 'objectUtil', 'alertUtil', 'modalUtil', 'selectUtil', 'stringUtil', 'dictUtil','myDatePicker'],
-        function (jquery, ajaxUtil, bootstrapTableUtil, objectUtil, alertUtil, modalUtil, selectUtil, stringUtil, dictUtil, myDatePicker) {
+    require(['jquery', 'ajaxUtil', 'bootstrapTableUtil', 'objectUtil', 'alertUtil', 'modalUtil', 'selectUtil', 'stringUtil', 'dictUtil','datetimepicker'],
+        function (jquery, ajaxUtil, bootstrapTableUtil, objectUtil, alertUtil, modalUtil, selectUtil, stringUtil, dictUtil,datetimepicker) {
 
 
             var getUrl = "/industrialdevelop";
@@ -52,40 +52,30 @@
                 var myTravelModal = modalUtil.init(myViewTimeModalData);
                 myTravelModal.show();
 
-                //调用日期插件
-                $("#startTime").myDatePicker({
-                    'startDate':'2014-01-01 18:45:20',
-                    'endDate':'2099-01-01 18:45:20',
-                    //指定父元素，不指定默认为body
-                    parent:$("#startTime").parent(),
-                    //定位方式是否用fixed
-                    positionFixed:$("#position-1").is(':checked'),
 
+                var date= new Date();
+                $("#startTime").datetimepicker({
+                    format: 'yyyy-mm-dd hh:ii:00',//显示格式
+                    startDate: date ,
+                    startView:2,
+                    minView:1,
+                    maxView :3,
+                    language: 'cn',
+                    autoclose: 1,//选择后自动关闭
+                    clearBtn:true,//清除按钮
+                    showMeridian:true,
                 });
-
-                let _input=$(" #startTime");
-                let view=7;
-                _input[0].resetDatePicker({
-                    'view':7,
+                $("#endTime").datetimepicker({
+                    format: 'yyyy-mm-dd hh:ii:00',//显示格式
+                    startDate: date ,
+                    startView:2,
+                    minView:1,
+                    maxView :3,
+                    language: 'cn',
+                    autoclose: 1,//选择后自动关闭
+                    clearBtn:true,//清除按钮
+                    showMeridian:true,
                 });
-                _input.focus();
-                //调用日期插件
-                $("#endTime").myDatePicker({
-                    'startDate':'2014-01-01 18:45:20',
-                    'endDate':'2099-01-01 18:45:20',
-                    //指定父元素，不指定默认为body
-                    parent:$("#endTime").parent(),
-                    //定位方式是否用fixed
-                    positionFixed:$("#position-1").is(':checked'),
-
-                });
-
-                let _inputE=$(" #endTime");
-                let viewE=7;
-                _inputE[0].resetDatePicker({
-                    'view':7,
-                });
-                _input.focus();
             });
 
             var pl = dictUtil.getDictByCode(dictUtil.DICT_LIST.showStatus);

@@ -37,7 +37,7 @@ public interface IndustrialDevelopTopicDOMapper {
      *
      * @mbg.generated Wed Oct 28 16:25:52 CST 2020
      */
-    IndustrialDevelopTopicDO selectByPrimaryKey(IndustrialDevelopTopicDOKey key);
+    List<IndustrialDevelopTopicDO> selectByPrimaryKey(@Param("userCode") String userCode);
 
     IndustrialDevelopTopicDO selectByItemCode(@Param("itemcode") String itemCode);
 
@@ -61,5 +61,13 @@ public interface IndustrialDevelopTopicDOMapper {
 
     List<IndustrialDevelopTopicDO> selectAll();
 
+    //更改项目状态
+    int changeStatus(@Param("key") IndustrialDevelopTopicDOKey key, @Param("dataStatus") String status);
 
+    //更改审核状态
+    int changeExamineStatus(@Param("key") IndustrialDevelopTopicDOKey key, @Param("dataStatus") String examineStatus);
+
+    List<IndustrialDevelopTopicDO> selectByUserCode(@Param("userCode") String userCode);
+
+    List<IndustrialDevelopTopicDO> selectByCompany(@Param("company") String company);
 }

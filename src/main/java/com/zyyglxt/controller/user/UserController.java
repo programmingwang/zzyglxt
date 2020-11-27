@@ -143,8 +143,15 @@ public class UserController {
 
     @LogAnnotation(logTitle = "修改个人信息", logLevel = "2")
     @RequestMapping(value = "/updateusermsg", method = RequestMethod.POST)
-    public ResponseData updateUserMsg(UserDO userDO) {
+    public ResponseData updateUserMsg(@RequestBody UserDO userDO) {
         iuserService.UpdateUserMsg(userDO);
+        return new ResponseData(EmBusinessError.success);
+    }
+
+    @LogAnnotation(logTitle = "修改用户头像", logLevel = "2")
+    @RequestMapping(value = "/updateuserimg", method = RequestMethod.POST)
+    public ResponseData updateUserPortrait(@RequestBody UserDO userDO) {
+        iuserService.UpdateUserPortrait(userDO);
         return new ResponseData(EmBusinessError.success);
     }
 

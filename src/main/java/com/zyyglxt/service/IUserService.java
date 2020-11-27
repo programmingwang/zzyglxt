@@ -27,4 +27,6 @@ public interface IUserService {
 //    void Logout();
 
     void UpdateUserMsg(UserDO userDO);
+
+    void UpdateUserPortrait(UserDO userDO);
 }

@@ -67,8 +67,6 @@ public class IndustrialDevelopTopicDO extends IndustrialDevelopTopicDOKey {
 
     
     private String userCode;
-
-
     
     private String creater;
 

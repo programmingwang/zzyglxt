@@ -84,4 +84,17 @@ public class MobileUtil {
         }
         return false;
     }
+
+    /**
+     * 隐藏手机号中间四位
+     *
+     * @param phone
+     * @return java.lang.String
+     */
+    public static String hideMiddleMobile(String phone) {
+        if (!StringUtils.isEmpty(phone)) {
+            phone = phone.replaceAll("(\\d{3})\\d{4}(\\d{4})", "$1****$2");
+        }
+        return phone;
+    }
 }

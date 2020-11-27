@@ -63,6 +63,8 @@ public class IndustrialDevelopTopicDO extends IndustrialDevelopTopicDOKey {
     
     private String examineStatus;
 
+    private String reason;
+
     
     private String userCode;
 

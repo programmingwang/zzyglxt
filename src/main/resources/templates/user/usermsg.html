@@ -38,9 +38,11 @@
             text-align: right;
         }
 
-        #btn{
+        #btn {
             margin-top: 15px;
         }
+
+
     </style>
 </head>
 <body>
@@ -56,8 +58,7 @@
                             <input type="file" name="file" accept="image/*" id="upload" multiple>
                         </div>
                     </div>
-                    <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog"
-                         aria-labelledby="myLargeModalLabel">
+                    <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
                         <div class="modal-dialog modal-lg" role="document">
                             <div class="modal-content" id="portrait">
                             </div>
@@ -69,33 +70,33 @@
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label">用户登录名：</label>
                 <div class="col-sm-3">
-                    <input id="username" type="text" class="form-control" disabled="disabled">
+                    <input id="username" type="text" class="msg form-control" disabled="disabled">
                 </div>
 
                 <label class="col-sm-2 col-form-label">用户名称：</label>
                 <div class="col-sm-3">
-                    <input id="name" type="text" class="form-control" disabled="disabled">
+                    <input id="name" type="text" class="msg form-control" disabled="disabled">
                 </div>
             </div>
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label">性别：</label>
                 <div class="col-sm-3">
-                    <input id="gender" type="text" class="form-control" disabled="disabled">
+                    <input id="gender" type="text" class="msg form-control" disabled="disabled">
                 </div>
                 <label class="col-sm-2 col-form-label">邮箱：</label>
                 <div class="col-sm-3">
-                    <input id="email" type="text" class="form-control" disabled="disabled">
+                    <input id="email" type="text" class="msg form-control" disabled="disabled">
                 </div>
             </div>
 
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label">身份证类型：</label>
                 <div class="col-sm-3">
-                    <input id="idcardType" type="text" class="form-control" disabled="disabled">
+                    <input id="idcardType" type="text" class="msg form-control" disabled="disabled">
                 </div>
                 <label class="col-sm-2 col-form-label">身份证号：</label>
                 <div class="col-sm-3">
-                    <input id="idcardNo" type="text" class="form-control" disabled="disabled">
+                    <input id="idcardNo" type="text" class="msg form-control" disabled="disabled">
                 </div>
 
             </div>
@@ -103,32 +104,57 @@
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label">联系人：</label>
                 <div class="col-sm-3">
-                    <input id="contacts" type="text" class="form-control" disabled="disabled">
+                    <input id="contacts" type="text" class="msg form-control" disabled="disabled">
                 </div>
                 <label class="col-sm-2 col-form-label">手机号码：</label>
                 <div class="col-sm-3">
-                    <input id="mobilephone" type="text" class="form-control" disabled="disabled">
+                    <input id="mobilephone" type="text" class="msg form-control" disabled="disabled">
+                </div>
+            </div>
+
+            <div class="updataP" style="display: none">
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">请输入原密码：</label>
+                    <div class="col-sm-3">
+                        <input id="oldPwd" type="password" class="pwd form-control" disabled="disabled">
+                    </div>
+                    <label class="col-sm-2 col-form-label">请输入新密码：</label>
+                    <div class="col-sm-3">
+                        <input id="newPwd" type="password" class="pwd form-control" disabled="disabled">
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">请输入手机号：</label>
+                    <div class="col-sm-3">
+                        <input id="phone" type="text" class="pwd form-control" disabled="disabled">
+                    </div>
+                    <label class="col-sm-2 col-form-label">请确认新密码：</label>
+                    <div class="col-sm-3">
+                        <input id="checkPwd" type="password" class="pwd form-control" disabled="disabled">
+                    </div>
                 </div>
             </div>
 
             <div class="form-group row" id="btn">
-                <div class="col-lg-3 col-md-3" ></div>
+                <div class="col-lg-3 col-md-3"></div>
                 <div class=" col-lg-5 row">
                     <div class="col">
                         <button id="cancelBtn" type="button" class="btn btn-light col">取消</button>
                     </div>
                     <div class="col">
-                        <button id="modifymsgBtn" type="button" class="modify btn btn-danger col" data-toggle="modal" data-target="">修改信息</button>
+                        <button id="modifymsgBtn" type="button" class="modify btn btn-primary col">修改信息</button>
                     </div>
                     <div class="col">
-                        <button id="confirmBtn" type="button" class="modify btn btn-danger col" data-toggle="modal" data-target="">确认修改</button>
+                        <button id="confirmBtn" type="button" class="modify btn btn-danger col">确认修改</button>
                     </div>
                     <div class="col">
-                        <button id="modifypwdBtn" type="submit" class="btn btn-primary col">修改密码</button>
+                        <button id="modifypwdBtn" type="button" class="btn btn-primary col">修改密码</button>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-4" ></div>
+                <div class="col-lg-4 col-md-4"></div>
             </div>
+
         </form>
 
     </div>

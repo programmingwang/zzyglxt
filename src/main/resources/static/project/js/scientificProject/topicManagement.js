@@ -6,6 +6,7 @@
             var aParam = {
             };
 
+            //角色信息
             var rolename = sessionStorage.getItem("rolename");
             var usercode = sessionStorage.getItem("itemcode");
 
@@ -14,7 +15,7 @@
             var topicStatus = dictUtil.getDictByCode(dictUtil.DICT_LIST.topicStatus);
             var auditStatus = dictUtil.getDictByCode(dictUtil.DICT_LIST.auditStatus);
 
-            //项目编号
+            //生成项目编号
             var topicData;
             $.ajax
             ({  cache: false,
@@ -43,7 +44,7 @@
             }
             var topicNum = year+num;
 
-            //操作
+            //审核操作
             function operation1(value, row, index){
                 if(row.examineStatus == projectStatus[0].id){
                     return [
@@ -151,6 +152,19 @@
                 }
             }
 
+            //点击文件名查看详情事件
+            function viewOperation(value, row, index){
+                return [
+                    '<a class="topicview" data-toggle="modal" style="margin:0 0.6em;text-decoration: none;color:#775637;" data-target="" >'+row.projectName+'</a>',
+                ].join('');
+            }
+            window.viewEvents = {
+                'click .topicview': function (e, value, row, index){
+                    localStorage.setItem("rowData", JSON.stringify(row));
+                    var viewUrl = "/scientificProject/viewTopicManagement";
+                    orange.redirect(viewUrl);
+                },
+            };
 
 
             //修改事件
@@ -428,19 +442,19 @@
 
             };
 
-
+            //申报项目点击事件
             $("#btn_addTask").unbind().on('click',function (row) {
                 localStorage.removeItem("rowData");
                 orange.redirect(addUrl);
             });
 
-
+            //根据角色显示不同菜单和不同操作
             if (rolename === "主研人") {
                 $("#topicStatusSearch").selectUtil(topicStatus);
                 var url = "/industrialdevelop/getUserCode?userCode="+usercode;
                 var aCol = [
                     {field: 'projectNo', title: '项目编号'},
-                    {field: 'projectName', title: '项目名称'},
+                    {field: 'projectName', title: '项目名称', formatter: viewOperation, events: viewEvents},
                     {field: 'status', title: '项目状态', formatter: function (value) {
                             return '</p>'+topicStatus[value].text+'</p>'
                         }},
@@ -473,11 +487,11 @@
                 date.isDuringDate(starttime, endtime);
 
             }else if (rolename === "科研项目申报单位"){
-                $("#topicStatusSearch").selectUtil(auditStatus);
+                $("#topicStatusSearch").selectUtil(topicStatus);
                 var url = "/industrialdevelop/getByCompany?company="+sessionStorage.getItem("username");
                 var aCol = [
                     {field: 'projectNo', title: '项目编号'},
-                    {field: 'projectName', title: '项目名称'},
+                    {field: 'projectName', title: '项目名称', formatter: viewOperation, events: viewEvents},
                     {field: 'applicant', title: '主研人'},
                     {field: 'examineStatus', title: '审核状态', formatter: function (value,row) {
                             if (row.examineStatus == projectStatus[1].id){
@@ -496,7 +510,7 @@
                 var url = "/industrialdevelop/getTopic?examineStatus="+projectStatus[2].id+"&examineStatus="+projectStatus[4].id +"&examineStatus="+projectStatus[5].id;
                 var aCol = [
                     {field: 'projectNo', title: '项目编号'},
-                    {field: 'projectName', title: '项目名称'},
+                    {field: 'projectName', title: '项目名称', formatter: viewOperation, events: viewEvents},
                     {field: 'company', title: '申报单位'},
                     {field: 'examineStatus', title: '审核状态', formatter: function (value,row) {
                             if (row.examineStatus == projectStatus[2].id){
@@ -515,7 +529,7 @@
                 var url = "/industrialdevelop/getTopic?examineStatus="+projectStatus[4].id+"&examineStatus="+projectStatus[6].id +"&examineStatus="+projectStatus[7].id;
                 var aCol = [
                     {field: 'projectNo', title: '项目编号'},
-                    {field: 'projectName', title: '项目名称'},
+                    {field: 'projectName', title: '项目名称', formatter: viewOperation, events: viewEvents},
                     {field: 'company', title: '申报单位'},
                     {field: 'examineStatus', title: '审核状态', formatter: function (value,row) {
                             if (row.examineStatus == projectStatus[4].id){

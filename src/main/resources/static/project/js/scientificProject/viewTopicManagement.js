@@ -171,7 +171,7 @@
                 return (localStorage.getItem("rowData") != null || localStorage.getItem("rowData") != undefined)
             }
 
-            var files= document.getElementById('upload_file').files;
+            var files= document.getElementById('upload_file');
             if(files.length>0){
                 $("#addFile").empty("p");
                 var name = files.name;

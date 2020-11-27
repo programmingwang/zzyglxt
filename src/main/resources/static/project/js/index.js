@@ -237,7 +237,14 @@
                         id: "15-1",
                         level: "2",
                         pid: "15"
-                    }
+                    },
+                    {
+                        menu_name: "＞账号管理",
+                        menu_url: "/scientificProject/accountManagement",
+                        id: "15-2",
+                        level: "2",
+                        pid: "15"
+                    },
                 ];
                 $(".tTile").css("display","none");
                 $("#kyxm").css("display","block");

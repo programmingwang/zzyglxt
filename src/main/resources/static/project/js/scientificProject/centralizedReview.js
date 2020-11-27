@@ -45,7 +45,7 @@
 
             $(function(){
                 $("span a").unbind().on('click',function () {
-                    // orange.redirect("/scientificProject/viewTopicManagement")
+                    orange.redirect("/scientificProject/viewTopicManagement")
                 });
             });
 
@@ -104,7 +104,6 @@
             var aCol = [
                 {field: 'projectNo', title: '项目编号'},
                 {field: 'projectName', title: '项目名称', formatter: function (value,row) {
-                    localStorage.setItem("rowData",JSON.stringify(row));
                         return '<span><a>'+value+'</a></span>'
                     }},
                 {field: 'company', title: '申报单位'},

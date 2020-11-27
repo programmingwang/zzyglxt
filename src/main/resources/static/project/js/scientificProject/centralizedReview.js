@@ -43,11 +43,11 @@
                 }
             }
 
-            $(function(){
-                $("span a").unbind().on('click',function () {
-                    orange.redirect("/scientificProject/viewTopicManagement")
-                });
-            });
+            // $(function(){
+            //     $("span a").unbind().on('click',function () {
+            //         orange.redirect("/scientificProject/viewTopicManagement")
+            //     });
+            // });
 
 
             //修改事件

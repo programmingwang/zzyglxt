@@ -1,4 +1,4 @@
-package com.zyyglxt.controller.IndustrialDevelop;
+package com.zyyglxt.controller.industrialDevelop;
 
 import com.zyyglxt.annotation.LogAnnotation;
 import com.zyyglxt.dataobject.FileDO;
@@ -89,6 +89,7 @@ public class TopicController {
     @ResponseBody
     public ResponseData getOneTopic(@RequestParam(value = "itemCode") String itemCode){
         IndustrialDevelopTopicDO topicDO = developTopicService.getTopic(itemCode);
+
         return new ResponseData(EmBusinessError.success,topicDO);
     }
 

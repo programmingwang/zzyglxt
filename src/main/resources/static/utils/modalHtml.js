@@ -2272,7 +2272,7 @@
 
         modalHtml.myResonable="<div>\n" +
             "        <textarea name=\"\" id=\"reason\" cols=\"96\" rows=\"10\"></textarea>\n" +
-            "    </div>";
+            "    </div>"
 
 
         modalHtml.myDeleteModalTravel = '是否删除景点信息?';
@@ -2327,6 +2327,8 @@
         modalHtml.myResetPassword="是否重置密码？"
 
         modalHtml.myCencelDistribution = "是否取消分配专家？"
+
+        modalHtml.myDeleteTopicManagement = "是否删除该项目信息";
 
 
         return modalHtml;

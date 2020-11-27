@@ -3,6 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" th:href="@{CSS/taskList.css}">
+    <style>
+        .btn-color{
+            color: #fff;
+            background-color: darkgrey;
+            display: none;
+        }
+    </style>
 </head>
 <body>
 <div id="fir_body">
@@ -10,7 +17,7 @@
     <div class="row test-border" id="accordion2">
         <div class="col-lg-4 col-md-4">
             <div class="input-group mb-4" >
-                <input type="text" id="taskNameSearch" class="form-control" value="请输入" onfocus="if (value=='请输入'){value =''}" onblur="if (value ==''){value='请输入'}" >
+                <input type="text" id="taskNameSearch" class="form-control" value="请输入关键字" onfocus="if (value=='请输入关键字'){value =''}" onblur="if (value ==''){value='请输入关键字'}" >
                 <div class="input-group-prepend">
                     <span class="input-group-text" id="btnSearch" style="z-index: 1;">搜索</span>
                 </div>
@@ -38,7 +45,7 @@
 
     <div class="row col-lg-12 col-md-12 mb-3">
         <div class="col-lg-12 col-md-12">
-            <button type="button" id="btn_addTask" class="btn btn-danger ml-3">申报项目信息</button>
+            <button type="button" id="btn_addTask" class="btn btn-color ml-3">申报项目信息</button>
         </div>
     </div>
     <div class="col-lg-12">

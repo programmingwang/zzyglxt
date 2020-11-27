@@ -1,4 +1,4 @@
-package com.zyyglxt.controller.industrialDevelop;
+package com.zyyglxt.controller.IndustrialDevelop;
 
 import com.zyyglxt.annotation.LogAnnotation;
 import com.zyyglxt.dataobject.FileDO;
@@ -65,10 +65,9 @@ public class TopicController {
     @GetMapping(value = "/getTopic")
     @ResponseBody
     @LogAnnotation(appCode ="",logTitle ="查看产业发展-课题数据",logLevel ="1",creater ="",updater = "")
-    public ResponseData getTopic(){
-        List<IndustrialDevelopTopicDO> topics = developTopicService.getTopics();
+    public ResponseData getTopic(@RequestParam(value = "examineStatus") List examineStatus){
+        List<IndustrialDevelopTopicDO> topics = developTopicService.getTopics(examineStatus);
         List<IndustrialDevelopTopicDODto> topicDODtoList = new ArrayList<>();
-
         for (IndustrialDevelopTopicDO topicDO : topics) {
             FileDO fileDO = iFileService.selectFileByDataCode(topicDO.getItemcode());
             topicDODtoList.add(
@@ -137,5 +136,13 @@ public class TopicController {
                     ConvertDOToDTOUtil.convertFromDOToDTO(topicDO, fileDO.getFilePath(), fileDO.getFileName()));
         }
         return new ResponseData(EmBusinessError.success,topicDODtoList);
+    }
+
+    //查询数据库中的最大编号
+    @GetMapping(value = "/maxProjectNO")
+    @ResponseBody
+    public ResponseData maxProjectNO(){
+        IndustrialDevelopTopicDO max = developTopicService.maxProjectNO();
+        return new ResponseData(EmBusinessError.success,max);
     }
 }

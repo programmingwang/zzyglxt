@@ -18,7 +18,7 @@ public interface IIndustrialDevelopTopicService {
 
     void updTopic(IndustrialDevelopTopicDO developTopicDO);
 
-    List<IndustrialDevelopTopicDO> getTopics();
+    List<IndustrialDevelopTopicDO> getTopics(List<String> examineStatus);
 
     List<IndustrialDevelopTopicDO> getStatus(String code);
 
@@ -33,4 +33,6 @@ public interface IIndustrialDevelopTopicService {
     List<IndustrialDevelopTopicDO> selectByUserCode(String userCode);
 
     List<IndustrialDevelopTopicDO> selectByCompany(String company);
+
+    IndustrialDevelopTopicDO maxProjectNO();
 }

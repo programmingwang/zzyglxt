@@ -360,7 +360,7 @@
                                                         alertUtil.error(data.msg);
                                                     }
                                                 }
-                                            },false);
+                                            },false,true);
                                         }else{
                                             alertUtil.error(data.msg);
                                         }
@@ -368,12 +368,12 @@
                                 else{
                                     alertUtil.error(data.msg);
                                 }
-                            },false,true)
+                            },false);
                             return isSuccess;
                         }
                     };
-                    var giveUp = modalUtil.init(myGiveUpTopicModalData);
-                    giveUp.show();
+                    var myGiveUpModal = modalUtil.init(myGiveUpTopicModalData);
+                    myGiveUpModal.show();
                 },
 
                 'click .view' : function (e, value, row, index) {

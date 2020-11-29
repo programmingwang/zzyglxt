@@ -42,7 +42,7 @@ table{
     height: 60px;
 }
 .h70{
-    height: 87px;
+    height: 6rem;
 }
 .h100{
     height: 100px;
@@ -114,14 +114,14 @@ table{
 
 
 .dropdown-item.active, .dropdown-item:active {
-    color: #F8F9FB;
+    color: white;
     text-decoration: none;
-    background-color: #52beff;
+    background-color:#D60000;
 }
 .aaaa.active, .aaaa:active {
-    color: #F8F9FB;
+    color: rgb(217, 0, 27);
     text-decoration: none;
-    background-color: #52beff;
+    background-color: white;
 }
 .btn-link{
     color:black;
@@ -176,7 +176,7 @@ hr {
     z-index: 3;
     color: #fff;
     background-color: #775637;
-     border-color: #775637;
+    border-color: #775637;
 }
 .page-link {
     color: black;
@@ -203,4 +203,17 @@ hr {
 
 thead.self-thead {
     text-align: center;
+    background-color: #775637;
+}
+.th-inner {
+    color: #fff;
+}
+.btn-danger {
+    color: #fff;
+    background-color: #D60000;
+    border-color: #D60000;
+}
+
+#main_body{
+    margin-top: 1rem;
 }

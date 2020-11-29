@@ -1,6 +1,6 @@
 (function () {
-    require(['jquery', 'ajaxUtil', 'bootstrapTableUtil', 'objectUtil', 'alertUtil', 'modalUtil', 'selectUtil', 'stringUtil', 'dictUtil','myDatePicker'],
-        function (jquery, ajaxUtil, bootstrapTableUtil, objectUtil, alertUtil, modalUtil, selectUtil, stringUtil, dictUtil, myDatePicker) {
+    require(['jquery', 'ajaxUtil', 'bootstrapTableUtil', 'objectUtil', 'alertUtil', 'modalUtil', 'selectUtil', 'stringUtil', 'dictUtil','datetimepicker'],
+        function (jquery, ajaxUtil, bootstrapTableUtil, objectUtil, alertUtil, modalUtil, selectUtil, stringUtil, dictUtil,datetimepicker) {
 
 
             var getUrl = "/industrialdevelop";
@@ -52,40 +52,30 @@
                 var myTravelModal = modalUtil.init(myViewTimeModalData);
                 myTravelModal.show();
 
-                //调用日期插件
-                $("#startTime").myDatePicker({
-                    'startDate':'2014-01-01 18:45:20',
-                    'endDate':'2099-01-01 18:45:20',
-                    //指定父元素，不指定默认为body
-                    parent:$("#startTime").parent(),
-                    //定位方式是否用fixed
-                    positionFixed:$("#position-1").is(':checked'),
 
+                var date= new Date();
+                $("#startTime").datetimepicker({
+                    format: 'yyyy-mm-dd hh:ii:00',//显示格式
+                    startDate: date ,
+                    startView:2,
+                    minView:1,
+                    maxView :3,
+                    language: 'cn',
+                    autoclose: 1,//选择后自动关闭
+                    clearBtn:true,//清除按钮
+                    showMeridian:true,
                 });
-
-                let _input=$(" #startTime");
-                let view=7;
-                _input[0].resetDatePicker({
-                    'view':7,
+                $("#endTime").datetimepicker({
+                    format: 'yyyy-mm-dd hh:ii:00',//显示格式
+                    startDate: date ,
+                    startView:2,
+                    minView:1,
+                    maxView :3,
+                    language: 'cn',
+                    autoclose: 1,//选择后自动关闭
+                    clearBtn:true,//清除按钮
+                    showMeridian:true,
                 });
-                _input.focus();
-                //调用日期插件
-                $("#endTime").myDatePicker({
-                    'startDate':'2014-01-01 18:45:20',
-                    'endDate':'2099-01-01 18:45:20',
-                    //指定父元素，不指定默认为body
-                    parent:$("#endTime").parent(),
-                    //定位方式是否用fixed
-                    positionFixed:$("#position-1").is(':checked'),
-
-                });
-
-                let _inputE=$(" #endTime");
-                let viewE=7;
-                _inputE[0].resetDatePicker({
-                    'view':7,
-                });
-                _input.focus();
             });
 
             var pl = dictUtil.getDictByCode(dictUtil.DICT_LIST.showStatus);
@@ -102,8 +92,6 @@
 
             var myTable = bootstrapTableUtil.myBootStrapTableInit("table", getUrl, aParam, aCol);
 
-            var allTableData = $("#table").bootstrapTable("getData");
-            console.log(allTableData);
 
             function refreshTable() {
                 var param = {};
@@ -111,7 +99,46 @@
                 myTable = bootstrapTableUtil.myBootStrapTableInit("table", getUrl, param, aCol);
             }
 
-            bootstrapTableUtil.globalSearch("table", getUrl, aParam, aCol);
+
+                $("#btnSearch").unbind().on('click',function() {
+
+                var newArry = [];
+                var addstr=document.getElementById("taskNameSearch2").value;
+                var str = document.getElementById("taskNameSearch1").value;
+                var allTableData = JSON.parse(localStorage.getItem("2"));
+                var nowDate= new Date();
+                // console.log(nowDate)
+                // console.log(allTableData);
+                // console.log(str);
+                // console.log(aCol)
+                console.log(addstr);
+
+                for (var i in allTableData) {
+                        var textP = allTableData[i][aCol[0].field];
+                        var makeTime=new Date(allTableData[i][aCol[2].field]) ;
+                        //console.log(makeTime)
+
+                        // console.log("开始时间："+stratTime);
+                        // console.log("结束时间"+endTime);
+                        //  console.log(makeTime>=nowDate);
+                        //  console.log(makeTime<nowDate);
+
+                        if (textP==str){
+                            if (addstr==="生效"&&makeTime>nowDate){
+                                newArry.push(allTableData[i]);
+                            }
+                            if (addstr==="失效"&&makeTime<=nowDate){
+                                newArry.push(allTableData[i]);
+                            }
+                        }
+
+                }
+                var newArr=new Set(newArry)
+                newArry=Array.from(newArr)
+                $("#table").bootstrapTable("load", newArry);
+            })
+
+
 
         })
 })();

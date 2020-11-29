@@ -18,6 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -77,8 +78,12 @@ public class IndustrialDevelopTopicServiceImpl implements IIndustrialDevelopTopi
     }
 
     @Override
-    public List<IndustrialDevelopTopicDO> getTopics() {
-        return developTopicDOMapper.selectAll();
+    public List<IndustrialDevelopTopicDO> getTopics(List<String> examineStatus) {
+        List<IndustrialDevelopTopicDO> topicDOList = new ArrayList<>();
+        for (String status : examineStatus) {
+            topicDOList.addAll(developTopicDOMapper.selectAll(status));
+        }
+        return topicDOList;
     }
 
     /*@Override
@@ -123,6 +128,11 @@ public class IndustrialDevelopTopicServiceImpl implements IIndustrialDevelopTopi
     @Override
     public List<IndustrialDevelopTopicDO> selectByCompany(String company) {
         return developTopicDOMapper.selectByCompany(company);
+    }
+
+    @Override
+    public IndustrialDevelopTopicDO maxProjectNO() {
+        return developTopicDOMapper.maxProjectNO();
     }
 
 

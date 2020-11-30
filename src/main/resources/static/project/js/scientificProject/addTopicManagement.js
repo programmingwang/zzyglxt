@@ -31,7 +31,7 @@
                 var TopicEntity;
                 var requestUrl;
                 var operateMessage;
-                var postalAddress = $("#addressPro").val()+" "+$("#addressCity").val()+" "+$("#addressCountry").val()+" "+$("#address").val();
+                var postalAddress = $("#addressPro").val()+","+$("#addressCity").val()+","+$("#addressCountry").val()+","+$("#address").val();
                 if (!isUpdate()){
                     for (var i=0;i<sm.length;i++){
                         if (sm[i].id == $("#disciplineName").val()){
@@ -98,7 +98,7 @@
                 var TopicEntity;
                 var requestUrl;
                 var operateMessage;
-                var postalAddress = $("#addressPro").val()+" "+$("#addressCity").val()+" "+$("#addressCountry").val()+" "+$("#address").val();
+                var postalAddress = $("#addressPro").val()+","+$("#addressCity").val()+","+$("#addressCountry").val()+","+$("#address").val();
                 if (!isUpdate()){
                     for (var i=0;i<sm.length;i++){
                         if (sm[i].id == $("#disciplineName").val()){
@@ -165,7 +165,7 @@
                 if (isUpdate()){
                     var tempdata = JSON.parse(localStorage.getItem("rowData"));
                     var postalAddress = tempdata.postalAddress;
-                    var postalAddressArry = postalAddress.split(" ");
+                    var postalAddressArry = postalAddress.split(",");
                     $("#distpicker").distpicker({
                         province: postalAddressArry[0],
                         city: postalAddressArry[1],

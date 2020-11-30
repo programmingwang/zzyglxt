@@ -31,11 +31,11 @@
             var year;
             var nowyear = new Date().getFullYear().toString();
             if (topicData.data == null){
-                num = "0000";
+                num = "000";
                 year = nowyear;
             }else {
-                if (topicData.data.projectNo.substring(4) == "9999" || topicData.data.projectNo.substring(0,4) !== nowyear){
-                    num = "0000";
+                if (topicData.data.projectNo.substring(4) == "999" || topicData.data.projectNo.substring(0,4) !== nowyear){
+                    num = "000";
                     year = nowyear;
                 }else {
                     num = topicData.data.projectNo.substring(4);

@@ -8,7 +8,7 @@
             var projectStatus = dictUtil.getDictByCode(dictUtil.DICT_LIST.projectStatus);
             var topicStatus = dictUtil.getDictByCode(dictUtil.DICT_LIST.topicStatus);
 
-            var row = JSON.parse(localStorage.getItem("rowData"));
+            var row = JSON.parse(localStorage.getItem("viewRowData"));
 
             $("#cancelbtn").unbind().on('click',function () {
                 localStorage.removeItem("viewRowData");

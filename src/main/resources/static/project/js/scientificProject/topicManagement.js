@@ -62,7 +62,7 @@
                     }
                 }
                 else if (row.examineStatus == projectStatus[1].id){
-                    if (row.status == topicStatus[1].id){
+                    if (row.status == topicStatus[1].id || row.status == topicStatus[0].id){
                         return [
                             '<a class="view" style="margin:0 1em;text-decoration: none;color:#775637;" data-toggle="modal" data-target="" >查看</a>',
                             '<a class="giveUp" style="margin:0 1em;text-decoration: none;color:#775637;" data-toggle="modal" data-target="" >放弃课题</a>',

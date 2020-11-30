@@ -11,7 +11,12 @@
             var row = JSON.parse(localStorage.getItem("rowData"));
 
             $("#cancelbtn").unbind().on('click',function () {
+                localStorage.removeItem("viewRowData");
                 var url = "/scientificProject/topicManagement";
+                if(localStorage.getItem("centralizedView") == "true"){
+                    url = "/scientificProject/centralizedReview";
+                    localStorage.removeItem("centralizedView");
+                }
                 orange.redirect(url);
             });
 
@@ -136,7 +141,7 @@
 
             (function init() {
                 if (isView()){
-                    var tempdata = JSON.parse(localStorage.getItem("rowData"));
+                    var tempdata = JSON.parse(localStorage.getItem("viewRowData"));
                     $("#projectName").val(tempdata.projectName);
                     $("#disciplineCode").val(tempdata.disciplineCode);
                     $("#disciplineName").val(tempdata.disciplineName);
@@ -168,7 +173,7 @@
             }());
 
             function isView() {
-                return (localStorage.getItem("rowData") != null || localStorage.getItem("rowData") != undefined)
+                return (localStorage.getItem("viewRowData") != null || localStorage.getItem("viewRowData") != undefined)
             }
 
             var files= document.getElementById('upload_file').files;

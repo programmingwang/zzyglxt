@@ -158,12 +158,9 @@
             }
 
 
-            // bootstrapTableUtil.globalSearch("table",url,aParam, aCol);
+             bootstrapTableUtil.globalSearch("table",url,aParam, aCol);
 
-            var allTableData = $("#table").bootstrapTable("getData");
-            //console.log(allTableData);
-            localStorage.setItem('2',JSON.stringify(allTableData))
-            obj2=JSON.parse(localStorage.getItem("2"));
+
 
         })
 })();

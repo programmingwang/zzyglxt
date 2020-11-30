@@ -92,8 +92,6 @@
 
             var myTable = bootstrapTableUtil.myBootStrapTableInit("table", getUrl, aParam, aCol);
 
-            var allTableData = $("#table").bootstrapTable("getData");
-            console.log(allTableData);
 
             function refreshTable() {
                 var param = {};
@@ -101,7 +99,46 @@
                 myTable = bootstrapTableUtil.myBootStrapTableInit("table", getUrl, param, aCol);
             }
 
-            bootstrapTableUtil.globalSearch("table", getUrl, aParam, aCol);
+
+                $("#btnSearch").unbind().on('click',function() {
+
+                var newArry = [];
+                var addstr=document.getElementById("taskNameSearch2").value;
+                var str = document.getElementById("taskNameSearch1").value;
+                var allTableData = JSON.parse(localStorage.getItem("2"));
+                var nowDate= new Date();
+                // console.log(nowDate)
+                // console.log(allTableData);
+                // console.log(str);
+                // console.log(aCol)
+                console.log(addstr);
+
+                for (var i in allTableData) {
+                        var textP = allTableData[i][aCol[0].field];
+                        var makeTime=new Date(allTableData[i][aCol[2].field]) ;
+                        //console.log(makeTime)
+
+                        // console.log("开始时间："+stratTime);
+                        // console.log("结束时间"+endTime);
+                        //  console.log(makeTime>=nowDate);
+                        //  console.log(makeTime<nowDate);
+
+                        if (textP==str){
+                            if (addstr==="生效"&&makeTime>nowDate){
+                                newArry.push(allTableData[i]);
+                            }
+                            if (addstr==="失效"&&makeTime<=nowDate){
+                                newArry.push(allTableData[i]);
+                            }
+                        }
+
+                }
+                var newArr=new Set(newArry)
+                newArry=Array.from(newArr)
+                $("#table").bootstrapTable("load", newArry);
+            })
+
+
 
         })
 })();

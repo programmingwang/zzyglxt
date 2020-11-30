@@ -11,7 +11,12 @@
             var row = JSON.parse(localStorage.getItem("rowData"));
 
             $("#cancelbtn").unbind().on('click',function () {
+                localStorage.removeItem("viewRowData");
                 var url = "/scientificProject/topicManagement";
+                if(localStorage.getItem("centralizedView") == "true"){
+                    url = "/scientificProject/centralizedReview";
+                    localStorage.removeItem("centralizedView");
+                }
                 orange.redirect(url);
             });
 
@@ -136,7 +141,7 @@
 
             (function init() {
                 if (isView()){
-                    var tempdata = JSON.parse(localStorage.getItem("rowData"));
+                    var tempdata = JSON.parse(localStorage.getItem("viewRowData"));
                     var address = tempdata.postalAddress;
                     address=address.replace(/,/ig, "");
                     $("#projectName").val(tempdata.projectName);
@@ -170,15 +175,16 @@
             }());
 
             function isView() {
-                return (localStorage.getItem("rowData") != null || localStorage.getItem("rowData") != undefined)
+                return (localStorage.getItem("viewRowData") != null || localStorage.getItem("viewRowData") != undefined)
             }
 
-            var files= document.getElementById('upload_file');
-            if(files.length>0){
-                $("#addFile").empty("p");
-                var name = files.name;
-                $("#addFile").append('<p>附件'+j+'：&nbsp;'+ name +'&nbsp;</p>');
+            var files= document.getElementById('upload_file').files;
+            if(files){
+                if(files.length>0){
+                    $("#addFile").empty("p");
+                    var name = files.name;
+                    $("#addFile").append('<p>附件'+j+'：&nbsp;'+ name +'&nbsp;</p>');
+                }
             }
-
         })
 })();

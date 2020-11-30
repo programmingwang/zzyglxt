@@ -267,7 +267,7 @@
                     }},
                 {field: 'specialtyName', title: '所在科室'},
                 {field: 'hospitalName', title: '所属医院'},
-                {field: 'phone', title: '联系电话', width: '120px'},
+                {field: 'phone', title: '联系电话', width: '125px'},
                 {field: 'action',  title: '操作',formatter: operation,events:orgEvents}
             ];
 
@@ -280,10 +280,6 @@
             }
 
             bootstrapTableUtil.globalSearch("table",url,aParam, aCol);
-            var allTableData = $("#table").bootstrapTable("getData");
-            //console.log(allTableData);
-            localStorage.setItem('2',JSON.stringify(allTableData))
-            obj2=JSON.parse(localStorage.getItem("2"));
-            //console.log(obj2);
+
         })
 })();

@@ -2228,8 +2228,8 @@
         modalHtml.myTimeModal =
             '<div class="row" >'+
             '            <div class="col-lg-12 col-md-12" >\n' +
-            '                <div class="input-group mb-3" style="padding-left: 1rem;\n' +
-            '    padding-right: 0.5rem;">\n' +
+            '                <div class="input-group mb-3" style="padding-left: 0.8rem;\n' +
+            '    padding-right: 0.2rem;">\n' +
             '                    <div class="input-group-prepend">\n' +
             '                        <label class="input-group-text" for="applicant">年份</label>\n' +
             '                    </div>\n' +
@@ -2242,7 +2242,7 @@
             '                <div class="input-group mb-3">\n' +
             '                    <div class="input-group-prepend">\n' +
             '                       <div  >\n' +
-            '                           <input type="text" id=\'startTime\' >\n' +
+            '                           <input type="text" id=\'startTime\' style="background-image:">  <i class="fa fa-calendar fa-lg" style="position: absolute;top: 0.5rem;right: 0;"></i>\n' +
             '                       </div>\n' +
             '                    </div>\n' +
             '                </div>\n' +
@@ -2253,7 +2253,7 @@
             '                <div class="input-group mb-3">\n' +
             '                    <div class="input-group-prepend">\n' +
             '                       <div >\n' +
-            '                           <input type="text" id=\'endTime\' >\n' +
+            '                           <input type="text" id=\'endTime\' >  <i class="fa fa-calendar fa-lg" style="position: absolute;top: 0.5rem;right: 0;"></i>\n' +
             '                       </div>\n' +'                    </div>\n' +
             '                </div>\n' +
             '            </div>\n' +

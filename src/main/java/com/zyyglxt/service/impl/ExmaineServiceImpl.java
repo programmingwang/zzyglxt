@@ -77,7 +77,7 @@ public class ExmaineServiceImpl implements IExmaineService {
             ExmaineDto exmaineDto = new ExmaineDto();
             BeanUtils.copyProperties(industrialDevelopExpertRefDO,exmaineDto);
             IndustrialDevelopTopicDO topic = developTopicService.getTopic(industrialDevelopExpertRefDO.getTopicCode());
-            exmaineDto.setProjectName(topic.getProjectName()).setCompany(topic.getCompany()).setProjectNo(topic.getProjectNo());
+            BeanUtils.copyProperties(topic,exmaineDto);
             exmaineDtos.add(exmaineDto);
         }
         return exmaineDtos;
@@ -91,7 +91,7 @@ public class ExmaineServiceImpl implements IExmaineService {
             ExmaineDto exmaineDto = new ExmaineDto();
             BeanUtils.copyProperties(industrialDevelopExpertRefDO,exmaineDto);
             IndustrialDevelopTopicDO topic = developTopicService.getTopic(industrialDevelopExpertRefDO.getTopicCode());
-            exmaineDto.setProjectName(topic.getProjectName()).setCompany(topic.getCompany()).setProjectNo(topic.getProjectNo());
+            BeanUtils.copyProperties(topic,exmaineDto);
             exmaineDtos.add(exmaineDto);
         }
         return exmaineDtos;

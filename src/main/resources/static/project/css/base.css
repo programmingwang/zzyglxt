@@ -79,7 +79,7 @@ table{
 
 
 .test-border{
-    border: 0px solid red;
+    border: 0px solid #D60000;
     margin-left: 0px!important;
     margin-right: 0px!important;
     padding-left: 0px!important;
@@ -119,9 +119,9 @@ table{
     background-color:#D60000;
 }
 .aaaa.active, .aaaa:active {
-    color: rgb(217, 0, 27);
+    color: white;
     text-decoration: none;
-    background-color: white;
+    background-color:#D60000;
 }
 .btn-link{
     color:black;
@@ -216,4 +216,19 @@ thead.self-thead {
 
 #main_body{
     margin-top: 1rem;
+}
+#btnSearch{
+    background-color: #D60000;color: #FFFFFF;border: none;border-radius: 4px;border-top-left-radius: 0px;border-bottom-left-radius: 0px;z-index: 1;
+}
+.upload-wrap {
+    padding-left: 0.8rem;
+}
+
+.upload-wrap .file-open {
+    width: 90px;
+    height: 36px;
+    line-height: 36px;
+    text-align: center;
+    color: #fff;
+    background: #D60000;
 }

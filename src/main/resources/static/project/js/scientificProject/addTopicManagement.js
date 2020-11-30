@@ -226,24 +226,6 @@
                         }
                     },false,"","get");
                     date.isDuringDate(starttime, endtime);
-
-                    /*var userCode = sessionStorage.getItem("itemcode");
-                    ajaxUtil.myAjax(null,"/industrialdevelop/getStatus?userCode="+userCode,null,function (data) {
-                        //console.log(data.data[3].status);
-                        var sum=0;
-                        for(var i=0;i<data.data.length;i++){
-                            if (data.data[i].status == "0" || data.data[i].status == "1"){
-                                sum +=1;
-                            }
-                        }
-                        if (sum>2){
-                            operateMessage = "当前有两个项目未结题，无法申报新项目";
-                            alertUtil.info(operateMessage);
-                            var url = "/scientificProject/topicManagement";
-                            orange.redirect(url);
-                        }
-                    },false,"","get");*/
-
                 }
             }());
 

@@ -17,6 +17,15 @@
             const editor = objectUtil.wangEditorUtil();
 
             $("#cancelBtn").click(function () {
+                var username = sessionStorage.getItem("username");
+                var orgName = sessionStorage.getItem("orgName");
+                var userdto = {
+                    "username": username,
+                    "orgName": orgName
+                }
+                ajaxUtil.myAjax(null,"/user/deletuser",userdto,function (data) {
+
+                },false,true);
                 window.history.back()
             });
 
@@ -37,7 +46,7 @@
                 return param;
             }
 
-            $("#saveBtn").unbind('click').on('click',function () {
+            $("#saveBtn").unbind().on('click',function () {
                 var param = generateParam();
                 param.status = "0";
                 param.itemcode = itemcode;

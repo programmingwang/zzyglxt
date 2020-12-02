@@ -35,8 +35,8 @@
             },false)
         })
 
-        $("#return").unbind("click").bind("click",function () {
-            window.location.href = "/"
+        $("#btn_Register").unbind("click").bind("click",function () {
+            window.location.href = "/register"
         })
 
         //回车事件绑定，密码框输完密码按回车课实现登录

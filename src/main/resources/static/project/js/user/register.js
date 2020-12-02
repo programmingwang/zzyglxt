@@ -178,7 +178,6 @@
                     alertUtil.error('请输入验证码！');
                     return false;
                 } else if (inputCode == canvasCode) {
-                    alertUtil.success('提交成功！');
                     return true;
                 } else {
                     alertUtil.error('验证码错误！请重新输入！');
@@ -194,7 +193,10 @@
                 let password = $("#password").val();
                 let phone = $("#phone").val();
 
-                console.log('555555555555'+orgType);
+                sessionStorage.setItem('username',username);
+                sessionStorage.setItem('orgCode',orgCode);
+                sessionStorage.setItem('orgName',orgName);
+                sessionStorage.setItem('phone',phone);
 
                 var userEntity = {
                     "orgName": orgName,
@@ -210,7 +212,6 @@
                             window.location.href = data.data
                         } else {
                             alertUtil.error("注册失败");
-                            window.location.href = "/register"
                         }
                     }, false)
                 }

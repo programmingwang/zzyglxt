@@ -31,11 +31,11 @@
             var year;
             var nowyear = new Date().getFullYear().toString();
             if (topicData.data == null){
-                num = "0000";
+                num = "000";
                 year = nowyear;
             }else {
-                if (topicData.data.projectNo.substring(4) == "9999" || topicData.data.projectNo.substring(0,4) !== nowyear){
-                    num = "0000";
+                if (topicData.data.projectNo.substring(4) == "999" || topicData.data.projectNo.substring(0,4) !== nowyear){
+                    num = "000";
                     year = nowyear;
                 }else {
                     num = topicData.data.projectNo.substring(4);
@@ -47,23 +47,25 @@
             //审核操作
             function operation1(value, row, index){
                 if(row.examineStatus == projectStatus[0].id){
-                    return [
-                        '<a class="edit" style="margin:0 1em;text-decoration: none;color:#775637;" data-toggle="modal" data-target="" >修改</a>',
-                        '<a class="submit"  style="margin:0 1em;text-decoration: none;color:#775637;" data-target="#staticBackdrop" >提交</a>',
-                        '<a class="delete" style="margin:0 1em;text-decoration: none;color:#D60000;"  data-toggle="modal" data-target="#staticBackdrop" >删除</a>',
-                    ].join('');
-                }
-                else if (row.examineStatus == projectStatus[1].id){
-                    if (row.status == topicStatus[1].id){
-                        return [
-                            '<a class="view" style="margin:0 1em;text-decoration: none;color:#775637;" data-toggle="modal" data-target="" >查看</a>',
-                            '<a class="giveUp" style="margin:0 1em;text-decoration: none;color:#775637;" data-toggle="modal" data-target="" >放弃课题</a>',
-                        ].join('');
-                    }else if (row.status == topicStatus[3].id){
+                    if (row.status == topicStatus[3].id){
                         return [
                             '<a class="view" style="margin:0 1em;text-decoration: none;color:#775637;" data-toggle="modal" data-target="" >查看</a>',
                             '<a class="viewReason" style="margin:0 1em;text-decoration: none;color:#775637;" data-toggle="modal" data-target="" >放弃理由</a>',
                             '<a class="delete" style="margin:0 1em;text-decoration: none;color:#D60000;"  data-toggle="modal" data-target="#staticBackdrop" >删除</a>',
+                        ].join('');
+                    }else {
+                        return [
+                            '<a class="edit" style="margin:0 1em;text-decoration: none;color:#775637;" data-toggle="modal" data-target="" >修改</a>',
+                            '<a class="submit"  style="margin:0 1em;text-decoration: none;color:#775637;" data-target="#staticBackdrop" >提交</a>',
+                            '<a class="delete" style="margin:0 1em;text-decoration: none;color:#D60000;"  data-toggle="modal" data-target="#staticBackdrop" >删除</a>',
+                        ].join('');
+                    }
+                }
+                else if (row.examineStatus == projectStatus[1].id){
+                    if (row.status == topicStatus[1].id || row.status == topicStatus[0].id){
+                        return [
+                            '<a class="view" style="margin:0 1em;text-decoration: none;color:#775637;" data-toggle="modal" data-target="" >查看</a>',
+                            '<a class="giveUp" style="margin:0 1em;text-decoration: none;color:#775637;" data-toggle="modal" data-target="" >放弃课题</a>',
                         ].join('');
                     }
                 }
@@ -360,7 +362,7 @@
                                                         alertUtil.error(data.msg);
                                                     }
                                                 }
-                                            },false);
+                                            },false,true);
                                         }else{
                                             alertUtil.error(data.msg);
                                         }
@@ -368,16 +370,16 @@
                                 else{
                                     alertUtil.error(data.msg);
                                 }
-                            },false,true)
+                            },false);
                             return isSuccess;
                         }
                     };
-                    var giveUp = modalUtil.init(myGiveUpTopicModalData);
-                    giveUp.show();
+                    var myGiveUpModal = modalUtil.init(myGiveUpTopicModalData);
+                    myGiveUpModal.show();
                 },
 
                 'click .view' : function (e, value, row, index) {
-                    localStorage.setItem("rowData", JSON.stringify(row));
+                    localStorage.setItem("viewRowData", JSON.stringify(row));
                     var viewUrl = "/scientificProject/viewTopicManagement";
                     orange.redirect(viewUrl);
                 },
@@ -450,7 +452,7 @@
 
             //根据角色显示不同菜单和不同操作
             if (rolename === "主研人") {
-                $("#topicStatusSearch").selectUtil(topicStatus);
+                $("#chargePersonSearch").selectUtil(topicStatus);
                 var url = "/industrialdevelop/getUserCode?userCode="+usercode;
                 var aCol = [
                     {field: 'projectNo', title: '项目编号'},
@@ -487,7 +489,7 @@
                 date.isDuringDate(starttime, endtime);
 
             }else if (rolename === "科研项目申报单位"){
-                $("#topicStatusSearch").selectUtil(topicStatus);
+                $("#chargePersonSearch").selectUtil(topicStatus);
                 var url = "/industrialdevelop/getByCompany?company="+sessionStorage.getItem("username");
                 var aCol = [
                     {field: 'projectNo', title: '项目编号'},
@@ -506,7 +508,7 @@
                 ];
 
             }else if (rolename === "市级中医药管理部门"){
-                $("#topicStatusSearch").selectUtil(auditStatus);
+                $("#chargePersonSearch").selectUtil(auditStatus);
                 var url = "/industrialdevelop/getTopic?examineStatus="+projectStatus[2].id+"&examineStatus="+projectStatus[4].id +"&examineStatus="+projectStatus[5].id;
                 var aCol = [
                     {field: 'projectNo', title: '项目编号'},
@@ -525,7 +527,7 @@
                 ];
 
             }else if (rolename === "省局中医药管理部门"){
-                $("#topicStatusSearch").selectUtil(auditStatus);
+                $("#chargePersonSearch").selectUtil(auditStatus);
                 var url = "/industrialdevelop/getTopic?examineStatus="+projectStatus[4].id+"&examineStatus="+projectStatus[6].id +"&examineStatus="+projectStatus[7].id;
                 var aCol = [
                     {field: 'projectNo', title: '项目编号'},

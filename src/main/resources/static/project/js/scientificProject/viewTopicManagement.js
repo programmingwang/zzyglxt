@@ -8,7 +8,7 @@
             var projectStatus = dictUtil.getDictByCode(dictUtil.DICT_LIST.projectStatus);
             var topicStatus = dictUtil.getDictByCode(dictUtil.DICT_LIST.topicStatus);
 
-            var row = JSON.parse(localStorage.getItem("rowData"));
+            var row = JSON.parse(localStorage.getItem("viewRowData"));
 
             $("#cancelbtn").unbind().on('click',function () {
                 localStorage.removeItem("viewRowData");
@@ -142,13 +142,15 @@
             (function init() {
                 if (isView()){
                     var tempdata = JSON.parse(localStorage.getItem("viewRowData"));
+                    var address = tempdata.postalAddress;
+                    address=address.replace(/,/ig, "");
                     $("#projectName").val(tempdata.projectName);
                     $("#disciplineCode").val(tempdata.disciplineCode);
                     $("#disciplineName").val(tempdata.disciplineName);
                     $("#applicant").val(tempdata.applicant);
                     $("#contactCode").val(tempdata.contactCode);
                     $("#company").val(tempdata.company);
-                    $("#postalAddress").val(tempdata.postalAddress);
+                    $("#postalAddress").val(address);
                     $("#postalCode").val(tempdata.postalCode);
                     $("#email").val(tempdata.email);
                     $("#upload_file").text(tempdata.fileName);

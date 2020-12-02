@@ -122,7 +122,13 @@ public class TopicController {
     @ResponseBody
     public ResponseData getUserCode(@RequestParam(value = "userCode") String userCode){
         List<IndustrialDevelopTopicDO> topicDOList = developTopicService.selectByUserCode(userCode);
-        return new ResponseData(EmBusinessError.success,topicDOList);
+        List<IndustrialDevelopTopicDODto> topicDODtoList = new ArrayList<>();
+        for (IndustrialDevelopTopicDO topicDO : topicDOList) {
+            FileDO fileDO = iFileService.selectFileByDataCode(topicDO.getItemcode());
+            topicDODtoList.add(
+                    ConvertDOToDTOUtil.convertFromDOToDTO(topicDO, fileDO.getFilePath(), fileDO.getFileName()));
+        }
+        return new ResponseData(EmBusinessError.success,topicDODtoList);
     }
 
     //查询相应用户对应的所有课题

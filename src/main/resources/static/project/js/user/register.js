@@ -2,8 +2,7 @@
     require(['jquery', 'ajaxUtil', 'bootstrapTableUtil', 'objectUtil', 'alertUtil', 'selectUtil', 'stringUtil', 'dictUtil'],
         function (jquery, ajaxUtil, bootstrapTableUtil, objectUtil, alertUtil, selectUtil, stringUtil, dictUtil) {
 
-            var codeStr = [];
-            var i = 0;
+            const codeStr = [];
 
             /**生成一个随机数**/
             function randomNum(min, max) {
@@ -24,7 +23,7 @@
                 drawPic(codeStr);
             };
 
-            var sel = dictUtil.getDictByCode(dictUtil.DICT_LIST.orgType);
+            const sel = dictUtil.getDictByCode(dictUtil.DICT_LIST.orgType);
             $("#orgType").selectUtil(sel);
 
             /**绘制验证码图片**/
@@ -58,80 +57,101 @@
                 }
             }
 
-            // 输入框失去焦点后获取公司名称和机构代码，去数据库查询该机构的审核状态
             $("#orgCode").on("blur", function () {
+                let i = 0;
                 let orgName = $("#orgName").val();
                 // let orgType = $("#orgType option:selected").val();
                 let orgType = dictUtil.getName(dictUtil.DICT_LIST.orgType, $("#orgType").val());
                 let orgCode = $("#orgCode").val();
-                console.log(orgType);
                 var userEntity = {"orgName": orgName, "orgIdentify": orgType, "orgCode": orgCode};
-                ajaxUtil.myAjax(null, "/user/queryOrgStatus", userEntity, function (data) {
-                    console.log("888888888888888:"+data.data);
-                    if (data && data.code === 88888) {
-
-                        if (i == 0) {
-                            var div = document.getElementById('showStatusdiv');
-                            var tag = "<p id='showStatus'></p> ";
-                            div.insertAdjacentHTML("beforeEnd", tag);
-                            i++;
-                        }
-
-                        var str = data.data;
-                        if (isContains(str, '修改信息')) {
-                            var index = data.data.indexOf(substr);
-                            var modify = data.data.substring(index);
-                            data.data = data.data.substring(0, index);
-                            if (i == 1) {
-                                var p = document.getElementById('showStatus');
-                                var tag = "<a id='modify'></a> ";
+                $.ajax({
+                    url:"/user/queryOrgStatus",
+                    type:'POST',
+                    async: false,
+                    data:userEntity,
+                    dataType: "json",
+                    success:function(data){
+                        if (data && data.code === 88888) {
+                            const div = document.getElementById('showStatusdiv');
+                            let tag;
+                            let index;
+                            if (i == 0) {
+                                tag = "<p id='showStatus'></p> ";
                                 div.insertAdjacentHTML("beforeEnd", tag);
                                 i++;
                             }
-                            // 这个得发请求到后端去查询数据库拿到数据后修改进行更新
-                            if (isContains('中药材种植园', orgType)) {
-                                document.getElementById('modify').href = 'http://localhost:8989/plantation_add';
-                            } else if (isContains('中药材加工企业', orgType)) {
-                                document.getElementById('modify').href = 'http://localhost:8989/process_add';
-                            } else if (isContains('中药材制药企业', orgType)) {
-                                document.getElementById('modify').href = 'http://localhost:8989/produce_add';
-                            } else if (isContains('科研院所', orgType)) {
-                                document.getElementById('modify').href = 'http://localhost:8989/lab_add';
-                            } else if (isContains('技术服务机构', orgType)) {
-                                document.getElementById('modify').href = 'http://localhost:8989/tecservice_add';
-                            } else if (isContains('旅游康养机构', orgType)) {
-                                document.getElementById('modify').href = 'http://localhost:8989/tour_add';
-                            } else {
-                                document.getElementById('modify').href = '#';
-                            }
-                            $("#modify").text(modify)
-                        }
-                        if(!isContains(str, '修改信息') && document.getElementById("modify")){
-                            $("#modify").remove();
-                        }
 
-                        if (isContains(str, '登录')) {
-                            var index = data.data.indexOf('登录');
-                            var login = data.data.substring(index);
-                            data.data = data.data.substring(0, index);
-                            if (i == 1) {
-                                var p = document.getElementById('showStatus');
-                                var tag = "<a id='login'></a> ";
-                                div.insertAdjacentHTML("beforeEnd", tag);
-                                i++;
+                            var str = data.data;
+                            if (isContains(str, '修改信息')) {
+                                index = data.data.indexOf('修改信息');
+                                const modify = data.data.slice(index);
+                                data.data = data.data.slice(0, index);
+                                if (i == 1) {
+                                    var p = document.getElementById('showStatus');
+                                    tag = "<a id='modify'></a> ";
+                                    div.insertAdjacentHTML("beforeEnd", tag);
+                                    i++;
+                                }
+                                // 这个得发请求到后端去查询数据库拿到数据后修改进行更新
+                                let m = document.getElementById('modify');
+                                if (isContains('中药材种植园', orgType)) {
+                                    // document.getElementById('modify').href = 'http://localhost:8989/plantation_add';
+                                    // 这样子会报Uncaught TypeError: Cannot set property 'href' of null
+                                    // 原因 “document.getElementById(“modify”)”这里，代码没有获取到Id为“modify”的元素，那么就是null，null是没有办法set属性的
+                                    m.href = 'http://localhost:8989/plantation_add';
+                                } else if (isContains('中药材加工企业', orgType)) {
+                                    m.href = 'http://localhost:8989/process_add';
+                                } else if (isContains('中药材制药企业', orgType)) {
+                                    m.href = 'http://localhost:8989/produce_add';
+                                } else if (isContains('科研院所', orgType)) {
+                                    m.href = 'http://localhost:8989/lab_add';
+                                } else if (isContains('技术服务机构', orgType)) {
+                                    m.href = 'http://localhost:8989/tecservice_add';
+                                } else if (isContains('旅游康养机构', orgType)) {
+                                    m.href = 'http://localhost:8989/tour_add';
+                                } else {
+                                    m.href = '#';
+                                }
+                                $("#modify").text(modify)
                             }
-                            document.getElementById('login').href = 'http://localhost:8989/userLogin';
-                            $("#login").text(login)
-                        }
-                        if(!isContains(str, '登录') && document.getElementById("login")){
-                            $("#login").remove();
-                        }
+                            if(!isContains(str, '修改信息') && document.getElementById("modify")){
+                                $("#modify").remove();
+                            }
 
-                        $("#showStatus").text(data.data);
-                    } else {
-                        alertUtil.error("查询审核状态失败")
+                            if (isContains(str, '登录')) {
+                                index = data.data.indexOf('登录');
+                                const login = data.data.slice(index);
+                                data.data = data.data.slice(0, index);
+                                if (i == 1) {
+                                    var p = document.getElementById('showStatus');
+                                    tag = "<a id='login'></a> ";
+                                    div.insertAdjacentHTML("beforeEnd", tag);
+                                    i++;
+                                }
+
+                                let l = document.getElementById('login');
+                                l.href = 'http://localhost:8989/userLogin';
+                                $("#login").text(login)
+                            }
+                            if(!isContains(str, '登录') && document.getElementById("login")){
+                                $("#login").remove();
+                            }
+
+                            $("#showStatus").text(data.data);
+
+                            $.each($('p'),function(){// 去除空白的p标签
+                                if(!$(this).text()){
+                                    $(this).remove();
+                                }
+                            });
+                        } else {
+                            alertUtil.error("查询审核状态失败")
+                        }
+                    },
+                    error: function(data){
+                        alertUtil.error(data.msg)
                     }
-                }, false)
+                });
             });
 
             function validateLogin() {
@@ -217,6 +237,7 @@
                 }
             })
 
+            // 判断str中是否含有substr
             function isContains(str, substr) {
                 return new RegExp(substr).test(str);
             }

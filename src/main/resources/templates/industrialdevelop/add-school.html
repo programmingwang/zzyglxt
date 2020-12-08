@@ -44,7 +44,7 @@
     <div class="col-12">
         <form>
             <div class="form-group row">
-                <label class="col-sm-2 col-form-label">基地照片：</label>
+                <label class="col-sm-2 col-form-label">学校图片：</label>
                 <div class="upload-content" data-limit="1">
                     <div class="content-img">
                         <ul class="content-img-list"></ul>
@@ -64,33 +64,44 @@
             </div>
 
             <div class="form-group row">
-                <label class="col-sm-2 col-form-label">基地名称：</label>
+                <label class="col-sm-2 col-form-label">学校名称：</label>
                 <div class="col-sm-3">
-                    <input id="name" type="text" class="form-control" placeholder="请输入">
+                    <input id="schoolName" type="text" class="form-control" placeholder="请输入">
                 </div>
 
-                <label class="col-sm-2 col-form-label">占地面积：</label>
+                <label class="col-sm-2 col-form-label">学校简介：</label>
                 <div class="col-sm-3">
-                    <input id="areaCoverd" type="text" class="form-control" placeholder="请输入">
+                    <input id="schoolIntroduce" type="text" class="form-control" placeholder="请输入">
                 </div>
             </div>
             <div class="form-group row">
-                <label class="col-sm-2 col-form-label">特色服务：</label>
+                <label class="col-sm-2 col-form-label">二级学院名称：</label>
                 <div class="col-sm-3">
-                    <input id="specialService" type="text" class="form-control" placeholder="请输入">
+                    <input id="secondaryCollege" type="text" class="form-control" placeholder="请输入">
+                </div>
+
+                <label class="col-sm-2 col-form-label">本科招生专业：</label>
+                <div class="col-sm-3">
+                    <input id="enrollmentMajor" type="text" class="form-control" placeholder="请输入">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">研究生招生专业：</label>
+                <div class="col-sm-3">
+                    <input id="graduateEnrollmentMajor" type="text" class="form-control" placeholder="请输入">
                 </div>
             </div>
             <div class="form-group row">
-                <label class="col-sm-2 col-form-label">联系人：</label>
-                <div class="col-sm-3">
-                    <input id="contacts" type="text" class="form-control" placeholder="请输入">
-                </div>
-
                 <label class="col-sm-2 col-form-label">联系电话：</label>
                 <div class="col-sm-3">
                     <input id="phone" type="text" class="form-control" placeholder="请输入">
                 </div>
 
+                <label class="col-sm-2 col-form-label">在线地址：</label>
+                <div class="col-sm-3">
+                    <input id="onlineAddress" type="text" class="form-control" placeholder="请输入">
+                </div>
             </div>
             <div id="distpicker" class="form-group row">
                 <label for="addressPro" class="col-sm-2 col-form-label">省：</label>
@@ -109,13 +120,13 @@
                 </div>
             </div>
             <div class="form-group row">
-                <label class="col-sm-2 col-form-label">地址：</label>
+                <label class="col-sm-2 col-form-label">学校地址：</label>
                 <div class="col-sm-3">
                     <input id="address" type="text" class="form-control" placeholder="请输入">
                 </div>
             </div>
             <div class="form-group row">
-                <label class="col-sm-2 col-form-label">基地简介：</label>
+                <label class="col-sm-2 col-form-label">学校简介：</label>
                 <div id="div1" class="col-sm-8">
                 </div>
             </div>
@@ -127,9 +138,9 @@
                     <div class="col">
                         <button id="cancelBtn" type="button" class="btn btn-light col">取消</button>
                     </div>
-                    <!--<div class="col">-->
-                    <!--<button id="saveBtn" type="button" class="btn btn-danger col">保存</button>-->
-                    <!--</div>-->
+                    <div class="col">
+                        <button id="saveBtn" type="button" class="btn btn-danger col">保存</button>
+                    </div>
                     <div class="col">
                         <button id="submitBtn" type="submit" class="btn btn-primary col">提交</button>
                     </div>

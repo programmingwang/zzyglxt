@@ -3,15 +3,9 @@
         function (jquery,objectUtil,ajaxUtil,alertUtil,stringUtil,dictUtil,selectUtil,fileUtil,uploadImg,distpicker,urlUtil) {
 
 
-            /*q全局变量*/
+            /*全局变量*/
             var tempdata;
-            ajaxUtil.myAjax(null, "/medicalService/hosp/selectByOrgCode", null,function (data) {
-                if(data && data.code == ajaxUtil.successCode) {
-                    tempdata = data.data
-                }else{
-                    alertUtil.error(data.msg)
-                }
-            },false,"","get");
+
             var updateStatus = isUpdate();
             var jumpUrl = "/userLogin";
             var webStatus = dictUtil.getDictByCode(dictUtil.DICT_LIST.webStatus);
@@ -38,8 +32,16 @@
             })
             /*返回按钮处理*/
             $("#cancel").unbind().on('click',function () {
+                var username = sessionStorage.getItem("username");
+                var orgName = sessionStorage.getItem("orgName");
+                var userdto = {
+                    "username": username,
+                    "orgName": orgName
+                }
+                ajaxUtil.myAjax(null,"/user/deletuser",userdto,function (data) {
+
+                },false,true);
                 window.history.back()
-                // orange.redirect(jumpUrl);
             });
 
             /*确认按钮处理*/
@@ -102,7 +104,7 @@
                     $("#hospitalKeySpecialty").val(tempdata.hospitalKeySpecialty);
                     $("#hospitalTelephone").val(tempdata.hospitalTelephone);
                     $("#distpicker").distpicker({
-                        province: "河北省",
+                        province: tempdata.hospitalAddressPro,
                         city: tempdata.hospitalAddressCity,
                         district: tempdata.hospitalAddressCountry
                     });
@@ -112,14 +114,12 @@
                     $(".w-e-text").html(tempdata.hospitalIntroduce);
                 }else {
                     localStorage.removeItem("rowData");
-                    $("#distpicker").distpicker({
-                        province: "河北省",
-                    });//新增页面使用
+                    $("#distpicker").distpicker();//新增页面使用
                 }
                 init = function () {
 
                 }
-            }
+            };
             uploadImg.init();
             init();
 

@@ -69,14 +69,14 @@ public class UserController {
                     case "中药材制药企业":
                         IndustrialDevelopChiMed chiMed = developChiMedService.selectByOrgNameAndCode(orgStatusDto.getOrgName(), orgStatusDto.getOrgCode());
                         switch (chiMed.getStatus()) {
-                            case "提交":
+                            case "1":
                                 return new ResponseData(EmBusinessError.success, "您申请注册的机构还在审核中，请耐心等待");
-                            case "地市局用户审核不通过":
-                            case "省局用户审核不通过":
+                            case "5":
+                            case "7":
                                 return new ResponseData(EmBusinessError.success, "您申请注册的机构暂未审核通过，审核意见：" + chiMed.getReason() + "，点击此处修改信息");
-                            case "地市局用户审核通过":
+                            case "4":
                                 return new ResponseData(EmBusinessError.success, "您申请注册的机构市局审核已通过，请耐心等待省局审核");
-                            case "省局用户审核通过":
+                            case "6":
                                 return new ResponseData(EmBusinessError.success, "该机构审核已通过，已有账号点击此处登录");
                         }
                         return new ResponseData(EmBusinessError.success, "非法状态：" + chiMed.getStatus());
@@ -85,14 +85,14 @@ public class UserController {
                     case "旅游康养机构":
                         IndustrialDevelopTecSerOrg tecSerOrg = developTecSerOrgService.selectByOrgNameAndCode(orgStatusDto.getOrgName(), orgStatusDto.getOrgCode());
                         switch (tecSerOrg.getStatus()) {
-                            case "提交":
+                            case "1":
                                 return new ResponseData(EmBusinessError.success, "您申请注册的机构还在审核中，请耐心等待");
-                            case "地市局用户审核不通过":
-                            case "省局用户审核不通过":
+                            case "5":
+                            case "7":
                                 return new ResponseData(EmBusinessError.success, "您申请注册的机构暂未审核通过，审核意见：" + tecSerOrg.getReason() + "，点击此处修改信息");
-                            case "地市局用户审核通过":
+                            case "4":
                                 return new ResponseData(EmBusinessError.success, "您申请注册的机构市局审核已通过，请耐心等待省局审核");
-                            case "省局用户审核通过":
+                            case "6":
                                 return new ResponseData(EmBusinessError.success, "该机构审核已通过，已有账号点击此处登录");
                         }
                         return new ResponseData(EmBusinessError.success, "非法状态：" + tecSerOrg.getStatus());
@@ -183,6 +183,17 @@ public class UserController {
     @RequestMapping(value = "/adduser", method = RequestMethod.POST)
     public ResponseData insertUser(@RequestBody UserDO userDO) {
         userService.insertUserSelective(userDO);
+        return new ResponseData(EmBusinessError.success);
+    }
+
+    /**
+     * 用户未录入机构信息点击返回按钮则删除用户信息
+     * @param userDtO
+     * @return
+     */
+    @RequestMapping(value = "/deletuser", method = RequestMethod.POST)
+    public ResponseData deleteUserByUsername(@RequestBody UserDto userDtO){
+        userService.deleteUserByUsername(userDtO);
         return new ResponseData(EmBusinessError.success);
     }
 }

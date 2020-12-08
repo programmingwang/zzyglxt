@@ -127,6 +127,14 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public void resetPassword(UserDO userDO) {
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        String password = encoder.encode("1234");
+        userDO.setPassword(password);
+        userDOMapper.updateByPrimaryKeySelective(userDO);
+    }
+
+    @Override
     public int updateByPrimaryKeyWithBLOBs(UserDO record) {
         return userDOMapper.updateByPrimaryKeyWithBLOBs(record);
     }

@@ -138,6 +138,9 @@
       <if test="state != null">
         STATE,
       </if>
+      <if test="contacts != null">
+        CONTACTS,
+      </if>
       <if test="mobilephone != null">
         mobilePhone,
       </if>
@@ -199,6 +202,9 @@
       </if>
       <if test="state != null">
         #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="contacts != null">
+        #{contacts,jdbcType=VARCHAR},
       </if>
       <if test="mobilephone != null">
         #{mobilephone,jdbcType=VARCHAR},

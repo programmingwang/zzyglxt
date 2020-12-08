@@ -24,6 +24,8 @@ public interface UserService {
 
     void updateByPrimaryKeySelective(UserDO userDO);
 
+    void resetPassword(UserDO userDO);
+
     int updateByPrimaryKeyWithBLOBs(UserDO record);
 
     int updateByPrimaryKey(UserDO record);

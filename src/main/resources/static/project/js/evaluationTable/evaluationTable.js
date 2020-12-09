@@ -81,7 +81,7 @@
                         $("#score"+(i+1)).attr("readOnly","true")
                     }
                 }
-                if(sessionStorage.getItem("rolename") == "省局中医药管理部门"){
+                if(sessionStorage.getItem("rolename") == "科研项目-省级"){
                     $("#expertOpinion").val("专家意见："+row.opinion);
                 }else{
                     $("#expertOpinion").val(row.opinion);

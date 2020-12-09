@@ -26,12 +26,12 @@
 
             var nopass;
 
-            if (rolename === "市级中医药管理部门")
+            if (rolename === "产业发展-市级")
             {
                 pass = "4";
                 nopass = "5";
             }
-            else if (rolename === "省局中医药管理部门")
+            else if (rolename === "产业发展-省级")
             {
                 pass = "6";
                 nopass = "7";
@@ -49,7 +49,7 @@
                 let tcode = parseInt(code);
                 let tpass = parseInt(pass);
                 let tnopass = parseInt(nopass);
-                if ((tcode < tpass && tcode % 2 === 0 && tcode !== 0) || (tcode === 1 && rolename === "市级中医药管理部门")){
+                if ((tcode < tpass && tcode % 2 === 0 && tcode !== 0) || (tcode === 1 && rolename === "产业发展-市级")){
                     return [
                         '<a class="view" style="margin:0 1em;text-decoration: none;color: #775637" data-toggle="modal" data-target="" >查看</a>',
                         '<a class="pass" style="margin:0 1em;text-decoration: none;color: #775637" data-toggle="modal" data-target="" >通过</a>',

@@ -85,7 +85,9 @@
                         }
                     }},
                 {field: 'contacts', title: '联系人'},
-                {field: 'status', title: '项目状态'},
+                {field: 'status', title: '项目状态', formatter:function (value) {
+                        return '<p>'+status[value].text+'</p>'
+                    }},
                 {field: 'action',  title: '操作',formatter: operation,events:orgEvents}
             ];
 
@@ -98,10 +100,6 @@
             }
 
             bootstrapTableUtil.globalSearch("table",getUrl,aParam, aCol);
-            var allTableData = $("#table").bootstrapTable("getData");
-            //console.log(allTableData);
-            localStorage.setItem('2',JSON.stringify(allTableData))
-            obj2=JSON.parse(localStorage.getItem("2"));
-            //console.log(obj2);
+
         })
 })();

@@ -43,46 +43,46 @@ public class IndexController {
 
     @RequestMapping(value = "/plantation_add")
     public String plantation_add() {
-        return "/industrialdevelop/chinesemed/plantation_add";
+        return "/industrialdevelop/chinesemed/add-plantation";
     }
 
     @RequestMapping(value = "/process_add")
     public String process_add() {
-        return "/industrialdevelop/chinesemed/chinesemed-process_add";
+        return "/industrialdevelop/chinesemed/add-chinesemed-process";
     }
 
     @RequestMapping(value = "/produce_add")
     public String produce_add() {
-        return "/industrialdevelop/chinesemed/chinesemed-produce_add";
+        return "/industrialdevelop/chinesemed/add-chinesemed-produce";
     }
 
     @RequestMapping(value = "/sale_add")
     public String sale_add() {
-        return "/industrialdevelop/chinesemed/chinesemed-sale_add";
+        return "/industrialdevelop/chinesemed/add-chinesemed-sale";
     }
 
     @RequestMapping(value = "/hosp_add")
     public String hosp_add() {
-        return "/industrialdevelop/organization/addHosp";
+        return "/industrialdevelop/organization/add-hosp";
     }
 
     @RequestMapping(value = "/school_add")
     public String school_add() {
-        return "/industrialdevelop/school_add";
+        return "/industrialdevelop/add-school";
     }
 
     @RequestMapping(value = "/lab_add")
     public String lab_add() {
-        return "/industrialdevelop/organization/lab_add";
+        return "/industrialdevelop/organization/add-lab";
     }
 
     @RequestMapping(value = "/tecserviceorg_add")
     public String tecservice_add() {
-        return "/industrialdevelop/organization/tecserviceorg_add";
+        return "/industrialdevelop/organization/add-tecserviceorg";
     }
 
     @RequestMapping(value = "/tour_add")
     public String tour_add() {
-        return "/industrialdevelop/organization/tour_add";
+        return "/industrialdevelop/organization/add-tour";
     }
 }

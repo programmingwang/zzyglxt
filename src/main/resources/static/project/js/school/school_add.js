@@ -68,7 +68,7 @@
                     $("#projectCost").val(tempdata.projectCost);
                     $("#contacts").val(tempdata.contacts);
                     $("#phone").val(tempdata.phone);
-                    $(".w-e-text").html(tempdata.projectIntroduce);
+                    editor.txt.html(tempdata.projectIntroduce);
                     itemcode = tempdata.itemcode;
                     // uploadImg.setImgSrc(tempdata.filePath)
                 }else {

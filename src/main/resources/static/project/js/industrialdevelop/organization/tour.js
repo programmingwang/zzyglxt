@@ -3,20 +3,34 @@
         function (jquery,ajaxUtil,bootstrapTableUtil,objectUtil,alertUtil,modalUtil,selectUtil,stringUtil,dictUtil) {
 
 
-            var getUrl = "/industrialdevelop/tec-ser-org/tour";
+            var url = "/industrialdevelop/base-style";
 
-            var opUrl = "/industrialdevelop/tec-ser-org";
-            var pathUrl = "/industrialdevelop/organization/tour";
-            var addUrl = pathUrl+"_add";
+            var pathUrl = "/industrialdevelop/style";
+            var addUrl = pathUrl+"_add_baseElegant";
             var aParam = {
+
             };
+
+            var showStatus = dictUtil.getDictByCode(dictUtil.DICT_LIST.showStatus);
+            // 0 —— 1 展示中 2 已下架
 
             //操作
             function operation(value, row, index){
-                return [
-                    '<button type="button" class="edit btn btn-primary btn-sm" style="margin-right: 5px" data-toggle="modal" data-target="" >编辑</button>',
-                    '<button type="button" class="delete btn btn-danger btn-sm"  data-toggle="modal" data-target="#staticBackdrop" >删除</button>',
-                ].join('');
+                if(row.status == showStatus[0].id){
+                    return [
+                        '<a class="edit" style="margin:0 1em;text-decoration: none;color:#775637;" data-toggle="modal" data-target="" >编辑</a>',
+                        '<a class="submit"  style="margin:0 1em;text-decoration: none;color:#775637;" data-target="#staticBackdrop" >上架</a>',
+                        '<a class="delete" style="margin:0 1em;text-decoration: none;color:#D60000;"  data-toggle="modal" data-target="#staticBackdrop" >删除</a>',
+                    ].join('');
+                }else if(row.status == showStatus[1].id){
+                    return [
+                        '<a  class="under-shelf" style="margin:0 1em;text-decoration: none;color:#775637;" data-toggle="modal" data-target="#staticBackdrop" >下架</a>',
+                    ].join('');
+                }else if(row.status == showStatus[2].id){
+                    return [
+                        '<a class="delete" style="margin:0 1em;text-decoration: none;color:#D60000;"  data-toggle="modal" data-target="#staticBackdrop" >删除</a>',
+                    ].join('');
+                }
             }
 
             //修改事件
@@ -25,22 +39,23 @@
                     localStorage.setItem("rowData", JSON.stringify(row));
                     orange.redirect(addUrl);
                 },
+
                 'click .delete': function (e, value, row, index) {
                     var myDeleteModalData ={
-                        modalBodyID : "myDeleteCooperation",
-                        modalTitle : "删除服务项目",
+                        modalBodyID : "myDeleteBaseStyle",
+                        modalTitle : "删除基地风采",
                         modalClass : "modal-lg",
                         confirmButtonClass : "btn-danger",
                         modalConfirmFun:function () {
-                            var projectEntity = {
+                            var baseStyleEntity = {
                                 itemid: row.itemid,
                                 itemcode: row.itemcode
                             };
                             var isSuccess = false;
-                            ajaxUtil.myAjax(null,opUrl,projectEntity,function (data) {
+                            ajaxUtil.myAjax(null,url,baseStyleEntity,function (data) {
                                 if(ajaxUtil.success(data)){
                                     ajaxUtil.deleteFile(row.itemcode)
-                                    alertUtil.info("删除项目成功");
+                                    alertUtil.info("删除基地风采成功");
                                     isSuccess = true;
                                     refreshTable();
                                 }
@@ -51,7 +66,69 @@
                     };
                     var myDeleteModal = modalUtil.init(myDeleteModalData);
                     myDeleteModal.show();
-                }
+                },
+
+                'click .under-shelf' : function (e, value, row, index) {
+                    var myUnderShelfStyleModalData ={
+                        modalBodyID :"myUnderShelfModal",
+                        modalTitle : "下架",
+                        modalClass : "modal-lg",
+                        modalConfirmFun:function () {
+                            var isSuccess = false;
+                            var submitStatus = {
+                                "status": showStatus[2].id,
+                                "itemid" : row.itemid,
+                                "itemcode" : row.itemcode
+                            };
+                            ajaxUtil.myAjax(null,"/industrialdevelop/base-style",submitStatus,function (data) {
+                                if(ajaxUtil.success(data)){
+                                    if(data.code == ajaxUtil.successCode){
+                                        alertUtil.success("下架成功");
+                                        isSuccess = true;
+                                        refreshTable();
+                                    }else{
+                                        alertUtil.error(data.msg);
+                                    }
+                                }
+                            },false,true,"put");
+                            return isSuccess;
+                        }
+
+                    };
+                    var myUnderShelfModal = modalUtil.init(myUnderShelfStyleModalData);
+                    myUnderShelfModal.show();
+                },
+
+                'click .submit' : function (e, value, row, index) {
+                    var mySubmitStyleModalData ={
+                        modalBodyID :"myShowModal",
+                        modalTitle : "上架",
+                        modalClass : "modal-lg",
+                        modalConfirmFun:function () {
+                            var isSuccess = false;
+                            var submitStatus = {
+                                "status": showStatus[1].id,
+                                "itemid" : row.itemid,
+                                "itemcode" : row.itemcode
+                            };
+                            ajaxUtil.myAjax(null,"/industrialdevelop/base-style",submitStatus,function (data) {
+                                if(ajaxUtil.success(data)){
+                                    if(data.code == ajaxUtil.successCode){
+                                        alertUtil.success("展示成功");
+                                        isSuccess = true;
+                                        refreshTable();
+                                    }else{
+                                        alertUtil.error(data.msg);
+                                    }
+                                }
+                            },false,true,"put");
+                            return isSuccess;
+                        }
+
+                    };
+                    var myUnderShelfModal = modalUtil.init(mySubmitStyleModalData);
+                    myUnderShelfModal.show();
+                },
             };
 
 
@@ -60,7 +137,7 @@
 
                 };
                 $('#table').bootstrapTable("destroy");
-                bootstrapTableUtil.myBootStrapTableInit("table", getUrl, param, aCol);
+                bootstrapTableUtil.myBootStrapTableInit("table", url, param, aCol);
             });
 
 
@@ -74,7 +151,6 @@
 
 
             var aCol = [
-                {field: 'name', title: '基地名称'},
                 {field: 'filePath', title: '基地照片', formatter:function (value, row, index) {
                         if(value == "已经损坏了"){
                             return '<p>'+value+'</p>';
@@ -82,24 +158,22 @@
                             return '<img  src='+value+' width="100" height="100" class="img-rounded" >';
                         }
                     }},
-                {field: 'contacts', title: '联系人'},
-                {field: 'status', title: '数据状态'},
+                {field: 'itemcreateat', title: '上传时间'},
+                {field: 'status', title: '照片状态', formatter:function (value) {
+                        return '<p>' +showStatus[value].text +'</p>';
+                    }},
                 {field: 'action',  title: '操作',formatter: operation,events:orgEvents}
             ];
 
-            var myTable = bootstrapTableUtil.myBootStrapTableInit("table", getUrl, aParam, aCol);
+            var myTable = bootstrapTableUtil.myBootStrapTableInit("table", url, aParam, aCol);
 
             function refreshTable() {
                 var param = {};
                 myTable.free();
-                myTable = bootstrapTableUtil.myBootStrapTableInit("table", getUrl, param, aCol);
+                myTable = bootstrapTableUtil.myBootStrapTableInit("table", url, param, aCol);
             }
 
-            bootstrapTableUtil.globalSearch("table",getUrl,aParam, aCol);
-            var allTableData = $("#table").bootstrapTable("getData");
-            //console.log(allTableData);
-            localStorage.setItem('2',JSON.stringify(allTableData))
-            obj2=JSON.parse(localStorage.getItem("2"));
-            //console.log(obj2);
+            bootstrapTableUtil.globalSearch("table",url,aParam, aCol);
+
         })
 })();

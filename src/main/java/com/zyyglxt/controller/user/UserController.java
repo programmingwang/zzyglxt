@@ -69,14 +69,14 @@ public class UserController {
                     case "中药材制药企业":
                         IndustrialDevelopChiMed chiMed = developChiMedService.selectByOrgNameAndCode(orgStatusDto.getOrgName(), orgStatusDto.getOrgCode());
                         switch (chiMed.getStatus()) {
-                            case "提交":
+                            case "1":
                                 return new ResponseData(EmBusinessError.success, "您申请注册的机构还在审核中，请耐心等待");
-                            case "地市局用户审核不通过":
-                            case "省局用户审核不通过":
+                            case "5":
+                            case "7":
                                 return new ResponseData(EmBusinessError.success, "您申请注册的机构暂未审核通过，审核意见：" + chiMed.getReason() + "，点击此处修改信息");
-                            case "地市局用户审核通过":
+                            case "4":
                                 return new ResponseData(EmBusinessError.success, "您申请注册的机构市局审核已通过，请耐心等待省局审核");
-                            case "省局用户审核通过":
+                            case "6":
                                 return new ResponseData(EmBusinessError.success, "该机构审核已通过，已有账号点击此处登录");
                         }
                         return new ResponseData(EmBusinessError.success, "非法状态：" + chiMed.getStatus());
@@ -85,14 +85,14 @@ public class UserController {
                     case "旅游康养机构":
                         IndustrialDevelopTecSerOrg tecSerOrg = developTecSerOrgService.selectByOrgNameAndCode(orgStatusDto.getOrgName(), orgStatusDto.getOrgCode());
                         switch (tecSerOrg.getStatus()) {
-                            case "提交":
+                            case "1":
                                 return new ResponseData(EmBusinessError.success, "您申请注册的机构还在审核中，请耐心等待");
-                            case "地市局用户审核不通过":
-                            case "省局用户审核不通过":
+                            case "5":
+                            case "7":
                                 return new ResponseData(EmBusinessError.success, "您申请注册的机构暂未审核通过，审核意见：" + tecSerOrg.getReason() + "，点击此处修改信息");
-                            case "地市局用户审核通过":
+                            case "4":
                                 return new ResponseData(EmBusinessError.success, "您申请注册的机构市局审核已通过，请耐心等待省局审核");
-                            case "省局用户审核通过":
+                            case "6":
                                 return new ResponseData(EmBusinessError.success, "该机构审核已通过，已有账号点击此处登录");
                         }
                         return new ResponseData(EmBusinessError.success, "非法状态：" + tecSerOrg.getStatus());
@@ -143,8 +143,15 @@ public class UserController {
 
     @LogAnnotation(logTitle = "修改个人信息", logLevel = "2")
     @RequestMapping(value = "/updateusermsg", method = RequestMethod.POST)
-    public ResponseData updateUserMsg(UserDO userDO) {
+    public ResponseData updateUserMsg(@RequestBody UserDO userDO) {
         iuserService.UpdateUserMsg(userDO);
+        return new ResponseData(EmBusinessError.success);
+    }
+
+    @LogAnnotation(logTitle = "修改用户头像", logLevel = "2")
+    @RequestMapping(value = "/updateuserimg", method = RequestMethod.POST)
+    public ResponseData updateUserPortrait(@RequestBody UserDO userDO) {
+        iuserService.UpdateUserPortrait(userDO);
         return new ResponseData(EmBusinessError.success);
     }
 
@@ -172,10 +179,35 @@ public class UserController {
      *
      * @return user和查询结果
      */
-    @LogAnnotation(logTitle = "账号管理新增用户", logLevel = "3")
+    @LogAnnotation(logTitle = "产业发展-账号管理-新增用户", logLevel = "3")
     @RequestMapping(value = "/adduser", method = RequestMethod.POST)
     public ResponseData insertUser(@RequestBody UserDO userDO) {
         userService.insertUserSelective(userDO);
+        return new ResponseData(EmBusinessError.success);
+    }
+
+    /**
+     * 用户未录入机构信息点击返回按钮则删除用户信息
+     * 科研项目管理-账号管理-删除用户
+     * @param userDtO
+     * @return
+     */
+    @LogAnnotation(logTitle = "产业发展-账号管理-删除用户", logLevel = "4")
+    @RequestMapping(value = "/deletuser", method = RequestMethod.POST)
+    public ResponseData deleteUserByUsername(@RequestBody UserDto userDtO){
+        userService.deleteUserByUsername(userDtO);
+        return new ResponseData(EmBusinessError.success);
+    }
+
+    /**
+     * 科研项目管理-账号管理-重置密码
+     * @param userDo
+     * @return
+     */
+    @LogAnnotation(logTitle ="产业发展-账号管理-重置密码",logLevel ="2")
+    @RequestMapping(value = "/reset", method = RequestMethod.PUT)
+    public ResponseData resetPassword(@RequestBody UserDO userDo){
+        userService.resetPassword(userDo);
         return new ResponseData(EmBusinessError.success);
     }
 }

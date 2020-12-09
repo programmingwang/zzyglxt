@@ -1,12 +1,13 @@
 (function () {
-    require(['jquery','objectUtil','ajaxUtil','alertUtil','stringUtil','dictUtil','selectUtil','fileUtil','uploadImg','distpicker'],
-        function (jquery,objectUtil,ajaxUtil,alertUtil,stringUtil,dictUtil,selectUtil,fileUtil,uploadImg,distpicker) {
+    require(['jquery','objectUtil','ajaxUtil','alertUtil','stringUtil','dictUtil','selectUtil','fileUtil','uploadImg','distpicker','urlUtil'],
+        function (jquery,objectUtil,ajaxUtil,alertUtil,stringUtil,dictUtil,selectUtil,fileUtil,uploadImg,distpicker,urlUtil) {
 
 
-            /*q全局变量*/
-            var tempdata = JSON.parse(localStorage.getItem("rowData"));
-            var updateStatus = isUpdate()
-            var jumpUrl = "/userLogin"
+            /*全局变量*/
+            var tempdata;
+
+            var updateStatus = isUpdate();
+            var jumpUrl = "/userLogin";
             var webStatus = dictUtil.getDictByCode(dictUtil.DICT_LIST.webStatus);
             var hospitalLevel = dictUtil.getDictByCode(dictUtil.DICT_LIST.hospitalLevel)
             var specialtyName = dictUtil.getDictByCode(dictUtil.DICT_LIST.dept)
@@ -31,8 +32,16 @@
             })
             /*返回按钮处理*/
             $("#cancel").unbind().on('click',function () {
+                var username = sessionStorage.getItem("username");
+                var orgName = sessionStorage.getItem("orgName");
+                var userdto = {
+                    "username": username,
+                    "orgName": orgName
+                }
+                ajaxUtil.myAjax(null,"/user/deletuser",userdto,function (data) {
+
+                },false,true);
                 window.history.back()
-                // orange.redirect(jumpUrl);
             });
 
             /*确认按钮处理*/
@@ -47,14 +56,6 @@
                         itemcode: stringUtil.getUUID(),
                     };
                 }
-                // else {
-                //     requestUrl = "/medicalService/hosp/update";
-                //     operateMessage = "更新医疗机构成功";
-                //     entity = {
-                //         itemid: tempdata.itemid,
-                //         itemcode: tempdata.itemcode
-                //     };
-                // }
                 entity["hospitalName"] = $("#hospitalName").val();
                 entity["hospitalLevel"] = hospitalLevel[$("#specialtyName").val()].text;
                 entity["hospitalBriefIntroduce"] = $("#hospitalBriefIntroduce").val();
@@ -66,7 +67,7 @@
                 entity["hospitalAddress"] = $("#hospitalAddress").val();
                 entity["hospitalLink"] = $("#hospitalLink").val();
                 entity["hospitalIntroduce"] = editor.txt.html()
-                entity["hospitalStatus"] = webStatus[0].id
+                entity["hospitalStatus"] = webStatus[1].id
 
 
                 fileUtil.handleFile(updateStatus, entity.itemcode, uploadImg.getFiles()[0]);
@@ -83,7 +84,7 @@
             });
 
             function isUpdate() {
-                return (tempdata != null || tempdata != undefined)
+                return (urlUtil.getFullUrl().indexOf("/main#") != -1 || urlUtil.getFullUrl().indexOf("/main?") != -1)
             }
 
 
@@ -103,7 +104,7 @@
                     $("#hospitalKeySpecialty").val(tempdata.hospitalKeySpecialty);
                     $("#hospitalTelephone").val(tempdata.hospitalTelephone);
                     $("#distpicker").distpicker({
-                        province: "河北省",
+                        province: tempdata.hospitalAddressPro,
                         city: tempdata.hospitalAddressCity,
                         district: tempdata.hospitalAddressCountry
                     });
@@ -113,14 +114,12 @@
                     $(".w-e-text").html(tempdata.hospitalIntroduce);
                 }else {
                     localStorage.removeItem("rowData");
-                    $("#distpicker").distpicker({
-                        province: "河北省",
-                    });//新增页面使用
+                    $("#distpicker").distpicker();//新增页面使用
                 }
                 init = function () {
 
                 }
-            }
+            };
             uploadImg.init();
             init();
 

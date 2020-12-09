@@ -25,6 +25,8 @@ public interface IExmaineService {
 
     List<ExmaineDto> selectAll();
 
+    List<ExmaineDto> selectByExpertCode(String expertCode);
+
     List<IndustrialDevelopExpertRefDO> selectByTopicCode(String topicCode);
 
     int deleteByTopicCode(String topicCode);

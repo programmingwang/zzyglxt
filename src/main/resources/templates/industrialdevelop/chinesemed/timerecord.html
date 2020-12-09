@@ -3,22 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <title>填报时间</title>
-    <link rel="stylesheet" th:href="@{CSS/taskList.css}">
-    <link rel="stylesheet" th:href="@{component/dataP/myDatepicker.css}">
-    <link rel="stylesheet" th:href="@{component/bootstrap-datetimepicker@4.7.14/bootstrap-datetimepicker.css}">
+    <link rel="stylesheet" th:href="@{component/bootstrap-datetimepicker@4.7.14/bootstrap-datetimepicker.min.css}">
     <style>
         .modal-content {
-            width: 42em;
-        }
-        .modal-body{
-            height: 399px;
+            width: 15em;
         }
     </style>
 </head>
 <body>
 <div id="fir_body">
+    <div class="row col-lg-12 col-md-12" id="accordion2" style="margin-bottom: 1rem;">
+        <div class="col-lg-8 col-md-8 row mb-4" style="padding-left: 3rem;">
+                <lable>年份：</lable>
+                <select name="" id="taskNameSearch1" class="col-lg-4  col-md-4">
+                    <option value ="2020">2020</option>
+                    <option value ="2019">2019</option>
+                    <option value ="2018">2018</option>
+                    <option value ="2017">2017</option>
+                </select>
+                <lable style="margin-left:2rem">状态：</lable>
+                <select name="" id="taskNameSearch2"  class="col-lg-4  col-md-4"style="margin-right: 1rem">
+                    <option value ="生效">生效</option>
+                    <option value ="失效">失效</option>
+                </select>
+
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="btnSearch" style="background-color: #D60000;color: #FFFFFF;border: none;border-radius: 4px;border-top-left-radius: 0px;border-bottom-left-radius: 0px;z-index: 1;">搜索</span>
+            </div>
+
+        </div>
+        <div class="col-lg-4 col-md-4"></div>
+        <hr size="1" class="mb-1" style="color: #EBEBEB;border-style:dashed;width:100%;margin-bottom:10px;">
+    </div>
     <div class="row col-lg-12 col-md-12 mb-3">
-        <div class="col-lg-12 col-md-12">
+        <div class="col-lg-12 col-md-12" >
             <button id="btn_addTask" class="btn btn-danger ml-3">设置填报时间</button>
         </div>
     </div>

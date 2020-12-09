@@ -2132,109 +2132,6 @@
             '            </div>\n'+
             '</div>';
 
-        modalHtml.myViewExpertModal =
-            '<div class="row">'+
-            '            <div class="col-lg-12 col-md-12">\n' +
-            '                <fieldset disabled>'+
-            '                <div class="input-group mb-3">\n' +
-            '                    <div class="input-group-prepend">\n' +
-            '                        <button type="button" class="btn btn-primary btn-sm">专家账号</button>\n' +
-            '                    </div>\n' +
-            '                    <input type="text" id="username" class="form-control">\n' +
-            '                </div>\n' +
-            '            </div>\n' +
-            '\n' +
-            '            <div class="col-lg-12 col-md-12">\n' +
-            '                <fieldset disabled>'+
-            '                <div class="input-group mb-3">\n' +
-            '                    <div class="input-group-prepend">\n' +
-            '                        <button type="button" class="btn btn-primary btn-sm">专家姓名</button>\n' +
-            '                    </div>\n' +
-            '                    <input type="text" id="name" class="form-control">\n' +
-            '                </div>\n' +
-            '            </div>\n' +
-            '\n' +
-            '            <div class="col-lg-12 col-md-12">\n' +
-            '                <fieldset disabled>'+
-            '                <div class="input-group mb-3">\n' +
-            '                    <div class="input-group-prepend">\n' +
-            '                        <button type="button" class="btn btn-primary btn-sm">性别</button>\n' +
-            '                    </div>\n' +
-            '                    <input type="text" id="gender" class="form-control">\n' +
-            '                </div>\n' +
-            '            </div>\n' +
-            '\n' +
-            '            <div class="col-lg-12 col-md-12">\n' +
-            '                <fieldset disabled>'+
-            '                <div class="input-group mb-3">\n' +
-            '                    <div class="input-group-prepend">\n' +
-            '                        <button type="button" class="btn btn-primary btn-sm">身份证件类型</button>\n' +
-            '                    </div>\n' +
-            '                    <input type="text" id="idcardType" class="form-control">\n' +
-            '                </div>\n' +
-            '            </div>\n' +
-            '\n' +
-            '            <div class="col-lg-12 col-md-12">\n' +
-            '                <fieldset disabled>'+
-            '                <div class="input-group mb-3">\n' +
-            '                    <div class="input-group-prepend">\n' +
-            '                        <button type="button" class="btn btn-primary btn-sm">证件号码</button>\n' +
-            '                    </div>\n' +
-            '                    <input type="text" id="idcardNo" class="form-control">\n' +
-            '                </div>\n' +
-            '            </div>\n' +
-            '\n' +
-            '            <div class="col-lg-12 col-md-12">\n' +
-            '                <fieldset disabled>'+
-            '                <div class="input-group mb-3">\n' +
-            '                    <div class="input-group-prepend">\n' +
-            '                        <button type="button" class="btn btn-primary btn-sm">email</button>\n' +
-            '                    </div>\n' +
-            '                    <input type="text" id="email" class="form-control">\n' +
-            '                </div>\n' +
-            '            </div>\n' +
-            '\n' +
-            '            <div class="col-lg-12 col-md-12">\n' +
-            '                <fieldset disabled>'+
-            '                <div class="input-group mb-3">\n' +
-            '                    <div class="input-group-prepend">\n' +
-            '                        <button type="button" class="btn btn-primary btn-sm">电话号码</button>\n' +
-            '                    </div>\n' +
-            '                    <input type="text" id="mobilephone" class="form-control">\n' +
-            '                </div>\n' +
-            '            </div>\n' +
-            '\n' +
-            '            <div class="col-lg-12 col-md-12">\n' +
-            '                <fieldset disabled>'+
-            '                <div class="input-group mb-3">\n' +
-            '                    <div class="input-group-prepend">\n' +
-            '                        <button type="button" class="btn btn-primary btn-sm">地级机构id</button>\n' +
-            '                    </div>\n' +
-            '                    <input type="text" id="cityid" class="form-control">\n' +
-            '                </div>\n' +
-            '            </div>\n' +
-            '\n' +
-            '            <div class="col-lg-12 col-md-12">\n' +
-            '                <fieldset disabled>'+
-            '                <div class="input-group mb-3">\n' +
-            '                    <div class="input-group-prepend">\n' +
-            '                        <button type="button" class="btn btn-primary btn-sm">肖像</button>\n' +
-            '                    </div>\n' +
-            '                    <input type="text" id="portrait" class="form-control">\n' +
-            '                </div>\n' +
-            '            </div>\n' +
-            '\n' +
-            '            <div class="col-lg-12 col-md-12">\n' +
-            '                <fieldset disabled>'+
-            '                <div class="input-group mb-3">\n' +
-            '                    <div class="input-group-prepend">\n' +
-            '                        <button type="button" class="btn btn-primary btn-sm">擅长领域  </button>\n' +
-            '                    </div>\n' +
-            '                    <input type="text" id="filed" class="form-control">\n' +
-            '                </div>\n' +
-            '            </div>\n' +
-            '</div>';
-
             modalHtml.myViewExpertModal =
                 '<div class="row">'+
                 '            <div class="col-lg-12 col-md-12">\n' +
@@ -2271,59 +2168,9 @@
                 '                <fieldset disabled>'+
                 '                <div class="input-group mb-3">\n' +
                 '                    <div class="input-group-prepend">\n' +
-                '                        <button type="button" class="btn btn-primary btn-sm">身份证件类型</button>\n' +
-                '                    </div>\n' +
-                '                    <input type="text" id="idcardType" class="form-control">\n' +
-                '                </div>\n' +
-                '            </div>\n' +
-                '\n' +
-                '            <div class="col-lg-12 col-md-12">\n' +
-                '                <fieldset disabled>'+
-                '                <div class="input-group mb-3">\n' +
-                '                    <div class="input-group-prepend">\n' +
-                '                        <button type="button" class="btn btn-primary btn-sm">证件号码</button>\n' +
-                '                    </div>\n' +
-                '                    <input type="text" id="idcardNo" class="form-control">\n' +
-                '                </div>\n' +
-                '            </div>\n' +
-                '\n' +
-                '            <div class="col-lg-12 col-md-12">\n' +
-                '                <fieldset disabled>'+
-                '                <div class="input-group mb-3">\n' +
-                '                    <div class="input-group-prepend">\n' +
-                '                        <button type="button" class="btn btn-primary btn-sm">email</button>\n' +
-                '                    </div>\n' +
-                '                    <input type="text" id="email" class="form-control">\n' +
-                '                </div>\n' +
-                '            </div>\n' +
-                '\n' +
-                '            <div class="col-lg-12 col-md-12">\n' +
-                '                <fieldset disabled>'+
-                '                <div class="input-group mb-3">\n' +
-                '                    <div class="input-group-prepend">\n' +
                 '                        <button type="button" class="btn btn-primary btn-sm">电话号码</button>\n' +
                 '                    </div>\n' +
                 '                    <input type="text" id="mobilephone" class="form-control">\n' +
-                '                </div>\n' +
-                '            </div>\n' +
-                '\n' +
-                '            <div class="col-lg-12 col-md-12">\n' +
-                '                <fieldset disabled>'+
-                '                <div class="input-group mb-3">\n' +
-                '                    <div class="input-group-prepend">\n' +
-                '                        <button type="button" class="btn btn-primary btn-sm">地级机构id</button>\n' +
-                '                    </div>\n' +
-                '                    <input type="text" id="cityid" class="form-control">\n' +
-                '                </div>\n' +
-                '            </div>\n' +
-                '\n' +
-                '            <div class="col-lg-12 col-md-12">\n' +
-                '                <fieldset disabled>'+
-                '                <div class="input-group mb-3">\n' +
-                '                    <div class="input-group-prepend">\n' +
-                '                        <button type="button" class="btn btn-primary btn-sm">肖像</button>\n' +
-                '                    </div>\n' +
-                '                    <input type="text" id="portrait" class="form-control">\n' +
                 '                </div>\n' +
                 '            </div>\n' +
                 '\n' +
@@ -2340,37 +2187,37 @@
 
         modalHtml.myaddExpertModal =
             '<form>\n'+
-                '<div class="form-group row">'+
-                '   <label class="col-sm-2 col-form-label">用户账号：</label>\n'+
-                '   <div class="col-sm-3">\n'+
+                '<div class="form-group">'+
+                '   <label class="col-form-label">用户账号：</label>\n'+
+                '   <div>\n'+
                 '    <input id="expertAccount" type="text" class="form-control" placeholder="请输入">\n'+
                 '    </div>\n'+
                 ' </div>\n' +
                 '\n' +
-                '<div class="form-group row">'+
-                '   <label class="col-sm-2 col-form-label">专家姓名：</label>\n'+
-                '   <div class="col-sm-3">\n'+
+                '<div class="form-group">'+
+                '   <label class="col-form-label">专家姓名：</label>\n'+
+                '   <div>\n'+
                 '    <input id="expertName" type="text" class="form-control" placeholder="请输入">\n'+
                 '    </div>\n'+
                 ' </div>\n' +
                 '\n' +
-                '<div class="form-group row">'+
-                '   <label class="col-sm-2 col-form-label">擅长领域：</label>\n'+
-                '   <div class="col-sm-3">\n'+
+                '<div class="form-group">'+
+                '   <label class="col-form-label">擅长领域：</label>\n'+
+                '   <div>\n'+
                 '    <input id="expertFiled" type="text" class="form-control" placeholder="请输入">\n'+
                 '    </div>\n'+
                 ' </div>\n' +
                 '\n' +
-                '<div class="form-group row">'+
-                '   <label class="col-sm-2 col-form-label">性别：</label>\n'+
-                '   <div class="col-sm-3">\n'+
+                '<div class="form-group">'+
+                '   <label class="col-form-label">性别：</label>\n'+
+                '   <div >\n'+
                 '    <input id="expertGender" type="text" class="form-control" placeholder="请输入">\n'+
                 '    </div>\n'+
                 ' </div>\n' +
                 '\n' +
-                '<div class="form-group row">'+
-                '   <label class="col-sm-2 col-form-label">联系电话：</label>\n'+
-                '   <div class="col-sm-3">\n'+
+                '<div class="form-group">'+
+                '   <label class="col-form-label">联系电话：</label>\n'+
+                '   <div>\n'+
                 '    <input id="expertPhone" type="text" class="form-control" placeholder="请输入">\n'+
                 '    </div>\n'+
                 ' </div>\n' +
@@ -2380,34 +2227,33 @@
 
         modalHtml.myTimeModal =
             '<div class="row" >'+
-            '            <div class="col-lg-4 col-md-4" style="margin-left: 2rem">\n' +
-            '                <div class="input-group mb-3">\n' +
+            '            <div class="col-lg-12 col-md-12" >\n' +
+            '                <div class="input-group mb-3" style="padding-left: 0.8rem;\n' +
+            '    padding-right: 0.2rem;">\n' +
             '                    <div class="input-group-prepend">\n' +
             '                        <label class="input-group-text" for="applicant">年份</label>\n' +
             '                    </div>\n' +
             '                    <input type="text"  id="year" class="form-control" placeholder="请输入年份">\n' +
             '                </div>\n' +
-            '            </div><div class="col-lg-8 col-md-8"></div>\n'+
+
             '\n' +
-            '                        <label class=\'input-label col-lg-6 col-md-6 row\' style="margin-left: 2rem">开启时间</label>\n' +
-            '                        <label class=\'input-label col-lg-4 col-md-4 row\' style="margin-left: 1rem">结束时间</label>\n' +
-            '            <div class="col-lg-6 col-md-6" style="margin-bottom: 10px;">\n' +
+            '           <label class=\'input-label col-lg-12 col-md-12 \'>开启时间</label>\n' +
+            '            <div class="col-lg-12 col-md-12" style="margin-bottom: 10px;">\n' +
             '                <div class="input-group mb-3">\n' +
             '                    <div class="input-group-prepend">\n' +
-            '                       <div style=\'display: flex;\'>\n' +
-            '                           <input type="text" id=\'startTime\' style=\'width:13em;display: block;margin-left: 2em\'>\n' +
+            '                       <div  >\n' +
+            '                           <input type="text" id=\'startTime\' style="background-image:">  <i class="fa fa-calendar fa-lg" style="position: absolute;top: 0.5rem;right: 0;"></i>\n' +
             '                       </div>\n' +
             '                    </div>\n' +
             '                </div>\n' +
             '            </div>\n' +
             '\n' +
-
-            '            <div class="col-lg-6 col-md-6" style="margin-bottom: 10px;">\n' +
+            '           <label class=\'input-label col-lg-12 col-md-12 \'>结束时间</label>\n' +
+            '            <div class="col-lg-12 col-md-12" style="margin-bottom: 10px;">\n' +
             '                <div class="input-group mb-3">\n' +
             '                    <div class="input-group-prepend">\n' +
-
-            '                       <div style=\'display: flex;\'>\n' +
-            '                           <input type="text" id=\'endTime\' style=\'width:13em;display: block;margin-left: 2em\'>\n' +
+            '                       <div >\n' +
+            '                           <input type="text" id=\'endTime\' >  <i class="fa fa-calendar fa-lg" style="position: absolute;top: 0.5rem;right: 0;"></i>\n' +
             '                       </div>\n' +'                    </div>\n' +
             '                </div>\n' +
             '            </div>\n' +
@@ -2423,6 +2269,10 @@
             '                </div>\n' +
             '        </div>\n' +
             '    </div>\n';
+
+        modalHtml.myResonable="<div>\n" +
+            "        <textarea name=\"\" id=\"reason\" cols=\"96\" rows=\"10\"></textarea>\n" +
+            "    </div>"
 
 
         modalHtml.myDeleteModalTravel = '是否删除景点信息?';
@@ -2443,7 +2293,6 @@
 
         modalHtml.myDeleteCStion='是否删除中药销售企业信息';
         modalHtml.myDeleteCPtion='是否删除中药制药企业信息';
-        modalHtml.myShelfSaleDrugModal='点击确认将上传到河北中医药网，是否上架';
 
         modalHtml.myShowModal = '确认展示吗？';
 
@@ -2478,6 +2327,8 @@
         modalHtml.myResetPassword="是否重置密码？"
 
         modalHtml.myCencelDistribution = "是否取消分配专家？"
+
+        modalHtml.myDeleteTopicManagement = "是否删除该项目信息";
 
 
         return modalHtml;

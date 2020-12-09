@@ -357,5 +357,15 @@
         AND itemCode = #{itemcode,jdbcType=CHAR}
     </update>
 
+    <select id="selectByOrgCode" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from tb_culpro_hosp
+        where ORG_CODE = #{orgCode,jdbcType=VARCHAR}
+    </select>
+
+
 
 </mapper>

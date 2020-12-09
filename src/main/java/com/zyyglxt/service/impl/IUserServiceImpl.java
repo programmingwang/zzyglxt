@@ -73,10 +73,10 @@ public class IUserServiceImpl implements IUserService {
         if (userDO != null) {
             throw new BusinessException("用户名已存在", EmBusinessError.USER_ACCOUNT_ALREADY_EXIST);
         } else {
-            OrganizationDO organizationDO = organizationDOMapper.selectByOrgNameAndCode(userDto.getOrgName(),userDto.getOrgCode());
+            OrganizationDO organizationDO = organizationDOMapper.selectByOrgNameAndCode(userDto.getOrgName(), userDto.getOrgCode());
             if (organizationDO != null) {   // 申请用户所在的机构已经申请过则直接到登录页面
                 register1(userDto);
-                return new ResponseData(EmBusinessError.success,"/userLogin");
+                return new ResponseData(EmBusinessError.success, "/userLogin");
             } else {    // 申请用户所在的机构没有申请过则跳转到信息录入页面
                 register2(userDto);
                 switch (userDto.getOrgIdentify()) {
@@ -201,40 +201,28 @@ public class IUserServiceImpl implements IUserService {
     @Override
     @Transactional
     public ResponseData UpdatePassword(UpdatePwdDto updatePwdDto) {
-        //从session中拿到用户名，然后根据用户名查询数据库，得到角色类型，然后判断是普通用户还是管理员，
-        //如果是普通用户则需要输入手机号码和原密码，管理员则直接输入新密码替换原密码（不需要手机号码和原密码）
         ValidatorResult result = validator.validate(updatePwdDto);
         if (result.isHasErrors()) {
             throw new BusinessException(result.getErrMsg(), EmBusinessError.PARAMETER_VALIDATION_ERROR);
         }
 
         UserDO userDO = userDOMapper.selectByUsername(usernameUtil.getOperateUser());
-        int userType = userDO.getType();// 用户类型（0：普通，1：管理员）
 
-        // 如果是普通用户
-        if (userType == 0) {
-            String mobilePhone = updatePwdDto.getMobilePhone();
-            if (MobileUtil.checkPhone(mobilePhone)) {
-                String oldPassword = updatePwdDto.getPassword();// 输入的原密码
-                BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-                oldPassword = passwordEncoder.encode(oldPassword);
-                // 数据库查询到的原密码和输入的原密码比对
-                if (userDO.getPassword().equals(oldPassword)) {
-                    updatePwdDto.setNewPassword(passwordEncoder.encode(updatePwdDto.getNewPassword()));
-                    userDOMapper.updatePasswordByMobilePhone(updatePwdDto.getNewPassword(), mobilePhone);
-                    return new ResponseData(EmBusinessError.success);
-                } else {
-                    throw new BusinessException("输入的旧密码错误，请重新输入！", EmBusinessError.OLDPASSWORD_ERROR);
-                }
+        String mobilePhone = updatePwdDto.getMobilePhone();
+        if (MobileUtil.checkPhone(mobilePhone)) {
+            String oldPassword = updatePwdDto.getPassword();// 输入的原密码
+            BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+            oldPassword = passwordEncoder.encode(oldPassword);
+            // 数据库查询到的原密码和输入的原密码比对
+            if (userDO.getPassword().equals(oldPassword)) {
+                updatePwdDto.setNewPassword(passwordEncoder.encode(updatePwdDto.getNewPassword()));
+                userDOMapper.updatePasswordByMobilePhone(updatePwdDto.getNewPassword(), mobilePhone);
+                return new ResponseData(EmBusinessError.success);
             } else {
-                throw new BusinessException("手机号码不正确！", EmBusinessError.MOBILEPHONE_ERROR);
+                throw new BusinessException("输入的旧密码错误，请重新输入！", EmBusinessError.OLDPASSWORD_ERROR);
             }
         } else {
-            // 如果是管理员
-            BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-            updatePwdDto.setNewPassword(passwordEncoder.encode(updatePwdDto.getNewPassword()));
-            userDOMapper.updatePasswordByUserName(updatePwdDto.getNewPassword(), usernameUtil.getOperateUser());
-            return new ResponseData(EmBusinessError.success);
+            throw new BusinessException("手机号码不正确！", EmBusinessError.MOBILEPHONE_ERROR);
         }
     }
 
@@ -245,7 +233,11 @@ public class IUserServiceImpl implements IUserService {
      */
     @Override
     public UserDO selectOne() {
-        return userDOMapper.selectByUsername(usernameUtil.getOperateUser());
+        UserDO userDO = userDOMapper.selectByUsername(usernameUtil.getOperateUser());
+//        隐藏身份证号的出生年月日和手机号的中间四位
+//        userDO.setMobilephone(MobileUtil.hideMiddleMobile(userDO.getMobilephone()));
+//        userDO.setIdcardNo(IDUtil.hideMiddleID(userDO.getIdcardNo()));
+        return userDO;
     }
 
     @Override
@@ -269,7 +261,7 @@ public class IUserServiceImpl implements IUserService {
         // 验证通过返回 null，不通过则返回一个 字符串，
         // 所以利用判空来判断身份证号码是否合法
         String isValidIDCardNo = IDUtil.IdentityCardVerification(userDO.getIdcardNo());
-        if (!StringUtils.isEmpty(isValidIDCardNo)) {
+        if (StringUtils.isEmpty(isValidIDCardNo)) {
             throw new BusinessException(isValidIDCardNo, EmBusinessError.IDNO_ERROR);
         }
         // 验证电话是否正确
@@ -277,6 +269,20 @@ public class IUserServiceImpl implements IUserService {
             throw new BusinessException("手机号码不正确！", EmBusinessError.MOBILEPHONE_ERROR);
         }
 
+        UserSessionDto userSessionDto = (UserSessionDto) request.getSession().getAttribute("user");
+        userDO.setItemid(userSessionDto.getItemid());
+        userDO.setItemcode(userSessionDto.getItemcode());
+        userDOMapper.updateByPrimaryKeySelective(userDO);
+    }
+
+    /**
+     * 修改用户头像
+     *
+     * @param userDO
+     */
+    @Override
+    @Transactional
+    public void UpdateUserPortrait(UserDO userDO) {
         UserSessionDto userSessionDto = (UserSessionDto) request.getSession().getAttribute("user");
         userDO.setItemid(userSessionDto.getItemid());
         userDO.setItemcode(userSessionDto.getItemcode());

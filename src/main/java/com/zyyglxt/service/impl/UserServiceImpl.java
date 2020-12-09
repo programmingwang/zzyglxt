@@ -1,9 +1,11 @@
 package com.zyyglxt.service.impl;
 
+import com.zyyglxt.dao.OrganizationDOMapper;
 import com.zyyglxt.dao.RoleDOMapper;
 import com.zyyglxt.dao.UserDOMapper;
 import com.zyyglxt.dao.UserRoleRefDOMapper;
 import com.zyyglxt.dataobject.*;
+import com.zyyglxt.dto.UserDto;
 import com.zyyglxt.error.BusinessException;
 import com.zyyglxt.error.EmBusinessError;
 
@@ -35,13 +37,17 @@ public class UserServiceImpl implements UserService {
     @Autowired
     RoleDOMapper roleDOMapper;
     @Autowired
+    OrganizationDOMapper organizationDOMapper;
+    @Autowired
     private ValidatorImpl validator;
     @Autowired
     UsernameUtil usernameUtil;
 
     @Override
-    public void deleteUserByUsername(UserDO userDO) {
+    public void deleteUserByUsername(UserDto userDtO) {
         //删除用户角色关系
+        UserDO userDO = userDOMapper.selectByUsername(userDtO.getUsername());
+
         UserRoleRefDOKey userRoleRefDOKey = new UserRoleRefDOKey();
         UserRoleRefDO userRoleRefDO = userRoleRefDOMapper.selectByUserCode(userDO.getItemcode());
         userRoleRefDOKey.setItemid(userRoleRefDO.getItemid());
@@ -52,6 +58,11 @@ public class UserServiceImpl implements UserService {
         userDOKey.setItemid(userDO.getItemid());
         userDOKey.setItemcode(userDO.getItemcode());
         userDOMapper.deleteByPrimaryKey(userDOKey);
+        //删除hospital
+        OrganizationDO organizationDO = organizationDOMapper.selectByOrgName(userDtO.getOrgName());
+        if (organizationDO != null){
+            organizationDOMapper.deleteByPrimaryKey(organizationDO.getItemid());
+        }
     }
 
     @Override
@@ -113,6 +124,14 @@ public class UserServiceImpl implements UserService {
             userRoleRefDO.setPlatRole(roleDO.getRoleName());
             userRoleRefDOMapper.updateByPrimaryKeySelective(userRoleRefDO);
         }
+    }
+
+    @Override
+    public void resetPassword(UserDO userDO) {
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        String password = encoder.encode("1234");
+        userDO.setPassword(password);
+        userDOMapper.updateByPrimaryKeySelective(userDO);
     }
 
     @Override

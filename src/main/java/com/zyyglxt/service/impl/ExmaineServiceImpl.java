@@ -22,6 +22,7 @@ import java.util.List;
  * Version: 1.0
  */
 @Service
+@SuppressWarnings("all")
 public class ExmaineServiceImpl implements IExmaineService {
     @Resource
     private IndustrialDevelopExpertRefDOMapper expertRefDOMapper;
@@ -76,7 +77,21 @@ public class ExmaineServiceImpl implements IExmaineService {
             ExmaineDto exmaineDto = new ExmaineDto();
             BeanUtils.copyProperties(industrialDevelopExpertRefDO,exmaineDto);
             IndustrialDevelopTopicDO topic = developTopicService.getTopic(industrialDevelopExpertRefDO.getTopicCode());
-            exmaineDto.setProjectName(topic.getProjectName()).setCompany(topic.getCompany()).setProjectNo(topic.getProjectNo());
+            BeanUtils.copyProperties(topic,exmaineDto);
+            exmaineDtos.add(exmaineDto);
+        }
+        return exmaineDtos;
+    }
+
+    @Override
+    public List<ExmaineDto> selectByExpertCode(String expertCode) {
+        List<IndustrialDevelopExpertRefDO> industrialDevelopExpertRefDOS = expertRefDOMapper.selectByExpertCode(expertCode);
+        List<ExmaineDto> exmaineDtos = new ArrayList<>();
+        for (IndustrialDevelopExpertRefDO industrialDevelopExpertRefDO : industrialDevelopExpertRefDOS) {
+            ExmaineDto exmaineDto = new ExmaineDto();
+            BeanUtils.copyProperties(industrialDevelopExpertRefDO,exmaineDto);
+            IndustrialDevelopTopicDO topic = developTopicService.getTopic(industrialDevelopExpertRefDO.getTopicCode());
+            BeanUtils.copyProperties(topic,exmaineDto);
             exmaineDtos.add(exmaineDto);
         }
         return exmaineDtos;

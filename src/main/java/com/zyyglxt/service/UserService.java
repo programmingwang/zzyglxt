@@ -2,6 +2,7 @@ package com.zyyglxt.service;
 
 import com.zyyglxt.dataobject.UserDO;
 import com.zyyglxt.dataobject.UserDOKey;
+import com.zyyglxt.dto.UserDto;
 
 import java.util.List;
 
@@ -13,7 +14,7 @@ import java.util.List;
 
 public interface UserService {
 
-    void deleteUserByUsername(UserDO userDO);
+    void deleteUserByUsername(UserDto userDtO);
 
     int insert(UserDO record);
 
@@ -22,6 +23,8 @@ public interface UserService {
     UserDO selectByPrimaryKey(UserDOKey key);
 
     void updateByPrimaryKeySelective(UserDO userDO);
+
+    void resetPassword(UserDO userDO);
 
     int updateByPrimaryKeyWithBLOBs(UserDO record);
 

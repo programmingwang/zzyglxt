@@ -8,9 +8,7 @@
 
             var pathUrl = "/school/school_msg";
 
-            var itemcode = null;
-
-            var fileitemcode = stringUtil.getUUID();
+            var itemcode = stringUtil.getUUID();
 
             uploadImg.init();
 
@@ -97,6 +95,7 @@
                         $("#onlineAddress").val(tempdata.onlineAddress);
                         $("#intruduce").val(tempdata.intruduce);
                         $(".w-e-text").html(tempdata.schoolText);
+                        uploadImg.setImgSrc(tempdata.filePath)
                         itemcode = tempdata.itemcode
                     } else {
                         alertUtil.error(data.msg)
@@ -106,7 +105,8 @@
             init();
 
             function isUpdate() {
-                return (urlUtil.getFullUrl().indexOf("/main#") != -1)
+                return (urlUtil.getFullUrl().indexOf("/main#") != -1 || urlUtil.getFullUrl().indexOf("/main?") != -1)
+
             }
         })
 })();

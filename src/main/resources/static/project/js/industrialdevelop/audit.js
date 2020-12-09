@@ -385,7 +385,7 @@
                     {field: 'type', title: '机构类型'},
                     {field: 'addressCity', title: '所属地市'},
                     {field: 'status', title: '审核状态'},
-                    {field: 'action',  title: '操作',formatter: operation,events:orgEvents}]
+                    {field: 'action',  title: '操作',width: '254px',formatter: operation,events:orgEvents}]
             }
 
 

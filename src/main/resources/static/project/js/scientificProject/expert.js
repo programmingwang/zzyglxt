@@ -32,7 +32,6 @@
                             var isSuccess = false;
                             ajaxUtil.myAjax(null,"/industrialdevelop/expert/"+row.itemcode,projectEntity,function (data) {
                                 if(ajaxUtil.success(data)){
-                                    ajaxUtil.deleteFile(row.itemcode);
                                     alertUtil.info("删除成功");
                                     isSuccess = true;
                                     refreshTable();
@@ -110,15 +109,15 @@
                            name:$("#expertName").val(),
                            filed : $("#expertFiled").val(),
                            gender:$("#expertGender").val(),
-                           phone:$("#expertPhone").val()
+                           mobilephone:$("#expertPhone").val()
                        }
                         ajaxUtil.myAjax(null, addUrl, param, function (data) {
                             if (ajaxUtil.success(data)) {
-                                alertUtil.alert("新增成功");
-
+                                alertUtil.success("新增成功");
                                 myaddExpertModal.hide();
+                                refreshTable();
                             } else {
-                                alertUtil.alert("新增失败");
+                                alertUtil.error("新增失败");
                             }
                         }, true, "123", 'post');
                     }
@@ -135,7 +134,7 @@
                 {field: 'name', title: '专家姓名'},
                 {field: 'filed', title: '擅长领域'},
                 {field: 'gender', title: '性别',width:'120px'},
-                {field: 'mobilephone', title: '联系电话',width:'120px'},
+                {field: 'mobilephone', title: '联系电话',width:'125px'},
                 {field: 'action',  title: '操作',formatter: operation,events:orgEvents}
             ];
 
@@ -148,10 +147,6 @@
             }
 
             bootstrapTableUtil.globalSearch("table",url,aParam, aCol);
-            var allTableData = $("#table").bootstrapTable("getData");
-            //console.log(allTableData);
-            localStorage.setItem('2',JSON.stringify(allTableData))
-            obj2=JSON.parse(localStorage.getItem("2"));
-            //console.log(obj2);
+
         })
 })();

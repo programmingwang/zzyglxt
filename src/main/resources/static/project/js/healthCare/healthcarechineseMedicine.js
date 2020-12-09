@@ -145,7 +145,7 @@
                     var myChineseMedicineModal = modalUtil.init(myViewChineseMedicineModalData);
                     $("#chineseMedicineName").val(row.chineseMedicineName);
                     $("#chineseMedicineAlias").val(row.chineseMedicineAlias);
-                    $("#chineseMedicineType").val(row.chineseMedicineType);
+                    $("#chineseMedicineType").val(p2[row.chineseMedicineType].text);
                     $("#chineseMedicineHarvesting").val(row.chineseMedicineHarvesting);
                     $("#chineseMedicineTaste").val(row.chineseMedicineTaste);
                     $("#chineseMedicineMerTro").val(row.chineseMedicineMerTro);

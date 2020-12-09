@@ -374,13 +374,13 @@
 
             var aCol;
 
-            if (rolename == "市级中医药管理部门"){
+            if (rolename == "产业发展-市级"){
                 aCol = [{field: 'name', title: '机构名称'},
                     {field: 'type', title: '机构类型'},
                     {field: 'itemcreateat', title: '申请时间'},
                     {field: 'status', title: '审核状态'},
                     {field: 'action',  title: '操作',formatter: operation,events:orgEvents}]
-            }else if (rolename == "省局中医药管理部门"){
+            }else if (rolename == "产业发展-省级"){
                 aCol = [{field: 'name', title: '机构名称'},
                     {field: 'type', title: '机构类型'},
                     {field: 'addressCity', title: '所属地市'},

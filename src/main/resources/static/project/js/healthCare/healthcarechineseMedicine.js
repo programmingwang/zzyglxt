@@ -233,7 +233,9 @@
             var aCol = [
                         {field: 'chineseMedicineName', title: '中医药名称'},
                         {field: 'chineseMedicineAlias', title: '别名'},
-                        {field:'chineseMedicineType',title:'功效分类'},
+                        {field:'chineseMedicineType',title:'功效分类',formatter:function (row) {
+                                return '<p>'+p2[row].text+'</p>';
+                            }},
                         {field: 'filePath', title: '药材图片', formatter:function (value, row, index) {
                                 if(value == "已经损坏了"){
                                     return '<p>'+value+'</p>';

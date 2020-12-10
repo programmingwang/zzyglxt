@@ -181,7 +181,7 @@ public class UserController {
      */
     @LogAnnotation(logTitle = "产业发展-账号管理-新增用户", logLevel = "3")
     @RequestMapping(value = "/adduser", method = RequestMethod.POST)
-    public ResponseData insertUser(@RequestBody UserDO userDO) {
+    public ResponseData insertUser(@RequestBody UserDO userDO) throws BusinessException {
         userService.insertUserSelective(userDO);
         return new ResponseData(EmBusinessError.success);
     }

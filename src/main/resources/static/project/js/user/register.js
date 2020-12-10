@@ -231,7 +231,7 @@
                         if (data && data.code === 88888) {
                             window.location.href = data.data
                         } else {
-                            alertUtil.error("注册失败");
+                            alertUtil.error(data.msg);
                         }
                     }, false)
                 }

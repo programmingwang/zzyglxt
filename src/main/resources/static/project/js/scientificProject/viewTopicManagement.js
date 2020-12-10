@@ -35,7 +35,7 @@
                         };
                         if(rolename == "科研项目申报单位"){
                             shStatus.examineStatus = projectStatus[2].id;
-                        }else if (rolename == "市级中医药管理部门"){
+                        }else if (rolename == "科研项目-市级"){
                             shStatus.examineStatus = projectStatus[4].id;
                         }else {
                             shStatus.examineStatus = projectStatus[6].id;
@@ -95,7 +95,7 @@
                         };
                         if(rolename == "科研项目申报单位"){
                             shStatus.examineStatus = projectStatus[3].id;
-                        }else if (rolename == "市级中医药管理部门"){
+                        }else if (rolename == "科研项目-市级"){
                             shStatus.examineStatus = projectStatus[5].id;
                         }else {
                             shStatus.examineStatus = projectStatus[7].id;
@@ -160,12 +160,12 @@
                             $('#passbtn').attr('style', "display:block;");
                             $('#failbtn').attr('style', "display:block;");
                         }
-                    }else if (rolename === "市级中医药管理部门"){
+                    }else if (rolename === "科研项目-市级"){
                         if (tempdata.examineStatus == projectStatus[2].id){
                             $('#passbtn').attr('style', "display:block;");
                             $('#failbtn').attr('style', "display:block;");
                         }
-                    }else if (rolename === "省局中医药管理部门"){
+                    }else if (rolename === "科研项目-省级"){
                         if (tempdata.examineStatus == projectStatus[4].id){
                             $('#passbtn').attr('style', "display:block;");
                             $('#failbtn').attr('style', "display:block;");

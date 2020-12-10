@@ -220,7 +220,7 @@
                             };
                             if(rolename == "科研项目申报单位"){
                                 shStatus.examineStatus = projectStatus[2].id;
-                            }else if (rolename == "市级中医药管理部门"){
+                            }else if (rolename == "科研项目-市级"){
                                 shStatus.examineStatus = projectStatus[4].id;
                             }else {
                                 shStatus.examineStatus = projectStatus[6].id;
@@ -279,7 +279,7 @@
                             };
                             if(rolename == "科研项目申报单位"){
                                 shStatus.examineStatus = projectStatus[3].id;
-                            }else if (rolename == "市级中医药管理部门"){
+                            }else if (rolename == "科研项目-市级"){
                                 shStatus.examineStatus = projectStatus[5].id;
                             }else {
                                 shStatus.examineStatus = projectStatus[7].id;
@@ -507,7 +507,7 @@
                     {field: 'action', title: '操作', formatter: operation2, events: orgEvents}
                 ];
 
-            }else if (rolename === "市级中医药管理部门"){
+            }else if (rolename === "科研项目-市级"){
                 $("#chargePersonSearch").selectUtil(auditStatus);
                 var url = "/industrialdevelop/getTopic?examineStatus="+projectStatus[2].id+"&examineStatus="+projectStatus[4].id +"&examineStatus="+projectStatus[5].id;
                 var aCol = [
@@ -526,7 +526,7 @@
                     {field: 'action', title: '操作', formatter: operation3, events: orgEvents}
                 ];
 
-            }else if (rolename === "省局中医药管理部门"){
+            }else if (rolename === "科研项目-省级"){
                 $("#chargePersonSearch").selectUtil(auditStatus);
                 var url = "/industrialdevelop/getTopic?examineStatus="+projectStatus[4].id+"&examineStatus="+projectStatus[6].id +"&examineStatus="+projectStatus[7].id;
                 var aCol = [

@@ -62,7 +62,7 @@ server:
   port: 8989
 
 upload:
-  addr: 47.113.104.120
+  addr: 47.106.185.189
   port: 8085
 
 #  servlet:

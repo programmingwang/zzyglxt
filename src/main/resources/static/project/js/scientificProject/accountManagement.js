@@ -142,6 +142,8 @@
                                         alertUtil.error(data.msg);
                                     }
 
+                                } else {
+                                    alertUtil.error(data.msg)
                                 }
                             },false,true);
                         } else {

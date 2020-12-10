@@ -46,6 +46,7 @@ public class IndustrialDevelopExpertServiceImpl implements IIndustrialDevelopExp
         userDO.setName(record.getName());
         userDO.setGender(record.getGender());
         userDO.setMobilephone(record.getMobilephone());
+        userDO.setType(11);
         userDO.setCreater(record.getCreater());
         userDO.setUpdater(record.getUpdater());
         userDOMapper.insertSelective(userDO);

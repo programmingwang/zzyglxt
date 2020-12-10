@@ -3,6 +3,7 @@ package com.zyyglxt.service;
 import com.zyyglxt.dataobject.UserDO;
 import com.zyyglxt.dataobject.UserDOKey;
 import com.zyyglxt.dto.UserDto;
+import com.zyyglxt.error.BusinessException;
 
 import java.util.List;
 
@@ -18,7 +19,7 @@ public interface UserService {
 
     int insert(UserDO record);
 
-    void insertUserSelective(UserDO record);
+    void insertUserSelective(UserDO record) throws BusinessException;
 
     UserDO selectByPrimaryKey(UserDOKey key);
 

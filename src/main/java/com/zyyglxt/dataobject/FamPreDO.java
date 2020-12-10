@@ -18,7 +18,6 @@ public class FamPreDO extends FamPreDOKey {
 
     private String status;
 
-    @NotBlank(message = "创建者不能为空")
     private String creater;
 
     private Date itemcreateat;

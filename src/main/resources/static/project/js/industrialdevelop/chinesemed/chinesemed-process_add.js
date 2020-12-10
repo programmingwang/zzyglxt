@@ -1,8 +1,9 @@
 (function () {
-    require(['jquery','objectUtil','ajaxUtil','alertUtil','stringUtil','dictUtil','fileUtil','uploadImg'],
-        function (jquery,objectUtil,ajaxUtil,alertUtil,stringUtil,dictUtil,fileUtil,uploadImg) {
+    require(['jquery','objectUtil','ajaxUtil','alertUtil','stringUtil','dictUtil','fileUtil','uploadImg','urlUtil',"distpicker"],
+        function (jquery,objectUtil,ajaxUtil,alertUtil,stringUtil,dictUtil,fileUtil,uploadImg,urlUtil,distpicker) {
 
             var url = "/industrialdevelop/chi-med";
+            var pathUrl = "/industrialdevelop/medMat/medMat"
             var orgType = "process";
             var type = isUpdate() ? "put" : "post";
             var status = dictUtil.getDictByCode(dictUtil.DICT_LIST.projectStatus);
@@ -38,7 +39,7 @@
                     operateMessage = "提交信息成功";
                 }
 
-                fileUtil.handleFile(updateStatus, param.itemcode, uploadImg.getFiles()[0]);
+                fileUtil.handleFile(isUpdate(), param.itemcode, uploadImg.getFiles()[0]);
 
                 ajaxUtil.myAjax(null, url, param, function (data) {
                     if (ajaxUtil.success(data)) {
@@ -49,6 +50,9 @@
                     }
                 }, true, "123", type);
             }
+            $("#cancelBtn").unbind('click').on('click',function () {
+                orange.redirect(pathUrl)
+            })
 
             $("#saveBtn").unbind('click').on('click', function () {
                 updateData("save");
@@ -60,26 +64,27 @@
 
             var init = function () {
                 if (isUpdate()) {
-                    var data;
+                    var needData;
                     ajaxUtil.myAjax(null,url + "/getByOrgCode",null,function (data) {
+                        console.log(data);
                         if(ajaxUtil.success(data)){
-                            data = data.data;
+                            needData = data.data;
                         }
                     },false,true,"get");
-                    $("#name").val(data.name);
-                    $("#areaCoverd").val(data.areaCoverd);
-                    $("#processingType").val(data.processingType);
-                    $("#contacts").val(data.contacts);
+                    $("#name").val(needData.name);
+                    $("#areaCoverd").val(needData.areaCoverd);
+                    $("#processingType").val(needData.processingType);
+                    $("#contacts").val(needData.contacts);
                     $("#distpicker").distpicker({
-                        province: data.addressPro,
-                        city: data.addressCity,
-                        district: data.addressCountry
+                        province: needData.addressPro,
+                        city: needData.addressCity,
+                        district: needData.addressCountry
                     });
-                    $("#address").val(data.address);
-                    $("#phone").val(data.phone);
-                    $(".w-e-text").html(data.intruduce);
-                    itemcode = data.itemcode;
-                    uploadImg.setImgSrc(data.filePath)
+                    $("#address").val(needData.address);
+                    $("#phone").val(needData.phone);
+                    editor.txt.html(needData.intruduce);
+                    itemcode = needData.itemcode;
+                    uploadImg.setImgSrc(needData.filePath)
                 }else {
                     $("#distpicker").distpicker({
                         province: "河北省",
@@ -91,7 +96,7 @@
             init();
 
             function isUpdate() {
-                return (localStorage.getItem("rowData") != null || localStorage.getItem("rowData") != undefined)
+                return (urlUtil.getFullUrl().indexOf("/main#") != -1 || urlUtil.getFullUrl().indexOf("/main?") != -1)
             }
 
         })

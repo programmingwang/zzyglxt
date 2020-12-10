@@ -37,7 +37,7 @@
                     entity["status"] = update
                 }
                 if (message == "上架"){
-                    operateMessage = "药材上架成功";
+                    operateMessage = "药材上架成功，已将药材信息发送到河北中医药网";
                 }
 
                 entity["name"] = $("#name").val();
@@ -69,17 +69,7 @@
             });
 
             $("#shelve").unbind().on('click',function () {
-                var myShelveMedMatModalData ={
-                    modalBodyID :"myShelveMedMat",
-                    modalTitle : "上架",
-                    modalClass : "modal-lg",
-                    modalConfirmFun:function () {
-                        console.log("modalConfirmFun" + "此函数执行了吗");
-                        addMedMat(medStatus[1].id, medStatus[1].id,"上架")
-                    }
-                };
-                var myShelveModal = modalUtil.init(myShelveMedMatModalData);
-                myShelveModal.show();
+                addMedMat(medStatus[1].id, medStatus[1].id,"上架")
             });
 
             function isUpdate() {

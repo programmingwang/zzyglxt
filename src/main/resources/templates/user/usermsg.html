@@ -1,78 +1,167 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="utf-8">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://at.alicdn.com/t/font_1805932_ysrcp4y0uy9.css">
+    <link rel="stylesheet" th:href="@{/component/bootstrap@4.5.2/css/bootstrap.css}">
     <title>个人信息</title>
-    <!-- Bootstrap core CSS -->
-    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" th:href="@{/project/css/user/usermsg.css}">
     <style>
-        label {
-            padding-top: 0px;
+        .upload-wrap {
+            position: relative;
+            display: inline-block;
+            overflow: hidden;
+
+            border-radius: 3px;
         }
 
-        p {
-            text-align: center;
-            transform: scale3d(1.5, 1.5, 1.5);
+        .upload-wrap .file-ele {
+            position: absolute;
+            top: 0;
+            right: 0;
+            opacity: 0;
+            height: 100%;
+            width: 100%;
+            cursor: pointer;
         }
+
+        .upload-wrap .file-open {
+            width: 90px;
+            height: 36px;
+            line-height: 36px;
+            text-align: center;
+            color: #fff;
+            background: red;
+        }
+
+        label {
+            text-align: right;
+        }
+
+        #btn {
+            margin-top: 15px;
+        }
+
+
     </style>
 </head>
 <body>
+<div class="row">
+    <div class="col-12">
+        <form>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">用户头像：</label>
+                <div class="upload-content" data-limit="1">
+                    <div class="content-img">
+                        <ul class="content-img-list"></ul>
+                        <div class="file">
+                            <input type="file" name="file" accept="image/*" id="upload" multiple>
+                        </div>
+                    </div>
+                    <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+                        <div class="modal-dialog modal-lg" role="document">
+                            <div class="modal-content" id="portrait">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-<form class="form-horizontal" role="form" id="userMessage">
-    <div class="form-group">
-        <div class="text-center mb-4">
-            <img class="mb-4" src="/images/logo.png" alt="">
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-sm-5 control-label">账户名称：</label>
-        <div class="col-sm-2">
-            <p class="accountName"></p>
-        </div>
-        <button type="button" class="btn btn-primary btn-sm">修改</button>
-    </div>
-    <div class="form-group">
-        <label class="col-sm-5 control-label">姓名：</label>
-        <div class="col-sm-2">
-            <p class="userName"></p>
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-sm-5 control-label">性别：</label>
-        <div class="col-sm-2">
-            <p class="sex"></p>
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-sm-5 control-label">身份证类型：</label>
-        <div class="col-sm-2">
-            <p class="IDcardType"></p>
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-sm-5 control-label">身份证号：</label>
-        <div class="col-sm-2">
-            <p class="IDNo"></p>
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-sm-5 control-label">邮箱：</label>
-        <div class="col-sm-2">
-            <p class="email"></p>
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-sm-5 control-label">手机号码：</label>
-        <div class="col-sm-2">
-            <p class="mobilePhone"></p>
-        </div>
-    </div>
-    <div class="col-sm-12" style="text-align: center">
-        <button type="button" class="btn btn-primary btn-sm">修改</button>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">用户登录名：</label>
+                <div class="col-sm-3">
+                    <input id="username" type="text" class="msg form-control" disabled="disabled">
+                </div>
+
+                <label class="col-sm-2 col-form-label">用户名称：</label>
+                <div class="col-sm-3">
+                    <input id="name" type="text" class="msg form-control" disabled="disabled">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">性别：</label>
+                <div class="col-sm-3">
+                    <input id="gender" type="text" class="msg form-control" disabled="disabled">
+                </div>
+                <label class="col-sm-2 col-form-label">邮箱：</label>
+                <div class="col-sm-3">
+                    <input id="email" type="text" class="msg form-control" disabled="disabled">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">身份证类型：</label>
+                <div class="col-sm-3">
+                    <input id="idcardType" type="text" class="msg form-control" disabled="disabled">
+                </div>
+                <label class="col-sm-2 col-form-label">身份证号：</label>
+                <div class="col-sm-3">
+                    <input id="idcardNo" type="text" class="msg form-control" disabled="disabled">
+                </div>
+
+            </div>
+
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">联系人：</label>
+                <div class="col-sm-3">
+                    <input id="contacts" type="text" class="msg form-control" disabled="disabled">
+                </div>
+                <label class="col-sm-2 col-form-label">手机号码：</label>
+                <div class="col-sm-3">
+                    <input id="mobilephone" type="text" class="msg form-control" disabled="disabled">
+                </div>
+            </div>
+
+            <div class="updataP" style="display: none">
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">请输入原密码：</label>
+                    <div class="col-sm-3">
+                        <input id="oldPwd" type="password" class="pwd form-control" disabled="disabled">
+                    </div>
+                    <label class="col-sm-2 col-form-label">请输入新密码：</label>
+                    <div class="col-sm-3">
+                        <input id="newPwd" type="password" class="pwd form-control" disabled="disabled">
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">请输入手机号：</label>
+                    <div class="col-sm-3">
+                        <input id="phone" type="text" class="pwd form-control" disabled="disabled">
+                    </div>
+                    <label class="col-sm-2 col-form-label">请确认新密码：</label>
+                    <div class="col-sm-3">
+                        <input id="checkPwd" type="password" class="pwd form-control" disabled="disabled">
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group row" id="btn">
+                <div class="col-lg-3 col-md-3"></div>
+                <div class=" col-lg-5 row">
+                    <div class="col">
+                        <button id="cancelBtn" type="button" class="btn btn-light col">取消</button>
+                    </div>
+                    <div class="col">
+                        <button id="modifymsgBtn" type="button" class="modify btn btn-primary col">修改信息</button>
+                    </div>
+                    <div class="col">
+                        <button id="confirmBtn" type="button" class="modify btn btn-danger col">确认修改</button>
+                    </div>
+                    <div class="col">
+                        <button id="modifypwdBtn" type="button" class="btn btn-primary col">修改密码</button>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4"></div>
+            </div>
+
+        </form>
+
     </div>
 
-</form>
-</body>
+</div>
 <script type="text/javascript" data-main="/main/main.js" th:src="@{/component/require@2.3.6/require-2.3.6.js}"></script>
+<link type="text/css" rel="stylesheet" href="/component/uploadImg/css/uploadImg.css"
+      th:src="@{/component/uploadImg/css/uploadImg.css}">
+</body>
 </html>

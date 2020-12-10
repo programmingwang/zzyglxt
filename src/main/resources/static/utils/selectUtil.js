@@ -43,12 +43,14 @@
         
         function getRoleTable(role,preUrl,status,webStatus) {
             if(role === "文化宣传科员"){
+                $('#btn_addTask').attr('style',"display:block");
                 return preUrl + "?"+status+"="+webStatus[0].id+"&"+status+"="+webStatus[1].id+"&"+status+"="+webStatus[3].id+"&"+status+"="+webStatus[4].id+"&"+status+"="+webStatus[6].id;
             }else if(role === "文化宣传处长"){
                 return preUrl + "?"+status+"="+webStatus[1].id+"&"+status+"="+webStatus[2].id+"&"+status+"="+webStatus[3].id;
             }else if(role === "文化宣传综合处处长"){
                 return preUrl + "?"+status+"="+webStatus[2].id+"&"+status+"="+webStatus[5].id;
             }else if(role === "政务资源科员"){
+                $('#btn_addTask').attr('style',"display:block");
                 return preUrl + "?"+status+"="+webStatus[0].id+"&"+status+"="+webStatus[1].id+"&"+status+"="+webStatus[2].id+"&"+status+"="+webStatus[3].id+"&"+status+"="+webStatus[4].id+"&"+status+"="+webStatus[5].id+"&"+status+"="+webStatus[6].id+"&"+status+"="+webStatus[7].id;
             }else if(role === "政务资源处长"){
                 return preUrl + "?"+status+"="+webStatus[1].id+"&"+status+"="+webStatus[2].id+"&"+status+"="+webStatus[3].id;
@@ -59,7 +61,6 @@
         
         function getRoleOperate(value, row, index, role, status,webStatus) {
             if(role === "文化宣传科员"){
-                $('#btn_addTask').attr('style',"display:block");
                 if(status == webStatus[0].id){
                     return [
                         '<a class="edit" style="margin:0 1em;text-decoration: none;color:#775637;" data-toggle="modal" data-target="" >编辑</a>',
@@ -106,7 +107,6 @@
                 }
 
             }else if(role === "政务资源科员"){
-                $('#btn_addTask').attr('style',"display:block");
                 if(status == webStatus[0].id){
                     return [
                         '<a class="edit" style="margin:0 0.8em;text-decoration: none;color:#775637;" data-toggle="modal" data-target="" >修改</a>',
@@ -181,6 +181,7 @@
             //     return
             // }
         }
+
 
         return {
             getRoleTable:getRoleTable,

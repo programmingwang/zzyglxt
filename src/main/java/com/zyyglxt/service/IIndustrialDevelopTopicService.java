@@ -18,7 +18,21 @@ public interface IIndustrialDevelopTopicService {
 
     void updTopic(IndustrialDevelopTopicDO developTopicDO);
 
-    List<IndustrialDevelopTopicDO> getTopics();
+    List<IndustrialDevelopTopicDO> getTopics(List<String> examineStatus);
+
+    List<IndustrialDevelopTopicDO> getStatus(String code);
 
     IndustrialDevelopTopicDO getTopic(String topicCode);
+
+    //修改项目状态
+    int changeStatus(IndustrialDevelopTopicDOKey key, String status);
+
+    //修改审核状态
+    int changeExamineStatus(IndustrialDevelopTopicDOKey key, String examineStatus);
+
+    List<IndustrialDevelopTopicDO> selectByUserCode(String userCode);
+
+    List<IndustrialDevelopTopicDO> selectByCompany(String company);
+
+    IndustrialDevelopTopicDO maxProjectNO();
 }

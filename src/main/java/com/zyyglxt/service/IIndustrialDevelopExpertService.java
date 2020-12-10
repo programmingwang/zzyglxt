@@ -25,5 +25,6 @@ public interface IIndustrialDevelopExpertService {
     List<IndustrialDevelopExpertDto> getExperts();
     //查看专家个人信息
     UserDO selectByPrimaryKey(String itemcode);
+    String selectByUserCode(String userCode);
 
 }

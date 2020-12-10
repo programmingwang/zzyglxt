@@ -28,6 +28,12 @@
     WHERE u.itemCode = a.USER_CODE
   </select>
 
+  <select id="selectByUserCode" parameterType="java.lang.String" resultType="java.lang.String">
+    SELECT itemCode
+    FROM tb_industrial_develop_expert
+    WHERE USER_CODE = #{userCode,jdbcType=CHAR}
+  </select>
+
 
   <select id="selectAll" resultType="com.zyyglxt.dto.industrialDevelop.IndustrialDevelopExpertDto">
     SELECT ex.itemID,ex.itemCode,ex.USER_CODE as userCode,u.username,u.name,ex.filed,u.gender,u.mobilePhone

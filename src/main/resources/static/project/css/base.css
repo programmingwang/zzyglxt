@@ -42,7 +42,7 @@ table{
     height: 60px;
 }
 .h70{
-    height: 87px;
+    height: 6rem;
 }
 .h100{
     height: 100px;
@@ -79,7 +79,7 @@ table{
 
 
 .test-border{
-    border: 0px solid red;
+    border: 0px solid #D60000;
     margin-left: 0px!important;
     margin-right: 0px!important;
     padding-left: 0px!important;
@@ -114,14 +114,14 @@ table{
 
 
 .dropdown-item.active, .dropdown-item:active {
-    color: #F8F9FB;
+    color: white;
     text-decoration: none;
-    background-color: #52beff;
+    background-color:#D60000;
 }
 .aaaa.active, .aaaa:active {
-    color: #F8F9FB;
+    color: white;
     text-decoration: none;
-    background-color: #52beff;
+    background-color:#D60000;
 }
 .btn-link{
     color:black;
@@ -176,7 +176,7 @@ hr {
     z-index: 3;
     color: #fff;
     background-color: #775637;
-     border-color: #775637;
+    border-color: #775637;
 }
 .page-link {
     color: black;
@@ -203,4 +203,32 @@ hr {
 
 thead.self-thead {
     text-align: center;
+    background-color: #775637;
+}
+.th-inner {
+    color: #fff;
+}
+.btn-danger {
+    color: #fff;
+    background-color: #D60000;
+    border-color: #D60000;
+}
+
+#main_body{
+    margin-top: 1rem;
+}
+#btnSearch{
+    background-color: #D60000;color: #FFFFFF;border: none;border-radius: 4px;border-top-left-radius: 0px;border-bottom-left-radius: 0px;z-index: 1;
+}
+.upload-wrap {
+    padding-left: 0.8rem;
+}
+
+.upload-wrap .file-open {
+    width: 90px;
+    height: 36px;
+    line-height: 36px;
+    text-align: center;
+    color: #fff;
+    background: #D60000;
 }

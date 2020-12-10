@@ -5,6 +5,7 @@ import com.zyyglxt.dto.industrialDevelop.AuditDto;
 import com.zyyglxt.error.EmBusinessError;
 import com.zyyglxt.response.ResponseData;
 import com.zyyglxt.service.IAuditService;
+import io.swagger.annotations.Api;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -14,6 +15,7 @@ import javax.annotation.Resource;
  * @Date 2020/11/15 16:46i
  * @Version 1.0
  **/
+@Api(tags = "产业发展-机构审核")
 @RestController
 @RequestMapping(value = "industrialdevelop")
 public class OrgAuditController {

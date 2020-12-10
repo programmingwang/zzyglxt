@@ -198,7 +198,7 @@ public class AuditServiceImpl implements IAuditService {
         Map<String, String> proMap = dictService.getDictMapByCode("projectStatus");
         Map<String, String> typeMap = dictService.getDictMapByCode("orgType");
         target.removeIf(item -> item.getStatus().equals("0"));
-        if (usernameUtil.getRoleName().equals("省局中医药管理部门")){
+        if (usernameUtil.getRoleName().equals("产业发展-省级")){
             target.removeIf(item -> item.getStatus().equals("1"));
             target.removeIf(item -> item.getStatus().equals("2"));
             target.removeIf(item -> item.getStatus().equals("3"));

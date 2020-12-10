@@ -38,6 +38,14 @@
             width: 10em;
             background-color: #CBCECE;
         }
+        #clsfile{
+            height: 36px;
+            margin-left: -92px;
+            display: none;
+            margin-right: 18px;
+            background-color: red;
+            z-index: 1;
+        }
     </style>
 </head>
 <body>
@@ -75,6 +83,10 @@
                 <div class="upload-wrap anticon" nv-file-drop="" uploader="uploader">
                     <input id="upload_file" class="file-ele" type="file" file-model="image" name="image" nv-file-select uploader="uploader" multiple />
                     <div class="file-open"><em class="upload"></em>&nbsp;上传附件</div>
+                </div>
+                <button type="button" class="btn btn-danger" id="clsfile">清除文件</button>
+                <div  id="addFile">
+                    <!-- <p> </p> -->
                 </div>
             </div>
 

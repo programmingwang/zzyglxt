@@ -46,6 +46,7 @@ public class IndustrialDevelopExpertServiceImpl implements IIndustrialDevelopExp
         userDO.setName(record.getName());
         userDO.setGender(record.getGender());
         userDO.setMobilephone(record.getMobilephone());
+        userDO.setType(11);
         userDO.setCreater(record.getCreater());
         userDO.setUpdater(record.getUpdater());
         userDOMapper.insertSelective(userDO);
@@ -85,6 +86,11 @@ public class IndustrialDevelopExpertServiceImpl implements IIndustrialDevelopExp
     @Override
     public UserDO selectByPrimaryKey(String itemcode) {
         return  developExpertDtoMapper.selectByPrimaryKey(itemcode);
+    }
+
+    @Override
+    public String selectByUserCode(String userCode) {
+        return developExpertDtoMapper.selectByUserCode(userCode);
     }
 
 

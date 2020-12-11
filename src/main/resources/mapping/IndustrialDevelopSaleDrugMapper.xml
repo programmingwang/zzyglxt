@@ -236,6 +236,7 @@
         SELECT *
         FROM tb_industrial_develop_sale_drug
         WHERE STATUS = #{status,jdbcType=VARCHAR}
+        AND ORG_CODE = #{orgCode}
     </select>
   <update id="changeStatusToSaleDrug">
     update tb_industrial_develop_sale_drug

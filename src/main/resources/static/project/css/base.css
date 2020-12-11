@@ -188,12 +188,12 @@ hr {
 }
 .page-item.active .page-link {
     z-index: 3;
-    color: #fff;
-    background-color: #5b4622;
-    border-color: #5b4622;
+    color: #fff !important;
+    background-color: #5b4622 !important;
+    border-color: #5b4622 !important;
 }
 .page-link {
-    color: black;
+    color: black !important;
 }
 .fixed-table-pagination {
     font-size: smaller;
@@ -280,6 +280,10 @@ thead.self-thead {
     background: url("../../images/new/top.png");
     height: 15px;
 }
+#accordion2>hr{
+    background: url("../../images/new/top.png");
+    height: 15px;
+}
 #collapseOne{
     margin: 0;
     padding: 0;
@@ -304,11 +308,28 @@ thead.self-thead {
 #btn_addTask{
     width: 140px;
     height: 40px;
+    background-color: #e66736 !important;
+    text-align: center;
+    font-size: 16px;
+    border-color: #e66736;
+}
+#addExper{
+    width: 140px;
+    height: 40px;
     background-color: #e66736;
     text-align: center;
     font-size: 16px;
     border-color: #e66736;
 }
+#deleteExper{
+    width: 154px;
+    height: 40px;
+    background-color: #e66736;
+    text-align: center;
+    font-size: 16px;
+    border-color: #e66736;
+}
+
 #chargePersonSearch{
     height: 40px;
     max-width: 280px;
@@ -320,7 +341,7 @@ thead.self-thead {
 
 .openBtnP{
     position: relative;
-    left: 917px;
+    left: 73%;
     top: -56px;
 }
 #table td, #table th {

@@ -517,8 +517,8 @@
             if (roleName === '高等医学院校'){
                 var menu_list = [
                     {
-                        menu_name: "服务项目",
-                        menu_url: "/school/school",
+                        menu_name: "科研成果",
+                        menu_url: "/industrialdevelop/achievement",
                         id: "1",
                         level: "1",
                         pid: ""

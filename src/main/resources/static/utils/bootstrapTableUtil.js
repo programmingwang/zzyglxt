@@ -258,15 +258,24 @@
 
                 //}
 
+
             var aria=this.ariaExpanded;
+            var element=document.getElementById("stratTime");
             $("#closeAndOpen").unbind().on('click',function(){
                 this.innerText="";
                 if (aria==="true"){
                     this.innerText="展开";
                     aria = "false";
+                    if (typeof(element)!= "undefined" || element != null){
+                        document.getElementById("btn_addTask").classList.remove("openBtnP");
+                    }
                 } else {
                     this.innerText="收起";
                     aria = "true";
+                    if (typeof(element)!= "undefined" || element != null){
+                        document.getElementById("btn_addTask").classList.add("openBtnP");
+                    }
+
                 }
             })
         }

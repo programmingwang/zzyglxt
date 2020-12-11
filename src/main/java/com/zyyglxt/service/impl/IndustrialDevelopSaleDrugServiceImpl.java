@@ -2,9 +2,11 @@ package com.zyyglxt.service.impl;
 
 import com.zyyglxt.error.BusinessException;
 import com.zyyglxt.error.EmBusinessError;
+import com.zyyglxt.util.UUIDUtils;
 import com.zyyglxt.util.UsernameUtil;
 import com.zyyglxt.validator.ValidatorImpl;
 import com.zyyglxt.validator.ValidatorResult;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
@@ -49,11 +51,13 @@ public class IndustrialDevelopSaleDrugServiceImpl implements IndustrialDevelopSa
     @Transactional
     @Override
     public int insertSelective(IndustrialDevelopSaleDrug record) {
+        if(StringUtils.isEmpty(record.getItemcode())){
+            record.setItemcode(UUIDUtils.getUUID());
+        }
         ValidatorResult result = validator.validate(record);
         if(result.isHasErrors()){
             throw new BusinessException(result.getErrMsg(), EmBusinessError.PARAMETER_VALIDATION_ERROR);
         }
-        record.setItemcode(UUID.randomUUID().toString());
         record.setItemcreateat(new Date());
         record.setStatus("0");
         record.setCreater(usernameUtil.getOperateUser());

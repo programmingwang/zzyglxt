@@ -4,7 +4,7 @@
 
             var url = "/industrialdevelop/chi-med";
 
-            var pathUrl = "/industrialdevelop/chinesemed/chinesemed-produce";
+            var pathUrl = "/industrialdevelop/chinesemed/chinesemed-produce_add";
 
             var orgType = "produce";
 

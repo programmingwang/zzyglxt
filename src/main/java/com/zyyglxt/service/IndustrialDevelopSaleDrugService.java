@@ -16,13 +16,13 @@ public interface IndustrialDevelopSaleDrugService{
 
     int deleteByPrimaryKey(Integer itemid,String itemcode);
 
-    int insert(IndustrialDevelopSaleDrug record)  throws BusinessException;;
+    int insert(IndustrialDevelopSaleDrug record)  ;;
 
     int insertSelective(IndustrialDevelopSaleDrug record);
 
     IndustrialDevelopSaleDrug selectByPrimaryKey(Integer itemid,String itemcode);
 
-    int updateByPrimaryKeySelective(IndustrialDevelopSaleDrug record)  throws BusinessException;;
+    int updateByPrimaryKeySelective(IndustrialDevelopSaleDrug record)  ;;
 
     int updateByPrimaryKey(IndustrialDevelopSaleDrug record);
 

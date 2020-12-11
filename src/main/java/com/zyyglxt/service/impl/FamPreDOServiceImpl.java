@@ -36,7 +36,7 @@ public class FamPreDOServiceImpl implements FamPreDOService {
     @Transactional
     @Override
     /*历史名方添加数据*/
-    public int  insertSelective(FamPreDO record) throws BusinessException {
+    public int  insertSelective(FamPreDO record)  {
         ValidatorResult result = validator.validate(record);
         if(result.isHasErrors()){
             throw new BusinessException(result.getErrMsg(), EmBusinessError.PARAMETER_VALIDATION_ERROR);
@@ -55,7 +55,7 @@ public class FamPreDOServiceImpl implements FamPreDOService {
     }
     @Transactional
     @Override
-    public int updateByPrimaryKeySelective(FamPreDO record) throws BusinessException {
+    public int updateByPrimaryKeySelective(FamPreDO record)  {
         ValidatorResult result = validator.validate(record);
         if(result.isHasErrors()){
             throw new BusinessException(result.getErrMsg(), EmBusinessError.PARAMETER_VALIDATION_ERROR);

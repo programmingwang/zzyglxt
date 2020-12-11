@@ -249,7 +249,7 @@
                 $(".tTile").css("display","none");
                 $("#kyxm").css("display","block");
             }
-            if (roleName === '省局中医药管理部门'){
+            if (roleName === '科研项目-省级'){
                 var menu_list = [
                     {
                         menu_name: "科研项目管理",
@@ -299,19 +299,12 @@
                         id: "15-6",
                         level: "2",
                         pid: "15"
-                    },
-                    {
-                        menu_name: "机构审核",
-                        menu_url: "/industrialdevelop/audit",
-                        id: "16",
-                        level: "1",
-                        pid: ""
                     }
                 ];
                 $(".tTile").css("display","none");
                 $("#kyxm").css("display","block");
             }
-            if (roleName === '市级中医药管理部门'){
+            if (roleName === '科研项目-市级'){
                 var menu_list = [
                     {
                         menu_name: "科研项目管理",
@@ -326,13 +319,6 @@
                         id: "15-1",
                         level: "2",
                         pid: "15"
-                    },
-                    {
-                        menu_name: "机构审核",
-                        menu_url: "/industrialdevelop/audit",
-                        id: "16",
-                        level: "1",
-                        pid: ""
                     }
                 ];
                 $(".tTile").css("display","none");
@@ -663,6 +649,19 @@
                 ];
                 $(".tTile").css("display","none");
                 $("#cyfz").css("display","block");
+            }
+            if (roleName === '产业发展-市级' || roleName === '产业发展-省级'){
+                var menu_list = [
+                    {
+                        menu_name: "机构审核",
+                        menu_url: "/industrialdevelop/audit",
+                        id: "1",
+                        level: "1",
+                        pid: ""
+                    }
+                ];
+                $(".tTile").css("display","none");
+                $("#kyxm").css("display","block");
             }
 
 

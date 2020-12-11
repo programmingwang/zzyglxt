@@ -14,9 +14,9 @@ import com.zyyglxt.response.ResponseData;
  */
 public interface IUserService {
 
-    ResponseData Register(UserDto userDto) throws BusinessException;
+    ResponseData Register(UserDto userDto) ;
 
-//    int Login(String username, String password) throws BusinessException;
+//    int Login(String username, String password) ;
 
     ResponseData UpdatePassword(UpdatePwdDto updatePwdDto);
 

@@ -6,7 +6,7 @@
 
             if(sessionStorage.getItem("rolename") == "专家"){
                 url = "/exmain/getByExpertCode?expertUserCode="+sessionStorage.getItem("itemcode");
-            }else if(sessionStorage.getItem("rolename") == "省局中医药管理部门"){
+            }else if(sessionStorage.getItem("rolename") == "科研项目-省级"){
                 url = "/exmain/exmain";
             }
 
@@ -36,7 +36,7 @@
                             '<a class="view" style="margin:0 1em;text-decoration: none;color:#775637;" data-toggle="modal" data-target="" >查看</a>',
                         ].join('');
                     }
-                } else if (sessionStorage.getItem("rolename") == "省局中医药管理部门"){
+                } else if (sessionStorage.getItem("rolename") == "科研项目-省级"){
                     return[
                         '<a class="view" style="margin:0 1em;text-decoration: none;color:#775637;" data-toggle="modal" data-target="" >查看</a>',
                     ].join('');

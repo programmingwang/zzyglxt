@@ -29,7 +29,7 @@ public interface IndustrialDevelopChiMedService {
 
     List<IndustrialDevelopChiMedDto> selectAll( String type);
 
-    IndustrialDevelopChiMed selectByOrgCode();
+    IndustrialDevelopChiMedDto selectByOrgCode();
 
     IndustrialDevelopChiMed selectByOrgNameAndCode(String orgName, String orgCode);
 }

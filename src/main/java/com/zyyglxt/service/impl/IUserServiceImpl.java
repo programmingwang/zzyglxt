@@ -58,7 +58,7 @@ public class IUserServiceImpl implements IUserService {
      */
     @Override
     @Transactional
-    public ResponseData Register(UserDto userDto) throws BusinessException {
+    public ResponseData Register(UserDto userDto) {
         // 验证参数不能为空
         ValidatorResult result = validator.validate(userDto);
         if (result.isHasErrors()) {

@@ -36,7 +36,7 @@ public class FamPreDOController {
     /*历史名方数据添加*/
   @RequestMapping(value = "insertfampredo",method = RequestMethod.POST)
   @LogAnnotation(appCode ="",logTitle ="历史名方数据添加",logLevel ="3",creater ="huangwj",updater = "huangwj")
-    public ResponseData insertFamPreDOMapper(@RequestBody FamPreDO key) throws BusinessException {
+    public ResponseData insertFamPreDOMapper(@RequestBody FamPreDO key)  {
           System.out.println("历史名方名称: " + key.getName());
           famPreDOService.insertSelective(key);
           return new ResponseData(EmBusinessError.success);
@@ -56,7 +56,7 @@ public class FamPreDOController {
     /*历史名方数据修改*/
     @RequestMapping(value ="updatefampredo",method = RequestMethod.POST )
     @LogAnnotation(appCode ="",logTitle ="修改历史名方",logLevel ="2",creater ="huangwj",updater = "huangwj")
-    public ResponseData updateFamPreDOMapper(@RequestBody FamPreDO key) throws BusinessException {
+    public ResponseData updateFamPreDOMapper(@RequestBody FamPreDO key)  {
         famPreDOService.updateByPrimaryKeySelective(key);
         System.out.println("要修改历史名方编号为："+key.getItemid());
         return new ResponseData(EmBusinessError.success);

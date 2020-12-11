@@ -42,7 +42,7 @@ public class IndustrialDevelopSaleDrugServiceImpl implements IndustrialDevelopSa
 /*添加无判断*/
     @Transactional
     @Override
-    public int insert(IndustrialDevelopSaleDrug record) throws BusinessException {
+    public int insert(IndustrialDevelopSaleDrug record)  {
         return industrialDevelopSaleDrugMapper.insert(record);
     }
 /*添加有判断*/
@@ -70,7 +70,7 @@ public class IndustrialDevelopSaleDrugServiceImpl implements IndustrialDevelopSa
 /*数据更新*/
     @Transactional
     @Override
-    public int updateByPrimaryKeySelective(IndustrialDevelopSaleDrug record) throws BusinessException {
+    public int updateByPrimaryKeySelective(IndustrialDevelopSaleDrug record)  {
         ValidatorResult result = validator.validate(record);
         if(result.isHasErrors()){
             throw new BusinessException(result.getErrMsg(), EmBusinessError.PARAMETER_VALIDATION_ERROR);

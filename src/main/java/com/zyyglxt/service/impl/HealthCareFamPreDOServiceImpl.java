@@ -40,7 +40,7 @@ public class HealthCareFamPreDOServiceImpl implements HealthCareFamPreDOService 
       历史名方、国医话健康添加、删除、修改、查询实现方法
   **/
     @Override
-    public int insertSelective(HealthCareFamPreDO record) throws BusinessException {
+    public int insertSelective(HealthCareFamPreDO record)  {
         ValidatorResult result = validator.validate(record);
         if(result.isHasErrors()){
             throw new BusinessException(result.getErrMsg(), EmBusinessError.PARAMETER_VALIDATION_ERROR);
@@ -60,7 +60,7 @@ public class HealthCareFamPreDOServiceImpl implements HealthCareFamPreDOService 
     }
     @Transactional
     @Override
-    public int updateByPrimaryKeySelective(HealthCareFamPreDO record) throws BusinessException {
+    public int updateByPrimaryKeySelective(HealthCareFamPreDO record)  {
         ValidatorResult result = validator.validate(record);
         if(result.isHasErrors()){
             throw new BusinessException(result.getErrMsg(), EmBusinessError.PARAMETER_VALIDATION_ERROR);

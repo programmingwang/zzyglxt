@@ -16,9 +16,9 @@ public interface FamPreDOService {
   /*
     历史名方添加、删除、修改、查询实现接口
    */
-  int insertSelective(FamPreDO record) throws BusinessException;
+  int insertSelective(FamPreDO record) ;
   int deleteByPrimaryKey(FamPreDOKey key);
-  int updateByPrimaryKeySelective(FamPreDO record) throws BusinessException;
+  int updateByPrimaryKeySelective(FamPreDO record) ;
   FamPreDO selectByPrimaryKey(FamPreDOKey key);
   List<FamPreDO> selectAllFamPre( List<String> status);//查询所有历史名方
   int changeStatusToFamPre( FamPreDOKey key , String status);//历史名方数据状态

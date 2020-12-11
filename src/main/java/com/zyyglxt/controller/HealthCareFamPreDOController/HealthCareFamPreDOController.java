@@ -38,7 +38,7 @@ HealthCareFamPreDOController {
    */
     @RequestMapping(value ="inserthealthcarefampredo",method = RequestMethod.POST )
     @LogAnnotation(appCode ="",logTitle ="国医话健康数据的添加",logLevel ="3",creater ="huangwj",updater = "huangwj")
-    public ResponseData insertHealthCareFamPreDOMapper(@RequestBody HealthCareFamPreDO key) throws BusinessException {
+    public ResponseData insertHealthCareFamPreDOMapper(@RequestBody HealthCareFamPreDO key)  {
 
         System.out.println("国医话健康标题名称: " + key.getName());
         healthCareFamPreDOService.insertSelective(key);
@@ -62,7 +62,7 @@ HealthCareFamPreDOController {
    */
     @RequestMapping(value ="updatehealthcarefampredo",method = RequestMethod.POST )
     @LogAnnotation(appCode ="",logTitle ="国医话健康数据的修改",logLevel ="2",creater ="huangwj",updater = "huangwj")
-    public ResponseData updateHealthCareFamPreDOMapper(@RequestBody HealthCareFamPreDO key) throws BusinessException {
+    public ResponseData updateHealthCareFamPreDOMapper(@RequestBody HealthCareFamPreDO key)  {
       healthCareFamPreDOService.updateByPrimaryKeySelective(key);
         System.out.println("要修改标题名称编号为："+key.getItemid());
         return new ResponseData(EmBusinessError.success);

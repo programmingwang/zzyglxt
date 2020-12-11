@@ -76,7 +76,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public void insertUserSelective(UserDO record) throws BusinessException {
+    public void insertUserSelective(UserDO record)  {
         ValidatorResult result = validator.validate(record);
         if (result.isHasErrors()) {
             throw new BusinessException(result.getErrMsg(), EmBusinessError.PARAMETER_VALIDATION_ERROR);

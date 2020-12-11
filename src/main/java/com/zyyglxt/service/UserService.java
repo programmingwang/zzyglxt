@@ -19,7 +19,7 @@ public interface UserService {
 
     int insert(UserDO record);
 
-    void insertUserSelective(UserDO record) throws BusinessException;
+    void insertUserSelective(UserDO record) ;
 
     UserDO selectByPrimaryKey(UserDOKey key);
 

@@ -90,11 +90,11 @@ public class IndustrialDevelopSaleDrugServiceImpl implements IndustrialDevelopSa
     }
 
     @Override
-    public List< IndustrialDevelopSaleDrug> selectAllSaleDrug( List<String> status) {
+    public List< IndustrialDevelopSaleDrug> selectAllSaleDrug(List<String> status) {
 //        return industrialDevelopSaleDrugMapper.selectAllSaleDrug(status);
        List<IndustrialDevelopSaleDrug> industrialDevelopSaleDrugList = new ArrayList<>();
         for (String Status : status) {
-            industrialDevelopSaleDrugList.addAll(industrialDevelopSaleDrugMapper.selectAllSaleDrug (Status));
+            industrialDevelopSaleDrugList.addAll(industrialDevelopSaleDrugMapper.selectAllSaleDrug (Status,usernameUtil.getOrgCode()));
         }
         return industrialDevelopSaleDrugList;
     }

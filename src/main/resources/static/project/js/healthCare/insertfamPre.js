@@ -22,7 +22,7 @@
                         source : $("#source").val(),
                         prescription : $("#prescription").val(),
                         status :  '0',
-                        creater : $("#creater").val(),
+                        type : $("#type").val(),
                         content : editor.txt.html()
                     };
                 }else{
@@ -35,7 +35,7 @@
                         source : $("#source").val(),
                         prescription : $("#prescription").val(),
                         status : $("#status").val(),
-                        creater : $("#creater").val(),
+                        type : $("#type").val(),
                         content : editor.txt.html()
                     }
                     operateMessage = "更新历史名方成功";
@@ -62,12 +62,11 @@
                     addUpdateUrl = "insertfampredo";
                     operateMessage = "新增历史名方成功";
                     famPreEntity = {
-                        itemcode: stringUtil.getUUID(),
                         name : $("#name").val(),
                         source : $("#source").val(),
                         prescription : $("#prescription").val(),
                         status :  '1',
-                        creater : $("#creater").val(),
+                        type : $("#type").val(),
                         content : editor.txt.html()
                     };
                 }else{
@@ -80,7 +79,7 @@
                         source : $("#source").val(),
                         prescription : $("#prescription").val(),
                         status : '1',
-                        creater : $("#creater").val(),
+                        type : $("#type").val(),
                         content : editor.txt.html()
                     }
                     operateMessage = "更新历史名方成功";
@@ -105,7 +104,7 @@
                     $("#source").val(tempdata.source);
                     $("#prescription").val(tempdata.prescription);
                     $("#status").val(tempdata.status);
-                    $("#creater").val(tempdata.creater);
+                    $("#type").val(tempdata.type);
                     editor.txt.html(tempdata.content);
                     var img = tempdata.filePath;
                     $("#upimg").attr("src",img);

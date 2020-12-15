@@ -241,12 +241,10 @@
             var oBt=document.getElementById("taskNameSearch");
             var btnSearch=document.getElementById("btnSearch")
             btnSearch.onclick=function(){
-                console.log(oTab.tHead.rows[0].childNodes[5].innerText);
                 for(var i=0;i<oTab.tBodies[0].rows.length;i++)
                 {
                     var str1=oTab.tBodies[0].rows[i].innerText.toLowerCase();
                     var str2=oBt.value.toLowerCase();
-                    console.log(str2);
                     if (str2==""||str2=="请输入"){
                         refreshTable();
                     }

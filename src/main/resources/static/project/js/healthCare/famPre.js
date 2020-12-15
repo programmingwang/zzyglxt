@@ -139,7 +139,6 @@
                 },
 
                 'click .view' : function (e, value, row, index) {
-                    console.log(row.content);
                     var myViewFamPreModalData ={
                         modalBodyID : "myViewFamPreModal", //公用的在后面给span加不同的内容就行了，其他模块同理
                         modalTitle : "查看详情",
@@ -151,6 +150,7 @@
                     $("#source").val(row.source);
                     $("#prescription").val(row.prescription);
                     $("#status").val(webStatus[row.status].text);
+                    $("#type").val(row.type);
                     $("#creater").val(row.creater);
                     $("#itemCreateAt").val(row.itemcreateat);
                     $("#content").html(row.content);
@@ -225,10 +225,8 @@
                 {field: 'name', title: '方名'},
                 {field: 'source', title: '出处'},
                 {field: 'prescription', title: '处方'},
-                {field:'content',title:'制法及用法'},
-                {field: 'status', title: '状态',formatter:function (row) {
-                        return '<p>'+webStatus[row].text+'</p>';
-                    }},
+                {field: 'content',title:'制法及用法'},
+                {field: 'type', title: '剂型',width: '70px'},
                 {field: 'action',  title: '操作',formatter: operation,events:orgEvents}
             ];
 
@@ -244,12 +242,10 @@
             var oBt=document.getElementById("taskNameSearch");
             var btnSearch=document.getElementById("btnSearch")
             btnSearch.onclick=function(){
-                console.log(oTab.tHead.rows[0].childNodes[5].innerText);
                 for(var i=0;i<oTab.tBodies[0].rows.length;i++)
                 {
                     var str1=oTab.tBodies[0].rows[i].innerText.toLowerCase();
                     var str2=oBt.value.toLowerCase();
-                    console.log(str2);
                     if (str2==""||str2=="请输入"){
                         refreshTable();
                     }

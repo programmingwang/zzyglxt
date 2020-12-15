@@ -26,7 +26,7 @@ import java.util.List;
  * @date 2020/11/4 16:37
  */
 @RestController
-@PropertySource("classpath:application.properties")
+//@PropertySource("classpath:application.properties")
 @RequestMapping("/file")
 public class FileController {
     @Resource

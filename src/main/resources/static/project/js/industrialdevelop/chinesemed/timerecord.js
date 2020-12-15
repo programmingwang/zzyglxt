@@ -107,21 +107,13 @@
                 var str = document.getElementById("taskNameSearch1").value;
                 var allTableData = JSON.parse(localStorage.getItem("2"));
                 var nowDate= new Date();
-                // console.log(nowDate)
-                // console.log(allTableData);
-                // console.log(str);
-                // console.log(aCol)
-                console.log(addstr);
+
 
                 for (var i in allTableData) {
                         var textP = allTableData[i][aCol[0].field];
                         var makeTime=new Date(allTableData[i][aCol[2].field]) ;
-                        //console.log(makeTime)
 
-                        // console.log("开始时间："+stratTime);
-                        // console.log("结束时间"+endTime);
-                        //  console.log(makeTime>=nowDate);
-                        //  console.log(makeTime<nowDate);
+
 
                         if (textP==str){
                             if (addstr==="生效"&&makeTime>nowDate){

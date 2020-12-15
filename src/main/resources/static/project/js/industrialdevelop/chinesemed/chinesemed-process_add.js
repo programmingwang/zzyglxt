@@ -66,7 +66,6 @@
                 if (isUpdate()) {
                     var needData;
                     ajaxUtil.myAjax(null,url + "/getByOrgCode",null,function (data) {
-                        console.log(data);
                         if(ajaxUtil.success(data)){
                             needData = data.data;
                         }

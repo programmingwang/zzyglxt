@@ -79,7 +79,6 @@
                             alertUtil.error(data.msg)
                         }
                     },false,"","get");
-                    console.log(tempdata);
                     $("#name").val(tempdata.name);
                     $("#projectCost").val(tempdata.projectCost);
                     $("#contacts").val(tempdata.contacts);

@@ -160,6 +160,16 @@
             '                <fieldset disabled>'+
             '                <div class="input-group mb-3">\n' +
             '                    <div class="input-group-prepend">\n' +
+            '                        <button id="culturalContentSpan" class="btn btn-primary btn-sm" >剂型</button>\n' +
+            '                    </div>\n' +
+            '                    <input type="text" id="type" class="form-control">\n' +
+            '                </div>\n' +
+            '            </div>\n' +
+            '\n' +
+            '            <div class="col-lg-12 col-md-12">\n' +
+            '                <fieldset disabled>'+
+            '                <div class="input-group mb-3">\n' +
+            '                    <div class="input-group-prepend">\n' +
             '                        <button class="btn btn-primary btn-sm" >制法及用法</button>\n' +
             '                    </div>\n' +
             '                  <div>\n' +

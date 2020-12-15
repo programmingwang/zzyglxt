@@ -85,7 +85,6 @@
 
 
             function isUpdate() {
-                console.log(localStorage.getItem("rowData"));
                 return (localStorage.getItem("rowData") != null || localStorage.getItem("rowData") != undefined)
             }
     })

@@ -47,6 +47,9 @@ spring:
   cache:
     ehcache:
       config: ehcache.xml
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
 
 
 
@@ -65,6 +68,7 @@ upload:
   addr: 47.113.104.120
   port: 8085
 
+
 #  servlet:
 #    context-path: /zyyglxt
 
@@ -72,4 +76,10 @@ upload:
 #  file:
 #    path: E:/Desktop
 
-
+fdfs:
+  connect-timeout: 6000
+  so-timeout: 15000
+  tracker-list: 39.101.192.246:22122
+  http_tracker_http_port: 8080
+  pool:
+    jmx-enabled: false

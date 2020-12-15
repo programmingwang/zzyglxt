@@ -481,7 +481,6 @@
                 }
                 ajaxUtil.myAjax(null,"/industrialdevelop",null,function (data) {
 
-                    //console.log(data.data);
                     for (var i=0;i<data.data.length;i++){
                         if (data.data[i].isimp == "1"){
                             starttime = data.data[i].startTime;

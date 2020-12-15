@@ -805,10 +805,8 @@
             function loadPage(url) {
                 orange.loadPage({
                     url: url, target: 'main_body', selector: '#fir_body', success: function (data) {
-                        console.log(typeof data);
                         if (typeof data == "string") {
                             $("#main_body").html(data);
-                            console.log(url + "加载")
                         } else {
                             alertUtil.error(url + '加载失败');
                         }

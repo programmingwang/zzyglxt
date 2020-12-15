@@ -81,7 +81,6 @@
                             needData = data.data;
                         }
                     },false,true,"get");
-                    console.log(needData);
                     $("#name").val(needData.name);
                     $("#salesCategory").val(needData.salesCategory);
                     $("#sellingDrugs").val(needData.sellingDrugs);

@@ -37,7 +37,6 @@ public class FamPreDOController {
   @RequestMapping(value = "insertfampredo",method = RequestMethod.POST)
   @LogAnnotation(appCode ="",logTitle ="历史名方数据添加",logLevel ="3",creater ="huangwj",updater = "huangwj")
     public ResponseData insertFamPreDOMapper(@RequestBody FamPreDO key)  {
-          System.out.println("历史名方名称: " + key.getName());
           famPreDOService.insertSelective(key);
           return new ResponseData(EmBusinessError.success);
   }

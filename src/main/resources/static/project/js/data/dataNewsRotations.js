@@ -274,14 +274,14 @@
             myTable = bootstrapTableUtil.myBootStrapTableInit("table", url, param, aCol);
         }
             var allTableData = $("#table").bootstrapTable("getData");
-            //console.log(allTableData);
+
             localStorage.setItem('2',JSON.stringify(allTableData))
             obj2=JSON.parse(localStorage.getItem("2"));
-            //console.log(obj2);
+
 
         var allPosition = document.getElementById("allPosition").children;
         for(var i=1;i<allPosition.length;i++){
-            //console.log(allPosition[i].innerHTML)
+
             allPosition[i].onclick=function () {
                 for(var j=1;j<allPosition.length;j++){
                     allPosition[j].classList.remove("addC");
@@ -301,7 +301,7 @@
                 }else if (str=='位置五'){
                     str=4;
                 }
-                //console.log(str)
+
 
                 if (str=='全部'){
                     refreshTable()

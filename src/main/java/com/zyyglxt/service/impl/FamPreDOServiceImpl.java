@@ -59,7 +59,6 @@ public class FamPreDOServiceImpl implements FamPreDOService {
         if(result.isHasErrors()){
             throw new BusinessException(result.getErrMsg(), EmBusinessError.PARAMETER_VALIDATION_ERROR);
         }
-        record.setItemupdateat(new Date());
         record.setUpdater(usernameUtil.getOperateUser());
         return famPreDOMapper.updateByPrimaryKeySelective(record);
     }

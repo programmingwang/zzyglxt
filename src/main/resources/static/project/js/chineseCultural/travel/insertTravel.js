@@ -115,7 +115,7 @@
                     $("#chineseCulturalAuthor").val(tempdata.chineseCulturalAuthor);
                     editor.txt.html(tempdata.chineseCulturalContent);
                     var img = tempdata.filePath;
-                    // console.log(tempdata);
+
                     // var imgName=tempdata.fileName;
                     uploadImg.setImgSrc(img);
                     // $("#upload_file").attr("value",imgName);

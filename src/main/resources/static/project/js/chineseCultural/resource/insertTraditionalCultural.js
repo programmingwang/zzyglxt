@@ -100,7 +100,6 @@
                     $("#chineseCulturalAuthor").val(tempdata.chineseCulturalAuthor);
                     editor.txt.html(tempdata.chineseCulturalContent);
                     var img = tempdata.filePath;
-                    console.log(img);
                     $("#upimg").attr("src",img);
                 }
             }());

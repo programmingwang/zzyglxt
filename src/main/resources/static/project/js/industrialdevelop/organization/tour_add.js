@@ -75,7 +75,6 @@
                             alertUtil.error(data.msg)
                         }
                     },false,"","get");
-                    console.log(tempdata);
                     $("#name").val(tempdata.name);
                     $("#areaCoverd").val(tempdata.areaCoverd);
                     $("#specialService").val(tempdata.specialService);
@@ -90,7 +89,6 @@
                     editor.txt.html(tempdata.intruduce);
                     itemcode = tempdata.itemcode;
                     var img = tempdata.filePath;
-                    // console.log(tempdata);
                     // var imgName=tempdata.fileName;
                     uploadImg.setImgSrc(img);
                 }else {

@@ -69,7 +69,6 @@
                     var needData;
                     ajaxUtil.myAjax(null,url + "/getByOrgCode",null,function (data) {
                         if(ajaxUtil.success(data)){
-                            console.log(data);
                             needData = data.data;
                         }
                     },false,true,"get");

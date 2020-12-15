@@ -50,7 +50,6 @@ public class HealthSciKnowDOServiceImpl implements HealthSciKnowDOService {
         if(result.isHasErrors()){
             throw new BusinessException(result.getErrMsg(), EmBusinessError.PARAMETER_VALIDATION_ERROR);
         }
-        record.setScienceKnowledgeStatus("0");
         record.setItemcode(UUID.randomUUID().toString());
         record.setItemcreateat(new Date());
         record.setCreater(usernameUtil.getOperateUser());

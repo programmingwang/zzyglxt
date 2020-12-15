@@ -222,7 +222,34 @@
                 $(".tTile").css("display","none");
                 $("#zwbg").css("display","block");
             }
-            if (roleName === '主研人'||roleName === '科研项目申报单位'){
+            if (roleName === '主研人'){
+                var menu_list = [
+                    {
+                        menu_name: "科研项目管理",
+                        menu_url: "",
+                        id: "15",
+                        level: "1",
+                        pid: ""
+                    },
+                    {
+                        menu_name: "课题管理",
+                        menu_url: "/scientificProject/topicManagement",
+                        id: "15-1",
+                        level: "2",
+                        pid: "15"
+                    },
+                    // {
+                    //     menu_name: "账号管理",
+                    //     menu_url: "/scientificProject/accountManagement",
+                    //     id: "15-2",
+                    //     level: "2",
+                    //     pid: "15"
+                    // },
+                ];
+                $(".tTile").css("display","none");
+                $("#kyxm").css("display","block");
+            }
+            if (roleName === '科研项目申报单位'){
                 var menu_list = [
                     {
                         menu_name: "科研项目管理",

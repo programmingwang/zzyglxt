@@ -50,7 +50,6 @@ public class HealthCareFamPreDOServiceImpl implements HealthCareFamPreDOService 
         if(result.isHasErrors()){
             throw new BusinessException(result.getErrMsg(), EmBusinessError.PARAMETER_VALIDATION_ERROR);
         }
-        record.setStatus("0");
         record.setItemcreateat(new Date());
         record.setCreater(usernameUtil.getOperateUser());
         record.setUpdater(usernameUtil.getOperateUser());

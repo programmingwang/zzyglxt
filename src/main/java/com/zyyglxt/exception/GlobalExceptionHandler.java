@@ -3,6 +3,7 @@ package com.zyyglxt.exception;
 import com.zyyglxt.error.BusinessException;
 import com.zyyglxt.error.EmBusinessError;
 import com.zyyglxt.response.ResponseData;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.access.AccessDeniedException;
@@ -38,9 +39,12 @@ public class GlobalExceptionHandler {
      * @param e
      * @return
      */
-    @ExceptionHandler(value =Exception.class)
+    @ExceptionHandler(value = Exception.class)
     @ResponseBody
     public ResponseData exceptionHandler(Exception e){
+        if(StringUtils.contains(e.getMessage(),"Field error in object 'fileDto' on field 'file': rejected value [undefined]; codes [typeMismatch.fileDto.file,typeMismatch.file,typeMismatch.org.springframework.web.multipart.MultipartFile,typeMismatch];")){
+            return new ResponseData(EmBusinessError.NO_FILE_UPLOAD);
+        }
         logger.error("未知异常！原因是:",e);
         return new ResponseData();
     }

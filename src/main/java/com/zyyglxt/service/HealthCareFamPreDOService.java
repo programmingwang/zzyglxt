@@ -16,9 +16,9 @@ public interface HealthCareFamPreDOService {
     /*
     中医药名称添加、删除、修改、查询实现接口
    **/
-    int insertSelective(HealthCareFamPreDO record) throws BusinessException;
+    int insertSelective(HealthCareFamPreDO record) ;
     int deleteByPrimaryKey(HealthCareFamPreDOKey key);
-    int updateByPrimaryKeySelective(HealthCareFamPreDO record) throws BusinessException;
+    int updateByPrimaryKeySelective(HealthCareFamPreDO record) ;
     HealthCareFamPreDO selectByPrimaryKey(HealthCareFamPreDOKey key);
     List<HealthCareFamPreDO> selectAllHealthCareFamPre(List<String> status);//查询所有国医话健康所有数据
     int changeStatusToCareFam( HealthCareFamPreDOKey key, String status);//国医话健康数据状态

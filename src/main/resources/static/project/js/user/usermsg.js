@@ -93,7 +93,6 @@
                     var mobilePhone = $("#phone").val();
                     var newPassword = $("#newPwd").val();
                     var checkNewPassword = $("#checkPwd").val();
-                    console.log(newPassword);
                     if (!stringUtil.isBlank(password) && !stringUtil.isBlank(mobilePhone) &&
                         !stringUtil.isBlank(newPassword) && !stringUtil.isBlank(checkNewPassword)) {
                         var pwd = {

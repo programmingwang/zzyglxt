@@ -37,7 +37,7 @@ public class HealthSciKnowDOServiceImpl implements HealthSciKnowDOService {
     private UsernameUtil usernameUtil;
     @Transactional
     @Override
-    public int insertSelective(HealthSciKnowDO record) throws BusinessException {
+    public int insertSelective(HealthSciKnowDO record)  {
         /*Date data=new Date();
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         try {
@@ -50,7 +50,6 @@ public class HealthSciKnowDOServiceImpl implements HealthSciKnowDOService {
         if(result.isHasErrors()){
             throw new BusinessException(result.getErrMsg(), EmBusinessError.PARAMETER_VALIDATION_ERROR);
         }
-        record.setScienceKnowledgeStatus("0");
         record.setItemcode(UUID.randomUUID().toString());
         record.setItemcreateat(new Date());
         record.setCreater(usernameUtil.getOperateUser());
@@ -65,7 +64,7 @@ public class HealthSciKnowDOServiceImpl implements HealthSciKnowDOService {
     }
     @Transactional
     @Override
-    public int updateByPrimaryKeySelective(HealthSciKnowDO record) throws BusinessException {
+    public int updateByPrimaryKeySelective(HealthSciKnowDO record)  {
         ValidatorResult result = validator.validate(record);
         if(result.isHasErrors()){
             throw new BusinessException(result.getErrMsg(), EmBusinessError.PARAMETER_VALIDATION_ERROR);

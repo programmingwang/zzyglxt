@@ -30,7 +30,6 @@
                             var chineseMedicineKey = {
                                 'username':row.username
                             };
-                            console.log(chineseMedicineKey+'5555555555555')
                             ajaxUtil.myAjax(null,"/user/deletuser",chineseMedicineKey,function (data) {
                                 if(ajaxUtil.success(data)){
                                     alertUtil.info("删除账号信息成功");
@@ -120,8 +119,6 @@
                         var mobilephone = $("#mobilephone").val();
                         var cityid = dictUtil.getName(dictUtil.DICT_LIST.areaAdmin,$("#cityid").val());
 
-                        console.log(roleName);
-                        console.log(cityid);
 
                         var submitStatus = {
                             "username": username,

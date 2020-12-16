@@ -9,7 +9,6 @@
             //角色加载工具
             url = selectUtil.getRoleTable(sessionStorage.getItem("rolename"),url,"chineseCulturalStatus",webStatus);
 
-            console.log(url);
             var aParam = {
 
             };
@@ -69,7 +68,6 @@
                                 "chineseCulturalStatus": selectUtil.getStatus(sessionStorage.getItem("rolename"),webStatus)
                             };
                             ajaxUtil.myAjax(null,"/cul/trav/trav/cgTravSta/"+row.itemid+"/"+row.itemcode,submitStatus,function (data) {
-                                console.log(data);
                                 if(ajaxUtil.success(data)){
                                     if(data.code == ajaxUtil.successCode){
                                         if(sessionStorage.getItem("rolename") == "文化宣传处长"){

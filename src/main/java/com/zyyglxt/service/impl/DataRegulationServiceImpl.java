@@ -60,7 +60,7 @@ public class DataRegulationServiceImpl implements IDataRegulationService {
         record.setItemcreateat(DateUtils.getDate());
         record.setCreater(usernameUtil.getOperateUser());
         record.setDataType("政策法规");
-        record.setDataStatus("0");
+        record.setUpdater(usernameUtil.getOperateUser());
         if(record.getItemcode() == null){
             record.setItemcode(UUIDUtils.getUUID());
         }

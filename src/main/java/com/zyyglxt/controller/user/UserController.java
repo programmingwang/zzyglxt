@@ -48,7 +48,7 @@ public class UserController {
      */
     @LogAnnotation(logTitle = "注册", logLevel = "3")
     @RequestMapping(value = "/register", method = RequestMethod.POST)
-    public ResponseData Register(UserDto userDto) throws BusinessException {
+    public ResponseData Register(UserDto userDto) {
         ResponseData rd = iuserService.Register(userDto);
         if (rd.getCode().equals(EmBusinessError.success.getErrCode())) {
             return new ResponseData(EmBusinessError.success, rd.getData());
@@ -181,7 +181,7 @@ public class UserController {
      */
     @LogAnnotation(logTitle = "产业发展-账号管理-新增用户", logLevel = "3")
     @RequestMapping(value = "/adduser", method = RequestMethod.POST)
-    public ResponseData insertUser(@RequestBody UserDO userDO) throws BusinessException {
+    public ResponseData insertUser(@RequestBody UserDO userDO){
         userService.insertUserSelective(userDO);
         return new ResponseData(EmBusinessError.success);
     }

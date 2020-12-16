@@ -10,7 +10,7 @@
 
         <div class="row test-border" id="accordion2">
             <div class="col-lg-4 col-md-4" style="padding-left: 2rem;">
-                <div class="input-group mb-4" >
+                <div class="input-group mb-4" style="width: 530px;">
                     <input type="text" id="taskNameSearch" class="form-control" value="请输入" onfocus="if (value=='请输入'){value =''}" onblur="if (value ==''){value='请输入'}" >
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="btnSearch" style="z-index: 1;">搜索</span>
@@ -30,14 +30,14 @@
                 <div class="col-lg-4 col-md-4" style="padding-left: 2rem;" >
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
-                            <span class="input-text" >其他选项： 展示状态：</span>
+                            <span class="input-text" style="margin-top: 9px;">其他选项： 展示状态：</span>
                         </div>
                         <select class="custom-select" id="chargePersonSearch"></select>
                     </div>
                 </div>
-                <div class="col-lg-3"></div>
+                <div class="col-lg-1"></div>
 
-                <div class="col-lg-5 col-md-8 row">
+                <div class="col-lg-5 col-md-8 row" style="margin-top: 9px;">
                     发布时间: &nbsp &nbsp
                     <div id="stratTime">
                         <input type="number" value="00" oninput="if(value>23)value=0;if(value<0)value=23;var v=this.value;while(v.length<2){v='0'+v;}this.value=v;" onkeyup="this.value=this.value.replace(/\D/g,'');" style="outline: none;text-align: left; border: none;width: 50px;border-radius: 2px;box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.349019607843137);">

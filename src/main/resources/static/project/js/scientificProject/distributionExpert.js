@@ -42,7 +42,7 @@
 
             function distribution(rows){
                 var postUrl = "/industrialdevelop/expert/selectAll"
-                var experts = {};
+                var experts = {}
                 var addExperModal ={
                     modalBodyID : "addExperModal", //公用的在后面给span加不同的内容就行了，其他模块同理
                     modalTitle : "分配专家",
@@ -55,7 +55,7 @@
                                 expertCode : $("#experName").val(),
                                 topicCode : rows[i].itemcode,
                                 exmaineStatus : exmaineStatus[1].id
-                            };
+                            }
                             ajaxUtil.myAjax(null, "/exmain/exmain", entity, function (data) {
                                 if (ajaxUtil.success(data)) {
                                     isSuccess = true;
@@ -158,10 +158,11 @@
             }
 
 
-             bootstrapTableUtil.globalSearch("table",url,aParam, aCol);
+            // bootstrapTableUtil.globalSearch("table",url,aParam, aCol);
 
-
+            var allTableData = $("#table").bootstrapTable("getData");
+            localStorage.setItem('2',JSON.stringify(allTableData))
+            obj2=JSON.parse(localStorage.getItem("2"));
 
         })
 })();
-

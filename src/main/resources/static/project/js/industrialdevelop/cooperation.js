@@ -90,7 +90,6 @@
             });
 
             var pl = dictUtil.getDictByCode(dictUtil.DICT_LIST.showStatus);
-            console.log(pl)
             $("#chargePersonSearch").selectUtil(pl);
 
 

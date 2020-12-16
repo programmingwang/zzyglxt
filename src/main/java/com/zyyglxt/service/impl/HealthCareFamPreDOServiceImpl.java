@@ -1,13 +1,17 @@
 package com.zyyglxt.service.impl;
 
 import com.zyyglxt.dao.HealthCareFamPreDOMapper;
+import com.zyyglxt.dataobject.FamPreDO;
 import com.zyyglxt.dataobject.HealthCareFamPreDO;
 import com.zyyglxt.dataobject.HealthCareFamPreDOKey;
 import com.zyyglxt.error.BusinessException;
 import com.zyyglxt.error.EmBusinessError;
 import com.zyyglxt.service.HealthCareFamPreDOService;
+import com.zyyglxt.util.UUIDUtils;
+import com.zyyglxt.util.UsernameUtil;
 import com.zyyglxt.validator.ValidatorImpl;
 import com.zyyglxt.validator.ValidatorResult;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,6 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.annotation.Resource;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -30,18 +35,24 @@ public class HealthCareFamPreDOServiceImpl implements HealthCareFamPreDOService 
      private HealthCareFamPreDOMapper healthCareFamPreDOMapper;
     @Autowired
     private ValidatorImpl validator;
+    @Autowired
+    private UsernameUtil usernameUtil;
     @Transactional
     /*
       历史名方、国医话健康添加、删除、修改、查询实现方法
   **/
     @Override
-    public int insertSelective(HealthCareFamPreDO record) throws BusinessException {
+    public int insertSelective(HealthCareFamPreDO record)  {
+        if(StringUtils.isEmpty(record.getItemcode())){
+            record.setItemcode(UUIDUtils.getUUID());
+        }
         ValidatorResult result = validator.validate(record);
         if(result.isHasErrors()){
             throw new BusinessException(result.getErrMsg(), EmBusinessError.PARAMETER_VALIDATION_ERROR);
         }
-        record.setItemcode(UUID.randomUUID().toString());
         record.setItemcreateat(new Date());
+        record.setCreater(usernameUtil.getOperateUser());
+        record.setUpdater(usernameUtil.getOperateUser());
         return healthCareFamPreDOMapper.insertSelective(record);
     }
     @Transactional
@@ -52,12 +63,13 @@ public class HealthCareFamPreDOServiceImpl implements HealthCareFamPreDOService 
     }
     @Transactional
     @Override
-    public int updateByPrimaryKeySelective(HealthCareFamPreDO record) throws BusinessException {
+    public int updateByPrimaryKeySelective(HealthCareFamPreDO record)  {
         ValidatorResult result = validator.validate(record);
         if(result.isHasErrors()){
             throw new BusinessException(result.getErrMsg(), EmBusinessError.PARAMETER_VALIDATION_ERROR);
         }
         record.setItemupdateat(new Date());
+        record.setUpdater(usernameUtil.getOperateUser());
         return healthCareFamPreDOMapper.updateByPrimaryKeySelective(record);
     }
     @Override
@@ -66,8 +78,17 @@ public class HealthCareFamPreDOServiceImpl implements HealthCareFamPreDOService 
     }
     /*查询国医话健康所有数据*/
     @Override
-    public List<HealthCareFamPreDO> selectAllHealthCareFamPre() {
-        return healthCareFamPreDOMapper.selectAllHealthCareFamPre();
+    public List<HealthCareFamPreDO> selectAllHealthCareFamPre(List<String> status) {
+        List<HealthCareFamPreDO> healthCareFamPreDOList=new ArrayList<>();
+        for(String careFamStatus: status){
+            healthCareFamPreDOList.addAll(healthCareFamPreDOMapper.selectAllHealthCareFamPre(careFamStatus));
+        }
+        return healthCareFamPreDOList;
+    }
+   /*国医话健康数据状态*/
+    @Override
+    public int changeStatusToCareFam(HealthCareFamPreDOKey key, String status) {
+        return healthCareFamPreDOMapper.changeStatusToCareFam(key,status);
     }
 
     @Override

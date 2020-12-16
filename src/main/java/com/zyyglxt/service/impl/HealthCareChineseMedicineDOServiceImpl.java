@@ -1,14 +1,13 @@
 package com.zyyglxt.service.impl;
 
-import com.zyyglxt.dao.FileDOMapper;
 import com.zyyglxt.dao.HealthCareChineseMedicineDOMapper;
-import com.zyyglxt.dataobject.FileDO;
 import com.zyyglxt.dataobject.HealthCareChineseMedicineDO;
 import com.zyyglxt.dataobject.HealthCareChineseMedicineDOKey;
 import com.zyyglxt.error.BusinessException;
 import com.zyyglxt.error.EmBusinessError;
 import com.zyyglxt.service.HealthCareChineseMedicineDOService;
 import com.zyyglxt.service.IFileService;
+import com.zyyglxt.util.UsernameUtil;
 import com.zyyglxt.validator.ValidatorImpl;
 import com.zyyglxt.validator.ValidatorResult;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -33,12 +33,14 @@ public class HealthCareChineseMedicineDOServiceImpl implements HealthCareChinese
     private IFileService iFileService;
     @Autowired
     private ValidatorImpl validator;
+    @Autowired
+    private UsernameUtil usernameUtil;
     @Transactional
     /*
   中医药常识添加、删除、修改、查询实现方法
 **/
     @Override
-    public int insert(HealthCareChineseMedicineDO record) throws BusinessException {
+    public int insert(HealthCareChineseMedicineDO record)  {
         ValidatorResult result = validator.validate(record);
         if(result.isHasErrors()){
             throw new BusinessException(result.getErrMsg(), EmBusinessError.PARAMETER_VALIDATION_ERROR);
@@ -48,7 +50,10 @@ public class HealthCareChineseMedicineDOServiceImpl implements HealthCareChinese
         if(record.getItemcode()==null){
             record.setItemcode(UUID.randomUUID().toString());
         }
+        record.setChineseMedicineStatus("0");
         record.setItemcreateat(new Date());
+        record.setCreater(usernameUtil.getOperateUser());
+        record.setUpdater(usernameUtil.getOperateUser());
         return healthCareChineseMedicineDOMapper.insert(record);
     }
     @Transactional
@@ -59,12 +64,13 @@ public class HealthCareChineseMedicineDOServiceImpl implements HealthCareChinese
     }
     @Transactional
     @Override
-    public int updateByPrimaryKeySelective(HealthCareChineseMedicineDO record) throws BusinessException {
+    public int updateByPrimaryKeySelective(HealthCareChineseMedicineDO record)  {
         ValidatorResult result = validator.validate(record);
         if(result.isHasErrors()){
             throw new BusinessException(result.getErrMsg(), EmBusinessError.PARAMETER_VALIDATION_ERROR);
         }
         record.setItemupdateat(new Date());
+        record.setUpdater(usernameUtil.getOperateUser());
         return healthCareChineseMedicineDOMapper.updateByPrimaryKeySelective(record);
     }
 
@@ -74,7 +80,16 @@ public class HealthCareChineseMedicineDOServiceImpl implements HealthCareChinese
     }
      /*查询所有中医药常识数据*/
     @Override
-    public List<HealthCareChineseMedicineDO> selectAllHealthCareChineseMedicine() {
-        return healthCareChineseMedicineDOMapper.selectAllHealthCareChineseMedicine();
+    public List<HealthCareChineseMedicineDO> selectAllHealthCareChineseMedicine(List<String> chineseMedicineStatus) {
+        List<HealthCareChineseMedicineDO> healthCareChineseMedicineDOList=new ArrayList<>();
+        for(String status:chineseMedicineStatus){
+            healthCareChineseMedicineDOList.addAll(healthCareChineseMedicineDOMapper.selectAllHealthCareChineseMedicine(status));
+        }
+        return healthCareChineseMedicineDOList;
+    }
+   /*中医药数据状态*/
+    @Override
+    public int changeStatusToMedicine(HealthCareChineseMedicineDOKey key, String chineseMedicineStatus) {
+        return healthCareChineseMedicineDOMapper.changeStatusToMedicine(key,chineseMedicineStatus);
     }
 }

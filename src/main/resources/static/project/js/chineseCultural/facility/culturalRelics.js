@@ -3,9 +3,12 @@
         function (jquery,ajaxUtil,bootstrapTableUtil,objectUtil,alertUtil,modalUtil,selectUtil,stringUtil,dictUtil) {
 
 
-            var url = "/cul/fac/culRel/getAll?chineseCulturalStatus=已下架&chineseCulturalStatus=展示中";
+            var url = "/cul/fac/culRel/getAll";
 
-            url = selectUtil.getRoleTable(sessionStorage.getItem("rolename"),url);
+            var webStatus = dictUtil.getDictByCode(dictUtil.DICT_LIST.webStatus);
+
+            //角色加载工具
+            url = selectUtil.getRoleTable(sessionStorage.getItem("rolename"),url,"chineseCulturalStatus",webStatus);
 
             var aParam = {
 
@@ -13,7 +16,7 @@
 
             //操作
             function operation(value, row, index){
-                return selectUtil.getRoleOperate(value,row,index,sessionStorage.getItem("rolename"),row.chineseCulturalStatus)
+                return selectUtil.getRoleOperate(value,row,index,sessionStorage.getItem("rolename"),row.chineseCulturalStatus,webStatus)
             }
 
 
@@ -60,12 +63,12 @@
                         modalConfirmFun:function () {
                             var isSuccess = false;
                             var submitStatus = {
-                                "chineseCulturalStatus": selectUtil.getStatus(sessionStorage.getItem("rolename"))
+                                "chineseCulturalStatus": selectUtil.getStatus(sessionStorage.getItem("rolename"),webStatus)
                             };
                             ajaxUtil.myAjax(null,"/cul/fac/culRel/cgCulRelSta/"+row.itemid+"/"+row.itemcode,submitStatus,function (data) {
                                 if(ajaxUtil.success(data)){
                                     if(data.code == 88888){
-                                        if(selectUtil.getStatus(sessionStorage.getItem("rolename")) == "处长已审核"){
+                                        if(sessionStorage.getItem("rolename") == "文化宣传处长"){
                                             alertUtil.info("审核已通过，已发送给综合处处长做最后审核！");
                                         }else{
                                             alertUtil.info("审核已通过，已上架！");
@@ -93,8 +96,13 @@
                         modalConfirmFun:function () {
                             var isSuccess = false;
                             var submitStatus = {
-                                "chineseCulturalStatus": "已下架"
+                                "chineseCulturalStatus": ""
                             };
+                            if(sessionStorage.getItem("rolename") == "文化宣传处长" || sessionStorage.getItem("rolename") == "政务资源处长"){
+                                submitStatus.chineseCulturalStatus = webStatus[3].id;
+                            }else{
+                                submitStatus.chineseCulturalStatus = webStatus[4].id;
+                            }
                             ajaxUtil.myAjax(null,"/cul/fac/culRel/cgCulRelSta/"+row.itemid+"/"+row.itemcode,submitStatus,function (data) {
                                 if(ajaxUtil.success(data)){
                                     if(data.code == 88888){
@@ -122,7 +130,7 @@
                         modalConfirmFun:function () {
                             var isSuccess = false;
                             var submitStatus = {
-                                "chineseCulturalStatus": "已下架"
+                                "chineseCulturalStatus": webStatus[6].id
                             };
                             ajaxUtil.myAjax(null,"/cul/fac/culRel/cgCulRelSta/"+row.itemid+"/"+row.itemcode,submitStatus,function (data) {
                                 if(ajaxUtil.success(data)){
@@ -154,10 +162,10 @@
                     $("#chineseCulturalName").val(row.chineseCulturalName);
                     $("#chineseCulturalSource").val(row.chineseCulturalSource);
                     $("#chineseCulturalAuthor").val(row.chineseCulturalAuthor);
-                    $("#chineseCulturalContent").val(row.chineseCulturalContent);
+                    $("#chineseCulturalContent").html(row.chineseCulturalContent);
                     $("#creater").val(row.creater);
                     $("#itemCreateAt").val(row.itemcreateat);
-                    $("#chineseCulturalStatus").val(row.chineseCulturalStatus);
+                    $("#chineseCulturalStatus").val(webStatus[row.chineseCulturalStatus].text);
                     $("#culturalImg").attr("src",row.filePath)
                     $('#culturalImgSpan').html("图片");
                     $('#culturalNameSpan').html("文化古迹名称");
@@ -174,7 +182,7 @@
                         modalConfirmFun:function () {
                             var isSuccess = false;
                             var submitStatus = {
-                                "chineseCulturalStatus": selectUtil.getStatus(sessionStorage.getItem("rolename"))
+                                "chineseCulturalStatus": selectUtil.getStatus(sessionStorage.getItem("rolename"),webStatus)
                             };
                             ajaxUtil.myAjax(null,"/cul/fac/culRel/cgCulRelSta/"+row.itemid+"/"+row.itemcode,submitStatus,function (data) {
                                 if(ajaxUtil.success(data)){
@@ -204,7 +212,7 @@
                         modalConfirmFun:function () {
                             var isSuccess = false;
                             var submitStatus = {
-                                "chineseCulturalStatus": "--"
+                                "chineseCulturalStatus": webStatus[0].id
                             };
                             ajaxUtil.myAjax(null,"/cul/fac/culRel/cgCulRelSta/"+row.itemid+"/"+row.itemcode,submitStatus,function (data) {
                                 if(ajaxUtil.success(data)){
@@ -253,7 +261,6 @@
 
             var myTable = bootstrapTableUtil.myBootStrapTableInit("table", url, aParam, aCol);
 
-            console.log(myTable);
 
             function refreshTable() {
 
@@ -263,5 +270,6 @@
             }
 
             bootstrapTableUtil.globalSearch("table",url,aParam, aCol);
+
         })
 })();

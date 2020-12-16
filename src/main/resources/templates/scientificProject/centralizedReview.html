@@ -1,10 +1,55 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>$Title$</title>
+    <link rel="stylesheet" th:href="@{CSS/taskList.css}">
 </head>
 <body>
-$END$
+<div id="fir_body">
+
+    <div class="col-lg-12">
+        <div class="row test-border" id="accordion2">
+            <div class="col-lg-4 col-md-4">
+                <div class="input-group mb-4" style="width: 530px;">
+                    <input type="text" id="taskNameSearch" class="form-control" value="请输入" onfocus="if (value=='请输入'){value =''}" onblur="if (value ==''){value='请输入'}" >
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="btnSearch" style="z-index: 1;">搜索</span>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr size="1" class="mb-3" style="color: #EBEBEB;border-style:dashed;width:100%;margin-bottom:10px;">
+
+    <div>
+        <div id="collapseOne" class="col-md-12 col-lg-12" >
+            <div class="col-lg-3 col-md-3">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend" style="margin-top: 9px;">
+                        <span class="input-text" >其他选项：状态：</span>
+                    </div>
+                    <select class="custom-select" id="chargePersonSearch"></select>
+                </div>
+            </div>
+            <div class="col-lg-3"></div>
+        </div>
+    </div>
+
+
+    <div class="col-lg-12">
+        <table id="table"></table>
+    </div>
+
+
+    <!-- Modal -->
+
+
+
+
+</div>
+
 </body>
+<script type="text/javascript" data-main="/main/main.js" th:src="@{/component/require@2.3.6/require-2.3.6.js}"></script>
+<script type="text/javascript" th:src="@{/project/js/scientificProject/centralizedReview.js}"></script>
 </html>

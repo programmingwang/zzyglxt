@@ -1,23 +1,17 @@
 package com.zyyglxt.controller.user;
 
 import com.zyyglxt.annotation.LogAnnotation;
-import com.zyyglxt.common.Result;
-import com.zyyglxt.dataobject.OrganizationDO;
-import com.zyyglxt.dataobject.UserDO;
+import com.zyyglxt.dataobject.*;
 import com.zyyglxt.dto.UpdatePwdDto;
 import com.zyyglxt.dto.UserDto;
-import com.zyyglxt.dto.UserSessionDto;
+import com.zyyglxt.dto.industrialDevelop.OrgStatusDto;
 import com.zyyglxt.error.BusinessException;
 import com.zyyglxt.error.EmBusinessError;
 import com.zyyglxt.response.ResponseData;
-import com.zyyglxt.service.IOrganizationService;
-import com.zyyglxt.service.IUserService;
-import com.zyyglxt.util.UserUtil;
-import com.zyyglxt.validator.ValidatorImpl;
-import com.zyyglxt.validator.ValidatorResult;
+import com.zyyglxt.service.*;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.transaction.annotation.Transactional;
+import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -33,9 +27,19 @@ import java.util.List;
 public class UserController {
 
     @Autowired
-    IUserService userService;
+    IUserService iuserService;
+    @Autowired
+    UserService userService;
+    @Autowired
+    UserRoleRefService userRoleRefService;
     @Autowired
     IOrganizationService organizationService;
+    @Autowired
+    IndustrialDevelopChiMedService developChiMedService;
+    @Autowired
+    IndustrialDevelopTecSerOrgService developTecSerOrgService;
+    @Autowired
+    IndustrialDevelopSchoolService schoolService;
     @Autowired
     HttpServletRequest request;
 
@@ -44,12 +48,65 @@ public class UserController {
      */
     @LogAnnotation(logTitle = "注册", logLevel = "3")
     @RequestMapping(value = "/register", method = RequestMethod.POST)
-    public ResponseData Register(UserDto userDto) throws BusinessException {
-        ResponseData rd = userService.Register(userDto);
+    public ResponseData Register(UserDto userDto) {
+        ResponseData rd = iuserService.Register(userDto);
         if (rd.getCode().equals(EmBusinessError.success.getErrCode())) {
-            return new ResponseData(EmBusinessError.success);
+            return new ResponseData(EmBusinessError.success, rd.getData());
         } else {
             return new ResponseData(EmBusinessError.USER_REGISTER_FAILED);
+        }
+    }
+
+    @LogAnnotation(logTitle = "查询机构审核状态", logLevel = "1")
+    @RequestMapping(value = "/queryOrgStatus", method = RequestMethod.POST)
+    public ResponseData checkOrgStatus(OrgStatusDto orgStatusDto) {
+        OrganizationDO organizationDO = iuserService.selectByOrgNameAndCode(orgStatusDto.getOrgName(), orgStatusDto.getOrgCode());
+        if (organizationDO != null) {
+            if (organizationDO.getOrgIdentify().equals(orgStatusDto.getOrgIdentify())) {
+                switch (orgStatusDto.getOrgIdentify()) {
+                    case "中药材种植园":
+                    case "中药材加工企业":
+                    case "中药材制药企业":
+                        IndustrialDevelopChiMed chiMed = developChiMedService.selectByOrgNameAndCode(orgStatusDto.getOrgName(), orgStatusDto.getOrgCode());
+                        switch (chiMed.getStatus()) {
+                            case "1":
+                                return new ResponseData(EmBusinessError.success, "您申请注册的机构还在审核中，请耐心等待");
+                            case "5":
+                            case "7":
+                                return new ResponseData(EmBusinessError.success, "您申请注册的机构暂未审核通过，审核意见：" + chiMed.getReason() + "，点击此处修改信息");
+                            case "4":
+                                return new ResponseData(EmBusinessError.success, "您申请注册的机构市局审核已通过，请耐心等待省局审核");
+                            case "6":
+                                return new ResponseData(EmBusinessError.success, "该机构审核已通过，已有账号点击此处登录");
+                        }
+                        return new ResponseData(EmBusinessError.success, "非法状态：" + chiMed.getStatus());
+                    case "科研院所":
+                    case "技术服务机构":
+                    case "旅游康养机构":
+                        IndustrialDevelopTecSerOrg tecSerOrg = developTecSerOrgService.selectByOrgNameAndCode(orgStatusDto.getOrgName(), orgStatusDto.getOrgCode());
+                        switch (tecSerOrg.getStatus()) {
+                            case "1":
+                                return new ResponseData(EmBusinessError.success, "您申请注册的机构还在审核中，请耐心等待");
+                            case "5":
+                            case "7":
+                                return new ResponseData(EmBusinessError.success, "您申请注册的机构暂未审核通过，审核意见：" + tecSerOrg.getReason() + "，点击此处修改信息");
+                            case "4":
+                                return new ResponseData(EmBusinessError.success, "您申请注册的机构市局审核已通过，请耐心等待省局审核");
+                            case "6":
+                                return new ResponseData(EmBusinessError.success, "该机构审核已通过，已有账号点击此处登录");
+                        }
+                        return new ResponseData(EmBusinessError.success, "非法状态：" + tecSerOrg.getStatus());
+                    case "中医医疗机构":
+                    case "高等医学院校":
+                        return new ResponseData(EmBusinessError.success, "该机构类型无需审核");
+                    default:
+                        return new ResponseData(EmBusinessError.success, "无此机构类型");
+                }
+            } else {
+                return new ResponseData(EmBusinessError.success, "该机构不属于此机构类型");
+            }
+        } else {
+            return new ResponseData(EmBusinessError.success, "该机构还未申请注册，请继续");
         }
     }
 
@@ -62,18 +119,16 @@ public class UserController {
     @RequestMapping(value = "/updatepwd", method = RequestMethod.PUT)
     public ResponseData UpdatePassword(UpdatePwdDto updatePwdDto) {
         if (StringUtils.isEmpty(updatePwdDto.getNewPassword()) || StringUtils.isEmpty(updatePwdDto.getCheckNewPassword())) {
-            System.out.println("密码输入不能为空，请重新输入！");
             return new ResponseData(EmBusinessError.INPUT_NOT_NULL);
         } else {
             if (updatePwdDto.getNewPassword().equals(updatePwdDto.getCheckNewPassword())) {
-                ResponseData rd = userService.UpdatePassword(updatePwdDto);
+                ResponseData rd = iuserService.UpdatePassword(updatePwdDto);
                 if (rd.getCode().equals(EmBusinessError.success.getErrCode())) {
                     return new ResponseData(EmBusinessError.success);
                 } else {
                     return new ResponseData(EmBusinessError.MODIFY_USER_MESSAGE_FAILED);
                 }
             } else {
-                System.out.println("两次输入的新密码不一致，请重新输入！");
                 return new ResponseData(EmBusinessError.NEWPASSWORD_NOT_EQUAL);
             }
         }
@@ -82,79 +137,77 @@ public class UserController {
     @LogAnnotation(logTitle = "查看个人信息", logLevel = "1")
     @RequestMapping(value = "/usermsg", method = RequestMethod.GET)
     public ResponseData selectOne() {
-        UserDO userDO = userService.selectOne();
+        UserDO userDO = iuserService.selectOne();
         return new ResponseData(EmBusinessError.success, userDO);
     }
 
     @LogAnnotation(logTitle = "修改个人信息", logLevel = "2")
     @RequestMapping(value = "/updateusermsg", method = RequestMethod.POST)
-    public ResponseData updateUserMsg(UserDO userDO) {
-        userService.UpdateUserMsg(userDO);
+    public ResponseData updateUserMsg(@RequestBody UserDO userDO) {
+        iuserService.UpdateUserMsg(userDO);
+        return new ResponseData(EmBusinessError.success);
+    }
+
+    @LogAnnotation(logTitle = "修改用户头像", logLevel = "2")
+    @RequestMapping(value = "/updateuserimg", method = RequestMethod.POST)
+    public ResponseData updateUserPortrait(@RequestBody UserDO userDO) {
+        iuserService.UpdateUserPortrait(userDO);
         return new ResponseData(EmBusinessError.success);
     }
 
     /**
-     * 查询出所有机构用于渲染在 市局审核 表格上
+     * 科研项目管理-账号管理-查询所有用户
      *
-     * @return
+     * @return user和查询结果
      */
-    @LogAnnotation(logTitle = "查询所有机构（市局）", logLevel = "1")
-    @RequestMapping(value = "/queryAllOrg", method = RequestMethod.GET)
-    public ResponseData selectOrganization1() {
-        List<OrganizationDO> organizationDO = organizationService.selectAllOrgByAuditStatus1();
-        return new ResponseData(EmBusinessError.success, organizationDO);
+    @LogAnnotation(logTitle = "查询所有用户", logLevel = "1")
+    @RequestMapping(value = "/alluser", method = RequestMethod.GET)
+    public ResponseData selectAllUser() {
+        List<UserDO> users = userService.selectAllUser();
+        for (UserDO user : users) {
+            String userItemCode = user.getItemcode();
+            UserRoleRefDO userRoleRefDO = userRoleRefService.selectByUserCode(userItemCode);
+            String roleName = userRoleRefDO.getPlatRole();
+            user.setRoleName(roleName);
+        }
+        return new ResponseData(EmBusinessError.success, users);
     }
+
 
     /**
-     * 查询出所有机构用于渲染在 省局审核 表格上
+     * 科研项目管理-账号管理-新增用户
      *
-     * @return
+     * @return user和查询结果
      */
-    @LogAnnotation(logTitle = "查询所有机构（省局）", logLevel = "1")
-    @RequestMapping(value = "/selectAllOrg", method = RequestMethod.GET)
-    public ResponseData selectOrganization2() {
-        List<OrganizationDO> organizationDO = organizationService.selectAllOrgByAuditStatus2();
-        return new ResponseData(EmBusinessError.success, organizationDO);
-    }
-
-    @LogAnnotation(logTitle = "机构通过审核", logLevel = "2")
-    @RequestMapping(value = "/checkOrgPass", method = RequestMethod.POST)
-    public ResponseData orgAudit1(@RequestBody OrganizationDO organizationDO) {
-        UserSessionDto user = (UserSessionDto) request.getSession().getAttribute("user");
-        if ("市级中医药管理部门".equals(user.getRolename())) {
-            if ("待审核".equals(organizationDO.getAuditStatus())) {
-                organizationDO.setAuditStatus("市局审核已通过");
-            }
-        } else if ("省局中医药管理部门".equals(user.getRolename())){
-            if ("待审核".equals(organizationDO.getAuditStatus())) {
-                organizationDO.setAuditStatus("省局审核已通过");
-            }
-            if ("市局审核已通过".equals(organizationDO.getAuditStatus())) {
-                organizationDO.setAuditStatus("省局审核已通过");
-            }
-        }
-
-        organizationService.orgAudit(organizationDO);
+    @LogAnnotation(logTitle = "产业发展-账号管理-新增用户", logLevel = "3")
+    @RequestMapping(value = "/adduser", method = RequestMethod.POST)
+    public ResponseData insertUser(@RequestBody UserDO userDO){
+        userService.insertUserSelective(userDO);
         return new ResponseData(EmBusinessError.success);
     }
 
-    @LogAnnotation(logTitle = "机构未通过审核", logLevel = "2")
-    @RequestMapping(value = "/checkOrgNotPass", method = RequestMethod.POST)
-    public ResponseData orgAudit2(@RequestBody OrganizationDO organizationDO) {
-        UserSessionDto user = (UserSessionDto) request.getSession().getAttribute("user");
-        if ("市级中医药管理部门".equals(user.getRolename())) {
-            if ("待审核".equals(organizationDO.getAuditStatus())) {
-                organizationDO.setAuditStatus("市局审核未通过");
-            }
-        } else if ("省局中医药管理部门".equals(user.getRolename())){
-            if ("待审核".equals(organizationDO.getAuditStatus())) {
-                organizationDO.setAuditStatus("省局审核未通过");
-            }
-            if ("市局审核已通过".equals(organizationDO.getAuditStatus())) {
-                organizationDO.setAuditStatus("省局审核未通过");
-            }
-        }
-        organizationService.orgAudit(organizationDO);
+    /**
+     * 用户未录入机构信息点击返回按钮则删除用户信息
+     * 科研项目管理-账号管理-删除用户
+     * @param userDtO
+     * @return
+     */
+    @LogAnnotation(logTitle = "产业发展-账号管理-删除用户", logLevel = "4")
+    @RequestMapping(value = "/deletuser", method = RequestMethod.POST)
+    public ResponseData deleteUserByUsername(@RequestBody UserDto userDtO){
+        userService.deleteUserByUsername(userDtO);
+        return new ResponseData(EmBusinessError.success);
+    }
+
+    /**
+     * 科研项目管理-账号管理-重置密码
+     * @param userDo
+     * @return
+     */
+    @LogAnnotation(logTitle ="产业发展-账号管理-重置密码",logLevel ="2")
+    @RequestMapping(value = "/reset", method = RequestMethod.PUT)
+    public ResponseData resetPassword(@RequestBody UserDO userDo){
+        userService.resetPassword(userDo);
         return new ResponseData(EmBusinessError.success);
     }
 }

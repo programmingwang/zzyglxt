@@ -1,5 +1,7 @@
 package com.zyyglxt.service.impl;
 
+import com.zyyglxt.util.UUIDUtils;
+import com.zyyglxt.util.UsernameUtil;
 import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import com.zyyglxt.dataobject.IndustrialDevelopSerPro;
@@ -18,7 +20,8 @@ public class IndustrialDevelopSerProServiceImpl implements IndustrialDevelopSerP
 
     @Resource
     private IndustrialDevelopSerProMapper industrialDevelopSerProMapper;
-
+    @Resource
+    UsernameUtil usernameUtil;
     @Override
     public int deleteByPrimaryKey(Integer itemid,String itemcode) {
         return industrialDevelopSerProMapper.deleteByPrimaryKey(itemid,itemcode);
@@ -31,6 +34,8 @@ public class IndustrialDevelopSerProServiceImpl implements IndustrialDevelopSerP
 
     @Override
     public int insertSelective(IndustrialDevelopSerPro record) {
+//        record.setItemcode(UUIDUtils.getUUID());
+        record.setOrgCode(usernameUtil.getOrgCode());
         return industrialDevelopSerProMapper.insertSelective(record);
     }
 
@@ -41,6 +46,7 @@ public class IndustrialDevelopSerProServiceImpl implements IndustrialDevelopSerP
 
     @Override
     public int updateByPrimaryKeySelective(IndustrialDevelopSerPro record) {
+        record.setOrgCode(usernameUtil.getOrgCode());
         return industrialDevelopSerProMapper.updateByPrimaryKeySelective(record);
     }
 
@@ -52,6 +58,11 @@ public class IndustrialDevelopSerProServiceImpl implements IndustrialDevelopSerP
     @Override
     public List<IndustrialDevelopSerPro> selectAll() {
         return industrialDevelopSerProMapper.selectAll();
+    }
+
+    @Override
+    public List<IndustrialDevelopSerPro> selectByorgcode() {
+        return industrialDevelopSerProMapper.selectByorgcode(usernameUtil.getOrgCode());
     }
 
 }

@@ -5,6 +5,8 @@ import com.zyyglxt.dataobject.*;
 
 import com.zyyglxt.error.EmBusinessError;
 import com.zyyglxt.response.ResponseData;
+import com.zyyglxt.service.RoleService;
+import com.zyyglxt.service.UserRoleRefService;
 import com.zyyglxt.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -25,17 +27,19 @@ import java.util.List;
 public class UserRoleController {
     @Autowired
     UserService userService;
+    @Autowired
+    UserRoleRefService userRoleRefService;
 
-    /**
-     * 根据主键删除用户
-     * @return 操作结果信息
-     */
-    @LogAnnotation(logTitle = "删除用户", logLevel = "4")
-    @RequestMapping(value = "/deletebykey",method = RequestMethod.DELETE)
-    public ResponseData deleteUserByUsername(@RequestBody UserDO userDO){
-        userService.deleteUserByUsername(userDO);
-        return new ResponseData(EmBusinessError.success);
-    }
+//    /**
+//     * 根据主键删除用户
+//     * @return 操作结果信息
+//     */
+//    @LogAnnotation(logTitle = "删除用户", logLevel = "4")
+//    @RequestMapping(value = "/deletebykey",method = RequestMethod.DELETE)
+//    public ResponseData deleteUserByUsername(@RequestBody UserDO userDO){
+//        userService.deleteUserByUsername(userDO);
+//        return new ResponseData(EmBusinessError.success);
+//    }
 
     /**
      * 添加用户
@@ -47,17 +51,6 @@ public class UserRoleController {
     public ResponseData insertUserSelective(@RequestBody UserDO userDO){
         userService.insertUserSelective(userDO);
         return new ResponseData(EmBusinessError.success);
-    }
-
-    /**
-     * 查询所有用户
-     * @return user和查询结果
-     */
-    @LogAnnotation(logTitle = "查询所有用户", logLevel = "1")
-    @RequestMapping(value = "/alluser",method = RequestMethod.GET)
-    public ResponseData selectAllUser(){
-        List<UserDO> users = userService.selectAllUser();
-        return new ResponseData(EmBusinessError.success, users);
     }
 
     /**

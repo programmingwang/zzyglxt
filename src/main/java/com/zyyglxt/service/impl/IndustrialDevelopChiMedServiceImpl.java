@@ -1,8 +1,16 @@
 package com.zyyglxt.service.impl;
 
+import com.zyyglxt.dao.OrganizationDOMapper;
+import com.zyyglxt.dataobject.OrganizationDO;
 import com.zyyglxt.dto.industrialDevelop.IndustrialDevelopChiMedDto;
+import com.zyyglxt.error.BusinessException;
+import com.zyyglxt.error.EmBusinessError;
 import com.zyyglxt.service.IFileService;
+import com.zyyglxt.util.UsernameUtil;
+import com.zyyglxt.validator.ValidatorImpl;
+import com.zyyglxt.validator.ValidatorResult;
 import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import com.zyyglxt.dao.IndustrialDevelopChiMedMapper;
@@ -26,6 +34,15 @@ public class IndustrialDevelopChiMedServiceImpl implements IndustrialDevelopChiM
     @Resource
     private IFileService fileService;
 
+    @Resource
+    OrganizationDOMapper organizationDOMapper;
+    @Resource
+    private UsernameUtil usernameUtil;
+
+
+    @Autowired
+    ValidatorImpl validator;
+
     @Override
     public int deleteByPrimaryKey(Integer itemid,String itemcode) {
         return industrialDevelopChiMedMapper.deleteByPrimaryKey(itemid,itemcode);
@@ -38,7 +55,17 @@ public class IndustrialDevelopChiMedServiceImpl implements IndustrialDevelopChiM
 
     @Override
     public int insertSelective(IndustrialDevelopChiMed record) {
-        return industrialDevelopChiMedMapper.insertSelective(record);
+        ValidatorResult result = validator.validate(record);
+        if (result.isHasErrors()) {
+            throw new BusinessException(result.getErrMsg(), EmBusinessError.PARAMETER_VALIDATION_ERROR);
+        }
+        OrganizationDO organizationDO = organizationDOMapper.selectByOrgName(record.getName());
+        if (organizationDO == null){
+            return -1;
+        } else {
+            record.setOrgCode(organizationDO.getOrgCode());
+            return industrialDevelopChiMedMapper.insertSelective(record);
+        }
     }
 
     @Override
@@ -72,4 +99,17 @@ public class IndustrialDevelopChiMedServiceImpl implements IndustrialDevelopChiM
         return resList;
     }
 
+    @Override
+    public IndustrialDevelopChiMedDto selectByOrgCode(){
+        IndustrialDevelopChiMed chiMed = industrialDevelopChiMedMapper.selectByOrgCode(usernameUtil.getOrgCode());
+        IndustrialDevelopChiMedDto dto = new IndustrialDevelopChiMedDto();
+        BeanUtils.copyProperties(chiMed,dto);
+        dto.setFilePath(fileService.selectFileByDataCode(dto.getItemcode()).getFilePath());
+        return dto;
+    }
+
+    @Override
+    public IndustrialDevelopChiMed selectByOrgNameAndCode(String orgName, String orgCode) {
+        return industrialDevelopChiMedMapper.selectByOrgNameAndCode(orgName,orgCode);
+    }
 }

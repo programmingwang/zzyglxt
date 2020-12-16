@@ -5,7 +5,8 @@
 body{
     font-family: "Microsoft YaHei UI";
     table-layout: fixed;
-    background-color: #FCFCFA;
+    background-color: white;
+    zoom:80%;
 }
 
 table{
@@ -15,7 +16,11 @@ table{
 }
 
 .header-bg{
-    background-color: #775637;
+    background-color: #5b4622;
+}
+.topback{
+    height: 1rem;
+    background-color: #5b4622;
 }
 
 .W20 {
@@ -41,7 +46,7 @@ table{
     height: 60px;
 }
 .h70{
-    height: 87px;
+    height: 6rem;
 }
 .h100{
     height: 100px;
@@ -78,7 +83,7 @@ table{
 
 
 .test-border{
-    border: 0px solid red;
+    border: 0px solid #D60000;
     margin-left: 0px!important;
     margin-right: 0px!important;
     padding-left: 0px!important;
@@ -113,25 +118,39 @@ table{
 
 
 .dropdown-item.active, .dropdown-item:active {
-    color: #F8F9FB;
+    color: white;
     text-decoration: none;
-    background-color: #52beff;
+    background: url("../../images/new/hover.png");
+    background-size: 100% 100%;
+}
+.aaaa.active, .aaaa:active {
+    color: white;
+    text-decoration: none;
+    background-color:#D60000;
+    background: url("../../images/new/hover.png");
+    background-size: 100% 100%;
 }
 .btn-link{
     color:black;
 }
 .dropdown-item {
-    font-family: 'Arial Narrow', 'Arial', sans-serif;
+    font-family: SourceHanSansCN-regular;
     font-weight: 400;
     font-style: normal;
-    font-size: 12px;
-    background-color: #F8F9FB;
+    font-size: 16px;
+    background: url("../../images/new/default.png");
+    background-size: 100% 100%;
+    margin: 0 10px;
+    text-align: center;
+    width: 161px;
+    padding-left: 0;
+    padding-right: 0;
 }
 .btn-block>h4 {
-    font-family: 'Arial Negreta', 'Arial Normal', 'Arial', sans-serif;
+    font-family: SourceHanSansCN-regular;
     font-weight: 700;
     font-style: normal;
-    font-size: 14px;
+    font-size: 1rem;
 }
 
 .dropdown-menu.left-menu-dropdown-menu {
@@ -142,6 +161,8 @@ table{
 
 .card{
     background-color: #FCFCFA;
+    border-left: 4px solid #f6c2aa;
+    border-right: 4px solid #f6c2aa;
 }
 hr {
     margin-top: 0;
@@ -149,10 +170,9 @@ hr {
     margin-bottom: 0;
 }
 .aaaa {
-    height: 30px;
-    margin-top: 3px;
-    margin-left: 2px;
-    margin-bottom: 3px;
+
+    padding: .12rem .1rem;
+    padding-bottom: 10px;
 }
 .AFirstMenu {
 
@@ -161,23 +181,182 @@ hr {
     font-family: 'Arial Negreta', 'Arial Normal', 'Arial', sans-serif;
     font-weight: 700;
     font-style: normal;
-    font-size: 14px;
+    font-size: 1rem;
 }
 .nullmenu{
     display:none;
 }
 .page-item.active .page-link {
     z-index: 3;
-    color: #fff;
-    background-color: #775637;
-     border-color: #775637;
+    color: #fff !important;
+    background-color: #5b4622 !important;
+    border-color: #5b4622 !important;
 }
 .page-link {
-    color: black;
+    color: black !important;
 }
 .fixed-table-pagination {
     font-size: smaller;
 }
 .page-link {
     margin-left: 9px;
+}
+
+.mh {
+    width: 11px;
+}
+.modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1040;
+    width: 100%;
+    height: 100%;
+    background-color: #000;
+}
+
+thead.self-thead {
+    text-align: center;
+    background: url(../../images/new/tableDefault.png) no-repeat !important;
+    background-size: 100% 100% !important;
+}
+.th-inner {
+    color: #fff;
+}
+.btn-danger {
+    color: #fff;
+    background-color: #D60000;
+    border-color: #D60000;
+}
+
+
+#btnSearch{
+    background-color: #D60000;color: #FFFFFF;border: none;border-radius: 4px;border-top-left-radius: 0px;border-bottom-left-radius: 0px;z-index: 1;
+}
+.upload-wrap {
+    padding-left: 0.8rem;
+}
+
+.upload-wrap .file-open {
+    width: 90px;
+    height: 36px;
+    line-height: 36px;
+    text-align: center;
+    color: #fff;
+    background: #D60000;
+}
+
+#left_menu{
+    text-align: center!important;
+    font-size: 16px!important;
+    font-family: SourceHanSansCN-regular!important;
+    color: #1e2629;
+    /*border-left: 4px solid #f6c2aa;*/
+    /*border-right: 4px solid #f6c2aa;*/
+}
+#headingOne{
+    background: url("../../images/new/title.png");
+    background-size: 100% 100%;
+}
+#left_menu_bottom{
+    height: 20px;
+    background: url("../../images/new/bottom.png");
+    background-size: 100% 100%;
+    border-left: 4px solid #f6c2aa;
+    border-right: 4px solid #f6c2aa;
+}
+
+
+#table tr:nth-child(even){
+    background: #f9f0eb;
+}
+
+#closeAndOpen{
+    color: #ad6809 !important;
+    font-size: 18px;
+    font-family: SourceHanSansCN-Blod;
+}
+#collapseOne>hr{
+    background: url("../../images/new/top.png");
+    height: 15px;
+}
+#accordion2>hr{
+    background: url("../../images/new/top.png");
+    height: 15px;
+}
+#collapseOne{
+    margin: 0;
+    padding: 0;
+}
+#btnSearch{
+    font-size: 18px;
+    width: 80px;
+    padding-left: 21px;
+    font-family: SourceHanSansCN-Blod;
+    background-color: #ad6809 !important;
+}
+#main_body {
+    border-top: 1rem solid #f7efeb;
+    border-right: 10px solid #f7efeb;
+    flex: 0 0 87.94% !important;
+    max-width: 87.94% !important;
+    border-bottom: 1rem solid #f7efeb;
+}
+#accordion2{
+    margin-top: 20px;
+}
+#btn_addTask{
+    width: 140px;
+    height: 40px;
+    background-color: #e66736 !important;
+    text-align: center;
+    font-size: 16px;
+    border-color: #e66736;
+}
+#addExper{
+    width: 140px;
+    height: 40px;
+    background-color: #e66736;
+    text-align: center;
+    font-size: 16px;
+    border-color: #e66736;
+}
+#deleteExper{
+    width: 154px;
+    height: 40px;
+    background-color: #e66736;
+    text-align: center;
+    font-size: 16px;
+    border-color: #e66736;
+}
+
+#chargePersonSearch{
+    height: 40px;
+    max-width: 280px;
+    border-color:#c4d3d4;
+}
+.custom-select {
+    background: #fff url("../../images/new/more.png") no-repeat right .75rem center/15px 10px;
+}
+
+.openBtnP{
+    position: relative;
+    left: 73%;
+    top: -56px;
+}
+#table td, #table th {
+    border: 0px solid #dee2e6;
+}
+#table{
+    border: 0px
+}
+
+@media screen and (max-width: 1400px) {
+    #main_body {
+        border-top: 1rem solid #f7efeb;
+        border-right: 10px solid #f7efeb;
+        flex: 0 0 86.5934% !important;
+        max-width: 87.94% !important;
+        border-bottom: 1rem solid #f7efeb;
+    }
 }

@@ -17,7 +17,7 @@ public interface RoleDOMapper {
 
     RoleDO selectByPrimaryKey(RoleDOKey key);
 
-    String selectItemCodeByRoleType(Integer roleType);
+    RoleDO selectByRoleName(String roleName);
 
     int updateByPrimaryKeySelective(RoleDO record);
 

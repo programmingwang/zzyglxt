@@ -96,5 +96,6 @@
             }
 
             bootstrapTableUtil.globalSearch("table",url,aParam, aCol);
+
         })
 })();

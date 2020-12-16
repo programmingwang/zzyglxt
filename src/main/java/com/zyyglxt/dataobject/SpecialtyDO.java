@@ -4,12 +4,20 @@ import lombok.Data;
 import org.springframework.stereotype.Repository;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.util.Date;
 
 @Data
 public class SpecialtyDO extends SpecialtyDOKey {
-    @NotBlank(message = "专科名称不能为空")
+    @NotBlank(message = "科室名称不能为空")
     private String specialtyName;
+
+    @Size(max = 60)
+    @NotBlank(message = "科室简介不能为空")
+    private String specialtyBriefIntroduce;
+
+    @NotBlank(message = "科室介绍不能为空")
+    private String specialtyIntroduce;
 
     private String specialtyPhone;
 
@@ -26,6 +34,7 @@ public class SpecialtyDO extends SpecialtyDOKey {
 
     private String specialtyLink;
 
+    @NotBlank(message = "科室状态不能为空")
     private String specialtyStatus;
 
     private String creater;
@@ -35,7 +44,4 @@ public class SpecialtyDO extends SpecialtyDOKey {
     private String updater;
 
     private Date itemupdateat;
-
-    private String specialtyDescribe;
-
 }

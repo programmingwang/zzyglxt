@@ -11,6 +11,7 @@
         <result column="HOSP_CODE" jdbcType="VARCHAR" property="hospCode"/>
         <result column="VISIT_TIME" jdbcType="VARCHAR" property="visitTime"/>
         <result column="PHONE" jdbcType="VARCHAR" property="phone"/>
+        <result column="EXPERT_BRIEF_INTRODUCE" jdbcType="VARCHAR" property="expertBriefIntroduce"/>
         <result column="MAIN_VISIT" jdbcType="VARCHAR" property="mainVisit"/>
         <result column="CHINESE_MEDICINE_STATUS" jdbcType="VARCHAR" property="chineseMedicineStatus"/>
         <result column="CREATER" jdbcType="VARCHAR" property="creater"/>
@@ -24,7 +25,7 @@
     </resultMap>
     <sql id="Base_Column_List">
         itemID, itemCode, CHINESE_MEDICINE_NAME, CHINESE_MEDICINE_TYPE, CHINESE_MEDICINE_TITLE,
-        DEPT_CODE, HOSP_CODE, VISIT_TIME, PHONE, MAIN_VISIT, CHINESE_MEDICINE_STATUS, CREATER,
+        DEPT_CODE, HOSP_CODE, VISIT_TIME, PHONE, EXPERT_BRIEF_INTRODUCE, MAIN_VISIT, CHINESE_MEDICINE_STATUS, CREATER,
         itemCreateAt, UPDATER, itemUpdateAt
     </sql>
     <sql id="Blob_Column_List">
@@ -46,19 +47,41 @@
         and itemCode = #{itemcode,jdbcType=CHAR}
     </delete>
     <insert id="insert" parameterType="com.zyyglxt.dataobject.ChineseMedicineDOWithBLOBs">
-        insert into tb_culpro_chinese_medicine (itemID, itemCode, CHINESE_MEDICINE_NAME,
-        CHINESE_MEDICINE_TYPE, CHINESE_MEDICINE_TITLE,
-        DEPT_CODE, HOSP_CODE, VISIT_TIME,
-        PHONE, MAIN_VISIT, CHINESE_MEDICINE_STATUS,
-        CREATER, itemCreateAt, UPDATER,
-        itemUpdateAt, EXPERT_INTRODUCE, MEDICINE_RECORDS
+        insert into tb_culpro_chinese_medicine (itemID, itemCode,
+        CHINESE_MEDICINE_NAME,
+        CHINESE_MEDICINE_TYPE,
+        CHINESE_MEDICINE_TITLE,
+        DEPT_CODE,
+        HOSP_CODE,
+        VISIT_TIME,
+        PHONE,
+        EXPERT_BRIEF_INTRODUCE,
+        MAIN_VISIT,
+        CHINESE_MEDICINE_STATUS,
+        CREATER,
+        itemCreateAt,
+        UPDATER,
+        itemUpdateAt,
+        EXPERT_INTRODUCE,
+        MEDICINE_RECORDS
         )
-        values (#{itemid,jdbcType=INTEGER}, #{itemcode,jdbcType=CHAR}, #{chineseMedicineName,jdbcType=VARCHAR},
-        #{chineseMedicineType,jdbcType=VARCHAR}, #{chineseMedicineTitle,jdbcType=VARCHAR},
-        #{deptCode,jdbcType=VARCHAR}, #{hospCode,jdbcType=VARCHAR}, #{visitTime,jdbcType=VARCHAR},
-        #{phone,jdbcType=VARCHAR}, #{mainVisit,jdbcType=VARCHAR}, #{chineseMedicineStatus,jdbcType=VARCHAR},
-        #{creater,jdbcType=VARCHAR}, #{itemcreateat,jdbcType=TIMESTAMP}, #{updater,jdbcType=VARCHAR},
-        #{itemupdateat,jdbcType=TIMESTAMP}, #{expertIntroduce,jdbcType=LONGVARCHAR},
+        values (#{itemid,jdbcType=INTEGER},
+        #{itemcode,jdbcType=CHAR},
+        #{chineseMedicineName,jdbcType=VARCHAR},
+        #{chineseMedicineType,jdbcType=VARCHAR},
+        #{chineseMedicineTitle,jdbcType=VARCHAR},
+        #{deptCode,jdbcType=VARCHAR},
+        #{hospCode,jdbcType=VARCHAR},
+        #{visitTime,jdbcType=VARCHAR},
+        #{phone,jdbcType=VARCHAR},
+        #{expertBriefIntroduce,jdbcType=VARCHAR},
+        #{mainVisit,jdbcType=VARCHAR},
+        #{chineseMedicineStatus,jdbcType=VARCHAR},
+        #{creater,jdbcType=VARCHAR},
+        #{itemcreateat,jdbcType=TIMESTAMP},
+        #{updater,jdbcType=VARCHAR},
+        #{itemupdateat,jdbcType=TIMESTAMP},
+        #{expertIntroduce,jdbcType=LONGVARCHAR},
         #{medicineRecords,jdbcType=LONGVARCHAR}
         )
     </insert>
@@ -91,6 +114,9 @@
             </if>
             <if test="phone != null">
                 PHONE,
+            </if>
+            <if test="expertBriefIntroduce != null">
+                EXPERT_BRIEF_INTRODUCE,
             </if>
             <if test="mainVisit != null">
                 MAIN_VISIT,
@@ -145,6 +171,9 @@
             <if test="phone != null">
                 #{phone,jdbcType=VARCHAR},
             </if>
+            <if test="expertBriefIntroduce != null">
+                #{expertBriefIntroduce,jdbcType=VARCHAR},
+            </if>
             <if test="mainVisit != null">
                 #{mainVisit,jdbcType=VARCHAR},
             </if>
@@ -195,6 +224,9 @@
             <if test="phone != null">
                 PHONE = #{phone,jdbcType=VARCHAR},
             </if>
+            <if test="expertBriefIntroduce != null">
+                EXPERT_BRIEF_INTRODUCE = #{expertBriefIntroduce,jdbcType=VARCHAR},
+            </if>
             <if test="mainVisit != null">
                 MAIN_VISIT = #{mainVisit,jdbcType=VARCHAR},
             </if>
@@ -232,6 +264,7 @@
         HOSP_CODE = #{hospCode,jdbcType=VARCHAR},
         VISIT_TIME = #{visitTime,jdbcType=VARCHAR},
         PHONE = #{phone,jdbcType=VARCHAR},
+        EXPERT_BRIEF_INTRODUCE = #{expertBriefIntroduce,jdbcType=VARCHAR},
         MAIN_VISIT = #{mainVisit,jdbcType=VARCHAR},
         CHINESE_MEDICINE_STATUS = #{chineseMedicineStatus,jdbcType=VARCHAR},
         CREATER = #{creater,jdbcType=VARCHAR},
@@ -252,6 +285,7 @@
         HOSP_CODE = #{hospCode,jdbcType=VARCHAR},
         VISIT_TIME = #{visitTime,jdbcType=VARCHAR},
         PHONE = #{phone,jdbcType=VARCHAR},
+        EXPERT_BRIEF_INTRODUCE = #{expertBriefIntroduce,jdbcType=VARCHAR},
         MAIN_VISIT = #{mainVisit,jdbcType=VARCHAR},
         CHINESE_MEDICINE_STATUS = #{chineseMedicineStatus,jdbcType=VARCHAR},
         CREATER = #{creater,jdbcType=VARCHAR},
@@ -310,5 +344,20 @@
         WHERE DEPT_CODE = #{specialtyCode}
     </select>
 
+    <select id="selectByStatus" resultMap="ResultMapWithBLOBs">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from tb_culpro_chinese_medicine
+        WHERE CHINESE_MEDICINE_STATUS = #{status}
+    </select>
+
+    <update id="updateStatusByPrimaryKey" parameterType="com.zyyglxt.dto.StatusDto">
+        UPDATE tb_culpro_chinese_medicine
+        SET CHINESE_MEDICINE_STATUS = #{status}, UPDATER = #{updater}
+        WHERE itemID = #{itemid,jdbcType=INTEGER}
+        AND itemCode = #{itemcode,jdbcType=CHAR}
+    </update>
 
 </mapper>

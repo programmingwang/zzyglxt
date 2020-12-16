@@ -8,14 +8,16 @@ import com.zyyglxt.dto.FileDto;
 import com.zyyglxt.error.EmBusinessError;
 import com.zyyglxt.response.ResponseData;
 import com.zyyglxt.service.IFileService;
+import com.zyyglxt.util.UsernameUtil;
 import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import javax.annotation.Resource;
 import java.io.IOException;
+import java.util.List;
 
 /**
  * @author qjc
@@ -23,7 +25,6 @@ import java.io.IOException;
  * @date 2020/11/4 16:37
  */
 @RestController
-@PropertySource("classpath:application.properties")
 @RequestMapping("/file")
 public class FileController {
     @Resource
@@ -34,10 +35,12 @@ public class FileController {
     private String nginx;
     @Value("${fdfs.http_tracker_http_port}")
     private String port;
+    @Autowired
+    private UsernameUtil usernameUtil;
 
     @PostMapping("/upload")
     @ResponseBody
-    @LogAnnotation(appCode ="",logTitle ="更新文件加载",logLevel ="1",creater ="",updater = "")
+    @LogAnnotation(appCode ="",logTitle ="文件上传",logLevel ="1",creater ="",updater = "")
     public ResponseData upload(FileDto fileDto) throws IOException {
         fileService.uploadFile(saveFile(fileDto));
         return new ResponseData(EmBusinessError.success);
@@ -47,20 +50,25 @@ public class FileController {
     @ResponseBody
     @LogAnnotation(appCode ="",logTitle ="删除文件",logLevel ="4",creater ="",updater = "")
     public ResponseData delete(String dataCode){
-        FileDO fileDO = fileService.selectFileByDataCode(dataCode);
-        fastFileStorageClient.deleteFile(fileDO.getFilePath());
+        List<FileDO> fileDOList = fileService.selectMultipleFileByDataCode(dataCode);
+        String filePath = null;
+        for (FileDO fileDO : fileDOList){
+            filePath = fileDO.getFilePath();
+            try {
+                fastFileStorageClient.deleteFile(filePath.substring(0, filePath.indexOf("?")));//去除掉后面的fileName属性
+            }catch (Exception e){
+                fastFileStorageClient.deleteFile(filePath);
+            }
+        }
         fileService.deleteFileByDataCode(dataCode);
         return new ResponseData(EmBusinessError.success);
     }
 
-    @PostMapping("/update")
+    @GetMapping("/get/{datacode}")
     @ResponseBody
-    public ResponseData update(FileDto fileDto){
-        delete(fileDto.getDataCode());
-        fileService.updateFile(saveFile(fileDto));
-        return new ResponseData(EmBusinessError.success);
+    public ResponseData get(@PathVariable String datacode){
+        return new ResponseData(EmBusinessError.success,fileService.selectFileByDataCode(datacode));
     }
-
 
     private FileDO saveFile(FileDto fileDto) {
         FileDO fileDO = new FileDO();
@@ -81,8 +89,9 @@ public class FileController {
         fileDO.setFileName(fileName);
         fileDO.setFileType(FilenameUtils.getExtension(fileName));//文件扩展名
         fileDO.setFileSize((double) multipartFile.getSize());
-        String path = "http://" + nginx.substring(0,nginx.indexOf(":")+1) + port + "/" + storePath.getFullPath();//字符串拼接路径
+        String path = "http://" + nginx.substring(0,nginx.indexOf(":")+1) + port + "/" + storePath.getFullPath() + "?filename=" + fileName;//字符串拼接路径
         fileDO.setFilePath(path);
+        fileDO.setUploader(usernameUtil.getOperateUser());
         return fileDO;
     }
 }

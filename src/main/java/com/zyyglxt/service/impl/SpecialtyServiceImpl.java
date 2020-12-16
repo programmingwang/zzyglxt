@@ -3,14 +3,15 @@ package com.zyyglxt.service.impl;
 import com.zyyglxt.dao.HospSpecialtyRefDOMapper;
 import com.zyyglxt.dao.SpecialtyDOMapper;
 import com.zyyglxt.dataobject.HospSpecialtyRefDO;
-import com.zyyglxt.dataobject.HospSpecialtyRefDOKey;
 import com.zyyglxt.dataobject.SpecialtyDO;
 import com.zyyglxt.dataobject.SpecialtyDOKey;
+import com.zyyglxt.dto.StatusDto;
 import com.zyyglxt.dto.SpecialtyDto;
 import com.zyyglxt.error.BusinessException;
 import com.zyyglxt.error.EmBusinessError;
 import com.zyyglxt.service.IChineseMedicineService;
 import com.zyyglxt.service.ISpecialtyService;
+import com.zyyglxt.util.UsernameUtil;
 import com.zyyglxt.validator.ValidatorImpl;
 import com.zyyglxt.validator.ValidatorResult;
 import org.springframework.beans.BeanUtils;
@@ -18,6 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -38,6 +40,8 @@ public class SpecialtyServiceImpl implements ISpecialtyService {
     private ValidatorImpl validator;
     @Resource
     private IChineseMedicineService chineseMedicineService;
+    @Autowired
+    private UsernameUtil usernameUtil;
 
     private SpecialtyDO specialtyDO = new SpecialtyDO();
 
@@ -51,14 +55,17 @@ public class SpecialtyServiceImpl implements ISpecialtyService {
             throw new BusinessException(result.getErrMsg(), EmBusinessError.PARAMETER_VALIDATION_ERROR);
         }
         BeanUtils.copyProperties(specialtyDto,specialtyDO);
+        String user = usernameUtil.getOperateUser();
+        specialtyDO.setCreater(user);
         specialtyDO.setItemcreateat(new Date());
+        specialtyDO.setUpdater(user);
 
         hospSpecialtyRefDO.setItemcode(UUID.randomUUID().toString());
         hospSpecialtyRefDO.setHospitalCode(specialtyDto.getHospitalCode());
         hospSpecialtyRefDO.setSpecialtyCode(specialtyDto.getItemcode());
-        hospSpecialtyRefDO.setCreater(specialtyDto.getCreater());
+        hospSpecialtyRefDO.setCreater(user);
         hospSpecialtyRefDO.setItemcreateat(new Date());
-        hospSpecialtyRefDO.setUpdater(specialtyDto.getUpdater());
+        hospSpecialtyRefDO.setUpdater(user);
 
         specialtyDOMapper.insertSelective(specialtyDO);
         hospSpecialtyRefDOMapper.insertSelective(hospSpecialtyRefDO);
@@ -71,17 +78,15 @@ public class SpecialtyServiceImpl implements ISpecialtyService {
         if(result.isHasErrors()){
             throw new BusinessException(result.getErrMsg(), EmBusinessError.PARAMETER_VALIDATION_ERROR);
         }
-        specialtyDO = specialtyDto;
+        BeanUtils.copyProperties(specialtyDto,specialtyDO);
+        String user = usernameUtil.getOperateUser();
+        specialtyDO.setUpdater(user);
 
         hospSpecialtyRefDO.setHospitalCode(specialtyDto.getHospitalCode());
-        hospSpecialtyRefDO.setSpecialtyCode(specialtyDto.getHospitalCode());
-        hospSpecialtyRefDO.setCreater(specialtyDto.getCreater());
-        hospSpecialtyRefDO.setItemcreateat(specialtyDto.getItemcreateat());
-        hospSpecialtyRefDO.setUpdater(specialtyDto.getUpdater());
-        hospSpecialtyRefDO.setItemupdateat(specialtyDto.getItemupdateat());
+        hospSpecialtyRefDO.setUpdater(user);
 
         specialtyDOMapper.updateByPrimaryKeySelective(specialtyDO);
-        hospSpecialtyRefDOMapper.updateByPrimaryKeySelective(hospSpecialtyRefDO);
+        hospSpecialtyRefDOMapper.updateBySpecialtyCodeSelective(hospSpecialtyRefDO);
     }
 
     /*删除科室记录，包括科室表和关系表*/
@@ -101,8 +106,12 @@ public class SpecialtyServiceImpl implements ISpecialtyService {
 
     /*查询所有科室*/
     @Override
-    public List<SpecialtyDO> selectAllSpecialty() {
-        return specialtyDOMapper.selectAllSpecialty();
+    public List<SpecialtyDO> selectAllSpecialty(List<String> specialtyStatus) {
+        List<SpecialtyDO> DOList = new ArrayList<>();
+        for (String status : specialtyStatus) {
+            DOList.addAll(specialtyDOMapper.selectByStatus(status));
+        }
+        return DOList;
     }
 
     /*
@@ -116,12 +125,6 @@ public class SpecialtyServiceImpl implements ISpecialtyService {
         return specialtyDOMapper.searchSpecialty(keyWord);
     }
 
-    /*查询前五条记录*/
-    @Override
-    public List<SpecialtyDO> top5Specialty() {
-        return specialtyDOMapper.top5Specialty();
-    }
-
     @Override
     public List<SpecialtyDO> selectByHospCode(String hospCode) {
         if(hospCode == null || hospCode == ""){
@@ -130,5 +133,13 @@ public class SpecialtyServiceImpl implements ISpecialtyService {
         return specialtyDOMapper.selectByHospCode(hospCode);
     }
 
-
+    @Override
+    public int updateStatus(StatusDto statusDto) {
+        ValidatorResult result = validator.validate(statusDto);
+        if(result.isHasErrors()){
+            throw new BusinessException(result.getErrMsg(), EmBusinessError.PARAMETER_VALIDATION_ERROR);
+        }
+        statusDto.setUpdater(usernameUtil.getOperateUser());
+        return specialtyDOMapper.updateStatusByPrimaryKey(statusDto);
+    }
 }

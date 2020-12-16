@@ -3,14 +3,13 @@ package com.zyyglxt.controller.medicalService;
 import com.zyyglxt.annotation.LogAnnotation;
 import com.zyyglxt.dao.SpecialtyDOMapper;
 import com.zyyglxt.dataobject.*;
-import com.zyyglxt.dto.ChineseCulturalDto;
 import com.zyyglxt.dto.ChineseMedicineDto;
+import com.zyyglxt.dto.StatusDto;
 import com.zyyglxt.error.EmBusinessError;
 import com.zyyglxt.response.ResponseData;
 import com.zyyglxt.service.IChineseMedicineService;
 import com.zyyglxt.service.IFileService;
 import com.zyyglxt.service.IHospService;
-import com.zyyglxt.service.ISpecialtyService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.web.bind.annotation.*;
 
@@ -62,8 +61,8 @@ public class ChineseMedicineController {
     @GetMapping(value = "selectAll")
     @ResponseBody
     @LogAnnotation(appCode ="",logTitle ="查看所有名老中医数据",logLevel ="1",creater ="",updater = "")
-    public ResponseData selectAllChineseMedicine(){
-        List<ChineseMedicineDO> chineseMedicineDOList = chineseMedicineService.selectAllChineseMedicine();
+    public ResponseData selectAllChineseMedicine(@RequestParam(value = "chineseMedicineStatus")List chineseMedicineStatus){
+        List<ChineseMedicineDO> chineseMedicineDOList = chineseMedicineService.selectAllChineseMedicine(chineseMedicineStatus);
         return new ResponseData(EmBusinessError.success,DoToDto(chineseMedicineDOList));
     }
 
@@ -75,12 +74,12 @@ public class ChineseMedicineController {
         return new ResponseData(EmBusinessError.success,DoToDto(chineseMedicineDOList));
     }
 
-    @GetMapping(value = "top5")
     @ResponseBody
-    @LogAnnotation(appCode ="",logTitle ="查看前5条名老中医数据",logLevel ="1",creater ="",updater = "")
-    public ResponseData top5ChineseMedicine(){
-        List<ChineseMedicineDO> chineseMedicineDOList = chineseMedicineService.top5ChineseMedicine();
-        return new ResponseData(EmBusinessError.success,DoToDto(chineseMedicineDOList));
+    @PostMapping("updateStatus")
+    @LogAnnotation(logTitle = "改变数据状态",logLevel = "2")
+    public ResponseData updateStatus(StatusDto statusDto){
+        chineseMedicineService.updateStatus(statusDto);
+        return new ResponseData(EmBusinessError.success);
     }
 
     private List<ChineseMedicineDto> DoToDto(List<ChineseMedicineDO> DOList){

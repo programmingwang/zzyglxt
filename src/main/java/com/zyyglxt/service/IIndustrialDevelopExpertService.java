@@ -1,32 +1,30 @@
 package com.zyyglxt.service;
 
-import com.zyyglxt.dataobject.IndustrialDevelopExpertDO;
-import com.zyyglxt.dataobject.IndustrialDevelopExpertDOKey;
-import com.zyyglxt.dataobject.IndustrialDevelopExpertRefDO;
-import com.zyyglxt.dataobject.IndustrialDevelopExpertRefDOKey;
+
+import com.zyyglxt.dataobject.UserDO;
+import com.zyyglxt.dataobject.UserRoleRefDO;
+import com.zyyglxt.dto.industrialDevelop.IndustrialDevelopExpertDto;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
 /**
- * @Author lrt
- * @Date 2020/10/29 15:17
+ * @Author zs
+ * @Date 2020/11/15 17:15
  * @Version 1.0
  **/
 public interface IIndustrialDevelopExpertService {
 
-    //专家信息表
-    void addExpert(IndustrialDevelopExpertDO record);
+    //新增专家信息
+    void addExpert(IndustrialDevelopExpertDto record);
+    //删除专家信息
+    int delExpert(String itemCode);
+    //重置密码
+    int resetPassword( @Param("userCode") String userCode);
+    //查看所有专家信息
+    List<IndustrialDevelopExpertDto> getExperts();
+    //查看专家个人信息
+    UserDO selectByPrimaryKey(String itemcode);
+    String selectByUserCode(String userCode);
 
-    void delExpert(IndustrialDevelopExpertDOKey key);
-
-    void updExpert(IndustrialDevelopExpertDO record);
-
-    List<IndustrialDevelopExpertDO> getExperts();
-
-    //专家-课题关系表
-    void addExpertRef(IndustrialDevelopExpertRefDO record);
-
-    void delExpertRef(IndustrialDevelopExpertRefDOKey key);
-
-    void updExpertRef(IndustrialDevelopExpertRefDO record);
 }

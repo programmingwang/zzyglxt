@@ -2,8 +2,12 @@ package com.zyyglxt.util;
 
 import com.zyyglxt.dataobject.ChineseCulturalDO;
 import com.zyyglxt.dataobject.CulturalResourcesDO;
+import com.zyyglxt.dataobject.IndustrialDevelopSciAchiDO;
+import com.zyyglxt.dataobject.IndustrialDevelopTopicDO;
 import com.zyyglxt.dto.ChineseCulturalDto;
 import com.zyyglxt.dto.CulturalResourcesDto;
+import com.zyyglxt.dto.industrialDevelop.IndustrialDevelopSciAchiDODto;
+import com.zyyglxt.dto.industrialDevelop.IndustrialDevelopTopicDODto;
 import com.zyyglxt.error.BusinessException;
 import com.zyyglxt.error.EmBusinessError;
 import org.apache.commons.lang3.StringUtils;
@@ -17,9 +21,7 @@ import org.springframework.beans.BeanUtils;
 public class ConvertDOToDTOUtil {
 
     public static ChineseCulturalDto convertFromDOToDTO(ChineseCulturalDO chineseCulturalDO, String filePath){
-        if(StringUtils.isEmpty(filePath)){
-            filePath = "已经损坏了";
-        }
+        filePath = StringUtils.isEmpty(filePath) ? "已经损坏了" : filePath;
         ChineseCulturalDto chineseCulturalDto = new ChineseCulturalDto();
         BeanUtils.copyProperties(chineseCulturalDO,chineseCulturalDto);
         chineseCulturalDto.setFilePath(filePath);
@@ -27,9 +29,7 @@ public class ConvertDOToDTOUtil {
     }
 
     public static CulturalResourcesDto convertFromDOToDTO(CulturalResourcesDO culturalResourcesDO, String filePath){
-        if(StringUtils.isEmpty(filePath)){
-            filePath = "已经损坏了";
-        }
+        filePath = StringUtils.isEmpty(filePath) ? "已经损坏了" : filePath;
         CulturalResourcesDto culturalResourcesDto = new CulturalResourcesDto();
         BeanUtils.copyProperties(culturalResourcesDO,culturalResourcesDto);
         culturalResourcesDto.setFilePath(filePath);
@@ -37,9 +37,7 @@ public class ConvertDOToDTOUtil {
     }
 
     public static CulturalResourcesDto convertFromDOToDTO(CulturalResourcesDO culturalResourcesDO, String filePath, String fileName){
-        if(StringUtils.isEmpty(filePath)){
-            filePath = "已经损坏了";
-        }
+        filePath = StringUtils.isEmpty(filePath) ? "已经损坏了" : filePath;
         CulturalResourcesDto culturalResourcesDto = new CulturalResourcesDto();
         BeanUtils.copyProperties(culturalResourcesDO,culturalResourcesDto);
         culturalResourcesDto.setFilePath(filePath);
@@ -47,4 +45,21 @@ public class ConvertDOToDTOUtil {
         return culturalResourcesDto;
     }
 
+    public static IndustrialDevelopSciAchiDODto convertFromDOToDTO(IndustrialDevelopSciAchiDO industrialDevelopSciAchiDO, String filePath, String fileName){
+        filePath = StringUtils.isEmpty(filePath) ? "已经损坏了" : filePath;
+        IndustrialDevelopSciAchiDODto industrialDevelopSciAchiDODto = new IndustrialDevelopSciAchiDODto();
+        BeanUtils.copyProperties(industrialDevelopSciAchiDO,industrialDevelopSciAchiDODto);
+        industrialDevelopSciAchiDODto.setFilePath(filePath);
+        industrialDevelopSciAchiDODto.setFileName(fileName);
+        return industrialDevelopSciAchiDODto;
+    }
+
+    public static IndustrialDevelopTopicDODto convertFromDOToDTO(IndustrialDevelopTopicDO topicDO, String filePath, String fileName){
+        filePath = StringUtils.isEmpty(filePath) ? "已经损坏了" : filePath;
+        IndustrialDevelopTopicDODto topicDODto = new IndustrialDevelopTopicDODto();
+        BeanUtils.copyProperties(topicDO,topicDODto);
+        topicDODto.setFilePath(filePath);
+        topicDODto.setFileName(fileName);
+        return topicDODto;
+    }
 }

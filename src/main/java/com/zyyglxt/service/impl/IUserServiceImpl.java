@@ -10,16 +10,16 @@ import com.zyyglxt.dataobject.UserDO;
 import com.zyyglxt.dataobject.UserRoleRefDO;
 import com.zyyglxt.dto.UpdatePwdDto;
 import com.zyyglxt.dto.UserDto;
+import com.zyyglxt.dto.UserSessionDto;
 import com.zyyglxt.error.BusinessException;
 import com.zyyglxt.error.EmBusinessError;
 import com.zyyglxt.response.ResponseData;
 import com.zyyglxt.service.IUserService;
 import com.zyyglxt.util.IDUtil;
 import com.zyyglxt.util.MobileUtil;
-import com.zyyglxt.util.UserUtil;
+import com.zyyglxt.util.UsernameUtil;
 import com.zyyglxt.validator.ValidatorImpl;
 import com.zyyglxt.validator.ValidatorResult;
-import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -27,8 +27,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
-import java.util.HashMap;
-import java.util.Map;
+import javax.servlet.http.HttpServletRequest;
 import java.util.UUID;
 
 /**
@@ -49,27 +48,58 @@ public class IUserServiceImpl implements IUserService {
     OrganizationDOMapper organizationDOMapper;
     @Autowired
     ValidatorImpl validator;
+    @Autowired
+    UsernameUtil usernameUtil;
+    @Autowired
+    HttpServletRequest request;
 
     /**
      * 用户注册
      */
     @Override
     @Transactional
-    public ResponseData Register(UserDto userDto) throws BusinessException {
+    public ResponseData Register(UserDto userDto) {
+        // 验证参数不能为空
         ValidatorResult result = validator.validate(userDto);
         if (result.isHasErrors()) {
             throw new BusinessException(result.getErrMsg(), EmBusinessError.PARAMETER_VALIDATION_ERROR);
         }
-        // 根据用户名查询数据库，若查询到数据，表示该用户名已存在，不能注册
+        // 验证手机号码
+        if (!MobileUtil.checkPhone(userDto.getMobilePhone())) {
+            throw new BusinessException("手机号码不正确", EmBusinessError.MOBILEPHONE_ERROR);
+        }
+        // 用户名的唯一性
         UserDO userDO = userDOMapper.selectByUsername(userDto.getUsername());
         if (userDO != null) {
-            throw new BusinessException("用户名已存在，请更换", EmBusinessError.USER_REGISTER_FAILED);
+            throw new BusinessException("用户名已存在", EmBusinessError.USER_ACCOUNT_ALREADY_EXIST);
         } else {
-            if (MobileUtil.checkPhone(userDto.getMobilePhone())) {
-                register(userDto);
+            OrganizationDO organizationDO = organizationDOMapper.selectByOrgNameAndCode(userDto.getOrgName(), userDto.getOrgCode());
+            if (organizationDO != null) {   // 申请用户所在的机构已经申请过则直接到登录页面
+                register1(userDto);
+                return new ResponseData(EmBusinessError.success, "/userLogin");
+            } else {    // 申请用户所在的机构没有申请过则跳转到信息录入页面
+                register2(userDto);
+                switch (userDto.getOrgIdentify()) {
+                    case "中药材种植园":
+                        return new ResponseData(EmBusinessError.success, "/plantation_add");
+                    case "中药材加工企业":
+                        return new ResponseData(EmBusinessError.success, "/process_add");
+                    case "中药材制药企业":
+                        return new ResponseData(EmBusinessError.success, "/produce_add");
+                    case "中药材销售企业":
+                        return new ResponseData(EmBusinessError.success, "/sale_add");
+                    case "中医医疗机构":
+                        return new ResponseData(EmBusinessError.success, "/hosp_add");
+                    case "高等医学院校":
+                        return new ResponseData(EmBusinessError.success, "/school_add");
+                    case "科研院所":
+                        return new ResponseData(EmBusinessError.success, "/lab_add");
+                    case "技术服务机构":
+                        return new ResponseData(EmBusinessError.success, "/tecserviceorg_add");
+                    case "旅游康养机构":
+                        return new ResponseData(EmBusinessError.success, "/tour_add");
+                }
                 return new ResponseData(EmBusinessError.success);
-            } else {
-                throw new BusinessException("手机号不正确", EmBusinessError.MOBILEPHONE_ERROR);
             }
         }
     }
@@ -79,7 +109,46 @@ public class IUserServiceImpl implements IUserService {
      *
      * @param userDto
      */
-    private void register(UserDto userDto) {
+    private void register1(UserDto userDto) {
+
+        String orgName = userDto.getOrgName();
+        String orgCode = userDto.getOrgCode();
+        OrganizationDO organizationDO = organizationDOMapper.selectByOrgNameAndCode(orgName, orgCode);
+
+        String userItemCode = UUID.randomUUID().toString();// user 表唯一标识UUID
+        UserDO userDO = new UserDO();
+        userDO.setItemcode(userItemCode);
+        userDO.setOrgCode(organizationDO.getItemcode());
+        userDO.setUsername(userDto.getUsername());
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        String password = passwordEncoder.encode(userDto.getPassword());
+        userDO.setSalt(userDto.getUsername());// 将 登陆账号 设置为 盐，存放到数据库中
+        userDO.setPassword(password);
+        userDO.setMobilephone(userDto.getMobilePhone());
+        userDO.setCreater(userDto.getUsername());// 注册时，注册用户为 创建人
+        userDO.setUpdater(userDto.getUsername());// 注册时，注册用户为 修改人
+//        userDO.setType(0);// 设置为普通用户（0：普通，1：管理员）
+
+        UserRoleRefDO userRoleRefDO = new UserRoleRefDO();
+        RoleDO roleDO = roleDOMapper.selectByRoleType(0);//根据角色类型查到itemcode
+
+        userRoleRefDO.setItemcode(UUID.randomUUID().toString());// 唯一标识UUID
+        userRoleRefDO.setUserCode(userItemCode);// 关联user表itemCode字段
+        userRoleRefDO.setRoleCode(roleDO.getItemcode());// 关联role表itemCode字段
+        userRoleRefDO.setPlatRole("普通用户");
+        userRoleRefDO.setCreater(userDto.getUsername());// 设置创建人
+        userRoleRefDO.setUpdater(userDto.getUsername());// 设置修改人
+
+        userDOMapper.insertSelective(userDO);// 添加数据到user表
+        userRoleRefDOMapper.insertSelective(userRoleRefDO);// 添加数据到user_role_ref表
+    }
+
+    /**
+     * 注册用户
+     *
+     * @param userDto
+     */
+    private void register2(UserDto userDto) {
 
         // orgnization 表唯一标识UUID
         String orgItemCode = UUID.randomUUID().toString();
@@ -89,7 +158,6 @@ public class IUserServiceImpl implements IUserService {
         organizationDO.setOrgIdentify(userDto.getOrgIdentify());
         organizationDO.setOrgCode(userDto.getOrgCode());
         organizationDO.setOrgDescription(userDto.getOrgIdentify());
-        organizationDO.setAuditStatus("待审核");
         organizationDO.setCreater(userDto.getUsername());
         organizationDO.setUpdater(userDto.getUsername());
 
@@ -100,21 +168,21 @@ public class IUserServiceImpl implements IUserService {
         userDO.setOrgCode(orgItemCode);
         userDO.setUsername(userDto.getUsername());
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        String password= passwordEncoder.encode(userDto.getPassword());
+        String password = passwordEncoder.encode(userDto.getPassword());
         userDO.setSalt(userDto.getUsername());// 将 登陆账号 设置为 盐，存放到数据库中
         userDO.setPassword(password);
         userDO.setMobilephone(userDto.getMobilePhone());
         userDO.setCreater(userDto.getUsername());// 注册时，注册用户为 创建人
         userDO.setUpdater(userDto.getUsername());// 注册时，注册用户为 修改人
+
+        RoleDO roleDO = roleDOMapper.selectByRoleName(userDto.getOrgIdentify());
+        userDO.setType(roleDO.getRoleType());
 //        userDO.setType(0);// 设置为普通用户（0：普通，1：管理员）
 
-
-        // user_role_ref 表唯一标识UUID
-        String userRoleItemCode = UUID.randomUUID().toString();
         UserRoleRefDO userRoleRefDO = new UserRoleRefDO();
-        userRoleRefDO.setItemcode(userRoleItemCode);// 唯一标识UUID
+        userRoleRefDO.setItemcode(UUID.randomUUID().toString());// 唯一标识UUID
         userRoleRefDO.setUserCode(userItemCode);// 关联user表itemCode字段
-        RoleDO roleDO = roleDOMapper.selectByRoleType(0);//根据角色类型查到itemcode
+//        roleDO = roleDOMapper.selectByRoleType(roleDO.getRoleType());//根据角色类型查到itemcode
         userRoleRefDO.setRoleCode(roleDO.getItemcode());// 关联role表itemCode字段
         userRoleRefDO.setPlatRole("普通用户");
         userRoleRefDO.setCreater(userDto.getUsername());// 设置创建人
@@ -133,42 +201,28 @@ public class IUserServiceImpl implements IUserService {
     @Override
     @Transactional
     public ResponseData UpdatePassword(UpdatePwdDto updatePwdDto) {
-        //从session中拿到用户名，然后根据用户名查询数据库，得到角色类型，然后判断是普通用户还是管理员，
-        //如果是普通用户则需要输入手机号码和原密码，管理员则直接输入新密码替换原密码（不需要手机号码和原密码）
         ValidatorResult result = validator.validate(updatePwdDto);
         if (result.isHasErrors()) {
             throw new BusinessException(result.getErrMsg(), EmBusinessError.PARAMETER_VALIDATION_ERROR);
         }
 
-        UserUtil userUtil = new UserUtil();
-        String username = userUtil.getUser().get("username");
-        UserDO userDO = userDOMapper.selectByUsername(username);
-        int userType = userDO.getType();// 用户类型（0：普通，1：管理员）
+        UserDO userDO = userDOMapper.selectByUsername(usernameUtil.getOperateUser());
 
-        // 如果是普通用户
-        if (userType == 0) {
-            String mobilePhone = updatePwdDto.getMobilePhone();
-            if (MobileUtil.checkPhone(mobilePhone)) {
-                String oldPassword = updatePwdDto.getPassword();// 输入的原密码
-                BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-                oldPassword = passwordEncoder.encode(oldPassword);
-                // 数据库查询到的原密码和输入的原密码比对
-                if (userDO.getPassword().equals(oldPassword)) {
-                    updatePwdDto.setNewPassword(passwordEncoder.encode(updatePwdDto.getNewPassword()));
-                    userDOMapper.updatePasswordByMobilePhone(updatePwdDto.getNewPassword(), mobilePhone);
-                    return new ResponseData(EmBusinessError.success);
-                } else {
-                    throw new BusinessException("输入的旧密码错误，请重新输入！", EmBusinessError.OLDPASSWORD_ERROR);
-                }
+        String mobilePhone = updatePwdDto.getMobilePhone();
+        if (MobileUtil.checkPhone(mobilePhone)) {
+            String oldPassword = updatePwdDto.getPassword();// 输入的原密码
+            BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+            oldPassword = passwordEncoder.encode(oldPassword);
+            // 数据库查询到的原密码和输入的原密码比对
+            if (userDO.getPassword().equals(oldPassword)) {
+                updatePwdDto.setNewPassword(passwordEncoder.encode(updatePwdDto.getNewPassword()));
+                userDOMapper.updatePasswordByMobilePhone(updatePwdDto.getNewPassword(), mobilePhone);
+                return new ResponseData(EmBusinessError.success);
             } else {
-                throw new BusinessException("手机号码不正确！", EmBusinessError.MOBILEPHONE_ERROR);
+                throw new BusinessException("输入的旧密码错误，请重新输入！", EmBusinessError.OLDPASSWORD_ERROR);
             }
         } else {
-            // 如果是管理员
-            BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-            updatePwdDto.setNewPassword(passwordEncoder.encode(updatePwdDto.getNewPassword()));
-            userDOMapper.updatePasswordByUserName(updatePwdDto.getNewPassword(), username);
-            return new ResponseData(EmBusinessError.success);
+            throw new BusinessException("手机号码不正确！", EmBusinessError.MOBILEPHONE_ERROR);
         }
     }
 
@@ -179,9 +233,16 @@ public class IUserServiceImpl implements IUserService {
      */
     @Override
     public UserDO selectOne() {
-        UserUtil userUtil = new UserUtil();
-        String username = userUtil.getUser().get("username");
-        return userDOMapper.selectByUsername(username);
+        UserDO userDO = userDOMapper.selectByUsername(usernameUtil.getOperateUser());
+//        隐藏身份证号的出生年月日和手机号的中间四位
+//        userDO.setMobilephone(MobileUtil.hideMiddleMobile(userDO.getMobilephone()));
+//        userDO.setIdcardNo(IDUtil.hideMiddleID(userDO.getIdcardNo()));
+        return userDO;
+    }
+
+    @Override
+    public OrganizationDO selectByOrgNameAndCode(String orgName, String orgCode) {
+        return organizationDOMapper.selectByOrgNameAndCode(orgName, orgCode);
     }
 
     /**
@@ -200,7 +261,7 @@ public class IUserServiceImpl implements IUserService {
         // 验证通过返回 null，不通过则返回一个 字符串，
         // 所以利用判空来判断身份证号码是否合法
         String isValidIDCardNo = IDUtil.IdentityCardVerification(userDO.getIdcardNo());
-        if (!StringUtils.isEmpty(isValidIDCardNo)) {
+        if (StringUtils.isEmpty(isValidIDCardNo)) {
             throw new BusinessException(isValidIDCardNo, EmBusinessError.IDNO_ERROR);
         }
         // 验证电话是否正确
@@ -208,11 +269,23 @@ public class IUserServiceImpl implements IUserService {
             throw new BusinessException("手机号码不正确！", EmBusinessError.MOBILEPHONE_ERROR);
         }
 
-        UserUtil userUtil = new UserUtil();
-        int userItemID = Integer.parseInt(userUtil.getUser().get("itemid"));
-        String userItemCode = userUtil.getUser().get("itemcode");
-        userDO.setItemid(userItemID);
-        userDO.setItemcode(userItemCode);
+        UserSessionDto userSessionDto = (UserSessionDto) request.getSession().getAttribute("user");
+        userDO.setItemid(userSessionDto.getItemid());
+        userDO.setItemcode(userSessionDto.getItemcode());
+        userDOMapper.updateByPrimaryKeySelective(userDO);
+    }
+
+    /**
+     * 修改用户头像
+     *
+     * @param userDO
+     */
+    @Override
+    @Transactional
+    public void UpdateUserPortrait(UserDO userDO) {
+        UserSessionDto userSessionDto = (UserSessionDto) request.getSession().getAttribute("user");
+        userDO.setItemid(userSessionDto.getItemid());
+        userDO.setItemcode(userSessionDto.getItemcode());
         userDOMapper.updateByPrimaryKeySelective(userDO);
     }
 }

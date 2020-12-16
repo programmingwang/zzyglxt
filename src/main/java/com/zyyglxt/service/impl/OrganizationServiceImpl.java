@@ -1,6 +1,10 @@
 package com.zyyglxt.service.impl;
 
+import com.zyyglxt.dao.IndustrialDevelopChiMedMapper;
+import com.zyyglxt.dao.IndustrialDevelopSchoolMapper;
+import com.zyyglxt.dao.IndustrialDevelopTecSerOrgMapper;
 import com.zyyglxt.dao.OrganizationDOMapper;
+import com.zyyglxt.dataobject.IndustrialDevelopChiMed;
 import com.zyyglxt.dataobject.OrganizationDO;
 import com.zyyglxt.dto.UserSessionDto;
 import com.zyyglxt.error.EmBusinessError;
@@ -23,19 +27,35 @@ public class OrganizationServiceImpl implements IOrganizationService {
 
     @Resource
     OrganizationDOMapper organizationDOMapper;
+    @Resource
+    IndustrialDevelopChiMedMapper industrialDevelopChiMedMapper;
+    @Resource
+    IndustrialDevelopSchoolMapper industrialDevelopSchoolMapper;
+    @Resource
+    IndustrialDevelopTecSerOrgMapper industrialDevelopTecSerOrgMapper;
+    @Autowired
+    HttpServletRequest request;
 
-
+    /**
+     * 根据角色不同用不同SQL查询获得表格显示数据
+     * @return
+     */
     @Override
-    public List<OrganizationDO> selectAllOrgByAuditStatus1() {
-        // 市局
-        return organizationDOMapper.selectAllOrgByAuditStatus();
+    public List<OrganizationDO> selectAllOrgByAuditStatus() {
+        UserSessionDto user = (UserSessionDto) request.getSession().getAttribute("user");
+        if ("科研项目-市级".equals(user.getRolename())) {
+            return organizationDOMapper.selectAllOrgByAuditStatus();
+        } else if ("科研项目-省级".equals(user.getRolename())){
+            return organizationDOMapper.queryAllOrgByAuditStatus();
+        }
+        return null;
     }
 
-    @Override
-    public List<OrganizationDO> selectAllOrgByAuditStatus2() {
-        // 省局
-        return organizationDOMapper.queryAllOrgByAuditStatus();
-    }
+//    @Override
+//    public List<OrganizationDO> selectAllOrgByAuditStatus2() {
+//        // 省局
+//        return organizationDOMapper.queryAllOrgByAuditStatus();
+//    }
 
     @Override
     public ResponseData orgAudit(OrganizationDO organizationDO) {
@@ -43,5 +63,10 @@ public class OrganizationServiceImpl implements IOrganizationService {
         organizationDOMapper.updateByPrimaryKeySelective(organizationDO);
 
         return new ResponseData(EmBusinessError.success);
+    }
+
+    @Override
+    public void insertChiMedMsg() {
+
     }
 }

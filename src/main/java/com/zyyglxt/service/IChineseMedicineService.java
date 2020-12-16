@@ -2,6 +2,7 @@ package com.zyyglxt.service;
 
 import com.zyyglxt.dataobject.ChineseMedicineDO;
 import com.zyyglxt.dataobject.ChineseMedicineDOKey;
+import com.zyyglxt.dto.StatusDto;
 
 import java.util.List;
 
@@ -14,8 +15,8 @@ public interface IChineseMedicineService {
     int addChineseMedicine(ChineseMedicineDO chineseMedicineDO);
     int updateChineseMedicine(ChineseMedicineDO chineseMedicineDO);
     int deleteChineseMedicine(ChineseMedicineDOKey chineseMedicineDOKey);
-    List<ChineseMedicineDO> selectAllChineseMedicine();
+    List<ChineseMedicineDO> selectAllChineseMedicine(List<String> chineseMedicineStatus);
     List<ChineseMedicineDO> searchChineseMedicine(String keyWord);
-    List<ChineseMedicineDO> top5ChineseMedicine();
     List<ChineseMedicineDO> selectBySpecialtyCode(String specialtyCode);
+    int updateStatus(StatusDto statusDto);
 }

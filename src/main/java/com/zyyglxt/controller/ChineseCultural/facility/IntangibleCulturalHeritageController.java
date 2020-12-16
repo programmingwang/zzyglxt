@@ -3,12 +3,16 @@ package com.zyyglxt.controller.ChineseCultural.facility;
 import com.zyyglxt.annotation.LogAnnotation;
 import com.zyyglxt.dataobject.ChineseCulturalDO;
 import com.zyyglxt.dataobject.ChineseCulturalDOKey;
+import com.zyyglxt.dto.ChineseCulturalDto;
 import com.zyyglxt.error.EmBusinessError;
 import com.zyyglxt.response.ResponseData;
+import com.zyyglxt.service.IFileService;
 import com.zyyglxt.service.IIntangibleCulturalHeritageService;
+import com.zyyglxt.util.ConvertDOToDTOUtil;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -25,13 +29,23 @@ public class IntangibleCulturalHeritageController {
     @Resource
     private IIntangibleCulturalHeritageService iIntangibleCulturalHeritageService;
 
+    @Resource
+    private IFileService iFileService;
+
     //获取所有的非物质文化遗产
     @RequestMapping(value = "/getAll" , method = RequestMethod.GET)
     @ResponseBody
     @LogAnnotation(logTitle = "查询非物质文化遗产", logLevel = "1")
     public ResponseData getAllIntangibleCulturalHeritage(@RequestParam(value = "chineseCulturalStatus")List chineseCulturalStatus){
         List<ChineseCulturalDO> intangibleCulturalHeritageList = iIntangibleCulturalHeritageService.getIntangibleCulturalHeritageList(chineseCulturalStatus);
-        return new ResponseData(EmBusinessError.success,intangibleCulturalHeritageList);
+        List<ChineseCulturalDto> chineseCulturalDtoList = new ArrayList<>();
+        for (ChineseCulturalDO chineseCulturalDO : intangibleCulturalHeritageList) {
+            chineseCulturalDtoList.add(
+                    ConvertDOToDTOUtil.convertFromDOToDTO(
+                            chineseCulturalDO,iFileService.selectFileByDataCode(
+                                    chineseCulturalDO.getItemcode()).getFilePath()));
+        }
+        return new ResponseData(EmBusinessError.success,chineseCulturalDtoList);
     }
 
 

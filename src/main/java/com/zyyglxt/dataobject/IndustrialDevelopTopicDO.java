@@ -14,6 +14,8 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 public class IndustrialDevelopTopicDO extends IndustrialDevelopTopicDOKey {
+
+    private String projectNo;
     
     @NotBlank(message = "项目名称不能为空",groups = ValidationGroups.Insert.class)
     private String projectName;
@@ -61,9 +63,10 @@ public class IndustrialDevelopTopicDO extends IndustrialDevelopTopicDOKey {
     
     private String examineStatus;
 
+    private String reason;
+
     
     private String userCode;
-
     
     private String creater;
 

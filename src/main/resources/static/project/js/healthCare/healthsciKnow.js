@@ -4,16 +4,15 @@
 
 
             var url = "selectallhealthsciknowdo";
+            var webStatus = dictUtil.getDictByCode(dictUtil.DICT_LIST.webStatus);
+            url = selectUtil.getRoleTable(sessionStorage.getItem("rolename"),url,"scienceKnowledgeStatus",webStatus);
             var aParam = {
 
             };
 
             //操作
             function operation(value, row, index){
-                return [
-                    '<button type="button" class="edit btn btn-primary btn-sm" style="margin-right: 5px" data-toggle="modal" data-target="" >编辑</button>',
-                    '<button type="button" class="delete btn btn-danger btn-sm"  data-toggle="modal" data-target="#staticBackdrop" >删除</button>',
-                ].join('');
+                return selectUtil.getRoleOperate(value,row,index,sessionStorage.getItem("rolename"),row.scienceKnowledgeStatus,webStatus)
             }
 
 
@@ -46,8 +45,169 @@
                     myDeleteModal.show();
                 },
                 'click .pass' : function (e, value, row, index) {
+                    var myPassSciKnowModalData ={
+                        modalBodyID :"myPassModal",
+                        modalTitle : "审核通过",
+                        modalClass : "modal-lg",
+                        modalConfirmFun:function () {
+                            var isSuccess = false;
+                            var submitStatus = {
+                                "scienceKnowledgeStatus": selectUtil.getStatus(sessionStorage.getItem("rolename"),webStatus)
+                            };
+                            ajaxUtil.myAjax(null,"changestatustosciknow/"+row.itemid+"/"+row.itemcode,submitStatus,function (data) {
+                                if(ajaxUtil.success(data)){
+                                    if(data.code == ajaxUtil.successCode){
+                                        /*if(selectUtil.getStatus(sessionStorage.getItem("rolename")) == "处长已审核")*/
+                                        if(sessionStorage.getItem("rolename") == "文化宣传处长")
+                                        {
+                                            alertUtil.info("审核已通过，已发送给综合处处长做最后审核！");
+                                        }else{
+                                            alertUtil.info("审核已通过，已上架！");
+                                        }
+                                        isSuccess = true;
+                                        refreshTable();
+                                    }else{
+                                        alertUtil.error(data.msg);
+                                    }
+                                }
+                            },false);
+                            return isSuccess;
+                        }
+
+                    };
+                    var myPassModal = modalUtil.init(myPassSciKnowModalData);
+                    myPassModal.show();
                 },
                 'click .fail' : function (e, value, row, index) {
+                    var myFailSciKnowModalData ={
+                        modalBodyID :"myFailModal",
+                        modalTitle : "审核不通过",
+                        modalClass : "modal-lg",
+                        modalConfirmFun:function () {
+                            var isSuccess = false;
+                            var submitStatus = {
+                                "statscienceKnowledgeStatusus": ""
+                            };
+                            if(sessionStorage.getItem("rolename") == "文化宣传处长" || sessionStorage.getItem("rolename") == "政务资源处长"){
+                                submitStatus.chineseCulturalStatus = webStatus[3].id;
+                            }else{
+                                submitStatus.chineseCulturalStatus = webStatus[4].id;
+                            }
+                            ajaxUtil.myAjax(null,"changestatustosciknow/"+row.itemid+"/"+row.itemcode,submitStatus,function (data) {
+                                if(ajaxUtil.success(data)){
+                                    if(data.code == 88888){
+                                        alertUtil.info("操作成功");
+                                        isSuccess = true;
+                                        refreshTable();
+                                    }else{
+                                        alertUtil.error(data.msg);
+                                    }
+                                }
+                            },false);
+                            return isSuccess;
+                        }
+                    };
+                    var myFailModal = modalUtil.init(myFailSciKnowModalData);
+                    myFailModal.show();
+                },
+                'click .under-shelf' : function (e, value, row, index) {
+                    var myUnderShelfSciKnowModalData ={
+                        modalBodyID :"myUnderShelfModal",
+                        modalTitle : "下架",
+                        modalClass : "modal-lg",
+                        modalConfirmFun:function () {
+                            var isSuccess = false;
+                            var submitStatus = {
+                                "statscienceKnowledgeStatusus":  webStatus[6].id
+                            };
+                            ajaxUtil.myAjax(null,"changestatustosciknow/"+row.itemid+"/"+row.itemcode,submitStatus,function (data) {
+                                if(ajaxUtil.success(data)){
+                                    if(data.code == 88888){
+                                        alertUtil.success("下架成功");
+                                        isSuccess = true;
+                                        refreshTable();
+                                    }else{
+                                        alertUtil.error(data.msg);
+                                    }
+                                }
+                            },false);
+                            return isSuccess;
+                        }
+                    };
+                    var myUnderShelfModal = modalUtil.init(myUnderShelfSciKnowModalData);
+                    myUnderShelfModal.show();
+                },
+
+                'click .view' : function (e, value, row, index) {
+                    var myViewSciKnowModalData ={
+                        modalBodyID : "myViewSciKnowModal", //公用的在后面给span加不同的内容就行了，其他模块同理
+                        modalTitle : "查看详情",
+                        modalClass : "modal-lg",
+                        confirmButtonStyle: "display:none",
+                    };
+                    var mySciKnowModal = modalUtil.init(myViewSciKnowModalData);
+                    $("#scienceKnowledgeName").val(row.scienceKnowledgeName);
+                    $("#scienceKnowledgeSource").val(row.scienceKnowledgeSource);
+                    $("#scienceKnowledgeAuthor").val(row.scienceKnowledgeAuthor);
+                    $("#scienceKnowledgeStatus").val(webStatus[row.scienceKnowledgeStatus].text);
+                    $("#creater").val(row.creater);
+                    $("#itemCreateAt").val(row.itemcreateat);
+                    $("#content").html(row.content);
+                    mySciKnowModal.show();
+                },
+                'click .submit' : function (e, value, row, index) {
+                    var mySubmitSciKnowModalData ={
+                        modalBodyID :"mySubmitModal",
+                        modalTitle : "提交",
+                        modalClass : "modal-lg",
+                        modalConfirmFun:function () {
+                            var isSuccess = false;
+                            var submitStatus = {
+                                "scienceKnowledgeStatus": selectUtil.getStatus(sessionStorage.getItem("rolename"),webStatus)
+                            };
+                            ajaxUtil.myAjax(null,"/changestatustosciknow/"+row.itemid+"/"+row.itemcode,submitStatus,function (data) {
+                                if(ajaxUtil.success(data)){
+                                    if(data.code == 88888){
+                                        alertUtil.info("已提交");
+                                        isSuccess = true;
+                                        refreshTable();
+                                    }else{
+                                        alertUtil.error(data.msg);
+                                    }
+                                }
+                            },false);
+                            return isSuccess;
+                        }
+                    };
+                    var mySubmitModal = modalUtil.init(mySubmitSciKnowModalData);
+                    mySubmitModal.show();
+                },
+                'click .no-submit' : function (e, value, row, index) {
+                    var myNoSubmitSciKnowModalData ={
+                        modalBodyID :"myNoSubmitModal",
+                        modalTitle : "取消提交",
+                        modalClass : "modal-lg",
+                        modalConfirmFun:function () {
+                            var isSuccess = false;
+                            var submitStatus = {
+                                "statscienceKnowledgeStatusus":  webStatus[0].id
+                            };
+                            ajaxUtil.myAjax(null,"changestatustosciknow/"+row.itemid+"/"+row.itemcode,submitStatus,function (data) {
+                                if(ajaxUtil.success(data)){
+                                    if(data.code == 88888){
+                                        alertUtil.info("已提交");
+                                        isSuccess = true;
+                                        refreshTable();
+                                    }else{
+                                        alertUtil.error(data.msg);
+                                    }
+                                }
+                            },false);
+                            return isSuccess;
+                        }
+                    };
+                    var mySubmitModal = modalUtil.init(myNoSubmitSciKnowModalData);
+                    mySubmitModal.show();
                 },
             };
 
@@ -81,12 +241,10 @@
             var oBt=document.getElementById("taskNameSearch");
             var btnSearch=document.getElementById("btnSearch")
             btnSearch.onclick=function(){
-                console.log(oTab.tHead.rows[0].childNodes[5].innerText);
                 for(var i=0;i<oTab.tBodies[0].rows.length;i++)
                 {
                     var str1=oTab.tBodies[0].rows[i].innerText.toLowerCase();
                     var str2=oBt.value.toLowerCase();
-                    console.log(str2);
                     if (str2==""||str2=="请输入"){
                         refreshTable();
                     }
@@ -118,5 +276,6 @@
                 }
             }
             bootstrapTableUtil.globalSearch("table",url,aParam, aCol);
+
         })
 })();

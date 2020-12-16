@@ -21,10 +21,13 @@ public interface IndustrialDevelopTecSerOrgMapper {
 
     IndustrialDevelopTecSerOrg selectByPrimaryKey(@Param("itemid") Integer itemid, @Param("itemcode") String itemcode);
 
+    IndustrialDevelopTecSerOrg selectByOrgcode(@Param("orgCode") String orgCode);
+
     int updateByPrimaryKeySelective(IndustrialDevelopTecSerOrg record);
 
     int updateByPrimaryKey(IndustrialDevelopTecSerOrg record);
 
-    List<IndustrialDevelopTecSerOrg> selectAll();
+    List<IndustrialDevelopTecSerOrg> selectAll(@Param("type") String type);
 
+    IndustrialDevelopTecSerOrg selectByOrgNameAndCode(String orgName, String orgCode);
 }

@@ -4,19 +4,21 @@ import com.zyyglxt.dao.HospDOMapper;
 import com.zyyglxt.dao.HospSpecialtyRefDOMapper;
 import com.zyyglxt.dataobject.HospDO;
 import com.zyyglxt.dataobject.HospDOKey;
-import com.zyyglxt.dataobject.HospSpecialtyRefDO;
+import com.zyyglxt.dto.HospDto;
+import com.zyyglxt.dto.StatusDto;
 import com.zyyglxt.error.BusinessException;
 import com.zyyglxt.error.EmBusinessError;
 import com.zyyglxt.service.IHospService;
+import com.zyyglxt.util.UsernameUtil;
 import com.zyyglxt.validator.ValidatorImpl;
 import com.zyyglxt.validator.ValidatorResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.UUID;
 
 /**
  * @author qjc
@@ -31,6 +33,8 @@ public class HospServiceImpl implements IHospService {
     private ValidatorImpl validator;
     @Resource
     private HospSpecialtyRefDOMapper hospSpecialtyRefDOMapper;
+    @Resource
+    private UsernameUtil usernameUtil;
 
     @Override
     public int addHosp(HospDO hospDO) {
@@ -39,6 +43,9 @@ public class HospServiceImpl implements IHospService {
             throw new BusinessException(result.getErrMsg(), EmBusinessError.PARAMETER_VALIDATION_ERROR);
         }
         hospDO.setItemcreateat(new Date());
+        hospDO.setCreater(usernameUtil.getOperateUser());
+        hospDO.setUpdater(usernameUtil.getOperateUser());
+
         return hospDOMapper.insertSelective(hospDO);
     }
 
@@ -48,6 +55,7 @@ public class HospServiceImpl implements IHospService {
         if(result.isHasErrors()){
             throw new BusinessException(result.getErrMsg(), EmBusinessError.PARAMETER_VALIDATION_ERROR);
         }
+        hospDO.setUpdater(usernameUtil.getOperateUser());
         return hospDOMapper.updateByPrimaryKeySelective(hospDO);
     }
 
@@ -65,8 +73,12 @@ public class HospServiceImpl implements IHospService {
     }
 
     @Override
-    public List<HospDO> selectAllHosp() {
-        return hospDOMapper.selectAllHosp();
+    public List<HospDO> selectAllHosp(List<String> specialtyStatus) {
+        List<HospDO> DOList = new ArrayList<>();
+        for (String status : specialtyStatus) {
+            DOList.addAll(hospDOMapper.selectByStatus(status));
+        }
+        return DOList;
     }
 
     /*
@@ -74,20 +86,44 @@ public class HospServiceImpl implements IHospService {
      */
     @Override
     public List<HospDO> searchHosp(String keyWord) {
-        if(keyWord.isEmpty()){
+        if(keyWord == "" || keyWord == null){
             throw new BusinessException("关键字不能为空", EmBusinessError.PARAMETER_VALIDATION_ERROR);
         }
         return hospDOMapper.searchHosp(keyWord);
     }
 
     @Override
-    public List<HospDO> top5Hosp() {
-        return hospDOMapper.top5Hosp();
-    }
-
-    @Override
     public HospDO selectHospByItemCode(String itemCode) {
+        if(itemCode == "" || itemCode == null){
+            throw new BusinessException("itemcode不能为空", EmBusinessError.PARAMETER_VALIDATION_ERROR);
+        }
         return hospDOMapper.selectHospByItemCode(itemCode);
     }
 
+    @Override
+    public List<HospDO> selectByStatus(String status) {
+        return hospDOMapper.selectByStatus(status);
+    }
+
+    @Override
+    public int updateStatus(StatusDto statusDto) {
+        ValidatorResult result = validator.validate(statusDto);
+        if(result.isHasErrors()){
+            throw new BusinessException(result.getErrMsg(), EmBusinessError.PARAMETER_VALIDATION_ERROR);
+        }
+        statusDto.setUpdater(usernameUtil.getOperateUser());
+        return hospDOMapper.updateStatusByPrimaryKey(statusDto);
+    }
+
+    @Override
+    public List<HospDO> selectAllNoStatus() {
+        return hospDOMapper.selectAllHosp();
+    }
+
+    @Override
+    public HospDO selectByOrgCode(String orgCode) {
+        return hospDOMapper.selectByOrgCode(orgCode);
+    }
+
 }
+

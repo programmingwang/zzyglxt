@@ -59,7 +59,7 @@ public interface IndustrialDevelopSciAchiDOMapper {
 
     List<IndustrialDevelopSciAchiDO> selectByPage(@Param("start") int start,@Param("end") int end);
 
-    List<IndustrialDevelopSciAchiDO> selectAll();
+    List<IndustrialDevelopSciAchiDO> selectAll(@Param("orgCode") String orgCode);
 }
 
 

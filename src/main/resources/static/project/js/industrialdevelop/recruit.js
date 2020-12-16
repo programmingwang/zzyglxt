@@ -5,6 +5,8 @@
 
             //后台请求地址
             var url = "/industrialdevelop/talrec";
+            
+            var getUrl = url + "/" + sessionStorage.getItem("orgCode");
             //页面请求地址
             var pathUrl = "/industrialdevelop/recruit";
             //新增页面地址
@@ -15,10 +17,16 @@
 
             //操作
             function operation(value, row, index){
-                return [
-                    '<button type="button" class="edit btn btn-primary btn-sm" style="margin-right: 5px" data-toggle="modal" data-target="" >编辑</button>',
-                    '<button type="button" class="delete btn btn-danger btn-sm"  data-toggle="modal" data-target="#staticBackdrop" >删除</button>',
-                ].join('');
+                if (dictUtil.getCode(dictUtil.DICT_LIST.showStatus,row.status) === '1'){
+                    return [
+                        '<a class="unshelve" style="margin:0 1em;text-decoration: none;color: #775637" data-toggle="modal" data-target="" >下架</a>'
+                    ].join('')
+                } else {
+                    return [
+                        '<a class="edit" style="margin:0 1em;text-decoration: none;color: #775637" data-toggle="modal" data-target="" >编辑</a>',
+                        '<a class="delete" style="margin:0 1em;text-decoration: none;color:#D60000;"  data-toggle="modal" data-target="#staticBackdrop" >删除</a>',
+                    ].join('');
+                }
             }
 
             //修改事件
@@ -52,7 +60,19 @@
                     };
                     var myDeleteModal = modalUtil.init(myDeleteModalData);
                     myDeleteModal.show();
-                }
+                },
+                'click .unshelve' : function(e, value, row, index) {
+                    var param = {
+                        itemid: row.itemid,
+                        itemcode: row.itemcode,
+                        status: '2'
+                    }
+                    ajaxUtil.myAjax(null, url, param,function (data) {
+                        if (ajaxUtil.success(data)){
+                            refreshTable();
+                        }
+                    },true,true,"put")
+                },
             };
 
 
@@ -83,14 +103,15 @@
                 {field: 'action',  title: '操作',formatter: operation,events:orgEvents}
             ];
 
-            var myTable = bootstrapTableUtil.myBootStrapTableInit("table", url, aParam, aCol);
+            var myTable = bootstrapTableUtil.myBootStrapTableInit("table", getUrl, aParam, aCol);
 
             function refreshTable() {
                 var param = {};
                 myTable.free();
-                myTable = bootstrapTableUtil.myBootStrapTableInit("table", url, param, aCol);
+                myTable = bootstrapTableUtil.myBootStrapTableInit("table", getUrl, param, aCol);
             }
 
-            bootstrapTableUtil.globalSearch("table",url,aParam, aCol);
+            bootstrapTableUtil.globalSearch("table",getUrl,aParam, aCol);
+
         })
 })();

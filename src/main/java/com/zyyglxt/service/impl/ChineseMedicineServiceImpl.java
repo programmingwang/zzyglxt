@@ -3,15 +3,18 @@ package com.zyyglxt.service.impl;
 import com.zyyglxt.dao.ChineseMedicineDOMapper;
 import com.zyyglxt.dataobject.ChineseMedicineDO;
 import com.zyyglxt.dataobject.ChineseMedicineDOKey;
+import com.zyyglxt.dto.StatusDto;
 import com.zyyglxt.error.BusinessException;
 import com.zyyglxt.error.EmBusinessError;
 import com.zyyglxt.service.IChineseMedicineService;
+import com.zyyglxt.util.UsernameUtil;
 import com.zyyglxt.validator.ValidatorImpl;
 import com.zyyglxt.validator.ValidatorResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -27,6 +30,8 @@ public class ChineseMedicineServiceImpl implements IChineseMedicineService {
     private ChineseMedicineDOMapper chineseMedicineDOMapper;
     @Autowired
     private ValidatorImpl validator;
+    @Autowired
+    private UsernameUtil usernameUtil;
     /*
     新建名老中医
      */
@@ -37,6 +42,8 @@ public class ChineseMedicineServiceImpl implements IChineseMedicineService {
             throw new BusinessException(result.getErrMsg(), EmBusinessError.PARAMETER_VALIDATION_ERROR);
         }
         chineseMedicineDO.setItemcreateat(new Date());
+        chineseMedicineDO.setCreater(usernameUtil.getOperateUser());
+        chineseMedicineDO.setUpdater(usernameUtil.getOperateUser());
         return chineseMedicineDOMapper.insertSelective(chineseMedicineDO);
     }
 
@@ -49,6 +56,7 @@ public class ChineseMedicineServiceImpl implements IChineseMedicineService {
         if(result.isHasErrors()){
             throw new BusinessException(result.getErrMsg(), EmBusinessError.PARAMETER_VALIDATION_ERROR);
         }
+        chineseMedicineDO.setUpdater(usernameUtil.getOperateUser());
         return chineseMedicineDOMapper.updateByPrimaryKeySelective(chineseMedicineDO);
     }
 
@@ -66,8 +74,12 @@ public class ChineseMedicineServiceImpl implements IChineseMedicineService {
 
     /*查询所有名老中医*/
     @Override
-    public List<ChineseMedicineDO> selectAllChineseMedicine() {
-        return chineseMedicineDOMapper.selectAllChineseMedicine();
+    public List<ChineseMedicineDO> selectAllChineseMedicine(List<String> chineseMedicineStatus) {
+        List<ChineseMedicineDO> DOList = new ArrayList<>();
+        for (String status : chineseMedicineStatus) {
+            DOList.addAll(chineseMedicineDOMapper.selectByStatus(status));
+        }
+        return DOList;
     }
 
     /*根据关键字搜索名老中医，在名字、类型、职称、主要就诊、科室、医院中搜索
@@ -75,20 +87,25 @@ public class ChineseMedicineServiceImpl implements IChineseMedicineService {
     * */
     @Override
     public List<ChineseMedicineDO> searchChineseMedicine(String keyWord) {
-        if(keyWord.isEmpty()){
+        if(keyWord == "" || keyWord == null){
             throw new BusinessException("关键字不能为空", EmBusinessError.PARAMETER_VALIDATION_ERROR);
         }
         return chineseMedicineDOMapper.searchChineseMedicine(keyWord);
-    }
-
-    /*查询最新增加的五条记录*/
-    @Override
-    public List<ChineseMedicineDO> top5ChineseMedicine() {
-        return chineseMedicineDOMapper.top5ChineseMedicine();
     }
 
     @Override
     public List<ChineseMedicineDO> selectBySpecialtyCode(String specialtyCode) {
         return chineseMedicineDOMapper.selectBySpecialtyCode(specialtyCode);
     }
+
+    @Override
+    public int updateStatus(StatusDto statusDto) {
+        ValidatorResult result = validator.validate(statusDto);
+        if(result.isHasErrors()){
+            throw new BusinessException(result.getErrMsg(), EmBusinessError.PARAMETER_VALIDATION_ERROR);
+        }
+        statusDto.setUpdater(usernameUtil.getOperateUser());
+        return chineseMedicineDOMapper.updateStatusByPrimaryKey(statusDto);
+    }
+
 }

@@ -23,13 +23,40 @@
                     if(ajaxUtil.success(data)){
                         var al = new Array();
                         $.each(data.data,function (k,v) {
-                            al.push({id:v.value,text:v.value});
+                            al.push({id:v.code,text:v.value});
                         });
                         dictList[code] = al;
                     }
                 },false)
             }
             return dictList[code];
+        }
+
+        function getCode(code, name) {
+            if (dictList[code]== null){
+                getDictByCode(code);
+            }
+            let list = dictList[code];
+            for (const t of list){
+                if (name == t.text){
+                    return t.id
+                }
+            }
+            return null;
+        }
+
+        function getName(code, id) {
+            if (dictList[code] == null)
+            {
+                getDictByCode(code);
+            }
+            let list = dictList[code]
+            for (const t of list){
+                if (id == t.id){
+                    return t.text
+                }
+            }
+            return null
         }
 
 
@@ -51,7 +78,27 @@
             //科研项目数据状态
             "projectStatus": "projectStatus",
             //专家评审状态
-            "exmaineStatus": "exmaineStatus"
+            "exmaineStatus": "exmaineStatus",
+            //轮播图位置
+            "dataLocation": "dataLocation",
+            //政策法规的文件类型
+            "dataFileType": "dataFileType",
+            //药材状态
+            "medStatus": "medStatus",
+            //机构类型
+            "orgType": "orgType",
+            //主管市区
+            "areaAdmin":"areaAdmin",
+            //用户角色
+            "userRole":"userRole",
+            //科研项目专家提交状态
+            "expertSubmitStatus":"expertSubmitStatus",
+            //课题专家分配状态
+            "distributionExpert" : "distributionExpert",
+            //数据提交状态
+            "topicStatus": "topicStatus",
+            //审核状态
+            "auditStatus": "auditStatus"
         }
 
         var dictList = {
@@ -63,6 +110,8 @@
             getImportanceType:getImportanceType,
             getDictByCode:getDictByCode,
             DICT_LIST:DICT_LIST,
+            getCode: getCode,
+            getName: getName
 
         }
     })

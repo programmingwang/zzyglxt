@@ -2,7 +2,6 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.zyyglxt.dao.FamPreDOMapper">
   <resultMap id="BaseResultMap" type="com.zyyglxt.dataobject.FamPreDO">
-
     <id column="itemID" jdbcType="INTEGER" property="itemid" />
     <id column="itemCode" jdbcType="CHAR" property="itemcode" />
     <result column="NAME" jdbcType="VARCHAR" property="name" />
@@ -10,6 +9,7 @@
     <result column="PRESCRIPTION" jdbcType="VARCHAR" property="prescription" />
     <result column="VISIT_NUM" jdbcType="INTEGER" property="visitNum" />
     <result column="STATUS" jdbcType="VARCHAR" property="status" />
+    <result column="TYPE" jdbcType="VARCHAR" property="type" />
     <result column="CREATER" jdbcType="VARCHAR" property="creater" />
     <result column="itemCreateAt" jdbcType="TIMESTAMP" property="itemcreateat" />
     <result column="UPDATER" jdbcType="VARCHAR" property="updater" />
@@ -21,7 +21,7 @@
   </resultMap>
   <sql id="Base_Column_List">
 
-    itemID, itemCode, NAME, SOURCE, PRESCRIPTION, VISIT_NUM, STATUS, CREATER, itemCreateAt, 
+    itemID, itemCode, NAME, SOURCE, PRESCRIPTION, VISIT_NUM, STATUS, TYPE, CREATER, itemCreateAt,
     UPDATER, itemUpdateAt
   </sql>
   <sql id="Blob_Column_List">
@@ -47,12 +47,12 @@
 
     insert into tb_culpro_fam_pre (itemID, itemCode, NAME, 
       SOURCE, PRESCRIPTION, VISIT_NUM, 
-      STATUS, CREATER, itemCreateAt, 
+      STATUS, TYPE, CREATER, itemCreateAt,
       UPDATER, itemUpdateAt, CONTENT
       )
     values (#{itemid,jdbcType=INTEGER}, #{itemcode,jdbcType=CHAR}, #{name,jdbcType=VARCHAR}, 
       #{source,jdbcType=VARCHAR}, #{prescription,jdbcType=VARCHAR}, #{visitNum,jdbcType=INTEGER}, 
-      #{status,jdbcType=VARCHAR}, #{creater,jdbcType=VARCHAR}, #{itemcreateat,jdbcType=TIMESTAMP}, 
+      #{status,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, #{creater,jdbcType=VARCHAR}, #{itemcreateat,jdbcType=TIMESTAMP},
       #{updater,jdbcType=VARCHAR}, #{itemupdateat,jdbcType=TIMESTAMP}, #{content,jdbcType=LONGVARCHAR}
       )
   </insert>
@@ -79,6 +79,9 @@
       </if>
       <if test="status != null">
         STATUS,
+      </if>
+      <if test="type != null">
+        TYPE,
       </if>
       <if test="creater != null">
         CREATER,
@@ -118,6 +121,9 @@
       <if test="status != null">
         #{status,jdbcType=VARCHAR},
       </if>
+      <if test="type != null">
+        #{type,jdbcType=VARCHAR},
+      </if>
       <if test="creater != null">
         #{creater,jdbcType=VARCHAR},
       </if>
@@ -154,6 +160,9 @@
       <if test="status != null">
         STATUS = #{status,jdbcType=VARCHAR},
       </if>
+      <if test="type != null">
+        TYPE = #{type,jdbcType=VARCHAR},
+      </if>
       <if test="creater != null">
         CREATER = #{creater,jdbcType=VARCHAR},
       </if>
@@ -181,6 +190,7 @@
       PRESCRIPTION = #{prescription,jdbcType=VARCHAR},
       VISIT_NUM = #{visitNum,jdbcType=INTEGER},
       STATUS = #{status,jdbcType=VARCHAR},
+      TYPE = #{type,jdbcType=VARCHAR},
       CREATER = #{creater,jdbcType=VARCHAR},
       itemCreateAt = #{itemcreateat,jdbcType=TIMESTAMP},
       UPDATER = #{updater,jdbcType=VARCHAR},
@@ -197,6 +207,7 @@
       PRESCRIPTION = #{prescription,jdbcType=VARCHAR},
       VISIT_NUM = #{visitNum,jdbcType=INTEGER},
       STATUS = #{status,jdbcType=VARCHAR},
+      TYPE = #{type,jdbcType=VARCHAR},
       CREATER = #{creater,jdbcType=VARCHAR},
       itemCreateAt = #{itemcreateat,jdbcType=TIMESTAMP},
       UPDATER = #{updater,jdbcType=VARCHAR},
@@ -206,10 +217,14 @@
   </update>
 
   <select id="selectAllFamPre" resultMap="ResultMapWithBLOBs">
-        SELECT *
+        SELECT
+        <include refid="Base_Column_List" />
+        ,
+        <include refid="Blob_Column_List" />
         FROM tb_culpro_fam_pre
-        ORDER BY itemCreateAt DESC
+        WHERE STATUS = #{status}
     </select>
+
 
     <update id="updateVisitNumFamPre" parameterType="com.zyyglxt.dataobject.FamPreDOKey">
       update tb_culpro_fam_pre set VISIT_NUM = VISIT_NUM + 1 where itemID = #{itemid,jdbcType=INTEGER} and itemCode = #{itemcode,jdbcType=CHAR}
@@ -226,8 +241,21 @@
     or PRESCRIPTION LIKE "%"#{source,jdbcType=VARCHAR}"%"
     or VISIT_NUM LIKE "%"#{visitNum,jdbcType=INTEGER}"%"
     or STATUS LIKE "%"#{status,jdbcType=VARCHAR}"%"
+    or TYPE LIKE "%"#{type,jdbcType=VARCHAR}"%"
     or CREATER LIKE "%"#{creater,jdbcType=VARCHAR}"%"
     or UPDATER LIKE "%"#{updater,jdbcType=VARCHAR}"%"
   </select>
+
+  <update id="changeStatusToFamPre">
+
+    update tb_culpro_fam_pre
+    <set>
+      <if test="status != null">
+        STATUS = #{status,jdbcType=VARCHAR}
+      </if>
+    </set>
+    where itemID = #{key.itemid,jdbcType=INTEGER}
+    and itemCode = #{key.itemcode,jdbcType=CHAR}
+  </update>
 
 </mapper>

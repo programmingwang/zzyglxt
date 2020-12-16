@@ -3,6 +3,7 @@ package com.zyyglxt.dataobject;
 import lombok.Data;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.util.Date;
 
 @Data
@@ -12,6 +13,12 @@ public class HospDO extends HospDOKey {
 
     @NotBlank(message = "医院等级不能为空")
     private String hospitalLevel;
+
+    @Size(max = 60)
+    @NotBlank(message = "医院简介不能为空")
+    private String hospitalBriefIntroduce;
+
+    private String hospitalKeySpecialty;
 
     @NotBlank(message = "联系电话不能为空")
     private String hospitalTelephone;
@@ -30,6 +37,8 @@ public class HospDO extends HospDOKey {
     private String hospitalLink;
 
     private String hospitalStatus;
+
+    private String reason;
 
     private String creater;
 

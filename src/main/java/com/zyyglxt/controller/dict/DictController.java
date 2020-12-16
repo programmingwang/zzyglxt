@@ -24,10 +24,9 @@ public class DictController {
     @RequestMapping(value = "/getDictByCode",method = RequestMethod.POST)
     public ResponseData getDictByCode(@ApiParam(value = "字典代码，对应dict表中的dict.DICT_CODE") @RequestParam String code){
         ResponseData responseData = new ResponseData();
-        System.out.println("aaa"+code);
         responseData.setCode(EmBusinessError.success.getErrCode());
         responseData.setMsg(EmBusinessError.success.getErrMsg());
-        responseData.setData(dictService.getDictMapByCode(code));
+        responseData.setData(dictService.getDictListByCode(code));
         return responseData;
     }
 }

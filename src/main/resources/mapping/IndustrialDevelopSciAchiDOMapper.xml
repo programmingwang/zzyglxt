@@ -42,7 +42,7 @@
         SELECT * FROM tb_industrial_develop_sci_achi LIMIT #{start},#{end}
     </select>
     <select id="selectAll" resultType="com.zyyglxt.dataobject.IndustrialDevelopSciAchiDO" resultMap="BaseResultMap">
-        SELECT * FROM tb_industrial_develop_sci_achi
+        SELECT * FROM tb_industrial_develop_sci_achi where ORG_CODE = #{orgCode}
     </select>
     <delete id="deleteByPrimaryKey" parameterType="com.zyyglxt.dataobject.IndustrialDevelopSciAchiDOKey">
         <!--

@@ -1,6 +1,7 @@
 package com.zyyglxt.controller.HealthSciKnowDOController;
 
 import com.zyyglxt.annotation.LogAnnotation;
+import com.zyyglxt.dataobject.HealthCareFamPreDOKey;
 import com.zyyglxt.dataobject.HealthSciKnowDO;
 import com.zyyglxt.dataobject.HealthSciKnowDOKey;
 import com.zyyglxt.error.BusinessException;
@@ -32,7 +33,7 @@ public class HealthSciKnowDOController {
     */
     @RequestMapping(value = "inserthealthsciknowdo",method = RequestMethod.POST)
     @LogAnnotation(appCode ="",logTitle ="科普知识数据的添加",logLevel ="3",creater ="huangwj",updater = "huangwj")
-    public ResponseData insertHealthSciKnowDOMapper(@RequestBody HealthSciKnowDO key) throws BusinessException {
+    public ResponseData insertHealthSciKnowDOMapper(@RequestBody HealthSciKnowDO key)  {
             System.out.println("科普知识名称: " + key.getScienceKnowledgeName());
             healthSciKnowDOService.insertSelective(key);
             return new ResponseData(EmBusinessError.success);
@@ -56,7 +57,7 @@ public class HealthSciKnowDOController {
     */
     @RequestMapping(value ="updatehealthsciknowdo",method = RequestMethod.POST )
     @LogAnnotation(appCode ="",logTitle ="修改科普知识数据",logLevel ="2",creater ="huangwj",updater = "huangwj")
-    public ResponseData updateHealthSciKnowDOMapper(@RequestBody HealthSciKnowDO key) throws BusinessException {
+    public ResponseData updateHealthSciKnowDOMapper(@RequestBody HealthSciKnowDO key)  {
         healthSciKnowDOService.updateByPrimaryKeySelective(key);
         System.out.println("要修改科普知识编号为："+key.getItemid());
         return new ResponseData(EmBusinessError.success);
@@ -72,10 +73,23 @@ public class HealthSciKnowDOController {
     }
     /*查询所有科普知识所有数据*/
     @RequestMapping(value ="selectallhealthsciknowdo",method = RequestMethod.GET)
+    @ResponseBody
     @LogAnnotation(appCode ="",logTitle ="查询所有科普知识数据",logLevel ="1",creater ="huangwj",updater = "huangwj")
-    public ResponseData selectAllHealthSciKnowDOMapper(){
-        List<HealthSciKnowDO> healthSciKnowDOSList = healthSciKnowDOService.selectAllHealthSciKnow();
+    public ResponseData selectAllHealthSciKnowDOMapper(@RequestParam(value = "scienceKnowledgeStatus")List scienceKnowledgeStatus){
+        List<HealthSciKnowDO> healthSciKnowDOSList = healthSciKnowDOService.selectAllHealthSciKnow(scienceKnowledgeStatus);
         return new ResponseData(EmBusinessError.success,healthSciKnowDOSList);
+    }
+
+    /*科普知识数据状态*/
+    @RequestMapping(value = "/changestatustosciknow/{itemID}/{itemCode}" , method = RequestMethod.POST)
+    @ResponseBody
+    @LogAnnotation(logTitle = "修改科普知识数据状态", logLevel = "2")
+    public ResponseData changeStatusToSciKnow(@RequestParam("scienceKnowledgeStatus") String scienceKnowledgeStatus , @PathVariable("itemID") Integer itemID , @PathVariable("itemCode")String itemCode){
+        HealthSciKnowDOKey healthCareFamPreDOKey=new HealthSciKnowDOKey();
+        healthCareFamPreDOKey.setItemid(itemID);
+        healthCareFamPreDOKey.setItemcode(itemCode);
+        healthSciKnowDOService.changeStatusToSciKnow(healthCareFamPreDOKey,scienceKnowledgeStatus);
+        return new ResponseData(EmBusinessError.success);
     }
     /**
      * 增加点击数

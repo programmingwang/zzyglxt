@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zyyglxt.dao.AuditMapper">
+
+    <select id="getAllChiMed" resultMap="com.zyyglxt.dao.IndustrialDevelopChiMedMapper.BaseResultMap">
+        select *
+        from tb_industrial_develop_chi_med
+    </select>
+    <select id="getAllTecOrg" resultMap="com.zyyglxt.dao.IndustrialDevelopTecSerOrgMapper.BaseResultMap">
+        select *
+        from tb_industrial_develop_tec_ser_org;
+    </select>
+    <select id="getAllSchool" resultMap="com.zyyglxt.dao.IndustrialDevelopSchoolMapper.BaseResultMap">
+        select *
+        from tb_industrial_develop_school
+    </select>
+    <select id="getAllHospital" resultMap="com.zyyglxt.dao.HospDOMapper.BaseResultMap">
+        select *
+        from tb_culpro_hosp
+    </select>
+    <select id="getAllChiMedByType" resultMap="com.zyyglxt.dao.IndustrialDevelopChiMedMapper.BaseResultMap">
+        select *
+        from tb_industrial_develop_chi_med
+        where TYPE = #{type}
+    </select>
+    <select id="getAllTecOrgByType" resultMap="com.zyyglxt.dao.IndustrialDevelopTecSerOrgMapper.BaseResultMap">
+        select *
+        from tb_industrial_develop_tec_ser_org
+        where TYPE = #{type}
+    </select>
+    <select id="getDetailChiMed" resultMap="com.zyyglxt.dao.IndustrialDevelopChiMedMapper.BaseResultMap">
+        select *
+        from tb_industrial_develop_chi_med
+        where itemCode = #{itemcode}
+        <if test="itemid != null ">
+            and itemID = #{itemid}
+        </if>
+        limit 1
+    </select>
+    <select id="getDetailTecSerOrg" resultMap="com.zyyglxt.dao.IndustrialDevelopTecSerOrgMapper.BaseResultMap">
+        select *
+        from tb_industrial_develop_tec_ser_org
+        where itemCode = #{itemcode}
+        <if test="itemid != null ">
+            and itemID = #{itemid}
+        </if>
+        limit 1
+    </select>
+    <select id="getDetailSchool" resultMap="com.zyyglxt.dao.IndustrialDevelopSchoolMapper.BaseResultMap">
+        select *
+        from tb_industrial_develop_school
+        where itemCode = #{itemcode}
+        <if test="itemid != null ">
+            and itemID = #{itemid}
+        </if>
+        limit 1
+    </select>
+    <select id="getDetailHospital" resultMap="com.zyyglxt.dao.HospDOMapper.BaseResultMap">
+        select *
+        from tb_culpro_hosp
+        where itemCode = #{itemcode}
+        <if test="itemid != null ">
+            and itemID = #{itemid}
+        </if>
+        limit 1
+    </select>
+    <update id="changeChiMedStatus">
+        update tb_industrial_develop_chi_med
+        set STATUS = #{status},
+        UPDATER = #{updater}
+        <if test="reason != null and reason != ''">
+            , REASON = #{reason}
+        </if>
+        where itemCode = #{itemcode}
+        <if test="itemid != null and itemid != ''">
+            and itemID = #{itemid}
+        </if>
+    </update>
+    <update id="changeTecSerOrgStatus">
+        update tb_industrial_develop_tec_ser_org
+        set STATUS = #{status},
+        UPDATER = #{updater}
+        <if test="reason != null and reason != ''">
+            , REASON = #{reason}
+        </if>
+        where itemCode = #{itemcode}
+        <if test="itemid != null and itemid != ''">
+            and itemID = #{itemid}
+        </if>
+    </update>
+    <update id="changeHospitalStatus">
+        update tb_culpro_hosp
+        set HOSPITAL_STATUS = #{status,jdbcType=VARCHAR},
+        UPDATER = #{updater}
+        where itemCode = #{itemcode}
+        <if test="itemid != null and itemid != ''">
+            and itemID = #{itemid}
+        </if>
+    </update>
+    <update id="changeSchoolStatus">
+        update tb_industrial_develop_school
+        set STATUS = #{status,jdbcType=VARCHAR},
+        UPDATER = #{updater}
+        where itemCode = #{itemcode}
+        <if test="itemid != null and itemid != ''">
+            and itemID = #{itemid}
+        </if>
+    </update>
+
+
+</mapper>

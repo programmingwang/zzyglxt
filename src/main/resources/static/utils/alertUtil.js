@@ -24,13 +24,16 @@
             $.notify({
                 icon: 'glyphicon glyphicon-star',
                 message: message
-            },{
+            },
+                {
                 type:type,
                 placement: {
                     from: "top",
                     align: "center"
                 },
+
                 offset:50,
+
             });
         }
 

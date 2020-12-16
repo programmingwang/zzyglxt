@@ -36,10 +36,11 @@ public enum EmBusinessError implements CommonError {
     OLDPASSWORD_ERROR(2014, "旧密码错误"),
     INPUT_NOT_NULL(2015, "密码输入不能为空，请重新输入"),
     NEWPASSWORD_NOT_EQUAL(2016, "两次输入的新密码不一致，请重新输入"),
+    ORG_NAME_ERROR(2016, "企业名称错误，请检查是否与注册时一致"),
     /* 业务错误 */
-    NO_PERMISSION(10001, "没有权限"),
+    NO_PERMISSION(10002, "没有权限"),
     INTEGRITY_CONSTRAINT_ERROE(40001,"违反数据完整性，请检查是否有其他数据关联"),
-
+    NO_FILE_UPLOAD(1003,"没有文件上传，如需上传请编辑上传！")
 
 
 

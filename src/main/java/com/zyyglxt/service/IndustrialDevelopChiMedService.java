@@ -1,6 +1,7 @@
 package com.zyyglxt.service;
 
 import com.zyyglxt.dataobject.IndustrialDevelopChiMed;
+import com.zyyglxt.dataobject.OrganizationDO;
 import com.zyyglxt.dto.industrialDevelop.IndustrialDevelopChiMedDto;
 import org.apache.ibatis.annotations.Param;
 
@@ -28,4 +29,7 @@ public interface IndustrialDevelopChiMedService {
 
     List<IndustrialDevelopChiMedDto> selectAll( String type);
 
+    IndustrialDevelopChiMedDto selectByOrgCode();
+
+    IndustrialDevelopChiMed selectByOrgNameAndCode(String orgName, String orgCode);
 }

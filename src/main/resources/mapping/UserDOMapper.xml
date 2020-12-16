@@ -14,6 +14,7 @@
     <result column="IDCARD_NO" jdbcType="VARCHAR" property="idcardNo" />
     <result column="EMAIL" jdbcType="VARCHAR" property="email" />
     <result column="STATE" jdbcType="VARCHAR" property="state" />
+    <result column="CONTACTS" jdbcType="VARCHAR" property="contacts" />
     <result column="mobilePhone" jdbcType="VARCHAR" property="mobilephone" />
     <result column="CREATER" jdbcType="VARCHAR" property="creater" />
     <result column="itemCreateAt" jdbcType="TIMESTAMP" property="itemcreateat" />
@@ -27,8 +28,7 @@
   </resultMap>
   <sql id="Base_Column_List">
     itemID, itemCode, ORG_CODE, USERNAME, PASSWORD, SALT, NAME, GENDER, IDCARD_TYPE,
-    IDCARD_NO, EMAIL, STATE, mobilePhone, CREATER, itemCreateAt, UPDATER, itemUpdateAt,
-    CITYID, TYPE
+    IDCARD_NO, EMAIL, STATE, CONTACTS, mobilePhone, CITYID, TYPE
   </sql>
   <sql id="Blob_Column_List">
      PORTRAIT
@@ -138,6 +138,9 @@
       <if test="state != null">
         STATE,
       </if>
+      <if test="contacts != null">
+        CONTACTS,
+      </if>
       <if test="mobilephone != null">
         mobilePhone,
       </if>
@@ -199,6 +202,9 @@
       </if>
       <if test="state != null">
         #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="contacts != null">
+        #{contacts,jdbcType=VARCHAR},
       </if>
       <if test="mobilephone != null">
         #{mobilephone,jdbcType=VARCHAR},

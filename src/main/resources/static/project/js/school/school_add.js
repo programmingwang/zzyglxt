@@ -35,7 +35,7 @@
                 var param = generateParam();
                 param.status = 0;
                 if (uploadImg.isUpdate()){
-                    ajaxUtil.fileAjax(itemcode,uploadImg.getFiles()[0],"undefined","undefined")
+                    ajaxUtil.fileAjax(itemcode,uploadImg.getFiles()[0],sessionStorage.getItem("username"), sessionStorage.getItem("itemcode"))
                 }
 
                 ajaxUtil.myAjax(null,url,param,function (data) {

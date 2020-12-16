@@ -31,7 +31,7 @@
 
             $("#saveBtn").unbind('click').on('click',function () {
                 var param = generateParam();
-                param.status = "——";
+                param.status = "0";
 
                 ajaxUtil.myAjax(null,url,param,function (data) {
                     if(ajaxUtil.success(data)){
@@ -45,7 +45,7 @@
 
             $("#submitBtn").unbind('click').on('click',function () {
                 var param = generateParam();
-                param.status = "——";
+                param.status = "1";
                 ajaxUtil.myAjax(null,url,param,function (data) {
                     if(ajaxUtil.success(data)){
                         orange.redirect(pathUrl)

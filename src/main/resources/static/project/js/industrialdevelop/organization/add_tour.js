@@ -52,9 +52,9 @@
                 param.status = "0";
                 if (uploadImg.isUpdate()){
                     if (isUpdate()){
-                        ajaxUtil.updateFile(itemcode,uploadImg.getFiles()[0],"undefined","undefined");
+                        ajaxUtil.updateFile(itemcode,uploadImg.getFiles()[0],sessionStorage.getItem("username"), sessionStorage.getItem("itemcode"));
                     }else {
-                        ajaxUtil.fileAjax(itemcode,uploadImg.getFiles()[0],"undefined","undefined")
+                        ajaxUtil.fileAjax(itemcode,uploadImg.getFiles()[0],sessionStorage.getItem("username"), sessionStorage.getItem("itemcode"))
                     }
 
                 }
@@ -74,9 +74,9 @@
                 param.status = "1";
                 if (uploadImg.isUpdate()){
                     if (isUpdate()){
-                        ajaxUtil.updateFile(itemcode,uploadImg.getFiles()[0],"undefined","undefined");
+                        ajaxUtil.updateFile(itemcode,uploadImg.getFiles()[0],sessionStorage.getItem("username"), sessionStorage.getItem("itemcode"));
                     }else {
-                        ajaxUtil.fileAjax(itemcode,uploadImg.getFiles()[0],"undefined","undefined")
+                        ajaxUtil.fileAjax(itemcode,uploadImg.getFiles()[0],sessionStorage.getItem("username"), sessionStorage.getItem("itemcode"))
                     }
 
                 }

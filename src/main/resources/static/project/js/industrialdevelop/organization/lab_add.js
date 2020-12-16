@@ -3,6 +3,7 @@
         function ($,ajaxUtil,stringUtil,uploadImg, objectUtil, distpicker, urlUtil) {
 
             var url = "/industrialdevelop/tec-ser-org/selectbyorgcode";
+            var opUrl = "/industrialdevelop/tec-ser-org/";
 
             var pathUrl = "/industrialdevelop/organization/lab";
 
@@ -39,13 +40,13 @@
 
             $("#saveBtn").unbind('click').on('click',function () {
                 var param = generateParam();
-                param.status = "——";
+                param.status = "0";
                 param.type = "lab";
                 if (uploadImg.isUpdate()){
-                    ajaxUtil.fileAjax(itemcode,uploadImg.getFiles()[0],"undefined","undefined")
+                    ajaxUtil.fileAjax(itemcode,uploadImg.getFiles()[0],sessionStorage.getItem("username"), sessionStorage.getItem("itemcode"))
                 }
 
-                ajaxUtil.myAjax(null,url,param,function (data) {
+                ajaxUtil.myAjax(null,opUrl,param,function (data) {
                     if(ajaxUtil.success(data)){
                         orange.redirect(pathUrl);
                     }else {
@@ -57,9 +58,9 @@
 
             $("#submitBtn").unbind('click').on('click',function () {
                 var param = generateParam();
-                param.status = "——";
+                param.status = "1";
                 param.type = "lab";
-                ajaxUtil.myAjax(null,url,param,function (data) {
+                ajaxUtil.myAjax(null,opUrl,param,function (data) {
                     if(ajaxUtil.success(data)){
                         orange.redirect(pathUrl)
                     }else {

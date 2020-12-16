@@ -24,7 +24,7 @@
                 param.contacts = $("#contacts").val();
                 param.phone = $("#phone").val();
                 param.projectIntroduce = $(".w-e-text").html();
-                param.orgCode = "未定义";
+                param.orgCode = sessionStorage.getItem("orgCode");
                 param.itemcode = itemcode;
                 return param;
             }

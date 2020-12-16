@@ -3,9 +3,9 @@
         function ($,ajaxUtil,stringUtil,uploadImg, objectUtil, distpicker, urlUtil) {
 
             var url = "/industrialdevelop/tec-ser-org/selectbyorgcode";
-            var opUrl = "/industrialdevelop/tec-ser-org/";
+            var opUrl = "/industrialdevelop/tec-ser-org";
 
-            var pathUrl = "/industrialdevelop/organization/lab";
+            var pathUrl = "/industrialdevelop/organization/lab_add";
 
             var itemcode = stringUtil.getUUID();
 
@@ -32,7 +32,7 @@
                 param.addressCountry = $("#addressCountry").val();
                 param.address = $("#address").val()
                 param.intruduce = $(".w-e-text").html();
-                param.orgCode = "未定义";
+                param.orgCode = sessionStorage.getItem("orgCode");
                 param.itemcode = itemcode;
                 param.type = orgType;
                 return param;
@@ -43,7 +43,7 @@
                 param.status = "0";
                 param.type = "lab";
                 if (uploadImg.isUpdate()){
-                    ajaxUtil.fileAjax(itemcode,uploadImg.getFiles()[0],sessionStorage.getItem("username"), sessionStorage.getItem("itemcode"))
+                    ajaxUtil.updateFile(itemcode,uploadImg.getFiles()[0],sessionStorage.getItem("username"), sessionStorage.getItem("itemcode"))
                 }
 
                 ajaxUtil.myAjax(null,opUrl,param,function (data) {
@@ -60,6 +60,9 @@
                 var param = generateParam();
                 param.status = "1";
                 param.type = "lab";
+                if (uploadImg.isUpdate()){
+                    ajaxUtil.updateFile(itemcode,uploadImg.getFiles()[0],sessionStorage.getItem("username"), sessionStorage.getItem("itemcode"))
+                }
                 ajaxUtil.myAjax(null,opUrl,param,function (data) {
                     if(ajaxUtil.success(data)){
                         orange.redirect(pathUrl)

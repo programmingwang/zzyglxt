@@ -5,7 +5,9 @@
 
             var url = "/industrialdevelop/tec-ser-org/selectbyorgcode";
 
-            var pathUrl = "/industrialdevelop/style";
+            var opUrl = "/industrialdevelop/tec-ser-org"
+
+            var pathUrl = "/industrialdevelop/organization/tour_add";
 
             var itemcode = stringUtil.getUUID();
 
@@ -38,10 +40,10 @@
                 param.status = "0";
                 param.itemcode = itemcode;
                 if (uploadImg.isUpdate()){
-                    ajaxUtil.fileAjax(itemcode,uploadImg.getFiles()[0],sessionStorage.getItem("username"), sessionStorage.getItem("itemcode"))
+                    ajaxUtil.updateFile(itemcode,uploadImg.getFiles()[0],sessionStorage.getItem("username"), sessionStorage.getItem("itemcode"))
                 }
 
-                ajaxUtil.myAjax(null,url,param,function (data) {
+                ajaxUtil.myAjax(null,opUrl,param,function (data) {
                     if(ajaxUtil.success(data)){
                         orange.redirect(pathUrl);
                     }else {
@@ -55,7 +57,10 @@
                 var param = generateParam();
                 param.status = "1";
                 param.type = "tour"
-                ajaxUtil.myAjax(null,url,param,function (data) {
+                if (uploadImg.isUpdate()){
+                    ajaxUtil.updateFile(itemcode,uploadImg.getFiles()[0],sessionStorage.getItem("username"), sessionStorage.getItem("itemcode"))
+                }
+                ajaxUtil.myAjax(null,opUrl,param,function (data) {
                     if(ajaxUtil.success(data)){
                         orange.redirect(pathUrl)
                     }else {

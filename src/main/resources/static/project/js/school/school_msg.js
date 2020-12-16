@@ -38,7 +38,7 @@
 
             $("#saveBtn").unbind('click').on('click', function () {
                 var param = generateParam();
-                param.status = 1;
+                param.status = "0";
                 if (uploadImg.isUpdate()){
                     if (isUpdate()){
                         ajaxUtil.updateFile(itemcode,uploadImg.getFiles()[0],sessionStorage.getItem("username"), sessionStorage.getItem("itemcode"));
@@ -58,7 +58,7 @@
 
             $("#submitBtn").unbind('click').on('click', function () {
                 var param = generateParam();
-                param.status = 1;
+                param.status = "1";
                 if (uploadImg.isUpdate()){
                     if (isUpdate()){
                         ajaxUtil.updateFile(itemcode,uploadImg.getFiles()[0],sessionStorage.getItem("username"), sessionStorage.getItem("itemcode"));

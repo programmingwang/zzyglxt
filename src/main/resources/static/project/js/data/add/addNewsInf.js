@@ -9,6 +9,48 @@
                 orange.redirect(url);
             });
 
+            $("#btn_save").unbind().on('click',function () {
+                var newsInfEntity;
+                var addUpdateUrl;
+                var operateMessage;
+                if(!isUpdate()){
+                    addUpdateUrl = "/datado/newsInf/insertNewsInf";
+                    operateMessage = "新增新闻信息成功";
+                    newsInfEntity = {
+                        itemcode: stringUtil.getUUID(),
+                        dataTitle : $("#dataTitle").val(),
+                        dataAuthor : $("#dataAuthor").val(),
+                        dataSource : $("#dataSource").val(),
+                        dataFileType : $("#dataFileType").val(),
+                        dataStatus : "0",
+                        dataContent : editor.txt.html()
+                    };
+                }else{
+                    var needData = JSON.parse(localStorage.getItem("rowData"));
+                    addUpdateUrl = "/datado/newsInf/updateNewsInf";
+                    newsInfEntity = {
+                        itemid: needData.itemid,
+                        itemcode: needData.itemcode,
+                        dataTitle : $("#dataTitle").val(),
+                        dataAuthor : $("#dataAuthor").val(),
+                        dataSource : $("#dataSource").val(),
+                        dataFileType : $("#dataFileType").val(),
+                        dataContent : editor.txt.html()
+                    };
+                    operateMessage = "更新新闻信息成功";
+                }
+
+                ajaxUtil.myAjax(null,addUpdateUrl,newsInfEntity,function (data) {
+                    if(ajaxUtil.success(data)){
+                        alertUtil.info(operateMessage);
+                        var url = "/data/dataNewsInf";
+                        orange.redirect(url);
+                    }else {
+                        alertUtil.alert(data.msg);
+                    }
+                },false,true);
+
+            });
 
             $("#submitbtn").unbind().on('click',function () {
                 var newsInfEntity;
@@ -23,6 +65,7 @@
                         dataAuthor : $("#dataAuthor").val(),
                         dataSource : $("#dataSource").val(),
                         dataFileType : $("#dataFileType").val(),
+                        dataStatus : "1",
                         dataContent : editor.txt.html()
                     };
                 }else{
@@ -35,6 +78,7 @@
                         dataAuthor : $("#dataAuthor").val(),
                         dataSource : $("#dataSource").val(),
                         dataFileType : $("#dataFileType").val(),
+                        dataStatus : "1",
                         dataContent : editor.txt.html()
                     };
                     operateMessage = "更新新闻信息成功";

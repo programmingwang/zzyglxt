@@ -24,14 +24,14 @@
                 param.contacts = $("#contacts").val();
                 param.phone = $("#phone").val();
                 param.projectIntroduce = $(".w-e-text").html();
-                param.orgCode = "未定义";
+                param.orgCode = sessionStorage.getItem("orgCode");
                 param.itemcode = itemcode;
                 return param;
             }
 
             $("#saveBtn").unbind('click').on('click',function () {
                 var param = generateParam();
-                param.status = "——";
+                param.status = "0";
 
                 ajaxUtil.myAjax(null,url,param,function (data) {
                     if(ajaxUtil.success(data)){
@@ -45,7 +45,7 @@
 
             $("#submitBtn").unbind('click').on('click',function () {
                 var param = generateParam();
-                param.status = "——";
+                param.status = "1";
                 ajaxUtil.myAjax(null,url,param,function (data) {
                     if(ajaxUtil.success(data)){
                         orange.redirect(pathUrl)

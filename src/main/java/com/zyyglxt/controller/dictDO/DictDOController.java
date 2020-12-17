@@ -53,7 +53,7 @@ public class DictDOController {
     @RequestMapping(value = "/insertDictDO", method = RequestMethod.POST)
     @ResponseBody
     @LogAnnotation(appCode ="",logTitle ="新增数据字典",logLevel ="3",creater ="",updater = "")
-    public ResponseData insertSelective(@RequestBody DictDO record) throws BusinessException {
+    public ResponseData insertSelective(@RequestBody DictDO record)  {
         iDictDOService.insertSelective(record);
         return new ResponseData(EmBusinessError.success);
     }
@@ -64,7 +64,7 @@ public class DictDOController {
     @RequestMapping(value = "/updateDictDO", method = RequestMethod.PUT)
     @ResponseBody
     @LogAnnotation(appCode ="",logTitle ="更新数据字典",logLevel ="2",creater ="",updater = "")
-    public ResponseData updateByPrimaryKeySelective(@RequestBody DictDO record) throws BusinessException {
+    public ResponseData updateByPrimaryKeySelective(@RequestBody DictDO record)  {
         iDictDOService.updateByPrimaryKeySelective(record);
         return new ResponseData(EmBusinessError.success);
     }

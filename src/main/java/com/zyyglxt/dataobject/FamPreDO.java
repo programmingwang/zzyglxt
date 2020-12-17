@@ -1,6 +1,5 @@
 package com.zyyglxt.dataobject;
 
-import lombok.experimental.Accessors;
 
 import javax.validation.constraints.NotBlank;
 import java.util.Date;
@@ -18,7 +17,8 @@ public class FamPreDO extends FamPreDOKey {
 
     private String status;
 
-    @NotBlank(message = "创建者不能为空")
+    private String type;
+
     private String creater;
 
     private Date itemcreateat;
@@ -66,9 +66,16 @@ public class FamPreDO extends FamPreDOKey {
         return status;
     }
 
-
     public void setStatus(String status) {
         this.status = status == null ? null : status.trim();
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type == null ? null : type.trim();
     }
 
     public String getCreater() {

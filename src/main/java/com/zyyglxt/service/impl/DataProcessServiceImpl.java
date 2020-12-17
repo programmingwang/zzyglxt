@@ -60,7 +60,7 @@ public class DataProcessServiceImpl implements IDataProcessService {
         record.setItemcreateat(DateUtils.getDate());
         record.setCreater(usernameUtil.getOperateUser());
         record.setDataType("办事指南");
-        record.setDataStatus("0");
+        record.setUpdater(usernameUtil.getOperateUser());
         if(record.getItemcode() == null){
             record.setItemcode(UUIDUtils.getUUID());
         }

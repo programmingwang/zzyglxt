@@ -40,7 +40,7 @@ public class HealthCareChineseMedicineDOServiceImpl implements HealthCareChinese
   中医药常识添加、删除、修改、查询实现方法
 **/
     @Override
-    public int insert(HealthCareChineseMedicineDO record) throws BusinessException {
+    public int insert(HealthCareChineseMedicineDO record)  {
         ValidatorResult result = validator.validate(record);
         if(result.isHasErrors()){
             throw new BusinessException(result.getErrMsg(), EmBusinessError.PARAMETER_VALIDATION_ERROR);
@@ -64,7 +64,7 @@ public class HealthCareChineseMedicineDOServiceImpl implements HealthCareChinese
     }
     @Transactional
     @Override
-    public int updateByPrimaryKeySelective(HealthCareChineseMedicineDO record) throws BusinessException {
+    public int updateByPrimaryKeySelective(HealthCareChineseMedicineDO record)  {
         ValidatorResult result = validator.validate(record);
         if(result.isHasErrors()){
             throw new BusinessException(result.getErrMsg(), EmBusinessError.PARAMETER_VALIDATION_ERROR);

@@ -126,9 +126,6 @@
                 var str = document.getElementById("taskNameSearch").value.toLowerCase();
                 var allTableData = JSON.parse(localStorage.getItem("2"));
 
-                // console.log(allTableData);
-                console.log(str);
-                // console.log("状态"+addstr);
                 if (str==='请输入'||str===''){
                     str=''
                 }
@@ -137,20 +134,13 @@
                         var textP = allTableData[i][aCol[v].field];
                         var isTimeSlot=false;
                         var makeTime=allTableData[i][aCol[3].field];
-                        //console.log(makeTime)
                         if(makeTime.length>18){
                             makeTime=makeTime.substring(11,19);
                         }
-                        // console.log(makeTime);
-                        // console.log("开始时间："+stratTime);
-                        // console.log("结束时间"+endTime);
-                        // console.log(makeTime>=stratTime);
-                        // console.log(makeTime<=endTime);
                         if (textP == null || textP == undefined || textP == '') {
                             textP = "1";
                         }
                         if(makeTime>=stratTime && makeTime<=endTime){
-                            //console.log('true')
                             isTimeSlot=true;
                         }
                         if(stratTime==endTime){
@@ -188,7 +178,7 @@
             //     var newArry=[];
             //     var str=document.getElementById("taskNameSearch").value.toLowerCase();
             //     var allTableData = $("#table").bootstrapTable("getData");
-            //     console.log(allTableData);
+            //      (allTableData);
             //     for(var i in allTableData){
             //         var chineseCulturalName = allTableData[i][chineseCulturalName];
             //
@@ -205,17 +195,17 @@
             // stratTime=stratTime[0].value+":"+stratTime[1].value+":"+stratTime[2].value;
             // endTime=endTime[0].value+":"+endTime[1].value+":"+endTime[2].value;
             //
-            // console.log(oTab.tHead.rows[0].childNodes[5].innerText);
+            //  (oTab.tHead.rows[0].childNodes[5].innerText);
             // for(var i=0;i<oTab.tBodies[0].rows.length;i++)
             // {
             //     var str1=oTab.tBodies[0].rows[i].innerText.toLowerCase();
             //     var str2=oBt.value.toLowerCase();
-            //     console.log(oTab.tBodies[0].rows);
+            //      (oTab.tBodies[0].rows);
             //     var time=oTab.tBodies[0].rows[i].childNodes[5].innerText;
             //     time=time.substring(11,19)
-            //     console.log(time>stratTime);
-            //     console.log(time<endTime);
-            //     console.log(time)
+            //      (time>stratTime);
+            //      (time<endTime);
+            //      (time)
             //     if (str2==="请输入"){
             //         myTable.free();
             //         myTable = myBootStrapTableInit(tableID,url,param,aCol)
@@ -258,15 +248,24 @@
 
                 //}
 
+
             var aria=this.ariaExpanded;
+            var element=document.getElementById("stratTime");
             $("#closeAndOpen").unbind().on('click',function(){
                 this.innerText="";
                 if (aria==="true"){
                     this.innerText="展开";
                     aria = "false";
+                    if (typeof(element)!= "undefined" || element != null){
+                        document.getElementById("btn_addTask").classList.remove("openBtnP");
+                    }
                 } else {
                     this.innerText="收起";
                     aria = "true";
+                    if (typeof(element)!= "undefined" || element != null){
+                        document.getElementById("btn_addTask").classList.add("openBtnP");
+                    }
+
                 }
             })
         }

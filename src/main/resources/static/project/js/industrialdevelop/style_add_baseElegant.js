@@ -95,7 +95,6 @@
                 if (isUpdate()){
                     var tempdata = JSON.parse(localStorage.getItem("rowData"));
                     var img = tempdata.filePath;
-                    // console.log(tempdata);
                     // var imgName=tempdata.fileName;
                     uploadImg.setImgSrc(img);
                     // $("#upload_file").attr("value",imgName);

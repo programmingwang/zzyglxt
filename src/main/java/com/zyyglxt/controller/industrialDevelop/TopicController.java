@@ -2,20 +2,24 @@ package com.zyyglxt.controller.industrialDevelop;
 
 import com.zyyglxt.annotation.LogAnnotation;
 import com.zyyglxt.dataobject.FileDO;
+import com.zyyglxt.dataobject.IndustrialDevelopExpertRefDO;
 import com.zyyglxt.dataobject.IndustrialDevelopTopicDO;
 import com.zyyglxt.dataobject.IndustrialDevelopTopicDOKey;
 import com.zyyglxt.dto.industrialDevelop.IndustrialDevelopTopicDODto;
 import com.zyyglxt.error.EmBusinessError;
 import com.zyyglxt.response.ResponseData;
+import com.zyyglxt.service.IExmaineService;
 import com.zyyglxt.service.IFileService;
 import com.zyyglxt.service.IIndustrialDevelopTopicService;
 import com.zyyglxt.util.ConvertDOToDTOUtil;
 import io.swagger.annotations.Api;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -33,6 +37,9 @@ public class TopicController {
 
     @Autowired
     IFileService iFileService;
+
+    @Autowired
+    IExmaineService exmaineService;
 
     //增加课题数据
     @RequestMapping(value = "/addTopic", method = RequestMethod.POST)
@@ -151,5 +158,34 @@ public class TopicController {
     public ResponseData maxProjectNO(){
         IndustrialDevelopTopicDO max = developTopicService.maxProjectNO();
         return new ResponseData(EmBusinessError.success,max);
+    }
+
+    @GetMapping("/topicAndExpert")
+    @ResponseBody
+    @LogAnnotation(logTitle = "查看课题数据和分配专家状态")
+    public ResponseData getTopicAndExpert(){
+        List<String> status = Arrays.asList("0","1","2","3","4","5","6","7");
+        List<IndustrialDevelopTopicDO> topicDOList = developTopicService.getTopics(status);
+        List<IndustrialDevelopTopicDODto> DtoList = new ArrayList<>();
+        for (IndustrialDevelopTopicDO DO:topicDOList){
+            IndustrialDevelopTopicDODto Dto = new IndustrialDevelopTopicDODto();
+            BeanUtils.copyProperties(DO,Dto);
+            List<IndustrialDevelopExpertRefDO> expertRefDOList = exmaineService.selectByTopicCode(Dto.getItemcode());
+            if (expertRefDOList.size() == 0 || expertRefDOList == null){
+                Dto.setExpertCode(null);
+            }
+            else{
+                for (IndustrialDevelopExpertRefDO expertRefDO : expertRefDOList){
+                    String expertCode = expertRefDO.getExpertCode();
+                    if (expertCode != null && expertCode != "" && expertCode.length() != 0){
+                        Dto.setExpertCode(expertCode);
+                        break;
+                    }
+                }
+
+            }
+            DtoList.add(Dto);
+        }
+        return new ResponseData(EmBusinessError.success,DtoList);
     }
 }

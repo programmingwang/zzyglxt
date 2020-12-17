@@ -7,6 +7,7 @@
             var orgType = "process";
             var type = isUpdate() ? "put" : "post";
             var status = dictUtil.getDictByCode(dictUtil.DICT_LIST.projectStatus);
+            var itemcode;
             const editor = objectUtil.wangEditorUtil();
 
             uploadImg.init();
@@ -24,17 +25,18 @@
                 param.address = $("#address").val();
                 param.intruduce = editor.txt.html()
                 param.type = orgType;
+                param.itemcode = itemcode;
                 return param;
             }
 
             function updateData(btnType){
                 var operateMessage;
                 var param = generateParam();
-                if ("save".equals(btnType)){
+                if ("save" === btnType){
                     param.status = status[0].id;
                     operateMessage = "保存信息成功";
                 }
-                else if ("submit".equals(btnType)){
+                else if ("submit" === btnType){
                     param.status = status[1].id;
                     operateMessage = "提交信息成功";
                 }
@@ -66,7 +68,6 @@
                 if (isUpdate()) {
                     var needData;
                     ajaxUtil.myAjax(null,url + "/getByOrgCode",null,function (data) {
-                        console.log(data);
                         if(ajaxUtil.success(data)){
                             needData = data.data;
                         }

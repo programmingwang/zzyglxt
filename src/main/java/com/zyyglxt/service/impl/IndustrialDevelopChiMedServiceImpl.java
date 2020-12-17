@@ -100,8 +100,12 @@ public class IndustrialDevelopChiMedServiceImpl implements IndustrialDevelopChiM
     }
 
     @Override
-    public IndustrialDevelopChiMed selectByOrgCode(){
-        return industrialDevelopChiMedMapper.selectByOrgCode(usernameUtil.getOrgCode());
+    public IndustrialDevelopChiMedDto selectByOrgCode(){
+        IndustrialDevelopChiMed chiMed = industrialDevelopChiMedMapper.selectByOrgCode(usernameUtil.getOrgCode());
+        IndustrialDevelopChiMedDto dto = new IndustrialDevelopChiMedDto();
+        BeanUtils.copyProperties(chiMed,dto);
+        dto.setFilePath(fileService.selectFileByDataCode(dto.getItemcode()).getFilePath());
+        return dto;
     }
 
     @Override

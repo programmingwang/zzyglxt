@@ -9,7 +9,7 @@
                 orange.redirect(url);
             });
 
-            $("#btn_insert").unbind().on('click',function () {
+            $("#btn_save").unbind().on('click',function () {
                 var careFamEntity;
                 var addUpdateUrl;
                 var operateMessage;
@@ -21,6 +21,7 @@
                         name : $("#name").val(),
                         source : $("#source").val(),
                         author : $("#author").val(),
+                        status : '0',
                         content : editor.txt.html()
                     };
                 }else{
@@ -49,6 +50,50 @@
                 },false,true);
 
             });
+
+            $("#btn_insert").unbind().on('click',function () {
+                var careFamEntity;
+                var addUpdateUrl;
+                var operateMessage;
+                if(!isUpdate()){
+                    addUpdateUrl = "inserthealthcarefampredo";
+                    operateMessage = "新增国医话健康成功";
+                    careFamEntity = {
+                        itemcode: stringUtil.getUUID(),
+                        name : $("#name").val(),
+                        source : $("#source").val(),
+                        author : $("#author").val(),
+                        status : '1',
+                        content : editor.txt.html()
+                    };
+                }else{
+                    var needData = JSON.parse(localStorage.getItem("rowData"));
+                    addUpdateUrl = "updatehealthcarefampredo";
+                    careFamEntity = {
+                        itemid: needData.itemid,
+                        itemcode: needData.itemcode,
+                        name : $("#name").val(),
+                        source : $("#source").val(),
+                        author : $("#author").val(),
+                        status : '1',
+                        content : editor.txt.html()
+                    }
+                    operateMessage = "更新国医话健康成功";
+                }
+                fileUtil.handleFile(isUpdate(), careFamEntity.itemcode, $("#upload_file")[0].files[0]);
+
+                ajaxUtil.myAjax(null,addUpdateUrl,careFamEntity,function (data) {
+                    if(ajaxUtil.success(data)){
+                        alertUtil.info(operateMessage);
+                        var url = "/healthCare/healthcarefamPre";
+                        orange.redirect(url);
+                    }else {
+                        alertUtil.alert(data.msg);
+                    }
+                },false,true);
+
+            });
+
             (function init() {
                 if (isUpdate()){
                     var tempdata = JSON.parse(localStorage.getItem("rowData"));

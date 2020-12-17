@@ -261,7 +261,6 @@
 
             var myTable = bootstrapTableUtil.myBootStrapTableInit("table", url, aParam, aCol);
 
-            console.log(myTable);
 
             function refreshTable() {
 

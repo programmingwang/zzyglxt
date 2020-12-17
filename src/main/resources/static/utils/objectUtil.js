@@ -67,10 +67,10 @@
 
             $(element).on("input propertychange", function() {
                 var textNUm=editor.txt.text()
-                if(textNUm.length>=100000){
-                    str=textNUm.substring(0,10000)+"";  //使用字符串截取，获取前30个字符，多余的字符使用“......”代替
+                if(textNUm.length>=1000000){
+                    str=textNUm.substring(0,1000000)+"";  //使用字符串截取，获取前30个字符，多余的字符使用“......”代替
                     editor.txt.html(str);
-                    alert("字数不能超过10000");                  //将替换的值赋值给当前对象
+                    alert("字数不能超过50000");                  //将替换的值赋值给当前对象
                 }
             });
 

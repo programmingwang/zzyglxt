@@ -40,6 +40,7 @@ public class IndustrialDevelopChiMedServiceImpl implements IndustrialDevelopChiM
     private UsernameUtil usernameUtil;
 
 
+
     @Autowired
     ValidatorImpl validator;
 
@@ -63,6 +64,11 @@ public class IndustrialDevelopChiMedServiceImpl implements IndustrialDevelopChiM
         if (organizationDO == null){
             return -1;
         } else {
+            if (record.getAddressCity() != null){
+                OrganizationDO updated = new OrganizationDO();
+                updated.setOrgLocate(record.getAddressCity());
+                organizationDOMapper.updateByOrgCode(updated,organizationDO.getOrgCode());
+            }
             record.setOrgCode(organizationDO.getOrgCode());
             return industrialDevelopChiMedMapper.insertSelective(record);
         }
@@ -75,11 +81,21 @@ public class IndustrialDevelopChiMedServiceImpl implements IndustrialDevelopChiM
 
     @Override
     public int updateByPrimaryKeySelective(IndustrialDevelopChiMed record) {
+        if (record.getAddressCity() != null){
+            OrganizationDO updated = new OrganizationDO();
+            updated.setOrgLocate(record.getAddressCity());
+            organizationDOMapper.updateByOrgCode(updated,usernameUtil.getOrgCode());
+        }
         return industrialDevelopChiMedMapper.updateByPrimaryKeySelective(record);
     }
 
     @Override
     public int updateByPrimaryKey(IndustrialDevelopChiMed record) {
+        if (record.getAddressCity() != null){
+            OrganizationDO updated = new OrganizationDO();
+            updated.setOrgLocate(record.getAddressCity());
+            organizationDOMapper.updateByOrgCode(updated,record.getOrgCode());
+        }
         return industrialDevelopChiMedMapper.updateByPrimaryKey(record);
     }
 

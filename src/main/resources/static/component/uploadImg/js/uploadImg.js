@@ -59,8 +59,8 @@ var base64Code = "";
                 var limit = localStorage.getItem('limit');
                 updated = true;
                 var imgSize = this.files[0].size;
-                if (imgSize > 5120 * 5120 * 1) { //1M
-                    return alert("上传图片不能超过1M");
+                if (imgSize > 5120 * 5120 * 1) { //5M
+                    return alert("上传图片不能超过5M");
                 }
                 ;
                 if (this.files[0].type != 'image/png' && this.files[0].type != 'image/jpeg' && this.files[0].type != 'image/gif') {

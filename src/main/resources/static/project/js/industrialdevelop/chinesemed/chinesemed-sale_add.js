@@ -1,18 +1,16 @@
 
 (function () {
-
-    require(['jquery','ajaxUtil','stringUtil','uploadImg','objectUtil',"distpicker","urlUtil"],
-        function ($,ajaxUtil,stringUtil,uploadImg, objectUtil,distpicker,urlUtil) {
-
+    require(['jquery','ajaxUtil','stringUtil','uploadImg','objectUtil',"distpicker","urlUtil","fileUtil"],
+        function ($,ajaxUtil,stringUtil,uploadImg, objectUtil,distpicker,urlUtil,fileUtil) {
             var url = "/industrialdevelop/chi-med";
 
-            var pathUrl = "/industrialdevelop/chinesemed/chinesemed-sale";
+            var pathUrl = "/industrialdevelop/chinesemed/chinesemed-sale_add";
 
             var orgType = 'sale'
 
             var itemcode = stringUtil.getUUID();
 
-            // var type = isUpdate() ? "put":"post";
+            var type = isUpdate() ? "put":"post";
 
             uploadImg.init();
 
@@ -35,41 +33,43 @@
                 param.addressCountry = $("#addressCountry").val()
                 param.address = $("#address").val()
                 param.intruduce = $(".w-e-text").html();
+                param.orgCode = sessionStorage.getItem("orgCode");
                 param.type = orgType
+                param.itemcode = itemcode;
                 return param;
             }
 
             $("#saveBtn").unbind('click').on('click',function () {
                 var param = generateParam();
                 param.status = "0";
-                param.itemcode = itemcode;
+
                 if (uploadImg.isUpdate()){
-                    ajaxUtil.fileAjax(itemcode,uploadImg.getFiles()[0],"undefined","undefined")
+                    fileUtil.handleFile(isUpdate(), param.itemcode, uploadImg.getFiles()[0]);
                 }
 
                 ajaxUtil.myAjax(null,url,param,function (data) {
-
                     if(ajaxUtil.success(data)){
                         orange.redirect(pathUrl);
-
                     }else {
                         alert(data.msg);
                     }
-                },true,"123","PUT");
+                },true,"123",type);
                 return false;
             });
 
             $("#submitBtn").unbind('click').on('click',function () {
                 var param = generateParam();
                 param.status = "1";
+                if (uploadImg.isUpdate()){
+                    fileUtil.handleFile(isUpdate(), param.itemcode, uploadImg.getFiles()[0]);
+                }
                 ajaxUtil.myAjax(null,url,param,function (data) {
                     if(ajaxUtil.success(data)){
                         orange.redirect(pathUrl)
-
                     }else {
                         alert(data.msg)
                     }
-                },true,"123","POST");
+                },true,"123",type);
                 return false;
             });
 
@@ -81,7 +81,6 @@
                             needData = data.data;
                         }
                     },false,true,"get");
-                    console.log(needData);
                     $("#name").val(needData.name);
                     $("#salesCategory").val(needData.salesCategory);
                     $("#sellingDrugs").val(needData.sellingDrugs);
@@ -109,7 +108,7 @@
             function isUpdate() {
                 return (urlUtil.getFullUrl().indexOf("/main#") != -1 || urlUtil.getFullUrl().indexOf("/main?") != -1)
             }
-        })
+    })
 })();
 
 

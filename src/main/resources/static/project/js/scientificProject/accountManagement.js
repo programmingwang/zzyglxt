@@ -26,17 +26,17 @@
                         modalClass : "modal-lg",
                         confirmButtonClass : "btn-danger",
                         modalConfirmFun:function () {
+                            var isSuccess = false;
                             var chineseMedicineKey = {
-                                itemid : row.itemid,
-                                itemcode : row.itemcode
+                                'username':row.username
                             };
-                            ajaxUtil.myAjax(null,"/user/deletebykey",chineseMedicineKey,function (data) {
+                            ajaxUtil.myAjax(null,"/user/deletuser",chineseMedicineKey,function (data) {
                                 if(ajaxUtil.success(data)){
                                     alertUtil.info("删除账号信息成功");
                                     isSuccess = true;
                                     refreshTable();
                                 }
-                            },false,true,"delete");
+                            },false,'123',"post");
                             return isSuccess;
                         }
                     };
@@ -81,7 +81,7 @@
                                 "itemid": row.itemid,
                                 "itemcode": row.itemcode,
                             };
-                            ajaxUtil.myAjax(null,"/industrialdevelop/expert/resetPassword/"+row.itemid+"/"+row.itemcode,submitStatus,function (data) {
+                            ajaxUtil.myAjax(null,"/user/reset",submitStatus,function (data) {
                                 if(ajaxUtil.success(data)){
                                     if(data.code == 88888){
                                         alertUtil.info("重置密码成功");
@@ -115,12 +115,10 @@
                         var username = $("#username").val();
                         var name = $("#name").val();
                         var roleName = dictUtil.getName(dictUtil.DICT_LIST.userRole,$("#roleName").val());
-                        var contacts = dictUtil.getName(dictUtil.DICT_LIST.userRole,$("#contacts").val());
+                        var contacts = $("#contacts").val();
                         var mobilephone = $("#mobilephone").val();
-                        var cityid = $("#cityid").val();
+                        var cityid = dictUtil.getName(dictUtil.DICT_LIST.areaAdmin,$("#cityid").val());
 
-                        console.log(roleName);
-                        console.log(cityid);
 
                         var submitStatus = {
                             "username": username,
@@ -130,7 +128,7 @@
                             "mobilephone": mobilephone,
                             "cityid": cityid
                         };
-                        if ((/^1[3456789]\d{9}$/.test(phone))){
+                        if ((/^1[3456789]\d{9}$/.test(mobilephone))){
                             ajaxUtil.myAjax(null,"/user/adduser",submitStatus,function (data) {
                                 if(ajaxUtil.success(data)){
                                     if(data.code == 88888){
@@ -141,6 +139,8 @@
                                         alertUtil.error(data.msg);
                                     }
 
+                                } else {
+                                    alertUtil.error(data.msg)
                                 }
                             },false,true);
                         } else {
@@ -182,10 +182,6 @@
             }
 
             bootstrapTableUtil.globalSearch("table",url,aParam, aCol);
-            var allTableData = $("#table").bootstrapTable("getData");
-            //console.log(allTableData);
-            localStorage.setItem('2',JSON.stringify(allTableData))
-            obj2=JSON.parse(localStorage.getItem("2"));
-            //console.log(obj2);
+
         })
 })();

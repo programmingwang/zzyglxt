@@ -6,8 +6,7 @@
             //请求后台url
             var url = "/industrialdevelop/achievement";
 
-            console.log(sessionStorage.getItem("orgCode"))
-            
+
             var getUrl = url + "/" + sessionStorage.getItem("orgCode");
             //请求页面url
             var pathUrl = url;
@@ -171,11 +170,7 @@
             }
 
             bootstrapTableUtil.globalSearch("table",getUrl,aParam, aCol);
-            var allTableData = $("#table").bootstrapTable("getData");
-            //console.log(allTableData);
-            localStorage.setItem('2',JSON.stringify(allTableData))
-            obj2=JSON.parse(localStorage.getItem("2"));
-            //console.log(obj2);
+
 
 
         })

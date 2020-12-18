@@ -13,6 +13,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -109,25 +110,14 @@ public class DataNewsInfController {
     @RequestMapping(value = "changeNewsStatus/{itemID}/{itemCode}", method = RequestMethod.POST)
     @ResponseBody
     @LogAnnotation(appCode ="",logTitle ="修改展示状态",logLevel ="2",creater ="",updater = "")
-    public ResponseData changeStatus(@RequestParam("dataStatus") String dataStatus, @PathVariable("itemID") Integer itemID, @PathVariable("itemCode")String itemCode){
+    public ResponseData changeStatus(@RequestParam("dataDelayedRelease") String dataDelayedRelease, @RequestParam("dataStatus") String dataStatus, @PathVariable("itemID") Integer itemID, @PathVariable("itemCode")String itemCode){
         DataDOKey dataDOKey = new DataDOKey();
         dataDOKey.setItemid(itemID);
         dataDOKey.setItemcode(itemCode);
-        dataDOService.changeStatus(dataDOKey,dataStatus);
+        dataDOService.changeStatus(dataDOKey,dataDelayedRelease,dataStatus);
         return new ResponseData(EmBusinessError.success);
     }
 
-    /**
-     * 关键字搜索
-     * @param keyWord
-     * @return
-     */
-    @GetMapping("/searchDataDO/{keyWord}")
-    @ResponseBody
-    public ResponseData searchDataDO(@PathVariable("keyWord") String keyWord) {
-        List<DataDO> dataDOList = dataDOService.searchDataDO(keyWord);
-        return new ResponseData(EmBusinessError.success,dataDOList);
-    }
 
     private List<DataDto> DoToDto(List<DataDO> DOList){
         List<DataDto> DtoList = new ArrayList<>();

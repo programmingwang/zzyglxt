@@ -95,6 +95,10 @@
             "expertSubmitStatus":"expertSubmitStatus",
             //课题专家分配状态
             "distributionExpert" : "distributionExpert",
+            //数据提交状态
+            "topicStatus": "topicStatus",
+            //审核状态
+            "auditStatus": "auditStatus"
         }
 
         var dictList = {

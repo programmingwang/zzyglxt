@@ -4,7 +4,7 @@
 
             var url = "/industrialdevelop/chi-med";
 
-            var pathUrl = "/industrialdevelop/chinesemed/chinesemed-produce";
+            var pathUrl = "/industrialdevelop/chinesemed/chinesemed-produce_add";
 
             var orgType = "produce";
 
@@ -33,15 +33,15 @@
                 param.address = $("#address").val()
                 param.intruduce = $(".w-e-text").html();
                 param.type = orgType;
+                param.itemcode = itemcode;
                 return param;
             }
 
             $("#saveBtn").unbind('click').on('click',function () {
                 var param = generateParam();
                 param.status = "0";
-                param.itemcode = itemcode;
                 if (uploadImg.isUpdate()){
-                    ajaxUtil.fileAjax(itemcode,uploadImg.getFiles()[0],"undefined","undefined")
+                    ajaxUtil.fileAjax(itemcode,uploadImg.getFiles()[0],sessionStorage.getItem("username"), sessionStorage.getItem("itemcode"))
                 }
 
                 ajaxUtil.myAjax(null,url,param,function (data) {
@@ -57,6 +57,9 @@
             $("#submitBtn").unbind('click').on('click',function () {
                 var param = generateParam();
                 param.status = "1";
+                if (uploadImg.isUpdate()){
+                    ajaxUtil.fileAjax(itemcode,uploadImg.getFiles()[0],sessionStorage.getItem("username"), sessionStorage.getItem("itemcode"))
+                }
                 ajaxUtil.myAjax(null,url,param,function (data) {
                     if(ajaxUtil.success(data)){
                         orange.redirect(pathUrl)

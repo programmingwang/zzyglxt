@@ -9,7 +9,7 @@
             /*下拉框值*/
             var sm = dictUtil.getDictByCode(dictUtil.DICT_LIST.subjectMajor);
             $("#disciplineName").selectUtil(sm);
-            $('#disciplineName').change(() => {
+            $('#disciplineName').change(function () {
                 $('#disciplineCode').val($('#disciplineName').val())
             });
 
@@ -30,27 +30,37 @@
                 var TopicEntity;
                 var requestUrl;
                 var operateMessage;
-                var postalAddress = $("#addressPro").val()+" "+$("#addressCity").val()+" "+$("#addressCountry").val()+" "+$("#address").val();
+                var postalAddress = $("#addressPro").val()+","+$("#addressCity").val()+","+$("#addressCountry").val()+","+$("#address").val();
                 if (!isUpdate()){
+                    for (var i=0;i<sm.length;i++){
+                        if (sm[i].id == $("#disciplineName").val()){
+                            var disciplineNameText = sm[i].text;
+                        }
+                    }
                     requestUrl = "/industrialdevelop/addTopic";
                     operateMessage = "保存课题项目成功";
                     TopicEntity = {
                         itemcode: stringUtil.getUUID(),
                         projectName : $("#projectName").val(),
                         disciplineCode : $("#disciplineCode").val(),
-                        disciplineName : $("#disciplineName").val(),
+                        disciplineName : disciplineNameText,
                         applicant : $("#applicant").val(),
                         contactCode : $("#contactCode").val(),
                         company : $("#company").val(),
                         postalAddress : postalAddress,
                         postalCode : $("#postalCode").val(),
                         email : $("#email").val(),
-                        userCode : sessionStorage.getItem("usercode"),
+                        userCode : sessionStorage.getItem("itemcode"),
                         status : "0",
                         examineStatus : "0",
                     };
                 }
                 else {
+                    for (var i=0;i<sm.length;i++){
+                        if (sm[i].id == $("#disciplineName").val()){
+                            var disciplineNameText = sm[i].text;
+                        }
+                    }
                     var needData = JSON.parse(localStorage.getItem("rowData"));
                     requestUrl = "/industrialdevelop/updTopic";
                     TopicEntity = {
@@ -58,7 +68,7 @@
                         itemcode: needData.itemcode,
                         projectName : $("#projectName").val(),
                         disciplineCode : $("#disciplineCode").val(),
-                        disciplineName : $("#disciplineName").val(),
+                        disciplineName : disciplineNameText,
                         applicant : $("#applicant").val(),
                         contactCode : $("#contactCode").val(),
                         company : $("#company").val(),
@@ -87,27 +97,37 @@
                 var TopicEntity;
                 var requestUrl;
                 var operateMessage;
-                var postalAddress = $("#addressPro").val()+" "+$("#addressCity").val()+" "+$("#addressCountry").val()+" "+$("#address").val();
+                var postalAddress = $("#addressPro").val()+","+$("#addressCity").val()+","+$("#addressCountry").val()+","+$("#address").val();
                 if (!isUpdate()){
+                    for (var i=0;i<sm.length;i++){
+                        if (sm[i].id == $("#disciplineName").val()){
+                            var disciplineNameText = sm[i].text;
+                        }
+                    }
                     requestUrl = "/industrialdevelop/addTopic";
                     operateMessage = "新增课题项目成功";
                     TopicEntity = {
                         itemcode: stringUtil.getUUID(),
                         projectName : $("#projectName").val(),
                         disciplineCode : $("#disciplineCode").val(),
-                        disciplineName : $("#disciplineName").val(),
+                        disciplineName : disciplineNameText,
                         applicant : $("#applicant").val(),
                         contactCode : $("#contactCode").val(),
                         company : $("#company").val(),
                         postalAddress : postalAddress,
                         postalCode : $("#postalCode").val(),
                         email : $("#email").val(),
-                        userCode : sessionStorage.getItem("usercode"),
+                        userCode : sessionStorage.getItem("itemcode"),
                         status : "0",
-                        examineStatus : "0",
+                        examineStatus : "1",
                     };
                 }
                 else {
+                    for (var i=0;i<sm.length;i++){
+                        if (sm[i].id == $("#disciplineName").val()){
+                            var disciplineNameText = sm[i].text;
+                        }
+                    }
                     var needData = JSON.parse(localStorage.getItem("rowData"));
                     requestUrl = "/industrialdevelop/updTopic";
                     TopicEntity = {
@@ -115,7 +135,7 @@
                         itemcode: needData.itemcode,
                         projectName : $("#projectName").val(),
                         disciplineCode : $("#disciplineCode").val(),
-                        disciplineName : $("#disciplineName").val(),
+                        disciplineName : disciplineNameText,
                         applicant : $("#applicant").val(),
                         contactCode : $("#contactCode").val(),
                         company : $("#company").val(),
@@ -144,7 +164,7 @@
                 if (isUpdate()){
                     var tempdata = JSON.parse(localStorage.getItem("rowData"));
                     var postalAddress = tempdata.postalAddress;
-                    var postalAddressArry = postalAddress.split(" ");
+                    var postalAddressArry = postalAddress.split(",");
                     $("#distpicker").distpicker({
                         province: postalAddressArry[0],
                         city: postalAddressArry[1],
@@ -153,7 +173,7 @@
                     $("#address").val(postalAddressArry[3]);
                     $("#projectName").val(tempdata.projectName);
                     $("#disciplineCode").val(tempdata.disciplineCode);
-                    $("#disciplineName").val(tempdata.disciplineName);
+                    $("#disciplineName").val(tempdata.disciplineCode);
                     $("#applicant").val(tempdata.applicant);
                     $("#contactCode").val(tempdata.contactCode);
                     $("#company").val(tempdata.company);
@@ -162,24 +182,47 @@
                     var file = tempdata.filePath;
                     uploadImg.setImgSrc(file);
                 }else{
+                    $('#savebtn').attr('style', "display:block;");
                     $("#distpicker").distpicker();
-                    var userCode = sessionStorage.getItem("usercode");
-                    ajaxUtil.myAjax(null,"/industrialdevelop/getStatus?userCode="+userCode,null,function (data) {
-                        //console.log(data.data.length);
-                        var sum=0;
-                        for(var i=0;i<data.data.length;i++){
-                            if (data.data[i].status == "——" || data.data[i].status == "进行中"){
-                                sum +=1;
+                    var date = {
+                        isDuringDate: function (beginDateStr, endDateStr) {
+                            var curDate = new Date(),
+                                beginDate = new Date(beginDateStr),
+                                endDate = new Date(endDateStr);
+                            if (curDate >= beginDate && curDate <= endDate) {
+                                var userCode = sessionStorage.getItem("itemcode");
+                                ajaxUtil.myAjax(null,"/industrialdevelop/getStatus?userCode="+userCode,null,function (data) {
+                                    var sum=0;
+                                    for(var i=0;i<data.data.length;i++){
+                                        if (data.data[i].status == "0" || data.data[i].status == "1"){
+                                            sum +=1;
+                                        }
+                                    }
+                                    if (sum>=2){
+                                        operateMessage = "当前有两个项目未结题，无法申报新项目";
+                                        alertUtil.info(operateMessage);
+                                        var url = "/scientificProject/topicManagement";
+                                        orange.redirect(url);
+                                    }
+                                },false,"","get");
+
+                            }else {
+                                operateMessage = "系统已关闭项目申报";
+                                alertUtil.info(operateMessage);
+                                var url = "/scientificProject/topicManagement";
+                                orange.redirect(url);
                             }
                         }
-                        if (sum>2){
-                            operateMessage = "当前有两个项目未结题，无法申报新项目";
-                            alertUtil.info(operateMessage);
-                            var url = "/scientificProject/topicManagement";
-                            orange.redirect(url);
+                    }
+                    ajaxUtil.myAjax(null,"/industrialdevelop",null,function (data) {
+                        for (var i=0;i<data.data.length;i++){
+                            if (data.data[i].isimp == "1"){
+                                starttime = data.data[i].startTime;
+                                endtime = data.data[i].endTime;
+                            }
                         }
                     },false,"","get");
-
+                    date.isDuringDate(starttime, endtime);
                 }
             }());
 

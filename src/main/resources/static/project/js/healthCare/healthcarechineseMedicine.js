@@ -85,9 +85,9 @@
                                 "chineseMedicineStatus": ""
                             };
                             if(sessionStorage.getItem("rolename") == "文化宣传处长" || sessionStorage.getItem("rolename") == "政务资源处长"){
-                                submitStatus.chineseMedicineStatus = webStatus[3].id;
+                                submitStatus.chineseCulturalStatus = webStatus[3].id;
                             }else{
-                                submitStatus.chineseMedicineStatus = webStatus[4].id;
+                                submitStatus.chineseCulturalStatus = webStatus[4].id;
                             }
                             ajaxUtil.myAjax(null,"changestatustomedicine/"+row.itemid+"/"+row.itemcode,submitStatus,function (data) {
                                 if(ajaxUtil.success(data)){
@@ -234,8 +234,8 @@
                         {field: 'chineseMedicineName', title: '中医药名称'},
                         {field: 'chineseMedicineAlias', title: '别名'},
                         {field:'chineseMedicineType',title:'功效分类',formatter:function (row) {
-                                return '<p>'+p2[row].text+'</p>';
-                            }},
+                        return '<p>'+p2[row].text+'</p>';
+                        }},
                         {field: 'filePath', title: '药材图片', formatter:function (value, row, index) {
                                 if(value == "已经损坏了"){
                                     return '<p>'+value+'</p>';
@@ -256,9 +256,6 @@
 
             bootstrapTableUtil.globalSearch("table",url,aParam, aCol);
 
-            var allTableData = $("#table").bootstrapTable("getData");
-            //console.log(allTableData);
-            localStorage.setItem('2',JSON.stringify(allTableData))
-            obj2=JSON.parse(localStorage.getItem("2"));
+
         })
 })();

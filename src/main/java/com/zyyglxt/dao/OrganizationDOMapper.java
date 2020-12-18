@@ -1,4 +1,5 @@
 package com.zyyglxt.dao;
+import org.apache.ibatis.annotations.Param;
 
 import com.zyyglxt.dataobject.OrganizationDO;
 import org.springframework.stereotype.Component;
@@ -25,6 +26,8 @@ public interface OrganizationDOMapper {
     OrganizationDO selectByOrgName(String orgName);
 
     int updateByPrimaryKeySelective(OrganizationDO record);
+
+    int updateByOrgCode(@Param("updated")OrganizationDO updated,@Param("orgCode")String orgCode);
 
     int updateByPrimaryKey(OrganizationDO record);
 

@@ -56,98 +56,101 @@
     </style>
 </head>
 <body>
-<div class="row">
-    <div class="col-12">
-        <form>
+<div id="fir_body">
+    <div class="row">
+        <div class="col-12">
+            <form>
 
-            <div class="aa">科研计划项目申请书</div>
+                <div class="aa">科研计划项目申请书</div>
 
-            <div class="form-group row">
-                <label class="col-sm-2 col-form-label">项目名称：</label>
-                <div class="col-sm-8">
-                    <input id="projectName" type="text" class="form-control" placeholder="请输入项目名称">
-                </div>
-            </div>
-
-            <div class="form-group row">
-                <label class="col-sm-2 col-form-label">学科专业代码：</label>
-                <div class="col-sm-3">
-                    <input id="disciplineCode" class="form-control" value="360" readonly="readonly"></input>
-                </div>
-
-                <label class="col-sm-2 col-form-label">学科专业名称：</label>
-                <div class="col-sm-3">
-                    <input id="disciplineName" class="form-control"></input>
-                </div>
-            </div>
-
-            <div class="form-group row">
-                <label class="col-sm-2 col-form-label">申请人：</label>
-                <div class="col-sm-3">
-                    <input id="applicant" type="text" class="form-control" placeholder="请输入" maxlength="30">
-                </div>
-
-                <label class="col-sm-2 col-form-label">联系电话：</label>
-                <div class="col-sm-3">
-                    <input id="contactCode" type="text" class="form-control" placeholder="请输入" maxlength="30">
-                </div>
-            </div>
-
-            <div class="form-group row">
-                <label class="col-sm-2 col-form-label">所在单位：</label>
-                <div class="col-sm-8">
-                    <input id="company" type="text" class="form-control" placeholder="请输入">
-                </div>
-            </div>
-
-            <div class="form-group row">
-                <label class="col-sm-2 col-form-label">通讯地址：</label>
-                <div class="col-sm-8">
-                    <input id="postalAddress" type="text" class="form-control" placeholder="请输入">
-                </div>
-            </div>
-
-            <div class="form-group row">
-                <label class="col-sm-2 col-form-label">邮政编码：</label>
-                <div class="col-sm-3">
-                    <input id="postalCode" type="text" class="form-control" placeholder="请输入" maxlength="30">
-                </div>
-
-                <label class="col-sm-2 col-form-label">电子信箱：</label>
-                <div class="col-sm-3">
-                    <input id="email" type="text" class="form-control" placeholder="请输入" maxlength="30">
-                </div>
-            </div>
-
-            <!--附件div-->
-            <div class="form-group row">
-                <label for="exampleFormControlFile1" class="col-sm-2 col-form-label">附件：</label>
-                <div class="upload-wrap anticon" nv-file-drop="" uploader="uploader" style="margin-top: 9px;">
-                    <a id="upload_file" href=""></a>
-                </div>
-
-            </div>
-
-            <div class="form-group row">
-                <div class="col-lg-4 col-md-4" ></div>
-                <div class=" col-lg-4 row" >
-                    <div class="col">
-                        <button id="cancelbtn" type="button" class="btn btn-light col">取消</button>
-                    </div>
-                    <div class="col">
-                        <button id="pass" type="button" class="btn btn-danger col">通过</button>
-                    </div>
-                    <div class="col">
-                        <button id="fail" type="button" class="btn btn-danger col">不通过</button>
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">项目名称：</label>
+                    <div class="col-sm-8">
+                        <input id="projectName" type="text" class="form-control" placeholder="请输入项目名称">
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-4" ></div>
-            </div>
-        </form>
+
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">学科专业代码：</label>
+                    <div class="col-sm-3">
+                        <input id="disciplineCode" class="form-control" value="360" readonly="readonly"></input>
+                    </div>
+
+                    <label class="col-sm-2 col-form-label">学科专业名称：</label>
+                    <div class="col-sm-3">
+                        <input id="disciplineName" class="form-control"></input>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">申请人：</label>
+                    <div class="col-sm-3">
+                        <input id="applicant" type="text" class="form-control" placeholder="请输入" maxlength="30">
+                    </div>
+
+                    <label class="col-sm-2 col-form-label">联系电话：</label>
+                    <div class="col-sm-3">
+                        <input id="contactCode" type="text" class="form-control" placeholder="请输入" maxlength="30">
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">所在单位：</label>
+                    <div class="col-sm-8">
+                        <input id="company" type="text" class="form-control" placeholder="请输入">
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">通讯地址：</label>
+                    <div class="col-sm-8">
+                        <input id="postalAddress" type="text" class="form-control" placeholder="请输入">
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">邮政编码：</label>
+                    <div class="col-sm-3">
+                        <input id="postalCode" type="text" class="form-control" placeholder="请输入" maxlength="30">
+                    </div>
+
+                    <label class="col-sm-2 col-form-label">电子信箱：</label>
+                    <div class="col-sm-3">
+                        <input id="email" type="text" class="form-control" placeholder="请输入" maxlength="30">
+                    </div>
+                </div>
+
+                <!--附件div-->
+                <div class="form-group row">
+                    <label for="exampleFormControlFile1" class="col-sm-2 col-form-label">附件：</label>
+                    <div class="upload-wrap anticon" nv-file-drop="" uploader="uploader" style="margin-top: 8px;">
+                        <a id="upload_file" href=""></a>
+                    </div>
+
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-lg-4 col-md-4" ></div>
+                    <div class=" col-lg-4 row" >
+                        <div class="col">
+                            <button id="cancelbtn" type="button" class="btn btn-light col">取消</button>
+                        </div>
+                        <div class="col">
+                            <button id="passbtn" type="button" style="display: none" class="pass btn btn-danger col" data-target="#staticBackdrop">通过</button>
+                        </div>
+                        <div class="col">
+                            <button id="failbtn" type="button" style="display: none" class="btn btn-danger col">不通过</button>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-4" ></div>
+                </div>
+            </form>
+
+        </div>
 
     </div>
-
 </div>
+
 <script type="text/javascript" data-main="/main/main.js" th:src="@{/component/require@2.3.6/require-2.3.6.js}"></script>
 <script type="text/javascript" th:src="@{/project/js/scientificProject/viewTopicManagement.js}"></script>
 <link type="text/css" rel="stylesheet" href="/component/uploadImg/css/uploadImg.css"

@@ -160,6 +160,16 @@
             '                <fieldset disabled>'+
             '                <div class="input-group mb-3">\n' +
             '                    <div class="input-group-prepend">\n' +
+            '                        <button id="culturalContentSpan" class="btn btn-primary btn-sm" >剂型</button>\n' +
+            '                    </div>\n' +
+            '                    <input type="text" id="type" class="form-control">\n' +
+            '                </div>\n' +
+            '            </div>\n' +
+            '\n' +
+            '            <div class="col-lg-12 col-md-12">\n' +
+            '                <fieldset disabled>'+
+            '                <div class="input-group mb-3">\n' +
+            '                    <div class="input-group-prepend">\n' +
             '                        <button class="btn btn-primary btn-sm" >制法及用法</button>\n' +
             '                    </div>\n' +
             '                  <div>\n' +
@@ -2227,34 +2237,33 @@
 
         modalHtml.myTimeModal =
             '<div class="row" >'+
-            '            <div class="col-lg-4 col-md-4" style="margin-left: 2rem">\n' +
-            '                <div class="input-group mb-3">\n' +
+            '            <div class="col-lg-12 col-md-12" >\n' +
+            '                <div class="input-group mb-3" style="padding-left: 0.8rem;\n' +
+            '    padding-right: 0.2rem;">\n' +
             '                    <div class="input-group-prepend">\n' +
             '                        <label class="input-group-text" for="applicant">年份</label>\n' +
             '                    </div>\n' +
             '                    <input type="text"  id="year" class="form-control" placeholder="请输入年份">\n' +
             '                </div>\n' +
-            '            </div><div class="col-lg-8 col-md-8"></div>\n'+
+
             '\n' +
-            '                        <label class=\'input-label col-lg-6 col-md-6 row\' style="margin-left: 2rem">开启时间</label>\n' +
-            '                        <label class=\'input-label col-lg-4 col-md-4 row\' style="margin-left: 1rem">结束时间</label>\n' +
-            '            <div class="col-lg-6 col-md-6" style="margin-bottom: 10px;">\n' +
+            '           <label class=\'input-label col-lg-12 col-md-12 \'>开启时间</label>\n' +
+            '            <div class="col-lg-12 col-md-12" style="margin-bottom: 10px;">\n' +
             '                <div class="input-group mb-3">\n' +
             '                    <div class="input-group-prepend">\n' +
-            '                       <div style=\'display: flex;\'>\n' +
-            '                           <input type="text" id=\'startTime\' style=\'width:13em;display: block;margin-left: 2em\'>\n' +
+            '                       <div  >\n' +
+            '                           <input type="text" id=\'startTime\' style="background-image:">  <i class="fa fa-calendar fa-lg" style="position: absolute;top: 0.5rem;right: 0;"></i>\n' +
             '                       </div>\n' +
             '                    </div>\n' +
             '                </div>\n' +
             '            </div>\n' +
             '\n' +
-
-            '            <div class="col-lg-6 col-md-6" style="margin-bottom: 10px;">\n' +
+            '           <label class=\'input-label col-lg-12 col-md-12 \'>结束时间</label>\n' +
+            '            <div class="col-lg-12 col-md-12" style="margin-bottom: 10px;">\n' +
             '                <div class="input-group mb-3">\n' +
             '                    <div class="input-group-prepend">\n' +
-
-            '                       <div style=\'display: flex;\'>\n' +
-            '                           <input type="text" id=\'endTime\' style=\'width:13em;display: block;margin-left: 2em\'>\n' +
+            '                       <div >\n' +
+            '                           <input type="text" id=\'endTime\' >  <i class="fa fa-calendar fa-lg" style="position: absolute;top: 0.5rem;right: 0;"></i>\n' +
             '                       </div>\n' +'                    </div>\n' +
             '                </div>\n' +
             '            </div>\n' +
@@ -2273,7 +2282,7 @@
 
         modalHtml.myResonable="<div>\n" +
             "        <textarea name=\"\" id=\"reason\" cols=\"96\" rows=\"10\"></textarea>\n" +
-            "    </div>";
+            "    </div>"
 
 
         modalHtml.myDeleteModalTravel = '是否删除景点信息?';
@@ -2328,6 +2337,8 @@
         modalHtml.myResetPassword="是否重置密码？"
 
         modalHtml.myCencelDistribution = "是否取消分配专家？"
+
+        modalHtml.myDeleteTopicManagement = "是否删除该项目信息";
 
 
         return modalHtml;

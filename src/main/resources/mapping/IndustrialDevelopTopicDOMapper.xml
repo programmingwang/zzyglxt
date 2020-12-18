@@ -56,6 +56,7 @@
     SELECT
     <include refid="Base_Column_List" />
     FROM tb_industrial_develop_topic
+    WHERE EXAMINE_STATUS = #{examineStatus,jdbcType=VARCHAR}
   </select>
   <select id="selectByItemCode" parameterType="java.lang.String" resultMap="BaseResultMap">
     <!--
@@ -368,6 +369,12 @@
     <include refid="Base_Column_List" />
     from tb_industrial_develop_topic
     where COMPANY = #{company,jdbcType=CHAR}
+    and EXAMINE_STATUS in("1","2","3")
   </select>
-
+  <select id="maxProjectNO" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List" />
+    FROM tb_industrial_develop_topic
+    where PROJECT_NO = (select MAX(PROJECT_NO) FROM tb_industrial_develop_topic where PROJECT_NO!="——")
+  </select>
 </mapper>

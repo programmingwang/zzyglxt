@@ -9,7 +9,7 @@
                 orange.redirect(url);
             });
 
-            $("#btn_insert").unbind().on('click',function () {
+            $("#btn_save").unbind().on('click',function () {
                 var traCulEntity ;
                 var addUpdateUrl;
                 var operateMessage;
@@ -21,6 +21,7 @@
                         chineseCulturalName : $("#chineseCulturalName").val(),
                         chineseCulturalSource : $("#chineseCulturalSource").val(),
                         chineseCulturalAuthor : $("#chineseCulturalAuthor").val(),
+                        chineseCulturalStatus : '0',
                         chineseCulturalContent : editor.txt.html()
                     };
                 }else{
@@ -49,6 +50,48 @@
 
             });
 
+            $("#btn_insert").unbind().on('click',function () {
+                var traCulEntity ;
+                var addUpdateUrl;
+                var operateMessage;
+                if(!isUpdate()){
+                    addUpdateUrl = "/cul/res/traCul/addTraCul";
+                    operateMessage = "新增中医医史成功";
+                    traCulEntity = {
+                        itemcode: stringUtil.getUUID(),
+                        chineseCulturalName : $("#chineseCulturalName").val(),
+                        chineseCulturalSource : $("#chineseCulturalSource").val(),
+                        chineseCulturalAuthor : $("#chineseCulturalAuthor").val(),
+                        chineseCulturalStatus : '1',
+                        chineseCulturalContent : editor.txt.html()
+                    };
+                }else{
+                    var needData = JSON.parse(localStorage.getItem("rowData"));
+                    addUpdateUrl = "/cul/res/traCul/updTraCul";
+                    traCulEntity = {
+                        itemid: needData.itemid,
+                        itemcode: needData.itemcode,
+                        chineseCulturalName : $("#chineseCulturalName").val(),
+                        chineseCulturalSource : $("#chineseCulturalSource").val(),
+                        chineseCulturalAuthor : $("#chineseCulturalAuthor").val(),
+                        chineseCulturalStatus : '1',
+                        chineseCulturalContent : editor.txt.html()
+                    }
+                    operateMessage = "更新中医医史记成功";
+                }
+
+                ajaxUtil.myAjax(null,addUpdateUrl,traCulEntity,function (data) {
+                    if(ajaxUtil.success(data)){
+                        alertUtil.info(operateMessage);
+                        var url = "/chineseCultural/resource/traditionalCultural";
+                        orange.redirect(url);
+                    }else {
+                        alertUtil.alert(data.msg);
+                    }
+                },false,true);
+
+            });
+
             (function init() {
                 if (isUpdate()){
                     var tempdata = JSON.parse(localStorage.getItem("rowData"));
@@ -57,7 +100,6 @@
                     $("#chineseCulturalAuthor").val(tempdata.chineseCulturalAuthor);
                     editor.txt.html(tempdata.chineseCulturalContent);
                     var img = tempdata.filePath;
-                    console.log(img);
                     $("#upimg").attr("src",img);
                 }
             }());

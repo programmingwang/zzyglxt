@@ -17,8 +17,16 @@
             const editor = objectUtil.wangEditorUtil();
 
             $("#cancelBtn").click(function () {
-                window.history.back();
-                // orange.redirect(pathUrl)
+                var username = sessionStorage.getItem("username");
+                var orgName = sessionStorage.getItem("orgName");
+                var userdto = {
+                    "username": username,
+                    "orgName": orgName
+                }
+                ajaxUtil.myAjax(null,"/user/deletuser",userdto,function (data) {
+
+                },false,true);
+                window.history.back()
             });
 
             function generateParam() {

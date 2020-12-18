@@ -11,6 +11,53 @@
                 orange.redirect(url)
             });
 
+            $("#btn_save").unbind().on('click',function () {
+                var culRelEntity ;
+                var addUpdateUrl;
+                var operateMessage;
+                if(!isUpdate()){
+                    addUpdateUrl = "/cul/fac/culRel/addCulRel";
+                    operateMessage = "新增文化古迹成功";
+                    culRelEntity = {
+                        itemcode: stringUtil.getUUID(),
+                        chineseCulturalName : $("#chineseCulturalName").val(),
+                        chineseCulturalSource : $("#chineseCulturalSource").val(),
+                        chineseCulturalAuthor : $("#chineseCulturalAuthor").val(),
+                        chineseCulturalStatus : '0',
+                        chineseCulturalContent : editor.txt.html()
+                    };
+                }else{
+                    var needData = JSON.parse(localStorage.getItem("rowData"));
+                    addUpdateUrl = "/cul/fac/culRel/updCulRel";
+                    culRelEntity = {
+                        itemid: needData.itemid,
+                        itemcode: needData.itemcode,
+                        chineseCulturalName : $("#chineseCulturalName").val(),
+                        chineseCulturalSource : $("#chineseCulturalSource").val(),
+                        chineseCulturalAuthor : $("#chineseCulturalAuthor").val(),
+                        chineseCulturalContent : editor.txt.html()
+                    }
+                    operateMessage = "更新文化古迹成功";
+                }
+                fileUtil.handleFile(isUpdate(), culRelEntity.itemcode, uploadImg.getFiles()[0]);
+
+                ajaxUtil.myAjax(null,addUpdateUrl,culRelEntity,function (data) {
+                    if(ajaxUtil.success(data)){
+                        if(data.code == ajaxUtil.successCode) {
+                            alertUtil.info(operateMessage);
+                            // var url = "/chineseCultural/facility/culturalRelics";
+                            orange.redirect("/chineseCultural/facility/culturalRelics");
+                        }else{
+                            alertUtil.error(data.msg);
+                        }
+                    }else {
+                        alertUtil.alert(data.msg);
+                    }
+                },false,true);
+
+            });
+
+
             $("#btn_insert").unbind().on('click',function () {
                 var culRelEntity ;
                 var addUpdateUrl;
@@ -23,6 +70,7 @@
                         chineseCulturalName : $("#chineseCulturalName").val(),
                         chineseCulturalSource : $("#chineseCulturalSource").val(),
                         chineseCulturalAuthor : $("#chineseCulturalAuthor").val(),
+                        chineseCulturalStatus : '1',
                         chineseCulturalContent : editor.txt.html()
                     };
                 }else{
@@ -34,6 +82,7 @@
                         chineseCulturalName : $("#chineseCulturalName").val(),
                         chineseCulturalSource : $("#chineseCulturalSource").val(),
                         chineseCulturalAuthor : $("#chineseCulturalAuthor").val(),
+                        chineseCulturalStatus : '1',
                         chineseCulturalContent : editor.txt.html()
                     }
                     operateMessage = "更新文化古迹成功";

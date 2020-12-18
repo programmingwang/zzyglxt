@@ -83,7 +83,7 @@ public class TopicController {
         return new ResponseData(EmBusinessError.success,topicDODtoList);
     }
 
-    //查询用户对应的课题的状态
+    //查询用户对应课题的数据提交状态
     @GetMapping(value = "/getStatus")
     @ResponseBody
     public ResponseData getStatus(@RequestParam(value = "userCode") String code){
@@ -124,7 +124,7 @@ public class TopicController {
         return new ResponseData(EmBusinessError.success);
     }
 
-    //查询相应用户对应的所有课题
+    //查询用户对应的所有课题
     @GetMapping(value = "/getUserCode")
     @ResponseBody
     public ResponseData getUserCode(@RequestParam(value = "userCode") String userCode){
@@ -138,7 +138,7 @@ public class TopicController {
         return new ResponseData(EmBusinessError.success,topicDODtoList);
     }
 
-    //查询相应用户对应的所有课题
+    //查询相应单位对应的所有课题
     @GetMapping(value = "/getByCompany")
     @ResponseBody
     public ResponseData getByCompany(@RequestParam(value = "company") String company){
@@ -152,7 +152,7 @@ public class TopicController {
         return new ResponseData(EmBusinessError.success,topicDODtoList);
     }
 
-    //查询数据库中的最大编号
+    //查询项目编号的最大值
     @GetMapping(value = "/maxProjectNO")
     @ResponseBody
     public ResponseData maxProjectNO(){

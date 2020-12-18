@@ -10,7 +10,6 @@ public class HealthCareFamPreDO extends HealthCareFamPreDOKey {
 
     private String source;
 
-    @NotBlank(message = "作者不能为空")
     private String author;
 
     private Integer visitNum;

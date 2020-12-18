@@ -26,7 +26,7 @@ public class ZyyglxtApplication {
     @Bean
     public MultipartConfigElement multipartConfigElement(){
         MultipartConfigFactory factory = new MultipartConfigFactory();
-        factory.setMaxFileSize(DataSize.parse("1024KB"));
+        factory.setMaxFileSize(DataSize.parse("5120KB"));
         return factory.createMultipartConfig();
     }
 }

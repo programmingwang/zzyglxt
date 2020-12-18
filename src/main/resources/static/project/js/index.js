@@ -532,7 +532,7 @@
                     },
                     {
                         menu_name: "信息维护",
-                        menu_url: "/industrialdevelop/organization/addHosp",
+                        menu_url: "/industrialdevelop/organization/hosp_add",
                         id: "4",
                         level: "1",
                         pid: ""

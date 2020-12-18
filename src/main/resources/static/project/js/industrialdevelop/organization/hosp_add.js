@@ -1,61 +1,49 @@
 (function () {
-    require(['jquery','objectUtil','ajaxUtil','alertUtil','stringUtil','dictUtil','selectUtil','fileUtil','uploadImg','distpicker','urlUtil'],
-        function (jquery,objectUtil,ajaxUtil,alertUtil,stringUtil,dictUtil,selectUtil,fileUtil,uploadImg,distpicker,urlUtil) {
+    require(['jquery', 'objectUtil', 'ajaxUtil', 'alertUtil', 'stringUtil', 'dictUtil', 'selectUtil', 'fileUtil', 'uploadImg', 'distpicker', 'urlUtil'],
+        function (jquery, objectUtil, ajaxUtil, alertUtil, stringUtil, dictUtil, selectUtil, fileUtil, uploadImg, distpicker, urlUtil) {
 
 
             /*全局变量*/
             var tempdata;
 
             var updateStatus = isUpdate();
-            var jumpUrl = "/userLogin";
+            var jumpUrl = "/industrialdevelop/organization/hosp_add";
             var webStatus = dictUtil.getDictByCode(dictUtil.DICT_LIST.webStatus);
             var hospitalLevel = dictUtil.getDictByCode(dictUtil.DICT_LIST.hospitalLevel)
             var specialtyName = dictUtil.getDictByCode(dictUtil.DICT_LIST.dept)
+            var itemcode;
+            var itemid;
             const editor = objectUtil.wangEditorUtil();
 
             /*设置下拉框的值*/
             $("#hospitalLevel").selectUtil(hospitalLevel);
             /*重点专科操作*/
             $("#specialtyName").selectUtil(specialtyName);
-            $("#add").unbind().on("click",function () {
+            $("#add").unbind().on("click", function () {
                 var str = $("#hospitalKeySpecialty").val();
-                if (str.length === 0){
+                if (str.length === 0) {
                     $("#hospitalKeySpecialty").val(specialtyName[$("#specialtyName").val()].text);
-                }else {
+                } else {
                     $("#hospitalKeySpecialty").val($("#hospitalKeySpecialty").val() + " " + specialtyName[$("#specialtyName").val()].text);
                 }
                 $("#specialtyName option[value=" + $("#specialtyName").val() + "]").remove();
             })
-            $("#clear").unbind().on("click",function () {
+            $("#clear").unbind().on("click", function () {
                 $("#hospitalKeySpecialty").val("")
                 $("#specialtyName").selectUtil(dictUtil.getDictByCode(dictUtil.DICT_LIST.dept));
             })
             /*返回按钮处理*/
-            $("#cancel").unbind().on('click',function () {
-                var username = sessionStorage.getItem("username");
-                var orgName = sessionStorage.getItem("orgName");
-                var userdto = {
-                    "username": username,
-                    "orgName": orgName
-                }
-                ajaxUtil.myAjax(null,"/user/deletuser",userdto,function (data) {
-
-                },false,true);
-                window.history.back()
+            $("#cancel").unbind().on('click', function () {
+                orange.redirect(jumpUrl)
             });
 
             /*确认按钮处理*/
-            $("#btn_insert").unbind('click').on('click',function () {
-                var entity;
+            $("#btn_insert").unbind().on('click', function () {
+                var entity = {};
                 var requestUrl;
                 var operateMessage;
-                if (!updateStatus){
-                    requestUrl = "/industrialDevelop/hosp_add";
-                    operateMessage = "新增医疗机构成功";
-                    entity = {
-                        itemcode: stringUtil.getUUID(),
-                    };
-                }
+                requestUrl = "/medicalService/hosp/update";
+                operateMessage = "更新医疗机构成功";
                 entity["hospitalName"] = $("#hospitalName").val();
                 entity["hospitalLevel"] = hospitalLevel[$("#specialtyName").val()].text;
                 entity["hospitalBriefIntroduce"] = $("#hospitalBriefIntroduce").val();
@@ -69,19 +57,20 @@
                 entity["orgCode"] = sessionStorage.getItem("orgCode");
                 entity["hospitalIntroduce"] = editor.txt.html()
                 entity["hospitalStatus"] = webStatus[1].id
+                entity["itemcode"] = itemcode;
+                entity["itemid"] = itemid;
 
 
-                // fileUtil.handleFile(updateStatus, entity.itemcode, uploadImg.getFiles()[0]);
+                fileUtil.handleFile(updateStatus, entity.itemcode, uploadImg.getFiles()[0]);
 
-                ajaxUtil.myAjax(null,requestUrl,entity,function (data) {
-                    if(ajaxUtil.success(data)){
+                ajaxUtil.myAjax(null, requestUrl, entity, function (data) {
+                    if (ajaxUtil.success(data)) {
                         alertUtil.info(operateMessage);
-                        window.location.href = jumpUrl;
-                        // orange.redirect(jumpUrl);
-                    }else {
+                        orange.redirect(jumpUrl)
+                    } else {
                         alertUtil.alert(data.msg);
                     }
-                },false,true);
+                }, false, true);
             });
 
             function isUpdate() {
@@ -90,13 +79,21 @@
 
 
             /*初始化数据*/
-            var  init = function () {
-                if (updateStatus){
+            var init = function () {
+                if (updateStatus) {
+                    ajaxUtil.myAjax(null, "/medicalService/hosp/selectByOrgCode", null, function (data) {
+                        if (data && data.code == ajaxUtil.successCode) {
+                            tempdata = data.data
+                        } else {
+                            alertUtil.error(data.msg)
+                        }
+                    }, false, "", "get")
                     uploadImg.setImgSrc(tempdata.filePath);
+                    itemcode = tempdata.itemcode
                     $("#hospitalName").val(tempdata.hospitalName);
                     $("#hospitalLevel").find("option").each(function (data) {
                         var $this = $(this);
-                        if($this.text() == tempdata.hospitalLevel) {
+                        if ($this.text() == tempdata.hospitalLevel) {
                             $this.attr("selected", true);
                         }
                     });
@@ -113,7 +110,7 @@
                     $("#hospitalLink").val(tempdata.hospitalLink);
                     $("#hospitalAddressCountry").val(tempdata.hospitalAddressCountry);
                     $(".w-e-text").html(tempdata.hospitalIntroduce);
-                }else {
+                } else {
                     localStorage.removeItem("rowData");
                     $("#distpicker").distpicker();//新增页面使用
                 }

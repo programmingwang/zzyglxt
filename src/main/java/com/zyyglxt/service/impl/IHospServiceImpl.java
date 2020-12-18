@@ -1,7 +1,9 @@
 package com.zyyglxt.service.impl;
 
 import com.zyyglxt.dao.HospDOMapper;
+import com.zyyglxt.dao.OrganizationDOMapper;
 import com.zyyglxt.dataobject.HospDO;
+import com.zyyglxt.dataobject.OrganizationDO;
 import com.zyyglxt.error.BusinessException;
 import com.zyyglxt.error.EmBusinessError;
 import com.zyyglxt.service.HospService;
@@ -25,6 +27,8 @@ public class IHospServiceImpl implements HospService {
     ValidatorImpl validator;
     @Resource
     HospDOMapper hospDOMapper;
+    @Resource
+    OrganizationDOMapper organizationDOMapper;
 
     @Override
     public int addHosp(HospDO hospDO) {
@@ -32,9 +36,14 @@ public class IHospServiceImpl implements HospService {
         if(result.isHasErrors()){
             throw new BusinessException(result.getErrMsg(), EmBusinessError.PARAMETER_VALIDATION_ERROR);
         }
-//        hospDO.setItemcreateat(new Date());
-//        hospDO.setCreater(usernameUtil.getOperateUser());
-//        hospDO.setUpdater(usernameUtil.getOperateUser());
+        if (hospDO.getHospitalAddressCity() != null){
+            OrganizationDO updated = new OrganizationDO();
+            updated.setOrgLocate(hospDO.getHospitalAddressCity());
+            organizationDOMapper.updateByOrgCode(updated,hospDO.getOrgCode());
+        }
+        hospDO.setItemcreateat(new Date());
+        hospDO.setCreater(hospDO.getHospitalName());
+        hospDO.setUpdater(hospDO.getHospitalName());
 
         return hospDOMapper.insertSelective(hospDO);
     }

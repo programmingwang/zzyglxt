@@ -209,7 +209,7 @@ public class IUserServiceImpl implements IUserService {
         UserDO userDO = userDOMapper.selectByUsername(usernameUtil.getOperateUser());
 
         String mobilePhone = updatePwdDto.getMobilePhone();
-        if (MobileUtil.checkPhone(mobilePhone)) {
+        if (MobileUtil.checkPhone(mobilePhone) || MobileUtil.isPhone(mobilePhone)) {
             String oldPassword = updatePwdDto.getPassword();// 输入的原密码
             BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
             oldPassword = passwordEncoder.encode(oldPassword);
@@ -265,10 +265,14 @@ public class IUserServiceImpl implements IUserService {
             throw new BusinessException(isValidIDCardNo, EmBusinessError.IDNO_ERROR);
         }
         // 验证电话是否正确
-        if (!MobileUtil.checkPhone(userDO.getMobilephone()) && !StringUtils.isEmpty(userDO.getMobilephone())) {
+        if (!MobileUtil.checkPhone(userDO.getMobilephone())  && !MobileUtil.isPhone(userDO.getMobilephone())
+                && !StringUtils.isEmpty(userDO.getMobilephone())) {
             throw new BusinessException("手机号码不正确！", EmBusinessError.MOBILEPHONE_ERROR);
         }
 
+        if (userDO.getPortrait() == ""){
+            userDO.setPortrait(null);
+        }
         UserSessionDto userSessionDto = (UserSessionDto) request.getSession().getAttribute("user");
         userDO.setItemid(userSessionDto.getItemid());
         userDO.setItemcode(userSessionDto.getItemcode());

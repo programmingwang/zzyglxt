@@ -1,21 +1,21 @@
 (function () {
-    require(['jquery','objectUtil','ajaxUtil','alertUtil','stringUtil','dictUtil','selectUtil','fileUtil','uploadImg','distpicker','urlUtil'],
-        function (jquery,objectUtil,ajaxUtil,alertUtil,stringUtil,dictUtil,selectUtil,fileUtil,uploadImg,distpicker,urlUtil) {
+    require(['jquery','objectUtil','ajaxUtil','alertUtil','stringUtil','dictUtil','fileUtil','uploadImg','selectUtil','distpicker'],
+        function (jquery,objectUtil,ajaxUtil,alertUtil,stringUtil,dictUtil,fileUtil,uploadImg,selectUtil,distpicker) {
 
 
-            /*全局变量*/
-            var tempdata;
-
-            var updateStatus = isUpdate();
-            var jumpUrl = "/userLogin";
+            /*q全局变量*/
+            var tempdata = JSON.parse(localStorage.getItem("rowData"));
+            var updateStatus = isUpdate()
+            var jumpUrl = "/userLogin"
             var webStatus = dictUtil.getDictByCode(dictUtil.DICT_LIST.webStatus);
             var hospitalLevel = dictUtil.getDictByCode(dictUtil.DICT_LIST.hospitalLevel)
             var specialtyName = dictUtil.getDictByCode(dictUtil.DICT_LIST.dept)
             const editor = objectUtil.wangEditorUtil();
 
-            /*设置下拉框的值*/
+            /*设置医院级别下拉框的值*/
             $("#hospitalLevel").selectUtil(hospitalLevel);
-            /*重点专科操作*/
+
+            /*重点专科h处理录入*/
             $("#specialtyName").selectUtil(specialtyName);
             $("#add").unbind().on("click",function () {
                 var str = $("#hospitalKeySpecialty").val();
@@ -30,6 +30,7 @@
                 $("#hospitalKeySpecialty").val("")
                 $("#specialtyName").selectUtil(dictUtil.getDictByCode(dictUtil.DICT_LIST.dept));
             })
+
             /*返回按钮处理*/
             $("#cancel").unbind().on('click',function () {
                 var username = sessionStorage.getItem("username");
@@ -45,7 +46,7 @@
             });
 
             /*确认按钮处理*/
-            $("#btn_insert").unbind('click').on('click',function () {
+            $("#btn_insert").unbind().on('click',function () {
                 var entity;
                 var requestUrl;
                 var operateMessage;
@@ -54,6 +55,16 @@
                     operateMessage = "新增医疗机构成功";
                     entity = {
                         itemcode: stringUtil.getUUID(),
+                        hospitalStatus: '1'
+                    };
+                }
+                else {
+                    requestUrl = "/medicalService/hosp/update";
+                    operateMessage = "更新医院成功";
+                    entity = {
+                        itemid: tempdata.itemid,
+                        itemcode: tempdata.itemcode,
+                        hospitalStatus: '1'
                     };
                 }
                 entity["hospitalName"] = $("#hospitalName").val();
@@ -66,26 +77,25 @@
                 entity["hospitalAddressCountry"] = $("#hospitalAddressCountry").val();
                 entity["hospitalAddress"] = $("#hospitalAddress").val();
                 entity["hospitalLink"] = $("#hospitalLink").val();
-                entity["orgCode"] = sessionStorage.getItem("orgCode");
                 entity["hospitalIntroduce"] = editor.txt.html()
-                entity["hospitalStatus"] = webStatus[1].id
+                entity["username"] = sessionStorage.getItem('username');
+                entity["orgCode"] = sessionStorage.getItem('orgCode');
 
-
-                // fileUtil.handleFile(updateStatus, entity.itemcode, uploadImg.getFiles()[0]);
+                //fileUtil.handleFile(updateStatus, entity.itemcode, uploadImg.getFiles()[0]);
 
                 ajaxUtil.myAjax(null,requestUrl,entity,function (data) {
                     if(ajaxUtil.success(data)){
                         alertUtil.info(operateMessage);
                         window.location.href = jumpUrl;
-                        // orange.redirect(jumpUrl);
                     }else {
                         alertUtil.alert(data.msg);
                     }
                 },false,true);
+                return false;
             });
 
             function isUpdate() {
-                return (urlUtil.getFullUrl().indexOf("/main#") != -1 || urlUtil.getFullUrl().indexOf("/main?") != -1)
+                return (tempdata != null || tempdata != undefined)
             }
 
 
@@ -111,16 +121,17 @@
                     });
                     $("#hospitalAddress").val(tempdata.hospitalAddress);
                     $("#hospitalLink").val(tempdata.hospitalLink);
-                    $("#hospitalAddressCountry").val(tempdata.hospitalAddressCountry);
-                    $(".w-e-text").html(tempdata.hospitalIntroduce);
+                    editor.txt.html(tempdata.hospitalIntroduce);
                 }else {
                     localStorage.removeItem("rowData");
+                    $("#hospitalName").val(sessionStorage.getItem('orgName'));
+                    $("#hospitalTelephone").val(sessionStorage.getItem('phone'));
                     $("#distpicker").distpicker();//新增页面使用
                 }
                 init = function () {
 
                 }
-            };
+            }
             uploadImg.init();
             init();
 

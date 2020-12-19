@@ -20,6 +20,7 @@
         <result column="itemCreateAt" jdbcType="TIMESTAMP" property="itemcreateat"/>
         <result column="UPDATER" jdbcType="VARCHAR" property="updater"/>
         <result column="itemUpdateAt" jdbcType="TIMESTAMP" property="itemupdateat"/>
+        <result column="ORG_CODE" jdbcType="VARCHAR" property="orgCode"/>
     </resultMap>
     <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.zyyglxt.dataobject.HospDO">
         <result column="HOSPITAL_INTRODUCE" jdbcType="LONGVARCHAR" property="hospitalIntroduce"/>
@@ -27,7 +28,7 @@
     <sql id="Base_Column_List">
         itemID, itemCode, HOSPITAL_NAME, HOSPITAL_LEVEL, HOSPITAL_BRIEF_INTRODUCE, HOSPITAL_KEY_SPECIALTY, HOSPITAL_TELEPHONE, HOSPITAL_ADDRESS_PRO,
         HOSPITAL_ADDRESS_CITY, HOSPITAL_ADDRESS_COUNTRY, HOSPITAL_ADDRESS, HOSPITAL_LINK, REASON,
-        HOSPITAL_STATUS, CREATER, itemCreateAt, UPDATER, itemUpdateAt
+        HOSPITAL_STATUS, CREATER, itemCreateAt, UPDATER, itemUpdateAt, ORG_CODE
     </sql>
     <sql id="Blob_Column_List">
         HOSPITAL_INTRODUCE
@@ -208,7 +209,7 @@
                 #{hospitalIntroduce,jdbcType=LONGVARCHAR},
             </if>
             <if test="orgCode != null">
-                #{orgCode,jdbcType=VARCHAR}
+                #{orgCode,jdbcType=VARCHAR},
             </if>
         </trim>
     </insert>

@@ -100,7 +100,7 @@
             addSale: '../project/js/industrialdevelop/chinesemed/add_chinesemed-sale',
             addSchool: '../project/js/industrialdevelop/add_school',
             addLab: '../project/js/industrialdevelop/organization/add_lab',
-            addHosp: '../project/js/industrialdevelop/organization/addHosp',
+            addhosp: '../project/js/industrialdevelop/organization/add_hosp',
             addTecServiceOrg: '../project/js/industrialdevelop/organization/add_tecserviceorg',
             addTour: '../project/js/industrialdevelop/organization/add_tour'
 
@@ -126,7 +126,7 @@
         {path:"/sale_add",jspath:"addSale"},
         {path:"/school_add",jspath:"addSchool"},
         {path:"/lab_add",jspath:"addLab"},
-        {path:"/hosp_add",jspath:"addHosp"},
+        {path:"/hosp_add",jspath:"addhosp"},
         {path:"/tecserviceorg_add",jspath:"addTecServiceOrg"},
         {path:"/tour_add",jspath:"addTour"}
 

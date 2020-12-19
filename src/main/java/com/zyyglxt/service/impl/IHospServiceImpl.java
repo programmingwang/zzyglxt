@@ -5,10 +5,12 @@ import com.zyyglxt.dataobject.HospDO;
 import com.zyyglxt.error.BusinessException;
 import com.zyyglxt.error.EmBusinessError;
 import com.zyyglxt.service.HospService;
+import com.zyyglxt.util.UsernameUtil;
 import com.zyyglxt.validator.ValidatorImpl;
 import com.zyyglxt.validator.ValidatorResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.Date;
@@ -27,14 +29,16 @@ public class IHospServiceImpl implements HospService {
     HospDOMapper hospDOMapper;
 
     @Override
+    @Transactional
     public int addHosp(HospDO hospDO) {
         ValidatorResult result = validator.validate(hospDO);
         if(result.isHasErrors()){
             throw new BusinessException(result.getErrMsg(), EmBusinessError.PARAMETER_VALIDATION_ERROR);
         }
-//        hospDO.setItemcreateat(new Date());
-//        hospDO.setCreater(usernameUtil.getOperateUser());
-//        hospDO.setUpdater(usernameUtil.getOperateUser());
+        hospDO.setItemcreateat(new Date());
+        hospDO.setItemupdateat(new Date());
+        hospDO.setCreater(hospDO.getUsername());
+        hospDO.setUpdater(hospDO.getUsername());
 
         return hospDOMapper.insertSelective(hospDO);
     }

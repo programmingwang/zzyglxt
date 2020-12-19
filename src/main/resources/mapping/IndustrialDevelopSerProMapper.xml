@@ -30,6 +30,7 @@
     <include refid="Base_Column_List" />
     from tb_industrial_develop_ser_pro
     where itemCode = #{itemcode,jdbcType=CHAR}
+    order by itemUpdateAt desc
   </select>
   <delete id="deleteByPrimaryKey" parameterType="map">
     <!--@mbg.generated-->
@@ -203,9 +204,11 @@
   </update>
   <select id="selectAll" resultMap="BaseResultMap">
       select * from tb_industrial_develop_ser_pro
+      order by itemUpdateAt desc
     </select>
   <select id="selectByorgcode" resultMap="BaseResultMap">
       select * from tb_industrial_develop_ser_pro
       where ORG_CODE = #{value}
+      order by itemUpdateAt desc
     </select>
 </mapper>

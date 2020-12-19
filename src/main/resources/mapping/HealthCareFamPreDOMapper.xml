@@ -38,6 +38,7 @@
     from tb_health_care_fam_pre
     where itemID = #{itemid,jdbcType=INTEGER}
       and itemCode = #{itemcode,jdbcType=CHAR}
+    order by itemUpdateAt desc
   </select>
   <delete id="deleteByPrimaryKey" parameterType="com.zyyglxt.dataobject.HealthCareFamPreDOKey">
 
@@ -222,6 +223,7 @@
         SELECT *
         FROM tb_health_care_fam_pre
        WHERE STATUS = #{status}
+       order by itemUpdateAt desc
     </select>
     <update id="updateVisitNumHealthCareFamPre" parameterType="com.zyyglxt.dataobject.HealthCareFamPreDOKey">
       update tb_health_care_fam_pre set VISIT_NUM = VISIT_NUM + 1 where itemID = #{itemid,jdbcType=INTEGER} and itemCode = #{itemcode,jdbcType=CHAR}

@@ -39,12 +39,14 @@
     <include refid="Base_Column_List" />
     from tb_industrial_develop_tec_ser_org
     where itemCode = #{itemcode,jdbcType=CHAR}
+    order by itemUpdateAt desc
   </select>
   <select id="selectByOrgcode" parameterType="java.lang.String" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
     from tb_industrial_develop_tec_ser_org
     where ORG_CODE = #{orgCode,jdbcType=CHAR}
+    order by itemUpdateAt desc
   </select>
   <delete id="deleteByPrimaryKey" parameterType="map">
     <!--@mbg.generated-->
@@ -295,6 +297,7 @@
   </update>
   <select id="selectAll" resultMap="BaseResultMap">
       select * from tb_industrial_develop_tec_ser_org
+      order by itemUpdateAt desc
   </select>
   <select id="selectByOrgNameAndCode" resultMap="BaseResultMap">
     select
@@ -302,5 +305,6 @@
     from tb_industrial_develop_tec_ser_org
     where NAME = #{orgName,jdbcType=VARCHAR}
     and ORG_CODE = #{orgCode,jdbcType=VARCHAR}
+    order by itemUpdateAt desc
   </select>
 </mapper>

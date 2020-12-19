@@ -34,6 +34,7 @@
     <include refid="Base_Column_List" />
     from tb_industrial_develop_sale_drug
     where itemCode = #{itemcode,jdbcType=CHAR}
+    order by itemUpdateAt desc
   </select>
   <delete id="deleteByPrimaryKey" parameterType="map">
     <!--@mbg.generated-->
@@ -237,6 +238,7 @@
         FROM tb_industrial_develop_sale_drug
         WHERE STATUS = #{status,jdbcType=VARCHAR}
         AND ORG_CODE = #{orgCode}
+        order by itemUpdateAt desc
     </select>
   <update id="changeStatusToSaleDrug">
     update tb_industrial_develop_sale_drug

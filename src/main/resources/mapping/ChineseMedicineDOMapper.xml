@@ -40,6 +40,7 @@
         from tb_culpro_chinese_medicine
         where itemID = #{itemid,jdbcType=INTEGER}
         and itemCode = #{itemcode,jdbcType=CHAR}
+        order by itemUpdateAt desc
     </select>
     <delete id="deleteByPrimaryKey" parameterType="com.zyyglxt.dataobject.ChineseMedicineDOKey">
         delete from tb_culpro_chinese_medicine
@@ -303,7 +304,7 @@
         ,
         <include refid="Blob_Column_List"/>
         FROM tb_culpro_chinese_medicine
-        ORDER BY itemCreateAt DESC
+        order by itemUpdateAt desc
     </select>
 
     <select id="searchChineseMedicine" resultMap="ResultMapWithBLOBs">
@@ -322,7 +323,7 @@
         OR HOSP_CODE IN (select itemCode
                          from tb_culpro_hosp
                          WHERE HOSPITAL_NAME LIKE "%"#{value}"%")
-        ORDER BY itemCreateAt DESC
+        order by itemUpdateAt desc
     </select>
 
     <select id="top5ChineseMedicine" resultMap="ResultMapWithBLOBs">
@@ -331,7 +332,7 @@
         ,
         <include refid="Blob_Column_List"/>
         from tb_culpro_chinese_medicine
-        ORDER BY itemCreateAt DESC
+        order by itemUpdateAt desc
         LIMIT 5
     </select>
 
@@ -342,6 +343,7 @@
         <include refid="Blob_Column_List"/>
         from tb_culpro_chinese_medicine
         WHERE DEPT_CODE = #{specialtyCode}
+        order by itemUpdateAt desc
     </select>
 
     <select id="selectByStatus" resultMap="ResultMapWithBLOBs">
@@ -351,6 +353,7 @@
         <include refid="Blob_Column_List"/>
         from tb_culpro_chinese_medicine
         WHERE CHINESE_MEDICINE_STATUS = #{status}
+        order by itemUpdateAt desc
     </select>
 
     <update id="updateStatusByPrimaryKey" parameterType="com.zyyglxt.dto.StatusDto">

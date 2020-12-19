@@ -14,7 +14,6 @@ public class ChineseCulturalDO extends ChineseCulturalDOKey {
     @NotBlank(message = "来源不能为空")
     private String chineseCulturalSource;
 
-    @NotBlank(message = "作者不能为空")
     private String chineseCulturalAuthor;
 
     private Integer visitNum;

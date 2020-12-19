@@ -65,6 +65,11 @@ public class IndustrialDevelopTecSerOrgServiceImpl implements IndustrialDevelopT
         if (organizationDO == null){
             return -1;
         } else {
+            if (record.getAddressCity() != null){
+                OrganizationDO updated = new OrganizationDO();
+                updated.setOrgLocate(record.getAddressCity());
+                organizationDOMapper.updateByOrgCode(updated,organizationDO.getOrgCode());
+            }
             record.setOrgCode(organizationDO.getOrgCode());
             return industrialDevelopTecSerOrgMapper.insertSelective(record);
         }
@@ -88,11 +93,21 @@ public class IndustrialDevelopTecSerOrgServiceImpl implements IndustrialDevelopT
 
     @Override
     public int updateByPrimaryKeySelective(IndustrialDevelopTecSerOrg record) {
+        if (record.getAddressCity() != null){
+            OrganizationDO updated = new OrganizationDO();
+            updated.setOrgLocate(record.getAddressCity());
+            organizationDOMapper.updateByOrgCode(updated,usernameUtil.getOrgCode());
+        }
         return industrialDevelopTecSerOrgMapper.updateByPrimaryKeySelective(record);
     }
 
     @Override
     public int updateByPrimaryKey(IndustrialDevelopTecSerOrg record) {
+        if (record.getAddressCity() != null){
+            OrganizationDO updated = new OrganizationDO();
+            updated.setOrgLocate(record.getAddressCity());
+            organizationDOMapper.updateByOrgCode(updated,record.getOrgCode());
+        }
         return industrialDevelopTecSerOrgMapper.updateByPrimaryKey(record);
     }
 

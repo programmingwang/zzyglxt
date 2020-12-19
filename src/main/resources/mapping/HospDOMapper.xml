@@ -145,6 +145,9 @@
             <if test="hospitalIntroduce != null">
                 HOSPITAL_INTRODUCE,
             </if>
+            <if test="orgCode != null">
+                ORG_CODE,
+            </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="itemid != null">
@@ -203,6 +206,9 @@
             </if>
             <if test="hospitalIntroduce != null">
                 #{hospitalIntroduce,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="orgCode != null">
+                #{orgCode,jdbcType=VARCHAR}
             </if>
         </trim>
     </insert>

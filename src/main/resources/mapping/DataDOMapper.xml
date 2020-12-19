@@ -284,6 +284,7 @@
         update tb_culpro_data
         <set>
             <if test="dataStatus != null">
+                DATA_DELAYED_RELEASE = #{dataDelayedRelease,jdbcType=TIMESTAMP},
                 DATA_STATUS = #{dataStatus,jdbcType=VARCHAR},
             </if>
         </set>
@@ -341,19 +342,4 @@
         FROM tb_culpro_data
         ORDER BY itemcreateat DESC
     </select>
-
-  <select id="searchDataDO" resultMap="ResultMapWithBLOBs">
-    select
-    <include refid="Base_Column_List"/>
-    ,
-    <include refid="Blob_Column_List"/>
-    from tb_culpro_data
-    WHERE DATA_TITLE LIKE "%"#{dataTitle,jdbcType=VARCHAR}"%"
-    or DATA_LOCATION LIKE "%"#{dataLocation,jdbcType=VARCHAR}"%"
-    or DATA_AUTHOR LIKE "%"#{dataAuthor,jdbcType=VARCHAR}"%"
-    or DATA_SOURCE LIKE "%"#{dataSource,jdbcType=VARCHAR}"%"
-    or DATA_FILE_TYPE LIKE "%"#{dataFileType,jdbcType=VARCHAR}"%"
-    or DATA_STATUS LIKE "%"#{dataStatus,jdbcType=VARCHAR}"%"
-    or DATA_TYPE LIKE "%"#{dataType,jdbcType=VARCHAR}"%"
-  </select>
 </mapper>

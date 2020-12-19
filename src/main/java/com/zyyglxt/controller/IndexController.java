@@ -63,7 +63,7 @@ public class IndexController {
 
     @RequestMapping(value = "/hosp_add")
     public String hosp_add() {
-        return "/industrialdevelop/organization/add-hosp";
+        return "/industrialdevelop/organization/addHosp";
     }
 
     @RequestMapping(value = "/school_add")

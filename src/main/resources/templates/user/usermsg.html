@@ -39,15 +39,27 @@
         }
 
         #btn {
-            margin-top: 15px;
+            margin-top: 6rem;
         }
 
+        .form-group{
+            margin-bottom: 2rem;
+
+        }
+        #main-form{
+            background-color: white;
+            margin-top: 1rem;
+        }
+        #confirmBtn{
+            background-color: #e66736;
+        }
 
     </style>
 </head>
-<body>
-<div class="row">
-    <div class="col-12">
+<body style="background-color: #f7efeb;height: 100%">
+<div class="row" >
+    <div class="col-1"></div>
+    <div class="col-10" id="main-form"  style="padding: 0">
         <form>
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label">用户头像：</label>
@@ -113,6 +125,7 @@
             </div>
 
             <div class="updataP" style="display: none">
+                <div class="col-lg-12 col-md-12" th:style="'background: url(' + '/images/new/top.png' + ');background-color: #5b4622;margin-bottom: 2rem;height: 1rem;'"></div>
                 <div class="form-group row">
                     <label class="col-sm-2 col-form-label">请输入原密码：</label>
                     <div class="col-sm-3">
@@ -138,7 +151,7 @@
 
             <div class="form-group row" id="btn">
                 <div class="col-lg-3 col-md-3"></div>
-                <div class=" col-lg-5 row">
+                <div class=" col-lg-6 row">
                     <div class="col">
                         <button id="cancelBtn" type="button" class="btn btn-light col">取消</button>
                     </div>
@@ -146,19 +159,19 @@
                         <button id="modifymsgBtn" type="button" class="modify btn btn-primary col">修改信息</button>
                     </div>
                     <div class="col">
-                        <button id="confirmBtn" type="button" class="modify btn btn-danger col">确认修改</button>
+                        <button id="confirmBtn" type="button" class="modify btn col">确认修改</button>
                     </div>
                     <div class="col">
                         <button id="modifypwdBtn" type="button" class="btn btn-primary col">修改密码</button>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-4"></div>
+                <div class="col-lg-3 col-md-3"></div>
             </div>
 
         </form>
 
     </div>
-
+    <div class="col-1"></div>
 </div>
 <script type="text/javascript" data-main="/main/main.js" th:src="@{/component/require@2.3.6/require-2.3.6.js}"></script>
 <link type="text/css" rel="stylesheet" href="/component/uploadImg/css/uploadImg.css"

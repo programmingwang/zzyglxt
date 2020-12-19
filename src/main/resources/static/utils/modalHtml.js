@@ -2333,7 +2333,7 @@
 
         modalHtml.myDeleteMedMat = "是否删除药材信息？"
         modalHtml.myShelveMedMat = "点击上架将药材信息发送到河北中医药网，确认上架？"
-
+        modalHtml.myShelfSaleDrugModal='点击确认上架将上传至河北中医药网';
         modalHtml.myDeleteExpert="是否删除该专家信息？"
         modalHtml.myResetPassword="是否重置密码？"
 

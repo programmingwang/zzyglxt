@@ -33,6 +33,7 @@
                 param.address = $("#address").val()
                 param.intruduce = $(".w-e-text").html();
                 param.orgCode = sessionStorage.getItem("orgCode");
+                param.onlineAddress = $("#onlineAddress").val()
                 param.itemcode = itemcode;
                 param.type = orgType;
                 return param;
@@ -87,6 +88,7 @@
                     $("#projectCost").val(tempdata.projectCost);
                     $("#contacts").val(tempdata.contacts);
                     $("#phone").val(tempdata.phone);
+                    $("#onlineAddress").val(tempdata.onlineAddress)
                     $("#distpicker").distpicker({
                         province: tempdata.addressPro,
                         city: tempdata.addressCity,

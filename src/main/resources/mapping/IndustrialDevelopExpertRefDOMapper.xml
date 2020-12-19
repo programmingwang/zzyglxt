@@ -11,7 +11,7 @@
     <result column="EXMAINE_STATUS" jdbcType="VARCHAR" property="exmaineStatus" />
     <result column="SUBMIT_STATUS" jdbcType="VARCHAR" property="submitStatus" />
     <result column="OPINION" jdbcType="VARCHAR" property="opinion" />
-    <result column="SCORE" jdbcType="INTEGER" property="score" />
+    <result column="SCORE" jdbcType="VARCHAR" property="score" />
     <result column="CREATER" jdbcType="VARCHAR" property="creater" />
     <result column="itemCreateAt" jdbcType="TIMESTAMP" property="itemcreateat" />
     <result column="UPDATER" jdbcType="VARCHAR" property="updater" />
@@ -51,7 +51,7 @@
     CREATER, itemCreateAt, UPDATER, OPINION
     itemUpdateAt)
     values (#{itemcode,jdbcType=CHAR}, #{expertCode,jdbcType=CHAR}, #{topicCode,jdbcType=CHAR},
-    #{exmaineStatus,jdbcType=VARCHAR}, #{submitStatus,jdbcType=VARCHAR}, #{score,jdbcType=INTEGER},
+    #{exmaineStatus,jdbcType=VARCHAR}, #{submitStatus,jdbcType=VARCHAR}, #{score,jdbcType=VARCHAR},
     #{creater,jdbcType=VARCHAR}, #{itemcreateat,jdbcType=TIMESTAMP}, #{updater,jdbcType=VARCHAR},
     #{itemupdateat,jdbcType=TIMESTAMP}, #{opinion,jdbcType=VARCHAR})
   </insert>
@@ -110,7 +110,7 @@
         #{submitStatus,jdbcType=VARCHAR},
       </if>
       <if test="score != null">
-        #{score,jdbcType=INTEGER},
+        #{score,jdbcType=VARCHAR},
       </if>
       <if test="creater != null">
         #{creater,jdbcType=VARCHAR},
@@ -137,12 +137,6 @@
     -->
     update tb_industrial_develop_expert_ref
     <set>
-      <if test="expertCode != null">
-        EXPERT_CODE = #{expertCode,jdbcType=CHAR},
-      </if>
-      <if test="topicCode != null">
-        TOPIC_CODE = #{topicCode,jdbcType=CHAR},
-      </if>
       <if test="exmaineStatus != null">
         EXMAINE_STATUS = #{exmaineStatus,jdbcType=VARCHAR},
       </if>
@@ -150,7 +144,7 @@
         SUBMIT_STATUS = #{submitStatus,jdbcType=VARCHAR},
       </if>
       <if test="score != null">
-        SCORE = #{score,jdbcType=INTEGER},
+        SCORE = #{score,jdbcType=VARCHAR},
       </if>
       <if test="creater != null">
         CREATER = #{creater,jdbcType=VARCHAR},
@@ -168,7 +162,8 @@
         OPINION = #{opinion,jdbcType=TIMESTAMP},
       </if>
     </set>
-    where itemCode = #{itemcode,jdbcType=CHAR}
+    where EXPERT_CODE = #{expertCode,jdbcType=CHAR}
+    and TOPIC_CODE = #{topicCode,jdbcType=CHAR}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.zyyglxt.dataobject.IndustrialDevelopExpertRefDO">
     <!--@mbg.generated-->
@@ -177,7 +172,7 @@
     TOPIC_CODE = #{topicCode,jdbcType=CHAR},
     EXMAINE_STATUS = #{exmaineStatus,jdbcType=VARCHAR},
     SUBMIT_STATUS = #{submitStatus,jdbcType=VARCHAR},
-    SCORE = #{score,jdbcType=INTEGER},
+    SCORE = #{score,jdbcType=VARCHAR},
     CREATER = #{creater,jdbcType=VARCHAR},
     itemCreateAt = #{itemcreateat,jdbcType=TIMESTAMP},
     UPDATER = #{updater,jdbcType=VARCHAR},

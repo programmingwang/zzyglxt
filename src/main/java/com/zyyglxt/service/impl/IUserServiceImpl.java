@@ -210,11 +210,14 @@ public class IUserServiceImpl implements IUserService {
 
         String mobilePhone = updatePwdDto.getMobilePhone();
         if (MobileUtil.checkPhone(mobilePhone) || MobileUtil.isPhone(mobilePhone)) {
+            if (!updatePwdDto.getMobilePhone().equals(userDO.getMobilephone())){
+                throw new BusinessException("输入的电话号码与预留的不一致，请重新输入！", EmBusinessError.OLDPASSWORD_ERROR);
+            }
             String oldPassword = updatePwdDto.getPassword();// 输入的原密码
             BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-            oldPassword = passwordEncoder.encode(oldPassword);
+            //oldPassword = passwordEncoder.encode(oldPassword);
             // 数据库查询到的原密码和输入的原密码比对
-            if (userDO.getPassword().equals(oldPassword)) {
+            if (passwordEncoder.matches(oldPassword,userDO.getPassword())) {
                 updatePwdDto.setNewPassword(passwordEncoder.encode(updatePwdDto.getNewPassword()));
                 userDOMapper.updatePasswordByMobilePhone(updatePwdDto.getNewPassword(), mobilePhone);
                 return new ResponseData(EmBusinessError.success);

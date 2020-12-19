@@ -111,18 +111,18 @@
                         alertUtil.info('输入不能为空')
                     }
                     // 修改密码时如果头像也改了也可以修改成功
-                    if (portrait != localportroit) {
-                        var uportroit = {
-                            "portrait": portrait
-                        };
-                        ajaxUtil.myAjax(null, "/user/updateuserimg", uportroit, function (data) {
-                            if (data && data.code == 88888) {
-                                alertUtil.success('修改头像成功');
-                            } else {
-                                alertUtil.error(data.msg)
-                            }
-                        }, false, true)
-                    }
+                    // if (portrait != localportroit) {
+                    //     var uportroit = {
+                    //         "portrait": portrait
+                    //     };
+                    //     ajaxUtil.myAjax(null, "/user/updateuserimg", uportroit, function (data) {
+                    //         if (data && data.code == 88888) {
+                    //             alertUtil.success('修改头像成功');
+                    //         } else {
+                    //             alertUtil.error(data.msg)
+                    //         }
+                    //     }, false, true)
+                    // }
                 } else {
                     if (portrait != localportroit) {// 不与原头像相同才请求更新
                         var uportroit = {

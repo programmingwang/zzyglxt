@@ -89,6 +89,9 @@ public class IndustrialDevelopTecSerOrg {
     @ApiModelProperty(value="手动输入地址")
     private String address;
 
+    @ApiModelProperty(value = "在线地址")
+    private String onlineAddress;
+
     /**
     * 简介
     */

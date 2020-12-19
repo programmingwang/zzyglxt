@@ -50,7 +50,14 @@
                 var param = generateParam();
                 param.status = "1";
                 param.type = "lab";
-                ajaxUtil.fileAjax(itemcode,uploadImg.getFiles()[0],sessionStorage.getItem("username"), sessionStorage.getItem("username"))
+                if (uploadImg.isUpdate()){
+                    if (isUpdate()){
+                        ajaxUtil.updateFile(itemcode,uploadImg.getFiles()[0],sessionStorage.getItem("username"), sessionStorage.getItem("username"));
+                    }else {
+                        ajaxUtil.fileAjax(itemcode,uploadImg.getFiles()[0],sessionStorage.getItem("username"), sessionStorage.getItem("username"))
+                    }
+
+                }
                 ajaxUtil.myAjax(null,url,param,function (data) {
                     if(ajaxUtil.success(data)){
                         window.location.href = pathUrl;

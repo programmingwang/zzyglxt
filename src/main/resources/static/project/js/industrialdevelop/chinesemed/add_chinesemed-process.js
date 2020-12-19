@@ -60,7 +60,6 @@
                 ajaxUtil.myAjax(null, url, param, function (data) {
                     if (ajaxUtil.success(data)) {
                         window.location.href = pathUrl;
-                        //orange.redirect(pathUrl)
                     } else {
                         alert(data.msg)
                     }

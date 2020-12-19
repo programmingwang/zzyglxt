@@ -41,6 +41,7 @@
         from tb_culpro_hosp
         where itemID = #{itemid,jdbcType=INTEGER}
         and itemCode = #{itemcode,jdbcType=CHAR}
+        order by itemUpdateAt desc
     </select>
     <delete id="deleteByPrimaryKey" parameterType="com.zyyglxt.dataobject.HospDOKey">
         delete from tb_culpro_hosp
@@ -321,7 +322,7 @@
         ,
         <include refid="Blob_Column_List"/>
         FROM tb_culpro_hosp
-        ORDER BY itemUpdateAt DESC
+        order by itemUpdateAt desc
     </select>
 
     <select id="searchHosp" resultMap="ResultMapWithBLOBs">
@@ -335,7 +336,7 @@
         OR HOSPITAL_ADDRESS_CITY LIKE "%"#{value}"%"
         OR HOSPITAL_ADDRESS_COUNTRY LIKE "%"#{value}"%"
         OR HOSPITAL_ADDRESS LIKE "%"#{value}"%"
-        ORDER BY itemUpdateAt DESC
+        order by itemUpdateAt desc
     </select>
 
 
@@ -346,6 +347,7 @@
         <include refid="Blob_Column_List"/>
         from tb_culpro_hosp
         WHERE itemCode = #{itemCode}
+        order by itemUpdateAt desc
     </select>
 
     <select id="selectByStatus" resultMap="ResultMapWithBLOBs">
@@ -355,6 +357,7 @@
         <include refid="Blob_Column_List"/>
         from tb_culpro_hosp
         WHERE HOSPITAL_STATUS = #{status}
+        order by itemUpdateAt desc
     </select>
 
     <update id="updateStatusByPrimaryKey" parameterType="com.zyyglxt.dto.StatusDto">
@@ -371,6 +374,7 @@
         <include refid="Blob_Column_List"/>
         from tb_culpro_hosp
         where ORG_CODE = #{orgCode,jdbcType=VARCHAR}
+        order by itemUpdateAt desc
     </select>
 
 

@@ -36,6 +36,7 @@
     from tb_culpro_fam_pre
     where itemID = #{itemid,jdbcType=INTEGER}
       and itemCode = #{itemcode,jdbcType=CHAR}
+    order by itemUpdateAt desc
   </select>
   <delete id="deleteByPrimaryKey" parameterType="com.zyyglxt.dataobject.FamPreDOKey">
 
@@ -223,6 +224,7 @@
         <include refid="Blob_Column_List" />
         FROM tb_culpro_fam_pre
         WHERE STATUS = #{status}
+    order by itemUpdateAt desc
     </select>
 
 
@@ -244,6 +246,7 @@
     or TYPE LIKE "%"#{type,jdbcType=VARCHAR}"%"
     or CREATER LIKE "%"#{creater,jdbcType=VARCHAR}"%"
     or UPDATER LIKE "%"#{updater,jdbcType=VARCHAR}"%"
+    order by itemUpdateAt desc
   </select>
 
   <update id="changeStatusToFamPre">

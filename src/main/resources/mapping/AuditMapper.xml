@@ -5,28 +5,34 @@
     <select id="getAllChiMed" resultMap="com.zyyglxt.dao.IndustrialDevelopChiMedMapper.BaseResultMap">
         select *
         from tb_industrial_develop_chi_med
+        order by itemUpdateAt desc
     </select>
     <select id="getAllTecOrg" resultMap="com.zyyglxt.dao.IndustrialDevelopTecSerOrgMapper.BaseResultMap">
         select *
-        from tb_industrial_develop_tec_ser_org;
+        from tb_industrial_develop_tec_ser_org
+        order by itemUpdateAt desc
     </select>
     <select id="getAllSchool" resultMap="com.zyyglxt.dao.IndustrialDevelopSchoolMapper.BaseResultMap">
         select *
         from tb_industrial_develop_school
+        order by itemUpdateAt desc
     </select>
     <select id="getAllHospital" resultMap="com.zyyglxt.dao.HospDOMapper.BaseResultMap">
         select *
         from tb_culpro_hosp
+        order by itemUpdateAt desc
     </select>
     <select id="getAllChiMedByType" resultMap="com.zyyglxt.dao.IndustrialDevelopChiMedMapper.BaseResultMap">
         select *
         from tb_industrial_develop_chi_med
         where TYPE = #{type}
+        order by itemUpdateAt desc
     </select>
     <select id="getAllTecOrgByType" resultMap="com.zyyglxt.dao.IndustrialDevelopTecSerOrgMapper.BaseResultMap">
         select *
         from tb_industrial_develop_tec_ser_org
         where TYPE = #{type}
+        order by itemUpdateAt desc
     </select>
     <select id="getDetailChiMed" resultMap="com.zyyglxt.dao.IndustrialDevelopChiMedMapper.BaseResultMap">
         select *

@@ -62,6 +62,7 @@
     from tb_culpro_doctor
     where itemID = #{itemid,jdbcType=INTEGER}
       and itemCode = #{itemcode,jdbcType=CHAR}
+    order by itemUpdateAt desc
   </select>
   <delete id="deleteByPrimaryKey" parameterType="com.zyyglxt.dataobject.DoctorDOKey">
     <!--

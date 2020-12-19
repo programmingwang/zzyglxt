@@ -20,12 +20,14 @@
     from resource_role_ref
     where itemID = #{itemid,jdbcType=INTEGER}
       and itemCode = #{itemcode,jdbcType=CHAR}
+    order by itemUpdateAt desc
   </select>
   <select id="selectByResCode" parameterType="java.lang.String" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
     from resource_role_ref
     where RESOURCE_CODE = #{resourceCode,jdbcType=CHAR}
+    order by itemUpdateAt desc
   </select>
   <delete id="deleteByPrimaryKey" parameterType="com.zyyglxt.dataobject.ResourcesRoleRefDOKey">
     delete from resource_role_ref

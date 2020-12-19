@@ -26,11 +26,13 @@
     from resource
     where itemID = #{itemid,jdbcType=INTEGER}
       and itemCode = #{itemcode,jdbcType=CHAR}
+    order by itemUpdateAt desc
   </select>
   <select id="selectAllResources" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
     from resource
+    order by itemUpdateAt desc
   </select>
   <select id="SelectMenuByRoleCode" parameterType="java.lang.String" resultMap="BaseResultMap">
     select
@@ -44,6 +46,7 @@
     and r3.ROLE_CODE = r2.itemCode
     and r2.itemCode = #{value}
     and r.RESOURCE_TYPE = 'm'
+    order by itemUpdateAt desc
   </select>
   <select id="SelectPermissionByRoleCode" parameterType="java.lang.String" resultMap="BaseResultMap">
     select
@@ -55,18 +58,21 @@
     and r3.ROLE_CODE = r2.itemCode
     and r2.itemCode = #{value}
     and r.RESOURCE_TYPE = 'p'
+    order by itemUpdateAt desc
   </select>
   <select id="selectListByPath" resultMap="BaseResultMap">
     select itemCode, RESOURCE_NAME, RESOURCE_URL
     from resource
     WHERE RESOURCE_URL = #{resourceUrl,jdbcType=VARCHAR}
     and RESOURCE_TYPE = 'p'
+    order by itemUpdateAt desc
   </select>
   <select id="selectPres" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
     from resource
     where RESOURCE_TYPE = 'p'
+    order by itemUpdateAt desc
   </select>
   <delete id="deleteByPrimaryKey" parameterType="com.zyyglxt.dataobject.ResourcesDOKey">
     delete from resource

@@ -1,35 +1,57 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.zyyglxt.dao.AuditMapper">
+<sql id="chimed">
+itemID,itemCode,NAME,AREA_COVERD,SALES_CATEGORY,PROCESSING_TYPE,PEODUCE_TYPE,PLANT_TYPE,PEODUCE_DRUG,SELLING_DRUGS,
+CONTACTS,PHONE,ADDRESS_PRO,ADDRESS_CITY,ADDRESS_COUNTRY,ADDRESS,INTRUDUCE,STATUS,REASON,ORG_CODE,TYPE,CREATER,itemCreateAt,
+UPDATER,itemUpdateAt
+</sql>
+<sql id="tecorg">
+itemID,itemCode,NAME,AREA_COVERD,SPECIAL_SERVICE,PROJECT_NAME,CONTACTS,PHONE,ADDRESS_PRO,ADDRESS_CITY,ADDRESS_COUNTRY,
+ADDRESS,ONLINE_ADDRESS,INTRUDUCE,STATUS,REASON,ORG_CODE,TYPE,CREATER,itemCreateAt,UPDATER,itemUpdateAt
+</sql>
+<sql id="school">
+itemID,itemCode,SCHOOL_NAME,SCHOOL_INTRODUCE,SECONDARY_COLLEGE,ENROLLMENT_MAJOR,GRADUATE_ENROLLMENT_MAJOR,PHONE,
+ONLINE_ADDRESS,SCHOOL_TEXT,ADDRESS_PRO,ADDRESS_CITY,ADDRESS_COUNTRY,ADDRESS,ORG_CODE,STATUS,CREATER,itemCreateAt,
+UPDATER,itemUpdateAt
+</sql>
+<sql id="hospital">
+itemID,itemCode,HOSPITAL_NAME,HOSPITAL_LEVEL,HOSPITAL_BRIEF_INTRODUCE,HOSPITAL_KEY_SPECIALTY,HOSPITAL_INTRODUCE,
+HOSPITAL_TELEPHONE,HOSPITAL_ADDRESS_PRO,HOSPITAL_ADDRESS_CITY,HOSPITAL_ADDRESS_COUNTRY,HOSPITAL_ADDRESS,HOSPITAL_LINK,
+REASON,HOSPITAL_STATUS,CREATER,itemCreateAt,UPDATER,itemUpdateAt,ORG_CODE
+</sql>
 
     <select id="getAllChiMed" resultMap="com.zyyglxt.dao.IndustrialDevelopChiMedMapper.BaseResultMap">
-        select *
+        select
+        <include refid="chimed"/>
         from tb_industrial_develop_chi_med
     </select>
     <select id="getAllTecOrg" resultMap="com.zyyglxt.dao.IndustrialDevelopTecSerOrgMapper.BaseResultMap">
-        select *
+        select
+        <include refid="tecorg"/>
         from tb_industrial_develop_tec_ser_org;
     </select>
     <select id="getAllSchool" resultMap="com.zyyglxt.dao.IndustrialDevelopSchoolMapper.BaseResultMap">
-        select *
+        select <include refid="school"/>
         from tb_industrial_develop_school
     </select>
     <select id="getAllHospital" resultMap="com.zyyglxt.dao.HospDOMapper.BaseResultMap">
-        select *
+        select <include refid="hospital"/>
         from tb_culpro_hosp
+        where ORG_CODE != 0
     </select>
     <select id="getAllChiMedByType" resultMap="com.zyyglxt.dao.IndustrialDevelopChiMedMapper.BaseResultMap">
-        select *
+        select <include refid="chimed"/>
         from tb_industrial_develop_chi_med
         where TYPE = #{type}
     </select>
     <select id="getAllTecOrgByType" resultMap="com.zyyglxt.dao.IndustrialDevelopTecSerOrgMapper.BaseResultMap">
-        select *
+        select <include refid="tecorg"/>
         from tb_industrial_develop_tec_ser_org
         where TYPE = #{type}
     </select>
     <select id="getDetailChiMed" resultMap="com.zyyglxt.dao.IndustrialDevelopChiMedMapper.BaseResultMap">
-        select *
+        select <include refid="chimed"/>
         from tb_industrial_develop_chi_med
         where itemCode = #{itemcode}
         <if test="itemid != null ">
@@ -38,7 +60,7 @@
         limit 1
     </select>
     <select id="getDetailTecSerOrg" resultMap="com.zyyglxt.dao.IndustrialDevelopTecSerOrgMapper.BaseResultMap">
-        select *
+        select <include refid="tecorg"/>
         from tb_industrial_develop_tec_ser_org
         where itemCode = #{itemcode}
         <if test="itemid != null ">
@@ -47,7 +69,7 @@
         limit 1
     </select>
     <select id="getDetailSchool" resultMap="com.zyyglxt.dao.IndustrialDevelopSchoolMapper.BaseResultMap">
-        select *
+        select <include refid="school"/>
         from tb_industrial_develop_school
         where itemCode = #{itemcode}
         <if test="itemid != null ">
@@ -56,7 +78,7 @@
         limit 1
     </select>
     <select id="getDetailHospital" resultMap="com.zyyglxt.dao.HospDOMapper.BaseResultMap">
-        select *
+        select <include refid="hospital"/>
         from tb_culpro_hosp
         where itemCode = #{itemcode}
         <if test="itemid != null ">

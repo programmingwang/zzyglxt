@@ -143,7 +143,7 @@
                     },
                     {
 
-                        menu_name: "中医药名科",
+                        menu_name: "中医名科",
                         menu_url: "/medicalService/specialty",
                         id: "7",
                         level: "1",

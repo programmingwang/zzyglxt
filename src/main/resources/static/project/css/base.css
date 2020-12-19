@@ -359,7 +359,7 @@ thead.self-thead {
     width: 100%;
     height: 100%;
 }
-.left-menu{
+.left_menu_fly{
     position: absolute;
     width: 229px;
     top: 0;

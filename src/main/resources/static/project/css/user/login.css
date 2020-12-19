@@ -39,9 +39,9 @@ body {
 
 .form-item {
     padding: 0;
-    height: 37px;
-    width: 88%;
     margin-left: 10%;
+    width: 80%;
+    height: 37px;
 }
 
 .form-input {

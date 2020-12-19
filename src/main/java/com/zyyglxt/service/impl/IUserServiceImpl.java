@@ -65,8 +65,8 @@ public class IUserServiceImpl implements IUserService {
             throw new BusinessException(result.getErrMsg(), EmBusinessError.PARAMETER_VALIDATION_ERROR);
         }
         // 验证手机号码
-        if (!MobileUtil.checkPhone(userDto.getMobilePhone())) {
-            throw new BusinessException("手机号码不正确", EmBusinessError.MOBILEPHONE_ERROR);
+        if (!MobileUtil.checkPhone(userDto.getMobilePhone()) && !MobileUtil.isPhone(userDto.getMobilePhone())) {
+            throw new BusinessException("号码不正确", EmBusinessError.MOBILEPHONE_ERROR);
         }
         // 用户名的唯一性
         UserDO userDO = userDOMapper.selectByUsername(userDto.getUsername());

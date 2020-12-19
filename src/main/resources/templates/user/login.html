@@ -9,28 +9,11 @@
     <link rel="stylesheet" type="text/css" th:href="@{/project/css/user/login.css}">
 </head>
 <body>
-<!--<div class="form-signin">-->
-
-<!--    <div class="form-label-group">-->
-<!--        <input type="text" id="inputUsername" class="form-control" placeholder="username " required>-->
-<!--        <label for="inputUsername">用户登录名</label>-->
-<!--    </div>-->
-
-<!--    <div class="form-label-group">-->
-<!--        <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>-->
-<!--        <label for="inputPassword">用户密码</label>-->
-<!--    </div>-->
-
-
-<!--    <button id="btn_Login" class="btn btn-lg btn-block" type="submit">登录</button>-->
-<!--    <button id="btn_Register" class="btn btn-lg btn-block" type="submit">注册</button>-->
-<!--    <p class="mt-5 mb-3 text-muted text-center">&copy; 2021 河北中医药网</p>-->
-<!--</div>-->
 <div class="container-fluid reg-content-body">
     <div class="row clearfix">
         <div class="col-sm-12 offset-md-4 col-md-4 reg-content">
             <div class="form-group row form-item">
-                <label for="username" class="col-sm-3 col-form-label form-text">用户名：</label>
+                <label for="inputUsername" class="col-sm-3 col-form-label form-text">用户名：</label>
                 <div class="col-sm-9 form-input">
                     <input type="text" class="form-control" id="inputUsername" placeholder="请输入用户名">
                 </div>
@@ -43,15 +26,17 @@
             </div>
 
             <div class="form-group row form-item">
+                <label class="col-sm-3"></label>
                 <button id="btn_Login" class="btn form-button col-sm-12" type="submit">登录</button>
             </div>
             <div class="form-group row form-item">
+                <label class="col-sm-3"></label>
                 <button id="btn_Register" class="btn form-button col-sm-12" type="submit">注册</button>
             </div>
-            <p class="mt-5 mb-3 text-muted text-center">&copy; 2021 河北中医药网</p>
         </div>
 
     </div>
+
 </div>
 </body>
 <script type="text/javascript" data-main="/main/main.js" th:src="@{/component/require@2.3.6/require-2.3.6.js}"></script>

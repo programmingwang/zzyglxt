@@ -37,6 +37,7 @@
     where itemID = #{key.itemid,jdbcType=INTEGER}
       and itemCode = #{key.itemcode,jdbcType=CHAR}
       and CHINESE_CULTURAL_TYPE = #{chineseCulturalType}
+    order by itemUpdateAt desc
   </select>
   <select id="selectChineseCulturalList"  resultMap="ResultMapWithBLOBs">
     select
@@ -46,6 +47,7 @@
     from tb_culpro_chinese_cultural
     where CHINESE_CULTURAL_TYPE = #{type}
     and CHINESE_CULTURAL_STATUS = #{status}
+    order by itemUpdateAt desc
   </select>
   <delete id="deleteByPrimaryKey" parameterType="com.zyyglxt.dataobject.ChineseCulturalDOKey">
 

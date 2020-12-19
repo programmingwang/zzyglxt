@@ -22,6 +22,7 @@
         from tb_culpro_hosp_specialty_ref
         where itemID = #{itemid,jdbcType=INTEGER}
         and itemCode = #{itemcode,jdbcType=CHAR}
+        order by itemUpdateAt desc
     </select>
     <delete id="deleteByPrimaryKey" parameterType="com.zyyglxt.dataobject.HospSpecialtyRefDOKey">
     delete from tb_culpro_hosp_specialty_ref
@@ -133,6 +134,7 @@
         <include refid="Base_Column_List"/>
         from tb_culpro_hosp_specialty_ref
         where SPECIALTY_CODE = #{specialtyCode}
+        order by itemUpdateAt desc
     </select>
 
     <delete id="deleteBySpecialtyCode">
@@ -145,6 +147,7 @@
         <include refid="Base_Column_List"/>
         from tb_culpro_hosp_specialty_ref
         where HOSPITAL_CODE = #{hospCode}
+        order by itemUpdateAt desc
     </select>
 
     <update id="updateBySpecialtyCodeSelective" parameterType="com.zyyglxt.dataobject.HospSpecialtyRefDO">

@@ -20,7 +20,11 @@ public class UsernameUtil {
 
     public String getOperateUser(){
         UserSessionDto user = (UserSessionDto) request.getSession().getAttribute("user");
-        return user.getUsername();
+        if (user != null){
+            return user.getUsername();
+        }else {
+            return null;
+        }
     }
     public String getOrgCode(){
         UserSessionDto user = (UserSessionDto) request.getSession().getAttribute("user");

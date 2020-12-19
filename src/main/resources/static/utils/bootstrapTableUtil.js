@@ -31,8 +31,8 @@
                 sortOrder: "asc",                   //排序方式
                 sidePagination: "client",           //分页方式：client客户端分页，server服务端分页（*）
                 page: 1,                      //初始化加载第一页，默认第一页,并记录
-                pageSize: 5,                       //每页的记录行数（*）
-                pageList: [5, 10, 20, 50],        //可供选择的每页的行数（*）
+                pageSize: 10,                       //每页的记录行数（*）
+                pageList: [10, 20, 30, 50],        //可供选择的每页的行数（*）
                 paginationPreText: '上一页',
                 paginationNextText: '下一页',
                 // showColumns: true,               //是否显示所有的列（选择显示的列）

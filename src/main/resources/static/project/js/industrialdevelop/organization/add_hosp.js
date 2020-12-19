@@ -81,7 +81,7 @@
                 entity["username"] = sessionStorage.getItem('username');
                 entity["orgCode"] = sessionStorage.getItem('orgCode');
 
-                //fileUtil.handleFile(updateStatus, entity.itemcode, uploadImg.getFiles()[0]);
+                fileUtil.handleFile(updateStatus, entity.itemcode, uploadImg.getFiles()[0]);
 
                 ajaxUtil.myAjax(null,requestUrl,entity,function (data) {
                     if(ajaxUtil.success(data)){

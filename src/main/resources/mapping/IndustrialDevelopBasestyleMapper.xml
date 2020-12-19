@@ -26,6 +26,7 @@
     from tb_industrial_develop_basestyle
     where itemID = #{itemid,jdbcType=INTEGER}
       and itemCode = #{itemcode,jdbcType=CHAR}
+    order by itemUpdateAt desc
   </select>
   <delete id="deleteByPrimaryKey" parameterType="map">
     <!--@mbg.generated-->
@@ -142,5 +143,6 @@
   </update>
     <select id="selectAll" resultMap="BaseResultMap">
       select * from tb_industrial_develop_basestyle
+      order by itemUpdateAt desc
     </select>
 </mapper>

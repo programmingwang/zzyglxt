@@ -28,12 +28,14 @@
     <include refid="Base_Column_List" />
     from tb_industrial_develop_expert_ref
     where itemCode = #{itemcode,jdbcType=CHAR}
+    order by itemUpdateAt desc
   </select>
   <select id="selectAll" resultMap="BaseResultMap">
     <!--@mbg.generated-->
     select
     <include refid="Base_Column_List" />
     from tb_industrial_develop_expert_ref
+    order by itemUpdateAt desc
   </select>
   <delete id="deleteByPrimaryKey" parameterType="com.zyyglxt.dataobject.IndustrialDevelopExpertRefDOKey">
     <!--
@@ -186,6 +188,7 @@
         <include refid="Base_Column_List" />
         FROM tb_industrial_develop_expert_ref
         WHERE TOPIC_CODE = #{topicCode}
+      order by itemUpdateAt desc
     </select>
 
     <select id="selectByExpertCode" resultMap="BaseResultMap">
@@ -193,6 +196,7 @@
         <include refid="Base_Column_List" />
         FROM tb_industrial_develop_expert_ref
         WHERE EXPERT_CODE = #{expertCode,jdbcType=VARCHAR}
+      order by itemUpdateAt desc
     </select>
 
     <delete id="deleteByTopicCode">

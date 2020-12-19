@@ -2296,6 +2296,7 @@
         modalHtml.myDeleteModalInCuHe = '是否删除非物质文化遗产信息?';
         modalHtml.myDeleteModalMovTV = '是否删除电视电影信息?';
         modalHtml.myDeleteModalSaleDrug='是否删除该药品';
+        modalHtml.myShelfSaleDrugModal='点击确认上架将上传至河北中医药网';
         modalHtml.mySubmitModal = '确认提交吗？';
         modalHtml.myPassModal = '确认通过吗？';
         modalHtml.myFailModal = '确认不通过吗？';

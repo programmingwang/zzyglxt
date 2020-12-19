@@ -1,6 +1,6 @@
 (function () {
-    require(['jquery','objectUtil','ajaxUtil','alertUtil','stringUtil','dictUtil','selectUtil','fileUtil','uploadImg','distpicker','urlUtil'],
-        function (jquery,objectUtil,ajaxUtil,alertUtil,stringUtil,dictUtil,selectUtil,fileUtil,uploadImg,distpicker,urlUtil) {
+    require(['jquery','objectUtil','ajaxUtil','alertUtil','stringUtil','dictUtil','fileUtil','uploadImg','selectUtil','distpicker'],
+        function (jquery,objectUtil,ajaxUtil,alertUtil,stringUtil,dictUtil,fileUtil,uploadImg,selectUtil,distpicker) {
 
 
             /*q全局变量*/
@@ -12,8 +12,6 @@
             var specialtyName = dictUtil.getDictByCode(dictUtil.DICT_LIST.dept)
             const editor = objectUtil.wangEditorUtil();
 
-            uploadImg.init();
-
             /*设置医院级别下拉框的值*/
             $("#hospitalLevel").selectUtil(hospitalLevel);
 
@@ -21,7 +19,7 @@
             $("#specialtyName").selectUtil(specialtyName);
             $("#add").unbind().on("click",function () {
                 var str = $("#hospitalKeySpecialty").val();
-                if (str.length == 0){
+                if (str.length === 0){
                     $("#hospitalKeySpecialty").val(specialtyName[$("#specialtyName").val()].text);
                 }else {
                     $("#hospitalKeySpecialty").val($("#hospitalKeySpecialty").val() + " " + specialtyName[$("#specialtyName").val()].text);
@@ -41,9 +39,9 @@
                     "username": username,
                     "orgName": orgName
                 }
-                ajaxUtil.myAjax(null, "/user/deletuser", userdto, function (data) {
+                ajaxUtil.myAjax(null,"/user/deletuser",userdto,function (data) {
 
-                }, false, true);
+                },false,true);
                 window.history.back()
             });
 
@@ -57,7 +55,16 @@
                     operateMessage = "新增医疗机构成功";
                     entity = {
                         itemcode: stringUtil.getUUID(),
-                        hospitalStatus: '0'
+                        hospitalStatus: '1'
+                    };
+                }
+                else {
+                    requestUrl = "/medicalService/hosp/update";
+                    operateMessage = "更新医院成功";
+                    entity = {
+                        itemid: tempdata.itemid,
+                        itemcode: tempdata.itemcode,
+                        hospitalStatus: '1'
                     };
                 }
                 entity["hospitalName"] = $("#hospitalName").val();
@@ -74,18 +81,11 @@
                 entity["username"] = sessionStorage.getItem('username');
                 entity["orgCode"] = sessionStorage.getItem('orgCode');
 
-                if (uploadImg.isUpdate()){
-                    if (isUpdate()){
-                        ajaxUtil.updateFile(itemcode,uploadImg.getFiles()[0],sessionStorage.getItem("username"), sessionStorage.getItem("username"));
-                    }else {
-                        ajaxUtil.fileAjax(itemcode,uploadImg.getFiles()[0],sessionStorage.getItem("username"), sessionStorage.getItem("username"))
-                    }
-
-                }
+                //fileUtil.handleFile(updateStatus, entity.itemcode, uploadImg.getFiles()[0]);
 
                 ajaxUtil.myAjax(null,requestUrl,entity,function (data) {
                     if(ajaxUtil.success(data)){
-                        alertUtil.success(operateMessage);
+                        alertUtil.info(operateMessage);
                         window.location.href = jumpUrl;
                     }else {
                         alertUtil.alert(data.msg);
@@ -123,6 +123,7 @@
                     $("#hospitalLink").val(tempdata.hospitalLink);
                     editor.txt.html(tempdata.hospitalIntroduce);
                 }else {
+                    localStorage.removeItem("rowData");
                     $("#hospitalName").val(sessionStorage.getItem('orgName'));
                     $("#hospitalTelephone").val(sessionStorage.getItem('phone'));
                     $("#distpicker").distpicker();//新增页面使用
@@ -131,11 +132,9 @@
 
                 }
             }
-
+            uploadImg.init();
             init();
 
 
         });
 })();
-
-

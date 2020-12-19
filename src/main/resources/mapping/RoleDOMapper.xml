@@ -37,7 +37,6 @@
     from role r, user_role_ref u
     where  r.itemCode = u.ROLE_CODE
     and u.USER_CODE = #{value}
-    order by itemUpdateAt desc
   </select>
   <select id="selectAllRole" resultMap="BaseResultMap">
     select

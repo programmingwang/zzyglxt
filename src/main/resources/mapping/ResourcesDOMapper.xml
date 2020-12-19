@@ -46,7 +46,6 @@
     and r3.ROLE_CODE = r2.itemCode
     and r2.itemCode = #{value}
     and r.RESOURCE_TYPE = 'm'
-    order by itemUpdateAt desc
   </select>
   <select id="SelectPermissionByRoleCode" parameterType="java.lang.String" resultMap="BaseResultMap">
     select
@@ -58,7 +57,6 @@
     and r3.ROLE_CODE = r2.itemCode
     and r2.itemCode = #{value}
     and r.RESOURCE_TYPE = 'p'
-    order by itemUpdateAt desc
   </select>
   <select id="selectListByPath" resultMap="BaseResultMap">
     select itemCode, RESOURCE_NAME, RESOURCE_URL

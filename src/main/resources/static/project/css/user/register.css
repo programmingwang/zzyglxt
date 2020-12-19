@@ -36,8 +36,9 @@
 
 .form-input input, .form-input select {
     border: 1px solid #9c7049;
-    height: 32px;
+    height: 35px;
     width: 100%;
+    color: #333333;
 }
 
 .form-input input:focus, .form-input select:focus {

@@ -43,6 +43,7 @@
                 param.intruduce = $(".w-e-text").html();
                 param.type = orgType;
                 param.itemcode = itemcode;
+                param.orgCode = sessionStorage.getItem("orgCode");
                 return param;
             }
 

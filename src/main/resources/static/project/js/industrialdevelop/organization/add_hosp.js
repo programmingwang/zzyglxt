@@ -59,7 +59,7 @@
                     };
                 }
                 else {
-                    requestUrl = "/medicalService/hosp/update";
+                    requestUrl = "/industrialDevelop/hosp_update";
                     operateMessage = "更新医院成功";
                     entity = {
                         itemid: tempdata.itemid,

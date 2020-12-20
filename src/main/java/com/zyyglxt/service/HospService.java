@@ -9,4 +9,6 @@ import com.zyyglxt.dataobject.HospDO;
  */
 public interface HospService {
     int addHosp(HospDO hospDO);
+
+    int updateHosp(HospDO hospDO);
 }

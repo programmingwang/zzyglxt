@@ -83,7 +83,7 @@ public class IndustrialDevelopSchoolServiceImpl implements IndustrialDevelopScho
         if (record.getAddressCity() != null){
             OrganizationDO updated = new OrganizationDO();
             updated.setOrgLocate(record.getAddressCity());
-            organizationDOMapper.updateByOrgCode(updated,record.getOrgCode());
+            organizationDOMapper.updateByOrgCode(updated,usernameUtil.getOrgCode());
         }
         return industrialDevelopSchoolMapper.updateByPrimaryKeySelective(record);
     }

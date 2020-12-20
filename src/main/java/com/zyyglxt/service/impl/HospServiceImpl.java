@@ -46,11 +46,6 @@ public class HospServiceImpl implements IHospService {
             throw new BusinessException(result.getErrMsg(), EmBusinessError.PARAMETER_VALIDATION_ERROR);
         }
         hospDO.setItemcreateat(new Date());
-        if (hospDO.getHospitalAddressCity() != null){
-            OrganizationDO updated = new OrganizationDO();
-            updated.setOrgLocate(hospDO.getHospitalAddressCity());
-            organizationDOMapper.updateByOrgCode(updated,hospDO.getOrgCode());
-        }
         hospDO.setCreater(usernameUtil.getOperateUser());
         hospDO.setUpdater(usernameUtil.getOperateUser());
 
@@ -62,11 +57,6 @@ public class HospServiceImpl implements IHospService {
         ValidatorResult result = validator.validate(hospDO);
         if(result.isHasErrors()){
             throw new BusinessException(result.getErrMsg(), EmBusinessError.PARAMETER_VALIDATION_ERROR);
-        }
-        if (hospDO.getHospitalAddressCity() != null){
-            OrganizationDO updated = new OrganizationDO();
-            updated.setOrgLocate(hospDO.getHospitalAddressCity());
-            organizationDOMapper.updateByOrgCode(updated,usernameUtil.getOrgCode());
         }
         hospDO.setUpdater(usernameUtil.getOperateUser());
         return hospDOMapper.updateByPrimaryKeySelective(hospDO);

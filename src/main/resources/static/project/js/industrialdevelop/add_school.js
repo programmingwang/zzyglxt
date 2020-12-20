@@ -43,6 +43,7 @@
                 param.address = $("#address").val()
                 param.schoolText = $(".w-e-text").html();
                 param.itemcode = itemcode;
+                param.orgCode = sessionStorage.getItem("orgCode");
                 return param;
             }
 

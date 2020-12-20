@@ -1,10 +1,173 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>首页</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/project/css/mainPage.css}">
 </head>
-<body>
-首页
+<body id="fir_body">
+<div>
+    <div class="row">
+        <div class="col-1"></div>
+        <div class="col-5">
+            <div class="home-header">
+                <div class="head-name">
+                    <span >我的办公</span>
+                </div>
+                <div class="more-c">
+                    <span >更多>></span>
+                </div>
+            </div>
+            <div class="home-contain">
+                <div>
+                    <div class="mb-3" style="color: red;font-weight: 800;font-size: larger;margin-left: 1rem;">我的收文</div>
+                    <div class="row mb-3">
+                        <div class="col-4">
+                            <div class="myOf">待办</div>
+                            <span id="shouW">10</span>
+                        </div>
+                        <div class="col-4">
+                            <div class="myOf">已办</div>
+                            <span id="shouO">10</span>
+                        </div>
+                        <div class="col-4">
+                            <div class="myOf">完结</div>
+                            <span id="shouE">10</span>
+                        </div>
+                    </div>
+                    <div class="mb-3" style="color: red;font-weight: 800;font-size: larger;margin-left: 1rem;">我的发文</div>
+                    <div class="row mb-3">
+                        <div class="col-4">
+                            <div class="myOf">待办</div>
+                            <span id="faW">10</span>
+                        </div>
+                        <div class="col-4">
+                            <div class="myOf">已办</div>
+                            <span id="faO">10</span>
+                        </div>
+                        <div class="col-4">
+                            <div class="myOf">完结</div>
+                            <span id="faE">10</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-5">
+            <div class="home-header">
+                <div class="head-name">
+                    <span >通知公告</span>
+                </div>
+                <div class="more-c">
+                    <span >更多>></span>
+                </div>
+            </div>
+            <div class="home-contain">
+                <div>
+                    <ul>
+                        <li class="mainLi">关于进一步做好新冠肺炎疫情防控期间中医药继续教育有关工作...</li>
+                        <li class="mainLi">河北省卫生健康委 河北省中医药管理局关于进一步加强无烟医疗卫...</li>
+                        <li class="mainLi">河北省中医药管理局关于组织2020年中医类别助理全科医生培训招...</li>
+                        <li class="mainLi">河北省将中药饮片纳入药品流通追溯系统</li>
+                        <li class="mainLi">河北省将中药饮片纳入药品流通追溯系统</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-1"></div>
+    </div>
+    <div class="row">
+        <div class="col-1"></div>
+        <div class="col-5">
+            <div class="home-header">
+                <div class="head-name">
+                    <span >我的办公</span>
+                </div>
+                <div class="more-c">
+                    <span >更多>></span>
+                </div>
+            </div>
+            <div class="home-contain">
+                <div>
+                    <ul>
+                        <li class="mainLi">关于进一步做好新冠肺炎疫情防控期间中医药继续教育有关工作...</li>
+                        <li class="mainLi">河北省卫生健康委 河北省中医药管理局关于进一步加强无烟医疗卫...</li>
+                        <li class="mainLi">河北省中医药管理局关于组织2020年中医类别助理全科医生培训招...</li>
+                        <li class="mainLi">河北省将中药饮片纳入药品流通追溯系统</li>
+                        <li class="mainLi">河北省将中药饮片纳入药品流通追溯系统</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-5">
+            <div class="home-header">
+                <div class="head-name">
+                    <span >通知公告</span>
+                </div>
+                <div class="more-c">
+                    <span >更多>></span>
+                </div>
+            </div>
+            <div class="home-contain">
+                <div>
+                    <ul>
+                        <li class="mainLi">关于进一步做好新冠肺炎疫情防控期间中医药继续教育有关工作...</li>
+                        <li class="mainLi">河北省卫生健康委 河北省中医药管理局关于进一步加强无烟医疗卫...</li>
+                        <li class="mainLi">河北省中医药管理局关于组织2020年中医类别助理全科医生培训招...</li>
+                        <li class="mainLi">河北省将中药饮片纳入药品流通追溯系统</li>
+                        <li class="mainLi">河北省将中药饮片纳入药品流通追溯系统</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-1"></div>
+    </div>
+    <div class="row">
+        <div class="col-1"></div>
+        <div class="col-5">
+            <div class="home-header">
+                <div class="head-name">
+                    <span >我的办公</span>
+                </div>
+                <div class="more-c">
+                    <span >更多>></span>
+                </div>
+            </div>
+            <div class="home-contain">
+                <div>
+                    <ul>
+                        <li class="mainLi">关于进一步做好新冠肺炎疫情防控期间中医药继续教育有关工作...</li>
+                        <li class="mainLi">河北省卫生健康委 河北省中医药管理局关于进一步加强无烟医疗卫...</li>
+                        <li class="mainLi">河北省中医药管理局关于组织2020年中医类别助理全科医生培训招...</li>
+                        <li class="mainLi">河北省将中药饮片纳入药品流通追溯系统</li>
+                        <li class="mainLi">河北省将中药饮片纳入药品流通追溯系统</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-5">
+            <div class="home-header">
+                <div class="head-name">
+                    <span >通知公告</span>
+                </div>
+                <div class="more-c">
+                    <span >更多>></span>
+                </div>
+            </div>
+            <div class="home-contain">
+                <div>
+                    <ul>
+                        <li class="mainLi">关于进一步做好新冠肺炎疫情防控期间中医药继续教育有关工作...</li>
+                        <li class="mainLi">河北省卫生健康委 河北省中医药管理局关于进一步加强无烟医疗卫...</li>
+                        <li class="mainLi">河北省中医药管理局关于组织2020年中医类别助理全科医生培训招...</li>
+                        <li class="mainLi">河北省将中药饮片纳入药品流通追溯系统</li>
+                        <li class="mainLi">河北省将中药饮片纳入药品流通追溯系统</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-1"></div>
+    </div>
+</div>
 </body>
 </html>

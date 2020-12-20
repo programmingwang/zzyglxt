@@ -209,12 +209,15 @@ public class IUserServiceImpl implements IUserService {
         UserDO userDO = userDOMapper.selectByUsername(usernameUtil.getOperateUser());
 
         String mobilePhone = updatePwdDto.getMobilePhone();
-        if (MobileUtil.checkPhone(mobilePhone)) {
+        if (MobileUtil.checkPhone(mobilePhone) || MobileUtil.isPhone(mobilePhone)) {
+            if (!updatePwdDto.getMobilePhone().equals(userDO.getMobilephone())){
+                throw new BusinessException("输入的电话号码与预留的不一致，请重新输入！", EmBusinessError.OLDPASSWORD_ERROR);
+            }
             String oldPassword = updatePwdDto.getPassword();// 输入的原密码
             BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-            oldPassword = passwordEncoder.encode(oldPassword);
+            //oldPassword = passwordEncoder.encode(oldPassword);
             // 数据库查询到的原密码和输入的原密码比对
-            if (userDO.getPassword().equals(oldPassword)) {
+            if (passwordEncoder.matches(oldPassword,userDO.getPassword())) {
                 updatePwdDto.setNewPassword(passwordEncoder.encode(updatePwdDto.getNewPassword()));
                 userDOMapper.updatePasswordByMobilePhone(updatePwdDto.getNewPassword(), mobilePhone);
                 return new ResponseData(EmBusinessError.success);
@@ -265,10 +268,14 @@ public class IUserServiceImpl implements IUserService {
             throw new BusinessException(isValidIDCardNo, EmBusinessError.IDNO_ERROR);
         }
         // 验证电话是否正确
-        if (!MobileUtil.checkPhone(userDO.getMobilephone()) && !StringUtils.isEmpty(userDO.getMobilephone())) {
+        if (!MobileUtil.checkPhone(userDO.getMobilephone())  && !MobileUtil.isPhone(userDO.getMobilephone())
+                && !StringUtils.isEmpty(userDO.getMobilephone())) {
             throw new BusinessException("手机号码不正确！", EmBusinessError.MOBILEPHONE_ERROR);
         }
 
+        if (userDO.getPortrait() == ""){
+            userDO.setPortrait(null);
+        }
         UserSessionDto userSessionDto = (UserSessionDto) request.getSession().getAttribute("user");
         userDO.setItemid(userSessionDto.getItemid());
         userDO.setItemcode(userSessionDto.getItemcode());

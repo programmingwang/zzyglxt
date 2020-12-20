@@ -180,8 +180,6 @@
                 let inputCode = $("#reg-code").val().toLowerCase();
                 let canvasCode = codeStr.join("").toLowerCase();
 
-                let RegExp = /^0\d{2,3}-\d{7,8}$/;
-
                 if (orgName == '') {
                     alertUtil.error('请输入机构名字！');
                     return false;
@@ -203,10 +201,7 @@
                     return false;
                 }
                 if (phone == '') {
-                    alertUtil.error('请输入手机号码！');
-                    return false;
-                } else if (RegExp.test(phone) == false && !(/^1[3456789]\d{9}$/.test(phone))) {
-                    alertUtil.error("电话号码或手机号码有误，请重填");
+                    alertUtil.error('请输入电话号码或手机号码！');
                     return false;
                 }
 

@@ -31,5 +31,5 @@ public interface OrganizationDOMapper {
 
     int updateByPrimaryKey(OrganizationDO record);
 
-    String selectByItemCode(String itemCode);
+    OrganizationDO selectByItemCode(String itemCode);
 }

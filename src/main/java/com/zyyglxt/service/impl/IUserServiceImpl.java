@@ -156,6 +156,7 @@ public class IUserServiceImpl implements IUserService {
         organizationDO.setItemcode(orgItemCode);
         organizationDO.setOrgName(userDto.getOrgName());
         organizationDO.setOrgIdentify(userDto.getOrgIdentify());
+        organizationDO.setAuditStatus("0");
         organizationDO.setOrgCode(userDto.getOrgCode());
         organizationDO.setOrgDescription(userDto.getOrgIdentify());
         organizationDO.setCreater(userDto.getUsername());

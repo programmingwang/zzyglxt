@@ -29,8 +29,16 @@ public class CustomizeAuthenticationFailureHandler implements AuthenticationFail
             //密码错误
             result = ResultTool.fail(EmBusinessError.USER_CREDENTIALS_ERROR);
         }else if (e instanceof InternalAuthenticationServiceException) {
-            //用户不存在
-            result = ResultTool.fail(EmBusinessError.USER_ACCOUNT_NOT_EXIST);
+            if ("用户不存在".equals(e.getMessage())) {
+                //用户不存在
+                result = ResultTool.fail(EmBusinessError.USER_ACCOUNT_NOT_EXIST);
+            } else if (e.getMessage().contains("审核未通过")){
+                result = ResultTool.fail(EmBusinessError.AUDIT_NOT_PASSED);
+            } else if (e.getMessage().contains("机构未注册")){
+                result = ResultTool.fail(EmBusinessError.ORG_NOT_REGISTER);
+            } else {
+                result = ResultTool.fail(EmBusinessError.UNKNOWN_ERROR);
+            }
         }else{
             //其他错误
             result = ResultTool.fail(EmBusinessError.fail);

@@ -43,6 +43,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         if (sysUser == null) {
             throw new RuntimeException("用户不存在");
         }
+        // 审核不通过不能登录
         OrganizationDO organizationDO = organizationService.selectByItemCode(sysUser.getOrgCode());
         if (organizationDO != null) {
             if (!"1".equals(organizationDO.getAuditStatus()) ){
@@ -51,6 +52,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         } else {
             throw new RuntimeException("机构未注册！");
         }
+
         Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
         if (sysUser != null) {
             RoleDO role = roleService.selectRoleByUserid(sysUser.getItemcode());

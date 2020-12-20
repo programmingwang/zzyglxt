@@ -23,7 +23,7 @@
         from tb_culpro_file
         where itemID = #{itemid,jdbcType=INTEGER}
         and itemCode = #{itemcode,jdbcType=CHAR}
-        order by itemUpdateAt desc
+        order by itemCreateAt desc
     </select>
     <delete id="deleteByPrimaryKey" parameterType="com.zyyglxt.dataobject.FileDOKey">
         delete from tb_culpro_file
@@ -157,7 +157,7 @@
         SELECT
         <include refid="Base_Column_List"/>
         FROM tb_culpro_file
-        order by itemUpdateAt desc
+        order by itemCreateAt desc
     </select>
 
     <select id="searchFile" resultMap="BaseResultMap">
@@ -167,14 +167,14 @@
         WHERE UPLOADER LIKE "%"#{value}"%"
         OR FILE_NAME LIKE "%"#{value}"%"
         OR FILE_TYPE LIKE "%"#{value}"%"
-        order by itemUpdateAt desc
+        order by itemCreateAt desc
     </select>
 
     <select id="top5File" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
         from tb_culpro_file
-        order by itemUpdateAt desc
+        order by itemCreateAt desc
         LIMIT 5
     </select>
 
@@ -196,7 +196,7 @@
         <include refid="Base_Column_List"/>
         FROM tb_culpro_file
         WHERE DATA_CODE = #{dataCode}
-        order by itemUpdateAt desc
+        order by itemCreateAt desc
     </select>
 
 </mapper>

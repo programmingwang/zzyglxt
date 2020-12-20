@@ -40,7 +40,7 @@
                 param.addressCountry = $("#addressCountry").val();
                 param.address = $("#address").val()
                 param.intruduce = $(".w-e-text").html();
-                param.orgCode = "未定义";
+                param.orgCode = sessionStorage.getItem("orgCode");
                 param.itemcode = itemcode;
                 param.type = orgType;
                 return param;

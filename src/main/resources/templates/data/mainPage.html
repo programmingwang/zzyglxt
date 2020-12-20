@@ -1,10 +1,182 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>首页</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/project/css/mainPage.css}">
 </head>
-<body>
-首页
+<body id="fir_body">
+<div>
+    <div class="row">
+        <div class="col-1"></div>
+        <div class="col-5">
+            <div class="home-header">
+                <div class="head-name">
+                    <span >我的办公</span>
+                </div>
+                <div class="more-c">
+                    <span >更多>></span>
+                </div>
+            </div>
+            <div class="home-contain">
+                <div>
+                    <ul>
+                        <li class="mainLi">关于拟确定为2020年度全省医养结合优质服务单位的公示</li>
+                        <li class="mainLi">河北省中医药管理局关于安新县中医医院评审结论的公示</li>
+                        <li class="mainLi">河北省中医药发展中心2020年公开招聘拟聘人员名单公示</li>
+                        <li class="mainLi">关于第一批河北省中医药健康旅游示范基地名单的公示</li>
+                        <li class="mainLi">关于我省青年岐黄学者推荐名单的公示</li>
+                    </ul>
+                </div>
+                <!--<div>-->
+                    <!--<div class="mb-3" style="color: red;font-weight: 800;font-size: larger;margin-left: 1rem;">我的收文</div>-->
+                    <!--<div class="row mb-3">-->
+                        <!--<div class="col-4">-->
+                            <!--<div class="myOf">待办</div>-->
+                            <!--<span id="shouW">10</span>-->
+                        <!--</div>-->
+                        <!--<div class="col-4">-->
+                            <!--<div class="myOf">已办</div>-->
+                            <!--<span id="shouO">10</span>-->
+                        <!--</div>-->
+                        <!--<div class="col-4">-->
+                            <!--<div class="myOf">完结</div>-->
+                            <!--<span id="shouE">10</span>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                    <!--<div class="mb-3" style="color: red;font-weight: 800;font-size: larger;margin-left: 1rem;">我的发文</div>-->
+                    <!--<div class="row mb-3">-->
+                        <!--<div class="col-4">-->
+                            <!--<div class="myOf">待办</div>-->
+                            <!--<span id="faW">10</span>-->
+                        <!--</div>-->
+                        <!--<div class="col-4">-->
+                            <!--<div class="myOf">已办</div>-->
+                            <!--<span id="faO">10</span>-->
+                        <!--</div>-->
+                        <!--<div class="col-4">-->
+                            <!--<div class="myOf">完结</div>-->
+                            <!--<span id="faE">10</span>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</div>-->
+            </div>
+        </div>
+        <div class="col-5">
+            <div class="home-header">
+                <div class="head-name">
+                    <span >通知公告</span>
+                </div>
+                <div class="more-c">
+                    <span >更多>></span>
+                </div>
+            </div>
+            <div class="home-contain">
+                <div>
+                    <ul>
+                        <li class="mainLi">关于进一步做好药品挂网工作的通知</li>
+                        <li class="mainLi">关于印发青年岐黄学者支持项目实施方案的通知</li>
+                        <li class="mainLi">关于印发中医药创新团队及人才支持计划实施方案的通知</li>
+                        <li class="mainLi">关于促进中医药传承创新发展的意见</li>
+                        <li class="mainLi">关于发布《中药新药用药材质量控制研究技术指导原则（试行）》等3个指导原则的通告</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-1"></div>
+    </div>
+    <div class="row">
+        <div class="col-1"></div>
+        <div class="col-5">
+            <div class="home-header">
+                <div class="head-name">
+                    <span >政策法规</span>
+                </div>
+                <div class="more-c">
+                    <span >更多>></span>
+                </div>
+            </div>
+            <div class="home-contain">
+                <div>
+                    <ul>
+                        <li class="mainLi">中华人民共和国广告法</li>
+                        <li class="mainLi">中华人民共和国基本医疗卫生与健康促进法</li>
+                        <li class="mainLi">医疗纠纷预防和处理条例</li>
+                        <li class="mainLi">中华人民共和国药品管理法实施条例</li>
+                        <li class="mainLi">药品生产监督管理办法</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-5">
+            <div class="home-header">
+                <div class="head-name">
+                    <span >规章制度</span>
+                </div>
+                <div class="more-c">
+                    <span >更多>></span>
+                </div>
+            </div>
+            <div class="home-contain">
+                <div>
+                    <ul>
+                        <li class="mainLi">河北省中医药条例</li>
+                        <li class="mainLi">河北省智慧医疗专项行动计划（2020-2022年）</li>
+                        <li class="mainLi">乡镇卫生院中医科基本标准</li>
+                        <li class="mainLi">卫生部国家中医药管理局关于印发医疗机构中药煎药室管理规范的通知</li>
+                        <li class="mainLi">关于修订中医类别医师执业范围的通知</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-1"></div>
+    </div>
+    <div class="row">
+        <div class="col-1"></div>
+        <div class="col-5">
+            <div class="home-header">
+                <div class="head-name">
+                    <span >领导讲话</span>
+                </div>
+                <div class="more-c">
+                    <span >更多>></span>
+                </div>
+            </div>
+            <div class="home-contain">
+                <div>
+                    <ul>
+                        <li class="mainLi">习近平对中医药工作作出重要指示强调</li>
+                        <li class="mainLi">王东峰：全力推动我省中医药事业发展迈上新台阶</li>
+                        <li class="mainLi">张伯礼：中医药参与武汉抗疫将被载入史册</li>
+                        <li class="mainLi">王东峰出席省中医药传承创新发展大会企业家座谈会并讲话</li>
+                        <li class="mainLi">河北省召开中医药传承创新发展新闻发布会</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-5">
+            <div class="home-header">
+                <div class="head-name">
+                    <span >共享文件</span>
+                </div>
+                <div class="more-c">
+                    <span >更多>></span>
+                </div>
+            </div>
+            <div class="home-contain">
+                <div>
+                    <ul>
+                        <li class="mainLi">关于拟确定为2020年度全省医养结合优质服务单位的公示</li>
+                        <li class="mainLi">河北省中医药管理局关于安新县中医医院评审结论的公示</li>
+                        <li class="mainLi">河北省中医药发展中心2020年公开招聘拟聘人员名单公示</li>
+                        <li class="mainLi">关于第一批河北省中医药健康旅游示范基地名单的公示</li>
+                        <li class="mainLi">关于我省青年岐黄学者推荐名单的公示</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-1"></div>
+    </div>
+</div>
 </body>
 </html>

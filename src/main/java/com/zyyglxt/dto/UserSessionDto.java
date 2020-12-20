@@ -19,4 +19,6 @@ public class UserSessionDto {
     private String rolename;
 
     private String orgCode;
+
+    private String cityId;
 }

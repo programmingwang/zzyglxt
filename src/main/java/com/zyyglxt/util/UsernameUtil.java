@@ -36,4 +36,13 @@ public class UsernameUtil {
         return user.getRolename();
     }
 
+    public String getCityId(){
+        UserSessionDto user = (UserSessionDto) request.getSession().getAttribute("user");
+        if (user != null){
+            return user.getCityId();
+        }else {
+            return null;
+        }
+    }
+
 }

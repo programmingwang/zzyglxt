@@ -203,7 +203,7 @@
                     return false;
                 }
                 if (phone == '') {
-                    alertUtil.error('请输入手机号码！');
+                    alertUtil.error('请输入电话号码或手机号码！');
                     return false;
                 } else if (RegExp.test(phone) == false && !(/^1[3456789]\d{9}$/.test(phone))) {
                     alertUtil.error("电话号码或手机号码有误，请重填");

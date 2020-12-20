@@ -180,8 +180,6 @@
                 let inputCode = $("#reg-code").val().toLowerCase();
                 let canvasCode = codeStr.join("").toLowerCase();
 
-                let RegExp = /^0\d{2,3}-\d{7,8}$/;
-
                 if (orgName == '') {
                     alertUtil.error('请输入机构名字！');
                     return false;

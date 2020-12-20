@@ -52,9 +52,9 @@
     and ORG_CODE = #{orgCode,jdbcType=VARCHAR}
     order by itemUpdateAt desc
   </select>
-  <select id="selectByItemCode" resultType="java.lang.String">
+  <select id="selectByItemCode" resultMap="BaseResultMap">
     select
-    ORG_CODE
+    *
     from organization
     where itemCode = #{itemcode,jdbcType=VARCHAR}
     order by itemUpdateAt desc

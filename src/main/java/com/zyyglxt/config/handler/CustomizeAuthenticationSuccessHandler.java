@@ -3,6 +3,7 @@ package com.zyyglxt.config.handler;
 import com.alibaba.fastjson.JSON;
 import com.zyyglxt.dao.OrganizationDOMapper;
 import com.zyyglxt.dao.RoleDOMapper;
+import com.zyyglxt.dataobject.OrganizationDO;
 import com.zyyglxt.dataobject.RoleDO;
 import com.zyyglxt.dataobject.UserDO;
 import com.zyyglxt.dto.UserSessionDto;
@@ -38,8 +39,9 @@ public class CustomizeAuthenticationSuccessHandler implements AuthenticationSucc
         User userDetails = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         UserDO userDo = userService.selectByName(userDetails.getUsername());
         RoleDO roleDO = roleDOMapper.selectByUserid(userDo.getItemcode());
+        OrganizationDO organizationDO = organizationDOMapper.selectByItemCode(userDo.getOrgCode());
         UserSessionDto userSessionDto = new UserSessionDto();
-        userSessionDto.setOrgCode(organizationDOMapper.selectByItemCode(userDo.getOrgCode()));
+        userSessionDto.setOrgCode(organizationDO.getOrgCode());
         userSessionDto.setUsername(userDo.getUsername());
         userSessionDto.setRolename(roleDO.getRoleName());
         userSessionDto.setItemid(userDo.getItemid());

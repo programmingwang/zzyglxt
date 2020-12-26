@@ -2,7 +2,11 @@ package com.zyyglxt.dao;
 
 import com.zyyglxt.dataobject.RequestReportDO;
 import com.zyyglxt.dataobject.RequestReportDOKey;
+import org.apache.ibatis.annotations.Mapper;
+import org.springframework.stereotype.Repository;
 
+@Mapper
+@Repository
 public interface RequestReportDOMapper {
     int deleteByPrimaryKey(RequestReportDOKey key);
 

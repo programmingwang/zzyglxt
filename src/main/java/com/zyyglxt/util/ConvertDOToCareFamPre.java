@@ -1,10 +1,9 @@
 package com.zyyglxt.util;
 
-import com.zyyglxt.dataobject.CulturalResourcesDO;
-import com.zyyglxt.dataobject.FamPreDO;
 import com.zyyglxt.dataobject.HealthCareFamPreDO;
-import com.zyyglxt.dto.CulturalResourcesDto;
+import com.zyyglxt.dataobject.ReceiptDO;
 import com.zyyglxt.dto.HealthCareFamPreDto;
+import com.zyyglxt.dto.ReceiptDto;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 
@@ -23,5 +22,15 @@ public class ConvertDOToCareFamPre {
         healthCareFamPreDto.setFilePath(filePath);
         healthCareFamPreDto.setFileName(fileName);
         return healthCareFamPreDto;
+    }
+    public static ReceiptDto convertFromReceipt(ReceiptDO receiptDO, String filePath, String fileName) {
+        if (StringUtils.isEmpty(filePath)) {
+            filePath = "已经损坏了";
+        }
+        ReceiptDto receiptDto = new ReceiptDto();
+        BeanUtils.copyProperties(receiptDO, receiptDto);
+        receiptDto.setFilePath(filePath);
+        receiptDto.setFileName(fileName);
+        return receiptDto;
     }
 }

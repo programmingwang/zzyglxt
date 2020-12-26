@@ -33,4 +33,6 @@ public class AuditDto {
     private String updater;
 
     private Date itemcreateat;
+
+    private String orgCode;
 }

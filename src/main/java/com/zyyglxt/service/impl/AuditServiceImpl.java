@@ -46,10 +46,24 @@ public class AuditServiceImpl implements IAuditService {
     @Override
     public List<AuditDto> getAll() {
         List<AuditDto> resList = new ArrayList<>();
-        List<IndustrialDevelopChiMed> chiMedList = auditMapper.getAllChiMed();
-        List<IndustrialDevelopTecSerOrg> tecSerOrgList = auditMapper.getAllTecOrg();
-        List<IndustrialDevelopSchool> schoolList = auditMapper.getAllSchool();
-        List<HospDO> hospDOList = auditMapper.getAllHospital();
+        List<IndustrialDevelopChiMed> chiMedList;
+        List<IndustrialDevelopTecSerOrg> tecSerOrgList;
+        List<IndustrialDevelopSchool> schoolList;
+        List<HospDO> hospDOList;
+        String city;
+        if (usernameUtil.getRoleName().equals("产业发展-省级")){
+            chiMedList = auditMapper.getAllChiMed();
+            tecSerOrgList = auditMapper.getAllTecOrg();
+            schoolList = auditMapper.getAllSchool();
+            hospDOList = auditMapper.getAllHospital();
+        }else {
+            city = usernameUtil.getCityId();
+            chiMedList = auditMapper.getAllChiMedByCity(city);
+            tecSerOrgList = auditMapper.getAllTecOrgByCity(city);
+            schoolList = auditMapper.getAllSchoolByCity(city);
+            hospDOList = auditMapper.getAllHospitalByCity(city);
+        }
+
 
         convertChiMed(chiMedList, resList);
 
@@ -134,6 +148,9 @@ public class AuditServiceImpl implements IAuditService {
 
     @Override
     public int changeChiMedStatus(AuditDto record) {
+        if (record.getStatus().equals("6")){
+            auditMapper.changeUserStatus(record.getOrgCode());
+        }
         record.setUpdater(usernameUtil.getOperateUser());
         return auditMapper.changeChiMedStatus(record);
     }
@@ -203,6 +220,8 @@ public class AuditServiceImpl implements IAuditService {
             target.removeIf(item -> item.getStatus().equals("2"));
             target.removeIf(item -> item.getStatus().equals("3"));
             target.removeIf(item -> item.getStatus().equals("5"));
+        }else if (usernameUtil.getRoleName().equals("产业发展-市级")){
+            target.removeIf(item -> !item.getAddressCity().equals(usernameUtil.getCityId()));
         }
         for (AuditDto item : target) {
             item.setType(typeMap.get(item.getType()));

@@ -51,4 +51,6 @@ public class HospDO extends HospDOKey {
     private String hospitalIntroduce;
 
     private String orgCode;
+
+    private String username;
 }

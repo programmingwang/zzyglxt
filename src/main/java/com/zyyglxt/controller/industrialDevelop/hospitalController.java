@@ -27,5 +27,13 @@ public class hospitalController {
         hospService.addHosp(hospDO);
         return new ResponseData(EmBusinessError.success);
     }
+
+    @PostMapping(value = "/hosp_update")
+    @ResponseBody
+    @LogAnnotation(appCode ="",logTitle ="更新医院数据",logLevel ="2",creater ="",updater = "")
+    public ResponseData updateHosp(@RequestBody HospDO hospDO){
+        hospService.updateHosp(hospDO);
+        return new ResponseData(EmBusinessError.success);
+    }
 }
 

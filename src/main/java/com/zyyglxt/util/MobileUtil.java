@@ -2,6 +2,7 @@ package com.zyyglxt.util;
 
 import org.apache.commons.lang3.StringUtils;
 
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class MobileUtil {
@@ -35,6 +36,28 @@ public class MobileUtil {
             }
         }
         return false;
+    }
+
+    /**
+     * 电话号码验证
+     *
+     * @param  str
+     * @return 验证通过返回true
+     */
+    public static boolean isPhone(String str) {
+        Pattern p1 = null,p2 = null;
+        Matcher m = null;
+        boolean b = false;
+        p1 = Pattern.compile("^[0-9]{3,4}[-][0-9]{7,9}$");  // 验证带区号的
+        p2 = Pattern.compile("^[1-9]{1}[0-9]{5,8}$");         // 验证没有区号的
+        if(str.length() >9)
+        {   m = p1.matcher(str);
+            b = m.matches();
+        }else{
+            m = p2.matcher(str);
+            b = m.matches();
+        }
+        return b;
     }
 
     /**

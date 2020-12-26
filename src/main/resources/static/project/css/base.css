@@ -177,7 +177,6 @@ hr {
 .AFirstMenu {
 
     color: black;
-    margin-left: 11px;
     font-family: 'Arial Negreta', 'Arial Normal', 'Arial', sans-serif;
     font-weight: 700;
     font-style: normal;
@@ -298,9 +297,11 @@ thead.self-thead {
 #main_body {
     border-top: 1rem solid #f7efeb;
     border-right: 10px solid #f7efeb;
-    flex: 0 0 87.94% !important;
-    max-width: 87.94% !important;
     border-bottom: 1rem solid #f7efeb;
+    width: 100%;
+    overflow: hidden;
+    height: 100%;
+    margin-left: 229px;
 }
 #accordion2{
     margin-top: 20px;
@@ -351,12 +352,17 @@ thead.self-thead {
     border: 0px
 }
 
-@media screen and (max-width: 1400px) {
-    #main_body {
-        border-top: 1rem solid #f7efeb;
-        border-right: 10px solid #f7efeb;
-        flex: 0 0 86.5934% !important;
-        max-width: 87.94% !important;
-        border-bottom: 1rem solid #f7efeb;
-    }
+
+.rifuck{
+    position: relative;
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
+.left_menu_fly{
+    position: absolute;
+    width: 229px;
+    top: 0;
+    left: 0;
+    overflow: hidden;
 }

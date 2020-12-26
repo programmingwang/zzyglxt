@@ -42,7 +42,7 @@
                 var entity = {};
                 var requestUrl;
                 var operateMessage;
-                requestUrl = "/medicalService/hosp/update";
+                requestUrl = "/industrialDevelop/hosp_update";
                 operateMessage = "更新医疗机构成功";
                 entity["hospitalName"] = $("#hospitalName").val();
                 entity["hospitalLevel"] = hospitalLevel[$("#specialtyName").val()].text;

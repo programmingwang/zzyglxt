@@ -18,7 +18,9 @@ public interface IndustrialDevelopSchoolMapper {
 
     int insert(IndustrialDevelopSchool record);
 
-    int insertSelective(IndustrialDevelopSchool record);
+    int insertSelective(IndustrialDevelopSchool industrialDevelopSchool);
+
+
 
     IndustrialDevelopSchool selectByPrimaryKey(@Param("itemid") Integer itemid, @Param("itemcode") String itemcode);
 

@@ -1,16 +1,16 @@
 (function () {
-    require(['jquery','ajaxUtil','stringUtil','uploadImg','urlUtil','objectUtil','distpicker'],
-        function (jquery,ajaxUtil,stringUtil,uploadImg,urlUtil, objectUtil,distpicker) {
+    require(['jquery', 'ajaxUtil', 'stringUtil', 'uploadImg', 'urlUtil', 'objectUtil', 'distpicker'],
+        function (jquery, ajaxUtil, stringUtil, uploadImg, urlUtil, objectUtil, distpicker) {
 
             var url = "/industrialdevelop/chi-med";
 
             var pathUrl = "/userLogin";
 
-            var orgType = "plant"
+            var orgType = "plant";
 
             var itemcode = stringUtil.getUUID();
 
-            var type = isUpdate() ? "put":"post";
+            var type = isUpdate() ? "put" : "post";
 
             uploadImg.init();
 
@@ -23,13 +23,13 @@
                     "username": username,
                     "orgName": orgName
                 }
-                ajaxUtil.myAjax(null,"/user/deletuser",userdto,function (data) {
+                ajaxUtil.myAjax(null, "/user/deletuser", userdto, function (data) {
 
-                },false,true);
+                }, false, true);
                 window.history.back()
             });
 
-            function generateParam(){
+            function generateParam() {
                 var param = {};
                 param.name = $("#name").val();
                 param.plantType = $("#plantType").val();
@@ -43,38 +43,30 @@
                 param.intruduce = $(".w-e-text").html();
                 param.type = orgType;
                 param.itemcode = itemcode;
+                param.orgCode = sessionStorage.getItem("orgCode");
                 return param;
             }
 
-            $("#saveBtn").unbind().on('click',function () {
-                var param = generateParam();
-                param.status = "0";
-                param.itemcode = itemcode;
-                if (uploadImg.isUpdate()){
-                    ajaxUtil.fileAjax(itemcode,uploadImg.getFiles()[0],sessionStorage.getItem("username"), sessionStorage.getItem("itemcode"))
-                }
-
-                ajaxUtil.myAjax(null,url,param,function (data) {
-                    if(ajaxUtil.success(data)){
-                        orange.redirect("/plantation_add");
-                    }else {
-                        alert(data.msg);
-                    }
-                },true,"123",type);
-                return false;
-            });
-
-            $("#submitBtn").unbind('click').on('click',function () {
+            $("#submitBtn").unbind('click').on('click', function () {
                 var param = generateParam();
                 param.status = "1";
-                ajaxUtil.myAjax(null,url,param,function (data) {
-                    if(ajaxUtil.success(data)){
-                        window.location.href = pathUrl;
-                        // orange.redirect(pathUrl)
+
+                if (uploadImg.isUpdate()){
+                    if (isUpdate()){
+                        ajaxUtil.updateFile(itemcode,uploadImg.getFiles()[0],sessionStorage.getItem("username"), sessionStorage.getItem("username"));
                     }else {
+                        ajaxUtil.fileAjax(itemcode,uploadImg.getFiles()[0],sessionStorage.getItem("username"), sessionStorage.getItem("username"))
+                    }
+
+                }
+
+                ajaxUtil.myAjax(null, url, param, function (data) {
+                    if (ajaxUtil.success(data)) {
+                        window.location.href = pathUrl;
+                    } else {
                         alert(data.msg)
                     }
-                },true,"123",type);
+                }, true, "123", type);
                 return false;
             });
 
@@ -96,8 +88,11 @@
                     itemcode = tempdata.itemcode;
                     uploadImg.setImgSrc(tempdata.filePath)
                 }else {
+                    $("#name").val(sessionStorage.getItem('orgName'));
+                    $("#phone").val(sessionStorage.getItem('phone'));
                     $("#distpicker").distpicker();
                 }
+
                 init = function () {
 
                 }

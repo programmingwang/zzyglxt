@@ -83,7 +83,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 "/images/**","/main/**", "/project/**", "/utils/**", "/", "/register","/user/register",
                 "/user/queryOrgStatus","/dict/getDictByCode","/industrialdevelop/chi-med","/industrialdevelop/school",
                 "/industrialdevelop/tec-ser-org","/industrialDevelop/hosp_add","/plantation_add","/process_add","/produce_add",
-                "/school_add","/sale_add","/hosp_add","/lab_add","/tecserviceorg_add","/tour_add","/user/deletuser").permitAll().
+                "/school_add","/sale_add","/hosp_add","/lab_add","/tecserviceorg_add","/tour_add","/user/deletuser","/file/upload").permitAll().
                 anyRequest().authenticated().
                     and().logout().
                     permitAll().//允许所有用户

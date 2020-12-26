@@ -10,6 +10,7 @@
     <result column="RECEIVING_UNIT_OF_COMMUN" jdbcType="VARCHAR" property="receivingUnitOfCommun" />
     <result column="FILE_NO" jdbcType="VARCHAR" property="fileNo" />
     <result column="NUMBER" jdbcType="INTEGER" property="number" />
+    <result column="SECRET_LEVEL" jdbcType="VARCHAR" property="secretLevel" />
     <result column="RECEIVING_DEGREE_OF_URGENCY" jdbcType="VARCHAR" property="receivingDegreeOfUrgency" />
     <result column="RECEIVING_DATA_STATUS" jdbcType="VARCHAR" property="receivingDataStatus" />
     <result column="TIME_LIMIT" jdbcType="TIMESTAMP" property="timeLimit" />
@@ -76,6 +77,9 @@
       <if test="number != null">
         NUMBER,
       </if>
+      <if test="secretLevel != null">
+        SECRET_LEVEL,
+      </if>
       <if test="receivingDegreeOfUrgency != null">
         RECEIVING_DEGREE_OF_URGENCY,
       </if>
@@ -123,6 +127,9 @@
       <if test="number != null">
         #{number,jdbcType=INTEGER},
       </if>
+      <if test="secretLevel != null">
+        #{secretLevel,jdbcType=VARCHAR},
+      </if>
       <if test="receivingDegreeOfUrgency != null">
         #{receivingDegreeOfUrgency,jdbcType=VARCHAR},
       </if>
@@ -167,6 +174,9 @@
       <if test="number != null">
         NUMBER = #{number,jdbcType=INTEGER},
       </if>
+      <if test="secretLevel != null">
+        SECRET_LEVEL = #{secretLevel,jdbcType=VARCHAR},
+      </if>
       <if test="receivingDegreeOfUrgency != null">
         RECEIVING_DEGREE_OF_URGENCY = #{receivingDegreeOfUrgency,jdbcType=VARCHAR},
       </if>
@@ -209,5 +219,21 @@
       itemUpdateAt = #{itemupdateat,jdbcType=TIMESTAMP}
     where itemID = #{itemid,jdbcType=INTEGER}
       and itemCode = #{itemcode,jdbcType=CHAR}
+  </update>
+  <select id="selectAllReceipt" resultMap="BaseResultMap">
+        SELECT *
+        FROM tb_governres_receipt
+       WHERE RECEIVING_DATA_STATUS = #{receivingDataStatus,jdbcType=VARCHAR}
+       order by itemCreateAt
+    </select>
+  <update id="changeStatusToReceipt">
+    update tb_governres_receipt
+    <set>
+      <if test="receivingDataStatus != null">
+        RECEIVING_DATA_STATUS = #{receivingDataStatus,jdbcType=VARCHAR}
+      </if>
+    </set>
+    where itemID = #{key.itemid,jdbcType=INTEGER}
+    and itemCode = #{key.itemcode,jdbcType=CHAR}
   </update>
 </mapper>

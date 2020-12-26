@@ -1,25 +1,30 @@
 package com.zyyglxt.dataobject;
 
+import javax.validation.constraints.NotBlank;
 import java.util.Date;
 
 public class ReceiptDO extends ReceiptDOKey {
-    private String receivingNum;
+    private String receivingNum;//收文号
 
-    private Date receivingDateOfReceipt;
+    private Date receivingDateOfReceipt;//收文时间
 
-    private String receivingTitle;
+    @NotBlank(message = "来文标题不能为空")
+    private String receivingTitle;//来文标题
 
-    private String receivingUnitOfCommun;
+    private String receivingUnitOfCommun;//来文单位
 
-    private String fileNo;
+    private String fileNo;//文件编号
 
-    private Integer number;
+    private Integer number;//份数
 
-    private String receivingDegreeOfUrgency;
+    @NotBlank(message = "来文密级不能为空")
+    private  String secretLevel;//密级
 
-    private String receivingDataStatus;
+    private String receivingDegreeOfUrgency;//紧急程度
 
-    private Date timeLimit;
+    private String receivingDataStatus;//数据状态
+
+    private Date timeLimit;//办结时间
 
     private String creater;
 
@@ -75,6 +80,15 @@ public class ReceiptDO extends ReceiptDOKey {
 
     public void setNumber(Integer number) {
         this.number = number;
+    }
+
+
+    public String getSecretLevel() {
+        return secretLevel;
+    }
+
+    public void setSecretLevel(String secretLevel) {
+        this.secretLevel = secretLevel== null ? null : secretLevel.trim();;
     }
 
     public String getReceivingDegreeOfUrgency() {

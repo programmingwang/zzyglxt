@@ -109,7 +109,7 @@
                     };
                 }else{
                     var needData = JSON.parse(localStorage.getItem("rowData"));
-                    addUpdateUrl = "updatehealthcarefampredo";
+                    addUpdateUrl = "updatereceipt";
                     ReceiptEntity = {
                         itemid: needData.itemid,
                         itemcode: needData.itemcode,

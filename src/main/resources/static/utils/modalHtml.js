@@ -2370,7 +2370,7 @@
             '                <fieldset disabled>'+
             '                <div class="input-group mb-3">\n' +
             '                    <div class="input-group-prepend">\n' +
-            '                        <button class="btn btn-primary btn-sm" >办结时间</button>\n' +
+            '                        <button class="btn btn-primary btn-sm" >办结时限</button>\n' +
             '                    </div>\n' +
             '                    <input type="text" id="timeLimit" class="form-control">\n' +
             '                </div>\n' +
@@ -2390,9 +2390,9 @@
             '                <fieldset disabled>'+
             '                <div class="input-group mb-3">\n' +
             '                    <div class="input-group-prepend">\n' +
-            '                        <button class="btn btn-primary btn-sm">附件</button>\n' +
+            '                        <button type="button" class="btn btn-primary btn-sm" >附&emsp;&emsp;件</button>\n' +
             '                    </div>\n' +
-            '                    <a src="#"></a>\n' +
+            '                    <span id="upFile" src="#" style="margin-left: 9px;margin-top: 2px;"></span>\n' +
             '                </div>\n' +
             '            </div>\n' +
             '\n' +
@@ -2413,7 +2413,7 @@
             '                    <div class="input-group-prepend">\n' +
             '                        <label class="input-group-text" for="applicant">创建时间</label>\n' +
             '                    </div>\n' +
-            '                    <input type="text"  id="itemCreateAt" class="form-control">\n' +
+            '                    <input type="text"  id="itemcreateat" class="form-control">\n' +
             '                </div>\n' +
             '                </fieldset>'+
             '            </div>\n'+

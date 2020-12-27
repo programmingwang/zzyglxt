@@ -159,7 +159,7 @@
                     $("#itemCreateat").val(row.itemcreateat);
                     $("#receivingDataStatus").val(webStatus[row.receivingDataStatus].text);
                     $("#fileDiv").attr("style","display:block");
-                    $("#upFile").html(row.fileName);
+                    $("#upFile").text(row.fileName);
                     myReceiptModal.show();
                 },
 

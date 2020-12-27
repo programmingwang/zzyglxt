@@ -1,8 +1,11 @@
 package com.zyyglxt.dataobject;
 
+import javax.validation.constraints.NotBlank;
 import java.util.Date;
 
 public class RequestReportDO extends RequestReportDOKey {
+
+    @NotBlank(message = "报告标题不能为空")
     private String reportTitle;
 
     private String reportDataStatus;

@@ -157,4 +157,20 @@
     where itemID = #{itemid,jdbcType=INTEGER}
       and itemCode = #{itemcode,jdbcType=CHAR}
   </update>
+  <select id="selectAllReport" resultMap="BaseResultMap">
+        SELECT *
+        FROM tb_governres_request_report
+       WHERE REPORT_DATA_STATUS = #{reportDataStatus,jdbcType=VARCHAR}
+       order by itemCreateAt
+    </select>
+  <update id="changeStatusToReport">
+    update tb_governres_request_report
+    <set>
+      <if test="reportDataStatus != null">
+        REPORT_DATA_STATUS = #{reportDataStatus,jdbcType=VARCHAR}
+      </if>
+    </set>
+    where itemID = #{key.itemid,jdbcType=INTEGER}
+    and itemCode = #{key.itemcode,jdbcType=CHAR}
+  </update>
 </mapper>

@@ -158,6 +158,8 @@
                     $("#creater").val(row.creater);
                     $("#itemCreateat").val(row.itemcreateat);
                     $("#receivingDataStatus").val(webStatus[row.receivingDataStatus].text);
+                    $("#fileDiv").attr("style","display:block");
+                    $("#upFile").text(row.fileName);
                     myReceiptModal.show();
                 },
 

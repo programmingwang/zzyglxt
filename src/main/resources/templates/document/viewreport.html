@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>查看请示报告</title>
+    <link rel="stylesheet" href="./bootstrap@4.5.2/css/bootstrap.min.css">
+    <style>
+        .request-table{
+            border-width: 1px;
+            border-color: #666666;
+            border-collapse: collapse;
+            width: 100%;
+            margin-top: 20px;
+
+        }
+        table.request-table th {
+            border-width: 1px;
+            padding: 8px;
+            border-style: solid;
+            border-color: #666666;
+            background-color: #dedede;
+        }
+        table.request-table td {
+            border-width: 1px;
+            padding: 8px;
+            border-style: solid;
+            border-color: #666666;
+            background-color: #ffffff;
+        }
+        .firstL{
+            width: 10%;
+            text-align: center;
+            height: 180px;
+            font-weight: 500;
+        }
+        .textC{
+            margin: 10px;
+        }
+        .mesageYJ {
+            float: left;
+        }
+        .mesageP {
+            float: right;
+        }
+        #reportTitle{
+
+        }
+    </style>
+</head>
+<body>
+<div class="col-lg-1"></div>
+<div class="col-lg-10">
+    <div class="col-lg-12" style="text-align: center;margin-top: 20px;"><h4>请示报告</h4></div>
+    <div class="col-lg-12">
+        <table class="request-table">
+            <tr>
+                <td class="firstL">领<br>导<br>批<br>示</td>
+                <td class="secendL ">
+                    <div class="mesageYJ">
+                        <span class="textC">同意，允许施工 </span>
+                    </div>
+                    <div class="mesageP">
+                        <div>
+                            <span class="textC">刘思思</span>
+                            <span class="textC">2020 11.12</span>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="firstL">处<br>室<br>意<br>见</td>
+                <td class="secendL">
+                    <div class="mesageYJ">
+                        <span class="textC">同意，允许施工 </span>
+                    </div>
+                    <div class="mesageP">
+                        <div>
+                            <span class="textC">刘思思</span>
+                            <span class="textC">2020 11.12</span>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="firstL">报<br>告<br>内<br>容</td>
+                <td class="secendL">
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">报告标题：</label>
+                        <div class="col-sm-3">
+                            <input id="reportTitle" type="text" class="form-control" style="font-family: monospace;margin-left: -120px;"  disabled>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">报告内容：</label>
+                        <div class="col-sm-3">
+                            <textarea name="" id="reportContent"  rows="3" style="font-family: monospace;margin-left: -120px;width: 100%;border: 1px solid;" disabled></textarea>
+                        </div>
+                    </div>
+                    <!--附件div-->
+                    <div class="form-group row">
+                        <label for="exampleFormControlFile1" class="col-sm-2 col-form-label">附&emsp;&emsp;件：</label>
+                        <div class="upload-wrap anticon" nv-file-drop="" uploader="uploader" style="margin-top: 8px;margin-left: -120px;">
+                            <a id="upload_file" href=""></a>
+                        </div>
+
+                    </div>
+                </td>
+            </tr>
+        </table>
+        </tbody>
+    </div>
+    <div class="col-lg-12" style="margin-top: 15px;">
+        <span style="margin-left: 3rem;margin-right: 1rem;">起草人：</span>
+        <span style="margin-right: 7rem;">刘思思</span>
+        <span style="margin-left: 3rem;margin-right: 1rem;">日期：</span>
+        <span>2020.11.11</span>
+    </div>
+    <div class="form-group row">
+        <div class="col-lg-4 col-md-4" ></div>
+        <div class=" col-lg-4 row" >
+            <div class="col">
+                <button id="cancelbtn" type="button" class="btn btn-light col">取消</button>
+            </div>
+            <div class="col">
+                <button id="passbtn" type="button" style="display: none" class="pass btn btn-danger col" data-target="#staticBackdrop">通过</button>
+            </div>
+            <div class="col">
+                <button id="failbtn" type="button" style="display: none" class="btn btn-danger col">不通过</button>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-4" ></div>
+    </div>
+</div>
+<div class="col-lg-1"></div>
+<script type="text/javascript" data-main="/main/main.js" th:src="@{/component/require@2.3.6/require-2.3.6.js}"></script>
+<script type="text/javascript" th:src="@{/project/js/document/viewreport.js}"></script>
+<link type="text/css" rel="stylesheet" href="/component/uploadImg/css/uploadImg.css"
+      th:src="@{/component/uploadImg/css/uploadImg.css}">
+<script type="text/javascript" th:src="@{/component/uploadImg/js/bootstrap.min.js}"></script>
+
+</body>
+</html>

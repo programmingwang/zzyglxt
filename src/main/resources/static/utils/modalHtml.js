@@ -2290,7 +2290,7 @@
             '                <fieldset disabled>'+
             '                <div class="input-group mb-3">\n' +
             '                    <div class="input-group-prepend">\n' +
-            '                        <button id="culturalNameSpan" class="btn btn-primary btn-sm">收文号</button>\n' +
+            '                        <button id="culturalNameSpan" class="btn btn-primary btn-sm">收&emsp;文&emsp;号</button>\n' +
             '                    </div>\n' +
             '                    <input type="text" id="receivingNum" class="form-control">\n' +
             '                </div>\n' +
@@ -2340,7 +2340,7 @@
             '                <fieldset disabled>'+
             '                <div class="input-group mb-3">\n' +
             '                    <div class="input-group-prepend">\n' +
-            '                        <button class="btn btn-primary btn-sm" >份数</button>\n' +
+            '                        <button class="btn btn-primary btn-sm" >份&emsp;&emsp;数</button>\n' +
             '                    </div>\n' +
             '                    <input type="text" id="number" class="form-control">\n' +
             '                </div>\n' +
@@ -2350,7 +2350,7 @@
             '                <fieldset disabled>'+
             '                <div class="input-group mb-3">\n' +
             '                    <div class="input-group-prepend">\n' +
-            '                        <button class="btn btn-primary btn-sm" >密级</button>\n' +
+            '                        <button class="btn btn-primary btn-sm" >密&emsp;&emsp;级</button>\n' +
             '                    </div>\n' +
             '                    <input type="text" id="secretLevel" class="form-control">\n' +
             '                </div>\n' +
@@ -2370,7 +2370,7 @@
             '                <fieldset disabled>'+
             '                <div class="input-group mb-3">\n' +
             '                    <div class="input-group-prepend">\n' +
-            '                        <button class="btn btn-primary btn-sm" >办结时间</button>\n' +
+            '                        <button class="btn btn-primary btn-sm" >办结时限</button>\n' +
             '                    </div>\n' +
             '                    <input type="text" id="timeLimit" class="form-control">\n' +
             '                </div>\n' +
@@ -2390,9 +2390,9 @@
             '                <fieldset disabled>'+
             '                <div class="input-group mb-3">\n' +
             '                    <div class="input-group-prepend">\n' +
-            '                        <button class="btn btn-primary btn-sm">附件</button>\n' +
+            '                        <button type="button" class="btn btn-primary btn-sm" >附&emsp;&emsp;件</button>\n' +
             '                    </div>\n' +
-            '                    <a src="#"></a>\n' +
+            '                    <span id="upFile" src="#" style="margin-left: 9px;margin-top: 2px;"></span>\n' +
             '                </div>\n' +
             '            </div>\n' +
             '\n' +
@@ -2413,7 +2413,7 @@
             '                    <div class="input-group-prepend">\n' +
             '                        <label class="input-group-text" for="applicant">创建时间</label>\n' +
             '                    </div>\n' +
-            '                    <input type="text"  id="itemCreateAt" class="form-control">\n' +
+            '                    <input type="text"  id="itemcreateat" class="form-control">\n' +
             '                </div>\n' +
             '                </fieldset>'+
             '            </div>\n'+
@@ -2473,6 +2473,7 @@
 
         modalHtml.myCencelDistribution = "是否取消分配专家？"
         modalHtml.myDeletereceiptModal='是否删除收文信息';
+        modalHtml.myDeletereportModal='是否删除请示报告信息';
         modalHtml.myDeleteTopicManagement = "是否删除该项目信息";
 
 

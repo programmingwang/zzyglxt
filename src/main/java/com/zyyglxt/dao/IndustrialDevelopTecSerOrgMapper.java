@@ -29,5 +29,5 @@ public interface IndustrialDevelopTecSerOrgMapper {
 
     List<IndustrialDevelopTecSerOrg> selectAll(@Param("type") String type);
 
-    IndustrialDevelopTecSerOrg selectByOrgNameAndCode(String orgName, String orgCode);
+    IndustrialDevelopTecSerOrg selectByOrgNameAndCode(@Param("orgName") String orgName, @Param("orgCode")String orgCode);
 }

@@ -98,7 +98,9 @@
             //数据提交状态
             "topicStatus": "topicStatus",
             //审核状态
-            "auditStatus": "auditStatus"
+            "auditStatus": "auditStatus",
+            //紧急程度
+            "emergencyStatus":"emergencyStatus"
         }
 
         var dictList = {

@@ -123,22 +123,12 @@
                     var tempdata = JSON.parse(localStorage.getItem("rowData"));
                     $("#chineseMedicineName").val(tempdata.chineseMedicineName);
                     $("#chineseMedicineAlias").val(tempdata.chineseMedicineAlias);
-                    // $("#chineseMedicineType").val(tempdata.chineseMedicineType);
-                    $("#chineseMedicineType").find("option[value='请选择']").attr("selected", false);
-                    var selectedVal;
-                    for(var i = 0;i<pl.length;i++){
-                        if(pl[i].text == tempdata.chineseMedicineType){
-                            selectedVal = i;
-                            break;
-                        }
-                    }
-                    $("#chineseMedicineType").val(selectedVal);
+                    $("#chineseMedicineType").val(tempdata.chineseMedicineType);
                     $("#chineseMedicineHarvesting").val(tempdata.chineseMedicineHarvesting);
                     $("#chineseMedicineTaste").val(tempdata.chineseMedicineTaste);
                     $("#chineseMedicineEffect").val(tempdata.chineseMedicineEffect);
                     $("#chineseMedicineUsage").val(tempdata.chineseMedicineUsage);
                     $("#chineseMedicineMerTro").val(tempdata.chineseMedicineMerTro);
-                   /* editor.txt.html(tempdata.chineseMedicineUsage);*/
                     var img = tempdata.filePath;
                     uploadImg.setImgSrc(img);
                 }else{

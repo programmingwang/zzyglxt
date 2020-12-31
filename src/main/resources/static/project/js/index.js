@@ -255,7 +255,7 @@
                     },
                     {
                         menu_name: "收文管理",
-                        menu_url: "/document/receiveMsgMan",
+                        menu_url: "/document/receipt",
                         id: "14-2",
                         level: "2",
                         pid: "14"
@@ -359,7 +359,7 @@
                     },
                     {
                         menu_name: "收文管理",
-                        menu_url: "/document/receiveMsgMan",
+                        menu_url: "/document/receipt",
                         id: "14-2",
                         level: "2",
                         pid: "14"

@@ -34,12 +34,23 @@
                 });
             });
 
+            var a = 0;
+
             // 点击修改密码按钮向上向下滑动，信息输入框变得不可输入，修改密码输入框可输入
             $(document).ready(function () {
                 $("#modifypwdBtn").click(function () {
-                    $(".updataP").slideToggle("slow");
-                    $(".msg").attr("disabled", "disabled");
-                    $(".pwd").removeAttr("disabled");
+                    if (a == 0){
+                        $(".updataP").slideDown("slow");
+                        if (typeof ($(".msg").attr("disabled")) == "undefined") {
+                            $(".msg").attr("disabled", "disabled");
+                        }
+                        $(".pwd").removeAttr("disabled");
+                        a = 1;
+                    }else if (a == 1){
+                        $(".updataP").slideUp("slow");
+                        $(".pwd").attr("disabled", "disabled");
+                        a = 0;
+                    }
                 });
             });
 

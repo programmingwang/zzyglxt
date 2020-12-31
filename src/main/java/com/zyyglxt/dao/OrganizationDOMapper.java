@@ -21,7 +21,7 @@ public interface OrganizationDOMapper {
 
     List<OrganizationDO> queryAllOrgByAuditStatus();
 
-    OrganizationDO selectByOrgNameAndCode(String orgName, String orgCode);
+    OrganizationDO selectByOrgNameAndCode(@Param("orgName") String orgName, @Param("orgCode")String orgCode);
 
     OrganizationDO selectByOrgName(String orgName);
 

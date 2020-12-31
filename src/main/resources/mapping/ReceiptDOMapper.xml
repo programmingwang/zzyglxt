@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zyyglxt.dao.ReceiptDOMapper">
+  <resultMap id="BaseResultMap" type="com.zyyglxt.dataobject.ReceiptDO">
+    <id column="itemID" jdbcType="INTEGER" property="itemid" />
+    <id column="itemCode" jdbcType="CHAR" property="itemcode" />
+    <result column="RECEIVING_NUM" jdbcType="VARCHAR" property="receivingNum" />
+    <result column="RECEIVING_DATE_OF_RECEIPT" jdbcType="TIMESTAMP" property="receivingDateOfReceipt" />
+    <result column="RECEIVING_TITLE" jdbcType="VARCHAR" property="receivingTitle" />
+    <result column="RECEIVING_UNIT_OF_COMMUN" jdbcType="VARCHAR" property="receivingUnitOfCommun" />
+    <result column="FILE_NO" jdbcType="VARCHAR" property="fileNo" />
+    <result column="NUMBER" jdbcType="INTEGER" property="number" />
+    <result column="SECRET_LEVEL" jdbcType="VARCHAR" property="secretLevel" />
+    <result column="RECEIVING_DEGREE_OF_URGENCY" jdbcType="VARCHAR" property="receivingDegreeOfUrgency" />
+    <result column="RECEIVING_DATA_STATUS" jdbcType="VARCHAR" property="receivingDataStatus" />
+    <result column="TIME_LIMIT" jdbcType="TIMESTAMP" property="timeLimit" />
+    <result column="CREATER" jdbcType="VARCHAR" property="creater" />
+    <result column="itemCreateAt" jdbcType="TIMESTAMP" property="itemcreateat" />
+    <result column="UPDATER" jdbcType="VARCHAR" property="updater" />
+    <result column="itemUpdateAt" jdbcType="TIMESTAMP" property="itemupdateat" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    itemID, itemCode, RECEIVING_NUM, RECEIVING_DATE_OF_RECEIPT, RECEIVING_TITLE, RECEIVING_UNIT_OF_COMMUN, 
+    FILE_NO, NUMBER, RECEIVING_DEGREE_OF_URGENCY, RECEIVING_DATA_STATUS, TIME_LIMIT, 
+    CREATER, itemCreateAt, UPDATER, itemUpdateAt
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="com.zyyglxt.dataobject.ReceiptDOKey" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tb_governres_receipt
+    where itemID = #{itemid,jdbcType=INTEGER}
+      and itemCode = #{itemcode,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.zyyglxt.dataobject.ReceiptDOKey">
+    delete from tb_governres_receipt
+    where itemID = #{itemid,jdbcType=INTEGER}
+      and itemCode = #{itemcode,jdbcType=CHAR}
+  </delete>
+  <insert id="insert" parameterType="com.zyyglxt.dataobject.ReceiptDO">
+    insert into tb_governres_receipt (itemID, itemCode, RECEIVING_NUM, 
+      RECEIVING_DATE_OF_RECEIPT, RECEIVING_TITLE, 
+      RECEIVING_UNIT_OF_COMMUN, FILE_NO, NUMBER, 
+      RECEIVING_DEGREE_OF_URGENCY, RECEIVING_DATA_STATUS, 
+      TIME_LIMIT, CREATER, itemCreateAt, 
+      UPDATER, itemUpdateAt)
+    values (#{itemid,jdbcType=INTEGER}, #{itemcode,jdbcType=CHAR}, #{receivingNum,jdbcType=VARCHAR}, 
+      #{receivingDateOfReceipt,jdbcType=TIMESTAMP}, #{receivingTitle,jdbcType=VARCHAR}, 
+      #{receivingUnitOfCommun,jdbcType=VARCHAR}, #{fileNo,jdbcType=VARCHAR}, #{number,jdbcType=INTEGER}, 
+      #{receivingDegreeOfUrgency,jdbcType=VARCHAR}, #{receivingDataStatus,jdbcType=VARCHAR}, 
+      #{timeLimit,jdbcType=TIMESTAMP}, #{creater,jdbcType=VARCHAR}, #{itemcreateat,jdbcType=TIMESTAMP}, 
+      #{updater,jdbcType=VARCHAR}, #{itemupdateat,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zyyglxt.dataobject.ReceiptDO">
+    insert into tb_governres_receipt
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="itemid != null">
+        itemID,
+      </if>
+      <if test="itemcode != null">
+        itemCode,
+      </if>
+      <if test="receivingNum != null">
+        RECEIVING_NUM,
+      </if>
+      <if test="receivingDateOfReceipt != null">
+        RECEIVING_DATE_OF_RECEIPT,
+      </if>
+      <if test="receivingTitle != null">
+        RECEIVING_TITLE,
+      </if>
+      <if test="receivingUnitOfCommun != null">
+        RECEIVING_UNIT_OF_COMMUN,
+      </if>
+      <if test="fileNo != null">
+        FILE_NO,
+      </if>
+      <if test="number != null">
+        NUMBER,
+      </if>
+      <if test="secretLevel != null">
+        SECRET_LEVEL,
+      </if>
+      <if test="receivingDegreeOfUrgency != null">
+        RECEIVING_DEGREE_OF_URGENCY,
+      </if>
+      <if test="receivingDataStatus != null">
+        RECEIVING_DATA_STATUS,
+      </if>
+      <if test="timeLimit != null">
+        TIME_LIMIT,
+      </if>
+      <if test="creater != null">
+        CREATER,
+      </if>
+      <if test="itemcreateat != null">
+        itemCreateAt,
+      </if>
+      <if test="updater != null">
+        UPDATER,
+      </if>
+      <if test="itemupdateat != null">
+        itemUpdateAt,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="itemid != null">
+        #{itemid,jdbcType=INTEGER},
+      </if>
+      <if test="itemcode != null">
+        #{itemcode,jdbcType=CHAR},
+      </if>
+      <if test="receivingNum != null">
+        #{receivingNum,jdbcType=VARCHAR},
+      </if>
+      <if test="receivingDateOfReceipt != null">
+        #{receivingDateOfReceipt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="receivingTitle != null">
+        #{receivingTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="receivingUnitOfCommun != null">
+        #{receivingUnitOfCommun,jdbcType=VARCHAR},
+      </if>
+      <if test="fileNo != null">
+        #{fileNo,jdbcType=VARCHAR},
+      </if>
+      <if test="number != null">
+        #{number,jdbcType=INTEGER},
+      </if>
+      <if test="secretLevel != null">
+        #{secretLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="receivingDegreeOfUrgency != null">
+        #{receivingDegreeOfUrgency,jdbcType=VARCHAR},
+      </if>
+      <if test="receivingDataStatus != null">
+        #{receivingDataStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="timeLimit != null">
+        #{timeLimit,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creater != null">
+        #{creater,jdbcType=VARCHAR},
+      </if>
+      <if test="itemcreateat != null">
+        #{itemcreateat,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updater != null">
+        #{updater,jdbcType=VARCHAR},
+      </if>
+      <if test="itemupdateat != null">
+        #{itemupdateat,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zyyglxt.dataobject.ReceiptDO">
+    update tb_governres_receipt
+    <set>
+      <if test="receivingNum != null">
+        RECEIVING_NUM = #{receivingNum,jdbcType=VARCHAR},
+      </if>
+      <if test="receivingDateOfReceipt != null">
+        RECEIVING_DATE_OF_RECEIPT = #{receivingDateOfReceipt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="receivingTitle != null">
+        RECEIVING_TITLE = #{receivingTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="receivingUnitOfCommun != null">
+        RECEIVING_UNIT_OF_COMMUN = #{receivingUnitOfCommun,jdbcType=VARCHAR},
+      </if>
+      <if test="fileNo != null">
+        FILE_NO = #{fileNo,jdbcType=VARCHAR},
+      </if>
+      <if test="number != null">
+        NUMBER = #{number,jdbcType=INTEGER},
+      </if>
+      <if test="secretLevel != null">
+        SECRET_LEVEL = #{secretLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="receivingDegreeOfUrgency != null">
+        RECEIVING_DEGREE_OF_URGENCY = #{receivingDegreeOfUrgency,jdbcType=VARCHAR},
+      </if>
+      <if test="receivingDataStatus != null">
+        RECEIVING_DATA_STATUS = #{receivingDataStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="timeLimit != null">
+        TIME_LIMIT = #{timeLimit,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creater != null">
+        CREATER = #{creater,jdbcType=VARCHAR},
+      </if>
+      <if test="itemcreateat != null">
+        itemCreateAt = #{itemcreateat,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updater != null">
+        UPDATER = #{updater,jdbcType=VARCHAR},
+      </if>
+      <if test="itemupdateat != null">
+        itemUpdateAt = #{itemupdateat,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where itemID = #{itemid,jdbcType=INTEGER}
+      and itemCode = #{itemcode,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zyyglxt.dataobject.ReceiptDO">
+    update tb_governres_receipt
+    set RECEIVING_NUM = #{receivingNum,jdbcType=VARCHAR},
+      RECEIVING_DATE_OF_RECEIPT = #{receivingDateOfReceipt,jdbcType=TIMESTAMP},
+      RECEIVING_TITLE = #{receivingTitle,jdbcType=VARCHAR},
+      RECEIVING_UNIT_OF_COMMUN = #{receivingUnitOfCommun,jdbcType=VARCHAR},
+      FILE_NO = #{fileNo,jdbcType=VARCHAR},
+      NUMBER = #{number,jdbcType=INTEGER},
+      RECEIVING_DEGREE_OF_URGENCY = #{receivingDegreeOfUrgency,jdbcType=VARCHAR},
+      RECEIVING_DATA_STATUS = #{receivingDataStatus,jdbcType=VARCHAR},
+      TIME_LIMIT = #{timeLimit,jdbcType=TIMESTAMP},
+      CREATER = #{creater,jdbcType=VARCHAR},
+      itemCreateAt = #{itemcreateat,jdbcType=TIMESTAMP},
+      UPDATER = #{updater,jdbcType=VARCHAR},
+      itemUpdateAt = #{itemupdateat,jdbcType=TIMESTAMP}
+    where itemID = #{itemid,jdbcType=INTEGER}
+      and itemCode = #{itemcode,jdbcType=CHAR}
+  </update>
+  <select id="selectAllReceipt" resultMap="BaseResultMap">
+        SELECT *
+        FROM tb_governres_receipt
+       WHERE RECEIVING_DATA_STATUS = #{receivingDataStatus,jdbcType=VARCHAR}
+       order by itemCreateAt
+    </select>
+  <update id="changeStatusToReceipt">
+    update tb_governres_receipt
+    <set>
+      <if test="receivingDataStatus != null">
+        RECEIVING_DATA_STATUS = #{receivingDataStatus,jdbcType=VARCHAR}
+      </if>
+    </set>
+    where itemID = #{key.itemid,jdbcType=INTEGER}
+    and itemCode = #{key.itemcode,jdbcType=CHAR}
+  </update>
+</mapper>

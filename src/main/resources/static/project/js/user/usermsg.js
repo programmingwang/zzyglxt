@@ -72,7 +72,7 @@
 
                     if (usermsg.username == username && usermsg.name == name && usermsg.gender == gender &&
                         usermsg.email == email && usermsg.idcardType == idcardType && usermsg.idcardNo == idcardNo &&
-                        usermsg.mobilephone == mobilephone) {
+                        usermsg.contacts == contacts && usermsg.mobilephone == mobilephone) {
                         alertUtil.info('没有需要修改的值')
                     } else {
                         if (!stringUtil.isBlank(username) && !stringUtil.isBlank(name) && !stringUtil.isBlank(gender) &&

@@ -1,0 +1,18 @@
+package com.zyyglxt.dao;
+
+import com.zyyglxt.dataobject.PostDO;
+import com.zyyglxt.dataobject.PostDOKey;
+
+public interface PostDOMapper {
+    int deleteByPrimaryKey(PostDOKey key);
+
+    int insert(PostDO record);
+
+    int insertSelective(PostDO record);
+
+    PostDO selectByPrimaryKey(PostDOKey key);
+
+    int updateByPrimaryKeySelective(PostDO record);
+
+    int updateByPrimaryKey(PostDO record);
+}

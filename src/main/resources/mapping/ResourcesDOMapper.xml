@@ -26,11 +26,13 @@
     from resource
     where itemID = #{itemid,jdbcType=INTEGER}
       and itemCode = #{itemcode,jdbcType=CHAR}
+    order by itemUpdateAt desc
   </select>
   <select id="selectAllResources" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
     from resource
+    order by itemUpdateAt desc
   </select>
   <select id="SelectMenuByRoleCode" parameterType="java.lang.String" resultMap="BaseResultMap">
     select
@@ -61,12 +63,14 @@
     from resource
     WHERE RESOURCE_URL = #{resourceUrl,jdbcType=VARCHAR}
     and RESOURCE_TYPE = 'p'
+    order by itemUpdateAt desc
   </select>
   <select id="selectPres" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
     from resource
     where RESOURCE_TYPE = 'p'
+    order by itemUpdateAt desc
   </select>
   <delete id="deleteByPrimaryKey" parameterType="com.zyyglxt.dataobject.ResourcesDOKey">
     delete from resource

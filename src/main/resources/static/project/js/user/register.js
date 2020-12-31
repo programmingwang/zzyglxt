@@ -38,7 +38,7 @@
                 ctx.fillStyle = randomColor(180, 240); //颜色若太深可能导致看不清
                 ctx.fillRect(0, 0, width, height);
                 /**绘制文字**/
-                var str = 'ABCEFGHJKLMNPQRSTWXY123456789';
+                var str = 'abcdefghijklmnopqrstuvwxyz0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
                 for (var i = 0; i < 4; i++) {
                     var txt = str[randomNum(0, str.length)];
                     codeStr[i] = txt;
@@ -55,8 +55,18 @@
                     ctx.rotate(-deg * Math.PI / 180);
                     ctx.translate(-x, -y);
                 }
+                //绘制干扰线
+                for (var i = 0; i < 5; i++) {
+                    ctx.beginPath();
+                    ctx.strokeStyle = randomColor(50, 160);
+                    ctx.moveTo(randomNum(0,30),randomNum(0,40));
+                    ctx.lineTo(randomNum(90,110),randomNum(0,40));
+                    ctx.stroke();
+                }
+
             }
 
+            // 机构审核状态
             $("#orgCode").on("blur", function () {
                 let i = 0;
                 let orgName = $("#orgName").val();
@@ -64,94 +74,99 @@
                 let orgType = dictUtil.getName(dictUtil.DICT_LIST.orgType, $("#orgType").val());
                 let orgCode = $("#orgCode").val();
                 var userEntity = {"orgName": orgName, "orgIdentify": orgType, "orgCode": orgCode};
-                $.ajax({
-                    url:"/user/queryOrgStatus",
-                    type:'POST',
-                    async: false,
-                    data:userEntity,
-                    dataType: "json",
-                    success:function(data){
-                        if (data && data.code === 88888) {
-                            const div = document.getElementById('showStatusdiv');
-                            let tag;
-                            let index;
-                            if (i == 0) {
-                                tag = "<p id='showStatus'></p> ";
-                                div.insertAdjacentHTML("beforeEnd", tag);
-                                i++;
-                            }
-
-                            var str = data.data;
-                            if (isContains(str, '修改信息')) {
-                                index = data.data.indexOf('修改信息');
-                                const modify = data.data.slice(index);
-                                data.data = data.data.slice(0, index);
-                                if (i == 1) {
-                                    var p = document.getElementById('showStatus');
-                                    tag = "<a id='modify'></a> ";
-                                    div.insertAdjacentHTML("beforeEnd", tag);
-                                    i++;
-                                }
-                                // 这个得发请求到后端去查询数据库拿到数据后修改进行更新
-                                let m = document.getElementById('modify');
-                                if (isContains('中药材种植园', orgType)) {
-                                    // document.getElementById('modify').href = 'http://localhost:8989/plantation_add';
-                                    // 这样子会报Uncaught TypeError: Cannot set property 'href' of null
-                                    // 原因 “document.getElementById(“modify”)”这里，代码没有获取到Id为“modify”的元素，那么就是null，null是没有办法set属性的
-                                    m.href = 'http://localhost:8989/plantation_add';
-                                } else if (isContains('中药材加工企业', orgType)) {
-                                    m.href = 'http://localhost:8989/process_add';
-                                } else if (isContains('中药材制药企业', orgType)) {
-                                    m.href = 'http://localhost:8989/produce_add';
-                                } else if (isContains('科研院所', orgType)) {
-                                    m.href = 'http://localhost:8989/lab_add';
-                                } else if (isContains('技术服务机构', orgType)) {
-                                    m.href = 'http://localhost:8989/tecservice_add';
-                                } else if (isContains('旅游康养机构', orgType)) {
-                                    m.href = 'http://localhost:8989/tour_add';
-                                } else {
-                                    m.href = '#';
-                                }
-                                $("#modify").text(modify)
-                            }
-                            if(!isContains(str, '修改信息') && document.getElementById("modify")){
-                                $("#modify").remove();
-                            }
-
-                            if (isContains(str, '登录')) {
-                                index = data.data.indexOf('登录');
-                                const login = data.data.slice(index);
-                                data.data = data.data.slice(0, index);
-                                if (i == 1) {
-                                    var p = document.getElementById('showStatus');
-                                    tag = "<a id='login'></a> ";
+                if (!stringUtil.isBlank(orgCode)){
+                    $.ajax({
+                        url:"/user/queryOrgStatus",
+                        type:'POST',
+                        async: false,
+                        data:userEntity,
+                        dataType: "json",
+                        success:function(data){
+                            if (data && data.code === 88888) {
+                                const div = document.getElementById('showStatusdiv');
+                                let tag;
+                                let index;
+                                if (i == 0) {
+                                    tag = "<p id='showStatus'></p> ";
                                     div.insertAdjacentHTML("beforeEnd", tag);
                                     i++;
                                 }
 
-                                let l = document.getElementById('login');
-                                l.href = 'http://localhost:8989/userLogin';
-                                $("#login").text(login)
-                            }
-                            if(!isContains(str, '登录') && document.getElementById("login")){
-                                $("#login").remove();
-                            }
-
-                            $("#showStatus").text(data.data);
-
-                            $.each($('p'),function(){// 去除空白的p标签
-                                if(!$(this).text()){
-                                    $(this).remove();
+                                var str = data.data;
+                                if (isContains(str, '修改信息')) {
+                                    index = data.data.indexOf('修改信息');
+                                    const modify = data.data.slice(index);
+                                    data.data = data.data.slice(0, index);
+                                    if (i == 1) {
+                                        var p = document.getElementById('showStatus');
+                                        tag = "<a id='modify'></a> ";
+                                        div.insertAdjacentHTML("beforeEnd", tag);
+                                        i++;
+                                    }
+                                    // 这个得发请求到后端去查询数据库拿到数据后修改进行更新
+                                    let m = document.getElementById('modify');
+                                    if (isContains('中药材种植园', orgType)) {
+                                        // document.getElementById('modify').href = 'http://localhost:8989/plantation_add';
+                                        // 这样子会报Uncaught TypeError: Cannot set property 'href' of null
+                                        // 原因 “document.getElementById(“modify”)”这里，代码没有获取到Id为“modify”的元素，那么就是null，null是没有办法set属性的
+                                        m.href = 'http://localhost:8989/plantation_add';
+                                    } else if (isContains('中药材加工企业', orgType)) {
+                                        m.href = 'http://localhost:8989/process_add';
+                                    } else if (isContains('中药材制药企业', orgType)) {
+                                        m.href = 'http://localhost:8989/produce_add';
+                                    } else if (isContains('科研院所', orgType)) {
+                                        m.href = 'http://localhost:8989/lab_add';
+                                    } else if (isContains('技术服务机构', orgType)) {
+                                        m.href = 'http://localhost:8989/tecservice_add';
+                                    } else if (isContains('旅游康养机构', orgType)) {
+                                        m.href = 'http://localhost:8989/tour_add';
+                                    } else {
+                                        m.href = '#';
+                                    }
+                                    $("#modify").text(modify)
                                 }
-                            });
-                        } else {
-                            alertUtil.error("查询审核状态失败")
+                                if(!isContains(str, '修改信息') && document.getElementById("modify")){
+                                    $("#modify").remove();
+                                }
+
+                                if (isContains(str, '登录')) {
+                                    index = data.data.indexOf('登录');
+                                    const login = data.data.slice(index);
+                                    data.data = data.data.slice(0, index);
+                                    if (i == 1) {
+                                        var p = document.getElementById('showStatus');
+                                        tag = "<a id='login'></a> ";
+                                        div.insertAdjacentHTML("beforeEnd", tag);
+                                        i++;
+                                    }
+
+                                    let l = document.getElementById('login');
+                                    l.href = 'http://localhost:8989/userLogin';
+                                    $("#login").text(login)
+                                }
+                                if(!isContains(str, '登录') && document.getElementById("login")){
+                                    $("#login").remove();
+                                }
+
+                                $("#showStatus").text(data.data);
+
+                                $.each($('p'),function(){// 去除空白的p标签
+                                    if(!$(this).text()){
+                                        $(this).remove();
+                                    }
+                                });
+                            } else {
+                                alertUtil.error("查询审核状态失败")
+                            }
+                        },
+                        error: function(data){
+                            alertUtil.error(data.msg)
                         }
-                    },
-                    error: function(data){
-                        alertUtil.error(data.msg)
-                    }
-                });
+                    });
+                } else {
+                    alertUtil.info("请输入统一社会信用代码！")
+                }
+
             });
 
             function validateLogin() {
@@ -186,13 +201,9 @@
                     return false;
                 }
                 if (phone == '') {
-                    alertUtil.error('请输入手机号码！');
-                    return false;
-                } else if (!(/^1[3456789]\d{9}$/.test(phone))) {
-                    alertUtil.error("手机号码有误，请重填");
+                    alertUtil.error('请输入电话号码或手机号码！');
                     return false;
                 }
-
 
                 if (inputCode == '') {
                     alertUtil.error('请输入验证码！');

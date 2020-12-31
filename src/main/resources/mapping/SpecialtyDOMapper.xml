@@ -38,6 +38,7 @@
         from tb_culpro_specialty
         where itemID = #{itemid,jdbcType=INTEGER}
         and itemCode = #{itemcode,jdbcType=CHAR}
+        order by itemUpdateAt desc
     </select>
     <delete id="deleteByPrimaryKey" parameterType="com.zyyglxt.dataobject.SpecialtyDOKey">
         delete from tb_culpro_specialty
@@ -275,7 +276,7 @@
         ,
         <include refid="Blob_Column_List"/>
         FROM tb_culpro_specialty
-        ORDER BY itemCreateAt DESC
+        order by itemUpdateAt desc
     </select>
 
     <select id="searchSpecialty" resultMap="ResultMapWithBLOBs">
@@ -294,7 +295,7 @@
                         from tb_culpro_hosp, tb_culpro_hosp_specialty_ref
                         WHERE HOSPITAL_NAME LIKE "%"#{value}"%"
                         AND tb_culpro_hosp.itemCode=tb_culpro_hosp_specialty_ref.itemCode)
-        ORDER BY itemCreateAt DESC
+        order by itemUpdateAt desc
     </select>
 
     <select id="top5Specialty" resultMap="ResultMapWithBLOBs">
@@ -303,7 +304,7 @@
         ,
         <include refid="Blob_Column_List"/>
         from tb_culpro_specialty
-        ORDER BY itemCreateAt DESC
+        order by itemUpdateAt desc
         LIMIT 5
     </select>
 
@@ -314,6 +315,7 @@
         <include refid="Blob_Column_List"/>
         from tb_culpro_specialty
         where itemCode = #{itemcode}
+        order by itemUpdateAt desc
     </select>
 
     <select id="selectByHospCode" resultMap="ResultMapWithBLOBs">
@@ -327,6 +329,7 @@
               FROM tb_culpro_hosp_specialty_ref
               WHERE HOSPITAL_CODE = #{hospCode}
         )
+        order by itemUpdateAt desc
     </select>
 
     <select id="selectByStatus" resultMap="ResultMapWithBLOBs">
@@ -336,6 +339,7 @@
         <include refid="Blob_Column_List"/>
         from tb_culpro_specialty
         WHERE SPECIALTY_STATUS = #{status}
+        order by itemUpdateAt desc
     </select>
 
     <update id="updateStatusByPrimaryKey" parameterType="com.zyyglxt.dto.StatusDto">

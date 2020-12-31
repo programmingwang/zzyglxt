@@ -20,6 +20,7 @@
         <result column="itemCreateAt" jdbcType="TIMESTAMP" property="itemcreateat"/>
         <result column="UPDATER" jdbcType="VARCHAR" property="updater"/>
         <result column="itemUpdateAt" jdbcType="TIMESTAMP" property="itemupdateat"/>
+        <result column="ORG_CODE" jdbcType="VARCHAR" property="orgCode"/>
     </resultMap>
     <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.zyyglxt.dataobject.HospDO">
         <result column="HOSPITAL_INTRODUCE" jdbcType="LONGVARCHAR" property="hospitalIntroduce"/>
@@ -27,7 +28,7 @@
     <sql id="Base_Column_List">
         itemID, itemCode, HOSPITAL_NAME, HOSPITAL_LEVEL, HOSPITAL_BRIEF_INTRODUCE, HOSPITAL_KEY_SPECIALTY, HOSPITAL_TELEPHONE, HOSPITAL_ADDRESS_PRO,
         HOSPITAL_ADDRESS_CITY, HOSPITAL_ADDRESS_COUNTRY, HOSPITAL_ADDRESS, HOSPITAL_LINK, REASON,
-        HOSPITAL_STATUS, CREATER, itemCreateAt, UPDATER, itemUpdateAt
+        HOSPITAL_STATUS, CREATER, itemCreateAt, UPDATER, itemUpdateAt, ORG_CODE
     </sql>
     <sql id="Blob_Column_List">
         HOSPITAL_INTRODUCE
@@ -40,6 +41,7 @@
         from tb_culpro_hosp
         where itemID = #{itemid,jdbcType=INTEGER}
         and itemCode = #{itemcode,jdbcType=CHAR}
+        order by itemUpdateAt desc
     </select>
     <delete id="deleteByPrimaryKey" parameterType="com.zyyglxt.dataobject.HospDOKey">
         delete from tb_culpro_hosp
@@ -208,7 +210,7 @@
                 #{hospitalIntroduce,jdbcType=LONGVARCHAR},
             </if>
             <if test="orgCode != null">
-                #{orgCode,jdbcType=VARCHAR}
+                #{orgCode,jdbcType=VARCHAR},
             </if>
         </trim>
     </insert>
@@ -320,7 +322,7 @@
         ,
         <include refid="Blob_Column_List"/>
         FROM tb_culpro_hosp
-        ORDER BY itemUpdateAt DESC
+        order by itemUpdateAt desc
     </select>
 
     <select id="searchHosp" resultMap="ResultMapWithBLOBs">
@@ -334,7 +336,7 @@
         OR HOSPITAL_ADDRESS_CITY LIKE "%"#{value}"%"
         OR HOSPITAL_ADDRESS_COUNTRY LIKE "%"#{value}"%"
         OR HOSPITAL_ADDRESS LIKE "%"#{value}"%"
-        ORDER BY itemUpdateAt DESC
+        order by itemUpdateAt desc
     </select>
 
 
@@ -345,6 +347,7 @@
         <include refid="Blob_Column_List"/>
         from tb_culpro_hosp
         WHERE itemCode = #{itemCode}
+        order by itemUpdateAt desc
     </select>
 
     <select id="selectByStatus" resultMap="ResultMapWithBLOBs">
@@ -354,6 +357,7 @@
         <include refid="Blob_Column_List"/>
         from tb_culpro_hosp
         WHERE HOSPITAL_STATUS = #{status}
+        order by itemUpdateAt desc
     </select>
 
     <update id="updateStatusByPrimaryKey" parameterType="com.zyyglxt.dto.StatusDto">
@@ -370,6 +374,7 @@
         <include refid="Blob_Column_List"/>
         from tb_culpro_hosp
         where ORG_CODE = #{orgCode,jdbcType=VARCHAR}
+        order by itemUpdateAt desc
     </select>
 
 

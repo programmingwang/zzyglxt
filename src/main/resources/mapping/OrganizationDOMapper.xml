@@ -28,18 +28,21 @@
     AUDIT_STATUS
     from organization
     where itemCode = #{itemcode,jdbcType=VARCHAR}
+    order by itemUpdateAt desc
   </select>
   <select id="selectAllOrgByAuditStatus" resultMap="BaseResultMap">
     select
     *
     from organization
     where AUDIT_STATUS = "待审核" or AUDIT_STATUS = "市局审核已通过" or AUDIT_STATUS = "市局审核未通过"
+    order by itemUpdateAt desc
   </select>
   <select id="queryAllOrgByAuditStatus" resultMap="BaseResultMap">
     select
     *
     from organization
     where AUDIT_STATUS = "待审核" or AUDIT_STATUS = "市局审核已通过" or AUDIT_STATUS = "省局审核已通过" or AUDIT_STATUS = "省局审核未通过"
+    order by itemUpdateAt desc
   </select>
   <select id="selectByOrgNameAndCode" resultMap="BaseResultMap">
     select
@@ -47,18 +50,21 @@
     from organization
     where ORG_NAME = #{orgName,jdbcType=VARCHAR}
     and ORG_CODE = #{orgCode,jdbcType=VARCHAR}
+    order by itemUpdateAt desc
   </select>
-  <select id="selectByItemCode" resultType="java.lang.String">
+  <select id="selectByItemCode" resultMap="BaseResultMap">
     select
-    ORG_CODE
+    *
     from organization
     where itemCode = #{itemcode,jdbcType=VARCHAR}
+    order by itemUpdateAt desc
   </select>
   <select id="selectByOrgName" resultMap="BaseResultMap">
     select
     *
     from organization
     where ORG_NAME = #{orgName,jdbcType=VARCHAR}
+    order by itemUpdateAt desc
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
   delete from organization

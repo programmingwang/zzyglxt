@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.zyyglxt.dao.FamProDOMapper">
-  <!--文创产品模块、健康旅游模块mapper-->
   <resultMap id="BaseResultMap" type="com.zyyglxt.dataobject.FamProDO">
     <!--
       WARNING - @mbg.generated
@@ -58,6 +57,7 @@
     from tb_culpro_fam_pro
     where itemID = #{itemid,jdbcType=INTEGER}
       and itemCode = #{itemcode,jdbcType=CHAR}
+    order by itemUpdateAt desc
   </select>
   <delete id="deleteByPrimaryKey" parameterType="com.zyyglxt.dataobject.FamProDOKey">
     <!--

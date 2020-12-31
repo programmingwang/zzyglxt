@@ -94,7 +94,6 @@
             if(localStorage.getItem("viewDetail") != null || localStorage.getItem("viewDetail") != undefined){
                 var tempdata = JSON.parse(localStorage.getItem("viewDetail"));
                 var attr = (tempdata.score).split("+");
-                console.log(attr);
                 for(var i = 0; i<attr.length; i++){
                     $("#score"+(i+1)).val(attr[i]);
                     $("#score"+(i+1)).attr("readOnly","true")

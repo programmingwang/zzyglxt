@@ -16,12 +16,19 @@
                 var RegulationEntity;
                 var addUpdateUrl;
                 var operateMessage;
+                var release;
+                if($("input[name='killOrder']:checked").val()=="y"){
+                    release="y";
+                }else{
+                    release="n";
+                }
                 if(!isUpdate()){
                     addUpdateUrl = "/datado/regulation/insertRegulation";
                     operateMessage = "新增政策法规成功";
                     RegulationEntity = {
                         itemcode: stringUtil.getUUID(),
                         dataTitle : $("#dataTitle").val(),
+                        releaseOrNot : release,
                         dataSource : $("#dataSource").val(),
                         dataFileType : $("#dataFileType").val(),
                         dataStatus : "0",
@@ -34,6 +41,7 @@
                         itemid: needData.itemid,
                         itemcode: needData.itemcode,
                         dataTitle : $("#dataTitle").val(),
+                        releaseOrNot : release,
                         dataSource : $("#dataSource").val(),
                         dataFileType : $("#dataFileType").val(),
                         dataContent : editor.txt.html()
@@ -59,12 +67,19 @@
                 var RegulationEntity;
                 var addUpdateUrl;
                 var operateMessage;
+                var release;
+                if($("input[name='killOrder']:checked").val()=="y"){
+                    release="y";
+                }else{
+                    release="n";
+                }
                 if(!isUpdate()){
                     addUpdateUrl = "/datado/regulation/insertRegulation";
                     operateMessage = "新增政策法规成功";
                     RegulationEntity = {
                         itemcode: stringUtil.getUUID(),
                         dataTitle : $("#dataTitle").val(),
+                        releaseOrNot : release,
                         dataSource : $("#dataSource").val(),
                         dataFileType : $("#dataFileType").val(),
                         dataStatus : "1",
@@ -77,6 +92,7 @@
                         itemid: needData.itemid,
                         itemcode: needData.itemcode,
                         dataTitle : $("#dataTitle").val(),
+                        releaseOrNot : release,
                         dataSource : $("#dataSource").val(),
                         dataFileType : $("#dataFileType").val(),
                         dataStatus : "1",
@@ -102,6 +118,11 @@
             (function init() {
                 if (isUpdate()){
                     var tempdata = JSON.parse(localStorage.getItem("rowData"));
+                    if (tempdata.releaseOrNot == "y"){
+                        $("#releaseOrNot").prop("checked",true);
+                    }else {
+                        $("#releaseOrNot").prop("checked",false);
+                    }
                     $("#dataTitle").val(tempdata.dataTitle);
                     $("#dataSource").val(tempdata.dataSource);
                     $("#dataFileType").val(tempdata.dataFileType);

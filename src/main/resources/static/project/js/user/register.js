@@ -74,7 +74,7 @@
                 let orgType = dictUtil.getName(dictUtil.DICT_LIST.orgType, $("#orgType").val());
                 let orgCode = $("#orgCode").val();
                 var userEntity = {"orgName": orgName, "orgIdentify": orgType, "orgCode": orgCode};
-                if (!stringUtil.isBlank(orgCode)){
+                if (!stringUtil.isBlank(orgCode) && !stringUtil.isBlank(orgName)){
                     $.ajax({
                         url:"/user/queryOrgStatus",
                         type:'POST',
@@ -164,7 +164,7 @@
                         }
                     });
                 } else {
-                    alertUtil.info("请输入统一社会信用代码！")
+                    alertUtil.info("请输入企业名称或统一社会信用代码！")
                 }
 
             });

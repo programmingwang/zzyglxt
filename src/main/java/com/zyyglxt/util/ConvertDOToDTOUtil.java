@@ -1,11 +1,9 @@
 package com.zyyglxt.util;
 
-import com.zyyglxt.dataobject.ChineseCulturalDO;
-import com.zyyglxt.dataobject.CulturalResourcesDO;
-import com.zyyglxt.dataobject.IndustrialDevelopSciAchiDO;
-import com.zyyglxt.dataobject.IndustrialDevelopTopicDO;
+import com.zyyglxt.dataobject.*;
 import com.zyyglxt.dto.ChineseCulturalDto;
 import com.zyyglxt.dto.CulturalResourcesDto;
+import com.zyyglxt.dto.PostDto;
 import com.zyyglxt.dto.industrialDevelop.IndustrialDevelopSciAchiDODto;
 import com.zyyglxt.dto.industrialDevelop.IndustrialDevelopTopicDODto;
 import com.zyyglxt.error.BusinessException;
@@ -61,5 +59,14 @@ public class ConvertDOToDTOUtil {
         topicDODto.setFilePath(filePath);
         topicDODto.setFileName(fileName);
         return topicDODto;
+    }
+
+    public static PostDto convertFromDOToDTO(PostDO postDO, String filePath, String fileName){
+        filePath = StringUtils.isEmpty(filePath) ? "已经损坏了" : filePath;
+        PostDto postDto = new PostDto();
+        BeanUtils.copyProperties(postDO,postDto);
+        postDto.setFilePath(filePath);
+        postDto.setFileName(fileName);
+        return postDto;
     }
 }

@@ -34,6 +34,13 @@
     where itemID = #{itemid,jdbcType=INTEGER}
       and itemCode = #{itemcode,jdbcType=CHAR}
   </select>
+  <select id="selectAll" parameterType="com.zyyglxt.dataobject.PostDOKey" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from tb_governres_post
+    where POST_DATA_STATUS = #{postDataStatus,jdbcType=VARCHAR}
+    order by itemUpdateAt desc
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="com.zyyglxt.dataobject.PostDOKey">
     delete from tb_governres_post
     where itemID = #{itemid,jdbcType=INTEGER}
@@ -246,4 +253,10 @@
     where itemID = #{itemid,jdbcType=INTEGER}
       and itemCode = #{itemcode,jdbcType=CHAR}
   </update>
+  <select id="maxNum" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from tb_governres_post
+    where POST_DOCUMENT_NUM1 = (select MAX(POST_DOCUMENT_NUM1) FROM tb_governres_post)
+  </select>
 </mapper>

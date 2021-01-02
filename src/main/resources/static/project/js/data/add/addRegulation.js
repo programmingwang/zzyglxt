@@ -95,7 +95,6 @@
                         releaseOrNot : release,
                         dataSource : $("#dataSource").val(),
                         dataFileType : $("#dataFileType").val(),
-                        dataStatus : "1",
                         dataContent : editor.txt.html()
                     };
                     operateMessage = "更新政策法规成功";

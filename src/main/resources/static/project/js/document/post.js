@@ -19,6 +19,20 @@
 
             };
 
+            //点击文件名查看详情事件
+            function viewOperation(value, row, index){
+                return [
+                    '<a class="postview" data-toggle="modal" style="margin:0 0.6em;text-decoration: none;color:#775637;" data-target="" >'+row.postDocumentTitle+'</a>',
+                ].join('');
+            }
+            window.viewEvents = {
+                'click .postview': function (e, value, row, index){
+                    localStorage.setItem("viewRowData", JSON.stringify(row));
+                    var viewUrl = "/document/post_view";
+                    orange.redirect(viewUrl);
+                },
+            };
+
             //操作
             function operation(value, row, index){
                 return selectUtil.getRoleOperate(value,row,index,sessionStorage.getItem("rolename"),row.postDataStatus,webStatus);
@@ -260,7 +274,7 @@
 
 
             var aCol = [
-                {field: 'postDocumentTitle', title: '文件标题'},
+                {field: 'postDocumentTitle', title: '文件标题', formatter: viewOperation, events: viewEvents},
                 {field: 'postDocumentNum', title: '文号', formatter:function (value, row, index){
                     var postNum = documentNum[value].text + row.postDocumentNum1;
                     return '</p>'+ postNum +'</p>'

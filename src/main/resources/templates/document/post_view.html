@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en"xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://at.alicdn.com/t/font_1805932_ysrcp4y0uy9.css">
+    <title>Document</title>
+    <style>
+        .table{
+            width: 100%;
+            margin-top: 20px;
+            margin-left: 40px;
+        }
+
+    </style>
+</head>
+<body>
+<div class="col-lg-1"></div>
+<div class="col-lg-10">
+    <div class="col-lg-12" style="text-align: center;margin-top: 20px;"><h4>请示报告</h4></div>
+    <div class="col-lg-12">
+        <table class="table" border="1" bordercolor="#CC0000">
+            <tr>
+                <th>Name</th>
+                <th colspan="2">Telephone</th>
+            </tr>
+            <tr>
+                <td>Bill Gates</td>
+                <td>555 77 854</td>
+                <td>555 77 855</td>
+            </tr>
+        </table>
+
+    </div>
+</div>
+
+<div class="col-lg-1"></div>
+
+<script type="text/javascript" data-main="/main/main.js" th:src="@{/component/require@2.3.6/require-2.3.6.js}"></script>
+<script type="text/javascript" th:src="@{/project/js/document/post_view.js}"></script>
+<link type="text/css" rel="stylesheet" href="/component/uploadImg/css/uploadImg.css"
+      th:src="@{/component/uploadImg/css/uploadImg.css}">
+<script type="text/javascript" th:src="@{/component/uploadImg/js/bootstrap.min.js}"></script>
+</body>
+</html>

@@ -88,7 +88,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 "/lab_add",
                 "/tecservice_add",
                 "/tour_add").permitAll().
-                   anyRequest().authenticated().
+                   //anyRequest().authenticated().
                     and().logout().
                     permitAll().//允许所有用户
                     logoutSuccessHandler(logoutSuccessHandler).//登出成功处理逻辑

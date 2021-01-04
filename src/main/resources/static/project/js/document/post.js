@@ -47,19 +47,24 @@
 
                 'click .delete': function (e, value, row, index) {
                     var myDeleteModalData ={
-                        modalBodyID : "myDeleteNewsInf",
-                        modalTitle : "删除新闻信息",
+                        modalBodyID : "myDeletePost",
+                        modalTitle : "删除发文信息",
                         modalClass : "modal-lg",
                         confirmButtonClass : "btn-danger",
                         modalConfirmFun:function () {
+                            var projectEntity = {
+                                itemid: row.itemid,
+                                itemcode: row.itemcode
+                            };
                             var isSuccess = false;
-                            ajaxUtil.myAjax(null,"/datado/newsInf/deleteByPrimaryKey/"+row.itemid+"/"+row.itemcode,null,function (data) {
+                            ajaxUtil.myAjax(null,"/post/delPost",projectEntity,function (data) {
                                 if(ajaxUtil.success(data)){
-                                    alertUtil.info("删除新闻信息成功");
+                                    ajaxUtil.deleteFile(row.itemcode);
+                                    alertUtil.info("删除发文信息成功");
                                     isSuccess = true;
                                     refreshTable();
                                 }
-                            },false,true,"delete");
+                            },false,"","delete");
                             return isSuccess;
                         }
 

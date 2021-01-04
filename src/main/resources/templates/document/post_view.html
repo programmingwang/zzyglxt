@@ -6,10 +6,39 @@
     <link rel="stylesheet" href="https://at.alicdn.com/t/font_1805932_ysrcp4y0uy9.css">
     <title>Document</title>
     <style>
-        .table{
+        .request-table{
             width: 100%;
             margin-top: 20px;
-            margin-left: 40px;
+        }
+        .title{
+            text-align: center;
+            font-size: 21px;
+            color: #D60000;
+        }
+        .documentNum{
+            margin-left: 1rem;
+            margin-right: 1rem;
+            width: 110px;
+            border: none;
+            outline: none;
+        }
+        .opinion{
+            margin-bottom: 20px;
+        }
+        .text1{
+            margin: 10px;
+            width: 95%;
+            border: none;
+            outline: none;
+        }
+        .nameDate {
+            float: right;
+            margin-right: 20px;
+        }
+        .nameDate1{
+            float: right;
+            margin-top: 50px;
+            margin-left: 20px
         }
 
     </style>
@@ -17,23 +46,188 @@
 <body>
 <div class="col-lg-1"></div>
 <div class="col-lg-10">
-    <div class="col-lg-12" style="text-align: center;margin-top: 20px;"><h4>请示报告</h4></div>
+    <div class="col-lg-12" style="text-align: center;margin-top: 40px;">
+        <h4 style="color: #D60000; font-size: 34px;">河北省中医药管理局发文审批笺</h4>
+    </div>
+    <div class="col-lg-12" style="margin-top: 30px; margin-bottom: -13px;">
+        <span style="margin-left: 30rem; color: #D60000;">文号：</span>
+        <input id="postDocumentNum" class="documentNum" />
+        <span style="color: #D60000">号</span>
+    </div>
     <div class="col-lg-12">
-        <table class="table" border="1" bordercolor="#CC0000">
-            <tr>
-                <th>Name</th>
-                <th colspan="2">Telephone</th>
+        <table class="request-table" border="1" bordercolor="#D60000">
+            <tr style="height: 200px">
+                <td class="title">局<br>领<br>导<br>意<br>见</td>
+                <td colspan="9">
+                    <div class="opinion">
+                        <span id="directorOpinion" class="text1">同意，允许施工</span>
+                        <span id="directorDate" class="nameDate">2020 11.12</span>
+                        <span id="directorName" class="nameDate">刘思思</span>
+                    </div>
+                    <div class="opinion">
+                        <span id="deputyDirectorOpinion" class="text1">同意，允许施工 </span>
+                        <span id="deputyDirectorDate" class="nameDate">2020 11.11</span>
+                        <span id="deputyDirectorName" class="nameDate">刘思思</span>
+                    </div>
+                </td>
             </tr>
-            <tr>
-                <td>Bill Gates</td>
-                <td>555 77 854</td>
-                <td>555 77 855</td>
-            </tr>
-        </table>
 
+            <tr style="height: 200px">
+                <td class="title">办<br>公<br>室<br>核<br>稿</td>
+                <td colspan="9">
+                    <div class="opinion">
+                        <span id="officeOpinion" class="text1">同意，允许施工 </span>
+                        <span id="officeDate" class="nameDate">2020 11.10</span>
+                        <span id="officeName" class="nameDate">刘处长</span>
+                    </div>
+                </td>
+            </tr>
+
+            <tr style="height: 200px">
+                <td class="title">处<br>室<br>核<br>稿</td>
+                <td colspan="5">
+                    <div class="opinion">
+                        <span id="departmentOpinion" class="text1">同意，允许施工 </span>
+                        <span id="departmentDate" class="nameDate1">2020 11.10</span>
+                        <span id="departmentName" class="nameDate1">刘处长</span>
+                    </div>
+                </td>
+                <td class="title">处<br>室<br>拟<br>稿</td>
+                <td colspan="3">
+                    <div class="opinion">
+                        <span id="initialName" style="margin-left: 20px">刘颖旭</span>
+                        <span id="initialDate" class="nameDate">2020.11.09</span>
+                    </div>
+                </td>
+            </tr>
+
+            <tr style="height: 130px">
+                <td class="title">文<br>件<br>标<br>题</td>
+                <td colspan="9">
+                    <div>
+                        <input id="postDocumentTitle" class="text1"/>
+                    </div>
+                </td>
+            </tr>
+
+            <tr style="height: 60px">
+                <td class="title">附<br>件</td>
+                <td colspan="9">
+                    <div>
+                        <span class="upload-wrap anticon" nv-file-drop="" uploader="uploader" style="margin-top: 8px;">
+                            <a id="upload_file1" href=""></a>
+                        </span>
+                    </div>
+                </td>
+            </tr>
+
+            <tr style="height: 60px">
+                <td class="title">主<br>送</td>
+                <td colspan="9">
+                    <div>
+                        <span id="zhusong" class="text1">邢台市市中医药管理部门</span>
+                    </div>
+                </td>
+            </tr>
+
+            <tr style="height: 60px">
+                <td class="title">抄<br>送</td>
+                <td colspan="9">
+                    <div>
+                        <span id="chaosong" class="text1">廊坊市中医药管理部门</span>
+                    </div>
+                </td>
+            </tr>
+
+            <tr style="height: 65px">
+                <td rowspan="2" class="title">信<br>息<br>公<br>开</td>
+                <td colspan="2" class="title">公开方式</td>
+                <td colspan="7">
+                    <div style="color: #D60000">
+                        <input name="postPublicWay" type="radio" id="p1" value="y" style="zoom:130%; margin-left: 15px;"/>
+                        <label for="p1">主动公开</label>
+                        <input name="postPublicWay" type="radio" id="p2" value="y" style="zoom:130%; margin-left: 60px;"/>
+                        <label for="p2">依申请公开</label>
+                        <input name="postPublicWay" type="radio" id="p3" value="y" style="zoom:130%; margin-left: 60px;"/>
+                        <label for="p3">不公开发布</label>
+                    </div>
+                </td>
+            </tr>
+            <tr style="height: 65px">
+                <td colspan="2" class="title">不公开理由</td>
+                <td colspan="7">
+                    <div style="color: #D60000">
+                        <input name="postReason" type="radio" id="r1" value="y" style="zoom:130%; margin-left: 15px;"/>
+                        <label for="r1">内部请示报告</label>
+                        <input name="postReason" type="radio" id="r2" value="y" style="zoom:130%; margin-left: 40px;"/>
+                        <label for="r2">政府内部文件</label>
+                        <input name="postReason" type="radio" id="r3" value="y" style="zoom:130%; margin-left: 40px;"/>
+                        <label for="r3">不宜公开</label>
+                        <input name="postReason" type="radio" id="r4" value="y" style="zoom:130%; margin-left: 40px;"/>
+                        <label for="r4">其他</label>
+                    </div>
+                </td>
+            </tr>
+
+            <tr style="height: 80px">
+                <td colspan="3" class="title">是否需要公平竞争审查</td>
+                <td colspan="7">
+                    <div style="color: #D60000">
+                        <input name="postFairDepartmentReview" type="radio" id="f1" value="y" style="zoom:130%; margin-left: 15px;"/>
+                        <label for="f1">主动公开</label>
+                        <span class="upload-wrap anticon" nv-file-drop="" uploader="uploader" style="margin-top: 8px;">
+                            <a id="fujian" href=""></a>
+                        </span>
+                    </div>
+                    <div style="color: #D60000">
+                        <input name="postFairDepartmentReview" type="radio" id="f2" value="y" style="zoom:130%; margin-left: 15px;"/>
+                        <label for="f2">依申请公开</label>
+                    </div>
+                </td>
+            </tr>
+
+            <tr style="height: 80px">
+                <td colspan="2" class="title">是否规范性文件</td>
+                <td>
+                    <div style="color: #D60000; margin-top: 11px; margin-left: 21px;">
+                        <input name="postNormativeDocuments" type="radio" id="n1" value="y" style="zoom:130%;"/>
+                        <label for="n1">是</label>
+                    </div>
+                    <div style="color: #D60000; margin-left: 21px;">
+                        <input name="postNormativeDocuments" type="radio" id="n2" value="y" style="zoom:130%;"/>
+                        <label for="n2">否</label>
+                    </div>
+                </td>
+                <td colspan="2" class="title">是否涉密</td>
+                <td>
+                    <div style="color: #D60000; margin-top: 11px; margin-left: 21px;">
+                        <input name="postSecretRelated" type="radio" id="s1" value="y" style="zoom:130%;"/>
+                        <label for="s1">是</label>
+                    </div>
+                    <div style="color: #D60000; margin-left: 21px;">
+                        <input name="postSecretRelated" type="radio" id="s2" value="y" style="zoom:130%;"/>
+                        <label for="s2">否</label>
+                    </div>
+                </td>
+                <td colspan="4" class="title">印数
+                    <input name="postPrinting" id="postPrinting" style="width: 140px"/>
+                </td>
+
+            </tr>
+
+        </table>
+    </div>
+    <br>
+    <div class="form-group row">
+        <div class="col-lg-4 col-md-4" ></div>
+        <div class=" col-lg-4 row" >
+            <div class="col">
+                <button id="cancelbtn" type="button" class="btn btn-light col">取消</button>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-4" ></div>
     </div>
 </div>
-
 <div class="col-lg-1"></div>
 
 <script type="text/javascript" data-main="/main/main.js" th:src="@{/component/require@2.3.6/require-2.3.6.js}"></script>

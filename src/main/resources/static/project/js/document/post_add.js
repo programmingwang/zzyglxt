@@ -108,7 +108,7 @@
                         postSecretRelated : secret,
                         postPrinting : $("#postPrinting").val(),
                         postDocumentNum : $("#postDocumentNum").val(),
-                        postDocumentNum1 : newNum,
+                        postDocumentNum1 : pad(newNum),
                         postDataStatus : "0",
                     };
                 }
@@ -175,7 +175,7 @@
                         postSecretRelated : secret,
                         postPrinting : $("#postPrinting").val(),
                         postDocumentNum : $("#postDocumentNum").val(),
-                        postDocumentNum1 : newNum,
+                        postDocumentNum1 : pad(newNum),
                         postDataStatus : "1",
                     };
                 }

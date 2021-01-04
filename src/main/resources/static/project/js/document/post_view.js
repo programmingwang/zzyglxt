@@ -8,39 +8,55 @@
 
             var row = JSON.parse(localStorage.getItem("viewRowData"));
 
+            $("#cancelbtn").unbind().on('click',function () {
+                localStorage.removeItem("viewRowData");
+                var url = "/document/post";
+                orange.redirect(url);
+            });
 
             (function init() {
                 if (isView()){
                     var tempdata = JSON.parse(localStorage.getItem("viewRowData"));
-                    var address = tempdata.postalAddress;
-                    address=address.replace(/,/ig, "");
-                    $("#projectName").val(tempdata.projectName);
-                    $("#disciplineCode").val(tempdata.disciplineCode);
-                    $("#disciplineName").val(tempdata.disciplineName);
-                    $("#applicant").val(tempdata.applicant);
-                    $("#contactCode").val(tempdata.contactCode);
-                    $("#company").val(tempdata.company);
-                    $("#postalAddress").val(address);
-                    $("#postalCode").val(tempdata.postalCode);
-                    $("#email").val(tempdata.email);
-                    $("#upload_file").text(tempdata.fileName);
-                    $("#upload_file").attr('href',tempdata.filePath);
-                    if (rolename === "科研项目申报单位"){
-                        if (tempdata.examineStatus == projectStatus[1].id){
-                            $('#passbtn').attr('style', "display:block;");
-                            $('#failbtn').attr('style', "display:block;");
-                        }
-                    }else if (rolename === "科研项目-市级"){
-                        if (tempdata.examineStatus == projectStatus[2].id){
-                            $('#passbtn').attr('style', "display:block;");
-                            $('#failbtn').attr('style', "display:block;");
-                        }
-                    }else if (rolename === "科研项目-省级"){
-                        if (tempdata.examineStatus == projectStatus[4].id){
-                            $('#passbtn').attr('style', "display:block;");
-                            $('#failbtn').attr('style', "display:block;");
+                    var num = dictUtil.getDictByCode(dictUtil.DICT_LIST.postDocumentNum);
+                    var postNum = num[tempdata.postDocumentNum].text + row.postDocumentNum1;
+                    $("#postDocumentNum").val(postNum);
+                    $("#postDocumentTitle").val(tempdata.postDocumentTitle);
+                    if (tempdata.postPublicWay == "0"){
+                        $("#p1").prop("checked",true);
+                    }else if (tempdata.postPublicWay == "1"){
+                        $("#p2").prop("checked",true);
+                    }else {
+                        $("#p3").prop("checked",true);
+                        if (tempdata.postReason == "0"){
+                            $("#r1").prop("checked",true);
+                        }else if (tempdata.postReason == "1"){
+                            $("#r2").prop("checked",true);
+                        }else if (tempdata.postReason == "2"){
+                            $("#r3").prop("checked",true);
+                        }else {
+                            $("#r4").prop("checked",true);
                         }
                     }
+                    if (tempdata.postFairDepartmentReview == "0"){
+                        $("#f1").prop("checked",true);
+                    }else {
+                        $("#f2").prop("checked",true);
+                        $('#fujian').attr('style',"display:none");
+                    }
+                    if (tempdata.postNormativeDocuments == "y"){
+                        $("#n1").prop("checked",true);
+                    }else {
+                        $("#n2").prop("checked",true);
+                    }
+                    if (tempdata.postSecretRelated =="y"){
+                        $("#s1").prop("checked",true);
+                    }else {
+                        $("#s2").prop("checked",true);
+                    }
+                    $("#postPrinting").val(tempdata.postPrinting);
+                    $("#upload_file").text(tempdata.fileName);
+                    $("#upload_file").attr('href',tempdata.filePath);
+
                 }
             }());
 

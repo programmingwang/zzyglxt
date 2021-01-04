@@ -27,7 +27,7 @@ public class GovernresCountersignController {
         return new ResponseData(EmBusinessError.success);
     }
 
-    @RequestMapping(value = "/delete/{itemCode}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/{itemCode}", method = RequestMethod.DELETE)
     @ResponseBody
     @LogAnnotation(appCode ="",logTitle ="政务办公-内部会签-删除",logLevel ="4",creater ="",updater = "")
     public ResponseData deleteByPrimaryKey(@PathVariable("itemCode") String itemCode) {

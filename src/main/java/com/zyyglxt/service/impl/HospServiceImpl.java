@@ -2,8 +2,10 @@ package com.zyyglxt.service.impl;
 
 import com.zyyglxt.dao.HospDOMapper;
 import com.zyyglxt.dao.HospSpecialtyRefDOMapper;
+import com.zyyglxt.dao.OrganizationDOMapper;
 import com.zyyglxt.dataobject.HospDO;
 import com.zyyglxt.dataobject.HospDOKey;
+import com.zyyglxt.dataobject.OrganizationDO;
 import com.zyyglxt.dto.StatusDto;
 import com.zyyglxt.error.BusinessException;
 import com.zyyglxt.error.EmBusinessError;
@@ -34,6 +36,8 @@ public class HospServiceImpl implements IHospService {
     private HospSpecialtyRefDOMapper hospSpecialtyRefDOMapper;
     @Resource
     private UsernameUtil usernameUtil;
+    @Resource
+    OrganizationDOMapper organizationDOMapper;
 
     @Override
     public int addHosp(HospDO hospDO) {
@@ -117,6 +121,11 @@ public class HospServiceImpl implements IHospService {
     @Override
     public List<HospDO> selectAllNoStatus() {
         return hospDOMapper.selectAllHosp();
+    }
+
+    @Override
+    public HospDO selectByOrgCode(String orgCode) {
+        return hospDOMapper.selectByOrgCode(orgCode);
     }
 
 }

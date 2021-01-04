@@ -2,6 +2,7 @@ package com.zyyglxt.service;
 
 
 import com.zyyglxt.dataobject.UserDO;
+import com.zyyglxt.dataobject.UserRoleRefDO;
 import com.zyyglxt.dto.industrialDevelop.IndustrialDevelopExpertDto;
 import org.apache.ibatis.annotations.Param;
 
@@ -24,5 +25,6 @@ public interface IIndustrialDevelopExpertService {
     List<IndustrialDevelopExpertDto> getExperts();
     //查看专家个人信息
     UserDO selectByPrimaryKey(String itemcode);
+    String selectByUserCode(String userCode);
 
 }

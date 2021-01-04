@@ -8,6 +8,10 @@
     padding: 40px 50px;
 }
 
+.offset-md-4 {
+    margin-left: 30%;
+}
+
 .form-text {
     padding: 0;
     margin: 0;
@@ -32,8 +36,9 @@
 
 .form-input input, .form-input select {
     border: 1px solid #9c7049;
-    height: 32px;
+    height: 35px;
     width: 100%;
+    color: #333333;
 }
 
 .form-input input:focus, .form-input select:focus {
@@ -62,4 +67,22 @@ html, body {
     background-image: url('../../../images/bg.jpg');
     background-size: 100% auto;
     background-repeat: no-repeat;
+}
+
+#showStatus, #login{
+    display:inline-block;
+    margin-top: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #9c7049;
+    text-align: center;
+}
+
+#showStatusdiv{
+    width: 100%;
+    text-align: center;
+}
+
+#orgType{
+    padding-left: 9px;
 }

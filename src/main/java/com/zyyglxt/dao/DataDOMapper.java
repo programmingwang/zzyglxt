@@ -4,6 +4,7 @@ import com.zyyglxt.dataobject.DataDO;
 import com.zyyglxt.dataobject.DataDOKey;
 import org.apache.ibatis.annotations.Param;
 
+import java.sql.Date;
 import java.util.List;
 
 public interface DataDOMapper {
@@ -29,7 +30,7 @@ public interface DataDOMapper {
     int updateByPrimaryKeySelective(DataDO record);
 
     //更改数据状态
-    int changeStatusByPrimaryKey(@Param("key") DataDOKey key, @Param("dataStatus") String dataStatus);
+    int changeStatusByPrimaryKey(@Param("key") DataDOKey key, @Param("dataDelayedRelease") String dataDelayedRelease, @Param("dataStatus") String dataStatus);
 
 
     int updateByPrimaryKeyWithBLOBs(DataDO record);
@@ -39,5 +40,4 @@ public interface DataDOMapper {
 
     List<DataDO> selectAll();
 
-    List<DataDO> searchDataDO(String keyWord);
 }

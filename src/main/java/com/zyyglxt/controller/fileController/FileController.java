@@ -13,7 +13,6 @@ import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import javax.annotation.Resource;
@@ -26,7 +25,6 @@ import java.util.List;
  * @date 2020/11/4 16:37
  */
 @RestController
-@PropertySource("classpath:application.properties")
 @RequestMapping("/file")
 public class FileController {
     @Resource
@@ -56,10 +54,20 @@ public class FileController {
         String filePath = null;
         for (FileDO fileDO : fileDOList){
             filePath = fileDO.getFilePath();
-            fastFileStorageClient.deleteFile(filePath.substring(0,filePath.indexOf("?")));//去除掉后面的fileName属性
+            try {
+                fastFileStorageClient.deleteFile(filePath.substring(0, filePath.indexOf("?")));//去除掉后面的fileName属性
+            }catch (Exception e){
+                fastFileStorageClient.deleteFile(filePath);
+            }
         }
         fileService.deleteFileByDataCode(dataCode);
         return new ResponseData(EmBusinessError.success);
+    }
+
+    @GetMapping("/get/{datacode}")
+    @ResponseBody
+    public ResponseData get(@PathVariable String datacode){
+        return new ResponseData(EmBusinessError.success,fileService.selectFileByDataCode(datacode));
     }
 
     private FileDO saveFile(FileDto fileDto) {
@@ -83,7 +91,12 @@ public class FileController {
         fileDO.setFileSize((double) multipartFile.getSize());
         String path = "http://" + nginx.substring(0,nginx.indexOf(":")+1) + port + "/" + storePath.getFullPath() + "?filename=" + fileName;//字符串拼接路径
         fileDO.setFilePath(path);
-        fileDO.setUploader(usernameUtil.getOperateUser());
+        if (null != usernameUtil.getOperateUser()){
+            fileDO.setUploader(usernameUtil.getOperateUser());
+        }else {
+            fileDO.setUploader("注册上传");
+        }
+
         return fileDO;
     }
 }

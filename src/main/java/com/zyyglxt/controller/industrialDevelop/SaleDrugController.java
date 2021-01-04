@@ -35,18 +35,19 @@ public class SaleDrugController {
     private IFileService iFileService;
     @Resource
     UsernameUtil usernameUtil;
-
     @ResponseBody
-
     @RequestMapping(value = "/sale-drug", method = RequestMethod.POST)
     @LogAnnotation(appCode ="",logTitle ="售药添加",logLevel ="3",creater ="",updater = "")
     public ResponseData addSaleDrug(@RequestBody IndustrialDevelopSaleDrug record) {
-        saleDrugService.insertSelective(record);
-        return new ResponseData(EmBusinessError.success);
+       int res= saleDrugService.insertSelective(record);
+        if (res == -1){
+            return new ResponseData(EmBusinessError.ORG_NAME_ERROR);
+        }else {
+            return new ResponseData(EmBusinessError.success);
+        }
     }
 
     @ResponseBody
-
     @RequestMapping(value = "/sale-drug", method = RequestMethod.PUT)
     @LogAnnotation(appCode ="",logTitle ="售药数据修改",logLevel ="2",creater ="",updater = "")
     public ResponseData updSaleDrug(@RequestBody IndustrialDevelopSaleDrug record){

@@ -16,8 +16,8 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 
+import java.sql.Date;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -69,7 +69,7 @@ public class DataNewsServiceImpl implements IDataNewsService {
         record.setItemcreateat(DateUtils.getDate());
         record.setCreater(usernameUtil.getOperateUser());
         record.setDataType("新闻");
-        record.setDataStatus("0");
+        record.setUpdater(usernameUtil.getOperateUser());
         //如果前台没有插入图片或者附件，就自己生成uuid
         if(record.getItemcode() == null){
             record.setItemcode(UUIDUtils.getUUID());
@@ -95,18 +95,8 @@ public class DataNewsServiceImpl implements IDataNewsService {
 
 
     @Override
-    public int changeStatus(DataDOKey key, String dataStatus) {
-        return dataDOMapper.changeStatusByPrimaryKey(key, dataStatus);
-    }
-
-    /**
-     * 关键字搜索
-     * @param keyWord
-     * @return
-     */
-    @Override
-    public List<DataDO> searchDataDO(String keyWord) {
-        return dataDOMapper.searchDataDO(keyWord);
+    public int changeStatus(DataDOKey key, String dataDelayedRelease, String dataStatus) {
+        return dataDOMapper.changeStatusByPrimaryKey(key, dataDelayedRelease, dataStatus);
     }
 
 }

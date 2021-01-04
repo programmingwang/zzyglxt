@@ -38,7 +38,7 @@
                 param.status = "0";
                 param.itemcode = itemcode;
                 if (uploadImg.isUpdate()){
-                    ajaxUtil.fileAjax(itemcode,uploadImg.getFiles()[0],"undefined","undefined")
+                    ajaxUtil.fileAjax(itemcode,uploadImg.getFiles()[0],sessionStorage.getItem("username"), sessionStorage.getItem("itemcode"))
                 }
 
                 ajaxUtil.myAjax(null,url,param,function (data) {
@@ -75,9 +75,9 @@
                             alertUtil.error(data.msg)
                         }
                     },false,"","get");
-                    console.log(tempdata);
                     $("#name").val(tempdata.name);
                     $("#areaCoverd").val(tempdata.areaCoverd);
+                    $("#specialService").val(tempdata.specialService);
                     $("#contacts").val(tempdata.contacts);
                     $("#phone").val(tempdata.phone);
                     $("#distpicker").distpicker({
@@ -86,9 +86,11 @@
                         district: tempdata.addressCountry
                     });
                     $("#address").val(tempdata.address);
-                    $("#intruduce").val(tempdata.intruduce)
-                    editor.txt.html(tempdata.projectIntroduce);
-                    itemcode = tempdata.itemcode
+                    editor.txt.html(tempdata.intruduce);
+                    itemcode = tempdata.itemcode;
+                    var img = tempdata.filePath;
+                    // var imgName=tempdata.fileName;
+                    uploadImg.setImgSrc(img);
                 }else {
                     $("#distpicker").distpicker();
                 }

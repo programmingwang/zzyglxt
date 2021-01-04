@@ -32,8 +32,12 @@ public class ChiMedController {
     @PostMapping(value = "/chi-med")
     @LogAnnotation(appCode ="",logTitle ="添加产业发展-中药材加工企业、中药材销售企业、中药材制药企业信息记录",logLevel ="3",creater ="",updater = "")
     public ResponseData addChiMed(@RequestBody IndustrialDevelopChiMed record){
-        chiMedService.insertSelective(record);
-        return new ResponseData(EmBusinessError.success);
+        int res = chiMedService.insertSelective(record);
+        if (res == -1){
+            return new ResponseData(EmBusinessError.ORG_NAME_ERROR);
+        }else {
+            return new ResponseData(EmBusinessError.success);
+        }
     }
 
     @ResponseBody

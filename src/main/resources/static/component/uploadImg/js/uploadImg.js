@@ -9,7 +9,7 @@ var base64Code = "";
 
 
         var init = function () {
-            console.log("init");
+             ("init");
             localStorage.setItem('limit', $(".upload-content").attr('data-limit'));
             imgSrc = [];
             imgFile = [];
@@ -26,9 +26,12 @@ var base64Code = "";
             // 单个图片删除
             $(".content-img-list").on("click", '.content-img-list-item a .gcllajitong', function () {
                 var index = $(this).parent().parent().parent().index();
-                imgSrc.splice(index, 1);
-                imgFile.splice(index, 1);
-                imgName.splice(index, 1);
+                imgSrc = [];
+                imgFile = [];
+                imgName = [];
+                // imgSrc.splice(index, 1);
+                // imgFile.splice(index, 1);
+                // imgName.splice(index, 1);
                 var boxId = ".content-img-list";
                 addNewContent(boxId);
                 if (imgSrc.length < limit) { //显示上传按钮
@@ -42,7 +45,7 @@ var base64Code = "";
                 $(".modal-content").html("");
 
                 var bigimg = $(".modal-content").html();
-                $(".modal-content").html(bigimg + '<div class="show"><img src="' + imgSrc[index] + '" alt=""><div>');
+                $(".modal-content").html(bigimg + '<div class="show"><img src="' + imgSrc[index] + '" alt="" style="max-width: 800px"><div>');
                 // $(".modal-content").append(
                 //     '<div class="show"><img src="' + imgSrc[a] + '" alt=""><div>'
                 // );
@@ -56,8 +59,8 @@ var base64Code = "";
                 var limit = localStorage.getItem('limit');
                 updated = true;
                 var imgSize = this.files[0].size;
-                if (imgSize > 1024 * 1024 * 1) { //1M
-                    return alert("上传图片不能超过1M");
+                if (imgSize > 5120 * 5120 * 1) { //5M
+                    return alert("上传图片不能超过5M");
                 }
                 ;
                 if (this.files[0].type != 'image/png' && this.files[0].type != 'image/jpeg' && this.files[0].type != 'image/gif') {
@@ -136,6 +139,11 @@ var base64Code = "";
             return imgFile;
         }
 
+        function disable() {
+            $('.content-img-list').off('mouseover','.content-img-list-item');
+            $('.content-img-list').off('mouseleave','.content-img-list-item');
+            $(".content-img-list").off("click", '.content-img-list-item a .gcllajitong');
+        }
         function genBase64() {
             r = new FileReader();
             r.onload = function(){
@@ -153,7 +161,7 @@ var base64Code = "";
         }
 
         function setImgSrc(src) {
-            console.log("setSrc")
+             ("setSrc")
             for (var i = 0; i < imgSrc.length; i++) {
                 if (imgSrc[i] === src) {
                     return
@@ -176,7 +184,8 @@ var base64Code = "";
             setImgSrc: setImgSrc,
             setImgSrcs: setImgSrcs,
             init: init,
-            getBase64: getBase64
+            getBase64: getBase64,
+            disable: disable
         }
 
     })

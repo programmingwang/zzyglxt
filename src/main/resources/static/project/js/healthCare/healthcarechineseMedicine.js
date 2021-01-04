@@ -145,7 +145,7 @@
                     var myChineseMedicineModal = modalUtil.init(myViewChineseMedicineModalData);
                     $("#chineseMedicineName").val(row.chineseMedicineName);
                     $("#chineseMedicineAlias").val(row.chineseMedicineAlias);
-                    $("#chineseMedicineType").val(row.chineseMedicineType);
+                    $("#chineseMedicineType").val(p2[row.chineseMedicineType].text);
                     $("#chineseMedicineHarvesting").val(row.chineseMedicineHarvesting);
                     $("#chineseMedicineTaste").val(row.chineseMedicineTaste);
                     $("#chineseMedicineMerTro").val(row.chineseMedicineMerTro);
@@ -233,7 +233,9 @@
             var aCol = [
                         {field: 'chineseMedicineName', title: '中医药名称'},
                         {field: 'chineseMedicineAlias', title: '别名'},
-                        {field:'chineseMedicineType',title:'功效分类'},
+                        {field:'chineseMedicineType',title:'功效分类',formatter:function (row) {
+                        return '<p>'+p2[row].text+'</p>';
+                        }},
                         {field: 'filePath', title: '药材图片', formatter:function (value, row, index) {
                                 if(value == "已经损坏了"){
                                     return '<p>'+value+'</p>';
@@ -254,9 +256,6 @@
 
             bootstrapTableUtil.globalSearch("table",url,aParam, aCol);
 
-            var allTableData = $("#table").bootstrapTable("getData");
-            //console.log(allTableData);
-            localStorage.setItem('2',JSON.stringify(allTableData))
-            obj2=JSON.parse(localStorage.getItem("2"));
+
         })
 })();

@@ -16,6 +16,27 @@ spring:
     username: root
     password: C&PVBLNPNR^F^qjr
     type: com.alibaba.druid.pool.DruidDataSource
+      #Spring Boot 默认是不注入这些属性值的，需要自己绑定
+      #druid 数据源专有配置
+    initialSize: 5
+    minIdle: 5
+    maxActive: 20
+    maxWait: 60000
+    timeBetweenEvictionRunsMillis: 60000
+    minEvictableIdleTimeMillis: 300000
+    validationQuery: SELECT 1 FROM DUAL
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+    poolPreparedStatements: true
+
+      #配置监控统计拦截的filters，stat:监控统计、log4j：日志记录、wall：防御sql注入
+      #如果允许时报错  java.lang.ClassNotFoundException: org.apache.log4j.Priority
+      #则导入 log4j 依赖即可，Maven 地址：https://mvnrepository.com/artifact/log4j/log4j
+    filters: stat,wall,log4j
+    maxPoolPreparedStatementPerConnectionSize: 20
+    useGlobalDataSourceStat: true
+    connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=500
 
 #     使项目能访问图片
   resources:
@@ -26,6 +47,9 @@ spring:
   cache:
     ehcache:
       config: ehcache.xml
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
 
 
 
@@ -44,12 +68,18 @@ upload:
   addr: 47.113.104.120
   port: 8085
 
+
 #  servlet:
 #    context-path: /zyyglxt
-    
+
 #logging:
 #  file:
 #    path: E:/Desktop
 
-
-
+fdfs:
+  connect-timeout: 6000
+  so-timeout: 15000
+  tracker-list: 39.101.192.246:22122
+  http_tracker_http_port: 8080
+  pool:
+    jmx-enabled: false

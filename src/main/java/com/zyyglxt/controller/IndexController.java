@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class IndexController {
 
     @RequestMapping(value = "/userLogin")
-    public String userLogin(){
+    public String userLogin() {
         return "/user/login";
     }
 
@@ -27,47 +27,62 @@ public class IndexController {
 
 
     @RequestMapping(value = "/")
-    public String index(){
+    public String index() {
         return "redirect:/userLogin";
     }
 
     @RequestMapping(value = "/main")
-    public String main(){
+    public String main() {
         return "/index";
     }
 
     @RequestMapping(value = "/toUserMsg")
-    public String userMsg(){
+    public String userMsg() {
         return "/user/usermsg";
     }
 
     @RequestMapping(value = "/plantation_add")
-    public String plantation_add(){
-        return "/industrialdevelop/chinesemed/plantation_add";
+    public String plantation_add() {
+        return "/industrialdevelop/chinesemed/add-plantation";
     }
 
     @RequestMapping(value = "/process_add")
-    public String process_add(){
-        return "/industrialdevelop/chinesemed/chinesemed-process_add";
+    public String process_add() {
+        return "/industrialdevelop/chinesemed/add-chinesemed-process";
     }
+
     @RequestMapping(value = "/produce_add")
-    public String produce_add(){
-        return "/industrialdevelop/chinesemed/chinesemed-produce_add";
+    public String produce_add() {
+        return "/industrialdevelop/chinesemed/add-chinesemed-produce";
     }
+
+    @RequestMapping(value = "/sale_add")
+    public String sale_add() {
+        return "/industrialdevelop/chinesemed/add-chinesemed-sale";
+    }
+
+    @RequestMapping(value = "/hosp_add")
+    public String hosp_add() {
+        return "/industrialdevelop/organization/add-hosp";
+    }
+
     @RequestMapping(value = "/school_add")
-    public String school_add(){
-        return "/industrialdevelop/school_add";
+    public String school_add() {
+        return "/industrialdevelop/add-school";
     }
+
     @RequestMapping(value = "/lab_add")
-    public String lab_add(){
-        return "/industrialdevelop/organization/lab_add";
+    public String lab_add() {
+        return "/industrialdevelop/organization/add-lab";
     }
-    @RequestMapping(value = "/tecservice_add")
-    public String tecservice_add(){
-        return "/industrialdevelop/organization/tecservice_add";
+
+    @RequestMapping(value = "/tecserviceorg_add")
+    public String tecservice_add() {
+        return "/industrialdevelop/organization/add-tecserviceorg";
     }
+
     @RequestMapping(value = "/tour_add")
-    public String tour_add(){
-        return "/industrialdevelop/organization/tour_add";
+    public String tour_add() {
+        return "/industrialdevelop/organization/add-tour";
     }
 }

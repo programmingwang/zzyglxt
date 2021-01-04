@@ -78,7 +78,6 @@
                     alertUtil.error(data.responseJSON.message);
                 }
 
-                console.log("请求失败URI："+ url);
             };
             _setting.complete = function (XMLHttpRequest) {
                 if (aButton != null) {

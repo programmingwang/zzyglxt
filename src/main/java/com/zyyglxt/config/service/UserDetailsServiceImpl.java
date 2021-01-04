@@ -1,9 +1,10 @@
 package com.zyyglxt.config.service;
 
-import com.zyyglxt.dao.OrganizationDOMapper;
+import com.zyyglxt.dataobject.OrganizationDO;
 import com.zyyglxt.dataobject.ResourcesDO;
 import com.zyyglxt.dataobject.RoleDO;
 import com.zyyglxt.dataobject.UserDO;
+import com.zyyglxt.service.IOrganizationService;
 import com.zyyglxt.service.ResourcesService;
 import com.zyyglxt.service.RoleService;
 import com.zyyglxt.service.UserService;
@@ -30,7 +31,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     @Autowired
     private RoleService roleService;
     @Autowired
-    private OrganizationDOMapper organizationDOMapper;
+    IOrganizationService organizationService;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -42,6 +43,16 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         if (sysUser == null) {
             throw new RuntimeException("用户不存在");
         }
+        // 审核不通过不能登录
+        OrganizationDO organizationDO = organizationService.selectByItemCode(sysUser.getOrgCode());
+        if (organizationDO != null) {
+            if (!"1".equals(organizationDO.getAuditStatus()) ){
+                throw new RuntimeException("审核未通过，请耐心等待！");
+            }
+        } else {
+            throw new RuntimeException("机构未注册！");
+        }
+
         Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
         if (sysUser != null) {
             RoleDO role = roleService.selectRoleByUserid(sysUser.getItemcode());

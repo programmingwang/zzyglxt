@@ -1,12 +1,54 @@
 (function () {
-    require(['jquery','objectUtil','ajaxUtil','alertUtil','stringUtil','fileUtil'],
-        function (jquery,objectUtil,ajaxUtil,alertUtil,stringUtil,fileUtil) {
+    require(['jquery','objectUtil','ajaxUtil','alertUtil','stringUtil','fileUtil','distpicker'],
+        function (jquery,objectUtil,ajaxUtil,alertUtil,stringUtil,fileUtil,distpicker) {
 
             const editor = objectUtil.wangEditorUtil();
 
             $("#cancel").unbind().on('click',function () {
                 var url = "/healthCare/healthsciKnow";
                 orange.redirect(url);
+            });
+
+            $("#btn_save").unbind().on('click',function () {
+                var sciKnowEntity;
+                var addUpdateUrl;
+                var operateMessage;
+                if(!isUpdate()){
+                    addUpdateUrl = "inserthealthsciknowdo";
+                    operateMessage = "新增科普知识成功";
+                    sciKnowEntity = {
+                        itemcode: stringUtil.getUUID(),
+                        scienceKnowledgeName : $("#scienceKnowledgeName").val(),
+                        scienceKnowledgeSource : $("#scienceKnowledgeSource").val(),
+                        scienceKnowledgeAuthor : $("#scienceKnowledgeAuthor").val(),
+                        scienceKnowledgeStatus : '0',
+                        content : editor.txt.html()
+                    };
+                }else{
+                    var needData = JSON.parse(localStorage.getItem("rowData"));
+                    addUpdateUrl = "updatehealthsciknowdo";
+                    sciKnowEntity = {
+                        itemid: needData.itemid,
+                        itemcode: needData.itemcode,
+                        scienceKnowledgeName : $("#scienceKnowledgeName").val(),
+                        scienceKnowledgeSource : $("#scienceKnowledgeSource").val(),
+                        scienceKnowledgeAuthor : $("#scienceKnowledgeAuthor").val(),
+                        content : editor.txt.html()
+                    }
+                    operateMessage = "更新科普知识成功";
+                }
+                /*fileUtil.handleFile(isUpdate(), sciKnowEntity.itemcode, upload_file.getFiles()[0]);*/
+
+                ajaxUtil.myAjax(null,addUpdateUrl,sciKnowEntity,function (data) {
+                    if(ajaxUtil.success(data)){
+                        alertUtil.info(operateMessage);
+                        var url = "/healthCare/healthsciKnow";
+                        orange.redirect(url);
+                    }else {
+                        alertUtil.alert(data.msg);
+                    }
+                },false,true);
+
             });
 
             $("#btn_insert").unbind().on('click',function () {
@@ -21,6 +63,7 @@
                         scienceKnowledgeName : $("#scienceKnowledgeName").val(),
                         scienceKnowledgeSource : $("#scienceKnowledgeSource").val(),
                         scienceKnowledgeAuthor : $("#scienceKnowledgeAuthor").val(),
+                        scienceKnowledgeStatus : '1',
                         content : editor.txt.html()
                     };
                 }else{
@@ -32,6 +75,7 @@
                         scienceKnowledgeName : $("#scienceKnowledgeName").val(),
                         scienceKnowledgeSource : $("#scienceKnowledgeSource").val(),
                         scienceKnowledgeAuthor : $("#scienceKnowledgeAuthor").val(),
+                        status : '1',
                         content : editor.txt.html()
                     }
                     operateMessage = "更新科普知识成功";
@@ -58,6 +102,12 @@
                     editor.txt.html(tempdata.content);
                     var img = tempdata.filePath;
                     $("#upimg").attr("src",img);
+                }
+                else {
+                    $("#distpicker").distpicker();
+                }
+                init = function () {
+
                 }
             }());
 

@@ -9,7 +9,6 @@
             //角色加载工具
             url = selectUtil.getRoleTable(sessionStorage.getItem("rolename"),url,"chineseCulturalStatus",webStatus);
 
-            console.log(url);
             var aParam = {
 
             };
@@ -69,7 +68,6 @@
                                 "chineseCulturalStatus": selectUtil.getStatus(sessionStorage.getItem("rolename"),webStatus)
                             };
                             ajaxUtil.myAjax(null,"/cul/trav/trav/cgTravSta/"+row.itemid+"/"+row.itemcode,submitStatus,function (data) {
-                                console.log(data);
                                 if(ajaxUtil.success(data)){
                                     if(data.code == ajaxUtil.successCode){
                                         if(sessionStorage.getItem("rolename") == "文化宣传处长"){
@@ -276,44 +274,6 @@
 
             bootstrapTableUtil.globalSearch("table",url,aParam, aCol);
 
-                var allTableData = $("#table").bootstrapTable("getData");
-                //console.log(allTableData);
-                localStorage.setItem('2',JSON.stringify(allTableData))
-                obj2=JSON.parse(localStorage.getItem("2"));
-                //console.log(obj2);
-            // function getAllData(){
-            //     var allTableData = $("#table").bootstrapTable("getData");
-            //     console.log(allTableData);
-            //     localStorage.setItem('2',JSON.stringify(allTableData))
-            //     obj2=JSON.parse(localStorage.getItem("2"));
-            //     console.log(obj2);
-            // }
-            // setTimeout(getAllData,10000);
-            // var addstr=document.getElementById("chargePersonSearch").value;
-            // var addstr=document.getElementById("chargePersonSearch").value;
-            // localStorage.setItem('1',addstr);
-            // //[object Object]
-            //
-            // localStorage.setItem('2',JSON.stringify(addstr));
-            //
-            // obj2=JSON.parse(localStorage.getItem("2"));
-            // console.log(obj2);
-            // obj1=localStorage.getItem("1")
-            // console.log(obj1)
-        //     window.onload=function(){
-        //
-        //         var addstr=document.getElementById("chargePersonSearch").value;
-        //         localStorage.setItem('1',addstr);
-        //         //[object Object]
-        //
-        //         localStorage.setItem('2',JSON.stringify(addstr));
-        //
-        //         obj2=JSON.parse(localStorage.getItem("2"));
-        //         console.log(obj2);
-        //         obj1=localStorage.getItem("1")
-        //         console.log(obj1)
-        //
-        // }
         })
 })();
 

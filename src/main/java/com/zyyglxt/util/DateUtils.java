@@ -31,4 +31,15 @@ public class DateUtils {
 //        return bjSdf.parse(bjSdf.format(new Date()));
 //    }
 
+    public static Date getYMD() {
+        Date date = new Date();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            return sdf.parse(sdf.format(date));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
 }

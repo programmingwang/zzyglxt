@@ -43,9 +43,9 @@ public class OrganizationServiceImpl implements IOrganizationService {
     @Override
     public List<OrganizationDO> selectAllOrgByAuditStatus() {
         UserSessionDto user = (UserSessionDto) request.getSession().getAttribute("user");
-        if ("市级中医药管理部门".equals(user.getRolename())) {
+        if ("科研项目-市级".equals(user.getRolename())) {
             return organizationDOMapper.selectAllOrgByAuditStatus();
-        } else if ("省局中医药管理部门".equals(user.getRolename())){
+        } else if ("科研项目-省级".equals(user.getRolename())){
             return organizationDOMapper.queryAllOrgByAuditStatus();
         }
         return null;
@@ -68,5 +68,10 @@ public class OrganizationServiceImpl implements IOrganizationService {
     @Override
     public void insertChiMedMsg() {
 
+    }
+
+    @Override
+    public OrganizationDO selectByItemCode(String itemCode) {
+        return organizationDOMapper.selectByItemCode(itemCode);
     }
 }

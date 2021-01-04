@@ -3,9 +3,11 @@ package com.zyyglxt.util;
 import com.zyyglxt.dataobject.ChineseCulturalDO;
 import com.zyyglxt.dataobject.CulturalResourcesDO;
 import com.zyyglxt.dataobject.IndustrialDevelopSciAchiDO;
+import com.zyyglxt.dataobject.IndustrialDevelopTopicDO;
 import com.zyyglxt.dto.ChineseCulturalDto;
 import com.zyyglxt.dto.CulturalResourcesDto;
 import com.zyyglxt.dto.industrialDevelop.IndustrialDevelopSciAchiDODto;
+import com.zyyglxt.dto.industrialDevelop.IndustrialDevelopTopicDODto;
 import com.zyyglxt.error.BusinessException;
 import com.zyyglxt.error.EmBusinessError;
 import org.apache.commons.lang3.StringUtils;
@@ -50,5 +52,14 @@ public class ConvertDOToDTOUtil {
         industrialDevelopSciAchiDODto.setFilePath(filePath);
         industrialDevelopSciAchiDODto.setFileName(fileName);
         return industrialDevelopSciAchiDODto;
+    }
+
+    public static IndustrialDevelopTopicDODto convertFromDOToDTO(IndustrialDevelopTopicDO topicDO, String filePath, String fileName){
+        filePath = StringUtils.isEmpty(filePath) ? "已经损坏了" : filePath;
+        IndustrialDevelopTopicDODto topicDODto = new IndustrialDevelopTopicDODto();
+        BeanUtils.copyProperties(topicDO,topicDODto);
+        topicDODto.setFilePath(filePath);
+        topicDODto.setFileName(fileName);
+        return topicDODto;
     }
 }

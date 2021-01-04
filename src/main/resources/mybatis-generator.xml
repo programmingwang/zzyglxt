@@ -33,11 +33,16 @@
         <property name="beginningDelimiter" value="`"/>
         <property name="endingDelimiter" value="`"/>
 
+        <commentGenerator>
+            <!-- 是否去除自动生成的注释 true：是 ： false:否 -->
+            <property name="suppressAllComments" value="true" />
+        </commentGenerator>
+
         <!-- 必须要有的，使用这个配置链接数据库 -->
         <jdbcConnection driverClass="com.mysql.cj.jdbc.Driver"
                         connectionURL="jdbc:mysql://47.106.185.189:3306/culpro"
                         userId="root"
-                        password="C&PVBLNPNR^F^qjr">
+                        password="C&amp;PVBLNPNR^F^qjr">
 
             <property name="serverTimezone" value="UTC"/>
             <!--MySQL 不支持 schema 或者 catalog 所以需要添加这个-->
@@ -84,27 +89,27 @@
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
 
-        <!--<table tableName="application" domainObjectName="ApplicationDO" enableCountByExample="false"-->
+        <!--<table tableName="tb_governres_advice" domainObjectName="adviceDO" enableCountByExample="false"-->
                <!--enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"-->
                <!--selectByExampleQueryId="false"></table>-->
 
-        <!--<table tableName="dict" domainObjectName="DictDO" enableCountByExample="false"-->
+        <!--<table tableName="tb_governres_countersign" domainObjectName="CountersignDO" enableCountByExample="false"-->
                <!--enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"-->
                <!--selectByExampleQueryId="false"></table>-->
 
-        <!--<table tableName="dictitem" domainObjectName="DictitemDO" enableCountByExample="false"-->
+        <!--<table tableName="tb_governres_post" domainObjectName="PostDO" enableCountByExample="false"-->
                <!--enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"-->
                <!--selectByExampleQueryId="false"></table>-->
 
-        <!--<table tableName="log" domainObjectName="LogDO" enableCountByExample="false"-->
+        <!--<table tableName="tb_governres_post_ref" domainObjectName="PostRefDO" enableCountByExample="false"-->
                <!--enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"-->
                <!--selectByExampleQueryId="false"></table>-->
 
-        <!--<table tableName="resource" domainObjectName="ResourcesDO" enableCountByExample="false"-->
+        <!--<table tableName="tb_governres_receipt" domainObjectName="ReceiptDO" enableCountByExample="false"-->
                <!--enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"-->
                <!--selectByExampleQueryId="false"></table>-->
 
-        <!--<table tableName="resource_role_ref" domainObjectName="ResourcesRoleRefDO" enableCountByExample="false"-->
+        <!--<table tableName="tb_governres_request_report" domainObjectName="RequestReportDO" enableCountByExample="false"-->
                <!--enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"-->
                <!--selectByExampleQueryId="false"></table>-->
 

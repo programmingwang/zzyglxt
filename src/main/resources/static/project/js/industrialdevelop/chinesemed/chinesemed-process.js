@@ -9,6 +9,7 @@
 
             var pathUrl = "/industrialdevelop/chinesemed/chinesemed-process";
             var addUrl = pathUrl+"_add";
+            var status = dictUtil.getDictByCode(dictUtil.DICT_LIST.projectStatus);
             var aParam = {
 
             };
@@ -85,7 +86,9 @@
                         }
                     }},
                 {field: 'contacts', title: '联系人'},
-                {field: 'status', title: '项目状态'},
+                {field: 'status', title: '项目状态', formatter:function (value) {
+
+                    }},
                 {field: 'action',  title: '操作',formatter: operation,events:orgEvents}
             ];
 
@@ -98,10 +101,6 @@
             }
 
             bootstrapTableUtil.globalSearch("table",getUrl,aParam, aCol);
-            var allTableData = $("#table").bootstrapTable("getData");
-            //console.log(allTableData);
-            localStorage.setItem('2',JSON.stringify(allTableData))
-            obj2=JSON.parse(localStorage.getItem("2"));
-            //console.log(obj2);
+
         })
 })();

@@ -42,13 +42,28 @@ public class AuditServiceImpl implements IAuditService {
     @Resource
     UsernameUtil usernameUtil;
 
+
     @Override
     public List<AuditDto> getAll() {
         List<AuditDto> resList = new ArrayList<>();
-        List<IndustrialDevelopChiMed> chiMedList = auditMapper.getAllChiMed();
-        List<IndustrialDevelopTecSerOrg> tecSerOrgList = auditMapper.getAllTecOrg();
-        List<IndustrialDevelopSchool> schoolList = auditMapper.getAllSchool();
-        List<HospDO> hospDOList = auditMapper.getAllHospital();
+        List<IndustrialDevelopChiMed> chiMedList;
+        List<IndustrialDevelopTecSerOrg> tecSerOrgList;
+        List<IndustrialDevelopSchool> schoolList;
+        List<HospDO> hospDOList;
+        String city;
+        if (usernameUtil.getRoleName().equals("产业发展-省级")){
+            chiMedList = auditMapper.getAllChiMed();
+            tecSerOrgList = auditMapper.getAllTecOrg();
+            schoolList = auditMapper.getAllSchool();
+            hospDOList = auditMapper.getAllHospital();
+        }else {
+            city = usernameUtil.getCityId();
+            chiMedList = auditMapper.getAllChiMedByCity(city);
+            tecSerOrgList = auditMapper.getAllTecOrgByCity(city);
+            schoolList = auditMapper.getAllSchoolByCity(city);
+            hospDOList = auditMapper.getAllHospitalByCity(city);
+        }
+
 
         convertChiMed(chiMedList, resList);
 
@@ -133,21 +148,28 @@ public class AuditServiceImpl implements IAuditService {
 
     @Override
     public int changeChiMedStatus(AuditDto record) {
+        if (record.getStatus().equals("6")){
+            auditMapper.changeUserStatus(record.getOrgCode());
+        }
+        record.setUpdater(usernameUtil.getOperateUser());
         return auditMapper.changeChiMedStatus(record);
     }
 
     @Override
     public int changeTecSerOrgStatus(AuditDto record) {
+        record.setUpdater(usernameUtil.getOperateUser());
         return auditMapper.changeTecSerOrgStatus(record);
     }
 
     @Override
     public int changeSchoolStatus(AuditDto record) {
+        record.setUpdater(usernameUtil.getOperateUser());
         return auditMapper.changeSchoolStatus(record);
     }
 
     @Override
     public int changeHospitalStatus(AuditDto record) {
+        record.setUpdater(usernameUtil.getOperateUser());
         return auditMapper.changeHospitalStatus(record);
     }
 
@@ -171,6 +193,7 @@ public class AuditServiceImpl implements IAuditService {
         for (IndustrialDevelopSchool item : source) {
             AuditDto obj = new AuditDto();
             BeanUtils.copyProperties(item, obj);
+            obj.setName(item.getSchoolName());
             obj.setType("school");
             target.add(obj);
         }
@@ -192,9 +215,21 @@ public class AuditServiceImpl implements IAuditService {
         Map<String, String> proMap = dictService.getDictMapByCode("projectStatus");
         Map<String, String> typeMap = dictService.getDictMapByCode("orgType");
         target.removeIf(item -> item.getStatus().equals("0"));
+        if (usernameUtil.getRoleName().equals("产业发展-省级")){
+            target.removeIf(item -> item.getStatus().equals("1"));
+            target.removeIf(item -> item.getStatus().equals("2"));
+            target.removeIf(item -> item.getStatus().equals("3"));
+            target.removeIf(item -> item.getStatus().equals("5"));
+        }else if (usernameUtil.getRoleName().equals("产业发展-市级")){
+            target.removeIf(item -> !item.getAddressCity().equals(usernameUtil.getCityId()));
+        }
         for (AuditDto item : target) {
             item.setType(typeMap.get(item.getType()));
-            item.setStatus(proMap.get(item.getStatus()));
+            if (item.getStatus().equals("1")){
+                item.setStatus("待审核");
+            }else {
+                item.setStatus(proMap.get(item.getStatus()));
+            }
         }
     }
 }

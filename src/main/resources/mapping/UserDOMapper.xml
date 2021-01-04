@@ -28,8 +28,7 @@
   </resultMap>
   <sql id="Base_Column_List">
     itemID, itemCode, ORG_CODE, USERNAME, PASSWORD, SALT, NAME, GENDER, IDCARD_TYPE,
-    IDCARD_NO, EMAIL, STATE, CONTACTS, mobilePhone, CREATER, itemCreateAt, UPDATER, itemUpdateAt,
-    CITYID, TYPE
+    IDCARD_NO, EMAIL, STATE, CONTACTS, mobilePhone, CITYID, TYPE
   </sql>
   <sql id="Blob_Column_List">
      PORTRAIT
@@ -42,6 +41,7 @@
     from user
     where itemID = #{itemid,jdbcType=INTEGER}
       and itemCode = #{itemcode,jdbcType=CHAR}
+    order by itemUpdateAt desc
   </select>
   <select id="selectByUsernameAndPassword" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
     select
@@ -51,6 +51,7 @@
     from user
     where username = #{username,jdbcType=VARCHAR}
     and password = #{password,jdbcType=VARCHAR}
+    order by itemUpdateAt desc
   </select>
   <select id="selectAllUser" resultMap="ResultMapWithBLOBs">
     select
@@ -58,6 +59,7 @@
     ,
     <include refid="Blob_Column_List" />
     from user
+    order by itemUpdateAt desc
   </select>
   <select id="selectByUsername" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
     select
@@ -66,6 +68,7 @@
     <include refid="Blob_Column_List" />
     from user
     where USERNAME = #{username,jdbcType=VARCHAR}
+    order by itemUpdateAt desc
   </select>
   <select id="selectByMobilePhone" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
      select
@@ -74,6 +77,7 @@
     <include refid="Blob_Column_List" />
     from user
     where mobilePhone = #{mobilephone,jdbcType=VARCHAR}
+    order by itemUpdateAt desc
   </select>
   <delete id="deleteByPrimaryKey" parameterType="com.zyyglxt.dataobject.UserDOKey">
     delete from user
@@ -139,6 +143,9 @@
       <if test="state != null">
         STATE,
       </if>
+      <if test="contacts != null">
+        CONTACTS,
+      </if>
       <if test="mobilephone != null">
         mobilePhone,
       </if>
@@ -201,6 +208,9 @@
       <if test="state != null">
         #{state,jdbcType=VARCHAR},
       </if>
+      <if test="contacts != null">
+        #{contacts,jdbcType=VARCHAR},
+      </if>
       <if test="mobilephone != null">
         #{mobilephone,jdbcType=VARCHAR},
       </if>
@@ -259,6 +269,9 @@
       </if>
       <if test="state != null">
         STATE = #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="contacts != null">
+        CONTACTS = #{contacts,jdbcType=VARCHAR},
       </if>
       <if test="mobilephone != null">
         mobilePhone = #{mobilephone,jdbcType=VARCHAR},

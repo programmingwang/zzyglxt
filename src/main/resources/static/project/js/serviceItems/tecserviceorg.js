@@ -93,7 +93,6 @@
             var pl = dictUtil.getDictByCode(dictUtil.DICT_LIST.showStatus);
             $("#chargePersonSearch").selectUtil(pl);
 
-
             var aCol = [
                 {field: 'serviceProject', title: '服务项目名称'},
                 {field: 'projectCost', title: '项目收费'},
@@ -113,10 +112,6 @@
             }
 
             bootstrapTableUtil.globalSearch("table", getUrl, aParam, aCol);
-            var allTableData = $("#table").bootstrapTable("getData");
-            //console.log(allTableData);
-            localStorage.setItem('2',JSON.stringify(allTableData))
-            obj2=JSON.parse(localStorage.getItem("2"));
-            //console.log(obj2);
+
         })
 })();

@@ -90,7 +90,17 @@
             //主管市区
             "areaAdmin":"areaAdmin",
             //用户角色
-            "userRole":"userRole"
+            "userRole":"userRole",
+            //科研项目专家提交状态
+            "expertSubmitStatus":"expertSubmitStatus",
+            //课题专家分配状态
+            "distributionExpert" : "distributionExpert",
+            //数据提交状态
+            "topicStatus": "topicStatus",
+            //审核状态
+            "auditStatus": "auditStatus",
+            //紧急程度
+            "emergencyStatus":"emergencyStatus"
         }
 
         var dictList = {

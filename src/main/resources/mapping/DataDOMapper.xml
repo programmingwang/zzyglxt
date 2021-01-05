@@ -18,6 +18,7 @@
     <result column="DATA_STATUS" jdbcType="VARCHAR" property="dataStatus" />
     <result column="DATA_TYPE" jdbcType="VARCHAR" property="dataType" />
     <result column="VISIT_NUM" jdbcType="INTEGER" property="visitNum" />
+    <result column="RELEASE_OR_NOT" jdbcType="VARCHAR" property="releaseOrNot" />
     <result column="CREATER" jdbcType="VARCHAR" property="creater" />
     <result column="itemCreateAt" jdbcType="TIMESTAMP" property="itemcreateat" />
     <result column="UPDATER" jdbcType="VARCHAR" property="updater" />
@@ -28,7 +29,7 @@
   </resultMap>
   <sql id="Base_Column_List">
     itemID, itemCode, DATA_TITLE, DATA_LOCATION, DATA_AUTHOR, DATA_SOURCE, DATA_FILE_TYPE, 
-    DATA_DELAYED_RELEASE, DATA_STATUS, DATA_TYPE, CREATER, itemCreateAt, UPDATER, itemUpdateAt
+    DATA_DELAYED_RELEASE, DATA_STATUS, DATA_TYPE, RELEASE_OR_NOT, CREATER, itemCreateAt, UPDATER, itemUpdateAt
   </sql>
   <sql id="Blob_Column_List">
     DATA_CONTENT
@@ -95,13 +96,13 @@
     insert into tb_culpro_data (itemID, itemCode, DATA_TITLE, 
       DATA_LOCATION, DATA_AUTHOR, DATA_SOURCE, 
       DATA_FILE_TYPE, DATA_DELAYED_RELEASE, DATA_STATUS, 
-      DATA_TYPE, CREATER, itemCreateAt, 
+      DATA_TYPE, RELEASE_OR_NOT, CREATER, itemCreateAt,
       UPDATER, itemUpdateAt, DATA_CONTENT
       )
     values (#{itemid,jdbcType=INTEGER}, #{itemcode,jdbcType=CHAR}, #{dataTitle,jdbcType=VARCHAR}, 
       #{dataLocation,jdbcType=VARCHAR}, #{dataAuthor,jdbcType=VARCHAR}, #{dataSource,jdbcType=VARCHAR}, 
       #{dataFileType,jdbcType=VARCHAR}, #{dataDelayedRelease,jdbcType=TIMESTAMP}, #{dataStatus,jdbcType=VARCHAR}, 
-      #{dataType,jdbcType=VARCHAR}, #{creater,jdbcType=VARCHAR}, #{itemcreateat,jdbcType=TIMESTAMP}, 
+      #{dataType,jdbcType=VARCHAR}, #{releaseOrNot,jdbcType=VARCHAR}, #{creater,jdbcType=VARCHAR}, #{itemcreateat,jdbcType=TIMESTAMP},
       #{updater,jdbcType=VARCHAR}, #{itemupdateat,jdbcType=TIMESTAMP}, #{dataContent,jdbcType=LONGVARCHAR}
       )
   </insert>
@@ -142,6 +143,9 @@
       </if>
       <if test="dataType != null">
         DATA_TYPE,
+      </if>
+      <if test="releaseOrNot != null">
+        RELEASE_OR_NOT,
       </if>
       <if test="creater != null">
         CREATER,
@@ -189,6 +193,9 @@
       </if>
       <if test="dataType != null">
         #{dataType,jdbcType=VARCHAR},
+      </if>
+      <if test="releaseOrNot != null">
+        #{releaseOrNot,jdbcType=VARCHAR},
       </if>
       <if test="creater != null">
         #{creater,jdbcType=VARCHAR},
@@ -239,6 +246,9 @@
       <if test="dataType != null">
         DATA_TYPE = #{dataType,jdbcType=VARCHAR},
       </if>
+      <if test="releaseOrNot != null">
+        RELEASE_OR_NOT = #{releaseOrNot,jdbcType=VARCHAR},
+      </if>
       <if test="creater != null">
         CREATER = #{creater,jdbcType=VARCHAR},
       </if>
@@ -280,6 +290,7 @@
       DATA_DELAYED_RELEASE = #{dataDelayedRelease,jdbcType=TIMESTAMP},
       DATA_STATUS = #{dataStatus,jdbcType=VARCHAR},
       DATA_TYPE = #{dataType,jdbcType=VARCHAR},
+      RELEASE_OR_NOT = #{releaseOrNot,jdbcType=VARCHAR},
       CREATER = #{creater,jdbcType=VARCHAR},
       itemCreateAt = #{itemcreateat,jdbcType=TIMESTAMP},
       UPDATER = #{updater,jdbcType=VARCHAR},
@@ -303,6 +314,7 @@
       DATA_DELAYED_RELEASE = #{dataDelayedRelease,jdbcType=TIMESTAMP},
       DATA_STATUS = #{dataStatus,jdbcType=VARCHAR},
       DATA_TYPE = #{dataType,jdbcType=VARCHAR},
+      RELEASE_OR_NOT = #{releaseOrNot,jdbcType=VARCHAR},
       CREATER = #{creater,jdbcType=VARCHAR},
       itemCreateAt = #{itemcreateat,jdbcType=TIMESTAMP},
       UPDATER = #{updater,jdbcType=VARCHAR},
@@ -310,10 +322,12 @@
     where itemID = #{itemid,jdbcType=INTEGER}
       and itemCode = #{itemcode,jdbcType=CHAR}
   </update>
-
-    <select id="selectAll" resultMap="ResultMapWithBLOBs">
-        SELECT *
-        FROM tb_culpro_data
-        order by itemUpdateAt desc
-    </select>
+  <select id="selectAll" resultMap="ResultMapWithBLOBs">
+    select
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    FROM tb_culpro_data
+    order by itemUpdateAt desc
+  </select>
 </mapper>

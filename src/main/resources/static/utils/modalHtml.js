@@ -2474,8 +2474,8 @@
         modalHtml.myCencelDistribution = "是否取消分配专家？"
         modalHtml.myDeletereceiptModal='是否删除收文信息';
         modalHtml.myDeletereportModal='是否删除请示报告信息';
-        modalHtml.myDeleteTopicManagement = "是否删除该项目信息";
-
+        modalHtml.myDeleteTopicManagement = "是否删除该项目信息？";
+        modalHtml.myDeletePost = "是否删除该发文信息？";
 
         return modalHtml;
 

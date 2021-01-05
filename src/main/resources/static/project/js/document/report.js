@@ -354,7 +354,7 @@
 
                 'click .under-shelf' : function (e, value, row, index) {
                     var myUnderShelfReportModalData ={
-                        modalBodyID :"myUnderShelfModal",
+                        modalBodyID :"myUnderShelfReportModal",
                         modalTitle : "撤销请示报告",
                         modalClass : "modal-lg",
                         modalConfirmFun:function () {

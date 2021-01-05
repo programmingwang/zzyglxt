@@ -3,29 +3,29 @@ package com.zyyglxt.dataobject;
 import java.util.Date;
 
 public class PostDO extends PostDOKey {
-    private String postDocumentNum;
+    private String postDocumentNum; //文号
 
-    private String postDocumentNum1;
+    private String postDocumentNum1; //文号2级选项
 
-    private String postOpinion;
+    private String postOpinion; //局长审核
 
-    private String postOpinion1;
+    private String postOpinion1; //分局长审核
 
-    private String postDocumentTitle;
+    private String postDocumentTitle; //文件标题
 
-    private String postDataStatus;
+    private String postDataStatus; //数据状态
 
-    private String postPublicWay;
+    private String postPublicWay; //公开方式
 
-    private String postReason;
+    private String postReason; //不公开理由
 
-    private String postFairDepartmentReview;
+    private String postFairDepartmentReview; //是否需要公平竞争审查
 
-    private String postNormativeDocuments;
+    private String postNormativeDocuments; //是否规范性文件
 
-    private Integer postPrinting;
+    private Integer postPrinting; //印数
 
-    private String postSecretRelated;
+    private String postSecretRelated; //是否泄密
 
     private String creater;
 

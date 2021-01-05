@@ -100,7 +100,9 @@
             //审核状态
             "auditStatus": "auditStatus",
             //紧急程度
-            "emergencyStatus":"emergencyStatus"
+            "emergencyStatus":"emergencyStatus",
+            //报告审核状态
+            "reportStatus":"reportStatus"
         }
 
         var dictList = {

@@ -270,6 +270,9 @@
       <if test="state != null">
         STATE = #{state,jdbcType=VARCHAR},
       </if>
+      <if test="contacts != null">
+        CONTACTS = #{contacts,jdbcType=VARCHAR},
+      </if>
       <if test="mobilephone != null">
         mobilePhone = #{mobilephone,jdbcType=VARCHAR},
       </if>

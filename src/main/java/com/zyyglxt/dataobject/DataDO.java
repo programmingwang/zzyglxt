@@ -120,10 +120,21 @@ public class DataDO extends DataDOKey {
      */
     private String dataContent;
 
+    //新增RELEASE_OR_NOT字段，注释是否发布到河北中医药网
+    private String releaseOrNot;
+
     /**
      * 新增VISIT_SUM字段，注释浏览次数
      */
     private Integer visitNum;
+
+    public String getReleaseOrNot() {
+        return releaseOrNot;
+    }
+
+    public void setReleaseOrNot(String releaseOrNot) {
+        this.releaseOrNot = releaseOrNot == null ? null : releaseOrNot.trim();
+    }
 
     public Integer getVisitNum() {
         return visitNum;

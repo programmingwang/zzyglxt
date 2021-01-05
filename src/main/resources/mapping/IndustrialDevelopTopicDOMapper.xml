@@ -359,7 +359,7 @@
     <include refid="Base_Column_List" />
     from tb_industrial_develop_topic
     where COMPANY = #{company,jdbcType=CHAR}
-    and EXAMINE_STATUS in("1","2","3")
+    and EXAMINE_STATUS in("1","2","3","4","5","6","7")
     order by itemUpdateAt desc
   </select>
   <select id="maxProjectNO" resultMap="BaseResultMap">

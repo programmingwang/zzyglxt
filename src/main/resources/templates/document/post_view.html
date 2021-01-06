@@ -7,8 +7,9 @@
     <title>Document</title>
     <style>
         .request-table{
-            width: 100%;
+            width: 900px;
             margin-top: 20px;
+            margin-left: 30px;
         }
         .title{
             text-align: center;
@@ -25,20 +26,31 @@
         .opinion{
             margin-bottom: 20px;
         }
+        .advice{
+            width: 485px;
+            margin-left: 18px;
+            border: none;
+            outline: none;
+        }
         .text1{
             margin: 10px;
             width: 95%;
             border: none;
             outline: none;
         }
-        .nameDate {
+        .date {
             float: right;
-            margin-right: 20px;
+            width: 100px;
+            margin-left: 20px;
+            border: none;
+            outline: none;
         }
-        .nameDate1{
+        .name {
             float: right;
-            margin-top: 50px;
-            margin-left: 20px
+            text-align: right;
+            width: 160px;
+            border: none;
+            outline: none;
         }
 
     </style>
@@ -46,10 +58,10 @@
 <body>
 <div class="col-lg-1"></div>
 <div class="col-lg-10">
-    <div class="col-lg-12" style="text-align: center;margin-top: 40px;">
+    <div style="margin-left: 230px;margin-top: 40px;">
         <h4 style="color: #D60000; font-size: 34px;">河北省中医药管理局发文审批笺</h4>
     </div>
-    <div class="col-lg-12" style="margin-top: 30px; margin-bottom: -13px;">
+    <div style="margin-top: 30px; margin-bottom: -13px;">
         <span style="margin-left: 30rem; color: #D60000;">文号：</span>
         <input id="postDocumentNum" class="documentNum" />
         <span style="color: #D60000">号</span>
@@ -60,14 +72,14 @@
                 <td class="title">局<br>领<br>导<br>意<br>见</td>
                 <td colspan="9">
                     <div class="opinion">
-                        <span id="directorOpinion" class="text1">同意，允许施工</span>
-                        <span id="directorDate" class="nameDate">2020 11.12</span>
-                        <span id="directorName" class="nameDate">刘思思</span>
+                        <input id="directorOpinion" class="advice" value="同意，允许施工"/>
+                        <input id="directorDate" class="date" value="2020 11.12"/>
+                        <input id="directorName" class="name" value="刘思思"/>
                     </div>
                     <div class="opinion">
-                        <span id="deputyDirectorOpinion" class="text1">同意，允许施工 </span>
-                        <span id="deputyDirectorDate" class="nameDate">2020 11.11</span>
-                        <span id="deputyDirectorName" class="nameDate">刘思思</span>
+                        <input id="deputyDirectorOpinion" class="advice" value="同意，允许施工"/>
+                        <input id="deputyDirectorDate" class="date" value="2020 11.11"/>
+                        <input id="deputyDirectorName" class="name" value="刘思思"/>
                     </div>
                 </td>
             </tr>
@@ -76,9 +88,9 @@
                 <td class="title">办<br>公<br>室<br>核<br>稿</td>
                 <td colspan="9">
                     <div class="opinion">
-                        <span id="officeOpinion" class="text1">同意，允许施工 </span>
-                        <span id="officeDate" class="nameDate">2020 11.10</span>
-                        <span id="officeName" class="nameDate">刘处长</span>
+                        <input id="officeOpinion" class="advice" value="同意，允许施工"/>
+                        <input id="officeDate" class="date" value="2020 11.10"/>
+                        <input id="officeName" class="name" value="刘处长"/>
                     </div>
                 </td>
             </tr>
@@ -87,16 +99,16 @@
                 <td class="title">处<br>室<br>核<br>稿</td>
                 <td colspan="5">
                     <div class="opinion">
-                        <span id="departmentOpinion" class="text1">同意，允许施工 </span>
-                        <span id="departmentDate" class="nameDate1">2020 11.10</span>
-                        <span id="departmentName" class="nameDate1">刘处长</span>
+                        <input id="departmentOpinion" style="margin-left: 18px; width: 410px; border: none; outline: none;" value="同意，允许施工"/>
+                        <input id="departmentDate" class="date" style="margin-top: 50px;" value="2020 11.10"/>
+                        <input id="departmentName" class="name" style="margin-top: 50px;" value="刘处长"/>
                     </div>
                 </td>
                 <td class="title">处<br>室<br>拟<br>稿</td>
                 <td colspan="3">
                     <div class="opinion">
-                        <span id="initialName" style="margin-left: 20px">刘颖旭</span>
-                        <span id="initialDate" class="nameDate">2020.11.09</span>
+                        <input id="initialName" style="margin-left: 18px; width: 128px; border: none; outline: none;"/>
+                        <input id="initialDate" class="date"/>
                     </div>
                 </td>
             </tr>
@@ -113,10 +125,8 @@
             <tr style="height: 60px">
                 <td class="title">附<br>件</td>
                 <td colspan="9">
-                    <div>
-                        <span class="upload-wrap anticon" nv-file-drop="" uploader="uploader" style="margin-top: 8px;">
-                            <a id="upload_file1" href=""></a>
-                        </span>
+                    <div class="upload-wrap anticon" nv-file-drop="" uploader="uploader" style="margin-top: 8px;">
+                        <a id="upload_file" href="" style="color: #BD7B37;"></a>
                     </div>
                 </td>
             </tr>
@@ -176,7 +186,7 @@
                         <input name="postFairDepartmentReview" type="radio" id="f1" value="y" style="zoom:130%; margin-left: 15px;"/>
                         <label for="f1">主动公开</label>
                         <span class="upload-wrap anticon" nv-file-drop="" uploader="uploader" style="margin-top: 8px;">
-                            <a id="fujian" href=""></a>
+                            <a id="fairFile" href="" style="color: #BD7B37;"></a>
                         </span>
                     </div>
                     <div style="color: #D60000">
@@ -212,7 +222,6 @@
                 <td colspan="4" class="title">印数
                     <input name="postPrinting" id="postPrinting" style="width: 140px"/>
                 </td>
-
             </tr>
 
         </table>

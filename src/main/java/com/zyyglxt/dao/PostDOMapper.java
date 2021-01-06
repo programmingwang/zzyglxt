@@ -22,4 +22,6 @@ public interface PostDOMapper {
     List<PostDO> selectAll(@Param("postDataStatus") String postDataStatus);
 
     PostDO maxNum();
+
+    List<PostDO> getPandA();
 }

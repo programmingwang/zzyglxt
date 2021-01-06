@@ -1,14 +1,25 @@
 package com.zyyglxt.dataobject;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.zyyglxt.dataobject.validation.ValidationGroups;
+
 import javax.validation.constraints.NotBlank;
 import java.util.Date;
 
 public class RequestReportDO extends RequestReportDOKey {
 
-    @NotBlank(message = "报告标题不能为空")
+  @NotBlank(message = "报告标题不能为空",groups = ValidationGroups.Insert.class)
     private String reportTitle;
 
     private String reportDataStatus;
+
+    private String reportContent;
+
+    private String reason;
+
+    private String reasonone;
+
+    private String reasontwo;
 
     private String creater;
 
@@ -16,9 +27,71 @@ public class RequestReportDO extends RequestReportDOKey {
 
     private String updater;
 
+    private String updaterone;
+
+    private String updatertwo;
+
+    private String updaterf;
+
     private Date itemupdateat;
 
-    private String reportContent;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "GMT+8")
+    private Date updateone;
+
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "GMT+8")
+    private Date updatetwo;
+
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "GMT+8")
+    private Date updatef;
+
+    public String getReasonone() {
+        return reasonone;
+    }
+
+    public void setReasonone(String reasonone) {
+        this.reasonone = reasonone == null ? null : reasonone.trim();
+    }
+
+    public String getReasontwo() {
+        return reasontwo;
+    }
+
+    public void setReasontwo(String reasontwo) {
+        this.reasontwo = reasontwo == null ? null : reasontwo.trim();
+    }
+
+    public String getUpdaterone() {
+        return updaterone;
+    }
+
+    public void setUpdaterone(String updaterone) {
+        this.updaterone = updaterone == null ? null : updaterone.trim();
+    }
+
+    public String getUpdatertwo() {
+        return updatertwo;
+    }
+
+    public void setUpdatertwo(String updatertwo) {
+        this.updatertwo = updatertwo == null ? null : updatertwo.trim();
+    }
+
+    public Date getUpdateone() {
+        return updateone;
+    }
+
+    public void setUpdateone(Date updateone) {
+        this.updateone = updateone;
+    }
+
+    public Date getUpdatetwo() {
+        return updatetwo;
+    }
+
+    public void setUpdatetwo(Date updatetwo) {
+        this.updatetwo = updatetwo;
+    }
+
 
     public String getReportTitle() {
         return reportTitle;
@@ -35,6 +108,14 @@ public class RequestReportDO extends RequestReportDOKey {
     public void setReportDataStatus(String reportDataStatus) {
         this.reportDataStatus = reportDataStatus == null ? null : reportDataStatus.trim();
     }
+    public String getReason() {
+        return reason;
+    }
+
+    public void setReason(String reason) {
+        this.reason = reason == null ? null : reason.trim();
+    }
+
 
     public String getCreater() {
         return creater;
@@ -74,5 +155,21 @@ public class RequestReportDO extends RequestReportDOKey {
 
     public void setReportContent(String reportContent) {
         this.reportContent = reportContent == null ? null : reportContent.trim();
+    }
+    public String getUpdaterf() {
+        return updaterf;
+    }
+
+    public void setUpdaterf(String updaterf) {
+        this.updaterf = updaterf == null ? null : updaterf.trim();
+
+    }
+
+    public Date getUpdatef() {
+        return updatef;
+    }
+
+    public void setUpdatef(Date updatef) {
+        this.updatef = updatef;
     }
 }

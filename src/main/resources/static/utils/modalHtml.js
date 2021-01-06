@@ -2419,6 +2419,25 @@
             '            </div>\n'+
             '</div>';
 
+        modalHtml.myPassReportModal="<div>\n" +
+            "        <textarea name=\"\" id=\"reason\" cols=\"96\" rows=\"10\"></textarea>\n" +
+            "    </div>"
+        modalHtml.myPassReportoneModal="<div>\n" +
+            "        <textarea name=\"\" id=\"reasonone\" cols=\"96\" rows=\"10\"></textarea>\n" +
+            "    </div>"
+        modalHtml.myPassReporttwoModal="<div>\n" +
+            "        <textarea name=\"\" id=\"reasontwo\" cols=\"96\" rows=\"10\"></textarea>\n" +
+            "    </div>"
+        modalHtml.myFailReportModal="<div>\n" +
+            "        <textarea name=\"\" id=\"reason\" cols=\"96\" rows=\"10\"></textarea>\n" +
+            "    </div>"
+        modalHtml.myFailReportoneModal="<div>\n" +
+            "        <textarea name=\"\" id=\"reasonone\" cols=\"96\" rows=\"10\"></textarea>\n" +
+            "    </div>"
+        modalHtml.myFailReporttwoModal="<div>\n" +
+            "        <textarea name=\"\" id=\"reasontwo\" cols=\"96\" rows=\"10\"></textarea>\n" +
+            "    </div>"
+
         modalHtml.myDeleteModalTravel = '是否删除景点信息?';
         modalHtml.myDeleteModalTraditionalCul = '是否删除中医医史信息?';
         modalHtml.myDeleteModalTraditionalDoc = '是否删除历代名家信息?';
@@ -2435,6 +2454,7 @@
         modalHtml.myPassModal = '确认通过吗？';
         modalHtml.myFailModal = '确认不通过吗？';
         modalHtml.myUnderShelfModal = '确认下架吗？';
+        modalHtml.myUnderShelfReportModal='确认撤销吗（下架）？';
 
         modalHtml.myDeleteCStion='是否删除中药销售企业信息';
         modalHtml.myDeleteCPtion='是否删除中药制药企业信息';

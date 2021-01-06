@@ -101,6 +101,8 @@
             "auditStatus": "auditStatus",
             //紧急程度
             "emergencyStatus":"emergencyStatus",
+            //报告审核状态
+            "reportStatus":"reportStatus",
             //公开方式
             "postPublicWay":"postPublicWay",
             //不公开理由

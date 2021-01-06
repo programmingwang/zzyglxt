@@ -232,4 +232,66 @@
     where itemID = #{itemid,jdbcType=INTEGER}
       and itemCode = #{itemcode,jdbcType=CHAR}
   </update>
+  <delete id="delByDataCode" parameterType="com.zyyglxt.dataobject.adviceDO">
+    delete from tb_governres_advice
+    where DATA_CODE = #{dataCode,jdbcType=VARCHAR}
+  </delete>
+  <select id="getByDataCode" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from tb_governres_advice
+    where DATA_CODE = #{dataCode,jdbcType=VARCHAR}
+    limit 1
+  </select>
+  <update id="updAdvice" parameterType="com.zyyglxt.dataobject.adviceDO">
+    update tb_governres_advice
+    <set>
+      <if test="dataCode != null">
+        DATA_CODE = #{dataCode,jdbcType=VARCHAR},
+      </if>
+      <if test="initial != null">
+        INITIAL = #{initial,jdbcType=VARCHAR},
+      </if>
+      <if test="initialDate != null">
+        INITIAL_DATE = #{initialDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="department != null">
+        DEPARTMENT = #{department,jdbcType=VARCHAR},
+      </if>
+      <if test="departDate != null">
+        DEPART_DATE = #{departDate,jdbcType=DATE},
+      </if>
+      <if test="office != null">
+        OFFICE = #{office,jdbcType=VARCHAR},
+      </if>
+      <if test="officeDate != null">
+        OFFICE_DATE = #{officeDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deputyDirector != null">
+        DEPUTY_DIRECTOR = #{deputyDirector,jdbcType=VARCHAR},
+      </if>
+      <if test="deputyDirectorDate != null">
+        DEPUTY_DIRECTOR_DATE = #{deputyDirectorDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="director != null">
+        DIRECTOR = #{director,jdbcType=VARCHAR},
+      </if>
+      <if test="directorDate != null">
+        DIRECTOR_DATE = #{directorDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creater != null">
+        CREATER = #{creater,jdbcType=VARCHAR},
+      </if>
+      <if test="itemcreateat != null">
+        itemCreateAt = #{itemcreateat,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updater != null">
+        UPDATER = #{updater,jdbcType=VARCHAR},
+      </if>
+      <if test="itemupdateat != null">
+        itemUpdateAt = #{itemupdateat,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where DATA_CODE = #{dataCode,jdbcType=VARCHAR}
+  </update>
 </mapper>

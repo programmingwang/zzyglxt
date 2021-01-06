@@ -4,9 +4,11 @@ import com.zyyglxt.annotation.LogAnnotation;
 import com.zyyglxt.dataobject.FileDO;
 import com.zyyglxt.dataobject.PostDO;
 import com.zyyglxt.dataobject.PostDOKey;
+import com.zyyglxt.dataobject.adviceDO;
 import com.zyyglxt.dto.PostDto;
 import com.zyyglxt.error.EmBusinessError;
 import com.zyyglxt.response.ResponseData;
+import com.zyyglxt.service.IAdviceService;
 import com.zyyglxt.service.IFileService;
 import com.zyyglxt.service.IPostService;
 import com.zyyglxt.util.ConvertDOToDTOUtil;
@@ -33,6 +35,9 @@ public class PostController {
     @Resource
     IFileService fileService;
 
+    @Resource
+    IAdviceService adviceService;
+
     //查询所有发文信息
     @GetMapping(value = "/getPost")
     @ResponseBody
@@ -44,7 +49,7 @@ public class PostController {
             FileDO fileDO = fileService.selectFileByDataCode(postDO.getItemcode());
             postDtos.add(
                     ConvertDOToDTOUtil.convertFromDOToDTO(
-                            postDO, fileDO.getFilePath(), fileDO.getFileName()));
+                            postDO, fileDO.getFilePath(), fileDO.getFileName() ));
         }
         return new ResponseData(EmBusinessError.success,postDtos);
     }
@@ -82,6 +87,14 @@ public class PostController {
     public ResponseData maxNum(){
         PostDO max = postService.maxNum();
         return new ResponseData(EmBusinessError.success,max);
+    }
+
+    //获取所有意见
+    @RequestMapping(value = "/getPandA" , method = RequestMethod.GET)
+    @ResponseBody
+    public ResponseData getPandA(){
+        List<PostDto> postDtos = postService.getPandA();
+        return new ResponseData(EmBusinessError.success,postDtos);
     }
 
 }

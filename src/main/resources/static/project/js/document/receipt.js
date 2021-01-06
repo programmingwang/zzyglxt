@@ -279,7 +279,7 @@
                     $("#receivingDegreeOfUrgency").val(emergencyStatus[row.receivingDegreeOfUrgency].text);
                     $("#timeLimit").val(row.timeLimit);
                     $("#creater").val(row.creater);
-                    $("#itemCreateat").val(row.itemcreateat);
+                    $("#itemcreateat").val(row.itemcreateat);
                     $("#receivingDataStatus").val(webStatus[row.receivingDataStatus].text);
                     $("#fileDiv").attr("style","display:block");
                     $("#upFile").text(row.fileName);

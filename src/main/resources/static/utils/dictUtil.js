@@ -112,7 +112,9 @@
             //公开方式
             "governerscounter":"postPublicWay",
             //会签审核状态
-            "signstatus":"status"
+            "signstatus":"status",
+            //发文审核状态
+            "postStatus":"postStatus"
         }
 
         var dictList = {

@@ -2559,6 +2559,7 @@
         modalHtml.myPassModal = '确认通过吗？';
         modalHtml.myFailModal = '确认不通过吗？';
         modalHtml.myUnderShelfModal = '确认下架吗？';
+        modalHtml.myUnderShelfReportModal='确认撤销吗（下架）？';
 
         modalHtml.myDeleteCStion='是否删除中药销售企业信息';
         modalHtml.myDeleteCPtion='是否删除中药制药企业信息';

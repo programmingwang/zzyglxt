@@ -232,7 +232,7 @@
                                 "reportDataStatus": ""
                             };
                             if(sessionStorage.getItem("rolename") == "政务资源处长" ){
-                                submitStatus.reportDataStatus = webStatus[3].id;
+                                submitStatus.reportDataStatus = webStatus[4].id;
                             }
                             ajaxUtil.myAjax(null, "updaterequestreport", PassReport, function (data) {
                                 if (data && ajaxUtil.success(data)) {
@@ -354,7 +354,7 @@
 
                 'click .under-shelf' : function (e, value, row, index) {
                     var myUnderShelfReportModalData ={
-                        modalBodyID :"myUnderShelfModal",
+                        modalBodyID :"myUnderShelfReportModal",
                         modalTitle : "撤销请示报告",
                         modalClass : "modal-lg",
                         modalConfirmFun:function () {

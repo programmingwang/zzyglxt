@@ -13,6 +13,8 @@ public class RequestReportDO extends RequestReportDOKey {
 
     private String reportDataStatus;
 
+    private String reportContent;
+
     private String reason;
 
     private String reasonone;
@@ -41,9 +43,6 @@ public class RequestReportDO extends RequestReportDOKey {
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "GMT+8")
     private Date updatef;
-
-    private String reportContent;
-
 
     public String getReasonone() {
         return reasonone;
@@ -92,6 +91,7 @@ public class RequestReportDO extends RequestReportDOKey {
     public void setUpdatetwo(Date updatetwo) {
         this.updatetwo = updatetwo;
     }
+
 
     public String getReportTitle() {
         return reportTitle;

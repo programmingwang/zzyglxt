@@ -15,7 +15,7 @@
                 }else {
                     $('#reason').attr('style',"display:none");
                     $('#postReason').attr('style',"display:none");
-                    $("#postPublicWay").val() == "";
+                    $("#postReason").val() == "";
                 }
             });
 
@@ -28,13 +28,13 @@
             $("#postFairDepartmentReview").selectUtil(fair);
             $('#postFairDepartmentReview').change(function () {
                 if($("#postFairDepartmentReview").val() == "1"){
-                    $('#fujian').attr('style',"display:none");
-                    var obj = document.getElementById('upload_file');
+                    $('#fairFile1').attr('style',"display:none");
+                    var obj = document.getElementById('fairFile');
                     obj.outerHTML=obj.outerHTML;
                     $("#clsfile").css("display","none");
                     $("#addFile").empty("p");
                 }else {
-                    $('#fujian').attr('style',"display:block");
+                    $('#fairFile1').attr('style',"display:block");
                 }
             });
 
@@ -42,12 +42,16 @@
             var num = dictUtil.getDictByCode(dictUtil.DICT_LIST.postDocumentNum);
             $("#postDocumentNum").selectUtil(num);
 
+            //当前时间
+            var nowTime = stringUtil.formatDateTime(new Date());
+
+            //当前用户名
+            var username = sessionStorage.getItem("username");
 
             $("#cancelbtn").unbind().on('click',function () {
                 var url = "/document/post";
                 orange.redirect(url);
             });
-
 
             //查询最大的文号
             var maxNum;
@@ -78,6 +82,15 @@
             }
             $("#postDocumentNum1").val(pad(newNum));
 
+            //结合发文管理增加意见
+            var uuid = stringUtil.getUUID();
+            var adviceUrl = "/advice/createAdvice";
+            var AdviceEntity = {
+                itemcode : stringUtil.getUUID(),
+                dataCode : uuid,
+                initial : username,
+                initialDate : nowTime,
+            };
 
             $("#savebtn").unbind().on('click',function () {
                 var PostEntity;
@@ -99,7 +112,7 @@
                     requestUrl = "/post/createPost";
                     operateMessage = "保存发文信息成功";
                     PostEntity = {
-                        itemcode: stringUtil.getUUID(),
+                        itemcode: uuid,
                         postDocumentTitle : $("#postDocumentTitle").val(),
                         postPublicWay : $("#postPublicWay").val(),
                         postReason : $("#postReason").val(),
@@ -131,13 +144,18 @@
                 }
 
                 fileUtil.handleFile(isUpdate(), PostEntity.itemcode, $("#upload_file")[0].files[0]);
-                fileUtil.handleFile(isUpdate(), PostEntity.itemcode, $("#upload_file1")[0].files[0]);
 
                 ajaxUtil.myAjax(null,requestUrl,PostEntity,function (data) {
                     if(ajaxUtil.success(data)){
-                        alertUtil.info(operateMessage);
-                        var url = "/document/post";
-                        orange.redirect(url);
+                        ajaxUtil.myAjax(null,adviceUrl,AdviceEntity,function (data) {
+                            if (ajaxUtil.success(data)){
+                                alertUtil.info(operateMessage);
+                                var url = "/document/post";
+                                orange.redirect(url);
+                            }else {
+                                alertUtil.alert(data.msg);
+                            }
+                        },false,true);
                     }else {
                         alertUtil.alert(data.msg);
                     }
@@ -166,7 +184,7 @@
                     requestUrl = "/post/createPost";
                     operateMessage = "提交发文信息成功";
                     PostEntity = {
-                        itemcode: stringUtil.getUUID(),
+                        itemcode: uuid,
                         postDocumentTitle : $("#postDocumentTitle").val(),
                         postPublicWay : $("#postPublicWay").val(),
                         postReason : $("#postReason").val(),
@@ -198,13 +216,18 @@
                 }
 
                 fileUtil.handleFile(isUpdate(), PostEntity.itemcode, $("#upload_file")[0].files[0]);
-                fileUtil.handleFile(isUpdate(), PostEntity.itemcode, $("#upload_file1")[0].files[0]);
 
                 ajaxUtil.myAjax(null,requestUrl,PostEntity,function (data) {
                     if(ajaxUtil.success(data)){
-                        alertUtil.info(operateMessage);
-                        var url = "/document/post";
-                        orange.redirect(url);
+                        ajaxUtil.myAjax(null,adviceUrl,AdviceEntity,function (data) {
+                            if (ajaxUtil.success(data)){
+                                alertUtil.info(operateMessage);
+                                var url = "/document/post";
+                                orange.redirect(url);
+                            }else {
+                                alertUtil.alert(data.msg);
+                            }
+                        },false,true);
                     }else {
                         alertUtil.alert(data.msg);
                     }
@@ -215,8 +238,9 @@
             (function init() {
                 if (isUpdate()){
                     var tempdata = JSON.parse(localStorage.getItem("rowData"));
+                    console.log(tempdata);
                     if (tempdata.postFairDepartmentReview == "1"){
-                        $('#fujian').attr('style',"display:none");
+                        $('#fairFile1').attr('style',"display:none");
                     }
                     $("#postDocumentTitle").val(tempdata.postDocumentTitle);
                     $("#postPublicWay").val(tempdata.postPublicWay);
@@ -237,6 +261,7 @@
                     $("#postDocumentNum1").val(tempdata.postDocumentNum1);
                     var file = tempdata.filePath;
                     uploadImg.setImgSrc(file);
+                    console.log(tempdata);
                 }
             }());
 
@@ -244,7 +269,7 @@
                 return (localStorage.getItem("rowData") != null || localStorage.getItem("rowData") != undefined)
             }
 
-            /*上传公平竞争审查附件*/
+            /*上传附件*/
             document.getElementById('upload_file').onchange=function(){
                 var len=this.files.length;
                 $("#addFile").empty("p");
@@ -262,26 +287,6 @@
                 obj.outerHTML=obj.outerHTML;
                 $("#clsfile").css("display","none");
                 $("#addFile").empty("p");
-            }
-
-            //上传附件
-            document.getElementById('upload_file1').onchange=function(){
-                var len=this.files.length;
-                $("#addFile1").empty("p");
-                for (var i = 0; i < len; i++) {
-                    var name = this.files[i].name;
-                    var j=i+1;
-                    $("#addFile1").append('<p>附件'+j+'：&nbsp;'+ name +'&nbsp;</p>');
-                };
-                if(len>0){
-                    $("#clsfile1").css("display","block")
-                }
-            }
-            document.getElementById('clsfile1').onclick = function() {
-                var obj = document.getElementById('upload_file1');
-                obj.outerHTML=obj.outerHTML;
-                $("#clsfile1").css("display","none");
-                $("#addFile1").empty("p");
             }
 
         })

@@ -71,6 +71,19 @@
             return oTime;
         }
 
+        /*返回格式化时间2018 08.08*/
+        function formatTime(dateTime){
+            if(dateTime == null || typeof(dateTime) == "undefined"){
+                return "";
+            }
+            var oDate = new Date(dateTime),
+                oYear = oDate.getFullYear(),
+                oMonth = oDate.getMonth()+1,
+                oDay = oDate.getDate(),
+                oTime = oYear +' '+ gzmd(oMonth) +'.'+ gzmd(oDay) ;
+            return oTime;
+        }
+
         function gzmd(aStr) {
             if(aStr < 10){
                 aStr = '0'+ aStr;
@@ -106,6 +119,7 @@
             getUUID:getUUID,
             formatDateTime:formatDateTime,
             formatDate:formatDate,
+            formatTime:formatTime,
         }
     })
 })();

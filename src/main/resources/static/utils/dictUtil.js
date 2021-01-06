@@ -109,6 +109,8 @@
             "postFairDepartmentReview":"postFairDepartmentReview",
             //文号
             "postDocumentNum":"postDocumentNum",
+            //发文审核状态
+            "postStatus":"postStatus",
         }
 
         var dictList = {

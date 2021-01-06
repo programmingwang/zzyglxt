@@ -57,6 +57,19 @@
                     $("#upload_file").text(tempdata.fileName);
                     $("#upload_file").attr('href',tempdata.filePath);
 
+                    var AdviceEntity = {
+                        dataCode : tempdata.itemcode
+                    };
+                    ajaxUtil.myAjax(null,"/advice/getByDataCode",AdviceEntity,function (data) {
+                        if(ajaxUtil.success(data)){
+                            $("#initialName").val(data.data.initial);
+                            $("#initialDate").val(stringUtil.formatTime(data.data.initialDate));
+
+                        }else {
+                            alertUtil.alert(data.msg);
+                        }
+                    },false,"","get");
+
                 }
             }());
 

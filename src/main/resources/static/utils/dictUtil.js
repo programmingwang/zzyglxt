@@ -102,15 +102,17 @@
             //紧急程度
             "emergencyStatus":"emergencyStatus",
             //报告审核状态
-            "reportStatus":"reportStatus"
-            //公开方式
-            "postPublicWay":"postPublicWay",
+            "reportStatus":"reportStatus",
             //不公开理由
             "postReason":"postReason",
             //公平竞争审查
             "postFairDepartmentReview":"postFairDepartmentReview",
             //文号
             "postDocumentNum":"postDocumentNum",
+            //公开方式
+            "governerscounter":"postPublicWay",
+            //会签审核状态
+            "signstatus":"status"
         }
 
         var dictList = {

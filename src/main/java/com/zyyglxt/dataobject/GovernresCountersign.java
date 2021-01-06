@@ -70,6 +70,15 @@ public class GovernresCountersign {
     * 修改时间
     */
     private Date itemupdateat;
+    private String parment;
+
+    public String getParment() {
+        return parment;
+    }
+
+    public void setParment(String parment) {
+        this.parment = parment;
+    }
 
     public Integer getItemid() {
         return itemid;

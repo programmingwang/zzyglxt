@@ -11,6 +11,7 @@
     <result column="GOV_PUNLIC" jdbcType="VARCHAR" property="govPunlic" />
     <result column="REASON" jdbcType="VARCHAR" property="reason" />
     <result column="FILE_NO" jdbcType="VARCHAR" property="fileNo" />
+    <result column="PARMENT" jdbcType="VARCHAR" property="parment" />
     <result column="CLASSIFICATION" jdbcType="VARCHAR" property="classification" />
     <result column="STATUS" jdbcType="VARCHAR" property="status" />
     <result column="CREATER" jdbcType="VARCHAR" property="creater" />
@@ -20,7 +21,7 @@
   </resultMap>
   <sql id="Base_Column_List">
     <!--@mbg.generated-->
-    itemID, itemCode, RECEIVING_TITLE, `NUMBER`, GOV_PUNLIC, REASON, FILE_NO, CLASSIFICATION, 
+    itemID, itemCode, RECEIVING_TITLE, `NUMBER`, GOV_PUNLIC, REASON, FILE_NO, PARMENT,CLASSIFICATION,
     `STATUS`, CREATER, itemCreateAt, UPDATER, itemUpdateAt
   </sql>
   <select id="selectByPrimaryKey" parameterType="map" resultMap="BaseResultMap">
@@ -35,19 +36,7 @@
     delete from tb_governres_countersign
     where itemCode = #{itemcode,jdbcType=CHAR}
   </delete>
-  <insert id="insert" keyColumn="itemID" keyProperty="itemid" parameterType="com.zyyglxt.dataobject.GovernresCountersign" useGeneratedKeys="true">
-    <!--@mbg.generated-->
-    insert into tb_governres_countersign (itemCode, RECEIVING_TITLE, `NUMBER`, 
-      GOV_PUNLIC, REASON, FILE_NO, 
-      CLASSIFICATION, `STATUS`, CREATER, 
-      itemCreateAt, UPDATER, itemUpdateAt
-      )
-    values (#{itemcode,jdbcType=CHAR}, #{receivingTitle,jdbcType=VARCHAR}, #{number,jdbcType=INTEGER}, 
-      #{govPunlic,jdbcType=VARCHAR}, #{reason,jdbcType=VARCHAR}, #{fileNo,jdbcType=VARCHAR}, 
-      #{classification,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, #{creater,jdbcType=VARCHAR}, 
-      #{itemcreateat,jdbcType=TIMESTAMP}, #{updater,jdbcType=VARCHAR}, #{itemupdateat,jdbcType=TIMESTAMP}
-      )
-  </insert>
+
   <insert id="insertSelective" keyColumn="itemID" keyProperty="itemid" parameterType="com.zyyglxt.dataobject.GovernresCountersign" useGeneratedKeys="true">
     <!--@mbg.generated-->
     insert into tb_governres_countersign
@@ -69,6 +58,9 @@
       </if>
       <if test="fileNo != null">
         FILE_NO,
+      </if>
+      <if test="parment != null">
+        PARMENT,
       </if>
       <if test="classification != null">
         CLASSIFICATION,
@@ -107,6 +99,9 @@
       </if>
       <if test="fileNo != null">
         #{fileNo,jdbcType=VARCHAR},
+      </if>
+      <if test="parment != null">
+        #{parment,jdbcType=VARCHAR},
       </if>
       <if test="classification != null">
         #{classification,jdbcType=VARCHAR},
@@ -147,6 +142,9 @@
       <if test="fileNo != null">
         FILE_NO = #{fileNo,jdbcType=VARCHAR},
       </if>
+      <if test="parment != null">
+        PARMENT = #{parment,jdbcType=VARCHAR},
+      </if>
       <if test="classification != null">
         CLASSIFICATION = #{classification,jdbcType=VARCHAR},
       </if>
@@ -169,23 +167,7 @@
     where itemID = #{itemid,jdbcType=INTEGER}
       and itemCode = #{itemcode,jdbcType=CHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.zyyglxt.dataobject.GovernresCountersign">
-    <!--@mbg.generated-->
-    update tb_governres_countersign
-    set RECEIVING_TITLE = #{receivingTitle,jdbcType=VARCHAR},
-      `NUMBER` = #{number,jdbcType=INTEGER},
-      GOV_PUNLIC = #{govPunlic,jdbcType=VARCHAR},
-      REASON = #{reason,jdbcType=VARCHAR},
-      FILE_NO = #{fileNo,jdbcType=VARCHAR},
-      CLASSIFICATION = #{classification,jdbcType=VARCHAR},
-      `STATUS` = #{status,jdbcType=VARCHAR},
-      CREATER = #{creater,jdbcType=VARCHAR},
-      itemCreateAt = #{itemcreateat,jdbcType=TIMESTAMP},
-      UPDATER = #{updater,jdbcType=VARCHAR},
-      itemUpdateAt = #{itemupdateat,jdbcType=TIMESTAMP}
-    where itemID = #{itemid,jdbcType=INTEGER}
-      and itemCode = #{itemcode,jdbcType=CHAR}
-  </update>
+
   <select id="selectAll" resultMap="BaseResultMap">
   SELECT *
   FROM tb_governres_countersign

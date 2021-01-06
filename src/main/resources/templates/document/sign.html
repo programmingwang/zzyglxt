@@ -3,6 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <title>内部会签</title>
+    <style>
+        .fileTitle{
+
+        }
+    </style>
     <link rel="stylesheet" th:href="@{CSS/taskList.css}">
     <link rel="stylesheet" th:href="@{component/bootstrap-datetimepicker@4.7.14/bootstrap-datetimepicker.min.css}">
 </head>
@@ -32,11 +37,7 @@
                     <div class="input-group-prepend" style="margin-top: 9px;">
                         <span class="input-text" >其他选项： 公开方式：</span>
                     </div>
-                    <select class="custom-select" id="chargePersonSearch">
-                        <option value="主动公开">主动公开</option>
-                        <option value="主动公开">依申请公开</option>
-                        <option value="主动公开">不公开发布</option>
-                    </select>
+                    <select class="custom-select" id="chargePersonSearch"></select>
                 </div>
             </div>
             <div class="col-lg-1"></div>

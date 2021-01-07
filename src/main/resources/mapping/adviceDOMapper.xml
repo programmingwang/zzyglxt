@@ -246,9 +246,6 @@
   <update id="updAdvice" parameterType="com.zyyglxt.dataobject.adviceDO">
     update tb_governres_advice
     <set>
-      <if test="dataCode != null">
-        DATA_CODE = #{dataCode,jdbcType=VARCHAR},
-      </if>
       <if test="initial != null">
         INITIAL = #{initial,jdbcType=VARCHAR},
       </if>

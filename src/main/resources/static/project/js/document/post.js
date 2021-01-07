@@ -220,6 +220,8 @@
                         modalConfirmFun:function () {
                             var isSuccess = false;
                             var submitStatus = {
+                                "itemid": row.itemid,
+                                "itemcode": row.itemcode,
                                 "postDataStatus": ""
                             };
                             if(rolename == "政务资源处长"){
@@ -333,7 +335,6 @@
                                             if(ajaxUtil.success(data)){
                                                 if(data.code == 88888){
                                                     alertUtil.success("填写成功！");
-                                                    console.log(data.data);
                                                     isSuccess = true;
                                                     refreshTable();
                                                 }else{
@@ -428,6 +429,7 @@
             var url;
             var aCol;
             if (rolename === "政务资源科员"){
+                $('#btn_addTask').attr('style', "display:block;");
                 url = "/post/getPost?postDataStatus=" +postStatus[0].id +"&postDataStatus="+postStatus[1].id +"&postDataStatus="+postStatus[2].id +"&postDataStatus="+postStatus[3].id +"&postDataStatus="+postStatus[4].id +"&postDataStatus="+postStatus[5].id +"&postDataStatus="+postStatus[6].id +"&postDataStatus="+postStatus[7].id +"&postDataStatus="+postStatus[8].id +"&postDataStatus="+postStatus[9].id;
                 aCol = [
                     {field: 'postDocumentTitle', title: '文件标题', formatter: viewOperation, events: viewEvents},

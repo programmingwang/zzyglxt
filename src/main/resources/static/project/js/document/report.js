@@ -8,42 +8,6 @@
             var aParam = {
             };
 
-
-            var date= new Date();
-            $("#updatef").datetimepicker({
-                format: 'yyyy-mm-dd ',//显示格式
-                startDate: date ,
-                startView:2,
-                minView:1,
-                maxView :3,
-                language: 'cn',
-                autoclose: 1,//选择后自动关闭
-                clearBtn:true,//清除按钮
-                showMeridian:true,
-            });
-            $("#updateone").datetimepicker({
-                format: 'yyyy-mm-dd ',//显示格式
-                startDate: date ,
-                startView:2,
-                minView:1,
-                maxView :3,
-                language: 'cn',
-                autoclose: 1,//选择后自动关闭
-                clearBtn:true,//清除按钮
-                showMeridian:true,
-            });
-            $("#updatetwo").datetimepicker({
-                format: 'yyyy-mm-dd ',//显示格式
-                startDate: date ,
-                startView:2,
-                minView:1,
-                maxView :3,
-                language: 'cn',
-                autoclose: 1,//选择后自动关闭
-                clearBtn:true,//清除按钮
-                showMeridian:true,
-            });
-
             //操作
             function operation(value, row, index){
                 return getRoleOperate(value,row,index,sessionStorage.getItem("rolename"),row.reportDataStatus,webStatus)

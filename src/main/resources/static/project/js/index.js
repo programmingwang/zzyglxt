@@ -262,7 +262,7 @@
                     },
                     {
                         menu_name: "内部会签",
-                        menu_url: "/document/countersign",
+                        menu_url: "/document/sign",
                         id: "14-3",
                         level: "2",
                         pid: "14"
@@ -366,7 +366,7 @@
                     },
                     {
                         menu_name: "内部会签",
-                        menu_url: "/document/countersign",
+                        menu_url: "/document/sign",
                         id: "14-3",
                         level: "2",
                         pid: "14"

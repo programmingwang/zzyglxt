@@ -4,14 +4,15 @@
 
             //角色信息
             var rolename = sessionStorage.getItem("rolename");
+            var username = sessionStorage.getItem("username");
 
 
             //获取字典数据
             var postStatus = dictUtil.getDictByCode(dictUtil.DICT_LIST.postStatus);
             var documentNum = dictUtil.getDictByCode(dictUtil.DICT_LIST.postDocumentNum);
-            var publicWay = dictUtil.getDictByCode(dictUtil.DICT_LIST.postPublicWay);
-            $("#postPublicWay").selectUtil(publicWay);
+            var publicWay = dictUtil.getDictByCode(dictUtil.DICT_LIST.governerscounter);
 
+            $("#postPublicWay").selectUtil(publicWay);
 
             var addUrl = "/document/post_add";
             var aParam = {
@@ -59,72 +60,80 @@
 
             function operation2(value, row, index){
                 if(row.postDataStatus == postStatus[1].id){
-                    return [
-                        '<a class="opinion" style="margin:0 1em;text-decoration: none;color:#348eff;" data-toggle="modal" data-target="" >填写审核意见</a>',
-                        '<a  class="fail"  data-toggle="modal" style="margin:0 0.6em;text-decoration: none;color:#D60000;" data-target="#staticBackdrop" >不通过</a>',
-                    ].join('');
+                    if (row.postOpinion == "1"){
+                        return [
+                            '<a class="view" style="margin:0 1em;text-decoration: none;color:#348eff;" data-toggle="modal" data-target="" >审核意见</a>',
+                            '<a class="pass"  style="margin:0 1em;text-decoration: none;color:#4df115;" data-target="#staticBackdrop" >提交</a>',
+                            '<a  class="fail"  data-toggle="modal" style="margin:0 0.6em;text-decoration: none;color:#D60000;" data-target="#staticBackdrop" >不通过</a>',
+                        ].join('');
+                    }else{
+                        return [
+                            '<a class="opinion" style="margin:0 1em;text-decoration: none;color:#348eff;" data-toggle="modal" data-target="" >填写审核意见</a>',
+                        ].join('');
+                    }
                 }else if(row.postDataStatus == postStatus[2].id || row.postDataStatus == postStatus[3].id || row.postDataStatus == postStatus[4].id || row.postDataStatus == postStatus[5].id || row.postDataStatus == postStatus[6].id || row.postDataStatus == postStatus[7].id || row.postDataStatus == postStatus[8].id || row.postDataStatus == postStatus[9].id){
                     return [
                         '<a class="view" style="margin:0 1em;text-decoration: none;color:#348eff;" data-toggle="modal" data-target="" >查看</a>',
-                    ].join('');
-                }else {
-                    return [
-                        '<a class="view" style="margin:0 1em;text-decoration: none;color:#348eff;" data-toggle="modal" data-target="" >审核意见</a>',
-                        '<a class="submit"  style="margin:0 1em;text-decoration: none;color:#4df115;" data-target="#staticBackdrop" >提交</a>',
                     ].join('');
                 }
             }
 
             function operation3(value, row, index){
                 if(row.postDataStatus == postStatus[2].id){
-                    return [
-                        '<a class="opinion" style="margin:0 1em;text-decoration: none;color:#348eff;" data-toggle="modal" data-target="" >填写审核意见</a>',
-                        '<a  class="fail"  data-toggle="modal" style="margin:0 0.6em;text-decoration: none;color:#D60000;" data-target="#staticBackdrop" >不通过</a>',
-                    ].join('');
+                    if (row.postOpinion == "2"){
+                        return [
+                            '<a class="view" style="margin:0 1em;text-decoration: none;color:#348eff;" data-toggle="modal" data-target="" >审核意见</a>',
+                            '<a class="transpond"  style="margin:0 1em;text-decoration: none;color:#4df115;" data-target="#staticBackdrop" >转发</a>',
+                            '<a  class="fail"  data-toggle="modal" style="margin:0 0.6em;text-decoration: none;color:#D60000;" data-target="#staticBackdrop" >不通过</a>',
+                        ].join('');
+                    }else{
+                        return [
+                            '<a class="opinion" style="margin:0 1em;text-decoration: none;color:#348eff;" data-toggle="modal" data-target="" >填写审核意见</a>',
+                        ].join('');
+                    }
                 }else if(row.postDataStatus == postStatus[4].id || row.postDataStatus == postStatus[5].id || row.postDataStatus == postStatus[6].id || row.postDataStatus == postStatus[7].id || row.postDataStatus == postStatus[8].id || row.postDataStatus == postStatus[9].id){
                     return [
                         '<a class="view" style="margin:0 1em;text-decoration: none;color:#348eff;" data-toggle="modal" data-target="" >查看</a>',
-                    ].join('');
-                }else {
-                    return [
-                        '<a class="view" style="margin:0 1em;text-decoration: none;color:#348eff;" data-toggle="modal" data-target="" >审核意见</a>',
-                        '<a class="submit"  style="margin:0 1em;text-decoration: none;color:#4df115;" data-target="#staticBackdrop" >转发</a>',
                     ].join('');
                 }
             }
 
             function operation4(value, row, index){
                 if(row.postDataStatus == postStatus[4].id){
-                    return [
-                        '<a class="opinion" style="margin:0 1em;text-decoration: none;color:#348eff;" data-toggle="modal" data-target="" >填写审核意见</a>',
-                        '<a  class="fail"  data-toggle="modal" style="margin:0 0.6em;text-decoration: none;color:#D60000;" data-target="#staticBackdrop" >不通过</a>',
-                    ].join('');
+                    if (row.postOpinion == "3"){
+                        return [
+                            '<a class="view" style="margin:0 1em;text-decoration: none;color:#348eff;" data-toggle="modal" data-target="" >审核意见</a>',
+                            '<a class="pass"  style="margin:0 1em;text-decoration: none;color:#4df115;" data-target="#staticBackdrop" >提交</a>',
+                            '<a  class="fail"  data-toggle="modal" style="margin:0 0.6em;text-decoration: none;color:#D60000;" data-target="#staticBackdrop" >不通过</a>',
+                        ].join('');
+                    }else{
+                        return [
+                            '<a class="opinion" style="margin:0 1em;text-decoration: none;color:#348eff;" data-toggle="modal" data-target="" >填写审核意见</a>',
+                        ].join('');
+                    }
                 }else if(row.postDataStatus == postStatus[6].id || row.postDataStatus == postStatus[7].id || row.postDataStatus == postStatus[8].id || row.postDataStatus == postStatus[9].id){
                     return [
                         '<a class="view" style="margin:0 1em;text-decoration: none;color:#348eff;" data-toggle="modal" data-target="" >查看</a>',
-                    ].join('');
-                }else {
-                    return [
-                        '<a class="view" style="margin:0 1em;text-decoration: none;color:#348eff;" data-toggle="modal" data-target="" >审核意见</a>',
-                        '<a class="submit"  style="margin:0 1em;text-decoration: none;color:#4df115;" data-target="#staticBackdrop" >提交</a>',
                     ].join('');
                 }
             }
 
             function operation5(value, row, index){
                 if(row.postDataStatus == postStatus[6].id){
-                    return [
-                        '<a class="opinion" style="margin:0 1em;text-decoration: none;color:#348eff;" data-toggle="modal" data-target="" >填写审核意见</a>',
-                        '<a  class="fail"  data-toggle="modal" style="margin:0 0.6em;text-decoration: none;color:#D60000;" data-target="#staticBackdrop" >不通过</a>',
-                    ].join('');
+                    if (row.postOpinion == "4"){
+                        return [
+                            '<a class="view" style="margin:0 1em;text-decoration: none;color:#348eff;" data-toggle="modal" data-target="" >审核意见</a>',
+                            '<a class="pass"  style="margin:0 1em;text-decoration: none;color:#4df115;" data-target="#staticBackdrop" >提交</a>',
+                            '<a  class="fail"  data-toggle="modal" style="margin:0 0.6em;text-decoration: none;color:#D60000;" data-target="#staticBackdrop" >不通过</a>',
+                        ].join('');
+                    }else{
+                        return [
+                            '<a class="opinion" style="margin:0 1em;text-decoration: none;color:#348eff;" data-toggle="modal" data-target="" >填写审核意见</a>',
+                        ].join('');
+                    }
                 }else if(row.postDataStatus == postStatus[8].id || row.postDataStatus == postStatus[9].id){
                     return [
                         '<a class="view" style="margin:0 1em;text-decoration: none;color:#348eff;" data-toggle="modal" data-target="" >查看</a>',
-                    ].join('');
-                }else {
-                    return [
-                        '<a class="view" style="margin:0 1em;text-decoration: none;color:#348eff;" data-toggle="modal" data-target="" >审核意见</a>',
-                        '<a class="submit"  style="margin:0 1em;text-decoration: none;color:#4df115;" data-target="#staticBackdrop" >提交</a>',
                     ].join('');
                 }
             }
@@ -183,8 +192,6 @@
                             };
                             if (rolename == "政务资源处长"){
                                 submitStatus.postDataStatus = postStatus[2].id;
-                            }else if (rolename == "政务资源综合处处长"){
-                                submitStatus.postDataStatus = postStatus[4].id;
                             }else if (rolename == "政务资源分管局长"){
                                 submitStatus.postDataStatus = postStatus[6].id;
                             }else if (rolename == "政务资源局长"){
@@ -193,11 +200,7 @@
                             ajaxUtil.myAjax(null,"/post/updatePost", submitStatus,function (data) {
                                 if(ajaxUtil.success(data)){
                                     if(data.code == 88888){
-                                        if(sessionStorage.getItem("rolename") == "政务资源综合处处长"){
-                                            alertUtil.info("转发成功！");
-                                        }else{
-                                            alertUtil.info("提交成功！");
-                                        }
+                                        alertUtil.info("提交成功");
                                         isSuccess = true;
                                         refreshTable();
                                     }else{
@@ -252,20 +255,22 @@
                     myFailModal.show();
                 },
 
-                /*'click .under-shelf' : function (e, value, row, index) {
-                    var myUnderShelfPostModalData ={
-                        modalBodyID :"myUnderShelfModal",
-                        modalTitle : "下架",
+                'click .transpond' : function (e, value, row, index) {
+                    var myTranspondModalData ={
+                        modalBodyID :"myTranspondModal",
+                        modalTitle : "转发文件至",
                         modalClass : "modal-lg",
                         modalConfirmFun:function () {
                             var isSuccess = false;
                             var submitStatus = {
-                                "postDataStatus": postStatus[0].id
+                                "itemid": row.itemid,
+                                "itemcode": row.itemcode,
+                                "postDataStatus": postStatus[4].id
                             };
                             ajaxUtil.myAjax(null,"/post/updatePost",submitStatus,function (data) {
                                 if(ajaxUtil.success(data)){
                                     if(data.code == 88888){
-                                        alertUtil.success("下架成功");
+                                        alertUtil.success("已转发至对应分局局长");
                                         isSuccess = true;
                                         refreshTable();
                                     }else{
@@ -277,9 +282,9 @@
                         }
 
                     };
-                    var myUnderShelfModal = modalUtil.init(myUnderShelfPostModalData);
-                    myUnderShelfModal.show();
-                },*/
+                    var myTranspondModal = modalUtil.init(myTranspondModalData);
+                    myTranspondModal.show();
+                },
 
                 'click .view' : function (e, value, row, index) {
                     localStorage.setItem("viewRowData", JSON.stringify(row));
@@ -298,43 +303,49 @@
                             var submitStatus = {
                                 "itemid": row.itemid,
                                 "itemcode": row.itemcode,
-                                "postDataStatus": ""
+                                "postOpinion" : ""
                             };
-                            var submitOpinion = {
-                                "dataCode" : row.itemcode,
-                                "department" : "",
-                                "departDate" : "",
-                                "office" : "",
-                                "officeDate" : "",
-                                "deputyDirector" : "",
-                                "deputyDirectorDate" : "",
-                                "director" : "",
-                                "directorDate" : "",
-                            };
+                            var submitOpinion;
                             if (rolename == "政务资源处长"){
-                                submitStatus.postDataStatus = postStatus[2].id;
-                                submitOpinion.department = $("#reason").val();
-                                submitOpinion.departDate = nowTime;
+                                submitOpinion = {
+                                    "dataCode" : row.itemcode,
+                                    "department" : $("#reason").val(),
+                                    "departmentName" : username,
+                                    "departDate" : nowTime,
+                                };
+                                submitStatus.postOpinion = "1";
                             }else if (rolename == "政务资源综合处处长"){
-                                submitStatus.postDataStatus = postStatus[4].id;
-                                submitOpinion.office = $("#reason").val();
-                                submitOpinion.officeDate = nowTime;
+                                submitOpinion = {
+                                    "dataCode" : row.itemcode,
+                                    "office" : $("#reason").val(),
+                                    "officeName" : username,
+                                    "officeDate" : nowTime,
+                                };
+                                submitStatus.postOpinion = "2";
                             }else if (rolename == "政务资源分管局长"){
-                                submitStatus.postDataStatus = postStatus[6].id;
-                                submitOpinion.deputyDirector = $("#reason").val();
-                                submitOpinion.deputyDirectorDate = nowTime;
+                                submitOpinion = {
+                                    "dataCode" : row.itemcode,
+                                    "deputyDirector" : $("#reason").val(),
+                                    "deputyDirectorName" : username,
+                                    "deputyDirectorDate" : nowTime,
+                                };
+                                submitStatus.postOpinion = "3";
                             }else if (rolename == "政务资源局长"){
-                                submitStatus.postDataStatus = postStatus[8].id;
-                                submitOpinion.director = $("#reason").val();
-                                submitOpinion.directorDate = nowTime;
+                                submitOpinion = {
+                                    "dataCode" : row.itemcode,
+                                    "director" : $("#reason").val(),
+                                    "directorName" : username,
+                                    "directorDate" : nowTime,
+                                };
+                                submitStatus.postOpinion = "4";
                             }
-                            ajaxUtil.myAjax(null,"/post/updatePost", submitStatus,function (data) {
+                            ajaxUtil.myAjax(null,"/post/updatePost",submitStatus,function (data) {
                                 if(ajaxUtil.success(data)){
                                     if(data.code == 88888){
                                         ajaxUtil.myAjax(null,"/advice/updAdvice", submitOpinion,function (data) {
                                             if(ajaxUtil.success(data)){
                                                 if(data.code == 88888){
-                                                    alertUtil.success("填写成功！");
+                                                    alertUtil.success("填写成功");
                                                     isSuccess = true;
                                                     refreshTable();
                                                 }else{
@@ -347,7 +358,6 @@
                                     }
                                 }
                             },false,true,"post");
-
                             return isSuccess;
                         }
                     };

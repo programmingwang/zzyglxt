@@ -2284,6 +2284,20 @@
             "        <textarea name=\"\" id=\"reason\" cols=\"96\" rows=\"10\"></textarea>\n" +
             "    </div>"
 
+        modalHtml.myTranspondModal='<div>\n' +
+            '        <div >\n' +
+            '            <span>请选择需要转发的人员：</span>\n' +
+            '                <div style="margin-top: 1em;">\n' +
+            '                    <select id="experName" class="form-control" >\n' +
+            '                        <option value ="volvo">中医处分局局长</option>\n' +
+            '                        <option value ="volvo">中药处分局局长</option>\n' +
+            '                        <option value ="volvo">综合处分局局长</option>\n' +
+            '                        <option value ="volvo">法规监督处分局局长</option>\n' +
+            '                    </select>\n' +
+            '                </div>\n' +
+            '        </div>\n' +
+            '    </div>\n';
+
         modalHtml.myViewReceiptModal =
             '<div class="row">'+
             '            <div class="col-lg-12 col-md-12">\n' +

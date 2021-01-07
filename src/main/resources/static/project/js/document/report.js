@@ -7,7 +7,6 @@
             url = getRoleTable(sessionStorage.getItem("rolename"),url,"reportDataStatus",webStatus);
             var aParam = {
             };
-
             //操作
             function operation(value, row, index){
                 return getRoleOperate(value,row,index,sessionStorage.getItem("rolename"),row.reportDataStatus,webStatus)

@@ -2,11 +2,7 @@
     require(['jquery','objectUtil','ajaxUtil','alertUtil','stringUtil','fileUtil','dictUtil','modalUtil'],
         function (jquery,objectUtil,ajaxUtil,alertUtil,stringUtil,fileUtil,dictUtil,modalUtil) {
 
-            const editor = objectUtil.wangEditorUtil();
-
             var rolename = sessionStorage.getItem("rolename");
-
-            var row = JSON.parse(localStorage.getItem("viewRowData"));
 
             $("#cancelbtn").unbind().on('click',function () {
                 localStorage.removeItem("viewRowData");
@@ -17,8 +13,13 @@
             (function init() {
                 if (isView()){
                     var tempdata = JSON.parse(localStorage.getItem("viewRowData"));
+                    var tgAdvice;
+                    $.ajax({cache: false, async: false, type: 'get', data: {dataCode: tempdata.itemcode}, url: "/advice/getByDataCode", success: function (data) {
+                            tgAdvice = data;
+                        }
+                    });
                     var num = dictUtil.getDictByCode(dictUtil.DICT_LIST.postDocumentNum);
-                    var postNum = num[tempdata.postDocumentNum].text + row.postDocumentNum1;
+                    var postNum = num[tempdata.postDocumentNum].text + tempdata.postDocumentNum1;
                     $("#postDocumentNum").val(postNum);
                     $("#postDocumentTitle").val(tempdata.postDocumentTitle);
                     if (tempdata.postPublicWay == "0"){
@@ -57,19 +58,20 @@
                     $("#upload_file").text(tempdata.fileName);
                     $("#upload_file").attr('href',tempdata.filePath);
 
-                    var AdviceEntity = {
-                        dataCode : tempdata.itemcode
-                    };
-                    ajaxUtil.myAjax(null,"/advice/getByDataCode",AdviceEntity,function (data) {
-                        if(ajaxUtil.success(data)){
-                            $("#initialName").val(data.data.initial);
-                            $("#initialDate").val(stringUtil.formatTime(data.data.initialDate));
-
-                        }else {
-                            alertUtil.alert(data.msg);
-                        }
-                    },false,"","get");
-
+                    $("#initialName").val(tgAdvice.data.initial);
+                    $("#initialDate").val(stringUtil.formatTime(tgAdvice.data.initialDate));
+                    $("#departmentOpinion").val(tgAdvice.data.department);
+                    $("#departmentName").val(tgAdvice.data.departmentName);
+                    $("#departmentDate").val(stringUtil.formatTime(tgAdvice.data.departDate));
+                    $("#officeOpinion").val(tgAdvice.data.office);
+                    $("#officeName").val(tgAdvice.data.officeName);
+                    $("#officeDate").val(stringUtil.formatTime(tgAdvice.data.officeDate));
+                    $("#deputyDirectorOpinion").val(tgAdvice.data.deputyDirector);
+                    $("#deputyDirectorName").val(tgAdvice.data.deputyDirectorName);
+                    $("#deputyDirectorDate").val(stringUtil.formatTime(tgAdvice.data.deputyDirectorDate));
+                    $("#directorOpinion").val(tgAdvice.data.director);
+                    $("#directorName").val(tgAdvice.data.directorName);
+                    $("#directorDate").val(stringUtil.formatTime(tgAdvice.data.directorDate));
                 }
             }());
 

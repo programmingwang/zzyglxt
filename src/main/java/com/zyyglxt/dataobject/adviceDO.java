@@ -11,17 +11,25 @@ public class adviceDO extends adviceDOKey {
 
     private String department;
 
+    private String departmentName;
+
     private Date departDate;
 
     private String office;
+
+    private String officeName;
 
     private Date officeDate;
 
     private String deputyDirector;
 
+    private String deputyDirectorName;
+
     private Date deputyDirectorDate;
 
     private String director;
+
+    private String directorName;
 
     private Date directorDate;
 
@@ -151,5 +159,37 @@ public class adviceDO extends adviceDOKey {
 
     public void setItemupdateat(Date itemupdateat) {
         this.itemupdateat = itemupdateat;
+    }
+
+    public String getDepartmentName() {
+        return departmentName;
+    }
+
+    public void setDepartmentName(String departmentName) {
+        this.departmentName = departmentName == null ? null : departmentName.trim();
+    }
+
+    public String getOfficeName() {
+        return officeName;
+    }
+
+    public void setOfficeName(String officeName) {
+        this.officeName = officeName == null ? null : officeName.trim();
+    }
+
+    public String getDeputyDirectorName() {
+        return deputyDirectorName;
+    }
+
+    public void setDeputyDirectorName(String deputyDirectorName) {
+        this.deputyDirectorName = deputyDirectorName == null ? null : deputyDirectorName.trim();
+    }
+
+    public String getDirectorName() {
+        return directorName;
+    }
+
+    public void setDirectorName(String directorName) {
+        this.directorName = directorName == null ? null : directorName.trim();
     }
 }

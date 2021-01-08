@@ -19,6 +19,7 @@
                         itemcode: stringUtil.getUUID(),
                         dataTitle : $("#dataTitle").val(),
                         dataSource : $("#dataSource").val(),
+                        releaseOrNot : "y",
                         dataStatus : "0",
                         dataContent : editor.txt.html()
                     };
@@ -61,6 +62,7 @@
                         itemcode: stringUtil.getUUID(),
                         dataTitle : $("#dataTitle").val(),
                         dataSource : $("#dataSource").val(),
+                        releaseOrNot : "y",
                         dataStatus : "1",
                         dataContent : editor.txt.html()
                     };
@@ -72,7 +74,6 @@
                         itemcode: needData.itemcode,
                         dataTitle : $("#dataTitle").val(),
                         dataSource : $("#dataSource").val(),
-                        dataStatus : "1",
                         dataContent : editor.txt.html()
                     }
                     operateMessage = "更新办事流程成功";

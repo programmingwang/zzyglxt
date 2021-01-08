@@ -58,29 +58,66 @@
                 <td class="firstL">领<br>导<br>批<br>示</td>
                 <td class="secendL ">
                     <div class="mesageYJ">
-                        <span class="textC">同意，允许施工 </span>
+                        <div>
+                            <input id="reasontwo" class="textC" style="border:none;" disabled></input>
+                        </div>
+                        <div>
+                            <input id="reasonone" class="textC" style="border:none;" disabled></input>
+                        </div>
                     </div>
                     <div class="mesageP">
                         <div>
-                            <span class="textC">刘思思</span>
-                            <span class="textC">2020 11.12</span>
+                            <input id="updatertwo" class="textC" style="border:none;" disabled></input>
+                            <input id="updatetwo" class="textC" style="border:none;"disabled></input>
+                        </div>
+                        <div>
+                            <input id="updaterone" class="textC" style="border:none;" disabled></input>
+                            <input id="updateone" class="textC" style="border:none;"disabled></input>
                         </div>
                     </div>
                 </td>
             </tr>
             <tr>
                 <td class="firstL">处<br>室<br>意<br>见</td>
-                <td class="secendL">
+                <!--<td class="secendL">
                     <div class="mesageYJ">
-                        <span class="textC">同意，允许施工 </span>
+                        <input id="reasonth" class="textC" style="border:none;" disabled></input>
+                    </div>
+                    <div class="mesageYJ">
+                        <input id="reason" class="textC" style="border:none;" disabled></input>
                     </div>
                     <div class="mesageP">
                         <div>
-                            <span class="textC">刘思思</span>
-                            <span class="textC">2020 11.12</span>
+                            <input id="updaterth" class="textC" style="border:none;" disabled></input>
+                            <input id="updateth" class="textC" style="border:none;"disabled></input>
+                        </div>
+                        <div>
+                            <input id="updaterf" class="textC" style="border:none;" disabled></input>
+                            <input id="updatef" class="textC" style="border:none;"disabled></input>
+                        </div>
+                    </div>
+                </td>-->
+                <td class="secendL ">
+                    <div class="mesageYJ">
+                        <div>
+                            <input id="reasonth" class="textC" style="border:none;" disabled></input>
+                        </div>
+                        <div>
+                            <input id="reason" class="textC" style="border:none;" disabled></input>
+                        </div>
+                    </div>
+                    <div class="mesageP">
+                        <div>
+                            <input id="updaterth" class="textC" style="border:none;" disabled></input>
+                            <input id="updateth" class="textC" style="border:none;"disabled></input>
+                        </div>
+                        <div>
+                            <input id="updaterf" class="textC" style="border:none;" disabled></input>
+                            <input id="updatef" class="textC" style="border:none;"disabled></input>
                         </div>
                     </div>
                 </td>
+
             </tr>
             <tr>
                 <td class="firstL">报<br>告<br>内<br>容</td>
@@ -88,13 +125,13 @@
                     <div class="form-group row">
                         <label class="col-sm-2 col-form-label">报告标题：</label>
                         <div class="col-sm-3">
-                            <input id="reportTitle" type="text" class="form-control" style="font-family: monospace;margin-left: -120px;"  disabled>
+                            <input id="reportTitle" type="text" class="textC" style="margin-left: -120px;border:none;"  disabled>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-sm-2 col-form-label">报告内容：</label>
                         <div class="col-sm-3">
-                            <textarea name="" id="reportContent"  rows="3" style="font-family: monospace;margin-left: -120px;width: 100%;border: 1px solid;" disabled></textarea>
+                            <textarea  id="reportContent"  rows="3" style="font-family: monospace;margin-left: -120px;width: 100%;border: 1px solid;" disabled></textarea>
                         </div>
                     </div>
                     <!--附件div-->
@@ -111,11 +148,18 @@
         </tbody>
     </div>
     <div class="col-lg-12" style="margin-top: 15px;">
-        <span style="margin-left: 3rem;margin-right: 1rem;">起草人：</span>
-        <span style="margin-right: 7rem;">刘思思</span>
-        <span style="margin-left: 3rem;margin-right: 1rem;">日期：</span>
-        <span>2020.11.11</span>
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label">起草人：</label>
+            <div class="col-sm-3">
+                <input id="creater" type="text" class="textC" style="border:none;margin-left: -150px;margin-top: 8px;"  disabled>
+            </div>
+            <label class="col-sm-2 col-form-label" style="margin-left: -120px;">日&emsp;期：</label>
+            <div class="col-sm-3">
+                <input id="itemcreateat" type="text" class="textC" style="border:none;margin-left: -150px;margin-top: 3px;"  disabled>
+            </div>
+        </div>
     </div>
+
     <div class="form-group row">
         <div class="col-lg-4 col-md-4" ></div>
         <div class=" col-lg-4 row" >
@@ -123,10 +167,10 @@
                 <button id="cancelbtn" type="button" class="btn btn-light col">取消</button>
             </div>
             <div class="col">
-                <button id="passbtn" type="button" style="display: none" class="pass btn btn-danger col" data-target="#staticBackdrop">通过</button>
+                <button id="passbtn" type="submit"  class="btn btn-primary col" data-target="#staticBackdrop" style="display: none" >通过</button>
             </div>
             <div class="col">
-                <button id="failbtn" type="button" style="display: none" class="btn btn-danger col">不通过</button>
+                <button id="failbtn" type="submit"  class="btn btn-danger col" style="display: none" >不通过</button>
             </div>
         </div>
         <div class="col-lg-4 col-md-4" ></div>

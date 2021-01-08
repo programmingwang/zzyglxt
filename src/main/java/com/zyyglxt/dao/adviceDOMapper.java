@@ -2,6 +2,9 @@ package com.zyyglxt.dao;
 
 import com.zyyglxt.dataobject.adviceDO;
 import com.zyyglxt.dataobject.adviceDOKey;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface adviceDOMapper {
     int deleteByPrimaryKey(adviceDOKey key);
@@ -15,4 +18,10 @@ public interface adviceDOMapper {
     int updateByPrimaryKeySelective(adviceDO record);
 
     int updateByPrimaryKey(adviceDO record);
+
+    int delByDataCode(@Param("dataCode") String dataCode);
+
+    adviceDO getByDataCode(@Param("dataCode") String dataCode);
+
+    int updAdvice(adviceDO record);
 }

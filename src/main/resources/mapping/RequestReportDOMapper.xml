@@ -5,14 +5,29 @@
     <id column="itemID" jdbcType="INTEGER" property="itemid" />
     <id column="itemCode" jdbcType="CHAR" property="itemcode" />
     <result column="REPORT_TITLE" jdbcType="VARCHAR" property="reportTitle" />
+    <result column="REPORT_CONTENT" jdbcType="VARCHAR" property="reportContent" />
     <result column="REPORT_DATA_STATUS" jdbcType="VARCHAR" property="reportDataStatus" />
+    <result column="REASON" jdbcType="VARCHAR" property="reason"/>
+    <result column="REASONONE" jdbcType="VARCHAR" property="reasonone"/>
+    <result column="REASONTWO" jdbcType="VARCHAR" property="reasontwo"/>
+    <result column="REASONTH" jdbcType="VARCHAR" property="reasonth"/>
     <result column="CREATER" jdbcType="VARCHAR" property="creater" />
     <result column="itemCreateAt" jdbcType="TIMESTAMP" property="itemcreateat" />
     <result column="UPDATER" jdbcType="VARCHAR" property="updater" />
+    <result column="UPDATERONE" jdbcType="VARCHAR" property="updaterone" />
+    <result column="UPDATERTWO" jdbcType="VARCHAR" property="updatertwo" />
+    <result column="UPDATERTH" jdbcType="VARCHAR" property="updaterth" />
+    <result column="UPDATERF" jdbcType="VARCHAR" property="updaterf" />
     <result column="itemUpdateAt" jdbcType="TIMESTAMP" property="itemupdateat" />
+    <result column="UPDATEONE" jdbcType="TIMESTAMP" property="updateone" />
+    <result column="UPDATETWO" jdbcType="TIMESTAMP" property="updatetwo" />
+    <result column="UPDATEF" jdbcType="TIMESTAMP" property="updatef" />
+    <result column="UPDATETH" jdbcType="TIMESTAMP" property="updateth" />
+
+
   </resultMap>
   <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.zyyglxt.dataobject.RequestReportDO">
-    <result column="REPORT_CONTENT" jdbcType="LONGVARCHAR" property="reportContent" />
+    <!--<result column="REPORT_CONTENT" jdbcType="VARCHAR" property="reportContent" />-->
   </resultMap>
   <sql id="Base_Column_List">
     itemID, itemCode, REPORT_TITLE, REPORT_DATA_STATUS, CREATER, itemCreateAt, UPDATER, 
@@ -60,6 +75,15 @@
       <if test="reportDataStatus != null">
         REPORT_DATA_STATUS,
       </if>
+      <if test="reason != null">
+        REASON,
+      </if>
+      <if test="reasonone != null">
+        REASONONE,
+      </if>
+      <if test="reasontwo != null">
+        REASONTWO,
+      </if>
       <if test="creater != null">
         CREATER,
       </if>
@@ -68,6 +92,12 @@
       </if>
       <if test="updater != null">
         UPDATER,
+      </if>
+      <if test="updaterone != null">
+        UPDATERONE,
+      </if>
+      <if test="updatertwo != null">
+        UPDATERONETWO,
       </if>
       <if test="itemupdateat != null">
         itemUpdateAt,
@@ -89,6 +119,15 @@
       <if test="reportDataStatus != null">
         #{reportDataStatus,jdbcType=VARCHAR},
       </if>
+      <if test="reason != null">
+        #{reason,jdbcType=VARCHAR},
+      </if>
+      <if test="reasonone != null">
+        #{reasonone,jdbcType=VARCHAR},
+      </if>
+      <if test="reasontwo != null">
+        #{reasontwo,jdbcType=VARCHAR},
+      </if>
       <if test="creater != null">
         #{creater,jdbcType=VARCHAR},
       </if>
@@ -98,11 +137,17 @@
       <if test="updater != null">
         #{updater,jdbcType=VARCHAR},
       </if>
+      <if test="updaterone != null">
+        #{updaterone,jdbcType=VARCHAR},
+      </if>
+      <if test="updatertwo != null">
+        #{updateronetwo,jdbcType=VARCHAR},
+      </if>
       <if test="itemupdateat != null">
         #{itemupdateat,jdbcType=TIMESTAMP},
       </if>
       <if test="reportContent != null">
-        #{reportContent,jdbcType=LONGVARCHAR},
+        #{reportContent,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -115,6 +160,18 @@
       <if test="reportDataStatus != null">
         REPORT_DATA_STATUS = #{reportDataStatus,jdbcType=VARCHAR},
       </if>
+      <if test="reason != null">
+        REASON = #{reason,jdbcType=VARCHAR},
+      </if>
+      <if test="reasonone != null">
+        REASONONE = #{reasonone,jdbcType=VARCHAR},
+      </if>
+      <if test="reasontwo != null">
+        REASONTWO = #{reasontwo,jdbcType=VARCHAR},
+      </if>
+      <if test="reasonth != null">
+        REASONTH = #{reasonth,jdbcType=VARCHAR},
+      </if>
       <if test="creater != null">
         CREATER = #{creater,jdbcType=VARCHAR},
       </if>
@@ -124,11 +181,37 @@
       <if test="updater != null">
         UPDATER = #{updater,jdbcType=VARCHAR},
       </if>
+      <if test="updaterone != null">
+        UPDATERONE = #{updaterone,jdbcType=VARCHAR},
+      </if>
+      <if test="updatertwo != null">
+        UPDATERTWO = #{updatertwo,jdbcType=VARCHAR},
+      </if>
+      <if test="updaterf != null">
+        UPDATERF = #{updaterf,jdbcType=VARCHAR},
+      </if>
+      <if test="updaterth != null">
+        UPDATERTH = #{updaterth,jdbcType=VARCHAR},
+      </if>
+
       <if test="itemupdateat != null">
         itemUpdateAt = #{itemupdateat,jdbcType=TIMESTAMP},
       </if>
+      <if test="updateone != null">
+        UPDATEONE= #{updateone,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetwo != null">
+        UPDATETWO = #{updatetwo,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatef != null">
+        UPDATEF = #{updatef,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateth != null">
+        UPDATETH = #{updateth,jdbcType=TIMESTAMP},
+      </if>
+
       <if test="reportContent != null">
-        REPORT_CONTENT = #{reportContent,jdbcType=LONGVARCHAR},
+        REPORT_CONTENT = #{reportContent,jdbcType=VARCHAR},
       </if>
     </set>
     where itemID = #{itemid,jdbcType=INTEGER}

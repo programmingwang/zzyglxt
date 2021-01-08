@@ -104,7 +104,7 @@
                         '<a  class="pass"  data-toggle="modal" style="margin:0 0.6em;text-decoration: none;color:#775637;" data-target="#staticBackdrop" >通过</a>',
                         '<a  class="fail"  data-toggle="modal" style="margin:0 0.6em;text-decoration: none;color:#D60000;" data-target="#staticBackdrop" >不通过</a>',
                     ].join('');
-                }else if (row.examineStatus == projectStatus[2].id){
+                }else if (row.examineStatus == projectStatus[2].id || row.examineStatus == projectStatus[4].id || row.examineStatus == projectStatus[5].id || row.examineStatus == projectStatus[6].id || row.examineStatus == projectStatus[7].id){
                     return [
                         '<a class="view" data-toggle="modal" style="margin:0 0.6em;text-decoration: none;color:#775637;" data-target="" >查看</a>',
                     ].join('');
@@ -123,7 +123,7 @@
                         '<a  class="pass"  data-toggle="modal" style="margin:0 0.6em;text-decoration: none;color:#775637;" data-target="#staticBackdrop" >通过</a>',
                         '<a  class="fail"  data-toggle="modal" style="margin:0 0.6em;text-decoration: none;color:#D60000;" data-target="#staticBackdrop" >不通过</a>',
                     ].join('');
-                }else if (row.examineStatus == projectStatus[4].id){
+                }else if (row.examineStatus == projectStatus[4].id || row.examineStatus == projectStatus[6].id || row.examineStatus == projectStatus[7].id){
                     return [
                         '<a class="view" data-toggle="modal" style="margin:0 0.6em;text-decoration: none;color:#775637;" data-target="" >查看</a>',
                     ].join('');
@@ -511,7 +511,7 @@
 
             }else if (rolename === "科研项目-市级"){
                 $("#chargePersonSearch").selectUtil(auditStatus);
-                var url = "/industrialdevelop/getTopic?examineStatus="+projectStatus[2].id+"&examineStatus="+projectStatus[4].id +"&examineStatus="+projectStatus[5].id;
+                var url = "/industrialdevelop/getTopic?examineStatus="+projectStatus[2].id+"&examineStatus="+projectStatus[4].id +"&examineStatus="+projectStatus[5].id +"&examineStatus="+projectStatus[6].id +"&examineStatus="+projectStatus[7].id;
                 var aCol = [
                     {field: 'projectNo', title: '项目编号'},
                     {field: 'projectName', title: '项目名称', formatter: viewOperation, events: viewEvents},

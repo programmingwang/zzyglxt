@@ -2547,11 +2547,17 @@
         modalHtml.myPassReporttwoModal="<div>\n" +
             "        <textarea name=\"\" id=\"reasontwo\" cols=\"96\" rows=\"10\"></textarea>\n" +
             "    </div>"
+        modalHtml.myPassReportthModal="<div>\n" +
+            "        <textarea name=\"\" id=\"reasonth\" cols=\"96\" rows=\"10\"></textarea>\n" +
+            "    </div>"
         modalHtml.myFailReportModal="<div>\n" +
             "        <textarea name=\"\" id=\"reason\" cols=\"96\" rows=\"10\"></textarea>\n" +
             "    </div>"
         modalHtml.myFailReportoneModal="<div>\n" +
             "        <textarea name=\"\" id=\"reasonone\" cols=\"96\" rows=\"10\"></textarea>\n" +
+            "    </div>"
+        modalHtml.myFailReportthModal="<div>\n" +
+            "        <textarea name=\"\" id=\"reasonth\" cols=\"96\" rows=\"10\"></textarea>\n" +
             "    </div>"
         modalHtml.myFailReporttwoModal="<div>\n" +
             "        <textarea name=\"\" id=\"reasontwo\" cols=\"96\" rows=\"10\"></textarea>\n" +

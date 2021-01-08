@@ -58,8 +58,6 @@
                                     if(data.code == ajaxUtil.successCode){
                                         if(sessionStorage.getItem("rolename") == "政务资源处长"){
                                             alertUtil.info("审核已通过，已发送给分局审核！");
-                                        }else{
-                                            alertUtil.info("审核已通过，已上架！");
                                         }
                                         isSuccess = true;
                                         refreshTable();
@@ -90,8 +88,6 @@
                                     if(data.code == ajaxUtil.successCode){
                                         if(sessionStorage.getItem("rolename") == "政务资源分管局长"){
                                             alertUtil.info("审核已通过，已发送给局长审核！");
-                                        }else{
-                                            alertUtil.info("审核已通过，已上架！");
                                         }
                                         isSuccess = true;
                                         refreshTable();
@@ -121,8 +117,6 @@
                                     if(data.code == ajaxUtil.successCode){
                                         if(sessionStorage.getItem("rolename") == "政务资源局长长"){
                                             alertUtil.info("审核已通过，已发布到门户首页网站！");
-                                        }else{
-                                            alertUtil.info("审核已通过，已上架！");
                                         }
                                         isSuccess = true;
                                         refreshTable();

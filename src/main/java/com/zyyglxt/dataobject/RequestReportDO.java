@@ -21,6 +21,8 @@ public class RequestReportDO extends RequestReportDOKey {
 
     private String reasontwo;
 
+    private String reasonth;
+
     private String creater;
 
     private Date itemcreateat;
@@ -30,6 +32,8 @@ public class RequestReportDO extends RequestReportDOKey {
     private String updaterone;
 
     private String updatertwo;
+
+    private String updaterth;
 
     private String updaterf;
 
@@ -43,6 +47,33 @@ public class RequestReportDO extends RequestReportDOKey {
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "GMT+8")
     private Date updatef;
+
+    public String getReasonth() {
+        return reasonth;
+    }
+
+    public void setReasonth(String reasonth) {
+        this.reasonth = reasonth == null ? null : reasonth.trim();
+    }
+
+    public String getUpdaterth() {
+        return updaterth;
+    }
+
+    public void setUpdaterth(String updaterth) {
+        this.updaterth = updaterth == null ? null : updaterth.trim();
+    }
+
+    public Date getUpdateth() {
+        return updateth;
+    }
+
+    public void setUpdateth(Date updateth) {
+        this.updateth = updateth;
+    }
+
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "GMT+8")
+    private Date updateth;
 
     public String getReasonone() {
         return reasonone;

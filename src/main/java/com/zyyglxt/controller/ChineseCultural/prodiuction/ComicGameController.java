@@ -36,16 +36,8 @@ public class ComicGameController {
     @RequestMapping(value = "/getAll" , method = RequestMethod.GET)
     @ResponseBody
     @LogAnnotation(logTitle = "查询所有动漫游戏", logLevel = "1")
-    public ResponseData getAllComicGame(@RequestParam(value = "chineseCulturalStatus")List chineseCulturalStatus){
-        List<ChineseCulturalDO> comicGameList = iComicGameService.getComicGameList(chineseCulturalStatus);
-        List<ChineseCulturalDto> chineseCulturalDtoList = new ArrayList<>();
-        for (ChineseCulturalDO chineseCulturalDO : comicGameList) {
-            chineseCulturalDtoList.add(
-                    ConvertDOToDTOUtil.convertFromDOToDTO(
-                            chineseCulturalDO,iFileService.selectFileByDataCode(
-                                    chineseCulturalDO.getItemcode()).getFilePath()));
-        }
-        return new ResponseData(EmBusinessError.success,chineseCulturalDtoList);
+    public ResponseData getAllComicGame(@RequestParam(value = "chineseCulturalStatus")String chineseCulturalStatus){
+        return new ResponseData(EmBusinessError.success,iComicGameService.getComicGameList(chineseCulturalStatus));
     }
 
 

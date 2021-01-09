@@ -11,7 +11,7 @@
 
             var date= new Date();
             $("#dataDelayedRelease").datetimepicker({
-                format: 'yyyy-mm-dd hh:ii:00',//显示格式
+                format: 'yyyy-mm-dd hh:00:00',//显示格式
                 startDate: date ,
                 startView:2,
                 minView:1,

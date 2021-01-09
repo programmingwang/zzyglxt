@@ -1,13 +1,35 @@
 (function () {
     require(['jquery', 'ajaxUtil', 'stringUtil', 'uploadImg', 'alertUtil', 'modalUtil', 'objectUtil'],
         function (jquery, ajaxUtil, stringUtil, uploadImg, alertUtil, modalUtil, objectUtil) {
+
+            var roleName = sessionStorage.getItem("rolename");
+
+            if (roleName === '文化宣传处长'||roleName === '文化宣传科员'||roleName === '文化宣传综合处处长') {
+                $(".tTile").css("display","none");
+                $("#xczy").css("display","block");
+            }
+            if (roleName === '政务资源处长'||roleName === '政务资源科员'||roleName === '政务资源综合处处长'){
+                $(".tTile").css("display","none");
+                $("#zwbg").css("display","block");
+            }
+            if (roleName === '主研人'||roleName === '科研项目申报单位'||roleName === '科研项目-省级'||
+                roleName === '科研项目-市级'||roleName === '专家'||roleName === '产业发展-市级' || roleName === '产业发展-省级'){
+                $(".tTile").css("display","none");
+                $("#kyxm").css("display","block");
+            }
+            if (roleName === '中药材种植园' || roleName === '中药材加工企业'||roleName === '中药材制药企业'||
+                roleName === '中药材销售企业'||roleName === '中医医疗机构'||roleName === '高等医学院校'||
+                roleName === '科研院所'||roleName === '技术服务机构'||roleName === '旅游康养机构'){
+                $(".tTile").css("display","none");
+                $("#cyfz").css("display","block");
+            }
             // 发送请求获取用户数据渲染到界面
             ajaxUtil.myAjax(null, "/user/usermsg", null, function (data) {
                 if (data && data.code === 88888) {
                     localStorage.setItem('user', JSON.stringify(data.data));
                     uploadImg.init();
                     uploadImg.setImgSrc(data.data.portrait);
-                    $("#username").val(data.data.username);
+                    $("#uname").val(data.data.username);
                     $("#name").val(data.data.name);
                     $("#gender").val(data.data.gender);
                     $("#email").val(data.data.email);
@@ -20,8 +42,25 @@
                 }
             }, false, "", "get");
 
+            $("#userName").text(sessionStorage.getItem('username'));
+
+            $("#logout").on("click", function () {
+                ajaxUtil.myAjax(null, "/logout", null, function (data) {
+                    if (data && data.code === 88888) {
+                        sessionStorage.clear();
+                        localStorage.clear();
+                        window.location.href = "/userLogin";
+                    } else {
+                        alertUtil.alert(data.msg);
+                    }
+                }, false)
+            });
+
             // 取消按钮返回上一页面
             $("#cancelBtn").click(function () {
+                window.history.back()
+            });
+            $("#return").click(function () {
                 window.history.back()
             });
 
@@ -61,7 +100,7 @@
                 // 如果输入框没有disabled属性，则取输入框的值
                 if (typeof ($(".msg").attr("disabled")) == "undefined") {
 
-                    var username = $("#username").val();
+                    var username = $("#uname").val();
                     var name = $("#name").val();
                     var gender = $("#gender").val();
                     var email = $("#email").val();

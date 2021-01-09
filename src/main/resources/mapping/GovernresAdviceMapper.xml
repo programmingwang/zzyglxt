@@ -1,23 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.zyyglxt.dao.adviceDOMapper">
-  <resultMap id="BaseResultMap" type="com.zyyglxt.dataobject.adviceDO">
+<mapper namespace="com.zyyglxt.dao.GovernresAdviceMapper">
+  <resultMap id="BaseResultMap" type="com.zyyglxt.dataobject.GovernresAdvice">
+    <!--@mbg.generated-->
+    <!--@Table tb_governres_advice-->
     <id column="itemID" jdbcType="INTEGER" property="itemid" />
     <id column="itemCode" jdbcType="CHAR" property="itemcode" />
     <result column="DATA_CODE" jdbcType="VARCHAR" property="dataCode" />
     <result column="INITIAL" jdbcType="VARCHAR" property="initial" />
     <result column="INITIAL_DATE" jdbcType="TIMESTAMP" property="initialDate" />
     <result column="DEPARTMENT" jdbcType="VARCHAR" property="department" />
-    <result column="DEPARTMENT_NAME" jdbcType="VARCHAR" property="departmentName" />
     <result column="DEPART_DATE" jdbcType="DATE" property="departDate" />
     <result column="OFFICE" jdbcType="VARCHAR" property="office" />
-    <result column="OFFICE_NAME" jdbcType="VARCHAR" property="officeName" />
     <result column="OFFICE_DATE" jdbcType="TIMESTAMP" property="officeDate" />
     <result column="DEPUTY_DIRECTOR" jdbcType="VARCHAR" property="deputyDirector" />
-    <result column="DEPUTY_DIRECTOR_NAME" jdbcType="VARCHAR" property="deputyDirectorName" />
     <result column="DEPUTY_DIRECTOR_DATE" jdbcType="TIMESTAMP" property="deputyDirectorDate" />
     <result column="DIRECTOR" jdbcType="VARCHAR" property="director" />
-    <result column="DIRECTOR_NAME" jdbcType="VARCHAR" property="directorName" />
     <result column="DIRECTOR_DATE" jdbcType="TIMESTAMP" property="directorDate" />
     <result column="CREATER" jdbcType="VARCHAR" property="creater" />
     <result column="itemCreateAt" jdbcType="TIMESTAMP" property="itemcreateat" />
@@ -25,45 +23,44 @@
     <result column="itemUpdateAt" jdbcType="TIMESTAMP" property="itemupdateat" />
   </resultMap>
   <sql id="Base_Column_List">
-    itemID, itemCode, DATA_CODE, INITIAL, INITIAL_DATE, DEPARTMENT, DEPART_DATE, OFFICE, 
+    <!--@mbg.generated-->
+    itemID, itemCode, DATA_CODE, `INITIAL`, INITIAL_DATE, DEPARTMENT, DEPART_DATE, OFFICE, 
     OFFICE_DATE, DEPUTY_DIRECTOR, DEPUTY_DIRECTOR_DATE, DIRECTOR, DIRECTOR_DATE, CREATER, 
-    itemCreateAt, UPDATER, itemUpdateAt, DEPARTMENT_NAME, OFFICE_NAME, DEPUTY_DIRECTOR_NAME,
-    DIRECTOR_NAME
+    itemCreateAt, UPDATER, itemUpdateAt
   </sql>
-  <select id="selectByPrimaryKey" parameterType="com.zyyglxt.dataobject.adviceDOKey" resultMap="BaseResultMap">
+  <select id="selectByPrimaryKey" parameterType="map" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
     select 
     <include refid="Base_Column_List" />
     from tb_governres_advice
     where itemID = #{itemid,jdbcType=INTEGER}
       and itemCode = #{itemcode,jdbcType=CHAR}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="com.zyyglxt.dataobject.adviceDOKey">
+  <delete id="deleteByPrimaryKey" parameterType="map">
+    <!--@mbg.generated-->
     delete from tb_governres_advice
     where itemID = #{itemid,jdbcType=INTEGER}
       and itemCode = #{itemcode,jdbcType=CHAR}
   </delete>
-  <insert id="insert" parameterType="com.zyyglxt.dataobject.adviceDO">
-    insert into tb_governres_advice (itemID, itemCode, DATA_CODE, 
-      INITIAL, INITIAL_DATE, DEPARTMENT, 
-      DEPART_DATE, OFFICE, OFFICE_DATE, 
-      DEPUTY_DIRECTOR, DEPUTY_DIRECTOR_DATE, DIRECTOR, 
-      DIRECTOR_DATE, CREATER, itemCreateAt, 
-      UPDATER, itemUpdateAt, DEPARTMENT_NAME, OFFICE_NAME,
-      DEPUTY_DIRECTOR_NAME, DIRECTOR_NAME)
-    values (#{itemid,jdbcType=INTEGER}, #{itemcode,jdbcType=CHAR}, #{dataCode,jdbcType=VARCHAR}, 
-      #{initial,jdbcType=VARCHAR}, #{initialDate,jdbcType=TIMESTAMP}, #{department,jdbcType=VARCHAR}, 
-      #{departDate,jdbcType=DATE}, #{office,jdbcType=VARCHAR}, #{officeDate,jdbcType=TIMESTAMP}, 
-      #{deputyDirector,jdbcType=VARCHAR}, #{deputyDirectorDate,jdbcType=TIMESTAMP}, #{director,jdbcType=VARCHAR}, 
-      #{directorDate,jdbcType=TIMESTAMP}, #{creater,jdbcType=VARCHAR}, #{itemcreateat,jdbcType=TIMESTAMP}, 
-      #{updater,jdbcType=VARCHAR}, #{itemupdateat,jdbcType=TIMESTAMP}, #{DEPARTMENT_NAME,jdbcType=VARCHAR},
-      #{OFFICE_NAME,jdbcType=VARCHAR}, #{DEPUTY_DIRECTOR_NAME,jdbcType=VARCHAR}, #{DIRECTOR_NAME,jdbcType=VARCHAR})
+  <insert id="insert" keyColumn="itemID" keyProperty="itemid" parameterType="com.zyyglxt.dataobject.GovernresAdvice" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into tb_governres_advice (itemCode, DATA_CODE, `INITIAL`, 
+      INITIAL_DATE, DEPARTMENT, DEPART_DATE, 
+      OFFICE, OFFICE_DATE, DEPUTY_DIRECTOR, 
+      DEPUTY_DIRECTOR_DATE, DIRECTOR, DIRECTOR_DATE, 
+      CREATER, itemCreateAt, UPDATER, 
+      itemUpdateAt)
+    values (#{itemcode,jdbcType=CHAR}, #{dataCode,jdbcType=VARCHAR}, #{initial,jdbcType=VARCHAR}, 
+      #{initialDate,jdbcType=TIMESTAMP}, #{department,jdbcType=VARCHAR}, #{departDate,jdbcType=DATE}, 
+      #{office,jdbcType=VARCHAR}, #{officeDate,jdbcType=TIMESTAMP}, #{deputyDirector,jdbcType=VARCHAR}, 
+      #{deputyDirectorDate,jdbcType=TIMESTAMP}, #{director,jdbcType=VARCHAR}, #{directorDate,jdbcType=TIMESTAMP}, 
+      #{creater,jdbcType=VARCHAR}, #{itemcreateat,jdbcType=TIMESTAMP}, #{updater,jdbcType=VARCHAR}, 
+      #{itemupdateat,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" parameterType="com.zyyglxt.dataobject.adviceDO">
+  <insert id="insertSelective" keyColumn="itemID" keyProperty="itemid" parameterType="com.zyyglxt.dataobject.GovernresAdvice" useGeneratedKeys="true">
+    <!--@mbg.generated-->
     insert into tb_governres_advice
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="itemid != null">
-        itemID,
-      </if>
       <if test="itemcode != null">
         itemCode,
       </if>
@@ -71,7 +68,7 @@
         DATA_CODE,
       </if>
       <if test="initial != null">
-        INITIAL,
+        `INITIAL`,
       </if>
       <if test="initialDate != null">
         INITIAL_DATE,
@@ -79,17 +76,11 @@
       <if test="department != null">
         DEPARTMENT,
       </if>
-      <if test="departmentName != null">
-        DEPARTMENT_NAME,
-      </if>
       <if test="departDate != null">
         DEPART_DATE,
       </if>
       <if test="office != null">
         OFFICE,
-      </if>
-      <if test="officeName != null">
-        OFFICE_NAME,
       </if>
       <if test="officeDate != null">
         OFFICE_DATE,
@@ -97,17 +88,11 @@
       <if test="deputyDirector != null">
         DEPUTY_DIRECTOR,
       </if>
-      <if test="deputyDirectorName != null">
-        DEPUTY_DIRECTOR_NAME,
-      </if>
       <if test="deputyDirectorDate != null">
         DEPUTY_DIRECTOR_DATE,
       </if>
       <if test="director != null">
         DIRECTOR,
-      </if>
-      <if test="directorName != null">
-        DIRECTOR_NAME,
       </if>
       <if test="directorDate != null">
         DIRECTOR_DATE,
@@ -126,9 +111,6 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="itemid != null">
-        #{itemid,jdbcType=INTEGER},
-      </if>
       <if test="itemcode != null">
         #{itemcode,jdbcType=CHAR},
       </if>
@@ -144,17 +126,11 @@
       <if test="department != null">
         #{department,jdbcType=VARCHAR},
       </if>
-      <if test="departmentName != null">
-        #{departmentName,jdbcType=VARCHAR},
-      </if>
       <if test="departDate != null">
         #{departDate,jdbcType=DATE},
       </if>
       <if test="office != null">
         #{office,jdbcType=VARCHAR},
-      </if>
-      <if test="officeName != null">
-        #{officeName,jdbcType=VARCHAR},
       </if>
       <if test="officeDate != null">
         #{officeDate,jdbcType=TIMESTAMP},
@@ -162,17 +138,11 @@
       <if test="deputyDirector != null">
         #{deputyDirector,jdbcType=VARCHAR},
       </if>
-      <if test="deputyDirectorName != null">
-        #{deputyDirectorName,jdbcType=VARCHAR},
-      </if>
       <if test="deputyDirectorDate != null">
         #{deputyDirectorDate,jdbcType=TIMESTAMP},
       </if>
       <if test="director != null">
         #{director,jdbcType=VARCHAR},
-      </if>
-      <if test="directorName != null">
-        #{directorName,jdbcType=VARCHAR},
       </if>
       <if test="directorDate != null">
         #{directorDate,jdbcType=TIMESTAMP},
@@ -191,14 +161,15 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.zyyglxt.dataobject.adviceDO">
+  <update id="updateByPrimaryKeySelective" parameterType="com.zyyglxt.dataobject.GovernresAdvice">
+    <!--@mbg.generated-->
     update tb_governres_advice
     <set>
       <if test="dataCode != null">
         DATA_CODE = #{dataCode,jdbcType=VARCHAR},
       </if>
       <if test="initial != null">
-        INITIAL = #{initial,jdbcType=VARCHAR},
+        `INITIAL` = #{initial,jdbcType=VARCHAR},
       </if>
       <if test="initialDate != null">
         INITIAL_DATE = #{initialDate,jdbcType=TIMESTAMP},
@@ -206,17 +177,11 @@
       <if test="department != null">
         DEPARTMENT = #{department,jdbcType=VARCHAR},
       </if>
-      <if test="departmentName != null">
-        DEPARTMENT_NAME = #{departmentName,jdbcType=VARCHAR},
-      </if>
       <if test="departDate != null">
         DEPART_DATE = #{departDate,jdbcType=DATE},
       </if>
       <if test="office != null">
         OFFICE = #{office,jdbcType=VARCHAR},
-      </if>
-      <if test="officeName != null">
-        OFFICE_NAME = #{officeName,jdbcType=VARCHAR},
       </if>
       <if test="officeDate != null">
         OFFICE_DATE = #{officeDate,jdbcType=TIMESTAMP},
@@ -224,17 +189,11 @@
       <if test="deputyDirector != null">
         DEPUTY_DIRECTOR = #{deputyDirector,jdbcType=VARCHAR},
       </if>
-      <if test="deputyDirectorName != null">
-        DEPUTY_DIRECTOR_NAME = #{deputyDirectorName,jdbcType=VARCHAR},
-      </if>
       <if test="deputyDirectorDate != null">
         DEPUTY_DIRECTOR_DATE = #{deputyDirectorDate,jdbcType=TIMESTAMP},
       </if>
       <if test="director != null">
         DIRECTOR = #{director,jdbcType=VARCHAR},
-      </if>
-      <if test="directorName != null">
-        DIRECTOR_NAME = #{directorName,jdbcType=VARCHAR},
       </if>
       <if test="directorDate != null">
         DIRECTOR_DATE = #{directorDate,jdbcType=TIMESTAMP},
@@ -255,22 +214,19 @@
     where itemID = #{itemid,jdbcType=INTEGER}
       and itemCode = #{itemcode,jdbcType=CHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.zyyglxt.dataobject.adviceDO">
+  <update id="updateByPrimaryKey" parameterType="com.zyyglxt.dataobject.GovernresAdvice">
+    <!--@mbg.generated-->
     update tb_governres_advice
     set DATA_CODE = #{dataCode,jdbcType=VARCHAR},
-      INITIAL = #{initial,jdbcType=VARCHAR},
+      `INITIAL` = #{initial,jdbcType=VARCHAR},
       INITIAL_DATE = #{initialDate,jdbcType=TIMESTAMP},
       DEPARTMENT = #{department,jdbcType=VARCHAR},
-      DEPARTMENT_NAME = #{departmentName,jdbcType=VARCHAR},
       DEPART_DATE = #{departDate,jdbcType=DATE},
       OFFICE = #{office,jdbcType=VARCHAR},
-      OFFICE_NAME = #{officeName,jdbcType=VARCHAR},
       OFFICE_DATE = #{officeDate,jdbcType=TIMESTAMP},
       DEPUTY_DIRECTOR = #{deputyDirector,jdbcType=VARCHAR},
-      DEPUTY_DIRECTOR_NAME = #{deputyDirectorName,jdbcType=VARCHAR},
       DEPUTY_DIRECTOR_DATE = #{deputyDirectorDate,jdbcType=TIMESTAMP},
       DIRECTOR = #{director,jdbcType=VARCHAR},
-      DIRECTOR_NAME = #{directorName,jdbcType=VARCHAR},
       DIRECTOR_DATE = #{directorDate,jdbcType=TIMESTAMP},
       CREATER = #{creater,jdbcType=VARCHAR},
       itemCreateAt = #{itemcreateat,jdbcType=TIMESTAMP},
@@ -279,75 +235,8 @@
     where itemID = #{itemid,jdbcType=INTEGER}
       and itemCode = #{itemcode,jdbcType=CHAR}
   </update>
-  <delete id="delByDataCode" parameterType="com.zyyglxt.dataobject.adviceDO">
-    delete from tb_governres_advice
-    where DATA_CODE = #{dataCode,jdbcType=VARCHAR}
-  </delete>
-  <select id="getByDataCode" resultMap="BaseResultMap">
-    select
-    <include refid="Base_Column_List" />
+  <select id="selectAll" resultMap="BaseResultMap">
+    select *
     from tb_governres_advice
-    where DATA_CODE = #{dataCode,jdbcType=VARCHAR}
-    limit 1
   </select>
-  <update id="updAdvice" parameterType="com.zyyglxt.dataobject.adviceDO">
-    update tb_governres_advice
-    <set>
-      <if test="initial != null">
-        INITIAL = #{initial,jdbcType=VARCHAR},
-      </if>
-      <if test="initialDate != null">
-        INITIAL_DATE = #{initialDate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="department != null">
-        DEPARTMENT = #{department,jdbcType=VARCHAR},
-      </if>
-      <if test="departmentName != null">
-        DEPARTMENT_NAME = #{departmentName,jdbcType=VARCHAR},
-      </if>
-      <if test="departDate != null">
-        DEPART_DATE = #{departDate,jdbcType=DATE},
-      </if>
-      <if test="office != null">
-        OFFICE = #{office,jdbcType=VARCHAR},
-      </if>
-      <if test="officeName != null">
-        OFFICE_NAME = #{officeName,jdbcType=VARCHAR},
-      </if>
-      <if test="officeDate != null">
-        OFFICE_DATE = #{officeDate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="deputyDirector != null">
-        DEPUTY_DIRECTOR = #{deputyDirector,jdbcType=VARCHAR},
-      </if>
-      <if test="deputyDirectorName != null">
-        DEPUTY_DIRECTOR_NAME = #{deputyDirectorName,jdbcType=VARCHAR},
-      </if>
-      <if test="deputyDirectorDate != null">
-        DEPUTY_DIRECTOR_DATE = #{deputyDirectorDate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="director != null">
-        DIRECTOR = #{director,jdbcType=VARCHAR},
-      </if>
-      <if test="directorName != null">
-        DIRECTOR_NAME = #{directorName,jdbcType=VARCHAR},
-      </if>
-      <if test="directorDate != null">
-        DIRECTOR_DATE = #{directorDate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="creater != null">
-        CREATER = #{creater,jdbcType=VARCHAR},
-      </if>
-      <if test="itemcreateat != null">
-        itemCreateAt = #{itemcreateat,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updater != null">
-        UPDATER = #{updater,jdbcType=VARCHAR},
-      </if>
-      <if test="itemupdateat != null">
-        itemUpdateAt = #{itemupdateat,jdbcType=TIMESTAMP},
-      </if>
-    </set>
-    where DATA_CODE = #{dataCode,jdbcType=VARCHAR}
-  </update>
 </mapper>

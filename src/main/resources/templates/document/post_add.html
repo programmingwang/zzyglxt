@@ -90,19 +90,29 @@
                 <label class="col-sm-2 col-form-label">主送：</label>
                 <div class="col-sm-8">
                     <select class="custom-select" id="send">
-                        <option value="aaa">aaa</option>
-                        <option value="bbb">bbb</option>
+                        <option value="省中医药管理局">省中医药管理局</option>
+                        <option value="市中医药管理局">市中医药管理局</option>
+                        <option value="县中医药管理局">县中医药管理局</option>
                     </select>
                 </div>
             </div>
 
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label">抄送：</label>
-                <div class="col-sm-8">
-                    <select class="custom-select" id="send1">
-                        <option value="ccc">ccc</option>
-                        <option value="ddd">ddd</option>
+                <div class="col-sm-3">
+                    <input id="hospitalKeySpecialty" type="text" class="form-control" placeholder="添加抄送目标" readonly="readonly">
+                </div>
+                <div class="col-sm-2">
+                    <select id="specialtyName" class="form-control">
+                        <option value ="中医处">中医处</option>
+                        <option value ="中药处">中药处</option>
+                        <option value ="综合处">综合处</option>
+                        <option value ="法规监督处">法规监督处</option>
                     </select>
+                </div>
+                <div class="col-sm-2">
+                    <button id="add" type="button">添加</button>
+                    <button id="clear" type="button">清空</button>
                 </div>
             </div>
 

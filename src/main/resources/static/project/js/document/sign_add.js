@@ -4,87 +4,62 @@
 
             const editor = objectUtil.wangEditorUtil();
 
-            var pl = dictUtil.getDictByCode(dictUtil.DICT_LIST.emergencyStatus);
-            $("#receivingDegreeOfUrgency").selectUtil(pl);
+            var type = isUpdate() ? "put": "post";
+
+            var pl = dictUtil.getDictByCode(dictUtil.DICT_LIST.governerscounter);
+            $("#govPunlic").selectUtil(pl);
 
             $("#cancel").unbind().on('click',function () {
-                var url = "/document/receipt";
+                var url = "/document/sign";
                 orange.redirect(url);
             });
 
-            var date= new Date();
-            $("#receivingDateOfReceipt").datetimepicker({
-                format: 'yyyy-mm-dd hh:ii:00',//显示格式
-                startDate: date,
-                startView:2,
-                minView:1,
-                maxView :3,
-                language: 'cn',
-                autoclose: 1,//选择后自动关闭
-                clearBtn:true,//清除按钮
-                showMeridian:true,
-            });
-            $("#timeLimit").datetimepicker({
-                format: 'yyyy-mm-dd hh:ii:00',//显示格式
-                startDate: date ,
-                startView:2,
-                minView:1,
-                maxView :3,
-                language: 'cn',
-                autoclose: 1,//选择后自动关闭
-                clearBtn:true,//清除按钮
-                showMeridian:true,
-            });
 
             $("#btn_save").unbind().on('click',function () {
                 var ReceiptEntity;
                 var addUpdateUrl;
                 var operateMessage;
                 if(!isUpdate()){
-                    addUpdateUrl = "insertreceipt";
-                    operateMessage = "保存收文信息成功";
+                    addUpdateUrl = "governresCountersign/insert";
+                    operateMessage = "保存会签信息成功";
                     ReceiptEntity = {
                         itemcode: stringUtil.getUUID(),
-                        receivingNum : $("#receivingNum").val(),
-                        receivingDateOfReceipt : $("#receivingDateOfReceipt").val(),
+                        govPunlic : $("#govPunlic").val(),
                         receivingTitle : $("#receivingTitle").val(),
-                        receivingUnitOfCommun : $("#receivingUnitOfCommun").val(),
+                        parment : $("#parment").val(),
                         fileNo : $("#fileNo").val(),
                         number : $("#number").val(),
-                        secretLevel : $("#secretLevel").val(),
-                        receivingDegreeOfUrgency : $("#receivingDegreeOfUrgency").val(),
-                        timeLimit : $("#timeLimit").val(),
-                        receivingDataStatus : '0',
+                        classification : $("#classification").val(),
+                        reason : $("#reason").val(),
+                        status : '0',
                     };
                 }else{
                     var needData = JSON.parse(localStorage.getItem("rowData"));
-                    addUpdateUrl = "updatereceipt";
+                    addUpdateUrl = "governresCountersign/update";
                     ReceiptEntity = {
                         itemid: needData.itemid,
                         itemcode: needData.itemcode,
-                        receivingNum : $("#receivingNum").val(),
-                        receivingDateOfReceipt : $("#receivingDateOfReceipt").val(),
+                        govPunlic : $("#govPunlic").val(),
                         receivingTitle : $("#receivingTitle").val(),
-                        receivingUnitOfCommun : $("#receivingUnitOfCommun").val(),
+                        parment : $("#parment").val(),
                         fileNo : $("#fileNo").val(),
                         number : $("#number").val(),
-                        secretLevel : $("#secretLevel").val(),
-                        receivingDegreeOfUrgency : $("#receivingDegreeOfUrgency").val(),
-                        timeLimit : $("#timeLimit").val(),
+                        classification : $("#classification").val(),
+                        reason : $("#reason").val(),
                     }
-                    operateMessage = "更新收文信息成功";
+                    operateMessage = "更新会签信息成功";
                 }
                 fileUtil.handleFile(isUpdate(), ReceiptEntity.itemcode, $("#upload_file")[0].files[0]);
 
                 ajaxUtil.myAjax(null,addUpdateUrl,ReceiptEntity,function (data) {
                     if(ajaxUtil.success(data)){
                         alertUtil.info(operateMessage);
-                        var url = "/document/receipt";
+                        var url = "/document/sign";
                         orange.redirect(url);
                     }else {
                         alertUtil.alert(data.msg);
                     }
-                },false,true);
+                },false,true,type);
             });
 
             $("#btn_insert").unbind().on('click',function () {
@@ -92,45 +67,41 @@
                 var addUpdateUrl;
                 var operateMessage;
                 if(!isUpdate()){
-                    addUpdateUrl = "insertreceipt";
-                    operateMessage = "录入收文信息成功";
+                    addUpdateUrl = "governresCountersign/insert";
+                    operateMessage = "录入会签信息成功";
                     ReceiptEntity = {
                         itemcode: stringUtil.getUUID(),
-                        receivingNum : $("#receivingNum").val(),
-                        receivingDateOfReceipt : $("#receivingDateOfReceipt").val(),
+                        govPunlic : $("#govPunlic").val(),
                         receivingTitle : $("#receivingTitle").val(),
-                        receivingUnitOfCommun : $("#receivingUnitOfCommun").val(),
+                        parment : $("#parment").val(),
                         fileNo : $("#fileNo").val(),
                         number : $("#number").val(),
-                        secretLevel : $("#secretLevel").val(),
-                        receivingDegreeOfUrgency : $("#receivingDegreeOfUrgency").val(),
-                        receivingDataStatus : '1',
-                        timeLimit : $("#timeLimit").val(),
+                        classification : $("#classification").val(),
+                        reason : $("#reason").val(),
+                        status : '1',
                     };
                 }else{
                     var needData = JSON.parse(localStorage.getItem("rowData"));
-                    addUpdateUrl = "updatereceipt";
+                    addUpdateUrl = "governresCountersign/update";
                     ReceiptEntity = {
                         itemid: needData.itemid,
                         itemcode: needData.itemcode,
-                        receivingNum : $("#receivingNum").val(),
-                        receivingDateOfReceipt : $("#receivingDateOfReceipt").val(),
+                        govPunlic : $("#govPunlic").val(),
                         receivingTitle : $("#receivingTitle").val(),
-                        receivingUnitOfCommun : $("#receivingUnitOfCommun").val(),
+                        parment : $("#parment").val(),
                         fileNo : $("#fileNo").val(),
                         number : $("#number").val(),
-                        secretLevel : $("#secretLevel").val(),
-                        receivingDegreeOfUrgency : $("#receivingDegreeOfUrgency").val(),
-                        timeLimit : $("#timeLimit").val(),
+                        classification : $("#classification").val(),
+                        reason : $("#reason").val(),
                     }
-                    operateMessage = "更新收文信息成功";
+                    operateMessage = "更新会签信息成功";
                 }
                 fileUtil.handleFile(isUpdate(), ReceiptEntity.itemcode, $("#upload_file")[0].files[0]);
 
                 ajaxUtil.myAjax(null,addUpdateUrl,ReceiptEntity,function (data) {
                     if(ajaxUtil.success(data)){
                         alertUtil.info(operateMessage);
-                        var url = "/document/receipt";
+                        var url = "/document/sign";
                         orange.redirect(url);
                     }else {
                         alertUtil.alert(data.msg);
@@ -141,15 +112,13 @@
             (function init() {
                 if (isUpdate()){
                     var tempdata = JSON.parse(localStorage.getItem("rowData"));
-                    $("#receivingNum").val(tempdata.receivingNum);
-                    $("#receivingDateOfReceipt").val(tempdata.receivingDateOfReceipt);
+                    $("#govPunlic").val(tempdata.govPunlic);
                     $("#receivingTitle").val(tempdata.receivingTitle);
-                    $("#receivingUnitOfCommun").val(tempdata.receivingUnitOfCommun);
+                    $("#parment").val(tempdata.parment);
                     $("#fileNo").val(tempdata.fileNo);
                     $("#number").val(tempdata.number);
-                    $("#secretLevel").val(tempdata.secretLevel);
-                    $("#receivingDegreeOfUrgency").val(tempdata.receivingDegreeOfUrgency);
-                    $("#timeLimit").val(tempdata.timeLimit);
+                    $("#classification").val(tempdata.classification);
+                    $("#reason").val(tempdata.reason);
                     var img = tempdata.filePath;
                     $("#upimg").attr("src",img);
                 }

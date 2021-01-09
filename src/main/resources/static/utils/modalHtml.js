@@ -2284,6 +2284,20 @@
             "        <textarea name=\"\" id=\"reason\" cols=\"96\" rows=\"10\"></textarea>\n" +
             "    </div>"
 
+        modalHtml.myTranspondModal='<div>\n' +
+            '        <div >\n' +
+            '            <span>请选择需要转发的人员：</span>\n' +
+            '                <div style="margin-top: 1em;">\n' +
+            '                    <select id="experName" class="form-control" >\n' +
+            '                        <option value ="volvo">中医处分局局长</option>\n' +
+            '                        <option value ="volvo">中药处分局局长</option>\n' +
+            '                        <option value ="volvo">综合处分局局长</option>\n' +
+            '                        <option value ="volvo">法规监督处分局局长</option>\n' +
+            '                    </select>\n' +
+            '                </div>\n' +
+            '        </div>\n' +
+            '    </div>\n';
+
         modalHtml.myViewReceiptModal =
             '<div class="row">'+
             '            <div class="col-lg-12 col-md-12">\n' +
@@ -2419,6 +2433,111 @@
             '            </div>\n'+
             '</div>';
 
+        modalHtml.myViewSignModal =
+            '<div class="row">'+
+            '            <div class="col-lg-12 col-md-12">\n' +
+            '                <fieldset disabled>'+
+            '                <div class="input-group mb-3">\n' +
+            '                    <div class="input-group-prepend">\n' +
+            '                        <button class="btn btn-primary btn-sm" >文件标题</button>\n' +
+            '                    </div>\n' +
+            '                    <input type="text" id="receivingTitle" class="form-control">\n' +
+            '                </div>\n' +
+            '            </div>\n' +
+            '\n'+
+            '            <div class="col-lg-12 col-md-12">\n' +
+            '                <fieldset disabled>'+
+            '                <div class="input-group mb-3">\n' +
+            '                    <div class="input-group-prepend">\n' +
+            '                        <button class="btn btn-primary btn-sm" >公开方式</button>\n' +
+            '                    </div>\n' +
+            '                    <input type="text" id="govPunlic" class="form-control">\n' +
+            '                </div>\n' +
+            '            </div>\n' +
+            '\n'+
+            '            <div class="col-lg-12 col-md-12">\n' +
+            '                <fieldset disabled>'+
+            '                <div class="input-group mb-3">\n' +
+            '                    <div class="input-group-prepend">\n' +
+            '                        <button class="btn btn-primary btn-sm" >文件编号</button>\n' +
+            '                    </div>\n' +
+            '                    <input type="text" id="fileNo" class="form-control">\n' +
+            '                </div>\n' +
+            '            </div>\n' +
+            '\n' +
+            '            <div class="col-lg-12 col-md-12">\n' +
+            '                <fieldset disabled>'+
+            '                <div class="input-group mb-3">\n' +
+            '                    <div class="input-group-prepend">\n' +
+            '                        <button class="btn btn-primary btn-sm" >份&emsp;&emsp;数</button>\n' +
+            '                    </div>\n' +
+            '                    <input type="text" id="number" class="form-control">\n' +
+            '                </div>\n' +
+            '            </div>\n' +
+            '\n' +
+            '            <div class="col-lg-12 col-md-12">\n' +
+            '                <fieldset disabled>'+
+            '                <div class="input-group mb-3">\n' +
+            '                    <div class="input-group-prepend">\n' +
+            '                        <button class="btn btn-primary btn-sm" >密&emsp;&emsp;级</button>\n' +
+            '                    </div>\n' +
+            '                    <input type="text" id="classification" class="form-control">\n' +
+            '                </div>\n' +
+            '            </div>\n' +
+            '\n' +
+            '            <div class="col-lg-12 col-md-12">\n' +
+            '                <fieldset disabled>'+
+            '                <div class="input-group mb-3">\n' +
+            '                    <div class="input-group-prepend">\n' +
+            '                        <button class="btn btn-primary btn-sm" >不公开理由</button>\n' +
+            '                    </div>\n' +
+            '                    <input type="text" id="reason" class="form-control">\n' +
+            '                </div>\n' +
+            '            </div>\n' +
+            '\n' +
+            '            <div class="col-lg-12 col-md-12">\n' +
+            '                <fieldset disabled>'+
+            '                <div class="input-group mb-3">\n' +
+            '                    <div class="input-group-prepend">\n' +
+            '                        <button class="btn btn-primary btn-sm" >数据状态</button>\n' +
+            '                    </div>\n' +
+            '                    <input type="text" id="status" class="form-control">\n' +
+            '                </div>\n' +
+            '            </div>\n' +
+            '\n' +
+            '            <div id="fileDiv" class="col-lg-12 col-md-12" style="display: none">\n' +
+            '                <fieldset disabled>'+
+            '                <div class="input-group mb-3">\n' +
+            '                    <div class="input-group-prepend">\n' +
+            '                        <button type="button" class="btn btn-primary btn-sm" >附&emsp;&emsp;件</button>\n' +
+            '                    </div>\n' +
+            '                    <span id="upFile" src="#" style="margin-left: 9px;margin-top: 2px;"></span>\n' +
+            '                </div>\n' +
+            '            </div>\n' +
+            '\n' +
+            '           <div class="col-lg-6 col-md-6">\n' +
+            '                <fieldset disabled>'+
+            '                <div class="input-group mb-3">\n' +
+            '                    <div class="input-group-prepend">\n' +
+            '                        <label class="input-group-text" for="applicant">创&ensp;建&ensp;人</label>\n' +
+            '                    </div>\n' +
+            '                    <input type="text"  id="creater" class="form-control">\n' +
+            '                </div>\n' +
+            '                </fieldset>'+
+            '            </div>\n'+
+            '\n' +
+            '            <div class="col-lg-6 col-md-6">\n' +
+            '                <fieldset disabled>'+
+            '                <div class="input-group mb-3">\n' +
+            '                    <div class="input-group-prepend">\n' +
+            '                        <label class="input-group-text" for="applicant">发文日期</label>\n' +
+            '                    </div>\n' +
+            '                    <input type="text"  id="itemupdateat" class="form-control">\n' +
+            '                </div>\n' +
+            '                </fieldset>'+
+            '            </div>\n'+
+            '</div>';
+
         modalHtml.myPassReportModal="<div>\n" +
             "        <textarea name=\"\" id=\"reason\" cols=\"96\" rows=\"10\"></textarea>\n" +
             "    </div>"
@@ -2428,11 +2547,17 @@
         modalHtml.myPassReporttwoModal="<div>\n" +
             "        <textarea name=\"\" id=\"reasontwo\" cols=\"96\" rows=\"10\"></textarea>\n" +
             "    </div>"
+        modalHtml.myPassReportthModal="<div>\n" +
+            "        <textarea name=\"\" id=\"reasonth\" cols=\"96\" rows=\"10\"></textarea>\n" +
+            "    </div>"
         modalHtml.myFailReportModal="<div>\n" +
             "        <textarea name=\"\" id=\"reason\" cols=\"96\" rows=\"10\"></textarea>\n" +
             "    </div>"
         modalHtml.myFailReportoneModal="<div>\n" +
             "        <textarea name=\"\" id=\"reasonone\" cols=\"96\" rows=\"10\"></textarea>\n" +
+            "    </div>"
+        modalHtml.myFailReportthModal="<div>\n" +
+            "        <textarea name=\"\" id=\"reasonth\" cols=\"96\" rows=\"10\"></textarea>\n" +
             "    </div>"
         modalHtml.myFailReporttwoModal="<div>\n" +
             "        <textarea name=\"\" id=\"reasontwo\" cols=\"96\" rows=\"10\"></textarea>\n" +
@@ -2496,7 +2621,7 @@
         modalHtml.myDeletereportModal='是否删除请示报告信息';
         modalHtml.myDeleteTopicManagement = "是否删除该项目信息？";
         modalHtml.myDeletePost = "是否删除该发文信息？";
-
+        modalHtml.myDeletesignModal = "是否删除内部会签？";
         return modalHtml;
 
     });

@@ -4,7 +4,6 @@
 
             uploadImg.init();
 
-            /*下拉框值*/
             //公开方式
             var publicWay = dictUtil.getDictByCode(dictUtil.DICT_LIST.postPublicWay);
             $("#postPublicWay").selectUtil(publicWay);
@@ -41,6 +40,20 @@
             //文号
             var num = dictUtil.getDictByCode(dictUtil.DICT_LIST.postDocumentNum);
             $("#postDocumentNum").selectUtil(num);
+
+            //抄送目标
+            $("#add").unbind().on("click",function () {
+                var str = $("#hospitalKeySpecialty").val();
+                if (str.length === 0){
+                    $("#hospitalKeySpecialty").val($("#specialtyName").val());
+                }else {
+                    $("#hospitalKeySpecialty").val($("#hospitalKeySpecialty").val() + " " + $("#specialtyName").val());
+                }
+                $("#specialtyName option[value=" + $("#specialtyName").val() + "]").remove();
+            })
+            $("#clear").unbind().on("click",function () {
+                $("#hospitalKeySpecialty").val("");
+            })
 
             //当前时间
             var nowTime = stringUtil.formatDateTime(new Date());

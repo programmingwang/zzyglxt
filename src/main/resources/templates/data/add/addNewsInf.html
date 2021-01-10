@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://at.alicdn.com/t/font_1805932_ysrcp4y0uy9.css">
+    <link rel="stylesheet" th:href="@{component/bootstrap-datetimepicker@4.7.14/bootstrap-datetimepicker.min.css}">
     <title>Document</title>
     <style>
         .upload-wrap{
@@ -74,6 +76,14 @@
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label">正文：</label>
                 <div id="div1" class="col-sm-8">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">延时发布：</label>
+                <div class="col-sm-3">
+                    <input id="dataDelayedRelease" type="text" class="form-control" placeholder="请选择发布时间" maxlength="30">
+                    <i class="fa fa-calendar fa-lg" style="position: absolute;top: 0.7rem;right: 20px;"></i>
                 </div>
             </div>
 

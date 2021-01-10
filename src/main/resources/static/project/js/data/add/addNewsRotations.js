@@ -27,6 +27,7 @@
                         dataSource : $("#dataSource").val(),
                         dataAuthor : $("#dataAuthor").val(),
                         dataContent : editor.txt.html(),
+                        releaseOrNot : "y",
                         dataStatus : "0",
                         dataLocation : $("#dataLocation").val(),
                     };
@@ -76,6 +77,7 @@
                         dataSource : $("#dataSource").val(),
                         dataAuthor : $("#dataAuthor").val(),
                         dataContent : editor.txt.html(),
+                        releaseOrNot : "y",
                         dataStatus : "1",
                         dataLocation : $("#dataLocation").val(),
                     };
@@ -88,7 +90,6 @@
                         dataTitle : $("#dataTitle").val(),
                         dataSource : $("#dataSource").val(),
                         dataAuthor : $("#dataAuthor").val(),
-                        dataStatus : "1",
                         dataContent : editor.txt.html(),
                         dataLocation : $("#dataLocation").val(),
                     }

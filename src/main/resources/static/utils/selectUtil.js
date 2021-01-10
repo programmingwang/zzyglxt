@@ -44,11 +44,14 @@
         function getRoleTable(role,preUrl,status,webStatus) {
             if(role === "文化宣传科员"){
                 $('#btn_addTask').attr('style',"display:block");
-                return preUrl + "?"+status+"="+webStatus[0].id+"&"+status+"="+webStatus[1].id+"&"+status+"="+webStatus[3].id+"&"+status+"="+webStatus[4].id+"&"+status+"="+webStatus[6].id;
+                // return preUrl + "?"+status+"="+webStatus[0].id+"&"+status+"="+webStatus[1].id+"&"+status+"="+webStatus[3].id+"&"+status+"="+webStatus[4].id+"&"+status+"="+webStatus[6].id;
+                return preUrl + "?"+status+"=1";
             }else if(role === "文化宣传处长"){
-                return preUrl + "?"+status+"="+webStatus[1].id+"&"+status+"="+webStatus[2].id+"&"+status+"="+webStatus[3].id;
+                // return preUrl + "?"+status+"="+webStatus[1].id+"&"+status+"="+webStatus[2].id+"&"+status+"="+webStatus[3].id;
+                return preUrl + "?"+status+"=2";
             }else if(role === "文化宣传综合处处长"){
-                return preUrl + "?"+status+"="+webStatus[2].id+"&"+status+"="+webStatus[5].id;
+                // return preUrl + "?"+status+"="+webStatus[2].id+"&"+status+"="+webStatus[5].id;
+                return preUrl + "?"+status+"=3";
             }else if(role === "政务资源科员"){
                 $('#btn_addTask').attr('style',"display:block");
                 return preUrl + "?"+status+"="+webStatus[0].id+"&"+status+"="+webStatus[1].id+"&"+status+"="+webStatus[2].id+"&"+status+"="+webStatus[3].id+"&"+status+"="+webStatus[4].id+"&"+status+"="+webStatus[5].id+"&"+status+"="+webStatus[6].id+"&"+status+"="+webStatus[7].id;

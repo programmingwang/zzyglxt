@@ -34,7 +34,11 @@
         <result column="itemCreateAt" jdbcType="TIMESTAMP" property="itemcreateat"/>
         <result column="UPDATER" jdbcType="VARCHAR" property="updater"/>
         <result column="itemUpdateAt" jdbcType="TIMESTAMP" property="itemupdateat"/>
-        <collection property="filePath" ofType="java.lang.String"/>
+        <collection property="filePath" ofType="java.lang.String">
+            <constructor>
+                <arg column="FILE_PATH"/>
+            </constructor>
+        </collection>
     </resultMap>
     <sql id="Base_Column_List">
         <!--@mbg.generated-->
@@ -228,15 +232,15 @@
         <!--order by itemUpdateAt desc-->
     <!--</select>-->
 
-    <select id="selectMedMatByORGCode" resultMap="BaseResultMap">
+    <select id="selectMedMatByORGCode" resultMap="BaseResultMapWithFile">
         select
-        <include refid="Base_Column_List"/>
+        <include refid="SelectAll_Column_List"/>
         ,
         cf.FILE_PATH
         from tb_industrial_develop_med_mat mm left join tb_culpro_file cf
         on mm.itemCode = cf.DATA_CODE
-        where ORG_CODE = #{ORGCode,jdbcType=CHAR}
-        order by itemUpdateAt desc
+        where mm.ORG_CODE = #{ORGCode,jdbcType=CHAR}
+        order by mm.itemUpdateAt desc
     </select>
 
     <update id="updateStatusByPrimaryKey" parameterType="com.zyyglxt.dto.StatusDto">

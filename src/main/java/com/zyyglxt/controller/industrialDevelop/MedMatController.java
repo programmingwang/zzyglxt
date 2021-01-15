@@ -66,8 +66,7 @@ public class MedMatController {
     @ResponseBody
     @GetMapping("/selectMedMat")
     public ResponseData selectMedMatByORGCode(){
-        List<IndustrialDevelopMedMat> medMatList = medMatService.selectMedMatByORGCode();
-        return new ResponseData(EmBusinessError.success,DoToDto(medMatList));
+        return new ResponseData(EmBusinessError.success,medMatService.selectMedMatByORGCode());
     }
 
     private List<IndustrialDevelopMedMatDto> DoToDto(List<IndustrialDevelopMedMat> DOList){

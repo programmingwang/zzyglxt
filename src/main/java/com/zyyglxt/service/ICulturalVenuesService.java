@@ -2,6 +2,7 @@ package com.zyyglxt.service;
 
 import com.zyyglxt.dataobject.ChineseCulturalDO;
 import com.zyyglxt.dataobject.ChineseCulturalDOKey;
+import com.zyyglxt.dto.ChineseCulturalDto;
 import com.zyyglxt.error.BusinessException;
 
 import java.util.List;
@@ -17,7 +18,7 @@ public interface ICulturalVenuesService {
     ChineseCulturalDO getCulturalVenues(ChineseCulturalDOKey key);
 
     //查询所有文化场馆
-    List<ChineseCulturalDO> getCulturalVenuesList(List<String> chineseCulturalStatus);
+    List<ChineseCulturalDto> getCulturalVenuesList(String chineseCulturalStatus);
 
     //增加一个文化场馆
     int addCulturalVenues(ChineseCulturalDO record) ;

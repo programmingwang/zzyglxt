@@ -19,10 +19,35 @@
         <result column="UPDATER" jdbcType="VARCHAR" property="updater"/>
         <result column="itemUpdateAt" jdbcType="TIMESTAMP" property="itemupdateat"/>
     </resultMap>
+    <resultMap id="BaseResultMapWithFile" type="com.zyyglxt.dto.industrialDevelop.IndustrialDevelopMedMatDto">
+        <id column="itemID" jdbcType="INTEGER" property="itemid"/>
+        <id column="itemCode" jdbcType="CHAR" property="itemcode"/>
+        <result column="NAME" jdbcType="VARCHAR" property="name"/>
+        <result column="SPECIFICATIONS" jdbcType="VARCHAR" property="specifications"/>
+        <result column="PRICE" jdbcType="VARCHAR" property="price"/>
+        <result column="PLACE" jdbcType="VARCHAR" property="place"/>
+        <result column="CONTACTS" jdbcType="VARCHAR" property="contacts"/>
+        <result column="PHONE" jdbcType="VARCHAR" property="phone"/>
+        <result column="STATUS" jdbcType="VARCHAR" property="status"/>
+        <result column="ORG_CODE" jdbcType="CHAR" property="orgCode"/>
+        <result column="CREATER" jdbcType="VARCHAR" property="creater"/>
+        <result column="itemCreateAt" jdbcType="TIMESTAMP" property="itemcreateat"/>
+        <result column="UPDATER" jdbcType="VARCHAR" property="updater"/>
+        <result column="itemUpdateAt" jdbcType="TIMESTAMP" property="itemupdateat"/>
+        <collection property="filePath" ofType="java.lang.String">
+            <constructor>
+                <arg column="FILE_PATH"/>
+            </constructor>
+        </collection>
+    </resultMap>
     <sql id="Base_Column_List">
         <!--@mbg.generated-->
         itemID, itemCode, `NAME`, SPECIFICATIONS, PRICE, PLACE, CONTACTS, PHONE, `STATUS`,
         ORG_CODE, CREATER, itemCreateAt, UPDATER, itemUpdateAt
+    </sql>
+    <sql id="SelectAll_Column_List">
+        mm.itemID, mm.itemCode, mm.NAME, mm.SPECIFICATIONS, mm.PRICE, mm.PLACE, mm.CONTACTS, mm.PHONE, mm.STATUS,
+        mm.ORG_CODE, mm.CREATER, mm.itemCreateAt, mm.UPDATER, mm.itemUpdateAt
     </sql>
     <select id="selectByPrimaryKey" parameterType="map" resultMap="BaseResultMap">
         <!--@mbg.generated-->
@@ -199,12 +224,23 @@
         where itemCode = #{itemcode,jdbcType=CHAR}
     </update>
 
-    <select id="selectMedMatByORGCode" resultMap="BaseResultMap">
+    <!--<select id="selectMedMatByORGCode" resultMap="BaseResultMap">-->
+        <!--select-->
+        <!--<include refid="Base_Column_List"/>-->
+        <!--from tb_industrial_develop_med_mat-->
+        <!--where ORG_CODE = #{ORGCode,jdbcType=CHAR}-->
+        <!--order by itemUpdateAt desc-->
+    <!--</select>-->
+
+    <select id="selectMedMatByORGCode" resultMap="BaseResultMapWithFile">
         select
-        <include refid="Base_Column_List"/>
-        from tb_industrial_develop_med_mat
-        where ORG_CODE = #{ORGCode,jdbcType=CHAR}
-        order by itemUpdateAt desc
+        <include refid="SelectAll_Column_List"/>
+        ,
+        cf.FILE_PATH
+        from tb_industrial_develop_med_mat mm left join tb_culpro_file cf
+        on mm.itemCode = cf.DATA_CODE
+        where mm.ORG_CODE = #{ORGCode,jdbcType=CHAR}
+        order by mm.itemUpdateAt desc
     </select>
 
     <update id="updateStatusByPrimaryKey" parameterType="com.zyyglxt.dto.StatusDto">

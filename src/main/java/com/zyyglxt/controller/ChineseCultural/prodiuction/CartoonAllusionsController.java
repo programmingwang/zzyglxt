@@ -36,16 +36,8 @@ public class CartoonAllusionsController {
     @RequestMapping(value = "/getAll" , method = RequestMethod.GET)
     @ResponseBody
     @LogAnnotation(logTitle = "查询所有的漫画典故", logLevel = "1")
-    public ResponseData getAllCartoonAllusions(@RequestParam(value = "chineseCulturalStatus")List chineseCulturalStatus){
-        List<ChineseCulturalDO> cartoonAllusionsList = iCartoonAllusionsService.getCartoonAllusionsList(chineseCulturalStatus);
-        List<ChineseCulturalDto> chineseCulturalDtoList = new ArrayList<>();
-        for (ChineseCulturalDO chineseCulturalDO : cartoonAllusionsList) {
-            chineseCulturalDtoList.add(
-                    ConvertDOToDTOUtil.convertFromDOToDTO(
-                            chineseCulturalDO,iFileService.selectFileByDataCode(
-                                    chineseCulturalDO.getItemcode()).getFilePath()));
-        }
-        return new ResponseData(EmBusinessError.success,chineseCulturalDtoList);
+    public ResponseData getAllCartoonAllusions(@RequestParam(value = "chineseCulturalStatus")String chineseCulturalStatus){
+        return new ResponseData(EmBusinessError.success,iCartoonAllusionsService.getCartoonAllusionsList(chineseCulturalStatus));
     }
 
 

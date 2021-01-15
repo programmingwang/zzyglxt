@@ -91,9 +91,13 @@ public class UserServiceImpl implements UserService {
             throw new BusinessException("用户名已存在", EmBusinessError.USER_ACCOUNT_ALREADY_EXIST);
         }
         if (record.getRoleName().equals("市级中医药管理部门")){
+            OrganizationDO organizationDO = organizationDOMapper.selectByOrgName(record.getRoleName());
+            record.setOrgCode(organizationDO.getItemcode());
             record.setRoleName("科研项目-市级");
             record.setType(21);
         } else if (record.getRoleName().equals("科研项目申报单位")){
+            OrganizationDO organizationDO = organizationDOMapper.selectByOrgName(record.getRoleName());
+            record.setOrgCode(organizationDO.getItemcode());
             record.setType(8);
         } else if (record.getRoleName().equals("主研人")){
             record.setType(7);
@@ -167,8 +171,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<UserDO> selectAllUser() {
-        List<UserDO> users = userDOMapper.selectAllUser();
+    public List<UserDO> selectAllUser(String itemcode, String username) {
+        List<UserDO> users = userDOMapper.selectAllUser(itemcode, username);
 
         int[] roletype = new int[4];
         for (int i=0; i<4;i++){

@@ -345,13 +345,13 @@
         ON h.itemCode = f.DATA_CODE
         WHERE
         <if test="status == 3">
-            HOSPITAL_STATUS in (2,5)
+            HOSPITAL_STATUS in (2,4,5)
         </if>
         <if test="status == 2">
-           HOSPITAL_STATUS in (1,2,3)
+            HOSPITAL_STATUS in (1,2,3)
         </if>
         <if test="status == 1">
-           HOSPITAL_STATUS in (0,1,2,3,4,6)
+            HOSPITAL_STATUS in (0,1,2,3,4,5,6,7)
         </if>
         AND (HOSPITAL_NAME LIKE "%"#{value}"%"
         OR HOSPITAL_LEVEL LIKE "%"#{value}"%"
@@ -386,13 +386,13 @@
         ON h.itemCode = f.DATA_CODE
         WHERE
         <if test="status == 3">
-            HOSPITAL_STATUS in (2,5)
+            HOSPITAL_STATUS in (2,4,5)
         </if>
         <if test="status == 2">
             HOSPITAL_STATUS in (1,2,3)
         </if>
         <if test="status == 1">
-            HOSPITAL_STATUS in (0,1,2,3,4,6)
+            HOSPITAL_STATUS in (0,1,2,3,4,5,6,7)
         </if>
         order by h.itemUpdateAt desc
     </select>

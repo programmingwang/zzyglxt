@@ -304,13 +304,13 @@
         ON s.itemCode = f.DATA_CODE
         WHERE
         <if test="status == 3">
-            SPECIALTY_STATUS in (2,5)
+            SPECIALTY_STATUS in (2,4,5)
         </if>
         <if test="status == 2">
             SPECIALTY_STATUS in (1,2,3)
         </if>
         <if test="status == 1">
-            SPECIALTY_STATUS in (0,1,2,3,4,6)
+            SPECIALTY_STATUS in (0,1,2,3,4,5,6,7)
         </if> AND (SPECIALTY_NAME LIKE "%"#{value}"%"
         OR SPECIALTY_INTRODUCE LIKE "%"#{value}"%"
         OR SPECIALTY_ADDRESS_PRO LIKE "%"#{value}"%"
@@ -368,13 +368,13 @@
         ON s.itemCode = f.DATA_CODE
         WHERE
         <if test="status == 3">
-            SPECIALTY_STATUS in (2,5)
+            SPECIALTY_STATUS in (2,4,5)
         </if>
         <if test="status == 2">
             SPECIALTY_STATUS in (1,2,3)
         </if>
         <if test="status == 1">
-            SPECIALTY_STATUS in (0,1,2,3,4,6)
+            SPECIALTY_STATUS in (0,1,2,3,4,5,6,7)
         </if>
         order by s.itemUpdateAt desc
     </select>

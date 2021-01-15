@@ -108,7 +108,7 @@
                 {field: 'price', title: '价格'},
                 {field: 'status', title: '状态', formatter:function (value, row, index) {
                         return medStatus[row.status].text
-                    }},
+                }},
                 {field: 'action',  title: '操作',formatter: operation,events:orgEvents}
             ];
 

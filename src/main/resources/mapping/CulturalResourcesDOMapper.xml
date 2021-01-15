@@ -21,8 +21,12 @@
 
     <result column="CHINESE_CULTURAL_CONTENT" jdbcType="LONGVARCHAR" property="chineseCulturalContent" />
   </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBsAndFile" type="com.zyyglxt.dto.CulturalResourcesDto">
+    <result column="FILE_PATH" jdbcType="VARCHAR" property="filePath"/>
+    <result column="FILE_NAME" jdbcType="VARCHAR" property="fileName"/>
+    <result column="CHINESE_CULTURAL_CONTENT" jdbcType="LONGVARCHAR" property="chineseCulturalContent" />
+  </resultMap>
   <sql id="Base_Column_List">
-
     itemID, itemCode, CHINESE_CULTURAL_NAME, CHINESE_CULTURAL_SOURCE, CHINESE_CULTURAL_AUTHOR, 
     VISIT_NUM, CHINESE_CULTURAL_TYPE, CHINESE_CULTURAL_STATUS, CREATER, itemCreateAt, 
     UPDATER, itemUpdateAt
@@ -30,6 +34,14 @@
   <sql id="Blob_Column_List">
 
     CHINESE_CULTURAL_CONTENT
+  </sql>
+  <sql id="SelectAll_Column_List">
+    cr.itemID, cr.itemCode, cr.CHINESE_CULTURAL_NAME, cr.CHINESE_CULTURAL_SOURCE, cr.CHINESE_CULTURAL_AUTHOR,
+    cr.VISIT_NUM, cr.CHINESE_CULTURAL_TYPE, cr.CHINESE_CULTURAL_STATUS, cr.CREATER, cr.itemCreateAt,
+    cr.UPDATER, cr.itemUpdateAt
+  </sql>
+  <sql id="SelectAllBlob_Column_List">
+    cr.CHINESE_CULTURAL_CONTENT
   </sql>
   <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs">
 
@@ -43,16 +55,38 @@
       and CHINESE_CULTURAL_TYPE = #{chineseCulturalType}
     order by itemUpdateAt desc
   </select>
-  <select id="selectCulturalResourcesList" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+  <!--<select id="selectCulturalResourcesList" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">-->
 
+    <!--select-->
+    <!--<include refid="Base_Column_List" />-->
+    <!--,-->
+    <!--<include refid="Blob_Column_List" />-->
+    <!--from tb_culpro_cultural_resources-->
+    <!--where CHINESE_CULTURAL_TYPE = #{type}-->
+    <!--and CHINESE_CULTURAL_STATUS = #{status}-->
+    <!--order by itemUpdateAt desc-->
+  <!--</select>-->
+  <select id="selectCulturalResourcesList"  resultMap="ResultMapWithBLOBsAndFile">
     select
-    <include refid="Base_Column_List" />
+    <include refid="SelectAll_Column_List" />
     ,
-    <include refid="Blob_Column_List" />
-    from tb_culpro_cultural_resources
+    <include refid="SelectAllBlob_Column_List" />
+    ,
+    cf.FILE_PATH,
+    cf.FILE_NAME
+    from tb_culpro_cultural_resources cr left join tb_culpro_file cf
+    on cr.itemCode = cf.DATA_CODE
     where CHINESE_CULTURAL_TYPE = #{type}
-    and CHINESE_CULTURAL_STATUS = #{status}
-    order by itemUpdateAt desc
+    <if test="status == 3">
+      and CHINESE_CULTURAL_STATUS in (2,5)
+    </if>
+    <if test="status == 2">
+      and CHINESE_CULTURAL_STATUS in (1,2,3)
+    </if>
+    <if test="status == 1">
+      and CHINESE_CULTURAL_STATUS in (0,1,2,3,4,6)
+    </if>
+    order by cr.itemUpdateAt desc
   </select>
   <delete id="deleteByPrimaryKey" parameterType="com.zyyglxt.dataobject.CulturalResourcesDOKey">
 

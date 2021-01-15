@@ -77,7 +77,7 @@ upload:
 #    path: E:/Desktop
 
 fdfs:
-  connect-timeout: 6000
+  connect-timeout: 60000
   so-timeout: 15000
   tracker-list: 39.101.192.246:22122
   http_tracker_http_port: 8080

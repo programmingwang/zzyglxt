@@ -3,6 +3,7 @@ package com.zyyglxt.service.impl;
 import com.zyyglxt.dao.DataDOMapper;
 import com.zyyglxt.dataobject.DataDO;
 import com.zyyglxt.dataobject.DataDOKey;
+import com.zyyglxt.dto.DataDto;
 import com.zyyglxt.error.BusinessException;
 import com.zyyglxt.error.EmBusinessError;
 import com.zyyglxt.service.IDataAnnouncementService;
@@ -43,12 +44,12 @@ public class DataAnnouncementServiceImpl implements IDataAnnouncementService {
     }
 
     @Override
-    public List<DataDO> selectAnnouncementList(List<String> dataStatus) {
-        List<DataDO> dataDOList = new ArrayList<>();
+    public List<DataDto> selectAnnouncementList(List<String> dataStatus) {
+        List<DataDto> dataDtoList = new ArrayList<>();
         for (String status : dataStatus) {
-            dataDOList.addAll(dataDOMapper.selectByAllData("通知公告", status));
+            dataDtoList.addAll(dataDOMapper.selectByAllData("通知公告", status));
         }
-        return dataDOList;
+        return dataDtoList;
     }
 
     @Override

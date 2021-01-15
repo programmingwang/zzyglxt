@@ -71,30 +71,12 @@ public class ExmaineServiceImpl implements IExmaineService {
 
     @Override
     public List<ExmaineDto> selectAll() {
-        List<IndustrialDevelopExpertRefDO> industrialDevelopExpertRefDOS = expertRefDOMapper.selectAll();
-        List<ExmaineDto> exmaineDtos = new ArrayList<>();
-        for (IndustrialDevelopExpertRefDO industrialDevelopExpertRefDO : industrialDevelopExpertRefDOS) {
-            ExmaineDto exmaineDto = new ExmaineDto();
-            BeanUtils.copyProperties(industrialDevelopExpertRefDO,exmaineDto);
-            IndustrialDevelopTopicDO topic = developTopicService.getTopic(industrialDevelopExpertRefDO.getTopicCode());
-            BeanUtils.copyProperties(topic,exmaineDto);
-            exmaineDtos.add(exmaineDto);
-        }
-        return exmaineDtos;
+        return expertRefDOMapper.selectAll();
     }
 
     @Override
     public List<ExmaineDto> selectByExpertCode(String expertCode) {
-        List<IndustrialDevelopExpertRefDO> industrialDevelopExpertRefDOS = expertRefDOMapper.selectByExpertCode(expertCode);
-        List<ExmaineDto> exmaineDtos = new ArrayList<>();
-        for (IndustrialDevelopExpertRefDO industrialDevelopExpertRefDO : industrialDevelopExpertRefDOS) {
-            ExmaineDto exmaineDto = new ExmaineDto();
-            BeanUtils.copyProperties(industrialDevelopExpertRefDO,exmaineDto);
-            IndustrialDevelopTopicDO topic = developTopicService.getTopic(industrialDevelopExpertRefDO.getTopicCode());
-            BeanUtils.copyProperties(topic,exmaineDto);
-            exmaineDtos.add(exmaineDto);
-        }
-        return exmaineDtos;
+        return expertRefDOMapper.selectByExpertCode(expertCode);
     }
 
     @Override

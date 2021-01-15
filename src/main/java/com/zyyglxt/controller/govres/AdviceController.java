@@ -45,8 +45,8 @@ public class AdviceController {
     @RequestMapping(value = "/updAdvice", method = RequestMethod.POST)
     @ResponseBody
     @LogAnnotation(appCode ="",logTitle ="修改意见",logLevel ="2",creater ="",updater = "")
-    public ResponseData updAdvice(@RequestBody String dataCode) {
-        adviceService.updAdvice(dataCode);
+    public ResponseData updAdvice(@RequestBody adviceDO advice) {
+        adviceService.updAdvice(advice);
         return new ResponseData(EmBusinessError.success);
     }
 

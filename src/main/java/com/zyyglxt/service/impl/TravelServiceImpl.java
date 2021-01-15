@@ -3,6 +3,7 @@ package com.zyyglxt.service.impl;
 import com.zyyglxt.dao.ChineseCulturalDOMapper;
 import com.zyyglxt.dataobject.ChineseCulturalDO;
 import com.zyyglxt.dataobject.ChineseCulturalDOKey;
+import com.zyyglxt.dto.ChineseCulturalDto;
 import com.zyyglxt.dto.UserSessionDto;
 import com.zyyglxt.error.BusinessException;
 import com.zyyglxt.error.EmBusinessError;
@@ -45,12 +46,12 @@ public class TravelServiceImpl implements ITravelService {
     }
 
     @Override
-    public List<ChineseCulturalDO> getTravelList(List<String> chineseCulturalStatus) {
-        List<ChineseCulturalDO> chineseCulturalDOList = new ArrayList<>();
+    public List<ChineseCulturalDto> getTravelList(List<String> chineseCulturalStatus) {
+        List<ChineseCulturalDto> chineseCulturalDtOList = new ArrayList<>();
         for (String culturalStatus : chineseCulturalStatus) {
-            chineseCulturalDOList.addAll(chineseCulturalDOMapper.selectChineseCulturalList("健康旅游", culturalStatus));
+            chineseCulturalDtOList.addAll(chineseCulturalDOMapper.selectChineseCulturalList("健康旅游", culturalStatus));
         }
-        return chineseCulturalDOList;
+        return chineseCulturalDtOList;
     }
 
     @Override

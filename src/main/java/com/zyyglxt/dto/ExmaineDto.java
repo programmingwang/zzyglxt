@@ -23,34 +23,15 @@ import java.util.Date;
 @Accessors(chain = true)
 public class ExmaineDto extends IndustrialDevelopExpertRefDO {
     private String projectNo;
-
     private String projectName;
-
-
     private String disciplineCode;
-
-
     private String disciplineName;
-
-
     private String applicant;
-
-
     private String company;
-
-
     private String postalAddress;
-
-
     private String postalCode;
-
-
     private String contactCode;
-
-
     private String email;
-
-
     private Date applicationDate;
     private String filePath;
     private String fileName;

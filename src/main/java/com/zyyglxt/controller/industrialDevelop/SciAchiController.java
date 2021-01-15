@@ -82,16 +82,7 @@ public class SciAchiController {
 
     @RequestMapping(value = "/achievement/{orgCode}", method = RequestMethod.GET)
     public ResponseData getAchievement(@PathVariable String orgCode) {
-        List<IndustrialDevelopSciAchiDO> achievement = sciAchiService.getAchievement(orgCode);
-        List<IndustrialDevelopSciAchiDODto> industrialDevelopSciAchiDODtoList = new ArrayList<>();
-
-        for (IndustrialDevelopSciAchiDO industrialDevelopSciAchiDO : achievement) {
-            FileDO fileDO = iFileService.selectFileByDataCode(industrialDevelopSciAchiDO.getItemcode());
-            industrialDevelopSciAchiDODtoList.add(
-                    ConvertDOToDTOUtil.convertFromDOToDTO(industrialDevelopSciAchiDO, fileDO.getFilePath(),
-                                        fileDO.getFileName()));
-        }
-        return new ResponseData(EmBusinessError.success,industrialDevelopSciAchiDODtoList);
+        return new ResponseData(EmBusinessError.success,sciAchiService.getAchievement(orgCode));
     }
 }
 

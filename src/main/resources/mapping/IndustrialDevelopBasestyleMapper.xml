@@ -14,9 +14,24 @@
     <result column="UPDATER" jdbcType="VARCHAR" property="updater" />
     <result column="itemUpdateAt" jdbcType="TIMESTAMP" property="itemupdateat" />
   </resultMap>
+  <resultMap id="BaseResultMapWithFiles" type="com.zyyglxt.dto.industrialDevelop.IndustrialDevelopBasestyleDto">
+    <id column="itemID" jdbcType="INTEGER" property="itemid" />
+    <id column="itemCode" jdbcType="CHAR" property="itemcode" />
+    <result column="FILE_CODE" jdbcType="CHAR" property="fileCode" />
+    <result column="ORG_CODE" jdbcType="CHAR" property="orgCode" />
+    <result column="STATUS" jdbcType="VARCHAR" property="status" />
+    <result column="CREATER" jdbcType="VARCHAR" property="creater" />
+    <result column="itemCreateAt" jdbcType="TIMESTAMP" property="itemcreateat" />
+    <result column="UPDATER" jdbcType="VARCHAR" property="updater" />
+    <result column="itemUpdateAt" jdbcType="TIMESTAMP" property="itemupdateat" />
+    <result column="FILE_PATH" jdbcType="VARCHAR" property="filePath"/>
+  </resultMap>
+  <sql id="SelectAll_Column_List">
+    b.itemID, b.itemCode, b.FILE_CODE, b.ORG_CODE, b.STATUS, b.CREATER, b.itemCreateAt, b.UPDATER,
+    b.itemUpdateAt
+  </sql>
   <sql id="Base_Column_List">
-    <!--@mbg.generated-->
-    itemID, itemCode, FILE_CODE, ORG_CODE, `STATUS`, CREATER, itemCreateAt, UPDATER, 
+    itemID, itemCode, FILE_CODE, ORG_CODE, STATUS, CREATER, itemCreateAt, UPDATER,
     itemUpdateAt
   </sql>
   <select id="selectByPrimaryKey" parameterType="map" resultMap="BaseResultMap">
@@ -129,7 +144,6 @@
       and itemCode = #{itemcode,jdbcType=CHAR}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.zyyglxt.dataobject.IndustrialDevelopBasestyle">
-    <!--@mbg.generated-->
     update tb_industrial_develop_basestyle
     set FILE_CODE = #{fileCode,jdbcType=CHAR},
       ORG_CODE = #{orgCode,jdbcType=CHAR},
@@ -141,8 +155,13 @@
     where itemID = #{itemid,jdbcType=INTEGER}
       and itemCode = #{itemcode,jdbcType=CHAR}
   </update>
-    <select id="selectAll" resultMap="BaseResultMap">
-      select * from tb_industrial_develop_basestyle
-      order by itemUpdateAt desc
-    </select>
+  <select id="selectAll" resultMap="BaseResultMapWithFiles">
+    select
+    <include refid="SelectAll_Column_List"/>
+    ,
+    f.FILE_PATH
+    from tb_industrial_develop_basestyle b
+    left join tb_culpro_file f on f.DATA_CODE = b.itemCode
+    order by itemUpdateAt desc
+   </select>
 </mapper>

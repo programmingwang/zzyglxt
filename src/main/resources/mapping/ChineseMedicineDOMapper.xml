@@ -340,7 +340,7 @@
             CHINESE_MEDICINE_STATUS in (2,4,5)
         </if>
         <if test="status == 2">
-            CHINESE_MEDICINE_STATUS in (1,2,3)
+            CHINESE_MEDICINE_STATUS in (1,2,3,5)
         </if>
         <if test="status == 1">
             CHINESE_MEDICINE_STATUS in (0,1,2,3,4,5,6,7)
@@ -394,7 +394,7 @@
             CHINESE_MEDICINE_STATUS in (2,4,5)
         </if>
         <if test="status == 2">
-            CHINESE_MEDICINE_STATUS in (1,2,3)
+            CHINESE_MEDICINE_STATUS in (1,2,3,5)
         </if>
         <if test="status == 1">
             CHINESE_MEDICINE_STATUS in (0,1,2,3,4,5,6,7)

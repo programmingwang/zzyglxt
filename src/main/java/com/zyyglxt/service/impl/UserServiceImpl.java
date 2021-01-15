@@ -95,6 +95,8 @@ public class UserServiceImpl implements UserService {
             record.setType(21);
         } else if (record.getRoleName().equals("科研项目申报单位")){
             record.setType(8);
+        } else if (record.getRoleName().equals("主研人")){
+            record.setType(7);
         }
         //添加用户
         record.setUpdater(usernameUtil.getOperateUser());
@@ -168,19 +170,16 @@ public class UserServiceImpl implements UserService {
     public List<UserDO> selectAllUser() {
         List<UserDO> users = userDOMapper.selectAllUser();
 
-        System.out.println("66666666666666666666: "+users.size());
-
-        int zyr = roleDOMapper.selectByRoleName("主研人").getRoleType();
-        int sbdw = roleDOMapper.selectByRoleName("科研项目申报单位").getRoleType();
-        int kysj = roleDOMapper.selectByRoleName("科研项目-市级").getRoleType();
-        int zj = roleDOMapper.selectByRoleName("专家").getRoleType();
+        int[] roletype = new int[4];
+        for (int i=0; i<4;i++){
+            roletype[i] = roleDOMapper.selectRoleType().get(i).getRoleType();
+        }
 
         List<UserDO> userDOList = new ArrayList<UserDO>();
-        for (int i = 0; i < users.size(); i++) {
-            int roleytpe = users.get(i).getType();
-            if (zyr == roleytpe || sbdw == roleytpe || kysj == roleytpe || zj == roleytpe) {
-
-                userDOList.add(users.get(i));
+        for (UserDO user : users) {
+            int type = user.getType();
+            if (roletype[0] == type || roletype[1] == type || roletype[2] == type || roletype[3] == type) {
+                userDOList.add(user);
             }
         }
 

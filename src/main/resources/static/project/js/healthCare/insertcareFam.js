@@ -33,6 +33,7 @@
                         name : $("#name").val(),
                         source : $("#source").val(),
                         author : $("#author").val(),
+                        status : '0',
                         content : editor.txt.html()
                     }
                     operateMessage = "更新国医话健康成功";

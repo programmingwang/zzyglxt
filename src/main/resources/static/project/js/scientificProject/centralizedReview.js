@@ -55,7 +55,7 @@
                 'click .exmaine' : function (e, value, row, index) {
                     localStorage.removeItem("isView");
                     localStorage.removeItem("viewDetail");
-                    localStorage.setItem("examinTopicCode",JSON.stringify(row.itemcode));
+                    localStorage.setItem("examinTopicCode",JSON.stringify(row.topicCode));
                     orange.redirect("/evaluationTable/evaluationTable")
                 },
                 'click .submit' : function (e, value, row, index) {
@@ -67,7 +67,7 @@
                             var isSuccess = false;
                             var submitStatus = {
                                 exmaineStatus: pl[0].id,
-                                topicCode : row.itemcode,
+                                topicCode : row.topicCode,
                             };
                             var checkExpertCodeParam = {
                                 expertUserCode : sessionStorage.getItem("itemcode")

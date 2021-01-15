@@ -1,178 +1,412 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.zyyglxt.dao.AuditMapper">
-    <sql id="chimed">
+    <resultMap id="ChiMedAuditResultMap" type="com.zyyglxt.dto.industrialDevelop.AuditDto">
+        <!--@mbg.generated-->
+        <!--@Table tb_industrial_develop_chi_med-->
+        <id column="itemID" jdbcType="INTEGER" property="itemid"/>
+        <id column="itemCode" jdbcType="CHAR" property="itemcode"/>
+        <result column="NAME" jdbcType="VARCHAR" property="name"/>
+        <result column="ADDRESS_CITY" jdbcType="VARCHAR" property="addressCity"/>
+        <result column="STATUS" jdbcType="VARCHAR" property="status"/>
+        <result column="REASON" jdbcType="VARCHAR" property="reason"/>
+        <result column="ORG_CODE" jdbcType="CHAR" property="orgCode"/>
+        <result column="TYPE" jdbcType="VARCHAR" property="type"/>
+        <result column="itemCreateAt" jdbcType="TIMESTAMP" property="itemcreateat"/>
+        <result column="UPDATER" jdbcType="VARCHAR" property="updater"/>
+    </resultMap>
+    <resultMap id="TecSerOrgAuditResultMap" type="com.zyyglxt.dto.industrialDevelop.AuditDto">
+        <!--@mbg.generated-->
+        <!--@Table tb_industrial_develop_tec_ser_org-->
+        <id column="itemID" jdbcType="INTEGER" property="itemid"/>
+        <id column="itemCode" jdbcType="CHAR" property="itemcode"/>
+        <result column="NAME" jdbcType="VARCHAR" property="name"/>
+        <result column="ADDRESS_CITY" jdbcType="VARCHAR" property="addressCity" />
+        <result column="STATUS" jdbcType="VARCHAR" property="status"/>
+        <result column="REASON" jdbcType="VARCHAR" property="reason"/>
+        <result column="ORG_CODE" jdbcType="CHAR" property="orgCode"/>
+        <result column="TYPE" jdbcType="VARCHAR" property="type"/>
+        <result column="itemCreateAt" jdbcType="TIMESTAMP" property="itemcreateat"/>
+        <result column="UPDATER" jdbcType="VARCHAR" property="updater"/>
+    </resultMap>
+
+    <resultMap id="SchoolAuditResultMap" type="com.zyyglxt.dto.industrialDevelop.AuditDto">
+        <!--@mbg.generated-->
+        <!--@Table tb_industrial_develop_school-->
+        <id column="itemID" jdbcType="INTEGER" property="itemid"/>
+        <id column="itemCode" jdbcType="CHAR" property="itemcode"/>
+        <result column="SCHOOL_NAME" jdbcType="VARCHAR" property="name"/>
+        <result column="ADDRESS_CITY" jdbcType="VARCHAR" property="addressCity"/>
+        <result column="STATUS" jdbcType="VARCHAR" property="status"/>
+        <result column="itemCreateAt" jdbcType="TIMESTAMP" property="itemcreateat"/>
+        <result column="UPDATER" jdbcType="VARCHAR" property="updater"/>
+        <result column="ORG_CODE" jdbcType="VARCHAR" property="orgCode"/>
+    </resultMap>
+
+    <resultMap id="HospitalAuditResultMap" type="com.zyyglxt.dto.industrialDevelop.AuditDto">
+        <id column="itemID" jdbcType="INTEGER" property="itemid"/>
+        <id column="itemCode" jdbcType="CHAR" property="itemcode"/>
+        <result column="HOSPITAL_NAME" jdbcType="VARCHAR" property="name"/>
+        <result column="HOSPITAL_ADDRESS_CITY" jdbcType="VARCHAR" property="addressCity"/>
+        <result column="REASON" jdbcType="VARCHAR" property="reason"/>
+        <result column="HOSPITAL_STATUS" jdbcType="VARCHAR" property="status"/>
+        <result column="itemCreateAt" jdbcType="TIMESTAMP" property="itemcreateat"/>
+        <result column="UPDATER" jdbcType="VARCHAR" property="updater"/>
+        <result column="ORG_CODE" jdbcType="VARCHAR" property="orgCode"/>
+    </resultMap>
+    <resultMap id="ChiMedResultMap" type="com.zyyglxt.dto.industrialDevelop.IndustrialDevelopChiMedDto">
+        <!--@mbg.generated-->
+        <!--@Table tb_industrial_develop_chi_med-->
+        <id column="itemID" jdbcType="INTEGER" property="itemid"/>
+        <id column="itemCode" jdbcType="CHAR" property="itemcode"/>
+        <result column="NAME" jdbcType="VARCHAR" property="name"/>
+        <result column="AREA_COVERD" jdbcType="VARCHAR" property="areaCoverd"/>
+        <result column="SALES_CATEGORY" jdbcType="VARCHAR" property="salesCategory"/>
+        <result column="PROCESSING_TYPE" jdbcType="VARCHAR" property="processingType"/>
+        <result column="PEODUCE_TYPE" jdbcType="VARCHAR" property="peoduceType"/>
+        <result column="PLANT_TYPE" jdbcType="VARCHAR" property="plantType"/>
+        <result column="PEODUCE_DRUG" jdbcType="VARCHAR" property="peoduceDrug"/>
+        <result column="SELLING_DRUGS" jdbcType="VARCHAR" property="sellingDrugs"/>
+        <result column="CONTACTS" jdbcType="VARCHAR" property="contacts"/>
+        <result column="PHONE" jdbcType="VARCHAR" property="phone"/>
+        <result column="ADDRESS_PRO" jdbcType="VARCHAR" property="addressPro"/>
+        <result column="ADDRESS_CITY" jdbcType="VARCHAR" property="addressCity"/>
+        <result column="ADDRESS_COUNTRY" jdbcType="VARCHAR" property="addressCountry"/>
+        <result column="ADDRESS" jdbcType="VARCHAR" property="address"/>
+        <result column="INTRUDUCE" jdbcType="LONGVARCHAR" property="intruduce"/>
+        <result column="STATUS" jdbcType="VARCHAR" property="status"/>
+        <result column="REASON" jdbcType="VARCHAR" property="reason"/>
+        <result column="ORG_CODE" jdbcType="CHAR" property="orgCode"/>
+        <result column="TYPE" jdbcType="VARCHAR" property="type"/>
+        <result column="CREATER" jdbcType="VARCHAR" property="creater"/>
+        <result column="itemCreateAt" jdbcType="TIMESTAMP" property="itemcreateat"/>
+        <result column="UPDATER" jdbcType="VARCHAR" property="updater"/>
+        <result column="itemUpdateAt" jdbcType="TIMESTAMP" property="itemupdateat"/>
+        <collection property="filePath" ofType="java.lang.String">
+            <constructor>
+                <arg column="FILE_PATH"/>
+            </constructor>
+        </collection>
+    </resultMap>
+
+    <resultMap id="TecSerOrgResultMap" type="com.zyyglxt.dto.industrialDevelop.IndustrialDevelopTecSerOrgDto">
+        <!--@mbg.generated-->
+        <!--@Table tb_industrial_develop_tec_ser_org-->
+        <id column="itemID" jdbcType="INTEGER" property="itemid"/>
+        <id column="itemCode" jdbcType="CHAR" property="itemcode"/>
+        <result column="NAME" jdbcType="VARCHAR" property="name"/>
+        <result column="AREA_COVERD" jdbcType="VARCHAR" property="areaCoverd"/>
+        <result column="SPECIAL_SERVICE" jdbcType="VARCHAR" property="specialService"/>
+        <result column="PROJECT_NAME" jdbcType="VARCHAR" property="projectName"/>
+        <result column="CONTACTS" jdbcType="VARCHAR" property="contacts"/>
+        <result column="PHONE" jdbcType="VARCHAR" property="phone"/>
+        <result column="ADDRESS_PRO" jdbcType="VARCHAR" property="addressPro"/>
+        <result column="ADDRESS_CITY" jdbcType="VARCHAR" property="addressCity"/>
+        <result column="ADDRESS_COUNTRY" jdbcType="VARCHAR" property="addressCountry"/>
+        <result column="ADDRESS" jdbcType="VARCHAR" property="address"/>
+        <result column="INTRUDUCE" jdbcType="LONGVARCHAR" property="intruduce"/>
+        <result column="STATUS" jdbcType="VARCHAR" property="status"/>
+        <result column="REASON" jdbcType="VARCHAR" property="reason"/>
+        <result column="ORG_CODE" jdbcType="CHAR" property="orgCode"/>
+        <result column="TYPE" jdbcType="VARCHAR" property="type"/>
+        <result column="CREATER" jdbcType="VARCHAR" property="creater"/>
+        <result column="itemCreateAt" jdbcType="TIMESTAMP" property="itemcreateat"/>
+        <result column="UPDATER" jdbcType="VARCHAR" property="updater"/>
+        <result column="itemUpdateAt" jdbcType="TIMESTAMP" property="itemupdateat"/>
+        <result column="ONLINE_ADDRESS" jdbcType="VARCHAR" property="onlineAddress"/>
+        <collection property="filePath" ofType="java.lang.String">
+            <constructor>
+                <arg column="FILE_PATH"/>
+            </constructor>
+        </collection>
+    </resultMap>
+
+    <resultMap id="SchoolResultMap" type="com.zyyglxt.dto.industrialDevelop.IndustrialDevelopSchoolDto">
+        <!--@mbg.generated-->
+        <!--@Table tb_industrial_develop_school-->
+        <id column="itemID" jdbcType="INTEGER" property="itemid"/>
+        <id column="itemCode" jdbcType="CHAR" property="itemcode"/>
+        <result column="SCHOOL_NAME" jdbcType="VARCHAR" property="schoolName"/>
+        <result column="SCHOOL_INTRODUCE" jdbcType="VARCHAR" property="schoolIntroduce"/>
+        <result column="SECONDARY_COLLEGE" jdbcType="LONGVARCHAR" property="secondaryCollege"/>
+        <result column="ENROLLMENT_MAJOR" jdbcType="LONGVARCHAR" property="enrollmentMajor"/>
+        <result column="GRADUATE_ENROLLMENT_MAJOR" jdbcType="LONGVARCHAR" property="graduateEnrollmentMajor"/>
+        <result column="PHONE" jdbcType="VARCHAR" property="phone"/>
+        <result column="ONLINE_ADDRESS" jdbcType="VARCHAR" property="onlineAddress"/>
+        <result column="SCHOOL_TEXT" jdbcType="LONGVARCHAR" property="schoolText"/>
+        <result column="ADDRESS_PRO" jdbcType="VARCHAR" property="addressPro"/>
+        <result column="ADDRESS_CITY" jdbcType="VARCHAR" property="addressCity"/>
+        <result column="ADDRESS_COUNTRY" jdbcType="VARCHAR" property="addressCountry"/>
+        <result column="ADDRESS" jdbcType="VARCHAR" property="address"/>
+        <result column="STATUS" jdbcType="VARCHAR" property="status"/>
+        <result column="CREATER" jdbcType="VARCHAR" property="creater"/>
+        <result column="itemCreateAt" jdbcType="TIMESTAMP" property="itemcreateat"/>
+        <result column="UPDATER" jdbcType="VARCHAR" property="updater"/>
+        <result column="itemUpdateAt" jdbcType="TIMESTAMP" property="itemupdateat"/>
+        <result column="ORG_CODE" jdbcType="VARCHAR" property="orgCode"/>
+        <collection property="filePath" ofType="java.lang.String">
+            <constructor>
+                <arg column="FILE_PATH"/>
+            </constructor>
+        </collection>
+    </resultMap>
+
+    <resultMap id="HospitalResultMap" type="com.zyyglxt.dto.HospDto">
+        <id column="itemID" jdbcType="INTEGER" property="itemid"/>
+        <id column="itemCode" jdbcType="CHAR" property="itemcode"/>
+        <result column="HOSPITAL_NAME" jdbcType="VARCHAR" property="hospitalName"/>
+        <result column="HOSPITAL_LEVEL" jdbcType="VARCHAR" property="hospitalLevel"/>
+        <result column="HOSPITAL_BRIEF_INTRODUCE" jdbcType="VARCHAR" property="hospitalBriefIntroduce"/>
+        <result column="HOSPITAL_KEY_SPECIALTY" jdbcType="VARCHAR" property="hospitalKeySpecialty"/>
+        <result column="HOSPITAL_TELEPHONE" jdbcType="VARCHAR" property="hospitalTelephone"/>
+        <result column="HOSPITAL_ADDRESS_PRO" jdbcType="VARCHAR" property="hospitalAddressPro"/>
+        <result column="HOSPITAL_ADDRESS_CITY" jdbcType="VARCHAR" property="hospitalAddressCity"/>
+        <result column="HOSPITAL_ADDRESS_COUNTRY" jdbcType="VARCHAR" property="hospitalAddressCountry"/>
+        <result column="HOSPITAL_ADDRESS" jdbcType="VARCHAR" property="hospitalAddress"/>
+        <result column="HOSPITAL_LINK" jdbcType="VARCHAR" property="hospitalLink"/>
+        <result column="REASON" jdbcType="VARCHAR" property="reason"/>
+        <result column="HOSPITAL_STATUS" jdbcType="VARCHAR" property="hospitalStatus"/>
+        <result column="CREATER" jdbcType="VARCHAR" property="creater"/>
+        <result column="itemCreateAt" jdbcType="TIMESTAMP" property="itemcreateat"/>
+        <result column="UPDATER" jdbcType="VARCHAR" property="updater"/>
+        <result column="itemUpdateAt" jdbcType="TIMESTAMP" property="itemupdateat"/>
+        <result column="ORG_CODE" jdbcType="VARCHAR" property="orgCode"/>
+        <collection property="filePath" ofType="java.lang.String">
+            <constructor>
+                <arg column="FILE_PATH"/>
+            </constructor>
+        </collection>
+    </resultMap>
+
+    <sql id="primary">
         itemID,
-        itemCode,
+        itemCode
+    </sql>
+    <sql id="chimed_all">
         NAME,
-        AREA_COVERD,
-        SALES_CATEGORY,
-        PROCESSING_TYPE,
-        PEODUCE_TYPE,
-        PLANT_TYPE,
-        PEODUCE_DRUG,
-        SELLING_DRUGS,
-        CONTACTS,
-        PHONE,
-        ADDRESS_PRO,
         ADDRESS_CITY,
-        ADDRESS_COUNTRY,
-        ADDRESS,
-        INTRUDUCE,
         STATUS,
         REASON,
         ORG_CODE,
         TYPE,
-        CREATER,
         itemCreateAt,
-        UPDATER,
-        itemUpdateAt
+        UPDATER
     </sql>
-    <sql id="tecorg">
-        itemID,
-        itemCode,
+    <sql id="tecorg_all">
         NAME,
-        AREA_COVERD,
-        SPECIAL_SERVICE,
-        PROJECT_NAME,
-        CONTACTS,
-        PHONE,
-        ADDRESS_PRO,
         ADDRESS_CITY,
-        ADDRESS_COUNTRY,
-        ADDRESS,
-        ONLINE_ADDRESS,
-        INTRUDUCE,
         STATUS,
         REASON,
         ORG_CODE,
         TYPE,
-        CREATER,
         itemCreateAt,
-        UPDATER,
-        itemUpdateAt
+        UPDATER
     </sql>
-    <sql id="school">
-        itemID,
-        itemCode,
+    <sql id="school_all">
         SCHOOL_NAME,
-        SCHOOL_INTRODUCE,
-        SECONDARY_COLLEGE,
-        ENROLLMENT_MAJOR,
-        GRADUATE_ENROLLMENT_MAJOR,
-        PHONE,
-        ONLINE_ADDRESS,
-        SCHOOL_TEXT,
-        ADDRESS_PRO,
         ADDRESS_CITY,
-        ADDRESS_COUNTRY,
-        ADDRESS,
-        ORG_CODE,
         STATUS,
-        CREATER,
+        ORG_CODE,
         itemCreateAt,
-        UPDATER,
-        itemUpdateAt
-    </sql>
-    <sql id="hospital">
-        itemID,
-        itemCode,
-        HOSPITAL_NAME,
-        HOSPITAL_LEVEL,
-        HOSPITAL_BRIEF_INTRODUCE,
-        HOSPITAL_KEY_SPECIALTY,
-        HOSPITAL_INTRODUCE,
-        HOSPITAL_TELEPHONE,
-        HOSPITAL_ADDRESS_PRO,
-        HOSPITAL_ADDRESS_CITY,
-        HOSPITAL_ADDRESS_COUNTRY,
-        HOSPITAL_ADDRESS,
-        HOSPITAL_LINK,
-        REASON,
-        HOSPITAL_STATUS,
-        CREATER,
-        itemCreateAt,
-        UPDATER,
-        itemUpdateAt,
-        ORG_CODE
+        UPDATER
     </sql>
 
-    <select id="getAllChiMed" resultMap="com.zyyglxt.dao.IndustrialDevelopChiMedMapper.BaseResultMap">
+        <sql id="hospital_all">
+        HOSPITAL_NAME,
+        HOSPITAL_ADDRESS_CITY,
+        HOSPITAL_STATUS,
+        REASON,
+        ORG_CODE,
+        itemCreateAt,
+        UPDATER
+    </sql>
+
+    <sql id="chimed">
+        cm.itemID,
+        cm.itemCode,
+        cm.NAME,
+        cm.AREA_COVERD,
+        cm.SALES_CATEGORY,
+        cm.PROCESSING_TYPE,
+        cm.PEODUCE_TYPE,
+        cm.PLANT_TYPE,
+        cm.PEODUCE_DRUG,
+        cm.SELLING_DRUGS,
+        cm.CONTACTS,
+        cm.PHONE,
+        cm.ADDRESS_PRO,
+        cm.ADDRESS_CITY,
+        cm.ADDRESS_COUNTRY,
+        cm.ADDRESS,
+        cm.INTRUDUCE,
+        cm.STATUS,
+        cm.REASON,
+        cm.ORG_CODE,
+        cm.TYPE,
+        cm.CREATER,
+        cm.itemCreateAt,
+        cm.UPDATER,
+        cm.itemUpdateAt
+    </sql>
+    <sql id="tecorg">
+        tecorg.itemID,
+        tecorg.itemCode,
+        tecorg.NAME,
+        tecorg.AREA_COVERD,
+        tecorg.SPECIAL_SERVICE,
+        tecorg.PROJECT_NAME,
+        tecorg.CONTACTS,
+        tecorg.PHONE,
+        tecorg.ADDRESS_PRO,
+        tecorg.ADDRESS_CITY,
+        tecorg.ADDRESS_COUNTRY,
+        tecorg.ADDRESS,
+        tecorg.ONLINE_ADDRESS,
+        tecorg.INTRUDUCE,
+        tecorg.STATUS,
+        tecorg.REASON,
+        tecorg.ORG_CODE,
+        tecorg.TYPE,
+        tecorg.CREATER,
+        tecorg.itemCreateAt,
+        tecorg.UPDATER,
+        tecorg.itemUpdateAt
+    </sql>
+    <sql id="school">
+        school.itemID,
+        school.itemCode,
+        school.SCHOOL_NAME,
+        school.SCHOOL_INTRODUCE,
+        school.SECONDARY_COLLEGE,
+        school.ENROLLMENT_MAJOR,
+        school.GRADUATE_ENROLLMENT_MAJOR,
+        school.PHONE,
+        school.ONLINE_ADDRESS,
+        school.SCHOOL_TEXT,
+        school.ADDRESS_PRO,
+        school.ADDRESS_CITY,
+        school.ADDRESS_COUNTRY,
+        school.ADDRESS,
+        school.ORG_CODE,
+        school.STATUS,
+        school.CREATER,
+        school.itemCreateAt,
+        school.UPDATER,
+        school.itemUpdateAt
+    </sql>
+    <sql id="hospital">
+        hospital.itemID,
+        hospital.itemCode,
+        hospital.HOSPITAL_NAME,
+        hospital.HOSPITAL_LEVEL,
+        hospital.HOSPITAL_BRIEF_INTRODUCE,
+        hospital.HOSPITAL_KEY_SPECIALTY,
+        hospital.HOSPITAL_INTRODUCE,
+        hospital.HOSPITAL_TELEPHONE,
+        hospital.HOSPITAL_ADDRESS_PRO,
+        hospital.HOSPITAL_ADDRESS_CITY,
+        hospital.HOSPITAL_ADDRESS_COUNTRY,
+        hospital.HOSPITAL_ADDRESS,
+        hospital.HOSPITAL_LINK,
+        hospital.REASON,
+        hospital.HOSPITAL_STATUS,
+        hospital.CREATER,
+        hospital.itemCreateAt,
+        hospital.UPDATER,
+        hospital.itemUpdateAt,
+        hospital.ORG_CODE
+    </sql>
+
+    <select id="getAllChiMed" resultMap="ChiMedAuditResultMap">
         select
-        <include refid="chimed"/>
+        <include refid="primary" />,
+        <include refid="chimed_all"/>
         from tb_industrial_develop_chi_med
         order by itemUpdateAt desc
     </select>
-    <select id="getAllTecOrg" resultMap="com.zyyglxt.dao.IndustrialDevelopTecSerOrgMapper.BaseResultMap">
+    <select id="getAllTecOrg" resultMap="TecSerOrgAuditResultMap">
         select
-        <include refid="tecorg"/>
+        <include refid="primary" />,
+        <include refid="tecorg_all"/>
         from tb_industrial_develop_tec_ser_org
         order by itemUpdateAt desc
     </select>
-    <select id="getAllSchool" resultMap="com.zyyglxt.dao.IndustrialDevelopSchoolMapper.BaseResultMap">
+    <select id="getAllSchool" resultMap="SchoolAuditResultMap">
         select
-        <include refid="school"/>
+        <include refid="primary" />,
+        <include refid="school_all"/>
         from tb_industrial_develop_school
         order by itemUpdateAt desc
     </select>
-    <select id="getAllHospital" resultMap="com.zyyglxt.dao.HospDOMapper.BaseResultMap">
+    <select id="getAllHospital" resultMap="HospitalAuditResultMap">
         select
-        <include refid="hospital"/>
-        from tb_culpro_hosp
+        <include refid="primary" />,
+        <include refid="hospital_all"/>
+        from tb_culpro_hosp hospital
         where ORG_CODE != 0
         order by itemUpdateAt desc
     </select>
-    <select id="getAllChiMedByType" resultMap="com.zyyglxt.dao.IndustrialDevelopChiMedMapper.BaseResultMap">
+    <select id="getAllChiMedByType" resultMap="ChiMedAuditResultMap">
         select
-        <include refid="chimed"/>
+        <include refid="primary" />,
+        <include refid="chimed_all"/>
         from tb_industrial_develop_chi_med
         where TYPE = #{type}
         order by itemUpdateAt desc
     </select>
-    <select id="getAllTecOrgByType" resultMap="com.zyyglxt.dao.IndustrialDevelopTecSerOrgMapper.BaseResultMap">
+    <select id="getAllTecOrgByType" resultMap="TecSerOrgAuditResultMap">
         select
-        <include refid="tecorg"/>
+        <include refid="primary" />,
+        <include refid="tecorg_all"/>
         from tb_industrial_develop_tec_ser_org
         where TYPE = #{type}
         order by itemUpdateAt desc
     </select>
-    <select id="getDetailChiMed" resultMap="com.zyyglxt.dao.IndustrialDevelopChiMedMapper.BaseResultMap">
+    <select id="getDetailChiMed" resultMap="ChiMedResultMap">
         select
-        <include refid="chimed"/>
-        from tb_industrial_develop_chi_med
-                where itemCode = #{itemcode}
+        <include refid="chimed"/>,
+            tcf.FILE_PATH
+            from tb_industrial_develop_chi_med cm
+                         left join tb_culpro_file tcf on cm.itemCode = tcf.DATA_CODE
+            where cm.itemCode = #{itemcode}
         <if test="itemid != null">
-            and itemID = #{itemid}
+            and cm.itemID = #{itemid}
         </if>
         limit 1
     </select>
-    <select id="getDetailTecSerOrg" resultMap="com.zyyglxt.dao.IndustrialDevelopTecSerOrgMapper.BaseResultMap">
+    <select id="getDetailTecSerOrg" resultMap="TecSerOrgResultMap">
         select
-        <include refid="tecorg"/>
-        from tb_industrial_develop_tec_ser_org
-                where itemCode = #{itemcode}
+        <include refid="tecorg"/>,
+            tcf.FILE_PATH
+            from tb_industrial_develop_tec_ser_org tecorg
+                         left join tb_culpro_file tcf on tecorg.itemCode = tcf.DATA_CODE
+            where tecorg.itemCode = #{itemcode}
         <if test="itemid != null">
-            and itemID = #{itemid}
+            and tecorg.itemID = #{itemid}
         </if>
         limit 1
     </select>
-    <select id="getDetailSchool" resultMap="com.zyyglxt.dao.IndustrialDevelopSchoolMapper.BaseResultMap">
+    <select id="getDetailSchool" resultMap="SchoolResultMap">
         select
-        <include refid="school"/>
-        from tb_industrial_develop_school
-                where itemCode = #{itemcode}
+        <include refid="school"/>,
+            tcf.FILE_PATH
+            from tb_industrial_develop_school school
+                         left join tb_culpro_file tcf on school.itemCode = tcf.DATA_CODE
+            where school.itemCode = #{itemcode}
         <if test="itemid != null">
-            and itemID = #{itemid}
+            and school.itemID = #{itemid}
         </if>
         limit 1
     </select>
-    <select id="getDetailHospital" resultMap="com.zyyglxt.dao.HospDOMapper.BaseResultMap">
+    <select id="getDetailHospital" resultMap="HospitalResultMap">
         select
-        <include refid="hospital"/>
-        from tb_culpro_hosp
-                where itemCode = #{itemcode}
+        <include refid="hospital"/>,
+            tcf.FILE_PATH
+            from tb_culpro_hosp hospital
+                         left join tb_culpro_file tcf on hospital.itemCode = tcf.DATA_CODE
+            where hospital.itemCode = #{itemcode}
         <if test="itemid != null">
-            and itemID = #{itemid}
+            and hospital.itemID = #{itemid}
         </if>
         limit 1
     </select>
@@ -220,31 +454,35 @@
             and itemID = #{itemid}
         </if>
     </update>
-    <select id="getAllChiMedByCity" resultMap="com.zyyglxt.dao.IndustrialDevelopChiMedMapper.BaseResultMap">
+    <select id="getAllChiMedByCity" resultMap="ChiMedAuditResultMap">
         select
-        <include refid="chimed"/>
+        <include refid="primary" />,
+        <include refid="chimed_all"/>
         from tb_industrial_develop_chi_med
         where ADDRESS_CITY = #{city,jdbcType=VARCHAR}
         order by itemUpdateAt desc
     </select>
-    <select id="getAllTecOrgByCity" resultMap="com.zyyglxt.dao.IndustrialDevelopTecSerOrgMapper.BaseResultMap">
+    <select id="getAllTecOrgByCity" resultMap="TecSerOrgAuditResultMap">
         select
-        <include refid="tecorg"/>
-        from tb_industrial_develop_tec_ser_org
+        <include refid="primary" />,
+        <include refid="tecorg_all"/>
+        from tb_industrial_develop_tec_ser_org tecorg
         where ADDRESS_CITY = #{city,jdbcType=VARCHAR}
         order by itemUpdateAt desc
     </select>
-    <select id="getAllSchoolByCity" resultMap="com.zyyglxt.dao.IndustrialDevelopSchoolMapper.BaseResultMap">
+    <select id="getAllSchoolByCity" resultMap="SchoolAuditResultMap">
         select
-        <include refid="school"/>
+        <include refid="primary" />,
+        <include refid="school_all"/>
         from tb_industrial_develop_school
         where ADDRESS_CITY = #{city,jdbcType=VARCHAR}
         order by itemUpdateAt desc
     </select>
-    <select id="getAllHospitalByCity" resultMap="com.zyyglxt.dao.HospDOMapper.BaseResultMap">
+    <select id="getAllHospitalByCity" resultMap="HospitalAuditResultMap">
         select
-        <include refid="hospital"/>
-        from tb_culpro_hosp
+        <include refid="primary" />,
+        <include refid="hospital_all"/>
+        from tb_culpro_hosp hospital
         where ORG_CODE != 0
           and HOSPITAL_ADDRESS_CITY = #{city,jdbcType=VARCHAR}
         order by itemUpdateAt desc

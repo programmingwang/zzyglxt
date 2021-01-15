@@ -12,7 +12,6 @@ import com.zyyglxt.dto.industrialDevelop.IndustrialDevelopSchoolDto;
 import com.zyyglxt.dto.industrialDevelop.IndustrialDevelopTecSerOrgDto;
 import com.zyyglxt.service.IAuditService;
 import com.zyyglxt.service.IDictService;
-import com.zyyglxt.service.IFileService;
 import com.zyyglxt.util.UsernameUtil;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
@@ -36,8 +35,6 @@ public class AuditServiceImpl implements IAuditService {
     @Resource
     IDictService dictService;
 
-    @Resource
-    IFileService fileService;
 
     @Resource
     UsernameUtil usernameUtil;
@@ -112,38 +109,22 @@ public class AuditServiceImpl implements IAuditService {
 
     @Override
     public IndustrialDevelopChiMedDto getDetailChiMed(Integer itemid, String itemcode) {
-        IndustrialDevelopChiMed chiMed = auditMapper.getDetailChiMed(itemid, itemcode);
-        IndustrialDevelopChiMedDto dto = new IndustrialDevelopChiMedDto();
-        BeanUtils.copyProperties(chiMed, dto);
-        dto.setFilePath(fileService.selectFileByDataCode(dto.getItemcode()).getFilePath());
-        return dto;
+        return auditMapper.getDetailChiMed(itemid, itemcode);
     }
 
     @Override
     public IndustrialDevelopTecSerOrgDto getDetailTecSerOrg(Integer itemid, String itemcode) {
-        IndustrialDevelopTecSerOrg org = auditMapper.getDetailTecSerOrg(itemid, itemcode);
-        IndustrialDevelopTecSerOrgDto dto = new IndustrialDevelopTecSerOrgDto();
-        BeanUtils.copyProperties(org,dto);
-        dto.setFilePath(fileService.selectFileByDataCode(dto.getItemcode()).getFilePath());
-        return dto;
+        return auditMapper.getDetailTecSerOrg(itemid, itemcode);
     }
 
     @Override
     public IndustrialDevelopSchoolDto getDetailSchool(Integer itemid, String itemcode) {
-        IndustrialDevelopSchool school = auditMapper.getDetailSchool(itemid, itemcode);
-        IndustrialDevelopSchoolDto dto = new IndustrialDevelopSchoolDto();
-        BeanUtils.copyProperties(school,dto);
-        dto.setFilePath(fileService.selectFileByDataCode(dto.getItemcode()).getFilePath());
-        return dto;
+        return auditMapper.getDetailSchool(itemid, itemcode);
     }
 
     @Override
     public HospDto getDetailHospital(Integer itemid, String itemcode) {
-        HospDO hospDO = auditMapper.getDetailHospital(itemid, itemcode);
-        HospDto hospDto = new HospDto();
-        BeanUtils.copyProperties(hospDO, hospDto);
-        hospDto.setFilePath(fileService.selectFileByDataCode(hospDO.getItemcode()).getFilePath());
-        return hospDto;
+        return auditMapper.getDetailHospital(itemid, itemcode);
     }
 
     @Override

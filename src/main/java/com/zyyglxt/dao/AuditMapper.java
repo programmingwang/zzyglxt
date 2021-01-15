@@ -4,7 +4,11 @@ import com.zyyglxt.dataobject.HospDO;
 import com.zyyglxt.dataobject.IndustrialDevelopChiMed;
 import com.zyyglxt.dataobject.IndustrialDevelopSchool;
 import com.zyyglxt.dataobject.IndustrialDevelopTecSerOrg;
+import com.zyyglxt.dto.HospDto;
 import com.zyyglxt.dto.industrialDevelop.AuditDto;
+import com.zyyglxt.dto.industrialDevelop.IndustrialDevelopChiMedDto;
+import com.zyyglxt.dto.industrialDevelop.IndustrialDevelopSchoolDto;
+import com.zyyglxt.dto.industrialDevelop.IndustrialDevelopTecSerOrgDto;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -35,13 +39,13 @@ public interface AuditMapper {
 
     List<HospDO> getAllHospitalByCity(String city);
 
-    IndustrialDevelopChiMed getDetailChiMed(@Param("itemid") Integer itemid,@Param("itemcode") String itemcode);
+    IndustrialDevelopChiMedDto getDetailChiMed(@Param("itemid") Integer itemid, @Param("itemcode") String itemcode);
 
-    IndustrialDevelopTecSerOrg getDetailTecSerOrg(@Param("itemid") Integer itemid,@Param("itemcode") String itemcode);
+    IndustrialDevelopTecSerOrgDto getDetailTecSerOrg(@Param("itemid") Integer itemid, @Param("itemcode") String itemcode);
 
-    IndustrialDevelopSchool getDetailSchool(@Param("itemid") Integer itemid,@Param("itemcode") String itemcode);
+    IndustrialDevelopSchoolDto getDetailSchool(@Param("itemid") Integer itemid, @Param("itemcode") String itemcode);
 
-    HospDO getDetailHospital(@Param("itemid") Integer itemid,@Param("itemcode") String itemcode);
+    HospDto getDetailHospital(@Param("itemid") Integer itemid, @Param("itemcode") String itemcode);
 
     int changeChiMedStatus(AuditDto record);
 

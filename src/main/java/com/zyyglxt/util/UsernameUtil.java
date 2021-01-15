@@ -26,6 +26,14 @@ public class UsernameUtil {
             return null;
         }
     }
+    public String getItemCode(){
+        UserSessionDto user = (UserSessionDto) request.getSession().getAttribute("user");
+        if (user != null){
+            return user.getItemcode();
+        }else {
+            return null;
+        }
+    }
     public String getOrgCode(){
         UserSessionDto user = (UserSessionDto) request.getSession().getAttribute("user");
         return user.getOrgCode();

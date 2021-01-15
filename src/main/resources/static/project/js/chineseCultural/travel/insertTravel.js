@@ -35,6 +35,7 @@
                         chineseCulturalName : $("#chineseCulturalName").val(),
                         chineseCulturalSource : $("#chineseCulturalSource").val(),
                         chineseCulturalAuthor : $("#chineseCulturalAuthor").val(),
+                        chineseCulturalStatus : '0',
                         chineseCulturalContent : editor.txt.html()
                     }
                     operateMessage = "更新旅游景点成功";

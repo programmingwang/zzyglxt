@@ -2,8 +2,6 @@
     require(['jquery','objectUtil','ajaxUtil','alertUtil','stringUtil','fileUtil','dictUtil','distpicker','selectUtil','checkUtil','uploadImg'],
         function (jquery,objectUtil,ajaxUtil,alertUtil,stringUtil,fileUtil,dictUtil,distpicker,selectUtil,checkUtil,uploadImg) {
 
-            const editor = objectUtil.wangEditorUtil();
-
             uploadImg.init();
 
             /*下拉框值*/
@@ -217,12 +215,13 @@
                     ajaxUtil.myAjax(null,"/industrialdevelop",null,function (data) {
                         for (var i=0;i<data.data.length;i++){
                             if (data.data[i].isimp == "1"){
-                                starttime = data.data[i].startTime;
-                                endtime = data.data[i].endTime;
+                                stime = data.data[i].startTime;
+                                etime = data.data[i].endTime;
                             }
                         }
+                        date.isDuringDate(stime, etime);
                     },false,"","get");
-                    date.isDuringDate(starttime, endtime);
+
                 }
             }());
 

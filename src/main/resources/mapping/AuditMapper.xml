@@ -1,6 +1,59 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.zyyglxt.dao.AuditMapper">
+    <resultMap id="ChiMedAuditResultMap" type="com.zyyglxt.dto.industrialDevelop.AuditDto">
+        <!--@mbg.generated-->
+        <!--@Table tb_industrial_develop_chi_med-->
+        <id column="itemID" jdbcType="INTEGER" property="itemid"/>
+        <id column="itemCode" jdbcType="CHAR" property="itemcode"/>
+        <result column="NAME" jdbcType="VARCHAR" property="name"/>
+        <result column="ADDRESS_CITY" jdbcType="VARCHAR" property="addressCity"/>
+        <result column="STATUS" jdbcType="VARCHAR" property="status"/>
+        <result column="REASON" jdbcType="VARCHAR" property="reason"/>
+        <result column="ORG_CODE" jdbcType="CHAR" property="orgCode"/>
+        <result column="TYPE" jdbcType="VARCHAR" property="type"/>
+        <result column="itemCreateAt" jdbcType="TIMESTAMP" property="itemcreateat"/>
+        <result column="UPDATER" jdbcType="VARCHAR" property="updater"/>
+    </resultMap>
+    <resultMap id="TecSerOrgAuditResultMap" type="com.zyyglxt.dto.industrialDevelop.AuditDto">
+        <!--@mbg.generated-->
+        <!--@Table tb_industrial_develop_tec_ser_org-->
+        <id column="itemID" jdbcType="INTEGER" property="itemid"/>
+        <id column="itemCode" jdbcType="CHAR" property="itemcode"/>
+        <result column="NAME" jdbcType="VARCHAR" property="name"/>
+        <result column="ADDRESS_CITY" jdbcType="VARCHAR" property="addressCity" />
+        <result column="STATUS" jdbcType="VARCHAR" property="status"/>
+        <result column="REASON" jdbcType="VARCHAR" property="reason"/>
+        <result column="ORG_CODE" jdbcType="CHAR" property="orgCode"/>
+        <result column="TYPE" jdbcType="VARCHAR" property="type"/>
+        <result column="itemCreateAt" jdbcType="TIMESTAMP" property="itemcreateat"/>
+        <result column="UPDATER" jdbcType="VARCHAR" property="updater"/>
+    </resultMap>
+
+    <resultMap id="SchoolAuditResultMap" type="com.zyyglxt.dto.industrialDevelop.AuditDto">
+        <!--@mbg.generated-->
+        <!--@Table tb_industrial_develop_school-->
+        <id column="itemID" jdbcType="INTEGER" property="itemid"/>
+        <id column="itemCode" jdbcType="CHAR" property="itemcode"/>
+        <result column="SCHOOL_NAME" jdbcType="VARCHAR" property="name"/>
+        <result column="ADDRESS_CITY" jdbcType="VARCHAR" property="addressCity"/>
+        <result column="STATUS" jdbcType="VARCHAR" property="status"/>
+        <result column="itemCreateAt" jdbcType="TIMESTAMP" property="itemcreateat"/>
+        <result column="UPDATER" jdbcType="VARCHAR" property="updater"/>
+        <result column="ORG_CODE" jdbcType="VARCHAR" property="orgCode"/>
+    </resultMap>
+
+    <resultMap id="HospitalAuditResultMap" type="com.zyyglxt.dto.industrialDevelop.AuditDto">
+        <id column="itemID" jdbcType="INTEGER" property="itemid"/>
+        <id column="itemCode" jdbcType="CHAR" property="itemcode"/>
+        <result column="HOSPITAL_NAME" jdbcType="VARCHAR" property="name"/>
+        <result column="HOSPITAL_ADDRESS_CITY" jdbcType="VARCHAR" property="addressCity"/>
+        <result column="REASON" jdbcType="VARCHAR" property="reason"/>
+        <result column="HOSPITAL_STATUS" jdbcType="VARCHAR" property="status"/>
+        <result column="itemCreateAt" jdbcType="TIMESTAMP" property="itemcreateat"/>
+        <result column="UPDATER" jdbcType="VARCHAR" property="updater"/>
+        <result column="ORG_CODE" jdbcType="VARCHAR" property="orgCode"/>
+    </resultMap>
     <resultMap id="ChiMedResultMap" type="com.zyyglxt.dto.industrialDevelop.IndustrialDevelopChiMedDto">
         <!--@mbg.generated-->
         <!--@Table tb_industrial_develop_chi_med-->
@@ -125,6 +178,49 @@
         </collection>
     </resultMap>
 
+    <sql id="primary">
+        itemID,
+        itemCode
+    </sql>
+    <sql id="chimed_all">
+        NAME,
+        ADDRESS_CITY,
+        STATUS,
+        REASON,
+        ORG_CODE,
+        TYPE,
+        itemCreateAt,
+        UPDATER
+    </sql>
+    <sql id="tecorg_all">
+        NAME,
+        ADDRESS_CITY,
+        STATUS,
+        REASON,
+        ORG_CODE,
+        TYPE,
+        itemCreateAt,
+        UPDATER
+    </sql>
+    <sql id="school_all">
+        SCHOOL_NAME,
+        ADDRESS_CITY,
+        STATUS,
+        ORG_CODE,
+        itemCreateAt,
+        UPDATER
+    </sql>
+
+        <sql id="hospital_all">
+        HOSPITAL_NAME,
+        HOSPITAL_ADDRESS_CITY,
+        HOSPITAL_STATUS,
+        REASON,
+        ORG_CODE,
+        itemCreateAt,
+        UPDATER
+    </sql>
+
     <sql id="chimed">
         cm.itemID,
         cm.itemCode,
@@ -221,51 +317,58 @@
         hospital.ORG_CODE
     </sql>
 
-    <select id="getAllChiMed" resultMap="com.zyyglxt.dao.IndustrialDevelopChiMedMapper.BaseResultMap">
+    <select id="getAllChiMed" resultMap="ChiMedAuditResultMap">
         select
-        <include refid="chimed"/>
-        from tb_industrial_develop_chi_med cm
+        <include refid="primary" />,
+        <include refid="chimed_all"/>
+        from tb_industrial_develop_chi_med
         order by itemUpdateAt desc
     </select>
-    <select id="getAllTecOrg" resultMap="com.zyyglxt.dao.IndustrialDevelopTecSerOrgMapper.BaseResultMap">
+    <select id="getAllTecOrg" resultMap="TecSerOrgAuditResultMap">
         select
-        <include refid="tecorg"/>
-        from tb_industrial_develop_tec_ser_org tecorg
+        <include refid="primary" />,
+        <include refid="tecorg_all"/>
+        from tb_industrial_develop_tec_ser_org
         order by itemUpdateAt desc
     </select>
-    <select id="getAllSchool" resultMap="com.zyyglxt.dao.IndustrialDevelopSchoolMapper.BaseResultMap">
+    <select id="getAllSchool" resultMap="SchoolAuditResultMap">
         select
-        <include refid="school"/>
-        from tb_industrial_develop_school school
+        <include refid="primary" />,
+        <include refid="school_all"/>
+        from tb_industrial_develop_school
         order by itemUpdateAt desc
     </select>
-    <select id="getAllHospital" resultMap="com.zyyglxt.dao.HospDOMapper.BaseResultMap">
+    <select id="getAllHospital" resultMap="HospitalAuditResultMap">
         select
-        <include refid="hospital"/>
+        <include refid="primary" />,
+        <include refid="hospital_all"/>
         from tb_culpro_hosp hospital
         where ORG_CODE != 0
         order by itemUpdateAt desc
     </select>
-    <select id="getAllChiMedByType" resultMap="com.zyyglxt.dao.IndustrialDevelopChiMedMapper.BaseResultMap">
+    <select id="getAllChiMedByType" resultMap="ChiMedAuditResultMap">
         select
-        <include refid="chimed"/>
-        from tb_industrial_develop_chi_med cm
+        <include refid="primary" />,
+        <include refid="chimed_all"/>
+        from tb_industrial_develop_chi_med
         where TYPE = #{type}
         order by itemUpdateAt desc
     </select>
-    <select id="getAllTecOrgByType" resultMap="com.zyyglxt.dao.IndustrialDevelopTecSerOrgMapper.BaseResultMap">
+    <select id="getAllTecOrgByType" resultMap="TecSerOrgAuditResultMap">
         select
-        <include refid="tecorg"/>
-        from tb_industrial_develop_tec_ser_org tecorg
+        <include refid="primary" />,
+        <include refid="tecorg_all"/>
+        from tb_industrial_develop_tec_ser_org
         where TYPE = #{type}
         order by itemUpdateAt desc
     </select>
     <select id="getDetailChiMed" resultMap="ChiMedResultMap">
         select
         <include refid="chimed"/>,
-        tcf.FILE_PATH
-        from tb_industrial_develop_chi_med cm left join tb_culpro_file tcf on cm.itemCode = tcf.DATA_CODE
-                where cm.itemCode = #{itemcode}
+            tcf.FILE_PATH
+            from tb_industrial_develop_chi_med cm
+                         left join tb_culpro_file tcf on cm.itemCode = tcf.DATA_CODE
+            where cm.itemCode = #{itemcode}
         <if test="itemid != null">
             and cm.itemID = #{itemid}
         </if>
@@ -274,9 +377,10 @@
     <select id="getDetailTecSerOrg" resultMap="TecSerOrgResultMap">
         select
         <include refid="tecorg"/>,
-        tcf.FILE_PATH
-        from tb_industrial_develop_tec_ser_org tecorg left join tb_culpro_file tcf on tecorg.itemCode = tcf.DATA_CODE
-                where tecorg.itemCode = #{itemcode}
+            tcf.FILE_PATH
+            from tb_industrial_develop_tec_ser_org tecorg
+                         left join tb_culpro_file tcf on tecorg.itemCode = tcf.DATA_CODE
+            where tecorg.itemCode = #{itemcode}
         <if test="itemid != null">
             and tecorg.itemID = #{itemid}
         </if>
@@ -285,9 +389,10 @@
     <select id="getDetailSchool" resultMap="SchoolResultMap">
         select
         <include refid="school"/>,
-        tcf.FILE_PATH
-        from tb_industrial_develop_school school left join tb_culpro_file tcf on school.itemCode = tcf.DATA_CODE
-                where school.itemCode = #{itemcode}
+            tcf.FILE_PATH
+            from tb_industrial_develop_school school
+                         left join tb_culpro_file tcf on school.itemCode = tcf.DATA_CODE
+            where school.itemCode = #{itemcode}
         <if test="itemid != null">
             and school.itemID = #{itemid}
         </if>
@@ -296,9 +401,10 @@
     <select id="getDetailHospital" resultMap="HospitalResultMap">
         select
         <include refid="hospital"/>,
-        tcf.FILE_PATH
-        from tb_culpro_hosp hospital left join tb_culpro_file tcf on hospital.itemCode = tcf.DATA_CODE
-                where hospital.itemCode = #{itemcode}
+            tcf.FILE_PATH
+            from tb_culpro_hosp hospital
+                         left join tb_culpro_file tcf on hospital.itemCode = tcf.DATA_CODE
+            where hospital.itemCode = #{itemcode}
         <if test="itemid != null">
             and hospital.itemID = #{itemid}
         </if>
@@ -348,30 +454,34 @@
             and itemID = #{itemid}
         </if>
     </update>
-    <select id="getAllChiMedByCity" resultMap="com.zyyglxt.dao.IndustrialDevelopChiMedMapper.BaseResultMap">
+    <select id="getAllChiMedByCity" resultMap="ChiMedAuditResultMap">
         select
-        <include refid="chimed"/>
-        from tb_industrial_develop_chi_med cm
+        <include refid="primary" />,
+        <include refid="chimed_all"/>
+        from tb_industrial_develop_chi_med
         where ADDRESS_CITY = #{city,jdbcType=VARCHAR}
         order by itemUpdateAt desc
     </select>
-    <select id="getAllTecOrgByCity" resultMap="com.zyyglxt.dao.IndustrialDevelopTecSerOrgMapper.BaseResultMap">
+    <select id="getAllTecOrgByCity" resultMap="TecSerOrgAuditResultMap">
         select
-        <include refid="tecorg"/>
+        <include refid="primary" />,
+        <include refid="tecorg_all"/>
         from tb_industrial_develop_tec_ser_org tecorg
         where ADDRESS_CITY = #{city,jdbcType=VARCHAR}
         order by itemUpdateAt desc
     </select>
-    <select id="getAllSchoolByCity" resultMap="com.zyyglxt.dao.IndustrialDevelopSchoolMapper.BaseResultMap">
+    <select id="getAllSchoolByCity" resultMap="SchoolAuditResultMap">
         select
-        <include refid="school"/>
-        from tb_industrial_develop_school school
+        <include refid="primary" />,
+        <include refid="school_all"/>
+        from tb_industrial_develop_school
         where ADDRESS_CITY = #{city,jdbcType=VARCHAR}
         order by itemUpdateAt desc
     </select>
-    <select id="getAllHospitalByCity" resultMap="com.zyyglxt.dao.HospDOMapper.BaseResultMap">
+    <select id="getAllHospitalByCity" resultMap="HospitalAuditResultMap">
         select
-        <include refid="hospital"/>
+        <include refid="primary" />,
+        <include refid="hospital_all"/>
         from tb_culpro_hosp hospital
         where ORG_CODE != 0
           and HOSPITAL_ADDRESS_CITY = #{city,jdbcType=VARCHAR}

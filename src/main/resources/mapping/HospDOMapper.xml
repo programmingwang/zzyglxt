@@ -25,13 +25,19 @@
     <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.zyyglxt.dataobject.HospDO">
         <result column="HOSPITAL_INTRODUCE" jdbcType="LONGVARCHAR" property="hospitalIntroduce"/>
     </resultMap>
+    <resultMap extends="ResultMapWithBLOBs" id="ResultMapWithBLOBsAndFile" type="com.zyyglxt.dto.HospDto">
+        <result column="FILE_PATH" jdbcType="VARCHAR" property="filePath"/>
+    </resultMap>
     <sql id="Base_Column_List">
-        itemID, itemCode, HOSPITAL_NAME, HOSPITAL_LEVEL, HOSPITAL_BRIEF_INTRODUCE, HOSPITAL_KEY_SPECIALTY, HOSPITAL_TELEPHONE, HOSPITAL_ADDRESS_PRO,
-        HOSPITAL_ADDRESS_CITY, HOSPITAL_ADDRESS_COUNTRY, HOSPITAL_ADDRESS, HOSPITAL_LINK, REASON,
-        HOSPITAL_STATUS, CREATER, itemCreateAt, UPDATER, itemUpdateAt, ORG_CODE
+        h.itemID, h.itemCode, h.HOSPITAL_NAME, h.HOSPITAL_LEVEL, h.HOSPITAL_BRIEF_INTRODUCE, h.HOSPITAL_KEY_SPECIALTY, h.HOSPITAL_TELEPHONE,
+        h.HOSPITAL_ADDRESS_PRO, h.HOSPITAL_ADDRESS_CITY, h.HOSPITAL_ADDRESS_COUNTRY, h.HOSPITAL_ADDRESS, h.HOSPITAL_LINK, h.REASON,
+        h.HOSPITAL_STATUS, h.CREATER, h.itemCreateAt, h.UPDATER, h.itemUpdateAt, h.ORG_CODE
     </sql>
     <sql id="Blob_Column_List">
-        HOSPITAL_INTRODUCE
+        h.HOSPITAL_INTRODUCE
+    </sql>
+    <sql id="File_Column_List">
+        f.FILE_PATH
     </sql>
     <select id="selectByPrimaryKey" parameterType="com.zyyglxt.dataobject.HospDOKey" resultMap="ResultMapWithBLOBs">
         select
@@ -316,48 +322,79 @@
         and itemCode = #{itemcode,jdbcType=CHAR}
     </update>
 
-    <select id="selectAllHosp" resultMap="ResultMapWithBLOBs">
-        SELECT
-        <include refid="Base_Column_List"/>
-        ,
-        <include refid="Blob_Column_List"/>
-        FROM tb_culpro_hosp
-        order by itemUpdateAt desc
-    </select>
-
-    <select id="searchHosp" resultMap="ResultMapWithBLOBs">
+    <select id="selectAllHosp" resultMap="ResultMapWithBLOBsAndFile">
         select
         <include refid="Base_Column_List"/>
         ,
         <include refid="Blob_Column_List"/>
-        from tb_culpro_hosp
-        WHERE HOSPITAL_NAME LIKE "%"#{value}"%"
+        ,
+        <include refid="File_Column_List"/>
+        from tb_culpro_hosp h LEFT JOIN tb_culpro_file f
+        ON h.itemCode = f.DATA_CODE
+        order by h.itemUpdateAt desc
+    </select>
+
+    <select id="searchHosp" resultMap="ResultMapWithBLOBsAndFile">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        ,
+        <include refid="File_Column_List"/>
+        from tb_culpro_hosp h LEFT JOIN tb_culpro_file f
+        ON h.itemCode = f.DATA_CODE
+        WHERE
+        <if test="status == 3">
+            HOSPITAL_STATUS in (2,5)
+        </if>
+        <if test="status == 2">
+           HOSPITAL_STATUS in (1,2,3)
+        </if>
+        <if test="status == 1">
+           HOSPITAL_STATUS in (0,1,2,3,4,6)
+        </if>
+        AND (HOSPITAL_NAME LIKE "%"#{value}"%"
         OR HOSPITAL_LEVEL LIKE "%"#{value}"%"
         OR HOSPITAL_ADDRESS_CITY LIKE "%"#{value}"%"
         OR HOSPITAL_ADDRESS_COUNTRY LIKE "%"#{value}"%"
-        OR HOSPITAL_ADDRESS LIKE "%"#{value}"%"
-        order by itemUpdateAt desc
+        OR HOSPITAL_ADDRESS LIKE "%"#{value}"%")
+        order by h.itemUpdateAt desc
     </select>
 
 
-    <select id="selectHospByItemCode" resultMap="ResultMapWithBLOBs">
+    <select id="selectHospByItemCode" resultMap="ResultMapWithBLOBsAndFile">
         select
         <include refid="Base_Column_List"/>
         ,
         <include refid="Blob_Column_List"/>
-        from tb_culpro_hosp
-        WHERE itemCode = #{itemCode}
-        order by itemUpdateAt desc
+        ,
+        <include refid="File_Column_List"/>
+        from tb_culpro_hosp h LEFT JOIN tb_culpro_file f
+        ON h.itemCode = f.DATA_CODE
+        WHERE h.itemCode = #{itemCode}
+        order by h.itemUpdateAt desc
     </select>
 
-    <select id="selectByStatus" resultMap="ResultMapWithBLOBs">
+    <select id="selectByStatus" resultMap="ResultMapWithBLOBsAndFile">
         select
         <include refid="Base_Column_List"/>
         ,
         <include refid="Blob_Column_List"/>
-        from tb_culpro_hosp
-        WHERE HOSPITAL_STATUS = #{status}
-        order by itemUpdateAt desc
+        ,
+        <include refid="File_Column_List"/>
+        from tb_culpro_hosp h LEFT JOIN tb_culpro_file f
+        ON h.itemCode = f.DATA_CODE
+        WHERE
+        <if test="status == 3">
+            HOSPITAL_STATUS in (2,5)
+        </if>
+        <if test="status == 2">
+            HOSPITAL_STATUS in (1,2,3)
+        </if>
+        <if test="status == 1">
+            HOSPITAL_STATUS in (0,1,2,3,4,6)
+        </if>
+        order by h.itemUpdateAt desc
     </select>
 
     <update id="updateStatusByPrimaryKey" parameterType="com.zyyglxt.dto.StatusDto">
@@ -376,7 +413,6 @@
         where ORG_CODE = #{orgCode,jdbcType=VARCHAR}
         order by itemUpdateAt desc
     </select>
-
 
 
 </mapper>

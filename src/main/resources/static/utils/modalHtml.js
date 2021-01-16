@@ -239,7 +239,7 @@
             '                <fieldset disabled>'+
             '                <div class="input-group mb-3">\n' +
             '                    <div class="input-group-prepend">\n' +
-            '                        <button class="btn btn-primary btn-sm" >别名</button>\n' +
+            '                        <button class="btn btn-primary btn-sm" >别&emsp;&emsp;名</button>\n' +
             '                    </div>\n' +
             '                    <input type="text" id="chineseMedicineAlias" class="form-control">\n' +
             '                </div>\n' +
@@ -259,7 +259,7 @@
             '                <fieldset disabled>'+
             '                <div class="input-group mb-3">\n' +
             '                    <div class="input-group-prepend">\n' +
-            '                        <button class="btn btn-primary btn-sm" >采制</button>\n' +
+            '                        <button class="btn btn-primary btn-sm" >采&emsp;&emsp;制</button>\n' +
             '                    </div>\n' +
             '                   <input type="text" id="chineseMedicineHarvesting" class="form-control">\n' +
             '                </div>\n' +
@@ -269,7 +269,7 @@
             '                <fieldset disabled>'+
             '                <div class="input-group mb-3">\n' +
             '                    <div class="input-group-prepend">\n' +
-            '                        <button class="btn btn-primary btn-sm" >性味</button>\n' +
+            '                        <button class="btn btn-primary btn-sm" >性&emsp;&emsp;味</button>\n' +
             '                    </div>\n' +
             '                    <input type="text" id="chineseMedicineTaste" class="form-control">\n' +
             '                </div>\n' +
@@ -279,7 +279,7 @@
             '                <fieldset disabled>'+
             '                <div class="input-group mb-3">\n' +
             '                    <div class="input-group-prepend">\n' +
-            '                        <button class="btn btn-primary btn-sm" >归经</button>\n' +
+            '                        <button class="btn btn-primary btn-sm" >归&emsp;&emsp;经</button>\n' +
             '                    </div>\n' +
             '                    <input type="text" id="chineseMedicineMerTro" class="form-control">\n' +
             '                </div>\n' +

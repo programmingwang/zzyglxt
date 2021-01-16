@@ -115,7 +115,9 @@
             //会签审核状态
             "signstatus":"status",
             //发文审核状态
-            "postStatus":"postStatus"
+            "postStatus":"postStatus",
+            //审核状态-机构审核
+            "orgAuditStatus": "orgAuditStatus"
         }
 
         var dictList = {

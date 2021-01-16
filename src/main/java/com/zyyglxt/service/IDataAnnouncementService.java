@@ -2,6 +2,7 @@ package com.zyyglxt.service;
 
 import com.zyyglxt.dataobject.DataDO;
 import com.zyyglxt.dataobject.DataDOKey;
+import com.zyyglxt.dto.DataDto;
 
 import java.sql.Date;
 import java.util.List;
@@ -16,7 +17,7 @@ public interface IDataAnnouncementService {
     DataDO selectAnnouncement(DataDOKey key);
 
     //查询所有通知公告
-    List<DataDO> selectAnnouncementList(List<String> dataStatus);
+    List<DataDto> selectAnnouncementList(List<String> dataStatus);
 
     //增加一个通知公告
     int insertAnnouncement(DataDO record);

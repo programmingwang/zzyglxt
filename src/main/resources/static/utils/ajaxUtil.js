@@ -113,6 +113,31 @@
             });
         }
 
+        function postFileAjax(dataCode, file, itemCode, uploader,uploaderCode){
+            var formData = new FormData();
+            formData.append("dataCode",dataCode);
+            formData.append("file",file);
+            formData.append("itemcode",itemCode);
+            formData.append("uploader",uploader);
+            formData.append("uploaderCode",uploaderCode);
+            $.ajax({
+                url:"/file/upload",
+                type:'POST',
+                data: formData,
+                processData: false,   // jQuery不要去处理发送的数据
+                contentType: false,   // jQuery不要去设置Content-Type请求头
+                async: false,
+                success:function(data){
+                    if(data && data.code == successCode){}else{
+                        alertUtil.error(data.msg);
+                    }
+                },
+                error: function(data){
+                    alertUtil.error(data.msg)
+                }
+            });
+        }
+
         function deleteFile(dataCode){
             $.ajax({
                 url:"/file/delete?dataCode="+dataCode,
@@ -152,7 +177,8 @@
             fileAjax: fileAjax,
             successCode:successCode,
             deleteFile: deleteFile,
-            updateFile: updateFile
+            updateFile: updateFile,
+            postFileAjax: postFileAjax,
         }
     })
 })();

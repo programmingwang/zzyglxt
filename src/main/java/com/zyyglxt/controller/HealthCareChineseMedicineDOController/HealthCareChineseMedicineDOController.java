@@ -85,20 +85,9 @@ public class HealthCareChineseMedicineDOController {
     }
     /*中医药常识数据所有查询*/
     @RequestMapping(value ="selectallhealthcarechinesemedicinedo",method = RequestMethod.GET )
-    @LogAnnotation(appCode ="",logTitle ="查寻所有中医药数据",logLevel ="1",creater ="huangwj",updater = "huangwj")
-    /*public List<HealthCareChineseMedicineDO> selectAllHealthCareChineseMedicineDOMapper(){
-        return healthCareChineseMedicineDOService.selectAllHealthCareChineseMedicine();
-    }*/
-    public ResponseData selectAllHealthCareChineseMedicineDOMapper(@RequestParam(value="chineseMedicineStatus")List chineseMedicineStatus){
-        List<HealthCareChineseMedicineDO> healthCareChineseMedicineDOSList = healthCareChineseMedicineDOService.selectAllHealthCareChineseMedicine(chineseMedicineStatus);
-        List<HealthCareChineseMedicineDto> healthCareChineseMedicineDtoList = new ArrayList<>();
-        for (HealthCareChineseMedicineDO healthCareChineseMedicineDO : healthCareChineseMedicineDOSList) {
-            healthCareChineseMedicineDtoList.add(
-                    this.convertDtoFromDo(
-                            healthCareChineseMedicineDO,iFileService.selectFileByDataCode(
-                                    healthCareChineseMedicineDO.getItemcode()).getFilePath()));
-        }
-        return new ResponseData(EmBusinessError.success,healthCareChineseMedicineDtoList);
+    @LogAnnotation(appCode ="",logTitle ="查寻所有中医药数据",logLevel ="1")
+    public ResponseData selectAllHealthCareChineseMedicineDOMapper(@RequestParam(value="chineseMedicineStatus")String  chineseMedicineStatus){
+        return new ResponseData(EmBusinessError.success,healthCareChineseMedicineDOService.selectAllHealthCareChineseMedicine(chineseMedicineStatus));
     }
      /*中医药数据的状态*/
      @RequestMapping(value = "changestatustomedicine/{itemID}/{itemCode}" , method = RequestMethod.POST)

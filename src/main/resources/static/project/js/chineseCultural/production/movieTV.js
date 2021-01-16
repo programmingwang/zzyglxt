@@ -261,89 +261,13 @@
 
         var myTable = bootstrapTableUtil.myBootStrapTableInit("table", url, aParam, aCol);
 
-            var aria=this.ariaExpanded;
-            var element=document.getElementById("stratTime");
-            $("#closeAndOpen").unbind().on('click',function(){
-                this.innerText="";
-                if (aria==="true"){
-                    this.innerText="展开";
-                    aria = "false";
-                    if (typeof(element)!= "undefined" || element != null){
-                        document.getElementById("btn_addTask").classList.remove("openBtnP");
-                    }
-                } else {
-                    this.innerText="收起";
-                    aria = "true";
-                    if (typeof(element)!= "undefined" || element != null){
-                        document.getElementById("btn_addTask").classList.add("openBtnP");
-                    }
-
-                }
-            })
-
         function refreshTable() {
             var param = {};
             myTable.free();
             myTable = bootstrapTableUtil.myBootStrapTableInit("table", url, param, aCol);
         }
 
-        var jQuery = $("#btnSearch").unbind().on('click',function() {
-                if(document.getElementById("stratTime")){
-                    var stratTime=document.getElementById("stratTime").children;
-                    var endTime=document.getElementById("endTime").children;
-                    stratTime=stratTime[0].value+":"+stratTime[1].value+":"+stratTime[2].value;
-                    endTime=endTime[0].value+":"+endTime[1].value+":"+endTime[2].value;
-                }
-                var newArry = [];
-                var addstr=document.getElementById("chargePersonSearch").value;
-                var str = document.getElementById("taskNameSearch").value.toLowerCase();
-                var allTableData = JSON.parse(localStorage.getItem("2"));
-                console.log(allTableData)
-                if(str.indexOf("请输入")!=-1){
-                    str=""
-                }
-                for (var i in allTableData) {
-                    for (var v in aCol){
-                        var textP = allTableData[i][aCol[v].field];
-                        var isStatusSlot=false;           // 默认状态为true
-                        var isTimeSlot=true;             // 默认时间条件为true
-                        //状态条件判断,与表格字段的状态一致,这里根据自己写的修改
-                        if($("#closeAndOpen").text() == "收起"){
-                            var status= allTableData[i]["chineseCulturalStatus"]
-                            console.log("addstr:"+addstr)
-                            console.log("status:"+status)
-                            //调试时可以先打印出来，进行修改
-                            if(addstr==status){
-                                isStatusSlot=true;
-                            }
-
-                        }
-
-
-                        if(aCol[v].field=="itemcreateat"){    //时间条件判断,与表格字段的状态一致,这里根据自己写的修改
-                            isTimeSlot=false;          //当存在时将条件改为flase
-                            var makeTime= allTableData[i][aCol[v].field]
-                            makeTime=makeTime.substring(11,19);
-                            if(makeTime>=stratTime && makeTime<=endTime){
-                                isTimeSlot=true;
-                            }
-                            if(stratTime==endTime){
-                                isTimeSlot=true;
-                            }
-                        }
-                        if (textP == null || textP == undefined || textP == '') {
-                            textP = "1";
-                        }
-                        if(textP.search(str)!=-1 && isStatusSlot && isTimeSlot){
-                            newArry.push(allTableData[i])
-                        }
-                    }
-                }
-                var newArr=new Set(newArry)
-                newArry=Array.from(newArr)
-                $("#table").bootstrapTable("load", newArry);
-
-            })
+        bootstrapTableUtil.globalSearch("table", url, aParam, aCol, "chineseCulturalStatus")
 
 
     })

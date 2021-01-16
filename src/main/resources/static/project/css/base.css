@@ -126,8 +126,7 @@ table{
 .aaaa.active, .aaaa:active {
     color: white;
     text-decoration: none;
-    background-color:#D60000;
-    background: url("../../images/new/hover.png");
+    background: url("../../images/new/titleHover.png") !important;
     background-size: 100% 100%;
 }
 .btn-link{

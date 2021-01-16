@@ -109,7 +109,7 @@
                 myTable = bootstrapTableUtil.myBootStrapTableInit("table", getUrl, param, aCol);
             }
 
-            bootstrapTableUtil.globalSearch("table",getUrl,aParam, aCol);
+            bootstrapTableUtil.globalSearch("table",getUrl,aParam, aCol, "status");
 
         })
 })();

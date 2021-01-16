@@ -3,6 +3,7 @@ package com.zyyglxt.service.impl;
 import com.zyyglxt.dao.DataDOMapper;
 import com.zyyglxt.dataobject.DataDO;
 import com.zyyglxt.dataobject.DataDOKey;
+import com.zyyglxt.dto.DataDto;
 import com.zyyglxt.error.BusinessException;
 import com.zyyglxt.error.EmBusinessError;
 import com.zyyglxt.service.IDataNewsService;
@@ -43,8 +44,8 @@ public class DataRegulationServiceImpl implements IDataRegulationService {
     }
 
     @Override
-    public List<DataDO> selectRegulationList(List<String> dataStatus) {
-        List<DataDO> dataDOList = new ArrayList<>();
+    public List<DataDto> selectRegulationList(List<String> dataStatus) {
+        List<DataDto> dataDOList = new ArrayList<>();
         for (String status : dataStatus) {
             dataDOList.addAll(dataDOMapper.selectByAllData("政策法规", status));
         }

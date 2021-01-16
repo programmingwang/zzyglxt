@@ -44,7 +44,8 @@
                     operateMessage = "更新科室成功";
                     entity = {
                         itemid: tempdata.itemid,
-                        itemcode: tempdata.itemcode
+                        itemcode: tempdata.itemcode,
+                        specialtyStatus: '0'
                     };
                 }
                 entity["specialtyName"] = specialtyName[$("#specialtyName").val()].text;

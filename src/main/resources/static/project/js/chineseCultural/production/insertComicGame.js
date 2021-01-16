@@ -34,6 +34,7 @@
                         chineseCulturalName : $("#chineseCulturalName").val(),
                         chineseCulturalSource : $("#chineseCulturalSource").val(),
                         chineseCulturalAuthor : $("#chineseCulturalAuthor").val(),
+                        chineseCulturalStatus : '0',
                         chineseCulturalContent : editor.txt.html()
                     }
                     operateMessage = "更新动漫游戏成功";

@@ -126,8 +126,7 @@ table{
 .aaaa.active, .aaaa:active {
     color: white;
     text-decoration: none;
-    background-color:#D60000;
-    background: url("../../images/new/hover.png");
+    background: url("../../images/new/titleHover.png") !important;
     background-size: 100% 100%;
 }
 .btn-link{
@@ -307,7 +306,7 @@ thead.self-thead {
     margin-top: 20px;
 }
 #btn_addTask{
-    width: 140px;
+    width: 171px;
     height: 40px;
     background-color: #e66736 !important;
     text-align: center;

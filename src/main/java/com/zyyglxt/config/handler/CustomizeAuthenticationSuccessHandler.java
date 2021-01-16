@@ -42,7 +42,7 @@ public class CustomizeAuthenticationSuccessHandler implements AuthenticationSucc
         OrganizationDO organizationDO = organizationDOMapper.selectByItemCode(userDo.getOrgCode());
         UserSessionDto userSessionDto = new UserSessionDto();
         userSessionDto.setOrgName(organizationDO.getOrgName());
-        userSessionDto.setOrgCode(organizationDO.getItemcode());
+        userSessionDto.setOrgCode(organizationDO.getOrgCode());
         userSessionDto.setUsername(userDo.getUsername());
         userSessionDto.setName(userDo.getName());
         userSessionDto.setRolename(roleDO.getRoleName());

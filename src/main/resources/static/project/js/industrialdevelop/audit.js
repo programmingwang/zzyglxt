@@ -350,12 +350,12 @@
 
             var pl;
             if (rolename == "产业发展-市级"){
-                pl = dictUtil.getDictByCode(dictUtil.DICT_LIST.auditStatus);
+                pl = dictUtil.getDictByCode(dictUtil.DICT_LIST.orgAuditStatus);
                 $("#chargePersonSearch").selectUtil(pl);
                 pl = dictUtil.getDictByCode(dictUtil.DICT_LIST.orgType);
                 $("#orgTypeSelect").selectUtil(pl);
             }else if (rolename == "产业发展-省级"){
-                pl = dictUtil.getDictByCode(dictUtil.DICT_LIST.auditStatus);
+                pl = dictUtil.getDictByCode(dictUtil.DICT_LIST.orgAuditStatus);
                 $("#chargePersonSearch").selectUtil(pl);
                 pl = dictUtil.getDictByCode(dictUtil.DICT_LIST.orgType);
                 $("#orgTypeSelect").selectUtil(pl);
@@ -412,8 +412,10 @@
                 var addstr=document.getElementById("chargePersonSearch").value;
                 switch (addstr) {
                     case "0" : addstr = "待审核"; break;
-                    case "1" : addstr = "审核已通过"; break;
-                    case "2" : addstr = "审核未通过"; break;
+                    case "1" : addstr = "地市局用户审核通过"; break;
+                    case "2" : addstr = "地市局用户审核不通过"; break;
+                    case "3" : addstr = "省局用户审核通过"; break;
+                    case "4" : addstr = "省局用户审核不通过"; break;
                 }
                 var str = document.getElementById("taskNameSearch").value.toLowerCase();
                 var allTableData = JSON.parse(localStorage.getItem("2"));

@@ -331,6 +331,7 @@
         <include refid="File_Column_List"/>
         from tb_culpro_hosp h LEFT JOIN tb_culpro_file f
         ON h.itemCode = f.DATA_CODE
+        where ORG_CODE='0'
         order by h.itemUpdateAt desc
     </select>
 
@@ -343,7 +344,8 @@
         <include refid="File_Column_List"/>
         from tb_culpro_hosp h LEFT JOIN tb_culpro_file f
         ON h.itemCode = f.DATA_CODE
-        WHERE
+        WHERE ORG_CODE='0'
+        AND
         <if test="status == 3">
             HOSPITAL_STATUS in (2,4,5)
         </if>
@@ -371,7 +373,8 @@
         <include refid="File_Column_List"/>
         from tb_culpro_hosp h LEFT JOIN tb_culpro_file f
         ON h.itemCode = f.DATA_CODE
-        WHERE h.itemCode = #{itemCode}
+        WHERE ORG_CODE='0'
+        AND h.itemCode = #{itemCode}
         order by h.itemUpdateAt desc
     </select>
 
@@ -384,7 +387,8 @@
         <include refid="File_Column_List"/>
         from tb_culpro_hosp h LEFT JOIN tb_culpro_file f
         ON h.itemCode = f.DATA_CODE
-        WHERE
+        WHERE ORG_CODE='0'
+        AND
         <if test="status == 3">
             HOSPITAL_STATUS in (2,4,5)
         </if>

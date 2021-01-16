@@ -30,5 +30,5 @@ public interface IndustrialDevelopSchoolMapper {
 
     List<IndustrialDevelopSchool> selectAll();
 
-    IndustrialDevelopSchool selectByorgcode(String orgcode);
+    IndustrialDevelopSchoolDto selectByorgcode(String orgcode);
 }

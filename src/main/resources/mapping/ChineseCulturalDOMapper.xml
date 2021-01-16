@@ -62,13 +62,13 @@
     on cc.itemCode = cf.DATA_CODE
     where CHINESE_CULTURAL_TYPE = #{type}
     <if test="status == 3">
-      and CHINESE_CULTURAL_STATUS in (2,5)
+      and CHINESE_CULTURAL_STATUS in (2,4,5)
     </if>
     <if test="status == 2">
-      and CHINESE_CULTURAL_STATUS in (1,2,3)
+      and CHINESE_CULTURAL_STATUS in (1,2,3,5)
     </if>
     <if test="status == 1">
-      and CHINESE_CULTURAL_STATUS in (0,1,2,3,4,6)
+      and CHINESE_CULTURAL_STATUS in (0,1,2,3,4,5,6,7)
     </if>
     order by cc.itemUpdateAt desc
   </select>

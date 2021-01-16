@@ -59,6 +59,8 @@
     ,
     <include refid="Blob_Column_List" />
     from user
+    where username != #{username,jdbcType=VARCHAR}
+      and itemCode != #{itemcode,jdbcType=CHAR}
     order by itemUpdateAt desc
   </select>
   <select id="selectByUsername" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">

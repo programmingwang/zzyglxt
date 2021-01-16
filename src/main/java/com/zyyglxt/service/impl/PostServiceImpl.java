@@ -90,17 +90,4 @@ public class PostServiceImpl implements IPostService {
         return postDOMapper.maxNum();
     }
 
-    @Override
-    public List<PostDto> getPandA() {
-        List<PostDO> postDOS = postDOMapper.getPandA();
-        List<PostDto> postDtos = new ArrayList<>();
-        for (PostDO postDO : postDOS) {
-            PostDto postDto = new PostDto();
-            BeanUtils.copyProperties(postDO,postDto);
-            adviceDO advice = adviceService.getByDataCode(postDO.getItemcode());
-            BeanUtils.copyProperties(advice,postDto);
-            postDtos.add(postDto);
-        }
-        return postDtos;
-    }
 }

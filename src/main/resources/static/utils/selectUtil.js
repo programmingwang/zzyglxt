@@ -54,11 +54,14 @@
                 return preUrl + "?"+status+"=3";
             }else if(role === "政务资源科员"){
                 $('#btn_addTask').attr('style',"display:block");
-                return preUrl + "?"+status+"="+webStatus[0].id+"&"+status+"="+webStatus[1].id+"&"+status+"="+webStatus[2].id+"&"+status+"="+webStatus[3].id+"&"+status+"="+webStatus[4].id+"&"+status+"="+webStatus[5].id+"&"+status+"="+webStatus[6].id+"&"+status+"="+webStatus[7].id;
+                //return preUrl + "?"+status+"="+webStatus[0].id+"&"+status+"="+webStatus[1].id+"&"+status+"="+webStatus[2].id+"&"+status+"="+webStatus[3].id+"&"+status+"="+webStatus[4].id+"&"+status+"="+webStatus[5].id+"&"+status+"="+webStatus[6].id+"&"+status+"="+webStatus[7].id;
+                return preUrl + "?"+status+"=1";
             }else if(role === "政务资源处长"){
-                return preUrl + "?"+status+"="+webStatus[1].id+"&"+status+"="+webStatus[2].id+"&"+status+"="+webStatus[3].id;
+                //return preUrl + "?"+status+"="+webStatus[1].id+"&"+status+"="+webStatus[2].id+"&"+status+"="+webStatus[3].id;
+                return preUrl + "?"+status+"=2";
             }else if(role === "政务资源综合处处长") {
-                return preUrl + "?"+status+"="+webStatus[2].id+"&"+status+"="+webStatus[5].id+"&"+status+"="+webStatus[7].id;
+                //return preUrl + "?"+status+"="+webStatus[2].id+"&"+status+"="+webStatus[5].id+"&"+status+"="+webStatus[7].id;
+                return preUrl + "?"+status+"=3";
             }
         }
         
@@ -70,8 +73,9 @@
                         '<a class="submit"  style="margin:0 1em;text-decoration: none;color:#4df115;" data-target="#staticBackdrop" >提交</a>',
                         '<a class="delete" style="margin:0 1em;text-decoration: none;color:#ed0f09;"  data-toggle="modal" data-target="#staticBackdrop" >删除</a>',
                     ].join('');
-                }else if(status == webStatus[3].id || status == webStatus[4].id || status == webStatus[6].id){
+                }else if(status == webStatus[2].id || status == webStatus[3].id || status == webStatus[4].id || status == webStatus[6].id){
                     return [
+                        '<a class="edit" style="margin:0 1em;text-decoration: none;color:#348eff;" data-toggle="modal" data-target="" >编辑</a>',
                         '<a class="view" style="margin:0 1em;text-decoration: none;color:#348eff;" data-toggle="modal" data-target="" >查看</a>',
                         '<a class="delete" style="margin:0 1em;text-decoration: none;color:#ed0f09;" data-toggle="modal" data-target="#staticBackdrop" >删除</a>',
                     ].join('');
@@ -79,6 +83,11 @@
                     return [
                         '<a class="view" style="margin:0 1em;text-decoration: none;color:#348eff;" data-toggle="modal" data-target="" >查看</a>',
                         '<a class="no-submit" style="margin:0 1em;text-decoration: none;color:#ed0f09;" data-toggle="modal" data-target="" >取消提交</a>',
+                    ].join('');
+                }else if(status ==webStatus[5].id ||  status == webStatus[7].id ){
+                    return [
+                        '<a class="view" style="margin:0 1em;text-decoration: none;color:#348eff;" data-toggle="modal" data-target="" >查看</a>',
+                        '<a  class="under-shelf" style="margin:0 1em;text-decoration: none;color:#ed0f09;" data-toggle="modal" data-target="#staticBackdrop" >下架</a>',
                     ].join('');
                 }
 
@@ -93,6 +102,11 @@
                     return [
                         '<a class="view" data-toggle="modal" style="margin:0 1em;text-decoration: none;color:#348eff;" data-target="" >查看</a>',
                     ].join('');
+                }else if(status ==webStatus[5].id ){
+                    return [
+                        '<a class="view" style="margin:0 1em;text-decoration: none;color:#348eff;" data-toggle="modal" data-target="" >查看</a>',
+                        '<a  class="under-shelf" style="margin:0 1em;text-decoration: none;color:#ed0f09;" data-toggle="modal" data-target="#staticBackdrop" >下架</a>',
+                    ].join('');
                 }
 
             }else if(role === "文化宣传综合处处长"){
@@ -106,6 +120,10 @@
                     return [
                         '<a  class="view"  style="margin:0 1em;text-decoration: none;color:#348eff;" data-toggle="modal" data-target="" >查看</a>',
                         '<a  class="under-shelf" style="margin:0 1em;text-decoration: none;color:#ed0f09;" data-toggle="modal" data-target="#staticBackdrop" >下架</a>',
+                    ].join('');
+                }else if(status == webStatus[4].id){
+                    return [
+                        '<a  class="view"  style="margin:0 1em;text-decoration: none;color:#348eff;" data-toggle="modal" data-target="" >查看</a>',
                     ].join('');
                 }
 

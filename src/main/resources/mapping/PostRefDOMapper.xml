@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zyyglxt.dao.PostRefDOMapper">
+  <resultMap id="BaseResultMap" type="com.zyyglxt.dataobject.PostRefDO">
+    <id column="itemID" jdbcType="INTEGER" property="itemid" />
+    <id column="itemCode" jdbcType="CHAR" property="itemcode" />
+    <result column="DATE_CODE" jdbcType="CHAR" property="dateCode" />
+    <result column="RECEIVER_ID" jdbcType="CHAR" property="receiverId" />
+    <result column="RECEIVER_TYPE" jdbcType="INTEGER" property="receiverType" />
+    <result column="SEND_STATUS" jdbcType="INTEGER" property="sendStatus" />
+    <result column="CREATER" jdbcType="VARCHAR" property="creater" />
+    <result column="itemCreateAt" jdbcType="TIMESTAMP" property="itemcreateat" />
+    <result column="UPDATER" jdbcType="VARCHAR" property="updater" />
+    <result column="itemUpdateAt" jdbcType="TIMESTAMP" property="itemupdateat" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    itemID, itemCode, DATE_CODE, RECEIVER_ID, RECEIVER_TYPE, SEND_STATUS, CREATER, itemCreateAt, 
+    UPDATER, itemUpdateAt
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="com.zyyglxt.dataobject.PostRefDOKey" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tb_governres_post_ref
+    where itemID = #{itemid,jdbcType=INTEGER}
+      and itemCode = #{itemcode,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.zyyglxt.dataobject.PostRefDOKey">
+    delete from tb_governres_post_ref
+    where itemID = #{itemid,jdbcType=INTEGER}
+      and itemCode = #{itemcode,jdbcType=CHAR}
+  </delete>
+  <insert id="insert" parameterType="com.zyyglxt.dataobject.PostRefDO">
+    insert into tb_governres_post_ref (itemID, itemCode, DATE_CODE, 
+      RECEIVER_ID, RECEIVER_TYPE, SEND_STATUS, 
+      CREATER, itemCreateAt, UPDATER, 
+      itemUpdateAt)
+    values (#{itemid,jdbcType=INTEGER}, #{itemcode,jdbcType=CHAR}, #{dateCode,jdbcType=CHAR}, 
+      #{receiverId,jdbcType=CHAR}, #{receiverType,jdbcType=INTEGER}, #{sendStatus,jdbcType=INTEGER}, 
+      #{creater,jdbcType=VARCHAR}, #{itemcreateat,jdbcType=TIMESTAMP}, #{updater,jdbcType=VARCHAR}, 
+      #{itemupdateat,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zyyglxt.dataobject.PostRefDO">
+    insert into tb_governres_post_ref
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="itemid != null">
+        itemID,
+      </if>
+      <if test="itemcode != null">
+        itemCode,
+      </if>
+      <if test="dateCode != null">
+        DATE_CODE,
+      </if>
+      <if test="receiverId != null">
+        RECEIVER_ID,
+      </if>
+      <if test="receiverType != null">
+        RECEIVER_TYPE,
+      </if>
+      <if test="sendStatus != null">
+        SEND_STATUS,
+      </if>
+      <if test="creater != null">
+        CREATER,
+      </if>
+      <if test="itemcreateat != null">
+        itemCreateAt,
+      </if>
+      <if test="updater != null">
+        UPDATER,
+      </if>
+      <if test="itemupdateat != null">
+        itemUpdateAt,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="itemid != null">
+        #{itemid,jdbcType=INTEGER},
+      </if>
+      <if test="itemcode != null">
+        #{itemcode,jdbcType=CHAR},
+      </if>
+      <if test="dateCode != null">
+        #{dateCode,jdbcType=CHAR},
+      </if>
+      <if test="receiverId != null">
+        #{receiverId,jdbcType=CHAR},
+      </if>
+      <if test="receiverType != null">
+        #{receiverType,jdbcType=INTEGER},
+      </if>
+      <if test="sendStatus != null">
+        #{sendStatus,jdbcType=INTEGER},
+      </if>
+      <if test="creater != null">
+        #{creater,jdbcType=VARCHAR},
+      </if>
+      <if test="itemcreateat != null">
+        #{itemcreateat,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updater != null">
+        #{updater,jdbcType=VARCHAR},
+      </if>
+      <if test="itemupdateat != null">
+        #{itemupdateat,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zyyglxt.dataobject.PostRefDO">
+    update tb_governres_post_ref
+    <set>
+      <if test="dateCode != null">
+        DATE_CODE = #{dateCode,jdbcType=CHAR},
+      </if>
+      <if test="receiverId != null">
+        RECEIVER_ID = #{receiverId,jdbcType=CHAR},
+      </if>
+      <if test="receiverType != null">
+        RECEIVER_TYPE = #{receiverType,jdbcType=INTEGER},
+      </if>
+      <if test="sendStatus != null">
+        SEND_STATUS = #{sendStatus,jdbcType=INTEGER},
+      </if>
+      <if test="creater != null">
+        CREATER = #{creater,jdbcType=VARCHAR},
+      </if>
+      <if test="itemcreateat != null">
+        itemCreateAt = #{itemcreateat,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updater != null">
+        UPDATER = #{updater,jdbcType=VARCHAR},
+      </if>
+      <if test="itemupdateat != null">
+        itemUpdateAt = #{itemupdateat,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where itemID = #{itemid,jdbcType=INTEGER}
+      and itemCode = #{itemcode,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zyyglxt.dataobject.PostRefDO">
+    update tb_governres_post_ref
+    set DATE_CODE = #{dateCode,jdbcType=CHAR},
+      RECEIVER_ID = #{receiverId,jdbcType=CHAR},
+      RECEIVER_TYPE = #{receiverType,jdbcType=INTEGER},
+      SEND_STATUS = #{sendStatus,jdbcType=INTEGER},
+      CREATER = #{creater,jdbcType=VARCHAR},
+      itemCreateAt = #{itemcreateat,jdbcType=TIMESTAMP},
+      UPDATER = #{updater,jdbcType=VARCHAR},
+      itemUpdateAt = #{itemupdateat,jdbcType=TIMESTAMP}
+    where itemID = #{itemid,jdbcType=INTEGER}
+      and itemCode = #{itemcode,jdbcType=CHAR}
+  </update>
+</mapper>

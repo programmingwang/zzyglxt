@@ -26,18 +26,21 @@
     FROM tb_industrial_develop_expert
     WHERE itemCode=#{itemcode,jdbcType=CHAR}) a
     WHERE u.itemCode = a.USER_CODE
+    order by itemUpdateAt desc
   </select>
 
   <select id="selectByUserCode" parameterType="java.lang.String" resultType="java.lang.String">
     SELECT itemCode
     FROM tb_industrial_develop_expert
     WHERE USER_CODE = #{userCode,jdbcType=CHAR}
+    order by itemUpdateAt desc
   </select>
 
 
   <select id="selectAll" resultType="com.zyyglxt.dto.industrialDevelop.IndustrialDevelopExpertDto">
     SELECT ex.itemID,ex.itemCode,ex.USER_CODE as userCode,u.username,u.name,ex.filed,u.gender,u.mobilePhone
     FROM tb_industrial_develop_expert ex,user u WHERE u.itemCode=ex.USER_CODE
+    order by ex.itemUpdateAt desc
   </select>
 
   <delete id="deleteByPrimaryKey" parameterType="com.zyyglxt.dto.industrialDevelop.IndustrialDevelopExpertDto">

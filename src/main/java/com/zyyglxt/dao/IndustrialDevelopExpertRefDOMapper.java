@@ -2,6 +2,7 @@ package com.zyyglxt.dao;
 
 import com.zyyglxt.dataobject.IndustrialDevelopExpertRefDO;
 import com.zyyglxt.dataobject.IndustrialDevelopExpertRefDOKey;
+import com.zyyglxt.dto.ExmaineDto;
 
 import java.util.List;
 
@@ -15,9 +16,9 @@ public interface IndustrialDevelopExpertRefDOMapper {
 
     IndustrialDevelopExpertRefDO selectByPrimaryKey(IndustrialDevelopExpertRefDOKey key);
 
-    List<IndustrialDevelopExpertRefDO> selectAll();
+    List<ExmaineDto> selectAll();
 
-    List<IndustrialDevelopExpertRefDO> selectByExpertCode(String expertCode);
+    List<ExmaineDto> selectByExpertCode(String expertCode);
 
     int updateByPrimaryKeySelective(IndustrialDevelopExpertRefDO record);
 

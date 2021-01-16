@@ -63,6 +63,11 @@ public class IndustrialDevelopSchoolServiceImpl implements IndustrialDevelopScho
         if (organizationDO == null){
             return -1;
         } else {
+            if (record.getAddressCity() != null){
+                OrganizationDO updated = new OrganizationDO();
+                updated.setOrgLocate(record.getAddressCity());
+                organizationDOMapper.updateByOrgCode(updated,record.getOrgCode());
+            }
             record.setOrgCode(organizationDO.getOrgCode());
             return industrialDevelopSchoolMapper.insertSelective(record);
         }
@@ -75,11 +80,21 @@ public class IndustrialDevelopSchoolServiceImpl implements IndustrialDevelopScho
 
     @Override
     public int updateByPrimaryKeySelective(IndustrialDevelopSchool record) {
+        if (record.getAddressCity() != null){
+            OrganizationDO updated = new OrganizationDO();
+            updated.setOrgLocate(record.getAddressCity());
+            organizationDOMapper.updateByOrgCode(updated,usernameUtil.getOrgCode());
+        }
         return industrialDevelopSchoolMapper.updateByPrimaryKeySelective(record);
     }
 
     @Override
     public int updateByPrimaryKey(IndustrialDevelopSchool record) {
+        if (record.getAddressCity() != null){
+            OrganizationDO updated = new OrganizationDO();
+            updated.setOrgLocate(record.getAddressCity());
+            organizationDOMapper.updateByOrgCode(updated,usernameUtil.getOrgCode());
+        }
         return industrialDevelopSchoolMapper.updateByPrimaryKey(record);
     }
 

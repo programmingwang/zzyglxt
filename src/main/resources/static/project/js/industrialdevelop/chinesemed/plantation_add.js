@@ -6,6 +6,7 @@
             var orgType = "plant"
             var pathUrl = "/industrialdevelop/medMat/medMat"
             var type = isUpdate() ? "put" : "post";
+            var itemcode;
             var status = dictUtil.getDictByCode(dictUtil.DICT_LIST.projectStatus);
             const editor = objectUtil.wangEditorUtil();
 
@@ -23,6 +24,7 @@
                 param.addressCountry = $("#addressCountry").val()
                 param.address = $("#address").val()
                 param.intruduce = editor.txt.html()
+                param.itemcode = itemcode
                 param.type = orgType
                 return param;
             }
@@ -31,11 +33,11 @@
             function updateData(btnType){
                 var operateMessage;
                 var param = generateParam();
-                if ("save".equals(btnType)){
+                if ("save" === btnType){
                     param.status = status[0].id;
                     operateMessage = "保存信息成功";
                 }
-                else if ("submit".equals(btnType)){
+                else if ("submit" === btnType){
                     param.status = status[1].id;
                     operateMessage = "提交信息成功";
                 }
@@ -69,7 +71,6 @@
                     var needData;
                     ajaxUtil.myAjax(null,url + "/getByOrgCode",null,function (data) {
                         if(ajaxUtil.success(data)){
-                            console.log(data);
                             needData = data.data;
                         }
                     },false,true,"get");

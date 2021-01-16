@@ -36,6 +36,60 @@
                 orange.redirect(jumpUrl);
             });
 
+            $("#btn_save").unbind().on('click',function () {
+                var hosp;
+                var specialty;
+                var entity;
+                var requestUrl;
+                var operateMessage;
+
+                /*拿到下拉框所选的值的其他信息*/
+                hosp = hosps.find(function (obj) {return obj.itemcode === $("#hospitalName").val()});
+                specialty = specialtys.find(function (obj) {return obj.itemcode === $("#specialtyName").val()});
+
+                if (!updateStatus){
+                    requestUrl = "/medicalService/chineseMedicine/add";
+                    operateMessage = "新增名老中医成功";
+                    entity = {
+                        itemcode: stringUtil.getUUID(),
+                        chineseMedicineStatus: '0'
+                    };
+                }
+                else {
+                    requestUrl = "/medicalService/chineseMedicine/update";
+                    operateMessage = "更新名老中医成功";
+                    entity = {
+                        itemid: tempdata.itemid,
+                        itemcode: tempdata.itemcode,
+                        chineseMedicineStatus: '0'
+                    };
+                }
+                entity["chineseMedicineName"] = $("#chineseMedicineName").val();
+                entity["chineseMedicineTitle"] = $("#chineseMedicineTitle").val();
+                entity["chineseMedicineType"] = chineseMedicineType[$("#chineseMedicineType").val()].text;
+                entity["hospCode"] = hosp.itemcode;
+                entity["hospitalName"] = hosp.hospitalName;
+                entity["deptCode"] = specialty.itemcode;
+                entity["specialtyName"] = specialty.specialtyName;
+                entity["visitTime"] = $("#visitTime").val()
+                entity["phone"] = $("#phone").val();
+                entity["mainVisit"] = $("#mainVisit").val();
+                entity["expertBriefIntroduce"] = $("#expertBriefIntroduce").val();
+                entity["expertIntroduce"] = editor.txt.html();
+                entity["medicineRecords"] = editor2.txt.html();
+
+                fileUtil.handleFile(updateStatus, entity.itemcode, uploadImg.getFiles()[0]);
+
+                ajaxUtil.myAjax(null,requestUrl,entity,function (data) {
+                    if(ajaxUtil.success(data)){
+                        alertUtil.info(operateMessage);
+                        orange.redirect(jumpUrl);
+                    }else {
+                        alertUtil.alert(data.msg);
+                    }
+                },false,true);
+            });
+
             /*处理提交按钮*/
             $("#btn_insert").unbind().on('click',function () {
                 var hosp;
@@ -53,6 +107,7 @@
                     operateMessage = "新增名老中医成功";
                     entity = {
                         itemcode: stringUtil.getUUID(),
+                        chineseMedicineStatus: '1'
                     };
                 }
                 else {
@@ -60,7 +115,8 @@
                     operateMessage = "更新名老中医成功";
                     entity = {
                         itemid: tempdata.itemid,
-                        itemcode: tempdata.itemcode
+                        itemcode: tempdata.itemcode,
+                        chineseMedicineStatus: '1'
                     };
                 }
                 entity["chineseMedicineName"] = $("#chineseMedicineName").val();
@@ -76,7 +132,6 @@
                 entity["expertBriefIntroduce"] = $("#expertBriefIntroduce").val();
                 entity["expertIntroduce"] = editor.txt.html();
                 entity["medicineRecords"] = editor2.txt.html();
-                entity["chineseMedicineStatus"] = webStatus[0].id
 
                 fileUtil.handleFile(updateStatus, entity.itemcode, uploadImg.getFiles()[0]);
 

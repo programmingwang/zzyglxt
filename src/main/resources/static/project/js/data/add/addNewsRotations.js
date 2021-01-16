@@ -14,6 +14,56 @@
                 orange.redirect(url);
             });
 
+            $("#btn_save").unbind().on('click',function () {
+                var newsRotationsEntity;
+                var addUpdateUrl;
+                var operateMessage;
+                if(!isUpdate()){
+                    addUpdateUrl = "/datado/newsInf/insertNewsInf";
+                    operateMessage = "新增新闻轮播图成功";
+                    newsRotationsEntity = {
+                        itemcode: stringUtil.getUUID(),
+                        dataTitle : $("#dataTitle").val(),
+                        dataSource : $("#dataSource").val(),
+                        dataAuthor : $("#dataAuthor").val(),
+                        dataContent : editor.txt.html(),
+                        releaseOrNot : "y",
+                        dataStatus : "0",
+                        dataLocation : $("#dataLocation").val(),
+                    };
+                }else{
+                    var needData = JSON.parse(localStorage.getItem("rowData"));
+                    addUpdateUrl = "/datado/newsInf/updateNewsInf";
+                    newsRotationsEntity = {
+                        itemid: needData.itemid,
+                        itemcode: needData.itemcode,
+                        dataTitle : $("#dataTitle").val(),
+                        dataSource : $("#dataSource").val(),
+                        dataAuthor : $("#dataAuthor").val(),
+                        dataContent : editor.txt.html(),
+                        dataLocation : $("#dataLocation").val(),
+                    }
+                    operateMessage = "更新新闻轮播图成功";
+                }
+
+                fileUtil.handleFile(isUpdate(), newsRotationsEntity.itemcode, uploadImg.getFiles()[0]);
+
+                ajaxUtil.myAjax(null,addUpdateUrl,newsRotationsEntity,function (data) {
+                    if(ajaxUtil.success(data)){
+                        if(data.code == ajaxUtil.successCode) {
+                            alertUtil.info(operateMessage);
+                            var url = "/data/dataNewsRotations";
+                            orange.redirect(url);
+                        }else{
+                            alertUtil.error(data.msg);
+                        }
+                    }else {
+                        alertUtil.error(data.msg);
+                    }
+                },false,true);
+
+            });
+
             $("#submitbtn").unbind().on('click',function () {
                 var newsRotationsEntity;
                 var addUpdateUrl;
@@ -27,6 +77,8 @@
                         dataSource : $("#dataSource").val(),
                         dataAuthor : $("#dataAuthor").val(),
                         dataContent : editor.txt.html(),
+                        releaseOrNot : "y",
+                        dataStatus : "1",
                         dataLocation : $("#dataLocation").val(),
                     };
                 }else{

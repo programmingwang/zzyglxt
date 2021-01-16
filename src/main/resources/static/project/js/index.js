@@ -15,21 +15,21 @@
                         pid: ""
                     },
                     {
-                        menu_name: "＞中医医史",
+                        menu_name: "中医医史",
                         menu_url: "/chineseCultural/resource/traditionalCultural",
                         id: "1-1",
                         level: "2",
                         pid: "1"
                     },
                     {
-                        menu_name: "＞中医流派",
+                        menu_name: "中医流派",
                         menu_url: "/chineseCultural/resource/traditionalSchool",
                         id: "1-2",
                         level: "2",
                         pid: "1"
                     },
                     {
-                        menu_name: "＞历代名家",
+                        menu_name: "历代名家",
                         menu_url: "/chineseCultural/resource/traditionalDoctor",
                         id: "1-3",
                         level: "2",
@@ -43,21 +43,21 @@
                         pid: ""
                     },
                     {
-                        menu_name: "＞文化古迹",
+                        menu_name: "文化古迹",
                         menu_url: "/chineseCultural/facility/culturalRelics",
                         id: "2-1",
                         level: "2",
                         pid: "2"
                     },
                     {
-                        menu_name: "＞非物质文化遗产",
+                        menu_name: "非物质文化遗产",
                         menu_url: "/chineseCultural/facility/intangibleCulturalHeritage",
                         id: "2-2",
                         level: "2",
                         pid: "2"
                     },
                     {
-                        menu_name: "＞文化场馆",
+                        menu_name: "文化场馆",
                         menu_url: "/chineseCultural/facility/culturalVenues",
                         id: "2-3",
                         level: "2",
@@ -71,21 +71,21 @@
                         pid: ""
                     },
                     {
-                        menu_name: "＞电视电影",
+                        menu_name: "电视电影",
                         menu_url: "/chineseCultural/production/movieTV",
                         id: "3-1",
                         level: "2",
                         pid: "3"
                     },
                     {
-                        menu_name: "＞动漫游戏",
+                        menu_name: "动漫游戏",
                         menu_url: "/chineseCultural/production/comicGame",
                         id: "3-2",
                         level: "2",
                         pid: "3"
                     },
                     {
-                        menu_name: "＞漫画典故",
+                        menu_name: "漫画典故",
                         menu_url: "/chineseCultural/production/cartoonAllusions",
                         id: "3-3",
                         level: "2",
@@ -143,7 +143,7 @@
                     },
                     {
 
-                        menu_name: "中医药名科",
+                        menu_name: "中医名科",
                         menu_url: "/medicalService/specialty",
                         id: "7",
                         level: "1",
@@ -174,8 +174,15 @@
                 $(".tTile").css("display","none");
                 $("#xczy").css("display","block");
             }
-            if (roleName === '政务资源处长'||roleName === '政务资源科员'||roleName === '政务资源综合处处长'){
+            if (roleName === '政务资源处长'||roleName === '政务资源科员'){
                 var menu_list = [
+                    {
+                        menu_name: "首页",
+                        menu_url: "/data/mainPage",
+                        id: "12",
+                        level: "1",
+                        pid: ""
+                    },
                     {
                         menu_name: "信息发布",
                         menu_url: "/data/dataNewsRotations",
@@ -184,45 +191,595 @@
                         pid: ""
                     },
                     {
-                        menu_name: "＞新闻轮播图",
+                        menu_name: "新闻轮播图",
                         menu_url: "/data/dataNewsRotations",
                         id: "13-1",
                         level: "2",
                         pid: "13"
                     },
                     {
-                        menu_name: "＞新闻管理",
+                        menu_name: "新闻管理",
                         menu_url: "/data/dataNewsInf",
                         id: "13-2",
                         level: "2",
                         pid: "13"
                     },
                     {
-                        menu_name: "＞通知公告",
+                        menu_name: "通知公告",
                         menu_url: "/data/dataAnnouncement",
                         id: "13-3",
                         level: "2",
                         pid: "13"
                     },
                     {
-                        menu_name: "＞政策法规",
+                        menu_name: "政策法规",
                         menu_url: "/data/dataRegulation",
                         id: "13-4",
                         level: "2",
                         pid: "13"
                     },
                     {
-                        menu_name: "＞办事流程",
-                        menu_url: "/data/dataProcess",
+                        menu_name: "规章制度",
+                        menu_url: "/data/dataRules",
                         id: "13-5",
                         level: "2",
                         pid: "13"
+                    },
+                    {
+                        menu_name: "领导讲话",
+                        menu_url: "/data/dataLeader",
+                        id: "13-6",
+                        level: "2",
+                        pid: "13"
+                    },
+                    {
+                        menu_name: "办事流程",
+                        menu_url: "/data/dataProcess",
+                        id: "13-7",
+                        level: "2",
+                        pid: "13"
+                    },
+                    {
+                        menu_name: "文件流转",
+                        menu_url: "",
+                        id: "14",
+                        level: "1",
+                        pid: ""
+                    },
+                    {
+                        menu_name: "发文管理",
+                        menu_url: "/document/post",
+                        id: "14-1",
+                        level: "2",
+                        pid: "14"
+                    },
+                    {
+                        menu_name: "收文管理",
+                        menu_url: "/document/receipt",
+                        id: "14-2",
+                        level: "2",
+                        pid: "14"
+                    },
+                    {
+                        menu_name: "内部会签",
+                        menu_url: "/document/sign",
+                        id: "14-3",
+                        level: "2",
+                        pid: "14"
+                    },
+                    {
+                        menu_name: "请示报告",
+                        menu_url: "/document/report",
+                        id: "14-4",
+                        level: "2",
+                        pid: "14"
                     }
                 ];
                 $(".tTile").css("display","none");
                 $("#zwbg").css("display","block");
             }
-            if (roleName === '主研人'||roleName === '科研项目申报单位'){
+            if (roleName === '政务资源综合处处长'){
+                var menu_list = [
+                    {
+                        menu_name: "首页",
+                        menu_url: "/data/mainPage",
+                        id: "12",
+                        level: "1",
+                        pid: ""
+                    },
+                    {
+                        menu_name: "信息发布",
+                        menu_url: "/data/dataNewsRotations",
+                        id: "13",
+                        level: "1",
+                        pid: ""
+                    },
+                    {
+                        menu_name: "新闻轮播图",
+                        menu_url: "/data/dataNewsRotations",
+                        id: "13-1",
+                        level: "2",
+                        pid: "13"
+                    },
+                    {
+                        menu_name: "新闻管理",
+                        menu_url: "/data/dataNewsInf",
+                        id: "13-2",
+                        level: "2",
+                        pid: "13"
+                    },
+                    {
+                        menu_name: "通知公告",
+                        menu_url: "/data/dataAnnouncement",
+                        id: "13-3",
+                        level: "2",
+                        pid: "13"
+                    },
+                    {
+                        menu_name: "政策法规",
+                        menu_url: "/data/dataRegulation",
+                        id: "13-4",
+                        level: "2",
+                        pid: "13"
+                    },
+                    {
+                        menu_name: "规章制度",
+                        menu_url: "/data/dataRules",
+                        id: "13-5",
+                        level: "2",
+                        pid: "13"
+                    },
+                    {
+                        menu_name: "领导讲话",
+                        menu_url: "/data/dataLeader",
+                        id: "13-6",
+                        level: "2",
+                        pid: "13"
+                    },
+                    {
+                        menu_name: "办事流程",
+                        menu_url: "/data/dataProcess",
+                        id: "13-7",
+                        level: "2",
+                        pid: "13"
+                    },
+                    {
+                        menu_name: "文件流转",
+                        menu_url: "",
+                        id: "14",
+                        level: "1",
+                        pid: ""
+                    },
+                    {
+                        menu_name: "发文管理",
+                        menu_url: "/document/post",
+                        id: "14-1",
+                        level: "2",
+                        pid: "14"
+                    },
+                    {
+                        menu_name: "收文管理",
+                        menu_url: "/document/receipt",
+                        id: "14-2",
+                        level: "2",
+                        pid: "14"
+                    },
+                    {
+                        menu_name: "内部会签",
+                        menu_url: "/document/sign",
+                        id: "14-3",
+                        level: "2",
+                        pid: "14"
+                    },
+                    {
+                        menu_name: "请示报告",
+                        menu_url: "/document/report",
+                        id: "14-4",
+                        level: "2",
+                        pid: "14"
+                    },
+                    {
+                        menu_name: "管理门户",
+                        menu_url: "",
+                        id: "15",
+                        level: "1",
+                        pid: ""
+                    },
+                    {
+                        menu_name: "接入系统管理",
+                        menu_url: "",
+                        id: "15-1",
+                        level: "2",
+                        pid: "15"
+                    },
+                    {
+                        menu_name: "角色管理",
+                        menu_url: "",
+                        id: "15-2",
+                        level: "2",
+                        pid: "15"
+                    },
+                    {
+                        menu_name: "用户映射",
+                        menu_url: "",
+                        id: "15-3",
+                        level: "2",
+                        pid: "15"
+                    },
+                    {
+                        menu_name: "系统管理",
+                        menu_url: "",
+                        id: "16",
+                        level: "1",
+                        pid: ""
+                    },
+                    {
+                        menu_name: "基本字典信息",
+                        menu_url: "",
+                        id: "16-1",
+                        level: "2",
+                        pid: "16"
+                    },
+                    {
+                        menu_name: "权限配置",
+                        menu_url: "",
+                        id: "16-2",
+                        level: "2",
+                        pid: "16"
+                    },
+                    {
+                        menu_name: "系统资料配置",
+                        menu_url: "",
+                        id: "16-3",
+                        level: "2",
+                        pid: "16"
+                    },
+                    {
+                        menu_name: "系统日志",
+                        menu_url: "",
+                        id: "16-4",
+                        level: "2",
+                        pid: "16"
+                    },
+                ];
+                $(".tTile").css("display","none");
+                $("#zwbg").css("display","block");
+            }
+            if (roleName === '政务资源分管局长'){
+                var menu_list = [
+                    {
+                        menu_name: "首页",
+                        menu_url: "/data/mainPage",
+                        id: "12",
+                        level: "1",
+                        pid: ""
+                    },
+                    {
+                        menu_name: "信息发布",
+                        menu_url: "/data/dataNewsRotations",
+                        id: "13",
+                        level: "1",
+                        pid: ""
+                    },
+                    {
+                        menu_name: "新闻轮播图",
+                        menu_url: "/data/dataNewsRotations",
+                        id: "13-1",
+                        level: "2",
+                        pid: "13"
+                    },
+                    {
+                        menu_name: "新闻管理",
+                        menu_url: "/data/dataNewsInf",
+                        id: "13-2",
+                        level: "2",
+                        pid: "13"
+                    },
+                    {
+                        menu_name: "通知公告",
+                        menu_url: "/data/dataAnnouncement",
+                        id: "13-3",
+                        level: "2",
+                        pid: "13"
+                    },
+                    {
+                        menu_name: "政策法规",
+                        menu_url: "/data/dataRegulation",
+                        id: "13-4",
+                        level: "2",
+                        pid: "13"
+                    },
+                    {
+                        menu_name: "规章制度",
+                        menu_url: "/data/dataRules",
+                        id: "13-5",
+                        level: "2",
+                        pid: "13"
+                    },
+                    {
+                        menu_name: "领导讲话",
+                        menu_url: "/data/dataLeader",
+                        id: "13-6",
+                        level: "2",
+                        pid: "13"
+                    },
+                    {
+                        menu_name: "办事流程",
+                        menu_url: "/data/dataProcess",
+                        id: "13-7",
+                        level: "2",
+                        pid: "13"
+                    },
+                    {
+                        menu_name: "文件流转",
+                        menu_url: "",
+                        id: "14",
+                        level: "1",
+                        pid: ""
+                    },
+                    {
+                        menu_name: "发文管理",
+                        menu_url: "/document/post",
+                        id: "14-1",
+                        level: "2",
+                        pid: "14"
+                    },
+                    {
+                        menu_name: "收文管理",
+                        menu_url: "/document/receipt",
+                        id: "14-2",
+                        level: "2",
+                        pid: "14"
+                    },
+                    {
+                        menu_name: "内部会签",
+                        menu_url: "/document/countersign",
+                        id: "14-3",
+                        level: "2",
+                        pid: "14"
+                    },
+                    {
+                        menu_name: "请示报告",
+                        menu_url: "/document/report",
+                        id: "14-4",
+                        level: "2",
+                        pid: "14"
+                    },
+                    {
+                        menu_name: "管理门户",
+                        menu_url: "",
+                        id: "15",
+                        level: "1",
+                        pid: ""
+                    },
+                    {
+                        menu_name: "接入系统管理",
+                        menu_url: "",
+                        id: "15-1",
+                        level: "2",
+                        pid: "15"
+                    },
+                    {
+                        menu_name: "角色管理",
+                        menu_url: "",
+                        id: "15-2",
+                        level: "2",
+                        pid: "15"
+                    },
+                    {
+                        menu_name: "用户映射",
+                        menu_url: "",
+                        id: "15-3",
+                        level: "2",
+                        pid: "15"
+                    },
+                    {
+                        menu_name: "系统管理",
+                        menu_url: "",
+                        id: "16",
+                        level: "1",
+                        pid: ""
+                    },
+                    {
+                        menu_name: "基本字典信息",
+                        menu_url: "",
+                        id: "16-1",
+                        level: "2",
+                        pid: "16"
+                    },
+                    {
+                        menu_name: "权限配置",
+                        menu_url: "",
+                        id: "16-2",
+                        level: "2",
+                        pid: "16"
+                    },
+                    {
+                        menu_name: "系统资料配置",
+                        menu_url: "",
+                        id: "16-3",
+                        level: "2",
+                        pid: "16"
+                    },
+                    {
+                        menu_name: "系统日志",
+                        menu_url: "",
+                        id: "16-4",
+                        level: "2",
+                        pid: "16"
+                    },
+                ];
+                $(".tTile").css("display","none");
+                $("#zwbg").css("display","block");
+            }
+            if (roleName === '政务资源局长'){
+                var menu_list = [
+                    {
+                        menu_name: "首页",
+                        menu_url: "/data/mainPage",
+                        id: "12",
+                        level: "1",
+                        pid: ""
+                    },
+                    {
+                        menu_name: "信息发布",
+                        menu_url: "/data/dataNewsRotations",
+                        id: "13",
+                        level: "1",
+                        pid: ""
+                    },
+                    {
+                        menu_name: "新闻轮播图",
+                        menu_url: "/data/dataNewsRotations",
+                        id: "13-1",
+                        level: "2",
+                        pid: "13"
+                    },
+                    {
+                        menu_name: "新闻管理",
+                        menu_url: "/data/dataNewsInf",
+                        id: "13-2",
+                        level: "2",
+                        pid: "13"
+                    },
+                    {
+                        menu_name: "通知公告",
+                        menu_url: "/data/dataAnnouncement",
+                        id: "13-3",
+                        level: "2",
+                        pid: "13"
+                    },
+                    {
+                        menu_name: "政策法规",
+                        menu_url: "/data/dataRegulation",
+                        id: "13-4",
+                        level: "2",
+                        pid: "13"
+                    },
+                    {
+                        menu_name: "规章制度",
+                        menu_url: "/data/dataRules",
+                        id: "13-5",
+                        level: "2",
+                        pid: "13"
+                    },
+                    {
+                        menu_name: "领导讲话",
+                        menu_url: "/data/dataLeader",
+                        id: "13-6",
+                        level: "2",
+                        pid: "13"
+                    },
+                    {
+                        menu_name: "办事流程",
+                        menu_url: "/data/dataProcess",
+                        id: "13-7",
+                        level: "2",
+                        pid: "13"
+                    },
+                    {
+                        menu_name: "文件流转",
+                        menu_url: "",
+                        id: "14",
+                        level: "1",
+                        pid: ""
+                    },
+                    {
+                        menu_name: "发文管理",
+                        menu_url: "/document/post",
+                        id: "14-1",
+                        level: "2",
+                        pid: "14"
+                    },
+                    {
+                        menu_name: "收文管理",
+                        menu_url: "/document/receipt",
+                        id: "14-2",
+                        level: "2",
+                        pid: "14"
+                    },
+                    {
+                        menu_name: "内部会签",
+                        menu_url: "/document/countersign",
+                        id: "14-3",
+                        level: "2",
+                        pid: "14"
+                    },
+                    {
+                        menu_name: "请示报告",
+                        menu_url: "/document/report",
+                        id: "14-4",
+                        level: "2",
+                        pid: "14"
+                    },
+                    {
+                        menu_name: "管理门户",
+                        menu_url: "",
+                        id: "15",
+                        level: "1",
+                        pid: ""
+                    },
+                    {
+                        menu_name: "接入系统管理",
+                        menu_url: "",
+                        id: "15-1",
+                        level: "2",
+                        pid: "15"
+                    },
+                    {
+                        menu_name: "角色管理",
+                        menu_url: "",
+                        id: "15-2",
+                        level: "2",
+                        pid: "15"
+                    },
+                    {
+                        menu_name: "用户映射",
+                        menu_url: "",
+                        id: "15-3",
+                        level: "2",
+                        pid: "15"
+                    },
+                    {
+                        menu_name: "系统管理",
+                        menu_url: "",
+                        id: "16",
+                        level: "1",
+                        pid: ""
+                    },
+                    {
+                        menu_name: "基本字典信息",
+                        menu_url: "",
+                        id: "16-1",
+                        level: "2",
+                        pid: "16"
+                    },
+                    {
+                        menu_name: "权限配置",
+                        menu_url: "",
+                        id: "16-2",
+                        level: "2",
+                        pid: "16"
+                    },
+                    {
+                        menu_name: "系统资料配置",
+                        menu_url: "",
+                        id: "16-3",
+                        level: "2",
+                        pid: "16"
+                    },
+                    {
+                        menu_name: "系统日志",
+                        menu_url: "",
+                        id: "16-4",
+                        level: "2",
+                        pid: "16"
+                    },
+                ];
+                $(".tTile").css("display","none");
+                $("#zwbg").css("display","block");
+            }
+            if (roleName === '主研人'){
                 var menu_list = [
                     {
                         menu_name: "科研项目管理",
@@ -232,14 +789,41 @@
                         pid: ""
                     },
                     {
-                        menu_name: "＞课题管理",
+                        menu_name: "课题管理",
+                        menu_url: "/scientificProject/topicManagement",
+                        id: "15-1",
+                        level: "2",
+                        pid: "15"
+                    },
+                    // {
+                    //     menu_name: "账号管理",
+                    //     menu_url: "/scientificProject/accountManagement",
+                    //     id: "15-2",
+                    //     level: "2",
+                    //     pid: "15"
+                    // },
+                ];
+                $(".tTile").css("display","none");
+                $("#kyxm").css("display","block");
+            }
+            if (roleName === '科研项目申报单位'){
+                var menu_list = [
+                    {
+                        menu_name: "科研项目管理",
+                        menu_url: "",
+                        id: "15",
+                        level: "1",
+                        pid: ""
+                    },
+                    {
+                        menu_name: "课题管理",
                         menu_url: "/scientificProject/topicManagement",
                         id: "15-1",
                         level: "2",
                         pid: "15"
                     },
                     {
-                        menu_name: "＞账号管理",
+                        menu_name: "账号管理",
                         menu_url: "/scientificProject/accountManagement",
                         id: "15-2",
                         level: "2",
@@ -259,42 +843,42 @@
                         pid: ""
                     },
                     {
-                        menu_name: "＞设置填报时间",
+                        menu_name: "设置填报时间",
                         menu_url: "/industrialdevelop/chinesemed/timerecord",
                         id: "15-1",
                         level: "2",
                         pid: "15"
                     },
                     {
-                        menu_name: "＞账号管理",
+                        menu_name: "账号管理",
                         menu_url: "/scientificProject/accountManagement",
                         id: "15-2",
                         level: "2",
                         pid: "15"
                     },
                     {
-                        menu_name: "＞课题管理",
+                        menu_name: "课题管理",
                         menu_url: "/scientificProject/topicManagement",
                         id: "15-3",
                         level: "2",
                         pid: "15"
                     },
                     {
-                        menu_name: "＞专家管理",
+                        menu_name: "专家管理",
                         menu_url: "/scientificProject/expert",
                         id: "15-4",
                         level: "2",
                         pid: "15"
                     },
                     {
-                        menu_name: "＞分配专家",
+                        menu_name: "分配专家",
                         menu_url: "/scientificProject/distributionExpert",
                         id: "15-5",
                         level: "2",
                         pid: "15"
                     },
                     {
-                        menu_name: "＞集中评审",
+                        menu_name: "集中评审",
                         menu_url: "/scientificProject/centralizedReview",
                         id: "15-6",
                         level: "2",
@@ -346,7 +930,7 @@
                         pid: ""
                     },
                     {
-                        menu_name: "＞课题管理",
+                        menu_name: "课题管理",
                         menu_url: "/scientificProject/topicManagement",
                         id: "15-1",
                         level: "2",
@@ -366,7 +950,7 @@
                         pid: ""
                     },
                     {
-                        menu_name: "＞集中评审",
+                        menu_name: "集中评审",
                         menu_url: "/scientificProject/centralizedReview",
                         id: "15-1",
                         level: "2",
@@ -537,7 +1121,7 @@
                     },
                     {
                         menu_name: "信息维护",
-                        menu_url: "/industrialdevelop/organization/addHosp",
+                        menu_url: "/industrialdevelop/organization/hosp_add",
                         id: "4",
                         level: "1",
                         pid: ""
@@ -549,8 +1133,8 @@
             if (roleName === '高等医学院校'){
                 var menu_list = [
                     {
-                        menu_name: "服务项目",
-                        menu_url: "/school/school",
+                        menu_name: "科研成果",
+                        menu_url: "/industrialdevelop/achievement",
                         id: "1",
                         level: "1",
                         pid: ""
@@ -716,7 +1300,7 @@
                 var furl = item.menu_url;
                 var str = "<div class=\"card\">\n" +
                     "                    <div class=\"\" id=\"headingOne\">\n" +
-                    "                        <button class=\"collapse-btn btn btn-link btn-block text-left\" type=\"button\" data-toggle=\"collapse\" data-target=\"#" + uuid + "\" aria-expanded=\"true\" aria-controls=\"collapseOne\">\n" +
+                    "                        <button class=\"collapse-btn btn btn-link btn-block \" type=\"button\" data-toggle=\"collapse\" data-target=\"#" + uuid + "\" aria-expanded=\"true\" aria-controls=\"collapseOne\">\n" +
                     "                            <h4>" + header + "</h4>\n" +
                     "                        </button>\n" +
                     "                    </div>\n" +
@@ -810,10 +1394,8 @@
             function loadPage(url) {
                 orange.loadPage({
                     url: url, target: 'main_body', selector: '#fir_body', success: function (data) {
-                        console.log(typeof data);
                         if (typeof data == "string") {
                             $("#main_body").html(data);
-                            console.log(url + "加载")
                         } else {
                             alertUtil.error(url + '加载失败');
                         }
@@ -837,6 +1419,6 @@
                 loadPage(currentUrlHash);
             }
 
-            $("#userName").text(sessionStorage.getItem('username'))
+            $("#userName").text(sessionStorage.getItem('name'))
         })
 })();

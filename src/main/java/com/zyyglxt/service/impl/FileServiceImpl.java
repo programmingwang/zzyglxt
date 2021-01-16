@@ -94,12 +94,7 @@ public class FileServiceImpl implements IFileService {
         }
         FileDO f = fileDOMapper.selectFileByDataCode(fileDO.getDataCode());
         /*对文件上传记录表操作，记录上传信息*/
-        if (f == null){
-            fileService.addFile(fileDO);
-        }
-        else {
-            fileService.updateFile(fileDO);
-        }
+        fileService.addFile(fileDO);
     }
 
     @Override

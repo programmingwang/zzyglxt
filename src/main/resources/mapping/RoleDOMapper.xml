@@ -22,12 +22,14 @@
     from role
     where itemID = #{itemid,jdbcType=INTEGER}
     and itemCode = #{itemcode,jdbcType=CHAR}
+    order by itemUpdateAt desc
   </select>
   <select id="selectByRoleType" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
     from role
     where ROLE_TYPE = #{roleType,jdbcType=INTEGER}
+    order by itemUpdateAt desc
   </select>
   <select id="selectByUserid" parameterType="java.lang.String" resultMap="BaseResultMap">
     select
@@ -40,12 +42,21 @@
     select
     <include refid="Base_Column_List" />
     from role
+    order by itemUpdateAt desc
   </select>
   <select id="selectByRoleName" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
     from role
     where ROLE_NAME = #{roleName,jdbcType=VARCHAR}
+    order by itemUpdateAt desc
+  </select>
+  <select id="selectRoleType" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from role
+    where ROLE_NAME = "主研人" or ROLE_NAME = "科研项目申报单位" or ROLE_NAME = "科研项目-市级" or ROLE_NAME = "专家"
+    order by itemUpdateAt desc
   </select>
   <delete id="deleteByPrimaryKey" parameterType="com.zyyglxt.dataobject.RoleDOKey">
     delete from role

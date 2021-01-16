@@ -36,16 +36,8 @@ public class IntangibleCulturalHeritageController {
     @RequestMapping(value = "/getAll" , method = RequestMethod.GET)
     @ResponseBody
     @LogAnnotation(logTitle = "查询非物质文化遗产", logLevel = "1")
-    public ResponseData getAllIntangibleCulturalHeritage(@RequestParam(value = "chineseCulturalStatus")List chineseCulturalStatus){
-        List<ChineseCulturalDO> intangibleCulturalHeritageList = iIntangibleCulturalHeritageService.getIntangibleCulturalHeritageList(chineseCulturalStatus);
-        List<ChineseCulturalDto> chineseCulturalDtoList = new ArrayList<>();
-        for (ChineseCulturalDO chineseCulturalDO : intangibleCulturalHeritageList) {
-            chineseCulturalDtoList.add(
-                    ConvertDOToDTOUtil.convertFromDOToDTO(
-                            chineseCulturalDO,iFileService.selectFileByDataCode(
-                                    chineseCulturalDO.getItemcode()).getFilePath()));
-        }
-        return new ResponseData(EmBusinessError.success,chineseCulturalDtoList);
+    public ResponseData getAllIntangibleCulturalHeritage(@RequestParam(value = "chineseCulturalStatus")String chineseCulturalStatus){
+        return new ResponseData(EmBusinessError.success,iIntangibleCulturalHeritageService.getIntangibleCulturalHeritageList(chineseCulturalStatus));
     }
 
 

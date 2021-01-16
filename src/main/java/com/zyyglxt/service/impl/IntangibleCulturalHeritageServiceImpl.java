@@ -3,6 +3,7 @@ package com.zyyglxt.service.impl;
 import com.zyyglxt.dao.ChineseCulturalDOMapper;
 import com.zyyglxt.dataobject.ChineseCulturalDO;
 import com.zyyglxt.dataobject.ChineseCulturalDOKey;
+import com.zyyglxt.dto.ChineseCulturalDto;
 import com.zyyglxt.error.BusinessException;
 import com.zyyglxt.error.EmBusinessError;
 import com.zyyglxt.util.DateUtils;
@@ -43,12 +44,8 @@ public class IntangibleCulturalHeritageServiceImpl implements IIntangibleCultura
     }
 
     @Override
-    public List<ChineseCulturalDO> getIntangibleCulturalHeritageList(List<String> chineseCulturalStatus) {
-        List<ChineseCulturalDO> chineseCulturalDOList = new ArrayList<>();
-        for (String culturalStatus : chineseCulturalStatus) {
-            chineseCulturalDOList.addAll(chineseCulturalDOMapper.selectChineseCulturalList("非物质文化遗产",culturalStatus));
-        }
-        return chineseCulturalDOList;
+    public List<ChineseCulturalDto> getIntangibleCulturalHeritageList(String chineseCulturalStatus) {
+        return chineseCulturalDOMapper.selectChineseCulturalList("非物质文化遗产",chineseCulturalStatus);
     }
 
     @Override
@@ -62,7 +59,6 @@ public class IntangibleCulturalHeritageServiceImpl implements IIntangibleCultura
         record.setItemcreateat(DateUtils.getDate());
         record.setUpdater(usernameUtil.getOperateUser());
         record.setChineseCulturalType("非物质文化遗产");
-        record.setChineseCulturalStatus("0");
         //如果前台没有插入图片或者附件，就自己生成uuid
         if(record.getItemcode() == null){
             record.setItemcode(UUIDUtils.getUUID());

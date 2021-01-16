@@ -76,7 +76,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public void insertUserSelective(UserDO record) throws BusinessException {
+    public void insertUserSelective(UserDO record)  {
         ValidatorResult result = validator.validate(record);
         if (result.isHasErrors()) {
             throw new BusinessException(result.getErrMsg(), EmBusinessError.PARAMETER_VALIDATION_ERROR);
@@ -91,10 +91,16 @@ public class UserServiceImpl implements UserService {
             throw new BusinessException("用户名已存在", EmBusinessError.USER_ACCOUNT_ALREADY_EXIST);
         }
         if (record.getRoleName().equals("市级中医药管理部门")){
+            OrganizationDO organizationDO = organizationDOMapper.selectByOrgName(record.getRoleName());
+            record.setOrgCode(organizationDO.getItemcode());
             record.setRoleName("科研项目-市级");
             record.setType(21);
         } else if (record.getRoleName().equals("科研项目申报单位")){
+            OrganizationDO organizationDO = organizationDOMapper.selectByOrgName(record.getRoleName());
+            record.setOrgCode(organizationDO.getItemcode());
             record.setType(8);
+        } else if (record.getRoleName().equals("主研人")){
+            record.setType(7);
         }
         //添加用户
         record.setUpdater(usernameUtil.getOperateUser());
@@ -165,22 +171,19 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<UserDO> selectAllUser() {
-        List<UserDO> users = userDOMapper.selectAllUser();
+    public List<UserDO> selectAllUser(String itemcode, String username) {
+        List<UserDO> users = userDOMapper.selectAllUser(itemcode, username);
 
-        System.out.println("66666666666666666666: "+users.size());
-
-        int zyr = roleDOMapper.selectByRoleName("主研人").getRoleType();
-        int sbdw = roleDOMapper.selectByRoleName("科研项目申报单位").getRoleType();
-        int kysj = roleDOMapper.selectByRoleName("科研项目-市级").getRoleType();
-        int zj = roleDOMapper.selectByRoleName("专家").getRoleType();
+        int[] roletype = new int[4];
+        for (int i=0; i<4;i++){
+            roletype[i] = roleDOMapper.selectRoleType().get(i).getRoleType();
+        }
 
         List<UserDO> userDOList = new ArrayList<UserDO>();
-        for (int i = 0; i < users.size(); i++) {
-            int roleytpe = users.get(i).getType();
-            if (zyr == roleytpe || sbdw == roleytpe || kysj == roleytpe || zj == roleytpe) {
-
-                userDOList.add(users.get(i));
+        for (UserDO user : users) {
+            int type = user.getType();
+            if (roletype[0] == type || roletype[1] == type || roletype[2] == type || roletype[3] == type) {
+                userDOList.add(user);
             }
         }
 

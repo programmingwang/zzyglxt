@@ -24,8 +24,7 @@
                 orange.redirect("/medicalService/add/addHosp");
             })
 
-            /*点击提交按钮*/
-            $("#btn_insert").unbind().on('click',function () {
+            $("#btn_save").unbind().on('click',function () {
                 var hosp;
                 var entity;
                 var requestUrl;
@@ -37,6 +36,7 @@
                     operateMessage = "新增科室成功";
                     entity = {
                         itemcode: stringUtil.getUUID(),
+                        specialtyStatus: '0'
                     };
                 }
                 else {
@@ -44,7 +44,8 @@
                     operateMessage = "更新科室成功";
                     entity = {
                         itemid: tempdata.itemid,
-                        itemcode: tempdata.itemcode
+                        itemcode: tempdata.itemcode,
+                        specialtyStatus: '0'
                     };
                 }
                 entity["specialtyName"] = specialtyName[$("#specialtyName").val()].text;
@@ -58,7 +59,56 @@
                 entity["specialtyIntroduce"] = editor.txt.html();
                 entity["hospitalCode"] = hosp.itemcode;
                 entity["hospitalName"] = hosp.hospitalName;
-                entity["specialtyStatus"] = webStatus[0].id
+
+                fileUtil.handleFile(updateStatus, entity.itemcode, uploadImg.getFiles()[0]);
+
+                ajaxUtil.myAjax(null,requestUrl,entity,function (data) {
+                    if(ajaxUtil.success(data)){
+                        alertUtil.info(operateMessage);
+                        orange.redirect(jumpUrl);
+                    }else {
+                        alertUtil.alert(data.msg);
+                    }
+                },false,true);
+
+            });
+
+            /*点击提交按钮*/
+            $("#btn_insert").unbind().on('click',function () {
+                var hosp;
+                var entity;
+                var requestUrl;
+                var operateMessage;
+                /*拿到下拉框所选医院的信息*/
+                hosp = hosps.find(function (obj) {return obj.itemcode === $("#hospitalName").val()});
+                if (!updateStatus){
+                    requestUrl = "/medicalService/specialty/add";
+                    operateMessage = "新增科室成功";
+                    entity = {
+                        itemcode: stringUtil.getUUID(),
+                        specialtyStatus: '1'
+                    };
+                }
+                else {
+                    requestUrl = "/medicalService/specialty/update";
+                    operateMessage = "更新科室成功";
+                    entity = {
+                        itemid: tempdata.itemid,
+                        itemcode: tempdata.itemcode,
+                        specialtyStatus: '1'
+                    };
+                }
+                entity["specialtyName"] = specialtyName[$("#specialtyName").val()].text;
+                entity["specialtyPhone"] = $("#specialtyPhone").val();
+                entity["specialtyBriefIntroduce"] = $("#specialtyBriefIntroduce").val();
+                entity["specialtyAddressPro"] = hosp.hospitalAddressPro;
+                entity["specialtyAddressCity"] = hosp.hospitalAddressCity;
+                entity["specialtyAddressCounty"] = hosp.hospitalAddressCountry;
+                entity["specialtyAddress"] = hosp.hospitalAddress;
+                entity["specialtyLink"] = hosp.hospitalLink;
+                entity["specialtyIntroduce"] = editor.txt.html();
+                entity["hospitalCode"] = hosp.itemcode;
+                entity["hospitalName"] = hosp.hospitalName;
 
                 fileUtil.handleFile(updateStatus, entity.itemcode, uploadImg.getFiles()[0]);
 

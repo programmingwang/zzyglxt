@@ -33,9 +33,9 @@
 
             $("#saveBtn").unbind('click').on('click',function () {
                 var param = generateParam();
-                param.status = 0;
+                param.status = "0";
                 if (uploadImg.isUpdate()){
-                    ajaxUtil.fileAjax(itemcode,uploadImg.getFiles()[0],"undefined","undefined")
+                    ajaxUtil.fileAjax(itemcode,uploadImg.getFiles()[0],sessionStorage.getItem("username"), sessionStorage.getItem("itemcode"))
                 }
 
                 ajaxUtil.myAjax(null,url,param,function (data) {
@@ -50,7 +50,7 @@
 
             $("#submitBtn").unbind('click').on('click',function () {
                 var param = generateParam();
-                param.status = 1;
+                param.status = "1";
                 ajaxUtil.myAjax(null,url,param,function (data) {
                     if(ajaxUtil.success(data)){
                         orange.redirect(pathUrl)

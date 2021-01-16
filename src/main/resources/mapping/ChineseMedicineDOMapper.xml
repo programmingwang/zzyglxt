@@ -23,13 +23,27 @@
         <result column="EXPERT_INTRODUCE" jdbcType="LONGVARCHAR" property="expertIntroduce"/>
         <result column="MEDICINE_RECORDS" jdbcType="LONGVARCHAR" property="medicineRecords"/>
     </resultMap>
+    <resultMap extends="ResultMapWithBLOBs" id="ResultMapWithBLOBsAndFile" type="com.zyyglxt.dto.ChineseMedicineDto">
+        <result column="HOSPITAL_NAME" jdbcType="VARCHAR" property="hospitalName"/>
+        <result column="SPECIALTY_NAME" jdbcType="VARCHAR" property="specialtyName"/>
+        <result column="FILE_PATH" jdbcType="VARCHAR" property="filePath"/>
+    </resultMap>
     <sql id="Base_Column_List">
-        itemID, itemCode, CHINESE_MEDICINE_NAME, CHINESE_MEDICINE_TYPE, CHINESE_MEDICINE_TITLE,
-        DEPT_CODE, HOSP_CODE, VISIT_TIME, PHONE, EXPERT_BRIEF_INTRODUCE, MAIN_VISIT, CHINESE_MEDICINE_STATUS, CREATER,
-        itemCreateAt, UPDATER, itemUpdateAt
+        cm.itemID, cm.itemCode, cm.CHINESE_MEDICINE_NAME, cm.CHINESE_MEDICINE_TYPE, cm.CHINESE_MEDICINE_TITLE,
+        cm.DEPT_CODE, cm.HOSP_CODE, cm.VISIT_TIME, cm.PHONE, cm.EXPERT_BRIEF_INTRODUCE, cm.MAIN_VISIT, cm.CHINESE_MEDICINE_STATUS, cm.CREATER,
+        cm.itemCreateAt, cm.UPDATER, cm.itemUpdateAt
     </sql>
     <sql id="Blob_Column_List">
-        EXPERT_INTRODUCE, MEDICINE_RECORDS
+        cm.EXPERT_INTRODUCE, cm.MEDICINE_RECORDS
+    </sql>
+    <sql id="Hosp_Column_List">
+        h.HOSPITAL_NAME
+    </sql>
+    <sql id="Specialty_Column_List">
+        s.SPECIALTY_NAME
+    </sql>
+    <sql id="File_Column_List">
+        f.FILE_PATH
     </sql>
     <select id="selectByPrimaryKey" parameterType="com.zyyglxt.dataobject.ChineseMedicineDOKey"
             resultMap="ResultMapWithBLOBs">
@@ -40,6 +54,7 @@
         from tb_culpro_chinese_medicine
         where itemID = #{itemid,jdbcType=INTEGER}
         and itemCode = #{itemcode,jdbcType=CHAR}
+        order by itemUpdateAt desc
     </select>
     <delete id="deleteByPrimaryKey" parameterType="com.zyyglxt.dataobject.ChineseMedicineDOKey">
         delete from tb_culpro_chinese_medicine
@@ -303,16 +318,33 @@
         ,
         <include refid="Blob_Column_List"/>
         FROM tb_culpro_chinese_medicine
-        ORDER BY itemCreateAt DESC
+        order by itemUpdateAt desc
     </select>
 
-    <select id="searchChineseMedicine" resultMap="ResultMapWithBLOBs">
+    <select id="searchChineseMedicine" resultMap="ResultMapWithBLOBsAndFile">
         select
         <include refid="Base_Column_List"/>
         ,
         <include refid="Blob_Column_List"/>
-        from tb_culpro_chinese_medicine
-        WHERE CHINESE_MEDICINE_NAME LIKE "%"#{value}"%"
+        ,
+        <include refid="Hosp_Column_List"/>
+        ,
+        <include refid="Specialty_Column_List"/>
+        ,
+        <include refid="File_Column_List"/>
+        from tb_culpro_chinese_medicine cm left join tb_culpro_hosp h on cm.HOSP_CODE=h.itemCode
+        left join tb_culpro_specialty s on cm.DEPT_CODE=s.itemCode
+        left join tb_culpro_file f on cm.itemCode=f.DATA_CODE
+        WHERE
+        <if test="status == 3">
+            CHINESE_MEDICINE_STATUS in (2,4,5)
+        </if>
+        <if test="status == 2">
+            CHINESE_MEDICINE_STATUS in (1,2,3,5)
+        </if>
+        <if test="status == 1">
+            CHINESE_MEDICINE_STATUS in (0,1,2,3,4,5,6,7)
+        </if> AND (CHINESE_MEDICINE_NAME LIKE "%"#{value}"%"
         OR CHINESE_MEDICINE_TYPE LIKE "%"#{value}"%"
         OR CHINESE_MEDICINE_TITLE LIKE "%"#{value}"%"
         OR MAIN_VISIT LIKE "%"#{value}"%"
@@ -321,36 +353,53 @@
                          WHERE SPECIALTY_NAME LIKE "%"#{value}"%")
         OR HOSP_CODE IN (select itemCode
                          from tb_culpro_hosp
-                         WHERE HOSPITAL_NAME LIKE "%"#{value}"%")
-        ORDER BY itemCreateAt DESC
+                         WHERE HOSPITAL_NAME LIKE "%"#{value}"%"))
+        order by cm.itemUpdateAt desc
     </select>
 
-    <select id="top5ChineseMedicine" resultMap="ResultMapWithBLOBs">
+    <select id="selectBySpecialtyCode" resultMap="ResultMapWithBLOBsAndFile">
         select
         <include refid="Base_Column_List"/>
         ,
         <include refid="Blob_Column_List"/>
-        from tb_culpro_chinese_medicine
-        ORDER BY itemCreateAt DESC
-        LIMIT 5
-    </select>
-
-    <select id="selectBySpecialtyCode" resultMap="ResultMapWithBLOBs">
-        select
-        <include refid="Base_Column_List"/>
         ,
-        <include refid="Blob_Column_List"/>
-        from tb_culpro_chinese_medicine
+        <include refid="Hosp_Column_List"/>
+        ,
+        <include refid="Specialty_Column_List"/>
+        ,
+        <include refid="File_Column_List"/>
+        from tb_culpro_chinese_medicine cm left join tb_culpro_hosp h on cm.HOSP_CODE=h.itemCode
+        left join tb_culpro_specialty s on cm.DEPT_CODE=s.itemCode
+        left join tb_culpro_file f on cm.itemCode=f.DATA_CODE
         WHERE DEPT_CODE = #{specialtyCode}
+        order by cm.itemUpdateAt desc
     </select>
 
-    <select id="selectByStatus" resultMap="ResultMapWithBLOBs">
+    <select id="selectByStatus" resultMap="ResultMapWithBLOBsAndFile">
         select
         <include refid="Base_Column_List"/>
         ,
         <include refid="Blob_Column_List"/>
-        from tb_culpro_chinese_medicine
-        WHERE CHINESE_MEDICINE_STATUS = #{status}
+        ,
+        <include refid="Hosp_Column_List"/>
+        ,
+        <include refid="Specialty_Column_List"/>
+        ,
+        <include refid="File_Column_List"/>
+        from tb_culpro_chinese_medicine cm left join tb_culpro_hosp h on cm.HOSP_CODE=h.itemCode
+        left join tb_culpro_specialty s on cm.DEPT_CODE=s.itemCode
+        left join tb_culpro_file f on cm.itemCode=f.DATA_CODE
+        WHERE
+        <if test="status == 3">
+            CHINESE_MEDICINE_STATUS in (2,4,5)
+        </if>
+        <if test="status == 2">
+            CHINESE_MEDICINE_STATUS in (1,2,3,5)
+        </if>
+        <if test="status == 1">
+            CHINESE_MEDICINE_STATUS in (0,1,2,3,4,5,6,7)
+        </if>
+        order by cm.itemUpdateAt desc
     </select>
 
     <update id="updateStatusByPrimaryKey" parameterType="com.zyyglxt.dto.StatusDto">

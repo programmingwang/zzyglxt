@@ -27,7 +27,7 @@ public class IndustrialDevelopExpertRefDO extends IndustrialDevelopExpertRefDOKe
 
     private String submitStatus;
 
-    private Integer score;
+    private String score;
 
     private String opinion;
 

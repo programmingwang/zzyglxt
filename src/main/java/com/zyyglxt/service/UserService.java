@@ -19,7 +19,7 @@ public interface UserService {
 
     int insert(UserDO record);
 
-    void insertUserSelective(UserDO record) throws BusinessException;
+    void insertUserSelective(UserDO record) ;
 
     UserDO selectByPrimaryKey(UserDOKey key);
 
@@ -31,7 +31,7 @@ public interface UserService {
 
     int updateByPrimaryKey(UserDO record);
 
-    List<UserDO> selectAllUser();
+    List<UserDO> selectAllUser(String itemcode, String username);
 
     int deleteByUsername(String username);
 

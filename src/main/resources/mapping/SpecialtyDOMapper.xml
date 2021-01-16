@@ -21,13 +21,24 @@
     <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.zyyglxt.dataobject.SpecialtyDO">
         <result column="SPECIALTY_INTRODUCE" jdbcType="LONGVARCHAR" property="specialtyIntroduce"/>
     </resultMap>
+    <resultMap extends="ResultMapWithBLOBs" id="ResultMapWithBLOBsAndFile" type="com.zyyglxt.dto.SpecialtyDto">
+        <result column="itemCode" jdbcType="CHAR" property="hospitalCode"/>
+        <result column="HOSPITAL_NAME" jdbcType="VARCHAR" property="hospitalName"/>
+        <result column="FILE_PATH" jdbcType="VARCHAR" property="filePath"/>
+    </resultMap>
     <sql id="Base_Column_List">
-        itemID, itemCode, SPECIALTY_NAME, SPECIALTY_BRIEF_INTRODUCE, SPECIALTY_PHONE, SPECIALTY_ADDRESS_PRO, SPECIALTY_ADDRESS_CITY,
-        SPECIALTY_ADDRESS_COUNTY, SPECIALTY_ADDRESS, SPECIALTY_LINK, SPECIALTY_STATUS, CREATER,
-        itemCreateAt, UPDATER, itemUpdateAt
+        s.itemID, s.itemCode, s.SPECIALTY_NAME, s.SPECIALTY_BRIEF_INTRODUCE, s.SPECIALTY_PHONE, s.SPECIALTY_ADDRESS_PRO, s.SPECIALTY_ADDRESS_CITY,
+        s.SPECIALTY_ADDRESS_COUNTY, s.SPECIALTY_ADDRESS, s.SPECIALTY_LINK, s.SPECIALTY_STATUS, s.CREATER,
+        s.itemCreateAt, s.UPDATER, s.itemUpdateAt
     </sql>
     <sql id="Blob_Column_List">
-        SPECIALTY_INTRODUCE
+        s.SPECIALTY_INTRODUCE
+    </sql>
+    <sql id="Hosp_Column_List">
+        h.itemCode hospitalCode, h.HOSPITAL_NAME
+    </sql>
+    <sql id="File_Column_List">
+        f.FILE_PATH
     </sql>
     <select id="selectByPrimaryKey" parameterType="com.zyyglxt.dataobject.SpecialtyDOKey"
             resultMap="ResultMapWithBLOBs">
@@ -38,6 +49,7 @@
         from tb_culpro_specialty
         where itemID = #{itemid,jdbcType=INTEGER}
         and itemCode = #{itemcode,jdbcType=CHAR}
+        order by itemUpdateAt desc
     </select>
     <delete id="deleteByPrimaryKey" parameterType="com.zyyglxt.dataobject.SpecialtyDOKey">
         delete from tb_culpro_specialty
@@ -275,16 +287,31 @@
         ,
         <include refid="Blob_Column_List"/>
         FROM tb_culpro_specialty
-        ORDER BY itemCreateAt DESC
+        order by itemUpdateAt desc
     </select>
 
-    <select id="searchSpecialty" resultMap="ResultMapWithBLOBs">
+    <select id="searchSpecialty" resultMap="ResultMapWithBLOBsAndFile">
         select
         <include refid="Base_Column_List"/>
         ,
         <include refid="Blob_Column_List"/>
-        from tb_culpro_specialty
-        WHERE SPECIALTY_NAME LIKE "%"#{value}"%"
+        ,
+        <include refid="Hosp_Column_List"/>
+        ,
+        <include refid="File_Column_List"/>
+        from tb_culpro_specialty s left join tb_culpro_hosp_specialty_ref hs on s.itemCode=hs.SPECIALTY_CODE
+        left join tb_culpro_hosp h on hs.HOSPITAL_CODE=h.itemCode LEFT JOIN tb_culpro_file f
+        ON s.itemCode = f.DATA_CODE
+        WHERE
+        <if test="status == 3">
+            SPECIALTY_STATUS in (2,4,5)
+        </if>
+        <if test="status == 2">
+            SPECIALTY_STATUS in (1,2,3,5)
+        </if>
+        <if test="status == 1">
+            SPECIALTY_STATUS in (0,1,2,3,4,5,6,7)
+        </if> AND (SPECIALTY_NAME LIKE "%"#{value}"%"
         OR SPECIALTY_INTRODUCE LIKE "%"#{value}"%"
         OR SPECIALTY_ADDRESS_PRO LIKE "%"#{value}"%"
         OR SPECIALTY_ADDRESS_CITY LIKE "%"#{value}"%"
@@ -293,18 +320,8 @@
         OR itemCode IN (select HOSPITAL_CODE
                         from tb_culpro_hosp, tb_culpro_hosp_specialty_ref
                         WHERE HOSPITAL_NAME LIKE "%"#{value}"%"
-                        AND tb_culpro_hosp.itemCode=tb_culpro_hosp_specialty_ref.itemCode)
-        ORDER BY itemCreateAt DESC
-    </select>
-
-    <select id="top5Specialty" resultMap="ResultMapWithBLOBs">
-        select
-        <include refid="Base_Column_List"/>
-        ,
-        <include refid="Blob_Column_List"/>
-        from tb_culpro_specialty
-        ORDER BY itemCreateAt DESC
-        LIMIT 5
+                        AND tb_culpro_hosp.itemCode=tb_culpro_hosp_specialty_ref.itemCode))
+        order by s.itemUpdateAt desc
     </select>
 
     <select id="selectSpecialtyByItemCode" resultMap="ResultMapWithBLOBs">
@@ -314,28 +331,52 @@
         <include refid="Blob_Column_List"/>
         from tb_culpro_specialty
         where itemCode = #{itemcode}
+        order by itemUpdateAt desc
     </select>
 
-    <select id="selectByHospCode" resultMap="ResultMapWithBLOBs">
+    <select id="selectByHospCode" resultMap="ResultMapWithBLOBsAndFile">
         select
         <include refid="Base_Column_List"/>
         ,
         <include refid="Blob_Column_List"/>
-        from tb_culpro_specialty
-        where itemCode IN (
+        ,
+        <include refid="Hosp_Column_List"/>
+        ,
+        <include refid="File_Column_List"/>
+        from tb_culpro_specialty s left join tb_culpro_hosp_specialty_ref hs on s.itemCode=hs.SPECIALTY_CODE
+        left join tb_culpro_hosp h on hs.HOSPITAL_CODE=h.itemCode LEFT JOIN tb_culpro_file f
+        ON s.itemCode = f.DATA_CODE
+        WHERE s.itemCode IN (
               SELECT SPECIALTY_CODE
               FROM tb_culpro_hosp_specialty_ref
               WHERE HOSPITAL_CODE = #{hospCode}
         )
+        order by s.itemUpdateAt desc
     </select>
 
-    <select id="selectByStatus" resultMap="ResultMapWithBLOBs">
+    <select id="selectByStatus" resultMap="ResultMapWithBLOBsAndFile">
         select
         <include refid="Base_Column_List"/>
         ,
         <include refid="Blob_Column_List"/>
-        from tb_culpro_specialty
-        WHERE SPECIALTY_STATUS = #{status}
+        ,
+        <include refid="Hosp_Column_List"/>
+        ,
+        <include refid="File_Column_List"/>
+        from tb_culpro_specialty s left join tb_culpro_hosp_specialty_ref hs on s.itemCode=hs.SPECIALTY_CODE
+        left join tb_culpro_hosp h on hs.HOSPITAL_CODE=h.itemCode LEFT JOIN tb_culpro_file f
+        ON s.itemCode = f.DATA_CODE
+        WHERE
+        <if test="status == 3">
+            SPECIALTY_STATUS in (2,4,5)
+        </if>
+        <if test="status == 2">
+            SPECIALTY_STATUS in (1,2,3,5)
+        </if>
+        <if test="status == 1">
+            SPECIALTY_STATUS in (0,1,2,3,4,5,6,7)
+        </if>
+        order by s.itemUpdateAt desc
     </select>
 
     <update id="updateStatusByPrimaryKey" parameterType="com.zyyglxt.dto.StatusDto">

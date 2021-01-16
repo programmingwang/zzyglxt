@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zyyglxt.dao.PostDOMapper">
+  <resultMap id="BaseResultMap" type="com.zyyglxt.dataobject.PostDO">
+    <id column="itemID" jdbcType="INTEGER" property="itemid" />
+    <id column="itemCode" jdbcType="CHAR" property="itemcode" />
+    <result column="POST_DOCUMENT_NUM" jdbcType="VARCHAR" property="postDocumentNum" />
+    <result column="POST_DOCUMENT_NUM1" jdbcType="VARCHAR" property="postDocumentNum1" />
+    <result column="POST_OPINION" jdbcType="VARCHAR" property="postOpinion" />
+    <result column="POST_OPINION1" jdbcType="VARCHAR" property="postOpinion1" />
+    <result column="POST_DOCUMENT_TITLE" jdbcType="VARCHAR" property="postDocumentTitle" />
+    <result column="POST_DATA_STATUS" jdbcType="VARCHAR" property="postDataStatus" />
+    <result column="POST_PUBLIC_WAY" jdbcType="VARCHAR" property="postPublicWay" />
+    <result column="POST_REASON" jdbcType="VARCHAR" property="postReason" />
+    <result column="POST_FAIR_DEPARTMENT_REVIEW" jdbcType="VARCHAR" property="postFairDepartmentReview" />
+    <result column="POST_NORMATIVE_DOCUMENTS" jdbcType="VARCHAR" property="postNormativeDocuments" />
+    <result column="POST_PRINTING" jdbcType="INTEGER" property="postPrinting" />
+    <result column="POST_SECRET_RELATED" jdbcType="VARCHAR" property="postSecretRelated" />
+    <result column="CREATER" jdbcType="VARCHAR" property="creater" />
+    <result column="itemCreateAt" jdbcType="TIMESTAMP" property="itemcreateat" />
+    <result column="UPDATER" jdbcType="VARCHAR" property="updater" />
+    <result column="itemUpdateAt" jdbcType="TIMESTAMP" property="itemupdateat" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    itemID, itemCode, POST_DOCUMENT_NUM, POST_DOCUMENT_NUM1, POST_OPINION, POST_OPINION1, 
+    POST_DOCUMENT_TITLE, POST_DATA_STATUS, POST_PUBLIC_WAY, POST_REASON, POST_FAIR_DEPARTMENT_REVIEW, 
+    POST_NORMATIVE_DOCUMENTS, POST_PRINTING, POST_SECRET_RELATED, CREATER, itemCreateAt, 
+    UPDATER, itemUpdateAt
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="com.zyyglxt.dataobject.PostDOKey" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tb_governres_post
+    where itemID = #{itemid,jdbcType=INTEGER}
+      and itemCode = #{itemcode,jdbcType=CHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from tb_governres_post
+    where POST_DATA_STATUS = #{postDataStatus,jdbcType=VARCHAR}
+    order by itemUpdateAt desc
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.zyyglxt.dataobject.PostDOKey">
+    delete from tb_governres_post
+    where itemID = #{itemid,jdbcType=INTEGER}
+      and itemCode = #{itemcode,jdbcType=CHAR}
+  </delete>
+  <insert id="insert" parameterType="com.zyyglxt.dataobject.PostDO">
+    insert into tb_governres_post (itemID, itemCode, POST_DOCUMENT_NUM, 
+      POST_DOCUMENT_NUM1, POST_OPINION, POST_OPINION1, 
+      POST_DOCUMENT_TITLE, POST_DATA_STATUS, POST_PUBLIC_WAY, 
+      POST_REASON, POST_FAIR_DEPARTMENT_REVIEW, POST_NORMATIVE_DOCUMENTS, 
+      POST_PRINTING, POST_SECRET_RELATED, CREATER, 
+      itemCreateAt, UPDATER, itemUpdateAt
+      )
+    values (#{itemid,jdbcType=INTEGER}, #{itemcode,jdbcType=CHAR}, #{postDocumentNum,jdbcType=VARCHAR}, 
+      #{postDocumentNum1,jdbcType=VARCHAR}, #{postOpinion,jdbcType=VARCHAR}, #{postOpinion1,jdbcType=VARCHAR}, 
+      #{postDocumentTitle,jdbcType=VARCHAR}, #{postDataStatus,jdbcType=VARCHAR}, #{postPublicWay,jdbcType=VARCHAR}, 
+      #{postReason,jdbcType=VARCHAR}, #{postFairDepartmentReview,jdbcType=VARCHAR}, #{postNormativeDocuments,jdbcType=VARCHAR}, 
+      #{postPrinting,jdbcType=INTEGER}, #{postSecretRelated,jdbcType=VARCHAR}, #{creater,jdbcType=VARCHAR}, 
+      #{itemcreateat,jdbcType=TIMESTAMP}, #{updater,jdbcType=VARCHAR}, #{itemupdateat,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zyyglxt.dataobject.PostDO">
+    insert into tb_governres_post
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="itemid != null">
+        itemID,
+      </if>
+      <if test="itemcode != null">
+        itemCode,
+      </if>
+      <if test="postDocumentNum != null">
+        POST_DOCUMENT_NUM,
+      </if>
+      <if test="postDocumentNum1 != null">
+        POST_DOCUMENT_NUM1,
+      </if>
+      <if test="postOpinion != null">
+        POST_OPINION,
+      </if>
+      <if test="postOpinion1 != null">
+        POST_OPINION1,
+      </if>
+      <if test="postDocumentTitle != null">
+        POST_DOCUMENT_TITLE,
+      </if>
+      <if test="postDataStatus != null">
+        POST_DATA_STATUS,
+      </if>
+      <if test="postPublicWay != null">
+        POST_PUBLIC_WAY,
+      </if>
+      <if test="postReason != null">
+        POST_REASON,
+      </if>
+      <if test="postFairDepartmentReview != null">
+        POST_FAIR_DEPARTMENT_REVIEW,
+      </if>
+      <if test="postNormativeDocuments != null">
+        POST_NORMATIVE_DOCUMENTS,
+      </if>
+      <if test="postPrinting != null">
+        POST_PRINTING,
+      </if>
+      <if test="postSecretRelated != null">
+        POST_SECRET_RELATED,
+      </if>
+      <if test="creater != null">
+        CREATER,
+      </if>
+      <if test="itemcreateat != null">
+        itemCreateAt,
+      </if>
+      <if test="updater != null">
+        UPDATER,
+      </if>
+      <if test="itemupdateat != null">
+        itemUpdateAt,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="itemid != null">
+        #{itemid,jdbcType=INTEGER},
+      </if>
+      <if test="itemcode != null">
+        #{itemcode,jdbcType=CHAR},
+      </if>
+      <if test="postDocumentNum != null">
+        #{postDocumentNum,jdbcType=VARCHAR},
+      </if>
+      <if test="postDocumentNum1 != null">
+        #{postDocumentNum1,jdbcType=VARCHAR},
+      </if>
+      <if test="postOpinion != null">
+        #{postOpinion,jdbcType=VARCHAR},
+      </if>
+      <if test="postOpinion1 != null">
+        #{postOpinion1,jdbcType=VARCHAR},
+      </if>
+      <if test="postDocumentTitle != null">
+        #{postDocumentTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="postDataStatus != null">
+        #{postDataStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="postPublicWay != null">
+        #{postPublicWay,jdbcType=VARCHAR},
+      </if>
+      <if test="postReason != null">
+        #{postReason,jdbcType=VARCHAR},
+      </if>
+      <if test="postFairDepartmentReview != null">
+        #{postFairDepartmentReview,jdbcType=VARCHAR},
+      </if>
+      <if test="postNormativeDocuments != null">
+        #{postNormativeDocuments,jdbcType=VARCHAR},
+      </if>
+      <if test="postPrinting != null">
+        #{postPrinting,jdbcType=INTEGER},
+      </if>
+      <if test="postSecretRelated != null">
+        #{postSecretRelated,jdbcType=VARCHAR},
+      </if>
+      <if test="creater != null">
+        #{creater,jdbcType=VARCHAR},
+      </if>
+      <if test="itemcreateat != null">
+        #{itemcreateat,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updater != null">
+        #{updater,jdbcType=VARCHAR},
+      </if>
+      <if test="itemupdateat != null">
+        #{itemupdateat,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zyyglxt.dataobject.PostDO">
+    update tb_governres_post
+    <set>
+      <if test="postDocumentNum != null">
+        POST_DOCUMENT_NUM = #{postDocumentNum,jdbcType=VARCHAR},
+      </if>
+      <if test="postDocumentNum1 != null">
+        POST_DOCUMENT_NUM1 = #{postDocumentNum1,jdbcType=VARCHAR},
+      </if>
+      <if test="postOpinion != null">
+        POST_OPINION = #{postOpinion,jdbcType=VARCHAR},
+      </if>
+      <if test="postOpinion1 != null">
+        POST_OPINION1 = #{postOpinion1,jdbcType=VARCHAR},
+      </if>
+      <if test="postDocumentTitle != null">
+        POST_DOCUMENT_TITLE = #{postDocumentTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="postDataStatus != null">
+        POST_DATA_STATUS = #{postDataStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="postPublicWay != null">
+        POST_PUBLIC_WAY = #{postPublicWay,jdbcType=VARCHAR},
+      </if>
+      <if test="postReason != null">
+        POST_REASON = #{postReason,jdbcType=VARCHAR},
+      </if>
+      <if test="postFairDepartmentReview != null">
+        POST_FAIR_DEPARTMENT_REVIEW = #{postFairDepartmentReview,jdbcType=VARCHAR},
+      </if>
+      <if test="postNormativeDocuments != null">
+        POST_NORMATIVE_DOCUMENTS = #{postNormativeDocuments,jdbcType=VARCHAR},
+      </if>
+      <if test="postPrinting != null">
+        POST_PRINTING = #{postPrinting,jdbcType=INTEGER},
+      </if>
+      <if test="postSecretRelated != null">
+        POST_SECRET_RELATED = #{postSecretRelated,jdbcType=VARCHAR},
+      </if>
+      <if test="creater != null">
+        CREATER = #{creater,jdbcType=VARCHAR},
+      </if>
+      <if test="itemcreateat != null">
+        itemCreateAt = #{itemcreateat,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updater != null">
+        UPDATER = #{updater,jdbcType=VARCHAR},
+      </if>
+      <if test="itemupdateat != null">
+        itemUpdateAt = #{itemupdateat,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where itemID = #{itemid,jdbcType=INTEGER}
+      and itemCode = #{itemcode,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zyyglxt.dataobject.PostDO">
+    update tb_governres_post
+    set POST_DOCUMENT_NUM = #{postDocumentNum,jdbcType=VARCHAR},
+      POST_DOCUMENT_NUM1 = #{postDocumentNum1,jdbcType=VARCHAR},
+      POST_OPINION = #{postOpinion,jdbcType=VARCHAR},
+      POST_OPINION1 = #{postOpinion1,jdbcType=VARCHAR},
+      POST_DOCUMENT_TITLE = #{postDocumentTitle,jdbcType=VARCHAR},
+      POST_DATA_STATUS = #{postDataStatus,jdbcType=VARCHAR},
+      POST_PUBLIC_WAY = #{postPublicWay,jdbcType=VARCHAR},
+      POST_REASON = #{postReason,jdbcType=VARCHAR},
+      POST_FAIR_DEPARTMENT_REVIEW = #{postFairDepartmentReview,jdbcType=VARCHAR},
+      POST_NORMATIVE_DOCUMENTS = #{postNormativeDocuments,jdbcType=VARCHAR},
+      POST_PRINTING = #{postPrinting,jdbcType=INTEGER},
+      POST_SECRET_RELATED = #{postSecretRelated,jdbcType=VARCHAR},
+      CREATER = #{creater,jdbcType=VARCHAR},
+      itemCreateAt = #{itemcreateat,jdbcType=TIMESTAMP},
+      UPDATER = #{updater,jdbcType=VARCHAR},
+      itemUpdateAt = #{itemupdateat,jdbcType=TIMESTAMP}
+    where itemID = #{itemid,jdbcType=INTEGER}
+      and itemCode = #{itemcode,jdbcType=CHAR}
+  </update>
+  <select id="maxNum" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from tb_governres_post
+    where POST_DOCUMENT_NUM1 = (select MAX(POST_DOCUMENT_NUM1) FROM tb_governres_post)
+  </select>
+  <select id="getPandA" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from tb_governres_post
+    order by itemUpdateAt desc
+  </select>
+</mapper>

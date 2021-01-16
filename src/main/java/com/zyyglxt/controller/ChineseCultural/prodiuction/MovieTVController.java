@@ -36,16 +36,8 @@ public class MovieTVController {
     @RequestMapping(value = "/getAll" , method = RequestMethod.GET)
     @ResponseBody
     @LogAnnotation(logTitle = "获得所有电视电影", logLevel = "1")
-    public ResponseData getAllMovieTV(@RequestParam(value = "chineseCulturalStatus")List chineseCulturalStatus){
-        List<ChineseCulturalDO> movieTVList = iMovieTVService.getMovieTVList(chineseCulturalStatus);
-        List<ChineseCulturalDto> chineseCulturalDtoList = new ArrayList<>();
-        for (ChineseCulturalDO chineseCulturalDO : movieTVList) {
-            chineseCulturalDtoList.add(
-                    ConvertDOToDTOUtil.convertFromDOToDTO(
-                            chineseCulturalDO,iFileService.selectFileByDataCode(
-                                    chineseCulturalDO.getItemcode()).getFilePath()));
-        }
-        return new ResponseData(EmBusinessError.success,chineseCulturalDtoList);
+    public ResponseData getAllMovieTV(@RequestParam(value = "chineseCulturalStatus")String chineseCulturalStatus){
+        return new ResponseData(EmBusinessError.success,iMovieTVService.getMovieTVList(chineseCulturalStatus));
     }
 
 

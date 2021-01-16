@@ -60,7 +60,10 @@
 			sessionStorage.clear();	//	清空会话缓存
 			clearAppContext();	//	重置应用上下文
 		}
-		
+
+        function isContains(str, substr) {
+            return new RegExp(substr).test(str);
+        }
 
 		
 		//	渲染应用首页
@@ -150,6 +153,9 @@
 						return alert(url+"加载失败");
 					}
 					$("#main_body").html(data);
+                    if(!(isContains(url,"insert") || isContains(url,"add") || isContains(url,"evaluationTable") || isContains(url,"post_view") || isContains(url,"document/viewreport") || isContains(url,"scientificProject/viewTopicManagement"))){
+                        window.location.reload();
+                    }
 				}})
 		}
 

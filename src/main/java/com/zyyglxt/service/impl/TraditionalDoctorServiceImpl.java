@@ -3,6 +3,7 @@ package com.zyyglxt.service.impl;
 import com.zyyglxt.dao.CulturalResourcesDOMapper;
 import com.zyyglxt.dataobject.CulturalResourcesDO;
 import com.zyyglxt.dataobject.CulturalResourcesDOKey;
+import com.zyyglxt.dto.CulturalResourcesDto;
 import com.zyyglxt.error.BusinessException;
 import com.zyyglxt.error.EmBusinessError;
 import com.zyyglxt.util.DateUtils;
@@ -44,12 +45,8 @@ public class TraditionalDoctorServiceImpl implements ITraditionalDoctorService {
     }
 
     @Override
-    public List<CulturalResourcesDO> getTraditionalDoctorList(List<String> chineseCulturalStatus) {
-        List<CulturalResourcesDO> culturalResourcesDOList = new ArrayList<>();
-        for (String culturalStatus : chineseCulturalStatus) {
-            culturalResourcesDOList.addAll(culturalResourcesDOMapper.selectCulturalResourcesList("历代名家",culturalStatus));
-        }
-        return culturalResourcesDOList;
+    public List<CulturalResourcesDto> getTraditionalDoctorList(String chineseCulturalStatus) {
+        return culturalResourcesDOMapper.selectCulturalResourcesList("历代名家",chineseCulturalStatus);
     }
 
     @Override
@@ -63,7 +60,6 @@ public class TraditionalDoctorServiceImpl implements ITraditionalDoctorService {
         record.setItemcreateat(DateUtils.getDate());
         record.setUpdater(usernameUtil.getOperateUser());
         record.setChineseCulturalType("历代名家");
-        record.setChineseCulturalStatus("0");
         //如果前台没有插入图片或者附件，就自己生成uuid
         if(record.getItemcode() == null){
             record.setItemcode(UUIDUtils.getUUID());

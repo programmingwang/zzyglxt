@@ -40,15 +40,7 @@ public class TravelController {
     @ResponseBody
     @LogAnnotation(logTitle = "查询所有健康旅游", logLevel = "1")
     public ResponseData getAllTravel(@RequestParam(value = "chineseCulturalStatus")List chineseCulturalStatus){
-        List<ChineseCulturalDO> cartoonAllusionsList = iTravelService.getTravelList(chineseCulturalStatus);
-        List<ChineseCulturalDto> chineseCulturalDtoList = new ArrayList<>();
-        for (ChineseCulturalDO chineseCulturalDO : cartoonAllusionsList) {
-            chineseCulturalDtoList.add(
-                    ConvertDOToDTOUtil.convertFromDOToDTO(
-                            chineseCulturalDO,iFileService.selectFileByDataCode(
-                                    chineseCulturalDO.getItemcode()).getFilePath()));
-        }
-        return new ResponseData(EmBusinessError.success,chineseCulturalDtoList);
+        return new ResponseData(EmBusinessError.success,iTravelService.getTravelList(chineseCulturalStatus));
 
     }
 
@@ -60,7 +52,7 @@ public class TravelController {
     @RequestMapping(value = "/addTrav" , method = RequestMethod.POST)
     @ResponseBody
     @LogAnnotation(logTitle = "增加一个健康旅游", logLevel = "3")
-//    public ResponseData addTravel(@RequestBody ChineseCulturalDO chineseCulturalDO , @RequestBody(required = false) FileDO fileDO) throws BusinessException {
+//    public ResponseData addTravel(@RequestBody ChineseCulturalDO chineseCulturalDO , @RequestBody(required = false) FileDO fileDO)  {
     public ResponseData addTravel(@RequestBody ChineseCulturalDO chineseCulturalDO) {
         iTravelService.addTravel(chineseCulturalDO);
         return new ResponseData(EmBusinessError.success);

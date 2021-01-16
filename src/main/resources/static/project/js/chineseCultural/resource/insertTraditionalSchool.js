@@ -8,6 +8,50 @@
                 orange.redirect(url);
             });
 
+            $("#btn_save").unbind().on('click',function () {
+                var traSchEntity;
+                var addUpdateUrl;
+                var operateMessage;
+                if(!isUpdate()){
+                    addUpdateUrl = "/cul/res/traSch/addTraSch";
+                    operateMessage = "新增中医流派成功";
+                    traSchEntity = {
+                        itemcode: stringUtil.getUUID(),
+                        chineseCulturalName : $("#chineseCulturalName").val(),
+                        chineseCulturalSource : $("#chineseCulturalSource").val(),
+                        chineseCulturalAuthor : $("#chineseCulturalAuthor").val(),
+                        chineseCulturalStatus : '0',
+                        chineseCulturalContent : editor.txt.html()
+                    };
+                }else{
+                    var needData = JSON.parse(localStorage.getItem("rowData"));
+                    addUpdateUrl = "/cul/res/traSch/updTraSch";
+                    traSchEntity = {
+                        itemid: needData.itemid,
+                        itemcode: needData.itemcode,
+                        chineseCulturalName : $("#chineseCulturalName").val(),
+                        chineseCulturalSource : $("#chineseCulturalSource").val(),
+                        chineseCulturalAuthor : $("#chineseCulturalAuthor").val(),
+                        chineseCulturalStatus : '0',
+                        chineseCulturalContent : editor.txt.html()
+                    }
+                    operateMessage = "更新中医流派成功";
+                }
+
+                fileUtil.handleFile(isUpdate(), traSchEntity.itemcode, $("#upload_file")[0].files[0]);
+
+                ajaxUtil.myAjax(null,addUpdateUrl,traSchEntity,function (data) {
+                    if(ajaxUtil.success(data)){
+                        alertUtil.info(operateMessage);
+                        var url = "/chineseCultural/resource/traditionalSchool";
+                        orange.redirect(url);
+                    }else {
+                        alertUtil.alert(data.msg);
+                    }
+                },false,true);
+
+            });
+
             $("#btn_insert").unbind().on('click',function () {
                 var traSchEntity;
                 var addUpdateUrl;
@@ -20,6 +64,7 @@
                         chineseCulturalName : $("#chineseCulturalName").val(),
                         chineseCulturalSource : $("#chineseCulturalSource").val(),
                         chineseCulturalAuthor : $("#chineseCulturalAuthor").val(),
+                        chineseCulturalStatus : '1',
                         chineseCulturalContent : editor.txt.html()
                     };
                 }else{
@@ -31,6 +76,7 @@
                         chineseCulturalName : $("#chineseCulturalName").val(),
                         chineseCulturalSource : $("#chineseCulturalSource").val(),
                         chineseCulturalAuthor : $("#chineseCulturalAuthor").val(),
+                        chineseCulturalStatus : '1',
                         chineseCulturalContent : editor.txt.html()
                     }
                     operateMessage = "更新中医流派成功";

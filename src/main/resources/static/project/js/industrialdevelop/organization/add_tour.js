@@ -41,49 +41,26 @@
                 param.addressCountry = $("#addressCountry").val();
                 param.address = $("#address").val()
                 param.intruduce = $(".w-e-text").html();
-                param.orgCode = "未定义";
+                param.orgCode = sessionStorage.getItem("orgCode");
                 param.itemcode = itemcode;
                 param.type = orgType;
                 return param;
             }
-
-            $("#saveBtn").unbind('click').on('click',function () {
-                var param = generateParam();
-                param.status = "0";
-                if (uploadImg.isUpdate()){
-                    if (isUpdate()){
-                        ajaxUtil.updateFile(itemcode,uploadImg.getFiles()[0],"undefined","undefined");
-                    }else {
-                        ajaxUtil.fileAjax(itemcode,uploadImg.getFiles()[0],"undefined","undefined")
-                    }
-
-                }
-
-                ajaxUtil.myAjax(null,url,param,function (data) {
-                    if(ajaxUtil.success(data)){
-                        orange.redirect('/tour_add');
-                    }else {
-                        alert(data.msg);
-                    }
-                },true,"123",type);
-                return false;
-            });
 
             $("#submitBtn").unbind('click').on('click',function () {
                 var param = generateParam();
                 param.status = "1";
                 if (uploadImg.isUpdate()){
                     if (isUpdate()){
-                        ajaxUtil.updateFile(itemcode,uploadImg.getFiles()[0],"undefined","undefined");
+                        ajaxUtil.updateFile(itemcode,uploadImg.getFiles()[0],sessionStorage.getItem("username"), sessionStorage.getItem("username"));
                     }else {
-                        ajaxUtil.fileAjax(itemcode,uploadImg.getFiles()[0],"undefined","undefined")
+                        ajaxUtil.fileAjax(itemcode,uploadImg.getFiles()[0],sessionStorage.getItem("username"), sessionStorage.getItem("username"))
                     }
 
                 }
                 ajaxUtil.myAjax(null,url,param,function (data) {
                     if(ajaxUtil.success(data)){
                         window.location.href = pathUrl;
-                        // orange.redirect(pathUrl)
                     }else {
                         alert(data.msg)
                     }
@@ -109,6 +86,8 @@
                     uploadImg.setImgSrc(tempdata.filePath)
                     itemcode = tempdata.itemcode;
                 }else {
+                    $("#name").val(sessionStorage.getItem('orgName'));
+                    $("#phone").val(sessionStorage.getItem('phone'));
                     $("#distpicker").distpicker();
                 }
                 init = function () {

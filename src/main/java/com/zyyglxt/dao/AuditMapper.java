@@ -4,7 +4,11 @@ import com.zyyglxt.dataobject.HospDO;
 import com.zyyglxt.dataobject.IndustrialDevelopChiMed;
 import com.zyyglxt.dataobject.IndustrialDevelopSchool;
 import com.zyyglxt.dataobject.IndustrialDevelopTecSerOrg;
+import com.zyyglxt.dto.HospDto;
 import com.zyyglxt.dto.industrialDevelop.AuditDto;
+import com.zyyglxt.dto.industrialDevelop.IndustrialDevelopChiMedDto;
+import com.zyyglxt.dto.industrialDevelop.IndustrialDevelopSchoolDto;
+import com.zyyglxt.dto.industrialDevelop.IndustrialDevelopTecSerOrgDto;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -15,25 +19,33 @@ import java.util.List;
  * @Version 1.0
  **/
 public interface AuditMapper {
-    List<IndustrialDevelopChiMed> getAllChiMed();
+    List<AuditDto> getAllChiMed();
 
-    List<IndustrialDevelopChiMed> getAllChiMedByType(String type);
+    List<AuditDto> getAllChiMedByCity(String city);
 
-    List<IndustrialDevelopTecSerOrg> getAllTecOrg();
+    List<AuditDto> getAllChiMedByType(String type);
 
-    List<IndustrialDevelopTecSerOrg> getAllTecOrgByType(String type);
+    List<AuditDto> getAllTecOrg();
 
-    List<IndustrialDevelopSchool> getAllSchool();
+    List<AuditDto> getAllTecOrgByCity(String city);
 
-    List<HospDO> getAllHospital();
+    List<AuditDto> getAllTecOrgByType(String type);
 
-    IndustrialDevelopChiMed getDetailChiMed(@Param("itemid") Integer itemid,@Param("itemcode") String itemcode);
+    List<AuditDto> getAllSchool();
 
-    IndustrialDevelopTecSerOrg getDetailTecSerOrg(@Param("itemid") Integer itemid,@Param("itemcode") String itemcode);
+    List<AuditDto> getAllSchoolByCity(String city);
 
-    IndustrialDevelopSchool getDetailSchool(@Param("itemid") Integer itemid,@Param("itemcode") String itemcode);
+    List<AuditDto> getAllHospital();
 
-    HospDO getDetailHospital(@Param("itemid") Integer itemid,@Param("itemcode") String itemcode);
+    List<AuditDto> getAllHospitalByCity(String city);
+
+    IndustrialDevelopChiMedDto getDetailChiMed(@Param("itemid") Integer itemid, @Param("itemcode") String itemcode);
+
+    IndustrialDevelopTecSerOrgDto getDetailTecSerOrg(@Param("itemid") Integer itemid, @Param("itemcode") String itemcode);
+
+    IndustrialDevelopSchoolDto getDetailSchool(@Param("itemid") Integer itemid, @Param("itemcode") String itemcode);
+
+    HospDto getDetailHospital(@Param("itemid") Integer itemid, @Param("itemcode") String itemcode);
 
     int changeChiMedStatus(AuditDto record);
 
@@ -42,4 +54,6 @@ public interface AuditMapper {
     int changeHospitalStatus(AuditDto record);
 
     int changeSchoolStatus(AuditDto record);
+
+    int changeUserStatus(String orgCode);
 }

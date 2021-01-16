@@ -16,8 +16,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.sql.Date;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -59,8 +59,8 @@ public class DataAnnouncementServiceImpl implements IDataAnnouncementService {
         }
         record.setItemcreateat(DateUtils.getDate());
         record.setCreater(usernameUtil.getOperateUser());
+        record.setUpdater(usernameUtil.getOperateUser());
         record.setDataType("通知公告");
-        record.setDataStatus("0");
         if(record.getItemcode() == null){
             record.setItemcode(UUIDUtils.getUUID());
         }
@@ -85,18 +85,8 @@ public class DataAnnouncementServiceImpl implements IDataAnnouncementService {
 
 
     @Override
-    public int changeStatus(DataDOKey key, String dataStatus) {
-        return dataDOMapper.changeStatusByPrimaryKey(key, dataStatus);
-    }
-
-    /**
-     * 关键字搜索
-     * @param keyWord
-     * @return
-     */
-    @Override
-    public List<DataDO> searchDataDO(String keyWord) {
-        return dataDOMapper.searchDataDO(keyWord);
+    public int changeStatus(DataDOKey key, String dataDelayedRelease, String dataStatus) {
+        return dataDOMapper.changeStatusByPrimaryKey(key, dataDelayedRelease, dataStatus);
     }
 
 }

@@ -106,19 +106,19 @@ public class SpecialtyServiceImpl implements ISpecialtyService {
 
     /*查询所有科室*/
     @Override
-    public List<SpecialtyDO> selectAllSpecialty(List<String> specialtyStatus) {
-        List<SpecialtyDO> DOList = new ArrayList<>();
+    public List<SpecialtyDto> selectAllSpecialty(List<String> specialtyStatus) {
+        List<SpecialtyDto> list = new ArrayList<>();
         for (String status : specialtyStatus) {
-            DOList.addAll(specialtyDOMapper.selectByStatus(status));
+            list.addAll(specialtyDOMapper.selectByStatus(status));
         }
-        return DOList;
+        return list;
     }
 
     /*
     搜索关键字，包括专科名，专科介绍，专科所在省市县，手动输入地址，专科所属医院名
      */
     @Override
-    public List<SpecialtyDO> searchSpecialty(String keyWord) {
+    public List<SpecialtyDto> searchSpecialty(String keyWord) {
         if(keyWord == null || keyWord == ""){
             throw new BusinessException("关键字不能为空", EmBusinessError.PARAMETER_VALIDATION_ERROR);
         }
@@ -126,7 +126,7 @@ public class SpecialtyServiceImpl implements ISpecialtyService {
     }
 
     @Override
-    public List<SpecialtyDO> selectByHospCode(String hospCode) {
+    public List<SpecialtyDto> selectByHospCode(String hospCode) {
         if(hospCode == null || hospCode == ""){
             throw new BusinessException("医院code不能为空", EmBusinessError.PARAMETER_VALIDATION_ERROR);
         }

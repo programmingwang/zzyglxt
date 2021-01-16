@@ -43,26 +43,19 @@
                 }
             }
 
-            $(function(){
-                $("span a").unbind().on('click',function () {
-                    alert("aaa");
-                    orange.redirect("/scientificProject/viewTopicManagement")
-                });
-            });
 
 
             //修改事件
             window.orgEvents = {
                 'click .view' : function (e, value, row, index) {
-                    var scoreArr = JSON.parse(localStorage.getItem("detailScore"));
-                    row.scoreArr = scoreArr;
-                    localStorage.setItem("viewDetail",JSON.stringify(row));
                     localStorage.setItem("isView","true");
+                    localStorage.setItem("viewDetail",JSON.stringify(row));
                     orange.redirect("/evaluationTable/evaluationTable")
                 },
                 'click .exmaine' : function (e, value, row, index) {
+                    localStorage.removeItem("isView");
                     localStorage.removeItem("viewDetail");
-                    localStorage.setItem("examinItemCode",JSON.stringify(row.itemcode));
+                    localStorage.setItem("examinTopicCode",JSON.stringify(row.topicCode));
                     orange.redirect("/evaluationTable/evaluationTable")
                 },
                 'click .submit' : function (e, value, row, index) {
@@ -74,23 +67,29 @@
                             var isSuccess = false;
                             var submitStatus = {
                                 exmaineStatus: pl[0].id,
-                                itemcode : row.itemcode
+                                topicCode : row.topicCode,
                             };
-                            ajaxUtil.myAjax(null,"/exmain/exmain",submitStatus,function (data) {
-                                if(ajaxUtil.success(data)){
-                                    if(data.code == ajaxUtil.successCode){
-                                        alertUtil.info("评改提交");
-                                        isSuccess = true;
-                                        refreshTable();
-                                    }else{
-                                        alertUtil.error(data.msg);
-                                    }
+                            var checkExpertCodeParam = {
+                                expertUserCode : sessionStorage.getItem("itemcode")
+                            };
+                            ajaxUtil.myAjax(null,"exmain/selExpertCode",checkExpertCodeParam,function (data) {
+                                submitStatus.expertCode = data.data;
+                                ajaxUtil.myAjax(null,"/exmain/exmain",submitStatus,function (data) {
+                                    if(ajaxUtil.success(data)){
+                                        if(data.code == ajaxUtil.successCode){
+                                            alertUtil.info("评改提交");
+                                            isSuccess = true;
+                                            refreshTable();
+                                        }else{
+                                            alertUtil.error(data.msg);
+                                        }
 
-                                }else {
-                                    alertUtil.error(data.msg)
-                                }
-                            },false,true,"put");
-                            return isSuccess;
+                                    }else {
+                                        alertUtil.error(data.msg)
+                                    }
+                                },false,true,"put");
+                            },false);
+                        return isSuccess;
                         }
 
                     };

@@ -30,21 +30,21 @@ public class ExpertExmainController {
     @RequestMapping(value = "/exmain" , method = RequestMethod.GET)
     @ResponseBody
     public ResponseData getAllExmainTopic(){
-        List<ExmaineDto> exmaineDtos = exmaineService.selectAll();
-        return new ResponseData(EmBusinessError.success,exmaineDtos);
+        return new ResponseData(EmBusinessError.success,exmaineService.selectAll());
     }
 
     //通过专家获得的课题
     @RequestMapping(value = "/getByExpertCode" , method = RequestMethod.GET)
     @ResponseBody
     public ResponseData getAllExmainTopic(@RequestParam("expertUserCode") String expertUserCode){
-        List<ExmaineDto> exmaineDtos = exmaineService.selectByExpertCode(industrialExpertService.selectByUserCode(expertUserCode));
-        return new ResponseData(EmBusinessError.success,exmaineDtos);
+        expertUserCode = industrialExpertService.selectByUserCode(expertUserCode);
+        return new ResponseData(EmBusinessError.success,exmaineService.selectByExpertCode(expertUserCode));
     }
 
     @RequestMapping(value = "/exmain" , method = RequestMethod.PUT)
     @ResponseBody
     public ResponseData updExmain(@RequestBody IndustrialDevelopExpertRefDO developExpertRefDO){
+        //打分，updateByPrimaryKeySelective不再是根据itemid和itemcode修改数据了，请注意
         exmaineService.updateByPrimaryKeySelective(developExpertRefDO);
         return new ResponseData(EmBusinessError.success);
     }
@@ -61,6 +61,12 @@ public class ExpertExmainController {
     public ResponseData insert(@RequestBody IndustrialDevelopExpertRefDO expertRefDO){
         exmaineService.insertSelective(expertRefDO);
         return new ResponseData(EmBusinessError.success);
+    }
+
+    @PostMapping("/selExpertCode")
+    @ResponseBody
+    public ResponseData selExpertCode(@RequestParam("expertUserCode") String expertUserCode){
+        return new ResponseData(EmBusinessError.success,industrialExpertService.selectByUserCode(expertUserCode));
     }
 
 }

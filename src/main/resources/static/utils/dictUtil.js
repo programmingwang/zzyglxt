@@ -98,7 +98,24 @@
             //数据提交状态
             "topicStatus": "topicStatus",
             //审核状态
-            "auditStatus": "auditStatus"
+            "auditStatus": "auditStatus",
+            //紧急程度
+            "emergencyStatus":"emergencyStatus",
+            //报告审核状态
+            "reportStatus":"reportStatus",
+            //不公开理由
+            "postReason":"postReason",
+            //公平竞争审查
+            "postFairDepartmentReview":"postFairDepartmentReview",
+            //文号
+            "postDocumentNum":"postDocumentNum",
+            //公开方式
+            "governerscounter":"postPublicWay",
+            "postPublicWay":"postPublicWay",
+            //会签审核状态
+            "signstatus":"status",
+            //发文审核状态
+            "postStatus":"postStatus"
         }
 
         var dictList = {

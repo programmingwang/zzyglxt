@@ -29,18 +29,20 @@ public enum EmBusinessError implements CommonError {
     USER_ACCOUNT_ALREADY_EXIST(2008, "账号已存在"),
     USER_ACCOUNT_USE_BY_OTHERS(2009, "账号下线"),
     USER_REGISTER_FAILED(2010, "注册失败"),
-    MOBILEPHONE_ERROR(2011, "手机号不正确"),
+    MOBILEPHONE_ERROR(2011, "电话号码或手机号码不正确"),
     IDNO_ERROR(2011, "身份证号不正确"),
     USER_LOGIN_FAILED(2012, "登陆失败"),
     MODIFY_USER_MESSAGE_FAILED(2013, "修改用户信息失败"),
     OLDPASSWORD_ERROR(2014, "旧密码错误"),
     INPUT_NOT_NULL(2015, "密码输入不能为空，请重新输入"),
     NEWPASSWORD_NOT_EQUAL(2016, "两次输入的新密码不一致，请重新输入"),
-    ORG_NAME_ERROR(2016, "企业名称错误，请检查是否与注册时一致"),
+    ORG_NAME_ERROR(2017, "企业名称错误，请检查是否与注册时一致"),
+    AUDIT_NOT_PASSED(2018, "审核未通过，请耐心等待！"),
+    ORG_NOT_REGISTER(2018, "机构未注册！"),
     /* 业务错误 */
-    NO_PERMISSION(10001, "没有权限"),
+    NO_PERMISSION(10002, "没有权限"),
     INTEGRITY_CONSTRAINT_ERROE(40001,"违反数据完整性，请检查是否有其他数据关联"),
-
+    NO_FILE_UPLOAD(1003,"没有文件上传，如需上传请编辑上传！")
 
 
 

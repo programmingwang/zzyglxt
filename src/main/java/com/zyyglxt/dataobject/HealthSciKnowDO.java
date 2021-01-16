@@ -10,7 +10,6 @@ public class HealthSciKnowDO extends HealthSciKnowDOKey {
 
     private String scienceKnowledgeSource;
 
-    @NotBlank(message = "作者不能为空")
     private String scienceKnowledgeAuthor;
 
     private Integer visitNum;

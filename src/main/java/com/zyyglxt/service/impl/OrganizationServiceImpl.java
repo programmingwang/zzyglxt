@@ -69,4 +69,9 @@ public class OrganizationServiceImpl implements IOrganizationService {
     public void insertChiMedMsg() {
 
     }
+
+    @Override
+    public OrganizationDO selectByItemCode(String itemCode) {
+        return organizationDOMapper.selectByItemCode(itemCode);
+    }
 }

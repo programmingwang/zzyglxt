@@ -10,6 +10,55 @@
                 orange.redirect(url);
             });
 
+            $("#btn_save").unbind().on('click',function () {
+                var comGamEntity;
+                var addUpdateUrl;
+                var operateMessage;
+                if(!isUpdate()){
+                    addUpdateUrl = "/cul/pro/comGam/addComGam";
+                    operateMessage = "新增动漫游戏成功";
+                    comGamEntity = {
+                        itemcode: stringUtil.getUUID(),
+                        chineseCulturalName : $("#chineseCulturalName").val(),
+                        chineseCulturalSource : $("#chineseCulturalSource").val(),
+                        chineseCulturalAuthor : $("#chineseCulturalAuthor").val(),
+                        chineseCulturalStatus : '0',
+                        chineseCulturalContent : editor.txt.html()
+                    };
+                }else{
+                    var needData = JSON.parse(localStorage.getItem("rowData"));
+                    addUpdateUrl = "/cul/pro/comGam/updComGam";
+                    comGamEntity = {
+                        itemid: needData.itemid,
+                        itemcode: needData.itemcode,
+                        chineseCulturalName : $("#chineseCulturalName").val(),
+                        chineseCulturalSource : $("#chineseCulturalSource").val(),
+                        chineseCulturalAuthor : $("#chineseCulturalAuthor").val(),
+                        chineseCulturalStatus : '0',
+                        chineseCulturalContent : editor.txt.html()
+                    }
+                    operateMessage = "更新动漫游戏成功";
+                }
+
+                fileUtil.handleFile(isUpdate(), comGamEntity.itemcode, uploadImg.getFiles()[0]);
+
+                ajaxUtil.myAjax(null,addUpdateUrl,comGamEntity,function (data) {
+                    if(ajaxUtil.success(data)){
+                        if(data.code == ajaxUtil.successCode){
+                            alertUtil.info(operateMessage);
+                            var url = "/chineseCultural/production/comicGame";
+                            orange.redirect(url);
+                        }else{
+                            alertUtil.error(data.msg);
+                        }
+
+                    }else {
+                        alertUtil.alert(data.msg);
+                    }
+                },false,true);
+
+            });
+
             $("#btn_insert").unbind().on('click',function () {
                 var comGamEntity;
                 var addUpdateUrl;
@@ -22,6 +71,7 @@
                         chineseCulturalName : $("#chineseCulturalName").val(),
                         chineseCulturalSource : $("#chineseCulturalSource").val(),
                         chineseCulturalAuthor : $("#chineseCulturalAuthor").val(),
+                        chineseCulturalStatus : '1',
                         chineseCulturalContent : editor.txt.html()
                     };
                 }else{
@@ -33,6 +83,7 @@
                         chineseCulturalName : $("#chineseCulturalName").val(),
                         chineseCulturalSource : $("#chineseCulturalSource").val(),
                         chineseCulturalAuthor : $("#chineseCulturalAuthor").val(),
+                        chineseCulturalStatus : '1',
                         chineseCulturalContent : editor.txt.html()
                     }
                     operateMessage = "更新动漫游戏成功";

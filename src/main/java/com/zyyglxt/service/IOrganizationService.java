@@ -19,4 +19,6 @@ public interface IOrganizationService {
     public ResponseData orgAudit(OrganizationDO organizationDO);
 
     public void insertChiMedMsg();
+
+    public OrganizationDO selectByItemCode(String itemCode);
 }

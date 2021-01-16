@@ -66,25 +66,6 @@ public class MedMatController {
     @ResponseBody
     @GetMapping("/selectMedMat")
     public ResponseData selectMedMatByORGCode(){
-        List<IndustrialDevelopMedMat> medMatList = medMatService.selectMedMatByORGCode();
-        return new ResponseData(EmBusinessError.success,DoToDto(medMatList));
-    }
-
-    private List<IndustrialDevelopMedMatDto> DoToDto(List<IndustrialDevelopMedMat> DOList){
-        List<IndustrialDevelopMedMatDto> DtoList = new ArrayList<>();
-        if (!DOList.isEmpty()){
-            for (IndustrialDevelopMedMat DO:DOList){
-                IndustrialDevelopMedMatDto Dto = new IndustrialDevelopMedMatDto();
-                BeanUtils.copyProperties(DO,Dto);
-                List<FileDO> fileDO= fileService.selectMultipleFileByDataCode(Dto.getItemcode());
-                List<String> filePath = new ArrayList<>();
-                for (FileDO file:fileDO){
-                    filePath.add(file.getFilePath());
-                }
-                Dto.setFilePath(filePath);
-                DtoList.add(Dto);
-            }
-        }
-        return DtoList;
+        return new ResponseData(EmBusinessError.success,medMatService.selectMedMatByORGCode());
     }
 }

@@ -38,14 +38,6 @@ public class HealthSciKnowDOServiceImpl implements HealthSciKnowDOService {
     @Transactional
     @Override
     public int insertSelective(HealthSciKnowDO record)  {
-        /*Date data=new Date();
-        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        try {
-            data = df.parse(df.format(data));
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        record.setItemcreateat(data);*/
         ValidatorResult result = validator.validate(record);
         if(result.isHasErrors()){
             throw new BusinessException(result.getErrMsg(), EmBusinessError.PARAMETER_VALIDATION_ERROR);
@@ -80,12 +72,9 @@ public class HealthSciKnowDOServiceImpl implements HealthSciKnowDOService {
     }
     /*查询所有科普知识数据*/
     @Override
-    public List<HealthSciKnowDO> selectAllHealthSciKnow(List<String> scienceKnowledgeStatus) {
-        List<HealthSciKnowDO> healthSciKnowDOList=new ArrayList<>();
-        for(String SciKnowStatus: scienceKnowledgeStatus){
-            healthSciKnowDOList.addAll(healthSciKnowDOMapper.selectAllHealthSciKnow(SciKnowStatus));
-        }
-        return healthSciKnowDOList;
+    public List<HealthSciKnowDO> selectAllHealthSciKnow(String scienceKnowledgeStatus) {
+
+        return healthSciKnowDOMapper.selectAllHealthSciKnow(scienceKnowledgeStatus);
     }
 
     @Override

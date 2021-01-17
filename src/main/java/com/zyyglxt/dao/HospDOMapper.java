@@ -33,6 +33,6 @@ public interface HospDOMapper {
 
     int updateStatusByPrimaryKey(StatusDto statusDto);
 
-    HospDO selectByOrgCode(String orgCode);
+    HospDto selectByOrgCode(String orgCode);
 
 }

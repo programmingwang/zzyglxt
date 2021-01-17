@@ -3,6 +3,7 @@ package com.zyyglxt.dao;
 import com.zyyglxt.dataobject.FamPreDOKey;
 import com.zyyglxt.dataobject.HealthCareChineseMedicineDO;
 import com.zyyglxt.dataobject.HealthCareChineseMedicineDOKey;
+import com.zyyglxt.dto.HealthCareChineseMedicineDto;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
@@ -27,5 +28,5 @@ public interface HealthCareChineseMedicineDOMapper {
 
     int changeStatusToMedicine(@Param("key") HealthCareChineseMedicineDOKey key , @Param("status") String chineseMedicineStatus);//中医药数据状态
 
-    List<HealthCareChineseMedicineDO> selectAllHealthCareChineseMedicine(@Param("chineseMedicineStatus") String chineseMedicineStatus);
+    List<HealthCareChineseMedicineDto> selectAllHealthCareChineseMedicine(@Param("chineseMedicineStatus") String chineseMedicineStatus);
 }

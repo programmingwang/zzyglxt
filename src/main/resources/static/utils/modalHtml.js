@@ -2272,10 +2272,7 @@
         modalHtml.addExperModal='<div>\n' +
             '        <div >\n' +
             '            <span>请选择专家</span>\n' +
-            '                <div style="margin-top: 1em;">\n' +
-            '                    <select id="experName" class="form-control" >\n' +
-            '                        <option value ="volvo">请选择专家姓名</option>\n' +
-            '                    </select>\n' +
+            '                <div id="experName" style="margin-top: 1em;">\n' +
             '                </div>\n' +
             '        </div>\n' +
             '    </div>\n';

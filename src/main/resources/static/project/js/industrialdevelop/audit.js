@@ -356,7 +356,13 @@
                 $("#orgTypeSelect").selectUtil(pl);
             }else if (rolename == "产业发展-省级"){
                 pl = dictUtil.getDictByCode(dictUtil.DICT_LIST.orgAuditStatus);
-                $("#chargePersonSearch").selectUtil(pl);
+                let tpl = [];
+                $.each(pl,function (index, item) {
+                    tpl.push(item)
+                })
+                tpl.splice(0,1)
+                tpl.splice(2,1)
+                $("#chargePersonSearch").selectUtil(tpl);
                 pl = dictUtil.getDictByCode(dictUtil.DICT_LIST.orgType);
                 $("#orgTypeSelect").selectUtil(pl);
             }
@@ -411,7 +417,7 @@
                 var newArry = [];
                 var addstr=document.getElementById("chargePersonSearch").value;
                 switch (addstr) {
-                    case "0" : addstr = "待审核"; break;
+                    case "0" : addstr = rolename == "产业发展-市级" ? "待审核": "地市局用户审核通过"; break;
                     case "1" : addstr = "地市局用户审核通过"; break;
                     case "2" : addstr = "地市局用户审核不通过"; break;
                     case "3" : addstr = "省局用户审核通过"; break;

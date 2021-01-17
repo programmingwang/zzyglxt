@@ -1,6 +1,7 @@
 package com.zyyglxt.service;
 
 import com.zyyglxt.dataobject.IndustrialDevelopSaleDrug;
+import com.zyyglxt.dto.industrialDevelop.IndustrialDevelopSaleDrugDto;
 import com.zyyglxt.error.BusinessException;
 import org.apache.ibatis.annotations.Param;
 
@@ -26,7 +27,7 @@ public interface IndustrialDevelopSaleDrugService{
 
     int updateByPrimaryKey(IndustrialDevelopSaleDrug record);
 
-   List< IndustrialDevelopSaleDrug> selectAllSaleDrug(List<String> status);//查询所有售药记录信息
+   List<IndustrialDevelopSaleDrugDto> selectAllSaleDrug(List<String> status);//查询所有售药记录信息
 
     int changeStatusToSaleDrug(IndustrialDevelopSaleDrug key, String status);
 

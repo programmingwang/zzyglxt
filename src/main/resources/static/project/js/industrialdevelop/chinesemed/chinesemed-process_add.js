@@ -3,7 +3,7 @@
         function (jquery,objectUtil,ajaxUtil,alertUtil,stringUtil,dictUtil,fileUtil,uploadImg,urlUtil,distpicker) {
 
             var url = "/industrialdevelop/chi-med";
-            var pathUrl = "/industrialdevelop/medMat/medMat"
+            var pathUrl = "/industrialdevelop/chinesemed/chinesemed-process_add"
             var orgType = "process";
             var type = isUpdate() ? "put" : "post";
             var status = dictUtil.getDictByCode(dictUtil.DICT_LIST.projectStatus);

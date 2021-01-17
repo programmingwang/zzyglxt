@@ -1,5 +1,6 @@
 package com.zyyglxt.service.impl;
 
+import com.zyyglxt.dto.industrialDevelop.IndustrialDevelopSaleDrugDto;
 import com.zyyglxt.error.BusinessException;
 import com.zyyglxt.error.EmBusinessError;
 import com.zyyglxt.util.UUIDUtils;
@@ -18,7 +19,6 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.UUID;
 
 /**
    *@Author lrt
@@ -90,9 +90,9 @@ public class IndustrialDevelopSaleDrugServiceImpl implements IndustrialDevelopSa
     }
 
     @Override
-    public List< IndustrialDevelopSaleDrug> selectAllSaleDrug(List<String> status) {
+    public List<IndustrialDevelopSaleDrugDto> selectAllSaleDrug(List<String> status) {
 //        return industrialDevelopSaleDrugMapper.selectAllSaleDrug(status);
-       List<IndustrialDevelopSaleDrug> industrialDevelopSaleDrugList = new ArrayList<>();
+       List<IndustrialDevelopSaleDrugDto> industrialDevelopSaleDrugList = new ArrayList<>();
         for (String Status : status) {
             industrialDevelopSaleDrugList.addAll(industrialDevelopSaleDrugMapper.selectAllSaleDrug (Status,usernameUtil.getOrgCode()));
         }

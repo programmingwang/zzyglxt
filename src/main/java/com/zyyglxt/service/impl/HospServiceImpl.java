@@ -125,7 +125,7 @@ public class HospServiceImpl implements IHospService {
     }
 
     @Override
-    public HospDO selectByOrgCode(String orgCode) {
+    public HospDto selectByOrgCode(String orgCode) {
         return hospDOMapper.selectByOrgCode(orgCode);
     }
 

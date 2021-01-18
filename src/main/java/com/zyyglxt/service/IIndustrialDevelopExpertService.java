@@ -16,15 +16,15 @@ import java.util.List;
 public interface IIndustrialDevelopExpertService {
 
     //新增专家信息
-    void addExpert(IndustrialDevelopExpertDto record);
+    String addExpert(IndustrialDevelopExpertDto record);
     //删除专家信息
-    int delExpert(String itemCode);
+    int delExpert(String userCode);
     //重置密码
     int resetPassword( @Param("userCode") String userCode);
     //查看所有专家信息
     List<IndustrialDevelopExpertDto> getExperts();
     //查看专家个人信息
-    UserDO selectByPrimaryKey(String itemcode);
+    UserDO selectByPrimaryKey(String userCode);
     String selectByUserCode(String userCode);
 
 }

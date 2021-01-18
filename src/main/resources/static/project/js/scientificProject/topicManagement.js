@@ -89,10 +89,10 @@
                 }
                 else if (row.examineStatus == projectStatus[3].id || row.examineStatus == projectStatus[5].id || row.examineStatus == projectStatus[7].id){
                     return [
-                        '<a class="viewReason" style="margin:0 1em;text-decoration: none;color:#775637;" data-toggle="modal" data-target="" >理由</a>',
-                        '<a class="edit" style="margin:0 1em;text-decoration: none;color:#775637;" data-toggle="modal" data-target="" >修改</a>',
-                        '<a class="submit"  style="margin:0 1em;text-decoration: none;color:#775637;" data-target="#staticBackdrop" >提交</a>',
-                        '<a class="delete" style="margin:0 1em;text-decoration: none;color:#D60000;"  data-toggle="modal" data-target="#staticBackdrop" >删除</a>',
+                        '<a class="viewReason" style="margin:0 0.7em;text-decoration: none;color:#775637;" data-toggle="modal" data-target="" >理由</a>',
+                        '<a class="edit" style="margin:0 0.7em;text-decoration: none;color:#775637;" data-toggle="modal" data-target="" >修改</a>',
+                        '<a class="submit"  style="margin:0 0.7em;text-decoration: none;color:#775637;" data-target="#staticBackdrop" >提交</a>',
+                        '<a class="delete" style="margin:0 0.7em;text-decoration: none;color:#D60000;"  data-toggle="modal" data-target="#staticBackdrop" >删除</a>',
                     ].join('');
                 }
             }
@@ -511,7 +511,7 @@
 
             }else if (rolename === "科研项目-市级"){
                 $("#chargePersonSearch").selectUtil(auditStatus);
-                var url = "/industrialdevelop/getTopic?examineStatus="+projectStatus[2].id+"&examineStatus="+projectStatus[4].id +"&examineStatus="+projectStatus[5].id +"&examineStatus="+projectStatus[6].id +"&examineStatus="+projectStatus[7].id;
+                var url = "/industrialdevelop/getTopic?examineStatus=1";
                 var aCol = [
                     {field: 'projectNo', title: '项目编号'},
                     {field: 'projectName', title: '项目名称', formatter: viewOperation, events: viewEvents},
@@ -530,7 +530,7 @@
 
             }else if (rolename === "科研项目-省级"){
                 $("#chargePersonSearch").selectUtil(auditStatus);
-                var url = "/industrialdevelop/getTopic?examineStatus="+projectStatus[4].id+"&examineStatus="+projectStatus[6].id +"&examineStatus="+projectStatus[7].id;
+                var url = "/industrialdevelop/getTopic?examineStatus=2";
                 var aCol = [
                     {field: 'projectNo', title: '项目编号'},
                     {field: 'projectName', title: '项目名称', formatter: viewOperation, events: viewEvents},

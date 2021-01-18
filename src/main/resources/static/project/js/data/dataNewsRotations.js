@@ -257,7 +257,7 @@
             orange.redirect(addUrl);
         });
 
-        var pl = dictUtil.getDictByCode(dictUtil.DICT_LIST.showStatus);
+        var pl = dictUtil.getDictByCode(dictUtil.DICT_LIST.webStatus);
         $("#chargePersonSearch").selectUtil(pl);
 
         var aCol = [
@@ -286,11 +286,13 @@
             myTable.free();
             myTable = bootstrapTableUtil.myBootStrapTableInit("table", url, param, aCol);
         }
-            var allTableData = $("#table").bootstrapTable("getData");
 
-            localStorage.setItem('2',JSON.stringify(allTableData))
-            obj2=JSON.parse(localStorage.getItem("2"));
+        bootstrapTableUtil.globalSearch("table",url,aParam, aCol, "dataStatus");
 
+        var allTableData = $("#table").bootstrapTable("getData");
+
+        localStorage.setItem('2',JSON.stringify(allTableData))
+        obj2=JSON.parse(localStorage.getItem("2"));
 
         var allPosition = document.getElementById("allPosition").children;
         for(var i=1;i<allPosition.length;i++){
@@ -314,8 +316,6 @@
                 }else if (str=='位置五'){
                     str=4;
                 }
-
-
                 if (str=='全部'){
                     refreshTable()
                 }else {

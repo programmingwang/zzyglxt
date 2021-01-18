@@ -48,10 +48,11 @@
                     modalTitle : "分配专家",
                     modalClass : "modal-lg",
                     modalConfirmFun:function () {
-                        var isSuccess = false;
                         for (var i = 0; i < rows.length; i++){
+                            var isCheckBox = false
                             $('input[name="checkExperName"]').each(function () {
                                 if ($(this).prop('checked')) {
+                                    isCheckBox = true
                                     var entity = {
                                         itemcode : stringUtil.getUUID(),
                                         expertCode : $(this).val(),
@@ -60,18 +61,23 @@
                                     }
                                     ajaxUtil.myAjax(null, "/exmain/exmain", entity, function (data) {
                                         if (ajaxUtil.success(data)) {
-                                            isSuccess = true;
                                         } else {
-                                            isSuccess = false;
                                             alert(data.msg);
                                         }
                                     }, false, true, "post");
                                 }
                             })
                         }
-                        refreshTable();
-                        alertUtil.info("分配专家成功");
-                        return isSuccess;
+
+                        if (isCheckBox) {
+                            refreshTable();
+                            alertUtil.info("分配专家成功");
+                            return true;
+                        }
+                        else {
+                            alertUtil.error("错误，没有勾选专家，请勾选专家后重试")
+                            return true;
+                        }
                     }
                 }
                 var addExperModal = modalUtil.init(addExperModal);

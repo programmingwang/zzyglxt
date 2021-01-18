@@ -163,32 +163,4 @@ public class TopicController {
         return new ResponseData(EmBusinessError.success,max);
     }
 
-    @GetMapping("/topicAndExpert")
-    @ResponseBody
-    @LogAnnotation(logTitle = "查看课题数据和分配专家状态")
-    public ResponseData getTopicAndExpert(){
-        List<String> status = Arrays.asList("0","1","2","3","4","5","6","7");
-        List<IndustrialDevelopTopicDO> topicDOList = developTopicService.getAll(status);
-        List<IndustrialDevelopTopicDODto> DtoList = new ArrayList<>();
-        for (IndustrialDevelopTopicDO DO:topicDOList){
-            IndustrialDevelopTopicDODto Dto = new IndustrialDevelopTopicDODto();
-            BeanUtils.copyProperties(DO,Dto);
-            List<IndustrialDevelopExpertRefDO> expertRefDOList = exmaineService.selectByTopicCode(Dto.getItemcode());
-            if (expertRefDOList.size() == 0 || expertRefDOList == null){
-                Dto.setExpertCode(null);
-            }
-            else{
-                for (IndustrialDevelopExpertRefDO expertRefDO : expertRefDOList){
-                    String expertCode = expertRefDO.getExpertCode();
-                    if (expertCode != null && expertCode != "" && expertCode.length() != 0){
-                        Dto.setExpertCode(expertCode);
-                        break;
-                    }
-                }
-
-            }
-            DtoList.add(Dto);
-        }
-        return new ResponseData(EmBusinessError.success,DtoList);
-    }
 }

@@ -3,6 +3,7 @@ package com.zyyglxt.dao;
 import com.zyyglxt.dataobject.IndustrialDevelopExpertRefDO;
 import com.zyyglxt.dataobject.IndustrialDevelopExpertRefDOKey;
 import com.zyyglxt.dto.ExmaineDto;
+import com.zyyglxt.dto.industrialDevelop.IndustrialDevelopTopicDODto;
 
 import java.util.List;
 
@@ -27,4 +28,6 @@ public interface IndustrialDevelopExpertRefDOMapper {
     List<IndustrialDevelopExpertRefDO> selectByTopicCode(String topicCode);
 
     int deleteByTopicCode(String topicCode);
+
+    List<IndustrialDevelopTopicDODto> topicAndExpertStatus();
 }

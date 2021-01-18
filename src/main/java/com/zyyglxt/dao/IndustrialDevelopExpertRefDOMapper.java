@@ -17,9 +17,11 @@ public interface IndustrialDevelopExpertRefDOMapper {
 
     IndustrialDevelopExpertRefDO selectByPrimaryKey(IndustrialDevelopExpertRefDOKey key);
 
-    List<ExmaineDto> selectAll();
+    //查询
+    List<String> selectAllTopicCode();
 
     List<ExmaineDto> selectByExpertCode(String expertCode);
+    List<ExmaineDto> selectAllByTopicCode(String topicCode);
 
     int updateByPrimaryKeySelective(IndustrialDevelopExpertRefDO record);
 
@@ -30,4 +32,6 @@ public interface IndustrialDevelopExpertRefDOMapper {
     int deleteByTopicCode(String topicCode);
 
     List<IndustrialDevelopTopicDODto> topicAndExpertStatus();
+
+    Integer selectZjktsl(String topicCode);
 }

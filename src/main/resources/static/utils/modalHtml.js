@@ -1110,55 +1110,55 @@
 
         modalHtml.myAddAccountModal =
             '<div class="row">'+
-            '            <div class="col-lg-12 col-md-12">\n' +
-            '                <div class="input-group mb-3">\n' +
-            '                    <div class="input-group-prepend">\n' +
-            '                        <button type="button" class="btn btn-primary btn-sm">用户账号</button>\n' +
+            '            <div class="col-lg-12 col-md-12" style="margin-top: 0;padding-top: 0;">\n' +
+            '                <div >\n' +
+            '                    <div >\n' +
+            '                        <span class="titleName" style="margin-top: 0;padding-top: 0;">用户账号</span>\n' +
             '                    </div>\n' +
             '                    <input type="text" id="username" class="form-control">\n' +
             '                </div>\n' +
             '            </div>\n' +
             '\n' +
             '            <div class="col-lg-12 col-md-12">\n' +
-            '                <div class="input-group mb-3">\n' +
-            '                    <div class="input-group-prepend">\n' +
-            '                        <button type="button" class="btn btn-primary btn-sm" >账号名称</button>\n' +
+            '                <div >\n' +
+            '                    <div >\n' +
+            '                        <sapn  class="titleName" >账号名称</sapn>\n' +
             '                    </div>\n' +
             '                    <input type="text" id="name" class="form-control">\n' +
             '                </div>\n' +
             '            </div>\n' +
             '\n' +
             '            <div class="col-lg-12 col-md-12">\n' +
-            '                <div class="input-group mb-3">\n' +
-            '                    <div class="input-group-prepend">\n' +
-            '                        <button type="button" class="btn btn-primary btn-sm" >主管市区</button>\n' +
+            '                <div >\n' +
+            '                    <div>\n' +
+            '                        <span  class="titleName" >主管市区</span>\n' +
             '                    </div>\n' +
             '                    <select id="cityid" class="form-control"></select>\n' +
             '                </div>\n' +
             '            </div>\n' +
             '\n' +
             '            <div class="col-lg-12 col-md-12">\n' +
-            '                <div class="input-group mb-3">\n' +
-            '                    <div class="input-group-prepend">\n' +
-            '                        <button type="button" class="btn btn-primary btn-sm" >用户角色</button>\n' +
+            '                <div>\n' +
+            '                    <div>\n' +
+            '                        <span  class="titleName" >用户角色</span>\n' +
             '                    </div>\n' +
             '                    <select id="roleName" class="form-control"></select>\n' +
             '                </div>\n' +
             '            </div>\n' +
             '\n' +
             '            <div class="col-lg-12 col-md-12">\n' +
-            '                <div class="input-group mb-3">\n' +
-            '                    <div class="input-group-prepend">\n' +
-            '                        <button type="button" class="btn btn-primary btn-sm" >联系人</button>\n' +
+            '                <div>\n' +
+            '                    <div>\n' +
+            '                        <span  class="titleName" >联系人</span>\n' +
             '                    </div>\n' +
             '                    <input type="text" id="contacts" class="form-control">\n' +
             '                </div>\n' +
             '            </div>\n' +
             '\n' +
             '            <div class="col-lg-12 col-md-12">\n' +
-            '                <div class="input-group mb-3">\n' +
-            '                    <div class="input-group-prepend">\n' +
-            '                        <button type="button" class="btn btn-primary btn-sm" >联系电话</button>\n' +
+            '                <div>\n' +
+            '                    <div>\n' +
+            '                        <span  class="titleName" >联系电话</span>\n' +
             '                    </div>\n' +
             '                    <input type="text" id="mobilephone" class="form-control">\n' +
             '                </div>\n' +

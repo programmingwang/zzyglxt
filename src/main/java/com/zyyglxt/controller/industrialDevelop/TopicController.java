@@ -73,14 +73,15 @@ public class TopicController {
     @ResponseBody
     @LogAnnotation(appCode ="",logTitle ="查看产业发展-课题数据",logLevel ="1",creater ="",updater = "")
     public ResponseData getTopic(@RequestParam(value = "examineStatus") List examineStatus){
-        List<IndustrialDevelopTopicDO> topics = developTopicService.getTopics(examineStatus);
+        /*List<IndustrialDevelopTopicDO> topics = developTopicService.getTopics(examineStatus);
         List<IndustrialDevelopTopicDODto> topicDODtoList = new ArrayList<>();
         for (IndustrialDevelopTopicDO topicDO : topics) {
             FileDO fileDO = iFileService.selectFileByDataCode(topicDO.getItemcode());
             topicDODtoList.add(
                     ConvertDOToDTOUtil.convertFromDOToDTO(topicDO, fileDO.getFilePath(), fileDO.getFileName()));
         }
-        return new ResponseData(EmBusinessError.success,topicDODtoList);
+        return new ResponseData(EmBusinessError.success,topicDODtoList);*/
+        return new ResponseData(EmBusinessError.success,developTopicService.getTopics(examineStatus));
     }
 
     //查询用户对应课题的数据提交状态
@@ -128,28 +129,30 @@ public class TopicController {
     @GetMapping(value = "/getUserCode")
     @ResponseBody
     public ResponseData getUserCode(@RequestParam(value = "userCode") String userCode){
-        List<IndustrialDevelopTopicDO> topicDOList = developTopicService.selectByUserCode(userCode);
+        /*List<IndustrialDevelopTopicDO> topicDOList = developTopicService.selectByUserCode(userCode);
         List<IndustrialDevelopTopicDODto> topicDODtoList = new ArrayList<>();
         for (IndustrialDevelopTopicDO topicDO : topicDOList) {
             FileDO fileDO = iFileService.selectFileByDataCode(topicDO.getItemcode());
             topicDODtoList.add(
                     ConvertDOToDTOUtil.convertFromDOToDTO(topicDO, fileDO.getFilePath(), fileDO.getFileName()));
         }
-        return new ResponseData(EmBusinessError.success,topicDODtoList);
+        return new ResponseData(EmBusinessError.success,topicDODtoList);*/
+        return new ResponseData(EmBusinessError.success,developTopicService.selectByUserCode(userCode));
     }
 
     //查询相应单位对应的所有课题
     @GetMapping(value = "/getByCompany")
     @ResponseBody
     public ResponseData getByCompany(@RequestParam(value = "company") String company){
-        List<IndustrialDevelopTopicDO> topicDOList = developTopicService.selectByCompany(company);
+        /*List<IndustrialDevelopTopicDO> topicDOList = developTopicService.selectByCompany(company);
         List<IndustrialDevelopTopicDODto> topicDODtoList = new ArrayList<>();
         for (IndustrialDevelopTopicDO topicDO : topicDOList) {
             FileDO fileDO = iFileService.selectFileByDataCode(topicDO.getItemcode());
             topicDODtoList.add(
                     ConvertDOToDTOUtil.convertFromDOToDTO(topicDO, fileDO.getFilePath(), fileDO.getFileName()));
         }
-        return new ResponseData(EmBusinessError.success,topicDODtoList);
+        return new ResponseData(EmBusinessError.success,topicDODtoList);*/
+        return new ResponseData(EmBusinessError.success,developTopicService.selectByCompany(company));
     }
 
     //查询项目编号的最大值
@@ -165,7 +168,7 @@ public class TopicController {
     @LogAnnotation(logTitle = "查看课题数据和分配专家状态")
     public ResponseData getTopicAndExpert(){
         List<String> status = Arrays.asList("0","1","2","3","4","5","6","7");
-        List<IndustrialDevelopTopicDO> topicDOList = developTopicService.getTopics(status);
+        List<IndustrialDevelopTopicDO> topicDOList = developTopicService.getAll(status);
         List<IndustrialDevelopTopicDODto> DtoList = new ArrayList<>();
         for (IndustrialDevelopTopicDO DO:topicDOList){
             IndustrialDevelopTopicDODto Dto = new IndustrialDevelopTopicDODto();

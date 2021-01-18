@@ -5,6 +5,7 @@ import com.zyyglxt.dataobject.IndustrialDevelopExpertRefDO;
 import com.zyyglxt.dataobject.IndustrialDevelopTopicDO;
 import com.zyyglxt.dataobject.IndustrialDevelopTopicDOKey;
 import com.zyyglxt.dataobject.validation.ValidationGroups;
+import com.zyyglxt.dto.industrialDevelop.IndustrialDevelopTopicDODto;
 import com.zyyglxt.error.BusinessException;
 import com.zyyglxt.error.EmBusinessError;
 import com.zyyglxt.service.IExmaineService;
@@ -78,8 +79,8 @@ public class IndustrialDevelopTopicServiceImpl implements IIndustrialDevelopTopi
     }
 
     @Override
-    public List<IndustrialDevelopTopicDO> getTopics(List<String> examineStatus) {
-        List<IndustrialDevelopTopicDO> topicDOList = new ArrayList<>();
+    public List<IndustrialDevelopTopicDODto> getTopics(List<String> examineStatus) {
+        List<IndustrialDevelopTopicDODto> topicDOList = new ArrayList<>();
         for (String status : examineStatus) {
             topicDOList.addAll(developTopicDOMapper.selectAll(status));
         }
@@ -121,12 +122,12 @@ public class IndustrialDevelopTopicServiceImpl implements IIndustrialDevelopTopi
     }
 
     @Override
-    public List<IndustrialDevelopTopicDO> selectByUserCode(String userCode) {
+    public List<IndustrialDevelopTopicDODto> selectByUserCode(String userCode) {
         return developTopicDOMapper.selectByUserCode(userCode);
     }
 
     @Override
-    public List<IndustrialDevelopTopicDO> selectByCompany(String company) {
+    public List<IndustrialDevelopTopicDODto> selectByCompany(String company) {
         return developTopicDOMapper.selectByCompany(company);
     }
 
@@ -135,5 +136,13 @@ public class IndustrialDevelopTopicServiceImpl implements IIndustrialDevelopTopi
         return developTopicDOMapper.maxProjectNO();
     }
 
+    @Override
+    public List<IndustrialDevelopTopicDO> getAll(List<String> examineStatus) {
+        List<IndustrialDevelopTopicDO> topicDOList = new ArrayList<>();
+        for (String status : examineStatus) {
+            topicDOList.addAll(developTopicDOMapper.getAll(status));
+        }
+        return topicDOList;
+    }
 
 }

@@ -5,6 +5,7 @@ import com.zyyglxt.dataobject.IndustrialDevelopExpertRefDO;
 import com.zyyglxt.dataobject.IndustrialDevelopExpertRefDOKey;
 import com.zyyglxt.dataobject.IndustrialDevelopTopicDO;
 import com.zyyglxt.dto.ExmaineDto;
+import com.zyyglxt.dto.industrialDevelop.IndustrialDevelopTopicDODto;
 import com.zyyglxt.service.IExmaineService;
 import com.zyyglxt.service.IIndustrialDevelopTopicService;
 import com.zyyglxt.util.UsernameUtil;
@@ -87,5 +88,10 @@ public class ExmaineServiceImpl implements IExmaineService {
     @Override
     public int deleteByTopicCode(String topicCode) {
         return expertRefDOMapper.deleteByTopicCode(topicCode);
+    }
+
+    @Override
+    public List<IndustrialDevelopTopicDODto> topicAndExpertStatus() {
+        return expertRefDOMapper.topicAndExpertStatus();
     }
 }

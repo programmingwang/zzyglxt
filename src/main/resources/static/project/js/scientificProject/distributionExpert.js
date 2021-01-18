@@ -2,7 +2,7 @@
     require(['jquery', 'ajaxUtil','bootstrapTableUtil','objectUtil','alertUtil','modalUtil','selectUtil','stringUtil','dictUtil'],
         function (jquery,ajaxUtil,bootstrapTableUtil,objectUtil,alertUtil,modalUtil,selectUtil,stringUtil,dictUtil) {
 
-            var url = "/industrialdevelop/topicAndExpert";
+            var url = "/exmain/topicAndExpertStatus";
             var exmaineStatus = dictUtil.getDictByCode(dictUtil.DICT_LIST.exmaineStatus);
             var checkids = [];
 
@@ -157,6 +157,8 @@
 
             var pl = dictUtil.getDictByCode(dictUtil.DICT_LIST.distributionExpert);
             $("#chargePersonSearch").selectUtil(pl);
+            var $default = $("<option value=\"\" disabled selected hidden>请选择展示状态</option>");
+            $("#chargePersonSearch").prepend($default);
 
             var aCol = [
                 {checkbox:true},
@@ -182,6 +184,27 @@
                 myTable = bootstrapTableUtil.myBootStrapTableInit("table", url, param, aCol);
             }
 
+            $("#chargePersonSearch").unbind().on('change',function() {
+                var newArry = [];
+                var addstr=document.getElementById("chargePersonSearch").value;
+                var allTableData = JSON.parse(localStorage.getItem("2"));
+                for (var i in allTableData) {
+                    var status= isDistribution(allTableData[i]["expertCode"]);
+                    console.log(addstr);
+                    console.log(Number(status));
+                    if(addstr==Number(status)) {
+                        newArry.push(allTableData[i])
+                    }
+                }
+                var newArr=new Set(newArry)
+                newArry=Array.from(newArr)
+                $("#table").bootstrapTable("load", newArry);
+                if(newArry.length == 0){
+                    alertUtil.warning("切换状态成功,但此状态下没有数据");
+                }else{
+                    alertUtil.success("切换状态成功");
+                }
+            })
 
             $("#btnSearch").unbind().on('click',function() {
                 var newArry = [];
@@ -203,11 +226,7 @@
                         if (textP == null || textP == undefined || textP == '') {
                             textP = "1";
                         }
-                        if($("#closeAndOpen").text().search("展开")!= -1 && textP.search(str) != -1){
-                            isStatusSlot = false;
-                            newArry.push(allTableData[i])
-                        }
-                        if($("#closeAndOpen").text().search("收起")!= -1 && textP.search(str) != -1 && isStatusSlot){
+                        if(textP.search(str) != -1 && isStatusSlot){
                             newArry.push(allTableData[i])
                         }
                     }
@@ -219,17 +238,6 @@
                     alertUtil.warning("搜索成功,但此搜索条件下没有数据");
                 }else{
                     alertUtil.success("搜索成功");
-                }
-            })
-            var aria=this.ariaExpanded;
-            $("#closeAndOpen").unbind().on('click',function(){
-                this.innerText="";
-                if (aria==="true"){
-                    this.innerText="展开";
-                    aria = "false";
-                } else {
-                    this.innerText="收起";
-                    aria = "true";
                 }
             })
 

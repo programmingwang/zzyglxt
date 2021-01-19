@@ -19,19 +19,7 @@
                 }
             });
 
-            var workUnit;
-            $.ajax
-            ({  cache: false, async: false, type: 'get', url: "/industrialdevelop/getPlatRole", success: function (data) {
-                    workUnit = data;
-                }
-            });
-            var unit = workUnit.data;
-            var myUnit = [];
-            for (var i=0;i<unit.length;i++){
-                myUnit.push(unit[i].username);
-                $("#company").append("<option value='" + i + "'>" + myUnit[i] + "</option>");
-            }
-            console.log(myUnit);
+
 
 
             $("#cancelbtn").unbind().on('click',function () {
@@ -237,6 +225,14 @@
                         date.isDuringDate(stime, etime);
                     },false,"","get");
                 }
+                var workUnit= "";
+                $.ajax
+                ({  cache: false, async: false, type: 'get', url: "/industrialdevelop/getPlatRole", success: function (data) {
+                        workUnit = data;
+                    }
+                });
+                var unit = workUnit.data;
+                $("#company").selectUtil(unit,true);
                 init = function () {
 
                 }

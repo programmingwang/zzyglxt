@@ -1,9 +1,11 @@
 package com.zyyglxt.service.impl;
 
 import com.zyyglxt.dao.IndustrialDevelopTopicDOMapper;
+import com.zyyglxt.dao.UserRoleRefDOMapper;
 import com.zyyglxt.dataobject.IndustrialDevelopExpertRefDO;
 import com.zyyglxt.dataobject.IndustrialDevelopTopicDO;
 import com.zyyglxt.dataobject.IndustrialDevelopTopicDOKey;
+import com.zyyglxt.dataobject.UserRoleRefDO;
 import com.zyyglxt.dataobject.validation.ValidationGroups;
 import com.zyyglxt.dto.industrialDevelop.IndustrialDevelopTopicDODto;
 import com.zyyglxt.error.BusinessException;
@@ -35,6 +37,8 @@ public class IndustrialDevelopTopicServiceImpl implements IIndustrialDevelopTopi
     @Resource
     IndustrialDevelopTopicDOMapper developTopicDOMapper;
 
+    @Resource
+    UserRoleRefDOMapper userRoleRefDOMapper;
 
     @Resource
     ValidatorImpl validator;
@@ -87,20 +91,6 @@ public class IndustrialDevelopTopicServiceImpl implements IIndustrialDevelopTopi
         return topicDOList;
     }
 
-    /*@Override
-    public List<IndustrialDevelopTopicDO> getTopics() {
-        if (usernameUtil.getRoleName().equals("申报单位"))
-        {
-            String orgCode = usernameUtil.getOrgCode();
-            List<String> userCodes = developTopicDOMapper.selectAllUserCode(orgCode);
-            for (String usercode : userCodes){
-                developTopicDOMapper.selectByUserCode(usercode);
-
-            }
-        }
-        return developTopicDOMapper.selectAll();
-    }*/
-
     @Override
     public List<IndustrialDevelopTopicDO> getStatus(String code) {
         return developTopicDOMapper.selectByPrimaryKey(code);
@@ -134,6 +124,11 @@ public class IndustrialDevelopTopicServiceImpl implements IIndustrialDevelopTopi
     @Override
     public IndustrialDevelopTopicDO maxProjectNO() {
         return developTopicDOMapper.maxProjectNO();
+    }
+
+    @Override
+    public List<UserRoleRefDO> getPlatRole() {
+        return userRoleRefDOMapper.getPlatRole();
     }
 
     @Override

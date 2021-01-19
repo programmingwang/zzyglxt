@@ -2,6 +2,7 @@ package com.zyyglxt.service;
 
 import com.zyyglxt.dataobject.IndustrialDevelopTopicDO;
 import com.zyyglxt.dataobject.IndustrialDevelopTopicDOKey;
+import com.zyyglxt.dataobject.UserRoleRefDO;
 import com.zyyglxt.dto.industrialDevelop.IndustrialDevelopTopicDODto;
 
 import java.util.List;
@@ -36,6 +37,8 @@ public interface IIndustrialDevelopTopicService {
     List<IndustrialDevelopTopicDODto> selectByCompany(String company);
 
     IndustrialDevelopTopicDO maxProjectNO();
+
+    List<UserRoleRefDO> getPlatRole();
 
     List<IndustrialDevelopTopicDO> getAll(List<String> examineStatus);
 

@@ -13,6 +13,11 @@
     <result column="UPDATER" jdbcType="VARCHAR" property="updater" />
     <result column="itemUpdateAt" jdbcType="TIMESTAMP" property="itemupdateat" />
   </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultUserRoleRefAndUser" type="com.zyyglxt.dataobject.UserDO">
+    <id column="itemCode" jdbcType="CHAR" property="itemcode" />
+    <result column="USERNAME" jdbcType="VARCHAR" property="username"/>
+    <result column="ORG_CODE" jdbcType="CHAR" property="orgCode"/>
+  </resultMap>
   <sql id="Base_Column_List">
     itemID, itemCode, USER_CODE, APP_CODE, ROLE_CODE, PLAT_ROLE
   </sql>
@@ -192,4 +197,12 @@
     delete from  user_role_ref
     where USER_CODE=#{userCode,jdbcType=CHAR}
   </delete>
+  <select id="getPlatRole" resultMap="ResultUserRoleRefAndUser">
+    select u.USERNAME
+    from user_role_ref urr, user u
+    where urr.USER_CODE = u.itemCode
+    and urr.PLAT_ROLE = '科研项目申报单位'
+	and u.ORG_CODE != ''
+    order by urr.itemUpdateAt asc
+  </select>
 </mapper>

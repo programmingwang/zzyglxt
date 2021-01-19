@@ -5,6 +5,8 @@ import com.zyyglxt.dataobject.UserRoleRefDO;
 import com.zyyglxt.dataobject.UserRoleRefDOKey;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface UserRoleRefDOMapper {
 
@@ -26,5 +28,5 @@ public interface UserRoleRefDOMapper {
 
     int deleteByUserCode(@Param("userCode")String userCode);
 
-
+    List<UserRoleRefDO> getPlatRole();
 }

@@ -19,6 +19,21 @@
                 }
             });
 
+            var workUnit;
+            $.ajax
+            ({  cache: false, async: false, type: 'get', url: "/industrialdevelop/getPlatRole", success: function (data) {
+                    workUnit = data;
+                }
+            });
+            var unit = workUnit.data;
+            var myUnit = [];
+            for (var i=0;i<unit.length;i++){
+                myUnit.push(unit[i].username);
+                $("#company").append("<option value='" + i + "'>" + myUnit[i] + "</option>");
+            }
+            console.log(myUnit);
+
+
             $("#cancelbtn").unbind().on('click',function () {
                 var url = "/scientificProject/topicManagement";
                 orange.redirect(url);
@@ -44,7 +59,7 @@
                         disciplineName : disciplineNameText,
                         applicant : $("#applicant").val(),
                         contactCode : $("#contactCode").val(),
-                        company : $("#company").val(),
+                        company : myUnit[$("#company").val()],
                         postalAddress : postalAddress,
                         postalCode : $("#postalCode").val(),
                         email : $("#email").val(),
@@ -69,7 +84,7 @@
                         disciplineName : disciplineNameText,
                         applicant : $("#applicant").val(),
                         contactCode : $("#contactCode").val(),
-                        company : $("#company").val(),
+                        company : myUnit[$("#company").val()],
                         postalAddress : postalAddress,
                         postalCode : $("#postalCode").val(),
                         email : $("#email").val(),
@@ -111,7 +126,7 @@
                         disciplineName : disciplineNameText,
                         applicant : $("#applicant").val(),
                         contactCode : $("#contactCode").val(),
-                        company : $("#company").val(),
+                        company : myUnit[$("#company").val()],
                         postalAddress : postalAddress,
                         postalCode : $("#postalCode").val(),
                         email : $("#email").val(),
@@ -136,7 +151,7 @@
                         disciplineName : disciplineNameText,
                         applicant : $("#applicant").val(),
                         contactCode : $("#contactCode").val(),
-                        company : $("#company").val(),
+                        company : myUnit[$("#company").val()],
                         postalAddress : postalAddress,
                         postalCode : $("#postalCode").val(),
                         email : $("#email").val(),
@@ -158,7 +173,7 @@
 
             });
 
-            (function init() {
+            var init = function () {
                 if (isUpdate()){
                     var tempdata = JSON.parse(localStorage.getItem("rowData"));
                     var postalAddress = tempdata.postalAddress;
@@ -211,7 +226,7 @@
                                 orange.redirect(url);
                             }
                         }
-                    }
+                    };
                     ajaxUtil.myAjax(null,"/industrialdevelop",null,function (data) {
                         for (var i=0;i<data.data.length;i++){
                             if (data.data[i].isimp == "1"){
@@ -221,9 +236,12 @@
                         }
                         date.isDuringDate(stime, etime);
                     },false,"","get");
+                }
+                init = function () {
 
                 }
-            }());
+            };
+            init();
 
             function isUpdate() {
                 return (localStorage.getItem("rowData") != null || localStorage.getItem("rowData") != undefined)

@@ -445,7 +445,7 @@
             };
 
             //申报项目点击事件
-            $("#btn_addTask").unbind().on('click',function (row) {
+            $("#btn-color").unbind().on('click',function (row) {
                 localStorage.removeItem("rowData");
                 orange.redirect(addUrl);
             });
@@ -473,14 +473,13 @@
                             beginDate = new Date(beginDateStr),
                             endDate = new Date(endDateStr);
                         if (curDate >= beginDate && curDate <= endDate) {
-                            $('#btn_addTask').attr('style', "display:block; background-color: #dc3545");
+                            $('#btn-color').attr('style', "display:block; border-color: #e66736; background-color: #e66736;");
                         }else {
-                            $('#btn_addTask').attr('style', "display:block;");
+                            $('#btn-color').attr('style', "display:block; border-color: darkgrey; background-color: darkgrey;");
                         }
                     }
-                }
+                };
                 ajaxUtil.myAjax(null,"/industrialdevelop",null,function (data) {
-
                     for (var i=0;i<data.data.length;i++){
                         if (data.data[i].isimp == "1"){
                             starttime = data.data[i].startTime;

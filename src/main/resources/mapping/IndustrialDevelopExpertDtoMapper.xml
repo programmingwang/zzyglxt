@@ -175,6 +175,8 @@
     set
     PASSWORD = #{password,jdbcType=VARCHAR}
     where  itemCode = #{userCode,jdbcType=VARCHAR}
-  </update>
+  </update><delete id="deleteByUserCode">
+  delete from tb_industrial_develop_expert where USER_CODE = #{userCode,jdbcType=VARCHAR}
+</delete>
 
 </mapper>

@@ -120,7 +120,14 @@
                 {field: 'projectName', title: '项目名称', formatter: viewOperation, events: viewEvents},
                 {field: 'company', title: '申报单位'},
                 {field: 'exmaineStatus', title: '状态', formatter:function (value) {
-                        return '<p>'+pl[value].text+'</p>'
+                        if(value.search("1") == -1){
+                            return '<p>'+pl[0].text+'</p>';
+                        }else if(value.search("0") == -1){
+                            return '<p>'+pl[1].text+'</p>';
+                        }else {
+                            return '<p>'+pl[2].text+'</p>';
+                        }
+
                     }},
                 {field: 'action',  title: '操作',formatter: operation,events:orgEvents}
             ];
@@ -149,6 +156,13 @@
                         var isStatusSlot=false;           // 默认状态为true
                         //状态条件判断,与表格字段的状态一致,这里根据自己写的修改
                         var status= allTableData[i]["exmaineStatus"]
+                        if(status.search("1") == -1){
+                            status = '0';
+                        }else if(status.search("0") == -1){
+                            status = '1';
+                        }else {
+                            status = '2';
+                        }
                         // console.log("addstr:"+addstr)
                         // console.log("status:"+status)
                         //调试时可以先打印出来，进行修改

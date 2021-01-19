@@ -1,4 +1,5 @@
 package com.zyyglxt.dao;
+import org.apache.ibatis.annotations.Param;
 
 import com.zyyglxt.dataobject.UserRoleRefDO;
 import com.zyyglxt.dataobject.UserRoleRefDOKey;
@@ -24,6 +25,8 @@ public interface UserRoleRefDOMapper {
     int updateByPrimaryKey(UserRoleRefDO record);
 
     UserRoleRefDO selectByUserCode(String itemcode);
+
+    int deleteByUserCode(@Param("userCode")String userCode);
 
     List<UserRoleRefDO> getPlatRole();
 }

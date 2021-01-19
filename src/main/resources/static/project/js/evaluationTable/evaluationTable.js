@@ -93,23 +93,47 @@
 
             if(localStorage.getItem("viewDetail") != null || localStorage.getItem("viewDetail") != undefined){
                 var tempdata = JSON.parse(localStorage.getItem("viewDetail"));
-                var attr = (tempdata.score).split("+");
-                for(var i = 0; i<attr.length; i++){
-                    $("#score"+(i+1)).val(attr[i]);
-                    $("#score"+(i+1)).attr("readOnly","true")
-                }
-
-                var lastScore = attr[10].split("=");
-                $("#score11").val(lastScore[0]);
-                $("#allSc").val(lastScore[1]);
-
-
-                if(sessionStorage.getItem("rolename") == "科研项目-省级"){
-                    $("#expertOpinion").val("专家意见："+tempdata.opinion);
-                }else{
+                if(sessionStorage.getItem("rolename") == "专家"){
+                    var attr = (tempdata.score).split("+");
+                    for(var i = 0; i<attr.length; i++){
+                        $("#score"+(i+1)).val(attr[i]);
+                        $("#score"+(i+1)).attr("readOnly","true")
+                    }
+                    var lastScore = attr[10].split("=");
+                    $("#score11").val(lastScore[0]);
+                    $("#allSc").val(lastScore[1]);
                     $("#expertOpinion").val(tempdata.opinion);
+                    $("#expertOpinion").attr("readOnly","true");
+                }else if (sessionStorage.getItem("rolename") == "科研项目-省级"){
+                    $("#zftitle").text("平均分：");
+                    var scores = (tempdata.score).split("|");
+                    var opinions = (tempdata.opinion).split("|");
+                    var finalOpinion = "";
+                    var sumScore = 0;
+                    for(var i = 0; i<scores.length; i++){
+                        if(scores[i]=="null"){
+                            $("#displaydf").html("（请注意：当前还未评审完）");
+                            continue;
+                        }
+                        var attr = (scores[i]).split("+");
+                        var lastScore = attr[10].split("=");
+                        $("#score11").val(lastScore[0]);
+                        sumScore += parseInt(lastScore[1]);
+                    }
+                    for(var i = 0; i<scores[scores.length-1].length; i++){
+                        $("#score"+(i+1)).val(attr[i]);
+                        $("#score"+(i+1)).attr("readOnly","true")
+                    }
+                    var lastScore = attr[10].split("=");
+                    $("#score11").val(lastScore[0]);
+                    $("#allSc").val(sumScore/scores.length);
+                    for(var i = 0; i<opinions.length; i++){
+                        finalOpinion += "专家"+(i+1)+"意见："+opinions[i]+"\n";
+                    }
+                    $("#expertOpinion").val(finalOpinion);
+                    $("#expertOpinion").attr("readOnly","true");
                 }
-                $("#expertOpinion").attr("readOnly","true");
+
 
             }
 

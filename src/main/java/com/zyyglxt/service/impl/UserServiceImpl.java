@@ -62,11 +62,13 @@ public class UserServiceImpl implements UserService {
         userDOKey.setItemid(userDO.getItemid());
         userDOKey.setItemcode(userDO.getItemcode());
         userDOMapper.deleteByPrimaryKey(userDOKey);
-        //删除hospital
-        OrganizationDO organizationDO = organizationDOMapper.selectByOrgName(userDtO.getOrgName());
-        if (organizationDO != null) {
-            organizationDOMapper.deleteByPrimaryKey(organizationDO.getItemid());
-        }
+//        if (!"主研人".equals(userRoleRefDO.getPlatRole())){
+////            //删除organization
+////            OrganizationDO organizationDO = organizationDOMapper.selectByOrgName(userDtO.getOrgName());
+////            if (organizationDO != null) {
+////                organizationDOMapper.deleteByPrimaryKey(organizationDO.getItemid());
+////            }
+////        }
     }
 
     @Override
@@ -100,6 +102,8 @@ public class UserServiceImpl implements UserService {
             record.setOrgCode(organizationDO.getItemcode());
             record.setType(8);
         } else if (record.getRoleName().equals("主研人")){
+            OrganizationDO organizationDO = organizationDOMapper.selectByOrgName("科研项目申报单位");
+            record.setOrgCode(organizationDO.getItemcode());
             record.setType(7);
         }
         //添加用户
@@ -178,9 +182,10 @@ public class UserServiceImpl implements UserService {
         for (int i=0; i<4;i++){
             roletype[i] = roleDOMapper.selectRoleType().get(i).getRoleType();
         }
-
         List<UserDO> userDOList = new ArrayList<UserDO>();
-        for (UserDO user : users) {
+        for (int i = 0; i < users.size(); i++) {
+            UserDO user = users.get(i);
+
             int type = user.getType();
             if (roletype[0] == type || roletype[1] == type || roletype[2] == type || roletype[3] == type) {
                 userDOList.add(user);

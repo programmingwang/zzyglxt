@@ -8,6 +8,22 @@
         button{
             margin: 0 2rem;
         }
+		#headerT{
+            margin: 20px 0px;
+            text-align: center;
+            font-size: 24px;
+            font-weight: 600;
+            color: #775637;
+        }
+        @media (max-width:1996px) { #expertOpinion{
+            width: 100%;
+        }}
+        @media (min-width:1997px) { #expertOpinion{
+            width: 1872px;
+        }}
+        td{
+            font-family: 'Arial Normal', 'Arial', sans-serif !important;
+        }
     </style>
 </head>
 <body>
@@ -15,13 +31,13 @@
     <div class="col-lg-1 col-md-1"></div>
     <div id="evalutionMain" class="col-lg-10 col-md-10" >
         <div id="headerT">集中评审打分情况<span id="displaydf" style="color: red"></span></div>
-        <span id="zftitle" style="font-weight: 400;font-style: normal;font-size: 14px;">总分:</span><input type="text"  id="allSc" readonly="readonly" style="width: 190px;height: 20px;border: 1px solid; border-color: #F2F2F2">
-        <div style="font-weight: 400;font-style: normal;font-size: 14px;margin-top:20px">专家评审意见:</div>
+        <span id="zftitle" style="font-weight: 400;font-style: normal;font-size: 17px;">总分:</span><input type="text"  id="allSc" readonly="readonly" style="width: 40px;height: 20px;border: 0px;border-bottom: 1px solid; border-color: #F2F2F2;margin-left: 10px;text-align: center;font-family: 'Arial Normal', 'Arial', sans-serif;font-weight: 400;font-size: 17px;">
+        <div style="font-weight: 400;font-style: normal;font-size: 17px;margin-top:20px;margin-bottom: 10px;">专家评审意见:</div>
         <div>
-            <textarea name="" id="expertOpinion" style="resize:none; width: 951px;height: 58px;border: 1px solid; border-color:#F2F2F2 "></textarea>
+            <textarea name="" id="expertOpinion" style="resize:none; height: 58px;border: 1px solid; border-color:#F2F2F2;font-family: 'Arial Normal', 'Arial', sans-serif; "></textarea>
             <!--<input type="text" style="width: 951px;height: 58px;border: 1px solid; border-color:#F2F2F2 ">-->
         </div>
-        <div style="font-weight: 700;font-style: normal;font-size: 14px;text-align: center;margin-top:20px;margin-bottom: 4px;">集中评审打分表</div>
+        <div style="font-weight: 700;font-style: normal;font-size: 17px;text-align: center;margin:20px;">集中评审打分表</div>
         <table  border="2" bordercolor="#F2F2F2"  cellspacing="0"  style="text-align: center;">
             <tr>
                 <th style="width: 150px;">一级指标</th>

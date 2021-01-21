@@ -67,9 +67,9 @@
                         window.location.href = "/userLogin";
                     }
                     if (data.code === 88888) {
-                        for(var i=0; i<data.data.length; i++){
-                            data.data[i].itemcreateat = stringUtil.formatDateTime(data.data[i].itemcreateat);
-                        }
+                        // for(var i=0; i<data.data.length; i++){
+                        //     data.data[i].itemcreateat = stringUtil.formatDateTime(data.data[i].itemcreateat);
+                        // }
                         var allTableData = data.data
                         localStorage.setItem('2',JSON.stringify(allTableData))
                         return {

@@ -569,13 +569,14 @@
                         var textP = allTableData[i][aCol[v].field];
                         var isStatusSlot=false;           // 默认状态为true
                         //状态条件判断,与表格字段的状态一致,这里根据自己写的修改
-                        var status;
+                        var status = "";
                         if(rolename == "主研人"){
                             status= allTableData[i]["status"]
+
                         }else{
                             status= allTableData[i]["examineStatus"]
                         }
-                        if(rolename = "科研项目申报单位"){
+                        if(rolename == "科研项目申报单位"){
                             if (status == projectStatus[1].id){
                                 status = 0;
                             }else if (status == projectStatus[2].id || status == projectStatus[4].id || status == projectStatus[5].id || status == projectStatus[6].id || status == projectStatus[7].id){
@@ -583,7 +584,7 @@
                             }else if (status == projectStatus[3].id){
                                 status = 2;
                             }
-                        }else if(rolename = "科研项目-市级"){
+                        }else if(rolename == "科研项目-市级"){
                             if (status == projectStatus[2].id){
                                 status = 0;
                             }else if (status == projectStatus[4].id || status == projectStatus[6].id || status == projectStatus[7].id){
@@ -609,11 +610,13 @@
                         if (textP == null || textP == undefined || textP == '') {
                             textP = "1";
                         }
-                        if($("#closeAndOpen").text().search("展开")!= -1 && textP.search(str) != -1){
-                            isStatusSlot = false;
-                            newArry.push(allTableData[i])
-                        }
-                        if($("#closeAndOpen").text().search("收起")!= -1 && textP.search(str) != -1 && isStatusSlot){
+                        // if($("#closeAndOpen").text().search("展开")!= -1 && textP.search(str) != -1){
+                        // if(textP.search(str) != -1){
+                        //     isStatusSlot = false;
+                        //     newArry.push(allTableData[i])
+                        // }
+                        // if($("#closeAndOpen").text().search("收起")!= -1 && textP.search(str) != -1 && isStatusSlot){
+                        if(textP.search(str) != -1 && isStatusSlot){
                             newArry.push(allTableData[i])
                         }
                     }
@@ -628,17 +631,17 @@
                 }
             })
 
-            var aria=this.ariaExpanded;
-            $("#closeAndOpen").unbind().on('click',function(){
-                this.innerText="";
-                if (aria==="true"){
-                    this.innerText="展开";
-                    aria = "false";
-                } else {
-                    this.innerText="收起";
-                    aria = "true";
-                }
-            })
+            // var aria=this.ariaExpanded;
+            // $("#closeAndOpen").unbind().on('click',function(){
+            //     this.innerText="";
+            //     if (aria==="true"){
+            //         this.innerText="展开";
+            //         aria = "false";
+            //     } else {
+            //         this.innerText="收起";
+            //         aria = "true";
+            //     }
+            // })
 
 
 

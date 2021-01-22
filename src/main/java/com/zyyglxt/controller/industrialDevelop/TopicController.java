@@ -1,10 +1,7 @@
 package com.zyyglxt.controller.industrialDevelop;
 
 import com.zyyglxt.annotation.LogAnnotation;
-import com.zyyglxt.dataobject.FileDO;
-import com.zyyglxt.dataobject.IndustrialDevelopExpertRefDO;
-import com.zyyglxt.dataobject.IndustrialDevelopTopicDO;
-import com.zyyglxt.dataobject.IndustrialDevelopTopicDOKey;
+import com.zyyglxt.dataobject.*;
 import com.zyyglxt.dto.industrialDevelop.IndustrialDevelopTopicDODto;
 import com.zyyglxt.error.EmBusinessError;
 import com.zyyglxt.response.ResponseData;
@@ -73,14 +70,15 @@ public class TopicController {
     @ResponseBody
     @LogAnnotation(appCode ="",logTitle ="查看产业发展-课题数据",logLevel ="1",creater ="",updater = "")
     public ResponseData getTopic(@RequestParam(value = "examineStatus") List examineStatus){
-        List<IndustrialDevelopTopicDO> topics = developTopicService.getTopics(examineStatus);
+        /*List<IndustrialDevelopTopicDO> topics = developTopicService.getTopics(examineStatus);
         List<IndustrialDevelopTopicDODto> topicDODtoList = new ArrayList<>();
         for (IndustrialDevelopTopicDO topicDO : topics) {
             FileDO fileDO = iFileService.selectFileByDataCode(topicDO.getItemcode());
             topicDODtoList.add(
                     ConvertDOToDTOUtil.convertFromDOToDTO(topicDO, fileDO.getFilePath(), fileDO.getFileName()));
         }
-        return new ResponseData(EmBusinessError.success,topicDODtoList);
+        return new ResponseData(EmBusinessError.success,topicDODtoList);*/
+        return new ResponseData(EmBusinessError.success,developTopicService.getTopics(examineStatus));
     }
 
     //查询用户对应课题的数据提交状态
@@ -128,28 +126,30 @@ public class TopicController {
     @GetMapping(value = "/getUserCode")
     @ResponseBody
     public ResponseData getUserCode(@RequestParam(value = "userCode") String userCode){
-        List<IndustrialDevelopTopicDO> topicDOList = developTopicService.selectByUserCode(userCode);
+        /*List<IndustrialDevelopTopicDO> topicDOList = developTopicService.selectByUserCode(userCode);
         List<IndustrialDevelopTopicDODto> topicDODtoList = new ArrayList<>();
         for (IndustrialDevelopTopicDO topicDO : topicDOList) {
             FileDO fileDO = iFileService.selectFileByDataCode(topicDO.getItemcode());
             topicDODtoList.add(
                     ConvertDOToDTOUtil.convertFromDOToDTO(topicDO, fileDO.getFilePath(), fileDO.getFileName()));
         }
-        return new ResponseData(EmBusinessError.success,topicDODtoList);
+        return new ResponseData(EmBusinessError.success,topicDODtoList);*/
+        return new ResponseData(EmBusinessError.success,developTopicService.selectByUserCode(userCode));
     }
 
     //查询相应单位对应的所有课题
     @GetMapping(value = "/getByCompany")
     @ResponseBody
     public ResponseData getByCompany(@RequestParam(value = "company") String company){
-        List<IndustrialDevelopTopicDO> topicDOList = developTopicService.selectByCompany(company);
+        /*List<IndustrialDevelopTopicDO> topicDOList = developTopicService.selectByCompany(company);
         List<IndustrialDevelopTopicDODto> topicDODtoList = new ArrayList<>();
         for (IndustrialDevelopTopicDO topicDO : topicDOList) {
             FileDO fileDO = iFileService.selectFileByDataCode(topicDO.getItemcode());
             topicDODtoList.add(
                     ConvertDOToDTOUtil.convertFromDOToDTO(topicDO, fileDO.getFilePath(), fileDO.getFileName()));
         }
-        return new ResponseData(EmBusinessError.success,topicDODtoList);
+        return new ResponseData(EmBusinessError.success,topicDODtoList);*/
+        return new ResponseData(EmBusinessError.success,developTopicService.selectByCompany(company));
     }
 
     //查询项目编号的最大值
@@ -160,32 +160,12 @@ public class TopicController {
         return new ResponseData(EmBusinessError.success,max);
     }
 
-    @GetMapping("/topicAndExpert")
+    //查询所有申报单位
+    @GetMapping(value = "/getPlatRole")
     @ResponseBody
-    @LogAnnotation(logTitle = "查看课题数据和分配专家状态")
-    public ResponseData getTopicAndExpert(){
-        List<String> status = Arrays.asList("0","1","2","3","4","5","6","7");
-        List<IndustrialDevelopTopicDO> topicDOList = developTopicService.getTopics(status);
-        List<IndustrialDevelopTopicDODto> DtoList = new ArrayList<>();
-        for (IndustrialDevelopTopicDO DO:topicDOList){
-            IndustrialDevelopTopicDODto Dto = new IndustrialDevelopTopicDODto();
-            BeanUtils.copyProperties(DO,Dto);
-            List<IndustrialDevelopExpertRefDO> expertRefDOList = exmaineService.selectByTopicCode(Dto.getItemcode());
-            if (expertRefDOList.size() == 0 || expertRefDOList == null){
-                Dto.setExpertCode(null);
-            }
-            else{
-                for (IndustrialDevelopExpertRefDO expertRefDO : expertRefDOList){
-                    String expertCode = expertRefDO.getExpertCode();
-                    if (expertCode != null && expertCode != "" && expertCode.length() != 0){
-                        Dto.setExpertCode(expertCode);
-                        break;
-                    }
-                }
-
-            }
-            DtoList.add(Dto);
-        }
-        return new ResponseData(EmBusinessError.success,DtoList);
+    public ResponseData getPlatRole(){
+        List<UserRoleRefDO> platRole = developTopicService.getPlatRole();
+        return new ResponseData(EmBusinessError.success,platRole);
     }
+
 }

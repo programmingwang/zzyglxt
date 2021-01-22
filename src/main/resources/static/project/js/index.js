@@ -519,7 +519,7 @@
                     },
                     {
                         menu_name: "发文管理",
-                        menu_url: "/document/sendMsgMan",
+                        menu_url: "/document/post",
                         id: "14-1",
                         level: "2",
                         pid: "14"
@@ -686,7 +686,7 @@
                     },
                     {
                         menu_name: "发文管理",
-                        menu_url: "/document/sendMsgMan",
+                        menu_url: "/document/post",
                         id: "14-1",
                         level: "2",
                         pid: "14"
@@ -1387,6 +1387,6 @@
                 loadPage(currentUrlHash);
             }
 
-            $("#userName").text(sessionStorage.getItem('username'))
+            $("#userName").text(sessionStorage.getItem('name'))
         })
 })();

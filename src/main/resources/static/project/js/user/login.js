@@ -20,14 +20,17 @@
             var userEntity = {"username":inputUsername,"password":inputPassword};
             ajaxUtil.myAjax(null,"/userLogin",userEntity,function (data) {
                 if(data && data.code === 88888) {
-                    alertUtil.success('登录成功');
                     var userName = data.data.username;
+                    var name = data.data.name;
                     var rolename = data.data.rolename;
                     var orgCode = data.data.orgCode;
+                    var orgName = data.data.orgName;
                     var itemCode = data.data.itemcode;
                     sessionStorage.setItem('username',userName);
+                    sessionStorage.setItem('name', name);
                     sessionStorage.setItem('rolename',rolename);
                     sessionStorage.setItem('orgCode',orgCode);
+                    sessionStorage.setItem('orgName',orgName);
                     sessionStorage.setItem('itemcode',itemCode);
                     window.location.href = "/main"
                 }else{

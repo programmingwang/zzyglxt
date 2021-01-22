@@ -178,13 +178,5 @@
                 return (localStorage.getItem("viewRowData") != null || localStorage.getItem("viewRowData") != undefined)
             }
 
-            var files= document.getElementById('upload_file').files;
-            if(files){
-                if(files.length>0){
-                    $("#addFile").empty("p");
-                    var name = files.name;
-                    $("#addFile").append('<p>附件'+j+'：&nbsp;'+ name +'&nbsp;</p>');
-                }
-            }
         })
 })();

@@ -2,7 +2,7 @@
     require(['jquery', 'ajaxUtil','bootstrapTableUtil','objectUtil','alertUtil','modalUtil','selectUtil','stringUtil','dictUtil'],
         function (jquery,ajaxUtil,bootstrapTableUtil,objectUtil,alertUtil,modalUtil,selectUtil,stringUtil,dictUtil) {
 
-            var url = "/industrialdevelop/topicAndExpert";
+            var url = "/exmain/topicAndExpertStatus";
             var exmaineStatus = dictUtil.getDictByCode(dictUtil.DICT_LIST.exmaineStatus);
             var checkids = [];
 
@@ -12,25 +12,25 @@
             };
 
             //判断该项目是否有专家
-            function handleStatus(expertCode) {
+            function isDistribution(expertCode) {
                 if (expertCode == undefined || expertCode == null || expertCode.toLowerCase() == "null" || expertCode == ""){
-                    return "未分配专家"
+                    return false
                 }
                 else {
-                    return "已分配专家"
+                    return true
                 }
             }
 
             //操作
             function operation(value, row, index){
-                if (handleStatus(row.expertCode) == "未分配专家"){
+                if (isDistribution(row.expertCode)){
                     return [
-                        '<a class="distribution" style="margin:0 1em;text-decoration: none;color:#775637;" data-toggle="modal" data-target="" >分配专家</a>',
+                        '<a class="cancel" style="margin:0 1em;text-decoration: none;color:#775637;" data-toggle="modal" data-target="" >取消分配专家</a>',
                     ].join('');
                 }
                 else {
                     return [
-                        '<a class="cancel" style="margin:0 1em;text-decoration: none;color:#775637;" data-toggle="modal" data-target="" >取消分配专家</a>',
+                        '<a class="distribution" style="margin:0 1em;text-decoration: none;color:#775637;" data-toggle="modal" data-target="" >分配专家</a>',
                     ].join('');
                 }
 
@@ -48,26 +48,36 @@
                     modalTitle : "分配专家",
                     modalClass : "modal-lg",
                     modalConfirmFun:function () {
-                        var isSuccess = false;
                         for (var i = 0; i < rows.length; i++){
-                            var entity = {
-                                itemcode : stringUtil.getUUID(),
-                                expertCode : $("#experName").val(),
-                                topicCode : rows[i].itemcode,
-                                exmaineStatus : exmaineStatus[1].id
-                            }
-                            ajaxUtil.myAjax(null, "/exmain/exmain", entity, function (data) {
-                                if (ajaxUtil.success(data)) {
-                                    isSuccess = true;
-                                } else {
-                                    isSuccess = false;
-                                    alert(data.msg);
+                            var isCheckBox = false
+                            $('input[name="checkExperName"]').each(function () {
+                                if ($(this).prop('checked')) {
+                                    isCheckBox = true
+                                    var entity = {
+                                        itemcode : stringUtil.getUUID(),
+                                        expertCode : $(this).val(),
+                                        topicCode : rows[i].itemcode,
+                                        exmaineStatus : exmaineStatus[1].id
+                                    }
+                                    ajaxUtil.myAjax(null, "/exmain/exmain", entity, function (data) {
+                                        if (ajaxUtil.success(data)) {
+                                        } else {
+                                            alert(data.msg);
+                                        }
+                                    }, false, true, "post");
                                 }
-                            }, false, true, "post");
+                            })
                         }
-                        refreshTable();
-                        alertUtil.info("分配专家成功");
-                        return isSuccess;
+
+                        if (isCheckBox) {
+                            refreshTable();
+                            alertUtil.info("分配专家成功");
+                            return true;
+                        }
+                        else {
+                            alertUtil.error("错误，没有勾选专家，请勾选专家后重试")
+                            return true;
+                        }
                     }
                 }
                 var addExperModal = modalUtil.init(addExperModal);
@@ -76,7 +86,7 @@
                         experts = data.data
                         var html = "";
                         $.each(experts,function (i,it) {
-                            html = html + '<option value="'+it.itemcode+'">'+it.username+'</option>';
+                            html = html + '<input type="checkbox" name="checkExperName" value="'+it.itemcode+'"><span>'+it.name+'&emsp;</span>';
                         });
                         $("#experName").html("");
                         $("#experName").append(html);
@@ -116,11 +126,21 @@
             }
 
             $("#addExper").unbind().on('click',function () {
-                distribution(getChecks())
+                if (getChecks().length==0){
+                    alertUtil.error("错误，未勾选项目，请勾选项目后重试")
+                }
+                else {
+                    distribution(getChecks())
+                }
             });
 
             $("#deleteExper").unbind().on('click',function () {
-                cancel(getChecks())
+                if (getChecks().length==0){
+                    alertUtil.error("错误，未勾选项目，请勾选项目后重试")
+                }
+                else {
+                    cancel(getChecks())
+                }
             });
 
             //修改事件
@@ -137,6 +157,8 @@
 
             var pl = dictUtil.getDictByCode(dictUtil.DICT_LIST.distributionExpert);
             $("#chargePersonSearch").selectUtil(pl);
+            var $default = $("<option value=\"\" disabled selected hidden>请选择展示状态</option>");
+            $("#chargePersonSearch").prepend($default);
 
             var aCol = [
                 {checkbox:true},
@@ -144,7 +166,12 @@
                 {field: 'projectName', title: '项目名称'},
                 {field: 'company', title: '申报单位'},
                 {field: 'expertCode', title: '状态',formatter:function (value, row, index) {
-                        return handleStatus(value);
+                        if (isDistribution(value)){
+                            return "已分配专家";
+                        }
+                        else {
+                            return "未分配专家";
+                        }
                     }},
                 {field: 'action',  title: '操作',formatter: operation,events:orgEvents}
             ];
@@ -157,8 +184,63 @@
                 myTable = bootstrapTableUtil.myBootStrapTableInit("table", url, param, aCol);
             }
 
+            $("#chargePersonSearch").unbind().on('change',function() {
+                var newArry = [];
+                var addstr=document.getElementById("chargePersonSearch").value;
+                var allTableData = JSON.parse(localStorage.getItem("2"));
+                for (var i in allTableData) {
+                    var status= isDistribution(allTableData[i]["expertCode"]);
+                    console.log(addstr);
+                    console.log(Number(status));
+                    if(addstr==Number(status)) {
+                        newArry.push(allTableData[i])
+                    }
+                }
+                var newArr=new Set(newArry)
+                newArry=Array.from(newArr)
+                $("#table").bootstrapTable("load", newArry);
+                if(newArry.length == 0){
+                    alertUtil.warning("切换状态成功,但此状态下没有数据");
+                }else{
+                    alertUtil.success("切换状态成功");
+                }
+            })
 
-            // bootstrapTableUtil.globalSearch("table",url,aParam, aCol);
+            $("#btnSearch").unbind().on('click',function() {
+                var newArry = [];
+                var addstr=document.getElementById("chargePersonSearch").value;
+                var str = document.getElementById("taskNameSearch").value.toLowerCase();
+                var allTableData = JSON.parse(localStorage.getItem("2"));
+                if(str.indexOf("请输入")!=-1){
+                    str=""
+                }
+                for (var i in allTableData) {
+                    for (var v in aCol){
+                        var textP = allTableData[i][aCol[v].field];
+                        var isStatusSlot=false;           // 默认状态为true
+                        //状态条件判断,与表格字段的状态一致,这里根据自己写的修改
+                        var status= isDistribution(allTableData[i]["expertCode"]);
+                        if(addstr==Number(status)){
+                            isStatusSlot=true;
+                        }
+                        if (textP == null || textP == undefined || textP == '') {
+                            textP = "1";
+                        }
+                        if(textP.search(str) != -1 && isStatusSlot){
+                            newArry.push(allTableData[i])
+                        }
+                    }
+                }
+                var newArr=new Set(newArry)
+                newArry=Array.from(newArr)
+                $("#table").bootstrapTable("load", newArry);
+                if(newArry.length == 0){
+                    alertUtil.warning("搜索成功,但此搜索条件下没有数据");
+                }else{
+                    alertUtil.success("搜索成功");
+                }
+            })
+
 
             var allTableData = $("#table").bootstrapTable("getData");
             localStorage.setItem('2',JSON.stringify(allTableData))

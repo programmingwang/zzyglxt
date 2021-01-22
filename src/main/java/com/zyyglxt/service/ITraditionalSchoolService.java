@@ -4,6 +4,7 @@ import com.zyyglxt.dataobject.ChineseCulturalDO;
 import com.zyyglxt.dataobject.ChineseCulturalDOKey;
 import com.zyyglxt.dataobject.CulturalResourcesDO;
 import com.zyyglxt.dataobject.CulturalResourcesDOKey;
+import com.zyyglxt.dto.CulturalResourcesDto;
 import com.zyyglxt.error.BusinessException;
 
 import java.util.List;
@@ -19,7 +20,7 @@ public interface ITraditionalSchoolService {
     CulturalResourcesDO getTraditionalSchool(CulturalResourcesDOKey key);
 
     //查询所有中医流派
-    List<CulturalResourcesDO> getTraditionalSchoolList(List<String> chineseCulturalStatus);
+    List<CulturalResourcesDto> getTraditionalSchoolList(String chineseCulturalStatus);
 
     //增加一个中医流派
     int addTraditionalSchool(CulturalResourcesDO record);

@@ -25,6 +25,7 @@
                     modalBodyID : "myTimeModal", //公用的在后面给span加不同的内容就行了，其他模块同理
                     modalTitle : "设置填报时间",
                     modalClass : "modal-lg",
+                    confirmButtonClass : "btn-danger",
                     modalConfirmFun:function () {
                         var isSuccess = false;
                         var year = $("#year").val();
@@ -130,7 +131,11 @@
                 $("#table").bootstrapTable("load", newArry);
             })
 
-
+            $("#startTime").bind("input propertychange",function(event){
+                var data = $("#startTime").val();
+                data=data.substring(0,4);
+                $("#year").val(data);
+            });
 
         })
 })();

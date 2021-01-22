@@ -2,8 +2,6 @@
     require(['jquery','objectUtil','ajaxUtil','alertUtil','stringUtil','fileUtil','dictUtil','distpicker','selectUtil','checkUtil','uploadImg'],
         function (jquery,objectUtil,ajaxUtil,alertUtil,stringUtil,fileUtil,dictUtil,distpicker,selectUtil,checkUtil,uploadImg) {
 
-            const editor = objectUtil.wangEditorUtil();
-
             uploadImg.init();
 
             /*下拉框值*/
@@ -20,6 +18,9 @@
                     alertUtil.error("请输入正确的电话号码");
                 }
             });
+
+
+
 
             $("#cancelbtn").unbind().on('click',function () {
                 var url = "/scientificProject/topicManagement";
@@ -46,7 +47,7 @@
                         disciplineName : disciplineNameText,
                         applicant : $("#applicant").val(),
                         contactCode : $("#contactCode").val(),
-                        company : $("#company").val(),
+                        company : myUnit[$("#company").val()],
                         postalAddress : postalAddress,
                         postalCode : $("#postalCode").val(),
                         email : $("#email").val(),
@@ -71,7 +72,7 @@
                         disciplineName : disciplineNameText,
                         applicant : $("#applicant").val(),
                         contactCode : $("#contactCode").val(),
-                        company : $("#company").val(),
+                        company : myUnit[$("#company").val()],
                         postalAddress : postalAddress,
                         postalCode : $("#postalCode").val(),
                         email : $("#email").val(),
@@ -113,7 +114,7 @@
                         disciplineName : disciplineNameText,
                         applicant : $("#applicant").val(),
                         contactCode : $("#contactCode").val(),
-                        company : $("#company").val(),
+                        company : myUnit[$("#company").val()],
                         postalAddress : postalAddress,
                         postalCode : $("#postalCode").val(),
                         email : $("#email").val(),
@@ -138,7 +139,7 @@
                         disciplineName : disciplineNameText,
                         applicant : $("#applicant").val(),
                         contactCode : $("#contactCode").val(),
-                        company : $("#company").val(),
+                        company : myUnit[$("#company").val()],
                         postalAddress : postalAddress,
                         postalCode : $("#postalCode").val(),
                         email : $("#email").val(),
@@ -160,7 +161,7 @@
 
             });
 
-            (function init() {
+            var init = function () {
                 if (isUpdate()){
                     var tempdata = JSON.parse(localStorage.getItem("rowData"));
                     var postalAddress = tempdata.postalAddress;
@@ -213,18 +214,30 @@
                                 orange.redirect(url);
                             }
                         }
-                    }
+                    };
                     ajaxUtil.myAjax(null,"/industrialdevelop",null,function (data) {
                         for (var i=0;i<data.data.length;i++){
                             if (data.data[i].isimp == "1"){
-                                starttime = data.data[i].startTime;
-                                endtime = data.data[i].endTime;
+                                stime = data.data[i].startTime;
+                                etime = data.data[i].endTime;
                             }
                         }
+                        date.isDuringDate(stime, etime);
                     },false,"","get");
-                    date.isDuringDate(starttime, endtime);
                 }
-            }());
+                var workUnit= "";
+                $.ajax
+                ({  cache: false, async: false, type: 'get', url: "/industrialdevelop/getPlatRole", success: function (data) {
+                        workUnit = data;
+                    }
+                });
+                var unit = workUnit.data;
+                $("#company").selectUtil(unit,true);
+                init = function () {
+
+                }
+            };
+            init();
 
             function isUpdate() {
                 return (localStorage.getItem("rowData") != null || localStorage.getItem("rowData") != undefined)
@@ -246,8 +259,7 @@
                 }
             }
             document.getElementById('clsfile').onclick = function() {
-                var obj = document.getElementById('upload_file');
-                obj.outerHTML=obj.outerHTML;
+                $("#upload_file").val("");
                 $("#clsfile").css("display","none");
                 $("#addFile").empty("p");
             }

@@ -27,7 +27,7 @@
   <sql id="Blob_Column_List">
     CONTENT
   </sql>
-  <select id="selectByPrimaryKey" parameterType="com.zyyglxt.dataobject.FamPreDOKey" resultMap="ResultMapWithBLOBs">
+  <!--<select id="selectByPrimaryKey" parameterType="com.zyyglxt.dataobject.FamPreDOKey" resultMap="ResultMapWithBLOBs">
 
     select 
     <include refid="Base_Column_List" />
@@ -37,7 +37,7 @@
     where itemID = #{itemid,jdbcType=INTEGER}
       and itemCode = #{itemcode,jdbcType=CHAR}
     order by itemUpdateAt desc
-  </select>
+  </select>-->
   <delete id="deleteByPrimaryKey" parameterType="com.zyyglxt.dataobject.FamPreDOKey">
 
     delete from tb_culpro_fam_pre
@@ -222,9 +222,19 @@
         <include refid="Base_Column_List" />
         ,
         <include refid="Blob_Column_List" />
+        ,
         FROM tb_culpro_fam_pre
         WHERE STATUS = #{status}
-    order by itemUpdateAt desc
+        <if test="status == 3">
+          and STATUS in (2,5)
+        </if>
+        <if test="status == 2">
+          and STATUS in (1,2,3)
+        </if>
+        <if test="status == 1">
+          and STATUS in (0,1,2,3,4,6)
+        </if>
+        order by itemUpdateAt desc
     </select>
 
 

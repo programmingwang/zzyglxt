@@ -1,6 +1,7 @@
 package com.zyyglxt.service.impl;
 
 import com.zyyglxt.dto.StatusDto;
+import com.zyyglxt.dto.industrialDevelop.IndustrialDevelopMedMatDto;
 import com.zyyglxt.error.BusinessException;
 import com.zyyglxt.error.EmBusinessError;
 import com.zyyglxt.util.UsernameUtil;
@@ -77,7 +78,7 @@ public class IndustrialDevelopMedMatServiceImpl implements IndustrialDevelopMedM
 
     /*通过机构code找药材*/
     @Override
-    public List<IndustrialDevelopMedMat> selectMedMatByORGCode() {
+    public List<IndustrialDevelopMedMatDto> selectMedMatByORGCode() {
         return industrialDevelopMedMatMapper.selectMedMatByORGCode(usernameUtil.getOrgCode());
     }
 

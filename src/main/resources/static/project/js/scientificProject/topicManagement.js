@@ -89,10 +89,10 @@
                 }
                 else if (row.examineStatus == projectStatus[3].id || row.examineStatus == projectStatus[5].id || row.examineStatus == projectStatus[7].id){
                     return [
-                        '<a class="viewReason" style="margin:0 1em;text-decoration: none;color:#775637;" data-toggle="modal" data-target="" >理由</a>',
-                        '<a class="edit" style="margin:0 1em;text-decoration: none;color:#775637;" data-toggle="modal" data-target="" >修改</a>',
-                        '<a class="submit"  style="margin:0 1em;text-decoration: none;color:#775637;" data-target="#staticBackdrop" >提交</a>',
-                        '<a class="delete" style="margin:0 1em;text-decoration: none;color:#D60000;"  data-toggle="modal" data-target="#staticBackdrop" >删除</a>',
+                        '<a class="viewReason" style="margin:0 0.7em;text-decoration: none;color:#775637;" data-toggle="modal" data-target="" >理由</a>',
+                        '<a class="edit" style="margin:0 0.7em;text-decoration: none;color:#775637;" data-toggle="modal" data-target="" >修改</a>',
+                        '<a class="submit"  style="margin:0 0.7em;text-decoration: none;color:#775637;" data-target="#staticBackdrop" >提交</a>',
+                        '<a class="delete" style="margin:0 0.7em;text-decoration: none;color:#D60000;"  data-toggle="modal" data-target="#staticBackdrop" >删除</a>',
                     ].join('');
                 }
             }
@@ -445,7 +445,7 @@
             };
 
             //申报项目点击事件
-            $("#btn_addTask").unbind().on('click',function (row) {
+            $("#btn-color").unbind().on('click',function (row) {
                 localStorage.removeItem("rowData");
                 orange.redirect(addUrl);
             });
@@ -473,14 +473,13 @@
                             beginDate = new Date(beginDateStr),
                             endDate = new Date(endDateStr);
                         if (curDate >= beginDate && curDate <= endDate) {
-                            $('#btn_addTask').attr('style', "display:block; background-color: #dc3545");
+                            $('#btn-color').attr('style', "display:block; border-color: #e66736; background-color: #e66736;");
                         }else {
-                            $('#btn_addTask').attr('style', "display:block;");
+                            $('#btn-color').attr('style', "display:block; border-color: darkgrey; background-color: darkgrey;");
                         }
                     }
-                }
+                };
                 ajaxUtil.myAjax(null,"/industrialdevelop",null,function (data) {
-
                     for (var i=0;i<data.data.length;i++){
                         if (data.data[i].isimp == "1"){
                             starttime = data.data[i].startTime;
@@ -491,7 +490,7 @@
                 date.isDuringDate(starttime, endtime);
 
             }else if (rolename === "科研项目申报单位"){
-                $("#chargePersonSearch").selectUtil(topicStatus);
+                $("#chargePersonSearch").selectUtil(auditStatus);
                 var url = "/industrialdevelop/getByCompany?company="+sessionStorage.getItem("username");
                 var aCol = [
                     {field: 'projectNo', title: '项目编号'},
@@ -511,7 +510,7 @@
 
             }else if (rolename === "科研项目-市级"){
                 $("#chargePersonSearch").selectUtil(auditStatus);
-                var url = "/industrialdevelop/getTopic?examineStatus="+projectStatus[2].id+"&examineStatus="+projectStatus[4].id +"&examineStatus="+projectStatus[5].id +"&examineStatus="+projectStatus[6].id +"&examineStatus="+projectStatus[7].id;
+                var url = "/industrialdevelop/getTopic?examineStatus=1";
                 var aCol = [
                     {field: 'projectNo', title: '项目编号'},
                     {field: 'projectName', title: '项目名称', formatter: viewOperation, events: viewEvents},
@@ -530,7 +529,7 @@
 
             }else if (rolename === "科研项目-省级"){
                 $("#chargePersonSearch").selectUtil(auditStatus);
-                var url = "/industrialdevelop/getTopic?examineStatus="+projectStatus[4].id+"&examineStatus="+projectStatus[6].id +"&examineStatus="+projectStatus[7].id;
+                var url = "/industrialdevelop/getTopic?examineStatus=2";
                 var aCol = [
                     {field: 'projectNo', title: '项目编号'},
                     {field: 'projectName', title: '项目名称', formatter: viewOperation, events: viewEvents},
@@ -557,7 +556,93 @@
                 myTable = bootstrapTableUtil.myBootStrapTableInit("table", url, param, aCol);
             }
 
-            bootstrapTableUtil.globalSearch("table",url,aParam, aCol);
+            $("#btnSearch").unbind().on('click',function() {
+                var newArry = [];
+                var addstr=document.getElementById("chargePersonSearch").value;
+                var str = document.getElementById("taskNameSearch").value.toLowerCase();
+                var allTableData = JSON.parse(localStorage.getItem("2"));
+                if(str.indexOf("请输入")!=-1){
+                    str=""
+                }
+                for (var i in allTableData) {
+                    for (var v in aCol){
+                        var textP = allTableData[i][aCol[v].field];
+                        var isStatusSlot=false;           // 默认状态为true
+                        //状态条件判断,与表格字段的状态一致,这里根据自己写的修改
+                        var status = "";
+                        if(rolename == "主研人"){
+                            status= allTableData[i]["status"]
+
+                        }else{
+                            status= allTableData[i]["examineStatus"]
+                        }
+                        if(rolename == "科研项目申报单位"){
+                            if (status == projectStatus[1].id){
+                                status = 0;
+                            }else if (status == projectStatus[2].id || status == projectStatus[4].id || status == projectStatus[5].id || status == projectStatus[6].id || status == projectStatus[7].id){
+                                status = 1;
+                            }else if (status == projectStatus[3].id){
+                                status = 2;
+                            }
+                        }else if(rolename == "科研项目-市级"){
+                            if (status == projectStatus[2].id){
+                                status = 0;
+                            }else if (status == projectStatus[4].id || status == projectStatus[6].id || status == projectStatus[7].id){
+                                status = 1;
+                            }else if (status == projectStatus[5].id){
+                                status = 2;
+                            }
+                        }else if (rolename == "科研项目-省级"){
+                            if (status == projectStatus[4].id){
+                                status = 0;
+                            }else if (status == projectStatus[6].id){
+                                status = 1;
+                            }else if (status == projectStatus[7].id){
+                                status = 2;
+                            }
+                        }
+                        // console.log("addstr:"+addstr)
+                        // console.log("status:"+status)
+                        //调试时可以先打印出来，进行修改
+                        if(addstr==status){
+                            isStatusSlot=true;
+                        }
+                        if (textP == null || textP == undefined || textP == '') {
+                            textP = "1";
+                        }
+                        // if($("#closeAndOpen").text().search("展开")!= -1 && textP.search(str) != -1){
+                        // if(textP.search(str) != -1){
+                        //     isStatusSlot = false;
+                        //     newArry.push(allTableData[i])
+                        // }
+                        // if($("#closeAndOpen").text().search("收起")!= -1 && textP.search(str) != -1 && isStatusSlot){
+                        if(textP.search(str) != -1 && isStatusSlot){
+                            newArry.push(allTableData[i])
+                        }
+                    }
+                }
+                var newArr=new Set(newArry)
+                newArry=Array.from(newArr)
+                $("#table").bootstrapTable("load", newArry);
+                if(newArry.length == 0){
+                    alertUtil.warning("搜索成功,但此搜索条件下没有数据");
+                }else{
+                    alertUtil.success("搜索成功");
+                }
+            })
+
+            // var aria=this.ariaExpanded;
+            // $("#closeAndOpen").unbind().on('click',function(){
+            //     this.innerText="";
+            //     if (aria==="true"){
+            //         this.innerText="展开";
+            //         aria = "false";
+            //     } else {
+            //         this.innerText="收起";
+            //         aria = "true";
+            //     }
+            // })
+
 
 
         })

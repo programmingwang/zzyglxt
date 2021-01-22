@@ -6,6 +6,15 @@
         .modal-content {
             width: 17rem;
         }
+        label {
+            float: left;
+        }
+        .table td:nth-child(6)
+        {
+            white-space: nowrap;
+            overflow: unset !important;
+            text-overflow: unset !important;
+        }
     </style>
 </head>
 <body>
@@ -24,7 +33,6 @@
         <div class="col-lg-7 col-md-7"></div>
         <hr size="1" class="mb-3" style="color: #EBEBEB;border-style:dashed;width:100%;margin-bottom:10px;">
     </div>
-
 
     <div class="row col-lg-12 col-md-12 mb-3">
         <div class="col-lg-12 col-md-12">
@@ -45,5 +53,5 @@
 
 </body>
 <script type="text/javascript" data-main="/main/main.js" th:src="@{/component/require@2.3.6/require-2.3.6.js}"></script>
-<script type="text/javascript" th:src="@{/scientificProject/expert.js}"></script>
+<script type="text/javascript" th:src="@{/project/js/scientificProject/expert.js}"></script>
 </html>

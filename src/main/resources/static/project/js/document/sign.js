@@ -370,15 +370,26 @@
                 orange.redirect(url);
             });
 
-
-
             var pl = dictUtil.getDictByCode(dictUtil.DICT_LIST.governerscounter);
             $("#chargePersonSearch").selectUtil(pl);
 
+            //点击标题查看会签
+            function viewOperation(value, row, index){
+                return [
+                    '<a class="topicview" data-toggle="modal" style="margin:0 0.6em;text-decoration: none;color:#775637;" data-target="" >'+row.receivingTitle+'</a>',
+                ].join('');
+            }
+            window.viewEvents = {
+                'click .topicview': function (e, value, row, index){
+                    localStorage.setItem("viewRowData", JSON.stringify(row));
+                    localStorage.setItem("centralizedView","true");
+                    var viewUrl = "/document/sign_title";
+                    orange.redirect(viewUrl);
+                },
+            };
+
             var aCol = [
-                {field: 'receivingTitle', title: '文件标题',formatter:function (row) {
-                return '<a class="fileTitle">'+row+'</a>';
-            }},
+                {field: 'receivingTitle', title: '文件标题',formatter: viewOperation, events: viewEvents},
                 {field: 'fileNo', title: '文号'},
                 {field: 'govPunlic', title: '公开方式',formatter:function (row) {
                         return '<p>'+pl[row].text+'</p>';

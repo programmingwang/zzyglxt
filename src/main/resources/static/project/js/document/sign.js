@@ -395,7 +395,7 @@
                 myTable = bootstrapTableUtil.myBootStrapTableInit("table", url, param, aCol);
             }
 
-            bootstrapTableUtil.globalSearch("table",url,aParam, aCol);
+            bootstrapTableUtil.globalSearch("table",url,aParam, aCol, "govPunlic");
 
             function getRoleTable(role,preUrl,status,webStatus) {
                 if(role === "政务资源科员"){

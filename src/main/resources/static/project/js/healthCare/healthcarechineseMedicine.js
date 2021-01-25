@@ -230,6 +230,35 @@
            var p2 = dictUtil.getDictByCode(dictUtil.DICT_LIST.effectType);
             $("#Search").selectUtil(p2);
 
+            $("#Search").unbind("change").on("change",function () {
+                var newArry = [];
+                var allTableData = JSON.parse(localStorage.getItem("2"));
+                var searchGxfl=document.getElementById("Search").value;
+
+                for (var i in allTableData) {
+                    for (var v in aCol){
+                        var textP = allTableData[i][aCol[v].field];
+                        var isStatusSlot=false;           // 默认状态为true
+                        //状态条件判断,与表格字段的状态一致,这里根据自己写的修改
+                        var gxfl= allTableData[i]["chineseMedicineType"]
+                        //调试时可以先打印出来，进行修改
+                        if(gxfl==searchGxfl){
+                            isStatusSlot=true;
+                        }
+                        //当存在时将条件改为flase
+                        if (textP == null || textP == undefined || textP == '') {
+                            textP = "1";
+                        }
+                        if(isStatusSlot){
+                            newArry.push(allTableData[i])
+                        }
+                        var newArr=new Set(newArry)
+                        newArry=Array.from(newArr)
+                        $("#table").bootstrapTable("load", newArry);
+                    }
+                }
+            });
+
             var aCol = [
                         {field: 'chineseMedicineName', title: '中医药名称'},
                         {field: 'chineseMedicineAlias', title: '别名'},
@@ -254,50 +283,35 @@
                 myTable = bootstrapTableUtil.myBootStrapTableInit("table", url, param, aCol);
             }
 
-            var jQuery = $("#btnSearch").unbind().on('click',function() {
-                if(document.getElementById("stratTime")){
-                    var stratTime=document.getElementById("stratTime").children;
-                    var endTime=document.getElementById("endTime").children;
-                    stratTime=stratTime[0].value+":"+stratTime[1].value+":"+stratTime[2].value;
-                    endTime=endTime[0].value+":"+endTime[1].value+":"+endTime[2].value;
-                }
+            $("#btnSearch").unbind().on('click',function() {
                 var newArry = [];
                 var addstr=document.getElementById("chargePersonSearch").value;
                 var str = document.getElementById("taskNameSearch").value.toLowerCase();
                 var allTableData = JSON.parse(localStorage.getItem("2"));
-                console.log(allTableData)
                 if(str.indexOf("请输入")!=-1){
                     str=""
                 }
                 for (var i in allTableData) {
                     for (var v in aCol){
                         var textP = allTableData[i][aCol[v].field];
-                        var isStatusSlot=true;           // 默认状态为true
-                        var isTimeSlot=true;             // 默认时间条件为true
-                        if(aCol[v].field=="webStatus"){    //状态条件判断,与表格字段的状态一致,这里根据自己写的修改
-                            isStatusSlot=false;           //当存在时将条件改为flase
-                            var webStatus= allTableData[i][aCol[v].field]
-                            // console.log("addstr:"+addstr)
-                            // console.log("status:"+status)
-                            //调试时可以先打印出来，进行修改
-                            if(addstr==webStatus){
-                                isStatusSlot=true;
-                            }
+                        var isStatusSlot=false;           // 默认状态为true
+                        //状态条件判断,与表格字段的状态一致,这里根据自己写的修改
+                        var status= allTableData[i]["chineseMedicineStatus"]
+                        // console.log("addstr:"+addstr)
+                        // console.log("status:"+status)
+                        //调试时可以先打印出来，进行修改
+                        if(addstr==status){
+                            isStatusSlot=true;
                         }
-                        if(aCol[v].field=="time"){    //时间条件判断,与表格字段的状态一致,这里根据自己写的修改
-                            isTimeSlot=false;          //当存在时将条件改为flase
-                            var makeTime= allTableData[i][aCol[v].field]
-                            if(makeTime>=stratTime && makeTime<=endTime){
-                                isTimeSlot=true;
-                            }
-                            if(stratTime==endTime){
-                                isTimeSlot=true;
-                            }
-                        }
+                        //当存在时将条件改为flase
                         if (textP == null || textP == undefined || textP == '') {
                             textP = "1";
                         }
-                        if(textP.search(str)!=-1&&isStatusSlot&&isTimeSlot){
+                        if($("#closeAndOpen").text().search("展开")!= -1 && textP.search(str) != -1){
+                            isStatusSlot = false;
+                            newArry.push(allTableData[i])
+                        }
+                        if($("#closeAndOpen").text().search("收起")!= -1 && textP.search(str) != -1 && isStatusSlot){
                             newArry.push(allTableData[i])
                         }
                     }
@@ -305,6 +319,24 @@
                 var newArr=new Set(newArry)
                 newArry=Array.from(newArr)
                 $("#table").bootstrapTable("load", newArry);
+                if(newArry.length == 0){
+                    alertUtil.warning("搜索成功,但此搜索条件下没有数据");
+                }else{
+                    alertUtil.success("搜索成功");
+                }
             })
+
+            var aria=this.ariaExpanded;
+            $("#closeAndOpen").unbind().on('click',function(){
+                this.innerText="";
+                if (aria==="true"){
+                    this.innerText="展开";
+                    aria = "false";
+                } else {
+                    this.innerText="收起";
+                    aria = "true";
+                }
+            })
+
         })
 })();

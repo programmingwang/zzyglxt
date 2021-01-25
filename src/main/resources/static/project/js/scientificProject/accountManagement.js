@@ -104,12 +104,12 @@
             };
 
             /*新增用户账号*/
-            $("#btn_addTask").unbind().on('click',function () {
-
-                var myViewTravelModalData ={
+            $("#btn_addTask").unbind().on('click',function (e, value, row, index) {
+                var myViewAccountModalData ={
                     modalBodyID : "myAddAccountModal", //公用的在后面给span加不同的内容就行了，其他模块同理
                     modalTitle : "新增用户账户",
                     modalClass : "modal-lg",
+                    confirmButtonClass : "btn-danger",
                     modalConfirmFun:function () {
                         var isSuccess = false;
 
@@ -157,7 +157,7 @@
                         return isSuccess;
                     }
                 };
-                var myTravelModal = modalUtil.init(myViewTravelModalData);
+                var myViewModal = modalUtil.init(myViewAccountModalData);
                 let sel = dictUtil.getDictByCode(dictUtil.DICT_LIST.areaAdmin);
                 $("#cityid").selectUtil(sel);
                 let select = dictUtil.getDictByCode(dictUtil.DICT_LIST.userRole);
@@ -170,7 +170,8 @@
                 } else{
                     $("#roleName").selectUtil(select);
                 }
-                myTravelModal.show();
+                myViewModal.show();
+
             });
 
 
@@ -196,7 +197,34 @@
                 myTable = bootstrapTableUtil.myBootStrapTableInit("table", url, param, aCol);
             }
 
-            bootstrapTableUtil.globalSearch("table",url,aParam, aCol);
+            $("#btnSearch").unbind().on('click',function() {
+                var newArry = [];
+                var str = document.getElementById("taskNameSearch").value.toLowerCase();
+                var allTableData = JSON.parse(localStorage.getItem("2"));
+                if(str.indexOf("请输入")!=-1){
+                    str=""
+                }
+                for (var i in allTableData) {
+                    for (var v in aCol){
+                        var textP = allTableData[i][aCol[v].field];
+                        if (textP == null || textP == undefined || textP == '') {
+                            textP = "1";
+                        }
+                        if(textP.search(str) != -1){
+                            newArry.push(allTableData[i])
+                        }
+                    }
+                }
+                var newArr=new Set(newArry)
+                newArry=Array.from(newArr)
+                $("#table").bootstrapTable("load", newArry);
+                if(newArry.length == 0){
+                    alertUtil.warning("搜索成功,但此搜索条件下没有数据");
+                }else{
+                    alertUtil.success("搜索成功");
+                }
+            })
+
 
         })
 })();

@@ -158,8 +158,20 @@
         }
 
         function updateFile(dataCode, file, uploader,uploaderCode){
-            deleteFile(dataCode);
-            fileAjax(dataCode, file, uploader, uploaderCode);
+            $.ajax({
+                url:"/file/delete?dataCode="+dataCode,
+                type:'GET',
+                processData: false,   // jQuery不要去处理发送的数据
+                contentType: false,   // jQuery不要去设置Content-Type请求头
+                success:function(data){
+                    fileAjax(dataCode, file, uploader, uploaderCode)
+                    alertUtil.success(data.msg);
+                },
+                error: function(data){
+                    alertUtil.error(data.msg)
+                }
+            });
+
         }
 
 

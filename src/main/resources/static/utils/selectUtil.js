@@ -3,11 +3,18 @@
 
 
         $.fn.extend({
-            selectUtil: function (data) {
+            selectUtil: function (data,topicMan = false) {
                 var html = "";
-                $.each(data,function (i,it) {
-                    html = html + '<option value="'+it.id+'">'+it.text+'</option>';
-                });
+                if(!topicMan){
+                    $.each(data,function (i,it) {
+                        html = html + '<option value="'+it.id+'">'+it.text+'</option>';
+                    });
+                }else {
+                    $.each(data,function (i,it) {
+                        console.log(it);
+                        html = html + '<option value="' + i + '">' + it.username + '</option>';
+                    });
+                }
                 $(this).html("");
                 $(this).append(html);
                 return $(this);

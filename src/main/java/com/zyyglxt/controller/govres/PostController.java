@@ -45,13 +45,6 @@ public class PostController {
     @LogAnnotation(appCode ="",logTitle ="查询所有发文信息",logLevel ="1",creater ="",updater = "")
     public ResponseData getPost(@RequestParam(value = "postDataStatus") List postDataStatus){
         List<PostDO> postDOS = postService.getPost(postDataStatus);
-        /*List<PostDto> postDtos = new ArrayList<>();
-        for (PostDO postDO : postDOS) {
-            List<FileDO> fileDO = fileService.selectMultipleFileByDataCode(postDO.getItemcode());
-            postDtos.add(
-                    ConvertDOToDTOUtil.convertFromDOToDTO(
-                            postDO, fileDO.getFilePath(), fileDO.getFileName() ));
-        }*/
         return new ResponseData(EmBusinessError.success,DoToDto(postDOS));
     }
 

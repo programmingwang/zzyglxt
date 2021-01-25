@@ -61,13 +61,7 @@ public class HospController {
     @ResponseBody
     @LogAnnotation(appCode ="",logTitle ="根据机构数据查看医院数据",logLevel ="1",creater ="",updater = "")
     public ResponseData selectByOrgCode(){
-        HospDO hospDO = hospService.selectByOrgCode(usernameUtil.getOrgCode());
-        HospDto dto = new HospDto();
-        BeanUtils.copyProperties(hospDO,dto);
-        FileDO fileDO = fileService.selectFileByDataCode(hospDO.getItemcode());
-        String filePath = (fileDO==null) ? "损坏了" : fileDO.getFilePath();
-        dto.setFilePath(filePath);
-        return new ResponseData(EmBusinessError.success,dto);
+        return new ResponseData(EmBusinessError.success,hospService.selectByOrgCode(usernameUtil.getOrgCode()));
     }
     @GetMapping(value = "/selectAll")
     @ResponseBody

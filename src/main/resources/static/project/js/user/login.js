@@ -20,7 +20,6 @@
             var userEntity = {"username":inputUsername,"password":inputPassword};
             ajaxUtil.myAjax(null,"/userLogin",userEntity,function (data) {
                 if(data && data.code === 88888) {
-                    alertUtil.success('登录成功');
                     var userName = data.data.username;
                     var name = data.data.name;
                     var rolename = data.data.rolename;

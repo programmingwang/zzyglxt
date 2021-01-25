@@ -5,16 +5,20 @@ import com.zyyglxt.dataobject.IndustrialDevelopExpertRefDO;
 import com.zyyglxt.dataobject.IndustrialDevelopExpertRefDOKey;
 import com.zyyglxt.dataobject.IndustrialDevelopTopicDO;
 import com.zyyglxt.dto.ExmaineDto;
+import com.zyyglxt.dto.industrialDevelop.IndustrialDevelopTopicDODto;
 import com.zyyglxt.service.IExmaineService;
 import com.zyyglxt.service.IIndustrialDevelopTopicService;
 import com.zyyglxt.util.UsernameUtil;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Author:wangzh
@@ -71,7 +75,31 @@ public class ExmaineServiceImpl implements IExmaineService {
 
     @Override
     public List<ExmaineDto> selectAll() {
-        return expertRefDOMapper.selectAll();
+        List<String> topicCode = expertRefDOMapper.selectAllTopicCode();
+        List<ExmaineDto> exmaineDtoList = new LinkedList<>();
+        topicCode.forEach(tc ->{
+            List<ExmaineDto> exmaineDtos = expertRefDOMapper.selectAllByTopicCode(tc);
+            int zjktsl = exmaineDtos.size();
+            if(zjktsl == 1){
+                exmaineDtoList.add(exmaineDtos.get(0));
+            }else if (zjktsl > 1){
+                ExmaineDto exmaineDto = new ExmaineDto();
+                for (int i = 0; i < zjktsl; i++) {
+                    if(i == 0){
+                        exmaineDto = exmaineDtos.get(0);
+                    } else {
+                        exmaineDto.setExpertCode(exmaineDto.getExpertCode() + "|" + exmaineDtos.get(i).getExpertCode());
+                        exmaineDto.setExmaineStatus(exmaineDto.getExmaineStatus() + "|" + exmaineDtos.get(i).getExmaineStatus());
+                        exmaineDto.setScore(exmaineDto.getScore() + "|" + exmaineDtos.get(i).getScore());
+                        exmaineDto.setOpinion(exmaineDto.getOpinion() + "|" + exmaineDtos.get(i).getOpinion());
+                        continue;
+                    }
+                }
+                exmaineDtoList.add(exmaineDto);
+            }
+
+        });
+        return exmaineDtoList;
     }
 
     @Override
@@ -87,5 +115,10 @@ public class ExmaineServiceImpl implements IExmaineService {
     @Override
     public int deleteByTopicCode(String topicCode) {
         return expertRefDOMapper.deleteByTopicCode(topicCode);
+    }
+
+    @Override
+    public List<IndustrialDevelopTopicDODto> topicAndExpertStatus() {
+        return expertRefDOMapper.topicAndExpertStatus();
     }
 }

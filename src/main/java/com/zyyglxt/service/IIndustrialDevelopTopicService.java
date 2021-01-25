@@ -2,6 +2,8 @@ package com.zyyglxt.service;
 
 import com.zyyglxt.dataobject.IndustrialDevelopTopicDO;
 import com.zyyglxt.dataobject.IndustrialDevelopTopicDOKey;
+import com.zyyglxt.dataobject.UserRoleRefDO;
+import com.zyyglxt.dto.industrialDevelop.IndustrialDevelopTopicDODto;
 
 import java.util.List;
 
@@ -18,7 +20,7 @@ public interface IIndustrialDevelopTopicService {
 
     void updTopic(IndustrialDevelopTopicDO developTopicDO);
 
-    List<IndustrialDevelopTopicDO> getTopics(List<String> examineStatus);
+    List<IndustrialDevelopTopicDODto> getTopics(List<String> examineStatus);
 
     List<IndustrialDevelopTopicDO> getStatus(String code);
 
@@ -30,9 +32,14 @@ public interface IIndustrialDevelopTopicService {
     //修改审核状态
     int changeExamineStatus(IndustrialDevelopTopicDOKey key, String examineStatus);
 
-    List<IndustrialDevelopTopicDO> selectByUserCode(String userCode);
+    List<IndustrialDevelopTopicDODto> selectByUserCode(String userCode);
 
-    List<IndustrialDevelopTopicDO> selectByCompany(String company);
+    List<IndustrialDevelopTopicDODto> selectByCompany(String company);
 
     IndustrialDevelopTopicDO maxProjectNO();
+
+    List<UserRoleRefDO> getPlatRole();
+
+    List<IndustrialDevelopTopicDO> getAll(List<String> examineStatus);
+
 }

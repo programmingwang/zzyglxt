@@ -1,8 +1,11 @@
 package com.zyyglxt.dao;
+import org.apache.ibatis.annotations.Param;
 
 import com.zyyglxt.dataobject.UserRoleRefDO;
 import com.zyyglxt.dataobject.UserRoleRefDOKey;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 @Repository
 public interface UserRoleRefDOMapper {
@@ -22,4 +25,8 @@ public interface UserRoleRefDOMapper {
     int updateByPrimaryKey(UserRoleRefDO record);
 
     UserRoleRefDO selectByUserCode(String itemcode);
+
+    int deleteByUserCode(@Param("userCode")String userCode);
+
+    List<UserRoleRefDO> getPlatRole();
 }

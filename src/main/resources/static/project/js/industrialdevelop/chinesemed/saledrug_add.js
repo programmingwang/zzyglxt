@@ -60,7 +60,7 @@
                         alertUtil.alert(data.msg);
                     }
                 },true,"123",type);
-
+                return false;
 
             });
 

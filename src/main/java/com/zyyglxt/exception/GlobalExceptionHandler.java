@@ -58,7 +58,7 @@ public class GlobalExceptionHandler {
     @ResponseBody
     public ResponseData blankFileExceptionHandler(org.springframework.validation.BindException e){
         logger.error("未知异常！原因是:",e);
-        return new ResponseData("上传的图片或者附件不能为空！");
+        return new ResponseData("您未上传图片或者附件！");
     }
 
     /**

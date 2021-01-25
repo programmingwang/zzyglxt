@@ -27,14 +27,15 @@
                     modalClass : "modal-lg",
                     confirmButtonClass : "btn-danger",
                     modalConfirmFun:function () {
+                        //var year=new Date();
                         var isSuccess = false;
-                        var year = $("#year").val();
+                        var year = new Date();
                         var startTime = $("#startTime").val();
                         var endTime = $("#endTime").val();
 
 
                         var submitStatus = {
-                            "year": year,
+                            "year": year.getFullYear(),
                             "startTime": startTime,
                             "endTime": endTime,
                         };

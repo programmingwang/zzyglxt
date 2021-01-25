@@ -16,6 +16,9 @@ spring:
     username: root
     password: C&PVBLNPNR^F^qjr
 
+
+
+
     type: com.alibaba.druid.pool.DruidDataSource
       #Spring Boot 默认是不注入这些属性值的，需要自己绑定
       #druid 数据源专有配置
@@ -66,7 +69,7 @@ server:
   port: 8989
 
 upload:
-  addr: 42.193.46.47
+  addr: 47.113.104.120
   port: 8085
 
 
@@ -78,7 +81,7 @@ upload:
 #    path: E:/Desktop
 
 fdfs:
-  connect-timeout: 60000
+  connect-timeout: 6000
   so-timeout: 15000
   tracker-list: 39.101.192.246:22122
   http_tracker_http_port: 8080

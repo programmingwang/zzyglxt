@@ -70,7 +70,7 @@
                         alertUtil.alert(data.msg);
                     }
                 },false,true);
-
+                return false;
             });
 
             /*点击提交按钮*/
@@ -120,7 +120,7 @@
                         alertUtil.alert(data.msg);
                     }
                 },false,true);
-
+                return false;
             });
 
             function isUpdate() {

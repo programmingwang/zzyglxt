@@ -57,6 +57,7 @@
                         }
                     },false,true,"put");
                 },false);
+                return false;
             });
 
             $("#btn_insert").unbind().on('click',function () {
@@ -88,7 +89,7 @@
                         }
                     },false,true,"put");
                 },false);
-
+                return false;
             });
 
             if(localStorage.getItem("viewDetail") != null || localStorage.getItem("viewDetail") != undefined){

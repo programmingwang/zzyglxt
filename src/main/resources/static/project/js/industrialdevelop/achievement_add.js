@@ -61,6 +61,7 @@
                         alert(data.msg)
                     }
                 }, true, "123", type);
+                return false;
             });
 
             $("#submitBtn").unbind('click').on('click', function () {

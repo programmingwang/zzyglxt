@@ -60,7 +60,8 @@
                     operateMessage = "更新名老中医成功";
                     entity = {
                         itemid: tempdata.itemid,
-                        itemcode: tempdata.itemcode
+                        itemcode: tempdata.itemcode,
+                        chineseMedicineStatus: '0'
                     };
                 }
                 entity["chineseMedicineName"] = $("#chineseMedicineName").val();

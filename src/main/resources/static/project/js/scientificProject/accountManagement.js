@@ -28,7 +28,8 @@
                         modalConfirmFun:function () {
                             var isSuccess = false;
                             var chineseMedicineKey = {
-                                'username':row.username
+                                'username':row.username,
+                                'orgName':sessionStorage.getItem('orgName')
                             };
                             ajaxUtil.myAjax(null,"/user/deletuser",chineseMedicineKey,function (data) {
                                 if(ajaxUtil.success(data)){
@@ -115,10 +116,14 @@
                         var username = $("#username").val();
                         var name = $("#name").val();
                         var roleName = dictUtil.getName(dictUtil.DICT_LIST.userRole,$("#roleName").val());
+                        if ($("#roleName").val() == "主研人"){
+                            roleName = $("#roleName").val();
+                        }
                         var contacts = $("#contacts").val();
                         var mobilephone = $("#mobilephone").val();
                         var cityid = dictUtil.getName(dictUtil.DICT_LIST.areaAdmin,$("#cityid").val());
-
+                        var orgName = sessionStorage.getItem("orgName");
+                        var orgCode = sessionStorage.getItem("orgCode");
 
                         var submitStatus = {
                             "username": username,
@@ -126,7 +131,9 @@
                             "roleName": roleName,
                             "contacts": contacts,
                             "mobilephone": mobilephone,
-                            "cityid": cityid
+                            "cityid": cityid,
+                            "orgName": orgName,
+                            "orgCode": orgCode
                         };
                         if ((/^1[3456789]\d{9}$/.test(mobilephone))){
                             ajaxUtil.myAjax(null,"/user/adduser",submitStatus,function (data) {
@@ -154,7 +161,15 @@
                 let sel = dictUtil.getDictByCode(dictUtil.DICT_LIST.areaAdmin);
                 $("#cityid").selectUtil(sel);
                 let select = dictUtil.getDictByCode(dictUtil.DICT_LIST.userRole);
-                $("#roleName").selectUtil(select);
+
+                if (sessionStorage.getItem('rolename') == '科研项目申报单位'){
+                    var option=document.createElement("option");
+                    $(option).val("主研人");
+                    $(option).text("主研人");
+                    $("#roleName").append(option);
+                } else{
+                    $("#roleName").selectUtil(select);
+                }
                 myTravelModal.show();
             });
 

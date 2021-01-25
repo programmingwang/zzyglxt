@@ -36,6 +36,7 @@
                         prescription : $("#prescription").val(),
                         status : $("#status").val(),
                         type : $("#type").val(),
+                        status :  '0',
                         content : editor.txt.html()
                     }
                     operateMessage = "更新历史名方成功";

@@ -73,32 +73,28 @@ public class HospController {
     @ResponseBody
     @LogAnnotation(appCode ="",logTitle ="根据身份查看医院数据",logLevel ="1",creater ="",updater = "")
     public ResponseData selectAllHosp(@RequestParam(value = "hospitalStatus")List hospitalStatus){
-        List<HospDO> hospDOList = hospService.selectAllHosp(hospitalStatus);
-        return new ResponseData(EmBusinessError.success,DoToDto(hospDOList));
+        return new ResponseData(EmBusinessError.success,hospService.selectAllHosp(hospitalStatus));
     }
 
     @GetMapping(value = "selectAllHosp")
     @ResponseBody
     @LogAnnotation(appCode ="",logTitle ="查看所有医院数据",logLevel ="1",creater ="",updater = "")
     public ResponseData selectAllNoStatus(){
-        List<HospDO> hospDOList = hospService.selectAllNoStatus();
-        return new ResponseData(EmBusinessError.success,DoToDto(hospDOList));
+        return new ResponseData(EmBusinessError.success,hospService.selectAllNoStatus());
     }
 
     @ResponseBody
     @GetMapping(value = "search")
     @LogAnnotation(appCode ="",logTitle ="搜索医院数据",logLevel ="1",creater ="",updater = "")
     public ResponseData searchHosp(String keyWord){
-        List<HospDO> hospDOList = hospService.searchHosp(keyWord);
-        return new ResponseData(EmBusinessError.success,DoToDto(hospDOList));
+        return new ResponseData(EmBusinessError.success,hospService.searchHosp(keyWord));
     }
 
     @ResponseBody
     @GetMapping("selectByStatus")
     @LogAnnotation(appCode = "",logTitle = "根据状态查看医院数据",logLevel = "1")
     public ResponseData selectByStatus(String status){
-        List<HospDO> hospDOList = hospService.selectByStatus(status);
-        return new ResponseData(EmBusinessError.success,DoToDto(hospDOList));
+        return new ResponseData(EmBusinessError.success,hospService.selectByStatus(status));
     }
 
     @ResponseBody
@@ -107,19 +103,5 @@ public class HospController {
     public ResponseData updateStatus(StatusDto statusDto){
         hospService.updateStatus(statusDto);
         return new ResponseData(EmBusinessError.success);
-    }
-
-    private List<HospDto> DoToDto(List<HospDO> DOList){
-        List<HospDto> DtoList = new ArrayList<>();
-        if (!DOList.isEmpty()){
-            for (HospDO DO:DOList){
-                HospDto Dto = new HospDto();
-                BeanUtils.copyProperties(DO,Dto);
-                FileDO fileDO= fileService.selectFileByDataCode(Dto.getItemcode());
-                Dto.setFilePath(fileDO == null ? null:fileDO.getFilePath());
-                DtoList.add(Dto);
-            }
-        }
-        return DtoList;
     }
 }

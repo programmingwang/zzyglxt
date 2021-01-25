@@ -153,7 +153,7 @@
 						return alert(url+"加载失败");
 					}
 					$("#main_body").html(data);
-                    if(!(isContains(url,"insert") || isContains(url,"add") || isContains(url,"evaluationTable") || isContains(url,"post_view") || isContains(url,"document/viewreport")) ){
+                    if(!(isContains(url,"insert") || isContains(url,"add") || isContains(url,"evaluationTable") || isContains(url,"post_view") || isContains(url,"document/viewreport") || isContains(url,"scientificProject/viewTopicManagement"))){
                         window.location.reload();
                     }
 				}})

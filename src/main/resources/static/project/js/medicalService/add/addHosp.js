@@ -53,7 +53,8 @@
                     operateMessage = "更新医院成功";
                     entity = {
                         itemid: tempdata.itemid,
-                        itemcode: tempdata.itemcode
+                        itemcode: tempdata.itemcode,
+                        hospitalStatus: '0'
                     };
                 }
                 entity["hospitalName"] = $("#hospitalName").val();

@@ -11,7 +11,6 @@
                     });
                 }else {
                     $.each(data,function (i,it) {
-                        console.log(it);
                         html = html + '<option value="' + i + '">' + it.username + '</option>';
                     });
                 }

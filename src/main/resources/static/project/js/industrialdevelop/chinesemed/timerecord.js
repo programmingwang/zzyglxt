@@ -82,6 +82,11 @@
 
             var pl = dictUtil.getDictByCode(dictUtil.DICT_LIST.showStatus);
             $("#chargePersonSearch").selectUtil(pl);
+            var pl2 = [];
+            for(var i = -2 ; i <= 2; i++){
+                pl2.push({id:generateSearchYear(i),text:generateSearchYear(i)})
+            }
+            $("#taskNameSearch1").selectUtil(pl2);
 
             var aCol = [
                 {field: 'year', title: '年份'},
@@ -101,35 +106,30 @@
                 myTable = bootstrapTableUtil.myBootStrapTableInit("table", getUrl, param, aCol);
             }
 
+            function generateSearchYear(num){
+                return new Date().getFullYear()+num;
+            }
 
                 $("#btnSearch").unbind().on('click',function() {
-
                 var newArry = [];
-                var addstr=document.getElementById("taskNameSearch2").value;
-                var str = document.getElementById("taskNameSearch1").value;
+                var searchIsImpl=document.getElementById("taskNameSearch2").value;
+                var searchYear = document.getElementById("taskNameSearch1").value;
                 var allTableData = JSON.parse(localStorage.getItem("2"));
-                var nowDate= new Date();
-
-
                 for (var i in allTableData) {
-                        var textP = allTableData[i][aCol[0].field];
-                        var makeTime=new Date(allTableData[i][aCol[2].field]) ;
-
-
-
-                        if (textP==str){
-                            if (addstr==="生效"&&makeTime>nowDate){
-                                newArry.push(allTableData[i]);
-                            }
-                            if (addstr==="失效"&&makeTime<=nowDate){
-                                newArry.push(allTableData[i]);
-                            }
-                        }
-
+                    var textYear = allTableData[i]["year"];
+                    var textIsimpl= allTableData[i]["isimp"] ;
+                    if(searchYear == textYear && searchIsImpl == textIsimpl){
+                        newArry.push(allTableData[i]);
+                    }
                 }
                 var newArr=new Set(newArry)
                 newArry=Array.from(newArr)
                 $("#table").bootstrapTable("load", newArry);
+                    if(newArry.length == 0){
+                        alertUtil.warning("搜索成功,但此搜索条件下没有数据");
+                    }else{
+                        alertUtil.success("搜索成功");
+                    }
             })
 
             $("#startTime").bind("input propertychange",function(event){

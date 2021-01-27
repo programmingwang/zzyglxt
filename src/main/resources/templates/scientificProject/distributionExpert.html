@@ -7,43 +7,46 @@
         .modal-content{
             width:13em;
         }
+        .bs-checkbox{
+            width: 37px !important;
+        }
     </style>
 </head>
 <body>
 <div id="fir_body">
     <div class="row test-border" id="accordion2">
         <div class="col-lg-4 col-md-4" style="padding-left: 2rem;">
-            <div class="input-group mb-4" style="width: 530px;">
+            <div class="input-group mb-4" style="width: 375px;">
+                <span>项目名称：</span>
                 <input type="text" id="taskNameSearch" class="form-control" value="请输入" onfocus="if (value=='请输入'){value =''}" onblur="if (value ==''){value='请输入'}" >
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-3">
+            <div class="input-group mb-3">
+                <div class="input-group-prepend" style="margin-top: 9px;">
+                    <span class="input-text" >项目状态：</span>
+                </div>
+                <select class="custom-select" id="chargePersonSearch">
+                </select>
                 <div class="input-group-prepend">
                     <span class="input-group-text" id="btnSearch" style="z-index: 1;">搜索</span>
                 </div>
             </div>
         </div>
+        <div class="col-lg-2 col-md-2"></div>
+        <button type="button" id="addExper" class="btn btn-danger ml-3 distribution ">批量分配专家</button>
+        <button type="button" id="deleteExper" class="btn btn-danger ml-3 distribution ">批量取消分配专家</button>
         <hr size="1" class="mb-3" style="color: #EBEBEB;border-style:dashed;width:100%;margin-bottom:10px;">
-
     </div>
-
     <div>
         <div id="collapseOne" class="col-md-12 col-lg-12" >
-            <div class="col-lg-3 col-md-3">
-                <div class="input-group mb-3">
-                    <div class="input-group-prepend" style="margin-top: 9px;">
-                        <span class="input-text" >其他选项：状态：</span>
-                    </div>
-                    <select class="custom-select" id="chargePersonSearch">
 
-                    </select>
-                </div>
-            </div>
             <div class="col-lg-3"></div>
         </div>
     </div>
     <div class="row col-lg-12 col-md-12 mb-3">
         <div class="col-lg-12 col-md-12">
-            <button type="button" id="addExper" class="btn btn-danger ml-3 distribution ">批量分配专家</button>
-            <button type="button" id="deleteExper" class="btn btn-danger ml-3 distribution ">批量取消分配专家</button>
-        </div>
+            </div>
     </div>
 
     <div class="col-lg-12">

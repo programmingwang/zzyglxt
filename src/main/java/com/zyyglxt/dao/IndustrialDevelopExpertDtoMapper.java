@@ -27,4 +27,6 @@ public interface IndustrialDevelopExpertDtoMapper {
     int resetPassword(@Param("userCode") String userCode,@Param("password") String password);
     //查看所有专家信息
     List<IndustrialDevelopExpertDto> selectAll();
+
+    int deleteByUserCode(@Param("userCode") String userCode);
 }

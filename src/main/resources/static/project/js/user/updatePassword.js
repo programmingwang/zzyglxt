@@ -55,6 +55,7 @@
                     tcmscs.messageBox(data.msg);
                 }
             })
+            return false;
         })
         $("#return").unbind("click").bind("click",function () {
             window.location.href = "/"

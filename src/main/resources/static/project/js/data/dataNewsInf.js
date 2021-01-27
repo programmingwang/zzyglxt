@@ -191,7 +191,7 @@
                             "dataStatus": ""
                         };
                         if(row.dataFileType=="转载性新闻" || row.dataFileType=="转载性公告"){
-                            submitStatus.dataStatus = webStatus[7].id;
+                            submitStatus.dataStatus = webStatus[2].id;
                         }else{
                             submitStatus = {
                                 "dataStatus": selectUtil.getStatus(sessionStorage.getItem("rolename"),webStatus)

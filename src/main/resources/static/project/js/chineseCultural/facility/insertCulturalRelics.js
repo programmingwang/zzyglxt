@@ -55,7 +55,7 @@
                         alertUtil.alert(data.msg);
                     }
                 },false,true);
-
+                return false;
             });
 
 
@@ -103,7 +103,7 @@
                         alertUtil.alert(data.msg);
                     }
                 },false,true);
-
+                return false;
             });
 
             (function init() {

@@ -80,6 +80,7 @@
                         alertUtil.alert(data.msg);
                     }
                 },false,true);
+                return false;
             });
 
             /*确认按钮处理*/
@@ -127,6 +128,7 @@
                         alertUtil.alert(data.msg);
                     }
                 },false,true);
+                return false;
             });
 
             function isUpdate() {

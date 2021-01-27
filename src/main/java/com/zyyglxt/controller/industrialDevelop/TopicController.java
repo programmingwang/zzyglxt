@@ -1,10 +1,7 @@
 package com.zyyglxt.controller.industrialDevelop;
 
 import com.zyyglxt.annotation.LogAnnotation;
-import com.zyyglxt.dataobject.FileDO;
-import com.zyyglxt.dataobject.IndustrialDevelopExpertRefDO;
-import com.zyyglxt.dataobject.IndustrialDevelopTopicDO;
-import com.zyyglxt.dataobject.IndustrialDevelopTopicDOKey;
+import com.zyyglxt.dataobject.*;
 import com.zyyglxt.dto.industrialDevelop.IndustrialDevelopTopicDODto;
 import com.zyyglxt.error.EmBusinessError;
 import com.zyyglxt.response.ResponseData;
@@ -161,6 +158,14 @@ public class TopicController {
     public ResponseData maxProjectNO(){
         IndustrialDevelopTopicDO max = developTopicService.maxProjectNO();
         return new ResponseData(EmBusinessError.success,max);
+    }
+
+    //查询所有申报单位
+    @GetMapping(value = "/getPlatRole")
+    @ResponseBody
+    public ResponseData getPlatRole(){
+        List<UserRoleRefDO> platRole = developTopicService.getPlatRole();
+        return new ResponseData(EmBusinessError.success,platRole);
     }
 
 }

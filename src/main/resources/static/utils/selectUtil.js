@@ -3,11 +3,17 @@
 
 
         $.fn.extend({
-            selectUtil: function (data) {
+            selectUtil: function (data,topicMan = false) {
                 var html = "";
-                $.each(data,function (i,it) {
-                    html = html + '<option value="'+it.id+'">'+it.text+'</option>';
-                });
+                if(!topicMan){
+                    $.each(data,function (i,it) {
+                        html = html + '<option value="'+it.id+'">'+it.text+'</option>';
+                    });
+                }else {
+                    $.each(data,function (i,it) {
+                        html = html + '<option value="' + i + '">' + it.username + '</option>';
+                    });
+                }
                 $(this).html("");
                 $(this).append(html);
                 return $(this);
@@ -143,7 +149,7 @@
                         '<a class="view" style="margin:0 1em;text-decoration: none;color:#348eff;" data-toggle="modal" data-target="" >查看</a>',
                         '<a class="delete" style="margin:0 1em;text-decoration: none;color:#ed0f09;" data-toggle="modal" data-target="#staticBackdrop" >删除</a>',
                     ].join('');
-                }else if(status == webStatus[1].id || status == webStatus[7].id){
+                }else if(status == webStatus[1].id){
                     return [
                         '<a class="view" style="margin:0 1em;text-decoration: none;color:#348eff;" data-toggle="modal" data-target="" >查看</a>',
                         '<a class="no-submit" style="margin:0 1em;text-decoration: none;color:#ed0f09;" data-toggle="modal" data-target="" >取消提交</a>',
@@ -164,7 +170,7 @@
                 }
 
             }else if(role === "政务资源综合处处长"){
-                if(status == webStatus[2].id || status == webStatus[7].id){
+                if(status == webStatus[2].id){
                     return [
                         '<a  class="pass"  data-toggle="modal" style="margin:0 0.6em;text-decoration: none;color:#4df115;" data-target="#staticBackdrop" >通过</a>',
                         '<a  class="fail"  data-toggle="modal" style="margin:0 0.6em;text-decoration: none;color:#ed0f09;" data-target="#staticBackdrop" >不通过</a>',

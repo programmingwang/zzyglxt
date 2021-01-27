@@ -19,6 +19,21 @@
                 }
             });
 
+            var workUnit;
+            $.ajax
+            ({  cache: false, async: false, type: 'get', url: "/industrialdevelop/getPlatRole", success: function (data) {
+                    workUnit = data;
+                }
+            });
+            var unit = workUnit.data;
+            $("#company").selectUtil(unit,true);
+            var myUnit = [];
+            for (var i=0;i<unit.length;i++){
+                myUnit.push(unit[i].username);
+                //$("#company").append("<option value='" + i + "'>" + myUnit[i] + "</option>");
+            }
+
+
             $("#cancelbtn").unbind().on('click',function () {
                 var url = "/scientificProject/topicManagement";
                 orange.redirect(url);
@@ -44,7 +59,7 @@
                         disciplineName : disciplineNameText,
                         applicant : $("#applicant").val(),
                         contactCode : $("#contactCode").val(),
-                        company : $("#company").val(),
+                        company : myUnit[$("#company").val()],
                         postalAddress : postalAddress,
                         postalCode : $("#postalCode").val(),
                         email : $("#email").val(),
@@ -69,7 +84,7 @@
                         disciplineName : disciplineNameText,
                         applicant : $("#applicant").val(),
                         contactCode : $("#contactCode").val(),
-                        company : $("#company").val(),
+                        company : myUnit[$("#company").val()],
                         postalAddress : postalAddress,
                         postalCode : $("#postalCode").val(),
                         email : $("#email").val(),
@@ -87,7 +102,7 @@
                         alertUtil.alert(data.msg);
                     }
                 },false,true);
-
+                return false;
             });
 
 
@@ -111,7 +126,7 @@
                         disciplineName : disciplineNameText,
                         applicant : $("#applicant").val(),
                         contactCode : $("#contactCode").val(),
-                        company : $("#company").val(),
+                        company : myUnit[$("#company").val()],
                         postalAddress : postalAddress,
                         postalCode : $("#postalCode").val(),
                         email : $("#email").val(),
@@ -136,7 +151,7 @@
                         disciplineName : disciplineNameText,
                         applicant : $("#applicant").val(),
                         contactCode : $("#contactCode").val(),
-                        company : $("#company").val(),
+                        company : myUnit[$("#company").val()],
                         postalAddress : postalAddress,
                         postalCode : $("#postalCode").val(),
                         email : $("#email").val(),
@@ -155,10 +170,10 @@
                         alertUtil.alert(data.msg);
                     }
                 },false,true);
-
+                return false;
             });
 
-            (function init() {
+            var init = function () {
                 if (isUpdate()){
                     var tempdata = JSON.parse(localStorage.getItem("rowData"));
                     var postalAddress = tempdata.postalAddress;
@@ -168,13 +183,18 @@
                         city: postalAddressArry[1],
                         district: postalAddressArry[2]
                     });
+                    for (var i=0;i<myUnit.length;i++){
+                        if (myUnit[i] == tempdata.company){
+                            var myCompany = i;
+                        }
+                    }
                     $("#address").val(postalAddressArry[3]);
                     $("#projectName").val(tempdata.projectName);
                     $("#disciplineCode").val(tempdata.disciplineCode);
                     $("#disciplineName").val(tempdata.disciplineCode);
                     $("#applicant").val(tempdata.applicant);
                     $("#contactCode").val(tempdata.contactCode);
-                    $("#company").val(tempdata.company);
+                    $("#company").val(myCompany);
                     $("#postalCode").val(tempdata.postalCode);
                     $("#email").val(tempdata.email);
                     var file = tempdata.filePath;
@@ -211,7 +231,7 @@
                                 orange.redirect(url);
                             }
                         }
-                    }
+                    };
                     ajaxUtil.myAjax(null,"/industrialdevelop",null,function (data) {
                         for (var i=0;i<data.data.length;i++){
                             if (data.data[i].isimp == "1"){
@@ -221,9 +241,20 @@
                         }
                         date.isDuringDate(stime, etime);
                     },false,"","get");
+                }
+                /*var workUnit= "";
+                $.ajax
+                ({  cache: false, async: false, type: 'get', url: "/industrialdevelop/getPlatRole", success: function (data) {
+                        workUnit = data;
+                    }
+                });
+                var unit = workUnit.data;*/
+
+                init = function () {
 
                 }
-            }());
+            };
+            init();
 
             function isUpdate() {
                 return (localStorage.getItem("rowData") != null || localStorage.getItem("rowData") != undefined)

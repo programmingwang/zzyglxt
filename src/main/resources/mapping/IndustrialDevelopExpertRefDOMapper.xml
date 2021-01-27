@@ -69,7 +69,13 @@
     where itemCode = #{itemcode,jdbcType=CHAR}
     order by itemUpdateAt desc
   </select>
-  <select id="selectAll" resultMap="ExmainResultMap">
+  <select id="selectAllTopicCode" resultType="String">
+    SELECT DISTINCT
+	ef.TOPIC_CODE
+FROM
+	tb_industrial_develop_expert_ref ef
+  </select>
+  <select id="selectAllByTopicCode" resultMap="ExmainResultMap">
     SELECT
     <include refid="Exmain_Column_List" />
     ,
@@ -80,6 +86,7 @@
     ON f.DATA_CODE = t.itemCode
     WHERE
     ef.TOPIC_CODE = t.itemCode
+    AND ef.TOPIC_CODE = #{topicCode}
     order by ef.itemUpdateAt desc
   </select>
   <delete id="deleteByPrimaryKey" parameterType="com.zyyglxt.dataobject.IndustrialDevelopExpertRefDOKey">
@@ -222,7 +229,6 @@
     OPINION = #{opinion,jdbcType=TIMESTAMP},
     where itemCode = #{itemcode,jdbcType=CHAR}
   </update>
-
     <select id="selectByTopicCode" resultMap="BaseResultMap">
         SELECT
         <include refid="Base_Column_List" />
@@ -230,7 +236,6 @@
         WHERE TOPIC_CODE = #{topicCode}
       order by itemUpdateAt desc
     </select>
-
     <!--<select id="selectByExpertCode" resultMap="BaseResultMap">-->
         <!--SELECT-->
         <!--<include refid="Base_Column_List" />-->
@@ -271,4 +276,12 @@
         TOPIC_CODE) ef on t.itemCode=ef.TOPIC_CODE
         order by t.itemUpdateAt desc
     </select>
+  <select id="selectZjktsl" resultType="java.lang.Integer" parameterType="java.lang.String">
+    SELECT
+	count(*) as 'zjktsl'
+FROM
+	tb_industrial_develop_expert_ref ef
+WHERE
+	ef.TOPIC_CODE = #{topicCode}
+  </select>
 </mapper>

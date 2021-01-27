@@ -178,8 +178,8 @@ public class UserServiceImpl implements UserService {
     public List<UserDO> selectAllUser(String itemcode, String username) {
         List<UserDO> users = userDOMapper.selectAllUser(itemcode, username);
 
-        int[] roletype = new int[4];
-        for (int i=0; i<4;i++){
+        int[] roletype = new int[2];
+        for (int i=0; i<2;i++){
             roletype[i] = roleDOMapper.selectRoleType().get(i).getRoleType();
         }
         List<UserDO> userDOList = new ArrayList<UserDO>();
@@ -187,7 +187,7 @@ public class UserServiceImpl implements UserService {
             UserDO user = users.get(i);
 
             int type = user.getType();
-            if (roletype[0] == type || roletype[1] == type || roletype[2] == type || roletype[3] == type) {
+            if (roletype[0] == type || roletype[1] == type) {
                 userDOList.add(user);
             }
         }

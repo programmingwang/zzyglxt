@@ -101,7 +101,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     authenticationEntryPoint(authenticationEntryPoint).//匿名用户访问无权限资源时的异常处理
                 //会话管理
                 and().sessionManagement().
-                    maximumSessions(20).//同一账号同时登录最大用户数
+                    invalidSessionUrl("/userLogin").
+                    maximumSessions(1).//同一账号同时登录最大用户数
                     expiredSessionStrategy(sessionInformationExpiredStrategy);//会话失效(账号被挤下线)处理逻辑
         http.addFilterBefore(securityInterceptor, FilterSecurityInterceptor.class);
     }

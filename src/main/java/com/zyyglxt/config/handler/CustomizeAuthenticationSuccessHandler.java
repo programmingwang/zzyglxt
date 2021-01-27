@@ -42,7 +42,7 @@ public class CustomizeAuthenticationSuccessHandler implements AuthenticationSucc
         OrganizationDO organizationDO = organizationDOMapper.selectByItemCode(userDo.getOrgCode());
         UserSessionDto userSessionDto = new UserSessionDto();
         userSessionDto.setOrgName(organizationDO.getOrgName());
-        userSessionDto.setOrgCode(organizationDO.getOrgCode());
+        userSessionDto.setOrgCode(organizationDO.getItemcode());
         userSessionDto.setUsername(userDo.getUsername());
         userSessionDto.setName(userDo.getName());
         userSessionDto.setRolename(roleDO.getRoleName());
@@ -51,7 +51,7 @@ public class CustomizeAuthenticationSuccessHandler implements AuthenticationSucc
         }
         userSessionDto.setItemid(userDo.getItemid());
         userSessionDto.setItemcode(userDo.getItemcode());
-        System.out.println(userSessionDto);
+//        System.out.println(userSessionDto);
         httpServletRequest.getSession().setAttribute("user", userSessionDto);
 //        super.onAuthenticationSuccess(httpServletRequest, httpServletResponse, authentication);
         //返回json数据

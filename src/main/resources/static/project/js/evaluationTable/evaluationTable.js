@@ -57,6 +57,7 @@
                         }
                     },false,true,"put");
                 },false);
+                return false;
             });
 
             $("#btn_insert").unbind().on('click',function () {
@@ -88,7 +89,7 @@
                         }
                     },false,true,"put");
                 },false);
-
+                return false;
             });
 
             if(localStorage.getItem("viewDetail") != null || localStorage.getItem("viewDetail") != undefined){
@@ -110,21 +111,23 @@
                     var opinions = (tempdata.opinion).split("|");
                     var finalOpinion = "";
                     var sumScore = 0;
+                    var sjfx = [];
                     for(var i = 0; i<scores.length; i++){
                         if(scores[i]=="null"){
                             $("#displaydf").html("（请注意：当前还未评审完）");
                             continue;
                         }
                         var attr = (scores[i]).split("+");
+                        sjfx = attr;
                         var lastScore = attr[10].split("=");
                         $("#score11").val(lastScore[0]);
                         sumScore += parseInt(lastScore[1]);
                     }
-                    for(var i = 0; i<scores[scores.length-1].length; i++){
-                        $("#score"+(i+1)).val(attr[i]);
+                    for(var i = 0; i<sjfx.length; i++){
+                        $("#score"+(i+1)).val(sjfx[i]);
                         $("#score"+(i+1)).attr("readOnly","true")
                     }
-                    var lastScore = attr[10].split("=");
+                    var lastScore = sjfx[10].split("=");
                     $("#score11").val(lastScore[0]);
                     $("#allSc").val(sumScore/scores.length);
                     for(var i = 0; i<opinions.length; i++){

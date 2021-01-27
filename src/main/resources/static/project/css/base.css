@@ -333,6 +333,7 @@ thead.self-thead {
     text-align: center;
     font-size: 16px;
     border-color: #e66736;
+    font-family: AdobeHeitiStd-Regular;
 }
 
 #chargePersonSearch{
@@ -374,4 +375,23 @@ thead.self-thead {
     color: #3c4d53;
     font-family: SourceHanSansCN-Regular;
     font-size: 16px;
+}
+
+.table td {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.table td:last-child
+{
+    white-space: nowrap;
+    overflow: visible !important;
+    text-overflow: unset !important;
+}
+
+span.input-text {
+    font-family: SourceHanSansCN-Regular;
+    font-size: 16px;
+    color: #1e2629;
 }

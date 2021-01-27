@@ -51,4 +51,9 @@ public class ResponseData implements Serializable {
         this.msg = EmBusinessError.fail.getErrMsg();
     }
 
+    public ResponseData(String errMsg){
+        this.code = EmBusinessError.fail.getErrCode();
+        this.msg = errMsg;
+    }
+
 }

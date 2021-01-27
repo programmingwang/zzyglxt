@@ -9,7 +9,7 @@
             }else if(isUpdate && file != null){
                 ajaxUtil.myAjax(null,"/file/delete?dataCode="+itemcode,null,function (data) {
                     if(!ajaxUtil.success(data)){
-                        return alertUtil.error("文件删除失败,可能是文件损坏或不存在了");
+                        return alertUtil.warning("文件删除失败,可能是文件损坏或不存在了");
                     }
                 },false,"","get");
                 ajaxUtil.fileAjax(itemcode,file,stringUtil.getUUID(),sessionStorage.getItem("username"), sessionStorage.getItem("itemcode"));

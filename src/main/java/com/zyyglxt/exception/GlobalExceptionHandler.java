@@ -50,6 +50,18 @@ public class GlobalExceptionHandler {
     }
 
     /**
+     * 处理图片空参异常
+     * @param e
+     * @return
+     */
+    @ExceptionHandler(value =org.springframework.validation.BindException.class)
+    @ResponseBody
+    public ResponseData blankFileExceptionHandler(org.springframework.validation.BindException e){
+        logger.error("未知异常！原因是:",e);
+        return new ResponseData("您未上传图片或者附件！");
+    }
+
+    /**
      * 处理权限不足异常
      * @param e
      * @return

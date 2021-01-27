@@ -224,11 +224,40 @@
                 orange.redirect(url);
             });
 
-            var pl = dictUtil.getDictByCode(dictUtil.DICT_LIST.showStatus);
+            var pl = dictUtil.getDictByCode(dictUtil.DICT_LIST.webStatus);
             $("#chargePersonSearch").selectUtil(pl);
 
            var p2 = dictUtil.getDictByCode(dictUtil.DICT_LIST.effectType);
             $("#Search").selectUtil(p2);
+
+            $("#Search").unbind("change").on("change",function () {
+                var newArry = [];
+                var allTableData = JSON.parse(localStorage.getItem("2"));
+                var searchGxfl=document.getElementById("Search").value;
+
+                for (var i in allTableData) {
+                    for (var v in aCol){
+                        var textP = allTableData[i][aCol[v].field];
+                        var isStatusSlot=false;           // 默认状态为true
+                        //状态条件判断,与表格字段的状态一致,这里根据自己写的修改
+                        var gxfl= allTableData[i]["chineseMedicineType"]
+                        //调试时可以先打印出来，进行修改
+                        if(gxfl==searchGxfl){
+                            isStatusSlot=true;
+                        }
+                        //当存在时将条件改为flase
+                        if (textP == null || textP == undefined || textP == '') {
+                            textP = "1";
+                        }
+                        if(isStatusSlot){
+                            newArry.push(allTableData[i])
+                        }
+                        var newArr=new Set(newArry)
+                        newArry=Array.from(newArr)
+                        $("#table").bootstrapTable("load", newArry);
+                    }
+                }
+            });
 
             var aCol = [
                         {field: 'chineseMedicineName', title: '中医药名称'},
@@ -254,8 +283,60 @@
                 myTable = bootstrapTableUtil.myBootStrapTableInit("table", url, param, aCol);
             }
 
-            bootstrapTableUtil.globalSearch("table",url,aParam, aCol);
+            $("#btnSearch").unbind().on('click',function() {
+                var newArry = [];
+                var addstr=document.getElementById("chargePersonSearch").value;
+                var str = document.getElementById("taskNameSearch").value.toLowerCase();
+                var allTableData = JSON.parse(localStorage.getItem("2"));
+                if(str.indexOf("请输入")!=-1){
+                    str=""
+                }
+                for (var i in allTableData) {
+                    for (var v in aCol){
+                        var textP = allTableData[i][aCol[v].field];
+                        var isStatusSlot=false;           // 默认状态为true
+                        //状态条件判断,与表格字段的状态一致,这里根据自己写的修改
+                        var status= allTableData[i]["chineseMedicineStatus"]
+                        // console.log("addstr:"+addstr)
+                        // console.log("status:"+status)
+                        //调试时可以先打印出来，进行修改
+                        if(addstr==status){
+                            isStatusSlot=true;
+                        }
+                        //当存在时将条件改为flase
+                        if (textP == null || textP == undefined || textP == '') {
+                            textP = "1";
+                        }
+                        if($("#closeAndOpen").text().search("展开")!= -1 && textP.search(str) != -1){
+                            isStatusSlot = false;
+                            newArry.push(allTableData[i])
+                        }
+                        if($("#closeAndOpen").text().search("收起")!= -1 && textP.search(str) != -1 && isStatusSlot){
+                            newArry.push(allTableData[i])
+                        }
+                    }
+                }
+                var newArr=new Set(newArry)
+                newArry=Array.from(newArr)
+                $("#table").bootstrapTable("load", newArry);
+                if(newArry.length == 0){
+                    alertUtil.warning("搜索成功,但此搜索条件下没有数据");
+                }else{
+                    alertUtil.success("搜索成功");
+                }
+            })
 
+            var aria=this.ariaExpanded;
+            $("#closeAndOpen").unbind().on('click',function(){
+                this.innerText="";
+                if (aria==="true"){
+                    this.innerText="展开";
+                    aria = "false";
+                } else {
+                    this.innerText="收起";
+                    aria = "true";
+                }
+            })
 
         })
 })();

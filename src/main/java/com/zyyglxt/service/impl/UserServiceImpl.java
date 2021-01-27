@@ -102,8 +102,8 @@ public class UserServiceImpl implements UserService {
             record.setOrgCode(organizationDO.getItemcode());
             record.setType(8);
         } else if (record.getRoleName().equals("主研人")){
-            OrganizationDO organizationDO = organizationDOMapper.selectByOrgName("科研项目申报单位");
-            record.setOrgCode(organizationDO.getItemcode());
+//            OrganizationDO organizationDO = organizationDOMapper.selectByOrgName("科研项目申报单位");
+//            record.setOrgCode(organizationDO.getItemcode());
             record.setType(7);
         }
         //添加用户

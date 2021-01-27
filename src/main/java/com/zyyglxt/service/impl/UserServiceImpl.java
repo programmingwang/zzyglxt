@@ -176,19 +176,33 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<UserDO> selectAllUser(String itemcode, String username) {
-        List<UserDO> users = userDOMapper.selectAllUser(itemcode, username);
-
-        int[] roletype = new int[2];
-        for (int i=0; i<2;i++){
-            roletype[i] = roleDOMapper.selectRoleType().get(i).getRoleType();
-        }
+        UserDO userDO = userDOMapper.selectByUsername(username);
         List<UserDO> userDOList = new ArrayList<UserDO>();
-        for (int i = 0; i < users.size(); i++) {
-            UserDO user = users.get(i);
+        if ("22".equals(userDO.getType())) {
+            List<UserDO> users = userDOMapper.selectAllUser(itemcode, username);
 
-            int type = user.getType();
-            if (roletype[0] == type || roletype[1] == type) {
-                userDOList.add(user);
+            int[] roletype = new int[2];
+            for (int i = 0; i < 2; i++) {
+                roletype[i] = roleDOMapper.selectRoleType().get(i).getRoleType();
+            }
+            for (int i = 0; i < users.size(); i++) {
+                UserDO user = users.get(i);
+
+                int type = user.getType();
+                if (roletype[0] == type || roletype[1] == type) {
+                    userDOList.add(user);
+                }
+            }
+        } else {
+            List<UserDO> users = userDOMapper.selectAllUser(itemcode, username);
+            int roletype = roleDOMapper.selectRoleType2().get(0).getRoleType();
+            for (int i = 0; i < users.size(); i++) {
+                UserDO user = users.get(i);
+
+                int type = user.getType();
+                if (roletype == type) {
+                    userDOList.add(user);
+                }
             }
         }
 

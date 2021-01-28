@@ -21,6 +21,8 @@ public interface RoleDOMapper {
 
     List<RoleDO> selectRoleType();
 
+    List<RoleDO> selectRoleType2();
+
     int updateByPrimaryKeySelective(RoleDO record);
 
     int updateByPrimaryKey(RoleDO record);

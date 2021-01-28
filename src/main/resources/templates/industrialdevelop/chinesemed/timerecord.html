@@ -12,19 +12,16 @@
 </head>
 <body>
 <div id="fir_body">
-    <div class="row col-lg-12 col-md-12" id="accordion2" style="margin-bottom: 1rem;">
+    <div class="row" id="accordion2" >
         <div class="col-lg-8 col-md-8 row mb-4" style="padding-left: 3rem;">
-                <lable>年份：</lable>
+                <lable style="margin-top: 6px;">年份：</lable>
                 <select name="" id="taskNameSearch1" class="col-lg-4  col-md-4">
-                    <option value ="2020">2020</option>
-                    <option value ="2019">2019</option>
-                    <option value ="2018">2018</option>
-                    <option value ="2017">2017</option>
                 </select>
-                <lable style="margin-left:2rem">状态：</lable>
+                <lable style="margin-left:2rem;margin-top: 6px;">状态：</lable>
                 <select name="" id="taskNameSearch2"  class="col-lg-4  col-md-4"style="margin-right: 1rem">
-                    <option value ="生效">生效</option>
-                    <option value ="失效">失效</option>
+                    <option value ="2">失效</option>
+                    <option value ="1">生效</option>
+                    <option value ="0">未开始</option>
                 </select>
 
             <div class="input-group-prepend">
@@ -32,14 +29,14 @@
             </div>
 
         </div>
-        <div class="col-lg-4 col-md-4"></div>
-        <hr size="1" class="mb-1" style="color: #EBEBEB;border-style:dashed;width:100%;margin-bottom:10px;">
-    </div>
-    <div class="row col-lg-12 col-md-12 mb-3">
-        <div class="col-lg-12 col-md-12" >
-            <button id="btn_addTask" class="btn btn-danger ml-3">设置填报时间</button>
+        <div class="col-lg-2 col-md-2"></div>
+        <div class="col-lg-2 col-md-2">
+                <button id="btn_addTask" class="btn btn-danger ml-3">设置填报时间</button>
         </div>
+        <hr size="1" class="mb-3" style="color: #EBEBEB;border-style:dashed;width:100%;margin-bottom:10px;">
     </div>
+
+
     <div class="col-lg-12">
         <table id="table"></table>
     </div>

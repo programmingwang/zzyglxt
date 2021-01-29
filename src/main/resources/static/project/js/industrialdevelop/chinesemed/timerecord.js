@@ -86,6 +86,7 @@
             for(var i = -2 ; i <= 2; i++){
                 pl2.push({id:generateSearchYear(i),text:generateSearchYear(i)})
             }
+            pl2.push({id:"00",text:"全部年份"})
             $("#taskNameSearch1").selectUtil(pl2);
 
             var aCol = [
@@ -118,7 +119,15 @@
                 for (var i in allTableData) {
                     var textYear = allTableData[i]["year"];
                     var textIsimpl= allTableData[i]["isimp"] ;
-                    if(searchYear == textYear && searchIsImpl == textIsimpl){
+                    var isStatusSlot=false;           // 默认状态为true
+                    var isYearSlot=false;           // 默认状态为true
+                    if(searchIsImpl==textIsimpl||searchIsImpl=='99'){
+                        isStatusSlot=true;
+                    }
+                    if(searchYear == textYear||searchYear=='00'){
+                        isYearSlot=true;
+                    }
+                    if(isYearSlot &&isStatusSlot){
                         newArry.push(allTableData[i]);
                     }
                 }

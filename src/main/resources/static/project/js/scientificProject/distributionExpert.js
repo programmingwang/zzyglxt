@@ -55,6 +55,7 @@
                     modalBodyID : "addExperModal", //公用的在后面给span加不同的内容就行了，其他模块同理
                     modalTitle : "分配专家",
                     modalClass : "modal-lg",
+                    confirmButtonClass : "btn-danger",
                     modalConfirmFun:function () {
                         for (var i = 0; i < rows.length; i++){
                             var expertsRows = $("#expertsTable").bootstrapTable('getSelections');
@@ -110,7 +111,7 @@
                 var myDeleteModalData ={
                     modalBodyID : "myCencelDistribution",
                     modalTitle : "取消分配专家",
-                    modalClass : "modal-lg",
+                    modalClass : "modal-md",
                     confirmButtonClass : "btn-danger",
                     modalConfirmFun:function () {
                         var deleteUrl = "/exmain/exmain";
@@ -193,23 +194,23 @@
                 myTable = bootstrapTableUtil.myBootStrapTableInit("table", url, param, aCol);
             }
 
-            $("#chargePersonSearch").unbind().on('change',function() {
-                var newArry = [];
-                var addstr=document.getElementById("chargePersonSearch").value;
-                var allTableData = JSON.parse(localStorage.getItem("2"));
-                for (var i in allTableData) {
-                    var status= isDistribution(allTableData[i]["expertCode"]);
-                    if(addstr==Number(status) || addstr=="000") {
-                        newArry.push(allTableData[i])
-                    }
-                }
-                var newArr=new Set(newArry)
-                newArry=Array.from(newArr)
-                $("#table").bootstrapTable("load", newArry);
-                if(newArry.length == 0){
-                    alertUtil.warning("此状态下没有数据");
-                }
-            })
+            // $("#chargePersonSearch").unbind().on('change',function() {
+            //     var newArry = [];
+            //     var addstr=document.getElementById("chargePersonSearch").value;
+            //     var allTableData = JSON.parse(localStorage.getItem("2"));
+            //     for (var i in allTableData) {
+            //         var status= isDistribution(allTableData[i]["expertCode"]);
+            //         if(addstr==Number(status) || addstr=="000") {
+            //             newArry.push(allTableData[i])
+            //         }
+            //     }
+            //     var newArr=new Set(newArry)
+            //     newArry=Array.from(newArr)
+            //     $("#table").bootstrapTable("load", newArry);
+            //     if(newArry.length == 0){
+            //         alertUtil.warning("此状态下没有数据");
+            //     }
+            // })
 
             $("#btnSearch").unbind().on('click',function() {
                 var newArry = [];

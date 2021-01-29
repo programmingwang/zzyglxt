@@ -291,7 +291,8 @@
                         itemid: row.itemid,
                         itemcode: row.itemcode,
                         type: dictUtil.getCode(dictUtil.DICT_LIST.orgType, row.type),
-                        status: pass
+                        status: pass,
+                        orgCode: row.orgCode
                     };
                     ajaxUtil.myAjax(null,auditUrl,param,function (data) {
                         alertUtil.info("修改成功");

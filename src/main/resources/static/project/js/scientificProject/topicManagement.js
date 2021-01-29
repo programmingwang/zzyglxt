@@ -467,8 +467,8 @@
                         }},
                     {field: 'action', title: '操作', formatter: operation1, events: orgEvents}
                 ];
-                var starttime;
-                var endtime;
+                var starttime="";
+                var endtime="";
                 var date = {
                     isDuringDate: function (beginDateStr, endDateStr) {
                         var curDate = new Date(),
@@ -606,18 +606,15 @@
                         // console.log("addstr:"+addstr)
                         // console.log("status:"+status)
                         //调试时可以先打印出来，进行修改
-                        if(addstr==status){
+                        if(addstr==status||addstr=='99'){
                             isStatusSlot=true;
                         }
                         if (textP == null || textP == undefined || textP == '') {
                             textP = "1";
                         }
-                        // if($("#closeAndOpen").text().search("展开")!= -1 && textP.search(str) != -1){
-                        // if(textP.search(str) != -1){
-                        //     isStatusSlot = false;
-                        //     newArry.push(allTableData[i])
-                        // }
-                        // if($("#closeAndOpen").text().search("收起")!= -1 && textP.search(str) != -1 && isStatusSlot){
+                        if(addstr == 99){
+                            isStatusSlot = true;
+                        }
                         if(textP.search(str) != -1 && isStatusSlot){
                             newArry.push(allTableData[i])
                         }
@@ -629,17 +626,6 @@
 
             })
 
-            // var aria=this.ariaExpanded;
-            // $("#closeAndOpen").unbind().on('click',function(){
-            //     this.innerText="";
-            //     if (aria==="true"){
-            //         this.innerText="展开";
-            //         aria = "false";
-            //     } else {
-            //         this.innerText="收起";
-            //         aria = "true";
-            //     }
-            // })
 
 
 

@@ -123,7 +123,7 @@
                         var mobilephone = $("#mobilephone").val();
                         var cityid = dictUtil.getName(dictUtil.DICT_LIST.areaAdmin,$("#cityid").val());
                         var orgName = sessionStorage.getItem("orgName");
-                        var orgCode = sessionStorage.getItem("orgCode");
+                        var orgCode = sessionStorage.getItem("orgItemCode");
 
                         var submitStatus = {
                             "username": username,

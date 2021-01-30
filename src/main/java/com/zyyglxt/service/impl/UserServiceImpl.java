@@ -159,7 +159,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public void resetPassword(UserDO userDO) {
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-        String password = encoder.encode("1234");
+        String password = encoder.encode("123456");
         userDO.setPassword(password);
         userDOMapper.updateByPrimaryKeySelective(userDO);
     }
@@ -178,32 +178,10 @@ public class UserServiceImpl implements UserService {
     public List<UserDO> selectAllUser(String itemcode, String username) {
         UserDO userDO = userDOMapper.selectByUsername(username);
         List<UserDO> userDOList = new ArrayList<UserDO>();
-        if ("22".equals(userDO.getType())) {
-            List<UserDO> users = userDOMapper.selectAllUser(itemcode, username);
-
-            int[] roletype = new int[2];
-            for (int i = 0; i < 2; i++) {
-                roletype[i] = roleDOMapper.selectRoleType().get(i).getRoleType();
-            }
-            for (int i = 0; i < users.size(); i++) {
-                UserDO user = users.get(i);
-
-                int type = user.getType();
-                if (roletype[0] == type || roletype[1] == type) {
-                    userDOList.add(user);
-                }
-            }
+        if (userDO.getType() == 22) {
+            userDOList = userDOMapper.selectAllUser(itemcode, username);
         } else {
-            List<UserDO> users = userDOMapper.selectAllUser(itemcode, username);
-            int roletype = roleDOMapper.selectRoleType2().get(0).getRoleType();
-            for (int i = 0; i < users.size(); i++) {
-                UserDO user = users.get(i);
-
-                int type = user.getType();
-                if (roletype == type) {
-                    userDOList.add(user);
-                }
-            }
+            userDOList = userDOMapper.selectAllUser2(itemcode, username,usernameUtil.getOrgItemCode());
         }
 
         return userDOList;

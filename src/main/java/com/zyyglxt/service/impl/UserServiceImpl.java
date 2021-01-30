@@ -181,7 +181,7 @@ public class UserServiceImpl implements UserService {
         if (userDO.getType() == 22) {
             userDOList = userDOMapper.selectAllUser(itemcode, username);
         } else {
-            userDOList = userDOMapper.selectAllUser2(itemcode, username,usernameUtil.getOrgCode());
+            userDOList = userDOMapper.selectAllUser2(itemcode, username,usernameUtil.getOrgItemCode());
         }
 
         return userDOList;

@@ -175,7 +175,7 @@ public class UserController {
      *
      * @return user和查询结果
      */
-    @LogAnnotation(logTitle = "产业发展-账号管理-新增用户", logLevel = "3")
+    @LogAnnotation(logTitle = "科研项目-账号管理-新增用户", logLevel = "3")
     @RequestMapping(value = "/adduser", method = RequestMethod.POST)
     public ResponseData insertUser(@RequestBody UserDO userDO){
         userService.insertUserSelective(userDO);
@@ -188,7 +188,7 @@ public class UserController {
      * @param userDtO
      * @return
      */
-    @LogAnnotation(logTitle = "产业发展-账号管理-删除用户", logLevel = "4")
+    @LogAnnotation(logTitle = "科研项目-账号管理-删除用户", logLevel = "4")
     @RequestMapping(value = "/deletuser", method = RequestMethod.POST)
     public ResponseData deleteUserByUsername(@RequestBody UserDto userDtO){
         userService.deleteUserByUsername(userDtO);
@@ -200,7 +200,7 @@ public class UserController {
      * @param userDo
      * @return
      */
-    @LogAnnotation(logTitle ="产业发展-账号管理-重置密码",logLevel ="2")
+    @LogAnnotation(logTitle ="科研项目-账号管理-重置密码",logLevel ="2")
     @RequestMapping(value = "/reset", method = RequestMethod.PUT)
     public ResponseData resetPassword(@RequestBody UserDO userDo){
         userService.resetPassword(userDo);

@@ -167,15 +167,8 @@ public class UserController {
     @RequestMapping(value = "/alluser", method = RequestMethod.GET)
     public ResponseData selectAllUser() {
         List<UserDO> users = userService.selectAllUser(usernameUtil.getItemCode(),usernameUtil.getOperateUser());
-        for (UserDO user : users) {
-            String userItemCode = user.getItemcode();
-            UserRoleRefDO userRoleRefDO = userRoleRefService.selectByUserCode(userItemCode);
-            String roleName = userRoleRefDO.getPlatRole();
-            user.setRoleName(roleName);
-        }
         return new ResponseData(EmBusinessError.success, users);
     }
-
 
     /**
      * 科研项目管理-账号管理-新增用户

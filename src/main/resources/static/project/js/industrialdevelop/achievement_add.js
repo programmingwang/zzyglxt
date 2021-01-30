@@ -61,6 +61,7 @@
                         alert(data.msg)
                     }
                 }, true, "123", type);
+                return false;
             });
 
             $("#submitBtn").unbind('click').on('click', function () {
@@ -115,8 +116,7 @@
                 }
             }
             document.getElementById('clsfile').onclick = function () {
-                var obj = document.getElementById('upload_file');
-                obj.outerHTML = obj.outerHTML;
+                $('#upload_file').val('');
                 $("#clsfile").css("display", "none");
                 $("#addFile").empty("p");
             }

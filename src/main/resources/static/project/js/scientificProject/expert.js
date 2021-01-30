@@ -26,11 +26,8 @@
                         modalClass : "modal-lg",
                         confirmButtonClass : "btn-danger",
                         modalConfirmFun:function () {
-                            var projectEntity = {
-                                itemcode: row.itemcode
-                            };
                             var isSuccess = false;
-                            ajaxUtil.myAjax(null,"/industrialdevelop/expert/"+row.itemcode,projectEntity,function (data) {
+                            ajaxUtil.myAjax(null,"/industrialdevelop/expert/"+row.userCode,null,function (data) {
                                 if(ajaxUtil.success(data)){
                                     alertUtil.info("删除成功");
                                     isSuccess = true;
@@ -117,7 +114,7 @@
                                 myaddExpertModal.hide();
                                 refreshTable();
                             } else {
-                                alertUtil.error("新增失败");
+                                alertUtil.error(data.msg);
                             }
                         }, true, "123", 'post');
                     }
@@ -125,6 +122,10 @@
                 var myaddExpertModal = modalUtil.init(myaddExpertModalData);
                 myaddExpertModal.show();
             });
+
+            $("#expertAccount").unbind().on('change',function () {
+
+            })
 
             var pl = dictUtil.getDictByCode(dictUtil.DICT_LIST.showStatus);
             $("#chargePersonSearch").selectUtil(pl);
@@ -146,7 +147,29 @@
                 myTable = bootstrapTableUtil.myBootStrapTableInit("table", url, param, aCol);
             }
 
-            bootstrapTableUtil.globalSearch("table",url,aParam, aCol);
+            $("#btnSearch").unbind().on('click',function() {
+                var newArry = [];
+                var str = document.getElementById("taskNameSearch").value.toLowerCase();
+                var allTableData = JSON.parse(localStorage.getItem("2"));
+                if(str.indexOf("请输入")!=-1){
+                    str=""
+                }
+                for (var i in allTableData) {
+                    for (var v in aCol){
+                        var textP = allTableData[i][aCol[v].field];
+                        if (textP == null || textP == undefined || textP == '') {
+                            textP = "1";
+                        }
+                        if(textP.search(str) != -1){
+                            newArry.push(allTableData[i])
+                        }
+                    }
+                }
+                var newArr=new Set(newArry)
+                newArry=Array.from(newArr)
+                $("#table").bootstrapTable("load", newArry);
+
+            })
 
         })
 })();

@@ -62,11 +62,13 @@ public class UserServiceImpl implements UserService {
         userDOKey.setItemid(userDO.getItemid());
         userDOKey.setItemcode(userDO.getItemcode());
         userDOMapper.deleteByPrimaryKey(userDOKey);
-        //删除hospital
-        OrganizationDO organizationDO = organizationDOMapper.selectByOrgName(userDtO.getOrgName());
-        if (organizationDO != null) {
-            organizationDOMapper.deleteByPrimaryKey(organizationDO.getItemid());
-        }
+//        if (!"主研人".equals(userRoleRefDO.getPlatRole())){
+////            //删除organization
+////            OrganizationDO organizationDO = organizationDOMapper.selectByOrgName(userDtO.getOrgName());
+////            if (organizationDO != null) {
+////                organizationDOMapper.deleteByPrimaryKey(organizationDO.getItemid());
+////            }
+////        }
     }
 
     @Override
@@ -100,6 +102,8 @@ public class UserServiceImpl implements UserService {
             record.setOrgCode(organizationDO.getItemcode());
             record.setType(8);
         } else if (record.getRoleName().equals("主研人")){
+//            OrganizationDO organizationDO = organizationDOMapper.selectByOrgName("科研项目申报单位");
+//            record.setOrgCode(organizationDO.getItemcode());
             record.setType(7);
         }
         //添加用户
@@ -172,18 +176,33 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<UserDO> selectAllUser(String itemcode, String username) {
-        List<UserDO> users = userDOMapper.selectAllUser(itemcode, username);
-
-        int[] roletype = new int[4];
-        for (int i=0; i<4;i++){
-            roletype[i] = roleDOMapper.selectRoleType().get(i).getRoleType();
-        }
-
+        UserDO userDO = userDOMapper.selectByUsername(username);
         List<UserDO> userDOList = new ArrayList<UserDO>();
-        for (UserDO user : users) {
-            int type = user.getType();
-            if (roletype[0] == type || roletype[1] == type || roletype[2] == type || roletype[3] == type) {
-                userDOList.add(user);
+        if ("22".equals(userDO.getType())) {
+            List<UserDO> users = userDOMapper.selectAllUser(itemcode, username);
+
+            int[] roletype = new int[2];
+            for (int i = 0; i < 2; i++) {
+                roletype[i] = roleDOMapper.selectRoleType().get(i).getRoleType();
+            }
+            for (int i = 0; i < users.size(); i++) {
+                UserDO user = users.get(i);
+
+                int type = user.getType();
+                if (roletype[0] == type || roletype[1] == type) {
+                    userDOList.add(user);
+                }
+            }
+        } else {
+            List<UserDO> users = userDOMapper.selectAllUser(itemcode, username);
+            int roletype = roleDOMapper.selectRoleType2().get(0).getRoleType();
+            for (int i = 0; i < users.size(); i++) {
+                UserDO user = users.get(i);
+
+                int type = user.getType();
+                if (roletype == type) {
+                    userDOList.add(user);
+                }
             }
         }
 

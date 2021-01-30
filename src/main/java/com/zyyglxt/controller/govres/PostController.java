@@ -13,6 +13,7 @@ import com.zyyglxt.service.IFileService;
 import com.zyyglxt.service.IPostService;
 import com.zyyglxt.util.ConvertDOToDTOUtil;
 import io.swagger.annotations.Api;
+import org.springframework.beans.BeanUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -44,15 +45,30 @@ public class PostController {
     @LogAnnotation(appCode ="",logTitle ="查询所有发文信息",logLevel ="1",creater ="",updater = "")
     public ResponseData getPost(@RequestParam(value = "postDataStatus") List postDataStatus){
         List<PostDO> postDOS = postService.getPost(postDataStatus);
-        List<PostDto> postDtos = new ArrayList<>();
-        for (PostDO postDO : postDOS) {
-            FileDO fileDO = fileService.selectFileByDataCode(postDO.getItemcode());
-            postDtos.add(
-                    ConvertDOToDTOUtil.convertFromDOToDTO(
-                            postDO, fileDO.getFilePath(), fileDO.getFileName() ));
-        }
-        return new ResponseData(EmBusinessError.success,postDtos);
+        return new ResponseData(EmBusinessError.success,DoToDto(postDOS));
     }
+
+    private List<PostDto> DoToDto(List<PostDO> DOList){
+        List<PostDto> DtoList = new ArrayList<>();
+        if (!DOList.isEmpty()){
+            for (PostDO DO:DOList){
+                PostDto Dto = new PostDto();
+                BeanUtils.copyProperties(DO,Dto);
+                List<FileDO> fileDO= fileService.selectMultipleFileByDataCode(Dto.getItemcode());
+                List<String> filePath = new ArrayList<>();
+                List<String> fileName = new ArrayList<>();
+                for (FileDO file:fileDO){
+                    filePath.add(file.getFilePath());
+                    fileName.add(file.getFileName());
+                }
+                Dto.setFilePath(filePath);
+                Dto.setFileName(fileName);
+                DtoList.add(Dto);
+            }
+        }
+        return DtoList;
+    }
+
 
     //添加发文信息
     @RequestMapping(value = "/createPost", method = RequestMethod.POST)
@@ -87,14 +103,6 @@ public class PostController {
     public ResponseData maxNum(){
         PostDO max = postService.maxNum();
         return new ResponseData(EmBusinessError.success,max);
-    }
-
-    //获取所有意见
-    @RequestMapping(value = "/getPandA" , method = RequestMethod.GET)
-    @ResponseBody
-    public ResponseData getPandA(){
-        List<PostDto> postDtos = postService.getPandA();
-        return new ResponseData(EmBusinessError.success,postDtos);
     }
 
 }

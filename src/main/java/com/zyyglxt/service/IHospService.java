@@ -32,5 +32,5 @@ public interface IHospService {
     //查询全部医院记录
     List<HospDto> selectAllNoStatus();
     //查询医院记录通过OrgCode
-    HospDO selectByOrgCode(String orgCode);
+    HospDto selectByOrgCode(String orgCode);
 }

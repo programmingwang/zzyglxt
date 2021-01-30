@@ -2,6 +2,7 @@ package com.zyyglxt.service;
 
 import com.zyyglxt.dataobject.DataDO;
 import com.zyyglxt.dataobject.DataDOKey;
+import com.zyyglxt.dto.DataDto;
 import com.zyyglxt.error.BusinessException;
 
 import java.sql.Date;
@@ -17,10 +18,10 @@ public interface IDataNewsService {
     DataDO selectNewsInf(DataDOKey key);
 
     //查询所有新闻信息
-    List<DataDO> selectNewsInfList(List<String> dataStatus);
+    List<DataDto> selectNewsInfList(List<String> dataStatus);
 
     //查询所有新闻轮播图
-    List<DataDO> selectNewsRotList(List<String> dataStatus);
+    List<DataDto> selectNewsRotList(List<String> dataStatus);
 
     //增加一个信息
     int insertNewsInf(DataDO record);

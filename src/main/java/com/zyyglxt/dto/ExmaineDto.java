@@ -6,6 +6,7 @@ import com.zyyglxt.dataobject.validation.ValidationGroups;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import lombok.experimental.Accessors;
 
 import javax.validation.constraints.NotBlank;
@@ -21,6 +22,7 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @Accessors(chain = true)
+@ToString
 public class ExmaineDto extends IndustrialDevelopExpertRefDO {
     private String projectNo;
     private String projectName;

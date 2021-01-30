@@ -68,16 +68,7 @@ public class SaleDrugController {
     @LogAnnotation(appCode ="",logTitle ="查寻所有售药数据",logLevel ="1")
     @ResponseBody
     public ResponseData selectAllSaleDrug(@RequestParam("status") List status){
-        List<IndustrialDevelopSaleDrug> industrialDevelopSaleDrugList = saleDrugService.selectAllSaleDrug(status);
-     // return new ResponseData(EmBusinessError.success,industrialDevelopSaleDrug);
-        List<IndustrialDevelopSaleDrugDto> industrialDevelopSaleDrugDtoList= new ArrayList<>();
-        for (IndustrialDevelopSaleDrug industrialDevelopSaleDrug : industrialDevelopSaleDrugList) {
-            industrialDevelopSaleDrugDtoList.add(
-                    this.convertDtoFromDo(
-                            industrialDevelopSaleDrug,iFileService.selectFileByDataCode(
-                                    industrialDevelopSaleDrug.getItemcode()).getFilePath()));
-        }
-        return new ResponseData(EmBusinessError.success,industrialDevelopSaleDrugDtoList);
+        return new ResponseData(EmBusinessError.success,saleDrugService.selectAllSaleDrug(status));
     }
     // usernameUtil.getOrgCode()
     private IndustrialDevelopSaleDrugDto convertDtoFromDo(IndustrialDevelopSaleDrug industrialDevelopSaleDrug, String filePath){

@@ -49,7 +49,7 @@
                         alertUtil.alert(data.msg);
                     }
                 },false,true);
-
+                return false;
             });
 
             $("#btn_insert").unbind().on('click',function () {
@@ -93,7 +93,7 @@
                         alertUtil.alert(data.msg);
                     }
                 },false,true);
-
+                return false;
             });
 
             (function init() {
@@ -128,8 +128,7 @@
                 }
             }
             document.getElementById('clsfile').onclick = function() {
-                var obj = document.getElementById('upload_file');
-                obj.outerHTML=obj.outerHTML;
+                $('#upload_file').val('');
                 $("#clsfile").css("display","none");
                 $("#addFile").empty("p");
             }

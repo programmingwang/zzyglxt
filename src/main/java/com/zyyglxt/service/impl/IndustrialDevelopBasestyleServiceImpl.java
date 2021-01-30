@@ -81,7 +81,7 @@ public class IndustrialDevelopBasestyleServiceImpl implements IndustrialDevelopB
 
     @Override
     public List<IndustrialDevelopBasestyleDto> selectAll() {
-        return industrialDevelopBasestyleMapper.selectAll();
+        return industrialDevelopBasestyleMapper.selectAll(usernameUtil.getOrgCode());
     }
 
 }

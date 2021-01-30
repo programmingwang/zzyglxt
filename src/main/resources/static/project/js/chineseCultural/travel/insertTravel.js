@@ -56,7 +56,7 @@
                         alertUtil.error(data.msg);
                     }
                 },false,true);
-
+                return false;
             });
 
             $("#btn_insert").unbind().on('click',function () {
@@ -104,7 +104,7 @@
                         alertUtil.error(data.msg);
                     }
                 },false,true);
-
+                return false;
             });
 
 

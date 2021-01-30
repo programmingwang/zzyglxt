@@ -131,18 +131,27 @@ public class AuditServiceImpl implements IAuditService {
 
     @Override
     public int changeTecSerOrgStatus(AuditDto record) {
+        if (record.getStatus().equals("6")){
+            auditMapper.changeUserStatus(record.getOrgCode());
+        }
         record.setUpdater(usernameUtil.getOperateUser());
         return auditMapper.changeTecSerOrgStatus(record);
     }
 
     @Override
     public int changeSchoolStatus(AuditDto record) {
+        if (record.getStatus().equals("6")){
+            auditMapper.changeUserStatus(record.getOrgCode());
+        }
         record.setUpdater(usernameUtil.getOperateUser());
         return auditMapper.changeSchoolStatus(record);
     }
 
     @Override
     public int changeHospitalStatus(AuditDto record) {
+        if (record.getStatus().equals("6")){
+            auditMapper.changeUserStatus(record.getOrgCode());
+        }
         record.setUpdater(usernameUtil.getOperateUser());
         return auditMapper.changeHospitalStatus(record);
     }

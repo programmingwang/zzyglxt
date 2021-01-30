@@ -42,6 +42,14 @@
     <result column="FILE_NAME" jdbcType="VARCHAR" property="fileName"/>
     <result column="FILE_PATH" jdbcType="VARCHAR" property="filePath"/>
   </resultMap>
+    <resultMap id="TopicResultMap" type="com.zyyglxt.dto.industrialDevelop.IndustrialDevelopTopicDODto">
+        <id column="itemID" jdbcType="INTEGER" property="itemid" />
+        <id column="itemCode" jdbcType="CHAR" property="itemcode" />
+        <result column="PROJECT_NO" jdbcType="VARCHAR" property="projectNo" />
+        <result column="PROJECT_NAME" jdbcType="VARCHAR" property="projectName" />
+        <result column="COMPANY" jdbcType="VARCHAR" property="company" />
+        <result column="EXPERT_CODE" jdbcType="CHAR" property="expertCode"/>
+    </resultMap>
   <sql id="Base_Column_List">
     itemID, itemCode, EXPERT_CODE, TOPIC_CODE, EXMAINE_STATUS, SUBMIT_STATUS, SCORE,
     CREATER, itemCreateAt, UPDATER, itemUpdateAt, opinion
@@ -51,6 +59,9 @@
     ef.CREATER, ef.itemCreateAt, ef.UPDATER, ef.itemUpdateAt, ef.opinion, t.PROJECT_NAME, t.PROJECT_NO, t.DISCIPLINE_CODE,
     t.DISCIPLINE_NAME, t.APPLICANT, t.COMPANY, t.POSTAL_ADDRESS,t.POSTAL_CODE,t.CONTACT_CODE,t.EMAIL,t.APPLICATION_DATE
   </sql>
+    <sql id="Topic_Column_List">
+        t.itemID, t.itemCode, t.PROJECT_NO, t.PROJECT_NAME, t.COMPANY, ef.EXPERT_CODE
+    </sql>
   <select id="selectByPrimaryKey" parameterType="com.zyyglxt.dataobject.IndustrialDevelopExpertRefDOKey" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
@@ -58,7 +69,13 @@
     where itemCode = #{itemcode,jdbcType=CHAR}
     order by itemUpdateAt desc
   </select>
-  <select id="selectAll" resultMap="ExmainResultMap">
+  <select id="selectAllTopicCode" resultType="String">
+    SELECT DISTINCT
+	ef.TOPIC_CODE
+FROM
+	tb_industrial_develop_expert_ref ef
+  </select>
+  <select id="selectAllByTopicCode" resultMap="ExmainResultMap">
     SELECT
     <include refid="Exmain_Column_List" />
     ,
@@ -69,6 +86,7 @@
     ON f.DATA_CODE = t.itemCode
     WHERE
     ef.TOPIC_CODE = t.itemCode
+    AND ef.TOPIC_CODE = #{topicCode}
     order by ef.itemUpdateAt desc
   </select>
   <delete id="deleteByPrimaryKey" parameterType="com.zyyglxt.dataobject.IndustrialDevelopExpertRefDOKey">
@@ -211,7 +229,6 @@
     OPINION = #{opinion,jdbcType=TIMESTAMP},
     where itemCode = #{itemcode,jdbcType=CHAR}
   </update>
-
     <select id="selectByTopicCode" resultMap="BaseResultMap">
         SELECT
         <include refid="Base_Column_List" />
@@ -219,7 +236,6 @@
         WHERE TOPIC_CODE = #{topicCode}
       order by itemUpdateAt desc
     </select>
-
     <!--<select id="selectByExpertCode" resultMap="BaseResultMap">-->
         <!--SELECT-->
         <!--<include refid="Base_Column_List" />-->
@@ -247,4 +263,25 @@
         DELETE FROM tb_industrial_develop_expert_ref
         WHERE TOPIC_CODE = #{topicCode}
     </delete>
+
+    <select id="topicAndExpertStatus" resultMap="TopicResultMap">
+        SELECT
+        <include refid="Topic_Column_List"/>
+        FROM tb_industrial_develop_topic t left join (
+        SELECT
+        TOPIC_CODE, MAX(EXPERT_CODE) EXPERT_CODE
+        FROM
+        tb_industrial_develop_expert_ref
+        GROUP BY
+        TOPIC_CODE) ef on t.itemCode=ef.TOPIC_CODE
+        order by t.itemUpdateAt desc
+    </select>
+  <select id="selectZjktsl" resultType="java.lang.Integer" parameterType="java.lang.String">
+    SELECT
+	count(*) as 'zjktsl'
+FROM
+	tb_industrial_develop_expert_ref ef
+WHERE
+	ef.TOPIC_CODE = #{topicCode}
+  </select>
 </mapper>

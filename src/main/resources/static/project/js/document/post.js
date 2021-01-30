@@ -12,7 +12,7 @@
             var documentNum = dictUtil.getDictByCode(dictUtil.DICT_LIST.postDocumentNum);
             var publicWay = dictUtil.getDictByCode(dictUtil.DICT_LIST.governerscounter);
 
-            $("#postPublicWay").selectUtil(publicWay);
+            $("#chargePersonSearch").selectUtil(publicWay);
 
             var addUrl = "/document/post_add";
             var aParam = {
@@ -524,7 +524,7 @@
                 myTable = bootstrapTableUtil.myBootStrapTableInit("table", url, param, aCol);
             }
 
-            bootstrapTableUtil.globalSearch("table",url,aParam, aCol);
+            bootstrapTableUtil.globalSearch("table",url,aParam, aCol, "postPublicWay");
 
 
         })

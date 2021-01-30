@@ -22,6 +22,8 @@ public class UserSessionDto {
 
     private String orgCode;
 
+    private String orgItemCode;
+
     private String orgName;
 
     private String cityId;

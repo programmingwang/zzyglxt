@@ -168,11 +168,11 @@
                 var newArr=new Set(newArry)
                 newArry=Array.from(newArr)
                 $("#table").bootstrapTable("load", newArry);
-                if(newArry.length == 0){
-                    alertUtil.warning("搜索成功,但此搜索条件下没有数据");
-                }else{
-                    alertUtil.success("搜索成功");
-                }
+                // if(newArry.length == 0){
+                //     alertUtil.warning("搜索成功,但此搜索条件下没有数据");
+                // }else{
+                //     alertUtil.success("搜索成功");
+                // }
             })
 
             var aria=this.ariaExpanded;

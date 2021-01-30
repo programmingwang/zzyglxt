@@ -19,20 +19,8 @@
                 }
             });
 
-            var workUnit;
-            $.ajax
-            ({  cache: false, async: false, type: 'get', url: "/industrialdevelop/getPlatRole", success: function (data) {
-                    workUnit = data;
-                }
-            });
-            var unit = workUnit.data;
-            $("#company").selectUtil(unit,true);
-            var myUnit = [];
-            for (var i=0;i<unit.length;i++){
-                myUnit.push(unit[i].username);
-                //$("#company").append("<option value='" + i + "'>" + myUnit[i] + "</option>");
-            }
-
+            var workUnit = sessionStorage.getItem("orgName");
+            $("#company").val(workUnit);
 
             $("#cancelbtn").unbind().on('click',function () {
                 var url = "/scientificProject/topicManagement";
@@ -59,7 +47,7 @@
                         disciplineName : disciplineNameText,
                         applicant : $("#applicant").val(),
                         contactCode : $("#contactCode").val(),
-                        company : myUnit[$("#company").val()],
+                        company : $("#company").val(),
                         postalAddress : postalAddress,
                         postalCode : $("#postalCode").val(),
                         email : $("#email").val(),
@@ -84,7 +72,7 @@
                         disciplineName : disciplineNameText,
                         applicant : $("#applicant").val(),
                         contactCode : $("#contactCode").val(),
-                        company : myUnit[$("#company").val()],
+                        company : $("#company").val(),
                         postalAddress : postalAddress,
                         postalCode : $("#postalCode").val(),
                         email : $("#email").val(),
@@ -126,7 +114,7 @@
                         disciplineName : disciplineNameText,
                         applicant : $("#applicant").val(),
                         contactCode : $("#contactCode").val(),
-                        company : myUnit[$("#company").val()],
+                        company : $("#company").val(),
                         postalAddress : postalAddress,
                         postalCode : $("#postalCode").val(),
                         email : $("#email").val(),
@@ -151,12 +139,14 @@
                         disciplineName : disciplineNameText,
                         applicant : $("#applicant").val(),
                         contactCode : $("#contactCode").val(),
-                        company : myUnit[$("#company").val()],
+                        company : $("#company").val(),
                         postalAddress : postalAddress,
                         postalCode : $("#postalCode").val(),
                         email : $("#email").val(),
+                        status : "0",
+                        examineStatus : "1",
                     }
-                    operateMessage = "修改课题项目成功";
+                    operateMessage = "已修改并提交课题项目成功";
                 }
 
                 fileUtil.handleFile(isUpdate(), TopicEntity.itemcode, $("#upload_file")[0].files[0]);
@@ -183,18 +173,13 @@
                         city: postalAddressArry[1],
                         district: postalAddressArry[2]
                     });
-                    for (var i=0;i<myUnit.length;i++){
-                        if (myUnit[i] == tempdata.company){
-                            var myCompany = i;
-                        }
-                    }
                     $("#address").val(postalAddressArry[3]);
                     $("#projectName").val(tempdata.projectName);
                     $("#disciplineCode").val(tempdata.disciplineCode);
                     $("#disciplineName").val(tempdata.disciplineCode);
                     $("#applicant").val(tempdata.applicant);
                     $("#contactCode").val(tempdata.contactCode);
-                    $("#company").val(myCompany);
+                    $("#company").val(workUnit);
                     $("#postalCode").val(tempdata.postalCode);
                     $("#email").val(tempdata.email);
                     var file = tempdata.filePath;

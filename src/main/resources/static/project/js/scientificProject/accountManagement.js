@@ -123,7 +123,7 @@
                         var mobilephone = $("#mobilephone").val();
                         var cityid = dictUtil.getName(dictUtil.DICT_LIST.areaAdmin,$("#cityid").val());
                         var orgName = sessionStorage.getItem("orgName");
-                        var orgCode = sessionStorage.getItem("orgCode");
+                        var orgCode = sessionStorage.getItem("orgItemCode");
 
                         var submitStatus = {
                             "username": username,
@@ -218,11 +218,7 @@
                 var newArr=new Set(newArry)
                 newArry=Array.from(newArr)
                 $("#table").bootstrapTable("load", newArry);
-                if(newArry.length == 0){
-                    alertUtil.warning("搜索成功,但此搜索条件下没有数据");
-                }else{
-                    alertUtil.success("搜索成功");
-                }
+
             })
 
 

@@ -1,0 +1,83 @@
+spring:
+  thymeleaf:
+    #    听说关掉就可以不用重启，上线要开启
+    cache: false
+    suffix: .html
+    mode: HTML5
+    encoding: UTF-8
+    servlet:
+      content-type: text/html
+    prefix: classpath:/templates
+  application:
+    name: zyyglxt
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      initialSize: 5
+      minIdle: 5
+      maxActive: 20
+      maxWait: 60000
+      timeBetweenEvictionRunsMillis: 60000
+      minEvictableIdleTimeMillis: 300000
+      validationQuery: SELECT 1 FROM DUAL
+      testWhileIdle: true
+      testOnBorrow: false
+      testOnReturn: false
+      poolPreparedStatements: true
+      filters: stat,wall,log4j
+      maxPoolPreparedStatementPerConnectionSize: 20
+      useGlobalDataSourceStat: true
+      connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=500
+      async-init: true
+
+
+  #     使项目能访问图片
+  resources:
+    static-locations: classpath:/static/
+  devtools:
+    restart:
+      enabled: false
+  cache:
+    ehcache:
+      config: classpath:ehcache.xml
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+
+
+
+
+
+mybatis:
+  mapper-locations: classpath:mapping/*.xml
+  type-aliases-package: com.zyyglxt.dataobject
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+server:
+  port: 8989
+  tomcat:
+    max-connections: 6500
+    accept-count: 1000
+
+upload:
+  addr: 47.113.104.120
+  port: 8085
+
+
+#  servlet:
+#    context-path: /zyyglxt
+
+#logging:
+#  file:
+#    path: E:/Desktop
+
+fdfs:
+  connect-timeout: 6000
+  so-timeout: 15000
+  tracker-list: 39.101.192.246:22122
+  http_tracker_http_port: 8080
+  pool:
+    jmx-enabled: false

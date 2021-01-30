@@ -49,7 +49,6 @@ public class FamPreDOController {
             famPreDOKey.setItemid(itemID);
             famPreDOKey.setItemcode(itemCode);
             famPreDOService.deleteByPrimaryKey(famPreDOKey);
-            System.out.println("要删除历史名方编号为："+famPreDOKey.getItemid());
             return new ResponseData(EmBusinessError.success);
         }
     /*历史名方数据修改*/
@@ -57,7 +56,6 @@ public class FamPreDOController {
     @LogAnnotation(appCode ="",logTitle ="修改历史名方",logLevel ="2")
     public ResponseData updateFamPreDOMapper(@RequestBody FamPreDO key)  {
         famPreDOService.updateByPrimaryKeySelective(key);
-        System.out.println("要修改历史名方编号为："+key.getItemid());
         return new ResponseData(EmBusinessError.success);
     }
     /*历史名方数据查询(通过id和编号)*/

@@ -162,6 +162,7 @@
     f.FILE_PATH
     from tb_industrial_develop_basestyle b
     left join tb_culpro_file f on f.DATA_CODE = b.itemCode
+    where b.ORG_CODE = #{orgCode}
     order by itemUpdateAt desc
    </select>
 </mapper>

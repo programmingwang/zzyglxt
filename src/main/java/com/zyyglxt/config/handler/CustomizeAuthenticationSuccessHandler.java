@@ -10,6 +10,7 @@ import com.zyyglxt.dto.UserSessionDto;
 import com.zyyglxt.util.JsonResult;
 import com.zyyglxt.util.ResultTool;
 import com.zyyglxt.service.UserService;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -42,16 +43,17 @@ public class CustomizeAuthenticationSuccessHandler implements AuthenticationSucc
         OrganizationDO organizationDO = organizationDOMapper.selectByItemCode(userDo.getOrgCode());
         UserSessionDto userSessionDto = new UserSessionDto();
         userSessionDto.setOrgName(organizationDO.getOrgName());
-        userSessionDto.setOrgCode(organizationDO.getOrgCode());
+        userSessionDto.setOrgCode(organizationDO.getOrgCode());//对应organization表中的orgCode
+        userSessionDto.setOrgItemCode(organizationDO.getItemcode());//对应organization表中的itemCode
         userSessionDto.setUsername(userDo.getUsername());
         userSessionDto.setName(userDo.getName());
         userSessionDto.setRolename(roleDO.getRoleName());
-        if (userDo.getCityid() != null){
+        if (!StringUtils.isBlank(userDo.getCityid())){
             userSessionDto.setCityId(userDo.getCityid());
         }
         userSessionDto.setItemid(userDo.getItemid());
         userSessionDto.setItemcode(userDo.getItemcode());
-        System.out.println(userSessionDto);
+//        System.out.println(userSessionDto);
         httpServletRequest.getSession().setAttribute("user", userSessionDto);
 //        super.onAuthenticationSuccess(httpServletRequest, httpServletResponse, authentication);
         //返回json数据

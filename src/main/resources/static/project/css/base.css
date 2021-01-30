@@ -218,7 +218,7 @@ hr {
 }
 
 thead.self-thead {
-    text-align: center;
+    text-align: left;
     background: url(../../images/new/tableDefault.png) no-repeat !important;
     background-size: 100% 100% !important;
     font-family: SourceHanSansCN-Regular;

@@ -28,5 +28,4 @@ public interface UserRoleRefDOMapper {
 
     int deleteByUserCode(@Param("userCode")String userCode);
 
-    List<UserRoleRefDO> getPlatRole();
 }

@@ -10,6 +10,7 @@ import com.zyyglxt.dto.UserSessionDto;
 import com.zyyglxt.util.JsonResult;
 import com.zyyglxt.util.ResultTool;
 import com.zyyglxt.service.UserService;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -42,11 +43,11 @@ public class CustomizeAuthenticationSuccessHandler implements AuthenticationSucc
         OrganizationDO organizationDO = organizationDOMapper.selectByItemCode(userDo.getOrgCode());
         UserSessionDto userSessionDto = new UserSessionDto();
         userSessionDto.setOrgName(organizationDO.getOrgName());
-        userSessionDto.setOrgCode(organizationDO.getItemcode());
+        userSessionDto.setOrgCode(organizationDO.getOrgCode());
         userSessionDto.setUsername(userDo.getUsername());
         userSessionDto.setName(userDo.getName());
         userSessionDto.setRolename(roleDO.getRoleName());
-        if (userDo.getCityid() != null){
+        if (!StringUtils.isBlank(userDo.getCityid())){
             userSessionDto.setCityId(userDo.getCityid());
         }
         userSessionDto.setItemid(userDo.getItemid());

@@ -30,6 +30,7 @@ spring:
       maxPoolPreparedStatementPerConnectionSize: 20
       useGlobalDataSourceStat: true
       connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=500
+      async-init: true
 
 
   #     使项目能访问图片

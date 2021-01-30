@@ -28,6 +28,7 @@
                         receivingTitle : $("#receivingTitle").val(),
                         parment : $("#parment").val(),
                         fileNo : $("#fileNo").val(),
+                        fileNumber : $("#fileNumber").val(),
                         number : $("#number").val(),
                         classification : $("#classification").val(),
                         reason : $("#reason").val(),
@@ -43,6 +44,7 @@
                         receivingTitle : $("#receivingTitle").val(),
                         parment : $("#parment").val(),
                         fileNo : $("#fileNo").val(),
+                        fileNumber : $("#fileNumber").val(),
                         number : $("#number").val(),
                         classification : $("#classification").val(),
                         reason : $("#reason").val(),
@@ -76,6 +78,7 @@
                         receivingTitle : $("#receivingTitle").val(),
                         parment : $("#parment").val(),
                         fileNo : $("#fileNo").val(),
+                        fileNumber : $("#fileNumber").val(),
                         number : $("#number").val(),
                         classification : $("#classification").val(),
                         reason : $("#reason").val(),
@@ -91,6 +94,7 @@
                         receivingTitle : $("#receivingTitle").val(),
                         parment : $("#parment").val(),
                         fileNo : $("#fileNo").val(),
+                        fileNumber : $("#fileNumber").val(),
                         number : $("#number").val(),
                         classification : $("#classification").val(),
                         reason : $("#reason").val(),
@@ -118,6 +122,7 @@
                     $("#receivingTitle").val(tempdata.receivingTitle);
                     $("#parment").val(tempdata.parment);
                     $("#fileNo").val(tempdata.fileNo);
+                    $("#fileNumber").val(tempdata.fileNumber);
                     $("#number").val(tempdata.number);
                     $("#classification").val(tempdata.classification);
                     $("#reason").val(tempdata.reason);

@@ -353,6 +353,7 @@
                     $("#receivingTitle").val(row.receivingTitle);
                     $("#govPunlic").val(emergencyStatus[row.govPunlic].text);
                     $("#fileNo").val(row.fileNo);
+                    $("#fileNumber").val(row.fileNumber);
                     $("#number").val(row.number);
                     $("#classification").val(row.classification);
                     $("#reason").val(row.reason);
@@ -362,79 +363,6 @@
                     $("#fileDiv").attr("style","display:block");
                     $("#upFile").text(row.fileName);
                     mySignModal.show();
-                },
-
-                'click .opinion' : function (e, value, row, index) {
-                    var myOpinionModalData ={
-                        modalBodyID :"myResonable",
-                        modalTitle : "填写审核意见",
-                        modalClass : "modal-lg",
-                        modalConfirmFun:function () {
-                            var isSuccess = false;
-                            var nowTime = stringUtil.formatDateTime(new Date());
-                            var submitStatus = {
-                                "itemid": row.itemid,
-                                "itemcode": row.itemcode,
-                                "postOpinion" : ""
-                            };
-                            var submitOpinion;
-                            if (rolename == "政务资源处长"){
-                                submitOpinion = {
-                                    "dataCode" : row.itemcode,
-                                    "department" : $("#reason").val(),
-                                    "departmentName" : username,
-                                    "departDate" : nowTime,
-                                };
-                                submitStatus.postOpinion = "1";
-                            }else if (rolename == "政务资源综合处处长"){
-                                submitOpinion = {
-                                    "dataCode" : row.itemcode,
-                                    "office" : $("#reason").val(),
-                                    "officeName" : username,
-                                    "officeDate" : nowTime,
-                                };
-                                submitStatus.postOpinion = "2";
-                            }else if (rolename == "政务资源分管局长"){
-                                submitOpinion = {
-                                    "dataCode" : row.itemcode,
-                                    "deputyDirector" : $("#reason").val(),
-                                    "deputyDirectorName" : username,
-                                    "deputyDirectorDate" : nowTime,
-                                };
-                                submitStatus.postOpinion = "3";
-                            }else if (rolename == "政务资源局长"){
-                                submitOpinion = {
-                                    "dataCode" : row.itemcode,
-                                    "director" : $("#reason").val(),
-                                    "directorName" : username,
-                                    "directorDate" : nowTime,
-                                };
-                                submitStatus.postOpinion = "4";
-                            }
-                            ajaxUtil.myAjax(null,"governresCountersign/update",submitStatus,function (data) {
-                                if(ajaxUtil.success(data)){
-                                    if(data.code == 88888){
-                                        ajaxUtil.myAjax(null,"/advice/updAdvice", submitOpinion,function (data) {
-                                            if(ajaxUtil.success(data)){
-                                                if(data.code == 88888){
-                                                    alertUtil.success("填写成功");
-                                                    isSuccess = true;
-                                                    refreshTable();
-                                                }else{
-                                                    alertUtil.error(data.msg);
-                                                }
-                                            }
-                                        },false,true,"post");
-                                    }else{
-                                        alertUtil.error(data.msg);
-                                    }
-                                }
-                            },false,true,"post");
-                            return isSuccess;
-                        }
-                    };
-                    var myGiveUpModal = modalUtil.init(myOpinionModalData);
-                    myGiveUpModal.show();
                 },
 
 

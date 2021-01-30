@@ -41,18 +41,25 @@
             var num = dictUtil.getDictByCode(dictUtil.DICT_LIST.postDocumentNum);
             $("#postDocumentNum").selectUtil(num);
 
+            //主送目标
+            let send = dictUtil.getDictByCode(dictUtil.DICT_LIST.areaAdmin);
+            $("#masterSend").selectUtil(send);
+
+            console.log($("#copySendGoal").val())
             //抄送目标
+            $("#copySendGoal").selectUtil(send);
             $("#add").unbind().on("click",function () {
-                var str = $("#hospitalKeySpecialty").val();
+                var str = $("#copySend").val();
                 if (str.length === 0){
-                    $("#hospitalKeySpecialty").val($("#specialtyName").val());
+                    $("#copySend").val(send[0].text);
                 }else {
-                    $("#hospitalKeySpecialty").val($("#hospitalKeySpecialty").val() + " " + $("#specialtyName").val());
+                    $("#copySend").val($("#copySend").val()+" "+send[$("#copySendGoal").val()].text);
                 }
-                $("#specialtyName option[value=" + $("#specialtyName").val() + "]").remove();
+                $("#copySendGoal option[value=" + $("#copySendGoal").val() + "]").remove();
             })
             $("#clear").unbind().on("click",function () {
-                $("#hospitalKeySpecialty").val("");
+                $("#copySend").val("");
+                $("#copySendGoal").selectUtil(send);
             })
 
             //当前时间
@@ -198,7 +205,7 @@
                         alertUtil.alert(data.msg);
                     }
                 },false,true);
-
+                return false;
             });
 
 
@@ -270,7 +277,7 @@
                         alertUtil.alert(data.msg);
                     }
                 },false,true);
-
+                return false;
             });
 
             (function init() {

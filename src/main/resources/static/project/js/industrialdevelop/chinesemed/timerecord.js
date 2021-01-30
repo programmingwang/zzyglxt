@@ -27,14 +27,15 @@
                     modalClass : "modal-lg",
                     confirmButtonClass : "btn-danger",
                     modalConfirmFun:function () {
+                        //var year=new Date();
                         var isSuccess = false;
-                        var year = $("#year").val();
+                        var year = new Date();
                         var startTime = $("#startTime").val();
                         var endTime = $("#endTime").val();
 
 
                         var submitStatus = {
-                            "year": year,
+                            "year": year.getFullYear(),
                             "startTime": startTime,
                             "endTime": endTime,
                         };
@@ -81,6 +82,12 @@
 
             var pl = dictUtil.getDictByCode(dictUtil.DICT_LIST.showStatus);
             $("#chargePersonSearch").selectUtil(pl);
+            var pl2 = [];
+            for(var i = -2 ; i <= 2; i++){
+                pl2.push({id:generateSearchYear(i),text:generateSearchYear(i)})
+            }
+            pl2.push({id:"00",text:"全部年份"})
+            $("#taskNameSearch1").selectUtil(pl2);
 
             var aCol = [
                 {field: 'year', title: '年份'},
@@ -100,31 +107,29 @@
                 myTable = bootstrapTableUtil.myBootStrapTableInit("table", getUrl, param, aCol);
             }
 
+            function generateSearchYear(num){
+                return new Date().getFullYear()+num;
+            }
 
                 $("#btnSearch").unbind().on('click',function() {
-
                 var newArry = [];
-                var addstr=document.getElementById("taskNameSearch2").value;
-                var str = document.getElementById("taskNameSearch1").value;
+                var searchIsImpl=document.getElementById("taskNameSearch2").value;
+                var searchYear = document.getElementById("taskNameSearch1").value;
                 var allTableData = JSON.parse(localStorage.getItem("2"));
-                var nowDate= new Date();
-
-
                 for (var i in allTableData) {
-                        var textP = allTableData[i][aCol[0].field];
-                        var makeTime=new Date(allTableData[i][aCol[2].field]) ;
-
-
-
-                        if (textP==str){
-                            if (addstr==="生效"&&makeTime>nowDate){
-                                newArry.push(allTableData[i]);
-                            }
-                            if (addstr==="失效"&&makeTime<=nowDate){
-                                newArry.push(allTableData[i]);
-                            }
-                        }
-
+                    var textYear = allTableData[i]["year"];
+                    var textIsimpl= allTableData[i]["isimp"] ;
+                    var isStatusSlot=false;           // 默认状态为true
+                    var isYearSlot=false;           // 默认状态为true
+                    if(searchIsImpl==textIsimpl||searchIsImpl=='99'){
+                        isStatusSlot=true;
+                    }
+                    if(searchYear == textYear||searchYear=='00'){
+                        isYearSlot=true;
+                    }
+                    if(isYearSlot &&isStatusSlot){
+                        newArry.push(allTableData[i]);
+                    }
                 }
                 var newArr=new Set(newArry)
                 newArry=Array.from(newArr)

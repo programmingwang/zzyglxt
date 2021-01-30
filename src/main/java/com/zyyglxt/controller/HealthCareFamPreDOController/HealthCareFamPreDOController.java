@@ -39,8 +39,6 @@ HealthCareFamPreDOController {
     @RequestMapping(value ="inserthealthcarefampredo",method = RequestMethod.POST )
     @LogAnnotation(appCode ="",logTitle ="国医话健康数据的添加",logLevel ="3")
     public ResponseData insertHealthCareFamPreDOMapper(@RequestBody HealthCareFamPreDO key)  {
-
-        System.out.println("国医话健康标题名称: " + key.getName());
         healthCareFamPreDOService.insertSelective(key);
         return new ResponseData(EmBusinessError.success);
     }
@@ -64,8 +62,7 @@ HealthCareFamPreDOController {
     @LogAnnotation(appCode ="",logTitle ="国医话健康数据的修改",logLevel ="2")
     public ResponseData updateHealthCareFamPreDOMapper(@RequestBody HealthCareFamPreDO key)  {
       healthCareFamPreDOService.updateByPrimaryKeySelective(key);
-        System.out.println("要修改标题名称编号为："+key.getItemid());
-        return new ResponseData(EmBusinessError.success);
+      return new ResponseData(EmBusinessError.success);
     }
     /*
      国医话健康相关数据的查询

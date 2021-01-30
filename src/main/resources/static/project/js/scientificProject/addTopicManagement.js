@@ -19,8 +19,8 @@
                 }
             });
 
-
-
+            var workUnit = sessionStorage.getItem("orgName");
+            $("#company").val(workUnit);
 
             $("#cancelbtn").unbind().on('click',function () {
                 var url = "/scientificProject/topicManagement";
@@ -47,7 +47,7 @@
                         disciplineName : disciplineNameText,
                         applicant : $("#applicant").val(),
                         contactCode : $("#contactCode").val(),
-                        company : myUnit[$("#company").val()],
+                        company : $("#company").val(),
                         postalAddress : postalAddress,
                         postalCode : $("#postalCode").val(),
                         email : $("#email").val(),
@@ -72,7 +72,7 @@
                         disciplineName : disciplineNameText,
                         applicant : $("#applicant").val(),
                         contactCode : $("#contactCode").val(),
-                        company : myUnit[$("#company").val()],
+                        company : $("#company").val(),
                         postalAddress : postalAddress,
                         postalCode : $("#postalCode").val(),
                         email : $("#email").val(),
@@ -90,7 +90,7 @@
                         alertUtil.alert(data.msg);
                     }
                 },false,true);
-
+                return false;
             });
 
 
@@ -114,7 +114,7 @@
                         disciplineName : disciplineNameText,
                         applicant : $("#applicant").val(),
                         contactCode : $("#contactCode").val(),
-                        company : myUnit[$("#company").val()],
+                        company : $("#company").val(),
                         postalAddress : postalAddress,
                         postalCode : $("#postalCode").val(),
                         email : $("#email").val(),
@@ -139,12 +139,14 @@
                         disciplineName : disciplineNameText,
                         applicant : $("#applicant").val(),
                         contactCode : $("#contactCode").val(),
-                        company : myUnit[$("#company").val()],
+                        company : $("#company").val(),
                         postalAddress : postalAddress,
                         postalCode : $("#postalCode").val(),
                         email : $("#email").val(),
+                        status : "0",
+                        examineStatus : "1",
                     }
-                    operateMessage = "修改课题项目成功";
+                    operateMessage = "已修改并提交课题项目成功";
                 }
 
                 fileUtil.handleFile(isUpdate(), TopicEntity.itemcode, $("#upload_file")[0].files[0]);
@@ -158,7 +160,7 @@
                         alertUtil.alert(data.msg);
                     }
                 },false,true);
-
+                return false;
             });
 
             var init = function () {
@@ -177,7 +179,7 @@
                     $("#disciplineName").val(tempdata.disciplineCode);
                     $("#applicant").val(tempdata.applicant);
                     $("#contactCode").val(tempdata.contactCode);
-                    $("#company").val(tempdata.company);
+                    $("#company").val(workUnit);
                     $("#postalCode").val(tempdata.postalCode);
                     $("#email").val(tempdata.email);
                     var file = tempdata.filePath;
@@ -225,14 +227,14 @@
                         date.isDuringDate(stime, etime);
                     },false,"","get");
                 }
-                var workUnit= "";
+                /*var workUnit= "";
                 $.ajax
                 ({  cache: false, async: false, type: 'get', url: "/industrialdevelop/getPlatRole", success: function (data) {
                         workUnit = data;
                     }
                 });
-                var unit = workUnit.data;
-                $("#company").selectUtil(unit,true);
+                var unit = workUnit.data;*/
+
                 init = function () {
 
                 }

@@ -40,10 +40,8 @@ public class HealthCareChineseMedicineDOController {
    @RequestMapping(value ="inserthealthcarechinesemedicinedo",method = RequestMethod.POST )
    @LogAnnotation(appCode ="",logTitle ="中医药数据添加",logLevel ="3",creater ="huangwj",updater = "huangwj")
    public ResponseData insertHealthCareChineseMedicineDOMapper(@RequestBody HealthCareChineseMedicineDO key) {
-
-           System.out.println("中医药名称: " + key.getChineseMedicineName());
-           healthCareChineseMedicineDOService.insert(key);
-           return new ResponseData(EmBusinessError.success);
+        healthCareChineseMedicineDOService.insert(key);
+        return new ResponseData(EmBusinessError.success);
    }
     /*
       中医药名称相关数据的删除
@@ -61,7 +59,6 @@ public class HealthCareChineseMedicineDOController {
         healthCareChineseMedicineDOKey.setItemid(itemID);
         healthCareChineseMedicineDOKey.setItemcode(itemCode);
         healthCareChineseMedicineDOService.deleteByPrimaryKey(healthCareChineseMedicineDOKey);
-        System.out.println("要删除中医药编号为："+healthCareChineseMedicineDOKey.getItemid());
         return new ResponseData(EmBusinessError.success);
     }
     /*
@@ -71,7 +68,6 @@ public class HealthCareChineseMedicineDOController {
     @LogAnnotation(appCode ="",logTitle ="中医药数据修改",logLevel ="2",creater ="huangwj",updater = "huangwj")
     public ResponseData updateHealthCareChineseMedicineDOMapper(@RequestBody HealthCareChineseMedicineDO key)  {
             healthCareChineseMedicineDOService.updateByPrimaryKeySelective(key);
-            System.out.println("要修改中医药编号为："+key.getItemid());
             return new ResponseData(EmBusinessError.success);
     }
     /*

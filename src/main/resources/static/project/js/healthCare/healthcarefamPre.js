@@ -223,7 +223,7 @@
                 orange.redirect(url);
             });
 
-            var pl = dictUtil.getDictByCode(dictUtil.DICT_LIST.showStatus);
+            var pl = dictUtil.getDictByCode(dictUtil.DICT_LIST.webStatus);
             $("#chargePersonSearch").selectUtil(pl);
 
             var aCol = [
@@ -249,16 +249,7 @@
                 myTable = bootstrapTableUtil.myBootStrapTableInit("table", url, param, aCol);
             }
 
-            document.getElementById('closeAndOpen').onclick = function(){
-                var aria=this.ariaExpanded;
-                this.innerText="";
-                if (aria=="true"){
-                    this.innerText="展开";
-                } else {
-                    this.innerText="收起";
-                }
-            }
-            bootstrapTableUtil.globalSearch("table",url,aParam, aCol);7
+            bootstrapTableUtil.globalSearch("table", url, aParam, aCol, "status")
 
         })
 })();

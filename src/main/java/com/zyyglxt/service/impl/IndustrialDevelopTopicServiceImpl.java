@@ -127,11 +127,6 @@ public class IndustrialDevelopTopicServiceImpl implements IIndustrialDevelopTopi
     }
 
     @Override
-    public List<UserRoleRefDO> getPlatRole() {
-        return userRoleRefDOMapper.getPlatRole();
-    }
-
-    @Override
     public List<IndustrialDevelopTopicDO> getAll(List<String> examineStatus) {
         List<IndustrialDevelopTopicDO> topicDOList = new ArrayList<>();
         for (String status : examineStatus) {

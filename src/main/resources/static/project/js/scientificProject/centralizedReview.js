@@ -166,7 +166,7 @@
                         // console.log("addstr:"+addstr)
                         // console.log("status:"+status)
                         //调试时可以先打印出来，进行修改
-                        if(addstr==status){
+                        if(addstr==status||addstr=='99'){
                             isStatusSlot=true;
                         }
                         if (textP == null || textP == undefined || textP == '') {
@@ -183,11 +183,7 @@
                 var newArr=new Set(newArry)
                 newArry=Array.from(newArr)
                 $("#table").bootstrapTable("load", newArry);
-                if(newArry.length == 0){
-                    alertUtil.warning("搜索成功,但此搜索条件下没有数据");
-                }else{
-                    alertUtil.success("搜索成功");
-                }
+
             })
 
 

@@ -36,7 +36,6 @@ public class LogInterceptor extends HandlerInterceptorAdapter {
             return;
         }
         HandlerMethod method = (HandlerMethod) handler;
-        System.out.println("方法名字："+method.getMethod().getName());
         LogAnnotation mainlog = method.getMethodAnnotation(LogAnnotation.class);
         if (mainlog != null) {
             /*

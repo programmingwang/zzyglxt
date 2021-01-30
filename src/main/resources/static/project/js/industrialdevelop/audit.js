@@ -291,7 +291,8 @@
                         itemid: row.itemid,
                         itemcode: row.itemcode,
                         type: dictUtil.getCode(dictUtil.DICT_LIST.orgType, row.type),
-                        status: pass
+                        status: pass,
+                        orgCode: row.orgCode
                     };
                     ajaxUtil.myAjax(null,auditUrl,param,function (data) {
                         alertUtil.info("修改成功");
@@ -456,11 +457,7 @@
                 var newArr=new Set(newArry)
                 newArry=Array.from(newArr)
                 $("#table").bootstrapTable("load", newArry);
-                if(newArry.length == 0){
-                    alertUtil.warning("搜索成功,但此搜索条件下没有数据");
-                }else{
-                    alertUtil.success("搜索成功");
-                }
+
             })
 
             var aria=this.ariaExpanded;

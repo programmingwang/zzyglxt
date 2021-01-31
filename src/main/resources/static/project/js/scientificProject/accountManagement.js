@@ -73,7 +73,7 @@
 
                 'click .submit' : function (e, value, row, index) {
                     var mySubmitTravelModalData ={
-                        modalBodyID :"mySubmitModal",
+                        modalBodyID :"myResetPassword",
                         modalTitle : "重置密码",
                         modalClass : "modal-lg",
                         modalConfirmFun:function () {
@@ -85,7 +85,17 @@
                             ajaxUtil.myAjax(null,"/user/reset",submitStatus,function (data) {
                                 if(ajaxUtil.success(data)){
                                     if(data.code == 88888){
-                                        alertUtil.info("重置密码成功");
+                                        var submitConfirmModal = {
+                                            modalBodyID :"myResetPasswordTips",
+                                            modalTitle : "提示",
+                                            modalClass : "modal-lg",
+                                            cancelButtonStyle: "display:none",
+                                            modalConfirmFun:function (){
+                                                return true;
+                                            }
+                                        }
+                                        var submitConfirm = modalUtil.init(submitConfirmModal);
+                                        submitConfirm.show();
                                         isSuccess = true;
                                         // refreshTable();
                                     }else{
@@ -141,7 +151,7 @@
                                     if(data.code == 88888){
                                         alertUtil.info("新增用户账号成功");
                                         isSuccess = true;
-                                        // refreshTable();
+                                        refreshTable();
                                     }else{
                                         alertUtil.error(data.msg);
                                     }

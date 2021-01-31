@@ -53,7 +53,7 @@ public class IndustrialDevelopExpertServiceImpl implements IIndustrialDevelopExp
         userDO.setItemcode(itemCode);
         userDO.setUsername(record.getUsername());
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-        String password = encoder.encode("1234");
+        String password = encoder.encode("123456");
         userDO.setOrgCode("d6a2a6ed-0a64-4d4c-be59-9fabc56b6238");
         userDO.setPassword(password);
         userDO.setName(record.getName());
@@ -91,7 +91,7 @@ public class IndustrialDevelopExpertServiceImpl implements IIndustrialDevelopExp
     @Override
     public int resetPassword( String userCode) {
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-        String password = encoder.encode("1234");
+        String password = encoder.encode("123456");
         return developExpertDtoMapper.resetPassword(userCode,password);
     }
     //查看所有专家信息

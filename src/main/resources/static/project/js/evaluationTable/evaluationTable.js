@@ -103,9 +103,16 @@
                     var lastScore = attr[10].split("=");
                     $("#score11").val(lastScore[0]);
                     $("#allSc").val(lastScore[1]);
+                    if(tempdata.opinion == null || tempdata.opinion==""){
+                        $("#expertOpinion").attr("placeholder","请在此输入评审意见：")
+                    }
                     $("#expertOpinion").val(tempdata.opinion);
                     $("#expertOpinion").attr("readOnly","true");
                 }else if (sessionStorage.getItem("rolename") == "科研项目-省级"){
+                    for(var i = 0; i<11; i++){
+                        $("#score"+(i+1)).attr("readOnly","true")
+                    }
+                    $("#expertOpinion").attr("readOnly","true");
                     $("#zftitle").text("平均分：");
                     var scores = (tempdata.score).split("|");
                     var opinions = (tempdata.opinion).split("|");
@@ -113,7 +120,7 @@
                     var sumScore = 0;
                     var sjfx = [];
                     for(var i = 0; i<scores.length; i++){
-                        if(scores[i]=="null"){
+                        if(scores[i] == "null" || scores[i] == ""){
                             $("#displaydf").html("（请注意：当前还未评审完）");
                             continue;
                         }
@@ -134,7 +141,6 @@
                         finalOpinion += "专家"+(i+1)+"意见："+opinions[i]+"\n";
                     }
                     $("#expertOpinion").val(finalOpinion);
-                    $("#expertOpinion").attr("readOnly","true");
                 }
 
 

@@ -9,6 +9,7 @@ import com.zyyglxt.validator.ValidatorImpl;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -53,8 +54,12 @@ public class GovernresCountersignImpl implements IGovernresCountersignService {
     }
 
     @Override
-    public List<GovernresCountersign> selectAll() {
-        return governresCountersignMapper.selectAll();
+    public List<GovernresCountersign> selectAll(List<String> status) {
+        List<GovernresCountersign> governresCountersignList= new ArrayList<>();
+        for(String statu:status){
+            governresCountersignList.addAll(governresCountersignMapper.selectAll(statu));
+        }
+        return governresCountersignList;
     }
 
 }

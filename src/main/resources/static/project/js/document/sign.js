@@ -61,7 +61,7 @@
                                 if(ajaxUtil.success(data)){
                                     if(data.code == ajaxUtil.successCode){
                                         if(sessionStorage.getItem("rolename") == "政务资源处长"){
-                                            alertUtil.info("审核已通过，已发送给分局审核！");
+                                            alertUtil.info("审核已通过，已发送给政务资源综合处处长审核！");
                                         }else{
                                             alertUtil.info("审核已通过，已上架！");
                                         }

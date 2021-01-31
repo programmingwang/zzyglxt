@@ -181,5 +181,7 @@
   <select id="selectAll" resultMap="BaseResultMap">
   SELECT *
   FROM tb_governres_countersign
+  WHERE STATUS = #{status,jdbcType=VARCHAR}
+  order by itemCreateAt
 </select>
 </mapper>

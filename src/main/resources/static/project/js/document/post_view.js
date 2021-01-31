@@ -13,6 +13,7 @@
             (function init() {
                 if (isView()){
                     var tempdata = JSON.parse(localStorage.getItem("viewRowData"));
+                    console.log(tempdata);
                     var tgAdvice;
                     $.ajax({cache: false, async: false, type: 'get', data: {dataCode: tempdata.itemcode}, url: "/advice/getByDataCode", success: function (data) {
                             tgAdvice = data;
@@ -55,8 +56,15 @@
                         $("#s2").prop("checked",true);
                     }
                     $("#postPrinting").val(tempdata.postPrinting);
-                    $("#upload_file").text(tempdata.fileName);
-                    $("#upload_file").attr('href',tempdata.filePath);
+                    if (tempdata.fileName[1] == null){
+                        $("#upload_file").text(tempdata.fileName);
+                        $("#upload_file").attr('href',tempdata.filePath);
+                    }else {
+                        $("#upload_file").text(tempdata.fileName[1]);
+                        $("#upload_file").attr('href',tempdata.filePath[1]);
+                        $("#fairFile").text(tempdata.fileName[0]);
+                        $("#fairFile").attr('href',tempdata.filePath[0]);
+                    }
 
                     $("#initialName").val(tgAdvice.data.initial);
                     $("#initialDate").val(stringUtil.formatTime(tgAdvice.data.initialDate));

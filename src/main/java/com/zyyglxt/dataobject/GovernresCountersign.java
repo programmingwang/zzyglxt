@@ -71,6 +71,15 @@ public class GovernresCountersign {
     */
     private Date itemupdateat;
     private String parment;
+    private String fileNumber;
+
+    public String getFileNumber() {
+        return fileNumber;
+    }
+
+    public void setFileNumber(String fileNumber) {
+        this.fileNumber = fileNumber;
+    }
 
     public String getParment() {
         return parment;

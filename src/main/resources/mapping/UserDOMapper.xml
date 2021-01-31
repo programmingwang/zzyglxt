@@ -22,6 +22,7 @@
     <result column="itemUpdateAt" jdbcType="TIMESTAMP" property="itemupdateat" />
     <result column="CITYID" jdbcType="CHAR" property="cityid" />
     <result column="TYPE" jdbcType="INTEGER" property="type" />
+    <result column="ROLE_NAME" jdbcType="VARCHAR" property="roleName" />
   </resultMap>
   <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.zyyglxt.dataobject.UserDO">
     <result column="PORTRAIT" jdbcType="LONGVARBINARY" property="portrait" />
@@ -32,6 +33,13 @@
   </sql>
   <sql id="Blob_Column_List">
      PORTRAIT
+  </sql>
+  <sql id="Base_Column_List_SELECTALL">
+    u.USERNAME, u.NAME, u.GENDER, u.IDCARD_TYPE, u.IDCARD_NO, u.EMAIL,
+    u.CONTACTS, u.mobilePhone, u.CITYID, u.CREATER, u.itemCreateAt
+  </sql>
+  <sql id="Blob_Column_List_SELECTALL">
+     u.PORTRAIT
   </sql>
   <select id="selectByPrimaryKey" parameterType="com.zyyglxt.dataobject.UserDOKey" resultMap="ResultMapWithBLOBs">
     select
@@ -54,12 +62,24 @@
     order by itemUpdateAt desc
   </select>
   <select id="selectAllUser" resultMap="ResultMapWithBLOBs">
-    select
-    <include refid="Base_Column_List" />
+    SELECT
+    <include refid="Base_Column_List_SELECTALL" />
     ,
-    <include refid="Blob_Column_List" />
-    from user
-    order by itemUpdateAt desc
+    <include refid="Blob_Column_List_SELECTALL" />
+    ,r.ROLE_NAME
+    FROM user u,role r
+    WHERE u.TYPE IN(8,21) AND u.TYPE=r.ROLE_TYPE
+    order by u.itemUpdateAt desc
+  </select>
+  <select id="selectAllUser2" resultMap="ResultMapWithBLOBs">
+    SELECT
+    <include refid="Base_Column_List_SELECTALL" />
+    ,
+    <include refid="Blob_Column_List_SELECTALL" />
+    ,r.ROLE_NAME
+    FROM user u,role r
+    WHERE u.TYPE=7 AND u.TYPE=r.ROLE_TYPE AND u.ORG_CODE = #{orgCode,jdbcType=CHAR}
+    order by u.itemUpdateAt desc
   </select>
   <select id="selectByUsername" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
     select
@@ -69,6 +89,7 @@
     from user
     where USERNAME = #{username,jdbcType=VARCHAR}
     order by itemUpdateAt desc
+    limit 1
   </select>
   <select id="selectByMobilePhone" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
      select
@@ -81,8 +102,10 @@
   </select>
   <delete id="deleteByPrimaryKey" parameterType="com.zyyglxt.dataobject.UserDOKey">
     delete from user
-    where itemID = #{itemid,jdbcType=INTEGER}
-      and itemCode = #{itemcode,jdbcType=CHAR}
+    where itemCode = #{itemcode,jdbcType=CHAR}
+    <if test="itemid != null">
+    and itemID = #{itemid,jdbcType=INTEGER}
+</if>
   </delete>
   <delete id="deleteByUsername" parameterType="java.lang.String">
     delete from user

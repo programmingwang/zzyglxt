@@ -11,6 +11,7 @@
     <result column="GOV_PUNLIC" jdbcType="VARCHAR" property="govPunlic" />
     <result column="REASON" jdbcType="VARCHAR" property="reason" />
     <result column="FILE_NO" jdbcType="VARCHAR" property="fileNo" />
+    <result column="FILE_NUMBER" jdbcType="VARCHAR" property="fileNumber" />
     <result column="PARMENT" jdbcType="VARCHAR" property="parment" />
     <result column="CLASSIFICATION" jdbcType="VARCHAR" property="classification" />
     <result column="STATUS" jdbcType="VARCHAR" property="status" />
@@ -21,7 +22,7 @@
   </resultMap>
   <sql id="Base_Column_List">
     <!--@mbg.generated-->
-    itemID, itemCode, RECEIVING_TITLE, `NUMBER`, GOV_PUNLIC, REASON, FILE_NO, PARMENT,CLASSIFICATION,
+    itemID, itemCode, RECEIVING_TITLE, `NUMBER`, GOV_PUNLIC, REASON, FILE_NO, FILE_NUMBER,PARMENT,CLASSIFICATION,
     `STATUS`, CREATER, itemCreateAt, UPDATER, itemUpdateAt
   </sql>
   <select id="selectByPrimaryKey" parameterType="map" resultMap="BaseResultMap">
@@ -58,6 +59,9 @@
       </if>
       <if test="fileNo != null">
         FILE_NO,
+      </if>
+      <if test="fileNumber != null">
+        FILE_NUMBER,
       </if>
       <if test="parment != null">
         PARMENT,
@@ -99,6 +103,9 @@
       </if>
       <if test="fileNo != null">
         #{fileNo,jdbcType=VARCHAR},
+      </if>
+      <if test="fileNumber != null">
+        #{fileNumber,jdbcType=VARCHAR},
       </if>
       <if test="parment != null">
         #{parment,jdbcType=VARCHAR},
@@ -142,6 +149,9 @@
       <if test="fileNo != null">
         FILE_NO = #{fileNo,jdbcType=VARCHAR},
       </if>
+      <if test="fileNumber != null">
+        FILE_NUMBER = #{fileNumber,jdbcType=VARCHAR},
+      </if>
       <if test="parment != null">
         PARMENT = #{parment,jdbcType=VARCHAR},
       </if>
@@ -171,5 +181,7 @@
   <select id="selectAll" resultMap="BaseResultMap">
   SELECT *
   FROM tb_governres_countersign
+  WHERE STATUS = #{status,jdbcType=VARCHAR}
+  order by itemCreateAt
 </select>
 </mapper>

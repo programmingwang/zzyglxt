@@ -39,6 +39,11 @@ public class UsernameUtil {
         return user.getOrgCode();
     }
 
+    public String getOrgItemCode(){
+        UserSessionDto user = (UserSessionDto) request.getSession().getAttribute("user");
+        return user.getOrgItemCode();
+    }
+
     public String getRoleName(){
         UserSessionDto user = (UserSessionDto) request.getSession().getAttribute("user");
         return user.getRolename();

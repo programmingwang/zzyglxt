@@ -160,12 +160,4 @@ public class TopicController {
         return new ResponseData(EmBusinessError.success,max);
     }
 
-    //查询所有申报单位
-    @GetMapping(value = "/getPlatRole")
-    @ResponseBody
-    public ResponseData getPlatRole(){
-        List<UserRoleRefDO> platRole = developTopicService.getPlatRole();
-        return new ResponseData(EmBusinessError.success,platRole);
-    }
-
 }

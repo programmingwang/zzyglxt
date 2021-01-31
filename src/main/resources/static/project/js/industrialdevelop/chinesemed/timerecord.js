@@ -83,9 +83,10 @@
             var pl = dictUtil.getDictByCode(dictUtil.DICT_LIST.showStatus);
             $("#chargePersonSearch").selectUtil(pl);
             var pl2 = [];
-            for(var i = -2 ; i <= 2; i++){
+            for(var i = -1 ; i <= 1; i++){
                 pl2.push({id:generateSearchYear(i),text:generateSearchYear(i)})
             }
+            pl2.push({id:"00",text:"全部年份"})
             $("#taskNameSearch1").selectUtil(pl2);
 
             var aCol = [
@@ -118,18 +119,21 @@
                 for (var i in allTableData) {
                     var textYear = allTableData[i]["year"];
                     var textIsimpl= allTableData[i]["isimp"] ;
-                    if(searchYear == textYear && searchIsImpl == textIsimpl){
+                    var isStatusSlot=false;           // 默认状态为true
+                    var isYearSlot=false;           // 默认状态为true
+                    if(searchIsImpl==textIsimpl||searchIsImpl=='99'){
+                        isStatusSlot=true;
+                    }
+                    if(searchYear == textYear||searchYear=='00'){
+                        isYearSlot=true;
+                    }
+                    if(isYearSlot &&isStatusSlot){
                         newArry.push(allTableData[i]);
                     }
                 }
                 var newArr=new Set(newArry)
                 newArry=Array.from(newArr)
                 $("#table").bootstrapTable("load", newArry);
-                    if(newArry.length == 0){
-                        alertUtil.warning("搜索成功,但此搜索条件下没有数据");
-                    }else{
-                        alertUtil.success("搜索成功");
-                    }
             })
 
             $("#startTime").bind("input propertychange",function(event){

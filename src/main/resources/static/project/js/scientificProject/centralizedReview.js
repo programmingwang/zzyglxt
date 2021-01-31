@@ -54,7 +54,7 @@
                 },
                 'click .exmaine' : function (e, value, row, index) {
                     localStorage.removeItem("isView");
-                    localStorage.removeItem("viewDetail");
+                    localStorage.setItem("keepExmaine",JSON.stringify(row));
                     localStorage.setItem("examinTopicCode",JSON.stringify(row.topicCode));
                     orange.redirect("/evaluationTable/evaluationTable")
                 },
@@ -77,7 +77,17 @@
                                 ajaxUtil.myAjax(null,"/exmain/exmain",submitStatus,function (data) {
                                     if(ajaxUtil.success(data)){
                                         if(data.code == ajaxUtil.successCode){
-                                            alertUtil.info("评改提交");
+                                            var submitConfirmModal = {
+                                                modalBodyID :"myTopicSubmitTip",
+                                                modalTitle : "提示",
+                                                modalClass : "modal-lg",
+                                                cancelButtonStyle: "display:none",
+                                                modalConfirmFun:function (){
+                                                    return true;
+                                                }
+                                            }
+                                            var submitConfirm = modalUtil.init(submitConfirmModal);
+                                            submitConfirm.show();
                                             isSuccess = true;
                                             refreshTable();
                                         }else{
@@ -166,7 +176,7 @@
                         // console.log("addstr:"+addstr)
                         // console.log("status:"+status)
                         //调试时可以先打印出来，进行修改
-                        if(addstr==status){
+                        if(addstr==status||addstr=='99'){
                             isStatusSlot=true;
                         }
                         if (textP == null || textP == undefined || textP == '') {
@@ -183,11 +193,7 @@
                 var newArr=new Set(newArry)
                 newArry=Array.from(newArr)
                 $("#table").bootstrapTable("load", newArry);
-                if(newArry.length == 0){
-                    alertUtil.warning("搜索成功,但此搜索条件下没有数据");
-                }else{
-                    alertUtil.success("搜索成功");
-                }
+
             })
 
 

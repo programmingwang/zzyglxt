@@ -75,7 +75,17 @@
                             ajaxUtil.myAjax(null,"/industrialdevelop/expert/resetPassword/"+row.userCode,submitStatus,function (data) {
                                 if(ajaxUtil.success(data)){
                                     if(data.code == 88888){
-                                        alertUtil.info("已重置");
+                                        var submitConfirmModal = {
+                                            modalBodyID :"myResetPasswordTips",
+                                            modalTitle : "提示",
+                                            modalClass : "modal-lg",
+                                            cancelButtonStyle: "display:none",
+                                            modalConfirmFun:function (){
+                                                return true;
+                                            }
+                                        }
+                                        var submitConfirm = modalUtil.init(submitConfirmModal);
+                                        submitConfirm.show();
                                         isSuccess = true;
                                         refreshTable();
                                     }else{

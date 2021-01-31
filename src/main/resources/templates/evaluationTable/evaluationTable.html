@@ -24,6 +24,16 @@
         td{
             font-family: 'Arial Normal', 'Arial', sans-serif !important;
         }
+        #evalutionMain{
+            background: white;
+        }
+        .Line{
+            border-bottom: 1px solid;
+            display: none;
+            width: 7rem;
+            margin-left: 2rem;
+            margin-bottom: 0.5rem;
+        }
     </style>
 </head>
 <body>
@@ -32,7 +42,6 @@
     <div id="evalutionMain" class="col-lg-10 col-md-10" >
         <div id="headerT">集中评审打分情况<span id="displaydf" style="color: red"></span></div>
 
-        <div style="font-weight: 700;font-style: normal;font-size: 17px;text-align: center;margin:20px;">集中评审打分表</div>
         <table  border="2" bordercolor="black"  cellspacing="0"  style="text-align: center;">
             <tr>
                 <th style="width: 150px;">一级指标</th>
@@ -46,7 +55,9 @@
                 <td>课题研究的意义</td>
                 <td style="text-align: left;">涉及重点领域的中医药理论或临床、药学关键技术问题,具有重要的理论价值或应用前景。</td>
                 <td>12分</td>
-                <td><input id="score1" class="sc" type="text" oninput="if(value>12)value=12;if(value<0)value=0" onkeyup="this.value=this.value.replace(/\D/g,'');" style="outline: none;text-align: center; border: none;width: 100%;height: 100%;"></td>
+                <td><input id="score1" class="sc" type="text" oninput="if(value>12)value=12;if(value<0)value=0" onkeyup="this.value=this.value.replace(/\D/g,'');" style="outline: none;text-align: center; border: none;width: 100%;height: 100%;">
+                <div class="Line"></div>
+                </td>
             </tr>
             <tr>
                 <td>科学性</td>
@@ -56,7 +67,7 @@
 
                     研究设想：研究目标及思路。</td>
                 <td>10分</td>
-                <td><input id="score2" class="sc" type="text" oninput="if(value>10)value=10;if(value<0)value=0" onkeyup="this.value=this.value.replace(/\D/g,'');" style="outline: none;text-align: center; border: none;width: 100%;height: 100%;"></td>
+                <td><input id="score2" class="sc" type="text" oninput="if(value>10)value=10;if(value<0)value=0" onkeyup="this.value=this.value.replace(/\D/g,'');" style="outline: none;text-align: center; border: none;width: 100%;height: 100%;"><div class="Line"></div></td>
             </tr>
             <tr>
                 <td>学术思想及创新性</td>
@@ -66,13 +77,13 @@
 
                     技术创新：技术改进或完善。</td>
                 <td>16分</td>
-                <td><input id="score3" class="sc" type="text" oninput="if(value>16)value=16;if(value<0)value=0" onkeyup="this.value=this.value.replace(/\D/g,'');" style="outline: none;text-align: center; border: none;width: 100%;height: 100%"></td>
+                <td><input id="score3" class="sc" type="text" oninput="if(value>16)value=16;if(value<0)value=0" onkeyup="this.value=this.value.replace(/\D/g,'');" style="outline: none;text-align: center; border: none;width: 100%;height: 100%"><div class="Line"></div></td>
             </tr>
             <tr>
                 <td>对国内外研究现状的了解</td>
                 <td style="text-align: left;">广度和深度：近5年的主要研究进展，研究中存在的主要问题。</td>
                 <td>7分</td>
-                <td><input id="score4" class="sc" type="text" oninput="if(value>7)value=7;if(value<0)value=0" onkeyup="this.value=this.value.replace(/\D/g,'');" style="outline: none;text-align: center; border: none;width: 100%;height: 100%"></td>
+                <td><input id="score4" class="sc" type="text" oninput="if(value>7)value=7;if(value<0)value=0" onkeyup="this.value=this.value.replace(/\D/g,'');" style="outline: none;text-align: center; border: none;width: 100%;height: 100%"><div class="Line"></div></td>
             </tr>
             <tr>
                 <td rowspan="4">研究方案</td>
@@ -83,25 +94,25 @@
 
                     关键问题选择准确：1-2个关键问题。</td>
                 <td>8分</td>
-                <td><input id="score5" class="sc" type="text" oninput="if(value>8)value=8;if(value<0)value=0" onkeyup="this.value=this.value.replace(/\D/g,'');" style="outline: none;text-align: center; border: none;width: 100%;height: 100%"></td>
+                <td><input id="score5" class="sc" type="text" oninput="if(value>8)value=8;if(value<0)value=0" onkeyup="this.value=this.value.replace(/\D/g,'');" style="outline: none;text-align: center; border: none;width: 100%;height: 100%"><div class="Line"></div></td>
             </tr>
             <tr>
                 <td>技术路线</td>
                 <td style="text-align: left;">设计合理：基础与临床；方法可行：成熟可靠 可重复性强 易于掌握。。</td>
                 <td>12分</td>
-                <td><input id="score6" class="sc" type="text" oninput="if(value>12)value=12;if(value<0)value=0" onkeyup="this.value=this.value.replace(/\D/g,'');" style="outline: none;text-align: center; border: none;width: 100%;height: 100%"></td>
+                <td><input id="score6" class="sc" type="text" oninput="if(value>12)value=12;if(value<0)value=0" onkeyup="this.value=this.value.replace(/\D/g,'');" style="outline: none;text-align: center; border: none;width: 100%;height: 100%"><div class="Line"></div></td>
             </tr>
             <tr>
                 <td>研究方法及手段</td>
                 <td style="text-align: left;">方法先进；技术成熟可靠；有创新：</td>
                 <td>12分</td>
-                <td><input id="score7" class="sc" type="text" oninput="if(value>12)value=12;if(value<0)value=0" onkeyup="this.value=this.value.replace(/\D/g,'');" style="outline: none;text-align: center; border: none;width: 100%;height: 100%"></td>
+                <td><input id="score7" class="sc" type="text" oninput="if(value>12)value=12;if(value<0)value=0" onkeyup="this.value=this.value.replace(/\D/g,'');" style="outline: none;text-align: center; border: none;width: 100%;height: 100%"><div class="Line"></div></td>
             </tr>
             <tr>
                 <td>研究的预期目标</td>
                 <td style="text-align: left;">明确，可以达到，留有余地。发表的研究论文；申请的技术专利；可应用产品的开发。</td>
                 <td>8分</td>
-                <td><input id="score8" class="sc" type="text" oninput="if(value>8)value=8;if(value<0)value=0" onkeyup="this.value=this.value.replace(/\D/g,'');" style="outline: none;text-align: center; border: none;width: 100%;height: 100%"></td>
+                <td><input id="score8" class="sc" type="text" oninput="if(value>8)value=8;if(value<0)value=0" onkeyup="this.value=this.value.replace(/\D/g,'');" style="outline: none;text-align: center; border: none;width: 100%;height: 100%"><div class="Line"></div></td>
             </tr>
             <tr>
                 <td rowspan="3">与本项目有关的工作积累</td>
@@ -112,7 +123,7 @@
 
                     关键问题选择准确：1-2个关键问题。</td>
                 <td>5分</td>
-                <td><input id="score9" class="sc" type="text" oninput="if(value>5)value=5;if(value<0)value=0" onkeyup="this.value=this.value.replace(/\D/g,'');" style="outline: none;text-align: center; border: none;width: 100%;height: 100%"></td>
+                <td><input id="score9" class="sc" type="text" oninput="if(value>5)value=5;if(value<0)value=0" onkeyup="this.value=this.value.replace(/\D/g,'');" style="outline: none;text-align: center; border: none;width: 100%;height: 100%"><div class="Line"></div></td>
             </tr>
             <tr>
                 <td>已具备的实验条件</td>
@@ -122,19 +133,19 @@
 
                     国内及国际合作：合作的背景及技术优势。</td>
                 <td>5分</td>
-                <td><input id="score10" class="sc" type="text" oninput="if(value>5)value=5;if(value<0)value=0" onkeyup="this.value=this.value.replace(/\D/g,'');" style="outline: none;text-align: center; border: none;width: 100%;height: 100%"></td>
+                <td><input id="score10" class="sc" type="text" oninput="if(value>5)value=5;if(value<0)value=0" onkeyup="this.value=this.value.replace(/\D/g,'');" style="outline: none;text-align: center; border: none;width: 100%;height: 100%"><div class="Line"></div></td>
             </tr>
             <tr>
                 <td>项目组成员</td>
                 <td style="text-align: left;">主要成员6-10名，结构合理：高级研究人员（1-2人）；中级研究人员（2-3人）；技术人员及研究生（3-5人）。</td>
                 <td>5分</td>
-                <td><input id="score11" class="sc" type="text" oninput="if(value>5)value=5;if(value<0)value=0" onkeyup="this.value=this.value.replace(/\D/g,'');" style="outline: none;text-align: center; border: none;width: 100%;height: 100%"></td>
+                <td><input id="score11" class="sc" type="text" oninput="if(value>5)value=5;if(value<0)value=0" onkeyup="this.value=this.value.replace(/\D/g,'');" style="outline: none;text-align: center; border: none;width: 100%;height: 100%"><div class="Line"></div></td>
             </tr>
             <tr>
                 <td><div style="font-weight: 400;font-style: normal;font-size: 17px;margin-top:20px;margin-bottom: 10px;">专家评审意见:</div></td>
                 <td colspan="4" >
                     <div>
-                        <textarea name="" id="expertOpinion" style="resize:none; height: 58px;border: 0px solid; border-color:black;font-family: 'Arial Normal', 'Arial', sans-serif; "></textarea>
+                        <textarea name="" id="expertOpinion" style="resize:none; height: 58px;border: 0px solid; border-color:black;font-family: 'Arial Normal', 'Arial', sans-serif; outline:none;"></textarea>
                         <!--<input type="text" style="width: 951px;height: 58px;border: 1px solid; border-color:#F2F2F2 ">-->
                     </div>
                 </td>

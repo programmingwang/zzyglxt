@@ -3,7 +3,6 @@ package com.zyyglxt.service.impl;
 import com.zyyglxt.dao.CulturalResourcesDOMapper;
 import com.zyyglxt.dataobject.CulturalResourcesDO;
 import com.zyyglxt.dataobject.CulturalResourcesDOKey;
-import com.zyyglxt.dto.CulturalResourcesDto;
 import com.zyyglxt.error.BusinessException;
 import com.zyyglxt.error.EmBusinessError;
 import com.zyyglxt.util.DateUtils;
@@ -44,8 +43,12 @@ public class TraditionalSchoolServiceImpl implements ITraditionalSchoolService {
     }
 
     @Override
-    public List<CulturalResourcesDto> getTraditionalSchoolList(String chineseCulturalStatus) {
-        return culturalResourcesDOMapper.selectCulturalResourcesList("中医流派",chineseCulturalStatus);
+    public List<CulturalResourcesDO> getTraditionalSchoolList(List<String> chineseCulturalStatus) {
+        List<CulturalResourcesDO> culturalResourcesDOList = new ArrayList<>();
+        for (String culturalStatus : chineseCulturalStatus) {
+            culturalResourcesDOList.addAll(culturalResourcesDOMapper.selectCulturalResourcesList("中医流派",culturalStatus));
+        }
+        return culturalResourcesDOList;
     }
 
     @Override

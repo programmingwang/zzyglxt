@@ -28,8 +28,7 @@
                         modalConfirmFun:function () {
                             var isSuccess = false;
                             var chineseMedicineKey = {
-                                'username':row.username,
-                                'orgName':sessionStorage.getItem('orgName')
+                                'username':row.username
                             };
                             ajaxUtil.myAjax(null,"/user/deletuser",chineseMedicineKey,function (data) {
                                 if(ajaxUtil.success(data)){
@@ -104,26 +103,22 @@
             };
 
             /*新增用户账号*/
-            $("#btn_addTask").unbind().on('click',function (e, value, row, index) {
-                var myViewAccountModalData ={
+            $("#btn_addTask").unbind().on('click',function () {
+
+                var myViewTravelModalData ={
                     modalBodyID : "myAddAccountModal", //公用的在后面给span加不同的内容就行了，其他模块同理
                     modalTitle : "新增用户账户",
                     modalClass : "modal-lg",
-                    confirmButtonClass : "btn-danger",
                     modalConfirmFun:function () {
                         var isSuccess = false;
 
                         var username = $("#username").val();
                         var name = $("#name").val();
                         var roleName = dictUtil.getName(dictUtil.DICT_LIST.userRole,$("#roleName").val());
-                        if ($("#roleName").val() == "主研人"){
-                            roleName = $("#roleName").val();
-                        }
                         var contacts = $("#contacts").val();
                         var mobilephone = $("#mobilephone").val();
                         var cityid = dictUtil.getName(dictUtil.DICT_LIST.areaAdmin,$("#cityid").val());
-                        var orgName = sessionStorage.getItem("orgName");
-                        var orgCode = sessionStorage.getItem("orgCode");
+
 
                         var submitStatus = {
                             "username": username,
@@ -131,9 +126,7 @@
                             "roleName": roleName,
                             "contacts": contacts,
                             "mobilephone": mobilephone,
-                            "cityid": cityid,
-                            "orgName": orgName,
-                            "orgCode": orgCode
+                            "cityid": cityid
                         };
                         if ((/^1[3456789]\d{9}$/.test(mobilephone))){
                             ajaxUtil.myAjax(null,"/user/adduser",submitStatus,function (data) {
@@ -157,21 +150,12 @@
                         return isSuccess;
                     }
                 };
-                var myViewModal = modalUtil.init(myViewAccountModalData);
+                var myTravelModal = modalUtil.init(myViewTravelModalData);
                 let sel = dictUtil.getDictByCode(dictUtil.DICT_LIST.areaAdmin);
                 $("#cityid").selectUtil(sel);
                 let select = dictUtil.getDictByCode(dictUtil.DICT_LIST.userRole);
-
-                if (sessionStorage.getItem('rolename') == '科研项目申报单位'){
-                    var option=document.createElement("option");
-                    $(option).val("主研人");
-                    $(option).text("主研人");
-                    $("#roleName").append(option);
-                } else{
-                    $("#roleName").selectUtil(select);
-                }
-                myViewModal.show();
-
+                $("#roleName").selectUtil(select);
+                myTravelModal.show();
             });
 
 
@@ -197,30 +181,7 @@
                 myTable = bootstrapTableUtil.myBootStrapTableInit("table", url, param, aCol);
             }
 
-            $("#btnSearch").unbind().on('click',function() {
-                var newArry = [];
-                var str = document.getElementById("taskNameSearch").value.toLowerCase();
-                var allTableData = JSON.parse(localStorage.getItem("2"));
-                if(str.indexOf("请输入")!=-1){
-                    str=""
-                }
-                for (var i in allTableData) {
-                    for (var v in aCol){
-                        var textP = allTableData[i][aCol[v].field];
-                        if (textP == null || textP == undefined || textP == '') {
-                            textP = "1";
-                        }
-                        if(textP.search(str) != -1){
-                            newArry.push(allTableData[i])
-                        }
-                    }
-                }
-                var newArr=new Set(newArry)
-                newArry=Array.from(newArr)
-                $("#table").bootstrapTable("load", newArry);
-
-            })
-
+            bootstrapTableUtil.globalSearch("table",url,aParam, aCol);
 
         })
 })();

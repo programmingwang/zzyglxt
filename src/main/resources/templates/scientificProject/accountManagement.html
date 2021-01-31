@@ -4,16 +4,6 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" th:href="@{CSS/taskList.css}">
     <link rel="stylesheet" href="https://at.alicdn.com/t/font_1805932_ysrcp4y0uy9.css">
-    <style>
-        .titleName{
-            float: left;
-            padding-top: 12px;
-            padding-bottom: 4px;
-        }
-        .modal-dialog{
-            width: 20em;
-        }
-    </style>
 </head>
 <body>
 <div id="fir_body">
@@ -21,20 +11,57 @@
     <div class="row test-border" id="accordion2">
         <div class="col-lg-4 col-md-4" style="padding-left: 2rem;">
             <div class="input-group mb-4" style="width: 530px;">
-                <span style="margin-top: 6px">账户名称：</span>
                 <input type="text" id="taskNameSearch" class="form-control" value="请输入" onfocus="if (value=='请输入'){value =''}" onblur="if (value ==''){value='请输入'}" >
                 <div class="input-group-prepend">
                     <span class="input-group-text" id="btnSearch" style="background-color: #D60000;color: #FFFFFF;border: none;border-radius: 4px;border-top-left-radius: 0px;border-bottom-left-radius: 0px;z-index: 1;">搜索</span>
                 </div>
+
             </div>
         </div>
-        <div class="col-lg-6 col-md-6"></div>
-        <div class="col-lg-2 col-md-2">
-            <button type="button" id="btn_addTask" class="btn btn-danger ml-3">新增用户账号</button>
+        <div class="col-lg-7 col-md-7"></div>
+        <div class="col-lg-1 col-md-1 pull-right" >
+            <a id="closeAndOpen" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne" style="text-decoration: none; color: red;" aria-expanded="false">
+                展开
+            </a>
         </div>
-        <hr size="1" class="mb-3" style="color: #EBEBEB;border-style:dashed;width:100%;margin-bottom:10px;">
+        <div id="collapseOne" class="collapse col-md-12 col-lg-12 row" style="height: 0px; ">
+            <hr size="1" class="mb-4" style="color: #EBEBEB;border-style:dashed;width:100%;margin-bottom:10px;">
+            <div class="col-lg-4 col-md-4" style="padding-left: 2rem;" >
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend" style="margin-top: 9px;">
+                        <span class="input-text" >其他选项： 展示状态：</span>
+                    </div>
+                    <select class="custom-select" id="chargePersonSearch"></select>
+                </div>
+            </div>
+            <div class="col-lg-1"></div>
+
+            <div class="col-lg-5 col-md-8 row" style="margin-top: 9px;">
+                创建时间: &nbsp &nbsp
+                <div id="stratTime">
+                    <input type="number" value="00" oninput="if(value>23)value=0;if(value<0)value=23;var v=this.value;while(v.length<2){v='0'+v;}this.value=v;" onkeyup="this.value=this.value.replace(/\D/g,'');" style="outline: none;text-align: left; border: none;width: 50px;border-radius: 2px;box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.349019607843137);">
+                    &nbsp : &nbsp
+                    <input type="number" value="00" oninput="if(value>59)value=0;if(value<0)value=59;var v=this.value;while(v.length<2){v='0'+v;}this.value=v;" onkeyup="this.value=this.value.replace(/\D/g,'');" style="outline: none;text-align: left; border: none;width: 50px;border-radius: 2px;box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.349019607843137);">
+
+                    <input type="number" value="00" oninput="if(value>59)value=0;if(value<0)value=59;var v=this.value;while(v.length<2){v='0'+v;}this.value=v;" onkeyup="this.value=this.value.replace(/\D/g,'');" style="display: none;outline: none;text-align: left; border: none;width: 50px;border-radius: 2px;box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.349019607843137);">
+                </div>
+                &nbsp 至 &nbsp
+                <div id="endTime">
+                    <input type="number" value="00" oninput="if(value>23)value=0;if(value<0)value=23;var v=this.value;while(v.length<2){v='0'+v;}this.value=v;" onkeyup="this.value=this.value.replace(/\D/g,'')" style="outline: none;text-align: left; border: none;width: 50px;border-radius: 2px;box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.349019607843137);">
+                    &nbsp : &nbsp
+                    <input type="number" value="00" oninput="if(value>59)value=0;if(value<0)value=59;var v=this.value;while(v.length<2){v='0'+v;}this.value=v;" onkeyup="this.value=this.value.replace(/\D/g,'');" style="outline: none;text-align: left; border: none;width: 50px;border-radius: 2px;box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.349019607843137);">
+
+                    <input type="number" value="00" oninput="if(value>59)value=0;if(value<0)value=59;var v=this.value;while(v.length<2){v='0'+v;}this.value=v;" onkeyup="this.value=this.value.replace(/\D/g,'');" style="display: none;outline: none;text-align: left; border: none;width: 50px;border-radius: 2px;box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.349019607843137);">
+                </div>
+            </div>
+        </div>
     </div>
 
+    <div class="row col-lg-12 col-md-12 mb-3">
+        <div class="col-lg-12 col-md-12" >
+            <button type="button" id="btn_addTask" class="btn btn-danger ml-3">新增用户账号</button>
+        </div>
+    </div>
     <div class="col-lg-12">
         <table id="table"></table>
     </div>
@@ -49,4 +76,8 @@
 
 </body>
 <script type="text/javascript" data-main="/main/main.js" th:src="@{/component/require@2.3.6/require-2.3.6.js}"></script>
+<script type="text/javascript" th:src="@{/project/js/scientificProject/accountManagement.js}"></script>
+<link type="text/css" rel="stylesheet" href="/component/uploadImg/css/uploadImg.css"
+      th:src="@{/component/uploadImg/css/uploadImg.css}">
+<script type="text/javascript" th:src="@{/component/uploadImg/js/bootstrap.min.js}"></script>
 </html>

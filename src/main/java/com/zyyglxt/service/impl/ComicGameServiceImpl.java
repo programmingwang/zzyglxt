@@ -3,7 +3,6 @@ package com.zyyglxt.service.impl;
 import com.zyyglxt.dao.ChineseCulturalDOMapper;
 import com.zyyglxt.dataobject.ChineseCulturalDO;
 import com.zyyglxt.dataobject.ChineseCulturalDOKey;
-import com.zyyglxt.dto.ChineseCulturalDto;
 import com.zyyglxt.error.BusinessException;
 import com.zyyglxt.error.EmBusinessError;
 import com.zyyglxt.util.DateUtils;
@@ -43,8 +42,13 @@ public class ComicGameServiceImpl implements IComicGameService {
     }
 
     @Override
-    public List<ChineseCulturalDto> getComicGameList(String chineseCulturalStatus) {
-        return chineseCulturalDOMapper.selectChineseCulturalList("动漫游戏",chineseCulturalStatus);
+    public List<ChineseCulturalDO> getComicGameList(List<String> chineseCulturalStatus) {
+        List<ChineseCulturalDO> chineseCulturalDOList = new ArrayList<>();
+        for (String culturalStatus : chineseCulturalStatus) {
+            chineseCulturalDOList.addAll(chineseCulturalDOMapper.selectChineseCulturalList("动漫游戏",culturalStatus));
+        }
+        return chineseCulturalDOList;
+
     }
 
     @Override

@@ -20,7 +20,7 @@ public interface FamPreDOService {
   int deleteByPrimaryKey(FamPreDOKey key);
   int updateByPrimaryKeySelective(FamPreDO record) ;
   FamPreDO selectByPrimaryKey(FamPreDOKey key);
-  List<FamPreDO> selectAllFamPre( String status);//查询所有历史名方
+  List<FamPreDO> selectAllFamPre( List<String> status);//查询所有历史名方
   int changeStatusToFamPre( FamPreDOKey key , String status);//历史名方数据状态
   int increaseVisitNumFamPre(FamPreDOKey key);//增加浏览次数
   List<FamPreDO> searchFamPre(String keyWord);//关键字查询

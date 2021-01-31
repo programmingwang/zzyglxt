@@ -33,6 +33,7 @@ public class ReceiptController {
     @RequestMapping(value ="insertreceipt",method = RequestMethod.POST )
     @LogAnnotation(appCode ="",logTitle ="收文管理数据的添加",logLevel ="3")
     public ResponseData insertReceipt(@RequestBody ReceiptDO key)  {
+        System.out.println("收文管理标题名称: " + key.getReceivingTitle());
         iReceiptDOService.insertSelective(key);
         return new ResponseData(EmBusinessError.success);
     }
@@ -56,6 +57,7 @@ public class ReceiptController {
     @LogAnnotation(appCode ="",logTitle ="收文管理数据的修改",logLevel ="2")
     public ResponseData updateReceipt(@RequestBody ReceiptDO key)  {
         iReceiptDOService.updateByPrimaryKeySelective(key);
+        System.out.println("要修改收文管理标题名称编号为："+key.getItemid());
         return new ResponseData(EmBusinessError.success);
     }
     /*查询所有收文管理数据*/

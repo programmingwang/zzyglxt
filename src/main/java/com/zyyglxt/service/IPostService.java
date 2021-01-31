@@ -22,4 +22,5 @@ public interface IPostService {
 
     PostDO maxNum();
 
+    List<PostDto> getPandA();
 }

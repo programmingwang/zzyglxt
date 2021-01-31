@@ -2,7 +2,6 @@ package com.zyyglxt.dao;
 
 import com.zyyglxt.dataobject.CulturalResourcesDO;
 import com.zyyglxt.dataobject.CulturalResourcesDOKey;
-import com.zyyglxt.dto.CulturalResourcesDto;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -17,7 +16,7 @@ public interface CulturalResourcesDOMapper {
 
     CulturalResourcesDO selectByPrimaryKey(@Param("key")CulturalResourcesDOKey key, @Param("chineseCulturalType") String chineseCulturalType);
 
-    List<CulturalResourcesDto> selectCulturalResourcesList(@Param("type") String chineseCulturalType, @Param("status") String chineseCulturalStatus);
+    List<CulturalResourcesDO> selectCulturalResourcesList(@Param("type") String chineseCulturalType, @Param("status") String chineseCulturalStatus);
 
     int updateByPrimaryKeySelective(CulturalResourcesDO record);
 

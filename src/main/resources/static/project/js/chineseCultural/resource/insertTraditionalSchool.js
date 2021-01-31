@@ -32,7 +32,6 @@
                         chineseCulturalName : $("#chineseCulturalName").val(),
                         chineseCulturalSource : $("#chineseCulturalSource").val(),
                         chineseCulturalAuthor : $("#chineseCulturalAuthor").val(),
-                        chineseCulturalStatus : '0',
                         chineseCulturalContent : editor.txt.html()
                     }
                     operateMessage = "更新中医流派成功";
@@ -49,7 +48,7 @@
                         alertUtil.alert(data.msg);
                     }
                 },false,true);
-                return false;
+
             });
 
             $("#btn_insert").unbind().on('click',function () {
@@ -93,7 +92,7 @@
                         alertUtil.alert(data.msg);
                     }
                 },false,true);
-                return false;
+
             });
 
             (function init() {
@@ -128,7 +127,8 @@
                 }
             }
             document.getElementById('clsfile').onclick = function() {
-                $('#upload_file').val('');
+                var obj = document.getElementById('upload_file');
+                obj.outerHTML=obj.outerHTML;
                 $("#clsfile").css("display","none");
                 $("#addFile").empty("p");
             }

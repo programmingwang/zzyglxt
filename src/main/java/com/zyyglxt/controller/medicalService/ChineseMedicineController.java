@@ -62,14 +62,16 @@ public class ChineseMedicineController {
     @ResponseBody
     @LogAnnotation(appCode ="",logTitle ="查看所有名老中医数据",logLevel ="1",creater ="",updater = "")
     public ResponseData selectAllChineseMedicine(@RequestParam(value = "chineseMedicineStatus")List chineseMedicineStatus){
-        return new ResponseData(EmBusinessError.success,chineseMedicineService.selectAllChineseMedicine(chineseMedicineStatus));
+        List<ChineseMedicineDO> chineseMedicineDOList = chineseMedicineService.selectAllChineseMedicine(chineseMedicineStatus);
+        return new ResponseData(EmBusinessError.success,DoToDto(chineseMedicineDOList));
     }
 
     @GetMapping(value = "search")
     @ResponseBody
     @LogAnnotation(appCode ="",logTitle ="搜索名老中医数据",logLevel ="1",creater ="",updater = "")
     public ResponseData searchChineseMedicine(String keyWord){
-        return new ResponseData(EmBusinessError.success,chineseMedicineService.searchChineseMedicine(keyWord));
+        List<ChineseMedicineDO> chineseMedicineDOList = chineseMedicineService.searchChineseMedicine(keyWord);
+        return new ResponseData(EmBusinessError.success,DoToDto(chineseMedicineDOList));
     }
 
     @ResponseBody
@@ -78,5 +80,25 @@ public class ChineseMedicineController {
     public ResponseData updateStatus(StatusDto statusDto){
         chineseMedicineService.updateStatus(statusDto);
         return new ResponseData(EmBusinessError.success);
+    }
+
+    private List<ChineseMedicineDto> DoToDto(List<ChineseMedicineDO> DOList){
+        List<ChineseMedicineDto> DtoList = new ArrayList<>();
+        if (!DOList.isEmpty()){
+            for (ChineseMedicineDO DO:DOList){
+                ChineseMedicineDto Dto = new ChineseMedicineDto();
+                BeanUtils.copyProperties(DO,Dto);
+                HospDO hospDO = hospService.selectHospByItemCode(Dto.getHospCode());
+                SpecialtyDO specialtyDO = specialtyDOMapper.selectSpecialtyByItemCode(Dto.getDeptCode());
+                Dto.setHospitalName(hospDO.getHospitalName());
+                Dto.setHospCode(hospDO.getItemcode());
+                Dto.setSpecialtyName(specialtyDO.getSpecialtyName());
+                Dto.setDeptCode(specialtyDO.getItemcode());
+                FileDO fileDO= fileService.selectFileByDataCode(Dto.getItemcode());
+                Dto.setFilePath(fileDO == null ? null:fileDO.getFilePath());
+                DtoList.add(Dto);
+            }
+        }
+        return DtoList;
     }
 }

@@ -3,7 +3,6 @@ package com.zyyglxt.dao;
 import com.zyyglxt.dataobject.FamPreDOKey;
 import com.zyyglxt.dataobject.HealthCareFamPreDO;
 import com.zyyglxt.dataobject.HealthCareFamPreDOKey;
-import com.zyyglxt.dto.HealthCareFamPreDto;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
@@ -28,7 +27,7 @@ public interface HealthCareFamPreDOMapper {
 
     int updateByPrimaryKey(HealthCareFamPreDO record);
 
-    List<HealthCareFamPreDto> selectAllHealthCareFamPre(@Param("status") String status);//查询所有国医话健康所有数据
+    List<HealthCareFamPreDO> selectAllHealthCareFamPre(@Param("status") String status);//查询所有国医话健康所有数据
 
     int updateVisitNumHealthCareFamPre(HealthCareFamPreDOKey key);
 

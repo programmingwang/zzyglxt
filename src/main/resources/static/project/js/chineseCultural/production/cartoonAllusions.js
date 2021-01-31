@@ -243,7 +243,7 @@
             });
 
 
-            var pl = dictUtil.getDictByCode(dictUtil.DICT_LIST.webStatus);
+            var pl = dictUtil.getDictByCode(dictUtil.DICT_LIST.showStatus);
             $("#chargePersonSearch").selectUtil(pl);
 
         var aCol = [
@@ -269,7 +269,7 @@
             myTable = bootstrapTableUtil.myBootStrapTableInit("table", url, param, aCol);
         }
 
-        bootstrapTableUtil.globalSearch("table", url, aParam, aCol, "chineseCulturalStatus")
+            bootstrapTableUtil.globalSearch("table",url,aParam, aCol);
 
     })
 })();

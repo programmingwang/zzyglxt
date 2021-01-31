@@ -23,12 +23,14 @@
     <result column="itemCreateAt" jdbcType="TIMESTAMP" property="itemcreateat" />
     <result column="UPDATER" jdbcType="VARCHAR" property="updater" />
     <result column="itemUpdateAt" jdbcType="TIMESTAMP" property="itemupdateat" />
+    <result column="signOpinion" jdbcType="VARCHAR" property="signOpinion" />
+    <result column="signName" jdbcType="VARCHAR" property="signName" />
+    <result column="signDate" jdbcType="VARCHAR" property="signDate" />
   </resultMap>
   <sql id="Base_Column_List">
-    itemID, itemCode, DATA_CODE, INITIAL, INITIAL_DATE, DEPARTMENT, DEPART_DATE, OFFICE, 
-    OFFICE_DATE, DEPUTY_DIRECTOR, DEPUTY_DIRECTOR_DATE, DIRECTOR, DIRECTOR_DATE, CREATER, 
-    itemCreateAt, UPDATER, itemUpdateAt, DEPARTMENT_NAME, OFFICE_NAME, DEPUTY_DIRECTOR_NAME,
-    DIRECTOR_NAME
+    itemID, itemCode, DATA_CODE, INITIAL, INITIAL_DATE, signOpinion,signName,signDate,DEPARTMENT,DEPARTMENT_NAME, DEPART_DATE, OFFICE,
+    OFFICE_NAME,OFFICE_DATE, DEPUTY_DIRECTOR,DEPUTY_DIRECTOR_NAME, DEPUTY_DIRECTOR_DATE, DIRECTOR,DIRECTOR_NAME, DIRECTOR_DATE, CREATER,
+    itemCreateAt, UPDATER, itemUpdateAt
   </sql>
   <select id="selectByPrimaryKey" parameterType="com.zyyglxt.dataobject.adviceDOKey" resultMap="BaseResultMap">
     select 
@@ -48,15 +50,13 @@
       DEPART_DATE, OFFICE, OFFICE_DATE, 
       DEPUTY_DIRECTOR, DEPUTY_DIRECTOR_DATE, DIRECTOR, 
       DIRECTOR_DATE, CREATER, itemCreateAt, 
-      UPDATER, itemUpdateAt, DEPARTMENT_NAME, OFFICE_NAME,
-      DEPUTY_DIRECTOR_NAME, DIRECTOR_NAME)
+      UPDATER, itemUpdateAt)
     values (#{itemid,jdbcType=INTEGER}, #{itemcode,jdbcType=CHAR}, #{dataCode,jdbcType=VARCHAR}, 
       #{initial,jdbcType=VARCHAR}, #{initialDate,jdbcType=TIMESTAMP}, #{department,jdbcType=VARCHAR}, 
       #{departDate,jdbcType=DATE}, #{office,jdbcType=VARCHAR}, #{officeDate,jdbcType=TIMESTAMP}, 
       #{deputyDirector,jdbcType=VARCHAR}, #{deputyDirectorDate,jdbcType=TIMESTAMP}, #{director,jdbcType=VARCHAR}, 
       #{directorDate,jdbcType=TIMESTAMP}, #{creater,jdbcType=VARCHAR}, #{itemcreateat,jdbcType=TIMESTAMP}, 
-      #{updater,jdbcType=VARCHAR}, #{itemupdateat,jdbcType=TIMESTAMP}, #{DEPARTMENT_NAME,jdbcType=VARCHAR},
-      #{OFFICE_NAME,jdbcType=VARCHAR}, #{DEPUTY_DIRECTOR_NAME,jdbcType=VARCHAR}, #{DIRECTOR_NAME,jdbcType=VARCHAR})
+      #{updater,jdbcType=VARCHAR}, #{itemupdateat,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.zyyglxt.dataobject.adviceDO">
     insert into tb_governres_advice
@@ -79,17 +79,11 @@
       <if test="department != null">
         DEPARTMENT,
       </if>
-      <if test="departmentName != null">
-        DEPARTMENT_NAME,
-      </if>
       <if test="departDate != null">
         DEPART_DATE,
       </if>
       <if test="office != null">
         OFFICE,
-      </if>
-      <if test="officeName != null">
-        OFFICE_NAME,
       </if>
       <if test="officeDate != null">
         OFFICE_DATE,
@@ -97,17 +91,11 @@
       <if test="deputyDirector != null">
         DEPUTY_DIRECTOR,
       </if>
-      <if test="deputyDirectorName != null">
-        DEPUTY_DIRECTOR_NAME,
-      </if>
       <if test="deputyDirectorDate != null">
         DEPUTY_DIRECTOR_DATE,
       </if>
       <if test="director != null">
         DIRECTOR,
-      </if>
-      <if test="directorName != null">
-        DIRECTOR_NAME,
       </if>
       <if test="directorDate != null">
         DIRECTOR_DATE,
@@ -144,17 +132,11 @@
       <if test="department != null">
         #{department,jdbcType=VARCHAR},
       </if>
-      <if test="departmentName != null">
-        #{departmentName,jdbcType=VARCHAR},
-      </if>
       <if test="departDate != null">
         #{departDate,jdbcType=DATE},
       </if>
       <if test="office != null">
         #{office,jdbcType=VARCHAR},
-      </if>
-      <if test="officeName != null">
-        #{officeName,jdbcType=VARCHAR},
       </if>
       <if test="officeDate != null">
         #{officeDate,jdbcType=TIMESTAMP},
@@ -162,17 +144,11 @@
       <if test="deputyDirector != null">
         #{deputyDirector,jdbcType=VARCHAR},
       </if>
-      <if test="deputyDirectorName != null">
-        #{deputyDirectorName,jdbcType=VARCHAR},
-      </if>
       <if test="deputyDirectorDate != null">
         #{deputyDirectorDate,jdbcType=TIMESTAMP},
       </if>
       <if test="director != null">
         #{director,jdbcType=VARCHAR},
-      </if>
-      <if test="directorName != null">
-        #{directorName,jdbcType=VARCHAR},
       </if>
       <if test="directorDate != null">
         #{directorDate,jdbcType=TIMESTAMP},
@@ -206,17 +182,11 @@
       <if test="department != null">
         DEPARTMENT = #{department,jdbcType=VARCHAR},
       </if>
-      <if test="departmentName != null">
-        DEPARTMENT_NAME = #{departmentName,jdbcType=VARCHAR},
-      </if>
       <if test="departDate != null">
         DEPART_DATE = #{departDate,jdbcType=DATE},
       </if>
       <if test="office != null">
         OFFICE = #{office,jdbcType=VARCHAR},
-      </if>
-      <if test="officeName != null">
-        OFFICE_NAME = #{officeName,jdbcType=VARCHAR},
       </if>
       <if test="officeDate != null">
         OFFICE_DATE = #{officeDate,jdbcType=TIMESTAMP},
@@ -224,17 +194,11 @@
       <if test="deputyDirector != null">
         DEPUTY_DIRECTOR = #{deputyDirector,jdbcType=VARCHAR},
       </if>
-      <if test="deputyDirectorName != null">
-        DEPUTY_DIRECTOR_NAME = #{deputyDirectorName,jdbcType=VARCHAR},
-      </if>
       <if test="deputyDirectorDate != null">
         DEPUTY_DIRECTOR_DATE = #{deputyDirectorDate,jdbcType=TIMESTAMP},
       </if>
       <if test="director != null">
         DIRECTOR = #{director,jdbcType=VARCHAR},
-      </if>
-      <if test="directorName != null">
-        DIRECTOR_NAME = #{directorName,jdbcType=VARCHAR},
       </if>
       <if test="directorDate != null">
         DIRECTOR_DATE = #{directorDate,jdbcType=TIMESTAMP},
@@ -261,16 +225,12 @@
       INITIAL = #{initial,jdbcType=VARCHAR},
       INITIAL_DATE = #{initialDate,jdbcType=TIMESTAMP},
       DEPARTMENT = #{department,jdbcType=VARCHAR},
-      DEPARTMENT_NAME = #{departmentName,jdbcType=VARCHAR},
       DEPART_DATE = #{departDate,jdbcType=DATE},
       OFFICE = #{office,jdbcType=VARCHAR},
-      OFFICE_NAME = #{officeName,jdbcType=VARCHAR},
       OFFICE_DATE = #{officeDate,jdbcType=TIMESTAMP},
       DEPUTY_DIRECTOR = #{deputyDirector,jdbcType=VARCHAR},
-      DEPUTY_DIRECTOR_NAME = #{deputyDirectorName,jdbcType=VARCHAR},
       DEPUTY_DIRECTOR_DATE = #{deputyDirectorDate,jdbcType=TIMESTAMP},
       DIRECTOR = #{director,jdbcType=VARCHAR},
-      DIRECTOR_NAME = #{directorName,jdbcType=VARCHAR},
       DIRECTOR_DATE = #{directorDate,jdbcType=TIMESTAMP},
       CREATER = #{creater,jdbcType=VARCHAR},
       itemCreateAt = #{itemcreateat,jdbcType=TIMESTAMP},
@@ -293,6 +253,9 @@
   <update id="updAdvice" parameterType="com.zyyglxt.dataobject.adviceDO">
     update tb_governres_advice
     <set>
+      <if test="dataCode != null">
+        DATA_CODE = #{dataCode,jdbcType=VARCHAR},
+      </if>
       <if test="initial != null">
         INITIAL = #{initial,jdbcType=VARCHAR},
       </if>
@@ -302,17 +265,11 @@
       <if test="department != null">
         DEPARTMENT = #{department,jdbcType=VARCHAR},
       </if>
-      <if test="departmentName != null">
-        DEPARTMENT_NAME = #{departmentName,jdbcType=VARCHAR},
-      </if>
       <if test="departDate != null">
         DEPART_DATE = #{departDate,jdbcType=DATE},
       </if>
       <if test="office != null">
         OFFICE = #{office,jdbcType=VARCHAR},
-      </if>
-      <if test="officeName != null">
-        OFFICE_NAME = #{officeName,jdbcType=VARCHAR},
       </if>
       <if test="officeDate != null">
         OFFICE_DATE = #{officeDate,jdbcType=TIMESTAMP},
@@ -320,17 +277,11 @@
       <if test="deputyDirector != null">
         DEPUTY_DIRECTOR = #{deputyDirector,jdbcType=VARCHAR},
       </if>
-      <if test="deputyDirectorName != null">
-        DEPUTY_DIRECTOR_NAME = #{deputyDirectorName,jdbcType=VARCHAR},
-      </if>
       <if test="deputyDirectorDate != null">
         DEPUTY_DIRECTOR_DATE = #{deputyDirectorDate,jdbcType=TIMESTAMP},
       </if>
       <if test="director != null">
         DIRECTOR = #{director,jdbcType=VARCHAR},
-      </if>
-      <if test="directorName != null">
-        DIRECTOR_NAME = #{directorName,jdbcType=VARCHAR},
       </if>
       <if test="directorDate != null">
         DIRECTOR_DATE = #{directorDate,jdbcType=TIMESTAMP},

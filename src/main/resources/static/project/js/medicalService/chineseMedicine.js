@@ -253,7 +253,8 @@
                 orange.redirect(addUrl)
             });
 
-            $("#chargePersonSearch").selectUtil(webStatus);
+            var pl = dictUtil.getDictByCode(dictUtil.DICT_LIST.showStatus);
+            $("#chargePersonSearch").selectUtil(pl);
 
             var aCol = [
                 {field: 'chineseMedicineName', title: '专家名称'},
@@ -278,7 +279,7 @@
                 myTable = bootstrapTableUtil.myBootStrapTableInit("table", url, param, aCol);
             }
 
-            bootstrapTableUtil.globalSearch("table",url,aParam, aCol,"chineseMedicineStatus");
+            bootstrapTableUtil.globalSearch("table",url,aParam, aCol);
 
         })
 })();

@@ -2,7 +2,6 @@ package com.zyyglxt.service;
 
 import com.zyyglxt.dataobject.ChineseCulturalDO;
 import com.zyyglxt.dataobject.ChineseCulturalDOKey;
-import com.zyyglxt.dto.ChineseCulturalDto;
 import com.zyyglxt.error.BusinessException;
 
 import java.util.List;
@@ -18,7 +17,7 @@ public interface ICartoonAllusionsService {
     ChineseCulturalDO getCartoonAllusions(ChineseCulturalDOKey key);
 
     //查询所有漫画典故
-    List<ChineseCulturalDto> getCartoonAllusionsList(String chineseCulturalStatus);
+    List<ChineseCulturalDO> getCartoonAllusionsList(List<String> chineseCulturalStatus);
 
     //增加一个漫画典故
     int addCartoonAllusions(ChineseCulturalDO record);

@@ -2,7 +2,9 @@ package com.zyyglxt.dao;
 
 import com.zyyglxt.dataobject.CountersignDO;
 import com.zyyglxt.dataobject.CountersignDOKey;
+import org.springframework.stereotype.Component;
 
+@Component
 public interface CountersignDOMapper {
     int deleteByPrimaryKey(CountersignDOKey key);
 
@@ -12,7 +14,10 @@ public interface CountersignDOMapper {
 
     CountersignDO selectByPrimaryKey(CountersignDOKey key);
 
+    CountersignDO selectByItemcode(String itemcode);
+
     int updateByPrimaryKeySelective(CountersignDO record);
 
     int updateByPrimaryKey(CountersignDO record);
+
 }

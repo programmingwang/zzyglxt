@@ -2,7 +2,6 @@ package com.zyyglxt.service;
 
 import com.zyyglxt.dataobject.ChineseCulturalDO;
 import com.zyyglxt.dataobject.ChineseCulturalDOKey;
-import com.zyyglxt.dto.ChineseCulturalDto;
 import com.zyyglxt.error.BusinessException;
 
 import java.util.List;
@@ -18,7 +17,7 @@ public interface IIntangibleCulturalHeritageService {
     ChineseCulturalDO getIntangibleCulturalHeritage(ChineseCulturalDOKey key);
 
     //查询所有非物质文化遗产
-    List<ChineseCulturalDto> getIntangibleCulturalHeritageList(String chineseCulturalStatus);
+    List<ChineseCulturalDO> getIntangibleCulturalHeritageList(List<String> chineseCulturalStatus);
 
     //增加一个非物质文化遗产
     int addIntangibleCulturalHeritage(ChineseCulturalDO record);

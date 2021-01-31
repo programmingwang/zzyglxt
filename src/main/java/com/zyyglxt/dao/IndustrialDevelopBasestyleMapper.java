@@ -1,7 +1,6 @@
 package com.zyyglxt.dao;
 
 import com.zyyglxt.dataobject.IndustrialDevelopBasestyle;
-import com.zyyglxt.dto.industrialDevelop.IndustrialDevelopBasestyleDto;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -26,5 +25,5 @@ public interface IndustrialDevelopBasestyleMapper {
 
     int updateByPrimaryKey(IndustrialDevelopBasestyle record);
 
-    List<IndustrialDevelopBasestyleDto> selectAll(String orgCode);
+    List<IndustrialDevelopBasestyle> selectAll();
 }

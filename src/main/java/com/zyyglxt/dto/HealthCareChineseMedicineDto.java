@@ -1,6 +1,5 @@
 package com.zyyglxt.dto;
 
-import com.zyyglxt.dataobject.HealthCareChineseMedicineDO;
 import lombok.Data;
 import lombok.ToString;
 import lombok.experimental.Accessors;
@@ -15,7 +14,22 @@ import java.util.Date;
 @Data
 @ToString
 @Accessors(chain = true)
-public class HealthCareChineseMedicineDto extends HealthCareChineseMedicineDO {
-    private String fileName;
+public class HealthCareChineseMedicineDto {
+    private Integer itemid;
+    private String itemcode;
+    private String chineseMedicineName;
+    private String chineseMedicineType;
+    private String chineseMedicineAlias;
+    private String chineseMedicineSource;
+    private String chineseMedicineHarvesting;
+    private String chineseMedicineTaste;
+    private String chineseMedicineMerTro;
+    private String chineseMedicineEffect;
+    private String chineseMedicineUsage;
+    private String chineseMedicineStatus;
+    private String creater;
+    private Date itemcreateat;
+    private String updater;
+    private Date itemupdateat;
     private String filePath;
 }

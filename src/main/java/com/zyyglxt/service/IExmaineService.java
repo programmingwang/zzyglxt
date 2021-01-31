@@ -2,7 +2,6 @@ package com.zyyglxt.service;
 
 import com.zyyglxt.dataobject.IndustrialDevelopExpertRefDO;
 import com.zyyglxt.dto.ExmaineDto;
-import com.zyyglxt.dto.industrialDevelop.IndustrialDevelopTopicDODto;
 
 import java.util.List;
 
@@ -31,7 +30,4 @@ public interface IExmaineService {
     List<IndustrialDevelopExpertRefDO> selectByTopicCode(String topicCode);
 
     int deleteByTopicCode(String topicCode);
-
-    //查询课题和分配专家状态--分配专家
-    List<IndustrialDevelopTopicDODto> topicAndExpertStatus();
 }

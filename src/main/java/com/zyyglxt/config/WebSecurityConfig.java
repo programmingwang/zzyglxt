@@ -84,7 +84,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 "/user/queryOrgStatus","/dict/getDictByCode","/industrialdevelop/chi-med","/industrialdevelop/school",
                 "/industrialdevelop/tec-ser-org","/industrialDevelop/hosp_add","/plantation_add","/process_add","/produce_add",
                 "/school_add","/sale_add","/hosp_add","/lab_add","/tecserviceorg_add","/tour_add","/user/deletuser","/file/upload").permitAll().
-                anyRequest().authenticated().
+                //anyRequest().authenticated().
                     and().logout().
                     permitAll().//允许所有用户
                     logoutSuccessHandler(logoutSuccessHandler).//登出成功处理逻辑
@@ -100,10 +100,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     accessDeniedHandler(accessDeniedHandler).//权限拒绝处理逻辑
                     authenticationEntryPoint(authenticationEntryPoint).//匿名用户访问无权限资源时的异常处理
                 //会话管理
-                and().sessionManagement().
-                    invalidSessionUrl("/userLogin").
-                    maximumSessions(1).//同一账号同时登录最大用户数
-                    expiredSessionStrategy(sessionInformationExpiredStrategy);//会话失效(账号被挤下线)处理逻辑
+                and().sessionManagement().invalidSessionUrl("/userLogin").
+                    maximumSessions(20);//同一账号同时登录最大用户数
+                    //expiredSessionStrategy(sessionInformationExpiredStrategy);//会话失效(账号被挤下线)处理逻辑
         http.addFilterBefore(securityInterceptor, FilterSecurityInterceptor.class);
     }
 }

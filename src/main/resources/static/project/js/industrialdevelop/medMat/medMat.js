@@ -108,7 +108,7 @@
                 {field: 'price', title: '价格'},
                 {field: 'status', title: '状态', formatter:function (value, row, index) {
                         return medStatus[row.status].text
-                }},
+                    }},
                 {field: 'action',  title: '操作',formatter: operation,events:orgEvents}
             ];
 
@@ -121,6 +121,6 @@
                 myTable = bootstrapTableUtil.myBootStrapTableInit("table", url, param, aCol);
             }
 
-            bootstrapTableUtil.globalSearch("table",url,aParam, aCol, "status");
+            bootstrapTableUtil.globalSearch("table",url,aParam, aCol);
         })
 })();

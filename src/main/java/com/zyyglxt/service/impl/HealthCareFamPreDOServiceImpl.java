@@ -4,7 +4,6 @@ import com.zyyglxt.dao.HealthCareFamPreDOMapper;
 import com.zyyglxt.dataobject.FamPreDO;
 import com.zyyglxt.dataobject.HealthCareFamPreDO;
 import com.zyyglxt.dataobject.HealthCareFamPreDOKey;
-import com.zyyglxt.dto.HealthCareFamPreDto;
 import com.zyyglxt.error.BusinessException;
 import com.zyyglxt.error.EmBusinessError;
 import com.zyyglxt.service.HealthCareFamPreDOService;
@@ -79,8 +78,12 @@ public class HealthCareFamPreDOServiceImpl implements HealthCareFamPreDOService 
     }
     /*查询国医话健康所有数据*/
     @Override
-    public List<HealthCareFamPreDto> selectAllHealthCareFamPre(String status) {
-        return healthCareFamPreDOMapper.selectAllHealthCareFamPre(status);
+    public List<HealthCareFamPreDO> selectAllHealthCareFamPre(List<String> status) {
+        List<HealthCareFamPreDO> healthCareFamPreDOList=new ArrayList<>();
+        for(String careFamStatus: status){
+            healthCareFamPreDOList.addAll(healthCareFamPreDOMapper.selectAllHealthCareFamPre(careFamStatus));
+        }
+        return healthCareFamPreDOList;
     }
    /*国医话健康数据状态*/
     @Override

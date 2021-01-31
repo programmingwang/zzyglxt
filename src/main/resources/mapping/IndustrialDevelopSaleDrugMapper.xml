@@ -22,29 +22,18 @@
     <result column="UPDATER" jdbcType="VARCHAR" property="updater" />
     <result column="itemUpdateAt" jdbcType="TIMESTAMP" property="itemupdateat" />
   </resultMap>
-  <resultMap id="ResultMapWithFile" type="com.zyyglxt.dto.industrialDevelop.IndustrialDevelopSaleDrugDto" extends="BaseResultMap">
-  <collection property="filePath" ofType="java.lang.String">
-            <constructor>
-                <arg column="FILE_PATH"/>
-            </constructor>
-        </collection>
-</resultMap>
   <sql id="Base_Column_List">
     <!--@mbg.generated-->
-    tb_industrial_develop_sale_drug.itemID,tb_industrial_develop_sale_drug.itemCode,tb_industrial_develop_sale_drug.DRUG_NAME,
-tb_industrial_develop_sale_drug.FUNCTION_INDICATIONS,tb_industrial_develop_sale_drug.USAGE,tb_industrial_develop_sale_drug.ADVERSE_REACTIONS,
-tb_industrial_develop_sale_drug.TABOO,tb_industrial_develop_sale_drug.SPECIFICATIONS,tb_industrial_develop_sale_drug.CAREFUL,
-tb_industrial_develop_sale_drug.STORAGE,tb_industrial_develop_sale_drug.PACKING,tb_industrial_develop_sale_drug.STATUS,
-tb_industrial_develop_sale_drug.ORG_CODE,tb_industrial_develop_sale_drug.CREATER,tb_industrial_develop_sale_drug.itemCreateAt,
-tb_industrial_develop_sale_drug.UPDATER,tb_industrial_develop_sale_drug.itemUpdateAt
+    itemID, itemCode, DRUG_NAME, FUNCTION_INDICATIONS, `USAGE`, ADVERSE_REACTIONS, TABOO, 
+    SPECIFICATIONS, CAREFUL, `STORAGE`, PACKING, `STATUS`, ORG_CODE, CREATER, itemCreateAt, 
+    UPDATER, itemUpdateAt
   </sql>
-  <select id="selectByPrimaryKey" parameterType="map" resultMap="ResultMapWithFile">
+  <select id="selectByPrimaryKey" parameterType="map" resultMap="BaseResultMap">
     <!--@mbg.generated-->
     select 
-    <include refid="Base_Column_List" />,
-    tcf.FILE_PATH
-    from tb_industrial_develop_sale_drug left join tb_culpro_file tcf on tb_industrial_develop_sale_drug.itemCode = tcf.DATA_CODE
-    where tb_industrial_develop_sale_drug.itemCode = #{itemcode,jdbcType=CHAR}
+    <include refid="Base_Column_List" />
+    from tb_industrial_develop_sale_drug
+    where itemCode = #{itemcode,jdbcType=CHAR}
     order by itemUpdateAt desc
   </select>
   <delete id="deleteByPrimaryKey" parameterType="map">
@@ -244,10 +233,9 @@ tb_industrial_develop_sale_drug.UPDATER,tb_industrial_develop_sale_drug.itemUpda
     where itemCode = #{itemcode,jdbcType=CHAR}
   </update>
 
-  <select id="selectAllSaleDrug" resultMap="ResultMapWithFile">
-        SELECT <include refid="Base_Column_List"/>,
-        tcf.FILE_PATH
-        FROM tb_industrial_develop_sale_drug left join tb_culpro_file tcf on tb_industrial_develop_sale_drug.itemCode = tcf.DATA_CODE
+  <select id="selectAllSaleDrug" resultMap="BaseResultMap">
+        SELECT *
+        FROM tb_industrial_develop_sale_drug
         WHERE STATUS = #{status,jdbcType=VARCHAR}
         AND ORG_CODE = #{orgCode}
         order by itemUpdateAt desc

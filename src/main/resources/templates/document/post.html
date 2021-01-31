@@ -32,13 +32,13 @@
                         <div class="input-group-prepend" style="margin-top: 9px;">
                             <span class="input-text" >其他选项： 公开方式：</span>
                         </div>
-                        <select class="custom-select" id="chargePersonSearch"></select>
+                        <select class="custom-select" id="postPublicWay"></select>
                     </div>
                 </div>
                 <div class="col-lg-1"></div>
 
                 <div class="col-lg-5 col-md-8 row" style="margin-top: 9px;">
-                    发文时间: &nbsp &nbsp
+                    发布时间: &nbsp &nbsp
                     <div id="stratTime">
                         <input type="number" value="00" oninput="if(value>23)value=0;if(value<0)value=23;var v=this.value;while(v.length<2){v='0'+v;}this.value=v;" onkeyup="this.value=this.value.replace(/\D/g,'');" style="outline: none;text-align: left; border: none;width: 50px;border-radius: 2px;box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.349019607843137);">
                         &nbsp : &nbsp
@@ -74,4 +74,5 @@
 
 </body>
 <script type="text/javascript" data-main="/main/main.js" th:src="@{/component/require@2.3.6/require-2.3.6.js}"></script>
+<script type="text/javascript" th:src="@{/project/js/document/post.js}"></script>
 </html>

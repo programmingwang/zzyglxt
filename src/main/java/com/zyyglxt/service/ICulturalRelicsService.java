@@ -2,7 +2,6 @@ package com.zyyglxt.service;
 
 import com.zyyglxt.dataobject.ChineseCulturalDO;
 import com.zyyglxt.dataobject.ChineseCulturalDOKey;
-import com.zyyglxt.dto.ChineseCulturalDto;
 
 import java.util.List;
 
@@ -17,7 +16,7 @@ public interface ICulturalRelicsService {
     ChineseCulturalDO getCulturalRelics(ChineseCulturalDOKey key);
 
     //查询所有文化古迹
-    List<ChineseCulturalDto> getCulturalRelicsList(String chineseCulturalStatus);
+    List<ChineseCulturalDO> getCulturalRelicsList(List<String> chineseCulturalStatus);
 
     //增加一个文化古迹
     int addCulturalRelics(ChineseCulturalDO record);

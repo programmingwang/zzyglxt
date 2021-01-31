@@ -45,6 +45,7 @@ public class LogUtil {
         while (true) { // 等待所有任务都结束了继续执行
             try {
                 if (executorService.isTerminated()) {
+                    System.out.println("所有的子线程都结束了！");
                     break;
                 }
                 Thread.sleep(1000);

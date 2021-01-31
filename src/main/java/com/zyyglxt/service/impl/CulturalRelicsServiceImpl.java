@@ -3,7 +3,6 @@ package com.zyyglxt.service.impl;
 import com.zyyglxt.dao.ChineseCulturalDOMapper;
 import com.zyyglxt.dataobject.ChineseCulturalDO;
 import com.zyyglxt.dataobject.ChineseCulturalDOKey;
-import com.zyyglxt.dto.ChineseCulturalDto;
 import com.zyyglxt.error.BusinessException;
 import com.zyyglxt.error.EmBusinessError;
 import com.zyyglxt.util.DateUtils;
@@ -44,8 +43,12 @@ public class CulturalRelicsServiceImpl implements ICulturalRelicsService {
     }
 
     @Override
-    public List<ChineseCulturalDto> getCulturalRelicsList(String chineseCulturalStatus) {
-        return chineseCulturalDOMapper.selectChineseCulturalList("文化古迹",chineseCulturalStatus);
+    public List<ChineseCulturalDO> getCulturalRelicsList(List<String> chineseCulturalStatus) {
+        List<ChineseCulturalDO> chineseCulturalDOList = new ArrayList<>();
+        for (String culturalStatus : chineseCulturalStatus) {
+            chineseCulturalDOList.addAll(chineseCulturalDOMapper.selectChineseCulturalList("文化古迹",culturalStatus));
+        }
+        return chineseCulturalDOList;
 
     }
 

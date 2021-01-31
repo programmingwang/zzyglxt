@@ -3,7 +3,6 @@ package com.zyyglxt.service.impl;
 import com.zyyglxt.dao.HealthCareChineseMedicineDOMapper;
 import com.zyyglxt.dataobject.HealthCareChineseMedicineDO;
 import com.zyyglxt.dataobject.HealthCareChineseMedicineDOKey;
-import com.zyyglxt.dto.HealthCareChineseMedicineDto;
 import com.zyyglxt.error.BusinessException;
 import com.zyyglxt.error.EmBusinessError;
 import com.zyyglxt.service.HealthCareChineseMedicineDOService;
@@ -30,6 +29,8 @@ import java.util.UUID;
 public class HealthCareChineseMedicineDOServiceImpl implements HealthCareChineseMedicineDOService {
     @Resource
     private HealthCareChineseMedicineDOMapper healthCareChineseMedicineDOMapper;
+    @Resource
+    private IFileService iFileService;
     @Autowired
     private ValidatorImpl validator;
     @Autowired
@@ -44,9 +45,12 @@ public class HealthCareChineseMedicineDOServiceImpl implements HealthCareChinese
         if(result.isHasErrors()){
             throw new BusinessException(result.getErrMsg(), EmBusinessError.PARAMETER_VALIDATION_ERROR);
         }
+        //iFileService.addFile(fileDO.setDataCode());
+        //fileDO.setDataCode(UUID.randomUUID().toString());
         if(record.getItemcode()==null){
             record.setItemcode(UUID.randomUUID().toString());
         }
+        record.setChineseMedicineStatus("0");
         record.setItemcreateat(new Date());
         record.setCreater(usernameUtil.getOperateUser());
         record.setUpdater(usernameUtil.getOperateUser());
@@ -76,8 +80,12 @@ public class HealthCareChineseMedicineDOServiceImpl implements HealthCareChinese
     }
      /*查询所有中医药常识数据*/
     @Override
-    public List<HealthCareChineseMedicineDto> selectAllHealthCareChineseMedicine(String chineseMedicineStatus) {
-        return healthCareChineseMedicineDOMapper.selectAllHealthCareChineseMedicine(chineseMedicineStatus);
+    public List<HealthCareChineseMedicineDO> selectAllHealthCareChineseMedicine(List<String> chineseMedicineStatus) {
+        List<HealthCareChineseMedicineDO> healthCareChineseMedicineDOList=new ArrayList<>();
+        for(String status:chineseMedicineStatus){
+            healthCareChineseMedicineDOList.addAll(healthCareChineseMedicineDOMapper.selectAllHealthCareChineseMedicine(status));
+        }
+        return healthCareChineseMedicineDOList;
     }
    /*中医药数据状态*/
     @Override

@@ -7,6 +7,43 @@
             url = getRoleTable(sessionStorage.getItem("rolename"),url,"reportDataStatus",webStatus);
             var aParam = {
             };
+
+
+            var date= new Date();
+            $("#updatef").datetimepicker({
+                format: 'yyyy-mm-dd ',//显示格式
+                startDate: date ,
+                startView:2,
+                minView:1,
+                maxView :3,
+                language: 'cn',
+                autoclose: 1,//选择后自动关闭
+                clearBtn:true,//清除按钮
+                showMeridian:true,
+            });
+            $("#updateone").datetimepicker({
+                format: 'yyyy-mm-dd ',//显示格式
+                startDate: date ,
+                startView:2,
+                minView:1,
+                maxView :3,
+                language: 'cn',
+                autoclose: 1,//选择后自动关闭
+                clearBtn:true,//清除按钮
+                showMeridian:true,
+            });
+            $("#updatetwo").datetimepicker({
+                format: 'yyyy-mm-dd ',//显示格式
+                startDate: date ,
+                startView:2,
+                minView:1,
+                maxView :3,
+                language: 'cn',
+                autoclose: 1,//选择后自动关闭
+                clearBtn:true,//清除按钮
+                showMeridian:true,
+            });
+
             //操作
             function operation(value, row, index){
                 return getRoleOperate(value,row,index,sessionStorage.getItem("rolename"),row.reportDataStatus,webStatus)
@@ -44,7 +81,7 @@
                 'click .pass' : function (e, value, row, index) {
                     var myPassReportModalData = {
                         modalBodyID: "myPassReportModal",
-                        modalTitle: "处长审核通过意见",
+                        modalTitle: "处室审核通过意见",
                         modalClass: "modal-lg",
                         modalConfirmFun: function () {
                             var isSuccess = false;
@@ -54,51 +91,6 @@
                                 updaterf:"政务资源处长",
                                 //updatef : $("#updatef").val(),
                                 updatef:d.getFullYear()+"-"+(d.getMonth()+1)+"-"+d.getDate(),
-                                itemid : row.itemid,
-                                itemcode : row.itemcode,
-                            };
-                            var submitStatus = {
-                                "reportDataStatus":getStatus(sessionStorage.getItem("rolename"),webStatus)
-                            };
-                            ajaxUtil.myAjax(null, "updaterequestreport", PassReport, function (data) {
-                                if (data && ajaxUtil.success(data)) {
-                                    if (data.code == ajaxUtil.successCode) {
-                                        ajaxUtil.myAjax(null, "changestatustorequestreport/" + row.itemid + "/" + row.itemcode, submitStatus, function (data) {
-                                            if (ajaxUtil.success(data)) {
-                                                if (data.code == 88888) {
-                                                    alertUtil.success("提交成功");
-                                                    isSuccess = true;
-                                                    refreshTable();
-                                                } else {
-                                                    alertUtil.error(data.msg);
-                                                }
-                                            }
-                                        }, false);
-                                    } else {
-                                        alertUtil.error(data.msg);
-                                    }
-                                }
-                            }, false, true);
-                            return isSuccess;
-                        }
-                    };
-                    var myReportModal = modalUtil.init(myPassReportModalData);
-                    myReportModal.show();
-                },
-
-                'click .passth' : function (e, value, row, index) {
-                    var myPassReportModalData = {
-                        modalBodyID: "myPassReportthModal",
-                        modalTitle: "政务资源综合处处长审核通过意见",
-                        modalClass: "modal-lg",
-                        modalConfirmFun: function () {
-                            var isSuccess = false;
-                            var d=new Date();
-                            var PassReport = {
-                                reasonth : $("#reasonth").val(),
-                                updaterth:"政务资源综合处处长",
-                                updateth:d.getFullYear()+"-"+(d.getMonth()+1)+"-"+d.getDate(),
-                                //updateone : $("#updateone").val(),
                                 itemid : row.itemid,
                                 itemcode : row.itemcode,
                             };
@@ -224,7 +216,7 @@
                 'click .fail' : function (e, value, row, index) {
                     var myFailReportModalData ={
                         modalBodyID :"myFailReportModal",
-                        modalTitle : "处长审核不通过意见",
+                        modalTitle : "处室审核不通过意见",
                         modalClass : "modal-lg",
                         modalConfirmFun:function () {
                             var isSuccess = false;
@@ -313,54 +305,6 @@
                     var myPassModal = modalUtil.init(myFailReportModalData);
                     myPassModal.show();
                 },
-
-                'click .failth' : function (e, value, row, index) {
-                    var myFailReportModalData ={
-                        modalBodyID :"myFailReportthModal",
-                        modalTitle : "政务资源综合处处长审核不通过意见",
-                        modalClass : "modal-lg",
-                        modalConfirmFun:function () {
-                            var isSuccess = false;
-                            var d=new Date();
-                            var PassReport = {
-                                reasonth : $("#reasonoth").val(),
-                                updaterth:"政务资源综合处处长长",
-                                updateth : d.getFullYear()+"-"+(d.getMonth()+1)+"-"+d.getDate(),
-                                itemid : row.itemid,
-                                itemcode : row.itemcode,
-                            };
-                            var submitStatus = {
-                                "reportDataStatus": ""
-                            };
-                            if(sessionStorage.getItem("rolename") == "政务资源综合处处长长"){
-                                submitStatus.reportDataStatus = webStatus[12].id;
-                            }
-                            ajaxUtil.myAjax(null, "updaterequestreport", PassReport, function (data) {
-                                if (data && ajaxUtil.success(data)) {
-                                    if (data.code == ajaxUtil.successCode) {
-                                        ajaxUtil.myAjax(null, "changestatustorequestreport/" + row.itemid + "/" + row.itemcode, submitStatus, function (data) {
-                                            if (ajaxUtil.success(data)) {
-                                                if (data.code == 88888) {
-                                                    alertUtil.success("提交成功");
-                                                    isSuccess = true;
-                                                    refreshTable();
-                                                } else {
-                                                    alertUtil.error(data.msg);
-                                                }
-                                            }
-                                        }, false);
-                                    } else {
-                                        alertUtil.error(data.msg);
-                                    }
-                                }
-                            }, false, true);
-                            return isSuccess;
-                        }
-                    };
-                    var myPassModal = modalUtil.init(myFailReportModalData);
-                    myPassModal.show();
-                },
-
                 'click .failtwo' : function (e, value, row, index) {
                     var myFailReportModalData ={
                         modalBodyID :"myFailReporttwoModal",
@@ -531,76 +475,7 @@
                 myTable = bootstrapTableUtil.myBootStrapTableInit("table", url, param, aCol);
             }
 
-            $("#btnSearch").unbind().on('click',function() {
-                if(document.getElementById("stratTime")){
-                    var stratTime=document.getElementById("stratTime").children;
-                    var endTime=document.getElementById("endTime").children;
-                    stratTime=stratTime[0].value+":"+stratTime[1].value+":"+stratTime[2].value;
-                    endTime=endTime[0].value+":"+endTime[1].value+":"+endTime[2].value;
-                }
-                var newArry = [];
-                var str = document.getElementById("taskNameSearch").value.toLowerCase();
-                var allTableData = JSON.parse(localStorage.getItem("2"));
-                if(str.indexOf("请输入")!=-1){
-                    str=""
-                }
-                for (var i in allTableData) {
-                    for (var v in aCol){
-                        var textP = allTableData[i][aCol[v].field];
-                        var isTimeSlot=false;             // 默认时间条件为true
-                        //状态条件判断,与表格字段的状态一致,这里根据自己写的修改
-                        // console.log("addstr:"+addstr)
-                        // console.log("status:"+status)
-                        // console.log(allTableData[i]["govPunlic"]);
-                        //调试时可以先打印出来，进行修改
-                        //当存在时将条件改为flase
-                        var makeTime = allTableData[i]["itemcreateat"].substring(11,19);
-                        if (makeTime >= stratTime && makeTime <= endTime) {
-                            isTimeSlot = true;
-                        }
-                        else {
-                            isTimeSlot = false;
-                        }
-                        if (stratTime == endTime) {
-                            isTimeSlot = true;
-                        }
-                        if (textP == null || textP == undefined || textP == '') {
-                            textP = "1";
-                        }
-                        if($("#closeAndOpen").text().search("展开")!= -1 && textP.search(str) != -1){
-                            isTimeSlot = false;
-                            newArry.push(allTableData[i])
-                        }
-                        if($("#closeAndOpen").text().search("收起")!= -1 && textP.search(str) != -1 && isTimeSlot){
-                            newArry.push(allTableData[i])
-                        }
-                    }
-                }
-                var newArr=new Set(newArry)
-                newArry=Array.from(newArr)
-                $("#table").bootstrapTable("load", newArry);
-
-            })
-
-            var aria=this.ariaExpanded;
-            var element=document.getElementById("stratTime");
-            $("#closeAndOpen").unbind().on('click',function(){
-                this.innerText="";
-                if (aria==="true"){
-                    this.innerText="展开";
-                    aria = "false";
-                    if (typeof(element)!= "undefined" || element != null){
-                        document.getElementById("btn_addTask").classList.remove("openBtnP");
-                    }
-                } else {
-                    this.innerText="收起";
-                    aria = "true";
-                    if (typeof(element)!= "undefined" || element != null){
-                        document.getElementById("btn_addTask").classList.add("openBtnP");
-                    }
-
-                }
-            })
+            bootstrapTableUtil.globalSearch("table",url,aParam, aCol);
 
         })
     function getRoleTable(role,preUrl,status,webStatus) {
@@ -609,10 +484,8 @@
             return preUrl + "?"+status+"="+webStatus[0].id+"&"+status+"="+webStatus[1].id+"&"+status+"="+webStatus[2].id+"&"+status+"="+webStatus[3].id+"&"+status+"="+webStatus[4].id+"&"+status+"="+webStatus[5].id+"&"+status+"="+webStatus[6].id+"&"+status+"="+webStatus[7].id+"&"+status+"="+webStatus[8].id+"&"+status+"="+webStatus[9].id;
         }else if(role === "政务资源处长"){
             return preUrl + "?"+status+"="+webStatus[1].id+"&"+status+"="+webStatus[2].id+"&"+status+"="+webStatus[4].id;
-        }else if(role === "政务资源综合处处长"){
-           return preUrl + "?"+status+"="+webStatus[10].id+"&"+status+"="+webStatus[11].id+"&"+status+"="+webStatus[12].id;
-       }else if(role === "政务资源分管局长") {
-            return preUrl + "?"+status+"="+webStatus[13].id+"&"+status+"="+webStatus[5].id+"&"+status+"="+webStatus[3].id;
+        }else if(role === "政务资源分管局长") {
+            return preUrl + "?"+status+"="+webStatus[3].id+"&"+status+"="+webStatus[5].id+"&"+status+"="+webStatus[10].id;
         } else if(role === "政务资源局长") {
            return preUrl + "?"+status+"="+webStatus[6].id+"&"+status+"="+webStatus[7].id+"&"+status+"="+webStatus[8].id+"&"+status+"="+webStatus[9].id;
        }
@@ -626,16 +499,16 @@
                     '<a class="submit"  style="margin:0 1em;text-decoration: none;color:#4df115;" data-target="#staticBackdrop" >提交</a>',
                     '<a class="delete" style="margin:0 1em;text-decoration: none;color:#ed0f09;"  data-toggle="modal" data-target="#staticBackdrop" >删除</a>',
                 ].join('');
-            }else if(status == webStatus[2].id || status ==webStatus[11].id|| status ==webStatus[9].id){
+            }else if(status == webStatus[2].id || status ==webStatus[3].id|| status ==webStatus[9].id){
                 return [
                     '<a class="view" style="margin:0 1em;text-decoration: none;color:#348eff;" data-toggle="modal" data-target="" >查看</a>',
                 ].join('');
-            }else if(status == webStatus[4].id || status == webStatus[5].id || status == webStatus[6].id|| status == webStatus[7].id|| status == webStatus[12].id){
+            }else if(status == webStatus[4].id || status == webStatus[5].id || status == webStatus[6].id|| status == webStatus[7].id){
                 return [
                     '<a class="view" style="margin:0 1em;text-decoration: none;color:#348eff;" data-toggle="modal" data-target="" >查看</a>',
                     '<a class="delete" style="margin:0 1em;text-decoration: none;color:#ed0f09;" data-toggle="modal" data-target="#staticBackdrop" >删除</a>',
                 ].join('');
-            }else if(status == webStatus[1].id || status == webStatus[8].id|| status == webStatus[10].id|| status == webStatus[13].id){
+            }else if(status == webStatus[1].id || status == webStatus[8].id|| status == webStatus[10].id){
                 return [
                     '<a class="view" style="margin:0 1em;text-decoration: none;color:#348eff;" data-toggle="modal" data-target="" >查看</a>',
                     '<a class="no-submit" style="margin:0 1em;text-decoration: none;color:#ed0f09;" data-toggle="modal" data-target="" >取消提交</a>',
@@ -655,21 +528,8 @@
                 ].join('');
             }
 
-        } else if(role === "政务资源综合处处长"){
-            if(status == webStatus[2].id||status == webStatus[10].id){
-                return [
-                    '<a  class="passth"  data-toggle="modal" style="margin:0 0.6em;text-decoration: none;color:#4df115;" data-target="#staticBackdrop" >通过</a>',
-                    '<a  class="failth"  data-toggle="modal" style="margin:0 0.6em;text-decoration: none;color:#ed0f09;" data-target="#staticBackdrop" >不通过</a>',
-                    '<a class="view" data-toggle="modal" style="margin:0 0.6em;text-decoration: none;color:#348eff;" data-target="" >查看</a>',
-                ].join('');
-            }else if( status == webStatus[12].id){
-                return [
-                    '<a class="view" data-toggle="modal" style="margin:0 1em;text-decoration: none;color:#348eff;" data-target="" >查看</a>',
-                ].join('');
-            }
-
         }else if(role === "政务资源分管局长"){
-            if(status == webStatus[11].id||status == webStatus[13].id ){
+            if(status == webStatus[10].id||status == webStatus[2].id ){
                 return [
                     '<a  class="passone"  data-toggle="modal" style="margin:0 0.6em;text-decoration: none;color:#4df115;" data-target="#staticBackdrop" >通过</a>',
                     '<a  class="failone"  data-toggle="modal" style="margin:0 0.6em;text-decoration: none;color:#ed0f09;" data-target="#staticBackdrop" >不通过</a>',
@@ -713,11 +573,7 @@
             return webStatus[1].id
         }else if(role === "政务资源处长"){
             return webStatus[10].id
-        }
-      else if(role === "政务资源综合处处长"){
-          return webStatus[13].id
-      }
-        else if(role === "政务资源分管局长"){
+        }else if(role === "政务资源分管局长"){
             return webStatus[8].id
         }
       else if(role === "政务资源局长"){

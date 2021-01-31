@@ -69,8 +69,12 @@ public class FamPreDOServiceImpl implements FamPreDOService {
     }
 
     @Override
-    public List<FamPreDO> selectAllFamPre(String status) {
-        return famPreDOMapper.selectAllFamPre(status);
+    public List<FamPreDO> selectAllFamPre(List<String> status) {
+        List<FamPreDO> famPreDOList=new ArrayList<>();
+        for(String fampreStatus: status){
+            famPreDOList.addAll(famPreDOMapper.selectAllFamPre(fampreStatus));
+        }
+        return famPreDOList;
     }
             /*历史名方数据状态*/
     @Override

@@ -60,8 +60,7 @@
                     operateMessage = "更新名老中医成功";
                     entity = {
                         itemid: tempdata.itemid,
-                        itemcode: tempdata.itemcode,
-                        chineseMedicineStatus: '0'
+                        itemcode: tempdata.itemcode
                     };
                 }
                 entity["chineseMedicineName"] = $("#chineseMedicineName").val();
@@ -88,7 +87,6 @@
                         alertUtil.alert(data.msg);
                     }
                 },false,true);
-                return false;
             });
 
             /*处理提交按钮*/
@@ -144,7 +142,6 @@
                         alertUtil.alert(data.msg);
                     }
                 },false,true);
-                return false;
             });
 
             /*初始化数据*/

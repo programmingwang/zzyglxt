@@ -4,7 +4,6 @@ import com.zyyglxt.dao.IndustrialDevelopSciAchiDOMapper;
 import com.zyyglxt.dataobject.IndustrialDevelopSciAchiDO;
 import com.zyyglxt.dataobject.IndustrialDevelopSciAchiDOKey;
 import com.zyyglxt.dataobject.validation.ValidationGroups;
-import com.zyyglxt.dto.industrialDevelop.IndustrialDevelopSciAchiDODto;
 import com.zyyglxt.error.BusinessException;
 import com.zyyglxt.error.EmBusinessError;
 import com.zyyglxt.service.IIndustrialDevelopSciAchiService;
@@ -79,7 +78,8 @@ public class IndustrialDevelopSciAchiServiceImpl implements IIndustrialDevelopSc
     }
 
     @Override
-    public List<IndustrialDevelopSciAchiDODto> getAchievement(String orgCode) {
+    public List<IndustrialDevelopSciAchiDO> getAchievement(String orgCode) {
+
         return sciAchiDOMapper.selectAll(orgCode);
     }
 

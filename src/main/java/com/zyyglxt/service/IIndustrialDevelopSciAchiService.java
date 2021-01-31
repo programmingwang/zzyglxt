@@ -2,7 +2,6 @@ package com.zyyglxt.service;
 
 import com.zyyglxt.dataobject.IndustrialDevelopSciAchiDO;
 import com.zyyglxt.dataobject.IndustrialDevelopSciAchiDOKey;
-import com.zyyglxt.dto.industrialDevelop.IndustrialDevelopSciAchiDODto;
 
 import java.util.List;
 
@@ -21,6 +20,6 @@ public interface IIndustrialDevelopSciAchiService {
 
     void increaseVisitNum(IndustrialDevelopSciAchiDOKey key);
 
-    List<IndustrialDevelopSciAchiDODto> getAchievement(String orgCode);
+    List<IndustrialDevelopSciAchiDO> getAchievement(String orgCode);
 
 }

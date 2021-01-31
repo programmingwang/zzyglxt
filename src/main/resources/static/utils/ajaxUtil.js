@@ -104,36 +104,7 @@
                 async: false,
                 success:function(data){
                     if(data && data.code == successCode){}else{
-                        data.msg == "您未上传图片或者附件！"?
-                            alertUtil.warning(data.msg) :
-                            alertUtil.error(data.msg)
-                    }
-                },
-                error: function(data){
-                    alertUtil.error(data.msg)
-                }
-            });
-        }
-
-        function postFileAjax(dataCode, file, itemCode, uploader,uploaderCode){
-            var formData = new FormData();
-            formData.append("dataCode",dataCode);
-            formData.append("file",file);
-            formData.append("itemcode",itemCode);
-            formData.append("uploader",uploader);
-            formData.append("uploaderCode",uploaderCode);
-            $.ajax({
-                url:"/file/upload",
-                type:'POST',
-                data: formData,
-                processData: false,   // jQuery不要去处理发送的数据
-                contentType: false,   // jQuery不要去设置Content-Type请求头
-                async: false,
-                success:function(data){
-                    if(data && data.code == successCode){}else{
-                        data.msg == "您未上传图片或者附件！"?
-                            alertUtil.warning(data.msg) :
-                            alertUtil.error(data.msg)
+                        alertUtil.error(data.msg);
                     }
                 },
                 error: function(data){
@@ -162,20 +133,8 @@
         }
 
         function updateFile(dataCode, file, uploader,uploaderCode){
-            $.ajax({
-                url:"/file/delete?dataCode="+dataCode,
-                type:'GET',
-                processData: false,   // jQuery不要去处理发送的数据
-                contentType: false,   // jQuery不要去设置Content-Type请求头
-                success:function(data){
-                    fileAjax(dataCode, file, uploader, uploaderCode)
-                    alertUtil.success(data.msg);
-                },
-                error: function(data){
-                    alertUtil.error(data.msg)
-                }
-            });
-
+            deleteFile(dataCode);
+            fileAjax(dataCode, file, uploader, uploaderCode);
         }
 
 
@@ -193,8 +152,7 @@
             fileAjax: fileAjax,
             successCode:successCode,
             deleteFile: deleteFile,
-            updateFile: updateFile,
-            postFileAjax: postFileAjax,
+            updateFile: updateFile
         }
     })
 })();

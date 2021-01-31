@@ -59,8 +59,6 @@
     ,
     <include refid="Blob_Column_List" />
     from user
-    where username != #{username,jdbcType=VARCHAR}
-      and itemCode != #{itemcode,jdbcType=CHAR}
     order by itemUpdateAt desc
   </select>
   <select id="selectByUsername" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
@@ -71,7 +69,6 @@
     from user
     where USERNAME = #{username,jdbcType=VARCHAR}
     order by itemUpdateAt desc
-    limit 1
   </select>
   <select id="selectByMobilePhone" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
      select
@@ -84,10 +81,8 @@
   </select>
   <delete id="deleteByPrimaryKey" parameterType="com.zyyglxt.dataobject.UserDOKey">
     delete from user
-    where itemCode = #{itemcode,jdbcType=CHAR}
-    <if test="itemid != null">
-    and itemID = #{itemid,jdbcType=INTEGER}
-</if>
+    where itemID = #{itemid,jdbcType=INTEGER}
+      and itemCode = #{itemcode,jdbcType=CHAR}
   </delete>
   <delete id="deleteByUsername" parameterType="java.lang.String">
     delete from user

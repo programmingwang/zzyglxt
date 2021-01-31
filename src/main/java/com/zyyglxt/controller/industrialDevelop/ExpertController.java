@@ -28,9 +28,7 @@ public class ExpertController {
     @ResponseBody
     @LogAnnotation(appCode ="",logTitle ="产业发展-专家管理-新增专家账号",logLevel ="3",creater ="",updater = "")
         public ResponseData addExpert(@RequestBody IndustrialDevelopExpertDto industrialDevelopExpertDto) {
-        if (industrialExpertService.addExpert(industrialDevelopExpertDto) != null){
-            return new ResponseData(EmBusinessError.USER_NAME_EXIST);
-        }
+        industrialExpertService.addExpert(industrialDevelopExpertDto);
         return new ResponseData(EmBusinessError.success);
     }
 
@@ -42,12 +40,11 @@ public class ExpertController {
         return new ResponseData(EmBusinessError.success);
     }
 
-    @RequestMapping(value = "/expert/{userCode}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/expert/{itemCode}", method = RequestMethod.DELETE)
     @ResponseBody
     @LogAnnotation(appCode ="",logTitle ="产业发展-专家管理-删除",logLevel ="4",creater ="",updater = "")
-    public ResponseData delExpert(@PathVariable("userCode") String userCode) {
-
-        industrialExpertService.delExpert(userCode);
+    public ResponseData delExpert(@PathVariable("itemCode") String itemCode) {
+        industrialExpertService.delExpert(itemCode);
         return new ResponseData(EmBusinessError.success);
     }
 

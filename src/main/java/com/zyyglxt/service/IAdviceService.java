@@ -15,7 +15,7 @@ public interface IAdviceService {
 
     adviceDO selectByPrimaryKey(adviceDOKey key);
 
-    void updAdvice(adviceDO advice);
+    void updAdvice(String dataCode);
 
     void delByDataCode(String dataCode);
 

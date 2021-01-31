@@ -3,7 +3,6 @@ package com.zyyglxt.service;
 import com.zyyglxt.dataobject.FileDO;
 import com.zyyglxt.dataobject.HealthCareChineseMedicineDO;
 import com.zyyglxt.dataobject.HealthCareChineseMedicineDOKey;
-import com.zyyglxt.dto.HealthCareChineseMedicineDto;
 import com.zyyglxt.error.BusinessException;
 import org.apache.ibatis.annotations.Param;
 
@@ -26,7 +25,7 @@ public interface HealthCareChineseMedicineDOService {
 
     HealthCareChineseMedicineDO selectByPrimaryKey(HealthCareChineseMedicineDOKey key);
 
-    List<HealthCareChineseMedicineDto> selectAllHealthCareChineseMedicine(String chineseMedicineStatus);//查询所有中医药常识数据
+    List<HealthCareChineseMedicineDO> selectAllHealthCareChineseMedicine(List<String> chineseMedicineStatus);//查询所有中医药常识数据
 
     int changeStatusToMedicine( HealthCareChineseMedicineDOKey key , String chineseMedicineStatus);//中医药数据状态
 

@@ -19,7 +19,6 @@ public enum EmBusinessError implements CommonError {
 
     //用20000开头来表示用户模块的错误信息
     /* 用户错误 */
-    USER_NAME_EXIST(2008,"用户名已存在"),
     USER_ACCOUNT_EXPIRED(2002, "账号已过期"),
     USER_NOT_LOGIN(20001, "用户未登录"),
     USER_CREDENTIALS_ERROR(2003, "密码错误"),

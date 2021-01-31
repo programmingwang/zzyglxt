@@ -254,7 +254,7 @@
             orange.redirect(addUrl);
         });
 
-        var pl = dictUtil.getDictByCode(dictUtil.DICT_LIST.webStatus);
+        var pl = dictUtil.getDictByCode(dictUtil.DICT_LIST.showStatus);
         $("#chargePersonSearch").selectUtil(pl);
 
 
@@ -285,7 +285,7 @@
             myTable = bootstrapTableUtil.myBootStrapTableInit("table", url, param, aCol);
         }
 
-        bootstrapTableUtil.globalSearch("table",url,aParam, aCol, "dataStatus");
+        bootstrapTableUtil.globalSearch("table",url,aParam, aCol);
 
 
     })

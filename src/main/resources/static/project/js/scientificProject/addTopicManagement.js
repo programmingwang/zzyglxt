@@ -2,6 +2,8 @@
     require(['jquery','objectUtil','ajaxUtil','alertUtil','stringUtil','fileUtil','dictUtil','distpicker','selectUtil','checkUtil','uploadImg'],
         function (jquery,objectUtil,ajaxUtil,alertUtil,stringUtil,fileUtil,dictUtil,distpicker,selectUtil,checkUtil,uploadImg) {
 
+            const editor = objectUtil.wangEditorUtil();
+
             uploadImg.init();
 
             /*下拉框值*/
@@ -18,9 +20,6 @@
                     alertUtil.error("请输入正确的电话号码");
                 }
             });
-
-            var workUnit = sessionStorage.getItem("orgName");
-            $("#company").val(workUnit);
 
             $("#cancelbtn").unbind().on('click',function () {
                 var url = "/scientificProject/topicManagement";
@@ -90,7 +89,7 @@
                         alertUtil.alert(data.msg);
                     }
                 },false,true);
-                return false;
+
             });
 
 
@@ -143,10 +142,8 @@
                         postalAddress : postalAddress,
                         postalCode : $("#postalCode").val(),
                         email : $("#email").val(),
-                        status : "0",
-                        examineStatus : "1",
                     }
-                    operateMessage = "已修改并提交课题项目成功";
+                    operateMessage = "修改课题项目成功";
                 }
 
                 fileUtil.handleFile(isUpdate(), TopicEntity.itemcode, $("#upload_file")[0].files[0]);
@@ -160,10 +157,10 @@
                         alertUtil.alert(data.msg);
                     }
                 },false,true);
-                return false;
+
             });
 
-            var init = function () {
+            (function init() {
                 if (isUpdate()){
                     var tempdata = JSON.parse(localStorage.getItem("rowData"));
                     var postalAddress = tempdata.postalAddress;
@@ -179,7 +176,7 @@
                     $("#disciplineName").val(tempdata.disciplineCode);
                     $("#applicant").val(tempdata.applicant);
                     $("#contactCode").val(tempdata.contactCode);
-                    $("#company").val(workUnit);
+                    $("#company").val(tempdata.company);
                     $("#postalCode").val(tempdata.postalCode);
                     $("#email").val(tempdata.email);
                     var file = tempdata.filePath;
@@ -216,30 +213,18 @@
                                 orange.redirect(url);
                             }
                         }
-                    };
+                    }
                     ajaxUtil.myAjax(null,"/industrialdevelop",null,function (data) {
                         for (var i=0;i<data.data.length;i++){
                             if (data.data[i].isimp == "1"){
-                                stime = data.data[i].startTime;
-                                etime = data.data[i].endTime;
+                                starttime = data.data[i].startTime;
+                                endtime = data.data[i].endTime;
                             }
                         }
-                        date.isDuringDate(stime, etime);
                     },false,"","get");
+                    date.isDuringDate(starttime, endtime);
                 }
-                /*var workUnit= "";
-                $.ajax
-                ({  cache: false, async: false, type: 'get', url: "/industrialdevelop/getPlatRole", success: function (data) {
-                        workUnit = data;
-                    }
-                });
-                var unit = workUnit.data;*/
-
-                init = function () {
-
-                }
-            };
-            init();
+            }());
 
             function isUpdate() {
                 return (localStorage.getItem("rowData") != null || localStorage.getItem("rowData") != undefined)
@@ -261,7 +246,8 @@
                 }
             }
             document.getElementById('clsfile').onclick = function() {
-                $("#upload_file").val("");
+                var obj = document.getElementById('upload_file');
+                obj.outerHTML=obj.outerHTML;
                 $("#clsfile").css("display","none");
                 $("#addFile").empty("p");
             }

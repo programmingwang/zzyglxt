@@ -191,7 +191,7 @@
                             "dataStatus": ""
                         };
                         if(row.dataFileType=="转载性新闻" || row.dataFileType=="转载性公告"){
-                            submitStatus.dataStatus = webStatus[2].id;
+                            submitStatus.dataStatus = webStatus[7].id;
                         }else{
                             submitStatus = {
                                 "dataStatus": selectUtil.getStatus(sessionStorage.getItem("rolename"),webStatus)
@@ -253,7 +253,7 @@
             orange.redirect(addUrl);
         });
 
-        var pl = dictUtil.getDictByCode(dictUtil.DICT_LIST.webStatus);
+        var pl = dictUtil.getDictByCode(dictUtil.DICT_LIST.showStatus);
         $("#chargePersonSearch").selectUtil(pl);
 
 
@@ -273,7 +273,7 @@
             myTable = bootstrapTableUtil.myBootStrapTableInit("table", url, param, aCol);
         }
 
-        bootstrapTableUtil.globalSearch("table",url,aParam, aCol, "dataStatus");
+        bootstrapTableUtil.globalSearch("table",url,aParam, aCol);
 
 
     })

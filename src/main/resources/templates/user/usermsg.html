@@ -2,13 +2,10 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>河北中医药网后台管理系统</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://at.alicdn.com/t/font_1805932_ysrcp4y0uy9.css">
     <link rel="stylesheet" th:href="@{/component/bootstrap@4.5.2/css/bootstrap.css}">
-    <link rel="stylesheet" type="text/css" th:href="@{/component/bootstrap-table@1.15.3/bootstrap-table.min.css}">
-    <link rel="stylesheet" type="text/css" th:href="@{/project/css/base.css}">
-    <link rel="stylesheet" th:href="@{/fonts/font-awesome.min.css}">
+    <title>个人信息</title>
     <style>
         .upload-wrap {
             position: relative;
@@ -56,68 +53,14 @@
         #confirmBtn{
             background-color: #e66736;
         }
-        .grxxxg{
-            text-align:center;
-            font-size: 22px;
-            height:50px;
-            line-height:50px;
-            color: #7E5435
-        }
 
     </style>
 </head>
 <body style="background-color: #f7efeb;height: 100%">
-<div class="topback" th:style="'background: url(' + '/images/new/top.png' + ');background-color: #5b4622;'"></div>
-<div id="header" class="header-bg row h70 test-border" >
-    <div class="col-md-3 col-lg-3 pl-5">
-        <h3 class="mt-4 mb-4 text-white tTile" id="xczy" style="display: none;font-size: 30px;font-family: SoureHanSansCN-Bold;" >中医药文化宣传资源门户</h3>
-        <h3 class="mt-4 mb-4 text-white tTile" id="zwbg" style="display: none;font-size: 30px;font-family: SoureHanSansCN-Bold;" >中医药健康信息资源政务门户</h3>
-        <h3 class="mt-4 mb-4 text-white tTile" id="kyxm" style="display: none;font-size: 30px;font-family: SoureHanSansCN-Bold;" >中医药科研项目管理系统</h3>
-        <h3 class="mt-4 mb-4 text-white tTile" id="cyfz" style="display: none;font-size: 30px;font-family: SoureHanSansCN-Bold;" >中医药产业协同信息系统</h3>
-    </div>
-    <div class="col-md-9 col-lg-9">
-        <div class="row  justify-content-end h70">
-            <div class="col-md-6 col-lg-6 d-flex align-items-center justify-content-end pr-5"style="font-size: 14px;font-family: SoureHanSansCN-Bold;">
-                <ul class="navbar-nav ml-md-auto flex-column flex-md-row">
-                    <li class="nav-item dropdown mr-2">
-                        <a class="nav-item nav-link  mr-md-2 text-white">
-                            欢迎您,<span id="userName"></span>
-                        </a>
-                    </li>
-                    <li class="nav-item ml-1">
-                        <div th:style="'background: url(' + '/images/new/head.png' + ');width: 25px;position: relative;height: 25px;top: 6px;'"></div>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-item nav-link  mr-md-2 text-white" th:href="@{/toUserMsg}" >
-                            个人信息
-                        </a>
-                    </li>
-                    <li class="nav-item dropdown ml-3">
-                        <a class="nav-item nav-link  mr-md-2 text-white" href="#" id="logout" >
-                            退出登录
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-
-    </div>
-</div>
-<div class="topback" th:style="'background: url(' + '/images/new/top.png' + ');background-color: #5b4622;border-bottom: 10px solid #f7efeb;height: 25px;'"></div>
-
-
 <div class="row" >
     <div class="col-1"></div>
     <div class="col-10" id="main-form"  style="padding: 0">
         <form>
-            <div class="form-group row">
-                <div class="col-lg-1 col-md-3">
-                    <button id="return" type="button" class="btn col">返回</button>
-                </div>
-                <div class="col-lg-10 col-md-3">
-                    <p class="grxxxg">个人信息修改</p>
-                </div>
-            </div>
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label">用户头像：</label>
                 <div class="upload-content" data-limit="1">
@@ -139,7 +82,7 @@
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label">用户登录名：</label>
                 <div class="col-sm-3">
-                    <input id="uname" type="text" class="msg form-control" disabled="disabled">
+                    <input id="username" type="text" class="msg form-control" disabled="disabled">
                 </div>
 
                 <label class="col-sm-2 col-form-label">用户名称：</label>

@@ -2,7 +2,6 @@ package com.zyyglxt.dao;
 
 import com.zyyglxt.dataobject.ChineseCulturalDO;
 import com.zyyglxt.dataobject.ChineseCulturalDOKey;
-import com.zyyglxt.dto.ChineseCulturalDto;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -18,7 +17,7 @@ public interface ChineseCulturalDOMapper {
 
     ChineseCulturalDO selectByPrimaryKey(@Param("key") ChineseCulturalDOKey key , @Param("chineseCulturalType") String chineseCulturalType);
 
-    List<ChineseCulturalDto> selectChineseCulturalList(@Param("type") String chineseCulturalType, @Param("status") String chineseCulturalStatus);
+    List<ChineseCulturalDO> selectChineseCulturalList(@Param("type") String chineseCulturalType, @Param("status") String chineseCulturalStatus);
 
     int updateByPrimaryKeySelective(@Param("key")ChineseCulturalDOKey key ,@Param("chineseCulturalDO") ChineseCulturalDO record);
 

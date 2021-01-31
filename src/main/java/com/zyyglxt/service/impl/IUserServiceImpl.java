@@ -274,7 +274,7 @@ public class IUserServiceImpl implements IUserService {
             throw new BusinessException("手机号码不正确！", EmBusinessError.MOBILEPHONE_ERROR);
         }
 
-        if (StringUtils.isBlank(userDO.getPortrait())){
+        if (userDO.getPortrait() == ""){
             userDO.setPortrait(null);
         }
         UserSessionDto userSessionDto = (UserSessionDto) request.getSession().getAttribute("user");

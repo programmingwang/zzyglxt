@@ -82,7 +82,13 @@ public class IndustrialDevelopTecSerOrgServiceImpl implements IndustrialDevelopT
 
     @Override
     public IndustrialDevelopTecSerOrgDto selectByOrgcode() {
-        return industrialDevelopTecSerOrgMapper.selectByOrgcode(usernameUtil.getOrgCode());
+        IndustrialDevelopTecSerOrgDto industrialDevelopTecSerOrgDto = new IndustrialDevelopTecSerOrgDto();
+        IndustrialDevelopTecSerOrg industrialDevelopTecSerOrg = industrialDevelopTecSerOrgMapper.selectByOrgcode(usernameUtil.getOrgCode());
+        BeanUtils.copyProperties(industrialDevelopTecSerOrg,industrialDevelopTecSerOrgDto);
+        FileDO fileDO = fileService.selectFileByDataCode(industrialDevelopTecSerOrg.getItemcode());
+        String filePath = !ObjectUtils.allNotNull(fileDO) ? "已经损坏了" : fileDO.getFilePath() ;
+        industrialDevelopTecSerOrgDto.setFilePath(filePath);
+        return industrialDevelopTecSerOrgDto;
     }
 
     @Override

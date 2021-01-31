@@ -27,23 +27,11 @@
     <result column="itemUpdateAt" jdbcType="TIMESTAMP" property="itemupdateat" />
     <result column="ONLINE_ADDRESS" jdbcType="VARCHAR" property="onlineAddress" />
   </resultMap>
-  <resultMap id="ResultMapWithFile" type="com.zyyglxt.dto.industrialDevelop.IndustrialDevelopTecSerOrgDto" extends="BaseResultMap">
-  <collection property="filePath" ofType="java.lang.String">
-            <constructor>
-                <arg column="FILE_PATH"/>
-            </constructor>
-        </collection>
-</resultMap>
   <sql id="Base_Column_List">
     <!--@mbg.generated-->
-    tb_industrial_develop_tec_ser_org.itemID,tb_industrial_develop_tec_ser_org.itemCode,tb_industrial_develop_tec_ser_org.NAME,
-tb_industrial_develop_tec_ser_org.AREA_COVERD,tb_industrial_develop_tec_ser_org.SPECIAL_SERVICE,tb_industrial_develop_tec_ser_org.PROJECT_NAME,
-tb_industrial_develop_tec_ser_org.CONTACTS,tb_industrial_develop_tec_ser_org.PHONE,tb_industrial_develop_tec_ser_org.ADDRESS_PRO,
-tb_industrial_develop_tec_ser_org.ADDRESS_CITY,tb_industrial_develop_tec_ser_org.ADDRESS_COUNTRY,tb_industrial_develop_tec_ser_org.ADDRESS,
-tb_industrial_develop_tec_ser_org.ONLINE_ADDRESS,tb_industrial_develop_tec_ser_org.INTRUDUCE,tb_industrial_develop_tec_ser_org.STATUS,
-tb_industrial_develop_tec_ser_org.REASON,tb_industrial_develop_tec_ser_org.ORG_CODE,tb_industrial_develop_tec_ser_org.TYPE,
-tb_industrial_develop_tec_ser_org.CREATER,tb_industrial_develop_tec_ser_org.itemCreateAt,tb_industrial_develop_tec_ser_org.UPDATER,
-tb_industrial_develop_tec_ser_org.itemUpdateAt
+    itemID, itemCode, `NAME`, AREA_COVERD, SPECIAL_SERVICE, PROJECT_NAME, CONTACTS, PHONE,
+    ADDRESS_PRO, ADDRESS_CITY, ADDRESS_COUNTRY, ADDRESS,ONLINE_ADDRESS, INTRUDUCE, `STATUS`, REASON,
+    ORG_CODE, `TYPE`, CREATER, itemCreateAt, UPDATER, itemUpdateAt
   </sql>
   <select id="selectByPrimaryKey" parameterType="map" resultMap="BaseResultMap">
     <!--@mbg.generated-->
@@ -53,11 +41,10 @@ tb_industrial_develop_tec_ser_org.itemUpdateAt
     where itemCode = #{itemcode,jdbcType=CHAR}
     order by itemUpdateAt desc
   </select>
-  <select id="selectByOrgcode" parameterType="java.lang.String" resultMap="ResultMapWithFile">
+  <select id="selectByOrgcode" parameterType="java.lang.String" resultMap="BaseResultMap">
     select
-    <include refid="Base_Column_List" />,
-    tcf.FILE_PATH
-    from tb_industrial_develop_tec_ser_org left join tb_culpro_file tcf on tb_industrial_develop_tec_ser_org.itemCode = tcf.DATA_CODE
+    <include refid="Base_Column_List" />
+    from tb_industrial_develop_tec_ser_org
     where ORG_CODE = #{orgCode,jdbcType=CHAR}
     order by itemUpdateAt desc
   </select>

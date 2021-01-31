@@ -71,7 +71,7 @@
             return oTime;
         }
 
-        /*返回格式化时间2018.08.08*/
+        /*返回格式化时间2018 08.08*/
         function formatTime(dateTime){
             if(dateTime == null || typeof(dateTime) == "undefined"){
                 return "";
@@ -80,7 +80,7 @@
                 oYear = oDate.getFullYear(),
                 oMonth = oDate.getMonth()+1,
                 oDay = oDate.getDate(),
-                oTime = oYear +'.'+ gzmd(oMonth) +'.'+ gzmd(oDay) ;
+                oTime = oYear +' '+ gzmd(oMonth) +'.'+ gzmd(oDay) ;
             return oTime;
         }
 

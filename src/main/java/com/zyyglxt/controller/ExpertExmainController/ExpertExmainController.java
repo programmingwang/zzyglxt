@@ -1,6 +1,5 @@
 package com.zyyglxt.controller.ExpertExmainController;
 
-import com.zyyglxt.annotation.LogAnnotation;
 import com.zyyglxt.dataobject.IndustrialDevelopExpertRefDO;
 import com.zyyglxt.dto.ExmaineDto;
 import com.zyyglxt.error.EmBusinessError;
@@ -31,15 +30,16 @@ public class ExpertExmainController {
     @RequestMapping(value = "/exmain" , method = RequestMethod.GET)
     @ResponseBody
     public ResponseData getAllExmainTopic(){
-        return new ResponseData(EmBusinessError.success,exmaineService.selectAll());
+        List<ExmaineDto> exmaineDtos = exmaineService.selectAll();
+        return new ResponseData(EmBusinessError.success,exmaineDtos);
     }
 
     //通过专家获得的课题
     @RequestMapping(value = "/getByExpertCode" , method = RequestMethod.GET)
     @ResponseBody
     public ResponseData getAllExmainTopic(@RequestParam("expertUserCode") String expertUserCode){
-        expertUserCode = industrialExpertService.selectByUserCode(expertUserCode);
-        return new ResponseData(EmBusinessError.success,exmaineService.selectByExpertCode(expertUserCode));
+        List<ExmaineDto> exmaineDtos = exmaineService.selectByExpertCode(industrialExpertService.selectByUserCode(expertUserCode));
+        return new ResponseData(EmBusinessError.success,exmaineDtos);
     }
 
     @RequestMapping(value = "/exmain" , method = RequestMethod.PUT)
@@ -70,11 +70,4 @@ public class ExpertExmainController {
         return new ResponseData(EmBusinessError.success,industrialExpertService.selectByUserCode(expertUserCode));
     }
 
-    //分配专家列表查询
-    @GetMapping("/topicAndExpertStatus")
-    @ResponseBody
-    @LogAnnotation(logTitle = "查看课题数据和分配专家状态")
-    public ResponseData selectTopic(){
-        return new ResponseData(EmBusinessError.success, exmaineService.topicAndExpertStatus());
-    }
 }

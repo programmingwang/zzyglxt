@@ -3,7 +3,6 @@ package com.zyyglxt.service.impl;
 import com.zyyglxt.dao.ChineseCulturalDOMapper;
 import com.zyyglxt.dataobject.ChineseCulturalDO;
 import com.zyyglxt.dataobject.ChineseCulturalDOKey;
-import com.zyyglxt.dto.ChineseCulturalDto;
 import com.zyyglxt.error.BusinessException;
 import com.zyyglxt.error.EmBusinessError;
 import com.zyyglxt.util.DateUtils;
@@ -43,8 +42,12 @@ public class MovieTVServiceImpl implements IMovieTVService {
     }
 
     @Override
-    public List<ChineseCulturalDto> getMovieTVList(String chineseCulturalStatus) {
-        return chineseCulturalDOMapper.selectChineseCulturalList("电视电影",chineseCulturalStatus);
+    public List<ChineseCulturalDO> getMovieTVList(List<String> chineseCulturalStatus) {
+        List<ChineseCulturalDO> chineseCulturalDOList = new ArrayList<>();
+        for (String culturalStatus : chineseCulturalStatus) {
+            chineseCulturalDOList.addAll(chineseCulturalDOMapper.selectChineseCulturalList("电视电影",culturalStatus));
+        }
+        return chineseCulturalDOList;
     }
 
     @Override

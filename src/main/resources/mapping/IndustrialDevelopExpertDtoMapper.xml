@@ -40,7 +40,7 @@
   <select id="selectAll" resultType="com.zyyglxt.dto.industrialDevelop.IndustrialDevelopExpertDto">
     SELECT ex.itemID,ex.itemCode,ex.USER_CODE as userCode,u.username,u.name,ex.filed,u.gender,u.mobilePhone
     FROM tb_industrial_develop_expert ex,user u WHERE u.itemCode=ex.USER_CODE
-    order by ex.itemUpdateAt desc
+    order by itemUpdateAt desc
   </select>
 
   <delete id="deleteByPrimaryKey" parameterType="com.zyyglxt.dto.industrialDevelop.IndustrialDevelopExpertDto">
@@ -175,8 +175,6 @@
     set
     PASSWORD = #{password,jdbcType=VARCHAR}
     where  itemCode = #{userCode,jdbcType=VARCHAR}
-  </update><delete id="deleteByUserCode">
-  delete from tb_industrial_develop_expert where USER_CODE = #{userCode,jdbcType=VARCHAR}
-</delete>
+  </update>
 
 </mapper>

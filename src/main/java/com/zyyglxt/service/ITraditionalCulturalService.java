@@ -4,7 +4,6 @@ import com.zyyglxt.dataobject.ChineseCulturalDO;
 import com.zyyglxt.dataobject.ChineseCulturalDOKey;
 import com.zyyglxt.dataobject.CulturalResourcesDO;
 import com.zyyglxt.dataobject.CulturalResourcesDOKey;
-import com.zyyglxt.dto.CulturalResourcesDto;
 import com.zyyglxt.error.BusinessException;
 
 import java.util.List;
@@ -20,7 +19,7 @@ public interface ITraditionalCulturalService {
     CulturalResourcesDO getTraditionalCultural(CulturalResourcesDOKey key);
 
     //查询所有中医医史
-    List<CulturalResourcesDto> getTraditionalCulturalList(String chineseCulturalStatus);
+    List<CulturalResourcesDO> getTraditionalCulturalList(List<String> chineseCulturalStatus);
 
     //增加一个中医医史
     int addTraditionalCultural(CulturalResourcesDO record);

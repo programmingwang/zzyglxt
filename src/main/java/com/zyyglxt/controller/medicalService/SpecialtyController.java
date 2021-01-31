@@ -62,21 +62,24 @@ public class SpecialtyController {
     @GetMapping(value = "selectAll")
     @LogAnnotation(appCode ="",logTitle ="查看所有科室数据",logLevel ="1",creater ="",updater = "")
     public ResponseData selectAllSpecialty(@RequestParam(value = "specialtyStatus")List specialtyStatus){
-        return new ResponseData(EmBusinessError.success,specialtyService.selectAllSpecialty(specialtyStatus));
+        List<SpecialtyDO> specialtyDOList = specialtyService.selectAllSpecialty(specialtyStatus);
+        return new ResponseData(EmBusinessError.success,DoToDto(specialtyDOList));
     }
 
     @ResponseBody
     @GetMapping(value = "search")
     @LogAnnotation(appCode ="",logTitle ="搜索科室数据",logLevel ="1",creater ="",updater = "")
     public ResponseData searchSpecialty(String keyWord){
-        return new ResponseData(EmBusinessError.success,specialtyService.searchSpecialty(keyWord));
+        List<SpecialtyDO> specialtyDOList = specialtyService.searchSpecialty(keyWord);
+        return new ResponseData(EmBusinessError.success,DoToDto(specialtyDOList));
     }
 
     @ResponseBody
     @GetMapping(value = "selectByHospCode")
     @LogAnnotation(appCode ="",logTitle ="通过医院code查看科室数据",logLevel ="1",creater ="",updater = "")
     public ResponseData selectByHospCode(String hospCode){
-        return new ResponseData(EmBusinessError.success,specialtyService.selectByHospCode(hospCode));
+        List<SpecialtyDO> specialtyDOList = specialtyService.selectByHospCode(hospCode);
+        return new ResponseData(EmBusinessError.success,DoToDto(specialtyDOList));
     }
 
     @ResponseBody
@@ -85,5 +88,27 @@ public class SpecialtyController {
     public ResponseData updateStatus(StatusDto statusDto){
         specialtyService.updateStatus(statusDto);
         return new ResponseData(EmBusinessError.success);
+    }
+
+
+    private List<SpecialtyDto> DoToDto(List<SpecialtyDO> DOList){
+        List<SpecialtyDto> DtoList = new ArrayList<>();
+        if (!DOList.isEmpty()){
+            for (SpecialtyDO DO:DOList){
+                SpecialtyDto Dto = new SpecialtyDto();
+                BeanUtils.copyProperties(DO,Dto);
+                HospSpecialtyRefDO hospSpecialtyRefDO = hospSpecialtyRefDOMapper.selectHospBySpecialtyCode(Dto.getItemcode());
+                HospDO hospDO = hospService.selectHospByItemCode(hospSpecialtyRefDO.getHospitalCode());
+                Dto.setHospitalCode(hospDO.getItemcode());
+                Dto.setHospitalName(hospDO.getHospitalName());
+                Dto.setSpecialtyAddressCity(hospDO.getHospitalAddressCity());
+                Dto.setSpecialtyAddressCounty(hospDO.getHospitalAddressCountry());
+                Dto.setSpecialtyAddress(hospDO.getHospitalAddress());
+                FileDO fileDO= fileService.selectFileByDataCode(Dto.getItemcode());
+                Dto.setFilePath(fileDO == null ? null:fileDO.getFilePath());
+                DtoList.add(Dto);
+            }
+        }
+        return DtoList;
     }
 }

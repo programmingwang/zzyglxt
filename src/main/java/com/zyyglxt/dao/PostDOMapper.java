@@ -23,4 +23,5 @@ public interface PostDOMapper {
 
     PostDO maxNum();
 
+    List<PostDO> getPandA();
 }

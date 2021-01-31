@@ -23,5 +23,5 @@ public interface adviceDOMapper {
 
     adviceDO getByDataCode(@Param("dataCode") String dataCode);
 
-    int updAdvice(adviceDO record);
+    int updAdvice(String dataCode);
 }

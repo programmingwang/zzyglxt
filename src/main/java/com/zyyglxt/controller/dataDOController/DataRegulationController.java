@@ -41,7 +41,8 @@ public class DataRegulationController {
     @RequestMapping(value = "/selectAll", method = RequestMethod.GET)
     @LogAnnotation(appCode ="",logTitle ="查看所有政策法规的数据",logLevel ="1",creater ="",updater = "")
     public ResponseData selectRegulationList(@RequestParam(value = "dataStatus")List dataStatus){
-        return new ResponseData(EmBusinessError.success,dataRegulationService.selectRegulationList(dataStatus));
+        List<DataDO> dataDOList = dataRegulationService.selectRegulationList(dataStatus);
+        return new ResponseData(EmBusinessError.success,DoToDto(dataDOList));
     }
 
     /**

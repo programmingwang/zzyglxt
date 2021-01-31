@@ -6,7 +6,6 @@ import com.zyyglxt.dao.OrganizationDOMapper;
 import com.zyyglxt.dataobject.HospDO;
 import com.zyyglxt.dataobject.HospDOKey;
 import com.zyyglxt.dataobject.OrganizationDO;
-import com.zyyglxt.dto.HospDto;
 import com.zyyglxt.dto.StatusDto;
 import com.zyyglxt.error.BusinessException;
 import com.zyyglxt.error.EmBusinessError;
@@ -77,8 +76,8 @@ public class HospServiceImpl implements IHospService {
     }
 
     @Override
-    public List<HospDto> selectAllHosp(List<String> specialtyStatus) {
-        List<HospDto> DOList = new ArrayList<>();
+    public List<HospDO> selectAllHosp(List<String> specialtyStatus) {
+        List<HospDO> DOList = new ArrayList<>();
         for (String status : specialtyStatus) {
             DOList.addAll(hospDOMapper.selectByStatus(status));
         }
@@ -89,7 +88,7 @@ public class HospServiceImpl implements IHospService {
     搜索关键字，包括搜名称，等级，市，县，地址
      */
     @Override
-    public List<HospDto> searchHosp(String keyWord) {
+    public List<HospDO> searchHosp(String keyWord) {
         if(keyWord == "" || keyWord == null){
             throw new BusinessException("关键字不能为空", EmBusinessError.PARAMETER_VALIDATION_ERROR);
         }
@@ -97,7 +96,7 @@ public class HospServiceImpl implements IHospService {
     }
 
     @Override
-    public HospDto selectHospByItemCode(String itemCode) {
+    public HospDO selectHospByItemCode(String itemCode) {
         if(itemCode == "" || itemCode == null){
             throw new BusinessException("itemcode不能为空", EmBusinessError.PARAMETER_VALIDATION_ERROR);
         }
@@ -105,7 +104,7 @@ public class HospServiceImpl implements IHospService {
     }
 
     @Override
-    public List<HospDto> selectByStatus(String status) {
+    public List<HospDO> selectByStatus(String status) {
         return hospDOMapper.selectByStatus(status);
     }
 
@@ -120,12 +119,12 @@ public class HospServiceImpl implements IHospService {
     }
 
     @Override
-    public List<HospDto> selectAllNoStatus() {
+    public List<HospDO> selectAllNoStatus() {
         return hospDOMapper.selectAllHosp();
     }
 
     @Override
-    public HospDto selectByOrgCode(String orgCode) {
+    public HospDO selectByOrgCode(String orgCode) {
         return hospDOMapper.selectByOrgCode(orgCode);
     }
 

@@ -9,7 +9,6 @@ import com.zyyglxt.response.ResponseData;
 import com.zyyglxt.service.ICulturalRelicsService;
 import com.zyyglxt.service.IFileService;
 import com.zyyglxt.util.ConvertDOToDTOUtil;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -25,7 +24,6 @@ import java.util.List;
 //@Controller
 @RestController
 @RequestMapping("/cul/fac/culRel")
-@Slf4j
 public class CulturalRelicsController {
 
     @Resource
@@ -38,8 +36,16 @@ public class CulturalRelicsController {
     @RequestMapping(value = "/getAll" , method = RequestMethod.GET)
     @ResponseBody
     @LogAnnotation(logTitle = "查看所有文化古迹", logLevel = "1")
-    public ResponseData getAllCulturalRelics(@RequestParam(value = "chineseCulturalStatus")String chineseCulturalStatus){
-        return new ResponseData(EmBusinessError.success,iCulturalRelicsService.getCulturalRelicsList(chineseCulturalStatus));
+    public ResponseData getAllCulturalRelics(@RequestParam(value = "chineseCulturalStatus")List chineseCulturalStatus){
+        List<ChineseCulturalDO> culturalRelicsList = iCulturalRelicsService.getCulturalRelicsList(chineseCulturalStatus);
+        List<ChineseCulturalDto> chineseCulturalDtoList = new ArrayList<>();
+        for (ChineseCulturalDO chineseCulturalDO : culturalRelicsList) {
+            chineseCulturalDtoList.add(
+                    ConvertDOToDTOUtil.convertFromDOToDTO(
+                            chineseCulturalDO,iFileService.selectFileByDataCode(
+                                    chineseCulturalDO.getItemcode()).getFilePath()));
+        }
+        return new ResponseData(EmBusinessError.success,chineseCulturalDtoList);
     }
 
 

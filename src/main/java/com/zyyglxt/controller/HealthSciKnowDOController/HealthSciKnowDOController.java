@@ -32,38 +32,41 @@ public class HealthSciKnowDOController {
     科普知识相关数据插入
     */
     @RequestMapping(value = "inserthealthsciknowdo",method = RequestMethod.POST)
-    @LogAnnotation(appCode ="",logTitle ="科普知识数据的添加",logLevel ="3")
+    @LogAnnotation(appCode ="",logTitle ="科普知识数据的添加",logLevel ="3",creater ="huangwj",updater = "huangwj")
     public ResponseData insertHealthSciKnowDOMapper(@RequestBody HealthSciKnowDO key)  {
-        healthSciKnowDOService.insertSelective(key);
-        return new ResponseData(EmBusinessError.success);
+            System.out.println("科普知识名称: " + key.getScienceKnowledgeName());
+            healthSciKnowDOService.insertSelective(key);
+            return new ResponseData(EmBusinessError.success);
     }
     /*
     科普知识相关数据的删除
     */
     @RequestMapping(value ="deletehealthsciknowdo/{itemID}/{itemCode}",method = RequestMethod.DELETE)
     @ResponseBody
-    @LogAnnotation(appCode ="",logTitle ="删除科普知识数据",logLevel ="4")
+    @LogAnnotation(appCode ="",logTitle ="删除科普知识数据",logLevel ="4",creater ="huangwj",updater = "huangwj")
     public ResponseData deleteHealthSciKnowDOMapper(@PathVariable("itemID") Integer itemID,@PathVariable("itemCode")String itemCode){
         HealthSciKnowDOKey healthSciKnowDOKey=new HealthSciKnowDOKey();
         healthSciKnowDOKey.setItemid(itemID);
         healthSciKnowDOKey.setItemcode(itemCode);
         healthSciKnowDOService.deleteByPrimaryKey(healthSciKnowDOKey);
+        System.out.println("要删除科普知识编号为："+healthSciKnowDOKey.getItemid());
         return new ResponseData(EmBusinessError.success);
     }
     /*
     科普知识相关数据的修改
     */
     @RequestMapping(value ="updatehealthsciknowdo",method = RequestMethod.POST )
-    @LogAnnotation(appCode ="",logTitle ="修改科普知识数据",logLevel ="2")
+    @LogAnnotation(appCode ="",logTitle ="修改科普知识数据",logLevel ="2",creater ="huangwj",updater = "huangwj")
     public ResponseData updateHealthSciKnowDOMapper(@RequestBody HealthSciKnowDO key)  {
         healthSciKnowDOService.updateByPrimaryKeySelective(key);
+        System.out.println("要修改科普知识编号为："+key.getItemid());
         return new ResponseData(EmBusinessError.success);
     }
     /*
      科普知识相关数据的查询
    */
     @RequestMapping(value ="selecthealthsciknowdo",method = RequestMethod.POST )
-    @LogAnnotation(appCode ="",logTitle ="通过id及编号查询科普知识数据",logLevel ="1")
+    @LogAnnotation(appCode ="",logTitle ="通过id及编号查询科普知识数据",logLevel ="1",creater ="huangwj",updater = "huangwj")
     public ResponseData selectHealthSciKnowDOMapper(@RequestBody HealthSciKnowDOKey key){
         healthSciKnowDOService.selectByPrimaryKey(key);
         return new ResponseData(EmBusinessError.success);
@@ -71,8 +74,8 @@ public class HealthSciKnowDOController {
     /*查询所有科普知识所有数据*/
     @RequestMapping(value ="selectallhealthsciknowdo",method = RequestMethod.GET)
     @ResponseBody
-    @LogAnnotation(appCode ="",logTitle ="查询所有科普知识数据",logLevel ="1")
-    public ResponseData selectAllHealthSciKnowDOMapper(@RequestParam(value = "scienceKnowledgeStatus")String  scienceKnowledgeStatus){
+    @LogAnnotation(appCode ="",logTitle ="查询所有科普知识数据",logLevel ="1",creater ="huangwj",updater = "huangwj")
+    public ResponseData selectAllHealthSciKnowDOMapper(@RequestParam(value = "scienceKnowledgeStatus")List scienceKnowledgeStatus){
         List<HealthSciKnowDO> healthSciKnowDOSList = healthSciKnowDOService.selectAllHealthSciKnow(scienceKnowledgeStatus);
         return new ResponseData(EmBusinessError.success,healthSciKnowDOSList);
     }
@@ -93,7 +96,7 @@ public class HealthSciKnowDOController {
      * @param key
      */
     @RequestMapping(value = "visitnumhealthSciKnowdo", method = RequestMethod.POST)
-    @LogAnnotation(appCode ="",logTitle ="科普知识数据的点击浏览数",logLevel ="2")
+    @LogAnnotation(appCode ="",logTitle ="科普知识数据的点击浏览数",logLevel ="2",creater ="huangwj",updater = "huangwj")
     public void increaseVisitNum(@RequestBody HealthSciKnowDOKey key) {
        healthSciKnowDOService.updateVisitNumHealthSciKnow(key);
     }

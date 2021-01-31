@@ -81,7 +81,15 @@ public class IndustrialDevelopBasestyleServiceImpl implements IndustrialDevelopB
 
     @Override
     public List<IndustrialDevelopBasestyleDto> selectAll() {
-        return industrialDevelopBasestyleMapper.selectAll(usernameUtil.getOrgCode());
+        List<IndustrialDevelopBasestyleDto> resList = new ArrayList<>();
+        List<IndustrialDevelopBasestyle> list = industrialDevelopBasestyleMapper.selectAll();
+        for (IndustrialDevelopBasestyle item : list){
+            IndustrialDevelopBasestyleDto obj = new IndustrialDevelopBasestyleDto();
+            BeanUtils.copyProperties(item,obj);
+            obj.setFilePath(fileService.selectFileByDataCode(item.getItemcode()).getFilePath());
+            resList.add(obj);
+        }
+        return resList;
     }
 
 }

@@ -51,20 +51,6 @@
     where ROLE_NAME = #{roleName,jdbcType=VARCHAR}
     order by itemUpdateAt desc
   </select>
-  <select id="selectRoleType" resultMap="BaseResultMap">
-    select
-    <include refid="Base_Column_List" />
-    from role
-    where ROLE_NAME = "科研项目申报单位" or ROLE_NAME = "科研项目-市级"
-    order by itemUpdateAt desc
-  </select>
-  <select id="selectRoleType2" resultMap="BaseResultMap">
-    select
-    <include refid="Base_Column_List" />
-    from role
-    where ROLE_NAME = "主研人"
-    order by itemUpdateAt desc
-  </select>
   <delete id="deleteByPrimaryKey" parameterType="com.zyyglxt.dataobject.RoleDOKey">
     delete from role
     where itemID = #{itemid,jdbcType=INTEGER}

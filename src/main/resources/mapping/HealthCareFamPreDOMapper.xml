@@ -17,11 +17,7 @@
     <result column="itemUpdateAt" jdbcType="TIMESTAMP" property="itemupdateat" />
   </resultMap>
   <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.zyyglxt.dataobject.HealthCareFamPreDO">
-    <result column="CONTENT" jdbcType="LONGVARCHAR" property="content" />
-  </resultMap>
 
-  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBsAndFile" type="com.zyyglxt.dto.HealthCareFamPreDto">
-    <result column="FILE_PATH" jdbcType="VARCHAR" property="filePath"/>
     <result column="CONTENT" jdbcType="LONGVARCHAR" property="content" />
   </resultMap>
   <sql id="Base_Column_List">
@@ -30,18 +26,11 @@
     UPDATER, itemUpdateAt
   </sql>
   <sql id="Blob_Column_List">
+
     CONTENT
   </sql>
-  <sql id="SelectAll_Column_List">
-    fp.itemID, fp.itemCode, fp.NAME, fp.SOURCE, fp.AUTHOR,
-    fp.VISIT_NUM, fp.TYPE, fp.STATUS, fp.CREATER, fp.itemCreateAt,
-    fp.UPDATER, fp.itemUpdateAt
-  </sql>
-  <sql id="SelectAllBlob_Column_List">
-    fp.CONTENT
-  </sql>
-
   <select id="selectByPrimaryKey" parameterType="com.zyyglxt.dataobject.HealthCareFamPreDOKey" resultMap="ResultMapWithBLOBs">
+
     select 
     <include refid="Base_Column_List" />
     ,
@@ -230,33 +219,12 @@
     where itemID = #{itemid,jdbcType=INTEGER}
       and itemCode = #{itemcode,jdbcType=CHAR}
   </update>
-  <!--<select id="selectAllHealthCareFamPre" resultMap="BaseResultMap">
+  <select id="selectAllHealthCareFamPre" resultMap="BaseResultMap">
         SELECT *
         FROM tb_health_care_fam_pre
        WHERE STATUS = #{status}
        order by itemUpdateAt desc
-    </select>-->
-  <select id="selectAllHealthCareFamPre"  resultMap="ResultMapWithBLOBsAndFile">
-    select
-    <include refid="SelectAll_Column_List" />
-    ,
-    <include refid="SelectAllBlob_Column_List" />
-    ,
-    cf.FILE_PATH
-    from tb_health_care_fam_pre fp left join tb_culpro_file cf
-    on fp.itemCode = cf.DATA_CODE
-    <if test="status == 3">
-      where STATUS in (2,4,5)
-    </if>
-    <if test="status == 2">
-      where STATUS in (1,2,3,5)
-    </if>
-    <if test="status == 1">
-      where STATUS in (0,1,2,3,4,5,6)
-    </if>
-    order by fp.itemUpdateAt desc
-  </select>
-
+    </select>
     <update id="updateVisitNumHealthCareFamPre" parameterType="com.zyyglxt.dataobject.HealthCareFamPreDOKey">
       update tb_health_care_fam_pre set VISIT_NUM = VISIT_NUM + 1 where itemID = #{itemid,jdbcType=INTEGER} and itemCode = #{itemcode,jdbcType=CHAR}
     </update>

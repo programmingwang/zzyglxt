@@ -111,13 +111,10 @@
             "postDocumentNum":"postDocumentNum",
             //公开方式
             "governerscounter":"postPublicWay",
-            "postPublicWay":"postPublicWay",
             //会签审核状态
             "signstatus":"status",
             //发文审核状态
-            "postStatus":"postStatus",
-            //审核状态-机构审核
-            "orgAuditStatus": "orgAuditStatus"
+            "postStatus":"postStatus"
         }
 
         var dictList = {

@@ -40,8 +40,16 @@ public class TraditionalSchoolController {
     @RequestMapping(value = "/getAll" , method = RequestMethod.GET)
     @ResponseBody
     @LogAnnotation(logTitle = "查询所有中医流派", logLevel = "1")
-    public ResponseData getAllTraditionalSchool(@RequestParam(value = "chineseCulturalStatus")String chineseCulturalStatus){
-        return new ResponseData(EmBusinessError.success,iTraditionalSchoolService.getTraditionalSchoolList(chineseCulturalStatus));
+    public ResponseData getAllTraditionalSchool(@RequestParam(value = "chineseCulturalStatus")List chineseCulturalStatus){
+        List<CulturalResourcesDO> traditionalSchoolList = iTraditionalSchoolService.getTraditionalSchoolList(chineseCulturalStatus);
+        List<CulturalResourcesDto> chineseCulturalDtoList = new ArrayList<>();
+        for (CulturalResourcesDO culturalResourcesDO : traditionalSchoolList) {
+            FileDO fileDO = iFileService.selectFileByDataCode(culturalResourcesDO.getItemcode());
+            chineseCulturalDtoList.add(
+                    ConvertDOToDTOUtil.convertFromDOToDTO(
+                            culturalResourcesDO,fileDO.getFilePath(),fileDO.getFileName()));
+        }
+        return new ResponseData(EmBusinessError.success,chineseCulturalDtoList);
     }
 
 

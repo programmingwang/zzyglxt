@@ -4,6 +4,7 @@
 
             uploadImg.init();
 
+            /*下拉框值*/
             //公开方式
             var publicWay = dictUtil.getDictByCode(dictUtil.DICT_LIST.postPublicWay);
             $("#postPublicWay").selectUtil(publicWay);
@@ -30,8 +31,8 @@
                     $('#fairFile1').attr('style',"display:none");
                     var obj = document.getElementById('fairFile');
                     obj.outerHTML=obj.outerHTML;
-                    $("#clsFairFile").css("display","none");
-                    $("#addFairFile").empty("p");
+                    $("#clsfile").css("display","none");
+                    $("#addFile").empty("p");
                 }else {
                     $('#fairFile1').attr('style',"display:block");
                 }
@@ -40,27 +41,6 @@
             //文号
             var num = dictUtil.getDictByCode(dictUtil.DICT_LIST.postDocumentNum);
             $("#postDocumentNum").selectUtil(num);
-
-            //主送目标
-            let send = dictUtil.getDictByCode(dictUtil.DICT_LIST.areaAdmin);
-            $("#masterSend").selectUtil(send);
-
-            console.log($("#copySendGoal").val())
-            //抄送目标
-            $("#copySendGoal").selectUtil(send);
-            $("#add").unbind().on("click",function () {
-                var str = $("#copySend").val();
-                if (str.length === 0){
-                    $("#copySend").val(send[0].text);
-                }else {
-                    $("#copySend").val($("#copySend").val()+" "+send[$("#copySendGoal").val()].text);
-                }
-                $("#copySendGoal option[value=" + $("#copySendGoal").val() + "]").remove();
-            })
-            $("#clear").unbind().on("click",function () {
-                $("#copySend").val("");
-                $("#copySendGoal").selectUtil(send);
-            })
 
             //当前时间
             var nowTime = stringUtil.formatDateTime(new Date());
@@ -112,11 +92,6 @@
                 initialDate : nowTime,
             };
 
-            /*console.log(uuid)
-            var stt= "2" + uuid.substring(1);
-            console.log(stt);*/
-
-
             $("#savebtn").unbind().on('click',function () {
                 var PostEntity;
                 var requestUrl;
@@ -149,14 +124,6 @@
                         postDocumentNum1 : pad(newNum),
                         postDataStatus : "0",
                     };
-                    var postFile = [];
-                    postFile[0] = $("#upload_file")[0].files[0];
-                    postFile[1] = $("#fairFile")[0].files[0];
-                    var code1 = "1" + uuid.substring(1);
-                    var code2 = "2" + uuid.substring(1);
-                    ajaxUtil.postFileAjax(uuid,postFile[0], code1, sessionStorage.getItem("username"), sessionStorage.getItem("itemcode"));
-                    ajaxUtil.postFileAjax(uuid,postFile[1], code2, sessionStorage.getItem("username"), sessionStorage.getItem("itemcode"));
-
                 }
                 else {
                     var needData = JSON.parse(localStorage.getItem("rowData"));
@@ -172,23 +139,11 @@
                         postSecretRelated : secret,
                         postPrinting : $("#postPrinting").val(),
                         postDocumentNum : $("#postDocumentNum").val(),
-                    };
-                    operateMessage = "修改发文信息成功";
-                    if($("#fairFile")[0].files[0] != null){
-                        ajaxUtil.myAjax(null,"/file/delete?dataCode="+PostEntity.itemcode,null,function (data) {
-                            if(!ajaxUtil.success(data)){
-                                return alertUtil.error("文件删除失败,可能是文件损坏或不存在了");
-                            }
-                        },false,"","get");
-                        ajaxUtil.fileAjax(itemcode,file,stringUtil.getUUID(),sessionStorage.getItem("username"), sessionStorage.getItem("itemcode"));
                     }
-
+                    operateMessage = "修改发文信息成功";
                 }
-                /*var postFile = [];
-                postFile[0] = $("#upload_file")[0].files[0];
-                postFile[1] = $("#fairFile")[0].files[0];*/
-                //fileUtil.postFiles(isUpdate(), PostEntity.itemcode, postFile);
-                //fileUtil.handleFile(isUpdate(), PostEntity.itemcode, $("#upload_file")[0].files[0]);
+
+                fileUtil.handleFile(isUpdate(), PostEntity.itemcode, $("#upload_file")[0].files[0]);
 
                 ajaxUtil.myAjax(null,requestUrl,PostEntity,function (data) {
                     if(ajaxUtil.success(data)){
@@ -205,7 +160,7 @@
                         alertUtil.alert(data.msg);
                     }
                 },false,true);
-                return false;
+
             });
 
 
@@ -277,7 +232,7 @@
                         alertUtil.alert(data.msg);
                     }
                 },false,true);
-                return false;
+
             });
 
             (function init() {
@@ -306,6 +261,7 @@
                     $("#postDocumentNum1").val(tempdata.postDocumentNum1);
                     var file = tempdata.filePath;
                     uploadImg.setImgSrc(file);
+                    console.log(tempdata);
                 }
             }());
 
@@ -331,26 +287,6 @@
                 obj.outerHTML=obj.outerHTML;
                 $("#clsfile").css("display","none");
                 $("#addFile").empty("p");
-            }
-
-            /*上传公平竞争审查附件*/
-            document.getElementById('fairFile').onchange=function(){
-                var len=this.files.length;
-                $("#addFairFile").empty("p");
-                for (var i = 0; i < len; i++) {
-                    var name = this.files[i].name;
-                    var j=i+1;
-                    $("#addFairFile").append('<p>附件'+j+'：&nbsp;'+ name +'&nbsp;</p>');
-                };
-                if(len>0){
-                    $("#clsFairFile").css("display","block")
-                }
-            }
-            document.getElementById('clsFairFile').onclick = function() {
-                var obj = document.getElementById('fairFile');
-                obj.outerHTML=obj.outerHTML;
-                $("#clsFairFile").css("display","none");
-                $("#addFairFile").empty("p");
             }
 
         })

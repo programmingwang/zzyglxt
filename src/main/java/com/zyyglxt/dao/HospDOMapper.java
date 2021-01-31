@@ -2,7 +2,6 @@ package com.zyyglxt.dao;
 
 import com.zyyglxt.dataobject.HospDO;
 import com.zyyglxt.dataobject.HospDOKey;
-import com.zyyglxt.dto.HospDto;
 import com.zyyglxt.dto.StatusDto;
 
 import java.util.List;
@@ -23,16 +22,18 @@ public interface HospDOMapper {
 
     int updateByPrimaryKey(HospDO record);
 
-    List<HospDto> selectAllHosp();
+    List<HospDO> selectAllHosp();
 
-    List<HospDto> searchHosp(String keyWord);
+    List<HospDO> searchHosp(String keyWord);
 
-    HospDto selectHospByItemCode(String itemCode);
+    List<HospDO> top5Hosp();
 
-    List<HospDto> selectByStatus(String status);
+    HospDO selectHospByItemCode(String itemCode);
+
+    List<HospDO> selectByStatus(String status);
 
     int updateStatusByPrimaryKey(StatusDto statusDto);
 
-    HospDto selectByOrgCode(String orgCode);
+    HospDO selectByOrgCode(String orgCode);
 
 }

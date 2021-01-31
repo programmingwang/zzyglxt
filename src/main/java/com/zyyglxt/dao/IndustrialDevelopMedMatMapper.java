@@ -2,7 +2,6 @@ package com.zyyglxt.dao;
 
 import com.zyyglxt.dataobject.IndustrialDevelopMedMat;
 import com.zyyglxt.dto.StatusDto;
-import com.zyyglxt.dto.industrialDevelop.IndustrialDevelopMedMatDto;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -27,7 +26,7 @@ public interface IndustrialDevelopMedMatMapper {
 
     int updateByPrimaryKey(IndustrialDevelopMedMat record);
 
-    List<IndustrialDevelopMedMatDto> selectMedMatByORGCode(String ORGCode);
+    List<IndustrialDevelopMedMat> selectMedMatByORGCode(String ORGCode);
 
     int updateStatusByPrimaryKey(StatusDto statusDto);
 }

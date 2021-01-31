@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.zyyglxt.dao.HealthCareChineseMedicineDOMapper">
+  <resultMap id="BaseResultMap" type="com.zyyglxt.dataobject.HealthCareChineseMedicineDO">
 
-
-  <resultMap id="BaseResultMap" type="com.zyyglxt.dto.HealthCareChineseMedicineDto">
     <id column="itemID" jdbcType="INTEGER" property="itemid" />
     <id column="itemCode" jdbcType="CHAR" property="itemcode" />
     <result column="CHINESE_MEDICINE_NAME" jdbcType="VARCHAR" property="chineseMedicineName" />
@@ -20,16 +19,15 @@
     <result column="itemCreateAt" jdbcType="TIMESTAMP" property="itemcreateat" />
     <result column="UPDATER" jdbcType="VARCHAR" property="updater" />
     <result column="itemUpdateAt" jdbcType="TIMESTAMP" property="itemupdateat" />
-    <result column="FILE_PATH" jdbcType="VARCHAR" property="filePath"/>
   </resultMap>
+  <sql id="Base_Column_List">
 
-  <sql id="SelectAll_Base_Column_List">
-    cm.itemID, cm.itemCode, cm.CHINESE_MEDICINE_NAME, cm.CHINESE_MEDICINE_TYPE, cm.CHINESE_MEDICINE_ALIAS,
-    cm.CHINESE_MEDICINE_SOURCE, cm.CHINESE_MEDICINE_HARVESTING, cm.CHINESE_MEDICINE_TASTE, cm.CHINESE_MEDICINE_MER_TRO,
-    cm.CHINESE_MEDICINE_EFFECT, cm.CHINESE_MEDICINE_USAGE, cm.CHINESE_MEDICINE_STATUS, cm.CREATER,
-    cm.itemCreateAt, cm.UPDATER, cm.itemUpdateAt
+    itemID, itemCode, CHINESE_MEDICINE_NAME, CHINESE_MEDICINE_TYPE, CHINESE_MEDICINE_ALIAS, 
+    CHINESE_MEDICINE_SOURCE, CHINESE_MEDICINE_HARVESTING, CHINESE_MEDICINE_TASTE, CHINESE_MEDICINE_MER_TRO, 
+    CHINESE_MEDICINE_EFFECT, CHINESE_MEDICINE_USAGE, CHINESE_MEDICINE_STATUS, CREATER, 
+    itemCreateAt, UPDATER, itemUpdateAt
   </sql>
-  <!--<select id="selectByPrimaryKey" parameterType="com.zyyglxt.dataobject.HealthCareChineseMedicineDOKey" resultMap="BaseResultMap">
+  <select id="selectByPrimaryKey" parameterType="com.zyyglxt.dataobject.HealthCareChineseMedicineDOKey" resultMap="BaseResultMap">
 
     select
     <include refid="Base_Column_List" />
@@ -37,7 +35,7 @@
     where itemID = #{itemid,jdbcType=INTEGER}
       and itemCode = #{itemcode,jdbcType=CHAR}
     order by itemUpdateAt desc
-  </select>-->
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="com.zyyglxt.dataobject.HealthCareChineseMedicineDOKey">
 
     delete from tb_health_care_chinese_medicine
@@ -237,24 +235,10 @@
   </update>
 
   <select id="selectAllHealthCareChineseMedicine" resultMap="BaseResultMap">
-        SELECT
-        <include refid="SelectAll_Base_Column_List" />
-        ,
-        cf.FILE_PATH
-        FROM tb_health_care_chinese_medicine cm
-        left join tb_culpro_file cf
-        on cm.itemCode = cf.DATA_CODE
+        SELECT *
+        FROM tb_health_care_chinese_medicine
         WHERE CHINESE_MEDICINE_STATUS = #{chineseMedicineStatus,jdbcType=VARCHAR}
-    <if test="chineseMedicineStatus == 3">
-      and CHINESE_MEDICINE_STATUS in (2,5)
-    </if>
-    <if test="chineseMedicineStatus == 2">
-      and CHINESE_MEDICINE_STATUS in (1,2,3)
-    </if>
-    <if test="chineseMedicineStatus == 1">
-      and CHINESE_MEDICINE_STATUS in (0,1,2,3,4,6)
-    </if>
-    order by cm.itemUpdateAt desc
+        order by itemUpdateAt desc
     </select>
 
   <update id="changeStatusToMedicine">

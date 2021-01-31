@@ -57,7 +57,6 @@
                         alertUtil.error(data.msg);
                     }
                 },false,true,"POST");
-                return false;
             }
 
             /*保存按钮处理*/

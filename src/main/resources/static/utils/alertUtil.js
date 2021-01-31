@@ -31,7 +31,6 @@
                     from: "top",
                     align: "center"
                 },
-                z_index: 9999,
 
                 offset:50,
 

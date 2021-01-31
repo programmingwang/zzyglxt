@@ -6,7 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
-import java.util.List;
+import java.util.Date;
 
 /**
  * @Author huangtao
@@ -18,7 +18,18 @@ import java.util.List;
 @AllArgsConstructor
 @Accessors(chain = true)
 public class PostDto extends PostDO {
-    private List<String> fileName;
-    private List<String> filePath;
+    private String fileName;
+    private String filePath;
 
+    private String dataCode;
+    private String initial;
+    private Date initialDate;
+    private String department;
+    private Date departDate;
+    private String office;
+    private Date officeDate;
+    private String deputyDirector;
+    private Date deputyDirectorDate;
+    private String director;
+    private Date directorDate;
 }

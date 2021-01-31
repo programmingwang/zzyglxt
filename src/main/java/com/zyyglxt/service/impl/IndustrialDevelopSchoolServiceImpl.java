@@ -115,6 +115,10 @@ public class IndustrialDevelopSchoolServiceImpl implements IndustrialDevelopScho
 
     @Override
     public IndustrialDevelopSchoolDto selectByorgcode() {
-        return industrialDevelopSchoolMapper.selectByorgcode(usernameUtil.getOrgCode());
+        IndustrialDevelopSchoolDto schoolDto = new IndustrialDevelopSchoolDto();
+        IndustrialDevelopSchool developSchoolDto = industrialDevelopSchoolMapper.selectByorgcode(usernameUtil.getOrgCode());
+        BeanUtils.copyProperties(developSchoolDto, schoolDto);
+        schoolDto.setFilePath(fileService.selectFileByDataCode(developSchoolDto.getItemcode()).getFilePath());
+        return schoolDto;
     }
 }

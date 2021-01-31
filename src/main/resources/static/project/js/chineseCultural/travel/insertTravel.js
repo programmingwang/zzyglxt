@@ -35,7 +35,6 @@
                         chineseCulturalName : $("#chineseCulturalName").val(),
                         chineseCulturalSource : $("#chineseCulturalSource").val(),
                         chineseCulturalAuthor : $("#chineseCulturalAuthor").val(),
-                        chineseCulturalStatus : '0',
                         chineseCulturalContent : editor.txt.html()
                     }
                     operateMessage = "更新旅游景点成功";
@@ -56,7 +55,7 @@
                         alertUtil.error(data.msg);
                     }
                 },false,true);
-                return false;
+
             });
 
             $("#btn_insert").unbind().on('click',function () {
@@ -104,7 +103,7 @@
                         alertUtil.error(data.msg);
                     }
                 },false,true);
-                return false;
+
             });
 
 

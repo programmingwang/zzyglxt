@@ -259,4 +259,10 @@
     from tb_governres_post
     where POST_DOCUMENT_NUM1 = (select MAX(POST_DOCUMENT_NUM1) FROM tb_governres_post)
   </select>
+  <select id="getPandA" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from tb_governres_post
+    order by itemUpdateAt desc
+  </select>
 </mapper>

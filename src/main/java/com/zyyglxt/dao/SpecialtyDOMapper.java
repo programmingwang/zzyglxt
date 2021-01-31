@@ -2,7 +2,6 @@ package com.zyyglxt.dao;
 
 import com.zyyglxt.dataobject.SpecialtyDO;
 import com.zyyglxt.dataobject.SpecialtyDOKey;
-import com.zyyglxt.dto.SpecialtyDto;
 import com.zyyglxt.dto.StatusDto;
 
 import java.util.List;
@@ -25,13 +24,13 @@ public interface SpecialtyDOMapper {
 
     List<SpecialtyDO> selectAllSpecialty();
 
-    List<SpecialtyDto> searchSpecialty(String keyWord);
+    List<SpecialtyDO> searchSpecialty(String keyWord);
 
     SpecialtyDO selectSpecialtyByItemCode(String itemCode);
 
-    List<SpecialtyDto> selectByHospCode(String hospCode);
+    List<SpecialtyDO> selectByHospCode(String hospCode);
 
-    List<SpecialtyDto> selectByStatus(String status);
+    List<SpecialtyDO> selectByStatus(String status);
 
     int updateStatusByPrimaryKey(StatusDto statusDto);
 }

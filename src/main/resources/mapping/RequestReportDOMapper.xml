@@ -10,20 +10,16 @@
     <result column="REASON" jdbcType="VARCHAR" property="reason"/>
     <result column="REASONONE" jdbcType="VARCHAR" property="reasonone"/>
     <result column="REASONTWO" jdbcType="VARCHAR" property="reasontwo"/>
-    <result column="REASONTH" jdbcType="VARCHAR" property="reasonth"/>
     <result column="CREATER" jdbcType="VARCHAR" property="creater" />
     <result column="itemCreateAt" jdbcType="TIMESTAMP" property="itemcreateat" />
     <result column="UPDATER" jdbcType="VARCHAR" property="updater" />
     <result column="UPDATERONE" jdbcType="VARCHAR" property="updaterone" />
     <result column="UPDATERTWO" jdbcType="VARCHAR" property="updatertwo" />
-    <result column="UPDATERTH" jdbcType="VARCHAR" property="updaterth" />
     <result column="UPDATERF" jdbcType="VARCHAR" property="updaterf" />
     <result column="itemUpdateAt" jdbcType="TIMESTAMP" property="itemupdateat" />
     <result column="UPDATEONE" jdbcType="TIMESTAMP" property="updateone" />
     <result column="UPDATETWO" jdbcType="TIMESTAMP" property="updatetwo" />
     <result column="UPDATEF" jdbcType="TIMESTAMP" property="updatef" />
-    <result column="UPDATETH" jdbcType="TIMESTAMP" property="updateth" />
-
 
   </resultMap>
   <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.zyyglxt.dataobject.RequestReportDO">
@@ -169,9 +165,6 @@
       <if test="reasontwo != null">
         REASONTWO = #{reasontwo,jdbcType=VARCHAR},
       </if>
-      <if test="reasonth != null">
-        REASONTH = #{reasonth,jdbcType=VARCHAR},
-      </if>
       <if test="creater != null">
         CREATER = #{creater,jdbcType=VARCHAR},
       </if>
@@ -190,9 +183,6 @@
       <if test="updaterf != null">
         UPDATERF = #{updaterf,jdbcType=VARCHAR},
       </if>
-      <if test="updaterth != null">
-        UPDATERTH = #{updaterth,jdbcType=VARCHAR},
-      </if>
 
       <if test="itemupdateat != null">
         itemUpdateAt = #{itemupdateat,jdbcType=TIMESTAMP},
@@ -205,9 +195,6 @@
       </if>
       <if test="updatef != null">
         UPDATEF = #{updatef,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updateth != null">
-        UPDATETH = #{updateth,jdbcType=TIMESTAMP},
       </if>
 
       <if test="reportContent != null">

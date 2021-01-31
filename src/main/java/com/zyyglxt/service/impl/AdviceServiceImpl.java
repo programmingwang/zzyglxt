@@ -57,13 +57,12 @@ public class AdviceServiceImpl implements IAdviceService {
     }
 
     @Override
-    public void updAdvice(adviceDO record) {
-        ValidatorResult result = validator.validate(record,ValidationGroups.UpdateOrDelete.class);
+    public void updAdvice(String dataCode) {
+        ValidatorResult result = validator.validate(dataCode,ValidationGroups.UpdateOrDelete.class);
         if (result.isHasErrors()){
             throw new BusinessException(result.getErrMsg(), EmBusinessError.PARAMETER_VALIDATION_ERROR);
         }
-        record.setUpdater(usernameUtil.getOperateUser());
-        adviceMapper.updAdvice(record);
+        adviceMapper.updAdvice(dataCode);
     }
 
     @Override

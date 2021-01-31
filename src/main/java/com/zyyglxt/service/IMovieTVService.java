@@ -2,7 +2,6 @@ package com.zyyglxt.service;
 
 import com.zyyglxt.dataobject.ChineseCulturalDO;
 import com.zyyglxt.dataobject.ChineseCulturalDOKey;
-import com.zyyglxt.dto.ChineseCulturalDto;
 import com.zyyglxt.error.BusinessException;
 
 import java.util.List;
@@ -18,7 +17,7 @@ public interface IMovieTVService {
     ChineseCulturalDO getMovieTV(ChineseCulturalDOKey key);
 
     //查询所有电视电影
-    List<ChineseCulturalDto> getMovieTVList(String chineseCulturalStatus);
+    List<ChineseCulturalDO> getMovieTVList(List<String> chineseCulturalStatus);
 
     //增加一个电视电影
     int addMovieTV(ChineseCulturalDO record);

@@ -126,7 +126,8 @@ table{
 .aaaa.active, .aaaa:active {
     color: white;
     text-decoration: none;
-    background: url("../../images/new/titleHover.png") !important;
+    background-color:#D60000;
+    background: url("../../images/new/hover.png");
     background-size: 100% 100%;
 }
 .btn-link{
@@ -144,15 +145,12 @@ table{
     width: 161px;
     padding-left: 0;
     padding-right: 0;
-    color: #1e2629;
 }
 .btn-block>h4 {
     font-family: SourceHanSansCN-regular;
     font-weight: 700;
     font-style: normal;
     font-size: 1rem;
-    color: #5b4622;
-
 }
 
 .dropdown-menu.left-menu-dropdown-menu {
@@ -183,7 +181,6 @@ hr {
     font-weight: 700;
     font-style: normal;
     font-size: 1rem;
-    color: #5b4622;
 }
 .nullmenu{
     display:none;
@@ -218,14 +215,13 @@ hr {
 }
 
 thead.self-thead {
-    text-align: left;
+    text-align: center;
     background: url(../../images/new/tableDefault.png) no-repeat !important;
     background-size: 100% 100% !important;
-    font-family: SourceHanSansCN-Regular;
-    font-size: 16px;
-    color: #5b4622;
 }
-
+.th-inner {
+    color: #fff;
+}
 .btn-danger {
     color: #fff;
     background-color: #D60000;
@@ -311,7 +307,7 @@ thead.self-thead {
     margin-top: 20px;
 }
 #btn_addTask{
-    width: 171px;
+    width: 140px;
     height: 40px;
     background-color: #e66736 !important;
     text-align: center;
@@ -333,7 +329,6 @@ thead.self-thead {
     text-align: center;
     font-size: 16px;
     border-color: #e66736;
-    font-family: AdobeHeitiStd-Regular;
 }
 
 #chargePersonSearch{
@@ -370,28 +365,4 @@ thead.self-thead {
     top: 0;
     left: 0;
     overflow: hidden;
-}
-.table{
-    color: #3c4d53;
-    font-family: SourceHanSansCN-Regular;
-    font-size: 16px;
-}
-
-.table td {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-.table td:last-child
-{
-    white-space: nowrap;
-    overflow: visible !important;
-    text-overflow: unset !important;
-}
-
-span.input-text {
-    font-family: SourceHanSansCN-Regular;
-    font-size: 16px;
-    color: #1e2629;
 }

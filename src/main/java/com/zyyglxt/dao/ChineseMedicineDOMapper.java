@@ -3,7 +3,6 @@ package com.zyyglxt.dao;
 import com.zyyglxt.dataobject.ChineseMedicineDO;
 import com.zyyglxt.dataobject.ChineseMedicineDOKey;
 import com.zyyglxt.dataobject.ChineseMedicineDOWithBLOBs;
-import com.zyyglxt.dto.ChineseMedicineDto;
 import com.zyyglxt.dto.StatusDto;
 
 import java.util.List;
@@ -25,11 +24,13 @@ public interface ChineseMedicineDOMapper {
 
     List<ChineseMedicineDO> selectAllChineseMedicine();
 
-    List<ChineseMedicineDto> searchChineseMedicine(String keyWord);
+    List<ChineseMedicineDO> searchChineseMedicine(String keyWord);
 
-    List<ChineseMedicineDto> selectBySpecialtyCode(String specialtyCode);
+    List<ChineseMedicineDO> top5ChineseMedicine();
 
-    List<ChineseMedicineDto> selectByStatus(String status);
+    List<ChineseMedicineDO> selectBySpecialtyCode(String specialtyCode);
+
+    List<ChineseMedicineDO> selectByStatus(String status);
 
     int updateStatusByPrimaryKey(StatusDto statusDto);
 }

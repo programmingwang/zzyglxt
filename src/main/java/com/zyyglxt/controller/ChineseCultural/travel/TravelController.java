@@ -40,7 +40,15 @@ public class TravelController {
     @ResponseBody
     @LogAnnotation(logTitle = "查询所有健康旅游", logLevel = "1")
     public ResponseData getAllTravel(@RequestParam(value = "chineseCulturalStatus")List chineseCulturalStatus){
-        return new ResponseData(EmBusinessError.success,iTravelService.getTravelList(chineseCulturalStatus));
+        List<ChineseCulturalDO> cartoonAllusionsList = iTravelService.getTravelList(chineseCulturalStatus);
+        List<ChineseCulturalDto> chineseCulturalDtoList = new ArrayList<>();
+        for (ChineseCulturalDO chineseCulturalDO : cartoonAllusionsList) {
+            chineseCulturalDtoList.add(
+                    ConvertDOToDTOUtil.convertFromDOToDTO(
+                            chineseCulturalDO,iFileService.selectFileByDataCode(
+                                    chineseCulturalDO.getItemcode()).getFilePath()));
+        }
+        return new ResponseData(EmBusinessError.success,chineseCulturalDtoList);
 
     }
 

@@ -28,7 +28,7 @@ public interface IndustrialDevelopChiMedMapper {
 
     List<IndustrialDevelopChiMed> selectAll(String type);
 
-    IndustrialDevelopChiMedDto selectByOrgCode(@Param("orgCode") String orgCode);
+    IndustrialDevelopChiMed selectByOrgCode(@Param("orgCode") String orgCode);
 
     IndustrialDevelopChiMed selectByOrgNameAndCode( @Param("name") String name, @Param("orgCode") String orgCode);
 }

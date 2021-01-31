@@ -33,7 +33,7 @@
                         chineseMedicineMerTro : $("#chineseMedicineMerTro").val(),//归经
                         chineseMedicineEffect : $("#chineseMedicineEffect").val(),//功能主治
                         chineseMedicineUsage :$("#chineseMedicineUsage").val(),//用法用量
-                        chineseMedicineStatus : '0'
+                        ChineseMedicineStatus : '0'
                         /*chineseMedicineUsage : editor.txt.html()*/
                     };
                 }else{
@@ -50,7 +50,6 @@
                         chineseMedicineMerTro : $("#chineseMedicineMerTro").val(),//归经
                         chineseMedicineEffect : $("#chineseMedicineEffect").val(),//功能主治
                         chineseMedicineUsage :$("#chineseMedicineUsage").val(),//用法用量
-                        chineseMedicineStatus : '0'
                         /* chineseMedicineUsage : editor.txt.html()*/
                     }
                     operateMessage = "更新中医药成功";
@@ -65,7 +64,7 @@
                         alertUtil.alert(data.msg);
                     }
                 },false,true);
-                return false;
+
             });
 
             $("#btn_insert").unbind().on('click',function () {
@@ -117,7 +116,7 @@
                         alertUtil.alert(data.msg);
                     }
                 },false,true);
-                return false;
+
             });
             (function init() {
                 if (isUpdate()){

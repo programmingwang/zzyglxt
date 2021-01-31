@@ -3,7 +3,6 @@ package com.zyyglxt.service;
 import com.zyyglxt.dataobject.ChineseCulturalDO;
 import com.zyyglxt.dataobject.ChineseCulturalDOKey;
 import com.zyyglxt.dataobject.FileDO;
-import com.zyyglxt.dto.ChineseCulturalDto;
 import com.zyyglxt.error.BusinessException;
 
 import java.util.List;
@@ -19,7 +18,7 @@ public interface ITravelService {
     ChineseCulturalDO getTravel(ChineseCulturalDOKey key);
 
     //查询所有健康旅游信息
-    List<ChineseCulturalDto> getTravelList(List<String> chineseCulturalStatus);
+    List<ChineseCulturalDO> getTravelList(List<String> chineseCulturalStatus);
 
     //增加一个健康旅游信息
     int addTravel(ChineseCulturalDO record);

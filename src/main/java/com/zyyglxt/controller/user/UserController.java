@@ -9,7 +9,6 @@ import com.zyyglxt.error.BusinessException;
 import com.zyyglxt.error.EmBusinessError;
 import com.zyyglxt.response.ResponseData;
 import com.zyyglxt.service.*;
-import com.zyyglxt.util.UsernameUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -43,8 +42,6 @@ public class UserController {
     IndustrialDevelopSchoolService schoolService;
     @Autowired
     HttpServletRequest request;
-    @Autowired
-    UsernameUtil usernameUtil;
 
     /**
      * 用户注册，接收前段传递的数据，到service层
@@ -166,7 +163,7 @@ public class UserController {
     @LogAnnotation(logTitle = "查询所有用户", logLevel = "1")
     @RequestMapping(value = "/alluser", method = RequestMethod.GET)
     public ResponseData selectAllUser() {
-        List<UserDO> users = userService.selectAllUser(usernameUtil.getItemCode(),usernameUtil.getOperateUser());
+        List<UserDO> users = userService.selectAllUser();
         for (UserDO user : users) {
             String userItemCode = user.getItemcode();
             UserRoleRefDO userRoleRefDO = userRoleRefService.selectByUserCode(userItemCode);

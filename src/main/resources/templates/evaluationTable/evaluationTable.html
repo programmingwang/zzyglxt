@@ -5,24 +5,8 @@
     <link rel="stylesheet" th:href="@{project/css/evaluationTable/evaluationTable.css}">
     <title>评审</title>
     <style>
-        .Ma{
+        button{
             margin: 0 2rem;
-        }
-		#headerT{
-            margin: 20px 0px;
-            text-align: center;
-            font-size: 24px;
-            font-weight: 600;
-            color: #775637;
-        }
-        @media (max-width:1996px) { #expertOpinion{
-            width: 100%;
-        }}
-        @media (min-width:1997px) { #expertOpinion{
-            width: 1872px;
-        }}
-        td{
-            font-family: 'Arial Normal', 'Arial', sans-serif !important;
         }
     </style>
 </head>
@@ -30,10 +14,15 @@
 <div class="row">
     <div class="col-lg-1 col-md-1"></div>
     <div id="evalutionMain" class="col-lg-10 col-md-10" >
-        <div id="headerT">集中评审打分情况<span id="displaydf" style="color: red"></span></div>
-
-        <div style="font-weight: 700;font-style: normal;font-size: 17px;text-align: center;margin:20px;">集中评审打分表</div>
-        <table  border="2" bordercolor="black"  cellspacing="0"  style="text-align: center;">
+        <div id="headerT">集中评审打分情况</div>
+        <div style="font-weight: 400;font-style: normal;font-size: 14px;">总分:<input type="text"  id="allSc" readonly="readonly" style="width: 190px;height: 20px;border: 1px solid; border-color: #F2F2F2"></div>
+        <div style="font-weight: 400;font-style: normal;font-size: 14px;margin-top:20px">专家评审意见:</div>
+        <div>
+            <textarea name="" id="expertOpinion" style="resize:none; width: 951px;height: 58px;border: 1px solid; border-color:#F2F2F2 "></textarea>
+            <!--<input type="text" style="width: 951px;height: 58px;border: 1px solid; border-color:#F2F2F2 ">-->
+        </div>
+        <div style="font-weight: 700;font-style: normal;font-size: 14px;text-align: center;margin-top:20px;margin-bottom: 4px;">集中评审打分表</div>
+        <table  border="2" bordercolor="#F2F2F2"  cellspacing="0"  style="text-align: center;">
             <tr>
                 <th style="width: 150px;">一级指标</th>
                 <th>二级指标</th>
@@ -130,33 +119,19 @@
                 <td>5分</td>
                 <td><input id="score11" class="sc" type="text" oninput="if(value>5)value=5;if(value<0)value=0" onkeyup="this.value=this.value.replace(/\D/g,'');" style="outline: none;text-align: center; border: none;width: 100%;height: 100%"></td>
             </tr>
-            <tr>
-                <td><div style="font-weight: 400;font-style: normal;font-size: 17px;margin-top:20px;margin-bottom: 10px;">专家评审意见:</div></td>
-                <td colspan="4" >
-                    <div>
-                        <textarea name="" id="expertOpinion" style="resize:none; height: 58px;border: 0px solid; border-color:black;font-family: 'Arial Normal', 'Arial', sans-serif; "></textarea>
-                        <!--<input type="text" style="width: 951px;height: 58px;border: 1px solid; border-color:#F2F2F2 ">-->
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td colspan="3"></td>
-                <td> <span id="zftitle" style="font-weight: 400;font-style: normal;font-size: 17px;">总分</span></td>
-                <td><input type="text"  id="allSc" readonly="readonly" style="width: 40px;height: 20px;border: 0px; border-color: black;margin-left: 10px;text-align: center;font-family: 'Arial Normal', 'Arial', sans-serif;font-weight: 400;font-size: 17px;"></td>
-            </tr>
         </table>
-
         <div class="form-group row" style="margin-top: 2rem " >
             <div class="col-lg-3 col-md-3"></div>
             <div class="col-lg-6 col-md-6 row">
-                <button id="cancel" type="button" class="btn btn-light Ma">取消</button>
+                <button id="cancel" type="button" class="btn btn-light">取消</button>
                 <!--点击保存，变成评审中-->
-                <button id="btn_save" type="submit" class="btn btn-danger Ma">保存</button>
+                <button id="btn_save" type="submit" class="btn btn-danger">保存</button>
 
-                <button id="btn_insert" type="submit" class="btn btn-primary Ma">提交</button>
+                <button id="btn_insert" type="submit" class="btn btn-primary">提交</button>
             </div>
             <div class="col-lg-3 col-md-3"></div>
         </div>
+
     </div>
     <div class="col-lg-1 col-md-1"></div>
 </div>

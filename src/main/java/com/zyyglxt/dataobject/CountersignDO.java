@@ -1,7 +1,10 @@
 package com.zyyglxt.dataobject;
 
+import lombok.Data;
+
 import java.util.Date;
 
+@Data
 public class CountersignDO extends CountersignDOKey {
     private String receivingTitle;
 
@@ -12,6 +15,8 @@ public class CountersignDO extends CountersignDOKey {
     private String reason;
 
     private String fileNo;
+
+    private String fileNumber;
 
     private String classification;
 

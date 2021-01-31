@@ -2,7 +2,6 @@ package com.zyyglxt.service;
 
 import com.zyyglxt.dataobject.DataDO;
 import com.zyyglxt.dataobject.DataDOKey;
-import com.zyyglxt.dto.DataDto;
 
 import java.sql.Date;
 import java.util.List;
@@ -17,7 +16,7 @@ public interface IDataRegulationService {
     DataDO selectRegulation(DataDOKey key);
 
     //查询所有政策法规
-    List<DataDto> selectRegulationList(List<String> dataStatus);
+    List<DataDO> selectRegulationList(List<String> dataStatus);
 
     //增加一个政策法规
     int insertRegulation(DataDO record);

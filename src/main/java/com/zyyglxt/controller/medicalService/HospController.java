@@ -61,34 +61,44 @@ public class HospController {
     @ResponseBody
     @LogAnnotation(appCode ="",logTitle ="根据机构数据查看医院数据",logLevel ="1",creater ="",updater = "")
     public ResponseData selectByOrgCode(){
-        return new ResponseData(EmBusinessError.success,hospService.selectByOrgCode(usernameUtil.getOrgCode()));
+        HospDO hospDO = hospService.selectByOrgCode(usernameUtil.getOrgCode());
+        HospDto dto = new HospDto();
+        BeanUtils.copyProperties(hospDO,dto);
+        FileDO fileDO = fileService.selectFileByDataCode(hospDO.getItemcode());
+        String filePath = (fileDO==null) ? "损坏了" : fileDO.getFilePath();
+        dto.setFilePath(filePath);
+        return new ResponseData(EmBusinessError.success,dto);
     }
     @GetMapping(value = "/selectAll")
     @ResponseBody
     @LogAnnotation(appCode ="",logTitle ="根据身份查看医院数据",logLevel ="1",creater ="",updater = "")
     public ResponseData selectAllHosp(@RequestParam(value = "hospitalStatus")List hospitalStatus){
-        return new ResponseData(EmBusinessError.success,hospService.selectAllHosp(hospitalStatus));
+        List<HospDO> hospDOList = hospService.selectAllHosp(hospitalStatus);
+        return new ResponseData(EmBusinessError.success,DoToDto(hospDOList));
     }
 
     @GetMapping(value = "selectAllHosp")
     @ResponseBody
     @LogAnnotation(appCode ="",logTitle ="查看所有医院数据",logLevel ="1",creater ="",updater = "")
     public ResponseData selectAllNoStatus(){
-        return new ResponseData(EmBusinessError.success,hospService.selectAllNoStatus());
+        List<HospDO> hospDOList = hospService.selectAllNoStatus();
+        return new ResponseData(EmBusinessError.success,DoToDto(hospDOList));
     }
 
     @ResponseBody
     @GetMapping(value = "search")
     @LogAnnotation(appCode ="",logTitle ="搜索医院数据",logLevel ="1",creater ="",updater = "")
     public ResponseData searchHosp(String keyWord){
-        return new ResponseData(EmBusinessError.success,hospService.searchHosp(keyWord));
+        List<HospDO> hospDOList = hospService.searchHosp(keyWord);
+        return new ResponseData(EmBusinessError.success,DoToDto(hospDOList));
     }
 
     @ResponseBody
     @GetMapping("selectByStatus")
     @LogAnnotation(appCode = "",logTitle = "根据状态查看医院数据",logLevel = "1")
     public ResponseData selectByStatus(String status){
-        return new ResponseData(EmBusinessError.success,hospService.selectByStatus(status));
+        List<HospDO> hospDOList = hospService.selectByStatus(status);
+        return new ResponseData(EmBusinessError.success,DoToDto(hospDOList));
     }
 
     @ResponseBody
@@ -97,5 +107,19 @@ public class HospController {
     public ResponseData updateStatus(StatusDto statusDto){
         hospService.updateStatus(statusDto);
         return new ResponseData(EmBusinessError.success);
+    }
+
+    private List<HospDto> DoToDto(List<HospDO> DOList){
+        List<HospDto> DtoList = new ArrayList<>();
+        if (!DOList.isEmpty()){
+            for (HospDO DO:DOList){
+                HospDto Dto = new HospDto();
+                BeanUtils.copyProperties(DO,Dto);
+                FileDO fileDO= fileService.selectFileByDataCode(Dto.getItemcode());
+                Dto.setFilePath(fileDO == null ? null:fileDO.getFilePath());
+                DtoList.add(Dto);
+            }
+        }
+        return DtoList;
     }
 }

@@ -30,24 +30,12 @@
     <result column="UPDATER" jdbcType="VARCHAR" property="updater" />
     <result column="itemUpdateAt" jdbcType="TIMESTAMP" property="itemupdateat" />
   </resultMap>
-  <resultMap id="ResultMapWithFile" type="com.zyyglxt.dto.industrialDevelop.IndustrialDevelopChiMedDto" extends="BaseResultMap">
-  <collection property="filePath" ofType="java.lang.String">
-            <constructor>
-                <arg column="FILE_PATH"/>
-            </constructor>
-        </collection>
-</resultMap>
   <sql id="Base_Column_List">
     <!--@mbg.generated-->
-    tb_industrial_develop_chi_med.itemID,tb_industrial_develop_chi_med.itemCode,tb_industrial_develop_chi_med.NAME,
-tb_industrial_develop_chi_med.AREA_COVERD,tb_industrial_develop_chi_med.SALES_CATEGORY,tb_industrial_develop_chi_med.PROCESSING_TYPE,
-tb_industrial_develop_chi_med.PEODUCE_TYPE,tb_industrial_develop_chi_med.PLANT_TYPE,tb_industrial_develop_chi_med.PEODUCE_DRUG,
-tb_industrial_develop_chi_med.SELLING_DRUGS,tb_industrial_develop_chi_med.CONTACTS,tb_industrial_develop_chi_med.PHONE,
-tb_industrial_develop_chi_med.ADDRESS_PRO,tb_industrial_develop_chi_med.ADDRESS_CITY,tb_industrial_develop_chi_med.ADDRESS_COUNTRY,
-tb_industrial_develop_chi_med.ADDRESS,tb_industrial_develop_chi_med.INTRUDUCE,tb_industrial_develop_chi_med.STATUS,
-tb_industrial_develop_chi_med.REASON,tb_industrial_develop_chi_med.ORG_CODE,tb_industrial_develop_chi_med.TYPE,
-tb_industrial_develop_chi_med.CREATER,tb_industrial_develop_chi_med.itemCreateAt,tb_industrial_develop_chi_med.UPDATER,
-tb_industrial_develop_chi_med.itemUpdateAt
+    itemID, itemCode, `NAME`, AREA_COVERD, SALES_CATEGORY, PROCESSING_TYPE, PEODUCE_TYPE,
+    PLANT_TYPE, PEODUCE_DRUG, SELLING_DRUGS, CONTACTS, PHONE, ADDRESS_PRO, ADDRESS_CITY,
+    ADDRESS_COUNTRY, ADDRESS, INTRUDUCE, `STATUS`, REASON, ORG_CODE, `TYPE`, CREATER,
+    itemCreateAt, UPDATER, itemUpdateAt
   </sql>
   <select id="selectByPrimaryKey" parameterType="map" resultMap="BaseResultMap">
     <!--@mbg.generated-->
@@ -57,12 +45,11 @@ tb_industrial_develop_chi_med.itemUpdateAt
     where itemCode = #{itemcode,jdbcType=CHAR}
     order by itemUpdateAt desc
   </select>
-  <select id="selectByOrgCode" resultMap="ResultMapWithFile">
+  <select id="selectByOrgCode" resultMap="BaseResultMap">
     <!--@mbg.generated-->
     select
-    <include refid="Base_Column_List" />,
-    tcf.FILE_PATH
-    from tb_industrial_develop_chi_med left join tb_culpro_file tcf on tb_industrial_develop_chi_med.itemCode = tcf.DATA_CODE
+    <include refid="Base_Column_List" />
+    from tb_industrial_develop_chi_med
     where ORG_CODE = #{orgCode,jdbcType=VARCHAR}
     order by itemUpdateAt desc
   </select>

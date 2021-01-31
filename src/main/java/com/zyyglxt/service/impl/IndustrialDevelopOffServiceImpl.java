@@ -7,16 +7,13 @@ import com.zyyglxt.dataobject.validation.ValidationGroups;
 import com.zyyglxt.error.BusinessException;
 import com.zyyglxt.error.EmBusinessError;
 import com.zyyglxt.service.IIndustrialDevelopOffService;
-import com.zyyglxt.util.DateUtils;
 import com.zyyglxt.util.UsernameUtil;
 import com.zyyglxt.validator.ValidatorImpl;
 import com.zyyglxt.validator.ValidatorResult;
-import lombok.Data;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -38,10 +35,6 @@ public class IndustrialDevelopOffServiceImpl implements IIndustrialDevelopOffSer
     @Override
     public void addOff(IndustrialDevelopOffDO record) {
 
-        Date date1 = record.getStartTime();
-        Date date2 = DateUtils.getDate();
-        Date date3 = record.getEndTime();
-
         record.setCreater(usernameUtil.getOperateUser());
         record.setUpdater(usernameUtil.getOperateUser());
         record.setItemcreateat(new Date());
@@ -53,21 +46,6 @@ public class IndustrialDevelopOffServiceImpl implements IIndustrialDevelopOffSer
         }
         if (record.getItemcode() == null || record.getItemcode().isEmpty()){
             record.setItemcode(UUID.randomUUID().toString());
-        }
-
-        Calendar date = Calendar.getInstance();
-        date.setTime(date2);
-
-        Calendar begin = Calendar.getInstance();
-        begin.setTime(date1);
-
-        Calendar end = Calendar.getInstance();
-        end.setTime(date3);
-
-        if (date.after(begin) && date.before(end)) {
-            record.setIsimp("1");
-        } else {
-           record.setIsimp("0");
         }
         developOffDOMapper.insertSelective(record);
     }

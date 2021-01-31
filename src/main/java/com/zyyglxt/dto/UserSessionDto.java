@@ -12,8 +12,6 @@ import lombok.ToString;
 public class UserSessionDto {
     private String username;
 
-    private String name;
-
     private int itemid;
 
     private String itemcode;
@@ -21,8 +19,6 @@ public class UserSessionDto {
     private String rolename;
 
     private String orgCode;
-
-    private String orgName;
 
     private String cityId;
 }

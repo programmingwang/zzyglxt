@@ -545,7 +545,7 @@
                 myTable = bootstrapTableUtil.myBootStrapTableInit("table", url, param, aCol);
             }
 
-            bootstrapTableUtil.globalSearch("table",url,aParam, aCol, "govPunlic");
+            bootstrapTableUtil.globalSearch("table",url,aParam, aCol);
 
 
 

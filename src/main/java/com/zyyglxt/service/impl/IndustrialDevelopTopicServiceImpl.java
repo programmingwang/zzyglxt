@@ -1,13 +1,10 @@
 package com.zyyglxt.service.impl;
 
 import com.zyyglxt.dao.IndustrialDevelopTopicDOMapper;
-import com.zyyglxt.dao.UserRoleRefDOMapper;
 import com.zyyglxt.dataobject.IndustrialDevelopExpertRefDO;
 import com.zyyglxt.dataobject.IndustrialDevelopTopicDO;
 import com.zyyglxt.dataobject.IndustrialDevelopTopicDOKey;
-import com.zyyglxt.dataobject.UserRoleRefDO;
 import com.zyyglxt.dataobject.validation.ValidationGroups;
-import com.zyyglxt.dto.industrialDevelop.IndustrialDevelopTopicDODto;
 import com.zyyglxt.error.BusinessException;
 import com.zyyglxt.error.EmBusinessError;
 import com.zyyglxt.service.IExmaineService;
@@ -37,8 +34,6 @@ public class IndustrialDevelopTopicServiceImpl implements IIndustrialDevelopTopi
     @Resource
     IndustrialDevelopTopicDOMapper developTopicDOMapper;
 
-    @Resource
-    UserRoleRefDOMapper userRoleRefDOMapper;
 
     @Resource
     ValidatorImpl validator;
@@ -83,13 +78,27 @@ public class IndustrialDevelopTopicServiceImpl implements IIndustrialDevelopTopi
     }
 
     @Override
-    public List<IndustrialDevelopTopicDODto> getTopics(List<String> examineStatus) {
-        List<IndustrialDevelopTopicDODto> topicDOList = new ArrayList<>();
+    public List<IndustrialDevelopTopicDO> getTopics(List<String> examineStatus) {
+        List<IndustrialDevelopTopicDO> topicDOList = new ArrayList<>();
         for (String status : examineStatus) {
             topicDOList.addAll(developTopicDOMapper.selectAll(status));
         }
         return topicDOList;
     }
+
+    /*@Override
+    public List<IndustrialDevelopTopicDO> getTopics() {
+        if (usernameUtil.getRoleName().equals("申报单位"))
+        {
+            String orgCode = usernameUtil.getOrgCode();
+            List<String> userCodes = developTopicDOMapper.selectAllUserCode(orgCode);
+            for (String usercode : userCodes){
+                developTopicDOMapper.selectByUserCode(usercode);
+
+            }
+        }
+        return developTopicDOMapper.selectAll();
+    }*/
 
     @Override
     public List<IndustrialDevelopTopicDO> getStatus(String code) {
@@ -112,12 +121,12 @@ public class IndustrialDevelopTopicServiceImpl implements IIndustrialDevelopTopi
     }
 
     @Override
-    public List<IndustrialDevelopTopicDODto> selectByUserCode(String userCode) {
+    public List<IndustrialDevelopTopicDO> selectByUserCode(String userCode) {
         return developTopicDOMapper.selectByUserCode(userCode);
     }
 
     @Override
-    public List<IndustrialDevelopTopicDODto> selectByCompany(String company) {
+    public List<IndustrialDevelopTopicDO> selectByCompany(String company) {
         return developTopicDOMapper.selectByCompany(company);
     }
 
@@ -126,13 +135,5 @@ public class IndustrialDevelopTopicServiceImpl implements IIndustrialDevelopTopi
         return developTopicDOMapper.maxProjectNO();
     }
 
-    @Override
-    public List<IndustrialDevelopTopicDO> getAll(List<String> examineStatus) {
-        List<IndustrialDevelopTopicDO> topicDOList = new ArrayList<>();
-        for (String status : examineStatus) {
-            topicDOList.addAll(developTopicDOMapper.getAll(status));
-        }
-        return topicDOList;
-    }
 
 }

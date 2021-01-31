@@ -93,6 +93,7 @@
         modalHtml.myDeletesignModal = "是否删除内部会签？";
         modalHtml.myTopicSubmitTip = "操作成功";
         modalHtml.myResetPasswordTips = "重置密码成功，默认密码为：123456";
+        modalHtml.myExmainSuccessTips = "评审成功";
         return modalHtml
     })
 })();

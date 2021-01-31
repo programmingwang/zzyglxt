@@ -49,9 +49,10 @@
                 if(row.examineStatus == projectStatus[0].id){
                     if (row.status == topicStatus[3].id){
                         return [
-                            '<a class="view" style="margin:0 1em;text-decoration: none;color:#775637;" data-toggle="modal" data-target="" >查看</a>',
-                            '<a class="viewReason" style="margin:0 1em;text-decoration: none;color:#775637;" data-toggle="modal" data-target="" >放弃理由</a>',
-                            '<a class="delete" style="margin:0 1em;text-decoration: none;color:#D60000;"  data-toggle="modal" data-target="#staticBackdrop" >删除</a>',
+                            '<a class="viewReason" style="margin:0 0.7em;text-decoration: none;color:#775637;" data-toggle="modal" data-target="" >理由</a>',
+                            '<a class="edit" style="margin:0 0.7em;text-decoration: none;color:#775637;" data-toggle="modal" data-target="" >修改</a>',
+                            '<a class="submit"  style="margin:0 0.7em;text-decoration: none;color:#775637;" data-target="#staticBackdrop" >提交</a>',
+                            '<a class="delete" style="margin:0 0.7em;text-decoration: none;color:#D60000;"  data-toggle="modal" data-target="#staticBackdrop" >删除</a>',
                         ].join('');
                     }else {
                         return [
@@ -81,9 +82,10 @@
                         ].join('');
                     }else if (row.status == topicStatus[3].id){ //放弃理由
                         return [
-                            '<a class="view" style="margin:0 1em;text-decoration: none;color:#775637;" data-toggle="modal" data-target="" >查看</a>',
-                            '<a class="viewReason" style="margin:0 1em;text-decoration: none;color:#775637;" data-toggle="modal" data-target="" >放弃理由</a>',
-                            '<a class="delete" style="margin:0 1em;text-decoration: none;color:#D60000;"  data-toggle="modal" data-target="#staticBackdrop" >删除</a>',
+                            '<a class="viewReason" style="margin:0 0.7em;text-decoration: none;color:#775637;" data-toggle="modal" data-target="" >理由</a>',
+                            '<a class="edit" style="margin:0 0.7em;text-decoration: none;color:#775637;" data-toggle="modal" data-target="" >修改</a>',
+                            '<a class="submit"  style="margin:0 0.7em;text-decoration: none;color:#775637;" data-target="#staticBackdrop" >提交</a>',
+                            '<a class="delete" style="margin:0 0.7em;text-decoration: none;color:#D60000;"  data-toggle="modal" data-target="#staticBackdrop" >删除</a>',
                         ].join('');
                     }
                 }
@@ -350,7 +352,17 @@
                                                         ajaxUtil.myAjax(null,"/industrialdevelop/projectStatus/"+row.itemid+"/"+row.itemcode,xmStatus,function (data) {
                                                             if(ajaxUtil.success(data)){
                                                                 if(data.code == 88888){
-                                                                    alertUtil.success("已放弃课题");
+                                                                    var submitConfirmModal = {
+                                                                        modalBodyID :"myTopicSubmitTip",
+                                                                        modalTitle : "提示",
+                                                                        modalClass : "modal-lg",
+                                                                        cancelButtonStyle: "display:none",
+                                                                        modalConfirmFun:function (){
+                                                                            return true;
+                                                                        }
+                                                                    }
+                                                                    var submitConfirm = modalUtil.init(submitConfirmModal);
+                                                                    submitConfirm.show();
                                                                     isSuccess = true;
                                                                     refreshTable();
                                                                 }else{
@@ -403,7 +415,17 @@
                                         ajaxUtil.myAjax(null,"/industrialdevelop/projectStatus/"+row.itemid+"/"+row.itemcode,xmStatus,function (data) {
                                             if(ajaxUtil.success(data)){
                                                 if(data.code == 88888){
-                                                    alertUtil.info("已提交");
+                                                    var submitConfirmModal = {
+                                                        modalBodyID :"myTopicSubmitTip",
+                                                        modalTitle : "提示",
+                                                        modalClass : "modal-lg",
+                                                        cancelButtonStyle: "display:none",
+                                                        modalConfirmFun:function (){
+                                                            return true;
+                                                        }
+                                                    }
+                                                    var submitConfirm = modalUtil.init(submitConfirmModal);
+                                                    submitConfirm.show();
                                                     isSuccess = true;
                                                     refreshTable();
                                                 }else{

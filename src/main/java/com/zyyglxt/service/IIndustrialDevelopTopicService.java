@@ -38,8 +38,6 @@ public interface IIndustrialDevelopTopicService {
 
     IndustrialDevelopTopicDO maxProjectNO();
 
-    List<UserRoleRefDO> getPlatRole();
-
     List<IndustrialDevelopTopicDO> getAll(List<String> examineStatus);
 
 }

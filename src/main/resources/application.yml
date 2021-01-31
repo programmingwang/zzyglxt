@@ -30,7 +30,7 @@ spring:
     testOnReturn: false
     poolPreparedStatements: true
 
-      #配置监控统计拦截的filters，stat:监控统计、log4j：日志记录、wall：防御sql注入
+    #配置监控统计拦截的filters，stat:监控统计、log4j：日志记录、wall：防御sql注入
     #如果允许时报错  java.lang.ClassNotFoundException: org.apache.log4j.Priority
     #则导入 log4j 依赖即可，Maven 地址：https://mvnrepository.com/artifact/log4j/log4j
     filters: stat,wall,log4j
@@ -46,7 +46,7 @@ spring:
       enabled: false
   cache:
     ehcache:
-      config: ehcache.xml
+      config: classpath:ehcache.xml
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss
     time-zone: GMT+8
@@ -63,6 +63,9 @@ mybatis:
 
 server:
   port: 8989
+  tomcat:
+    max-connections: 6500
+    accept-count: 1000
 
 upload:
   addr: 47.113.104.120

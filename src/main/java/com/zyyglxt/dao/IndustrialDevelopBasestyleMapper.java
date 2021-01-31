@@ -26,5 +26,5 @@ public interface IndustrialDevelopBasestyleMapper {
 
     int updateByPrimaryKey(IndustrialDevelopBasestyle record);
 
-    List<IndustrialDevelopBasestyleDto> selectAll();
+    List<IndustrialDevelopBasestyleDto> selectAll(String orgCode);
 }

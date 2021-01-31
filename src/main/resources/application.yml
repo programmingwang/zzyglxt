@@ -44,7 +44,7 @@ spring:
       enabled: false
   cache:
     ehcache:
-      config: ehcache.xml
+      config: classpath:ehcache.xml
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss
     time-zone: GMT+8
@@ -61,6 +61,9 @@ mybatis:
 
 server:
   port: 8989
+  tomcat:
+    max-connections: 6500
+    accept-count: 1000
 
 upload:
   addr: 47.113.104.120

@@ -9,6 +9,7 @@ import com.zyyglxt.error.BusinessException;
 import com.zyyglxt.error.EmBusinessError;
 import com.zyyglxt.response.ResponseData;
 import com.zyyglxt.service.*;
+import com.zyyglxt.util.UsernameUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -42,6 +43,8 @@ public class UserController {
     IndustrialDevelopSchoolService schoolService;
     @Autowired
     HttpServletRequest request;
+    @Autowired
+    UsernameUtil usernameUtil;
 
     /**
      * 用户注册，接收前段传递的数据，到service层
@@ -163,23 +166,16 @@ public class UserController {
     @LogAnnotation(logTitle = "查询所有用户", logLevel = "1")
     @RequestMapping(value = "/alluser", method = RequestMethod.GET)
     public ResponseData selectAllUser() {
-        List<UserDO> users = userService.selectAllUser();
-        for (UserDO user : users) {
-            String userItemCode = user.getItemcode();
-            UserRoleRefDO userRoleRefDO = userRoleRefService.selectByUserCode(userItemCode);
-            String roleName = userRoleRefDO.getPlatRole();
-            user.setRoleName(roleName);
-        }
+        List<UserDO> users = userService.selectAllUser(usernameUtil.getItemCode(),usernameUtil.getOperateUser());
         return new ResponseData(EmBusinessError.success, users);
     }
-
 
     /**
      * 科研项目管理-账号管理-新增用户
      *
      * @return user和查询结果
      */
-    @LogAnnotation(logTitle = "产业发展-账号管理-新增用户", logLevel = "3")
+    @LogAnnotation(logTitle = "科研项目-账号管理-新增用户", logLevel = "3")
     @RequestMapping(value = "/adduser", method = RequestMethod.POST)
     public ResponseData insertUser(@RequestBody UserDO userDO){
         userService.insertUserSelective(userDO);
@@ -192,7 +188,7 @@ public class UserController {
      * @param userDtO
      * @return
      */
-    @LogAnnotation(logTitle = "产业发展-账号管理-删除用户", logLevel = "4")
+    @LogAnnotation(logTitle = "科研项目-账号管理-删除用户", logLevel = "4")
     @RequestMapping(value = "/deletuser", method = RequestMethod.POST)
     public ResponseData deleteUserByUsername(@RequestBody UserDto userDtO){
         userService.deleteUserByUsername(userDtO);
@@ -204,7 +200,7 @@ public class UserController {
      * @param userDo
      * @return
      */
-    @LogAnnotation(logTitle ="产业发展-账号管理-重置密码",logLevel ="2")
+    @LogAnnotation(logTitle ="科研项目-账号管理-重置密码",logLevel ="2")
     @RequestMapping(value = "/reset", method = RequestMethod.PUT)
     public ResponseData resetPassword(@RequestBody UserDO userDo){
         userService.resetPassword(userDo);

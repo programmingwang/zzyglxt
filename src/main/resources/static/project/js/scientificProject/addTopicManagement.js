@@ -150,9 +150,18 @@
 
                 ajaxUtil.myAjax(null,requestUrl,TopicEntity,function (data) {
                     if(ajaxUtil.success(data)){
-                        alertUtil.info(operateMessage);
-                        var url = "/scientificProject/topicManagement";
-                        orange.redirect(url);
+                        var submitConfirmModal = {
+                            modalBodyID :"myTopicSubmitTip",
+                            modalTitle : "提示",
+                            modalClass : "modal-lg",
+                            cancelButtonStyle: "display:none",
+                            modalConfirmFun:function (){
+                                var url = "/scientificProject/topicManagement";
+                                orange.redirect(url);
+                            }
+                        }
+                        var submitConfirm = modalUtil.init(submitConfirmModal);
+                        submitConfirm.show();
                     }else {
                         alertUtil.alert(data.msg);
                     }

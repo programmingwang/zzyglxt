@@ -33,9 +33,19 @@
                             };
                             ajaxUtil.myAjax(null,"/user/deletuser",chineseMedicineKey,function (data) {
                                 if(ajaxUtil.success(data)){
-                                    alertUtil.info("删除账号信息成功");
+                                    var submitConfirmModal = {
+                                        modalBodyID :"myTopicSubmitTip",
+                                        modalTitle : "提示",
+                                        modalClass : "modal-lg",
+                                        cancelButtonStyle: "display:none",
+                                        modalConfirmFun:function (){
+                                            refreshTable();
+                                            return true;
+                                        }
+                                    };
+                                    var submitConfirm = modalUtil.init(submitConfirmModal);
+                                    submitConfirm.show();
                                     isSuccess = true;
-                                    refreshTable();
                                 }
                             },false,'123',"post");
                             return isSuccess;
@@ -53,21 +63,12 @@
                         confirmButtonStyle: "display:none",
                     };
                     var myTravelModal = modalUtil.init(myViewTravelModalData);
-                    uploadImg.init();
-                    uploadImg.disable();
-                    uploadImg.setImgSrc(row.portrait);
                     $("#username").val(row.username);
                     $("#name").val(row.name);
-                    $("#gender").val(row.gender);
-                    $("#IDCardType").val(row.idcardType);
-                    $("#IDCardNo").val(row.idcardNo);
-                    $("#email").val(row.email);
                     $("#roleName").val(row.roleName);
                     $("#contacts").val(row.contacts);
                     $("#mobilephone").val(row.mobilephone);
                     $("#cityid").val(row.cityid);
-                    $("#creater").val(row.creater);
-                    $("#itemCreateAt").val(row.itemcreateat);
                     myTravelModal.show();
                 },
 
@@ -84,24 +85,20 @@
                             };
                             ajaxUtil.myAjax(null,"/user/reset",submitStatus,function (data) {
                                 if(ajaxUtil.success(data)){
-                                    if(data.code == 88888){
-                                        var submitConfirmModal = {
-                                            modalBodyID :"myResetPasswordTips",
-                                            modalTitle : "提示",
-                                            modalClass : "modal-lg",
-                                            cancelButtonStyle: "display:none",
-                                            modalConfirmFun:function (){
-                                                return true;
-                                            }
+                                    var submitConfirmModal = {
+                                        modalBodyID :"myResetPasswordTips",
+                                        modalTitle : "提示",
+                                        modalClass : "modal-lg",
+                                        cancelButtonStyle: "display:none",
+                                        modalConfirmFun:function (){
+                                            return true;
                                         }
-                                        var submitConfirm = modalUtil.init(submitConfirmModal);
-                                        submitConfirm.show();
-                                        isSuccess = true;
-                                        // refreshTable();
-                                    }else{
-                                        alertUtil.error(data.msg);
-                                    }
-
+                                    };
+                                    var submitConfirm = modalUtil.init(submitConfirmModal);
+                                    submitConfirm.show();
+                                    isSuccess = true;
+                                }else{
+                                    alertUtil.error(data.msg);
                                 }
                             },false,true,"put");
                             return isSuccess;
@@ -153,14 +150,21 @@
                             if (reg.test(username)) {
                                 ajaxUtil.myAjax(null,"/user/adduser",submitStatus,function (data) {
                                     if(ajaxUtil.success(data)){
-                                        if(data.code == 88888){
-                                            alertUtil.info("新增用户账号成功");
-                                            isSuccess = true;
-                                            refreshTable();
-                                        }else{
-                                            alertUtil.error(data.msg);
-                                        }
-                                        alertUtil.error(data.msg)
+                                        var submitConfirmModal = {
+                                            modalBodyID :"myTopicSubmitTip",
+                                            modalTitle : "提示",
+                                            modalClass : "modal-lg",
+                                            cancelButtonStyle: "display:none",
+                                            modalConfirmFun:function (){
+                                                refreshTable();
+                                                return true;
+                                            }
+                                        };
+                                        var submitConfirm = modalUtil.init(submitConfirmModal);
+                                        submitConfirm.show();
+                                        isSuccess = true;
+                                    }else{
+                                        alertUtil.error(data.msg);
                                     }
                                 },false,true);
                             } else {
@@ -230,8 +234,8 @@
                         }
                     }
                 }
-                var newArr=new Set(newArry)
-                newArry=Array.from(newArr)
+                var newArr=new Set(newArry);
+                newArry=Array.from(newArr);
                 $("#table").bootstrapTable("load", newArry);
 
             })

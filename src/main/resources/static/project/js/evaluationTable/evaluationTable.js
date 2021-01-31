@@ -1,9 +1,9 @@
 (function () {
-    require(['jquery', 'ajaxUtil','objectUtil','alertUtil','selectUtil','stringUtil','dictUtil'],
-        function (jquery,ajaxUtil,objectUtil,alertUtil,selectUtil,stringUtil,dictUtil) {
+    require(['jquery', 'ajaxUtil','objectUtil','alertUtil','selectUtil','stringUtil','dictUtil','modalUtil'],
+        function (jquery,ajaxUtil,objectUtil,alertUtil,selectUtil,stringUtil,dictUtil,modalUtil) {
             if(localStorage.getItem("isView") == "true"){
-                $("#btn_save").attr("style","display:none");
-                $("#btn_insert").attr("style","display:none");
+                $("#btn_save").remove();
+                $("#btn_insert").remove();
             }
             var exmaineStatus = dictUtil.getDictByCode(dictUtil.DICT_LIST.exmaineStatus);
 
@@ -25,6 +25,7 @@
             $("#cancel").unbind().on('click', function () {
                 localStorage.removeItem("isView");
                 localStorage.removeItem("viewDetail");
+                localStorage.removeItem("keepExmaine");
                 orange.redirect(redirectUtl);
             });
 
@@ -82,7 +83,18 @@
                     exmaineEntity.score += "="+ $("#allSc").val();
                     ajaxUtil.myAjax(null,controUrl,exmaineEntity,function (data) {
                         if(ajaxUtil.success(data)){
-                            alertUtil.success("提交评审意见成功！")
+                            var submitConfirmModal = {
+                                modalBodyID :"myExmainSuccessTips",
+                                modalTitle : "提示",
+                                modalClass : "modal-lg",
+                                cancelButtonStyle: "display:none",
+                                modalConfirmFun:function (){
+                                    localStorage.removeItem("keepExmaine")
+                                    return true;
+                                }
+                            }
+                            var submitConfirm = modalUtil.init(submitConfirmModal);
+                            submitConfirm.show();
                             orange.redirect(redirectUtl);
                         }else {
                             alertUtil.error("提交失败，请重试");
@@ -106,6 +118,11 @@
                     $("#expertOpinion").val(tempdata.opinion);
                     $("#expertOpinion").attr("readOnly","true");
                 }else if (sessionStorage.getItem("rolename") == "科研项目-省级"){
+                    $("#expertOpinion").attr("placeholder","");
+                    for(var i = 0; i<11; i++){
+                        $("#score"+(i+1)).attr("readOnly","true")
+                    }
+                    $("#expertOpinion").attr("readOnly","true");
                     $("#zftitle").text("平均分：");
                     var scores = (tempdata.score).split("|");
                     var opinions = (tempdata.opinion).split("|");
@@ -113,7 +130,7 @@
                     var sumScore = 0;
                     var sjfx = [];
                     for(var i = 0; i<scores.length; i++){
-                        if(scores[i]=="null"){
+                        if(scores[i] == "null" || scores[i] == ""){
                             $("#displaydf").html("（请注意：当前还未评审完）");
                             continue;
                         }
@@ -125,7 +142,6 @@
                     }
                     for(var i = 0; i<sjfx.length; i++){
                         $("#score"+(i+1)).val(sjfx[i]);
-                        $("#score"+(i+1)).attr("readOnly","true")
                     }
                     var lastScore = sjfx[10].split("=");
                     $("#score11").val(lastScore[0]);
@@ -134,14 +150,17 @@
                         finalOpinion += "专家"+(i+1)+"意见："+opinions[i]+"\n";
                     }
                     $("#expertOpinion").val(finalOpinion);
-                    $("#expertOpinion").attr("readOnly","true");
                 }
-
-
             }
-
-
-
-
-
+            else if(localStorage.getItem("keepExmaine") != null || localStorage.getItem("keepExmaine") != undefined){
+                var tempdata = JSON.parse(localStorage.getItem("keepExmaine"));
+                var attr = (tempdata.score).split("+");
+                for(var i = 0; i<attr.length; i++){
+                    $("#score"+(i+1)).val(attr[i]);
+                }
+                var lastScore = attr[10].split("=");
+                $("#score11").val(lastScore[0]);
+                $("#allSc").val(lastScore[1]);
+                $("#expertOpinion").val(tempdata.opinion);
+            }
 })}());

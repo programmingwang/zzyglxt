@@ -54,7 +54,7 @@
                 },
                 'click .exmaine' : function (e, value, row, index) {
                     localStorage.removeItem("isView");
-                    localStorage.removeItem("viewDetail");
+                    localStorage.setItem("keepExmaine",JSON.stringify(row));
                     localStorage.setItem("examinTopicCode",JSON.stringify(row.topicCode));
                     orange.redirect("/evaluationTable/evaluationTable")
                 },
@@ -77,7 +77,17 @@
                                 ajaxUtil.myAjax(null,"/exmain/exmain",submitStatus,function (data) {
                                     if(ajaxUtil.success(data)){
                                         if(data.code == ajaxUtil.successCode){
-                                            alertUtil.info("评改提交");
+                                            var submitConfirmModal = {
+                                                modalBodyID :"myTopicSubmitTip",
+                                                modalTitle : "提示",
+                                                modalClass : "modal-lg",
+                                                cancelButtonStyle: "display:none",
+                                                modalConfirmFun:function (){
+                                                    return true;
+                                                }
+                                            }
+                                            var submitConfirm = modalUtil.init(submitConfirmModal);
+                                            submitConfirm.show();
                                             isSuccess = true;
                                             refreshTable();
                                         }else{

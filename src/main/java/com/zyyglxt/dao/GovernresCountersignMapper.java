@@ -17,5 +17,5 @@ public interface GovernresCountersignMapper {
 
     int updateByPrimaryKeySelective(GovernresCountersign record);
 
-    List<GovernresCountersign> selectAll();
+    List<GovernresCountersign> selectAll(@Param("status") String status);
 }

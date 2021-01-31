@@ -19,16 +19,18 @@
 </head>
 <body>
 <div id="fir_body">
-    <div class="row test-border" id="accordion2">
+    <div class="row " id="accordion2">
         <div class="col-lg-4 col-md-4" style="padding-left: 2rem;">
-            <div class="input-group mb-4" style="width: 375px;">
-                <span style="margin-top: 6px">项目名称：</span>
+            <div class="input-group col-lg-10 col-md-10" >
+                <div class="input-group-prepend" style="margin-top: 7px;">
+                    <span>项目名称：</span>
+                </div>
                 <input type="text" id="taskNameSearch" class="form-control" value="请输入" onfocus="if (value=='请输入'){value =''}" onblur="if (value ==''){value='请输入'}" >
             </div>
         </div>
         <div class="col-lg-3 col-md-3">
             <div class="input-group mb-3">
-                <div class="input-group-prepend" style="margin-top: 9px;">
+                <div class="input-group-prepend" style="margin-top: 7px;">
                     <span class="input-text" >项目状态：</span>
                 </div>
                 <select class="custom-select" id="chargePersonSearch">

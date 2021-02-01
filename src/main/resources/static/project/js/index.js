@@ -1400,8 +1400,9 @@
                                         modalClass : "modal-lg",
                                         cancelButtonStyle: "display:none",
                                         modalConfirmFun:function (){
-                                            window.location.href = '/userLogin';//密码修改成功后重新登陆
+                                            // window.location.href = '/userLogin';//密码修改成功后重新登陆
                                             // orange.redirect('/userLogin');
+                                            $('#logout').click();
                                             return true;
                                         }
                                     };

@@ -47,8 +47,25 @@
         <id column="itemCode" jdbcType="CHAR" property="itemcode" />
         <result column="PROJECT_NO" jdbcType="VARCHAR" property="projectNo" />
         <result column="PROJECT_NAME" jdbcType="VARCHAR" property="projectName" />
+        <result column="DISCIPLINE_CODE" jdbcType="VARCHAR" property="disciplineCode"/>
+        <result column="DISCIPLINE_NAME" jdbcType="VARCHAR" property="disciplineName"/>
+        <result column="APPLICANT" jdbcType="VARCHAR" property="applicant"/>
+        <result column="CONTACT_CODE" jdbcType="VARCHAR" property="contactCode"/>
+        <result column="EMAIL" jdbcType="VARCHAR" property="email"/>
         <result column="COMPANY" jdbcType="VARCHAR" property="company" />
-        <result column="EXPERT_CODE" jdbcType="CHAR" property="expertCode"/>
+        <result column="POSTAL_CODE" jdbcType="VARCHAR" property="postalCode" />
+        <result column="POSTAL_ADDRESS" jdbcType="VARCHAR" property="postalAddress" />
+        <result column="FILE_NAME" jdbcType="VARCHAR" property="fileName"/>
+        <result column="FILE_PATH" jdbcType="VARCHAR" property="filePath"/>
+        <collection property="expertList" ofType="com.zyyglxt.dto.industrialDevelop.IndustrialDevelopExpertDto">
+            <id column="EXPERT_ID" jdbcType="INTEGER" property="itemid" />
+            <id column="EXPERT_CODE" jdbcType="CHAR" property="itemcode" />
+            <result column="NAME" jdbcType="VARCHAR" property="name"/>
+            <result column="FILED" jdbcType="VARCHAR" property="filed"/>
+            <result column="GENDER" jdbcType="VARCHAR" property="gender"/>
+            <result column="mobilePhone" jdbcType="VARCHAR" property="mobilephone"/>
+            <result column="SCORE" jdbcType="VARCHAR" property="score"/>
+        </collection>
     </resultMap>
   <sql id="Base_Column_List">
     itemID, itemCode, EXPERT_CODE, TOPIC_CODE, EXMAINE_STATUS, SUBMIT_STATUS, SCORE,
@@ -60,7 +77,9 @@
     t.DISCIPLINE_NAME, t.APPLICANT, t.COMPANY, t.POSTAL_ADDRESS,t.POSTAL_CODE,t.CONTACT_CODE,t.EMAIL,t.APPLICATION_DATE
   </sql>
     <sql id="Topic_Column_List">
-        t.itemID, t.itemCode, t.PROJECT_NO, t.PROJECT_NAME, t.COMPANY, ef.EXPERT_CODE
+        t.itemID, t.itemCode, t.PROJECT_NO, t.PROJECT_NAME, t.DISCIPLINE_CODE, t.DISCIPLINE_NAME, t.APPLICANT, t.CONTACT_CODE, t.EMAIL,
+        t.COMPANY, t.POSTAL_CODE, t.POSTAL_ADDRESS, e.itemID as EXPERT_ID, e.itemCode as EXPERT_CODE, u.NAME, e.FILED, u.GENDER, u.mobilePhone,
+        f.FILE_NAME, f.FILE_PATH, ef.SCORE
     </sql>
   <select id="selectByPrimaryKey" parameterType="com.zyyglxt.dataobject.IndustrialDevelopExpertRefDOKey" resultMap="BaseResultMap">
     select
@@ -267,13 +286,10 @@ FROM
     <select id="topicAndExpertStatus" resultMap="TopicResultMap">
         SELECT
         <include refid="Topic_Column_List"/>
-        FROM tb_industrial_develop_topic t left join (
-        SELECT
-        TOPIC_CODE, MAX(EXPERT_CODE) EXPERT_CODE
-        FROM
-        tb_industrial_develop_expert_ref
-        GROUP BY
-        TOPIC_CODE) ef on t.itemCode=ef.TOPIC_CODE
+        FROM tb_industrial_develop_topic t left join tb_industrial_develop_expert_ref ef on t.itemCode=ef.TOPIC_CODE
+        LEFT JOIN tb_industrial_develop_expert e ON ef.EXPERT_CODE = e.itemCode
+        LEFT JOIN `user` u ON e.USER_CODE=u.itemCode
+        LEFT JOIN tb_culpro_file f ON f.DATA_CODE = t.itemCode
         order by t.itemUpdateAt desc
     </select>
   <select id="selectZjktsl" resultType="java.lang.Integer" parameterType="java.lang.String">

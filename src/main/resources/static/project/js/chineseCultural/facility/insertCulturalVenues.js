@@ -1,6 +1,6 @@
 (function () {
-    require(['jquery','objectUtil','ajaxUtil','alertUtil','stringUtil','fileUtil','uploadImg'],
-        function (jquery,objectUtil,ajaxUtil,alertUtil,stringUtil,fileUtil,uploadImg) {
+    require(['jquery','objectUtil','ajaxUtil','alertUtil','stringUtil','fileUtil','uploadImg','modalUtil'],
+        function (jquery,objectUtil,ajaxUtil,alertUtil,stringUtil,fileUtil,uploadImg,modalUtil) {
             const editor = objectUtil.wangEditorUtil();
             uploadImg.init();
 
@@ -12,10 +12,8 @@
             $("#btn_save").unbind().on('click',function () {
                 var culRelEntity;
                 var addUpdateUrl;
-                var operateMessage;
                 if(!isUpdate()){
                     addUpdateUrl = "/cul/fac/culVen/addCulVen";
-                    operateMessage = "新增文化场馆成功";
                     culRelEntity = {
                         itemcode: stringUtil.getUUID(),
                         chineseCulturalName : $("#chineseCulturalName").val(),
@@ -36,7 +34,6 @@
                         chineseCulturalStatus : '0',
                         chineseCulturalContent : editor.txt.html()
                     }
-                    operateMessage = "更新文化场馆成功";
                 }
 
                 fileUtil.handleFile(isUpdate(), culRelEntity.itemcode, uploadImg.getFiles()[0]);
@@ -44,9 +41,20 @@
                 ajaxUtil.myAjax(null,addUpdateUrl,culRelEntity,function (data) {
                     if(ajaxUtil.success(data)){
                         if(data.code == ajaxUtil.successCode) {
-                            alertUtil.info(operateMessage);
-                            var url = "/chineseCultural/facility/culturalVenues";
-                            orange.redirect(url);
+                            var submitConfirmModal = {
+                                modalBodyID :"myTopicSubmitTip",
+                                modalTitle : "提示",
+                                modalClass : "modal-lg",
+                                cancelButtonStyle: "display:none",
+                                modalConfirmFun:function (){
+                                    var url = "/chineseCultural/facility/culturalVenues";
+                                    orange.redirect(url);
+                                    return true;
+                                }
+                            }
+                            var submitConfirm = modalUtil.init(submitConfirmModal);
+                            submitConfirm.show();
+
                         }else{
                             alertUtil.error(data.msg)
                         }
@@ -59,50 +67,67 @@
 
 
             $("#btn_insert").unbind().on('click',function () {
-                var culRelEntity;
-                var addUpdateUrl;
-                var operateMessage;
-                if(!isUpdate()){
-                    addUpdateUrl = "/cul/fac/culVen/addCulVen";
-                    operateMessage = "新增文化场馆成功";
-                    culRelEntity = {
-                        itemcode: stringUtil.getUUID(),
-                        chineseCulturalName : $("#chineseCulturalName").val(),
-                        chineseCulturalSource : $("#chineseCulturalSource").val(),
-                        chineseCulturalAuthor : $("#chineseCulturalAuthor").val(),
-                        chineseCulturalStatus : '1',
-                        chineseCulturalContent : editor.txt.html()
-                    };
-                }else{
-                    var needData = JSON.parse(localStorage.getItem("rowData"));
-                    addUpdateUrl = "/cul/fac/culVen/updCulVen";
-                    culRelEntity = {
-                        itemid: needData.itemid,
-                        itemcode: needData.itemcode,
-                        chineseCulturalName : $("#chineseCulturalName").val(),
-                        chineseCulturalSource : $("#chineseCulturalSource").val(),
-                        chineseCulturalAuthor : $("#chineseCulturalAuthor").val(),
-                        chineseCulturalStatus : '1',
-                        chineseCulturalContent : editor.txt.html()
-                    }
-                    operateMessage = "更新文化场馆成功";
-                }
-
-                fileUtil.handleFile(isUpdate(), culRelEntity.itemcode, uploadImg.getFiles()[0]);
-
-                ajaxUtil.myAjax(null,addUpdateUrl,culRelEntity,function (data) {
-                    if(ajaxUtil.success(data)){
-                        if(data.code == ajaxUtil.successCode) {
-                            alertUtil.info(operateMessage);
-                            var url = "/chineseCultural/facility/culturalVenues";
-                            orange.redirect(url);
+                var mySubmitToCZ = {
+                    modalBodyID: "mySubmitModal",
+                    modalTitle: "提交",
+                    modalClass: "modal-lg",
+                    modalConfirmFun:function (){
+                        var culRelEntity;
+                        var addUpdateUrl;
+                        if(!isUpdate()){
+                            addUpdateUrl = "/cul/fac/culVen/addCulVen";
+                            culRelEntity = {
+                                itemcode: stringUtil.getUUID(),
+                                chineseCulturalName : $("#chineseCulturalName").val(),
+                                chineseCulturalSource : $("#chineseCulturalSource").val(),
+                                chineseCulturalAuthor : $("#chineseCulturalAuthor").val(),
+                                chineseCulturalStatus : '1',
+                                chineseCulturalContent : editor.txt.html()
+                            };
                         }else{
-                            alertUtil.error(data.msg)
+                            var needData = JSON.parse(localStorage.getItem("rowData"));
+                            addUpdateUrl = "/cul/fac/culVen/updCulVen";
+                            culRelEntity = {
+                                itemid: needData.itemid,
+                                itemcode: needData.itemcode,
+                                chineseCulturalName : $("#chineseCulturalName").val(),
+                                chineseCulturalSource : $("#chineseCulturalSource").val(),
+                                chineseCulturalAuthor : $("#chineseCulturalAuthor").val(),
+                                chineseCulturalStatus : '1',
+                                chineseCulturalContent : editor.txt.html()
+                            }
                         }
-                    }else {
-                        alertUtil.alert(data.msg);
+
+                        fileUtil.handleFile(isUpdate(), culRelEntity.itemcode, uploadImg.getFiles()[0]);
+
+                        ajaxUtil.myAjax(null,addUpdateUrl,culRelEntity,function (data) {
+                            if(ajaxUtil.success(data)){
+                                if(data.code == ajaxUtil.successCode) {
+                                    var submitConfirmModal = {
+                                        modalBodyID :"myTopicSubmitTip",
+                                        modalTitle : "提示",
+                                        modalClass : "modal-lg",
+                                        cancelButtonStyle: "display:none",
+                                        modalConfirmFun:function (){
+                                            var url = "/chineseCultural/facility/culturalVenues";
+                                            orange.redirect(url);
+                                            return true;
+                                        }
+                                    }
+                                    var submitConfirm = modalUtil.init(submitConfirmModal);
+                                    submitConfirm.show();
+                                }else{
+                                    alertUtil.error(data.msg)
+                                }
+                            }else {
+                                alertUtil.alert(data.msg);
+                            }
+                        },false,true);
+                        return false;
                     }
-                },false,true);
+                }
+                var x = modalUtil.init(mySubmitToCZ);
+                x.show();
                 return false;
             });
 

@@ -22,5 +22,6 @@ public class CustomizeAuthenticationEntryPoint implements AuthenticationEntryPoi
         JsonResult result = ResultTool.fail(EmBusinessError.USER_NOT_LOGIN);
         httpServletResponse.setContentType("text/json;charset=utf-8");
         httpServletResponse.getWriter().write(JSON.toJSONString(result));
+        httpServletResponse.sendRedirect("userLogin");
     }
 }

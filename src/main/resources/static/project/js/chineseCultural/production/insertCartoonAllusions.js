@@ -1,6 +1,6 @@
 (function () {
-    require(['jquery','objectUtil','ajaxUtil','alertUtil','stringUtil','fileUtil','uploadImg'],
-        function (jquery,objectUtil,ajaxUtil,alertUtil,stringUtil,fileUtil,uploadImg) {
+    require(['jquery','objectUtil','ajaxUtil','alertUtil','stringUtil','fileUtil','uploadImg',modalUtil],
+        function (jquery,objectUtil,ajaxUtil,alertUtil,stringUtil,fileUtil,uploadImg,modalUtil) {
             const editor = objectUtil.wangEditorUtil();
 
             uploadImg.init();
@@ -13,10 +13,8 @@
             $("#btn_save").unbind().on('click',function () {
                 var carAllEntity;
                 var addUpdateUrl;
-                var operateMessage;
                 if(!isUpdate()){
                     addUpdateUrl = "/cul/pro/carAll/addCarAll";
-                    operateMessage = "新增漫画典故成功";
                     carAllEntity = {
                         itemcode: stringUtil.getUUID(),
                         chineseCulturalName : $("#chineseCulturalName").val(),
@@ -37,7 +35,6 @@
                         chineseCulturalStatus : '0',
                         chineseCulturalContent : editor.txt.html()
                     }
-                    operateMessage = "更新漫画典故成功";
                 }
 
                 fileUtil.handleFile(isUpdate(), carAllEntity.itemcode, uploadImg.getFiles()[0]);
@@ -45,9 +42,20 @@
                 ajaxUtil.myAjax(null,addUpdateUrl,carAllEntity,function (data) {
                     if(ajaxUtil.success(data)){
                         if(data.code == ajaxUtil.successCode) {
-                            alertUtil.info(operateMessage);
-                            var url = "/chineseCultural/production/cartoonAllusions";
-                            orange.redirect(url);
+                            var submitConfirmModal = {
+                                modalBodyID :"myTopicSubmitTip",
+                                modalTitle : "提示",
+                                modalClass : "modal-lg",
+                                cancelButtonStyle: "display:none",
+                                modalConfirmFun:function (){
+                                    var url = "/chineseCultural/production/cartoonAllusions";
+                                    orange.redirect(url);
+                                    return true;
+                                }
+                            }
+                            var submitConfirm = modalUtil.init(submitConfirmModal);
+                            submitConfirm.show();
+
                         }else{
                             alertUtil.error(data.msg);
                         }
@@ -93,9 +101,20 @@
                 ajaxUtil.myAjax(null,addUpdateUrl,carAllEntity,function (data) {
                     if(ajaxUtil.success(data)){
                         if(data.code == ajaxUtil.successCode) {
-                            alertUtil.info(operateMessage);
-                            var url = "/chineseCultural/production/cartoonAllusions";
-                            orange.redirect(url);
+                            var submitConfirmModal = {
+                                modalBodyID :"myTopicSubmitTip",
+                                modalTitle : "提示",
+                                modalClass : "modal-lg",
+                                cancelButtonStyle: "display:none",
+                                modalConfirmFun:function (){
+                                    var url = "/chineseCultural/production/cartoonAllusions";
+                                    orange.redirect(url);
+                                    return true;
+                                }
+                            }
+                            var submitConfirm = modalUtil.init(submitConfirmModal);
+                            submitConfirm.show();
+
                         }else{
                             alertUtil.error(data.msg);
                         }

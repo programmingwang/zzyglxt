@@ -24,7 +24,7 @@
                 var myViewTimeModalData ={
                     modalBodyID : "myTimeModal", //公用的在后面给span加不同的内容就行了，其他模块同理
                     modalTitle : "设置填报时间",
-                    modalClass : "modal-lg",
+                    modalClass : "modal-md",
                     confirmButtonClass : "btn-danger",
                     modalConfirmFun:function () {
                         //var year=new Date();
@@ -85,6 +85,20 @@
                     autoclose: 1,//选择后自动关闭
                     clearBtn:true,//清除按钮
                     showMeridian:true,
+                }).on('changeDate',function(ev){
+                    var starttime=$("#startTime").val();
+                    var endtime=$("#endTime").val();
+                    if(starttime!=""&&endtime!=""){
+                        if (starttime==endtime){
+                            $("#endTime").val('');
+                            alert("开始时间大于结束时间！");
+
+                            return;
+                        }
+                    }
+
+                    $("#startTime").datetimepicker('setEndDate',endtime);
+                    $("#endTime").datetimepicker('hide');
                 });
             });
 
@@ -102,7 +116,7 @@
             $("#taskNameSearch1").selectUtil(pl2);
 
             var aCol = [
-                {field: 'year', title: '年份'},
+                {field: 'year', title: '年份',width:'200px'},
                 {field: 'startTime', title: '开启时间'},
                 {field: 'endTime', title: '结束时间'},
                 {field: 'isimp', title: '状态',formatter:function (row) {

@@ -16,7 +16,8 @@ spring:
     username: root
     password: C&PVBLNPNR^F^qjr
     type: com.alibaba.druid.pool.DruidDataSource
-      #Spring Boot 默认是不注入这些属性值的，需要自己绑定
+
+    #Spring Boot 默认是不注入这些属性值的，需要自己绑定
     #druid 数据源专有配置
     initialSize: 5
     minIdle: 5
@@ -30,8 +31,8 @@ spring:
     testOnReturn: false
     poolPreparedStatements: true
 
-      #配置监控统计拦截的filters，stat:监控统计、log4j：日志记录、wall：防御sql注入
-      #如果允许时报错  java.lang.ClassNotFoundException: org.apache.log4j.Priority
+    #配置监控统计拦截的filters，stat:监控统计、log4j：日志记录、wall：防御sql注入
+    #如果允许时报错  java.lang.ClassNotFoundException: org.apache.log4j.Priority
     #则导入 log4j 依赖即可，Maven 地址：https://mvnrepository.com/artifact/log4j/log4j
     filters: stat,wall,log4j
     maxPoolPreparedStatementPerConnectionSize: 20

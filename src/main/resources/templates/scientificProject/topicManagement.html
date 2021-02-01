@@ -17,16 +17,18 @@
 <body>
 <div id="fir_body">
 
-    <div class="row test-border mb-3" id="accordion2">
+    <div class="row " id="accordion2">
         <div class="col-lg-4 col-md-4" style="padding-left: 2rem;">
-            <div class="input-group mb-4" style="width: 530px;">
-                <span style="margin-top: 6px">项目名称：</span>
+            <div class="input-group mb-3 col-lg-10 col-md-10" >
+                <div class="input-group-prepend" style="margin-top: 7px;">
+                    <span >项目名称：</span>
+                </div>
                 <input type="text" id="taskNameSearch" class="form-control" value="请输入关键字" onfocus="if (value=='请输入关键字'){value =''}" onblur="if (value ==''){value='请输入关键字'}" >
             </div>
         </div>
         <div class="col-lg-4 col-md-4" style="padding-left: 2rem;">
             <div class="input-group mb-3">
-                <div class="input-group-prepend" style="margin-top: 9px;">
+                <div class="input-group-prepend" style="margin-top: 7px;">
                     <span class="input-text" >审核状态：</span>
                 </div>
                 <select class="custom-select" id="chargePersonSearch"></select>
@@ -39,7 +41,6 @@
         <div class="col-lg-2 col-md-2">
             <button type="button" id="btn-color" class="btn ml-3">申报项目信息</button>
         </div>
-        <hr size="1" class="mb-1" style="color: #EBEBEB;border-style:dashed;width:100%;margin-bottom:10px;">
 
         <!--</div>-->
     </div>

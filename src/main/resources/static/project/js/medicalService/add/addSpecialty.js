@@ -44,7 +44,8 @@
                     operateMessage = "更新科室成功";
                     entity = {
                         itemid: tempdata.itemid,
-                        itemcode: tempdata.itemcode
+                        itemcode: tempdata.itemcode,
+                        specialtyStatus: '0'
                     };
                 }
                 entity["specialtyName"] = specialtyName[$("#specialtyName").val()].text;
@@ -69,7 +70,7 @@
                         alertUtil.alert(data.msg);
                     }
                 },false,true);
-
+                return false;
             });
 
             /*点击提交按钮*/
@@ -119,7 +120,7 @@
                         alertUtil.alert(data.msg);
                     }
                 },false,true);
-
+                return false;
             });
 
             function isUpdate() {

@@ -71,6 +71,7 @@
                         alertUtil.alert(data.msg);
                     }
                 }, false, true);
+                return false;
             });
 
             function isUpdate() {

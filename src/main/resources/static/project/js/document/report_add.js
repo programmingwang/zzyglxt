@@ -44,6 +44,7 @@
                         alertUtil.alert(data.msg);
                     }
                 },false,true);
+                return false;
             });
 
             $("#btn_insert").unbind().on('click',function () {
@@ -81,6 +82,7 @@
                         alertUtil.alert(data.msg);
                     }
                 },false,true);
+                return false;
             });
 
             (function init() {

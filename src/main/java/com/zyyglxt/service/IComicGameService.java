@@ -2,6 +2,7 @@ package com.zyyglxt.service;
 
 import com.zyyglxt.dataobject.ChineseCulturalDO;
 import com.zyyglxt.dataobject.ChineseCulturalDOKey;
+import com.zyyglxt.dto.ChineseCulturalDto;
 import com.zyyglxt.error.BusinessException;
 
 import java.util.List;
@@ -17,7 +18,7 @@ public interface IComicGameService {
     ChineseCulturalDO getComicGame(ChineseCulturalDOKey key);
 
     //查询所有动漫游戏
-    List<ChineseCulturalDO> getComicGameList(List<String> chineseCulturalStatus);
+    List<ChineseCulturalDto> getComicGameList(String chineseCulturalStatus);
 
     //增加一个动漫游戏
     int addComicGame(ChineseCulturalDO record);

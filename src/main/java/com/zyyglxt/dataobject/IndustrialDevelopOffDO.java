@@ -16,6 +16,7 @@ import java.util.Date;
 public class IndustrialDevelopOffDO extends IndustrialDevelopOffDOKey {
     
     @NotNull(message = "年份不能为空",groups = ValidationGroups.Insert.class)
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy", timezone = "GMT+8")
     private String year;
 
     

@@ -3,6 +3,7 @@ package com.zyyglxt.service.impl;
 import com.zyyglxt.dao.ChineseMedicineDOMapper;
 import com.zyyglxt.dataobject.ChineseMedicineDO;
 import com.zyyglxt.dataobject.ChineseMedicineDOKey;
+import com.zyyglxt.dto.ChineseMedicineDto;
 import com.zyyglxt.dto.StatusDto;
 import com.zyyglxt.error.BusinessException;
 import com.zyyglxt.error.EmBusinessError;
@@ -74,19 +75,19 @@ public class ChineseMedicineServiceImpl implements IChineseMedicineService {
 
     /*查询所有名老中医*/
     @Override
-    public List<ChineseMedicineDO> selectAllChineseMedicine(List<String> chineseMedicineStatus) {
-        List<ChineseMedicineDO> DOList = new ArrayList<>();
+    public List<ChineseMedicineDto> selectAllChineseMedicine(List<String> chineseMedicineStatus) {
+        List<ChineseMedicineDto> list = new ArrayList<>();
         for (String status : chineseMedicineStatus) {
-            DOList.addAll(chineseMedicineDOMapper.selectByStatus(status));
+            list.addAll(chineseMedicineDOMapper.selectByStatus(status));
         }
-        return DOList;
+        return list;
     }
 
     /*根据关键字搜索名老中医，在名字、类型、职称、主要就诊、科室、医院中搜索
     * 搜索某个科室或医院列出该科室或医院下的所有名老中医
     * */
     @Override
-    public List<ChineseMedicineDO> searchChineseMedicine(String keyWord) {
+    public List<ChineseMedicineDto> searchChineseMedicine(String keyWord) {
         if(keyWord == "" || keyWord == null){
             throw new BusinessException("关键字不能为空", EmBusinessError.PARAMETER_VALIDATION_ERROR);
         }
@@ -94,7 +95,7 @@ public class ChineseMedicineServiceImpl implements IChineseMedicineService {
     }
 
     @Override
-    public List<ChineseMedicineDO> selectBySpecialtyCode(String specialtyCode) {
+    public List<ChineseMedicineDto> selectBySpecialtyCode(String specialtyCode) {
         return chineseMedicineDOMapper.selectBySpecialtyCode(specialtyCode);
     }
 

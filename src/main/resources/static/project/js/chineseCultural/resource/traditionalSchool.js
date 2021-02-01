@@ -235,7 +235,7 @@
                 },
             };
 
-            var pl = dictUtil.getDictByCode(dictUtil.DICT_LIST.showStatus);
+            var pl = dictUtil.getDictByCode(dictUtil.DICT_LIST.webStatus);
             $("#chargePersonSearch").selectUtil(pl);
 
             $("#btn_addTask").unbind().on('click',function () {
@@ -266,9 +266,8 @@
                 myTable.free();
                 myTable = bootstrapTableUtil.myBootStrapTableInit("table", url, param, aCol);
             }
-            bootstrapTableUtil.globalSearch("table",url,aParam, aCol);
 
-            var allTableData = $("#table").bootstrapTable("getData");
+            bootstrapTableUtil.globalSearch("table", url, aParam, aCol, "chineseCulturalStatus")
 
         })
 })();

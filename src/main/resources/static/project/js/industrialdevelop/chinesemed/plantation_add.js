@@ -52,6 +52,7 @@
                         alert(data.msg);
                     }
                 }, true, "123", type);
+                return false;
             }
 
             $("#saveBtn").unbind('click').on('click',function () {

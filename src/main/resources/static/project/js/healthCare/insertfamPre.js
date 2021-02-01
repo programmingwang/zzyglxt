@@ -36,6 +36,7 @@
                         prescription : $("#prescription").val(),
                         status : $("#status").val(),
                         type : $("#type").val(),
+                        status :  '0',
                         content : editor.txt.html()
                     }
                     operateMessage = "更新历史名方成功";
@@ -51,7 +52,7 @@
                         alertUtil.alert(data.msg);
                     }
                 },false,true);
-
+                return false;
             });
 
             $("#btn_insert").unbind().on('click',function () {
@@ -95,7 +96,7 @@
                         alertUtil.alert(data.msg);
                     }
                 },false,true);
-
+                return false;
             });
             (function init() {
                 if (isUpdate()){

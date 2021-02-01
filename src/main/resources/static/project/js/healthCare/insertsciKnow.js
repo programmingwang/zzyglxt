@@ -33,6 +33,7 @@
                         scienceKnowledgeName : $("#scienceKnowledgeName").val(),
                         scienceKnowledgeSource : $("#scienceKnowledgeSource").val(),
                         scienceKnowledgeAuthor : $("#scienceKnowledgeAuthor").val(),
+                        scienceKnowledgeStatus : '0',
                         content : editor.txt.html()
                     }
                     operateMessage = "更新科普知识成功";
@@ -48,7 +49,7 @@
                         alertUtil.alert(data.msg);
                     }
                 },false,true);
-
+                return false;
             });
 
             $("#btn_insert").unbind().on('click',function () {
@@ -91,7 +92,7 @@
                         alertUtil.alert(data.msg);
                     }
                 },false,true);
-
+                return false;
             });
             (function init() {
                 if (isUpdate()){

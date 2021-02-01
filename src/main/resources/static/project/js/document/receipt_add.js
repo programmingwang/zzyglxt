@@ -15,7 +15,7 @@
             var date= new Date();
             $("#receivingDateOfReceipt").datetimepicker({
                 format: 'yyyy-mm-dd hh:ii:00',//显示格式
-                startDate: date ,
+                startDate: date,
                 startView:2,
                 minView:1,
                 maxView :3,
@@ -85,6 +85,7 @@
                         alertUtil.alert(data.msg);
                     }
                 },false,true);
+                return false;
             });
 
             $("#btn_insert").unbind().on('click',function () {
@@ -136,6 +137,7 @@
                         alertUtil.alert(data.msg);
                     }
                 },false,true);
+                return false;
             });
 
             (function init() {

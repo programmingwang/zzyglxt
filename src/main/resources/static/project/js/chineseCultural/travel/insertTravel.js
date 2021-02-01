@@ -1,6 +1,6 @@
 (function () {
-    require(['jquery','objectUtil','ajaxUtil','alertUtil','stringUtil','fileUtil','uploadImg'],
-        function (jquery,objectUtil,ajaxUtil,alertUtil,stringUtil,fileUtil,uploadImg) {
+    require(['jquery','objectUtil','ajaxUtil','alertUtil','stringUtil','fileUtil','uploadImg','modalUtil'],
+        function (jquery,objectUtil,ajaxUtil,alertUtil,stringUtil,fileUtil,uploadImg,modalUtil) {
 
             const editor = objectUtil.wangEditorUtil();
 
@@ -46,9 +46,20 @@
                 ajaxUtil.myAjax(null,addUpdateUrl,travelEntity,function (data) {
                     if(ajaxUtil.success(data)){
                         if(data.code == ajaxUtil.successCode) {
-                            alertUtil.info(operateMessage);
-                            var url = "/chineseCultural/travel/travel";
-                            orange.redirect(url);
+                            var submitConfirmModal = {
+                                modalBodyID :"myTopicSubmitTip",
+                                modalTitle : "提示",
+                                modalClass : "modal-lg",
+                                cancelButtonStyle: "display:none",
+                                modalConfirmFun:function (){
+                                    var url = "/chineseCultural/travel/travel";
+                                    orange.redirect(url);
+                                    return true;
+                                }
+                            }
+                            var submitConfirm = modalUtil.init(submitConfirmModal);
+                            submitConfirm.show();
+
                         }else{
                             alertUtil.error(data.msg);
                         }
@@ -60,51 +71,73 @@
             });
 
             $("#btn_insert").unbind().on('click',function () {
-                var travelEntity;
-                var addUpdateUrl;
-                var operateMessage;
-                if(!isUpdate()){
-                    addUpdateUrl = "/cul/trav/trav/addTrav";
-                    operateMessage = "新增旅游景点成功";
-                    travelEntity = {
-                        itemcode: stringUtil.getUUID(),
-                        chineseCulturalName : $("#chineseCulturalName").val(),
-                        chineseCulturalSource : $("#chineseCulturalSource").val(),
-                        chineseCulturalAuthor : $("#chineseCulturalAuthor").val(),
-                        chineseCulturalStatus : '1',
-                        chineseCulturalContent : editor.txt.html()
-                    };
-                }else{
-                    var needData = JSON.parse(localStorage.getItem("rowData"));
-                    addUpdateUrl = "/cul/trav/trav/updTrav";
-                    travelEntity = {
-                        itemid: needData.itemid,
-                        itemcode: needData.itemcode,
-                        chineseCulturalName : $("#chineseCulturalName").val(),
-                        chineseCulturalSource : $("#chineseCulturalSource").val(),
-                        chineseCulturalAuthor : $("#chineseCulturalAuthor").val(),
-                        chineseCulturalStatus : '1',
-                        chineseCulturalContent : editor.txt.html()
-                    }
-                    operateMessage = "更新旅游景点成功";
-                }
-
-                fileUtil.handleFile(isUpdate(), travelEntity.itemcode, uploadImg.getFiles()[0]);
-
-                ajaxUtil.myAjax(null,addUpdateUrl,travelEntity,function (data) {
-                    if(ajaxUtil.success(data)){
-                        if(data.code == ajaxUtil.successCode) {
-                            alertUtil.info(operateMessage);
-                            var url = "/chineseCultural/travel/travel";
-                            orange.redirect(url);
+                var mySubmitToCZ = {
+                    modalBodyID: "mySubmitModal",
+                    modalTitle: "提交",
+                    modalClass: "modal-lg",
+                    modalConfirmFun:function (){
+                        var travelEntity;
+                        var addUpdateUrl;
+                        var operateMessage;
+                        if(!isUpdate()){
+                            addUpdateUrl = "/cul/trav/trav/addTrav";
+                            operateMessage = "新增旅游景点成功";
+                            travelEntity = {
+                                itemcode: stringUtil.getUUID(),
+                                chineseCulturalName : $("#chineseCulturalName").val(),
+                                chineseCulturalSource : $("#chineseCulturalSource").val(),
+                                chineseCulturalAuthor : $("#chineseCulturalAuthor").val(),
+                                chineseCulturalStatus : '1',
+                                chineseCulturalContent : editor.txt.html()
+                            };
                         }else{
-                            alertUtil.error(data.msg);
+                            var needData = JSON.parse(localStorage.getItem("rowData"));
+                            addUpdateUrl = "/cul/trav/trav/updTrav";
+                            travelEntity = {
+                                itemid: needData.itemid,
+                                itemcode: needData.itemcode,
+                                chineseCulturalName : $("#chineseCulturalName").val(),
+                                chineseCulturalSource : $("#chineseCulturalSource").val(),
+                                chineseCulturalAuthor : $("#chineseCulturalAuthor").val(),
+                                chineseCulturalStatus : '1',
+                                chineseCulturalContent : editor.txt.html()
+                            }
+                            operateMessage = "更新旅游景点成功";
                         }
-                    }else {
-                        alertUtil.error(data.msg);
+
+                        fileUtil.handleFile(isUpdate(), travelEntity.itemcode, uploadImg.getFiles()[0]);
+
+                        ajaxUtil.myAjax(null,addUpdateUrl,travelEntity,function (data) {
+                            if(ajaxUtil.success(data)){
+                                if(data.code == ajaxUtil.successCode) {
+                                    var submitConfirmModal = {
+                                        modalBodyID :"myTopicSubmitTip",
+                                        modalTitle : "提示",
+                                        modalClass : "modal-lg",
+                                        cancelButtonStyle: "display:none",
+                                        modalConfirmFun:function (){
+                                            var url = "/chineseCultural/travel/travel";
+                                            orange.redirect(url);
+                                            return true;
+                                        }
+                                    }
+                                    var submitConfirm = modalUtil.init(submitConfirmModal);
+                                    submitConfirm.show();
+
+                                }else{
+                                    alertUtil.error(data.msg);
+                                }
+                            }else {
+                                alertUtil.error(data.msg);
+                            }
+                        },false,true);
+                        return false;
                     }
-                },false,true);
+                }
+                var x = modalUtil.init(mySubmitToCZ);
+                x.show();
                 return false;
+
             });
 
 

@@ -1,6 +1,6 @@
 (function () {
-    require(['jquery', 'ajaxUtil', 'stringUtil', 'objectUtil', 'dictUtil', 'alertUtil','fileUtil'],
-        function (jquery, ajaxUtil, stringUtil, objectUtil, dictUtil, alertUtil, fileUtil) {
+    require(['jquery', 'ajaxUtil', 'stringUtil', 'objectUtil', 'dictUtil', 'alertUtil','fileUtil','modalUtil'],
+        function (jquery, ajaxUtil, stringUtil, objectUtil, dictUtil, alertUtil, fileUtil,modalUtil) {
 
             var type = isUpdate() ? "put" : "post";
 
@@ -9,13 +9,6 @@
             const editor = objectUtil.wangEditorUtil();
 
             var showStatus = dictUtil.getDictByCode(dictUtil.DICT_LIST.showStatus);
-
-            var operateMsg;
-            if(!isUpdate()){
-                operateMsg = "新增成功";
-            }else{
-                operateMsg = "更新成功";
-            }
 
             //后台数据交互地址
             var url = "/industrialdevelop/achievement";
@@ -55,8 +48,19 @@
                 ajaxUtil.myAjax(null, url, param, function (data) {
                     if (ajaxUtil.success(data)) {
                         fileUtil.handleFile(isUpdate(), param.itemcode, $("#upload_file")[0].files[0]);
-                        alertUtil.success(operateMsg);
-                        orange.redirect(url)
+                        var submitConfirmModal = {
+                            modalBodyID :"myTopicSubmitTip",
+                            modalTitle : "提示",
+                            modalClass : "modal-lg",
+                            cancelButtonStyle: "display:none",
+                            modalConfirmFun:function (){
+                                orange.redirect(url)
+                                return true;
+                            }
+                        }
+                        var submitConfirm = modalUtil.init(submitConfirmModal);
+                        submitConfirm.show();
+
                     } else {
                         alert(data.msg)
                     }
@@ -65,15 +69,36 @@
             });
 
             $("#submitBtn").unbind('click').on('click', function () {
-                var param = generateParam();
-                param.industrialDevelopStatus = showStatus[1].id;
-                ajaxUtil.myAjax(null, url, param, function (data) {
-                    if (ajaxUtil.success(data)) {
-                        fileUtil.handleFile(isUpdate(), param.itemcode, $("#upload_file")[0].files[0]);
-                        alertUtil.success(operateMsg+"，信息将展示在主页");
-                        orange.redirect(url)
+                var mySubmitToCZ = {
+                    modalBodyID: "muPublishIndustrial",
+                    modalTitle: "提交",
+                    modalClass: "modal-lg",
+                    modalConfirmFun:function (){
+                        var param = generateParam();
+                        param.industrialDevelopStatus = showStatus[1].id;
+                        ajaxUtil.myAjax(null, url, param, function (data) {
+                            if (ajaxUtil.success(data)) {
+                                fileUtil.handleFile(isUpdate(), param.itemcode, $("#upload_file")[0].files[0]);
+                                var submitConfirmModal = {
+                                    modalBodyID :"myTopicSubmitTip",
+                                    modalTitle : "提示",
+                                    modalClass : "modal-lg",
+                                    cancelButtonStyle: "display:none",
+                                    modalConfirmFun:function (){
+                                        orange.redirect(url)
+                                        return true;
+                                    }
+                                }
+                                var submitConfirm = modalUtil.init(submitConfirmModal);
+                                submitConfirm.show();
+
+                            }
+                        }, true, "123", type);
+                        return false;
                     }
-                }, true, "123", type);
+                }
+                var x = modalUtil.init(mySubmitToCZ);
+                x.show();
                 return false;
             });
 

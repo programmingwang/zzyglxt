@@ -250,6 +250,7 @@
         modalHtml.myTopicSubmitTip = "操作成功";
         modalHtml.myResetPasswordTips = "重置密码成功，默认密码为：123456";
         modalHtml.myExmainSuccessTips = "评审成功";
+        modalHtml.muPublishIndustrial = "确认上架展示吗？"
         return modalHtml
     })
 })();

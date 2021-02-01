@@ -1,6 +1,6 @@
 (function () {
-    require(['jquery','objectUtil','ajaxUtil','alertUtil','stringUtil','fileUtil','uploadImg'],
-        function (jquery,objectUtil,ajaxUtil,alertUtil,stringUtil,fileUtil,uploadImg) {
+    require(['jquery','objectUtil','ajaxUtil','alertUtil','stringUtil','fileUtil','uploadImg','modalUtil'],
+        function (jquery,objectUtil,ajaxUtil,alertUtil,stringUtil,fileUtil,uploadImg,modalUtil) {
             const editor = objectUtil.wangEditorUtil();
 
             uploadImg.init();
@@ -45,9 +45,19 @@
                 ajaxUtil.myAjax(null,addUpdateUrl,traDocEntity,function (data) {
                     if(ajaxUtil.success(data)){
                         if(data.code == ajaxUtil.successCode) {
-                            alertUtil.info(operateMessage);
-                            var url = "/chineseCultural/resource/traditionalDoctor";
-                            orange.redirect(url);
+                            var submitConfirmModal = {
+                                modalBodyID :"myTopicSubmitTip",
+                                modalTitle : "提示",
+                                modalClass : "modal-lg",
+                                cancelButtonStyle: "display:none",
+                                modalConfirmFun:function (){
+                                    var url = "/chineseCultural/resource/traditionalDoctor";
+                                    orange.redirect(url);
+                                    return true;
+                                }
+                            }
+                            var submitConfirm = modalUtil.init(submitConfirmModal);
+                            submitConfirm.show();
                         }else{
                             alertUtil.error(data.msg);
                         }
@@ -59,50 +69,73 @@
             });
 
             $("#btn_insert").unbind().on('click',function () {
-                var traDocEntity ;
-                var addUpdateUrl;
-                var operateMessage;
-                if(!isUpdate()){
-                    addUpdateUrl = "/cul/res/traDoc/addTraDoc";
-                    operateMessage = "新增历代名家成功";
-                    traDocEntity = {
-                        itemcode: stringUtil.getUUID(),
-                        chineseCulturalName : $("#chineseCulturalName").val(),
-                        chineseCulturalSource : $("#chineseCulturalSource").val(),
-                        chineseCulturalAuthor : $("#chineseCulturalAuthor").val(),
-                        chineseCulturalStatus : '1',
-                        chineseCulturalContent : editor.txt.html()
-                    };
-                }else{
-                    var needData = JSON.parse(localStorage.getItem("rowData"));
-                    addUpdateUrl = "/cul/res/traDoc/updTraDoc";
-                    traDocEntity = {
-                        itemid: needData.itemid,
-                        itemcode: needData.itemcode,
-                        chineseCulturalName : $("#chineseCulturalName").val(),
-                        chineseCulturalSource : $("#chineseCulturalSource").val(),
-                        chineseCulturalAuthor : $("#chineseCulturalAuthor").val(),
-                        chineseCulturalStatus : '1',
-                        chineseCulturalContent : editor.txt.html()
-                    }
-                    operateMessage = "更新历代名家成功";
-                }
-                fileUtil.handleFile(isUpdate(), traDocEntity.itemcode, uploadImg.getFiles()[0]);
-
-                ajaxUtil.myAjax(null,addUpdateUrl,traDocEntity,function (data) {
-                    if(ajaxUtil.success(data)){
-                        if(data.code == ajaxUtil.successCode) {
-                            alertUtil.info(operateMessage);
-                            var url = "/chineseCultural/resource/traditionalDoctor";
-                            orange.redirect(url);
+                var mySubmitToCZ = {
+                    modalBodyID: "mySubmitModal",
+                    modalTitle: "提交",
+                    modalClass: "modal-lg",
+                    modalConfirmFun:function (){
+                        var traDocEntity ;
+                        var addUpdateUrl;
+                        var operateMessage;
+                        if(!isUpdate()){
+                            addUpdateUrl = "/cul/res/traDoc/addTraDoc";
+                            operateMessage = "新增历代名家成功";
+                            traDocEntity = {
+                                itemcode: stringUtil.getUUID(),
+                                chineseCulturalName : $("#chineseCulturalName").val(),
+                                chineseCulturalSource : $("#chineseCulturalSource").val(),
+                                chineseCulturalAuthor : $("#chineseCulturalAuthor").val(),
+                                chineseCulturalStatus : '1',
+                                chineseCulturalContent : editor.txt.html()
+                            };
                         }else{
-                            alertUtil.error(data.msg);
+                            var needData = JSON.parse(localStorage.getItem("rowData"));
+                            addUpdateUrl = "/cul/res/traDoc/updTraDoc";
+                            traDocEntity = {
+                                itemid: needData.itemid,
+                                itemcode: needData.itemcode,
+                                chineseCulturalName : $("#chineseCulturalName").val(),
+                                chineseCulturalSource : $("#chineseCulturalSource").val(),
+                                chineseCulturalAuthor : $("#chineseCulturalAuthor").val(),
+                                chineseCulturalStatus : '1',
+                                chineseCulturalContent : editor.txt.html()
+                            }
+                            operateMessage = "更新历代名家成功";
                         }
-                    }else {
-                        alertUtil.alert(data.msg);
+                        fileUtil.handleFile(isUpdate(), traDocEntity.itemcode, uploadImg.getFiles()[0]);
+
+                        ajaxUtil.myAjax(null,addUpdateUrl,traDocEntity,function (data) {
+                            if(ajaxUtil.success(data)){
+                                if(data.code == ajaxUtil.successCode) {
+                                    var submitConfirmModal = {
+                                        modalBodyID :"myTopicSubmitTip",
+                                        modalTitle : "提示",
+                                        modalClass : "modal-lg",
+                                        cancelButtonStyle: "display:none",
+                                        modalConfirmFun:function (){
+                                            var url = "/chineseCultural/resource/traditionalDoctor";
+                                            orange.redirect(url);
+                                            return true;
+                                        }
+                                    }
+                                    var submitConfirm = modalUtil.init(submitConfirmModal);
+                                    submitConfirm.show();
+
+                                }else{
+                                    alertUtil.error(data.msg);
+                                }
+                            }else {
+                                alertUtil.alert(data.msg);
+                            }
+                        },false,true);
+                        return false;
+                        return false;
                     }
-                },false,true);
+                }
+                var x = modalUtil.init(mySubmitToCZ);
+                x.show();
                 return false;
+
             });
 
             (function init() {

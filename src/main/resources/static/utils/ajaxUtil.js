@@ -150,7 +150,7 @@
                 contentType: false,   // jQuery不要去设置Content-Type请求头
                 success:function(data){
                     if(data && data.code == successCode){
-                        alertUtil.success(data.msg);
+                        // alertUtil.success(data.msg);
                     }else{
                         alertUtil.error(data.msg);
                     }

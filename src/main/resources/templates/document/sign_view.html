@@ -63,7 +63,7 @@
     </div>
     <div style="margin-top: 30px; margin-bottom: -13px;">
         <span style="margin-left: 30rem; color: #D60000;">文号：</span>
-        <span id="fileNo" class="text1" />
+        <input style="border: none; outline: none;" id="fileNo" />
         <span style="color: #D60000">号</span>
     </div>
     <div class="col-lg-12">
@@ -72,13 +72,13 @@
                 <td class="title">会签部门</td>
                 <td colspan="5">
                     <div>
-                        <span id="parment" class="text1" />
+                        <input id="parment" class="text1" />
                     </div>
                 </td>
                 <td class="title">需要份数</td>
                 <td colspan="3">
                     <div>
-                        <span id="number" class="text1" />
+                        <input id="number" class="text1" />
                     </div>
                 </td>
             </tr>
@@ -87,7 +87,7 @@
                 <td class="title">文件标题</td>
                 <td colspan="9">
                     <div>
-                        <span id="receivingTitle" class="text1" />
+                        <input id="receivingTitle" class="text1" />
                     </div>
                 </td>
             </tr>
@@ -96,7 +96,7 @@
                 <td class="title">政府信息公开</td>
                 <td colspan="9">
                     <div>
-                        <span id="govPunlic" class="text1" />
+                        <input id="govPunlic" class="text1" />
                     </div>
                 </td>
             </tr>
@@ -105,13 +105,13 @@
                 <td class="title">文件编号</td>
                 <td colspan="5">
                     <div>
-                        <span id="fileNo" class="text1" />
+                        <input id="fileNumber" class="text1" />
                     </div>
                 </td>
                 <td class="title">密级</td>
                 <td colspan="3">
                     <div>
-                        <span id="classification" class="text1" />
+                        <input id="classification" class="text1" />
                     </div>
                 </td>
             </tr>
@@ -121,8 +121,8 @@
                 <td colspan="9">
                     <div class="opinion">
                         <input id="signOpinion" class="advice" placeholder="等待审批" readonly="readonly"/>
-                        <input id="signDate" class="date" readonly="readonly"/>
-                        <input id="signName" class="name" readonly="readonly"/>
+                        <input id="signDate" class="date" placeholder="审批日期" readonly="readonly"/>
+                        <input id="signName" class="name" placeholder="审批人" readonly="readonly"/>
                     </div>
                 </td>
             </tr>
@@ -132,13 +132,13 @@
                 <td colspan="9">
                     <div class="opinion">
                         <input id="directorOpinion" class="advice" placeholder="等待审批" readonly="readonly"/>
-                        <input id="directorDate" class="date" readonly="readonly"/>
-                        <input id="directorName" class="name" readonly="readonly"/>
+                        <input id="directorDate" class="date" placeholder="审批日期" readonly="readonly"/>
+                        <input id="directorName" class="name" placeholder="审批人" readonly="readonly"/>
                     </div>
                     <div class="opinion">
                         <input id="deputyDirectorOpinion" class="advice" placeholder="等待审批" readonly="readonly"/>
-                        <input id="deputyDirectorDate" class="date" readonly="readonly"/>
-                        <input id="deputyDirectorName" class="name" readonly="readonly"/>
+                        <input id="deputyDirectorDate" class="date" placeholder="审批日期" readonly="readonly"/>
+                        <input id="deputyDirectorName" class="name" placeholder="审批人" readonly="readonly"/>
                     </div>
                 </td>
             </tr>
@@ -148,8 +148,8 @@
                 <td colspan="9">
                     <div class="opinion">
                         <input id="officeOpinion" class="advice" placeholder="等待审批" readonly="readonly"/>
-                        <input id="officeDate" class="date" readonly="readonly"/>
-                        <input id="officeName" class="name" readonly="readonly"/>
+                        <input id="officeDate" class="date" placeholder="审批日期" readonly="readonly"/>
+                        <input id="officeName" class="name" placeholder="审批人" readonly="readonly"/>
                     </div>
                 </td>
             </tr>
@@ -159,15 +159,15 @@
                 <td colspan="5">
                     <div class="opinion">
                         <input id="departmentOpinion" style="margin-left: 18px; width: 410px; border: none; outline: none;" placeholder="等待审批" readonly="readonly"/>
-                        <input id="departmentDate" class="date" style="margin-top: 50px;" readonly="readonly"/>
-                        <input id="departmentName" class="name" style="margin-top: 50px;" readonly="readonly"/>
+                        <input id="departmentDate" class="date" style="margin-top: 50px;" placeholder="审批日期" readonly="readonly"/>
+                        <input id="departmentName" class="name" style="margin-top: 50px;" placeholder="审批人" readonly="readonly"/>
                     </div>
                 </td>
                 <td class="title">处<br>室<br>拟<br>稿</td>
                 <td colspan="3">
                     <div class="opinion">
-                        <input id="initialName" style="margin-left: 18px; width: 128px; border: none; outline: none;" readonly="readonly"/>
-                        <input id="initialDate" class="date" readonly="readonly"/>
+                        <input id="initialName" style="margin-left: 18px; width: 128px; border: none; outline: none;" placeholder="审批人" readonly="readonly"/>
+                        <input id="initialDate" class="date" placeholder="审批日期" readonly="readonly"/>
                     </div>
                 </td>
             </tr>

@@ -102,8 +102,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 //会话管理
                 and().sessionManagement().
                     invalidSessionUrl("/userLogin").
-                    maximumSessions(1).//同一账号同时登录最大用户数
-                    expiredSessionStrategy(sessionInformationExpiredStrategy);//会话失效(账号被挤下线)处理逻辑
+                    maximumSessions(1);//同一账号同时登录最大用户数
+//                    expiredSessionStrategy(sessionInformationExpiredStrategy);//会话失效(账号被挤下线)处理逻辑
         http.addFilterBefore(securityInterceptor, FilterSecurityInterceptor.class);
     }
 }

@@ -75,7 +75,17 @@
                             ajaxUtil.myAjax(null,"/industrialdevelop/expert/resetPassword/"+row.userCode,submitStatus,function (data) {
                                 if(ajaxUtil.success(data)){
                                     if(data.code == 88888){
-                                        alertUtil.info("已重置");
+                                        var submitConfirmModal = {
+                                            modalBodyID :"myResetPasswordTips",
+                                            modalTitle : "提示",
+                                            modalClass : "modal-lg",
+                                            cancelButtonStyle: "display:none",
+                                            modalConfirmFun:function (){
+                                                return true;
+                                            }
+                                        }
+                                        var submitConfirm = modalUtil.init(submitConfirmModal);
+                                        submitConfirm.show();
                                         isSuccess = true;
                                         refreshTable();
                                     }else{
@@ -131,9 +141,21 @@
             $("#chargePersonSearch").selectUtil(pl);
 
             var aCol = [
-                {field: 'username', title: '用户账号'},
-                {field: 'name', title: '专家姓名'},
-                {field: 'filed', title: '擅长领域'},
+                {field: 'username', title: '用户账号',cellStyle: {
+
+                        css:{"padding-left":"62px"}
+
+                    }},
+                {field: 'name', title: '专家姓名',cellStyle: {
+
+                        css:{"padding-left":"32px"}
+
+                    } },
+                {field: 'filed', title: '擅长领域',cellStyle: {
+
+                        css:{"padding-left":"32px"}
+
+                    }},
                 {field: 'gender', title: '性别',width:'120px'},
                 {field: 'mobilephone', title: '联系电话',width:'125px'},
                 {field: 'action',  title: '操作',formatter: operation,events:orgEvents}

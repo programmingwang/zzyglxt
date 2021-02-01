@@ -15,5 +15,5 @@ public interface IGovernresCountersignService {
 
     int updateByPrimaryKeySelective(GovernresCountersign record);
 
-    List<GovernresCountersign> selectAll();
+    List<GovernresCountersign> selectAll(List<String> status);
 }

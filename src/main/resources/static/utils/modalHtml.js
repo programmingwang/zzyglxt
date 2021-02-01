@@ -198,6 +198,7 @@
         modalHtml.myFailReportoneModal = "<div>" + '        <textarea name="" id="reasonone" cols="96" rows="10"></textarea>' + "    </div>";
         modalHtml.myFailReportthModal = "<div>" + '        <textarea name="" id="reasonth" cols="96" rows="10"></textarea>' + "    </div>";
         modalHtml.myFailReporttwoModal = "<div>" + '        <textarea name="" id="reasontwo" cols="96" rows="10"></textarea>' + "    </div>";
+        modalHtml.myViewTopictModal = "<div id=\"viewTopic\"><div class=\"col-lg-12 col-md-12\"><div class=\"input-group mb-3\"><div class=\"input-group-prepend\"><button type=\"button\" class=\"btn btn-primary btn-sm\">项目名称</button></div><input type=\"text\" id=\"projectName\" class=\"form-control\" readonly=\"readonly\"></div></div><div class=\"col-lg-12 col-md-12\"><div class=\"input-group mb-3\"><div class=\"input-group-prepend\"><button type=\"button\" class=\"btn btn-primary btn-sm\">学科专业代码</button></div><input type=\"text\" id=\"disciplineCode\" class=\"form-control\" readonly=\"readonly\"><div class=\"input-group-prepend\"><button type=\"button\" class=\"btn btn-primary btn-sm\">学科专业名称</button></div><input type=\"text\" id=\"disciplineName\" class=\"form-control\" readonly=\"readonly\"></div></div><div class=\"col-lg-12 col-md-12\"><div class=\"input-group mb-3\"><div class=\"input-group-prepend\"><button type=\"button\" class=\"btn btn-primary btn-sm\">申请人</button></div><input type=\"text\" id=\"applicant\" class=\"form-control\" readonly=\"readonly\"><div class=\"input-group-prepend\"><button type=\"button\" class=\"btn btn-primary btn-sm\">联系电话</button></div><input type=\"text\" id=\"contactCode\" class=\"form-control\" readonly=\"readonly\"></div></div><div class=\"col-lg-12 col-md-12\"><div class=\"input-group mb-3\"><div class=\"input-group-prepend\"><button type=\"button\" class=\"btn btn-primary btn-sm\">邮政编码</button></div><input type=\"text\" id=\"postalCode\" class=\"form-control\" readonly=\"readonly\"><div class=\"input-group-prepend\"><button type=\"button\" class=\"btn btn-primary btn-sm\">电子信箱</button></div><input type=\"text\" id=\"email\" class=\"form-control\" readonly=\"readonly\"></div></div><div class=\"col-lg-12 col-md-12\"><div class=\"input-group mb-3\"><div class=\"input-group-prepend\"><button type=\"button\" class=\"btn btn-primary btn-sm\">所在单位</button></div><input type=\"text\" id=\"company\" class=\"form-control\" readonly=\"readonly\"></div></div><div class=\"col-lg-12 col-md-12\"><div class=\"input-group mb-3\"><div class=\"input-group-prepend\"><button type=\"button\" class=\"btn btn-primary btn-sm\">通讯地址</button></div><input type=\"text\" id=\"postalAddress\" class=\"form-control\" readonly=\"readonly\"></div></div><div class=\"col-lg-12 col-md-12\"><div class=\"input-group mb-3\"><div class=\"input-group-prepend\"><button type=\"button\" class=\"btn btn-primary btn-sm\">分配状态</button></div><input type=\"text\" id=\"expertStatus\" class=\"form-control\" readonly=\"readonly\"></div></div></div>";
         modalHtml.myDeleteModalTravel = "是否删除景点信息?";
         modalHtml.myDeleteModalTraditionalCul = "是否删除中医医史信息?";
         modalHtml.myDeleteModalTraditionalDoc = "是否删除历代名家信息?";
@@ -209,7 +210,6 @@
         modalHtml.myDeleteModalInCuHe = "是否删除非物质文化遗产信息?";
         modalHtml.myDeleteModalMovTV = "是否删除电视电影信息?";
         modalHtml.myDeleteModalSaleDrug = "是否删除该药品";
-        modalHtml.myShelfSaleDrugModal = "点击确认上架将上传至河北中医药网";
         modalHtml.mySubmitModal = "确认提交吗？";
         modalHtml.myPassModal = "确认通过吗？";
         modalHtml.myFailModal = "确认不通过吗？";
@@ -237,11 +237,12 @@
         modalHtml.myDeleteChineseMedicine = "是否删除名老中医信息？";
         modalHtml.myDeleteAccount = "是否删除该账号？";
         modalHtml.myDeleteMedMat = "是否删除药材信息？";
-        modalHtml.myShelveMedMat = "点击上架将药材信息发送到河北中医药网，确认上架？";
+        modalHtml.myShelveMedMat = "点击确认后药材信息发送到河北中医药网，确认上架？";
         modalHtml.myShelfSaleDrugModal = "点击确认上架将上传至河北中医药网";
         modalHtml.myDeleteExpert = "是否删除该专家信息？";
         modalHtml.myResetPassword = "是否重置密码？";
         modalHtml.myCencelDistribution = "是否取消分配专家？";
+        modalHtml.myCencelDistributionConfirm = "勾选的项目中已经有专家评审，确认取消分配专家？";
         modalHtml.myDeletereceiptModal = "是否删除收文信息";
         modalHtml.myDeletereportModal = "是否删除请示报告信息";
         modalHtml.myDeleteTopicManagement = "是否删除该项目信息？";

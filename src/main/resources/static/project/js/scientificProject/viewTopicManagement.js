@@ -17,6 +17,10 @@
                     url = "/scientificProject/centralizedReview";
                     localStorage.removeItem("centralizedView");
                 }
+                if(localStorage.getItem("distributionExpert") == "true"){
+                    url = "/scientificProject/distributionExpert";
+                    localStorage.removeItem("distributionExpert");
+                }
                 orange.redirect(url);
             });
 

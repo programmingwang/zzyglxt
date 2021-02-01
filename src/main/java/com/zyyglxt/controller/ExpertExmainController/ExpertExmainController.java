@@ -50,12 +50,22 @@ public class ExpertExmainController {
         return new ResponseData(EmBusinessError.success);
     }
 
-    //删除分配专家
+    //批量删除分配专家
     @DeleteMapping("/exmain")
     @ResponseBody
     public ResponseData deleteByTopicCode(@RequestBody List<IndustrialDevelopExpertRefDO> topicCodeList){
         for (IndustrialDevelopExpertRefDO topicCode:topicCodeList){
             exmaineService.deleteByTopicCode(topicCode.getTopicCode());
+        }
+        return new ResponseData(EmBusinessError.success);
+    }
+
+    //删除单个课题的专家
+    @DeleteMapping("/delExpertTopic")
+    @ResponseBody
+    public ResponseData delExpertTopic(@RequestBody List<IndustrialDevelopExpertRefDO> expertRefDOList){
+        for (IndustrialDevelopExpertRefDO expertRefDO:expertRefDOList){
+            exmaineService.delExpertTopic(expertRefDO);
         }
         return new ResponseData(EmBusinessError.success);
     }

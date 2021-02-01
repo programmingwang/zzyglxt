@@ -283,6 +283,11 @@ FROM
         WHERE TOPIC_CODE = #{topicCode}
     </delete>
 
+    <delete id="delExpertTopic">
+        DELETE FROM tb_industrial_develop_expert_ref
+        WHERE EXPERT_CODE = #{expertCode,jdbcType=CHAR} AND TOPIC_CODE = #{topicCode,jdbcType=CHAR}
+    </delete>
+
     <select id="topicAndExpertStatus" resultMap="TopicResultMap">
         SELECT
         <include refid="Topic_Column_List"/>

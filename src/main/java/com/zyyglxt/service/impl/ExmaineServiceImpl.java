@@ -121,4 +121,9 @@ public class ExmaineServiceImpl implements IExmaineService {
     public List<IndustrialDevelopTopicDODto> topicAndExpertStatus() {
         return expertRefDOMapper.topicAndExpertStatus();
     }
+
+    @Override
+    public int delExpertTopic(IndustrialDevelopExpertRefDO expertRefDO) {
+        return expertRefDOMapper.delExpertTopic(expertRefDO.getExpertCode(),expertRefDO.getTopicCode());
+    }
 }

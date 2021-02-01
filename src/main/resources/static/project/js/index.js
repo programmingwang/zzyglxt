@@ -1,6 +1,6 @@
 (function () {
-    require(['jquery', 'urlUtil', 'stringUtil', 'alertUtil', 'ajaxUtil'],
-        function (jquery, urlUtil, stringUtil, alertUtil, ajaxUtil) {
+    require(['jquery', 'urlUtil', 'stringUtil', 'alertUtil', 'ajaxUtil', 'modalUtil'],
+        function (jquery, urlUtil, stringUtil, alertUtil, ajaxUtil, modalUtil) {
 
             var roleName = sessionStorage.getItem("rolename");
             var currentUrlHash = window.location.hash.replace("#", "");
@@ -1370,6 +1370,58 @@
                     }
                 })
             }
+
+            $("#usermsg").on("click", function () {
+                var myChangePasswordModalData = {
+                    modalBodyID: "myChangePasswordModal",
+                    modalTitle: "修改密码",
+                    modalClass: "modal-lg",
+                    confirmButtonClass: "btn-danger",
+                    modalConfirmFun: function () {
+                        var isSuccess = false;
+                        var password = $("#oldPwd").val();
+                        var mobilePhone = $("#phone").val();
+                        var newPassword = $("#newPwd").val();
+                        var checkNewPassword = $("#checkPwd").val();
+                        if (!stringUtil.isBlank(password) && !stringUtil.isBlank(mobilePhone) &&
+                            !stringUtil.isBlank(newPassword) && !stringUtil.isBlank(checkNewPassword)) {
+                            var pwd = {
+                                "password": password,
+                                "mobilePhone": mobilePhone,
+                                "newPassword": newPassword,
+                                "checkNewPassword": checkNewPassword
+                            };
+                            ajaxUtil.myAjax(null, "/user/updatepwd", pwd, function (data) {
+                                if (data && data.code == 88888) {
+                                    // alertUtil.success('修改成功');
+                                    var submitConfirmModal = {
+                                        modalBodyID :"myTopicSubmitTip",
+                                        modalTitle : "提示",
+                                        modalClass : "modal-lg",
+                                        cancelButtonStyle: "display:none",
+                                        modalConfirmFun:function (){
+                                            window.location.href = '/userLogin';//密码修改成功后重新登陆
+                                            // orange.redirect('/userLogin');
+                                            return true;
+                                        }
+                                    };
+                                    var submitConfirm = modalUtil.init(submitConfirmModal);
+                                    submitConfirm.show();
+                                    isSuccess = true;
+                                } else {
+                                    alertUtil.error(data.msg)
+                                }
+                            }, false, "", "put")
+                        } else {
+                            alertUtil.info('输入不能为空')
+                        }
+                        return isSuccess;
+                    }
+
+                };
+                var myChangePasswordModal = modalUtil.init(myChangePasswordModalData);
+                myChangePasswordModal.show();
+            });
 
             $("#logout").on("click", function () {
                 ajaxUtil.myAjax(null, "/logout", null, function (data) {

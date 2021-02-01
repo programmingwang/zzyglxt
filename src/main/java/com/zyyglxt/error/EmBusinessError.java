@@ -44,7 +44,8 @@ public enum EmBusinessError implements CommonError {
     NO_PERMISSION(10002, "没有权限"),
     INTEGRITY_CONSTRAINT_ERROE(40001,"违反数据完整性，请检查是否有其他数据关联"),
     NO_FILE_UPLOAD(1003,"没有文件上传，如需上传请编辑上传！"),
-    USERNAME_ERROR(2021,"用户账号须以字母开头，长度为5-12位！")
+    USERNAME_ERROR(2021,"用户账号须以字母开头，长度为5-12位！"),
+    OPWD_EQUAL_NPWD(2022,"新密码与原密码相同，无需修改！"),
 
 
 

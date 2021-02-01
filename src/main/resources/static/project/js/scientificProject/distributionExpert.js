@@ -172,6 +172,14 @@
 
             var aCol = [
                 {checkbox:true},
+                {width:'64px', title: '序号', align: 'center', formatter: function (value, row, index) {
+                        //获取每页显示的数量
+                        var pageSize = $("#table").bootstrapTable('getOptions').pageSize;
+                        //获取当前是第几页
+                        var pageNumber = $("#table").bootstrapTable('getOptions').pageNumber;
+                        // return pageSize * (pageNumber - 1) + index + 1;  // 分页后出现断层
+                        return index +1;
+                    }},
                 {field: 'projectNo', title: '项目编号'},
                 {field: 'projectName', title: '项目名称'},
                 {field: 'company', title: '申报单位'},

@@ -9,8 +9,9 @@
             padding-top: 12px;
             padding-bottom: 4px;
         }
-        .modal-dialog{
-            width: 20em;
+        .LeftText{
+            text-align: right;
+            width: 100%;
         }
     </style>
 </head>
@@ -23,7 +24,7 @@
                 <span style="margin-top: 6px">账户名称：</span>
                 <input type="text" id="taskNameSearch" class="form-control" value="请输入" onfocus="if (value=='请输入'){value =''}" onblur="if (value ==''){value='请输入'}" >
                 <div class="input-group-prepend">
-                    <span class="input-group-text" id="btnSearch" style="background-color: #D60000;color: #FFFFFF;border: none;border-radius: 4px;border-top-left-radius: 0px;border-bottom-left-radius: 0px;z-index: 1;">搜索</span>
+                    <span class="input-group-text" id="btnSearch" style="background-color: #D60000;color: #FFFFFF;border: none;z-index: 1;">搜索</span>
                 </div>
             </div>
         </div>
@@ -31,7 +32,6 @@
         <div class="col-lg-2 col-md-2">
             <button type="button" id="btn_addTask" class="btn btn-danger ml-3">新增用户账号</button>
         </div>
-        <hr size="1" class="mb-3" style="color: #EBEBEB;border-style:dashed;width:100%;margin-bottom:10px;">
     </div>
 
     <div class="col-lg-12">

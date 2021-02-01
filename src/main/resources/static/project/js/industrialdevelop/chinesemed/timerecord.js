@@ -90,7 +90,7 @@
             $("#taskNameSearch1").selectUtil(pl2);
 
             var aCol = [
-                {field: 'year', title: '年份'},
+                {field: 'year', title: '年份',width:'200px'},
                 {field: 'startTime', title: '开启时间'},
                 {field: 'endTime', title: '结束时间'},
                 {field: 'creater', title: '操作人'},

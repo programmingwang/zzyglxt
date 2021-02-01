@@ -26,11 +26,8 @@
                         modalClass : "modal-lg",
                         confirmButtonClass : "btn-danger",
                         modalConfirmFun:function () {
-                            var projectEntity = {
-                                itemcode: row.itemcode
-                            };
                             var isSuccess = false;
-                            ajaxUtil.myAjax(null,"/industrialdevelop/expert/"+row.itemcode,projectEntity,function (data) {
+                            ajaxUtil.myAjax(null,"/industrialdevelop/expert/"+row.userCode,null,function (data) {
                                 if(ajaxUtil.success(data)){
                                     alertUtil.info("删除成功");
                                     isSuccess = true;
@@ -78,7 +75,17 @@
                             ajaxUtil.myAjax(null,"/industrialdevelop/expert/resetPassword/"+row.userCode,submitStatus,function (data) {
                                 if(ajaxUtil.success(data)){
                                     if(data.code == 88888){
-                                        alertUtil.info("已重置");
+                                        var submitConfirmModal = {
+                                            modalBodyID :"myResetPasswordTips",
+                                            modalTitle : "提示",
+                                            modalClass : "modal-lg",
+                                            cancelButtonStyle: "display:none",
+                                            modalConfirmFun:function (){
+                                                return true;
+                                            }
+                                        }
+                                        var submitConfirm = modalUtil.init(submitConfirmModal);
+                                        submitConfirm.show();
                                         isSuccess = true;
                                         refreshTable();
                                     }else{
@@ -117,7 +124,7 @@
                                 myaddExpertModal.hide();
                                 refreshTable();
                             } else {
-                                alertUtil.error("新增失败");
+                                alertUtil.error(data.msg);
                             }
                         }, true, "123", 'post');
                     }
@@ -126,13 +133,29 @@
                 myaddExpertModal.show();
             });
 
+            $("#expertAccount").unbind().on('change',function () {
+
+            })
+
             var pl = dictUtil.getDictByCode(dictUtil.DICT_LIST.showStatus);
             $("#chargePersonSearch").selectUtil(pl);
 
             var aCol = [
-                {field: 'username', title: '用户账号'},
-                {field: 'name', title: '专家姓名'},
-                {field: 'filed', title: '擅长领域'},
+                {field: 'username', title: '用户账号',cellStyle: {
+
+                        css:{"padding-left":"62px"}
+
+                    }},
+                {field: 'name', title: '专家姓名',cellStyle: {
+
+                        css:{"padding-left":"32px"}
+
+                    } },
+                {field: 'filed', title: '擅长领域',cellStyle: {
+
+                        css:{"padding-left":"32px"}
+
+                    }},
                 {field: 'gender', title: '性别',width:'120px'},
                 {field: 'mobilephone', title: '联系电话',width:'125px'},
                 {field: 'action',  title: '操作',formatter: operation,events:orgEvents}
@@ -146,7 +169,29 @@
                 myTable = bootstrapTableUtil.myBootStrapTableInit("table", url, param, aCol);
             }
 
-            bootstrapTableUtil.globalSearch("table",url,aParam, aCol);
+            $("#btnSearch").unbind().on('click',function() {
+                var newArry = [];
+                var str = document.getElementById("taskNameSearch").value.toLowerCase();
+                var allTableData = JSON.parse(localStorage.getItem("2"));
+                if(str.indexOf("请输入")!=-1){
+                    str=""
+                }
+                for (var i in allTableData) {
+                    for (var v in aCol){
+                        var textP = allTableData[i][aCol[v].field];
+                        if (textP == null || textP == undefined || textP == '') {
+                            textP = "1";
+                        }
+                        if(textP.search(str) != -1){
+                            newArry.push(allTableData[i])
+                        }
+                    }
+                }
+                var newArr=new Set(newArry)
+                newArry=Array.from(newArr)
+                $("#table").bootstrapTable("load", newArry);
+
+            })
 
         })
 })();

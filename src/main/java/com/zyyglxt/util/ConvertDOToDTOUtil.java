@@ -11,6 +11,9 @@ import com.zyyglxt.error.EmBusinessError;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 
+import java.util.Collections;
+import java.util.List;
+
 /**
  * Author:wangzh
  * Date: 2020/11/6 15:39
@@ -61,8 +64,8 @@ public class ConvertDOToDTOUtil {
         return topicDODto;
     }
 
-    public static PostDto convertFromDOToDTO(PostDO postDO, String filePath, String fileName){
-        filePath = StringUtils.isEmpty(filePath) ? "已经损坏了" : filePath;
+    public static PostDto convertFromDOToDTO(PostDO postDO, List<String> filePath, List<String> fileName){
+        filePath = StringUtils.isEmpty((CharSequence) filePath) ? Collections.singletonList("已经损坏了") : filePath;
         PostDto postDto = new PostDto();
         BeanUtils.copyProperties(postDO,postDto);
         postDto.setFilePath(filePath);

@@ -33,7 +33,6 @@ public class ReportController {
     @RequestMapping(value ="insertrequestreport",method = RequestMethod.POST )
     @LogAnnotation(appCode ="",logTitle ="请示报告数据的添加",logLevel ="3")
     public ResponseData insertRequestReport(@RequestBody RequestReportDO key)  {
-        System.out.println("请示报告标题名称: " + key.getReportTitle());
         iRequestReportDOService.insertSelective(key);
         return new ResponseData(EmBusinessError.success);
     }
@@ -57,7 +56,6 @@ public class ReportController {
     @LogAnnotation(appCode ="",logTitle ="请示报告数据的修改",logLevel ="2")
     public ResponseData updateRequestReport(@RequestBody RequestReportDO key)  {
         iRequestReportDOService.updateByPrimaryKeySelective(key);
-        System.out.println("要修改请示报告标题名称编号为："+key.getItemid());
         return new ResponseData(EmBusinessError.success);
     }
     /*查询所有请示报告数据*/

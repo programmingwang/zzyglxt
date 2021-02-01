@@ -80,7 +80,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 "/swagger-resources/configuration/security",//安全选项
                 "/swagger-ui.html",
                 "/webjars/**").permitAll().antMatchers("/component/**","/css/**", "/fonts/**",
-                "/images/**","/main/**", "/project/**", "/utils/**", "/", "/register","/user/register",
+                "/images/**","/main/main.js", "/project/**", "/utils/**", "/", "/register","/user/register",
                 "/user/queryOrgStatus","/dict/getDictByCode","/industrialdevelop/chi-med","/industrialdevelop/school",
                 "/industrialdevelop/tec-ser-org","/industrialDevelop/hosp_add","/plantation_add","/process_add","/produce_add",
                 "/school_add","/sale_add","/hosp_add","/lab_add","/tecserviceorg_add","/tour_add","/user/deletuser","/file/upload").permitAll().
@@ -102,8 +102,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 //会话管理
                 and().sessionManagement().
                     invalidSessionUrl("/userLogin").
-                    maximumSessions(1);//同一账号同时登录最大用户数
-//                    expiredSessionStrategy(sessionInformationExpiredStrategy);//会话失效(账号被挤下线)处理逻辑
+                    maximumSessions(1).//同一账号同时登录最大用户数
+                    expiredSessionStrategy(sessionInformationExpiredStrategy);//会话失效(账号被挤下线)处理逻辑
         http.addFilterBefore(securityInterceptor, FilterSecurityInterceptor.class);
     }
 }

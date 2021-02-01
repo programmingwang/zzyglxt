@@ -20,14 +20,17 @@
                     $("#reason").val(tempdata.reason);
                     $("#reasonone").val(tempdata.reasonone);
                     $("#reasontwo").val(tempdata.reasontwo);
+                    $("#reasonth").val(tempdata.reasonth);
 
                     $("#updaterf").val(tempdata.updaterf);
                     $("#updaterone").val(tempdata.updaterone);
                     $("#updatertwo").val(tempdata.updatertwo);
+                    $("#updaterth").val(tempdata.updaterth);
 
                     $("#updateone").val(tempdata.updateone);
                     $("#updatetwo").val(tempdata.updatetwo);
                     $("#updatef").val(tempdata.updatef);
+                    $("#updateth").val(tempdata.updateth);
 
                     $("#creater").val(tempdata.creater);
                     $("#itemcreateat").val(tempdata.itemcreateat);

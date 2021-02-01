@@ -260,8 +260,8 @@
                 orange.redirect(addUrl)
             });
 
-            var pl = dictUtil.getDictByCode(dictUtil.DICT_LIST.showStatus);
-            $("#chargePersonSearch").selectUtil(pl);
+
+            $("#chargePersonSearch").selectUtil(webStatus);
 
             var aCol = [
                 {field: 'hospitalName', title: '医院名称'},
@@ -287,7 +287,7 @@
                 myTable = bootstrapTableUtil.myBootStrapTableInit("table", url, param, aCol);
             }
 
-            bootstrapTableUtil.globalSearch("table",url,aParam, aCol);
+            bootstrapTableUtil.globalSearch("table",url,aParam, aCol,"hospitalStatus");
 
         })
 })();

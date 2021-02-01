@@ -207,11 +207,22 @@
     where itemID = #{itemid,jdbcType=INTEGER}
       and itemCode = #{itemcode,jdbcType=CHAR}
   </update>
-  <select id="selectAllHealthSciKnow" resultMap="BaseResultMap">
-        SELECT *
+  <select id="selectAllHealthSciKnow" resultMap="ResultMapWithBLOBs">
+        SELECT
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
         FROM tb_health_care_sci_know
-        WHERE SCIENCE_KNOWLEDGE_STATUS = #{scienceKnowledgeStatus,jdbcType=VARCHAR}
-        order by itemUpdateAt desc
+    <if test="scienceKnowledgeStatus == 3">
+      where SCIENCE_KNOWLEDGE_STATUS in (2,4,5)
+    </if>
+    <if test="scienceKnowledgeStatus == 2">
+      where SCIENCE_KNOWLEDGE_STATUS in (1,2,3,5)
+    </if>
+    <if test="scienceKnowledgeStatus == 1">
+      where SCIENCE_KNOWLEDGE_STATUS in (0,1,2,3,4,5,6)
+    </if>
+    order by itemUpdateAt desc
     </select>
     <update id="updateVisitNumHealthSciKnow" parameterType="com.zyyglxt.dataobject.HealthSciKnowDOKey">
       update tb_health_care_sci_know set VISIT_NUM = VISIT_NUM + 1 where itemID = #{itemid,jdbcType=INTEGER} and itemCode = #{itemcode,jdbcType=CHAR}

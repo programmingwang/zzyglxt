@@ -2,6 +2,7 @@ package com.zyyglxt.service;
 
 import com.zyyglxt.dataobject.IndustrialDevelopMedMat;
 import com.zyyglxt.dto.StatusDto;
+import com.zyyglxt.dto.industrialDevelop.IndustrialDevelopMedMatDto;
 
 import java.util.List;
 
@@ -25,7 +26,7 @@ public interface IndustrialDevelopMedMatService{
 
     int updateByPrimaryKey(IndustrialDevelopMedMat record);
 
-    List<IndustrialDevelopMedMat> selectMedMatByORGCode();
+    List<IndustrialDevelopMedMatDto> selectMedMatByORGCode();
 
     int updateStatus(StatusDto statusDto);
 }

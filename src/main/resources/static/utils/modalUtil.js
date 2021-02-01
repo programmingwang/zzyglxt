@@ -110,7 +110,7 @@
             data.modalConfirmID = stringUtil.getUUID();
             var defaultConfirmButtonClass = "btn ";
 
-            data.confirmButtonClass = defaultConfirmButtonClass + (stringUtil.isBlank(data.confirmButtonClass) ? "btn-primary" : data.confirmButtonClass);
+            data.confirmButtonClass = defaultConfirmButtonClass + (stringUtil.isBlank(data.confirmButtonClass) ? "btn-danger" : data.confirmButtonClass);
 
 
 

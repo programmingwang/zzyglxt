@@ -35,7 +35,9 @@ public interface UserDOMapper {
 
     int updateStateByUserName(@Param("state") String state, @Param("username") String username);
 
-    List<UserDO> selectAllUser();
+    List<UserDO> selectAllUser(String itemcode, String username);
+
+    List<UserDO> selectAllUser2(String itemcode, String username, String orgCode);
 
     int deleteByUsername(String username);
 }

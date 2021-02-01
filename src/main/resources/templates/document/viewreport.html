@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -46,6 +46,9 @@
         #reportTitle{
 
         }
+        input{
+            background-color:white;
+        }
     </style>
 </head>
 <body>
@@ -79,17 +82,45 @@
             </tr>
             <tr>
                 <td class="firstL">处<br>室<br>意<br>见</td>
-                <td class="secendL">
+                <!--<td class="secendL">
+                    <div class="mesageYJ">
+                        <input id="reasonth" class="textC" style="border:none;" disabled></input>
+                    </div>
                     <div class="mesageYJ">
                         <input id="reason" class="textC" style="border:none;" disabled></input>
                     </div>
                     <div class="mesageP">
+                        <div>
+                            <input id="updaterth" class="textC" style="border:none;" disabled></input>
+                            <input id="updateth" class="textC" style="border:none;"disabled></input>
+                        </div>
+                        <div>
+                            <input id="updaterf" class="textC" style="border:none;" disabled></input>
+                            <input id="updatef" class="textC" style="border:none;"disabled></input>
+                        </div>
+                    </div>
+                </td>-->
+                <td class="secendL ">
+                    <div class="mesageYJ">
+                        <div>
+                            <input id="reasonth" class="textC" style="border:none;" disabled></input>
+                        </div>
+                        <div>
+                            <input id="reason" class="textC" style="border:none;" disabled></input>
+                        </div>
+                    </div>
+                    <div class="mesageP">
+                        <div>
+                            <input id="updaterth" class="textC" style="border:none;" disabled></input>
+                            <input id="updateth" class="textC" style="border:none;"disabled></input>
+                        </div>
                         <div>
                             <input id="updaterf" class="textC" style="border:none;" disabled></input>
                             <input id="updatef" class="textC" style="border:none;"disabled></input>
                         </div>
                     </div>
                 </td>
+
             </tr>
             <tr>
                 <td class="firstL">报<br>告<br>内<br>容</td>
@@ -150,10 +181,8 @@
 </div>
 <div class="col-lg-1"></div>
 <script type="text/javascript" data-main="/main/main.js" th:src="@{/component/require@2.3.6/require-2.3.6.js}"></script>
-<script type="text/javascript" th:src="@{/project/js/document/viewreport.js}"></script>
 <link type="text/css" rel="stylesheet" href="/component/uploadImg/css/uploadImg.css"
       th:src="@{/component/uploadImg/css/uploadImg.css}">
-<script type="text/javascript" th:src="@{/component/uploadImg/js/bootstrap.min.js}"></script>
 
 </body>
 </html>

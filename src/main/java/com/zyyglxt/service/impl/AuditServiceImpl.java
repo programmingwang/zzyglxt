@@ -1,10 +1,6 @@
 package com.zyyglxt.service.impl;
 
 import com.zyyglxt.dao.AuditMapper;
-import com.zyyglxt.dataobject.HospDO;
-import com.zyyglxt.dataobject.IndustrialDevelopChiMed;
-import com.zyyglxt.dataobject.IndustrialDevelopSchool;
-import com.zyyglxt.dataobject.IndustrialDevelopTecSerOrg;
 import com.zyyglxt.dto.HospDto;
 import com.zyyglxt.dto.industrialDevelop.AuditDto;
 import com.zyyglxt.dto.industrialDevelop.IndustrialDevelopChiMedDto;
@@ -12,9 +8,7 @@ import com.zyyglxt.dto.industrialDevelop.IndustrialDevelopSchoolDto;
 import com.zyyglxt.dto.industrialDevelop.IndustrialDevelopTecSerOrgDto;
 import com.zyyglxt.service.IAuditService;
 import com.zyyglxt.service.IDictService;
-import com.zyyglxt.service.IFileService;
 import com.zyyglxt.util.UsernameUtil;
-import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -36,8 +30,6 @@ public class AuditServiceImpl implements IAuditService {
     @Resource
     IDictService dictService;
 
-    @Resource
-    IFileService fileService;
 
     @Resource
     UsernameUtil usernameUtil;
@@ -45,11 +37,10 @@ public class AuditServiceImpl implements IAuditService {
 
     @Override
     public List<AuditDto> getAll() {
-        List<AuditDto> resList = new ArrayList<>();
-        List<IndustrialDevelopChiMed> chiMedList;
-        List<IndustrialDevelopTecSerOrg> tecSerOrgList;
-        List<IndustrialDevelopSchool> schoolList;
-        List<HospDO> hospDOList;
+        List<AuditDto> chiMedList;
+        List<AuditDto> tecSerOrgList;
+        List<AuditDto> schoolList;
+        List<AuditDto> hospDOList;
         String city;
         if (usernameUtil.getRoleName().equals("产业发展-省级")){
             chiMedList = auditMapper.getAllChiMed();
@@ -63,15 +54,18 @@ public class AuditServiceImpl implements IAuditService {
             schoolList = auditMapper.getAllSchoolByCity(city);
             hospDOList = auditMapper.getAllHospitalByCity(city);
         }
-
-
-        convertChiMed(chiMedList, resList);
-
-        convertTecSerOrg(tecSerOrgList, resList);
-
-        convertSchool(schoolList, resList);
-
-        convertHospital(hospDOList, resList);
+        List<AuditDto> resList = new ArrayList<>(chiMedList);
+        resList.addAll(tecSerOrgList);
+        for (AuditDto item: schoolList)
+        {
+            item.setType("school");
+        }
+        for (AuditDto item: hospDOList)
+        {
+            item.setType("hospital");
+        }
+        resList.addAll(schoolList);
+        resList.addAll(hospDOList);
 
         filter(resList);
 
@@ -86,23 +80,19 @@ public class AuditServiceImpl implements IAuditService {
             case "tec":
             case "lab":
             case "tour":
-                List<IndustrialDevelopTecSerOrg> tecSerOrgList = auditMapper.getAllTecOrgByType(type);
-                convertTecSerOrg(tecSerOrgList, resList);
+                resList.addAll(auditMapper.getAllTecOrgByType(type));
                 break;
             case "plant":
             case "process":
             case "sale":
             case "produce":
-                List<IndustrialDevelopChiMed> chiMedList = auditMapper.getAllChiMedByType(type);
-                convertChiMed(chiMedList, resList);
+                resList.addAll(auditMapper.getAllChiMedByType(type));
                 break;
             case "school":
-                List<IndustrialDevelopSchool> schoolList = auditMapper.getAllSchool();
-                convertSchool(schoolList, resList);
+                resList.addAll(auditMapper.getAllSchool());
                 break;
             case "hospital":
-                List<HospDO> hospDOList = auditMapper.getAllHospital();
-                convertHospital(hospDOList, resList);
+                resList.addAll(auditMapper.getAllHospital());
                 break;
         }
         filter(resList);
@@ -112,38 +102,22 @@ public class AuditServiceImpl implements IAuditService {
 
     @Override
     public IndustrialDevelopChiMedDto getDetailChiMed(Integer itemid, String itemcode) {
-        IndustrialDevelopChiMed chiMed = auditMapper.getDetailChiMed(itemid, itemcode);
-        IndustrialDevelopChiMedDto dto = new IndustrialDevelopChiMedDto();
-        BeanUtils.copyProperties(chiMed, dto);
-        dto.setFilePath(fileService.selectFileByDataCode(dto.getItemcode()).getFilePath());
-        return dto;
+        return auditMapper.getDetailChiMed(itemid, itemcode);
     }
 
     @Override
     public IndustrialDevelopTecSerOrgDto getDetailTecSerOrg(Integer itemid, String itemcode) {
-        IndustrialDevelopTecSerOrg org = auditMapper.getDetailTecSerOrg(itemid, itemcode);
-        IndustrialDevelopTecSerOrgDto dto = new IndustrialDevelopTecSerOrgDto();
-        BeanUtils.copyProperties(org,dto);
-        dto.setFilePath(fileService.selectFileByDataCode(dto.getItemcode()).getFilePath());
-        return dto;
+        return auditMapper.getDetailTecSerOrg(itemid, itemcode);
     }
 
     @Override
     public IndustrialDevelopSchoolDto getDetailSchool(Integer itemid, String itemcode) {
-        IndustrialDevelopSchool school = auditMapper.getDetailSchool(itemid, itemcode);
-        IndustrialDevelopSchoolDto dto = new IndustrialDevelopSchoolDto();
-        BeanUtils.copyProperties(school,dto);
-        dto.setFilePath(fileService.selectFileByDataCode(dto.getItemcode()).getFilePath());
-        return dto;
+        return auditMapper.getDetailSchool(itemid, itemcode);
     }
 
     @Override
     public HospDto getDetailHospital(Integer itemid, String itemcode) {
-        HospDO hospDO = auditMapper.getDetailHospital(itemid, itemcode);
-        HospDto hospDto = new HospDto();
-        BeanUtils.copyProperties(hospDO, hospDto);
-        hospDto.setFilePath(fileService.selectFileByDataCode(hospDO.getItemcode()).getFilePath());
-        return hospDto;
+        return auditMapper.getDetailHospital(itemid, itemcode);
     }
 
     @Override
@@ -157,59 +131,31 @@ public class AuditServiceImpl implements IAuditService {
 
     @Override
     public int changeTecSerOrgStatus(AuditDto record) {
+        if (record.getStatus().equals("6")){
+            auditMapper.changeUserStatus(record.getOrgCode());
+        }
         record.setUpdater(usernameUtil.getOperateUser());
         return auditMapper.changeTecSerOrgStatus(record);
     }
 
     @Override
     public int changeSchoolStatus(AuditDto record) {
+        if (record.getStatus().equals("6")){
+            auditMapper.changeUserStatus(record.getOrgCode());
+        }
         record.setUpdater(usernameUtil.getOperateUser());
         return auditMapper.changeSchoolStatus(record);
     }
 
     @Override
     public int changeHospitalStatus(AuditDto record) {
+        if (record.getStatus().equals("6")){
+            auditMapper.changeUserStatus(record.getOrgCode());
+        }
         record.setUpdater(usernameUtil.getOperateUser());
         return auditMapper.changeHospitalStatus(record);
     }
 
-    public void convertChiMed(List<IndustrialDevelopChiMed> source, List<AuditDto> target) {
-        for (IndustrialDevelopChiMed item : source) {
-            AuditDto obj = new AuditDto();
-            BeanUtils.copyProperties(item, obj);
-            target.add(obj);
-        }
-    }
-
-    public void convertTecSerOrg(List<IndustrialDevelopTecSerOrg> source, List<AuditDto> target) {
-        for (IndustrialDevelopTecSerOrg item : source) {
-            AuditDto obj = new AuditDto();
-            BeanUtils.copyProperties(item, obj);
-            target.add(obj);
-        }
-    }
-
-    public void convertSchool(List<IndustrialDevelopSchool> source, List<AuditDto> target) {
-        for (IndustrialDevelopSchool item : source) {
-            AuditDto obj = new AuditDto();
-            BeanUtils.copyProperties(item, obj);
-            obj.setName(item.getSchoolName());
-            obj.setType("school");
-            target.add(obj);
-        }
-    }
-
-    public void convertHospital(List<HospDO> source, List<AuditDto> target) {
-        for (HospDO item : source) {
-            AuditDto obj = new AuditDto();
-            BeanUtils.copyProperties(item, obj);
-            obj.setAddressCity(item.getHospitalAddressCity());
-            obj.setName(item.getHospitalName());
-            obj.setStatus(item.getHospitalStatus());
-            obj.setType("hospital");
-            target.add(obj);
-        }
-    }
 
     public void filter(List<AuditDto> target) {
         Map<String, String> proMap = dictService.getDictMapByCode("projectStatus");

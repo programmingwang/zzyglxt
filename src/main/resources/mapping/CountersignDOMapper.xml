@@ -9,7 +9,6 @@
     <result column="GOV_PUNLIC" jdbcType="VARCHAR" property="govPunlic" />
     <result column="REASON" jdbcType="VARCHAR" property="reason" />
     <result column="FILE_NO" jdbcType="VARCHAR" property="fileNo" />
-    <result column="FILE_NUMBER" jdbcType="VARCHAR" property="fileNumber" />
     <result column="CLASSIFICATION" jdbcType="VARCHAR" property="classification" />
     <result column="STATUS" jdbcType="VARCHAR" property="status" />
     <result column="CREATER" jdbcType="VARCHAR" property="creater" />
@@ -18,7 +17,7 @@
     <result column="itemUpdateAt" jdbcType="TIMESTAMP" property="itemupdateat" />
   </resultMap>
   <sql id="Base_Column_List">
-    itemID, itemCode, RECEIVING_TITLE, NUMBER, GOV_PUNLIC, REASON, FILE_NO,FILE_NUMBER, CLASSIFICATION,
+    itemID, itemCode, RECEIVING_TITLE, NUMBER, GOV_PUNLIC, REASON, FILE_NO, CLASSIFICATION, 
     STATUS, CREATER, itemCreateAt, UPDATER, itemUpdateAt
   </sql>
   <select id="selectByPrimaryKey" parameterType="com.zyyglxt.dataobject.CountersignDOKey" resultMap="BaseResultMap">
@@ -27,12 +26,6 @@
     from tb_governres_countersign
     where itemID = #{itemid,jdbcType=INTEGER}
       and itemCode = #{itemcode,jdbcType=CHAR}
-  </select>
-  <select id="selectByItemcode" parameterType="java.lang.String" resultMap="BaseResultMap">
-    select
-    <include refid="Base_Column_List" />
-    from tb_governres_countersign
-    where itemCode = #{itemcode,jdbcType=CHAR}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="com.zyyglxt.dataobject.CountersignDOKey">
     delete from tb_governres_countersign

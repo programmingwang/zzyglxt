@@ -234,7 +234,14 @@ thead.self-thead {
 
 
 #btnSearch{
-    background-color: #D60000;color: #FFFFFF;border: none;border-radius: 4px;border-top-left-radius: 0px;border-bottom-left-radius: 0px;z-index: 1;
+    background-color: #D60000;
+    color: #FFFFFF;
+    border: none;
+    margin-left: 1rem;
+    z-index: 1;
+    border-radius: unset !important;
+    border-top-left-radius: unset !important;
+    border-bottom-left-radius: unset !important;
 }
 .upload-wrap {
     padding-left: 0.8rem;
@@ -299,16 +306,16 @@ thead.self-thead {
     background-color: #ad6809 !important;
 }
 #main_body {
-    border-top: 1rem solid #f7efeb;
     border-right: 10px solid #f7efeb;
     border-bottom: 1rem solid #f7efeb;
     width: 100%;
     overflow: hidden;
     height: 100%;
-    margin-left: 229px;
+    border-left: 229px solid #f7efeb;
 }
 #accordion2{
-    margin-top: 20px;
+    margin-top: 10px;
+    border-top: 10px solid white;
 }
 #btn_addTask{
     width: 171px;
@@ -395,6 +402,11 @@ span.input-text {
     font-size: 16px;
     color: #1e2629;
 }
-a{
-    cursor: pointer;
+#fir_body{
+    border-radius: 10px;
+    background-color: white;
+    background-clip: content-box;
+}
+#table td:last-child>a {
+    margin: 0 0.6em 0 0 !important;
 }

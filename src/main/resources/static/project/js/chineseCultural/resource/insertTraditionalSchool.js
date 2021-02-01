@@ -1,6 +1,6 @@
 (function () {
-    require(['jquery','objectUtil','ajaxUtil','alertUtil','stringUtil','fileUtil'],
-        function (jquery,objectUtil,ajaxUtil,alertUtil,stringUtil,fileUtil) {
+    require(['jquery','objectUtil','ajaxUtil','alertUtil','stringUtil','fileUtil','modalUtil'],
+        function (jquery,objectUtil,ajaxUtil,alertUtil,stringUtil,fileUtil,modalUtil) {
             const editor = objectUtil.wangEditorUtil();
 
             $("#cancel").unbind().on('click',function () {
@@ -42,9 +42,20 @@
 
                 ajaxUtil.myAjax(null,addUpdateUrl,traSchEntity,function (data) {
                     if(ajaxUtil.success(data)){
-                        alertUtil.info(operateMessage);
-                        var url = "/chineseCultural/resource/traditionalSchool";
-                        orange.redirect(url);
+                        var submitConfirmModal = {
+                            modalBodyID :"myTopicSubmitTip",
+                            modalTitle : "提示",
+                            modalClass : "modal-lg",
+                            cancelButtonStyle: "display:none",
+                            modalConfirmFun:function (){
+                                var url = "/chineseCultural/resource/traditionalSchool";
+                                orange.redirect(url);
+                                return true;
+                            }
+                        }
+                        var submitConfirm = modalUtil.init(submitConfirmModal);
+                        submitConfirm.show();
+
                     }else {
                         alertUtil.alert(data.msg);
                     }
@@ -53,46 +64,63 @@
             });
 
             $("#btn_insert").unbind().on('click',function () {
-                var traSchEntity;
-                var addUpdateUrl;
-                var operateMessage;
-                if(!isUpdate()){
-                    addUpdateUrl = "/cul/res/traSch/addTraSch";
-                    operateMessage = "新增中医流派成功";
-                    traSchEntity = {
-                        itemcode: stringUtil.getUUID(),
-                        chineseCulturalName : $("#chineseCulturalName").val(),
-                        chineseCulturalSource : $("#chineseCulturalSource").val(),
-                        chineseCulturalAuthor : $("#chineseCulturalAuthor").val(),
-                        chineseCulturalStatus : '1',
-                        chineseCulturalContent : editor.txt.html()
-                    };
-                }else{
-                    var needData = JSON.parse(localStorage.getItem("rowData"));
-                    addUpdateUrl = "/cul/res/traSch/updTraSch";
-                    traSchEntity = {
-                        itemid: needData.itemid,
-                        itemcode: needData.itemcode,
-                        chineseCulturalName : $("#chineseCulturalName").val(),
-                        chineseCulturalSource : $("#chineseCulturalSource").val(),
-                        chineseCulturalAuthor : $("#chineseCulturalAuthor").val(),
-                        chineseCulturalStatus : '1',
-                        chineseCulturalContent : editor.txt.html()
+                var mySubmitToCZ = {
+                    modalBodyID: "mySubmitModal",
+                    modalTitle: "提交",
+                    modalClass: "modal-lg",
+                    modalConfirmFun:function (){
+                        var traSchEntity;
+                        var addUpdateUrl;
+                        if(!isUpdate()){
+                            addUpdateUrl = "/cul/res/traSch/addTraSch";
+                            traSchEntity = {
+                                itemcode: stringUtil.getUUID(),
+                                chineseCulturalName : $("#chineseCulturalName").val(),
+                                chineseCulturalSource : $("#chineseCulturalSource").val(),
+                                chineseCulturalAuthor : $("#chineseCulturalAuthor").val(),
+                                chineseCulturalStatus : '1',
+                                chineseCulturalContent : editor.txt.html()
+                            };
+                        }else{
+                            var needData = JSON.parse(localStorage.getItem("rowData"));
+                            addUpdateUrl = "/cul/res/traSch/updTraSch";
+                            traSchEntity = {
+                                itemid: needData.itemid,
+                                itemcode: needData.itemcode,
+                                chineseCulturalName : $("#chineseCulturalName").val(),
+                                chineseCulturalSource : $("#chineseCulturalSource").val(),
+                                chineseCulturalAuthor : $("#chineseCulturalAuthor").val(),
+                                chineseCulturalStatus : '1',
+                                chineseCulturalContent : editor.txt.html()
+                            }
+                        }
+
+                        fileUtil.handleFile(isUpdate(), traSchEntity.itemcode, $("#upload_file")[0].files[0]);
+
+                        ajaxUtil.myAjax(null,addUpdateUrl,traSchEntity,function (data) {
+                            if(ajaxUtil.success(data)){
+                                var submitConfirmModal = {
+                                    modalBodyID :"myTopicSubmitTip",
+                                    modalTitle : "提示",
+                                    modalClass : "modal-lg",
+                                    cancelButtonStyle: "display:none",
+                                    modalConfirmFun:function (){
+                                        var url = "/chineseCultural/resource/traditionalSchool";
+                                        orange.redirect(url);
+                                        return true;
+                                    }
+                                }
+                                var submitConfirm = modalUtil.init(submitConfirmModal);
+                                submitConfirm.show();
+                            }else {
+                                alertUtil.alert(data.msg);
+                            }
+                        },false,true);
+                        return false;
                     }
-                    operateMessage = "更新中医流派成功";
                 }
-
-                fileUtil.handleFile(isUpdate(), traSchEntity.itemcode, $("#upload_file")[0].files[0]);
-
-                ajaxUtil.myAjax(null,addUpdateUrl,traSchEntity,function (data) {
-                    if(ajaxUtil.success(data)){
-                        alertUtil.info(operateMessage);
-                        var url = "/chineseCultural/resource/traditionalSchool";
-                        orange.redirect(url);
-                    }else {
-                        alertUtil.alert(data.msg);
-                    }
-                },false,true);
+                var x = modalUtil.init(mySubmitToCZ);
+                x.show();
                 return false;
             });
 

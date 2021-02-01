@@ -1,6 +1,6 @@
 (function () {
-    require(['jquery','objectUtil','ajaxUtil','alertUtil','stringUtil','dictUtil','fileUtil','uploadImg'],
-        function (jquery,objectUtil,ajaxUtil,alertUtil,stringUtil,dictUtil,fileUtil,uploadImg) {
+    require(['jquery','objectUtil','ajaxUtil','alertUtil','stringUtil','dictUtil','fileUtil','uploadImg','modalUtil'],
+        function (jquery,objectUtil,ajaxUtil,alertUtil,stringUtil,dictUtil,fileUtil,uploadImg,modalUtil) {
             const editor = objectUtil.wangEditorUtil();
             const editor2 = objectUtil.wangEditorUtil("#div2");
 
@@ -36,116 +36,93 @@
                 orange.redirect(jumpUrl);
             });
 
+
+            //保存和提交调用函数，保存和提交只是状态码不同
+            function insert(saveStatus){
+                var hosp;
+                var specialty;
+                var entity;
+                var requestUrl;
+                /*拿到下拉框所选的值的其他信息*/
+                hosp = hosps.find(function (obj) {return obj.itemcode === $("#hospitalName").val()});
+                specialty = specialtys.find(function (obj) {return obj.itemcode === $("#specialtyName").val()});
+                if (!updateStatus){
+                    requestUrl = "/medicalService/chineseMedicine/add";
+                    entity = {
+                        itemcode: stringUtil.getUUID(),
+                        chineseMedicineStatus: saveStatus
+                    };
+                }
+                else {
+                    requestUrl = "/medicalService/chineseMedicine/update";
+                    entity = {
+                        itemid: tempdata.itemid,
+                        itemcode: tempdata.itemcode,
+                        chineseMedicineStatus: saveStatus
+                    };
+                }
+                entity["chineseMedicineName"] = $("#chineseMedicineName").val();
+                entity["chineseMedicineTitle"] = $("#chineseMedicineTitle").val();
+                entity["chineseMedicineType"] = chineseMedicineType[$("#chineseMedicineType").val()].text;
+                entity["hospCode"] = hosp.itemcode;
+                entity["hospitalName"] = hosp.hospitalName;
+                entity["deptCode"] = specialty.itemcode;
+                entity["specialtyName"] = specialty.specialtyName;
+                entity["visitTime"] = $("#visitTime").val()
+                entity["phone"] = $("#phone").val();
+                entity["mainVisit"] = $("#mainVisit").val();
+                entity["expertBriefIntroduce"] = $("#expertBriefIntroduce").val();
+                entity["expertIntroduce"] = editor.txt.html();
+                entity["medicineRecords"] = editor2.txt.html();
+
+                fileUtil.handleFile(updateStatus, entity.itemcode, uploadImg.getFiles()[0]);
+
+                ajaxUtil.myAjax(null,requestUrl,entity,function (data) {
+                    if(ajaxUtil.success(data)){
+                        var submitConfirmModal = {
+                            modalBodyID: "myTopicSubmitTip",
+                            modalTitle: "提示",
+                            modalClass: "modal-lg",
+                            cancelButtonStyle: "display:none",
+                            confirmButtonClass: "btn-danger",
+                            modalConfirmFun: function () {
+                                orange.redirect(jumpUrl);
+                                return true;
+                            }
+                        }
+                        var submitConfirm = modalUtil.init(submitConfirmModal);
+                        submitConfirm.show();
+                        return false;
+                    }else {
+                        alertUtil.alert(data.msg);
+                    }
+                },false,true);
+                return false;
+            }
+
+            //保存按钮处理
             $("#btn_save").unbind().on('click',function () {
-                var hosp;
-                var specialty;
-                var entity;
-                var requestUrl;
-                var operateMessage;
-
-                /*拿到下拉框所选的值的其他信息*/
-                hosp = hosps.find(function (obj) {return obj.itemcode === $("#hospitalName").val()});
-                specialty = specialtys.find(function (obj) {return obj.itemcode === $("#specialtyName").val()});
-
-                if (!updateStatus){
-                    requestUrl = "/medicalService/chineseMedicine/add";
-                    operateMessage = "新增名老中医成功";
-                    entity = {
-                        itemcode: stringUtil.getUUID(),
-                        chineseMedicineStatus: '0'
-                    };
-                }
-                else {
-                    requestUrl = "/medicalService/chineseMedicine/update";
-                    operateMessage = "更新名老中医成功";
-                    entity = {
-                        itemid: tempdata.itemid,
-                        itemcode: tempdata.itemcode,
-                        chineseMedicineStatus: '0'
-                    };
-                }
-                entity["chineseMedicineName"] = $("#chineseMedicineName").val();
-                entity["chineseMedicineTitle"] = $("#chineseMedicineTitle").val();
-                entity["chineseMedicineType"] = chineseMedicineType[$("#chineseMedicineType").val()].text;
-                entity["hospCode"] = hosp.itemcode;
-                entity["hospitalName"] = hosp.hospitalName;
-                entity["deptCode"] = specialty.itemcode;
-                entity["specialtyName"] = specialty.specialtyName;
-                entity["visitTime"] = $("#visitTime").val()
-                entity["phone"] = $("#phone").val();
-                entity["mainVisit"] = $("#mainVisit").val();
-                entity["expertBriefIntroduce"] = $("#expertBriefIntroduce").val();
-                entity["expertIntroduce"] = editor.txt.html();
-                entity["medicineRecords"] = editor2.txt.html();
-
-                fileUtil.handleFile(updateStatus, entity.itemcode, uploadImg.getFiles()[0]);
-
-                ajaxUtil.myAjax(null,requestUrl,entity,function (data) {
-                    if(ajaxUtil.success(data)){
-                        alertUtil.info(operateMessage);
-                        orange.redirect(jumpUrl);
-                    }else {
-                        alertUtil.alert(data.msg);
-                    }
-                },false,true);
+                insert('0');
                 return false;
             });
 
-            /*处理提交按钮*/
+            /*提交按钮处理*/
             $("#btn_insert").unbind().on('click',function () {
-                var hosp;
-                var specialty;
-                var entity;
-                var requestUrl;
-                var operateMessage;
-
-                /*拿到下拉框所选的值的其他信息*/
-                hosp = hosps.find(function (obj) {return obj.itemcode === $("#hospitalName").val()});
-                specialty = specialtys.find(function (obj) {return obj.itemcode === $("#specialtyName").val()});
-
-                if (!updateStatus){
-                    requestUrl = "/medicalService/chineseMedicine/add";
-                    operateMessage = "新增名老中医成功";
-                    entity = {
-                        itemcode: stringUtil.getUUID(),
-                        chineseMedicineStatus: '1'
-                    };
-                }
-                else {
-                    requestUrl = "/medicalService/chineseMedicine/update";
-                    operateMessage = "更新名老中医成功";
-                    entity = {
-                        itemid: tempdata.itemid,
-                        itemcode: tempdata.itemcode,
-                        chineseMedicineStatus: '1'
-                    };
-                }
-                entity["chineseMedicineName"] = $("#chineseMedicineName").val();
-                entity["chineseMedicineTitle"] = $("#chineseMedicineTitle").val();
-                entity["chineseMedicineType"] = chineseMedicineType[$("#chineseMedicineType").val()].text;
-                entity["hospCode"] = hosp.itemcode;
-                entity["hospitalName"] = hosp.hospitalName;
-                entity["deptCode"] = specialty.itemcode;
-                entity["specialtyName"] = specialty.specialtyName;
-                entity["visitTime"] = $("#visitTime").val()
-                entity["phone"] = $("#phone").val();
-                entity["mainVisit"] = $("#mainVisit").val();
-                entity["expertBriefIntroduce"] = $("#expertBriefIntroduce").val();
-                entity["expertIntroduce"] = editor.txt.html();
-                entity["medicineRecords"] = editor2.txt.html();
-
-                fileUtil.handleFile(updateStatus, entity.itemcode, uploadImg.getFiles()[0]);
-
-                ajaxUtil.myAjax(null,requestUrl,entity,function (data) {
-                    if(ajaxUtil.success(data)){
-                        alertUtil.info(operateMessage);
-                        orange.redirect(jumpUrl);
-                    }else {
-                        alertUtil.alert(data.msg);
-                    }
-                },false,true);
+                var mySubmitToCZ = {
+                    modalBodyID: "mySubmitModal",
+                    modalTitle: "提交",
+                    modalClass: "modal-lg",
+                    confirmButtonClass: "btn-danger",
+                    modalConfirmFun: function () {
+                        insert('1');
+                        return false;
+                    },
+                };
+                var x = modalUtil.init(mySubmitToCZ);
+                x.show();
                 return false;
             });
+
 
             /*初始化数据*/
             (function init() {

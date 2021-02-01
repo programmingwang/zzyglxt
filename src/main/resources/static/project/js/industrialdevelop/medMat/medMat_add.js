@@ -15,31 +15,31 @@
                 orange.redirect(jumpUrl);
             });
 
-            function addMedMat(add,update,message){
+            function addMedMat(button){
+                var postStatus;
                 var entity;
                 var requestUrl;
-                var operateMessage;
                 if (!updateStatus){
                     requestUrl = "/industrialdevelop/medmat/add";
-                    operateMessage = "保存药材成功";
                     entity = {
                         itemcode: stringUtil.getUUID(),
                     };
-                    entity["status"] = add
+                    postStatus = medStatus[0].id;
                 }
                 else {
                     requestUrl = "/industrialdevelop/medmat/update";
-                    operateMessage = "更新药材成功";
                     entity = {
                         itemid: tempdata.itemid,
                         itemcode: tempdata.itemcode
                     };
-                    entity["status"] = update
+                    postStatus = tempdata.status;
                 }
-                if (message == "上架"){
-                    operateMessage = "药材上架成功，已将药材信息发送到河北中医药网";
+                if (button==="上架"){
+                    entity["status"] = medStatus[1].id;
                 }
-
+                else {
+                    entity["status"] = postStatus;
+                }
                 entity["name"] = $("#name").val();
                 entity["specifications"] = $("#specifications").val();
                 entity["price"] = $("#price").val();
@@ -51,8 +51,19 @@
 
                 ajaxUtil.myAjax(null,requestUrl,entity,function (data) {
                     if(ajaxUtil.success(data)){
-                        alertUtil.info(operateMessage);
-                        orange.redirect(jumpUrl);
+                        var submitConfirmModal = {
+                            modalBodyID: "myTopicSubmitTip",
+                            modalTitle: "提示",
+                            modalClass: "modal-lg",
+                            cancelButtonStyle: "display:none",
+                            confirmButtonClass: "btn-danger",
+                            modalConfirmFun: function () {
+                                orange.redirect(jumpUrl);
+                                return true;
+                            }
+                        }
+                        var submitConfirm = modalUtil.init(submitConfirmModal);
+                        submitConfirm.show();
                     }else {
                         alertUtil.error(data.msg);
                     }
@@ -62,21 +73,28 @@
 
             /*保存按钮处理*/
             $("#btn_insert").unbind().on('click',function () {
-                var update;
-                if (updateStatus){
-                    update = tempdata.status
-                }
-                addMedMat(medStatus[0].id, update,null)
+                addMedMat("保存");
             });
-
+            //上架按钮处理
             $("#shelve").unbind().on('click',function () {
-                addMedMat(medStatus[1].id, medStatus[1].id,"上架")
+                var mySubmitToCZ = {
+                    modalBodyID: "myShelveMedMat",
+                    modalTitle: "上架",
+                    modalClass: "modal-lg",
+                    confirmButtonClass: "btn-danger",
+                    modalConfirmFun: function () {
+                        addMedMat("上架");
+                        return false;
+                    }
+                };
+                var x = modalUtil.init(mySubmitToCZ);
+                x.show();
+                return false;
             });
 
             function isUpdate() {
                 return (tempdata != null || tempdata != undefined)
             }
-
             /*初始化数据*/
             (function init() {
                 if (updateStatus){
@@ -89,8 +107,5 @@
                     uploadImg.setImgSrcs(tempdata.filePath);
                 }
             }());
-
-
-
         });
 })();

@@ -1404,6 +1404,10 @@
                                             // orange.redirect('/userLogin');
                                             $('#logout').click();
                                             return true;
+                                        },
+                                        onModalHidden:function () {
+                                            $('#logout').click();
+                                            return true;
                                         }
                                     };
                                     var submitConfirm = modalUtil.init(submitConfirmModal);

@@ -118,7 +118,6 @@
             (function init() {
                 if (isUpdate()){
                     var tempdata = JSON.parse(localStorage.getItem("rowData"));
-                    console.log(tempdata);
                     $("#dataTitle").val(tempdata.dataTitle);
                     $("#dataAuthor").val(tempdata.dataAuthor);
                     $("#dataSource").val(tempdata.dataSource);

@@ -32,39 +32,6 @@
             '        </div>\n' +
             '        <div class="col-lg-12 col-md-12">\n' +
             '            <fieldset disabled="">\n' +
-            '                <div class="input-group mb-3 row">\n' +
-            '                    <div class="input-group-prepend col-lg-3 col-md-3"> <span  class="LeftText">性别：</span>\n' +
-            '                    </div> <input type="text" id="gender" class="form-control">\n' +
-            '                </div>\n' +
-            '            </fieldset>\n' +
-            '        </div>\n' +
-            '        <div class="col-lg-12 col-md-12">\n' +
-            '            <fieldset disabled="">\n' +
-            '                <div class="input-group mb-3 row ">\n' +
-            '                    <div class="input-group-prepend col-lg-3 col-md-3"> <sapn \n' +
-            '                            class="LeftText">身份证类型：</sapn> </div> <input type="text" id="IDCardType"\n' +
-            '                        class="form-control">\n' +
-            '                </div>\n' +
-            '            </fieldset>\n' +
-            '        </div>\n' +
-            '        <div class="col-lg-12 col-md-12">\n' +
-            '            <fieldset disabled="">\n' +
-            '                <div class="input-group mb-3 row ">\n' +
-            '                    <div class="input-group-prepend col-lg-3 col-md-3"> <span  class="LeftText">身份证号：</span>\n' +
-            '                    </div> <input type="text" id="IDCardNo" class="form-control">\n' +
-            '                </div>\n' +
-            '            </fieldset>\n' +
-            '        </div>\n' +
-            '        <div class="col-lg-12 col-md-12">\n' +
-            '            <fieldset disabled="">\n' +
-            '                <div class="input-group mb-3 row ">\n' +
-            '                    <div class="input-group-prepend col-lg-3 col-md-3"> <span  class="LeftText">邮箱：</span>\n' +
-            '                    </div> <input type="text" id="email" class="form-control">\n' +
-            '                </div>\n' +
-            '            </fieldset>\n' +
-            '        </div>\n' +
-            '        <div class="col-lg-12 col-md-12">\n' +
-            '            <fieldset disabled="">\n' +
             '                <div class="input-group mb-3 row ">\n' +
             '                    <div class="input-group-prepend col-lg-3 col-md-3"> <span  class="LeftText">用户角色：</span>\n' +
             '                    </div> <input type="text" id="roleName" class="form-control">\n' +
@@ -94,40 +61,6 @@
             '                    </div> <input type="text" id="cityid" class="form-control">\n' +
             '                </div>\n' +
             '            </fieldset>\n' +
-            '        </div>\n' +
-            '        <div class="col-lg-6 col-md-6" style="padding-right: 0;" >\n' +
-            '            <fieldset disabled="">\n' +
-            '                <div class="input-group mb-3 row ">\n' +
-            '                    <div class="input-group-prepend col-lg-6 col-md-6"> <span class="LeftText">创建人：</span> </div> <input type="text" id="creater"\n' +
-            '                        class="form-control">\n' +
-            '                </div>\n' +
-            '            </fieldset>\n' +
-            '        </div>\n' +
-            '        <div class="col-lg-6 col-md-6" style="padding-left: 0;">\n' +
-            '            <fieldset disabled="">\n' +
-            '                <div class="input-group mb-3 row">\n' +
-            '                    <div class="input-group-prepend col-lg-6 col-md-6"> <span class="LeftText">创建时间：</span>\n' +
-            '                    </div> <input type="text" id="itemCreateAt" class="form-control">\n' +
-            '                </div>\n' +
-            '            </fieldset>\n' +
-            '        </div>\n' +
-            '        <div class="upload-content" data-limit="1">\n' +
-            '            <div class="content-img" style="margin-left: 7rem;">\n' +
-            '                <ul class="content-img-list">\n' +
-            '                    <li class="content-img-list-item"><img src="null" alt="">\n' +
-            '                        <div class="hide"><a index="0" class="delete-btn"><i class="gcl gcllajitong"></i></a><a\n' +
-            '                                index="0" class="big-btn" type="button" data-toggle="modal"\n' +
-            '                                data-target=".bs-example-modal-lg"><i class="gcl gclfangda"></i></a></div>\n' +
-            '                    </li>\n' +
-            '                </ul>\n' +
-            '                <div class="file" style="display: none;"> <input type="file" name="file" accept="image/*" id="upload"\n' +
-            '                        multiple=""> </div>\n' +
-            '            </div>\n' +
-            '            <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">\n' +
-            '                <div class="modal-dialog modal-lg" role="document">\n' +
-            '                    <div class="modal-content"> </div>\n' +
-            '                </div>\n' +
-            '            </div>\n' +
             '        </div>\n' +
             '    </div>';
 
@@ -168,6 +101,35 @@
             '                <div class="row">\n' +
             '                    <div class="col-lg-2 col-md-2"> <span class="titleName">联系电话：</span> </div>\n' +
             '                    <input type="text" id="mobilephone" class="form-control col-lg-9 col-md-9">\n' +
+            '                </div>\n' +
+            '            </div>\n' +
+            '        </div>';
+
+        modalHtml.myChangePasswordModal = ' <div class="row">\n' +
+            '            <div class="col-lg-12 col-md-12 mb-3" style="margin-top: 0;padding-top: 0;">\n' +
+            '                <div class="row">\n' +
+            '                    <div class="col-lg-2 col-md-2"> <span class="titleName" style="margin-top: 0;padding-top: 0;">电话号码：</span> </div>\n' +
+            '                    <input type="text" id="phone" class="form-control col-lg-9 col-md-9">\n' +
+            '                </div>\n' +
+            '            </div>\n' +
+            '            <div class="col-lg-12 col-md-12 mb-3">\n' +
+            '                <div class="row">\n' +
+            '                    <div class="col-lg-2 col-md-2">\n' +
+            '                        <sapn class="titleName">原密码：</sapn>\n' +
+            '                    </div>\n' +
+            '                    <input type="password" id="oldPwd" class="form-control col-lg-9 col-md-9">\n' +
+            '                </div>\n' +
+            '            </div>\n' +
+            '            <div class="col-lg-12 col-md-12 mb-3">\n' +
+            '                <div class="row">\n' +
+            '                    <div class="col-lg-2 col-md-2"> <span class="titleName">新密码：</span> </div>\n' +
+            '                    <input type="password" id="newPwd" class="form-control col-lg-9 col-md-9">\n' +
+            '                </div>\n' +
+            '            </div>\n' +
+            '            <div class="col-lg-12 col-md-12 mb-3">\n' +
+            '                <div class="row">\n' +
+            '                    <div class="col-lg-2 col-md-2"> <span class="titleName">确认密码：</span> </div>\n' +
+            '                    <input type="password" id="checkPwd" class="form-control col-lg-9 col-md-9">\n' +
             '                </div>\n' +
             '            </div>\n' +
             '        </div>';

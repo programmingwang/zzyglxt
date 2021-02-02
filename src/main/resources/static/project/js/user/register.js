@@ -204,6 +204,11 @@
                     alertUtil.error('请输入用户名！');
                     return false;
                 }
+                var reg = /^[a-zA-Z]([\s\S]{4,11})$/;//以字母开头，5-12位，([\s\S]*)匹配任意字符
+                if (!reg.test(username)) {
+                    alertUtil.error("用户账号须以字母开头，长度为5-12位");
+                    return false
+                }
                 if (password == '') {
                     alertUtil.error('请输入密码！');
                     return false;

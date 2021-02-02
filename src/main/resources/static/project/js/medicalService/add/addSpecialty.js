@@ -126,6 +126,7 @@
                     alertUtil.info("医院信息为空，请先添加医院")
                 }
                 if (updateStatus){
+                    $(".titleCSS").text("修改中医名科信息");
                     var tempdata = JSON.parse(localStorage.getItem("rowData"));
                     uploadImg.setImgSrc(tempdata.filePath)
                     $("#specialtyName").find("option").each(function (data) {
@@ -138,6 +139,8 @@
                     $("#hospitalName  option[value="+tempdata.hospitalCode+"] ").attr("selected",true)
                     $("#specialtyPhone").val(tempdata.specialtyPhone);
                     $(".w-e-text").html(tempdata.specialtyIntroduce);
+                }else{
+                    $(".titleCSS").text("新增中医名科信息");
                 }
             };
             uploadImg.init();

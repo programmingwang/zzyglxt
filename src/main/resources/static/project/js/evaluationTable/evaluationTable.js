@@ -11,14 +11,18 @@
             var redirectUtl = "/scientificProject/centralizedReview";
 
             var sc= document.getElementsByClassName("sc");
-            var allSc=document.getElementById("allSc");
 
-
-            var a=0;
             for (var i = 0;i<sc.length;i++){
                 sc[i].onchange=function () {
-                    a=a+Number(this.value)
-                    allSc.value=a;
+                    var a = 0;
+                    for (var j = 0;j<11;j++){
+                        if($("#score"+(j+1)).val() == "" || $("#score"+(j+1)).val() == null){
+                            a += 0;
+                        }else{
+                            a += parseInt($("#score"+(j+1)).val());
+                        }
+                    }
+                    $("#allSc").val(a);
                 }
             }
             
@@ -50,9 +54,20 @@
                     exmaineEntity.score += "="+ $("#allSc").val();
                     ajaxUtil.myAjax(null,controUrl,exmaineEntity,function (data) {
                         if(ajaxUtil.success(data)){
-                            alertUtil.success("保存评审意见成功！");
-                            localStorage.removeItem("examinTopicCode");
-                            orange.redirect(redirectUtl);
+                            var submitConfirmModal = {
+                                modalBodyID :"myExmainSaveTips",
+                                modalTitle : "提示",
+                                modalClass : "modal-lg",
+                                cancelButtonStyle: "display:none",
+                                modalConfirmFun:function (){
+                                    localStorage.removeItem("viewDetail");
+                                    localStorage.removeItem("keepExmaine");
+                                    orange.redirect(redirectUtl);
+                                    return true;
+                                }
+                            }
+                            var submitConfirm = modalUtil.init(submitConfirmModal);
+                            submitConfirm.show();
                         }else {
                             alertUtil.error("保存失败，请重试");
                         }
@@ -62,45 +77,58 @@
             });
 
             $("#btn_insert").unbind().on('click',function () {
-                var exmaineEntity = {};
-                exmaineEntity.opinion = $("#expertOpinion").val();
-                exmaineEntity.score = $("#allSc").val();
-                exmaineEntity.exmaineStatus = exmaineStatus[0].id;
-                exmaineEntity.topicCode = JSON.parse(localStorage.getItem("examinTopicCode"));
-                exmaineEntity.score= '';
-                var checkExpertCodeParam = {
-                    expertUserCode : sessionStorage.getItem("itemcode")
-                };
-                ajaxUtil.myAjax(null,"exmain/selExpertCode",checkExpertCodeParam,function (data) {
-                    exmaineEntity.expertCode = data.data;
-                    for(var i =0;i<11;i++){
-                        exmaineEntity.score += $("#score"+(i+1)).val() + "+";
-                    }
-                    //对分数入库格式进行修改（入库的是小分项相加 = 总分的形式 类似 1+1+1+1 = 4）
-                    var aStr = (exmaineEntity.score).split('');
-                    aStr.splice(exmaineEntity.score.length-1,1,'');
-                    exmaineEntity.score = aStr.join('');
-                    exmaineEntity.score += "="+ $("#allSc").val();
-                    ajaxUtil.myAjax(null,controUrl,exmaineEntity,function (data) {
-                        if(ajaxUtil.success(data)){
-                            var submitConfirmModal = {
-                                modalBodyID :"myExmainSuccessTips",
-                                modalTitle : "提示",
-                                modalClass : "modal-lg",
-                                cancelButtonStyle: "display:none",
-                                modalConfirmFun:function (){
-                                    localStorage.removeItem("keepExmaine")
-                                    return true;
-                                }
+                var mySubmitToCZ = {
+                    modalBodyID: "myExmainScoreTips",
+                    modalTitle: "提交",
+                    modalClass: "modal-lg",
+                    modalConfirmFun:function (){
+                        console.log()
+                        var exmaineEntity = {};
+                        exmaineEntity.opinion = $("#expertOpinion").val();
+                        exmaineEntity.score = $("#allSc").val();
+                        exmaineEntity.exmaineStatus = exmaineStatus[0].id;
+                        exmaineEntity.topicCode = JSON.parse(localStorage.getItem("examinTopicCode"));
+                        exmaineEntity.score= '';
+                        var checkExpertCodeParam = {
+                            expertUserCode : sessionStorage.getItem("itemcode")
+                        };
+                        ajaxUtil.myAjax(null,"exmain/selExpertCode",checkExpertCodeParam,function (data) {
+                            exmaineEntity.expertCode = data.data;
+                            for(var i =0;i<11;i++){
+                                exmaineEntity.score += $("#score"+(i+1)).val() + "+";
                             }
-                            var submitConfirm = modalUtil.init(submitConfirmModal);
-                            submitConfirm.show();
-                            orange.redirect(redirectUtl);
-                        }else {
-                            alertUtil.error("提交失败，请重试");
-                        }
-                    },false,true,"put");
-                },false);
+                            //对分数入库格式进行修改（入库的是小分项相加 = 总分的形式 类似 1+1+1+1 = 4）
+                            var aStr = (exmaineEntity.score).split('');
+                            aStr.splice(exmaineEntity.score.length-1,1,'');
+                            exmaineEntity.score = aStr.join('');
+                            exmaineEntity.score += "="+ $("#allSc").val();
+                            ajaxUtil.myAjax(null,controUrl,exmaineEntity,function (data) {
+                                if(ajaxUtil.success(data)){
+                                    var submitConfirmModal = {
+                                        modalBodyID :"myExmainSuccessTips",
+                                        modalTitle : "提示",
+                                        modalClass : "modal-lg",
+                                        cancelButtonStyle: "display:none",
+                                        modalConfirmFun:function (){
+                                            localStorage.removeItem("viewDetail");
+                                            localStorage.removeItem("keepExmaine");
+                                            orange.redirect(redirectUtl);
+                                            return true;
+                                        }
+                                    }
+                                    var submitConfirm = modalUtil.init(submitConfirmModal);
+                                    submitConfirm.show();
+                                }else {
+                                    alertUtil.error("提交失败，请重试");
+                                }
+                            },false,true,"put");
+                            return false;
+                        },false);
+                        return true;
+                    }
+                }
+                var x = modalUtil.init(mySubmitToCZ);
+                x.show();
                 return false;
             });
 
@@ -158,9 +186,12 @@
                 for(var i = 0; i<attr.length; i++){
                     $("#score"+(i+1)).val(attr[i]);
                 }
-                var lastScore = attr[10].split("=");
-                $("#score11").val(lastScore[0]);
-                $("#allSc").val(lastScore[1]);
+                if(attr[10]!= undefined || attr[10]!= null) {
+                    var lastScore = attr[10].split("=");
+                    $("#score11").val(lastScore[0]);
+                    $("#allSc").val(lastScore[1]);
+                }
                 $("#expertOpinion").val(tempdata.opinion);
             }
+
 })}());

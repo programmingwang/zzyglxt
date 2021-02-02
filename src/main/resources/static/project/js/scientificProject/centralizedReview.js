@@ -1,6 +1,10 @@
 (function () {
     require(['jquery', 'ajaxUtil','bootstrapTableUtil','objectUtil','alertUtil','modalUtil','selectUtil','stringUtil','dictUtil'],
         function (jquery,ajaxUtil,bootstrapTableUtil,objectUtil,alertUtil,modalUtil,selectUtil,stringUtil,dictUtil) {
+            $(function(){
+                localStorage.removeItem("viewDetail");
+                localStorage.removeItem("keepExmaine");
+            })  ;
 
             var url;
 
@@ -34,6 +38,7 @@
                     } else if (row.exmaineStatus == pl[0].id) {
                         return [
                             '<a class="view" style="margin:0 1em;text-decoration: none;color:#775637;" data-toggle="modal" data-target="" >查看</a>',
+                            '<a class="rexmaine" style="margin:0 1em;text-decoration: none;color:#D60000;" data-toggle="modal" data-target="" >重新打分</a>',
                         ].join('');
                     }
                 } else if (sessionStorage.getItem("rolename") == "科研项目-省级"){
@@ -105,6 +110,54 @@
                     };
                     var mySubmitModal = modalUtil.init(mySubmitExmainModalData);
                     mySubmitModal.show();
+                },
+                'click .rexmaine' : function (e, value, row, index){
+                    var myReExmainModalData ={
+                        modalBodyID :"myReExmainModal",
+                        modalTitle : "重新评审",
+                        modalClass : "modal-lg",
+                        modalConfirmFun:function () {
+                            var isSuccess = false;
+                            var submitStatus = {
+                                exmaineStatus: pl[1].id,
+                                topicCode : row.topicCode,
+                            };
+                            var checkExpertCodeParam = {
+                                expertUserCode : sessionStorage.getItem("itemcode")
+                            };
+                            ajaxUtil.myAjax(null,"exmain/selExpertCode",checkExpertCodeParam,function (data) {
+                                submitStatus.expertCode = data.data;
+                                ajaxUtil.myAjax(null,"/exmain/ReExmain",submitStatus,function (data) {
+                                    if(ajaxUtil.success(data)){
+                                        if(data.code == ajaxUtil.successCode){
+                                            var submitConfirmModal = {
+                                                modalBodyID :"myReExmainModalSuccessTips",
+                                                modalTitle : "提示",
+                                                modalClass : "modal-lg",
+                                                cancelButtonStyle: "display:none",
+                                                modalConfirmFun:function (){
+                                                    return true;
+                                                }
+                                            }
+                                            var submitConfirm = modalUtil.init(submitConfirmModal);
+                                            submitConfirm.show();
+                                            isSuccess = true;
+                                            refreshTable();
+                                        }else{
+                                            alertUtil.error(data.msg);
+                                        }
+
+                                    }else {
+                                        alertUtil.error(data.msg)
+                                    }
+                                },false,true,"post");
+                            },false);
+                            return isSuccess;
+                        }
+
+                    };
+                    var myReExmianModal = modalUtil.init(myReExmainModalData);
+                    myReExmianModal.show();
                 }
             };
 

@@ -1,10 +1,10 @@
 (function () {
     require(['jquery', 'ajaxUtil','bootstrapTableUtil','objectUtil','alertUtil','modalUtil','selectUtil','stringUtil','dictUtil'],
         function (jquery,ajaxUtil,bootstrapTableUtil,objectUtil,alertUtil,modalUtil,selectUtil,stringUtil,dictUtil) {
-            $(function(){
-                localStorage.removeItem("viewDetail");
-                localStorage.removeItem("keepExmaine");
-            })  ;
+            // $(function(){
+            //     localStorage.removeItem("viewDetail");
+            //     localStorage.removeItem("keepExmaine");
+            // }) ;
 
             var url;
 
@@ -58,6 +58,9 @@
                     orange.redirect("/evaluationTable/evaluationTable")
                 },
                 'click .exmaine' : function (e, value, row, index) {
+                    if(row.opinion == "" || row.opinion == null){
+                        localStorage.removeItem("viewDetail");
+                    }
                     localStorage.removeItem("isView");
                     localStorage.setItem("keepExmaine",JSON.stringify(row));
                     localStorage.setItem("examinTopicCode",JSON.stringify(row.topicCode));

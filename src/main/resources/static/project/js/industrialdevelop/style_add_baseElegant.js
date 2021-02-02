@@ -108,7 +108,7 @@
                                 alertUtil.error(data.msg);
                             }
                         },false,true,type);
-                        return false;
+                        return true;
                     }
                 }
                 var x = modalUtil.init(mySubmitToCZ);

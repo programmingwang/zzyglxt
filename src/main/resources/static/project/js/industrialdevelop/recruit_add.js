@@ -66,6 +66,7 @@
 
             var init = function () {
                 if (isUpdate()){
+                    $(".titleCSS").text("修改招聘信息");
                     var tempdata = JSON.parse(localStorage.getItem("rowData"));
                     $("#recruitmentTitle").val(tempdata.recruitmentTitle);
                     $("#recruitmentPosition").val(tempdata.recruitmentPosition);

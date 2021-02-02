@@ -115,7 +115,7 @@
                     confirmButtonClass: "btn-danger",
                     modalConfirmFun: function () {
                         insert('1');
-                        return false;
+                        return true;
                     },
                 };
                 var x = modalUtil.init(mySubmitToCZ);

@@ -1,6 +1,6 @@
 (function () {
-    require(['jquery','objectUtil','ajaxUtil','alertUtil','stringUtil','fileUtil','distpicker'],
-        function (jquery,objectUtil,ajaxUtil,alertUtil,stringUtil,fileUtil,distpicker) {
+    require(['jquery','objectUtil','ajaxUtil','alertUtil','stringUtil','fileUtil','distpicker','modalUtil'],
+        function (jquery,objectUtil,ajaxUtil,alertUtil,stringUtil,fileUtil,distpicker,modalUtil) {
 
            const editor = objectUtil.wangEditorUtil();
 
@@ -43,8 +43,20 @@
                 ajaxUtil.myAjax(null,addUpdateUrl,careFamEntity,function (data) {
                     if(ajaxUtil.success(data)){
                         alertUtil.info(operateMessage);
-                        var url = "/healthCare/healthcarefamPre";
-                        orange.redirect(url);
+                        var submitConfirmModal = {
+                            modalBodyID :"myTopicSubmitTip",
+                            modalTitle : "提示",
+                            modalClass : "modal-lg",
+                            cancelButtonStyle: "display:none",
+                            modalConfirmFun:function (){
+                                var url = "/healthCare/healthcarefamPre";
+                                orange.redirect(url);
+                                return true;
+                            }
+                        }
+                        var submitConfirm = modalUtil.init(submitConfirmModal);
+                        submitConfirm.show();
+
                     }else {
                         alertUtil.alert(data.msg);
                     }
@@ -53,50 +65,69 @@
             });
 
             $("#btn_insert").unbind().on('click',function () {
-                var careFamEntity;
-                var addUpdateUrl;
-                var operateMessage;
-                if(!isUpdate()){
-                    addUpdateUrl = "inserthealthcarefampredo";
-                    operateMessage = "新增国医话健康成功";
-                    careFamEntity = {
-                        itemcode: stringUtil.getUUID(),
-                        name : $("#name").val(),
-                        source : $("#source").val(),
-                        author : $("#author").val(),
-                        status : '1',
-                        content : editor.txt.html()
-                    };
-                }else{
-                    var needData = JSON.parse(localStorage.getItem("rowData"));
-                    addUpdateUrl = "updatehealthcarefampredo";
-                    careFamEntity = {
-                        itemid: needData.itemid,
-                        itemcode: needData.itemcode,
-                        name : $("#name").val(),
-                        source : $("#source").val(),
-                        author : $("#author").val(),
-                        status : '1',
-                        content : editor.txt.html()
-                    }
-                    operateMessage = "更新国医话健康成功";
-                }
-                fileUtil.handleFile(isUpdate(), careFamEntity.itemcode, $("#upload_file")[0].files[0]);
+                var mySubmitToCZ = {
+                    modalBodyID: "mySubmitModal",
+                    modalTitle: "提交",
+                    modalClass: "modal-lg",
+                    modalConfirmFun:function (){
+                        var careFamEntity;
+                        var addUpdateUrl;
+                        if(!isUpdate()){
+                            addUpdateUrl = "inserthealthcarefampredo";
+                            careFamEntity = {
+                                itemcode: stringUtil.getUUID(),
+                                name : $("#name").val(),
+                                source : $("#source").val(),
+                                author : $("#author").val(),
+                                status : '1',
+                                content : editor.txt.html()
+                            };
+                        }else{
+                            var needData = JSON.parse(localStorage.getItem("rowData"));
+                            addUpdateUrl = "updatehealthcarefampredo";
+                            careFamEntity = {
+                                itemid: needData.itemid,
+                                itemcode: needData.itemcode,
+                                name : $("#name").val(),
+                                source : $("#source").val(),
+                                author : $("#author").val(),
+                                status : '1',
+                                content : editor.txt.html()
+                            }
+                        }
+                        fileUtil.handleFile(isUpdate(), careFamEntity.itemcode, $("#upload_file")[0].files[0]);
 
-                ajaxUtil.myAjax(null,addUpdateUrl,careFamEntity,function (data) {
-                    if(ajaxUtil.success(data)){
-                        alertUtil.info(operateMessage);
-                        var url = "/healthCare/healthcarefamPre";
-                        orange.redirect(url);
-                    }else {
-                        alertUtil.alert(data.msg);
+                        ajaxUtil.myAjax(null,addUpdateUrl,careFamEntity,function (data) {
+                            if(ajaxUtil.success(data)){
+                                var submitConfirmModal = {
+                                    modalBodyID :"myTopicSubmitTip",
+                                    modalTitle : "提示",
+                                    modalClass : "modal-lg",
+                                    cancelButtonStyle: "display:none",
+                                    modalConfirmFun:function (){
+                                        var url = "/healthCare/healthcarefamPre";
+                                        orange.redirect(url);
+                                        return true;
+                                    }
+                                }
+                                var submitConfirm = modalUtil.init(submitConfirmModal);
+                                submitConfirm.show();
+
+                            }else {
+                                alertUtil.alert(data.msg);
+                            }
+                        },false,true);
+                        return true;
                     }
-                },false,true);
+                }
+                var x = modalUtil.init(mySubmitToCZ);
+                x.show();
                 return false;
             });
 
             (function init() {
                 if (isUpdate()){
+                    $(".titleCSS").text("修改国医话健康信息");
                     var tempdata = JSON.parse(localStorage.getItem("rowData"));
                     $("#name").val(tempdata.name);
                     $("#source").val(tempdata.source);

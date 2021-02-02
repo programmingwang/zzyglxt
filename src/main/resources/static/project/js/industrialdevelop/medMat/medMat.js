@@ -15,11 +15,11 @@
             //操作
             function operation(value, row, index){
                 if (row.status == medStatus[1].id) {
-                    return ['<a  class="under-shelf" style="margin:0 1em;text-decoration: none;color:#775637;" data-toggle="modal" data-target="#staticBackdrop" >下架</a>'].join('');
+                    return ['<a  class="under-shelf" style=" 1em;text-decoration: none;color:#775637;" data-toggle="modal" data-target="#staticBackdrop" >下架</a>'].join('');
                 }
                 else {
                     return [
-                        '<a class="edit" style="margin:0 1em;text-decoration: none;color:#775637;" data-toggle="modal" data-target="" >编辑</a>',
+                        '<a class="edit" style="1em;text-decoration: none;color:#775637;" data-toggle="modal" data-target="" >编辑</a>',
                         '<a class="delete" style="margin:0 1em;text-decoration: none;color:#D60000;"  data-toggle="modal" data-target="#staticBackdrop" >删除</a>',
                     ].join('');
                 }
@@ -50,7 +50,18 @@
                                             return alertUtil.error("文件删除失败");
                                         }
                                     },false,"","get");
-                                    alertUtil.info("删除药材信息成功");
+                                    var submitConfirmModal = {
+                                        modalBodyID: "myTopicSubmitTip",
+                                        modalTitle: "提示",
+                                        modalClass: "modal-lg",
+                                        cancelButtonStyle: "display:none",
+                                        confirmButtonClass: "btn-danger",
+                                        modalConfirmFun: function () {
+                                            return true;
+                                        }
+                                    }
+                                    var submitConfirm = modalUtil.init(submitConfirmModal);
+                                    submitConfirm.show();
                                     isSuccess = true;
                                     refreshTable();
                                 }
@@ -60,6 +71,7 @@
                     };
                     var myDeleteModal = modalUtil.init(myDeleteModalData);
                     myDeleteModal.show();
+                    return false;
                 },
 
                 'click .under-shelf' : function (e, value, row, index) {
@@ -77,7 +89,18 @@
                             ajaxUtil.myAjax(null,"/industrialdevelop/medmat/updateStatus",submitStatus,function (data) {
                                 if(ajaxUtil.success(data)){
                                     if(data.code == 88888){
-                                        alertUtil.success("下架成功");
+                                        var submitConfirmModal = {
+                                            modalBodyID: "myTopicSubmitTip",
+                                            modalTitle: "提示",
+                                            modalClass: "modal-lg",
+                                            cancelButtonStyle: "display:none",
+                                            confirmButtonClass: "btn-danger",
+                                            modalConfirmFun: function () {
+                                                return true;
+                                            }
+                                        }
+                                        var submitConfirm = modalUtil.init(submitConfirmModal);
+                                        submitConfirm.show();
                                         isSuccess = true;
                                         refreshTable();
                                     }else{

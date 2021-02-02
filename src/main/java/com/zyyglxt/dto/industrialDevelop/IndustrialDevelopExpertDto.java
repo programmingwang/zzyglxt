@@ -18,4 +18,5 @@ import lombok.NoArgsConstructor;
 public class IndustrialDevelopExpertDto extends UserDO  {
     private String filed;
     private String userCode;
+    private String score;
 }

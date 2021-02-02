@@ -4,6 +4,7 @@ import com.zyyglxt.dataobject.IndustrialDevelopExpertRefDO;
 import com.zyyglxt.dataobject.IndustrialDevelopExpertRefDOKey;
 import com.zyyglxt.dto.ExmaineDto;
 import com.zyyglxt.dto.industrialDevelop.IndustrialDevelopTopicDODto;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -34,4 +35,6 @@ public interface IndustrialDevelopExpertRefDOMapper {
     List<IndustrialDevelopTopicDODto> topicAndExpertStatus();
 
     Integer selectZjktsl(String topicCode);
+
+    int delExpertTopic(@Param("expertCode")String expertCode, @Param("topicCode")String topicCode);
 }

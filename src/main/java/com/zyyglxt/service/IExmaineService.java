@@ -34,4 +34,6 @@ public interface IExmaineService {
 
     //查询课题和分配专家状态--分配专家
     List<IndustrialDevelopTopicDODto> topicAndExpertStatus();
+
+    int delExpertTopic(IndustrialDevelopExpertRefDO expertRefDO);
 }

@@ -117,7 +117,9 @@
             //发文审核状态
             "postStatus":"postStatus",
             //审核状态-机构审核
-            "orgAuditStatus": "orgAuditStatus"
+            "orgAuditStatus": "orgAuditStatus",
+            //时间状态
+            "timeStatus":"timeStatus"
         }
 
         var dictList = {

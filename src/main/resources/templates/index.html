@@ -8,18 +8,18 @@
     <link rel="stylesheet" type="text/css" th:href="@{/project/css/base.css}">
     <link rel="stylesheet" th:href="@{/fonts/font-awesome.min.css}">
 </head>
-<body id="main">
+<body id="main"  style="background-color: #f7efeb;background-clip: content-box;">
 <div id="fir_body">
     <div class="topback" th:style="'background: url(' + '/images/new/top.png' + ');background-color: #5b4622;'"></div>
-    <div id="header" class="header-bg row h70 test-border" >
+    <div id="header" class="header-bg row h60 test-border" >
         <div class="col-md-3 col-lg-3 pl-5">
-            <h3 class="mt-4 mb-4 text-white tTile" id="xczy" style="display: none;font-size: 30px;font-family: SoureHanSansCN-Bold;" >中医药文化宣传资源门户</h3>
-            <h3 class="mt-4 mb-4 text-white tTile" id="zwbg" style="display: none;font-size: 30px;font-family: SoureHanSansCN-Bold;" >中医药健康信息资源政务门户</h3>
-            <h3 class="mt-4 mb-4 text-white tTile" id="kyxm" style="display: none;font-size: 30px;font-family: SoureHanSansCN-Bold;" >中医药科研项目管理系统</h3>
-            <h3 class="mt-4 mb-4 text-white tTile" id="cyfz" style="display: none;font-size: 30px;font-family: SoureHanSansCN-Bold;" >中医药产业协同信息系统</h3>
+            <h3 class="mt-2 mb-2 text-white tTile" id="xczy" style="display: none;font-size: 30px;font-family: SoureHanSansCN-Bold;" >中医药文化宣传资源门户</h3>
+            <h3 class="mt-2 mb-2 text-white tTile" id="zwbg" style="display: none;font-size: 30px;font-family: SoureHanSansCN-Bold;" >中医药健康信息资源政务门户</h3>
+            <h3 class="mt-2 mb-2 text-white tTile" id="kyxm" style="display: none;font-size: 30px;font-family: SoureHanSansCN-Bold;" >中医药科研项目管理系统</h3>
+            <h3 class="mt-2 mb-2 text-white tTile" id="cyfz" style="display: none;font-size: 30px;font-family: SoureHanSansCN-Bold;" >中医药产业协同信息系统</h3>
         </div>
         <div class="col-md-9 col-lg-9">
-            <div class="row  justify-content-end h70">
+            <div class="row  justify-content-end h60">
                 <div class="col-md-6 col-lg-6 d-flex align-items-center justify-content-end pr-5"style="font-size: 14px;font-family: SoureHanSansCN-Bold;">
                     <ul class="navbar-nav ml-md-auto flex-column flex-md-row">
                         <li class="nav-item dropdown mr-2">
@@ -31,8 +31,7 @@
                             <div th:style="'background: url(' + '/images/new/head.png' + ');width: 25px;position: relative;height: 25px;top: 6px;'"></div>
                         </li>
                         <li class="nav-item dropdown">
-<!--                            <a class="nav-item nav-link  mr-md-2 text-white" th:href="@{/toUserMsg}" >-->
-                            <a id="usermsg" class="nav-item nav-link  mr-md-2 text-white">
+                            <a class="nav-item nav-link  mr-md-2 text-white" th:href="@{/toUserMsg}" >
                                 个人信息
                             </a>
                         </li>
@@ -49,17 +48,16 @@
     </div>
     <div class="topback" th:style="'background: url(' + '/images/new/top.png' + ');background-color: #5b4622;border-bottom: 10px solid #f7efeb;height: 25px;'"></div>
 
-    <div class="row test-border rifuck">
-        <div  class=" h500 test-border left_menu_fly" style="background-color: #f7efeb;border-right: 20px solid #f7efeb;border-left: 20px solid #f7efeb;flex: 0 0 229px;max-width: 229px;">
+    <div class="row test-border rifuck"  >
+        <div  class=" h500 test-border left_menu_fly" style="border-right: 20px solid #f7efeb;border-left: 20px solid #f7efeb;flex: 0 0 229px;max-width: 229px;border-top: 10px solid #f7efeb;">
             <div class="accordion " id="left_menu">
             </div>
             <div id="left_menu_bottom"></div>
         </div>
-        <div id="main_body">
+        <div id="main_body" >
 
         </div>
     </div>
-    <div style="display: flex;position: absolute;top: 37px;z-index: -1;width: 229px;height: 100%;background-color: #f7efeb;"></div>
 </div>
 </body>
 <script type="text/javascript" data-main="/main/main.js" src="/component/require@2.3.6/require-2.3.6.js"></script>

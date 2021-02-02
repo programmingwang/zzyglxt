@@ -1,6 +1,6 @@
 (function () {
-    require(['jquery','objectUtil','ajaxUtil','alertUtil','stringUtil','dictUtil','fileUtil','uploadImg'],
-        function (jquery,objectUtil,ajaxUtil,alertUtil,stringUtil,dictUtil,fileUtil,uploadImg) {
+    require(['jquery','objectUtil','ajaxUtil','alertUtil','stringUtil','dictUtil','fileUtil','uploadImg','modalUtil'],
+        function (jquery,objectUtil,ajaxUtil,alertUtil,stringUtil,dictUtil,fileUtil,uploadImg,modalUtil) {
 
 
             /*q全局变量*/
@@ -24,28 +24,26 @@
                 orange.redirect("/medicalService/add/addHosp");
             })
 
-            $("#btn_save").unbind().on('click',function () {
+            //保存和提交调用函数，保存和提交只是状态码不同
+            function insert(saveStatus){
                 var hosp;
                 var entity;
                 var requestUrl;
-                var operateMessage;
                 /*拿到下拉框所选医院的信息*/
                 hosp = hosps.find(function (obj) {return obj.itemcode === $("#hospitalName").val()});
                 if (!updateStatus){
                     requestUrl = "/medicalService/specialty/add";
-                    operateMessage = "新增科室成功";
                     entity = {
                         itemcode: stringUtil.getUUID(),
-                        specialtyStatus: '0'
+                        specialtyStatus: saveStatus
                     };
                 }
                 else {
                     requestUrl = "/medicalService/specialty/update";
-                    operateMessage = "更新科室成功";
                     entity = {
                         itemid: tempdata.itemid,
                         itemcode: tempdata.itemcode,
-                        specialtyStatus: '0'
+                        specialtyStatus: saveStatus
                     };
                 }
                 entity["specialtyName"] = specialtyName[$("#specialtyName").val()].text;
@@ -64,62 +62,46 @@
 
                 ajaxUtil.myAjax(null,requestUrl,entity,function (data) {
                     if(ajaxUtil.success(data)){
-                        alertUtil.info(operateMessage);
-                        orange.redirect(jumpUrl);
+                        var submitConfirmModal = {
+                            modalBodyID: "myTopicSubmitTip",
+                            modalTitle: "提示",
+                            modalClass: "modal-lg",
+                            cancelButtonStyle: "display:none",
+                            confirmButtonClass: "btn-danger",
+                            modalConfirmFun: function () {
+                                orange.redirect(jumpUrl);
+                                return true;
+                            }
+                        }
+                        var submitConfirm = modalUtil.init(submitConfirmModal);
+                        submitConfirm.show();
+                        return false;
                     }else {
                         alertUtil.alert(data.msg);
                     }
                 },false,true);
                 return false;
+            }
+
+            $("#btn_save").unbind().on('click',function () {
+                insert('0');
+                return false;
             });
 
-            /*点击提交按钮*/
+            /*确认按钮处理*/
             $("#btn_insert").unbind().on('click',function () {
-                var hosp;
-                var entity;
-                var requestUrl;
-                var operateMessage;
-                /*拿到下拉框所选医院的信息*/
-                hosp = hosps.find(function (obj) {return obj.itemcode === $("#hospitalName").val()});
-                if (!updateStatus){
-                    requestUrl = "/medicalService/specialty/add";
-                    operateMessage = "新增科室成功";
-                    entity = {
-                        itemcode: stringUtil.getUUID(),
-                        specialtyStatus: '1'
-                    };
-                }
-                else {
-                    requestUrl = "/medicalService/specialty/update";
-                    operateMessage = "更新科室成功";
-                    entity = {
-                        itemid: tempdata.itemid,
-                        itemcode: tempdata.itemcode,
-                        specialtyStatus: '1'
-                    };
-                }
-                entity["specialtyName"] = specialtyName[$("#specialtyName").val()].text;
-                entity["specialtyPhone"] = $("#specialtyPhone").val();
-                entity["specialtyBriefIntroduce"] = $("#specialtyBriefIntroduce").val();
-                entity["specialtyAddressPro"] = hosp.hospitalAddressPro;
-                entity["specialtyAddressCity"] = hosp.hospitalAddressCity;
-                entity["specialtyAddressCounty"] = hosp.hospitalAddressCountry;
-                entity["specialtyAddress"] = hosp.hospitalAddress;
-                entity["specialtyLink"] = hosp.hospitalLink;
-                entity["specialtyIntroduce"] = editor.txt.html();
-                entity["hospitalCode"] = hosp.itemcode;
-                entity["hospitalName"] = hosp.hospitalName;
-
-                fileUtil.handleFile(updateStatus, entity.itemcode, uploadImg.getFiles()[0]);
-
-                ajaxUtil.myAjax(null,requestUrl,entity,function (data) {
-                    if(ajaxUtil.success(data)){
-                        alertUtil.info(operateMessage);
-                        orange.redirect(jumpUrl);
-                    }else {
-                        alertUtil.alert(data.msg);
-                    }
-                },false,true);
+                var mySubmitToCZ = {
+                    modalBodyID: "mySubmitModal",
+                    modalTitle: "提交",
+                    modalClass: "modal-lg",
+                    confirmButtonClass: "btn-danger",
+                    modalConfirmFun: function () {
+                        insert('1');
+                        return false;
+                    },
+                };
+                var x = modalUtil.init(mySubmitToCZ);
+                x.show();
                 return false;
             });
 
@@ -152,11 +134,10 @@
                             $this.attr("selected", true);
                         }
                     });
-                    $("#specialtyIntroduce").val(tempdata.specialtyIntroduce);
+                    $("#specialtyBriefIntroduce").val(tempdata.specialtyBriefIntroduce)
                     $("#hospitalName  option[value="+tempdata.hospitalCode+"] ").attr("selected",true)
-
                     $("#specialtyPhone").val(tempdata.specialtyPhone);
-                    $(".w-e-text").html(tempdata.specialtyDescribe);
+                    $(".w-e-text").html(tempdata.specialtyIntroduce);
                 }
             };
             uploadImg.init();

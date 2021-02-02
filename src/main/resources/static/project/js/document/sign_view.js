@@ -13,14 +13,21 @@
             (function init() {
                 if (isView()){
                     var tempdata = JSON.parse(localStorage.getItem("viewRowData"));
+                    $("#fileNo").val(tempdata.fileNo);
+                    $("#parment").val(tempdata.parment);
+                    $("#number").val(tempdata.number);
+                    $("#govPunlic").val(tempdata.govPunlic);
+                    $("#receivingTitle").val(tempdata.receivingTitle);
+                    $("#fileNumber").val(tempdata.fileNumber);
+                    $("#classification").val(tempdata.classification);
                     var tgAdvice;
                     $.ajax({cache: false, async: false, type: 'get', data: {dataCode: tempdata.itemcode}, url: "/advice/getByDataCode", success: function (data) {
                             tgAdvice = data;
                         }
                     });
                     var num = dictUtil.getDictByCode(dictUtil.DICT_LIST.postDocumentNum);
-                    var postNum = num[tempdata.postDocumentNum].text + tempdata.postDocumentNum1;
-                    $("#postDocumentNum").val(postNum);
+                    /*var postNum = num[tempdata.postDocumentNum].text + tempdata.postDocumentNum1;
+                    $("#postDocumentNum").val(postNum);*/
                     $("#postDocumentTitle").val(tempdata.postDocumentTitle);
                     if (tempdata.postPublicWay == "0"){
                         $("#p1").prop("checked",true);
@@ -59,19 +66,22 @@
                     $("#upload_file").attr('href',tempdata.filePath);
 
                     $("#initialName").val(tgAdvice.data.initial);
-                    $("#initialDate").val(stringUtil.formatTime(tgAdvice.data.initialDate));
+                    $("#initialDate").val(tgAdvice.data.initialDate);
+                    $("#signOpinion").val(tgAdvice.data.signOpinion);
+                    $("#signDate").val(tgAdvice.data.signDate);
+                    $("#signName").val(tgAdvice.data.signName);
                     $("#departmentOpinion").val(tgAdvice.data.department);
                     $("#departmentName").val(tgAdvice.data.departmentName);
-                    $("#departmentDate").val(stringUtil.formatTime(tgAdvice.data.departDate));
+                    $("#departmentDate").val(tgAdvice.data.departDate);
                     $("#officeOpinion").val(tgAdvice.data.office);
                     $("#officeName").val(tgAdvice.data.officeName);
-                    $("#officeDate").val(stringUtil.formatTime(tgAdvice.data.officeDate));
+                    $("#officeDate").val(tgAdvice.data.officeDate);
                     $("#deputyDirectorOpinion").val(tgAdvice.data.deputyDirector);
                     $("#deputyDirectorName").val(tgAdvice.data.deputyDirectorName);
-                    $("#deputyDirectorDate").val(stringUtil.formatTime(tgAdvice.data.deputyDirectorDate));
+                    $("#deputyDirectorDate").val(tgAdvice.data.deputyDirectorDate);
                     $("#directorOpinion").val(tgAdvice.data.director);
                     $("#directorName").val(tgAdvice.data.directorName);
-                    $("#directorDate").val(stringUtil.formatTime(tgAdvice.data.directorDate));
+                    $("#directorDate").val(tgAdvice.data.directorDate);
                 }
             }());
 

@@ -5,8 +5,16 @@
     <title>填报时间</title>
     <link rel="stylesheet" th:href="@{component/bootstrap-datetimepicker@4.7.14/bootstrap-datetimepicker.min.css}">
     <style>
-        .modal-content {
-            width: 15em;
+        .LeftText {
+            text-align: right;
+            width: 100%;
+            padding: 0;
+        }
+        .next{
+            background-color: #c4d3d4;
+        }
+        .prve{
+            background-color: #c4d3d4;
         }
     </style>
 </head>
@@ -18,7 +26,7 @@
                 <select name="" id="taskNameSearch1" class="col-lg-4  col-md-4">
                 </select>
                 <lable style="margin-left:2rem;margin-top: 6px;">状态：</lable>
-                <select name="" id="taskNameSearch2"  class="col-lg-4  col-md-4"style="margin-right: 1rem">
+                <select name="" id="taskNameSearch2"  class="col-lg-4  col-md-4">
                     <option value ="2">失效</option>
                     <option value ="1">生效</option>
                     <option value ="0">未开始</option>
@@ -34,7 +42,6 @@
         <div class="col-lg-2 col-md-2">
                 <button id="btn_addTask" class="btn btn-danger ml-3">设置填报时间</button>
         </div>
-        <hr size="1" class="mb-3" style="color: #EBEBEB;border-style:dashed;width:100%;margin-bottom:10px;">
     </div>
 
 

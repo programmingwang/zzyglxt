@@ -32,6 +32,13 @@
             return pattern.test(phone);
         }
 
+        //验证座机和手机号
+        function regxTest (val) {
+            let phone = /^((13[0-9])|(14[5,7,9])|(15[^4])|(18[0-9])|(17[0,1,3,5,6,7,8]))[0-9]{8}$/;
+            let ring = /^(\(\d{3,4}\)|\d{3,4}-|\s)?\d{7,14}$/;
+            return phone.test(val) || ring.test(val);
+        }
+
 
         function isEmail(aEM){
             var myreg = /^([\.a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(\.[a-zA-Z0-9_-])+/;
@@ -67,6 +74,7 @@
             isNumber:isNumber,
             isTel:isTel,
             isPhoneNo:isPhoneNo,
+            regxTest:regxTest,
             isEmail:isEmail,
             vailPasswrod:vailPasswrod,
             isDate:isDate,

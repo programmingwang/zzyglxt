@@ -54,6 +54,8 @@
                             }else {
                                     alertUtil.info("结束时间不能小于开始时间");
                                 }
+                            }else{
+                                alertUtil.info("时间栏不能为空");
                             }
                         },false,true,"POST");
                         return isSuccess;

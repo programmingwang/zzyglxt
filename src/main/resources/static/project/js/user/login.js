@@ -27,6 +27,7 @@
                     var orgName = data.data.orgName;
                     var itemCode = data.data.itemcode;
                     var orgItemCode = data.data.orgItemCode;
+                    var cityid = data.data.cityId;
                     sessionStorage.setItem('username',userName);
                     sessionStorage.setItem('name', name);
                     sessionStorage.setItem('rolename',rolename);
@@ -34,6 +35,7 @@
                     sessionStorage.setItem('orgName',orgName);
                     sessionStorage.setItem('itemcode',itemCode);
                     sessionStorage.setItem('orgItemCode',orgItemCode);
+                    sessionStorage.setItem('cityId',cityid);
                     if(rolename==='专家'){
                         window.location.href = "/main#/scientificProject/centralizedReview";
                     }else if (rolename === '科研项目-市级'){

@@ -48,9 +48,7 @@ public class CustomizeAuthenticationSuccessHandler implements AuthenticationSucc
         userSessionDto.setUsername(userDo.getUsername());
         userSessionDto.setName(userDo.getName());
         userSessionDto.setRolename(roleDO.getRoleName());
-        if (!StringUtils.isBlank(userDo.getCityid())){
-            userSessionDto.setCityId(userDo.getCityid());
-        }
+        userSessionDto.setCityId(userDo.getCityid());
         userSessionDto.setItemid(userDo.getItemid());
         userSessionDto.setItemcode(userDo.getItemcode());
 //        System.out.println(userSessionDto);

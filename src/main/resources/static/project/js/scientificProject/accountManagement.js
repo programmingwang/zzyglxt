@@ -33,9 +33,19 @@
                             };
                             ajaxUtil.myAjax(null,"/user/deletuser",chineseMedicineKey,function (data) {
                                 if(ajaxUtil.success(data)){
-                                    alertUtil.info("删除账号信息成功");
+                                    var submitConfirmModal = {
+                                        modalBodyID :"myTopicSubmitTip",
+                                        modalTitle : "提示",
+                                        modalClass : "modal-lg",
+                                        cancelButtonStyle: "display:none",
+                                        modalConfirmFun:function (){
+                                            refreshTable();
+                                            return true;
+                                        }
+                                    };
+                                    var submitConfirm = modalUtil.init(submitConfirmModal);
+                                    submitConfirm.show();
                                     isSuccess = true;
-                                    refreshTable();
                                 }
                             },false,'123',"post");
                             return isSuccess;
@@ -53,21 +63,12 @@
                         confirmButtonStyle: "display:none",
                     };
                     var myTravelModal = modalUtil.init(myViewTravelModalData);
-                    uploadImg.init();
-                    uploadImg.disable();
-                    uploadImg.setImgSrc(row.portrait);
                     $("#username").val(row.username);
                     $("#name").val(row.name);
-                    $("#gender").val(row.gender);
-                    $("#IDCardType").val(row.idcardType);
-                    $("#IDCardNo").val(row.idcardNo);
-                    $("#email").val(row.email);
                     $("#roleName").val(row.roleName);
                     $("#contacts").val(row.contacts);
                     $("#mobilephone").val(row.mobilephone);
                     $("#cityid").val(row.cityid);
-                    $("#creater").val(row.creater);
-                    $("#itemCreateAt").val(row.itemcreateat);
                     myTravelModal.show();
                 },
 
@@ -84,24 +85,20 @@
                             };
                             ajaxUtil.myAjax(null,"/user/reset",submitStatus,function (data) {
                                 if(ajaxUtil.success(data)){
-                                    if(data.code == 88888){
-                                        var submitConfirmModal = {
-                                            modalBodyID :"myResetPasswordTips",
-                                            modalTitle : "提示",
-                                            modalClass : "modal-lg",
-                                            cancelButtonStyle: "display:none",
-                                            modalConfirmFun:function (){
-                                                return true;
-                                            }
+                                    var submitConfirmModal = {
+                                        modalBodyID :"myResetPasswordTips",
+                                        modalTitle : "提示",
+                                        modalClass : "modal-lg",
+                                        cancelButtonStyle: "display:none",
+                                        modalConfirmFun:function (){
+                                            return true;
                                         }
-                                        var submitConfirm = modalUtil.init(submitConfirmModal);
-                                        submitConfirm.show();
-                                        isSuccess = true;
-                                        // refreshTable();
-                                    }else{
-                                        alertUtil.error(data.msg);
-                                    }
-
+                                    };
+                                    var submitConfirm = modalUtil.init(submitConfirmModal);
+                                    submitConfirm.show();
+                                    isSuccess = true;
+                                }else{
+                                    alertUtil.error(data.msg);
                                 }
                             },false,true,"put");
                             return isSuccess;
@@ -126,42 +123,53 @@
                         var username = $("#username").val();
                         var name = $("#name").val();
                         var roleName = dictUtil.getName(dictUtil.DICT_LIST.userRole,$("#roleName").val());
+                        var cityid = dictUtil.getName(dictUtil.DICT_LIST.areaAdmin,$("#cityid").val());
                         if ($("#roleName").val() == "主研人"){
                             roleName = $("#roleName").val();
+                            cityid = $("#cityid").val();
                         }
                         var contacts = $("#contacts").val();
                         var mobilephone = $("#mobilephone").val();
-                        var cityid = dictUtil.getName(dictUtil.DICT_LIST.areaAdmin,$("#cityid").val());
                         var orgName = sessionStorage.getItem("orgName");
                         var orgCode = sessionStorage.getItem("orgItemCode");
 
-                        var submitStatus = {
-                            "username": username,
-                            "name": name,
-                            "roleName": roleName,
-                            "contacts": contacts,
-                            "mobilephone": mobilephone,
-                            "cityid": cityid,
-                            "orgName": orgName,
-                            "orgCode": orgCode
-                        };
-                        if ((/^1[3456789]\d{9}$/.test(mobilephone))){
-                            ajaxUtil.myAjax(null,"/user/adduser",submitStatus,function (data) {
-                                if(ajaxUtil.success(data)){
-                                    if(data.code == 88888){
-                                        alertUtil.info("新增用户账号成功");
+                        if (stringUtil.isBlank(username) || stringUtil.isBlank(name) || stringUtil.isBlank(contacts) || stringUtil.isBlank(mobilephone)){
+                            alertUtil.info('输入不能为空！')
+                        } else {
+                            var submitStatus = {
+                                "username": username,
+                                "name": name,
+                                "roleName": roleName,
+                                "contacts": contacts,
+                                "mobilephone": mobilephone,
+                                "cityid": cityid,
+                                "orgName": orgName,
+                                "orgCode": orgCode
+                            };
+                            var reg = /^[a-zA-Z]([\s\S]{4,11})$/;//以字母开头，5-12位，([\s\S]*)匹配任意字符
+                            if (reg.test(username)) {
+                                ajaxUtil.myAjax(null,"/user/adduser",submitStatus,function (data) {
+                                    if(ajaxUtil.success(data)){
+                                        var submitConfirmModal = {
+                                            modalBodyID :"myTopicSubmitTip",
+                                            modalTitle : "提示",
+                                            modalClass : "modal-lg",
+                                            cancelButtonStyle: "display:none",
+                                            modalConfirmFun:function (){
+                                                refreshTable();
+                                                return true;
+                                            }
+                                        };
+                                        var submitConfirm = modalUtil.init(submitConfirmModal);
+                                        submitConfirm.show();
                                         isSuccess = true;
-                                        refreshTable();
                                     }else{
                                         alertUtil.error(data.msg);
                                     }
-
-                                } else {
-                                    alertUtil.error(data.msg)
-                                }
-                            },false,true);
-                        } else {
-                            alertUtil.error("手机号码错误")
+                                },false,true);
+                            } else {
+                                alertUtil.error("用户账号须以字母开头，长度为5-12位")
+                            }
                         }
 
                         return isSuccess;
@@ -169,7 +177,6 @@
                 };
                 var myViewModal = modalUtil.init(myViewAccountModalData);
                 let sel = dictUtil.getDictByCode(dictUtil.DICT_LIST.areaAdmin);
-                $("#cityid").selectUtil(sel);
                 let select = dictUtil.getDictByCode(dictUtil.DICT_LIST.userRole);
 
                 if (sessionStorage.getItem('rolename') == '科研项目申报单位'){
@@ -177,18 +184,20 @@
                     $(option).val("主研人");
                     $(option).text("主研人");
                     $("#roleName").append(option);
+                    option=document.createElement("option");
+                    $(option).val(sessionStorage.getItem('cityId'));
+                    $(option).text(sessionStorage.getItem('cityId'));
+                    $("#cityid").append(option);
                 } else{
+                    $("#cityid").selectUtil(sel);
                     $("#roleName").selectUtil(select);
                 }
                 myViewModal.show();
 
             });
 
-
-
             var pl = dictUtil.getDictByCode(dictUtil.DICT_LIST.showStatus);
             $("#chargePersonSearch").selectUtil(pl);
-
 
             var aCol = [
                 {field: 'username', title: '用户账号'},
@@ -225,12 +234,11 @@
                         }
                     }
                 }
-                var newArr=new Set(newArry)
-                newArry=Array.from(newArr)
+                var newArr=new Set(newArry);
+                newArry=Array.from(newArr);
                 $("#table").bootstrapTable("load", newArry);
 
             })
-
 
         })
 })();

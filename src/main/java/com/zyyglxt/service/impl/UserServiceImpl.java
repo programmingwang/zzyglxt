@@ -26,6 +26,7 @@ import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.regex.Pattern;
 
 /**
  * @Author wanglx
@@ -84,13 +85,18 @@ public class UserServiceImpl implements UserService {
             throw new BusinessException(result.getErrMsg(), EmBusinessError.PARAMETER_VALIDATION_ERROR);
         }
         // 验证手机号码
-        if (!MobileUtil.checkPhone(record.getMobilephone())) {
-            throw new BusinessException("手机号码不正确", EmBusinessError.MOBILEPHONE_ERROR);
+        if (!MobileUtil.checkPhone(record.getMobilephone()) && !MobileUtil.isPhone(record.getMobilephone())) {
+            throw new BusinessException("联系电话不正确", EmBusinessError.MOBILEPHONE_ERROR);
         }
         // 用户名的唯一性
         UserDO userDO = userDOMapper.selectByUsername(record.getUsername());
         if (userDO != null) {
             throw new BusinessException("用户名已存在", EmBusinessError.USER_ACCOUNT_ALREADY_EXIST);
+        }
+        //用户账号：字母开头，至少5位，别超过12个字符
+        Pattern reg = Pattern.compile("^[a-zA-Z]([\\s\\S]{4,11})$");
+        if (!reg.matcher(record.getUsername()).matches()){
+            throw new BusinessException("用户账号须以字母开头，长度为5-12位", EmBusinessError.USERNAME_ERROR);
         }
         if (record.getRoleName().equals("市级中医药管理部门")){
             OrganizationDO organizationDO = organizationDOMapper.selectByOrgName(record.getRoleName());

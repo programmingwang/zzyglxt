@@ -8,8 +8,7 @@
             var showStatus = dictUtil.getDictByCode(dictUtil.DICT_LIST.showStatus);
 
             $("#cancel").unbind().on('click',function () {
-                var url = "/industrialdevelop/style";
-                orange.redirect(url);
+                orange.redirect("/industrialdevelop/organization/tour");
             });
 
             $("#btn_save").unbind().on('click',function () {
@@ -120,6 +119,7 @@
 
             (function init() {
                 if (isUpdate()){
+                    $(".titleCSS").text("修改基地风采照片")
                     var tempdata = JSON.parse(localStorage.getItem("rowData"));
                     var img = tempdata.filePath;
                     // var imgName=tempdata.fileName;

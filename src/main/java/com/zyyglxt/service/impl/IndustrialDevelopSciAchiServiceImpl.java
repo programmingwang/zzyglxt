@@ -9,10 +9,12 @@ import com.zyyglxt.error.BusinessException;
 import com.zyyglxt.error.EmBusinessError;
 import com.zyyglxt.service.IIndustrialDevelopSciAchiService;
 import com.zyyglxt.util.DateUtils;
+import com.zyyglxt.util.MobileUtil;
 import com.zyyglxt.util.UUIDUtils;
 import com.zyyglxt.util.UsernameUtil;
 import com.zyyglxt.validator.ValidatorImpl;
 import com.zyyglxt.validator.ValidatorResult;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -40,6 +42,10 @@ public class IndustrialDevelopSciAchiServiceImpl implements IIndustrialDevelopSc
 
     @Override
     public void addAchievement(IndustrialDevelopSciAchiDO record) {
+        if (!MobileUtil.checkPhone(record.getPhone())  && !MobileUtil.isPhone(record.getPhone())
+                && !StringUtils.isEmpty(record.getPhone())) {
+            throw new BusinessException("您输入的联系方式不正确！", EmBusinessError.MOBILEPHONE_ERROR);
+        }
         record.setItemcreateat(DateUtils.getDate());
         record.setCreater(usernameUtil.getOperateUser());
         record.setUpdater(usernameUtil.getOperateUser());

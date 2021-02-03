@@ -457,3 +457,6 @@ input, select{
 .custom-select{
     border-radius: 0;
 }
+#upload{
+    z-index: 100;
+}

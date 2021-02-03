@@ -35,9 +35,11 @@
             $("#cancel").unbind().on('click',function () {
                 var username = sessionStorage.getItem("username");
                 var orgName = sessionStorage.getItem("orgName");
+                var orgCode = sessionStorage.getItem("orgCode");
                 var userdto = {
                     "username": username,
-                    "orgName": orgName
+                    "orgName": orgName,
+                    "orgCode": orgCode
                 }
                 ajaxUtil.myAjax(null,"/user/deletuser",userdto,function (data) {
 

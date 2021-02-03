@@ -17,6 +17,7 @@ import com.zyyglxt.util.UUIDUtils;
 import com.zyyglxt.util.UsernameUtil;
 import com.zyyglxt.validator.ValidatorImpl;
 import com.zyyglxt.validator.ValidatorResult;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -70,6 +71,10 @@ public class UserServiceImpl implements UserService {
 ////                organizationDOMapper.deleteByPrimaryKey(organizationDO.getItemid());
 ////            }
 ////        }
+        // 企业信息录入页面取消按钮删除企业信息
+        if (!StringUtils.isBlank(userDtO.getOrgCode())){
+            organizationDOMapper.deleteByNameAndCode(userDtO.getOrgName(),userDtO.getOrgCode());
+        }
     }
 
     @Override

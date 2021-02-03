@@ -40,7 +40,7 @@ public class DataAnnouncementController {
      */
     @RequestMapping(value = "/selectAll", method = RequestMethod.GET)
     @LogAnnotation(appCode ="",logTitle ="查看所有通知公告",logLevel ="1",creater ="",updater = "")
-    public ResponseData selectAnnouncementList(@RequestParam(value = "dataStatus")List dataStatus){
+    public ResponseData selectAnnouncementList(@RequestParam(value = "dataStatus")String dataStatus){
         return new ResponseData(EmBusinessError.success,dataAnnouncementService.selectAnnouncementList(dataStatus));
     }
 

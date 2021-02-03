@@ -17,7 +17,7 @@ public interface IDataAnnouncementService {
     DataDO selectAnnouncement(DataDOKey key);
 
     //查询所有通知公告
-    List<DataDto> selectAnnouncementList(List<String> dataStatus);
+    List<DataDto> selectAnnouncementList(String dataStatus);
 
     //增加一个通知公告
     int insertAnnouncement(DataDO record);

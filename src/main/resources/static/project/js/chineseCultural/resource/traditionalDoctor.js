@@ -301,10 +301,10 @@
             $("#chargePersonSearch").selectUtil(pl);
 
             var aCol = [
-                {field: 'chineseCulturalName', title: '历代名家姓名'},
+                {field: 'chineseCulturalName', title: '历代名家姓名',width:'200px'},
                 {field: 'filePath', title: '图片', formatter:function (value, row, index) {
                         if(value == "已经损坏了"){
-                            return '<p>'+value+'</p>';
+                            return value;
                         }else{
                             return '<img  src='+value+' width="100" height="100" class="img-rounded" >';
                         }

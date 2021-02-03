@@ -340,9 +340,9 @@
             var aCol = [
                 {field: 'specialtyName', title: '科室名称'},
                 {field: 'hospitalName', title: '所属医院'},
-                {field: 'filePath', title: '图片',formatter:function (value, row, index) {
+                {field: 'filePath', title: '图片',width:'200px',formatter:function (value, row, index) {
                         if(value == "已经损坏了"){
-                            return '<p>'+value+'</p>';
+                            return value;
                         }else{
                             return '<img  src='+value+' width="100" height="100" class="img-rounded" >';
                         }
@@ -350,7 +350,7 @@
                 {field: 'specialtyAddress', title: '地址',formatter:function (value, row, index) {
                         return handlePro(row.specialtyAddressPro) + row.specialtyAddressPro + row.specialtyAddressCity + row.specialtyAddressCity + value
                     }},
-                {field: 'specialtyPhone', title: '联系电话', width:'125px'},
+                {field: 'specialtyPhone', title: '联系电话', width:'200px'},
                 {field: 'action',  title: '操作',formatter: operation,events:orgEvents}
             ];
 

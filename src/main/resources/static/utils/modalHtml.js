@@ -244,6 +244,7 @@
         modalHtml.myFailReportoneModal = "<div>" + '        <textarea name="" id="reasonone" cols="96" rows="10"></textarea>' + "    </div>";
         modalHtml.myFailReportthModal = "<div>" + '        <textarea name="" id="reasonth" cols="96" rows="10"></textarea>' + "    </div>";
         modalHtml.myFailReporttwoModal = "<div>" + '        <textarea name="" id="reasontwo" cols="96" rows="10"></textarea>' + "    </div>";
+        modalHtml.myTranspondReceiptModal = "<div>" + "        <div >" + "            <span>请选择需要转发的人员：</span>" + '                <div style="margin-top: 1em;">' + '                    <select id="experName" class="form-control" >' + '                        <option value ="volvo">中医处分管局长</option>' + '                        <option value ="volvo">中药处分管局长</option>' + '                        <option value ="volvo">综合处分管局长</option>' + '                        <option value ="volvo">法规监督处分管局长</option>' + "                    </select>" + "                </div>" + "        </div>" + "    </div>";
         modalHtml.myDeleteModalTravel = "是否删除景点信息?";
         modalHtml.myDeleteModalTraditionalCul = "是否删除中医医史信息?";
         modalHtml.myDeleteModalTraditionalDoc = "是否删除历代名家信息?";

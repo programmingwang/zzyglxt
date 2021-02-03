@@ -445,7 +445,7 @@
                 $(".tTile").css("display","none");
                 $("#zwbg").css("display","block");
             }
-            if (roleName === '政务资源分管局长'){
+            if (roleName === '政务资源分管局长'||roleName === '中药处分管局长'||roleName === '中医处分管局长'||roleName === '综合处分管局长'||roleName === '法规监督处分管局长'){
                 var menu_list = [
                     {
                         menu_name: "首页",

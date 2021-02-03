@@ -94,7 +94,7 @@
 
                             }
                         }, true, "123", type);
-                        return false;
+                        return true;
                     }
                 }
                 var x = modalUtil.init(mySubmitToCZ);

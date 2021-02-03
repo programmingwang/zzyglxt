@@ -1,6 +1,6 @@
 (function () {
-    require(['jquery','objectUtil','ajaxUtil','alertUtil','stringUtil','fileUtil','uploadImg','dictUtil','selectUtil','distpicker'],
-        function (jquery,objectUtil,ajaxUtil,alertUtil,stringUtil,fileUtil,uploadImg,dictUtil,selectUtil,distpicker) {
+    require(['jquery','objectUtil','ajaxUtil','alertUtil','stringUtil','fileUtil','uploadImg','dictUtil','selectUtil','distpicker','modalUtil'],
+        function (jquery,objectUtil,ajaxUtil,alertUtil,stringUtil,fileUtil,uploadImg,dictUtil,selectUtil,distpicker,modalUtil) {
 
             const editor = objectUtil.wangEditorUtil();
 
@@ -19,10 +19,8 @@
             $("#btn_save").unbind().on('click',function () {
                 var chinesemedicineEntity;
                 var addUpdateUrl;
-                var operateMessage;
                 if(!isUpdate()){
                     addUpdateUrl = "inserthealthcarechinesemedicinedo";
-                    operateMessage = "新增中医药成功";
                     chinesemedicineEntity = {
                         itemcode: stringUtil.getUUID(),
                         chineseMedicineName : $("#chineseMedicineName").val(),//中药材名称
@@ -53,14 +51,24 @@
                         chineseMedicineStatus : '0'
                         /* chineseMedicineUsage : editor.txt.html()*/
                     }
-                    operateMessage = "更新中医药成功";
                 }
                 fileUtil.handleFile(isUpdate(), chinesemedicineEntity.itemcode, uploadImg.getFiles()[0]);
                 ajaxUtil.myAjax(null,addUpdateUrl,chinesemedicineEntity,function (data) {
                     if(ajaxUtil.success(data)){
-                        alertUtil.info(operateMessage);
-                        var url = "/healthCare/healthcarechineseMedicine";
-                        orange.redirect(url);
+                        var submitConfirmModal = {
+                            modalBodyID :"myTopicSubmitTip",
+                            modalTitle : "提示",
+                            modalClass : "modal-lg",
+                            cancelButtonStyle: "display:none",
+                            modalConfirmFun:function (){
+                                var url = "/healthCare/healthcarechineseMedicine";
+                                orange.redirect(url);
+                                return true;
+                            }
+                        }
+                        var submitConfirm = modalUtil.init(submitConfirmModal);
+                        submitConfirm.show();
+
                     }else {
                         alertUtil.alert(data.msg);
                     }
@@ -69,58 +77,78 @@
             });
 
             $("#btn_insert").unbind().on('click',function () {
-                var chinesemedicineEntity;
-                var addUpdateUrl;
-                var operateMessage;
-                if(!isUpdate()){
-                    addUpdateUrl = "inserthealthcarechinesemedicinedo";
-                    operateMessage = "新增中医药成功";
-                    chinesemedicineEntity = {
-                        itemcode: stringUtil.getUUID(),
-                        chineseMedicineName : $("#chineseMedicineName").val(),//中药材名称
-                        chineseMedicineAlias : $("#chineseMedicineAlias").val(),//别名
-                        chineseMedicineType : $("#chineseMedicineType").val(),//功效分类
-                        chineseMedicineHarvesting : $("#chineseMedicineHarvesting").val(),//采制
-                        chineseMedicineTaste : $("#chineseMedicineTaste").val(),//性味
-                        chineseMedicineMerTro : $("#chineseMedicineMerTro").val(),//归经
-                        chineseMedicineEffect : $("#chineseMedicineEffect").val(),//功能主治
-                        chineseMedicineUsage :$("#chineseMedicineUsage").val(),//用法用量
-                        ChineseMedicineStatus : '1'
-                        /*chineseMedicineUsage : editor.txt.html()*/
-                    };
-                }else{
-                    var needData = JSON.parse(localStorage.getItem("rowData"));
-                    addUpdateUrl = "updatehealthcarechinesemedicinedo";
-                    chinesemedicineEntity = {
-                        itemid: needData.itemid,
-                        itemcode: needData.itemcode,
-                        chineseMedicineName : $("#chineseMedicineName").val(),//中药材名称
-                        chineseMedicineAlias : $("#chineseMedicineAlias").val(),//别名
-                        chineseMedicineType : $("#chineseMedicineType").val(),//功效分类
-                        chineseMedicineHarvesting : $("#chineseMedicineHarvesting").val(),//采制
-                        chineseMedicineTaste : $("#chineseMedicineTaste").val(),//性味
-                        chineseMedicineMerTro : $("#chineseMedicineMerTro").val(),//归经
-                        chineseMedicineEffect : $("#chineseMedicineEffect").val(),//功能主治
-                        chineseMedicineUsage :$("#chineseMedicineUsage").val(),//用法用量
-                        status : '1',
-                       /* chineseMedicineUsage : editor.txt.html()*/
+                var mySubmitToCZ = {
+                    modalBodyID: "mySubmitModal",
+                    modalTitle: "提交",
+                    modalClass: "modal-lg",
+                    modalConfirmFun:function (){
+                        var chinesemedicineEntity;
+                        var addUpdateUrl;
+                        var operateMessage;
+                        if(!isUpdate()){
+                            addUpdateUrl = "inserthealthcarechinesemedicinedo";
+                            operateMessage = "新增中医药成功";
+                            chinesemedicineEntity = {
+                                itemcode: stringUtil.getUUID(),
+                                chineseMedicineName : $("#chineseMedicineName").val(),//中药材名称
+                                chineseMedicineAlias : $("#chineseMedicineAlias").val(),//别名
+                                chineseMedicineType : $("#chineseMedicineType").val(),//功效分类
+                                chineseMedicineHarvesting : $("#chineseMedicineHarvesting").val(),//采制
+                                chineseMedicineTaste : $("#chineseMedicineTaste").val(),//性味
+                                chineseMedicineMerTro : $("#chineseMedicineMerTro").val(),//归经
+                                chineseMedicineEffect : $("#chineseMedicineEffect").val(),//功能主治
+                                chineseMedicineUsage :$("#chineseMedicineUsage").val(),//用法用量
+                                ChineseMedicineStatus : '1'
+                                /*chineseMedicineUsage : editor.txt.html()*/
+                            };
+                        }else{
+                            var needData = JSON.parse(localStorage.getItem("rowData"));
+                            addUpdateUrl = "updatehealthcarechinesemedicinedo";
+                            chinesemedicineEntity = {
+                                itemid: needData.itemid,
+                                itemcode: needData.itemcode,
+                                chineseMedicineName : $("#chineseMedicineName").val(),//中药材名称
+                                chineseMedicineAlias : $("#chineseMedicineAlias").val(),//别名
+                                chineseMedicineType : $("#chineseMedicineType").val(),//功效分类
+                                chineseMedicineHarvesting : $("#chineseMedicineHarvesting").val(),//采制
+                                chineseMedicineTaste : $("#chineseMedicineTaste").val(),//性味
+                                chineseMedicineMerTro : $("#chineseMedicineMerTro").val(),//归经
+                                chineseMedicineEffect : $("#chineseMedicineEffect").val(),//功能主治
+                                chineseMedicineUsage :$("#chineseMedicineUsage").val(),//用法用量
+                                status : '1',
+                                /* chineseMedicineUsage : editor.txt.html()*/
+                            }
+                        }
+                        fileUtil.handleFile(isUpdate(), chinesemedicineEntity.itemcode, uploadImg.getFiles()[0]);
+                        ajaxUtil.myAjax(null,addUpdateUrl,chinesemedicineEntity,function (data) {
+                            if(ajaxUtil.success(data)){
+                                var submitConfirmModal = {
+                                    modalBodyID :"myTopicSubmitTip",
+                                    modalTitle : "提示",
+                                    modalClass : "modal-lg",
+                                    cancelButtonStyle: "display:none",
+                                    modalConfirmFun:function (){
+                                        var url = "/healthCare/healthcarechineseMedicine";
+                                        orange.redirect(url);
+                                        return true;
+                                    }
+                                }
+                                var submitConfirm = modalUtil.init(submitConfirmModal);
+                                submitConfirm.show();
+                            }else {
+                                alertUtil.alert(data.msg);
+                            }
+                        },false,true);
+                        return true;
                     }
-                    operateMessage = "更新中医药成功";
                 }
-                fileUtil.handleFile(isUpdate(), chinesemedicineEntity.itemcode, uploadImg.getFiles()[0]);
-                ajaxUtil.myAjax(null,addUpdateUrl,chinesemedicineEntity,function (data) {
-                    if(ajaxUtil.success(data)){
-                        alertUtil.info(operateMessage);
-                        var url = "/healthCare/healthcarechineseMedicine";
-                        orange.redirect(url);
-                    }else {
-                        alertUtil.alert(data.msg);
-                    }
-                },false,true);
+                var x = modalUtil.init(mySubmitToCZ);
+                x.show();
                 return false;
             });
             (function init() {
                 if (isUpdate()){
+                    $(".titleCSS").text("修改中药常识信息");
                     var tempdata = JSON.parse(localStorage.getItem("rowData"));
                     $("#chineseMedicineName").val(tempdata.chineseMedicineName);
                     $("#chineseMedicineAlias").val(tempdata.chineseMedicineAlias);

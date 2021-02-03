@@ -115,7 +115,7 @@
                     confirmButtonClass: "btn-danger",
                     modalConfirmFun: function () {
                         insert('1');
-                        return false;
+                        return true;
                     },
                 };
                 var x = modalUtil.init(mySubmitToCZ);
@@ -141,6 +141,7 @@
                     alertUtil.info("医院信息为空，请先添加医院")
                 }
                 if (isUpdate()){
+                    $(".titleCSS").text("修改名老中医信息");
                     var tempdata = JSON.parse(localStorage.getItem("rowData"));
                     $("#chineseMedicineName").val(tempdata.chineseMedicineName);
                     uploadImg.setImgSrc(tempdata.filePath)
@@ -165,6 +166,8 @@
                     $("#expertBriefIntroduce").val(tempdata.expertBriefIntroduce);
                     editor.txt.html(tempdata.expertIntroduce);
                     editor2.txt.html(tempdata.medicineRecords);
+                }else{
+                    $(".titleCSS").text("新增名老中医信息");
                 }
             }());
 

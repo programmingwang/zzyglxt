@@ -105,7 +105,7 @@
                     confirmButtonClass: "btn-danger",
                     modalConfirmFun: function () {
                         insert('1');
-                        return false;
+                        return true;
                     },
                 };
                 var x = modalUtil.init(mySubmitToCZ);
@@ -121,6 +121,7 @@
             /*初始化数据*/
             var  init = function () {
                 if (updateStatus){
+                    $(".titleCSS").text("修改中医名院信息");
                     uploadImg.setImgSrc(tempdata.filePath);
                     $("#hospitalName").val(tempdata.hospitalName);
                     $("#hospitalLevel").find("option").each(function (data) {
@@ -142,6 +143,7 @@
                     $("#hospitalLink").val(tempdata.hospitalLink);
                     editor.txt.html(tempdata.hospitalIntroduce);
                 }else {
+                    $(".titleCSS").text("新增中医名院信息");
                     localStorage.removeItem("rowData");
                     $("#distpicker").distpicker({
                         province: "河北省",

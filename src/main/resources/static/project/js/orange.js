@@ -145,10 +145,6 @@
 					}
 					$("#main_body").html(data);
 					$('.modal-backdrop').remove();
-                    // if(!(isContains(url,"insert") || isContains(url,"add") || isContains(url,"evaluationTable") || isContains(url,"post_view") || isContains(url,"document/viewreport") || isContains(url,"scientificProject/viewTopicManagement"))){
-                    //     window.location.reload();
-                    // }
-
 				}})
 		}
 

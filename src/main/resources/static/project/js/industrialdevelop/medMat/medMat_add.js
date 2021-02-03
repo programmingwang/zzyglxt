@@ -84,7 +84,7 @@
                     confirmButtonClass: "btn-danger",
                     modalConfirmFun: function () {
                         addMedMat("上架");
-                        return false;
+                        return true;
                     }
                 };
                 var x = modalUtil.init(mySubmitToCZ);

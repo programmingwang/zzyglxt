@@ -8,6 +8,7 @@ public class HealthSciKnowDO extends HealthSciKnowDOKey {
     @NotBlank(message = "科普知识名称不能为空")
     private String scienceKnowledgeName;
 
+    @NotBlank(message = "科普知识来源不能为空")
     private String scienceKnowledgeSource;
 
     private String scienceKnowledgeAuthor;
@@ -24,6 +25,7 @@ public class HealthSciKnowDO extends HealthSciKnowDOKey {
 
     private Date itemupdateat;
 
+    @NotBlank(message = "科普知识正文详情不能为空")
     private String content;
 
     public String getScienceKnowledgeName() {

@@ -42,9 +42,21 @@ public class ExpertExmainController {
         return new ResponseData(EmBusinessError.success,exmaineService.selectByExpertCode(expertUserCode));
     }
 
+    //打分
     @RequestMapping(value = "/exmain" , method = RequestMethod.PUT)
     @ResponseBody
     public ResponseData updExmain(@RequestBody IndustrialDevelopExpertRefDO developExpertRefDO){
+        //打分，updateByPrimaryKeySelective不再是根据itemid和itemcode修改数据了，请注意
+        exmaineService.updateByPrimaryKeySelective(developExpertRefDO);
+        return new ResponseData(EmBusinessError.success);
+    }
+
+    //更改课题状态，重新打分
+    @RequestMapping(value = "/ReExmain" , method = RequestMethod.POST)
+    @ResponseBody
+    public ResponseData ReExmain(@RequestBody IndustrialDevelopExpertRefDO developExpertRefDO){
+        developExpertRefDO.setOpinion("");
+        developExpertRefDO.setScore("");
         //打分，updateByPrimaryKeySelective不再是根据itemid和itemcode修改数据了，请注意
         exmaineService.updateByPrimaryKeySelective(developExpertRefDO);
         return new ResponseData(EmBusinessError.success);

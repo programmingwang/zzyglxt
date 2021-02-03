@@ -1,6 +1,6 @@
 (function () {
-    require(['jquery','objectUtil','ajaxUtil','alertUtil','stringUtil','fileUtil','distpicker'],
-        function (jquery,objectUtil,ajaxUtil,alertUtil,stringUtil,fileUtil,distpicker) {
+    require(['jquery','objectUtil','ajaxUtil','alertUtil','stringUtil','fileUtil','distpicker','modalUtil'],
+        function (jquery,objectUtil,ajaxUtil,alertUtil,stringUtil,fileUtil,distpicker,modalUtil) {
 
             const editor = objectUtil.wangEditorUtil();
 
@@ -12,10 +12,8 @@
             $("#btn_save").unbind().on('click',function () {
                 var sciKnowEntity;
                 var addUpdateUrl;
-                var operateMessage;
                 if(!isUpdate()){
                     addUpdateUrl = "inserthealthsciknowdo";
-                    operateMessage = "新增科普知识成功";
                     sciKnowEntity = {
                         itemcode: stringUtil.getUUID(),
                         scienceKnowledgeName : $("#scienceKnowledgeName").val(),
@@ -36,15 +34,24 @@
                         scienceKnowledgeStatus : '0',
                         content : editor.txt.html()
                     }
-                    operateMessage = "更新科普知识成功";
                 }
                 /*fileUtil.handleFile(isUpdate(), sciKnowEntity.itemcode, upload_file.getFiles()[0]);*/
 
                 ajaxUtil.myAjax(null,addUpdateUrl,sciKnowEntity,function (data) {
                     if(ajaxUtil.success(data)){
-                        alertUtil.info(operateMessage);
-                        var url = "/healthCare/healthsciKnow";
-                        orange.redirect(url);
+                        var submitConfirmModal = {
+                            modalBodyID :"myTopicSubmitTip",
+                            modalTitle : "提示",
+                            modalClass : "modal-lg",
+                            cancelButtonStyle: "display:none",
+                            modalConfirmFun:function (){
+                                var url = "/healthCare/healthsciKnow";
+                                orange.redirect(url);
+                                return true;
+                            }
+                        }
+                        var submitConfirm = modalUtil.init(submitConfirmModal);
+                        submitConfirm.show();
                     }else {
                         alertUtil.alert(data.msg);
                     }
@@ -53,49 +60,67 @@
             });
 
             $("#btn_insert").unbind().on('click',function () {
-                var sciKnowEntity;
-                var addUpdateUrl;
-                var operateMessage;
-                if(!isUpdate()){
-                    addUpdateUrl = "inserthealthsciknowdo";
-                    operateMessage = "新增科普知识成功";
-                    sciKnowEntity = {
-                        itemcode: stringUtil.getUUID(),
-                        scienceKnowledgeName : $("#scienceKnowledgeName").val(),
-                        scienceKnowledgeSource : $("#scienceKnowledgeSource").val(),
-                        scienceKnowledgeAuthor : $("#scienceKnowledgeAuthor").val(),
-                        scienceKnowledgeStatus : '1',
-                        content : editor.txt.html()
-                    };
-                }else{
-                    var needData = JSON.parse(localStorage.getItem("rowData"));
-                    addUpdateUrl = "updatehealthsciknowdo";
-                    sciKnowEntity = {
-                        itemid: needData.itemid,
-                        itemcode: needData.itemcode,
-                        scienceKnowledgeName : $("#scienceKnowledgeName").val(),
-                        scienceKnowledgeSource : $("#scienceKnowledgeSource").val(),
-                        scienceKnowledgeAuthor : $("#scienceKnowledgeAuthor").val(),
-                        status : '1',
-                        content : editor.txt.html()
-                    }
-                    operateMessage = "更新科普知识成功";
-                }
-               /*fileUtil.handleFile(isUpdate(), sciKnowEntity.itemcode, upload_file.getFiles()[0]);*/
+                var mySubmitToCZ = {
+                    modalBodyID: "mySubmitModal",
+                    modalTitle: "提交",
+                    modalClass: "modal-lg",
+                    modalConfirmFun:function (){
+                        var sciKnowEntity;
+                        var addUpdateUrl;
+                        if(!isUpdate()){
+                            addUpdateUrl = "inserthealthsciknowdo";
+                            sciKnowEntity = {
+                                itemcode: stringUtil.getUUID(),
+                                scienceKnowledgeName : $("#scienceKnowledgeName").val(),
+                                scienceKnowledgeSource : $("#scienceKnowledgeSource").val(),
+                                scienceKnowledgeAuthor : $("#scienceKnowledgeAuthor").val(),
+                                scienceKnowledgeStatus : '1',
+                                content : editor.txt.html()
+                            };
+                        }else{
+                            var needData = JSON.parse(localStorage.getItem("rowData"));
+                            addUpdateUrl = "updatehealthsciknowdo";
+                            sciKnowEntity = {
+                                itemid: needData.itemid,
+                                itemcode: needData.itemcode,
+                                scienceKnowledgeName : $("#scienceKnowledgeName").val(),
+                                scienceKnowledgeSource : $("#scienceKnowledgeSource").val(),
+                                scienceKnowledgeAuthor : $("#scienceKnowledgeAuthor").val(),
+                                status : '1',
+                                content : editor.txt.html()
+                            }
+                        }
+                        /*fileUtil.handleFile(isUpdate(), sciKnowEntity.itemcode, upload_file.getFiles()[0]);*/
 
-                ajaxUtil.myAjax(null,addUpdateUrl,sciKnowEntity,function (data) {
-                    if(ajaxUtil.success(data)){
-                        alertUtil.info(operateMessage);
-                        var url = "/healthCare/healthsciKnow";
-                        orange.redirect(url);
-                    }else {
-                        alertUtil.alert(data.msg);
+                        ajaxUtil.myAjax(null,addUpdateUrl,sciKnowEntity,function (data) {
+                            if(ajaxUtil.success(data)){
+                                var submitConfirmModal = {
+                                    modalBodyID :"myTopicSubmitTip",
+                                    modalTitle : "提示",
+                                    modalClass : "modal-lg",
+                                    cancelButtonStyle: "display:none",
+                                    modalConfirmFun:function (){
+                                        var url = "/healthCare/healthsciKnow";
+                                        orange.redirect(url);
+                                        return true;
+                                    }
+                                }
+                                var submitConfirm = modalUtil.init(submitConfirmModal);
+                                submitConfirm.show();
+                            }else {
+                                alertUtil.alert(data.msg);
+                            }
+                        },false,true);
+                        return true;
                     }
-                },false,true);
+                }
+                var x = modalUtil.init(mySubmitToCZ);
+                x.show();
                 return false;
             });
             (function init() {
                 if (isUpdate()){
+                    $(".titleCSS").text("修改科普知识信息");
                     var tempdata = JSON.parse(localStorage.getItem("rowData"));
                     $("#scienceKnowledgeName").val(tempdata.scienceKnowledgeName);
                     $("#scienceKnowledgeSource").val(tempdata.scienceKnowledgeSource);

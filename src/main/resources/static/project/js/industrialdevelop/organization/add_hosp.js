@@ -35,9 +35,11 @@
             $("#cancel").unbind().on('click',function () {
                 var username = sessionStorage.getItem("username");
                 var orgName = sessionStorage.getItem("orgName");
+                var orgCode = sessionStorage.getItem("orgCode");
                 var userdto = {
                     "username": username,
-                    "orgName": orgName
+                    "orgName": orgName,
+                    "orgCode": orgCode
                 }
                 ajaxUtil.myAjax(null,"/user/deletuser",userdto,function (data) {
 
@@ -81,16 +83,25 @@
                 entity["username"] = sessionStorage.getItem('username');
                 entity["orgCode"] = sessionStorage.getItem('orgCode');
 
-                fileUtil.handleFile(updateStatus, entity.itemcode, uploadImg.getFiles()[0]);
+                if (!stringUtil.isBlank(entity.hospitalName) && !stringUtil.isBlank(entity.hospitalLevel) && !stringUtil.isBlank(entity.hospitalBriefIntroduce) &&
+                    !stringUtil.isBlank(entity.hospitalKeySpecialty) && !stringUtil.isBlank(entity.hospitalTelephone) && !stringUtil.isBlank(entity.hospitalAddressPro) &&
+                    !stringUtil.isBlank(entity.hospitalAddressCity) && !stringUtil.isBlank(entity.hospitalAddressCountry) && !stringUtil.isBlank(entity.hospitalAddress) &&
+                    !stringUtil.isBlank(entity.hospitalLink) && !stringUtil.isBlank(entity.hospitalIntroduce)) {
 
-                ajaxUtil.myAjax(null,requestUrl,entity,function (data) {
-                    if(ajaxUtil.success(data)){
-                        alertUtil.info(operateMessage);
-                        window.location.href = jumpUrl;
-                    }else {
-                        alertUtil.alert(data.msg);
-                    }
-                },false,true);
+                    fileUtil.handleFile(updateStatus, entity.itemcode, uploadImg.getFiles()[0]);
+
+                    ajaxUtil.myAjax(null,requestUrl,entity,function (data) {
+                        if(ajaxUtil.success(data)){
+                            alertUtil.info(operateMessage);
+                            window.location.href = jumpUrl;
+                        }else {
+                            alertUtil.alert(data.msg);
+                        }
+                    },false,true);
+                } else {
+                    alertUtil.error('输入不能为空')
+                }
+
                 return false;
             });
 

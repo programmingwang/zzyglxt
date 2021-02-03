@@ -11,6 +11,8 @@ public interface OrganizationDOMapper {
 
     int deleteByPrimaryKey(Integer itemid);
 
+    int deleteByNameAndCode(@Param("orgName") String orgName, @Param("orgCode") String orgCode);
+
     int insert(OrganizationDO record);
 
     int insertSelective(OrganizationDO record);

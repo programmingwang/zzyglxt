@@ -1,6 +1,6 @@
 (function () {
-    require(['jquery','ajaxUtil','stringUtil','uploadImg','urlUtil','objectUtil',"distpicker"],
-        function ($,ajaxUtil,stringUtil,uploadImg,urlUtil, objectUtil,distpicker) {
+    require(['jquery','ajaxUtil','stringUtil','uploadImg','urlUtil','objectUtil',"distpicker",'alertUtil'],
+        function ($,ajaxUtil,stringUtil,uploadImg,urlUtil, objectUtil,distpicker,alertUtil) {
 
             var url = "/industrialdevelop/school";
 
@@ -18,9 +18,11 @@
             $("#cancelBtn").click(function () {
                 var username = sessionStorage.getItem("username");
                 var orgName = sessionStorage.getItem("orgName");
+                var orgCode = sessionStorage.getItem("orgCode");
                 var userdto = {
                     "username": username,
-                    "orgName": orgName
+                    "orgName": orgName,
+                    "orgCode": orgCode
                 }
                 ajaxUtil.myAjax(null,"/user/deletuser",userdto,function (data) {
 
@@ -50,22 +52,26 @@
             $("#submitBtn").unbind('click').on('click',function () {
                 var param = generateParam();
                 param.status = "1";
-                if (uploadImg.isUpdate()){
-                    if (isUpdate()){
-                        ajaxUtil.updateFile(itemcode,uploadImg.getFiles()[0],sessionStorage.getItem("username"), sessionStorage.getItem("username"));
-                    }else {
-                        ajaxUtil.fileAjax(itemcode,uploadImg.getFiles()[0],sessionStorage.getItem("username"), sessionStorage.getItem("username"))
-                    }
 
+                if (!stringUtil.isBlank(param.schoolName) && !stringUtil.isBlank(param.schoolIntroduce) && !stringUtil.isBlank(param.secondaryCollege) &&
+                    !stringUtil.isBlank(param.enrollmentMajor) && !stringUtil.isBlank(param.graduateEnrollmentMajor) &&
+                    !stringUtil.isBlank(param.phone) && !stringUtil.isBlank(param.addressPro) && !stringUtil.isBlank(param.onlineAddress) &&
+                    !stringUtil.isBlank(param.addressCity) && !stringUtil.isBlank(param.addressCountry) && !stringUtil.isBlank(param.address)) {
+
+                    ajaxUtil.fileAjax(itemcode, uploadImg.getFiles()[0], sessionStorage.getItem("username"), sessionStorage.getItem("username"))
+
+                    ajaxUtil.myAjax(null, url, param, function (data) {
+                        if (ajaxUtil.success(data)) {
+                            window.location.href = pathUrl;
+                            // orange.redirect(pathUrl)
+                        } else {
+                            alert(data.msg)
+                        }
+                    }, true, "123", type);
+                } else {
+                    alertUtil.error('输入不能为空')
                 }
-                ajaxUtil.myAjax(null,url,param,function (data) {
-                    if(ajaxUtil.success(data)){
-                        window.location.href = pathUrl;
-                        // orange.redirect(pathUrl)
-                    }else {
-                        alert(data.msg)
-                    }
-                },true,"123",type);
+
                 return false;
             });
 

@@ -17,7 +17,7 @@ public interface IDataRegulationService {
     DataDO selectRegulation(DataDOKey key);
 
     //查询所有政策法规
-    List<DataDto> selectRegulationList(List<String> dataStatus);
+    List<DataDto> selectRegulationList(String dataStatus);
 
     //增加一个政策法规
     int insertRegulation(DataDO record);
@@ -29,5 +29,7 @@ public interface IDataRegulationService {
     int updateRegulation(DataDO record);
 
     int changeStatus(DataDOKey key, String dataDelayedRelease, String dataStatus);
+
+    List<String> selectForMainPage();
 
 }

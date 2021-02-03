@@ -40,29 +40,26 @@ public class DataRegulationServiceImpl implements IDataRegulationService {
 
     @Override
     public DataDO selectRegulation(DataDOKey key) {
-        return dataDOMapper.selectByPrimaryKey(key,"政策法规");
+        return dataDOMapper.selectByPrimaryKey(key, "政策法规");
     }
 
     @Override
-    public List<DataDto> selectRegulationList(List<String> dataStatus) {
-        List<DataDto> dataDOList = new ArrayList<>();
-        for (String status : dataStatus) {
-            dataDOList.addAll(dataDOMapper.selectByAllData("政策法规", status));
-        }
-        return dataDOList;
+    public List<DataDto> selectRegulationList(String dataStatus) {
+        return dataDOMapper.selectByAllData("政策法规", dataStatus);
+
     }
 
     @Override
     public int insertRegulation(DataDO record) {
         ValidatorResult result = validator.validate(record);
-        if(result.isHasErrors()){
+        if (result.isHasErrors()) {
             throw new BusinessException(result.getErrMsg(), EmBusinessError.PARAMETER_VALIDATION_ERROR);
         }
         record.setItemcreateat(DateUtils.getDate());
         record.setCreater(usernameUtil.getOperateUser());
         record.setDataType("政策法规");
         record.setUpdater(usernameUtil.getOperateUser());
-        if(record.getItemcode() == null){
+        if (record.getItemcode() == null) {
             record.setItemcode(UUIDUtils.getUUID());
         }
         return dataDOMapper.insertSelective(record);
@@ -76,7 +73,7 @@ public class DataRegulationServiceImpl implements IDataRegulationService {
     @Override
     public int updateRegulation(DataDO record) {
         ValidatorResult result = validator.validate(record);
-        if(result.isHasErrors()){
+        if (result.isHasErrors()) {
             throw new BusinessException(result.getErrMsg(), EmBusinessError.PARAMETER_VALIDATION_ERROR);
         }
         record.setUpdater(usernameUtil.getOperateUser());
@@ -89,5 +86,11 @@ public class DataRegulationServiceImpl implements IDataRegulationService {
     public int changeStatus(DataDOKey key, String dataDelayedRelease, String dataStatus) {
         return dataDOMapper.changeStatusByPrimaryKey(key, dataDelayedRelease, dataStatus);
     }
+
+    @Override
+    public List<String> selectForMainPage() {
+        return dataDOMapper.selectAllForMainPage("政策法规");
+    }
+
 
 }

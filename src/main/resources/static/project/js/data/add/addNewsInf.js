@@ -1,6 +1,6 @@
 (function () {
-    require(['jquery','objectUtil','ajaxUtil','alertUtil','stringUtil','datetimepicker'],
-        function (jquery,objectUtil,ajaxUtil,alertUtil,stringUtil,datetimepicker) {
+    require(['jquery','objectUtil','ajaxUtil','alertUtil','stringUtil','datetimepicker','modalUtil'],
+        function (jquery,objectUtil,ajaxUtil,alertUtil,stringUtil,datetimepicker,modalUtil) {
 
             const editor = objectUtil.wangEditorUtil();
 
@@ -58,9 +58,20 @@
 
                 ajaxUtil.myAjax(null,addUpdateUrl,newsInfEntity,function (data) {
                     if(ajaxUtil.success(data)){
-                        alertUtil.info(operateMessage);
-                        var url = "/data/dataNewsInf";
-                        orange.redirect(url);
+                        var submitConfirmModal = {
+                            modalBodyID :"myTopicSubmitTip",
+                            modalTitle : "提示",
+                            modalClass : "modal-lg",
+                            cancelButtonStyle: "display:none",
+                            modalConfirmFun:function (){
+                                var url = "/data/dataNewsInf";
+                                orange.redirect(url);
+                                return true;
+                            }
+                        }
+                        var submitConfirm = modalUtil.init(submitConfirmModal);
+                        submitConfirm.show();
+
                     }else {
                         alertUtil.alert(data.msg);
                     }
@@ -69,48 +80,70 @@
             });
 
             $("#submitbtn").unbind().on('click',function () {
-                var newsInfEntity;
-                var addUpdateUrl;
-                var operateMessage;
-                if(!isUpdate()){
-                    addUpdateUrl = "/datado/newsInf/insertNewsInf";
-                    operateMessage = "新增新闻信息成功";
-                    newsInfEntity = {
-                        itemcode: stringUtil.getUUID(),
-                        dataTitle : $("#dataTitle").val(),
-                        dataAuthor : $("#dataAuthor").val(),
-                        dataSource : $("#dataSource").val(),
-                        dataFileType : $("#dataFileType").val(),
-                        dataDelayedRelease : $("#dataDelayedRelease").val(),
-                        releaseOrNot : "y",
-                        dataStatus : "1",
-                        dataContent : editor.txt.html()
-                    };
-                }else{
-                    var needData = JSON.parse(localStorage.getItem("rowData"));
-                    addUpdateUrl = "/datado/newsInf/updateNewsInf";
-                    newsInfEntity = {
-                        itemid: needData.itemid,
-                        itemcode: needData.itemcode,
-                        dataTitle : $("#dataTitle").val(),
-                        dataAuthor : $("#dataAuthor").val(),
-                        dataSource : $("#dataSource").val(),
-                        dataFileType : $("#dataFileType").val(),
-                        dataDelayedRelease : $("#dataDelayedRelease").val(),
-                        dataContent : editor.txt.html()
-                    };
-                    operateMessage = "更新新闻信息成功";
-                }
+                var mySubmitToCZ = {
+                    modalBodyID: "mySubmitModal",
+                    modalTitle: "提交",
+                    modalClass: "modal-lg",
+                    modalConfirmFun: function () {
+                        var newsInfEntity;
+                        var addUpdateUrl;
+                        var operateMessage;
+                        if(!isUpdate()){
+                            addUpdateUrl = "/datado/newsInf/insertNewsInf";
+                            operateMessage = "新增新闻信息成功";
+                            newsInfEntity = {
+                                itemcode: stringUtil.getUUID(),
+                                dataTitle : $("#dataTitle").val(),
+                                dataAuthor : $("#dataAuthor").val(),
+                                dataSource : $("#dataSource").val(),
+                                dataFileType : $("#dataFileType").val(),
+                                dataDelayedRelease : $("#dataDelayedRelease").val(),
+                                releaseOrNot : "y",
+                                dataStatus : "1",
+                                dataContent : editor.txt.html()
+                            };
+                        }else{
+                            var needData = JSON.parse(localStorage.getItem("rowData"));
+                            addUpdateUrl = "/datado/newsInf/updateNewsInf";
+                            newsInfEntity = {
+                                itemid: needData.itemid,
+                                itemcode: needData.itemcode,
+                                dataTitle : $("#dataTitle").val(),
+                                dataAuthor : $("#dataAuthor").val(),
+                                dataSource : $("#dataSource").val(),
+                                dataFileType : $("#dataFileType").val(),
+                                dataDelayedRelease : $("#dataDelayedRelease").val(),
+                                dataStatus : "1",
+                                dataContent : editor.txt.html()
+                            };
+                            operateMessage = "更新新闻信息成功";
+                        }
 
-                ajaxUtil.myAjax(null,addUpdateUrl,newsInfEntity,function (data) {
-                    if(ajaxUtil.success(data)){
-                        alertUtil.info(operateMessage);
-                        var url = "/data/dataNewsInf";
-                        orange.redirect(url);
-                    }else {
-                        alertUtil.alert(data.msg);
+                        ajaxUtil.myAjax(null,addUpdateUrl,newsInfEntity,function (data) {
+                            if(ajaxUtil.success(data)){
+                                var submitConfirmModal = {
+                                    modalBodyID :"myTopicSubmitTip",
+                                    modalTitle : "提示",
+                                    modalClass : "modal-lg",
+                                    cancelButtonStyle: "display:none",
+                                    modalConfirmFun:function (){
+                                        var url = "/data/dataNewsInf";
+                                        orange.redirect(url);
+                                        return true;
+                                    }
+                                }
+                                var submitConfirm = modalUtil.init(submitConfirmModal);
+                                submitConfirm.show();
+
+                            }else {
+                                alertUtil.alert(data.msg);
+                            }
+                        },false,true);
+                        return true;
                     }
-                },false,true);
+                }
+                var x = modalUtil.init(mySubmitToCZ);
+                x.show();
                 return false;
             });
 

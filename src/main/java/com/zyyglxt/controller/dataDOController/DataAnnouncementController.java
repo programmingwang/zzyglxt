@@ -44,6 +44,12 @@ public class DataAnnouncementController {
         return new ResponseData(EmBusinessError.success,dataAnnouncementService.selectAnnouncementList(dataStatus));
     }
 
+    @RequestMapping(value = "/selectAnnMain", method = RequestMethod.GET)
+    @LogAnnotation(appCode ="",logTitle ="查看所有通知公告",logLevel ="1",creater ="",updater = "")
+    public ResponseData selectAnnouncementForMainPage(){
+        return new ResponseData(EmBusinessError.success,dataAnnouncementService.selectForMainPage());
+    }
+
     /**
      * 删除通知公告记录
      * @param itemID

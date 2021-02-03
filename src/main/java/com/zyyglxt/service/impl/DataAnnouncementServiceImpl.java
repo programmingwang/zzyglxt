@@ -48,6 +48,8 @@ public class DataAnnouncementServiceImpl implements IDataAnnouncementService {
         return dataDOMapper.selectByAllData("通知公告", dataStatus);
     }
 
+
+
     @Override
     public int insertAnnouncement(DataDO record) {
         ValidatorResult result = validator.validate(record);
@@ -84,6 +86,11 @@ public class DataAnnouncementServiceImpl implements IDataAnnouncementService {
     @Override
     public int changeStatus(DataDOKey key, String dataDelayedRelease, String dataStatus) {
         return dataDOMapper.changeStatusByPrimaryKey(key, dataDelayedRelease, dataStatus);
+    }
+
+    @Override
+    public List<String> selectForMainPage() {
+        return dataDOMapper.selectAllForMainPage("通知公告");
     }
 
 }

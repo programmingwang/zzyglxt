@@ -30,4 +30,6 @@ public interface IDataAnnouncementService {
 
     int changeStatus(DataDOKey key, String dataDelayedRelease, String dataStatus);
 
+    List<String> selectForMainPage();
+
 }

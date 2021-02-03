@@ -14,10 +14,8 @@
             $("#btn_save").unbind().on('click',function () {
                 var traDocEntity ;
                 var addUpdateUrl;
-                var operateMessage;
                 if(!isUpdate()){
                     addUpdateUrl = "/cul/res/traDoc/addTraDoc";
-                    operateMessage = "新增历代名家成功";
                     traDocEntity = {
                         itemcode: stringUtil.getUUID(),
                         chineseCulturalName : $("#chineseCulturalName").val(),
@@ -38,7 +36,6 @@
                         chineseCulturalStatus : '0',
                         chineseCulturalContent : editor.txt.html()
                     }
-                    operateMessage = "更新历代名家成功";
                 }
                 fileUtil.handleFile(isUpdate(), traDocEntity.itemcode, uploadImg.getFiles()[0]);
 
@@ -76,10 +73,8 @@
                     modalConfirmFun:function (){
                         var traDocEntity ;
                         var addUpdateUrl;
-                        var operateMessage;
                         if(!isUpdate()){
                             addUpdateUrl = "/cul/res/traDoc/addTraDoc";
-                            operateMessage = "新增历代名家成功";
                             traDocEntity = {
                                 itemcode: stringUtil.getUUID(),
                                 chineseCulturalName : $("#chineseCulturalName").val(),
@@ -100,7 +95,6 @@
                                 chineseCulturalStatus : '1',
                                 chineseCulturalContent : editor.txt.html()
                             }
-                            operateMessage = "更新历代名家成功";
                         }
                         fileUtil.handleFile(isUpdate(), traDocEntity.itemcode, uploadImg.getFiles()[0]);
 
@@ -128,8 +122,7 @@
                                 alertUtil.alert(data.msg);
                             }
                         },false,true);
-                        return false;
-                        return false;
+                        return true;
                     }
                 }
                 var x = modalUtil.init(mySubmitToCZ);
@@ -140,6 +133,7 @@
 
             (function init() {
                 if (isUpdate()){
+                    $(".titleCSS").text("修改历代名家信息");
                     var tempdata = JSON.parse(localStorage.getItem("rowData"));
                     $("#chineseCulturalName").val(tempdata.chineseCulturalName);
                     $("#chineseCulturalSource").val(tempdata.chineseCulturalSource);

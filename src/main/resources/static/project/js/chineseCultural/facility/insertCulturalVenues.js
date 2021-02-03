@@ -123,7 +123,7 @@
                                 alertUtil.alert(data.msg);
                             }
                         },false,true);
-                        return false;
+                        return true;
                     }
                 }
                 var x = modalUtil.init(mySubmitToCZ);

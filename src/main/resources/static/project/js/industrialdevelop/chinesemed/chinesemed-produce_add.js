@@ -1,6 +1,6 @@
 (function () {
-    require(['jquery','ajaxUtil','stringUtil','uploadImg','objectUtil',"distpicker",'urlUtil'],
-        function ($,ajaxUtil,stringUtil,uploadImg, objectUtil,distpicker,urlUtil) {
+    require(['jquery','ajaxUtil','stringUtil','uploadImg','objectUtil',"distpicker",'urlUtil','modalUtil'],
+        function ($,ajaxUtil,stringUtil,uploadImg, objectUtil,distpicker,urlUtil,modalUtil) {
 
             var url = "/industrialdevelop/chi-med";
 
@@ -55,18 +55,45 @@
             });
 
             $("#submitBtn").unbind('click').on('click',function () {
-                var param = generateParam();
-                param.status = "1";
-                if (uploadImg.isUpdate()){
-                    ajaxUtil.fileAjax(itemcode,uploadImg.getFiles()[0],sessionStorage.getItem("username"), sessionStorage.getItem("itemcode"))
-                }
-                ajaxUtil.myAjax(null,url,param,function (data) {
-                    if(ajaxUtil.success(data)){
-                        orange.redirect(pathUrl)
-                    }else {
-                        alert(data.msg)
+                var submitModalData = {
+                    modalBodyID: "mySubmitModal",
+                    modalTitle: "提示",
+                    modalClass: "modal-lg",
+                    modalConfirmFun: function () {
+                        var param = generateParam();
+                        param.status = "1";
+                        if (uploadImg.isUpdate()){
+                            ajaxUtil.fileAjax(itemcode,uploadImg.getFiles()[0],sessionStorage.getItem("username"), sessionStorage.getItem("itemcode"))
+                        }
+                        ajaxUtil.myAjax(null,url,param,function (data) {
+                            if(ajaxUtil.success(data)){
+                                orange.redirect(pathUrl)
+                            }else {
+                                alert(data.msg)
+                            }
+                        },true,"123",type);
+
+                        submitModal.hide()
+                        var submitConfirmModal = {
+                            modalBodyID: "myTopicSubmitTip",
+                            modalTitle: "提示",
+                            modalClass: "modal-lg",
+                            cancelButtonStyle: "display:none",
+                            confirmButtonClass: "btn-danger",
+                            modalConfirmFun: function () {
+                                submitConfirm.hide()
+                                return true;
+                            }
+                        }
+                        var submitConfirm = modalUtil.init(submitConfirmModal)
+                        submitConfirm.show()
+
                     }
-                },true,"123",type);
+                }
+                var submitModal = modalUtil.init(submitModalData)
+                submitModal.show()
+
+
                 return false;
             });
 

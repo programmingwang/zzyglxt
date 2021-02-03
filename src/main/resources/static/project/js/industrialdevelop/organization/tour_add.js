@@ -1,7 +1,7 @@
 //旅游康养机构录入界面
 (function () {
-    require(['jquery','ajaxUtil','stringUtil','uploadImg','objectUtil','distpicker','alertUtil','urlUtil'],
-        function ($,ajaxUtil,stringUtil,uploadImg, objectUtil, distpicker, alertUtil,urlUtil) {
+    require(['jquery','ajaxUtil','stringUtil','uploadImg','objectUtil','distpicker','alertUtil','urlUtil','modalUtil'],
+        function ($,ajaxUtil,stringUtil,uploadImg, objectUtil, distpicker, alertUtil,urlUtil,modalUtil) {
 
             var url = "/industrialdevelop/tec-ser-org/selectbyorgcode";
 
@@ -54,19 +54,46 @@
             });
 
             $("#submitBtn").unbind('click').on('click',function () {
-                var param = generateParam();
-                param.status = "1";
-                param.type = "tour"
-                if (uploadImg.isUpdate()){
-                    ajaxUtil.updateFile(itemcode,uploadImg.getFiles()[0],sessionStorage.getItem("username"), sessionStorage.getItem("itemcode"))
-                }
-                ajaxUtil.myAjax(null,opUrl,param,function (data) {
-                    if(ajaxUtil.success(data)){
-                        orange.redirect(pathUrl)
-                    }else {
-                        alert(data.msg)
+                var submitModalData = {
+                    modalBodyID: "mySubmitModal",
+                    modalTitle: "提示",
+                    modalClass: "modal-lg",
+                    modalConfirmFun: function () {
+                        var param = generateParam();
+                        param.status = "1";
+                        param.type = "tour"
+                        if (uploadImg.isUpdate()){
+                            ajaxUtil.updateFile(itemcode,uploadImg.getFiles()[0],sessionStorage.getItem("username"), sessionStorage.getItem("itemcode"))
+                        }
+                        ajaxUtil.myAjax(null,opUrl,param,function (data) {
+                            if(ajaxUtil.success(data)){
+                                orange.redirect(pathUrl)
+                            }else {
+                                alert(data.msg)
+                            }
+                        },true,"123",type);
+
+                        submitModal.hide()
+                        var submitConfirmModal = {
+                            modalBodyID: "myTopicSubmitTip",
+                            modalTitle: "提示",
+                            modalClass: "modal-lg",
+                            cancelButtonStyle: "display:none",
+                            confirmButtonClass: "btn-danger",
+                            modalConfirmFun: function () {
+                                submitConfirm.hide()
+                                return true;
+                            }
+                        }
+                        var submitConfirm = modalUtil.init(submitConfirmModal)
+                        submitConfirm.show()
+
                     }
-                },true,"123",type);
+                }
+                var submitModal = modalUtil.init(submitModalData)
+                submitModal.show()
+
+
                 return false;
             });
 

@@ -359,7 +359,6 @@ thead.self-thead {
 
 .openBtnP{
     position: relative;
-    left: 73%;
     top: -56px;
 }
 #table td, #table th {
@@ -454,4 +453,7 @@ input, select{
     width: 100%;
     margin-top: 6px;
     color: #775637;
+}
+#upload{
+    z-index: 100;
 }

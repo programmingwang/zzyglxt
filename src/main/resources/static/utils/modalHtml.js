@@ -298,7 +298,11 @@
         modalHtml.myTopicSubmitTip = "操作成功";
         modalHtml.myResetPasswordTips = "重置密码成功，默认密码为：123456";
         modalHtml.myExmainSuccessTips = "评审成功";
-        modalHtml.muPublishIndustrial = "确认上架展示吗？"
+        modalHtml.muPublishIndustrial = "确认上架展示吗？";
+        modalHtml.myExmainScoreTips = "您确定提交此次评审吗？";
+        modalHtml.myExmainSaveTips = "您本次的评审已保存，您可以在表格点击评审继续评审";
+        modalHtml.myReExmainModal = "您确定要重新评审吗？";
+        modalHtml.myReExmainModalSuccessTips = "已重新设置课题状态，您可以重新评审了";
         return modalHtml
     })
 })();

@@ -11,10 +11,8 @@
             $("#btn_save").unbind().on('click',function () {
                 var traSchEntity;
                 var addUpdateUrl;
-                var operateMessage;
                 if(!isUpdate()){
                     addUpdateUrl = "/cul/res/traSch/addTraSch";
-                    operateMessage = "新增中医流派成功";
                     traSchEntity = {
                         itemcode: stringUtil.getUUID(),
                         chineseCulturalName : $("#chineseCulturalName").val(),
@@ -35,7 +33,6 @@
                         chineseCulturalStatus : '0',
                         chineseCulturalContent : editor.txt.html()
                     }
-                    operateMessage = "更新中医流派成功";
                 }
 
                 fileUtil.handleFile(isUpdate(), traSchEntity.itemcode, $("#upload_file")[0].files[0]);
@@ -116,7 +113,7 @@
                                 alertUtil.alert(data.msg);
                             }
                         },false,true);
-                        return false;
+                        return true;
                     }
                 }
                 var x = modalUtil.init(mySubmitToCZ);
@@ -126,6 +123,7 @@
 
             (function init() {
                 if (isUpdate()){
+                    $(".titleCSS").text("修改中医流派信息");
                     var tempdata = JSON.parse(localStorage.getItem("rowData"));
                     $("#chineseCulturalName").val(tempdata.chineseCulturalName);
                     $("#chineseCulturalSource").val(tempdata.chineseCulturalSource);

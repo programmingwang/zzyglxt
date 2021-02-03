@@ -41,4 +41,6 @@ public interface DataDOMapper {
 
     List<DataDO> selectAll();
 
+    List<String> selectAllForMainPage(String dataType);
+
 }

@@ -125,7 +125,7 @@
                                 alertUtil.alert(data.msg);
                             }
                         },false,true);
-                        return false;
+                        return true;
                     }
                 }
                 var x = modalUtil.init(mySubmitToCZ);
@@ -135,6 +135,7 @@
 
             (function init() {
                 if (isUpdate()){
+                    $(".titleCSS").text("修改文化古迹信息");
                     var tempdata = JSON.parse(localStorage.getItem("rowData"));
                     $("#chineseCulturalName").val(tempdata.chineseCulturalName);
                     $("#chineseCulturalSource").val(tempdata.chineseCulturalSource);

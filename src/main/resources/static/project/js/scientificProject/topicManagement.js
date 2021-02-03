@@ -673,11 +673,7 @@
                 var newArr=new Set(newArry)
                 newArry=Array.from(newArr)
                 $("#table").bootstrapTable("load", newArry);
-
             })
-
-
-
 
         })
 })();

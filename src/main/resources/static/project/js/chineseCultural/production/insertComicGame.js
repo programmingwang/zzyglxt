@@ -1,5 +1,5 @@
 (function () {
-    require(['jquery','objectUtil','ajaxUtil','alertUtil','stringUtil','fileUtil','uploadImg',modalUtil],
+    require(['jquery','objectUtil','ajaxUtil','alertUtil','stringUtil','fileUtil','uploadImg','modalUtil'],
         function (jquery,objectUtil,ajaxUtil,alertUtil,stringUtil,fileUtil,uploadImg,modalUtil) {
             const editor = objectUtil.wangEditorUtil();
             uploadImg.init();
@@ -13,10 +13,8 @@
             $("#btn_save").unbind().on('click',function () {
                 var comGamEntity;
                 var addUpdateUrl;
-                var operateMessage;
                 if(!isUpdate()){
                     addUpdateUrl = "/cul/pro/comGam/addComGam";
-                    operateMessage = "新增动漫游戏成功";
                     comGamEntity = {
                         itemcode: stringUtil.getUUID(),
                         chineseCulturalName : $("#chineseCulturalName").val(),
@@ -37,7 +35,6 @@
                         chineseCulturalStatus : '0',
                         chineseCulturalContent : editor.txt.html()
                     }
-                    operateMessage = "更新动漫游戏成功";
                 }
 
                 fileUtil.handleFile(isUpdate(), comGamEntity.itemcode, uploadImg.getFiles()[0]);
@@ -78,10 +75,8 @@
                     modalConfirmFun:function (){
                         var comGamEntity;
                         var addUpdateUrl;
-                        var operateMessage;
                         if(!isUpdate()){
                             addUpdateUrl = "/cul/pro/comGam/addComGam";
-                            operateMessage = "新增动漫游戏成功";
                             comGamEntity = {
                                 itemcode: stringUtil.getUUID(),
                                 chineseCulturalName : $("#chineseCulturalName").val(),
@@ -102,7 +97,6 @@
                                 chineseCulturalStatus : '1',
                                 chineseCulturalContent : editor.txt.html()
                             }
-                            operateMessage = "更新动漫游戏成功";
                         }
 
                         fileUtil.handleFile(isUpdate(), comGamEntity.itemcode, uploadImg.getFiles()[0]);
@@ -132,7 +126,7 @@
                                 alertUtil.alert(data.msg);
                             }
                         },false,true);
-                        return false;
+                        return true;
                     }
                 }
                 var x = modalUtil.init(mySubmitToCZ);
@@ -142,6 +136,7 @@
 
             (function init() {
                 if (isUpdate()){
+                    $(".titleCSS").text("修改动漫游戏信息");
                     var tempdata = JSON.parse(localStorage.getItem("rowData"));
                     $("#chineseCulturalName").val(tempdata.chineseCulturalName);
                     $("#chineseCulturalSource").val(tempdata.chineseCulturalSource);

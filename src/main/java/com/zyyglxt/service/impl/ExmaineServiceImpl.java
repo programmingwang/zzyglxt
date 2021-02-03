@@ -75,15 +75,18 @@ public class ExmaineServiceImpl implements IExmaineService {
 
     @Override
     public List<ExmaineDto> selectAll() {
+        //获得当前表的所有课题code
         List<String> topicCode = expertRefDOMapper.selectAllTopicCode();
         List<ExmaineDto> exmaineDtoList = new LinkedList<>();
         topicCode.forEach(tc ->{
+            //获得当前code的所有课题
             List<ExmaineDto> exmaineDtos = expertRefDOMapper.selectAllByTopicCode(tc);
             int zjktsl = exmaineDtos.size();
             if(zjktsl == 1){
                 exmaineDtoList.add(exmaineDtos.get(0));
             }else if (zjktsl > 1){
                 ExmaineDto exmaineDto = new ExmaineDto();
+                //对有多个专家的项目进行拼接
                 for (int i = 0; i < zjktsl; i++) {
                     if(i == 0){
                         exmaineDto = exmaineDtos.get(0);

@@ -13,10 +13,8 @@
             $("#btn_save").unbind().on('click',function () {
                 var movTVEntity;
                 var addUpdateUrl;
-                var operateMessage;
                 if(!isUpdate()){
                     addUpdateUrl = "/cul/pro/movTv/addMovTv";
-                    operateMessage = "新增电视电影成功";
                     movTVEntity = {
                         itemcode: stringUtil.getUUID(),
                         chineseCulturalName : $("#chineseCulturalName").val(),
@@ -37,7 +35,6 @@
                         chineseCulturalStatus : '0',
                         chineseCulturalContent : editor.txt.html()
                     }
-                    operateMessage = "更新电视电影成功";
                 }
 
                 fileUtil.handleFile(isUpdate(), movTVEntity.itemcode, uploadImg.getFiles()[0]);
@@ -127,7 +124,7 @@
                                 alertUtil.alert(data.msg);
                             }
                         },false,true);
-                        return false;
+                        return true;
                     }
                 }
                 var x = modalUtil.init(mySubmitToCZ);
@@ -138,6 +135,7 @@
 
             (function init() {
                 if (isUpdate()){
+                    $(".titleCSS").text("修改电视电影信息");
                     var tempdata = JSON.parse(localStorage.getItem("rowData"));
                     $("#chineseCulturalName").val(tempdata.chineseCulturalName);
                     $("#chineseCulturalSource").val(tempdata.chineseCulturalSource);

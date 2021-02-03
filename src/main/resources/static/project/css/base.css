@@ -225,11 +225,7 @@ thead.self-thead {
     font-size: 16px;
     color: #5b4622;
 }
-.table{
-    color: #3c4d53;
-    font-family: SourceHanSansCN-Regular;
-    font-size: 16px;
-}
+
 .btn-danger {
     color: #fff;
     background-color: #D60000;
@@ -322,7 +318,8 @@ thead.self-thead {
     border-top: 10px solid white;
 }
 #btn_addTask{
-    width: 171px;
+    /*width: 171px;*/
+    width: 179px;
     height: 40px;
     background-color: #e66736 !important;
     text-align: center;

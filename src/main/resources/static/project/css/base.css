@@ -225,7 +225,11 @@ thead.self-thead {
     font-size: 16px;
     color: #5b4622;
 }
-
+.table{
+    color: #3c4d53;
+    font-family: SourceHanSansCN-Regular;
+    font-size: 16px;
+}
 .btn-danger {
     color: #fff;
     background-color: #D60000;
@@ -384,13 +388,13 @@ thead.self-thead {
     font-size: 16px;
 }
 
-.table td {
+#table td {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
 }
 
-.table td:last-child
+#table td:last-child
 {
     white-space: nowrap;
     overflow: visible !important;
@@ -406,6 +410,7 @@ span.input-text {
     border-radius: 10px;
     background-color: white;
     background-clip: content-box;
+    border-top: 10px solid #f7efeb;
 }
 #table td:last-child>a {
     margin: 0 0.6em 0 0 !important;
@@ -413,4 +418,33 @@ span.input-text {
 
 a{
     cursor: pointer;
+}
+.titleCSS {
+    padding-bottom: 45px;
+    padding-top: 20px;
+    padding-right: 100px;
+    text-align: center;
+    color: #775637;
+    font-size: 24px;
+}
+.titleName {
+    float: right;
+    margin-top: 6px !important;
+    color: #775637;
+}
+th.next {
+    background: #C8C8C8;
+}
+th.prev {
+    background: #C8C8C8;
+}
+input, select{
+    border-color: #c4d3d4;
+}
+.btn-light {
+    background-color: #D3D3D3;
+    border-color: #D3D3D3;
+}
+#table{
+    border-top: 10px solid #fff;
 }

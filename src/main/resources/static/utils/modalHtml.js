@@ -17,7 +17,7 @@
             '        <div class="col-lg-12 col-md-12">\n' +
             '            <fieldset disabled="">\n' +
             '                <div class="input-group mb-3 row">\n' +
-            '                    <div class="input-group-prepend col-lg-3 col-md-3"> <span  class="LeftText">用户账号：</span>\n' +
+            '                    <div class="input-group-prepend col-lg-3 col-md-3"> <span  class="lefttext">用户账号：</span>\n' +
             '                    </div> <input type="text" id="username" class="form-control">\n' +
             '                </div>\n' +
             '            </fieldset>\n' +
@@ -25,7 +25,7 @@
             '        <div class="col-lg-12 col-md-12">\n' +
             '            <fieldset disabled="">\n' +
             '                <div class="input-group mb-3 row">\n' +
-            '                    <div class="input-group-prepend col-lg-3 col-md-3"> <span  class="LeftText">账号名称：</span>\n' +
+            '                    <div class="input-group-prepend col-lg-3 col-md-3"> <span  class="lefttext">账号名称：</span>\n' +
             '                    </div> <input type="text" id="name" class="form-control">\n' +
             '                </div>\n' +
             '            </fieldset>\n' +
@@ -33,7 +33,7 @@
             '        <div class="col-lg-12 col-md-12">\n' +
             '            <fieldset disabled="">\n' +
             '                <div class="input-group mb-3 row ">\n' +
-            '                    <div class="input-group-prepend col-lg-3 col-md-3"> <span  class="LeftText">用户角色：</span>\n' +
+            '                    <div class="input-group-prepend col-lg-3 col-md-3"> <span  class="lefttext">用户角色：</span>\n' +
             '                    </div> <input type="text" id="roleName" class="form-control">\n' +
             '                </div>\n' +
             '            </fieldset>\n' +
@@ -41,7 +41,7 @@
             '        <div class="col-lg-6 col-md-6" style="padding-right: 0;">\n' +
             '            <fieldset disabled="">\n' +
             '                <div class="input-group mb-3 row ">\n' +
-            '                    <div class="input-group-prepend col-lg-6 col-md-6"> <span  class="LeftText">联系人：</span>\n' +
+            '                    <div class="input-group-prepend col-lg-6 col-md-6"> <span  class="lefttext">联系人：</span>\n' +
             '                    </div> <input type="text" id="contacts" class="form-control">\n' +
             '                </div>\n' +
             '            </fieldset>\n' +
@@ -49,7 +49,7 @@
             '        <div class="col-lg-6 col-md-6" style="padding-left: 0;">\n' +
             '            <fieldset disabled="">\n' +
             '                <div class="input-group mb-3 row ">\n' +
-            '                    <div class="input-group-prepend col-lg-6 col-md-6"> <span  class="LeftText">联系电话：</span>\n' +
+            '                    <div class="input-group-prepend col-lg-6 col-md-6"> <span  class="lefttext">联系电话：</span>\n' +
             '                    </div> <input type="text" id="mobilephone" class="form-control">\n' +
             '                </div>\n' +
             '            </fieldset>\n' +
@@ -57,7 +57,7 @@
             '        <div class="col-lg-12 col-md-12">\n' +
             '            <fieldset disabled="">\n' +
             '                <div class="input-group mb-3 row ">\n' +
-            '                    <div class="input-group-prepend col-lg-3 col-md-3"> <span  class="LeftText">主管市区：</span>\n' +
+            '                    <div class="input-group-prepend col-lg-3 col-md-3"> <span  class="lefttext">主管市区：</span>\n' +
             '                    </div> <input type="text" id="cityid" class="form-control">\n' +
             '                </div>\n' +
             '            </fieldset>\n' +
@@ -150,7 +150,7 @@
             '                <fieldset disabled>\n' +
             '                    <div class="input-group mb-3 row">\n' +
             '                        <div class="input-group-prepend col-lg-2 col-md-2 "><span type="button"\n' +
-            '                                class="LeftText">专家账号：</span></div> <input type="text" id="username"\n' +
+            '                                class="lefttext">专家账号：</span></div> <input type="text" id="username"\n' +
             '                            class="form-control col-lg-9 col-md-9">\n' +
             '                    </div>\n' +
             '            </div>\n' +
@@ -158,7 +158,7 @@
             '                <fieldset disabled>\n' +
             '                    <div class="input-group mb-3 row">\n' +
             '                        <div class="input-group-prepend col-lg-2 col-md-2"><span type="button"\n' +
-            '                                class="LeftText">专家姓名：</span></div> <input type="text" id="name"\n' +
+            '                                class="lefttext">专家姓名：</span></div> <input type="text" id="name"\n' +
             '                            class="form-control col-lg-9 col-md-9">\n' +
             '                    </div>\n' +
             '            </div>\n' +
@@ -166,7 +166,7 @@
             '                <fieldset disabled>\n' +
             '                    <div class="input-group mb-3 row">\n' +
             '                        <div class="input-group-prepend col-lg-2 col-md-2"><span type="button"\n' +
-            '                                class="LeftText">性别：</span></div> <input type="text" id="gender"\n' +
+            '                                class="lefttext">性别：</span></div> <input type="text" id="gender"\n' +
             '                            class="form-control col-lg-9 col-md-9">\n' +
             '                    </div>\n' +
             '            </div>\n' +
@@ -174,36 +174,36 @@
             '                <fieldset disabled>\n' +
             '                    <div class="input-group mb-3 row">\n' +
             '                        <div class="input-group-prepend col-lg-2 col-md-2"><span type="button"\n' +
-            '                                class="LeftText">电话号码：</span></div> <input type="text" id="mobilephone"\n' +
+            '                                class="lefttext">电话号码：</span></div> <input type="text" id="mobilephone"\n' +
             '                            class="form-control col-lg-9 col-md-9">\n' +
             '                    </div>\n' +
             '            </div>\n' +
             '            <div class="col-lg-12 col-md-12">\n' +
             '                <fieldset disabled>\n' +
             '                    <div class="input-group mb-3 row">\n' +
-            '                        <div class="input-group-prepend col-lg-2 col-md-2"><sapn type="button" class="LeftText">擅长领域：\n' +
+            '                        <div class="input-group-prepend col-lg-2 col-md-2"><sapn type="button" class="lefttext">擅长领域：\n' +
             '                            </sapn></div> <input type="text" id="filed" class="form-control col-lg-9 col-md-9">\n' +
             '                    </div>\n' +
             '            </div>\n' +
             '        </div>';
         modalHtml.myaddExpertModal = " <form>\n" +
-            "            <div class=\"form-group row\"> <span class=\"col-lg-2 col-md-2 LeftText\">用户账号：</span>\n" +
+            "            <div class=\"form-group row\"> <span class=\"col-lg-2 col-md-2 lefttext\">用户账号：</span>\n" +
             "                <div class=\"col-lg-9 col-md-9\"> <input id=\"expertAccount\" type=\"text\" class=\"form-control\" placeholder=\"请输入\"></div>\n" +
             "            </div>\n" +
-            "            <div class=\"form-group row\"> <span class=\"col-lg-2 col-md-2 LeftText\">专家姓名：</span>\n" +
+            "            <div class=\"form-group row\"> <span class=\"col-lg-2 col-md-2 lefttext\">专家姓名：</span>\n" +
             "                <div class=\"col-lg-9 col-md-9\"> <input id=\"expertName\" type=\"text\" class=\"form-control\" placeholder=\"请输入\"></div>\n" +
             "            </div>\n" +
-            "            <div class=\"form-group row\"> <span class=\"col-lg-2 col-md-2 LeftText\">擅长领域：</span>\n" +
+            "            <div class=\"form-group row\"> <span class=\"col-lg-2 col-md-2 lefttext\">擅长领域：</span>\n" +
             "                <div class=\"col-lg-9 col-md-9\"> <input id=\"expertFiled\" type=\"text\" class=\"form-control\" placeholder=\"请输入\"></div>\n" +
             "            </div>\n" +
-            "            <div class=\"form-group row\"> <span class=\"col-lg-2 col-md-2 LeftText\">性别：</span>\n" +
+            "            <div class=\"form-group row\"> <span class=\"col-lg-2 col-md-2 lefttext\">性别：</span>\n" +
             "                <div class=\"col-lg-9 col-md-9\"> <select id=\"expertGender\" type=\"text\" class=\"form-control\" placeholder=\"请输入\">\n" +
             "                        <option value='男'>男\n" +
             "                        </option>\n" +
             "                        <option value='女'>女</option>\n" +
             "                    </select></div>\n" +
             "            </div>\n" +
-            "            <div class=\"form-group row\"> <span class=\"col-lg-2 col-md-2 LeftText\">联系电话：</span>\n" +
+            "            <div class=\"form-group row\"> <span class=\"col-lg-2 col-md-2 lefttext\">联系电话：</span>\n" +
             "                <div class=\"col-lg-9 col-md-9\"> <input id=\"expertPhone\" type=\"text\" class=\"form-control\" placeholder=\"请输入\"></div>\n" +
             "            </div>\n" +
             "        </form>";
@@ -216,14 +216,14 @@
             '                \n' +
             '                <div class="col-lg-12 col-md-12" style="margin-bottom: 10px;">\n' +
             '                    <div class="input-group mb-3 row">\n' +
-            '                        <span class=\'input-label  col-lg-3 col-md-3 LeftText\'>开启时间：</span>\n' +
+            '                        <span class=\'input-label  col-lg-3 col-md-3 lefttext\'>开启时间：</span>\n' +
             '                         <input type="text" id="startTime" class="col-lg-9 col-md-9" > <i\n' +
             '                            class="fa fa-calendar fa-lg" style="position: absolute;top: 0.5rem;right: 7px;"></i>\n' +
             '                    </div>\n' +
             '                </div>\n' +
             '                <div class="col-lg-12 col-md-12" >\n' +
             '                    <div class="input-group mb-3 row">\n' +
-            '                        <span class=\'input-label col-lg-3 col-md-3 LeftText\'>结束时间：</span>\n' +
+            '                        <span class=\'input-label col-lg-3 col-md-3 lefttext\'>结束时间：</span>\n' +
             '                        <input type="text" id="endTime" class="col-lg-9 col-md-9"> <i class="fa fa-calendar fa-lg"\n' +
             '                            style="position: absolute;top: 0.5rem;right: 7px;"></i>\n' +
             '                    </div>\n' +

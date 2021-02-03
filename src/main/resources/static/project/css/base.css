@@ -454,6 +454,9 @@ input, select{
     margin-top: 6px;
     color: #775637;
 }
+.custom-select{
+    border-radius: 0;
+}
 #upload{
     z-index: 100;
 }

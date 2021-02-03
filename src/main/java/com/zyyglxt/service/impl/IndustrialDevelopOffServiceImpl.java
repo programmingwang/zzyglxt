@@ -66,8 +66,10 @@ public class IndustrialDevelopOffServiceImpl implements IIndustrialDevelopOffSer
 
         if (date.after(begin) && date.before(end)) {
             record.setIsimp("1");
-        } else {
-           record.setIsimp("0");
+        } else if(begin.before(date)){
+           record.setIsimp("2");
+        }else if(end.after(date)){
+            record.setIsimp("0");
         }
         developOffDOMapper.insertSelective(record);
     }

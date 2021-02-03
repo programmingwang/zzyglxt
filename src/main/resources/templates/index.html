@@ -9,6 +9,7 @@
     <link rel="stylesheet" th:href="@{/fonts/font-awesome.min.css}">
 </head>
 <body id="main"  style="background-color: #f7efeb;background-clip: content-box;">
+<div id="fir_body">
     <div class="topback" th:style="'background: url(' + '/images/new/top.png' + ');background-color: #5b4622;'"></div>
     <div id="header" class="header-bg row h60 test-border" >
         <div class="col-md-3 col-lg-3 pl-5">
@@ -30,7 +31,7 @@
                             <div th:style="'background: url(' + '/images/new/head.png' + ');width: 25px;position: relative;height: 25px;top: 6px;'"></div>
                         </li>
                         <li class="nav-item dropdown">
-                            <a class="nav-item nav-link  mr-md-2 text-white" th:href="@{/toUserMsg}" >
+                            <a class="nav-item nav-link  mr-md-2 text-white" id="usermsg">
                                 个人信息
                             </a>
                         </li>
@@ -57,7 +58,7 @@
 
         </div>
     </div>
-
+</div>
 </body>
 <script type="text/javascript" data-main="/main/main.js" src="/component/require@2.3.6/require-2.3.6.js"></script>
 </html>

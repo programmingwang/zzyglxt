@@ -64,7 +64,15 @@
                     ctx.stroke();
                 }
 
-            }
+            };
+
+            $("#checkpassword").on("blur", function () {
+                let password = $("#password").val();
+                let checkpwd = $("#checkpassword").val();
+                if (checkpwd != password){
+                    alertUtil.info("两次输入的密码不一致")
+                }
+            });
 
             // 机构审核状态
             $("#orgCode").on("blur", function () {
@@ -175,8 +183,8 @@
                 let orgCode = $("#orgCode").val();
                 let username = $("#username").val();
                 let password = $("#password").val();
+                let checkpwd = $("#checkpassword").val();
                 let phone = $("#phone").val();
-
                 let inputCode = $("#reg-code").val().toLowerCase();
                 let canvasCode = codeStr.join("").toLowerCase();
 
@@ -196,15 +204,27 @@
                     alertUtil.error('请输入用户名！');
                     return false;
                 }
+                var reg = /^[a-zA-Z]([\s\S]{4,11})$/;//以字母开头，5-12位，([\s\S]*)匹配任意字符
+                if (!reg.test(username)) {
+                    alertUtil.error("用户账号须以字母开头，长度为5-12位");
+                    return false
+                }
                 if (password == '') {
                     alertUtil.error('请输入密码！');
+                    return false;
+                }
+                if (checkpwd == '') {
+                    alertUtil.error('请确认密码！');
                     return false;
                 }
                 if (phone == '') {
                     alertUtil.error('请输入电话号码或手机号码！');
                     return false;
                 }
-
+                if (password != checkpwd){
+                    alertUtil.info("两次输入的密码不一致");
+                    return false
+                }
                 if (inputCode == '') {
                     alertUtil.error('请输入验证码！');
                     return false;
@@ -214,7 +234,7 @@
                     alertUtil.error('验证码错误！请重新输入！');
                     return false
                 }
-            }
+            };
 
             $("#btn_register").unbind("click").bind("click", function () {
                 let orgName = $("#orgName").val();
@@ -246,7 +266,7 @@
                         }
                     }, false)
                 }
-            })
+            });
 
             // 判断str中是否含有substr
             function isContains(str, substr) {

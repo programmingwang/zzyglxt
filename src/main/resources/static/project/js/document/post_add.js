@@ -45,7 +45,7 @@
             let send = dictUtil.getDictByCode(dictUtil.DICT_LIST.areaAdmin);
             $("#masterSend").selectUtil(send);
 
-            console.log($("#copySendGoal").val())
+            //console.log($("#copySendGoal").val())
             //抄送目标
             $("#copySendGoal").selectUtil(send);
             $("#add").unbind().on("click",function () {
@@ -112,10 +112,6 @@
                 initialDate : nowTime,
             };
 
-            /*console.log(uuid)
-            var stt= "2" + uuid.substring(1);
-            console.log(stt);*/
-
 
             $("#savebtn").unbind().on('click',function () {
                 var PostEntity;
@@ -157,8 +153,7 @@
                     ajaxUtil.postFileAjax(uuid,postFile[0], code1, sessionStorage.getItem("username"), sessionStorage.getItem("itemcode"));
                     ajaxUtil.postFileAjax(uuid,postFile[1], code2, sessionStorage.getItem("username"), sessionStorage.getItem("itemcode"));
 
-                }
-                else {
+                } else {
                     var needData = JSON.parse(localStorage.getItem("rowData"));
                     requestUrl = "/post/updatePost";
                     PostEntity = {
@@ -174,22 +169,21 @@
                         postDocumentNum : $("#postDocumentNum").val(),
                     };
                     operateMessage = "修改发文信息成功";
-                    if($("#fairFile")[0].files[0] != null){
-                        ajaxUtil.myAjax(null,"/file/delete?dataCode="+PostEntity.itemcode,null,function (data) {
+                    if (needData.fileName !== null){
+                        ajaxUtil.myAjax(null,"/file/delete?dataCode="+needData.itemcode,null,function (data) {
                             if(!ajaxUtil.success(data)){
-                                return alertUtil.error("文件删除失败,可能是文件损坏或不存在了");
+                                return alertUtil.warning("文件删除失败,可能是文件损坏或不存在了");
                             }
                         },false,"","get");
-                        ajaxUtil.fileAjax(itemcode,file,stringUtil.getUUID(),sessionStorage.getItem("username"), sessionStorage.getItem("itemcode"));
+                        postFile = [];
+                        postFile[0] = $("#upload_file")[0].files[0];
+                        postFile[1] = $("#fairFile")[0].files[0];
+                        code1 = "1" + needData.itemcode.substring(1);
+                        code2 = "2" + needData.itemcode.substring(1);
+                        ajaxUtil.postFileAjax(needData.itemcode,postFile[0], code1, sessionStorage.getItem("username"), sessionStorage.getItem("itemcode"));
+                        ajaxUtil.postFileAjax(needData.itemcode,postFile[1], code2, sessionStorage.getItem("username"), sessionStorage.getItem("itemcode"));
                     }
-
                 }
-                /*var postFile = [];
-                postFile[0] = $("#upload_file")[0].files[0];
-                postFile[1] = $("#fairFile")[0].files[0];*/
-                //fileUtil.postFiles(isUpdate(), PostEntity.itemcode, postFile);
-                //fileUtil.handleFile(isUpdate(), PostEntity.itemcode, $("#upload_file")[0].files[0]);
-
                 ajaxUtil.myAjax(null,requestUrl,PostEntity,function (data) {
                     if(ajaxUtil.success(data)){
                         ajaxUtil.myAjax(null,adviceUrl,AdviceEntity,function (data) {
@@ -283,7 +277,7 @@
             (function init() {
                 if (isUpdate()){
                     var tempdata = JSON.parse(localStorage.getItem("rowData"));
-                    console.log(tempdata);
+                    //console.log(tempdata);
                     if (tempdata.postFairDepartmentReview == "1"){
                         $('#fairFile1').attr('style',"display:none");
                     }

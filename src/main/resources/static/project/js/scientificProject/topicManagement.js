@@ -193,7 +193,17 @@
                             ajaxUtil.myAjax(null,"/industrialdevelop/delTopic",projectEntity,function (data) {
                                 if(ajaxUtil.success(data)){
                                     ajaxUtil.deleteFile(row.itemcode);
-                                    alertUtil.info("删除课题项目成功");
+                                    var submitConfirmModal = {
+                                        modalBodyID :"myTopicSubmitTip",
+                                        modalTitle : "提示",
+                                        modalClass : "modal-lg",
+                                        cancelButtonStyle: "display:none",
+                                        modalConfirmFun:function (){
+                                            return true;
+                                        }
+                                    }
+                                    var submitConfirm = modalUtil.init(submitConfirmModal);
+                                    submitConfirm.show();
                                     isSuccess = true;
                                     refreshTable();
                                 }
@@ -240,7 +250,17 @@
                                             if(ajaxUtil.success(data)){
                                                 if(data.code == 88888){
                                                     ajaxUtil.myAjax(null,"/industrialdevelop/updTopic",developTopicDO,null,false,true);
-                                                    alertUtil.info("审核已通过");
+                                                    var submitConfirmModal = {
+                                                        modalBodyID :"myTopicSubmitTip",
+                                                        modalTitle : "提示",
+                                                        modalClass : "modal-lg",
+                                                        cancelButtonStyle: "display:none",
+                                                        modalConfirmFun:function (){
+                                                            return true;
+                                                        }
+                                                    }
+                                                    var submitConfirm = modalUtil.init(submitConfirmModal);
+                                                    submitConfirm.show();
                                                     isSuccess = true;
                                                     refreshTable();
                                                 }else{
@@ -295,7 +315,17 @@
                                                     ajaxUtil.myAjax(null,"/industrialdevelop/projectStatus/"+row.itemid+"/"+row.itemcode,xmStatus,function (data) {
                                                         if(ajaxUtil.success(data)){
                                                             if(data.code == 88888){
-                                                                alertUtil.info("操作成功");
+                                                                var submitConfirmModal = {
+                                                                    modalBodyID :"myTopicSubmitTip",
+                                                                    modalTitle : "提示",
+                                                                    modalClass : "modal-lg",
+                                                                    cancelButtonStyle: "display:none",
+                                                                    modalConfirmFun:function (){
+                                                                        return true;
+                                                                    }
+                                                                }
+                                                                var submitConfirm = modalUtil.init(submitConfirmModal);
+                                                                submitConfirm.show();
                                                                 isSuccess = true;
                                                                 refreshTable();
                                                             }else{

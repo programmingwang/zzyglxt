@@ -78,6 +78,7 @@
 
             var init = function () {
                 if (isUpdate()) {
+                    $(".titleCSS").text("修改合作交流信息");
                     var tempdata = JSON.parse(localStorage.getItem("rowData"));
                     ajaxUtil.myAjax(null,"/file/get/"+ tempdata.itemcode,null,
                         function (res) {

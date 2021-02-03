@@ -42,10 +42,20 @@
 
                         var isSuccess = false;
                         ajaxUtil.myAjax(null,opUrl,submitStatus,function (data) {
-                            if(ajaxUtil.success(data)){
-                                alertUtil.info("设置时间成功");
-                                isSuccess = true;
-                                refreshTable();
+                            if(startTime!=""&&endTime!=""){
+                                var start=new Date(startTime.replace("-","/").replace("-","/"));
+                                var end=new Date(endTime.replace("-","/").replace("-","/"));
+                                if(end>start){
+                                    if(ajaxUtil.success(data)) {
+                                    alertUtil.info("设置时间成功");
+                                    isSuccess = true;
+                                    refreshTable();
+                                }
+                            }else {
+                                    alertUtil.info("结束时间不能小于开始时间");
+                                }
+                            }else{
+                                alertUtil.info("时间栏不能为空");
                             }
                         },false,true,"POST");
                         return isSuccess;
@@ -96,6 +106,10 @@
 
             var pl = dictUtil.getDictByCode(dictUtil.DICT_LIST.showStatus);
             $("#chargePersonSearch").selectUtil(pl);
+
+            var p3 = dictUtil.getDictByCode(dictUtil.DICT_LIST.timeStatus);
+            $("#chargePersonSearch").selectUtil(p3);
+
             var pl2 = [];
             for(var i = -1 ; i <= 1; i++){
                 pl2.push({id:generateSearchYear(i),text:generateSearchYear(i)})
@@ -107,6 +121,9 @@
                 {field: 'year', title: '年份',width:'200px'},
                 {field: 'startTime', title: '开启时间'},
                 {field: 'endTime', title: '结束时间'},
+                {field: 'isimp', title: '状态',formatter:function (row) {
+                        return '<p>'+p3[row].text+'</p>';
+                    }},
                 {field: 'creater', title: '操作人'},
                 {field: 'itemcreateat', title: '操作时间'}
             ];

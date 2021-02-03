@@ -121,18 +121,23 @@ public class UserController {
     @LogAnnotation(logTitle = "修改密码", logLevel = "2")
     @RequestMapping(value = "/updatepwd", method = RequestMethod.PUT)
     public ResponseData UpdatePassword(UpdatePwdDto updatePwdDto) {
-        if (StringUtils.isEmpty(updatePwdDto.getNewPassword()) || StringUtils.isEmpty(updatePwdDto.getCheckNewPassword())) {
+        if (StringUtils.isBlank(updatePwdDto.getNewPassword()) || StringUtils.isBlank(updatePwdDto.getCheckNewPassword()) ||
+                StringUtils.isBlank(updatePwdDto.getMobilePhone()) || StringUtils.isBlank(updatePwdDto.getPassword())) {
             return new ResponseData(EmBusinessError.INPUT_NOT_NULL);
         } else {
-            if (updatePwdDto.getNewPassword().equals(updatePwdDto.getCheckNewPassword())) {
-                ResponseData rd = iuserService.UpdatePassword(updatePwdDto);
-                if (rd.getCode().equals(EmBusinessError.success.getErrCode())) {
-                    return new ResponseData(EmBusinessError.success);
-                } else {
-                    return new ResponseData(EmBusinessError.MODIFY_USER_MESSAGE_FAILED);
-                }
+            if (updatePwdDto.getPassword().equals(updatePwdDto.getNewPassword())) {
+                return new ResponseData(EmBusinessError.OPWD_EQUAL_NPWD);
             } else {
-                return new ResponseData(EmBusinessError.NEWPASSWORD_NOT_EQUAL);
+                if (updatePwdDto.getNewPassword().equals(updatePwdDto.getCheckNewPassword())) {
+                    ResponseData rd = iuserService.UpdatePassword(updatePwdDto);
+                    if (rd.getCode().equals(EmBusinessError.success.getErrCode())) {
+                        return new ResponseData(EmBusinessError.success);
+                    } else {
+                        return new ResponseData(EmBusinessError.MODIFY_USER_MESSAGE_FAILED);
+                    }
+                } else {
+                    return new ResponseData(EmBusinessError.NEWPASSWORD_NOT_EQUAL);
+                }
             }
         }
     }
@@ -166,7 +171,7 @@ public class UserController {
     @LogAnnotation(logTitle = "查询所有用户", logLevel = "1")
     @RequestMapping(value = "/alluser", method = RequestMethod.GET)
     public ResponseData selectAllUser() {
-        List<UserDO> users = userService.selectAllUser(usernameUtil.getItemCode(),usernameUtil.getOperateUser());
+        List<UserDO> users = userService.selectAllUser(usernameUtil.getItemCode(), usernameUtil.getOperateUser());
         return new ResponseData(EmBusinessError.success, users);
     }
 
@@ -177,7 +182,7 @@ public class UserController {
      */
     @LogAnnotation(logTitle = "科研项目-账号管理-新增用户", logLevel = "3")
     @RequestMapping(value = "/adduser", method = RequestMethod.POST)
-    public ResponseData insertUser(@RequestBody UserDO userDO){
+    public ResponseData insertUser(@RequestBody UserDO userDO) {
         userService.insertUserSelective(userDO);
         return new ResponseData(EmBusinessError.success);
     }
@@ -185,24 +190,26 @@ public class UserController {
     /**
      * 用户未录入机构信息点击返回按钮则删除用户信息
      * 科研项目管理-账号管理-删除用户
+     *
      * @param userDtO
      * @return
      */
     @LogAnnotation(logTitle = "科研项目-账号管理-删除用户", logLevel = "4")
     @RequestMapping(value = "/deletuser", method = RequestMethod.POST)
-    public ResponseData deleteUserByUsername(@RequestBody UserDto userDtO){
+    public ResponseData deleteUserByUsername(@RequestBody UserDto userDtO) {
         userService.deleteUserByUsername(userDtO);
         return new ResponseData(EmBusinessError.success);
     }
 
     /**
      * 科研项目管理-账号管理-重置密码
+     *
      * @param userDo
      * @return
      */
-    @LogAnnotation(logTitle ="科研项目-账号管理-重置密码",logLevel ="2")
+    @LogAnnotation(logTitle = "科研项目-账号管理-重置密码", logLevel = "2")
     @RequestMapping(value = "/reset", method = RequestMethod.PUT)
-    public ResponseData resetPassword(@RequestBody UserDO userDo){
+    public ResponseData resetPassword(@RequestBody UserDO userDo) {
         userService.resetPassword(userDo);
         return new ResponseData(EmBusinessError.success);
     }

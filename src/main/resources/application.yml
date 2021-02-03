@@ -12,9 +12,6 @@ spring:
     name: zyyglxt
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://47.106.185.189:3306/culpro?useUnicode=true&characterEncoding=utf8
-    username: root
-    password: C&PVBLNPNR^F^qjr
     type: com.alibaba.druid.pool.DruidDataSource
     druid:
       initialSize: 5

@@ -318,7 +318,8 @@ thead.self-thead {
     border-top: 10px solid white;
 }
 #btn_addTask{
-    width: 171px;
+    /*width: 171px;*/
+    width: 179px;
     height: 40px;
     background-color: #e66736 !important;
     text-align: center;
@@ -410,6 +411,15 @@ span.input-text {
 #table td:last-child>a {
     margin: 0 0.6em 0 0 !important;
 }
+
 a{
     cursor: pointer;
+}
+.titleCSS {
+    padding-bottom: 45px;
+    padding-top: 20px;
+    padding-right: 100px;
+    text-align: center;
+    color: #775637;
+    font-size: 24px;
 }

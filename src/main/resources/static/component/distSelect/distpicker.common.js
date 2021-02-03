@@ -50,7 +50,7 @@ var DEFAULTS = {
     // Select value. Options: 'name' and 'code'
     valueType: 'name',
     // Defines the initial value of province.
-    province: '—— 省 ——',
+    province: '河北省',
     // Defines the initial value of city.
     city: '—— 市 ——',
     // Defines the initial value of district.

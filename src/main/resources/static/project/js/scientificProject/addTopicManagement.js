@@ -194,6 +194,7 @@
                                     modalConfirmFun: function () {
                                         var url = "/scientificProject/topicManagement";
                                         orange.redirect(url);
+                                        return true;
                                     }
                                 }
                                 var submitConfirm = modalUtil.init(submitConfirmModal);

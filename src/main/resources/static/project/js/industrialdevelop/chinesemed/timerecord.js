@@ -24,7 +24,7 @@
                 var myViewTimeModalData ={
                     modalBodyID : "myTimeModal", //公用的在后面给span加不同的内容就行了，其他模块同理
                     modalTitle : "设置填报时间",
-                    modalClass : "modal-md",
+                    modalClass : "modal-lg",
                     confirmButtonClass : "btn-danger",
                     modalConfirmFun:function () {
                         //var year=new Date();
@@ -67,7 +67,7 @@
 
                 var date= new Date();
                 $("#startTime").datetimepicker({
-                    format: 'yyyy-mm-dd hh:ii:00',//显示格式
+                    format: 'yyyy-mm-dd hh:00:00',//显示格式
                     startDate: date ,
                     startView:2,
                     minView:1,
@@ -78,7 +78,7 @@
                     showMeridian:true,
                 });
                 $("#endTime").datetimepicker({
-                    format: 'yyyy-mm-dd hh:ii:00',//显示格式
+                    format: 'yyyy-mm-dd hh:00:00',//显示格式
                     startDate: date ,
                     startView:2,
                     minView:1,
@@ -122,7 +122,7 @@
                 {field: 'startTime', title: '开启时间'},
                 {field: 'endTime', title: '结束时间'},
                 {field: 'isimp', title: '状态',formatter:function (row) {
-                        return '<p>'+p3[row].text+'</p>';
+                        return p3[row].text;
                     }},
                 {field: 'creater', title: '操作人'},
                 {field: 'itemcreateat', title: '操作时间'}

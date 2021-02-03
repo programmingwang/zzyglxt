@@ -182,20 +182,20 @@
 
 
             var aCol = [
-                {field: 'projectNo', title: '项目编号'},
+                {field: 'projectNo', title: '项目编号',width:'200px'},
                 {field: 'projectName', title: '项目名称', formatter: viewOperation, events: viewEvents},
                 {field: 'company', title: '申报单位'},
                 {field: 'exmaineStatus', title: '状态', formatter:function (value) {
                         if(value.search("1") == -1){
-                            return '<p>'+pl[0].text+'</p>';
+                            return +pl[0].text;
                         }else if(value.search("0") == -1){
-                            return '<p>'+pl[1].text+'</p>';
+                            return pl[1].text;
                         }else {
-                            return '<p>'+pl[2].text+'</p>';
+                            return pl[2].text;
                         }
 
                     }},
-                {field: 'action',  title: '操作',formatter: operation,events:orgEvents}
+                {field: 'action',  title: '操作',width:'300px',formatter: operation,events:orgEvents}
             ];
 
             var myTable = bootstrapTableUtil.myBootStrapTableInit("table", url, aParam, aCol);

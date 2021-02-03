@@ -403,7 +403,7 @@
                         return index + 1;
                     }
                 },
-                {field: 'projectNo', title: '项目编号'},
+                {field: 'projectNo', title: '项目编号',width:'200px',},
                 {field: 'projectName', title: '项目名称', formatter: viewOperation, events: viewEvents},
                 {field: 'company', title: '申报单位'},
                 {
@@ -416,7 +416,7 @@
                         }
                     }
                 },
-                {field: 'action', title: '操作', formatter: operation, events: orgEvents}
+                {field: 'action', title: '操作',width:'200px', formatter: operation, events: orgEvents}
             ];
 
             var myTable = bootstrapTableUtil.myBootStrapTableInit("table", url, aParam, aCol);

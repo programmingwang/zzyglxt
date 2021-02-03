@@ -319,6 +319,7 @@ thead.self-thead {
 }
 #btn_addTask{
     /*width: 171px;*/
+    float:right;
     width: 179px;
     height: 40px;
     background-color: #e66736 !important;
@@ -327,6 +328,7 @@ thead.self-thead {
     border-color: #e66736;
 }
 #addExper{
+    float: right;
     width: 140px;
     height: 40px;
     background-color: #e66736;
@@ -336,6 +338,8 @@ thead.self-thead {
 }
 #deleteExper{
     width: 154px;
+    float: right;
+    margin-right: 1rem;
     height: 40px;
     background-color: #e66736;
     text-align: center;
@@ -385,13 +389,13 @@ thead.self-thead {
     font-size: 16px;
 }
 
-.table td {
+#table td {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
 }
 
-.table td:last-child
+#table td:last-child
 {
     white-space: nowrap;
     overflow: visible !important;
@@ -407,6 +411,7 @@ span.input-text {
     border-radius: 10px;
     background-color: white;
     background-clip: content-box;
+    border-top: 10px solid #f7efeb;
 }
 #table td:last-child>a {
     margin: 0 0.6em 0 0 !important;
@@ -422,4 +427,31 @@ a{
     text-align: center;
     color: #775637;
     font-size: 24px;
+}
+.titleName {
+    float: right;
+    margin-top: 6px !important;
+    color: #775637;
+}
+th.next {
+    background: #C8C8C8;
+}
+th.prev {
+    background: #C8C8C8;
+}
+input, select{
+    border-color: #c4d3d4;
+}
+.btn-light {
+    background-color: #D3D3D3;
+    border-color: #D3D3D3;
+}
+#table{
+    border-top: 10px solid #fff;
+}
+.lefttext{
+    text-align: right;
+    width: 100%;
+    margin-top: 6px;
+    color: #775637;
 }

@@ -10,18 +10,24 @@ public class HealthCareChineseMedicineDO extends HealthCareChineseMedicineDOKey 
 
     private String chineseMedicineType;
 
+    @NotBlank(message = "中医药别名不能为空")
     private String chineseMedicineAlias;
 
     private String chineseMedicineSource;
 
+    @NotBlank(message = "中医药采制不能为空")
     private String chineseMedicineHarvesting;
 
+    @NotBlank(message = "中医药性味不能为空")
     private String chineseMedicineTaste;
 
+    @NotBlank(message = "中医药归经不能为空")
     private String chineseMedicineMerTro;
 
+    @NotBlank(message = "中医药功能主治不能为空")
     private String chineseMedicineEffect;
 
+    @NotBlank(message = "中医药用法用量不能为空")
     private String chineseMedicineUsage;
 
     private String chineseMedicineStatus;

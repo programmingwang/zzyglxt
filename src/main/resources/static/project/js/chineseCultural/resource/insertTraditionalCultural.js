@@ -12,10 +12,8 @@
             $("#btn_save").unbind().on('click',function () {
                 var traCulEntity ;
                 var addUpdateUrl;
-                var operateMessage;
                 if(!isUpdate()){
                     addUpdateUrl = "/cul/res/traCul/addTraCul";
-                    operateMessage = "新增中医医史成功";
                     traCulEntity = {
                         itemcode: stringUtil.getUUID(),
                         chineseCulturalName : $("#chineseCulturalName").val(),
@@ -36,7 +34,6 @@
                         chineseCulturalStatus : '0',
                         chineseCulturalContent : editor.txt.html()
                     }
-                    operateMessage = "更新中医医史记成功";
                 }
 
                 ajaxUtil.myAjax(null,addUpdateUrl,traCulEntity,function (data) {
@@ -69,10 +66,8 @@
                     modalConfirmFun:function (){
                         var traCulEntity ;
                         var addUpdateUrl;
-                        var operateMessage;
                         if(!isUpdate()){
                             addUpdateUrl = "/cul/res/traCul/addTraCul";
-                            operateMessage = "新增中医医史成功";
                             traCulEntity = {
                                 itemcode: stringUtil.getUUID(),
                                 chineseCulturalName : $("#chineseCulturalName").val(),
@@ -93,7 +88,6 @@
                                 chineseCulturalStatus : '1',
                                 chineseCulturalContent : editor.txt.html()
                             }
-                            operateMessage = "更新中医医史记成功";
                         }
 
                         ajaxUtil.myAjax(null,addUpdateUrl,traCulEntity,function (data) {
@@ -115,7 +109,7 @@
                                 alertUtil.alert(data.msg);
                             }
                         },false,true);
-                        return false;
+                        return true;
                     }
                 }
                 var x = modalUtil.init(mySubmitToCZ);
@@ -126,6 +120,7 @@
 
             (function init() {
                 if (isUpdate()){
+                    $(".titleCSS").text("修改中医医史信息");
                     var tempdata = JSON.parse(localStorage.getItem("rowData"));
                     $("#chineseCulturalName").val(tempdata.chineseCulturalName);
                     $("#chineseCulturalSource").val(tempdata.chineseCulturalSource);

@@ -32,7 +32,6 @@
                         name : $("#name").val(),
                         source : $("#source").val(),
                         prescription : $("#prescription").val(),
-                        status : $("#status").val(),
                         type : $("#type").val(),
                         status :  '0',
                         content : editor.txt.html()

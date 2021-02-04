@@ -15,15 +15,11 @@ public interface ResourcesService {
 
     void deleteByPrimaryKey(ResourcesDO resourcesDO);
 
-    int insert(ResourcesDO record);
-
     void insertSelective(ResourcesDO record);
 
     ResourcesDO selectByPrimaryKey(ResourcesDOKey key);
 
     int updateByPrimaryKeySelective(ResourcesDO record);
-
-    int updateByPrimaryKey(ResourcesDO record);
 
     List<ResourcesDO> selectAllResources();
 

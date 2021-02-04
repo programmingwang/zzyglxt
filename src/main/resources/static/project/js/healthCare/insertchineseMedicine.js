@@ -84,10 +84,8 @@
                     modalConfirmFun:function (){
                         var chinesemedicineEntity;
                         var addUpdateUrl;
-                        var operateMessage;
                         if(!isUpdate()){
                             addUpdateUrl = "inserthealthcarechinesemedicinedo";
-                            operateMessage = "新增中医药成功";
                             chinesemedicineEntity = {
                                 itemcode: stringUtil.getUUID(),
                                 chineseMedicineName : $("#chineseMedicineName").val(),//中药材名称
@@ -98,7 +96,7 @@
                                 chineseMedicineMerTro : $("#chineseMedicineMerTro").val(),//归经
                                 chineseMedicineEffect : $("#chineseMedicineEffect").val(),//功能主治
                                 chineseMedicineUsage :$("#chineseMedicineUsage").val(),//用法用量
-                                ChineseMedicineStatus : '1'
+                                chineseMedicineStatus : '1'
                                 /*chineseMedicineUsage : editor.txt.html()*/
                             };
                         }else{
@@ -115,7 +113,7 @@
                                 chineseMedicineMerTro : $("#chineseMedicineMerTro").val(),//归经
                                 chineseMedicineEffect : $("#chineseMedicineEffect").val(),//功能主治
                                 chineseMedicineUsage :$("#chineseMedicineUsage").val(),//用法用量
-                                status : '1',
+                                chineseMedicineStatus : '1',
                                 /* chineseMedicineUsage : editor.txt.html()*/
                             }
                         }

@@ -304,8 +304,8 @@
             var aCol = [
                 {field: 'chineseCulturalName', title: '流派名称'},
                 {field: 'filePath', title: '附件', formatter:function (value, row, index) {
-                        if(value == "已经损坏了"){
-                            return '<p>'+value+'</p>';
+                        if(value == null){
+                            return '<p style="padding-top: 15px">无附件</p>';
                         }else{
                             return '<a href="'+value+'">'+row.fileName+'</a>'
                         }

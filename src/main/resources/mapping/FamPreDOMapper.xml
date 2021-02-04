@@ -5,6 +5,8 @@
     <id column="itemID" jdbcType="INTEGER" property="itemid" />
     <id column="itemCode" jdbcType="CHAR" property="itemcode" />
     <result column="NAME" jdbcType="VARCHAR" property="name" />
+    <result column="AUTHOR" jdbcType="VARCHAR" property="author" />
+    <result column="FAMSOURCE" jdbcType="VARCHAR" property="famsource" />
     <result column="SOURCE" jdbcType="VARCHAR" property="source" />
     <result column="PRESCRIPTION" jdbcType="VARCHAR" property="prescription" />
     <result column="VISIT_NUM" jdbcType="INTEGER" property="visitNum" />
@@ -21,7 +23,7 @@
   </resultMap>
   <sql id="Base_Column_List">
 
-    itemID, itemCode, NAME, SOURCE, PRESCRIPTION, VISIT_NUM, STATUS, TYPE, CREATER, itemCreateAt,
+    itemID, itemCode, NAME, AUTHOR,FAMSOURCE,SOURCE, PRESCRIPTION, VISIT_NUM, STATUS, TYPE, CREATER, itemCreateAt,
     UPDATER, itemUpdateAt
   </sql>
   <sql id="Blob_Column_List">
@@ -46,13 +48,13 @@
   </delete>
   <insert id="insert" parameterType="com.zyyglxt.dataobject.FamPreDO">
 
-    insert into tb_culpro_fam_pre (itemID, itemCode, NAME, 
+    insert into tb_culpro_fam_pre (itemID, itemCode, NAME, AUTHOR,FAMSOURCE,
       SOURCE, PRESCRIPTION, VISIT_NUM, 
       STATUS, TYPE, CREATER, itemCreateAt,
       UPDATER, itemUpdateAt, CONTENT
       )
     values (#{itemid,jdbcType=INTEGER}, #{itemcode,jdbcType=CHAR}, #{name,jdbcType=VARCHAR}, 
-      #{source,jdbcType=VARCHAR}, #{prescription,jdbcType=VARCHAR}, #{visitNum,jdbcType=INTEGER}, 
+       #{author,jdbcType=VARCHAR},#{famsource,jdbcType=VARCHAR}, #{source,jdbcType=VARCHAR}, #{prescription,jdbcType=VARCHAR}, #{visitNum,jdbcType=INTEGER},
       #{status,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, #{creater,jdbcType=VARCHAR}, #{itemcreateat,jdbcType=TIMESTAMP},
       #{updater,jdbcType=VARCHAR}, #{itemupdateat,jdbcType=TIMESTAMP}, #{content,jdbcType=LONGVARCHAR}
       )
@@ -68,6 +70,12 @@
       </if>
       <if test="name != null">
         NAME,
+      </if>
+      <if test="author != null">
+        AUTHOR,
+      </if>
+      <if test="famsource != null">
+        FAMSOURCE,
       </if>
       <if test="source != null">
         SOURCE,
@@ -110,6 +118,12 @@
       <if test="name != null">
         #{name,jdbcType=VARCHAR},
       </if>
+      <if test="author != null">
+        #{author,jdbcType=VARCHAR},
+      </if>
+      <if test="famsource != null">
+        #{famsource,jdbcType=VARCHAR},
+      </if>
       <if test="source != null">
         #{source,jdbcType=VARCHAR},
       </if>
@@ -149,6 +163,12 @@
       <if test="name != null">
         NAME = #{name,jdbcType=VARCHAR},
       </if>
+      <if test="author != null">
+        AUTHOR = #{author,jdbcType=VARCHAR},
+      </if>
+      <if test="famsource != null">
+        FAMSOURCE = #{famsource,jdbcType=VARCHAR},
+      </if>
       <if test="source != null">
         SOURCE = #{source,jdbcType=VARCHAR},
       </if>
@@ -187,6 +207,8 @@
 
     update tb_culpro_fam_pre
     set NAME = #{name,jdbcType=VARCHAR},
+      AUTHOR = #{author,jdbcType=VARCHAR},
+      FAMSOURCE = #{famsource,jdbcType=VARCHAR},
       SOURCE = #{source,jdbcType=VARCHAR},
       PRESCRIPTION = #{prescription,jdbcType=VARCHAR},
       VISIT_NUM = #{visitNum,jdbcType=INTEGER},
@@ -204,6 +226,8 @@
 
     update tb_culpro_fam_pre
     set NAME = #{name,jdbcType=VARCHAR},
+      AUTHOR = #{author,jdbcType=VARCHAR},
+      FAMSOURCE = #{famsource,jdbcType=VARCHAR},
       SOURCE = #{source,jdbcType=VARCHAR},
       PRESCRIPTION = #{prescription,jdbcType=VARCHAR},
       VISIT_NUM = #{visitNum,jdbcType=INTEGER},

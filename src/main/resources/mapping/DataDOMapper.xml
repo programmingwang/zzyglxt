@@ -304,7 +304,7 @@
     where itemID = #{itemid,jdbcType=INTEGER}
       and itemCode = #{itemcode,jdbcType=CHAR}
   </update>
-    <update id="changeStatusByPrimaryKey" parameterType="com.zyyglxt.dataobject.DataDO">
+  <update id="changeStatusByPrimaryKey" parameterType="com.zyyglxt.dataobject.DataDO">
         update tb_culpro_data
         <set>
             <if test="dataStatus != null">

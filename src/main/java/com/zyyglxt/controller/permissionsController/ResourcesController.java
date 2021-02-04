@@ -37,13 +37,6 @@ public class ResourcesController {
         return new ResponseData(EmBusinessError.success);
     }
 
-    @LogAnnotation(logTitle = "添加权限", logLevel = "3")
-    @RequestMapping(value = "/insertrrr", method = RequestMethod.POST)
-    public ResponseData insertSelectiveRrr(@RequestBody ResourcesRoleRefDO resourcesDO) {
-        resRoleRefService.insertSelective(resourcesDO);
-        return new ResponseData(EmBusinessError.success);
-    }
-
     /**
      * 修改
      *

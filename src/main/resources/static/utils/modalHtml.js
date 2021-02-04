@@ -230,6 +230,26 @@
             '                </div>\n' +
             '            </div>\n' +
             '        </div>';
+
+        modalHtml.myReceiptModal = '<div class="row" style="font-size: 1.25rem;flex-direction:column;align-items: flex-start;margin-left: 15px;">\n' +
+            '    <script>\n' +
+            '        function f() {\n' +
+            '            var a = document.getElementsByName(\'fuxuan\');\n' +
+            '            for(var i=0;i<a.length;i++){\n' +
+            '                a[i].checked = document.getElementById(\'all_select\').checked;\n' +
+            '            }\n' +
+            '            return false;\n' +
+            '        }\n' +
+            '    </script>\n' +
+            '    <div>请选择需要转发的人员：</div>\n' +
+            '    <div ><input id="all_select" type="checkbox" value="all" onclick="f()"><label for="all_select">全选</label></div>\n' +
+            '    <div ><input id="zhongyichu" name="fuxuan" type="checkbox" value="zyc"><label for="zhongyichu">中医处分管局长</label></div>\n' +
+            '    <div ><input id="zhongyaochu" name="fuxuan" type="checkbox" value="zyc"><label for="zhongyaochu">中药处分管局长</label>\n' +
+            '    </div>\n' +
+            '    <div><input id="zonghechu" name="fuxuan" type="checkbox" value="zyc"><label for="zonghechu">综合处分管局长</label></div>\n' +
+            '    <div><input id="faguijandu" name="fuxuan" type="checkbox" value="zyc"><label for="faguijandu">法规监督处分管局长</label>\n' +
+            '    </div>\n' +
+            '</div>'
         modalHtml.addExperModal = '<div><div><table id="expertsTable"></table></div></div>';
         modalHtml.reviseExperModal = '<div><div><button type="button" class="btn btn-primary btn-sm">该项目已经分配的专家</button><table id="expertsTable1"></table><button type="button" class="btn btn-primary btn-sm">该项目还没有分配的专家</button><table id="expertsTable2"></table></div></div>';
         modalHtml.myResonable = "<div>" + '        <textarea name="" id="reason" cols="96" rows="10"></textarea>' + "    </div>";

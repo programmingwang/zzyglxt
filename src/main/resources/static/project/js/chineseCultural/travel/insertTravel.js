@@ -51,15 +51,16 @@
                                 modalConfirmFun:function (){
                                     var url = "/chineseCultural/travel/travel";
                                     orange.redirect(url);
+                                    return true;
                                 }
                             }
                             var submitConfirm = modalUtil.init(submitConfirmModal);
                             submitConfirm.show();
                         }else{
-                            alertUtil.error(data.msg);
+                            alertUtil.alert(data.msg);
                         }
                     }else {
-                        alertUtil.error(data.msg);
+                        alertUtil.alert(data.msg);
                     }
                 },false,true);
                 return false;
@@ -117,10 +118,10 @@
                                     submitConfirm.show();
 
                                 }else{
-                                    alertUtil.error(data.msg);
+                                    alertUtil.alert(data.msg);
                                 }
                             }else {
-                                alertUtil.error(data.msg);
+                                alertUtil.alert(data.msg);
                             }
                         },false,true);
                         return true;
@@ -129,7 +130,6 @@
                 var x = modalUtil.init(mySubmitToCZ);
                 x.show();
                 return false;
-
             });
 
 

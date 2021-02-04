@@ -237,14 +237,13 @@
   </update>
 
   <select id="selectAllHealthCareChineseMedicine" resultMap="BaseResultMap">
-        SELECT
-        <include refid="SelectAll_Base_Column_List" />
-        ,
-        cf.FILE_PATH
-        FROM tb_health_care_chinese_medicine cm
-        left join tb_culpro_file cf
-        on cm.itemCode = cf.DATA_CODE
-        WHERE CHINESE_MEDICINE_STATUS = #{chineseMedicineStatus,jdbcType=VARCHAR}
+    SELECT
+    <include refid="SelectAll_Base_Column_List" />
+    ,
+    cf.FILE_PATH
+    FROM tb_health_care_chinese_medicine cm
+    left join tb_culpro_file cf
+    on cm.itemCode = cf.DATA_CODE
     <if test="chineseMedicineStatus == 3">
       and CHINESE_MEDICINE_STATUS in (2,5)
     </if>

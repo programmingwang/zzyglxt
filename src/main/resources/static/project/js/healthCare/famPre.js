@@ -285,8 +285,9 @@
                 {field: 'name', title: '方名'},
                 {field: 'source', title: '出处'},
                 {field: 'prescription', title: '处方'},
-                {field: 'content',title:'制法及用法'},
-                {field: 'type', title: '剂型',width: '70px'},
+                {field: 'content',title:'制法及用法', formatter: function (value){
+                        return $(value)[0].innerText;
+                    }},
                 {field: 'action',  title: '操作',formatter: operation,events:orgEvents}
             ];
 

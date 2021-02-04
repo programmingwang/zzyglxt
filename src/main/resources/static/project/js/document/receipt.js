@@ -3,9 +3,11 @@
         function (jquery,ajaxUtil,bootstrapTableUtil,objectUtil,alertUtil,modalUtil,selectUtil,stringUtil,dictUtil) {
 
             var url = "selectallreceipt";
-            var webStatus = dictUtil.getDictByCode(dictUtil.DICT_LIST.reportStatus);
+            var webStatus = dictUtil.getDictByCode(dictUtil.DICT_LIST.receiptStatus);
             var emergencyStatus = dictUtil.getDictByCode(dictUtil.DICT_LIST.emergencyStatus);
             url = getRoleTable(sessionStorage.getItem("rolename"),url,"receivingDataStatus",webStatus);
+            var rolename = sessionStorage.getItem("rolename");
+            var username = sessionStorage.getItem("username");
             var aParam = {
             };
 
@@ -43,237 +45,20 @@
                     myDeleteModal.show();
                 },
 
-
-                'click .passth' : function (e, value, row, index) {
-                    var myPassReceiptModalData ={
-                        modalBodyID :"myPassModal",
-                        modalTitle : "政务资源综合处处长审核通过",
+                'click .send-file' : function (e, value, row, index) {
+                    var mySendFileReceiptModalData ={
+                        modalBodyID :"mySendFileModal",
+                        modalTitle : "文件下达各个部门",
                         modalClass : "modal-lg",
                         modalConfirmFun:function () {
                             var isSuccess = false;
                             var submitStatus = {
-                                "receivingDataStatus":getStatus(sessionStorage.getItem("rolename"),webStatus)
-                            };
-                            ajaxUtil.myAjax(null,"changestatustoreceipt/"+row.itemid+"/"+row.itemcode,submitStatus,function (data) {
-                                if(ajaxUtil.success(data)){
-                                    if(data.code == ajaxUtil.successCode){
-                                        if(sessionStorage.getItem("rolename") == "政务资源综合处处长"){
-                                            alertUtil.info("审核已通过，已发送给分局长审核！");
-                                        }
-                                        isSuccess = true;
-                                        refreshTable();
-                                    }else{
-                                        alertUtil.error(data.msg);
-                                    }
-                                }
-                            },false);
-                            return isSuccess;
-                        }
-                    };
-                    var myPassModal = modalUtil.init(myPassReceiptModalData);
-                    myPassModal.show();
-                },
-
-                'click .passone' : function (e, value, row, index) {
-                    var myPassReceiptModalData ={
-                        modalBodyID :"myPassModal",
-                        modalTitle : "分局审核通过",
-                        modalClass : "modal-lg",
-                        modalConfirmFun:function () {
-                            var isSuccess = false;
-                            var submitStatus = {
-                                "receivingDataStatus":getStatus(sessionStorage.getItem("rolename"),webStatus)
-                            };
-                            ajaxUtil.myAjax(null,"changestatustoreceipt/"+row.itemid+"/"+row.itemcode,submitStatus,function (data) {
-                                if(ajaxUtil.success(data)){
-                                    if(data.code == ajaxUtil.successCode){
-                                        if(sessionStorage.getItem("rolename") == "政务资源分管局长"){
-                                            alertUtil.info("审核已通过，已发送给局长审核！");
-                                        }
-                                        isSuccess = true;
-                                        refreshTable();
-                                    }else{
-                                        alertUtil.error(data.msg);
-                                    }
-                                }
-                            },false);
-                            return isSuccess;
-                        }
-                    };
-                    var myPassModal = modalUtil.init(myPassReceiptModalData);
-                    myPassModal.show();
-                },
-                'click .passtwo' : function (e, value, row, index) {
-                    var myPassReceiptModalData ={
-                        modalBodyID :"myPassModal",
-                        modalTitle : "局长审核通过",
-                        modalClass : "modal-lg",
-                        modalConfirmFun:function () {
-                            var isSuccess = false;
-                            var submitStatus = {
-                                "receivingDataStatus":getStatus(sessionStorage.getItem("rolename"),webStatus)
-                            };
-                            ajaxUtil.myAjax(null,"changestatustoreceipt/"+row.itemid+"/"+row.itemcode,submitStatus,function (data) {
-                                if(ajaxUtil.success(data)){
-                                    if(data.code == ajaxUtil.successCode){
-                                        if(sessionStorage.getItem("rolename") == "政务资源局长长"){
-                                            alertUtil.info("审核已通过，已发布到门户首页网站！");
-                                        }
-                                        isSuccess = true;
-                                        refreshTable();
-                                    }else{
-                                        alertUtil.error(data.msg);
-                                    }
-                                }
-                            },false);
-                            return isSuccess;
-                        }
-                    };
-                    var myPassModal = modalUtil.init(myPassReceiptModalData);
-                    myPassModal.show();
-                },
-
-                'click .fail' : function (e, value, row, index) {
-                    var myFailReceiptModalData ={
-                        modalBodyID :"myFailModal",
-                        modalTitle : "处长审核不通过",
-                        modalClass : "modal-lg",
-                        modalConfirmFun:function () {
-                            var isSuccess = false;
-                            var submitStatus = {
-                                "receivingDataStatus": ""
-                            };
-                            if(sessionStorage.getItem("rolename") == "政务资源处长"){
-                                submitStatus.receivingDataStatus = webStatus[4].id;
-                            }
-                            ajaxUtil.myAjax(null,"changestatustoreceipt/"+row.itemid+"/"+row.itemcode,submitStatus,function (data) {
-                                if(ajaxUtil.success(data)){
-                                    if(data.code == 88888){
-                                        alertUtil.info("操作成功");
-                                        isSuccess = true;
-                                        refreshTable();
-                                    }else{
-                                        alertUtil.error(data.msg);
-                                    }
-                                }
-                            },false);
-                            return isSuccess;
-                        }
-
-                    };
-                    var myFailModal = modalUtil.init(myFailReceiptModalData);
-                    myFailModal.show();
-                },
-
-                'click .failth' : function (e, value, row, index) {
-                    var myFailReceiptModalData ={
-                        modalBodyID :"myFailModal",
-                        modalTitle : "综合处处长审核不通过",
-                        modalClass : "modal-lg",
-                        modalConfirmFun:function () {
-                            var isSuccess = false;
-                            var submitStatus = {
-                                "receivingDataStatus": ""
-                            };
-                            if(sessionStorage.getItem("rolename") == "政务资源综合处处长"){
-                                submitStatus.receivingDataStatus = webStatus[12].id;
-                            }
-                            ajaxUtil.myAjax(null,"changestatustoreceipt/"+row.itemid+"/"+row.itemcode,submitStatus,function (data) {
-                                if(ajaxUtil.success(data)){
-                                    if(data.code == 88888){
-                                        alertUtil.info("操作成功");
-                                        isSuccess = true;
-                                        refreshTable();
-                                    }else{
-                                        alertUtil.error(data.msg);
-                                    }
-                                }
-                            },false);
-                            return isSuccess;
-                        }
-
-                    };
-                    var myFailModal = modalUtil.init(myFailReceiptModalData);
-                    myFailModal.show();
-                },
-
-                'click .failone' : function (e, value, row, index) {
-                    var myFailReceiptModalData ={
-                        modalBodyID :"myFailModal",
-                        modalTitle : "分局审核不通过",
-                        modalClass : "modal-lg",
-                        modalConfirmFun:function () {
-                            var isSuccess = false;
-                            var submitStatus = {
-                                "receivingDataStatus": ""
-                            };
-                            if(sessionStorage.getItem("rolename") == "政务资源分管局长"){
-                                submitStatus.receivingDataStatus = webStatus[5].id;
-                            }
-                            ajaxUtil.myAjax(null,"changestatustoreceipt/"+row.itemid+"/"+row.itemcode,submitStatus,function (data) {
-                                if(ajaxUtil.success(data)){
-                                    if(data.code == 88888){
-                                        alertUtil.info("操作成功");
-                                        isSuccess = true;
-                                        refreshTable();
-                                    }else{
-                                        alertUtil.error(data.msg);
-                                    }
-                                }
-                            },false);
-                            return isSuccess;
-                        }
-
-                    };
-                    var myFailModal = modalUtil.init(myFailReceiptModalData);
-                    myFailModal.show();
-                },
-                'click .failtwo' : function (e, value, row, index) {
-                    var myFailReceiptModalData ={
-                        modalBodyID :"myFailModal",
-                        modalTitle : "局长审核不通过",
-                        modalClass : "modal-lg",
-                        modalConfirmFun:function () {
-                            var isSuccess = false;
-                            var submitStatus = {
-                                "receivingDataStatus": ""
-                            };
-                            if(sessionStorage.getItem("rolename") == "政务资源局长"){
-                                submitStatus.receivingDataStatus = webStatus[6].id;
-                            }
-                            ajaxUtil.myAjax(null,"changestatustoreceipt/"+row.itemid+"/"+row.itemcode,submitStatus,function (data) {
-                                if(ajaxUtil.success(data)){
-                                    if(data.code == 88888){
-                                        alertUtil.info("操作成功");
-                                        isSuccess = true;
-                                        refreshTable();
-                                    }else{
-                                        alertUtil.error(data.msg);
-                                    }
-                                }
-                            },false);
-                            return isSuccess;
-                        }
-
-                    };
-                    var myFailModal = modalUtil.init(myFailReceiptModalData);
-                    myFailModal.show();
-                },
-
-                'click .under-shelf' : function (e, value, row, index) {
-                    var myUnderShelfReceiptModalData ={
-                        modalBodyID :"myUnderShelfModal",
-                        modalTitle : "下架",
-                        modalClass : "modal-lg",
-                        modalConfirmFun:function () {
-                            var isSuccess = false;
-                            var submitStatus = {
-                                "receivingDataStatus": webStatus[7].id
+                                "receivingDataStatus": webStatus[18].id
                             };
                             ajaxUtil.myAjax(null,"changestatustoreceipt/"+row.itemid+"/"+row.itemcode,submitStatus,function (data) {
                                 if(ajaxUtil.success(data)){
                                     if(data.code == 88888){
-                                        alertUtil.success("下架成功");
+                                        alertUtil.success("文件下达成功");
                                         isSuccess = true;
                                         refreshTable();
                                     }else{
@@ -285,8 +70,8 @@
                         }
 
                     };
-                    var myUnderShelfModal = modalUtil.init(myUnderShelfReceiptModalData);
-                    myUnderShelfModal.show();
+                    var mySendFileModal = modalUtil.init(mySendFileReceiptModalData);
+                    mySendFileModal.show();
                 },
 
                 'click .view' : function (e, value, row, index) {
@@ -296,15 +81,24 @@
                 },
 
                 'click .transpond' : function (e, value, row, index) {
-                    var myTranspondModalData ={
-                        modalBodyID :"myTranspondReceiptModal",
-                        modalTitle : "转发文件至",
-                        modalClass : "modal-lg",
+                    var receiptModalData = {
+                        modalBodyID: "myReceiptModal",
+                        modalTitle: "转发文件至",
+                        modalClass: "modal-sm",
                         modalConfirmFun:function () {
                             var isSuccess = false;
                             var submitStatus = {
-                                "receivingDataStatus": webStatus[99].id
+                                "receivingDataStatus": ""
                             };
+                             if (rolename == "中医处分管局长"){
+                                submitStatus.receivingDataStatus = webStatus[4].id;
+                            }else if (rolename == "中药处分管局长"){
+                                submitStatus.receivingDataStatus = webStatus[7].id;
+                            }else if (rolename == "综合处分管局长"){
+                                submitStatus.receivingDataStatus = webStatus[10].id;
+                            }else if (rolename == "法规监督处分管局长"){
+                                submitStatus.receivingDataStatus = webStatus[13].id;
+                            }
                             ajaxUtil.myAjax(null,"changestatustoreceipt/"+row.itemid+"/"+row.itemcode,submitStatus,function (data) {
                                 if(ajaxUtil.success(data)){
                                     if(data.code == 88888){
@@ -408,7 +202,7 @@
                         modalConfirmFun:function () {
                             var isSuccess = false;
                             var submitStatus = {
-                                "receivingDataStatus": getStatus(sessionStorage.getItem("rolename"),webStatus)
+                                "receivingDataStatus": webStatus[1].id
                             };
                             ajaxUtil.myAjax(null,"changestatustoreceipt/"+row.itemid+"/"+row.itemcode,submitStatus,function (data) {
                                 if(ajaxUtil.success(data)){
@@ -502,14 +296,19 @@
                     $('#btn_addTask').attr('style',"display:block");
                     return preUrl + "?"+status+"="+webStatus[0].id+"&"+status+"="+webStatus[1].id+"&"+status+"="+webStatus[2].id+"&"+status+"="+webStatus[3].id+"&"+status+"="+webStatus[4].id+"&"+status+"="+webStatus[5].id+"&"+status+"="+webStatus[6].id+"&"+status+"="+webStatus[7].id+"&"+status+"="+webStatus[8].id+"&"+status+"="+webStatus[9].id;
                 }else if(role === "政务资源综合处处长"){
+                    return preUrl + "?"+status+"="+webStatus[1].id+"&"+status+"="+webStatus[2].id+"&"+status+"="+webStatus[3].id;
+                }else if(role === "中医处分管局长") {
+                    return preUrl + "?"+status+"="+webStatus[4].id+"&"+status+"="+webStatus[5].id+"&"+status+"="+webStatus[6].id;
+                } else if(role === "中药处分管局长") {
+                    return preUrl + "?"+status+"="+webStatus[7].id+"&"+status+"="+webStatus[8].id+"&"+status+"="+webStatus[9].id;
+                }else if(role === "综合处分管局长") {
                     return preUrl + "?"+status+"="+webStatus[10].id+"&"+status+"="+webStatus[11].id+"&"+status+"="+webStatus[12].id;
-                }else if(role === "政务资源分管局长") {
-                    return preUrl + "?"+status+"="+webStatus[13].id+"&"+status+"="+webStatus[5].id+"&"+status+"="+webStatus[3].id;
-                } else if(role === "政务资源局长") {
-                    return preUrl + "?"+status+"="+webStatus[6].id+"&"+status+"="+webStatus[7].id+"&"+status+"="+webStatus[8].id+"&"+status+"="+webStatus[9].id;
+                }else if(role === "法规监督处分管局长") {
+                    return preUrl + "?"+status+"="+webStatus[13].id+"&"+status+"="+webStatus[14].id+"&"+status+"="+webStatus[15].id;
+                }else if(role === "政务资源局长") {
+                    return preUrl + "?"+status+"="+webStatus[16].id+"&"+status+"="+webStatus[17].id+"&"+status+"="+webStatus[18].id;
                 }
             }
-
             function getRoleOperate(value, row, index, role, status,webStatus) {
                 if(role === "政务资源科员"){
                     if(status == webStatus[0].id){
@@ -518,16 +317,16 @@
                             '<a class="submit"  style="margin:0 1em;text-decoration: none;color:#4df115;" data-target="#staticBackdrop" >提交</a>',
                             '<a class="delete" style="margin:0 1em;text-decoration: none;color:#ed0f09;"  data-toggle="modal" data-target="#staticBackdrop" >删除</a>',
                         ].join('');
-                    }else if(status == webStatus[2].id || status ==webStatus[11].id|| status ==webStatus[9].id){
+                    }else if(status == webStatus[2].id || status ==webStatus[5].id|| status ==webStatus[8].id|| status ==webStatus[11].id|| status ==webStatus[14].id|| status ==webStatus[16].id){
                         return [
                             '<a class="view" style="margin:0 1em;text-decoration: none;color:#348eff;" data-toggle="modal" data-target="" >查看</a>',
                         ].join('');
-                    }else if(status == webStatus[4].id || status == webStatus[5].id || status == webStatus[6].id|| status == webStatus[7].id|| status == webStatus[12].id){
+                    }else if(status == webStatus[3].id || status == webStatus[6].id || status == webStatus[9].id|| status == webStatus[12].id|| status == webStatus[15].id|| status ==webStatus[17].id|| status ==webStatus[18].id){
                         return [
                             '<a class="view" style="margin:0 1em;text-decoration: none;color:#348eff;" data-toggle="modal" data-target="" >查看</a>',
                             '<a class="delete" style="margin:0 1em;text-decoration: none;color:#ed0f09;" data-toggle="modal" data-target="#staticBackdrop" >删除</a>',
                         ].join('');
-                    }else if(status == webStatus[1].id || status == webStatus[8].id|| status == webStatus[10].id|| status == webStatus[13].id){
+                    }else if(status == webStatus[1].id ){
                         return [
                             '<a class="view" style="margin:0 1em;text-decoration: none;color:#348eff;" data-toggle="modal" data-target="" >查看</a>',
                             '<a class="no-submit" style="margin:0 1em;text-decoration: none;color:#ed0f09;" data-toggle="modal" data-target="" >取消提交</a>',
@@ -535,68 +334,105 @@
                     }
 
                 }else if(role === "政务资源综合处处长"){
-                    if(status == webStatus[2].id||status == webStatus[10].id){
+                    if(status == webStatus[1].id){
                         return [
                             '<a  class="opinion"  data-toggle="modal" style="margin:0 0.6em;text-decoration: none;color:#4df115;" data-target="#staticBackdrop" >填写审核意见</a>',
+                            '<a class="view" data-toggle="modal" style="margin:0 0.6em;text-decoration: none;color:#348eff;" data-target="" >查看</a>',
+                        ].join('');
+                    }else if( status == webStatus[2].id||status == webStatus[3].id){
+                        return [
                             '<a  class="transpond"  data-toggle="modal" style="margin:0 0.6em;text-decoration: none;color:#ed0f09;" data-target="#staticBackdrop" >转发</a>',
-                            '<a class="view" data-toggle="modal" style="margin:0 0.6em;text-decoration: none;color:#348eff;" data-target="" >查看</a>',
+                            '<a class="view" data-toggle="modal" style="margin:0 1em;text-decoration: none;color:#348eff;" data-target="" >查看</a>',
                         ].join('');
-                    }else if( status == webStatus[12].id){
+                    }else if( status == webStatus[4].id||status == webStatus[7].id||status == webStatus[10].id||status == webStatus[13].id){
                         return [
                             '<a class="view" data-toggle="modal" style="margin:0 1em;text-decoration: none;color:#348eff;" data-target="" >查看</a>',
                         ].join('');
                     }
 
-                }else if(role === "政务资源分管局长"){
-                    if(status == webStatus[11].id||status == webStatus[13].id ){
+                }else if(role === "中医处分管局长"){
+                    if(status == webStatus[4].id){
                         return [
                             '<a  class="opinion"  data-toggle="modal" style="margin:0 0.6em;text-decoration: none;color:#4df115;" data-target="#staticBackdrop" >填写审核意见</a>',
                             '<a class="view" data-toggle="modal" style="margin:0 0.6em;text-decoration: none;color:#348eff;" data-target="" >查看</a>',
                         ].join('');
-                    }else if(status == webStatus[5].id){
+                    }else if(status == webStatus[18].id){
                         return [
                             '<a class="view" data-toggle="modal" style="margin:0 1em;text-decoration: none;color:#348eff;" data-target="" >查看</a>',
                         ].join('');
-                    }else if(status == webStatus[9].id){
+                    }
+                }
+                else if(role === "中药处分管局长"){
+                    if(status == webStatus[7].id){
                         return [
-                            '<a  class="view"  style="margin:0 1em;text-decoration: none;color:#348eff;" data-toggle="modal" data-target="" >查看</a>',
+                            '<a  class="opinion"  data-toggle="modal" style="margin:0 0.6em;text-decoration: none;color:#4df115;" data-target="#staticBackdrop" >填写审核意见</a>',
+                            '<a class="view" data-toggle="modal" style="margin:0 0.6em;text-decoration: none;color:#348eff;" data-target="" >查看</a>',
+                        ].join('');
+                    }else if(status == webStatus[18].id){
+                        return [
+                            '<a class="view" data-toggle="modal" style="margin:0 1em;text-decoration: none;color:#348eff;" data-target="" >查看</a>',
                         ].join('');
                     }
-
+                }
+                else if(role === "综合处分管局长"){
+                    if(status == webStatus[10].id){
+                        return [
+                            '<a  class="opinion"  data-toggle="modal" style="margin:0 0.6em;text-decoration: none;color:#4df115;" data-target="#staticBackdrop" >填写审核意见</a>',
+                            '<a class="view" data-toggle="modal" style="margin:0 0.6em;text-decoration: none;color:#348eff;" data-target="" >查看</a>',
+                        ].join('');
+                    }else if(status == webStatus[18].id){
+                        return [
+                            '<a class="view" data-toggle="modal" style="margin:0 1em;text-decoration: none;color:#348eff;" data-target="" >查看</a>',
+                        ].join('');
+                    }
+                }
+                else if(role === "法规监督处分管局长"){
+                    if(status == webStatus[13].id){
+                        return [
+                            '<a  class="opinion"  data-toggle="modal" style="margin:0 0.6em;text-decoration: none;color:#4df115;" data-target="#staticBackdrop" >填写审核意见</a>',
+                            '<a class="view" data-toggle="modal" style="margin:0 0.6em;text-decoration: none;color:#348eff;" data-target="" >查看</a>',
+                        ].join('');
+                    }else if(status == webStatus[18].id){
+                        return [
+                            '<a class="view" data-toggle="modal" style="margin:0 1em;text-decoration: none;color:#348eff;" data-target="" >查看</a>',
+                        ].join('');
+                    }
                 }
                 else if(role === "政务资源局长"){
-                    if(status == webStatus[3].id || status == webStatus[8].id){
+                    if(status == webStatus[5].id || status == webStatus[8].id|| status == webStatus[11].id|| status == webStatus[14].id){
                         return [
                             '<a  class="opinion"  data-toggle="modal" style="margin:0 0.6em;text-decoration: none;color:#4df115;" data-target="#staticBackdrop" >填写审核意见</a>',
-                            '<a  class="transpond"  data-toggle="modal" style="margin:0 0.6em;text-decoration: none;color:#ed0f09;" data-target="#staticBackdrop" >转发</a>',
                             '<a class="view" data-toggle="modal" style="margin:0 0.6em;text-decoration: none;color:#348eff;" data-target="" >查看</a>',
                         ].join('');
-                    }else if(status == webStatus[6].id||status == webStatus[7].id){
+                    }else if(status == webStatus[16].id||status == webStatus[17].id|| status == webStatus[18].id){
                         return [
                             '<a class="view" data-toggle="modal" style="margin:0 1em;text-decoration: none;color:#348eff;" data-target="" >查看</a>',
                         ].join('');
-                    }else if(status == webStatus[9].id){
-                        return [
-                            '<a  class="view"  style="margin:0 1em;text-decoration: none;color:#348eff;" data-toggle="modal" data-target="" >查看</a>',
-                            '<a  class="under-shelf" style="margin:0 1em;text-decoration: none;color:#ed0f09;" data-toggle="modal" data-target="#staticBackdrop" >撤销</a>',
-                        ].join('');
                     }
-
                 }
             }
 
             function getStatus(role,webStatus) {
                 if(role === "政务资源科员"){
-                    return webStatus[10].id
+                    return webStatus[1].id
                 }
                 else if(role === "政务资源综合处处长"){
-                    return webStatus[13].id
+                    return webStatus[2].id
                 }
-                else if(role === "政务资源分管局长"){
+                else if(role === "中医处分管局长"){
+                    return webStatus[5].id
+                }
+                else if(role === "中药处分管局长"){
                     return webStatus[8].id
                 }
+                else if(role === "综合处分管局长"){
+                    return webStatus[11].id
+                }
+                else if(role === "法规监督处分管局长"){
+                    return webStatus[14].id
+                }
                 else if(role === "政务资源局长"){
-                    return webStatus[9].id
+                    return webStatus[18].id
                 }
             }
 
@@ -606,7 +442,6 @@
                 getRoleOperate:getRoleOperate,
                 getStatus: getStatus,
             }
-
 
         })
 })();

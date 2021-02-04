@@ -42,7 +42,6 @@
 
                 ajaxUtil.myAjax(null,addUpdateUrl,careFamEntity,function (data) {
                     if(ajaxUtil.success(data)){
-                        alertUtil.info(operateMessage);
                         var submitConfirmModal = {
                             modalBodyID :"myTopicSubmitTip",
                             modalTitle : "提示",

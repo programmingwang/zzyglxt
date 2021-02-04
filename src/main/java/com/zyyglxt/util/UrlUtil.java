@@ -94,6 +94,9 @@ public class UrlUtil {
         if (requestUrl.contains("/datado/process/selectByPrimaryKey")
                 ||requestUrl.contains("/datado/process/deleteByPrimaryKey")
                 ||requestUrl.contains("/datado/process/changeStatus")
+                ||requestUrl.contains("/datado/leader/deleteByPrimaryKey")
+                ||requestUrl.contains("/datado/leader/changeStatus")
+                ||requestUrl.contains("/datado/leader/selectByPrimaryKey")
         ){
             requestUrl = requestUrl.substring(0, requestUrl.lastIndexOf("/"));
             requestUrl = requestUrl.substring(0, requestUrl.lastIndexOf("/"));

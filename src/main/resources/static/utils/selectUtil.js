@@ -222,6 +222,7 @@
                 { id: "2",text: "审核未通过"},
                 { id: "3",text: "已上架"},
                 { id: "4",text: "已下架"},
+                { id: "99",text: "全部状态"},
                 ]
             return status;
         }

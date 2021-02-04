@@ -8,7 +8,6 @@
             url = getRoleTable(sessionStorage.getItem("rolename"),url,"receivingDataStatus",webStatus);
             var rolename = sessionStorage.getItem("rolename");
             var username = sessionStorage.getItem("username");
-
             var aParam = {
             };
 
@@ -115,8 +114,8 @@
                         }
 
                     };
-                    var receiptModal = modalUtil.init(receiptModalData)
-                    receiptModal.show()
+                    var myTranspondModal = modalUtil.init(myTranspondModalData);
+                    myTranspondModal.show();
                 },
 
                 'click .opinion' : function (e, value, row, index) {

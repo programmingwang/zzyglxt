@@ -287,17 +287,41 @@
                     }
                 },
                 'click .pass': function (e, value, row, index) {
-                    var param = {
-                        itemid: row.itemid,
-                        itemcode: row.itemcode,
-                        type: dictUtil.getCode(dictUtil.DICT_LIST.orgType, row.type),
-                        status: pass,
-                        orgCode: row.orgCode
-                    };
-                    ajaxUtil.myAjax(null,auditUrl,param,function (data) {
-                        alertUtil.info("修改成功");
-                        refreshTable()
-                    }, true,true,"put")
+                    var passModalData = {
+                        modalBodyID :"myPassModal",
+                        modalTitle : "提示",
+                        modalClass : "modal-lg",
+                        modalConfirmFun: function () {
+                            var param = {
+                                itemid: row.itemid,
+                                itemcode: row.itemcode,
+                                type: dictUtil.getCode(dictUtil.DICT_LIST.orgType, row.type),
+                                status: pass,
+                                orgCode: row.orgCode
+                            };
+                            ajaxUtil.myAjax(null,auditUrl,param,function (data) {
+                                alertUtil.info("修改成功");
+                                passModal.hide();
+                            }, true,true,"put")
+
+                            var submitConfirmModal = {
+                                modalBodyID :"myTopicSubmitTip",
+                                modalTitle : "提示",
+                                modalClass : "modal-lg",
+                                cancelButtonStyle: "display:none",
+                                confirmButtonStyle: "btn-danger",
+                                modalConfirmFun:function (){
+                                    refreshTable()
+                                    return true;
+                                }
+                            }
+                            var submitConfirm = modalUtil.init(submitConfirmModal)
+                            submitConfirm.show()
+                        }
+                    }
+
+                    var passModal = modalUtil.init(passModalData)
+                    passModal.show();
                 },
                 'click .nopass' : function(e, value, row, index) {
                     var param = {
@@ -309,7 +333,7 @@
                     };
 
                     var myModalData ={
-                        modalBodyID : "myInputReason", //公用的在后面给span加不同的内容就行了，其他模块同理
+                        modalBodyID : "myResonable", //公用的在后面给span加不同的内容就行了，其他模块同理
                         modalTitle : "输入理由",
                         modalClass : "modal-lg",
                         modalConfirmFun:function () {

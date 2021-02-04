@@ -157,7 +157,7 @@
 
                     }},
                 {field: 'gender', title: '性别',width:'120px'},
-                {field: 'mobilephone', title: '联系电话',width:'125px'},
+                {field: 'mobilephone', title: '联系电话',width:'200px'},
                 {field: 'action',  title: '操作',formatter: operation,events:orgEvents}
             ];
 

@@ -62,7 +62,7 @@
                         submitConfirm.show();
 
                     } else {
-                        alert(data.msg)
+                        alertUtil.error(data.msg)
                     }
                 }, true, "123", type);
                 return false;
@@ -91,7 +91,8 @@
                                 }
                                 var submitConfirm = modalUtil.init(submitConfirmModal);
                                 submitConfirm.show();
-
+                            }else{
+                                alertUtil.error(data.msg)
                             }
                         }, true, "123", type);
                         return true;
@@ -105,6 +106,7 @@
 
             var init = function () {
                 if (isUpdate()) {
+                    $(".titleCSS").text("修改科研成果")
                     var tempdata = JSON.parse(localStorage.getItem("rowData"));
                     $("#industrialDevelopLeader").val(tempdata.industrialDevelopLeader);
                     $("#industrialDevelopName").val(tempdata.industrialDevelopName);

@@ -44,13 +44,11 @@ public class DataAnnouncementServiceImpl implements IDataAnnouncementService {
     }
 
     @Override
-    public List<DataDto> selectAnnouncementList(List<String> dataStatus) {
-        List<DataDto> dataDtoList = new ArrayList<>();
-        for (String status : dataStatus) {
-            dataDtoList.addAll(dataDOMapper.selectByAllData("通知公告", status));
-        }
-        return dataDtoList;
+    public List<DataDto> selectAnnouncementList(String dataStatus) {
+        return dataDOMapper.selectByAllData("通知公告", dataStatus);
     }
+
+
 
     @Override
     public int insertAnnouncement(DataDO record) {
@@ -88,6 +86,11 @@ public class DataAnnouncementServiceImpl implements IDataAnnouncementService {
     @Override
     public int changeStatus(DataDOKey key, String dataDelayedRelease, String dataStatus) {
         return dataDOMapper.changeStatusByPrimaryKey(key, dataDelayedRelease, dataStatus);
+    }
+
+    @Override
+    public List<String> selectForMainPage() {
+        return dataDOMapper.selectAllForMainPage("通知公告");
     }
 
 }

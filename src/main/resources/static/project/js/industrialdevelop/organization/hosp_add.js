@@ -1,6 +1,6 @@
 (function () {
-    require(['jquery', 'objectUtil', 'ajaxUtil', 'alertUtil', 'stringUtil', 'dictUtil', 'selectUtil', 'fileUtil', 'uploadImg', 'distpicker', 'urlUtil'],
-        function (jquery, objectUtil, ajaxUtil, alertUtil, stringUtil, dictUtil, selectUtil, fileUtil, uploadImg, distpicker, urlUtil) {
+    require(['jquery', 'objectUtil', 'ajaxUtil', 'alertUtil', 'stringUtil', 'dictUtil', 'selectUtil', 'fileUtil', 'uploadImg', 'distpicker', 'urlUtil','modalUtil'],
+        function (jquery, objectUtil, ajaxUtil, alertUtil, stringUtil, dictUtil, selectUtil, fileUtil, uploadImg, distpicker, urlUtil,modalUtil) {
 
 
             /*全局变量*/
@@ -39,38 +39,65 @@
 
             /*确认按钮处理*/
             $("#btn_insert").unbind().on('click', function () {
-                var entity = {};
-                var requestUrl;
-                var operateMessage;
-                requestUrl = "/industrialDevelop/hosp_update";
-                operateMessage = "更新医疗机构成功";
-                entity["hospitalName"] = $("#hospitalName").val();
-                entity["hospitalLevel"] = hospitalLevel[$("#specialtyName").val()].text;
-                entity["hospitalBriefIntroduce"] = $("#hospitalBriefIntroduce").val();
-                entity["hospitalKeySpecialty"] = $("#hospitalKeySpecialty").val();
-                entity["hospitalTelephone"] = $("#hospitalTelephone").val();
-                entity["hospitalAddressPro"] = $("#hospitalAddressPro").val();
-                entity["hospitalAddressCity"] = $("#hospitalAddressCity").val();
-                entity["hospitalAddressCountry"] = $("#hospitalAddressCountry").val();
-                entity["hospitalAddress"] = $("#hospitalAddress").val();
-                entity["hospitalLink"] = $("#hospitalLink").val();
-                entity["orgCode"] = sessionStorage.getItem("orgCode");
-                entity["hospitalIntroduce"] = editor.txt.html()
-                entity["hospitalStatus"] = webStatus[1].id
-                entity["itemcode"] = itemcode;
-                entity["itemid"] = itemid;
+                var submitModalData = {
+                    modalBodyID: "mySubmitModal",
+                    modalTitle: "提示",
+                    modalClass: "modal-lg",
+                    modalConfirmFun: function () {
+                        var entity = {};
+                        var requestUrl;
+                        var operateMessage;
+                        requestUrl = "/industrialDevelop/hosp_update";
+                        operateMessage = "更新医疗机构成功";
+                        entity["hospitalName"] = $("#hospitalName").val();
+                        entity["hospitalLevel"] = hospitalLevel[$("#specialtyName").val()].text;
+                        entity["hospitalBriefIntroduce"] = $("#hospitalBriefIntroduce").val();
+                        entity["hospitalKeySpecialty"] = $("#hospitalKeySpecialty").val();
+                        entity["hospitalTelephone"] = $("#hospitalTelephone").val();
+                        entity["hospitalAddressPro"] = $("#hospitalAddressPro").val();
+                        entity["hospitalAddressCity"] = $("#hospitalAddressCity").val();
+                        entity["hospitalAddressCountry"] = $("#hospitalAddressCountry").val();
+                        entity["hospitalAddress"] = $("#hospitalAddress").val();
+                        entity["hospitalLink"] = $("#hospitalLink").val();
+                        entity["orgCode"] = sessionStorage.getItem("orgCode");
+                        entity["hospitalIntroduce"] = editor.txt.html()
+                        entity["hospitalStatus"] = webStatus[1].id
+                        entity["itemcode"] = itemcode;
+                        entity["itemid"] = itemid;
 
 
-                fileUtil.handleFile(updateStatus, entity.itemcode, uploadImg.getFiles()[0]);
+                        fileUtil.handleFile(updateStatus, entity.itemcode, uploadImg.getFiles()[0]);
 
-                ajaxUtil.myAjax(null, requestUrl, entity, function (data) {
-                    if (ajaxUtil.success(data)) {
-                        alertUtil.info(operateMessage);
-                        orange.redirect(jumpUrl)
-                    } else {
-                        alertUtil.alert(data.msg);
+                        ajaxUtil.myAjax(null, requestUrl, entity, function (data) {
+                            if (ajaxUtil.success(data)) {
+
+                            } else {
+                                alertUtil.alert(data.msg);
+                            }
+                        }, false, true);
+
+                        submitModal.hide()
+                        var submitConfirmModal = {
+                            modalBodyID: "myTopicSubmitTip",
+                            modalTitle: "提示",
+                            modalClass: "modal-lg",
+                            cancelButtonStyle: "display:none",
+                            confirmButtonClass: "btn-danger",
+                            modalConfirmFun: function () {
+                                submitConfirm.hide()
+                                orange.redirect(jumpUrl)
+                                return true;
+                            }
+                        }
+                        var submitConfirm = modalUtil.init(submitConfirmModal)
+                        submitConfirm.show()
+
                     }
-                }, false, true);
+                }
+                var submitModal = modalUtil.init(submitModalData)
+                submitModal.show()
+
+
                 return false;
             });
 

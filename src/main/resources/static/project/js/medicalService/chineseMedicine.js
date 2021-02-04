@@ -355,7 +355,7 @@
                 myTable = bootstrapTableUtil.myBootStrapTableInit("table", url, param, aCol);
             }
 
-            bootstrapTableUtil.globalSearch("table",url,aParam, aCol,"chineseMedicineStatus");
+            bootstrapTableUtil.globalSearch2("table",url,aParam, aCol,"chineseMedicineStatus");
 
         })
 })();

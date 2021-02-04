@@ -328,7 +328,7 @@
             }
 
 
-            bootstrapTableUtil.globalSearch("table", url, aParam, aCol, "chineseCulturalStatus")
+            bootstrapTableUtil.globalSearch2("table", url, aParam, aCol, "chineseCulturalStatus")
 
         })
 })();

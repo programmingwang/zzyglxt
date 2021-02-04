@@ -368,12 +368,13 @@
                         // console.log("addstr:"+addstr)
                         // console.log("status:"+status)
                         //调试时可以先打印出来，进行修改
-                        if(addstr==status){
+                        if(addstr==status || addstr==99){
                             if(gxfl == searchGxfl){
                                 isStatusSlot=true;
                             }
-
                         }
+                        if(typeof textP == "object") continue;
+                        else if(typeof textP == "number") textP = textP.toString();
                         //当存在时将条件改为flase
                         if (textP == null || textP == undefined || textP == '') {
                             textP = "1";

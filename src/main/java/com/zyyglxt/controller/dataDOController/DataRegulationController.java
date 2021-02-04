@@ -40,8 +40,15 @@ public class DataRegulationController {
      */
     @RequestMapping(value = "/selectAll", method = RequestMethod.GET)
     @LogAnnotation(appCode ="",logTitle ="查看所有政策法规的数据",logLevel ="1",creater ="",updater = "")
-    public ResponseData selectRegulationList(@RequestParam(value = "dataStatus")List dataStatus){
+    public ResponseData selectRegulationList(@RequestParam(value = "dataStatus")String dataStatus){
         return new ResponseData(EmBusinessError.success,dataRegulationService.selectRegulationList(dataStatus));
+    }
+
+    //获取首页数据
+    @RequestMapping(value = "/selectRegMain", method = RequestMethod.GET)
+    @LogAnnotation(appCode ="",logTitle ="查看所有政策法规的数据",logLevel ="1",creater ="",updater = "")
+    public ResponseData selectRegulationForMain(){
+        return new ResponseData(EmBusinessError.success,dataRegulationService.selectForMainPage());
     }
 
     /**

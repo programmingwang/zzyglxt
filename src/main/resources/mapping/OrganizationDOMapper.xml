@@ -70,6 +70,11 @@
   delete from organization
   where itemID = #{itemid,jdbcType=INTEGER}
   </delete>
+  <delete id="deleteByNameAndCode" parameterType="java.lang.String">
+  delete from organization
+  where ORG_NAME = #{orgName,jdbcType=VARCHAR}
+  and ORG_CODE = #{orgCode,jdbcType=VARCHAR}
+  </delete>
   <insert id="insert" parameterType="com.zyyglxt.dataobject.OrganizationDO">
     insert into organization (itemID, itemCode, ORG_NAME,
       ORG_CODE, ORG_DESCRIPTION, ORG_IDENTIFY,

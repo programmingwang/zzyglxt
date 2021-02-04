@@ -338,7 +338,7 @@
             });
 
 
-            $("#chargePersonSearch").selectUtil(webStatus);
+            $("#chargePersonSearch").selectUtil(selectUtil.inSearchStatus());
 
             var aCol = [
                 {field: 'hospitalName', title: '医院名称'},

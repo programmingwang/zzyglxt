@@ -22,7 +22,7 @@
 
         function getRoleTabletwo(role,preUrl,status,medStatus) {
             if (role !=null) {
-                return preUrl + "?" + status + "=" + medStatus[0].id + "&" + status + "=" + medStatus[1].id + "&" + status + "=" + medStatus[2].id;
+                return preUrl + "?status=1";
             }
         }
 
@@ -31,8 +31,8 @@
                 if (status == medStatus[0].id) {
                     return [
                         '<a class="edit" style="margin:0 1em;text-decoration: none;color:#348eff;" data-toggle="modal" data-target="" >编辑</a>',
-                        '<a class="delete" style="margin:0 1em;text-decoration: none;color:#ed0f09;"  data-toggle="modal" data-target="#staticBackdrop" >删除</a>',
                         '<a class="shelf" style="margin:0 1em;text-decoration: none;color:#4df115;" data-toggle="modal" data-target="" >上架</a>',
+                        '<a class="delete" style="margin:0 1em;text-decoration: none;color:#ed0f09;"  data-toggle="modal" data-target="#staticBackdrop" >删除</a>',
                     ].join('');
                 } else if (status == medStatus[1].id ) {
                     return [
@@ -215,6 +215,17 @@
             // }
         }
 
+        function inSearchStatus(){
+            var status = [
+                { id: "0",text: "保存"},
+                { id: "1",text: "审核中"},
+                { id: "2",text: "审核未通过"},
+                { id: "3",text: "已上架"},
+                { id: "4",text: "已下架"},
+                ]
+            return status;
+        }
+
 
         return {
             getRoleTable:getRoleTable,
@@ -222,6 +233,7 @@
             getStatus: getStatus,
             getRoleTabletwo:getRoleTabletwo,
             getRoleOperatetwo:getRoleOperatetwo,
+            inSearchStatus: inSearchStatus,
         }
     })
 })();

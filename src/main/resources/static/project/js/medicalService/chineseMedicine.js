@@ -330,7 +330,7 @@
                 orange.redirect(addUrl)
             });
 
-            $("#chargePersonSearch").selectUtil(webStatus);
+            $("#chargePersonSearch").selectUtil(selectUtil.inSearchStatus());
 
             var aCol = [
                 {field: 'chineseMedicineName', title: '专家名称'},

@@ -57,9 +57,7 @@
                 width: '100%',
                 columns: fColumns,
                 ajaxOptions: {
-
                     complete: function (XMLHttpRequest) {
-
                     }
                 },
                 responseHandler: function (data) {
@@ -122,7 +120,7 @@
                     endTime=endTime[0].value+":"+endTime[1].value+":"+endTime[2].value;
                 }
                 var newArry = [];
-                var addstr=document.getElementById("chargePersonSearch").value;
+                var addstr=document.getElementById("chargePersonSearch").value; //搜索里的
                 var str = document.getElementById("taskNameSearch").value.toLowerCase();
                 var allTableData = JSON.parse(localStorage.getItem("2"));
                 if(str.indexOf("请输入")!=-1){
@@ -134,7 +132,15 @@
                         var isStatusSlot=false;           // 默认状态为true
                         var isTimeSlot=false;             // 默认时间条件为true
                         //状态条件判断,与表格字段的状态一致,这里根据自己写的修改
-                        var status= allTableData[i][statusWord]
+                        var status= allTableData[i][statusWord] //表格里的
+                        if(statusWord == "chineseCulturalStatus" || statusWord == "chineseMedicineStatus"
+                            || statusWord == "hospitalStatus" || statusWord == "specialtyStatus" || statusWord == "status"){
+                            if(status == "0") status =0;
+                            else if(status == "1" || status == "2") status = 1;
+                            else if(status == "3" || status == "4") status = 2;
+                            else if(status == "5") status = 3;
+                            else if (status == "6") status = 4;
+                        }
                         // console.log("addstr:"+addstr)
                         // console.log("status:"+status)
                         //调试时可以先打印出来，进行修改

@@ -326,7 +326,7 @@
         modalHtml.myReExmainModal = "您确定要重新评审吗？";
         modalHtml.myReExmainModalSuccessTips = "已重新设置课题状态，您可以重新评审了";
         modalHtml.mySendFileModal="您确认文件下达吗？";
-        modalHtml.myDeleteLeader="是否删除此领导讲话吗？"
+        modalHtml.myDeleteLeader="是否删除此领导讲话？"
         return modalHtml
     })
 })();

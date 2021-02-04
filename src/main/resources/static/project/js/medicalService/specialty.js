@@ -335,7 +335,7 @@
                 orange.redirect(addUrl)
             });
 
-            $("#chargePersonSearch").selectUtil(webStatus);
+            $("#chargePersonSearch").selectUtil(selectUtil.inSearchStatus());
 
             var aCol = [
                 {field: 'specialtyName', title: '科室名称'},

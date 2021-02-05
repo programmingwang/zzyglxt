@@ -55,21 +55,18 @@ public class ResourcesServiceImpl implements ResourcesService {
     }
 
     @Override
-    public int insert(ResourcesDO record) {
-        record.setItemcode(UUIDUtils.getUUID());
-        return resourcesDOMapper.insert(record);
-    }
-
-    @Override
     public void insertSelective(ResourcesDO record) {
         ValidatorResult result = validator.validate(record);
         if(result.isHasErrors()){
             throw new BusinessException(result.getErrMsg(), EmBusinessError.PARAMETER_VALIDATION_ERROR);
         }
-        record.setUpdater(usernameUtil.getOperateUser());
-        record.setCreater(usernameUtil.getOperateUser());
         record.setItemcode(UUIDUtils.getUUID());
         resourcesDOMapper.insertSelective(record);
+        ResourcesRoleRefDO resourcesRoleRefDO = new ResourcesRoleRefDO();
+        resourcesRoleRefDO.setItemcode(UUIDUtils.getUUID());
+        resourcesRoleRefDO.setResourceCode(record.getItemcode());
+        resourcesRoleRefDO.setRoleCode(roleDOMapper.selectByRoleName(record.getRoleNmae()).getItemcode());
+        resourcesRoleRefDOMapper.insertSelective(resourcesRoleRefDO);
     }
 
     @Override
@@ -82,12 +79,6 @@ public class ResourcesServiceImpl implements ResourcesService {
         record.setUpdater(usernameUtil.getOperateUser());
         record.setItemupdateat(DateUtils.getDate());
         return resourcesDOMapper.updateByPrimaryKeySelective(record);
-    }
-
-    @Override
-    public int updateByPrimaryKey(ResourcesDO record) {
-        record.setUpdater(usernameUtil.getOperateUser());
-        return resourcesDOMapper.updateByPrimaryKey(record);
     }
 
     @Override

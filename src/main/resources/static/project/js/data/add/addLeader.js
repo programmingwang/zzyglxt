@@ -1,46 +1,44 @@
 (function () {
-    require(['jquery','objectUtil','ajaxUtil','alertUtil','stringUtil','fileUtil','distpicker','modalUtil'],
-        function (jquery,objectUtil,ajaxUtil,alertUtil,stringUtil,fileUtil,distpicker,modalUtil) {
+    require(['jquery','objectUtil','ajaxUtil','alertUtil','stringUtil','fileUtil','modalUtil'],
+        function (jquery,objectUtil,ajaxUtil,alertUtil,stringUtil,fileUtil,modalUtil) {
 
-           const editor = objectUtil.wangEditorUtil();
+            const editor = objectUtil.wangEditorUtil();
 
-            $("#cancel").unbind().on('click',function () {
-                var url = "/healthCare/healthcarefamPre";
+            $("#cancelbtn").unbind().on('click',function () {
+                var url = "/data/dataLeader";
                 orange.redirect(url);
             });
-
             $("#btn_save").unbind().on('click',function () {
-                var careFamEntity;
+                var leaderEntity;
                 var addUpdateUrl;
                 var operateMessage;
                 if(!isUpdate()){
-                    addUpdateUrl = "inserthealthcarefampredo";
-                    operateMessage = "新增国医话健康成功";
-                    careFamEntity = {
+                    addUpdateUrl = "/datado/leader/insertLeader";
+                    operateMessage = "新增领导讲话成功";
+                    leaderEntity = {
                         itemcode: stringUtil.getUUID(),
-                        name : $("#name").val(),
-                        source : $("#source").val(),
-                        author : $("#author").val(),
-                        status : '0',
-                        content : editor.txt.html()
+                        dataTitle : $("#dataTitle").val(),
+                        dataSource : $("#dataSource").val(),
+                        releaseOrNot : "y",
+                        dataStatus : "0",
+                        dataContent : editor.txt.html()
                     };
                 }else{
                     var needData = JSON.parse(localStorage.getItem("rowData"));
-                    addUpdateUrl = "updatehealthcarefampredo";
-                    careFamEntity = {
+                    addUpdateUrl = "/datado/leader/updateLeader";
+                    leaderEntity = {
                         itemid: needData.itemid,
                         itemcode: needData.itemcode,
-                        name : $("#name").val(),
-                        source : $("#source").val(),
-                        author : $("#author").val(),
-                        status : '0',
-                        content : editor.txt.html()
+                        dataTitle : $("#dataTitle").val(),
+                        dataSource : $("#dataSource").val(),
+                        dataContent : editor.txt.html()
                     }
-                    operateMessage = "更新国医话健康成功";
+                    operateMessage = "更新领导讲话成功";
                 }
-                fileUtil.handleFile(isUpdate(), careFamEntity.itemcode, $("#upload_file")[0].files[0]);
 
-                ajaxUtil.myAjax(null,addUpdateUrl,careFamEntity,function (data) {
+                fileUtil.handleFile(isUpdate(), leaderEntity.itemcode, $("#upload_file")[0].files[0]);
+
+                ajaxUtil.myAjax(null,addUpdateUrl,leaderEntity,function (data) {
                     if(ajaxUtil.success(data)){
                         var submitConfirmModal = {
                             modalBodyID :"myTopicSubmitTip",
@@ -48,7 +46,7 @@
                             modalClass : "modal-lg",
                             cancelButtonStyle: "display:none",
                             modalConfirmFun:function (){
-                                var url = "/healthCare/healthcarefamPre";
+                                var url = "/data/dataLeader";
                                 orange.redirect(url);
                                 return true;
                             }
@@ -63,40 +61,43 @@
                 return false;
             });
 
-            $("#btn_insert").unbind().on('click',function () {
+
+            $("#submitbtn").unbind().on('click',function () {
                 var mySubmitToCZ = {
                     modalBodyID: "mySubmitModal",
                     modalTitle: "提交",
                     modalClass: "modal-lg",
                     modalConfirmFun:function (){
-                        var careFamEntity;
+                        var leaderEntity;
                         var addUpdateUrl;
+                        var operateMessage;
                         if(!isUpdate()){
-                            addUpdateUrl = "inserthealthcarefampredo";
-                            careFamEntity = {
+                            addUpdateUrl = "/datado/leader/insertLeader";
+                            operateMessage = "新增领导讲话成功";
+                            leaderEntity = {
                                 itemcode: stringUtil.getUUID(),
-                                name : $("#name").val(),
-                                source : $("#source").val(),
-                                author : $("#author").val(),
-                                status : '1',
-                                content : editor.txt.html()
+                                dataTitle : $("#dataTitle").val(),
+                                dataSource : $("#dataSource").val(),
+                                releaseOrNot : "y",
+                                dataStatus : "1",
+                                dataContent : editor.txt.html()
                             };
                         }else{
                             var needData = JSON.parse(localStorage.getItem("rowData"));
-                            addUpdateUrl = "updatehealthcarefampredo";
-                            careFamEntity = {
+                            addUpdateUrl = "/datado/leader/updateLeader";
+                            leaderEntity = {
                                 itemid: needData.itemid,
                                 itemcode: needData.itemcode,
-                                name : $("#name").val(),
-                                source : $("#source").val(),
-                                author : $("#author").val(),
-                                status : '1',
-                                content : editor.txt.html()
+                                dataTitle : $("#dataTitle").val(),
+                                dataSource : $("#dataSource").val(),
+                                dataContent : editor.txt.html()
                             }
+                            operateMessage = "更新领导讲话成功";
                         }
-                        fileUtil.handleFile(isUpdate(), careFamEntity.itemcode, $("#upload_file")[0].files[0]);
 
-                        ajaxUtil.myAjax(null,addUpdateUrl,careFamEntity,function (data) {
+                        fileUtil.handleFile(isUpdate(), leaderEntity.itemcode, $("#upload_file")[0].files[0]);
+
+                        ajaxUtil.myAjax(null,addUpdateUrl,leaderEntity,function (data) {
                             if(ajaxUtil.success(data)){
                                 var submitConfirmModal = {
                                     modalBodyID :"myTopicSubmitTip",
@@ -104,7 +105,7 @@
                                     modalClass : "modal-lg",
                                     cancelButtonStyle: "display:none",
                                     modalConfirmFun:function (){
-                                        var url = "/healthCare/healthcarefamPre";
+                                        var url = "/data/dataLeader";
                                         orange.redirect(url);
                                         return true;
                                     }
@@ -122,31 +123,21 @@
                 var x = modalUtil.init(mySubmitToCZ);
                 x.show();
                 return false;
+
             });
 
             (function init() {
                 if (isUpdate()){
-                    $(".titleCSS").text("修改国医话健康信息");
                     var tempdata = JSON.parse(localStorage.getItem("rowData"));
-                    $("#name").val(tempdata.name);
-                    $("#source").val(tempdata.source);
-                    $("#author").val(tempdata.author);
-                    editor.txt.html(tempdata.content);
-                    var img = tempdata.filePath;
-                    $("#upimg").attr("src",img);
-                }
-                else {
-                    $("#distpicker").distpicker();
-                }
-                init = function () {
-
+                    $("#dataTitle").val(tempdata.dataTitle);
+                    $("#dataSource").val(tempdata.dataSource);
+                    editor.txt.html(tempdata.dataContent);
                 }
             }());
 
             function isUpdate() {
                 return (localStorage.getItem("rowData") != null || localStorage.getItem("rowData") != undefined)
             }
-
             /*
            上传文件
            */
@@ -163,10 +154,10 @@
                 }
             }
             document.getElementById('clsfile').onclick = function() {
-                var obj = document.getElementById('upload_file');
-                obj.outerHTML=obj.outerHTML;
+                $("#upload_file").val("");
                 $("#clsfile").css("display","none");
                 $("#addFile").empty("p");
             }
+
         })
 })();

@@ -278,15 +278,15 @@
                 orange.redirect(url);
             });
 
-            var pl = dictUtil.getDictByCode(dictUtil.DICT_LIST.webStatus);
-            $("#chargePersonSearch").selectUtil(pl);
+            $("#chargePersonSearch").selectUtil(selectUtil.inSearchStatus());
 
             var aCol = [
                 {field: 'name', title: '方名'},
                 {field: 'source', title: '出处'},
                 {field: 'prescription', title: '处方'},
-                {field: 'content',title:'制法及用法'},
-                {field: 'type', title: '剂型',width: '70px'},
+                {field: 'content',title:'制法及用法', formatter: function (value){
+                        return $(value)[0].innerText;
+                    }},
                 {field: 'action',  title: '操作',formatter: operation,events:orgEvents}
             ];
 
@@ -298,7 +298,7 @@
                 myTable = bootstrapTableUtil.myBootStrapTableInit("table", url, param, aCol);
             }
 
-            bootstrapTableUtil.globalSearch("table", url, aParam, aCol, "status")
+            bootstrapTableUtil.globalSearch2("table", url, aParam, aCol, "status")
 
 
         })

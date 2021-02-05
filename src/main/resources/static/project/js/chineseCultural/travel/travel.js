@@ -300,8 +300,7 @@
                 orange.redirect(url);
             });
 
-            var pl = dictUtil.getDictByCode(dictUtil.DICT_LIST.webStatus);
-            $("#chargePersonSearch").selectUtil(pl);
+            $("#chargePersonSearch").selectUtil(selectUtil.inSearchStatus());
 
 
             var aCol = [
@@ -329,7 +328,7 @@
             }
 
 
-            bootstrapTableUtil.globalSearch("table", url, aParam, aCol, "chineseCulturalStatus")
+            bootstrapTableUtil.globalSearch2("table", url, aParam, aCol, "chineseCulturalStatus")
 
         })
 })();

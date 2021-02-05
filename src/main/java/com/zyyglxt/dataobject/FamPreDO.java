@@ -9,6 +9,9 @@ public class FamPreDO extends FamPreDOKey {
     @NotBlank(message = "名方名称不能为空")
     private String name;
 
+    private String author;
+
+    private String famsource;
     @NotBlank(message = "名方出处不能为空")
     private String source;
 
@@ -35,6 +38,20 @@ public class FamPreDO extends FamPreDOKey {
 
     public String getName() {
         return name;
+    }
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author == null ? null : author.trim();
+    }
+    public String getFamsource() {
+        return famsource;
+    }
+
+    public void setFamsource(String famsource) {
+        this.famsource = famsource == null ? null : famsource.trim();
     }
 
     public void setName(String name) {

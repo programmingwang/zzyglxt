@@ -119,7 +119,9 @@
             //审核状态-机构审核
             "orgAuditStatus": "orgAuditStatus",
             //时间状态
-            "timeStatus":"timeStatus"
+            "timeStatus":"timeStatus",
+            //收文审核状态
+            "receiptStatus":"receiptStatus"
         }
 
         var dictList = {

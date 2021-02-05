@@ -22,6 +22,7 @@
 
   <resultMap extends="BaseResultMap" id="ResultMapWithBLOBsAndFile" type="com.zyyglxt.dto.HealthCareFamPreDto">
     <result column="FILE_PATH" jdbcType="VARCHAR" property="filePath"/>
+    <result column="FILE_NAME" jdbcType="VARCHAR" property="fileName"/>
     <result column="CONTENT" jdbcType="LONGVARCHAR" property="content" />
   </resultMap>
   <sql id="Base_Column_List">
@@ -243,6 +244,8 @@
     <include refid="SelectAllBlob_Column_List" />
     ,
     cf.FILE_PATH
+    ,
+    cf.FILE_NAME
     from tb_health_care_fam_pre fp left join tb_culpro_file cf
     on fp.itemCode = cf.DATA_CODE
     <if test="status == 3">

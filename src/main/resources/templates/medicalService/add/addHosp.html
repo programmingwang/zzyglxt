@@ -35,6 +35,7 @@
 
         label {
             text-align: right;
+            margin-top: 6px;
         }
     </style>
 </head>
@@ -44,45 +45,47 @@
         <div class="col-12">
             <div class="titleCSS"></div>
             <form>
-                <!--上传图片的div-->
-                <div class="form-group row">
-                    <label class="col-sm-2 col-form-label">医院照片：</label>
-                    <div class="upload-content" data-limit="1">
-                        <div class="content-img">
-                            <ul class="content-img-list"></ul>
-                            <div class="file">
-                                <i class="gcl gcladd"></i>
-                                <input type="file" name="file" accept="image/*" id="upload" multiple>
+                <div class="col-lg-12 row">
+                    <div class="col-lg-6" >
+                        <div class="form-group row">
+                            <label class="col-sm-4 col-form-label">医院名称：</label>
+                            <div class="col-sm-6">
+                                <input id="hospitalName" type="text" class="form-control" placeholder="请输入">
                             </div>
                         </div>
-                        <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog"
-                             aria-labelledby="myLargeModalLabel">
-                            <div class="modal-dialog modal-lg" role="document">
-                                <div class="modal-content">
+                        <div class="form-group row">
+                            <label class="col-sm-4 col-form-label">医院级别：</label>
+                            <div class="col-sm-6">
+                                <select id="hospitalLevel" class="form-control"></select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-4 col-form-label">医院简介：</label>
+                            <div class="col-sm-6">
+                                <input id="hospitalBriefIntroduce" type="text" class="form-control" placeholder="请输入（限30字）" maxlength="30">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6" >
+                        <div class="form-group row">
+                            <label style="position: relative;top: 60px;" class="col-sm-5 col-form-label">医院照片：</label>
+                            <div class="upload-content" data-limit="1">
+                                <div class="content-img">
+                                    <ul class="content-img-list"></ul>
+                                    <div class="file">
+                                        <i class="gcl gcladd"></i>
+                                        <input type="file" name="file" accept="image/*" id="upload" multiple>
+                                    </div>
+                                </div>
+                                <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog"
+                                     aria-labelledby="myLargeModalLabel">
+                                    <div class="modal-dialog modal-lg" role="document">
+                                        <div class="modal-content">
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-
-                <div class="form-group row">
-                    <label class="col-sm-2 col-form-label">医院名称：</label>
-                    <div class="col-sm-3">
-                        <input id="hospitalName" type="text" class="form-control" placeholder="请输入">
-                    </div>
-                </div>
-
-                <div class="form-group row">
-                    <label class="col-sm-2 col-form-label">医院级别：</label>
-                    <div class="col-sm-3">
-                        <select id="hospitalLevel" class="form-control"></select>
-                    </div>
-                </div>
-
-                <div class="form-group row">
-                    <label class="col-sm-2 col-form-label">医院简介：</label>
-                    <div class="col-sm-3">
-                        <input id="hospitalBriefIntroduce" type="text" class="form-control" placeholder="请输入（限30字）" maxlength="30">
                     </div>
                 </div>
 
@@ -100,41 +103,26 @@
                     </div>
                 </div>
 
-                <div class="form-group row">
-                    <label class="col-sm-2 col-form-label">联系电话：</label>
-                    <div class="col-sm-3">
-                        <input id="hospitalTelephone" type="text" class="form-control" placeholder="请输入">
-                    </div>
-                </div>
-
                 <div id="distpicker" class="form-group row">
-                    <label for="hospitalAddressPro" class="col-sm-2 col-form-label">医院所在省：</label>
-                    <div class="col-sm-2">
-                        <select id="hospitalAddressPro" class="form-control"></select>
+                    <label for="hospitalAddressPro" class="col-sm-2 col-form-label">医院地址：</label>
+                    <div class="col-sm-4 row" style="padding-left: 30px">
+                        <select id="hospitalAddressPro" class="form-control col" style="padding-right: 0"></select>
+                        <select id="hospitalAddressCity" class="form-control col" style="padding: 0"></select>
+                        <select id="hospitalAddressCountry" class="form-control col" style="padding: 0"></select>
                     </div>
-
-                    <label for="hospitalAddressCity" class="col-sm-1 col-form-label">市：</label>
-                    <div class="col-sm-2">
-                        <select id="hospitalAddressCity" class="form-control"></select>
-                    </div>
-
-                    <label for="hospitalAddressCountry" class="col-sm-1 col-form-label">区：</label>
-                    <div class="col-sm-2">
-                        <select id="hospitalAddressCountry" class="form-control"></select>
-                    </div>
-                </div>
-
-
-                <div class="form-group row">
-                    <label class="col-sm-2 col-form-label">医院详细地址：</label>
-                    <div class="col-sm-3">
+                    <div class="col-sm-4" style="padding: 0;flex: 0 0 34.333333%;max-width: 34.333333%;">
                         <input id="hospitalAddress" type="text" class="form-control" placeholder="请输入">
                     </div>
                 </div>
+
                 <div class="form-group row">
                     <label class="col-sm-2 col-form-label">链接地址：</label>
                     <div class="col-sm-3">
                         <input id="hospitalLink" type="text" class="form-control" placeholder="请输入">
+                    </div>
+                    <label class="col-sm-2 col-form-label">联系电话：</label>
+                    <div class="col-sm-3">
+                        <input id="hospitalTelephone" type="text" class="form-control" placeholder="请输入">
                     </div>
                 </div>
                 <div class="form-group row">
@@ -144,17 +132,19 @@
                 </div>
 
                 <div class="form-group row">
-                    <div class="col-lg-4 col-md-4" ></div>
-                    <div class=" col-lg-4 row" >
+                    <div class="col-lg-6 col-md-6" ></div>
+                    <div class=" col-lg-4 row" style="padding: 0" >
                         <div class="col">
                             <button id="cancel" type="button" class="btn btn-light col">取消</button>
                         </div>
                         <div class="col">
                             <button id="btn_save" type="submit" class="btn btn-danger col">保存</button>
                         </div>
-                        <button id="btn_insert" type="submit" class="btn btn-primary col">提交</button>
+                        <div class="col" style="padding-right: 0;">
+                            <button id="btn_insert" type="submit" class="btn btn-primary col">提交</button>
+                        </div>
                     </div>
-                    <div class="col-lg-4 col-md-4" ></div>
+
                 </div>
             </form>
 

@@ -190,7 +190,7 @@
                 var myViewTravelModalData ={
                     modalBodyID : "myViewCulturalModal", //公用的在后面给span加不同的内容就行了，其他模块同理
                     modalTitle : "查看详情",
-                    modalClass : "modal-lg",
+                    modalClass : "modal-xl",
                     confirmButtonStyle: "display:none",
                 };
                 var myTravelModal = modalUtil.init(myViewTravelModalData);
@@ -202,9 +202,9 @@
                 $("#itemCreateAt").val(row.itemcreateat);
                 $("#chineseCulturalStatus").val(webStatus[row.chineseCulturalStatus].text);
                 $("#culturalImg").attr("src",row.filePath)
-                $('#culturalImgSpan').html("电影电视图片");
-                $('#culturalNameSpan').html("电影电视名称");
-                $('#culturalContentSpan').html("电影电视介绍");
+                $('#culturalImgSpan').html("电影电视图片：");
+                $('#culturalNameSpan').html("电影电视名称：");
+                $('#culturalContentSpan').html("电影电视介绍：");
 
                 myTravelModal.show();
             },

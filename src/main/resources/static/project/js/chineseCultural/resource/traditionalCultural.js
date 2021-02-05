@@ -196,8 +196,8 @@
                     $("#itemCreateAt").val(row.itemcreateat);
                     $("#chineseCulturalStatus").val(webStatus[row.chineseCulturalStatus].text);
                     $("#imgDiv").attr("style","display:none");
-                    $('#culturalNameSpan').html("医史名称");
-                    $('#culturalContentSpan').html("医史介绍");
+                    $('#culturalNameSpan').html("医史名称：");
+                    $('#culturalContentSpan').html("医史介绍：");
 
                     myTravelModal.show();
                 },

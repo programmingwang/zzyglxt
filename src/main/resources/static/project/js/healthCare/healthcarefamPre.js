@@ -181,7 +181,7 @@
                     var myViewCareFamModalData ={
                         modalBodyID : "myViewCareFamModal", //公用的在后面给span加不同的内容就行了，其他模块同理
                         modalTitle : "查看详情",
-                        modalClass : "modal-lg",
+                        modalClass : "modal-xl",
                         confirmButtonStyle: "display:none",
                     };
                     var myCareFamModal = modalUtil.init(myViewCareFamModalData);

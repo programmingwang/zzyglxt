@@ -195,7 +195,7 @@
                     $("#itemCreateAt").val(row.itemcreateat);
                     $("#chineseMedicineStatus").val(webStatus[ row.chineseMedicineStatus].text);
                     $("#mediCineImg").attr("src",row.filePath)
-                    $('#mediCineImgSpan').html("药材图片");
+                    $('#mediCineImgSpan').html("药材图片：");
 
                     myChineseMedicineModal.show();
                 },
@@ -328,7 +328,7 @@
                         }},
                         {field: 'filePath', title: '药材图片', formatter:function (value, row, index) {
                                 if(value == "已经损坏了"){
-                                    return '<p>'+value+'</p>';
+                                    return value;
                                 }else{
                                     return '<img  src='+value+' width="100" height="100" class="img-rounded" >';
                                 }

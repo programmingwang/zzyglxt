@@ -285,7 +285,7 @@
                 {field: 'scienceKnowledgeSource', title: '来源'},
                 {field: 'scienceKnowledgeAuthor', title: '作者'},
                 {field:'itemcreateat',title:'发布时间'},
-                {field: 'action',  title: '操作',formatter: operation,events:orgEvents}
+                {field: 'action',  title: '操作',width:'200px',formatter: operation,events:orgEvents}
             ];
 
             var myTable = bootstrapTableUtil.myBootStrapTableInit("table", url, aParam, aCol);

@@ -32,6 +32,7 @@
         }
         label{
             text-align: right;
+            margin-top: 6px;
         }
         div#upimg {
             padding-top: 23%;
@@ -46,26 +47,51 @@
     <div class="col-12">
         <div class="titleCSS"></div>
         <form>
-            <!--上传图片的div-->
-            <div class="form-group row">
-                <label class="col-sm-2 col-form-label">科室照片：</label>
-                <div class="upload-content" data-limit="1">
-                    <div class="content-img">
-                        <ul class="content-img-list"></ul>
-                        <div class="file">
-                            <i class="gcl gcladd"></i>
-                            <input type="file" name="file" accept="image/*" id="upload" multiple>
+            <div class="col-lg-12 row" >
+                <div class="col-lg-6" >
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-form-label">科室名称：</label>
+                        <div class="col-sm-6">
+                            <select id="specialtyName" class="form-control"></select>
                         </div>
                     </div>
-                    <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog"
-                         aria-labelledby="myLargeModalLabel">
-                        <div class="modal-dialog modal-lg" role="document">
-                            <div class="modal-content">
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-form-label">科室简介：</label>
+                        <div class="col-sm-6">
+                            <input id="specialtyBriefIntroduce" type="text" class="form-control" placeholder="请输入（限30字）" maxlength="30">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-form-label">联系电话：</label>
+                        <div class="col-sm-6">
+                            <input id="specialtyPhone" type="text" class="form-control" placeholder="请输入">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6" >
+                    <div class="form-group row">
+                        <label style="position: relative;top: 60px;" class="col-sm-5 col-form-label">科室照片：</label>
+                        <div class="upload-content" data-limit="1">
+                            <div class="content-img">
+                                <ul class="content-img-list"></ul>
+                                <div class="file">
+                                    <i class="gcl gcladd"></i>
+                                    <input type="file" name="file" accept="image/*" id="upload" multiple>
+                                </div>
+                            </div>
+                            <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog"
+                                 aria-labelledby="myLargeModalLabel">
+                                <div class="modal-dialog modal-lg" role="document">
+                                    <div class="modal-content">
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+            <!--上传图片的div-->
+
 
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label"><span style="color: red">*</span>科室名称：</label>
@@ -81,6 +107,7 @@
                 </div>
             </div>
 
+
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label"><span style="color: red">*</span>所在机构：</label>
                 <div class="col-sm-3">
@@ -88,12 +115,6 @@
                 </div>
                 <div class="col-sm-4">
                     <a id="addHosp" style="color: #D60000">没有所属医院？点击创建医院信息</a>
-                </div>
-            </div>
-            <div class="form-group row">
-                <label class="col-sm-2 col-form-label">联系电话：</label>
-                <div class="col-sm-3">
-                    <input id="specialtyPhone" type="text" class="form-control" placeholder="请输入">
                 </div>
             </div>
 
@@ -104,17 +125,19 @@
             </div>
 
             <div class="form-group row">
-                <div class="col-lg-4 col-md-4" ></div>
-                <div class=" col-lg-4 row" >
+                <div class="col-lg-6 col-md-6" ></div>
+                <div class=" col-lg-4 row" style="padding: 0" >
                     <div class="col">
                         <button id="cancel" type="button" class="btn btn-light col">取消</button>
                     </div>
                     <div class="col">
                         <button id="btn_save" type="submit" class="btn btn-danger col">保存</button>
                     </div>
-                    <button id="btn_insert" type="submit" class="btn btn-primary col">提交</button>
-                </div>
-                <div class="col-lg-4 col-md-4" ></div>
+                    <div class="col" style="padding-right: 0;">
+                        <button id="btn_insert" type="submit" class="btn btn-primary col">提交</button>
+                    </div>
+                    </div>
+
             </div>
         </form>
 

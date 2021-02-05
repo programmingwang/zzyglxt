@@ -66,6 +66,7 @@
                             </div>
                         </div>
                     </div>
+
                     <div class="col-lg-6" >
                         <div class="form-group row">
                             <label style="position: relative;top: 60px;" class="col-sm-5 col-form-label">医院照片：</label>
@@ -86,6 +87,26 @@
                                 </div>
                             </div>
                         </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label"><span style="color: red">*</span>医院名称：</label>
+                    <div class="col-sm-3">
+                        <input id="hospitalName" type="text" class="form-control" placeholder="请输入">
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label"><span style="color: red">*</span>医院级别：</label>
+                    <div class="col-sm-3">
+                        <select id="hospitalLevel" class="form-control"></select>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label"><span style="color: red">*</span>医院简介：</label>
+                    <div class="col-sm-3">
+                        <input id="hospitalBriefIntroduce" type="text" class="form-control" placeholder="请输入（限30字）" maxlength="30">
                     </div>
                 </div>
 
@@ -102,6 +123,7 @@
                         <button id="clear" type="button">清空</button>
                     </div>
                 </div>
+
 
                 <div id="distpicker" class="form-group row">
                     <label for="hospitalAddressPro" class="col-sm-2 col-form-label">医院地址：</label>
@@ -126,7 +148,7 @@
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label class="col-sm-2 col-form-label">医院介绍：</label>
+                    <label class="col-sm-2 col-form-label"><span style="color: red">*</span>医院介绍：</label>
                     <div id="div1" class="col-sm-8">
                     </div>
                 </div>

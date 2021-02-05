@@ -11,7 +11,7 @@ public class HospDO extends HospDOKey {
     @NotBlank(message = "医院名称不能为空")
     private String hospitalName;
 
-    @NotBlank(message = "医院等级不能为空")
+    @NotBlank(message = "医院级别不能为空")
     private String hospitalLevel;
 
     @Size(max = 60)
@@ -28,7 +28,7 @@ public class HospDO extends HospDOKey {
     @NotBlank(message = "医院所在市不能为空")
     private String hospitalAddressCity;
 
-    @NotBlank(message = "医院所在县不能为空")
+    @NotBlank(message = "医院所在县区不能为空")
     private String hospitalAddressCountry;
 
     @NotBlank(message = "医院地址不能为空")

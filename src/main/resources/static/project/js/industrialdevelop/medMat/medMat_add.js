@@ -98,6 +98,7 @@
             /*初始化数据*/
             (function init() {
                 if (updateStatus){
+                    $(".titleCSS").text("修改药材信息");
                     $("#name").val(tempdata.name);
                     $("#specifications").val(tempdata.specifications);
                     $("#price").val(tempdata.price);
@@ -105,6 +106,9 @@
                     $("#contacts").val(tempdata.contacts);
                     $("#phone").val(tempdata.phone);
                     uploadImg.setImgSrcs(tempdata.filePath);
+                }
+                else {
+                    $(".titleCSS").text("上架新药材");
                 }
             }());
         });

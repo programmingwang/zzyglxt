@@ -22,7 +22,7 @@
 
         function getRoleTabletwo(role,preUrl,status,medStatus) {
             if (role !=null) {
-                return preUrl + "?" + status + "=" + medStatus[0].id + "&" + status + "=" + medStatus[1].id + "&" + status + "=" + medStatus[2].id;
+                return preUrl + "?status=1";
             }
         }
 
@@ -31,8 +31,8 @@
                 if (status == medStatus[0].id) {
                     return [
                         '<a class="edit" style="margin:0 1em;text-decoration: none;color:#348eff;" data-toggle="modal" data-target="" >编辑</a>',
-                        '<a class="delete" style="margin:0 1em;text-decoration: none;color:#ed0f09;"  data-toggle="modal" data-target="#staticBackdrop" >删除</a>',
                         '<a class="shelf" style="margin:0 1em;text-decoration: none;color:#4df115;" data-toggle="modal" data-target="" >上架</a>',
+                        '<a class="delete" style="margin:0 1em;text-decoration: none;color:#ed0f09;"  data-toggle="modal" data-target="#staticBackdrop" >删除</a>',
                     ].join('');
                 } else if (status == medStatus[1].id ) {
                     return [
@@ -136,16 +136,13 @@
             }else if(role === "政务资源科员"){
                 if(status == webStatus[0].id){
                     return [
-                        '<a class="edit" style="margin:0 0.8em;text-decoration: none;color:#348eff;" data-toggle="modal" data-target="" >修改</a>',
+                        '<a class="edit" style="margin:0 1em;text-decoration: none;color:#348eff;" data-toggle="modal" data-target="" >编辑</a>',
                         '<a class="submit"  style="margin:0 1em;text-decoration: none;color:#4df115;" data-target="#staticBackdrop" >提交</a>',
                         '<a class="delete" style="margin:0 1em;text-decoration: none;color:#ed0f09;"  data-toggle="modal" data-target="#staticBackdrop" >删除</a>',
                     ].join('');
-                }else if(status == webStatus[2].id || status ==webStatus[5].id){
+                }else if(status == webStatus[2].id || status == webStatus[3].id || status == webStatus[4].id || status == webStatus[6].id){
                     return [
-                        '<a class="view" style="margin:0 1em;text-decoration: none;color:#348eff;" data-toggle="modal" data-target="" >查看</a>',
-                    ].join('');
-                }else if(status == webStatus[3].id || status == webStatus[4].id || status == webStatus[6].id){
-                    return [
+                        '<a class="edit" style="margin:0 1em;text-decoration: none;color:#348eff;" data-toggle="modal" data-target="" >编辑</a>',
                         '<a class="view" style="margin:0 1em;text-decoration: none;color:#348eff;" data-toggle="modal" data-target="" >查看</a>',
                         '<a class="delete" style="margin:0 1em;text-decoration: none;color:#ed0f09;" data-toggle="modal" data-target="#staticBackdrop" >删除</a>',
                     ].join('');
@@ -154,30 +151,36 @@
                         '<a class="view" style="margin:0 1em;text-decoration: none;color:#348eff;" data-toggle="modal" data-target="" >查看</a>',
                         '<a class="no-submit" style="margin:0 1em;text-decoration: none;color:#ed0f09;" data-toggle="modal" data-target="" >取消提交</a>',
                     ].join('');
+                }else if(status ==webStatus[5].id ){
+                    return [
+                        '<a class="view" style="margin:0 1em;text-decoration: none;color:#348eff;" data-toggle="modal" data-target="" >查看</a>',
+                        '<a  class="under-shelf" style="margin:0 1em;text-decoration: none;color:#ed0f09;" data-toggle="modal" data-target="#staticBackdrop" >下架</a>',
+                    ].join('');
                 }
 
             }else if(role === "政务资源处长"){
                 if(status == webStatus[1].id){
                     return [
-                        '<a  class="pass"  data-toggle="modal" style="margin:0 0.6em;text-decoration: none;color:#4df115;" data-target="#staticBackdrop" >通过</a>',
-                        '<a  class="fail"  data-toggle="modal" style="margin:0 0.6em;text-decoration: none;color:#ed0f09;" data-target="#staticBackdrop" >不通过</a>',
-                        '<a class="view" data-toggle="modal" style="margin:0 0.6em;text-decoration: none;color:#348eff;" data-target="" >查看</a>',
+                        '<a  class="pass"  data-toggle="modal" style="margin:0 1em;text-decoration: none;color:#4df115;" data-target="#staticBackdrop" >通过</a>',
+                        '<a  class="fail"  data-toggle="modal" style="margin:0 1em;text-decoration: none;color:#ed0f09;" data-target="#staticBackdrop" >不通过</a>',
+                        '<a class="view" data-toggle="modal" style="margin:0 1em;text-decoration: none;color:#348eff;" data-target="" >查看</a>',
                     ].join('');
                 }else if(status == webStatus[2].id || status == webStatus[3].id){
                     return [
                         '<a class="view" data-toggle="modal" style="margin:0 1em;text-decoration: none;color:#348eff;" data-target="" >查看</a>',
+                    ].join('');
+                }else if(status ==webStatus[5].id ){
+                    return [
+                        '<a class="view" style="margin:0 1em;text-decoration: none;color:#348eff;" data-toggle="modal" data-target="" >查看</a>',
+                        '<a  class="under-shelf" style="margin:0 1em;text-decoration: none;color:#ed0f09;" data-toggle="modal" data-target="#staticBackdrop" >下架</a>',
                     ].join('');
                 }
 
             }else if(role === "政务资源综合处处长"){
                 if(status == webStatus[2].id){
                     return [
-                        '<a  class="pass"  data-toggle="modal" style="margin:0 0.6em;text-decoration: none;color:#4df115;" data-target="#staticBackdrop" >通过</a>',
-                        '<a  class="fail"  data-toggle="modal" style="margin:0 0.6em;text-decoration: none;color:#ed0f09;" data-target="#staticBackdrop" >不通过</a>',
-                        '<a class="view" data-toggle="modal" style="margin:0 0.6em;text-decoration: none;color:#348eff;" data-target="" >查看</a>',
-                    ].join('');
-                }else if(status == webStatus[4].id){
-                    return [
+                        '<a class="pass "  data-toggle="modal" data-target="#staticBackdrop" style="margin:0 1em;text-decoration: none;color:#4df115;">通过</a>',
+                        '<a class="fail"  data-toggle="modal" data-target="#staticBackdrop" style="margin:0 1em;text-decoration: none;color:#ed0f09;">不通过</a>',
                         '<a class="view" data-toggle="modal" style="margin:0 1em;text-decoration: none;color:#348eff;" data-target="" >查看</a>',
                     ].join('');
                 }else if(status == webStatus[5].id){
@@ -185,8 +188,11 @@
                         '<a  class="view"  style="margin:0 1em;text-decoration: none;color:#348eff;" data-toggle="modal" data-target="" >查看</a>',
                         '<a  class="under-shelf" style="margin:0 1em;text-decoration: none;color:#ed0f09;" data-toggle="modal" data-target="#staticBackdrop" >下架</a>',
                     ].join('');
+                }else if(status == webStatus[4].id){
+                    return [
+                        '<a  class="view"  style="margin:0 1em;text-decoration: none;color:#348eff;" data-toggle="modal" data-target="" >查看</a>',
+                    ].join('');
                 }
-
             }
         }
 
@@ -209,6 +215,18 @@
             // }
         }
 
+        function inSearchStatus(){
+            var status = [
+                { id: "0",text: "保存"},
+                { id: "1",text: "审核中"},
+                { id: "2",text: "审核未通过"},
+                { id: "3",text: "已上架"},
+                { id: "4",text: "已下架"},
+                { id: "99",text: "全部状态"},
+                ]
+            return status;
+        }
+
 
         return {
             getRoleTable:getRoleTable,
@@ -216,6 +234,7 @@
             getStatus: getStatus,
             getRoleTabletwo:getRoleTabletwo,
             getRoleOperatetwo:getRoleOperatetwo,
+            inSearchStatus: inSearchStatus,
         }
     })
 })();

@@ -8,7 +8,7 @@ import java.util.Date;
 @ToString
 public class CulturalResourcesDO extends CulturalResourcesDOKey {
 
-    @NotBlank(message = "名称不能为空")
+    @NotBlank(message = "医史标题或流派名称或名家姓名不能为空")
     private String chineseCulturalName;
 
     private String chineseCulturalSource;

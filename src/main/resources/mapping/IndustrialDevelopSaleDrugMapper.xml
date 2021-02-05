@@ -248,8 +248,10 @@ tb_industrial_develop_sale_drug.UPDATER,tb_industrial_develop_sale_drug.itemUpda
         SELECT <include refid="Base_Column_List"/>,
         tcf.FILE_PATH
         FROM tb_industrial_develop_sale_drug left join tb_culpro_file tcf on tb_industrial_develop_sale_drug.itemCode = tcf.DATA_CODE
-        WHERE STATUS = #{status,jdbcType=VARCHAR}
-        AND ORG_CODE = #{orgCode}
+        WHERE ORG_CODE = #{orgCode}
+        <if test="status == 1">
+          AND STATUS in (0,1,2)
+        </if>
         order by itemUpdateAt desc
     </select>
   <update id="changeStatusToSaleDrug">

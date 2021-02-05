@@ -59,7 +59,6 @@ public class IndustrialDevelopSaleDrugServiceImpl implements IndustrialDevelopSa
             throw new BusinessException(result.getErrMsg(), EmBusinessError.PARAMETER_VALIDATION_ERROR);
         }
         record.setItemcreateat(new Date());
-        record.setStatus("0");
         record.setCreater(usernameUtil.getOperateUser());
         record.setUpdater(usernameUtil.getOperateUser());
         record.setOrgCode(usernameUtil.getOrgCode());
@@ -90,13 +89,8 @@ public class IndustrialDevelopSaleDrugServiceImpl implements IndustrialDevelopSa
     }
 
     @Override
-    public List<IndustrialDevelopSaleDrugDto> selectAllSaleDrug(List<String> status) {
-//        return industrialDevelopSaleDrugMapper.selectAllSaleDrug(status);
-       List<IndustrialDevelopSaleDrugDto> industrialDevelopSaleDrugList = new ArrayList<>();
-        for (String Status : status) {
-            industrialDevelopSaleDrugList.addAll(industrialDevelopSaleDrugMapper.selectAllSaleDrug (Status,usernameUtil.getOrgCode()));
-        }
-        return industrialDevelopSaleDrugList;
+    public List<IndustrialDevelopSaleDrugDto> selectAllSaleDrug(String status) {
+        return industrialDevelopSaleDrugMapper.selectAllSaleDrug (status,usernameUtil.getOrgCode());
     }
 
     @Override

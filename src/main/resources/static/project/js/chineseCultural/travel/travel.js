@@ -205,9 +205,9 @@
                     $("#itemCreateAt").val(row.itemcreateat);
                     $("#chineseCulturalStatus").val(webStatus[row.chineseCulturalStatus].text);
                     $("#culturalImg").attr("src",row.filePath)
-                    $('#culturalImgSpan').html("景点图片");
-                    $('#culturalNameSpan').html("景点名称");
-                    $('#culturalContentSpan').html("景点介绍");
+                    $('#culturalImgSpan').html("景点图片：");
+                    $('#culturalNameSpan').html("景点名称：");
+                    $('#culturalContentSpan').html("景点介绍：");
 
                     myTravelModal.show();
                 },
@@ -300,8 +300,7 @@
                 orange.redirect(url);
             });
 
-            var pl = dictUtil.getDictByCode(dictUtil.DICT_LIST.webStatus);
-            $("#chargePersonSearch").selectUtil(pl);
+            $("#chargePersonSearch").selectUtil(selectUtil.inSearchStatus());
 
 
             var aCol = [
@@ -329,7 +328,7 @@
             }
 
 
-            bootstrapTableUtil.globalSearch("table", url, aParam, aCol, "chineseCulturalStatus")
+            bootstrapTableUtil.globalSearch2("table", url, aParam, aCol, "chineseCulturalStatus")
 
         })
 })();

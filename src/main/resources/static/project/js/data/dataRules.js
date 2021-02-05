@@ -319,7 +319,7 @@
                         if(value == "已经损坏了"){
                             return '<p>'+value+'</p>';
                         }else if (row.fileName == null){
-                            return '<p>————</p>';
+                            return '<p>无附件</p>';
                         }else{
                             return '<a href="'+value+'">'+row.fileName+'</a>'
                         }

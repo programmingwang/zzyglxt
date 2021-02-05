@@ -192,7 +192,7 @@
                     var myViewInCuHeModalData ={
                         modalBodyID : "myViewCulturalModal", //公用的在后面给span加不同的内容就行了，其他模块同理
                         modalTitle : "查看详情",
-                        modalClass : "modal-lg",
+                        modalClass : "modal-xl",
                         confirmButtonStyle: "display:none",
                     };
                     var myTravelModal = modalUtil.init(myViewInCuHeModalData);
@@ -204,9 +204,9 @@
                     $("#itemCreateAt").val(row.itemcreateat);
                     $("#chineseCulturalStatus").val(webStatus[row.chineseCulturalStatus].text);
                     $("#culturalImg").attr("src",row.filePath)
-                    $('#culturalImgSpan').html("非物质文化遗产图片");
-                    $('#culturalNameSpan').html("非物质文化遗产名称");
-                    $('#culturalContentSpan').html("非物质文化遗产介绍");
+                    $('#culturalImgSpan').html("非物质文化遗产图片：");
+                    $('#culturalNameSpan').html("非物质文化遗产名称：");
+                    $('#culturalContentSpan').html("非物质文化遗产介绍：");
 
                     myTravelModal.show();
                 },
@@ -299,8 +299,7 @@
                 orange.redirect(url);
             });
 
-            var pl = dictUtil.getDictByCode(dictUtil.DICT_LIST.webStatus);
-            $("#chargePersonSearch").selectUtil(pl);
+            $("#chargePersonSearch").selectUtil(selectUtil.inSearchStatus());
 
             var aCol = [
                 {field: 'chineseCulturalName', title: '非物质文化遗产名称'},
@@ -325,7 +324,7 @@
                 myTable = bootstrapTableUtil.myBootStrapTableInit("table", url, param, aCol);
             }
 
-            bootstrapTableUtil.globalSearch("table", url, aParam, aCol, "chineseCulturalStatus")
+            bootstrapTableUtil.globalSearch2("table", url, aParam, aCol, "chineseCulturalStatus")
 
         })
 })();

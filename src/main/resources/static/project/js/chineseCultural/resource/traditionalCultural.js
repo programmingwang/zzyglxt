@@ -196,8 +196,8 @@
                     $("#itemCreateAt").val(row.itemcreateat);
                     $("#chineseCulturalStatus").val(webStatus[row.chineseCulturalStatus].text);
                     $("#imgDiv").attr("style","display:none");
-                    $('#culturalNameSpan').html("医史名称");
-                    $('#culturalContentSpan').html("医史介绍");
+                    $('#culturalNameSpan').html("医史名称：");
+                    $('#culturalContentSpan').html("医史介绍：");
 
                     myTravelModal.show();
                 },
@@ -290,8 +290,7 @@
                 orange.redirect(url);
             });
 
-            var pl = dictUtil.getDictByCode(dictUtil.DICT_LIST.webStatus);
-            $("#chargePersonSearch").selectUtil(pl);
+            $("#chargePersonSearch").selectUtil(selectUtil.inSearchStatus());
 
             var aCol = [
                 {field: 'chineseCulturalName', title: '文章标题'},
@@ -310,7 +309,7 @@
                 myTable = bootstrapTableUtil.myBootStrapTableInit("table", url, param, aCol);
             }
 
-            bootstrapTableUtil.globalSearch("table", url, aParam, aCol, "chineseCulturalStatus")
+            bootstrapTableUtil.globalSearch2("table", url, aParam, aCol, "chineseCulturalStatus")
 
 
         })

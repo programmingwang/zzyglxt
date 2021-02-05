@@ -202,8 +202,8 @@
                     $("#itemCreateAt").val(row.itemcreateat);
                     $("#chineseCulturalStatus").val(webStatus[row.chineseCulturalStatus].text);
                     $("#imgDiv").attr("style","display:none");
-                    $('#culturalNameSpan').html("流派名称");
-                    $('#culturalContentSpan').html("流派介绍");
+                    $('#culturalNameSpan').html("流派名称：");
+                    $('#culturalContentSpan').html("流派介绍：");
                     $("#fileDiv").attr("style","display:block");
                     $("#upFile").html(row.fileName);
 
@@ -291,8 +291,7 @@
                 },
             };
 
-            var pl = dictUtil.getDictByCode(dictUtil.DICT_LIST.webStatus);
-            $("#chargePersonSearch").selectUtil(pl);
+            $("#chargePersonSearch").selectUtil(selectUtil.inSearchStatus());
 
             $("#btn_addTask").unbind().on('click',function () {
                 var url = "/chineseCultural/resource/insertTraditionalSchool";
@@ -323,7 +322,7 @@
                 myTable = bootstrapTableUtil.myBootStrapTableInit("table", url, param, aCol);
             }
 
-            bootstrapTableUtil.globalSearch("table", url, aParam, aCol, "chineseCulturalStatus")
+            bootstrapTableUtil.globalSearch2("table", url, aParam, aCol, "chineseCulturalStatus")
 
         })
 })();

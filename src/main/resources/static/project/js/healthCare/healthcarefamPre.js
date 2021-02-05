@@ -181,7 +181,7 @@
                     var myViewCareFamModalData ={
                         modalBodyID : "myViewCareFamModal", //公用的在后面给span加不同的内容就行了，其他模块同理
                         modalTitle : "查看详情",
-                        modalClass : "modal-lg",
+                        modalClass : "modal-xl",
                         confirmButtonStyle: "display:none",
                     };
                     var myCareFamModal = modalUtil.init(myViewCareFamModalData);
@@ -285,8 +285,7 @@
                 orange.redirect(url);
             });
 
-            var pl = dictUtil.getDictByCode(dictUtil.DICT_LIST.webStatus);
-            $("#chargePersonSearch").selectUtil(pl);
+            $("#chargePersonSearch").selectUtil(selectUtil.inSearchStatus());
 
             var aCol = [
                 {field: 'name', title: '国医话健康标题'},
@@ -311,7 +310,7 @@
                 myTable = bootstrapTableUtil.myBootStrapTableInit("table", url, param, aCol);
             }
 
-            bootstrapTableUtil.globalSearch("table", url, aParam, aCol, "status")
+            bootstrapTableUtil.globalSearch2("table", url, aParam, aCol, "status")
 
         })
 })();

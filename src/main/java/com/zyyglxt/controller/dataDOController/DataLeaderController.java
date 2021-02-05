@@ -90,6 +90,12 @@ public class DataLeaderController {
         return new ResponseData(EmBusinessError.success);
     }
 
+    @GetMapping(value = "/selectLeaderMain")
+    @LogAnnotation(appCode ="",logTitle ="查询首页前五条领导讲话的数据",logLevel ="1",creater ="",updater = "")
+    public ResponseData selectRegulationForMain(){
+        return new ResponseData(EmBusinessError.success,iDataLraderService.selectForMainPage());
+    }
+
 
     private List<DataDto> DoToDto(List<DataDO> DOList){
         List<DataDto> DtoList = new ArrayList<>();

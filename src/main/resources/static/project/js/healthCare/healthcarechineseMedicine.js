@@ -195,7 +195,7 @@
                     $("#itemCreateAt").val(row.itemcreateat);
                     $("#chineseMedicineStatus").val(webStatus[ row.chineseMedicineStatus].text);
                     $("#mediCineImg").attr("src",row.filePath)
-                    $('#mediCineImgSpan').html("药材图片");
+                    $('#mediCineImgSpan').html("药材图片：");
 
                     myChineseMedicineModal.show();
                 },
@@ -286,8 +286,7 @@
                 orange.redirect(url);
             });
 
-            var pl = dictUtil.getDictByCode(dictUtil.DICT_LIST.webStatus);
-            $("#chargePersonSearch").selectUtil(pl);
+            $("#chargePersonSearch").selectUtil(selectUtil.inSearchStatus());
 
            var p2 = dictUtil.getDictByCode(dictUtil.DICT_LIST.effectType);
             $("#Search").selectUtil(p2);
@@ -329,7 +328,7 @@
                         }},
                         {field: 'filePath', title: '药材图片', formatter:function (value, row, index) {
                                 if(value == "已经损坏了"){
-                                    return '<p>'+value+'</p>';
+                                    return value;
                                 }else{
                                     return '<img  src='+value+' width="100" height="100" class="img-rounded" >';
                                 }
@@ -361,15 +360,21 @@
                         var isStatusSlot=false;           // 默认状态为true
                         //状态条件判断,与表格字段的状态一致,这里根据自己写的修改
                         var status= allTableData[i]["chineseMedicineStatus"]
+                        if(status == "0") status =0;
+                        else if(status == "1" || status == "2") status = 1;
+                        else if(status == "3" || status == "4") status = 2;
+                        else if(status == "5") status = 3;
+                        else if (status == "6") status = 4;
                         // console.log("addstr:"+addstr)
                         // console.log("status:"+status)
                         //调试时可以先打印出来，进行修改
-                        if(addstr==status){
+                        if(addstr==status || addstr==99){
                             if(gxfl == searchGxfl){
                                 isStatusSlot=true;
                             }
-
                         }
+                        if(typeof textP == "object") continue;
+                        else if(typeof textP == "number") textP = textP.toString();
                         //当存在时将条件改为flase
                         if (textP == null || textP == undefined || textP == '') {
                             textP = "1";

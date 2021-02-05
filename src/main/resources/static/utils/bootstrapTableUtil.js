@@ -57,9 +57,7 @@
                 width: '100%',
                 columns: fColumns,
                 ajaxOptions: {
-
                     complete: function (XMLHttpRequest) {
-
                     }
                 },
                 responseHandler: function (data) {
@@ -122,7 +120,7 @@
                     endTime=endTime[0].value+":"+endTime[1].value+":"+endTime[2].value;
                 }
                 var newArry = [];
-                var addstr=document.getElementById("chargePersonSearch").value;
+                var addstr=document.getElementById("chargePersonSearch").value; //搜索里的
                 var str = document.getElementById("taskNameSearch").value.toLowerCase();
                 var allTableData = JSON.parse(localStorage.getItem("2"));
                 if(str.indexOf("请输入")!=-1){
@@ -134,7 +132,7 @@
                         var isStatusSlot=false;           // 默认状态为true
                         var isTimeSlot=false;             // 默认时间条件为true
                         //状态条件判断,与表格字段的状态一致,这里根据自己写的修改
-                        var status= allTableData[i][statusWord]
+                        var status= allTableData[i][statusWord] //表格里的
                         // console.log("addstr:"+addstr)
                         // console.log("status:"+status)
                         //调试时可以先打印出来，进行修改
@@ -196,10 +194,101 @@
             })
         }
 
+        function globalSearch2(tableID, url, needParam, aCol, statusWord) {
+            $("#btnSearch").unbind().on('click',function() {
+                if(document.getElementById("stratTime")){
+                    var stratTime=document.getElementById("stratTime").children;
+                    var endTime=document.getElementById("endTime").children;
+                    stratTime=stratTime[0].value+":"+stratTime[1].value+":"+stratTime[2].value;
+                    endTime=endTime[0].value+":"+endTime[1].value+":"+endTime[2].value;
+                }
+                var newArry = [];
+                var addstr=document.getElementById("chargePersonSearch").value; //搜索里的
+                var str = document.getElementById("taskNameSearch").value.toLowerCase();
+                var allTableData = JSON.parse(localStorage.getItem("2"));
+                if(str.indexOf("请输入")!=-1){
+                    str=""
+                }
+                for (var i in allTableData) {
+                    for (var v in aCol){
+                        var textP = allTableData[i][aCol[v].field];
+                        var isStatusSlot=false;           // 默认状态为true
+                        var isTimeSlot=false;             // 默认时间条件为true
+                        //状态条件判断,与表格字段的状态一致,这里根据自己写的修改
+                        var status= allTableData[i][statusWord] //表格里的
+                        if(status == "0") status =0;
+                        else if(status == "1" || status == "2") status = 1;
+                        else if(status == "3" || status == "4") status = 2;
+                        else if(status == "5") status = 3;
+                        else if (status == "6") status = 4;
+                        // console.log("addstr:"+addstr)
+                        // console.log("status:"+status)
+                        //调试时可以先打印出来，进行修改
+                        if(addstr==status || addstr == 99){
+                            isStatusSlot=true;
+                        }
+                        if(typeof textP == "object") continue;
+                        else if(typeof textP == "number") textP = textP.toString();
+                        //当存在时将条件改为flase
+                        var makeTime = allTableData[i]["itemcreateat"].substring(11,19);
+                        if (makeTime >= stratTime && makeTime <= endTime) {
+                            isTimeSlot = true;
+                        }
+                        else {
+                            isTimeSlot = false;
+                        }
+                        if (stratTime == endTime) {
+                            isTimeSlot = true;
+                        }
+                        if (textP == null || textP == undefined || textP == '') {
+                            textP = "1";
+                        }
+                        if($("#closeAndOpen").text().search("展开")!= -1 && textP.search(str) != -1){
+                            isStatusSlot = false;
+                            isTimeSlot = false;
+                            newArry.push(allTableData[i])
+                        }
+                        if($("#closeAndOpen").text().search("收起")!= -1 && textP.search(str) != -1 && isStatusSlot && isTimeSlot){
+                            newArry.push(allTableData[i])
+                        }
+                    }
+                }
+                var newArr=new Set(newArry)
+                newArry=Array.from(newArr)
+                $("#table").bootstrapTable("load", newArry);
+                // if(newArry.length == 0){
+                //     alertUtil.warning("搜索成功,但此搜索条件下没有数据");
+                // }else{
+                //     alertUtil.success("搜索成功");
+                // }
+            })
+
+            var aria=this.ariaExpanded;
+            var element=document.getElementById("stratTime");
+            $("#closeAndOpen").unbind().on('click',function(){
+                this.innerText="";
+                if (aria==="true"){
+                    this.innerText="展开";
+                    aria = "false";
+                    if (typeof(element)!= "undefined" || element != null){
+                        document.getElementById("btn_addTask").classList.remove("openBtnP");
+                    }
+                } else {
+                    this.innerText="收起";
+                    aria = "true";
+                    if (typeof(element)!= "undefined" || element != null){
+                        document.getElementById("btn_addTask").classList.add("openBtnP");
+                    }
+
+                }
+            })
+        }
+
         return {
             myBootStrapTableInit:myBootStrapTableInit,
             myBootStrapTableDestory:myBootStrapTableDestory,
             globalSearch:globalSearch,
+            globalSearch2:globalSearch2,
         }
 
 

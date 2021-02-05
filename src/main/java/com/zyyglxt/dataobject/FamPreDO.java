@@ -9,10 +9,8 @@ public class FamPreDO extends FamPreDOKey {
     @NotBlank(message = "名方名称不能为空")
     private String name;
 
-    @NotBlank(message = "作者不能为空")
     private String author;
 
-    @NotBlank(message = "来源不能为空")
     private String famsource;
     @NotBlank(message = "名方出处不能为空")
     private String source;

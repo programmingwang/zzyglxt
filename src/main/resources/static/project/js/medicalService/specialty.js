@@ -335,7 +335,7 @@
                 orange.redirect(addUrl)
             });
 
-            $("#chargePersonSearch").selectUtil(webStatus);
+            $("#chargePersonSearch").selectUtil(selectUtil.inSearchStatus());
 
             var aCol = [
                 {field: 'specialtyName', title: '科室名称'},
@@ -362,7 +362,7 @@
                 myTable = bootstrapTableUtil.myBootStrapTableInit("table", url, param, aCol);
             }
 
-            bootstrapTableUtil.globalSearch("table",url,aParam, aCol,"specialtyStatus");
+            bootstrapTableUtil.globalSearch2("table",url,aParam, aCol,"specialtyStatus");
 
         })
 })();

@@ -18,6 +18,27 @@
     <result column="itemCreateAt" jdbcType="TIMESTAMP" property="itemcreateat" />
     <result column="UPDATER" jdbcType="VARCHAR" property="updater" />
     <result column="itemUpdateAt" jdbcType="TIMESTAMP" property="itemupdateat" />
+
+    <result column="REASONO" jdbcType="VARCHAR" property="reasono" />
+    <result column="REASONT" jdbcType="VARCHAR" property="reasont" />
+    <result column="REASONH" jdbcType="VARCHAR" property="reasonh" />
+    <result column="REASONF" jdbcType="VARCHAR" property="reasonf" />
+    <result column="REASONV" jdbcType="VARCHAR" property="reasonv" />
+    <result column="REASONS" jdbcType="VARCHAR" property="reasons" />
+
+    <result column="NAMEO" jdbcType="VARCHAR" property="nameo" />
+    <result column="NAMET" jdbcType="VARCHAR" property="namet" />
+    <result column="NAMEH" jdbcType="VARCHAR" property="nameh" />
+    <result column="NAMEF" jdbcType="VARCHAR" property="namef" />
+    <result column="NAMEV" jdbcType="VARCHAR" property="namev" />
+    <result column="NAMES" jdbcType="VARCHAR" property="names" />
+
+    <result column="DATEO" jdbcType="TIMESTAMP" property="dateo" />
+    <result column="DATET" jdbcType="TIMESTAMP" property="datet" />
+    <result column="DATEH" jdbcType="TIMESTAMP" property="dateh" />
+    <result column="DATEF" jdbcType="TIMESTAMP" property="datef" />
+    <result column="DATEV" jdbcType="TIMESTAMP" property="datev" />
+    <result column="DATES" jdbcType="TIMESTAMP" property="dates" />
   </resultMap>
   <sql id="Base_Column_List">
     itemID, itemCode, RECEIVING_NUM, RECEIVING_DATE_OF_RECEIPT, RECEIVING_TITLE, RECEIVING_UNIT_OF_COMMUN, 
@@ -197,6 +218,63 @@
       </if>
       <if test="itemupdateat != null">
         itemUpdateAt = #{itemupdateat,jdbcType=TIMESTAMP},
+      </if>
+
+      <if test="reasono != null">
+        REASONO = #{reasono,jdbcType=VARCHAR},
+      </if>
+      <if test="reasont != null">
+        REASONT = #{reasont,jdbcType=VARCHAR},
+      </if>
+      <if test="reasonh != null">
+        REASONH = #{reasonh,jdbcType=VARCHAR},
+      </if>
+      <if test="reasonf != null">
+        REASONF = #{reasonf,jdbcType=VARCHAR},
+      </if>
+      <if test="reasonv != null">
+        REASONV = #{reasonv,jdbcType=VARCHAR},
+      </if>
+      <if test="reasons != null">
+        REASONS = #{reasons,jdbcType=VARCHAR},
+      </if>
+
+      <if test="nameo != null">
+        NAMEO = #{nameo,jdbcType=VARCHAR},
+      </if>
+      <if test="namet != null">
+        NAMET = #{namet,jdbcType=VARCHAR},
+      </if>
+      <if test="nameh != null">
+        NAMEH = #{nameh,jdbcType=VARCHAR},
+      </if>
+      <if test="namef != null">
+        NAMEF = #{namef,jdbcType=VARCHAR},
+      </if>
+      <if test="namev != null">
+        NAMEV = #{namev,jdbcType=VARCHAR},
+      </if>
+      <if test="names != null">
+        NAMES = #{names,jdbcType=VARCHAR},
+      </if>
+
+      <if test="dateo != null">
+        DATEO = #{dateo,jdbcType=TIMESTAMP},
+      </if>
+      <if test="datet != null">
+        DATET = #{datet,jdbcType=TIMESTAMP},
+      </if>
+      <if test="dateh != null">
+        DATEH = #{dateh,jdbcType=TIMESTAMP},
+      </if>
+      <if test="datef != null">
+        DATEF = #{datef,jdbcType=TIMESTAMP},
+      </if>
+      <if test="datev != null">
+        DATEV = #{datev,jdbcType=TIMESTAMP},
+      </if>
+      <if test="dates != null">
+        DATES = #{dates,jdbcType=TIMESTAMP},
       </if>
     </set>
     where itemID = #{itemid,jdbcType=INTEGER}

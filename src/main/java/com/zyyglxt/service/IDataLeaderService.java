@@ -28,5 +28,6 @@ public interface IDataLeaderService {
     int updateLeader(DataDO record);
 
     int changeStatus(DataDOKey key, String dataDelayedRelease, String dataStatus);
-
+    //获取首页数据
+    List<String> selectForMainPage();
 }

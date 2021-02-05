@@ -91,4 +91,9 @@ public class DataLeaderServiceImpl implements IDataLeaderService {
         return dataDOMapper.changeStatusByPrimaryKey(key, dataDelayedRelease, dataStatus);
     }
 
+    @Override
+    public List<String> selectForMainPage() {
+        return dataDOMapper.selectAllForMainPage("领导讲话");
+    }
+
 }

@@ -8,6 +8,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+import javax.validation.constraints.NotBlank;
+
 /**
    *@Author lrt
    *@Date 2020/11/6 20:00
@@ -35,54 +37,63 @@ public class IndustrialDevelopSaleDrug {
     * 药品名称
     */
     @ApiModelProperty(value="药品名称")
+    @NotBlank(message = "药品名称不能为空")
     private String drugName;
 
     /**
     * 功能主治
     */
     @ApiModelProperty(value="功能主治")
+    @NotBlank(message = "药品功能主治不能为空")
     private String functionIndications;
 
     /**
     * 用法用量
     */
     @ApiModelProperty(value="用法用量")
+    @NotBlank(message = "药品用法用量不能为空")
     private String usage;
 
     /**
     * 不良反应
     */
     @ApiModelProperty(value="不良反应")
+    @NotBlank(message = "药品不良反应不能为空")
     private String adverseReactions;
 
     /**
     * 禁忌
     */
     @ApiModelProperty(value="禁忌")
+    @NotBlank(message = "药品禁忌不能为空")
     private String taboo;
 
     /**
     * 规格
     */
     @ApiModelProperty(value="规格")
+    @NotBlank(message = "药品规格不能为空")
     private String specifications;
 
     /**
     * 注意事项
     */
-    @ApiModelProperty(value="注意事项")
+    @ApiModelProperty(value="药品注意事项")
+    @NotBlank(message = "药品注意事项不能为空")
     private String careful;
 
     /**
     * 贮藏
     */
     @ApiModelProperty(value="贮藏")
+    @NotBlank(message = "药品贮藏不能为空")
     private String storage;
 
     /**
     * 包装
     */
     @ApiModelProperty(value="包装")
+    @NotBlank(message = "药品包装不能为空")
     private String packing;
 
     /**

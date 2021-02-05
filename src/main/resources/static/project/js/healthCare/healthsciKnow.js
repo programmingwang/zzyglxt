@@ -278,8 +278,7 @@
                 orange.redirect(url);
             });
 
-            var pl = dictUtil.getDictByCode(dictUtil.DICT_LIST.webStatus);
-            $("#chargePersonSearch").selectUtil(pl);
+            $("#chargePersonSearch").selectUtil(selectUtil.inSearchStatus());
 
             var aCol = [
                 {field: 'scienceKnowledgeName', title: '科普知识标题'},
@@ -297,7 +296,7 @@
                 myTable = bootstrapTableUtil.myBootStrapTableInit("table", url, param, aCol);
             }
 
-            bootstrapTableUtil.globalSearch("table", url, aParam, aCol, "scienceKnowledgeStatus")
+            bootstrapTableUtil.globalSearch2("table", url, aParam, aCol, "scienceKnowledgeStatus")
 
         })
 })();

@@ -26,6 +26,8 @@
 
             getMainData("/datado/announcement/selectAnnMain","tzgg");
             getMainData("/datado/regulation/selectRegMain","zcfg");
+            getMainData("/datado/rules/selectRulesMain","gzzd");
+            getMainData("/datado/leader/selectLeaderMain","ldjh");
 
         });
 
@@ -50,7 +52,14 @@
         });
 
         $("#wdbggd").unbind().on('click',function (){
-            orange.redirect("/document/receipt");
+            var rolename = sessionStorage.getItem("rolename");
+            if(rolename == "政务资源处长" || rolename == "政务资源科员" || rolename == "政务资源综合处处长" ||
+                rolename == "政务资源局长" || rolename == "政务资源分管局长" || rolename == "中医处分管局长" ||
+                rolename == "中药处分管局长" || rolename == "综合处分管局长" || rolename == "法规监督处分管局长"){
+                orange.redirect("/document/post");
+            }else{
+                orange.redirect("/document/receipt");
+            }
             return false;
         });
 

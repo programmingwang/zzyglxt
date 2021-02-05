@@ -15,6 +15,54 @@
             var itemid;
             const editor = objectUtil.wangEditorUtil();
 
+            function checkParam(param) {
+                if (stringUtil.isBlank(param.hospitalName)){
+                    alertUtil.error("医院名称不能为空")
+                    return false
+                }
+                if (stringUtil.isBlank(param.hospitalLevel)){
+                    alertUtil.error("医院等级不能为空")
+                    return false
+                }
+                if (stringUtil.isBlank(param.hospitalBriefIntroduce)){
+                    alertUtil.error("医院简要介绍不能为空")
+                    return false
+                }
+                if (stringUtil.isBlank(param.hospitalKeySpecialty)){
+                    alertUtil.error("重点专科不能为空")
+                    return false
+                }
+                if (stringUtil.isBlank(param.hospitalTelephone)){
+                    alertUtil.error("联系方式不能为空")
+                    return false
+                }
+                if (stringUtil.isBlank(param.hospitalAddressPro)){
+                    alertUtil.error("省份不能为空")
+                    return false
+                }
+                if (stringUtil.isBlank(param.hospitalAddressCity)){
+                    alertUtil.error("地市不能为空")
+                    return false
+                }
+                if (stringUtil.isBlank(param.hospitalAddressCountry)){
+                    alertUtil.error("县/区不能为空")
+                    return false
+                }
+                if (stringUtil.isBlank(param.hospitalAddress)){
+                    alertUtil.error("详细地址不能为空")
+                    return false
+                }
+                if (stringUtil.isBlank(param.hospitalLink)){
+                    alertUtil.error("链接地址不能为空")
+                    return false
+                }
+                if (stringUtil.isBlank(param.hospitalIntroduce)){
+                    alertUtil.error("简介不能为空")
+                    return false
+                }
+                return true
+            }
+
             /*设置下拉框的值*/
             $("#hospitalLevel").selectUtil(hospitalLevel);
             /*重点专科操作*/
@@ -65,7 +113,9 @@
                         entity["itemcode"] = itemcode;
                         entity["itemid"] = itemid;
 
-
+                        if (!checkParam(entity)){
+                            return
+                        }
                         fileUtil.handleFile(updateStatus, entity.itemcode, uploadImg.getFiles()[0]);
 
                         ajaxUtil.myAjax(null, requestUrl, entity, function (data) {
@@ -145,6 +195,7 @@
                 init = function () {
 
                 }
+                $("input").attr("required","required")
             };
             uploadImg.init();
             init();

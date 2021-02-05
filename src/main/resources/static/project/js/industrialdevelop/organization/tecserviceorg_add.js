@@ -86,6 +86,7 @@
                 }else {
                     $("#distpicker").distpicker();
                 }
+                $("input").attr("required","required")
                 init = function () {
 
                 }

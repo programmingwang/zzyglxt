@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -50,7 +50,7 @@
             <div class="col-lg-12 row" >
                 <div class="col-lg-6" >
                     <div class="form-group row">
-                        <label class="col-sm-4 col-form-label">专家姓名：</label>
+                        <label class="col-sm-4 col-form-label"><span style="color: red">*</span>专家姓名：</label>
                         <div class="col-sm-6">
                             <input id="chineseMedicineName" type="text" class="form-control" placeholder="请输入">
                         </div>
@@ -68,20 +68,32 @@
                         </div>
                     </div>
                 </div>
-
-            </div>
-
-            <div class="form-group row">
-                <label class="col-sm-2 col-form-label"><span style="color: red">*</span>专家姓名：</label>
-                <div class="col-sm-3">
-                    <input id="chineseMedicineName" type="text" class="form-control" placeholder="请输入">
-
+                <div class="col-lg-6" >
+                    <div class="form-group row">
+                        <label style="position: relative;top: 60px;" class="col-sm-5 col-form-label">专家照片：</label>
+                        <div class="upload-content" data-limit="1">
+                            <div class="content-img">
+                                <ul class="content-img-list"></ul>
+                                <div class="file">
+                                    <i class="gcl gcladd"></i>
+                                    <input type="file" name="file" accept="image/*" id="upload" multiple>
+                                </div>
+                            </div>
+                            <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog"
+                                 aria-labelledby="myLargeModalLabel">
+                                <div class="modal-dialog modal-lg" role="document">
+                                    <div class="modal-content">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
 
             <div class="form-group row">
-                <label class="col-sm-2 col-form-label">出诊地点：</label>
+                <label class="col-sm-2 col-form-label"><span style="color: red">*</span>出诊地点：</label>
                 <div class="col-sm-3">
                     <select id="hospitalName" type="text" class="form-control"></select>
                 </div>
@@ -92,20 +104,11 @@
             </div>
 
             <div class="form-group row">
-
-                <label class="col-sm-2 col-form-label"><span style="color: red">*</span>出诊地点：</label>
-                <div class="col-sm-3">
-                    <select id="hospitalName" type="text" class="form-control"></select>
-                </div>
-            </div>
-
-            <div class="form-group row">
                 <label class="col-sm-2 col-form-label"><span style="color: red">*</span>出诊科室：</label>
-
                 <div class="col-sm-3">
                     <select id="specialtyName" type="text" class="form-control" placeholder="请输入"></select>
                 </div>
-                <label class="col-sm-2 col-form-label">专家简介：</label>
+                <label class="col-sm-2 col-form-label"><span style="color: red">*</span>专家简介：</label>
                 <div class="col-sm-3">
                     <input id="expertBriefIntroduce" type="text" class="form-control" placeholder="请输入">
                 </div>
@@ -116,12 +119,7 @@
                 <div class="col-sm-3">
                     <input id="visitTime" type="text" class="form-control" placeholder="请输入">
                 </div>
-
-            </div>
-
-            <div class="form-group row">
-                <label class="col-sm-2 col-form-label"><span style="color: red">*</span>专家简介：</label>
-
+                <label class="col-sm-2 col-form-label"><span style="color: red">*</span>主要诊治：</label>
                 <div class="col-sm-3">
                     <input id="mainVisit" type="text" class="form-control" placeholder="请输入">
                 </div>
@@ -131,13 +129,6 @@
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label"><span style="color: red">*</span>专家介绍：</label>
                 <div id="div1" class="col-sm-8">
-                </div>
-            </div>
-
-            <div class="form-group row">
-                <label class="col-sm-2 col-form-label"><span style="color: red">*</span>主要诊治：</label>
-                <div class="col-sm-3">
-                    <input id="mainVisit" type="text" class="form-control" placeholder="请输入">
                 </div>
             </div>
 
@@ -163,6 +154,7 @@
                         <button id="btn_insert" type="submit" class="btn btn-primary col">提交</button>
                     </div>
                 </div>
+                <div class="col-lg-4 col-md-4" ></div>
             </div>
         </form>
 

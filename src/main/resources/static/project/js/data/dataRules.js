@@ -308,8 +308,7 @@
             });
 
             //获取并设置展示状态下拉框的数据
-            var pl = dictUtil.getDictByCode(dictUtil.DICT_LIST.webStatus);
-            $("#chargePersonSearch").selectUtil(pl);
+            $("#chargePersonSearch").selectUtil(selectUtil.inSearchStatus());
 
 
             var aCol = [

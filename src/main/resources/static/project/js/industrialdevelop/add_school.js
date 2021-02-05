@@ -54,9 +54,9 @@
                 param.status = "1";
 
                 if (!stringUtil.isBlank(param.schoolName) && !stringUtil.isBlank(param.schoolIntroduce) && !stringUtil.isBlank(param.secondaryCollege) &&
-                    !stringUtil.isBlank(param.enrollmentMajor) && !stringUtil.isBlank(param.graduateEnrollmentMajor) &&
-                    !stringUtil.isBlank(param.phone) && !stringUtil.isBlank(param.addressPro) && !stringUtil.isBlank(param.onlineAddress) &&
-                    !stringUtil.isBlank(param.addressCity) && !stringUtil.isBlank(param.addressCountry) && !stringUtil.isBlank(param.address)) {
+                    !stringUtil.isBlank(param.enrollmentMajor) && !stringUtil.isBlank(param.graduateEnrollmentMajor) && !stringUtil.isBlank(param.phone) &&
+                    !stringUtil.isBlank(param.addressPro) && !stringUtil.isBlank(param.onlineAddress) && !stringUtil.isBlank(param.addressCity) &&
+                    !stringUtil.isBlank(param.addressCountry) && !stringUtil.isBlank(param.address) && !stringUtil.isBlank($.trim($(".w-e-text").text()))) {
 
                     ajaxUtil.fileAjax(itemcode, uploadImg.getFiles()[0], sessionStorage.getItem("username"), sessionStorage.getItem("username"))
 

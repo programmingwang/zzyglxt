@@ -7,6 +7,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.validation.constraints.NotBlank;
+
 /**
  * @Author lrt
  * @Date 2020/11/8 22:46
@@ -32,6 +34,7 @@ public class IndustrialDevelopMedMat {
     /**
      * 药材名称
      */
+    @NotBlank(message = "药材名称不能为空")
     @ApiModelProperty(value = "药材名称")
     private String name;
 
@@ -50,6 +53,7 @@ public class IndustrialDevelopMedMat {
     /**
      * 产地
      */
+    @NotBlank(message = "药材产地不能为空")
     @ApiModelProperty(value = "产地")
     private String place;
 

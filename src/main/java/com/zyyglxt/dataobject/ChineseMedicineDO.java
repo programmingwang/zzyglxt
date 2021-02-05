@@ -21,7 +21,6 @@ public class ChineseMedicineDO extends ChineseMedicineDOKey {
     @NotBlank(message = "所在地点不能为空")
     private String hospCode;
 
-    @NotBlank(message = "出诊时间不能为空")
     private String visitTime;
 
     private String phone;
@@ -35,7 +34,6 @@ public class ChineseMedicineDO extends ChineseMedicineDOKey {
     @NotBlank(message = "主要就诊不能为空")
     private String mainVisit;
 
-    @NotBlank(message = "重点医案不能为空")
     private String medicineRecords;
 
     private String chineseMedicineStatus;

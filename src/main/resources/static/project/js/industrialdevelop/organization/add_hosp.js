@@ -86,7 +86,7 @@
                 if (!stringUtil.isBlank(entity.hospitalName) && !stringUtil.isBlank(entity.hospitalLevel) && !stringUtil.isBlank(entity.hospitalBriefIntroduce) &&
                     !stringUtil.isBlank(entity.hospitalKeySpecialty) && !stringUtil.isBlank(entity.hospitalTelephone) && !stringUtil.isBlank(entity.hospitalAddressPro) &&
                     !stringUtil.isBlank(entity.hospitalAddressCity) && !stringUtil.isBlank(entity.hospitalAddressCountry) && !stringUtil.isBlank(entity.hospitalAddress) &&
-                    !stringUtil.isBlank(entity.hospitalLink) && !stringUtil.isBlank(entity.hospitalIntroduce)) {
+                    !stringUtil.isBlank(entity.hospitalLink) && !stringUtil.isBlank(entity.hospitalIntroduce) && !stringUtil.isBlank($.trim($(".w-e-text").text()))) {
 
                     fileUtil.handleFile(updateStatus, entity.itemcode, uploadImg.getFiles()[0]);
 

@@ -1,6 +1,6 @@
 (function () {
-    require(['jquery', 'ajaxUtil', 'stringUtil', 'objectUtil','modalUtil'],
-        function (jquery, ajaxUtil, stringUtil, objectUtil,modalUtil) {
+    require(['jquery', 'ajaxUtil', 'stringUtil', 'objectUtil','modalUtil','alertUtil'],
+        function (jquery, ajaxUtil, stringUtil, objectUtil,modalUtil,alertUtil) {
 
             var url = "/industrialdevelop/coorecord";
 
@@ -27,6 +27,30 @@
                 param.orgCode = sessionStorage.getItem("orgCode");
                 param.itemcode = itemcode;
                 return param;
+            }
+
+            function checkParam(param) {
+                if (stringUtil.isBlank(param.cooperationExchangeName)){
+                    alertUtil.error("合作信息不能为空")
+                    return false
+                }
+                if (stringUtil.isBlank(param.cooperativeOrg)){
+                    alertUtil.error("预期合作机构不能为空")
+                    return false
+                }
+                if (stringUtil.isBlank(param.contacts)){
+                    alertUtil.error("联系人不能为空")
+                    return false
+                }
+                if (stringUtil.isBlank(param.phone)){
+                    alertUtil.error("联系电话不能为空")
+                    return false
+                }
+                if (stringUtil.isBlank(param.projectIntroduce)){
+                    alertUtil.error("合作信息简介不能为空")
+                    return false
+                }
+                return true
             }
 
             $("#upload_file").change(function () {
@@ -64,6 +88,10 @@
                     modalConfirmFun: function () {
                         var param = generateParam();
                         param.status = "1";
+                        if (!checkParam(param)){
+                            return
+                        }
+
                         ajaxUtil.myAjax(null, url, param, function (data) {
                             if (ajaxUtil.success(data)) {
                                 if ($("#upload_file")[0].files[0] != null){
@@ -124,6 +152,7 @@
                     editor.txt.html(tempdata.projectIntroduce);
                     itemcode = tempdata.itemcode
                 }
+                $("input").attr("required","required")
                 init = function () {
 
                 }

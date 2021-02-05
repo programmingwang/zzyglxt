@@ -1,6 +1,6 @@
 (function () {
-    require(['jquery','ajaxUtil','stringUtil','objectUtil','modalUtil'],
-        function (jquery,ajaxUtil,stringUtil, objectUtil,modalUtil) {
+    require(['jquery','ajaxUtil','stringUtil','objectUtil','modalUtil','alertUtil'],
+        function (jquery,ajaxUtil,stringUtil, objectUtil,modalUtil,alertUtil) {
 
             var type = isUpdate() ? "put":"post";
 
@@ -37,6 +37,46 @@
                 return param;
             }
 
+            function checkParam(param) {
+                if (stringUtil.isBlank(param.recruitmentTitle)){
+                    alertUtil.error("招聘标题不能为空")
+                    return false
+                }
+                if (stringUtil.isBlank(param.recruitmentPosition)){
+                    alertUtil.error("招聘地点不能为空")
+                    return false
+                }
+                if (stringUtil.isBlank(param.recruitmentCount)){
+                    alertUtil.error("招聘数量不能为空")
+                    return false
+                }
+                if (stringUtil.isBlank(param.salary)){
+                    alertUtil.error("薪资不能为空")
+                    return false
+                }
+                if (stringUtil.isBlank(param.workplace)){
+                    alertUtil.error("工作地点不能为空")
+                    return false
+                }
+                if (stringUtil.isBlank(param.education)){
+                    alertUtil.error("学历要求不能为空")
+                    return false
+                }
+                if (stringUtil.isBlank(param.postDuty)){
+                    alertUtil.error("岗位职责不能为空")
+                    return false
+                }
+                if (stringUtil.isBlank(param.postDescr)){
+                    alertUtil.error("岗位描述不能为空")
+                    return false
+                }
+                if (stringUtil.isBlank(param.emali)){
+                    alertUtil.error("联系邮箱不能为空")
+                    return false
+                }
+                return true
+            }
+
             $("#saveBtn").unbind('click').on('click',function () {
                 var param = generateParam();
                 param.status = "0";
@@ -59,6 +99,9 @@
                     modalConfirmFun: function () {
                         var param = generateParam();
                         param.status = "1";
+                        if (!checkParam(param)){
+                            return
+                        }
                         ajaxUtil.myAjax(null,url,param,function (data) {
                             if(ajaxUtil.success(data)){
 
@@ -103,6 +146,7 @@
                     editor2.txt.html(tempdata.postDescr);
                     itemcode = tempdata.itemcode;
                 }
+                $("input").attr("required","required")
                 init = function () {
 
                 }

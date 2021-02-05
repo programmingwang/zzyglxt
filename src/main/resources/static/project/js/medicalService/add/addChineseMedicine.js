@@ -169,6 +169,7 @@
                 }else{
                     $(".titleCSS").text("新增名老中医信息");
                 }
+                specialtySelect();
             }());
 
 

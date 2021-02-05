@@ -297,14 +297,13 @@
                 orange.redirect(url);
             });
 
-            var pl = dictUtil.getDictByCode(dictUtil.DICT_LIST.webStatus);
-            $("#chargePersonSearch").selectUtil(pl);
+            $("#chargePersonSearch").selectUtil(selectUtil.inSearchStatus());
 
             var aCol = [
-                {field: 'chineseCulturalName', title: '历代名家姓名'},
+                {field: 'chineseCulturalName', title: '历代名家姓名',width:'200px'},
                 {field: 'filePath', title: '图片', formatter:function (value, row, index) {
                         if(value == "已经损坏了"){
-                            return '<p>'+value+'</p>';
+                            return value;
                         }else{
                             return '<img  src='+value+' width="100" height="100" class="img-rounded" >';
                         }
@@ -324,7 +323,7 @@
                 myTable = bootstrapTableUtil.myBootStrapTableInit("table", url, param, aCol);
             }
 
-            bootstrapTableUtil.globalSearch("table", url, aParam, aCol, "chineseCulturalStatus")
+            bootstrapTableUtil.globalSearch2("table", url, aParam, aCol, "chineseCulturalStatus")
 
         })
 })();

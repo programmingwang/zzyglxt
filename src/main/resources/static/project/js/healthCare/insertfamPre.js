@@ -17,6 +17,8 @@
                     famPreEntity = {
                         itemcode: stringUtil.getUUID(),
                         name : $("#name").val(),
+                        author : $("#author").val(),
+                        famsource : $("#famsource").val(),
                         source : $("#source").val(),
                         prescription : $("#prescription").val(),
                         status :  '0',
@@ -30,9 +32,10 @@
                         itemid: needData.itemid,
                         itemcode: needData.itemcode,
                         name : $("#name").val(),
+                        author : $("#author").val(),
+                        famsource : $("#famsource").val(),
                         source : $("#source").val(),
                         prescription : $("#prescription").val(),
-                        status : $("#status").val(),
                         type : $("#type").val(),
                         status :  '0',
                         content : editor.txt.html()
@@ -74,6 +77,8 @@
                             addUpdateUrl = "insertfampredo";
                             famPreEntity = {
                                 name : $("#name").val(),
+                                author : $("#author").val(),
+                                famsource : $("#famsource").val(),
                                 source : $("#source").val(),
                                 prescription : $("#prescription").val(),
                                 status :  '1',
@@ -87,6 +92,8 @@
                                 itemid: needData.itemid,
                                 itemcode: needData.itemcode,
                                 name : $("#name").val(),
+                                author : $("#author").val(),
+                                famsource : $("#famsource").val(),
                                 source : $("#source").val(),
                                 prescription : $("#prescription").val(),
                                 status : '1',
@@ -127,6 +134,8 @@
                     $(".titleCSS").text("修改历史名方信息");
                     var tempdata = JSON.parse(localStorage.getItem("rowData"));
                     $("#name").val(tempdata.name);
+                    $("#author").val(tempdata.author);
+                    $("#famsource").val(tempdata.famsource);
                     $("#source").val(tempdata.source);
                     $("#prescription").val(tempdata.prescription);
                     $("#status").val(tempdata.status);

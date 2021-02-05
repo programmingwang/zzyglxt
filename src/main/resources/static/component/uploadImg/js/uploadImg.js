@@ -9,7 +9,6 @@ var base64Code = "";
 
 
         var init = function () {
-             ("init");
             localStorage.setItem('limit', $(".upload-content").attr('data-limit'));
             imgSrc = [];
             imgFile = [];
@@ -91,6 +90,18 @@ var base64Code = "";
                 var boxId = ".content-img-list";
                 addNewContent(boxId);
             }
+
+            //推荐尺寸
+            var spanElement = $('<span>')
+            spanElement.attr('style',"z-index: 99;position: absolute;left: 46px;top: -20px;color: #ABABAD;")
+            spanElement.html("推荐尺寸")
+            console.log($("#upload").parent())
+            var parentNode = $("#upload").parent()
+            parentNode.append(spanElement)
+            spanElement = $('<span>')
+            spanElement.attr('style',"z-index: 99;position: absolute;left: 38px;top: 20px;color: #ABABAD;")
+            spanElement.html("1920*1080")
+            parentNode.append(spanElement)
             init = function () {
 
             }
@@ -161,7 +172,6 @@ var base64Code = "";
         }
 
         function setImgSrc(src) {
-             ("setSrc")
             for (var i = 0; i < imgSrc.length; i++) {
                 if (imgSrc[i] === src) {
                     return

@@ -67,7 +67,7 @@ public class SaleDrugController {
     @RequestMapping(value ="/sale-drug",method = RequestMethod.GET )
     @LogAnnotation(appCode ="",logTitle ="查寻所有售药数据",logLevel ="1")
     @ResponseBody
-    public ResponseData selectAllSaleDrug(@RequestParam("status") List status){
+    public ResponseData selectAllSaleDrug(@RequestParam("status") String status){
         return new ResponseData(EmBusinessError.success,saleDrugService.selectAllSaleDrug(status));
     }
     // usernameUtil.getOrgCode()

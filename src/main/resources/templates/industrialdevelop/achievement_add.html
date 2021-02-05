@@ -46,45 +46,46 @@
 <body>
 <div id="fir_body" class="row">
     <div class="col-12">
+        <div class="titleCSS">新增科研成果</div>
         <form>
             <div class="form-group row">
-                <label class="col-sm-2 col-form-label">项目名称：</label>
+                <label class="col-sm-2 col-form-label"><span style="color: red">*</span>项目名称：</label>
                 <div class="col-sm-3">
                     <input id="projectName" type="text" class="form-control" placeholder="请输入">
                 </div>
             </div>
             <div class="form-group row">
-                <label class="col-sm-2 col-form-label">研究成果：</label>
+                <label class="col-sm-2 col-form-label"><span style="color: red">*</span>研究成果：</label>
                 <div class="col-sm-3">
                     <input id="industrialDevelopName" type="text" class="form-control" placeholder="请输入">
                 </div>
             </div>
             <div class="form-group row">
-                <label class="col-sm-2 col-form-label">主研人：</label>
+                <label class="col-sm-2 col-form-label"><span style="color: red">*</span>主研人：</label>
                 <div class="col-sm-3">
                     <input id="industrialDevelopLeader" type="text" class="form-control" placeholder="请输入">
                 </div>
             </div>
             <div class="form-group row">
-                <label class="col-sm-2 col-form-label">联系人：</label>
+                <label class="col-sm-2 col-form-label"><span style="color: red">*</span>联系人：</label>
                 <div class="col-sm-3">
                     <input id="contacts" type="text" class="form-control" placeholder="请输入">
                 </div>
 
-                <label class="col-sm-2 col-form-label">联系电话：</label>
+                <label class="col-sm-2 col-form-label"><span style="color: red">*</span>联系电话：</label>
                 <div class="col-sm-3">
                     <input id="phone" type="text" class="form-control" placeholder="请输入">
                 </div>
             </div>
             <div class="form-group row">
-                <label class="col-sm-2 col-form-label">成果简介：</label>
+                <label class="col-sm-2 col-form-label"><span style="color: red">*</span>成果简介：</label>
                 <div id="div1" class="col-sm-8">
                 </div>
             </div>
 
             <!--附件div-->
             <div class="form-group row">
-                <label for="exampleFormControlFile1" class="col-sm-2 col-form-label">附件：</label>
+                <label for="exampleFormControlFile1" class="col-sm-2 col-form-label"><span style="color: red">*</span>科研成果附件：</label>
                 <div class="upload-wrap anticon" nv-file-drop="" uploader="uploader">
                     <input id="upload_file" class="file-ele" type="file" file-model="image" name="image" nv-file-select uploader="uploader" multiple />
                     <div class="file-open"><em class="upload"></em>&nbsp;选择附件</div>

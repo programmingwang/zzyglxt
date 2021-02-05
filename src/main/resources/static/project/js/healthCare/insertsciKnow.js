@@ -86,7 +86,7 @@
                                 scienceKnowledgeName : $("#scienceKnowledgeName").val(),
                                 scienceKnowledgeSource : $("#scienceKnowledgeSource").val(),
                                 scienceKnowledgeAuthor : $("#scienceKnowledgeAuthor").val(),
-                                status : '1',
+                                scienceKnowledgeStatus : '1',
                                 content : editor.txt.html()
                             }
                         }

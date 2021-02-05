@@ -50,7 +50,7 @@ public class HealthCareChineseMedicineDOServiceImpl implements HealthCareChinese
         record.setItemcreateat(new Date());
         record.setCreater(usernameUtil.getOperateUser());
         record.setUpdater(usernameUtil.getOperateUser());
-        return healthCareChineseMedicineDOMapper.insert(record);
+        return healthCareChineseMedicineDOMapper.insertSelective(record);
     }
     @Transactional
     @Override

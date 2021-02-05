@@ -338,7 +338,7 @@
             });
 
 
-            $("#chargePersonSearch").selectUtil(webStatus);
+            $("#chargePersonSearch").selectUtil(selectUtil.inSearchStatus());
 
             var aCol = [
                 {field: 'hospitalName', title: '医院名称'},
@@ -364,7 +364,7 @@
                 myTable = bootstrapTableUtil.myBootStrapTableInit("table", url, param, aCol);
             }
 
-            bootstrapTableUtil.globalSearch("table",url,aParam, aCol,"hospitalStatus");
+            bootstrapTableUtil.globalSearch2("table",url,aParam, aCol,"hospitalStatus");
 
         })
 })();

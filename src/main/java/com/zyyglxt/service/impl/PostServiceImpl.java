@@ -1,9 +1,7 @@
 package com.zyyglxt.service.impl;
 
 import com.zyyglxt.dao.PostDOMapper;
-import com.zyyglxt.dataobject.PostDO;
-import com.zyyglxt.dataobject.PostDOKey;
-import com.zyyglxt.dataobject.adviceDO;
+import com.zyyglxt.dataobject.*;
 import com.zyyglxt.dataobject.validation.ValidationGroups;
 import com.zyyglxt.dto.PostDto;
 import com.zyyglxt.error.BusinessException;
@@ -88,6 +86,16 @@ public class PostServiceImpl implements IPostService {
     @Override
     public PostDO maxNum() {
         return postDOMapper.maxNum();
+    }
+
+    @Override
+    public List<PostFileDO> getPostFileForMain() {
+        return postDOMapper.selectPostFileForMain();
+    }
+
+    @Override
+    public List<String> getPostForMainPage(String status) {
+        return postDOMapper.selectForMainPage(status);
     }
 
 }

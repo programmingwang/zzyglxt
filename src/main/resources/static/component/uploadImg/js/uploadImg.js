@@ -44,7 +44,7 @@ var base64Code = "";
                 $(".modal-content").html("");
 
                 var bigimg = $(".modal-content").html();
-                $(".modal-content").html(bigimg + '<div class="show"><img src="' + imgSrc[index] + '" alt="" style="max-width: 800px"><div>');
+                $(".modal-content").html(bigimg + '<div class="showImg"><img src="' + imgSrc[index] + '" alt="" style="max-width: 800px"><div>');
                 // $(".modal-content").append(
                 //     '<div class="show"><img src="' + imgSrc[a] + '" alt=""><div>'
                 // );

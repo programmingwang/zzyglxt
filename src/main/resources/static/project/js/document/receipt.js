@@ -290,7 +290,9 @@
                 if(role === "政务资源科员"){
                     $('#btn_addTask').attr('style',"display:block");
                     return preUrl + "?"+status+"="+webStatus[0].id+"&"+status+"="+webStatus[1].id+"&"+status+"="+webStatus[2].id+"&"+status+"="+webStatus[3].id+"&"+status+"="+webStatus[4].id+"&"+status+"="+webStatus[5].id+"&"+status+"="+webStatus[6].id+"&"+status+"="+webStatus[7].id+"&"+status+"="+webStatus[8].id+"&"+status+"="+webStatus[9].id+"&"+status+"="+webStatus[12].id+"&"+status+"="+webStatus[15].id+"&"+status+"="+webStatus[17].id+"&"+status+"="+webStatus[18].id+"&"+status+"="+webStatus[10].id+"&"+status+"="+webStatus[11].id+"&"+status+"="+webStatus[13].id+"&"+status+"="+webStatus[14].id+"&"+status+"="+webStatus[16].id;
-                }else if(role === "政务资源综合处处长"){
+                }/*else if(role === "政务资源处长"){
+                    return preUrl + "?"+status+"="+webStatus[18].id+"&"+status+"="+webStatus[16].id;
+                }*/else if(role === "政务资源综合处处长"){
                     return preUrl + "?"+status+"="+webStatus[1].id+"&"+status+"="+webStatus[2].id+"&"+status+"="+webStatus[3].id+"&"+status+"="+webStatus[18].id+"&"+status+"="+webStatus[4].id+"&"+status+"="+webStatus[7].id+"&"+status+"="+webStatus[10].id+"&"+status+"="+webStatus[13].id;
                 }else if(role === "中医处分管局长") {
                     return preUrl + "?"+status+"="+webStatus[4].id+"&"+status+"="+webStatus[5].id+"&"+status+"="+webStatus[6].id+"&"+status+"="+webStatus[19].id+"&"+status+"="+webStatus[18].id;
@@ -328,7 +330,14 @@
                         ].join('');
                     }
 
-                }else if(role === "政务资源综合处处长"){
+                }/*else if(role === "政务资源处长"){
+                    if(status == webStatus[16].id||status == webStatus[18].id){
+                        return [
+                            '<a class="view" data-toggle="modal" style="margin:0 0.6em;text-decoration: none;color:#348eff;" data-target="" >查看</a>',
+                        ].join('');
+                    }
+
+                }*/else if(role === "政务资源综合处处长"){
                     if(status == webStatus[1].id){
                         return [
                             '<a  class="opinion"  data-toggle="modal" style="margin:0 0.6em;text-decoration: none;color:#4df115;" data-target="#staticBackdrop" >填写审核意见</a>',

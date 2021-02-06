@@ -29,6 +29,50 @@
                 return param;
             }
 
+            function checkParam(param) {
+                if (stringUtil.isBlank(param.name)){
+                    alertUtil.error("企业名称不能为空")
+                    return false
+                }
+                if (stringUtil.isBlank(param.areaCoverd)){
+                    alertUtil.error("占地面积不能为空")
+                    return false
+                }
+                if (stringUtil.isBlank(param.processingType)){
+                    alertUtil.error("加工种类不能为空")
+                    return false
+                }
+                if (stringUtil.isBlank(param.contacts)){
+                    alertUtil.error("联系人不能为空")
+                    return false
+                }
+                if (stringUtil.isBlank(param.phone)){
+                    alertUtil.error("联系方式不能为空")
+                    return false
+                }
+                if (stringUtil.isBlank(param.addressPro)){
+                    alertUtil.error("省份不能为空")
+                    return false
+                }
+                if (stringUtil.isBlank(param.addressCity)){
+                    alertUtil.error("地市不能为空")
+                    return false
+                }
+                if (stringUtil.isBlank(param.addressCountry)){
+                    alertUtil.error("县/区不能为空")
+                    return false
+                }
+                if (stringUtil.isBlank(param.address)){
+                    alertUtil.error("详细地址不能为空")
+                    return false
+                }
+                if (stringUtil.isBlank(param.intruduce)){
+                    alertUtil.error("简介不能为空")
+                    return false
+                }
+                return true
+            }
+
             function updateData(btnType) {
                 var submitModalData = {
                     modalBodyID: "mySubmitModal",
@@ -42,6 +86,9 @@
                             operateMessage = "保存信息成功";
                         } else if ("submit" === btnType) {
                             param.status = status[1].id;
+                            if (!checkParam(param)){
+                                return
+                            }
                             operateMessage = "提交信息成功";
                         }
 
@@ -114,6 +161,7 @@
                         province: "河北省",
                     });//新增页面使用
                 }
+                $("input").attr("required","required")
                 init = function () {
                 }
             };

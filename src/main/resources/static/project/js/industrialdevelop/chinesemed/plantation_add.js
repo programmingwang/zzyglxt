@@ -29,6 +29,50 @@
                 return param;
             }
 
+            function checkParam(param) {
+                if (stringUtil.isBlank(param.name)){
+                    alertUtil.error("种植园名称不能为空")
+                    return false
+                }
+                if (stringUtil.isBlank(param.plantType)){
+                    alertUtil.error("种植种类不能为空")
+                    return false
+                }
+                if (stringUtil.isBlank(param.areaCoverd)){
+                    alertUtil.error("占地面积不能为空")
+                    return false
+                }
+                if (stringUtil.isBlank(param.contacts)){
+                    alertUtil.error("联系人不能为空")
+                    return false
+                }
+                if (stringUtil.isBlank(param.phone)){
+                    alertUtil.error("联系方式不能为空")
+                    return false
+                }
+                if (stringUtil.isBlank(param.addressPro)){
+                    alertUtil.error("省份不能为空")
+                    return false
+                }
+                if (stringUtil.isBlank(param.addressCity)){
+                    alertUtil.error("地市不能为空")
+                    return false
+                }
+                if (stringUtil.isBlank(param.addressCountry)){
+                    alertUtil.error("县/区不能为空")
+                    return false
+                }
+                if (stringUtil.isBlank(param.address)){
+                    alertUtil.error("详细地址不能为空")
+                    return false
+                }
+                if (stringUtil.isBlank(param.intruduce)){
+                    alertUtil.error("简介不能为空")
+                    return false
+                }
+                return true
+            }
+
 
             function updateData(btnType){
                 var submitModalData = {
@@ -42,6 +86,9 @@
                             param.status = status[0].id;
                         }
                         else if ("submit" === btnType){
+                            if (!checkParam(param)){
+                                return
+                            }
                             param.status = status[1].id;
                         }
 
@@ -117,6 +164,7 @@
                         province: "河北省",
                     });//新增页面使用
                 }
+                $("input").attr("required","required")
                 init = function () {
                 }
             };

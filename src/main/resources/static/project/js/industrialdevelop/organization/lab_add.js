@@ -1,6 +1,6 @@
 (function () {
-    require(['jquery','ajaxUtil','stringUtil','uploadImg','objectUtil','distpicker','urlUtil','modalUtil'],
-        function ($,ajaxUtil,stringUtil,uploadImg, objectUtil, distpicker, urlUtil,modalUtil) {
+    require(['jquery','ajaxUtil','stringUtil','uploadImg','objectUtil','distpicker','urlUtil','modalUtil','alertUtil'],
+        function ($,ajaxUtil,stringUtil,uploadImg, objectUtil, distpicker, urlUtil,modalUtil,alertUtil) {
 
             var url = "/industrialdevelop/tec-ser-org/selectbyorgcode";
             var opUrl = "/industrialdevelop/tec-ser-org";
@@ -39,6 +39,46 @@
                 return param;
             }
 
+            function checkParam(param) {
+                if (stringUtil.isBlank(param.name)){
+                    alertUtil.error("院所名称不能为空")
+                    return false
+                }
+                if (stringUtil.isBlank(param.onlineAddress)){
+                    alertUtil.error("连接地址不能为空")
+                    return false
+                }
+                if (stringUtil.isBlank(param.contacts)){
+                    alertUtil.error("联系人不能为空")
+                    return false
+                }
+                if (stringUtil.isBlank(param.phone)){
+                    alertUtil.error("联系方式不能为空")
+                    return false
+                }
+                if (stringUtil.isBlank(param.addressPro)){
+                    alertUtil.error("省份不能为空")
+                    return false
+                }
+                if (stringUtil.isBlank(param.addressCity)){
+                    alertUtil.error("地市不能为空")
+                    return false
+                }
+                if (stringUtil.isBlank(param.addressCountry)){
+                    alertUtil.error("县/区不能为空")
+                    return false
+                }
+                if (stringUtil.isBlank(param.address)){
+                    alertUtil.error("详细地址不能为空")
+                    return false
+                }
+                if (stringUtil.isBlank(param.intruduce)){
+                    alertUtil.error("简介不能为空")
+                    return false
+                }
+                return true
+            }
+
             $("#saveBtn").unbind('click').on('click',function () {
                 var param = generateParam();
                 param.status = "0";
@@ -66,6 +106,9 @@
                         var param = generateParam();
                         param.status = "1";
                         param.type = "lab";
+                        if (!checkParam(param)){
+                            return
+                        }
                         if (uploadImg.isUpdate()){
                             ajaxUtil.updateFile(itemcode,uploadImg.getFiles()[0],sessionStorage.getItem("username"), sessionStorage.getItem("itemcode"))
                         }

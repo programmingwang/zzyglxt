@@ -13,4 +13,40 @@ public class ValidationGroups {
     public interface UpdateOrDelete{
 
     }
+
+    public interface Process{
+
+    }
+
+    public interface Produce{
+
+    }
+
+    public interface Plantation{
+
+    }
+
+    public interface Tour{
+
+    }
+
+    public interface TecOrg{
+
+    }
+
+    public interface Lab{
+
+    }
+
+    public interface School{
+
+    }
+
+    public interface Hospital{
+
+    }
+
+    public interface Sale {
+
+    }
 }

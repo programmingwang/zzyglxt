@@ -40,6 +40,34 @@
                 return param;
             }
 
+            function checkParam(param) {
+                if (stringUtil.isBlank(param.industrialDevelopLeader)){
+                    alertUtil.error("主研人不能为空")
+                    return false
+                }
+                if (stringUtil.isBlank(param.industrialDevelopName)){
+                    alertUtil.error("研究成果不能为空")
+                    return false
+                }
+                if (stringUtil.isBlank(param.contacts)){
+                    alertUtil.error("联系人不能为空")
+                    return false
+                }
+                if (stringUtil.isBlank(param.phone)){
+                    alertUtil.error("联系方式不能为空")
+                    return false
+                }
+                if (stringUtil.isBlank(param.context)){
+                    alertUtil.error("成果简介不能为空")
+                    return false
+                }
+                if (stringUtil.isBlank(param.projectName)){
+                    alertUtil.error("项目简介不能为空")
+                    return false
+                }
+                return true
+            }
+
 
             $("#saveBtn").unbind('click').on('click', function () {
                 var param = generateParam();
@@ -75,6 +103,9 @@
                     modalClass: "modal-lg",
                     modalConfirmFun:function (){
                         var param = generateParam();
+                        if (!checkParam(param)){
+                            return
+                        }
                         param.industrialDevelopStatus = showStatus[1].id;
                         ajaxUtil.myAjax(null, url, param, function (data) {
                             if (ajaxUtil.success(data)) {
@@ -116,6 +147,7 @@
                     editor.txt.html(tempdata.context);
                     $("#addFile").text(tempdata.fileName);
                 }
+                $("input").attr("required","required")
                 init = function () {
                 }
             };

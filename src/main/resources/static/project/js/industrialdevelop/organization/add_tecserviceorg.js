@@ -52,9 +52,9 @@
                 var param = generateParam();
                 param.status = "1";
 
-                if (!stringUtil.isBlank(param.name) && !stringUtil.isBlank(param.projectName) &&
-                    !stringUtil.isBlank(param.contacts) && !stringUtil.isBlank(param.phone) && !stringUtil.isBlank(param.addressPro) &&
-                    !stringUtil.isBlank(param.addressCity) && !stringUtil.isBlank(param.addressCountry) && !stringUtil.isBlank(param.address)) {
+                if (!stringUtil.isBlank(param.name) && !stringUtil.isBlank(param.projectName) && !stringUtil.isBlank(param.contacts) &&
+                    !stringUtil.isBlank(param.phone) && !stringUtil.isBlank(param.addressPro) && !stringUtil.isBlank(param.addressCity) &&
+                    !stringUtil.isBlank(param.addressCountry) && !stringUtil.isBlank(param.address) && !stringUtil.isBlank($.trim($(".w-e-text").text()))) {
 
                     ajaxUtil.fileAjax(itemcode, uploadImg.getFiles()[0], sessionStorage.getItem("username"), sessionStorage.getItem("username"))
 

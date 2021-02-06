@@ -20,7 +20,7 @@
                     }else {
                         alertUtil.error("数据加载失败，请重试！")
                     }
-                },"true",true,"get");
+                },true,true,"get");
                 return false;
             }
 

@@ -302,7 +302,7 @@
         SELECT *
         FROM tb_governres_receipt
        WHERE RECEIVING_DATA_STATUS = #{receivingDataStatus,jdbcType=VARCHAR}
-       order by itemCreateAt
+       order by itemCreateAt desc
     </select>
   <update id="changeStatusToReceipt">
     update tb_governres_receipt

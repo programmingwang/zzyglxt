@@ -244,7 +244,7 @@
         SELECT *
         FROM tb_governres_request_report
        WHERE REPORT_DATA_STATUS = #{reportDataStatus,jdbcType=VARCHAR}
-       order by itemCreateAt
+       order by itemCreateAt desc
     </select>
   <update id="changeStatusToReport">
     update tb_governres_request_report

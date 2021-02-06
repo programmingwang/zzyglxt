@@ -77,7 +77,7 @@ public class ReceiptController {
     @RequestMapping(value = "changestatustoreceipt/{itemID}/{itemCode}" , method = RequestMethod.POST)
     @ResponseBody
     @LogAnnotation(logTitle = "修改收文管理数据状态", logLevel = "2")
-    public ResponseData changeStatusToReceipt(@RequestParam("receivingDataStatus") String receivingDataStatus , @PathVariable("itemID") Integer itemID , @PathVariable("itemCode")String itemCode){
+    public ResponseData changeStatusToReceipt(@RequestParam(value="receivingDataStatus") String receivingDataStatus , @PathVariable("itemID") Integer itemID , @PathVariable("itemCode")String itemCode){
         ReceiptDOKey receiptDOKey=new ReceiptDOKey();
         receiptDOKey.setItemid(itemID);
         receiptDOKey.setItemcode(itemCode);

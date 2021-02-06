@@ -34,7 +34,18 @@
                             var isSuccess = false;
                             ajaxUtil.myAjax(null,"deletereceipt/"+row.itemid+"/"+row.itemcode,null,function (data) {
                                 if(ajaxUtil.success(data)){
-                                    alertUtil.info("删除收文管理数据成功");
+                                    var submitConfirmModal = {
+                                        modalBodyID :"myTopicSubmitTip",
+                                        modalTitle : "提示",
+                                        modalClass : "modal-lg",
+                                        cancelButtonStyle: "display:none",
+                                        modalConfirmFun:function (){
+                                            return true;
+                                        }
+                                    }
+                                    var submitConfirm = modalUtil.init(submitConfirmModal);
+                                    submitConfirm.show();
+
                                     isSuccess = true;
                                     refreshTable();
                                 }
@@ -60,7 +71,18 @@
                             ajaxUtil.myAjax(null,"changestatustoreceipt/"+row.itemid+"/"+row.itemcode,submitStatus,function (data) {
                                 if(ajaxUtil.success(data)){
                                     if(data.code == 88888){
-                                        alertUtil.success("文件下达成功");
+                                        var submitConfirmModal = {
+                                            modalBodyID :"myTopicSubmitTip",
+                                            modalTitle : "提示",
+                                            modalClass : "modal-lg",
+                                            cancelButtonStyle: "display:none",
+                                            modalConfirmFun:function (){
+                                                return true;
+                                            }
+                                        }
+                                        var submitConfirm = modalUtil.init(submitConfirmModal);
+                                        submitConfirm.show();
+
                                         isSuccess = true;
                                         refreshTable();
                                     }else{
@@ -108,7 +130,18 @@
                             ajaxUtil.myAjax(null,"changestatustoreceipt/"+row.itemid+"/"+row.itemcode,submitStatus,function (data) {
                                 if(ajaxUtil.success(data)){
                                     if(data.code == 88888){
-                                        alertUtil.success("已转发至对应分局长");
+                                        var submitConfirmModal = {
+                                            modalBodyID :"myTopicSubmitTip",
+                                            modalTitle : "提示",
+                                            modalClass : "modal-lg",
+                                            cancelButtonStyle: "display:none",
+                                            modalConfirmFun:function (){
+                                                return true;
+                                            }
+                                        }
+                                        var submitConfirm = modalUtil.init(submitConfirmModal);
+                                        submitConfirm.show();
+
                                         isSuccess = true;
                                         refreshTable();
                                     }else{
@@ -148,7 +181,18 @@
                             ajaxUtil.myAjax(null,"changestatustoreceipt/"+row.itemid+"/"+row.itemcode,submitStatus,function (data) {
                                 if(ajaxUtil.success(data)){
                                     if(data.code == 88888){
-                                        alertUtil.info("已提交");
+                                        var submitConfirmModal = {
+                                            modalBodyID :"myTopicSubmitTip",
+                                            modalTitle : "提示",
+                                            modalClass : "modal-lg",
+                                            cancelButtonStyle: "display:none",
+                                            modalConfirmFun:function (){
+                                                return true;
+                                            }
+                                        }
+                                        var submitConfirm = modalUtil.init(submitConfirmModal);
+                                        submitConfirm.show();
+
                                         isSuccess = true;
                                         refreshTable();
                                     }else{
@@ -178,7 +222,17 @@
                             ajaxUtil.myAjax(null,"changestatustoreceipt/"+row.itemid+"/"+row.itemcode,submitStatus,function (data) {
                                 if(ajaxUtil.success(data)){
                                     if(data.code == 88888){
-                                        alertUtil.info("已提交");
+                                        var submitConfirmModal = {
+                                            modalBodyID :"myTopicSubmitTip",
+                                            modalTitle : "提示",
+                                            modalClass : "modal-lg",
+                                            cancelButtonStyle: "display:none",
+                                            modalConfirmFun:function (){
+                                                return true;
+                                            }
+                                        }
+                                        var submitConfirm = modalUtil.init(submitConfirmModal);
+                                        submitConfirm.show();
                                         isSuccess = true;
                                         refreshTable();
                                     }else{

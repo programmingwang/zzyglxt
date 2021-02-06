@@ -160,6 +160,7 @@
                             ajaxUtil.myAjax(null, viewUrl,null, function (res) {
                                 data = res.data;
                                 modalData.modalBodyID = "myViewPlantModal";
+                                modalData.modalClass= "modal-xl",
                                 myTravelModal = modalUtil.init(modalData);
                                 $("#myImg").attr('src', data.filePath);
                                 $("#name").val(data.name);
@@ -244,6 +245,7 @@
                             ajaxUtil.myAjax(null, viewUrl,null, function (res) {
                                 data = res.data;
                                 modalData.modalBodyID = "myViewSchoolModal";
+                                modalData.modalClass= "modal-xl",
                                 myTravelModal = modalUtil.init(modalData);
                                 $("#myImg").attr('src', data.filePath);
                                 $("#schoolName").val(data.schoolName);

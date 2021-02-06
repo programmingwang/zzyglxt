@@ -103,10 +103,10 @@
                             }else if ($("#faguijandu").is(":checked") == true){
                                  submitStatus.receivingDataStatus = webStatus[13].id;
                              }
+                            if ($("#all_select").is(":checked") == true||$("#zhongyichu").is(":checked") == true||$("#zhongyaochu").is(":checked")== true||$("#zonghechu").is(":checked") == true||$("#faguijandu").is(":checked") == true)
+                            {
                             ajaxUtil.myAjax(null,"changestatustoreceipt/"+row.itemid+"/"+row.itemcode,submitStatus,function (data) {
                                 if(ajaxUtil.success(data)){
-                                    if ($("#all_select").is(":checked") == true||$("#zhongyichu").is(":checked") == true||$("#zhongyaochu").is(":checked")== true||$("#zonghechu").is(":checked") == true||$("#faguijandu").is(":checked") == true)
-                                    {
                                     if(data.code == 88888){
                                         alertUtil.success("已转发至对应分局长");
                                         isSuccess = true;
@@ -114,11 +114,13 @@
                                     }else{
                                         alertUtil.error(data.msg);
                                     }
-                                    }else{
-                                        alertUtil.error("选项不能为空");
-                                    }
+
                                 }
+
                             },false);
+                            }else{
+                                alertUtil.error("选项不能为空");
+                            }
                             return isSuccess;
                         }
 

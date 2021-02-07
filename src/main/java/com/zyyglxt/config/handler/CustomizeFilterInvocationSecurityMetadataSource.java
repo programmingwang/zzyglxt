@@ -45,7 +45,13 @@ public class CustomizeFilterInvocationSecurityMetadataSource implements FilterIn
                 |requestUrl.contains("/userLogin")
                 |requestUrl.contains("/CSS")
                 |requestUrl.contains("/upload")
-                |requestUrl.contains("/error")){
+                |requestUrl.contains("/error")
+                |requestUrl.contains("/datado/announcement/selectAnnMain")
+                |requestUrl.contains("/datado/regulation/selectRegMain")
+                |requestUrl.contains("/datado/rules/selectRulesMain")
+                |requestUrl.contains("/datado/leader/selectLeaderMain")
+                |requestUrl.contains("/post/getPostFileForMain")
+                |requestUrl.contains("/post/getPostForMainPage")){
             return null;
         }
         int index = requestUrl.indexOf("?");

@@ -10,6 +10,9 @@ import com.zyyglxt.service.IDataRulesService;
 import com.zyyglxt.util.UsernameUtil;
 import com.zyyglxt.validator.ValidatorImpl;
 import com.zyyglxt.validator.ValidatorResult;
+import org.apache.commons.lang3.ObjectUtils;
+import org.ehcache.Cache;
+import org.ehcache.CacheManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,6 +26,7 @@ import java.util.List;
  * @date 2021/2/4 14:03
  */
 @Service
+@SuppressWarnings("unchecked")
 public class DataRulesServiceImpl implements IDataRulesService {
 
     @Resource
@@ -31,6 +35,8 @@ public class DataRulesServiceImpl implements IDataRulesService {
     private ValidatorImpl validator;
     @Resource
     private UsernameUtil usernameUtil;
+    @Resource
+    private CacheManager cacheManager;
 
     @Override
     public int insert(DataDO record) {
@@ -70,6 +76,18 @@ public class DataRulesServiceImpl implements IDataRulesService {
 
     @Override
     public List<String> selectForMainPage() {
-        return dataDOMapper.selectAllForMainPage("规章制度");
+        //获得缓存
+        Cache<String, Object> mainPageGzzd = cacheManager.getCache("mainPageData", String.class, Object.class);
+        Object gzzdData = mainPageGzzd.get("GzzdData");
+        //缓存判空
+        if(ObjectUtils.allNotNull(gzzdData)){
+            //如果不是空，则直接将缓存数据给前台
+            return (List<String>) gzzdData;
+        }else {
+            //如果是空，则查询数据库，将数据重新放入本地缓存中
+            List<String> gzzd = dataDOMapper.selectAllForMainPage("规章制度");
+            mainPageGzzd.put("GzzdData",gzzd);
+            return gzzd;
+        }
     }
 }

@@ -13,6 +13,9 @@ import com.zyyglxt.util.UUIDUtils;
 import com.zyyglxt.util.UsernameUtil;
 import com.zyyglxt.validator.ValidatorImpl;
 import com.zyyglxt.validator.ValidatorResult;
+import org.apache.commons.lang3.ObjectUtils;
+import org.ehcache.Cache;
+import org.ehcache.CacheManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,6 +31,7 @@ import java.util.List;
  */
 
 @Service
+@SuppressWarnings("unchecked")
 public class DataRegulationServiceImpl implements IDataRegulationService {
     @Resource
     DataDOMapper dataDOMapper;
@@ -37,6 +41,9 @@ public class DataRegulationServiceImpl implements IDataRegulationService {
 
     @Autowired
     private UsernameUtil usernameUtil;
+
+    @Resource
+    private CacheManager cacheManager;
 
     @Override
     public DataDO selectRegulation(DataDOKey key) {
@@ -89,7 +96,19 @@ public class DataRegulationServiceImpl implements IDataRegulationService {
 
     @Override
     public List<String> selectForMainPage() {
-        return dataDOMapper.selectAllForMainPage("政策法规");
+        //获得缓存
+        Cache<String, Object> mainPageZcfg = cacheManager.getCache("mainPageData", String.class, Object.class);
+        Object zcfgData = mainPageZcfg.get("ZcfgData");
+        //缓存判空
+        if(ObjectUtils.allNotNull(zcfgData)){
+            //如果不是空，则直接将缓存数据给前台
+            return (List<String>) zcfgData;
+        }else {
+            //如果是空，则查询数据库，将数据重新放入本地缓存中
+            List<String> zcfg = dataDOMapper.selectAllForMainPage("政策法规");
+            mainPageZcfg.put("ZcfgData",zcfg);
+            return zcfg;
+        }
     }
 
 

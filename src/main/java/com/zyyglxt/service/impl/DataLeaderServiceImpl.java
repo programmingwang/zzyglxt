@@ -14,6 +14,9 @@ import com.zyyglxt.util.UUIDUtils;
 import com.zyyglxt.util.UsernameUtil;
 import com.zyyglxt.validator.ValidatorImpl;
 import com.zyyglxt.validator.ValidatorResult;
+import org.apache.commons.lang3.ObjectUtils;
+import org.ehcache.Cache;
+import org.ehcache.CacheManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -38,6 +41,9 @@ public class DataLeaderServiceImpl implements IDataLeaderService {
 
     @Autowired
     private UsernameUtil usernameUtil;
+
+    @Resource
+    private CacheManager cacheManager;
 
     @Override
     public DataDO selectLeader(DataDOKey key) {
@@ -93,7 +99,19 @@ public class DataLeaderServiceImpl implements IDataLeaderService {
 
     @Override
     public List<String> selectForMainPage() {
-        return dataDOMapper.selectAllForMainPage("领导讲话");
+        //获得缓存
+        Cache<String, Object> mainPageLdjh = cacheManager.getCache("mainPageData", String.class, Object.class);
+        Object ldjhData = mainPageLdjh.get("LdjhData");
+        //缓存判空
+        if(ObjectUtils.allNotNull(ldjhData)){
+            //如果不是空，则直接将缓存数据给前台
+            return (List<String>) ldjhData;
+        }else {
+            //如果是空，则查询数据库，将数据重新放入本地缓存中
+            List<String> ldjh = dataDOMapper.selectAllForMainPage("领导讲话");
+            mainPageLdjh.put("LdjhData",ldjh);
+            return ldjh;
+        }
     }
 
 }

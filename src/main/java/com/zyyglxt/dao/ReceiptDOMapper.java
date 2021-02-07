@@ -2,6 +2,7 @@ package com.zyyglxt.dao;
 
 import com.zyyglxt.dataobject.ReceiptDO;
 import com.zyyglxt.dataobject.ReceiptDOKey;
+import com.zyyglxt.dto.ReceiptDto;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
@@ -23,7 +24,7 @@ public interface ReceiptDOMapper {
 
     int updateByPrimaryKey(ReceiptDO record);
 
-    List<ReceiptDO> selectAllReceipt(@Param("receivingDataStatus") String receivingDataStatus);//查询所有收文管理数据
+    List<ReceiptDto> selectAllReceipt(@Param("receivingDataStatus") String receivingDataStatus);//查询所有收文管理数据
 
     int changeStatusToReceipt(@Param("key") ReceiptDOKey key ,@Param("receivingDataStatus") String receivingDataStatus);//收文管理数据状态
 }

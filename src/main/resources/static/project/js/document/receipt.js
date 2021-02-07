@@ -289,28 +289,28 @@
             function getRoleTable(role,preUrl,status,webStatus) {
                 if(role === "政务资源科员"){
                     $('#btn_addTask').attr('style',"display:block");
-                    return preUrl + "?"+status+"="+webStatus[0].id+"&"+status+"="+webStatus[1].id+"&"+status+"="+webStatus[2].id+"&"+status+"="+webStatus[3].id+"&"+status+"="+webStatus[4].id+"&"+status+"="+webStatus[5].id+"&"+status+"="+webStatus[6].id+"&"+status+"="+webStatus[7].id+"&"+status+"="+webStatus[8].id+"&"+status+"="+webStatus[9].id+"&"+status+"="+webStatus[12].id+"&"+status+"="+webStatus[15].id+"&"+status+"="+webStatus[17].id+"&"+status+"="+webStatus[18].id+"&"+status+"="+webStatus[10].id+"&"+status+"="+webStatus[11].id+"&"+status+"="+webStatus[13].id+"&"+status+"="+webStatus[14].id+"&"+status+"="+webStatus[16].id;
+                    return preUrl + "?"+status+"=1";
                 }/*else if(role === "政务资源处长"){
                     return preUrl + "?"+status+"="+webStatus[18].id+"&"+status+"="+webStatus[16].id;
                 }*/else if(role === "政务资源综合处处长"){
-                    return preUrl + "?"+status+"="+webStatus[1].id+"&"+status+"="+webStatus[2].id+"&"+status+"="+webStatus[3].id+"&"+status+"="+webStatus[18].id+"&"+status+"="+webStatus[4].id+"&"+status+"="+webStatus[7].id+"&"+status+"="+webStatus[10].id+"&"+status+"="+webStatus[13].id;
+                    return preUrl + "?"+status+"=2";
                 }else if(role === "中医处分管局长") {
-                    return preUrl + "?"+status+"="+webStatus[4].id+"&"+status+"="+webStatus[5].id+"&"+status+"="+webStatus[6].id+"&"+status+"="+webStatus[19].id+"&"+status+"="+webStatus[18].id;
+                    return preUrl + "?"+status+"=3";
                 } else if(role === "中药处分管局长") {
-                    return preUrl + "?"+status+"="+webStatus[7].id+"&"+status+"="+webStatus[8].id+"&"+status+"="+webStatus[9].id+"&"+status+"="+webStatus[19].id+"&"+status+"="+webStatus[18].id;
+                    return preUrl + "?"+status+"=4";
                 }else if(role === "综合处分管局长") {
-                    return preUrl + "?"+status+"="+webStatus[10].id+"&"+status+"="+webStatus[11].id+"&"+status+"="+webStatus[12].id+"&"+status+"="+webStatus[19].id+"&"+status+"="+webStatus[18].id;
+                    return preUrl + "?"+status+"=5";
                 }else if(role === "法规监督处分管局长") {
-                    return preUrl + "?"+status+"="+webStatus[13].id+"&"+status+"="+webStatus[14].id+"&"+status+"="+webStatus[15].id+"&"+status+"="+webStatus[19].id+"&"+status+"="+webStatus[18].id;
+                    return preUrl + "?"+status+"=6";
                 }else if(role === "政务资源局长") {
-                    return preUrl + "?"+status+"="+webStatus[16].id+"&"+status+"="+webStatus[17].id+"&"+status+"="+webStatus[18].id+"&"+status+"="+webStatus[5].id+"&"+status+"="+webStatus[8].id+"&"+status+"="+webStatus[11].id+"&"+status+"="+webStatus[14].id;
+                    return preUrl + "?"+status+"=7";
                 }
             }
             function getRoleOperate(value, row, index, role, status,webStatus) {
                 if(role === "政务资源科员"){
                     if(status == webStatus[0].id){
                         return [
-                            '<a class="edit" style="margin:0 0.8em;text-decoration: none;color:#348eff;" data-toggle="modal" data-target="" >修改</a>',
+                            '<a class="edit" style="margin:0 0.8em;text-decoration: none;color:#348eff;" data-toggle="modal" data-target="" >编辑</a>',
                             '<a class="submit"  style="margin:0 1em;text-decoration: none;color:#4df115;" data-target="#staticBackdrop" >提交</a>',
                             '<a class="delete" style="margin:0 1em;text-decoration: none;color:#ed0f09;"  data-toggle="modal" data-target="#staticBackdrop" >删除</a>',
                         ].join('');
@@ -360,7 +360,7 @@
                             '<a  class="opinion"  data-toggle="modal" style="margin:0 0.6em;text-decoration: none;color:#4df115;" data-target="#staticBackdrop" >填写审核意见</a>',
                             '<a class="view" data-toggle="modal" style="margin:0 0.6em;text-decoration: none;color:#348eff;" data-target="" >查看</a>',
                         ].join('');
-                    }else if(status == webStatus[18].id||status == webStatus[5].id){
+                    }else if(status == webStatus[5].id||status == webStatus[18].id){
                         return [
                             '<a class="view" data-toggle="modal" style="margin:0 1em;text-decoration: none;color:#348eff;" data-target="" >查看</a>',
                         ].join('');

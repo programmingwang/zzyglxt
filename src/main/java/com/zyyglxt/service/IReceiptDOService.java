@@ -2,6 +2,7 @@ package com.zyyglxt.service;
 
 import com.zyyglxt.dataobject.ReceiptDO;
 import com.zyyglxt.dataobject.ReceiptDOKey;
+import com.zyyglxt.dto.ReceiptDto;
 
 import java.util.List;
 
@@ -15,6 +16,6 @@ public interface IReceiptDOService {
     int deleteByPrimaryKey(ReceiptDOKey key);
     int updateByPrimaryKeySelective(ReceiptDO record);
     ReceiptDO selectByPrimaryKey(ReceiptDOKey key);
-    List<ReceiptDO> selectAllReceipt( List<String> receivingDataStatus);//查询所有收文管理数据
+    List<ReceiptDto> selectAllReceipt(String receivingDataStatus);//查询所有收文管理数据
     int changeStatusToReceipt( ReceiptDOKey key ,String receivingDataStatus);//收文管理数据状态
 }

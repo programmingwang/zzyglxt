@@ -2,6 +2,7 @@ package com.zyyglxt.dao;
 
 import com.zyyglxt.dataobject.RequestReportDO;
 import com.zyyglxt.dataobject.RequestReportDOKey;
+import com.zyyglxt.dto.RequestReportDto;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
@@ -26,7 +27,7 @@ public interface RequestReportDOMapper {
     int updateByPrimaryKey(RequestReportDO record);
 
 
-    List<RequestReportDO> selectAllReport(@Param("reportDataStatus") String reportDataStatus);//查询所有请示报告数据
+    List<RequestReportDto> selectAllReport(@Param("reportDataStatus") String reportDataStatus);//查询所有请示报告数据
 
     int changeStatusToReport(@Param("key") RequestReportDOKey key , @Param("reportDataStatus") String reportDataStatus);//请示报告数据状态
 

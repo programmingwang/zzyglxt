@@ -48,6 +48,20 @@ public class PostController {
         return new ResponseData(EmBusinessError.success,DoToDto(postDOS));
     }
 
+    @GetMapping(value = "/getPostFileForMain")
+    @ResponseBody
+    @LogAnnotation(appCode ="",logTitle ="查询所有发文附件信息",logLevel ="1",creater ="",updater = "")
+    public ResponseData getPostFileForMain(){
+        return new ResponseData(EmBusinessError.success,postService.getPostFileForMain());
+    }
+
+    @GetMapping(value = "/getPostForMainPage")
+    @ResponseBody
+    @LogAnnotation(appCode ="",logTitle ="查询所有发文标题信息",logLevel ="1",creater ="",updater = "")
+    public ResponseData getPostForMainPage(@RequestParam String status){
+        return new ResponseData(EmBusinessError.success,postService.getPostForMainPage(status));
+    }
+
     private List<PostDto> DoToDto(List<PostDO> DOList){
         List<PostDto> DtoList = new ArrayList<>();
         if (!DOList.isEmpty()){

@@ -329,10 +329,10 @@
 
   <select id="selectAllForMainPage" resultType="java.lang.String">
     select
-    a.DATA_TITLE
+      a.DATA_TITLE
     from
-         tb_culpro_data a inner join
-    (select itemID from tb_culpro_data where DATA_TYPE = #{dataType,jdbcType=VARCHAR} limit 0,5)
-        b on a.itemID=b.itemID;
+      tb_culpro_data a inner join
+        (select itemID from tb_culpro_data where DATA_TYPE = #{dataType,jdbcType=VARCHAR} limit 0,5)
+        b on a.itemID=b.itemID where a.DATA_STATUS = 5;
   </select>
 </mapper>

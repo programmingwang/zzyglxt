@@ -12,9 +12,9 @@
                         }else{
                             for(var i = 0; i<data.data.length; i++){
                                 if(typeof data.data[i] !== "object"){
-                                    data.data[i].length >= 30
+                                    data.data[i].length >= 35
                                         ?
-                                        $("#"+targetId+"").append('<li class="mainLi" >'+data.data[i].replace(data.data[i].substring(28,(data.data[i].length)),"......")+'</li>')
+                                        $("#"+targetId+"").append('<li class="mainLi" >'+data.data[i].replace(data.data[i].substring(35,(data.data[i].length)),"......")+'</li>')
                                         :
                                         $("#"+targetId+"").append('<li class="mainLi" >'+data.data[i]+'</li>');
                                 }else {

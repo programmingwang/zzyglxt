@@ -129,7 +129,7 @@
                         // console.log("addstr:"+addstr)
                         // console.log("status:"+status)
                         //调试时可以先打印出来，进行修改
-                        if(addstr==status){
+                        if(addstr==status || addstr==99){
                             isStatusSlot=true;
                         }
                         if (textP == null || textP == undefined || textP == '') {

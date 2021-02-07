@@ -187,7 +187,7 @@
                 {field: 'company', title: '申报单位'},
                 {field: 'exmaineStatus', title: '状态', formatter:function (value) {
                         if(value.search("1") == -1){
-                            return +pl[0].text;
+                            return pl[0].text;
                         }else if(value.search("0") == -1){
                             return pl[1].text;
                         }else {

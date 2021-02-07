@@ -142,6 +142,7 @@
                     $("#workplace").val(tempdata.workplace);
                     $("#education").val(tempdata.education);
                     $("#emali").val(tempdata.emali);
+                    $("#salary").val(tempdata.salary)
                     editor.txt.html(tempdata.postDuty);
                     editor2.txt.html(tempdata.postDescr);
                     itemcode = tempdata.itemcode;

@@ -94,12 +94,16 @@
             var pl = dictUtil.getDictByCode(dictUtil.DICT_LIST.showStatus);
             $("#chargePersonSearch").selectUtil(pl);
 
+            function statusFormatter(value,row,index){
+                return dictUtil.getName(dictUtil.DICT_LIST.showStatus,value)
+            }
+
 
             var aCol = [
                 {field: 'recruitmentTitle', title: '招聘标题'},
                 {field: 'recruitmentPosition', title: '招聘职位'},
                 {field: 'recruitmentCount', title: '招聘数量'},
-                {field: 'status', title: '信息状态'},
+                {field: 'status', title: '信息状态',formatter:statusFormatter},
                 {field: 'action',  title: '操作',formatter: operation,events:orgEvents}
             ];
 

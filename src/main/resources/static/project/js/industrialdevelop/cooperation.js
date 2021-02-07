@@ -92,12 +92,16 @@
             var pl = dictUtil.getDictByCode(dictUtil.DICT_LIST.showStatus);
             $("#chargePersonSearch").selectUtil(pl);
 
+            function statusFormatter(value,row,index){
+                return dictUtil.getName(dictUtil.DICT_LIST.showStatus,value)
+            }
+
 
             var aCol = [
                 {field: 'cooperationExchangeName', title: '合作信息'},
                 {field: 'cooperativeOrg', title: '预期合作机构'},
                 {field: 'contacts', title: '联系人'},
-                {field: 'status', title: '数据状态'},
+                {field: 'status', title: '数据状态',formatter: statusFormatter},
                 {field: 'action',  title: '操作',formatter: operation,events:orgEvents}
             ];
 

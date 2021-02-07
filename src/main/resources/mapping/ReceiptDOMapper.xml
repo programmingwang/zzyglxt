@@ -40,11 +40,27 @@
     <result column="DATEV" jdbcType="TIMESTAMP" property="datev" />
     <result column="DATES" jdbcType="TIMESTAMP" property="dates" />
   </resultMap>
+
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBsAndFile" type="com.zyyglxt.dto.ReceiptDto">
+    <result column="FILE_PATH" jdbcType="VARCHAR" property="filePath"/>
+    <result column="FILE_NAME" jdbcType="VARCHAR" property="fileName"/>
+  </resultMap>
+
   <sql id="Base_Column_List">
-    itemID, itemCode, RECEIVING_NUM, RECEIVING_DATE_OF_RECEIPT, RECEIVING_TITLE, RECEIVING_UNIT_OF_COMMUN, 
+    itemID, itemCode, RECEIVING_NUM, RECEIVING_DATE_OF_RECEIPT, RECEIVING_TITLE, RECEIVING_UNIT_OF_COMMUN,
     FILE_NO, NUMBER, RECEIVING_DEGREE_OF_URGENCY, RECEIVING_DATA_STATUS, TIME_LIMIT, 
     CREATER, itemCreateAt, UPDATER, itemUpdateAt
   </sql>
+
+  <sql id="SelectAll_Column_List">
+    rp.itemID, rp.itemCode, rp.RECEIVING_NUM, rp.RECEIVING_DATE_OF_RECEIPT, rp.RECEIVING_TITLE,
+    rp.RECEIVING_UNIT_OF_COMMUN, rp.FILE_NO, rp.NUMBER, rp.RECEIVING_DEGREE_OF_URGENCY,
+    rp.RECEIVING_DATA_STATUS, rp.TIME_LIMIT, rp.REASONO, rp.REASONT, rp.REASONH, rp.REASONF, rp.REASONV, rp.REASONS,
+    rp.NAMEO, rp.NAMET, rp.NAMEH, rp.NAMEF, rp.NAMEV, rp.NAMES,
+    rp.DATEO, rp.DATET, rp.DATEH, rp.DATEF, rp.DATEV, rp.DATES,
+    rp.CREATER, rp.itemCreateAt, rp.UPDATER, rp.itemUpdateAt
+  </sql>
+
   <select id="selectByPrimaryKey" parameterType="com.zyyglxt.dataobject.ReceiptDOKey" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
@@ -298,12 +314,46 @@
     where itemID = #{itemid,jdbcType=INTEGER}
       and itemCode = #{itemcode,jdbcType=CHAR}
   </update>
-  <select id="selectAllReceipt" resultMap="BaseResultMap">
+  <!--<select id="selectAllReceipt" resultMap="BaseResultMap">
         SELECT *
         FROM tb_governres_receipt
        WHERE RECEIVING_DATA_STATUS = #{receivingDataStatus,jdbcType=VARCHAR}
        order by itemCreateAt desc
+    </select>-->
+
+  <select id="selectAllReceipt" resultMap="ResultMapWithBLOBsAndFile">
+        SELECT
+          <include refid="SelectAll_Column_List" />
+          ,
+          cf.FILE_PATH
+          ,
+          cf.FILE_NAME
+          FROM tb_governres_receipt rp left join tb_culpro_file cf
+          on rp.itemCode = cf.DATA_CODE
+          <if test='receivingDataStatus == "7" '>
+            WHERE RECEIVING_DATA_STATUS in (16,17,18)
+          </if>
+          <if test='receivingDataStatus == "6" '>
+            WHERE RECEIVING_DATA_STATUS in (13,14,15,18,19)
+          </if>
+          <if test='receivingDataStatus == "5" '>
+            WHERE RECEIVING_DATA_STATUS in (10,11,12,18,19)
+          </if>
+          <if test='receivingDataStatus == "4" '>
+            WHERE RECEIVING_DATA_STATUS in (7,8,9,18,19)
+          </if>
+          <if test='receivingDataStatus == "3" '>
+               WHERE RECEIVING_DATA_STATUS in (4,5,6,18,19)
+          </if>
+          <if test='receivingDataStatus == "2" '>
+                WHERE RECEIVING_DATA_STATUS in (1,2,3,18)
+          </if>
+          <if test='receivingDataStatus == "1" '>
+               WHERE RECEIVING_DATA_STATUS in (0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18)
+         </if>
+        order by rp.itemUpdateAt desc
     </select>
+
   <update id="changeStatusToReceipt">
     update tb_governres_receipt
     <set>

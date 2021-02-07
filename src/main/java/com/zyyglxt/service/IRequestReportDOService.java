@@ -2,6 +2,7 @@ package com.zyyglxt.service;
 
 import com.zyyglxt.dataobject.RequestReportDO;
 import com.zyyglxt.dataobject.RequestReportDOKey;
+import com.zyyglxt.dto.RequestReportDto;
 
 import java.util.List;
 
@@ -17,7 +18,7 @@ public interface IRequestReportDOService {
 
     int updateByPrimaryKeySelective(RequestReportDO record);
 
-    List<RequestReportDO> selectAllReport(List<String> reportDataStatus);//查询所有请示报告数据
+    List<RequestReportDto> selectAllReport(String reportDataStatus);//查询所有请示报告数据
 
     int changeStatusToReport( RequestReportDOKey key ,  String reportDataStatus);//请示报告数据状态
 }

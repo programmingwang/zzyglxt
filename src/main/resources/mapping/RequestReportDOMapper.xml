@@ -26,9 +26,17 @@
 
 
   </resultMap>
-  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.zyyglxt.dataobject.RequestReportDO">
-    <!--<result column="REPORT_CONTENT" jdbcType="VARCHAR" property="reportContent" />-->
+
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBsAndFile" type="com.zyyglxt.dto.RequestReportDto">
+    <result column="FILE_PATH" jdbcType="VARCHAR" property="filePath"/>
+    <result column="FILE_NAME" jdbcType="VARCHAR" property="fileName"/>
   </resultMap>
+
+
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.zyyglxt.dataobject.RequestReportDO">
+    <result column="REPORT_CONTENT" jdbcType="VARCHAR" property="reportContent" />
+  </resultMap>
+
   <sql id="Base_Column_List">
     itemID, itemCode, REPORT_TITLE, REPORT_DATA_STATUS, CREATER, itemCreateAt, UPDATER, 
     itemUpdateAt
@@ -36,6 +44,20 @@
   <sql id="Blob_Column_List">
     REPORT_CONTENT
   </sql>
+
+  <sql id="SelectAll_Column_List">
+    rt.itemID, rt.itemCode, rt.REPORT_TITLE, rt.REPORT_DATA_STATUS,
+    rt.REASON, rt.REASONONE, rt.REASONTWO, rt.REASONTH,
+    rt.CREATER, rt.itemCreateAt,
+    rt.UPDATER,
+    rt.UPDATERONE, rt.UPDATERTWO, rt.UPDATERTH, rt.UPDATERF,
+    rt.UPDATEONE, rt.UPDATETWO, rt.UPDATEF, rt.UPDATETH,
+    rt.itemUpdateAt
+  </sql>
+  <sql id="SelectAllBlob_Column_List">
+    rt.REPORT_CONTENT
+  </sql>
+
   <select id="selectByPrimaryKey" parameterType="com.zyyglxt.dataobject.RequestReportDOKey" resultMap="ResultMapWithBLOBs">
     select 
     <include refid="Base_Column_List" />
@@ -240,12 +262,39 @@
     where itemID = #{itemid,jdbcType=INTEGER}
       and itemCode = #{itemcode,jdbcType=CHAR}
   </update>
-  <select id="selectAllReport" resultMap="BaseResultMap">
+  <!--<select id="selectAllReport" resultMap="BaseResultMap">
         SELECT *
         FROM tb_governres_request_report
        WHERE REPORT_DATA_STATUS = #{reportDataStatus,jdbcType=VARCHAR}
        order by itemCreateAt desc
+    </select>-->
+
+  <select id="selectAllReport" resultMap="ResultMapWithBLOBsAndFile">
+    SELECT
+    <include refid="SelectAll_Column_List" />
+    ,
+    <include refid="SelectAllBlob_Column_List" />
+    ,
+    cf.FILE_PATH
+    ,
+    cf.FILE_NAME
+    FROM tb_governres_request_report rt left join tb_culpro_file cf
+    on rt.itemCode = cf.DATA_CODE
+    <if test='reportDataStatus == "4" '>
+      WHERE REPORT_DATA_STATUS in (3,6,7,8,9)
+    </if>
+    <if test='reportDataStatus == "3" '>
+      WHERE REPORT_DATA_STATUS in (2,3,5,7,13)
+    </if>
+    <if test='reportDataStatus == "2" '>
+      WHERE REPORT_DATA_STATUS in (1,2,4,7)
+    </if>
+    <if test='reportDataStatus == "1" '>
+      WHERE REPORT_DATA_STATUS in (0,1,4,5,6,7,8,13)
+    </if>
+    order by rt.itemUpdateAt desc
     </select>
+
   <update id="changeStatusToReport">
     update tb_governres_request_report
     <set>

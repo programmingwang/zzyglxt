@@ -204,7 +204,7 @@
                 var myViewRegulationModalData ={
                     modalBodyID : "myViewDataModal", //公用的在后面给span加不同的内容就行了，其他模块同理
                     modalTitle : "查看详情",
-                    modalClass : "modal-lg",
+                    modalClass : "modal-xl",
                     confirmButtonStyle: "display:none",
                 };
                 var myRegulationModal = modalUtil.init(myViewRegulationModalData);
@@ -217,8 +217,8 @@
                 $("#dataFileType").val(webFileType[row.dataFileType].text);
                 $("#imgDiv").attr("style","display:none");
                 $("#author").attr("style","display:none");
-                $('#dataTitleSpan').html("政策法规名称");
-                $('#dataFileTypeSpan').html("文件类型");
+                $('#dataTitleSpan').html("政策法规名称：");
+                $('#dataFileTypeSpan').html("文件类型：");
                 $("#fileDiv").attr("style","display:block");
                 $("#upFile").html(row.fileName);
 

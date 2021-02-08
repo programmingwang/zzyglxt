@@ -219,9 +219,9 @@
                     $("#dataStatus").val(webStatus[row.dataStatus].text);
                     $("#dataFileType").val(webLocation[row.dataLocation].text);
                     $("#newsImg").attr("src",row.filePath);
-                    $('#newsImgSpan').html("新闻图片");
-                    $('#dataTitleSpan').html("新闻标题");
-                    $('#dataFileTypeSpan').html("所属位置");
+                    $('#newsImgSpan').html("新闻图片：");
+                    $('#dataTitleSpan').html("新闻标题：");
+                    $('#dataFileTypeSpan').html("所属位置：");
 
                     myNewsRotationsModal.show();
                 },

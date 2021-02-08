@@ -460,6 +460,6 @@ input, select{
 #upload{
     z-index: 100;
 }
-/*
-test
-*/
+.upload-wrap {
+    border-radius: unset;
+}

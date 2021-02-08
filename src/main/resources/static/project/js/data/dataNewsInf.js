@@ -210,8 +210,8 @@
                 $("#dataStatus").val(webStatus[row.dataStatus].text);
                 $("#dataFileType").val(row.dataFileType);
                 $("#imgDiv").attr("style","display:none");
-                $('#dataTitleSpan').html("新闻标题");
-                $('#dataFileTypeSpan').html("新闻性质");
+                $('#dataTitleSpan').html("新闻标题：");
+                $('#dataFileTypeSpan').html("新闻性质：");
 
                 myNewsInfModal.show();
             },

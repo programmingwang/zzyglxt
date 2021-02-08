@@ -214,8 +214,8 @@
                 $("#dataFileType").val(row.dataFileType);
                 $("#imgDiv").attr("style","display:none");
                 $("#author").attr("style","display:none");
-                $('#dataTitleSpan').html("通知名称");
-                $('#dataFileTypeSpan').html("公告性质");
+                $('#dataTitleSpan').html("通知名称：");
+                $('#dataFileTypeSpan').html("公告性质：");
                 $("#fileDiv").attr("style","display:block");
                 $("#upFile").html(row.fileName);
 

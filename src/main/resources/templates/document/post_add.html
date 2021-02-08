@@ -41,7 +41,7 @@
             padding-top: 30px;
             padding-right: 180px;
             text-align: center;
-            color: #D60000;
+            color: #775637;
             font-size: 34px;
         }
 
@@ -109,36 +109,33 @@
 
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label">公开方式：</label>
+                <div class="col-sm-5">
+                    <div class="form-control" style="height: 40px">
+                        <input name="postPublicWay" type="radio" id="pw1" value="1" style="zoom:130%;"/>
+                        <label for="pw1">主动公开</label>
+                        <input name="postPublicWay" type="radio" id="pw2" value="2" style="zoom:130%; margin-left: 50px;"/>
+                        <label for="pw2">依申请公开</label>
+                        <input name="postPublicWay" type="radio" id="pw3" value="3" style="zoom:130%; margin-left: 50px;"/>
+                        <label for="pw3">不公开</label>
+                    </div>
+                </div>
                 <div class="col-sm-3">
+                    <select id="postReason" class="form-control" style="height: 40px; display: none"></select>
+                </div>
+                <!--<div class="col-sm-3">
                     <select id="postPublicWay" name="postPublicWay" class="form-control"></select>
                 </div>
-
                 <label id="reason" class="col-sm-2 col-form-label" style="display: none">不公开理由：</label>
                 <div class="col-sm-3">
                     <select id="postReason" class="form-control" style="display: none"></select>
-                </div>
+                </div>-->
             </div>
 
-            <div class="form-group row">
-                <label class="col-sm-2 col-form-label">公平竞争审查：</label>
-                <div class="col-sm-3">
-                    <select id="postFairDepartmentReview" class="form-control"></select>
-                </div>
-
-                <div class="upload-wrap anticon" nv-file-drop="" uploader="uploader">
-                    <input id="fairFile" class="file-ele" type="file" file-model="image" name="image" nv-file-select uploader="uploader" multiple />
-                    <div id="fairFile1" class="file-open"><em class="upload"></em>&nbsp;上传附件</div>
-                </div>
-                <button type="button" class="btn btn-danger" id="clsFairFile">清除文件</button>
-                <div  id="addFairFile">
-                    <!-- <p> </p> -->
-                </div>
-            </div>
 
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label">规范性文件：</label>
                 <div class="col-sm-3">
-                    <div class="form-control">
+                    <div class="form-control" style="height: 40px">
                         <input name="postNormativeDocuments" type="radio" id="g1" value="y" style="zoom:130%; margin-left: 15px;"/>
                         <label for="g1">是</label>
                         <input name="postNormativeDocuments" type="radio" id="g2" value="n" style="zoom:130%; margin-left: 60px;"/>
@@ -148,7 +145,7 @@
 
                 <label class="col-sm-2 col-form-label">是否涉密：</label>
                 <div class="col-sm-3">
-                    <div class="form-control">
+                    <div class="form-control" style="height: 40px">
                         <input name="postSecretRelated" type="radio" id="s1" value="y" style="zoom:130%; margin-left: 15px;"/>
                         <label for="s1">是</label>
                         <input name="postSecretRelated" type="radio" id="s2" value="n" style="zoom:130%; margin-left: 60px;"/>
@@ -172,6 +169,22 @@
                         <input id="postDocumentNum1" class="form-control" readonly="readonly"/>
                     </div>
                     <div class="num1">号</div>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">公平竞争审查：</label>
+                <div class="col-sm-3">
+                    <select id="postFairDepartmentReview" class="form-control" style="height: 40px"></select>
+                </div>
+
+                <div class="upload-wrap anticon" nv-file-drop="" uploader="uploader">
+                    <input id="fairFile" class="file-ele" type="file" file-model="image" name="image" nv-file-select uploader="uploader" multiple />
+                    <div id="fairFile1" class="file-open"><em class="upload"></em>&nbsp;上传附件</div>
+                </div>
+                <button type="button" class="btn btn-danger" id="clsFairFile">清除文件</button>
+                <div  id="addFairFile">
+                    <!-- <p> </p> -->
                 </div>
             </div>
 

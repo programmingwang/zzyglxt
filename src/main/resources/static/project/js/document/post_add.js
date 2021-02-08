@@ -4,8 +4,21 @@
 
             uploadImg.init();
 
+            //不公开理由
+            var reason = dictUtil.getDictByCode(dictUtil.DICT_LIST.postReason);
+            $("#postReason").selectUtil(reason);
+
             //公开方式
-            var publicWay = dictUtil.getDictByCode(dictUtil.DICT_LIST.postPublicWay);
+            $('input[type=radio][name=postPublicWay]').change(function () {
+                if(this.value == "3"){
+                    $('#postReason').attr('style',"display:block");
+                }else {
+                    $('#postReason').attr('style',"display:none");
+                    $("#postReason").selectUtil(reason);
+                    $("#postReason").val() == "";
+                }
+            })
+           /* var publicWay = dictUtil.getDictByCode(dictUtil.DICT_LIST.postPublicWay);
             $("#postPublicWay").selectUtil(publicWay);
             $('#postPublicWay').change(function () {
                 if($("#postPublicWay").val() == "2"){
@@ -16,11 +29,7 @@
                     $('#postReason').attr('style',"display:none");
                     $("#postReason").val() == "";
                 }
-            });
-
-            //不公开理由
-            var reason = dictUtil.getDictByCode(dictUtil.DICT_LIST.postReason);
-            $("#postReason").selectUtil(reason);
+            });*/
 
             //是否需要公平竞争审查
             var fair = dictUtil.getDictByCode(dictUtil.DICT_LIST.postFairDepartmentReview);

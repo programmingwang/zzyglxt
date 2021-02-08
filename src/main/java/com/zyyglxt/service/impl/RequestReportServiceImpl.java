@@ -3,6 +3,7 @@ package com.zyyglxt.service.impl;
 import com.zyyglxt.dao.RequestReportDOMapper;
 import com.zyyglxt.dataobject.RequestReportDO;
 import com.zyyglxt.dataobject.RequestReportDOKey;
+import com.zyyglxt.dto.RequestReportDto;
 import com.zyyglxt.error.BusinessException;
 import com.zyyglxt.error.EmBusinessError;
 import com.zyyglxt.service.IRequestReportDOService;
@@ -67,12 +68,12 @@ public class RequestReportServiceImpl implements IRequestReportDOService {
     }
 
     @Override
-    public List<RequestReportDO> selectAllReport(List<String> reportDataStatus) {
-        List<RequestReportDO> requestReportDOList=new ArrayList<>();
+    public List<RequestReportDto> selectAllReport(String reportDataStatus) {
+        /*List<RequestReportDO> requestReportDOList=new ArrayList<>();
         for(String status:reportDataStatus){
             requestReportDOList.addAll(requestReportDOMapper.selectAllReport(status));
-        }
-        return requestReportDOList;
+        }*/
+        return requestReportDOMapper.selectAllReport(reportDataStatus);
     }
 
     @Override

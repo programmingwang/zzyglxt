@@ -79,11 +79,7 @@ public class IndustrialDevelopCooServiceImpl implements IIndustrialDevelopCooSer
 
     @Override
     public List<IndustrialDevelopCooExcDO> getCooRecord(String orgCode) {
-        List<IndustrialDevelopCooExcDO> list = cooExcDOMapper.selectAll(orgCode);
-        for (IndustrialDevelopCooExcDO item : list) {
-            item.setStatus(dictService.getDictMapByCode("showStatus").get(item.getStatus()));
-        }
-        return list;
+        return cooExcDOMapper.selectAll(orgCode);
     }
 
 }

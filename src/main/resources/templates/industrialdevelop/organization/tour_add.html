@@ -44,87 +44,90 @@
     <div class="col-12">
         <div class="titleCSS">企业信息维护</div>
         <form>
-            <div class="form-group row">
-                <label class="col-sm-2 col-form-label">基地照片：<span style="color: red">*</span></label>
-                <div class="upload-content" data-limit="1">
-                    <div class="content-img">
-                        <ul class="content-img-list"></ul>
-                        <div class="file">
-                            <i class="gcl gcladd"></i>
-                            <input type="file" name="file" accept="image/*" id="upload" multiple>
+            <div class="col-lg-12 row" >
+                <div class="col-lg-6" >
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-form-label"><span style="color: red">*</span>基地名称：</label>
+                        <div class="col-sm-6" style="padding-right: 0;">
+                            <input id="name" type="text" class="form-control" placeholder="请输入">
                         </div>
                     </div>
-                    <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog"
-                         aria-labelledby="myLargeModalLabel">
-                        <div class="modal-dialog modal-lg" role="document">
-                            <div class="modal-content">
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-form-label"><span style="color: red">*</span>占地面积：</label>
+                        <div class="col-sm-6" style="padding-right: 0;">
+                            <input id="areaCoverd" type="text" class="form-control" placeholder="请输入">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-form-label"><span style="color: red">*</span>特色服务：</label>
+                        <div class="col-sm-6" style="padding-right: 0;">
+                            <input id="specialService" type="text" class="form-control" placeholder="请输入">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6" >
+                    <div class="form-group row">
+                        <label style="position: relative;top: 60px;" class="col-sm-5 col-form-label"><span style="color: red">*</span>基地照片：</label>
+                        <div class="upload-content" data-limit="1">
+                            <div class="content-img">
+                                <ul class="content-img-list"></ul>
+                                <div class="file">
+                                    <i class="gcl gcladd"></i>
+                                    <input type="file" name="file" accept="image/*" id="upload" multiple>
+                                </div>
+                            </div>
+                            <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog"
+                                 aria-labelledby="myLargeModalLabel">
+                                <div class="modal-dialog modal-lg" role="document">
+                                    <div class="modal-content">
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="form-group row">
-                <label class="col-sm-2 col-form-label">基地名称：<span style="color: red">*</span></label>
-                <div class="col-sm-3">
-                    <input id="name" type="text" class="form-control" placeholder="请输入">
-                </div>
 
-                <label class="col-sm-2 col-form-label">占地面积：<span style="color: red">*</span></label>
-                <div class="col-sm-3">
-                    <input id="areaCoverd" type="text" class="form-control" placeholder="请输入">
-                </div>
-            </div>
+
+
             <div class="form-group row">
-                <label class="col-sm-2 col-form-label">特色服务：<span style="color: red">*</span></label>
-                <div class="col-sm-3">
-                    <input id="specialService" type="text" class="form-control" placeholder="请输入">
-                </div>
-            </div>
-            <div class="form-group row">
-                <label class="col-sm-2 col-form-label">联系人：<span style="color: red">*</span></label>
+                <label class="col-sm-2 col-form-label"><span style="color: red">*</span>联系人：</label>
                 <div class="col-sm-3">
                     <input id="contacts" type="text" class="form-control" placeholder="请输入">
                 </div>
 
-                <label class="col-sm-2 col-form-label">联系电话：<span style="color: red">*</span></label>
+                <label class="col-sm-2 col-form-label"><span style="color: red">*</span>联系电话：</label>
                 <div class="col-sm-3">
                     <input id="phone" type="text" class="form-control" placeholder="请输入">
                 </div>
 
             </div>
             <div id="distpicker" class="form-group row">
-                <label for="addressPro" class="col-sm-2 col-form-label">详细地址：<span style="color: red">*</span></label>
-                <div class="col-sm-1" style="padding-right: 0;">
-                    <select id="addressPro" class="form-control"></select>
+                <label for="addressPro" class="col-sm-2 col-form-label"><span style="color: red">*</span>详细地址：</label>
+                <div class="col-sm-4 row" style="padding-left: 30px;">
+                    <select id="addressPro" class="form-control col"></select>
+                    <select id="addressCity" class="form-control col"></select>
+                    <select id="addressCountry" class="form-control col"></select>
                 </div>
-                <div class="col-sm-1" style="padding: 0;">
-                    <select id="addressCity" class="form-control"></select>
-                </div>
-                <div class="col-sm-2" style="padding: 0;">
-                    <select id="addressCountry" class="form-control"></select>
-                </div>
-                <div class="col-sm-4" style="padding-left: 0;">
+                <div class="col-sm-4" style="padding-left: 0;flex: 0 0 35%;max-width: 35%;">
                     <input id="address" type="text" class="form-control" placeholder="请输入">
                 </div>
             </div>
             <div class="form-group row">
-                <label class="col-sm-2 col-form-label">基地简介：<span style="color: red">*</span></label>
+                <label class="col-sm-2 col-form-label"><span style="color: red">*</span>基地简介：</label>
                 <div id="div1" class="col-sm-8">
                 </div>
             </div>
 
 
             <div class="form-group row">
-                <div class="col-lg-4 col-md-4" ></div>
-                <div class=" col-lg-4 row">
+                <div class="col-lg-7 col-md-6" ></div>
+                <div class=" col-lg-3 row" style="padding: 0" >
                     <div class="col">
                         <button id="cancelBtn" type="button" class="btn btn-light col">取消</button>
                     </div>
-                    <!--<div class="col">-->
-                    <!--<button id="saveBtn" type="button" class="btn btn-danger col">保存</button>-->
-                    <!--</div>-->
-                    <div class="col">
+                    <div class="col" style="padding-right: 0;">
                         <button id="submitBtn" type="submit" class="btn btn-primary col">提交</button>
                     </div>
                 </div>

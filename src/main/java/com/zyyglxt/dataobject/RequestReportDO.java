@@ -13,6 +13,7 @@ public class RequestReportDO extends RequestReportDOKey {
 
     private String reportDataStatus;
 
+    @NotBlank(message = "报告内容不能为空",groups = ValidationGroups.Insert.class)
     private String reportContent;
 
     private String reason;

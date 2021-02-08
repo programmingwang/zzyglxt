@@ -9,6 +9,7 @@ import com.zyyglxt.error.BusinessException;
 import com.zyyglxt.error.EmBusinessError;
 import com.zyyglxt.service.IDictService;
 import com.zyyglxt.service.IIndustrialDevelopTalRecService;
+import com.zyyglxt.util.UsernameUtil;
 import com.zyyglxt.validator.ValidatorImpl;
 import com.zyyglxt.validator.ValidatorResult;
 import org.springframework.stereotype.Service;
@@ -29,14 +30,14 @@ public class IdustrialDevelopTalRecServiceImpl implements IIndustrialDevelopTalR
     IndustrialDevelopTalRecDOMapper developTalRecDOMapper;
 
     @Resource
-    IDictService dictService;
+    ValidatorImpl validator;
 
     @Resource
-    ValidatorImpl validator;
+    UsernameUtil usernameUtil;
     @Override
     public void addTalRec(IndustrialDevelopTalRecDO record) {
-        record.setCreater("未定义");
-        record.setUpdater("未定义");
+        record.setCreater(usernameUtil.getOperateUser());
+        record.setUpdater(usernameUtil.getOperateUser());
         ValidatorResult result = validator.validate(record, ValidationGroups.Insert.class);
         if (result.isHasErrors()){
             throw new BusinessException(result.getErrMsg(), EmBusinessError.PARAMETER_VALIDATION_ERROR);
@@ -61,17 +62,13 @@ public class IdustrialDevelopTalRecServiceImpl implements IIndustrialDevelopTalR
 
     @Override
     public void updTalRec(IndustrialDevelopTalRecDO record) {
-        record.setUpdater("未定义");
+        record.setUpdater(usernameUtil.getOperateUser());
         record.setItemupdateat(new Date());
         developTalRecDOMapper.updateByPrimaryKeySelective(record);
     }
 
     @Override
     public List<IndustrialDevelopTalRecDO> getTalRecs(String orgCode) {
-        List<IndustrialDevelopTalRecDO> list = developTalRecDOMapper.selectAll(orgCode);
-        for (IndustrialDevelopTalRecDO item : list) {
-            item.setStatus(dictService.getDictMapByCode("showStatus").get(item.getStatus()));
-        }
-        return list;
+        return developTalRecDOMapper.selectAll(orgCode);
     }
 }

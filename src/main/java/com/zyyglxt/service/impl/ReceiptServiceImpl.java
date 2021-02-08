@@ -3,6 +3,7 @@ package com.zyyglxt.service.impl;
 import com.zyyglxt.dao.ReceiptDOMapper;
 import com.zyyglxt.dataobject.ReceiptDO;
 import com.zyyglxt.dataobject.ReceiptDOKey;
+import com.zyyglxt.dto.ReceiptDto;
 import com.zyyglxt.error.BusinessException;
 import com.zyyglxt.error.EmBusinessError;
 import com.zyyglxt.service.IReceiptDOService;
@@ -72,12 +73,8 @@ public class ReceiptServiceImpl implements IReceiptDOService {
     }
 
     @Override
-    public List<ReceiptDO> selectAllReceipt(List<String> receivingDataStatus) {
-        List<ReceiptDO> receiptDOList=new ArrayList<>();
-        for(String status:receivingDataStatus){
-            receiptDOList.addAll(receiptDOMapper.selectAllReceipt(status));
-        }
-        return receiptDOList;
+    public List<ReceiptDto> selectAllReceipt(String receivingDataStatus) {
+        return receiptDOMapper.selectAllReceipt(receivingDataStatus);
     }
 
     @Override

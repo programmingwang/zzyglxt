@@ -1,7 +1,9 @@
 package com.zyyglxt.service;
 
+import com.zyyglxt.dataobject.FileDO;
 import com.zyyglxt.dataobject.PostDO;
 import com.zyyglxt.dataobject.PostDOKey;
+import com.zyyglxt.dataobject.PostFileDO;
 import com.zyyglxt.dto.PostDto;
 
 import java.util.List;
@@ -21,5 +23,9 @@ public interface IPostService {
     List<PostDO> getPost(List<String> postDataStatus);
 
     PostDO maxNum();
+
+    List<PostFileDO> getPostFileForMain();
+
+    List<String> getPostForMainPage(String status);
 
 }

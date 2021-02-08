@@ -1,9 +1,7 @@
 package com.zyyglxt.service.impl;
 
 import com.zyyglxt.dao.PostDOMapper;
-import com.zyyglxt.dataobject.PostDO;
-import com.zyyglxt.dataobject.PostDOKey;
-import com.zyyglxt.dataobject.adviceDO;
+import com.zyyglxt.dataobject.*;
 import com.zyyglxt.dataobject.validation.ValidationGroups;
 import com.zyyglxt.dto.PostDto;
 import com.zyyglxt.error.BusinessException;
@@ -15,6 +13,9 @@ import com.zyyglxt.util.UUIDUtils;
 import com.zyyglxt.util.UsernameUtil;
 import com.zyyglxt.validator.ValidatorImpl;
 import com.zyyglxt.validator.ValidatorResult;
+import org.apache.commons.lang3.ObjectUtils;
+import org.ehcache.Cache;
+import org.ehcache.CacheManager;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -41,6 +42,9 @@ public class PostServiceImpl implements IPostService {
 
     @Resource
     IAdviceService adviceService;
+
+    @Resource
+    private CacheManager cacheManager;
 
     @Override
     public void delPost(PostDOKey key) {
@@ -88,6 +92,40 @@ public class PostServiceImpl implements IPostService {
     @Override
     public PostDO maxNum() {
         return postDOMapper.maxNum();
+    }
+
+    @Override
+    public List<PostFileDO> getPostFileForMain() {
+        //获得缓存
+        Cache<String, Object> mainPagePostFile = cacheManager.getCache("mainPageData", String.class, Object.class);
+        Object postFileData = mainPagePostFile.get("PostFileData");
+        //缓存判空
+        if(ObjectUtils.allNotNull(postFileData)){
+            //如果不是空，则直接将缓存数据给前台
+            return (List<PostFileDO>) postFileData;
+        }else {
+            //如果是空，则查询数据库，将数据重新放入本地缓存中
+            List<PostFileDO> postFile = postDOMapper.selectPostFileForMain();
+            mainPagePostFile.put("PostFileData",postFile);
+            return postFile;
+        }
+    }
+
+    @Override
+    public List<String> getPostForMainPage(String status) {
+        //获得缓存
+        Cache<String, Object> mainPagePostTitle = cacheManager.getCache("mainPageData", String.class, Object.class);
+        Object postTitleData = mainPagePostTitle.get("PostTitleData");
+        //缓存判空
+        if(ObjectUtils.allNotNull(postTitleData)){
+            //如果不是空，则直接将缓存数据给前台
+            return (List<String>) postTitleData;
+        }else {
+            //如果是空，则查询数据库，将数据重新放入本地缓存中
+            List<String> postTitle = postDOMapper.selectForMainPage(status);
+            mainPagePostTitle.put("PostTitleData",postTitle);
+            return postTitle;
+        }
     }
 
 }

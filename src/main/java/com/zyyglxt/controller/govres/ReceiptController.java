@@ -61,23 +61,15 @@ public class ReceiptController {
     /*查询所有收文管理数据*/
     @RequestMapping(value ="selectallreceipt",method = RequestMethod.GET )
     @LogAnnotation(appCode ="",logTitle ="查询所有收文管理数据",logLevel ="1")
-    public ResponseData selectAllReceipt(@RequestParam(value = "receivingDataStatus") List receivingDataStatus){
-        List<ReceiptDO> receiptDOList = iReceiptDOService.selectAllReceipt(receivingDataStatus);
-        List<ReceiptDto> receiptDtoList = new ArrayList<>();
-        for (ReceiptDO receiptDO : receiptDOList) {
-            FileDO fileDO = iFileService.selectFileByDataCode(receiptDO.getItemcode());
-            receiptDtoList.add(
-                    ConvertDOToCareFamPre.convertFromReceipt(
-                            receiptDO,fileDO.getFilePath(),fileDO.getFileName()));
-        }
-        return new ResponseData(EmBusinessError.success,receiptDtoList);
+    public ResponseData selectAllReceipt(@RequestParam(value = "receivingDataStatus") String receivingDataStatus){
+        return new ResponseData(EmBusinessError.success,iReceiptDOService.selectAllReceipt(receivingDataStatus));
     }
 
     /*收文管理数据状态*/
     @RequestMapping(value = "changestatustoreceipt/{itemID}/{itemCode}" , method = RequestMethod.POST)
     @ResponseBody
     @LogAnnotation(logTitle = "修改收文管理数据状态", logLevel = "2")
-    public ResponseData changeStatusToReceipt(@RequestParam("receivingDataStatus") String receivingDataStatus , @PathVariable("itemID") Integer itemID , @PathVariable("itemCode")String itemCode){
+    public ResponseData changeStatusToReceipt(@RequestParam(value="receivingDataStatus") String receivingDataStatus , @PathVariable("itemID") Integer itemID , @PathVariable("itemCode")String itemCode){
         ReceiptDOKey receiptDOKey=new ReceiptDOKey();
         receiptDOKey.setItemid(itemID);
         receiptDOKey.setItemcode(itemCode);

@@ -14,10 +14,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -100,9 +97,8 @@ public class ExmaineServiceImpl implements IExmaineService {
                 }
                 exmaineDtoList.add(exmaineDto);
             }
-
         });
-        return exmaineDtoList;
+        return exmaineDtoList.stream().sorted(Comparator.comparing(ExmaineDto::getItemupdateat).reversed()).collect(Collectors.toList());
     }
 
     @Override

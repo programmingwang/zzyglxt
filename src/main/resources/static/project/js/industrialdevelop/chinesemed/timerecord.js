@@ -104,17 +104,13 @@
                 });
             });
 
-            var pl = dictUtil.getDictByCode(dictUtil.DICT_LIST.showStatus);
-            $("#chargePersonSearch").selectUtil(pl);
-
             var p3 = dictUtil.getDictByCode(dictUtil.DICT_LIST.timeStatus);
-            $("#chargePersonSearch").selectUtil(p3);
 
             var pl2 = [];
             for(var i = -1 ; i <= 1; i++){
                 pl2.push({id:generateSearchYear(i),text:generateSearchYear(i)})
             }
-            pl2.push({id:"00",text:"全部年份"})
+            pl2.push({id:"00",text:"全部"})
             $("#taskNameSearch1").selectUtil(pl2);
 
             var aCol = [

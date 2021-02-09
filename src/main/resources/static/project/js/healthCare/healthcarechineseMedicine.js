@@ -349,13 +349,11 @@
                 var addstr=document.getElementById("chargePersonSearch").value;
                 var str = document.getElementById("taskNameSearch").value.toLowerCase();
                 var allTableData = JSON.parse(localStorage.getItem("2"));
-                var searchGxfl=document.getElementById("Search").value;
                 if(str.indexOf("请输入")!=-1){
                     str=""
                 }
                 for (var i in allTableData) {
                     for (var v in aCol){
-                        var gxfl= allTableData[i]["chineseMedicineType"]
                         var textP = allTableData[i][aCol[v].field];
                         var isStatusSlot=false;           // 默认状态为true
                         //状态条件判断,与表格字段的状态一致,这里根据自己写的修改
@@ -369,9 +367,7 @@
                         // console.log("status:"+status)
                         //调试时可以先打印出来，进行修改
                         if(addstr==status || addstr==99){
-                            if(gxfl == searchGxfl){
-                                isStatusSlot=true;
-                            }
+                            isStatusSlot=true;
                         }
                         if(typeof textP == "object") continue;
                         else if(typeof textP == "number") textP = textP.toString();

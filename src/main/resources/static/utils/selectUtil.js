@@ -3,8 +3,14 @@
 
 
         $.fn.extend({
-            selectUtil: function (data,topicMan = false) {
-                var html = $("#chargePersonSearch").html();
+            selectUtil: function (data,topicMan = false,exclude = false) {
+                var html;
+                if (exclude){
+                    html = ""
+                }
+                else {
+                    html = $("#chargePersonSearch").html();
+                }
                 if(!topicMan){
                     $.each(data,function (i,it) {
                         html = html + '<option value="'+it.id+'">'+it.text+'</option>';

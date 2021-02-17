@@ -219,9 +219,9 @@
                     $("#dataStatus").val(webStatus[row.dataStatus].text);
                     $("#dataFileType").val(webLocation[row.dataLocation].text);
                     $("#newsImg").attr("src",row.filePath);
-                    $('#newsImgSpan').html("新闻图片");
-                    $('#dataTitleSpan').html("新闻标题");
-                    $('#dataFileTypeSpan').html("所属位置");
+                    $('#newsImgSpan').html("新闻图片：");
+                    $('#dataTitleSpan').html("新闻标题：");
+                    $('#dataFileTypeSpan').html("所属位置：");
 
                     myNewsRotationsModal.show();
                 },
@@ -342,17 +342,10 @@
             myTable = bootstrapTableUtil.myBootStrapTableInit("table", url, param, aCol);
         }
 
-        bootstrapTableUtil.globalSearch("table",url,aParam, aCol, "dataStatus");
-
-        var allTableData = $("#table").bootstrapTable("getData");
-
-        localStorage.setItem('2',JSON.stringify(allTableData))
-        obj2=JSON.parse(localStorage.getItem("2"));
-
         var allPosition = document.getElementById("allPosition").children;
         for(var i=1;i<allPosition.length;i++){
-
             allPosition[i].onclick=function () {
+                var addstr=document.getElementById("chargePersonSearch").value; //搜索里的
                 for(var j=1;j<allPosition.length;j++){
                     allPosition[j].classList.remove("addC");
                 }
@@ -376,7 +369,13 @@
                 }else {
                     for (var i in allTableData) {
                         var thisPosition = allTableData[i][aCol[2].field];
-                        if (thisPosition == str) {
+                        var status= allTableData[i]["dataStatus"] //表格里的
+                        if(status == "0") status =0;
+                        else if(status == "1" || status == "2") status = 1;
+                        else if(status == "3" || status == "4") status = 2;
+                        else if(status == "5") status = 3;
+                        else if (status == "6") status = 4;
+                    if (thisPosition == str && (addstr== status || addstr ==99 )) {
                             newArry.push(allTableData[i]);
                         }
                     }

@@ -47,7 +47,7 @@ a:visited{
 a:hover{
     color: black;
     text-decoration: none;
-    background-color: #fafafa;
+    /*background-color: #fafafa;*/
 }
 a:active{
     color: black;

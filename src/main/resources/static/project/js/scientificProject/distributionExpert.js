@@ -388,7 +388,7 @@
 
             var pl = dictUtil.getDictByCode(dictUtil.DICT_LIST.distributionExpert);
             $("#chargePersonSearch").selectUtil(pl);
-            var $default = $("<option value=\"000\" selected>全部状态</option>");
+            var $default = $("<option value=\"000\" selected>全部</option>");
             $("#chargePersonSearch").prepend($default);
 
             var aCol = [

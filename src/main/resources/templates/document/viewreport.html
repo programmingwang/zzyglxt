@@ -68,109 +68,112 @@
     </style>
 </head>
 <body>
-<div class="col-lg-1"></div>
-<div class="col-lg-10">
-    <div class="col-lg-12" style="text-align: center;margin-top: 20px;"><h4>请示报告</h4></div>
-    <div class="col-lg-12">
-        <table class="request-table">
-            <tr>
-                <td class="firstL">领<br>导<br>批<br>示</td>
-                <td class="secendL ">
-                    <div class="mesageYJ">
-                        <div>
-                            <input id="reasontwo" class="textC" style=""placeholder="局长审核 理由不为空" ></input>
+<div class="row" id="fir_body">
+    <div class="col-lg-1"></div>
+    <div class="col-lg-10">
+        <div class="col-lg-12" style="text-align: center;margin-top: 20px;"><h4>请示报告</h4></div>
+        <div class="col-lg-12">
+            <table class="request-table">
+                <tr>
+                    <td class="firstL">领<br>导<br>批<br>示</td>
+                    <td class="secendL ">
+                        <div class="mesageYJ">
+                            <div>
+                                <input id="reasontwo" class="textC" style=""placeholder="局长审核 理由不为空" ></input>
+                            </div>
+                            <div>
+                                <input id="reasonone" class="textC" style="margin-top: 20px;" placeholder="分局审核 理由不为空"></input>
+                            </div>
                         </div>
-                        <div>
-                            <input id="reasonone" class="textC" style="margin-top: 20px;" placeholder="分局审核 理由不为空"></input>
+                        <div class="mesageP">
+                            <div>
+                                <input id="updatertwo" class="textCl" style="border:none;margin-top: 40px;" disabled></input>
+                                <input id="updatetwo" class="textCy" style="border:none;margin-top: 40px;"disabled></input>
+                            </div>
+                            <div>
+                                <input id="updaterone" class="textCl" style="border:none;margin-top: 40px;" disabled></input>
+                                <input id="updateone" class="textCy" style="border:none;margin-top: 40px;"disabled></input>
+                            </div>
                         </div>
-                    </div>
-                    <div class="mesageP">
-                        <div>
-                            <input id="updatertwo" class="textCl" style="border:none;margin-top: 40px;" disabled></input>
-                            <input id="updatetwo" class="textCy" style="border:none;margin-top: 40px;"disabled></input>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="firstL">处<br>室<br>意<br>见</td>
+                    <td class="secendL ">
+                        <div class="mesageYJ">
+                            <div>
+                                <input id="reason" class="textC" placeholder="处长审核 理由不为空"></input>
+                            </div>
                         </div>
-                        <div>
-                            <input id="updaterone" class="textCl" style="border:none;margin-top: 40px;" disabled></input>
-                            <input id="updateone" class="textCy" style="border:none;margin-top: 40px;"disabled></input>
+                        <div class="mesageP">
+                            <div>
+                                <input id="updaterf" class="textCl" style="border:none;margin-top: 40px;"disabled></input>
+                                <input id="updatef" class="textCy" style="border:none;margin-top: 40px;"disabled></input>
+                            </div>
                         </div>
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td class="firstL">处<br>室<br>意<br>见</td>
-                <td class="secendL ">
-                    <div class="mesageYJ">
-                        <div>
-                            <input id="reason" class="textC" placeholder="处长审核 理由不为空"></input>
-                        </div>
-                    </div>
-                    <div class="mesageP">
-                        <div>
-                            <input id="updaterf" class="textCl" style="border:none;margin-top: 40px;"disabled></input>
-                            <input id="updatef" class="textCy" style="border:none;margin-top: 40px;"disabled></input>
-                        </div>
-                    </div>
-                </td>
+                    </td>
 
-            </tr>
-            <tr>
-                <td class="firstL">报<br>告<br>内<br>容</td>
-                <td class="secendL">
-                    <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">报告标题：</label>
-                        <div class="col-sm-4">
-                            <input id="reportTitle" type="text" class="textC" style="margin-left: -120px;border:none;margin-top: 1px;"  disabled>
+                </tr>
+                <tr>
+                    <td class="firstL">报<br>告<br>内<br>容</td>
+                    <td class="secendL">
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">报告标题：</label>
+                            <div class="col-sm-4">
+                                <input id="reportTitle" type="text" class="textC" style="margin-left: -120px;border:none;margin-top: 1px;"  disabled>
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">报告内容：</label>
-                        <div class="col-sm-4">
-                            <textarea  id="reportContent"  rows="6" style="font-family: monospace;border:none;margin-left: -120px;width: 100%;" disabled></textarea>
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">报告内容：</label>
+                            <div class="col-sm-4">
+                                <textarea  id="reportContent"  rows="6" style="font-family: monospace;border:none;margin-left: -120px;width: 100%;" disabled></textarea>
+                            </div>
                         </div>
-                    </div>
-                    <!--附件div-->
-                    <div class="form-group row">
-                        <label for="exampleFormControlFile1" class="col-sm-2 col-form-label">附&emsp;&emsp;件：</label>
-                        <div class="upload-wrap anticon" nv-file-drop="" uploader="uploader" style="margin-top: 1px;margin-left: -120px;">
-                            <a id="upload_file" href=""></a>
-                        </div>
+                        <!--附件div-->
+                        <div class="form-group row">
+                            <label for="exampleFormControlFile1" class="col-sm-2 col-form-label">附&emsp;&emsp;件：</label>
+                            <div class="upload-wrap anticon" nv-file-drop="" uploader="uploader" style="margin-top: 1px;margin-left: -120px;">
+                                <a id="upload_file" href=""></a>
+                            </div>
 
-                    </div>
-                </td>
-            </tr>
-        </table>
-        </tbody>
-    </div>
-    <div class="col-lg-12" style="margin-top: 15px;">
+                        </div>
+                    </td>
+                </tr>
+            </table>
+            </tbody>
+        </div>
+        <div class="col-lg-12" style="margin-top: 15px;">
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">起草人：</label>
+                <div class="col-sm-3">
+                    <input id="creater" type="text" class="textC" style="border:none;margin-left: -150px;margin-top: 1px;"  disabled>
+                </div>
+                <label class="col-sm-2 col-form-label" style="margin-left: -120px;">日&emsp;期：</label>
+                <div class="col-sm-3">
+                    <input id="itemcreateat" type="text" class="textC" style="border:none;margin-left: -150px;margin-top: 1px;"  disabled>
+                </div>
+            </div>
+        </div>
+
         <div class="form-group row">
-            <label class="col-sm-2 col-form-label">起草人：</label>
-            <div class="col-sm-3">
-                <input id="creater" type="text" class="textC" style="border:none;margin-left: -150px;margin-top: 1px;"  disabled>
+            <div class="col-lg-8 col-md-4" ></div>
+            <div class=" col-lg-4 row" >
+                <div class="col">
+                    <button id="fail" type="submit" class="btn btn-danger col">驳回</button>
+                </div>
+                <div class="col">
+                    <button id="pass" type="submit" class="btn btn-primary col">通过</button>
+                </div>
+                <div class="col">
+                    <button id="cancelbtn" type="button" class="btn btn-light col">关闭</button>
+                </div>
             </div>
-            <label class="col-sm-2 col-form-label" style="margin-left: -120px;">日&emsp;期：</label>
-            <div class="col-sm-3">
-                <input id="itemcreateat" type="text" class="textC" style="border:none;margin-left: -150px;margin-top: 1px;"  disabled>
-            </div>
+            <div class="col-lg-4 col-md-4" ></div>
         </div>
     </div>
-
-    <div class="form-group row">
-        <div class="col-lg-7 col-md-4" ></div>
-        <div class=" col-lg-4 row" >
-            <div class="col">
-                <button id="fail" type="submit" class="btn btn-danger col">驳回</button>
-            </div>
-            <div class="col">
-                <button id="pass" type="submit" class="btn btn-primary col">通过</button>
-            </div>
-            <div class="col">
-                <button id="cancelbtn" type="button" class="btn btn-light col">关闭</button>
-            </div>
-        </div>
-        <div class="col-lg-4 col-md-4" ></div>
-    </div>
+    <div class="col-lg-1"></div>
 </div>
-<div class="col-lg-1"></div>
+
 <script type="text/javascript" data-main="/main/main.js" th:src="@{/component/require@2.3.6/require-2.3.6.js}"></script>
 <link type="text/css" rel="stylesheet" href="/component/uploadImg/css/uploadImg.css"
       th:src="@{/component/uploadImg/css/uploadImg.css}">

@@ -3,8 +3,14 @@
 
 
         $.fn.extend({
-            selectUtil: function (data,topicMan = false) {
-                var html = "";
+            selectUtil: function (data,topicMan = false,exclude = false) {
+                var html;
+                if (exclude){
+                    html = ""
+                }
+                else {
+                    html = $("#chargePersonSearch").html();
+                }
                 if(!topicMan){
                     $.each(data,function (i,it) {
                         html = html + '<option value="'+it.id+'">'+it.text+'</option>';
@@ -217,12 +223,12 @@
 
         function inSearchStatus(){
             var status = [
+                { id: "99",text: "全部"},
                 { id: "0",text: "保存"},
                 { id: "1",text: "审核中"},
                 { id: "2",text: "审核未通过"},
                 { id: "3",text: "已上架"},
                 { id: "4",text: "已下架"},
-                { id: "99",text: "全部状态"},
                 ]
             return status;
         }

@@ -241,11 +241,7 @@
                         if (textP == null || textP == undefined || textP == '') {
                             textP = "1";
                         }
-                        if($("#closeAndOpen").text().search("展开")!= -1 && textP.search(str) != -1){
-                            isTimeSlot = false;
-                            newArry.push(allTableData[i])
-                        }
-                        if($("#closeAndOpen").text().search("收起")!= -1 && textP.search(str) != -1 && isTimeSlot){
+                        if(textP.search(str) != -1 && isTimeSlot){
                             newArry.push(allTableData[i])
                         }
                     }

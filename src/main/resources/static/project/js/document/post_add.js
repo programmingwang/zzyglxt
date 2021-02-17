@@ -10,7 +10,7 @@
 
             //公开方式
             $('input[type=radio][name=postPublicWay]').change(function () {
-                if(this.value == "3"){
+                if(this.value == "2"){
                     $('#postReason').attr('style',"display:block");
                 }else {
                     $('#postReason').attr('style',"display:none");
@@ -18,18 +18,6 @@
                     $("#postReason").val() == "";
                 }
             })
-           /* var publicWay = dictUtil.getDictByCode(dictUtil.DICT_LIST.postPublicWay);
-            $("#postPublicWay").selectUtil(publicWay);
-            $('#postPublicWay').change(function () {
-                if($("#postPublicWay").val() == "2"){
-                    $('#reason').attr('style',"display:block");
-                    $('#postReason').attr('style',"display:block");
-                }else {
-                    $('#reason').attr('style',"display:none");
-                    $('#postReason').attr('style',"display:none");
-                    $("#postReason").val() == "";
-                }
-            });*/
 
             //是否需要公平竞争审查
             var fair = dictUtil.getDictByCode(dictUtil.DICT_LIST.postFairDepartmentReview);
@@ -244,6 +232,14 @@
                         postDocumentNum1 : pad(newNum),
                         postDataStatus : "1",
                     };
+                    var postFile = [];
+                    postFile[0] = $("#upload_file")[0].files[0];
+                    postFile[1] = $("#fairFile")[0].files[0];
+                    var code1 = "1" + uuid.substring(1);
+                    var code2 = "2" + uuid.substring(1);
+                    ajaxUtil.postFileAjax(uuid,postFile[0], code1, sessionStorage.getItem("username"), sessionStorage.getItem("itemcode"));
+                    ajaxUtil.postFileAjax(uuid,postFile[1], code2, sessionStorage.getItem("username"), sessionStorage.getItem("itemcode"));
+
                 }
                 else {
                     var needData = JSON.parse(localStorage.getItem("rowData"));
@@ -261,10 +257,21 @@
                         postDocumentNum : $("#postDocumentNum").val(),
                     }
                     operateMessage = "修改发文信息成功";
+                    if (needData.fileName !== null){
+                        ajaxUtil.myAjax(null,"/file/delete?dataCode="+needData.itemcode,null,function (data) {
+                            if(!ajaxUtil.success(data)){
+                                return alertUtil.warning("文件删除失败,可能是文件损坏或不存在了");
+                            }
+                        },false,"","get");
+                        postFile = [];
+                        postFile[0] = $("#upload_file")[0].files[0];
+                        postFile[1] = $("#fairFile")[0].files[0];
+                        code1 = "1" + needData.itemcode.substring(1);
+                        code2 = "2" + needData.itemcode.substring(1);
+                        ajaxUtil.postFileAjax(needData.itemcode,postFile[0], code1, sessionStorage.getItem("username"), sessionStorage.getItem("itemcode"));
+                        ajaxUtil.postFileAjax(needData.itemcode,postFile[1], code2, sessionStorage.getItem("username"), sessionStorage.getItem("itemcode"));
+                    }
                 }
-
-                fileUtil.handleFile(isUpdate(), PostEntity.itemcode, $("#upload_file")[0].files[0]);
-
                 ajaxUtil.myAjax(null,requestUrl,PostEntity,function (data) {
                     if(ajaxUtil.success(data)){
                         ajaxUtil.myAjax(null,adviceUrl,AdviceEntity,function (data) {

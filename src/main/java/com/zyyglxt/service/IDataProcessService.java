@@ -17,7 +17,7 @@ public interface IDataProcessService {
     DataDO selectProcess(DataDOKey key);
 
     //查询所有办事流程
-    List<DataDto> selectProcessList(List<String> dataStatus);
+    List<DataDto> selectProcessList(String dataStatus);
 
     //增加一个办事流程
     int insertProcess(DataDO record);

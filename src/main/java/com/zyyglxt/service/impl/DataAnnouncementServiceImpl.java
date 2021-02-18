@@ -20,8 +20,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.sql.Date;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -59,6 +59,8 @@ public class DataAnnouncementServiceImpl implements IDataAnnouncementService {
 
     @Override
     public int insertAnnouncement(DataDO record) {
+        record.setDataDelayedRelease(new Date());
+
         ValidatorResult result = validator.validate(record);
         if(result.isHasErrors()){
             throw new BusinessException(result.getErrMsg(), EmBusinessError.PARAMETER_VALIDATION_ERROR);
@@ -80,6 +82,8 @@ public class DataAnnouncementServiceImpl implements IDataAnnouncementService {
 
     @Override
     public int updateAnnouncement(DataDO record) {
+        record.setDataDelayedRelease(new Date());
+
         ValidatorResult result = validator.validate(record);
         if(result.isHasErrors()){
             throw new BusinessException(result.getErrMsg(), EmBusinessError.PARAMETER_VALIDATION_ERROR);

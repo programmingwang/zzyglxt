@@ -16,7 +16,7 @@ public interface IDataLeaderService {
     DataDO selectLeader(DataDOKey key);
 
     //查询所有领导讲话
-    List<DataDto> selectLeaderList(List<String> dataStatus);
+    List<DataDto> selectLeaderList(String dataStatus);
 
     //增加一个领导讲话
     int insertLeader(DataDO record);

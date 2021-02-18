@@ -365,7 +365,18 @@
                     str=4;
                 }
                 if (str=='全部'){
-                    refreshTable()
+                    for (var i in allTableData) {
+                        var status= allTableData[i]["dataStatus"] //表格里的
+                        if(status == "0") status =0;
+                        else if(status == "1" || status == "2") status = 1;
+                        else if(status == "3" || status == "4") status = 2;
+                        else if(status == "5") status = 3;
+                        else if (status == "6") status = 4;
+                        if (addstr== status || addstr ==99 ) {
+                            newArry.push(allTableData[i]);
+                        }
+                    }
+                    $("#table").bootstrapTable("load", newArry);
                 }else {
                     for (var i in allTableData) {
                         var thisPosition = allTableData[i][aCol[2].field];

@@ -21,8 +21,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.sql.Date;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -51,16 +51,14 @@ public class DataLeaderServiceImpl implements IDataLeaderService {
     }
 
     @Override
-    public List<DataDto> selectLeaderList(List<String> dataStatus) {
-        List<DataDto> dataDOList = new ArrayList<>();
-        for (String status : dataStatus) {
-            dataDOList.addAll(dataDOMapper.selectByAllData("领导讲话", status));
-        }
-        return dataDOList;
+    public List<DataDto> selectLeaderList(String dataStatus) {
+        return dataDOMapper.selectByAllData("领导讲话", dataStatus);
     }
 
     @Override
     public int insertLeader(DataDO record) {
+        record.setDataDelayedRelease(new Date());
+
         ValidatorResult result = validator.validate(record);
         if(result.isHasErrors()){
             throw new BusinessException(result.getErrMsg(), EmBusinessError.PARAMETER_VALIDATION_ERROR);
@@ -82,6 +80,8 @@ public class DataLeaderServiceImpl implements IDataLeaderService {
 
     @Override
     public int updateLeader(DataDO record) {
+        record.setDataDelayedRelease(new Date());
+
         ValidatorResult result = validator.validate(record);
         if(result.isHasErrors()){
             throw new BusinessException(result.getErrMsg(), EmBusinessError.PARAMETER_VALIDATION_ERROR);

@@ -233,7 +233,7 @@
                         pid: "13"
                     },
                     {
-                        menu_name: "办事流程",
+                        menu_name: "办事指南",
                         menu_url: "/data/dataProcess",
                         id: "13-7",
                         level: "2",
@@ -337,7 +337,7 @@
                         pid: "13"
                     },
                     {
-                        menu_name: "办事流程",
+                        menu_name: "办事指南",
                         menu_url: "/data/dataProcess",
                         id: "13-7",
                         level: "2",
@@ -504,7 +504,7 @@
                         pid: "13"
                     },
                     {
-                        menu_name: "办事流程",
+                        menu_name: "办事指南",
                         menu_url: "/data/dataProcess",
                         id: "13-7",
                         level: "2",
@@ -671,7 +671,7 @@
                         pid: "13"
                     },
                     {
-                        menu_name: "办事流程",
+                        menu_name: "办事指南",
                         menu_url: "/data/dataProcess",
                         id: "13-7",
                         level: "2",

@@ -40,7 +40,7 @@ public class DataNewsInfController {
      */
     @RequestMapping(value = "/selectAllNewsRot", method = RequestMethod.GET)
     @LogAnnotation(appCode ="",logTitle ="查看所有新闻轮播图",logLevel ="1",creater ="",updater = "")
-    public ResponseData selectNewsRotList(@RequestParam(value = "dataStatus")List dataStatus){
+    public ResponseData selectNewsRotList(@RequestParam(value = "dataStatus")String dataStatus){
         return new ResponseData(EmBusinessError.success,dataDOService.selectNewsRotList(dataStatus));
     }
 
@@ -51,7 +51,7 @@ public class DataNewsInfController {
      */
     @RequestMapping(value = "/selectAllNewsInf", method = RequestMethod.GET)
     @LogAnnotation(appCode ="",logTitle ="查看所有新闻信息",logLevel ="1",creater ="",updater = "")
-    public ResponseData selectNewsInfList(@RequestParam(value = "dataStatus")List dataStatus){
+    public ResponseData selectNewsInfList(@RequestParam(value = "dataStatus")String dataStatus){
         return new ResponseData(EmBusinessError.success,dataDOService.selectNewsInfList(dataStatus));
     }
 

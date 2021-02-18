@@ -17,8 +17,8 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 
-import java.sql.Date;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -44,21 +44,13 @@ public class DataNewsServiceImpl implements IDataNewsService {
     }
 
     @Override
-    public List<DataDto> selectNewsInfList(List<String> dataStatus) {
-        List<DataDto> dataDOList = new ArrayList<>();
-        for (String status : dataStatus) {
-            dataDOList.addAll(dataDOMapper.selectByAllData("新闻", status));
-        }
-        return dataDOList;
+    public List<DataDto> selectNewsInfList(String dataStatus) {
+        return dataDOMapper.selectByAllData("新闻", dataStatus);
     }
 
     @Override
-    public List<DataDto> selectNewsRotList(List<String> dataStatus) {
-        List<DataDto> dataDOList = new ArrayList<>();
-        for (String status : dataStatus) {
-            dataDOList.addAll(dataDOMapper.getAllNewsRot("新闻", status));
-        }
-        return dataDOList;
+    public List<DataDto> selectNewsRotList(String dataStatus) {
+        return dataDOMapper.getAllNewsRot("新闻", dataStatus);
     }
 
     @Override

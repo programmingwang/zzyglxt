@@ -40,6 +40,8 @@ public class DataRulesServiceImpl implements IDataRulesService {
 
     @Override
     public int insert(DataDO record) {
+        record.setDataDelayedRelease(new Date());
+
         ValidatorResult result = validator.validate(record);
         if (result.isHasErrors()) {
             throw new BusinessException(result.getErrMsg(), EmBusinessError.PARAMETER_VALIDATION_ERROR);
@@ -61,6 +63,8 @@ public class DataRulesServiceImpl implements IDataRulesService {
 
     @Override
     public int update(DataDO record) {
+        record.setDataDelayedRelease(new Date());
+
         ValidatorResult result = validator.validate(record);
         if (result.isHasErrors()) {
             throw new BusinessException(result.getErrMsg(), EmBusinessError.PARAMETER_VALIDATION_ERROR);

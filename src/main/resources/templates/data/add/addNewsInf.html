@@ -49,11 +49,11 @@
             <div class="titleCSS">新增新闻</div>
             <form>
                 <div class="form-group row">
-                    <label class="col-sm-2 col-form-label">新闻标题：</label>
+                    <label class="col-sm-2 col-form-label"><span style="color: red">*</span>新闻标题：</label>
                     <div class="col-sm-3">
                         <input id="dataTitle" type="text" class="form-control" placeholder="请输入">
                     </div>
-                    <label class="col-sm-2 col-form-label">新闻性质：</label>
+                    <label class="col-sm-2 col-form-label"><span style="color: red">*</span>新闻性质：</label>
                     <div class="col-sm-3">
                         <select class="custom-select" id="dataFileType">
                             <option value="转载性新闻">转载性新闻</option>
@@ -72,18 +72,11 @@
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label class="col-sm-2 col-form-label">正文：</label>
+                    <label class="col-sm-2 col-form-label"><span style="color: red">*</span>正文：</label>
                     <div id="div1" class="col-sm-8">
                     </div>
                 </div>
 
-                <div class="form-group row">
-                    <label class="col-sm-2 col-form-label">延时发布：</label>
-                    <div class="col-sm-3">
-                        <input id="dataDelayedRelease" type="text" class="form-control" placeholder="请选择发布时间" maxlength="30">
-                        <i class="fa fa-calendar fa-lg" style="position: absolute;top: 0.7rem;right: 20px;"></i>
-                    </div>
-                </div>
                 <div class="form-group row">
                     <div class="col-lg-6 col-md-6" ></div>
                     <div class=" col-lg-4 row" style="padding: 0" >

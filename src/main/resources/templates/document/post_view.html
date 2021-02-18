@@ -54,207 +54,208 @@
 </head>
 <body>
 <div id="fir_body" class="row">
-<div class="col-lg-2"></div>
-<div class="col-lg-7" style="margin-left: 60px">
-    <div style="margin-left: 230px;margin-top: 40px;">
-        <h4 style="color: #D60000; font-size: 34px;">河北省中医药管理局发文审批笺</h4>
-    </div>
-    <div style="margin-top: 30px; margin-bottom: -13px;">
-        <span style="margin-left: 30rem; color: #D60000;">文号：</span>
-        <input id="postDocumentNum" class="documentNum" />
-        <span style="color: #D60000">号</span>
-    </div>
-    <div class="col-lg-12">
-        <table class="request-table" border="1" bordercolor="#D60000">
-            <tr style="height: 200px">
-                <td class="title">局<br>领<br>导<br>意<br>见</td>
-                <td colspan="9">
-                    <div>
-                        <div id="opinin11" style="height:100px; display: none">
+    <div class="col-lg-1"></div>
+    <div class="col-lg-8" style="margin-left: 60px;">
+        <div style="margin-left: 230px;margin-top: 40px;">
+            <h4 style="color: #D60000; font-size: 34px;">河北省中医药管理局发文审批笺</h4>
+        </div>
+        <div style="margin-top: 30px; margin-bottom: -13px;">
+            <span style="margin-left: 30rem; color: #D60000;">文号：</span>
+            <input id="postDocumentNum" class="documentNum" />
+            <span style="color: #D60000">号</span>
+        </div>
+        <div class="col-lg-12">
+            <table class="request-table" border="1" bordercolor="#D60000">
+                <tr style="height: 200px">
+                    <td class="title">局<br>领<br>导<br>意<br>见</td>
+                    <td colspan="9">
+                        <div>
+                            <div id="opinin11" style="height:100px; display: none">
+                                <textarea placeholder="请输入审核意见" style="width:100%; height:100%; padding: 18px; border: none; outline: none;"></textarea>
+                            </div>
+                            <div id="opinin12" style="display: none; margin-bottom: 40px">
+                                <input id="directorOpinion" class="advice" placeholder="等待局长审批" readonly="readonly"/>
+                                <input id="directorDate" class="date" readonly="readonly"/>
+                                <input id="directorName" class="name" readonly="readonly"/>
+                            </div>
+                        </div>
+                        <div >
+                            <div id="opinin21" style="height:100px; display: none">
+                                <textarea placeholder="请输入审核意见" style="width:100%; height:100%; padding-left: 18px; border: none; outline: none;"></textarea>
+                            </div>
+                            <div id="opinin22" style="display: none">
+                                <input id="deputyDirectorOpinion" class="advice" placeholder="等待分管局长审批" readonly="readonly"/>
+                                <input id="deputyDirectorDate" class="date" readonly="readonly"/>
+                                <input id="deputyDirectorName" class="name" readonly="readonly"/>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+
+                <tr style="height: 200px">
+                    <td class="title">办<br>公<br>室<br>核<br>稿</td>
+                    <td colspan="9">
+                        <div id="opinin31" style="height: 200px; display: none">
                             <textarea placeholder="请输入审核意见" style="width:100%; height:100%; padding: 18px; border: none; outline: none;"></textarea>
                         </div>
-                        <div id="opinin12" style="display: none; margin-bottom: 40px">
-                            <input id="directorOpinion" class="advice" placeholder="等待局长审批" readonly="readonly"/>
-                            <input id="directorDate" class="date" readonly="readonly"/>
-                            <input id="directorName" class="name" readonly="readonly"/>
+                        <div id="opinin32" style="display: none">
+                            <input id="officeOpinion" class="advice" placeholder="等待综合处处长审批" readonly="readonly"/>
+                            <input id="officeDate" class="date" style="margin-top: 100px;" readonly="readonly"/>
+                            <input id="officeName" class="name" style="margin-top: 100px;" readonly="readonly"/>
                         </div>
-                    </div>
-                    <div >
-                        <div id="opinin21" style="height:100px; display: none">
-                            <textarea placeholder="请输入审核意见" style="width:100%; height:100%; padding-left: 18px; border: none; outline: none;"></textarea>
+                    </td>
+                </tr>
+
+                <tr style="height: 200px">
+                    <td class="title">处<br>室<br>核<br>稿</td>
+                    <td colspan="5">
+                        <div id="opinin41" style="height: 200px; display: none">
+                            <textarea placeholder="请输入审核意见" style="width:100%; height:100%; padding: 18px; border: none; outline: none;"></textarea>
                         </div>
-                        <div id="opinin22" style="display: none">
-                            <input id="deputyDirectorOpinion" class="advice" placeholder="等待分管局长审批" readonly="readonly"/>
-                            <input id="deputyDirectorDate" class="date" readonly="readonly"/>
-                            <input id="deputyDirectorName" class="name" readonly="readonly"/>
+                        <div id="opinin42" style="display: none">
+                            <input id="departmentOpinion" style="margin-left: 18px; width: 410px; border: none; outline: none;" placeholder="等待处长审批" readonly="readonly"/>
+                            <input id="departmentDate" class="date" style="margin-top: 71px;" readonly="readonly"/>
+                            <input id="departmentName" class="name" style="margin-top: 71px;" readonly="readonly"/>
                         </div>
-                    </div>
-                </td>
-            </tr>
+                    </td>
+                    <td class="title">处<br>室<br>拟<br>稿</td>
+                    <td colspan="3">
+                        <div>
+                            <input id="initialName" style="margin-left: 18px; width: 128px; border: none; outline: none;" readonly="readonly"/>
+                            <input id="initialDate" class="date" readonly="readonly"/>
+                        </div>
+                    </td>
+                </tr>
 
-            <tr style="height: 200px">
-                <td class="title">办<br>公<br>室<br>核<br>稿</td>
-                <td colspan="9">
-                    <div id="opinin31" style="height: 200px; display: none">
-                        <textarea placeholder="请输入审核意见" style="width:100%; height:100%; padding: 18px; border: none; outline: none;"></textarea>
-                    </div>
-                    <div id="opinin32" style="display: none">
-                        <input id="officeOpinion" class="advice" placeholder="等待综合处处长审批" readonly="readonly"/>
-                        <input id="officeDate" class="date" style="margin-top: 100px;" readonly="readonly"/>
-                        <input id="officeName" class="name" style="margin-top: 100px;" readonly="readonly"/>
-                    </div>
-                </td>
-            </tr>
+                <tr style="height: 130px">
+                    <td class="title">文<br>件<br>标<br>题</td>
+                    <td colspan="9">
+                        <div>
+                            <input id="postDocumentTitle" class="text1"/>
+                        </div>
+                    </td>
+                </tr>
 
-            <tr style="height: 200px">
-                <td class="title">处<br>室<br>核<br>稿</td>
-                <td colspan="5">
-                    <div id="opinin41" style="height: 200px; display: none">
-                        <textarea placeholder="请输入审核意见" style="width:100%; height:100%; padding: 18px; border: none; outline: none;"></textarea>
-                    </div>
-                    <div id="opinin42" style="display: none">
-                        <input id="departmentOpinion" style="margin-left: 18px; width: 410px; border: none; outline: none;" placeholder="等待处长审批" readonly="readonly"/>
-                        <input id="departmentDate" class="date" style="margin-top: 71px;" readonly="readonly"/>
-                        <input id="departmentName" class="name" style="margin-top: 71px;" readonly="readonly"/>
-                    </div>
-                </td>
-                <td class="title">处<br>室<br>拟<br>稿</td>
-                <td colspan="3">
-                    <div>
-                        <input id="initialName" style="margin-left: 18px; width: 128px; border: none; outline: none;" readonly="readonly"/>
-                        <input id="initialDate" class="date" readonly="readonly"/>
-                    </div>
-                </td>
-            </tr>
+                <tr style="height: 60px">
+                    <td class="title">附<br>件</td>
+                    <td colspan="9">
+                        <div class="upload-wrap anticon" nv-file-drop="" uploader="uploader" style="margin-top: 8px;">
+                            <a id="upload_file" href="" style="color: #BD7B37;"></a>
+                        </div>
+                    </td>
+                </tr>
 
-            <tr style="height: 130px">
-                <td class="title">文<br>件<br>标<br>题</td>
-                <td colspan="9">
-                    <div>
-                        <input id="postDocumentTitle" class="text1"/>
-                    </div>
-                </td>
-            </tr>
+                <tr style="height: 60px">
+                    <td class="title">主<br>送</td>
+                    <td colspan="9">
+                        <div>
+                            <span id="zhusong" class="text1">邢台市市中医药管理部门</span>
+                        </div>
+                    </td>
+                </tr>
 
-            <tr style="height: 60px">
-                <td class="title">附<br>件</td>
-                <td colspan="9">
-                    <div class="upload-wrap anticon" nv-file-drop="" uploader="uploader" style="margin-top: 8px;">
-                        <a id="upload_file" href="" style="color: #BD7B37;"></a>
-                    </div>
-                </td>
-            </tr>
+                <tr style="height: 60px">
+                    <td class="title">抄<br>送</td>
+                    <td colspan="9">
+                        <div>
+                            <span id="chaosong" class="text1">廊坊市中医药管理部门</span>
+                        </div>
+                    </td>
+                </tr>
 
-            <tr style="height: 60px">
-                <td class="title">主<br>送</td>
-                <td colspan="9">
-                    <div>
-                        <span id="zhusong" class="text1">邢台市市中医药管理部门</span>
-                    </div>
-                </td>
-            </tr>
+                <tr style="height: 65px">
+                    <td rowspan="2" class="title">信<br>息<br>公<br>开</td>
+                    <td colspan="2" class="title">公开方式</td>
+                    <td colspan="7">
+                        <div style="color: #D60000">
+                            <input name="postPublicWay" type="radio" id="p1" value="y" style="zoom:130%; margin-left: 15px;"/>
+                            <label for="p1">主动公开</label>
+                            <input name="postPublicWay" type="radio" id="p2" value="y" style="zoom:130%; margin-left: 60px;"/>
+                            <label for="p2">依申请公开</label>
+                            <input name="postPublicWay" type="radio" id="p3" value="y" style="zoom:130%; margin-left: 60px;"/>
+                            <label for="p3">不公开发布</label>
+                        </div>
+                    </td>
+                </tr>
+                <tr style="height: 65px">
+                    <td colspan="2" class="title">不公开理由</td>
+                    <td colspan="7">
+                        <div style="color: #D60000">
+                            <input name="postReason" type="radio" id="r1" value="y" style="zoom:130%; margin-left: 15px;"/>
+                            <label for="r1">内部请示报告</label>
+                            <input name="postReason" type="radio" id="r2" value="y" style="zoom:130%; margin-left: 40px;"/>
+                            <label for="r2">政府内部文件</label>
+                            <input name="postReason" type="radio" id="r3" value="y" style="zoom:130%; margin-left: 40px;"/>
+                            <label for="r3">不宜公开</label>
+                            <input name="postReason" type="radio" id="r4" value="y" style="zoom:130%; margin-left: 40px;"/>
+                            <label for="r4">其他</label>
+                        </div>
+                    </td>
+                </tr>
 
-            <tr style="height: 60px">
-                <td class="title">抄<br>送</td>
-                <td colspan="9">
-                    <div>
-                        <span id="chaosong" class="text1">廊坊市中医药管理部门</span>
-                    </div>
-                </td>
-            </tr>
+                <tr style="height: 80px">
+                    <td colspan="3" class="title">是否需要公平竞争审查</td>
+                    <td colspan="7">
+                        <div style="color: #D60000">
+                            <input name="postFairDepartmentReview" type="radio" id="f1" value="y" style="zoom:130%; margin-left: 15px;"/>
+                            <label for="f1">主动公开</label>
+                            <span class="upload-wrap anticon" nv-file-drop="" uploader="uploader" style="margin-top: 8px;">
+                                <a id="fairFile" href="" style="color: #BD7B37;"></a>
+                            </span>
+                        </div>
+                        <div style="color: #D60000">
+                            <input name="postFairDepartmentReview" type="radio" id="f2" value="y" style="zoom:130%; margin-left: 15px;"/>
+                            <label for="f2">依申请公开</label>
+                        </div>
+                    </td>
+                </tr>
 
-            <tr style="height: 65px">
-                <td rowspan="2" class="title">信<br>息<br>公<br>开</td>
-                <td colspan="2" class="title">公开方式</td>
-                <td colspan="7">
-                    <div style="color: #D60000">
-                        <input name="postPublicWay" type="radio" id="p1" value="y" style="zoom:130%; margin-left: 15px;"/>
-                        <label for="p1">主动公开</label>
-                        <input name="postPublicWay" type="radio" id="p2" value="y" style="zoom:130%; margin-left: 60px;"/>
-                        <label for="p2">依申请公开</label>
-                        <input name="postPublicWay" type="radio" id="p3" value="y" style="zoom:130%; margin-left: 60px;"/>
-                        <label for="p3">不公开发布</label>
-                    </div>
-                </td>
-            </tr>
-            <tr style="height: 65px">
-                <td colspan="2" class="title">不公开理由</td>
-                <td colspan="7">
-                    <div style="color: #D60000">
-                        <input name="postReason" type="radio" id="r1" value="y" style="zoom:130%; margin-left: 15px;"/>
-                        <label for="r1">内部请示报告</label>
-                        <input name="postReason" type="radio" id="r2" value="y" style="zoom:130%; margin-left: 40px;"/>
-                        <label for="r2">政府内部文件</label>
-                        <input name="postReason" type="radio" id="r3" value="y" style="zoom:130%; margin-left: 40px;"/>
-                        <label for="r3">不宜公开</label>
-                        <input name="postReason" type="radio" id="r4" value="y" style="zoom:130%; margin-left: 40px;"/>
-                        <label for="r4">其他</label>
-                    </div>
-                </td>
-            </tr>
+                <tr style="height: 80px">
+                    <td colspan="2" class="title">是否规范性文件</td>
+                    <td>
+                        <div style="color: #D60000; margin-top: 11px; margin-left: 21px;">
+                            <input name="postNormativeDocuments" type="radio" id="n1" value="y" style="zoom:130%;"/>
+                            <label for="n1">是</label>
+                        </div>
+                        <div style="color: #D60000; margin-left: 21px;">
+                            <input name="postNormativeDocuments" type="radio" id="n2" value="y" style="zoom:130%;"/>
+                            <label for="n2">否</label>
+                        </div>
+                    </td>
+                    <td colspan="2" class="title">是否涉密</td>
+                    <td>
+                        <div style="color: #D60000; margin-top: 11px; margin-left: 21px;">
+                            <input name="postSecretRelated" type="radio" id="s1" value="y" style="zoom:130%;"/>
+                            <label for="s1">是</label>
+                        </div>
+                        <div style="color: #D60000; margin-left: 21px;">
+                            <input name="postSecretRelated" type="radio" id="s2" value="y" style="zoom:130%;"/>
+                            <label for="s2">否</label>
+                        </div>
+                    </td>
+                    <td colspan="4" class="title">印数：
+                        <input name="postPrinting" id="postPrinting" style="width: 140px; border: none; outline: none;"/>
+                    </td>
+                </tr>
 
-            <tr style="height: 80px">
-                <td colspan="3" class="title">是否需要公平竞争审查</td>
-                <td colspan="7">
-                    <div style="color: #D60000">
-                        <input name="postFairDepartmentReview" type="radio" id="f1" value="y" style="zoom:130%; margin-left: 15px;"/>
-                        <label for="f1">主动公开</label>
-                        <span class="upload-wrap anticon" nv-file-drop="" uploader="uploader" style="margin-top: 8px;">
-                            <a id="fairFile" href="" style="color: #BD7B37;"></a>
-                        </span>
-                    </div>
-                    <div style="color: #D60000">
-                        <input name="postFairDepartmentReview" type="radio" id="f2" value="y" style="zoom:130%; margin-left: 15px;"/>
-                        <label for="f2">依申请公开</label>
-                    </div>
-                </td>
-            </tr>
+            </table>
 
-            <tr style="height: 80px">
-                <td colspan="2" class="title">是否规范性文件</td>
-                <td>
-                    <div style="color: #D60000; margin-top: 11px; margin-left: 21px;">
-                        <input name="postNormativeDocuments" type="radio" id="n1" value="y" style="zoom:130%;"/>
-                        <label for="n1">是</label>
+            <br>
+            <div class="form-group row">
+                <div class="col-lg-7 col-md-7" ></div>
+                <div class=" col-lg-5 row" >
+                    <div class="col" style="padding-right: 0;">
+                        <button id="failbtn" type="button" style="display: block" class="btn btn-danger col">驳回</button>
                     </div>
-                    <div style="color: #D60000; margin-left: 21px;">
-                        <input name="postNormativeDocuments" type="radio" id="n2" value="y" style="zoom:130%;"/>
-                        <label for="n2">否</label>
+                    <div class="col" style="padding-right: 0;" >
+                        <button id="passbtn" type="button" style="display: block" class="pass btn btn-primary col" data-target="#staticBackdrop">通过</button>
                     </div>
-                </td>
-                <td colspan="2" class="title">是否涉密</td>
-                <td>
-                    <div style="color: #D60000; margin-top: 11px; margin-left: 21px;">
-                        <input name="postSecretRelated" type="radio" id="s1" value="y" style="zoom:130%;"/>
-                        <label for="s1">是</label>
+                    <div class="col" style="padding-right: 0;" >
+                        <button id="cancelbtn" type="button" class="btn btn-light col">返回</button>
                     </div>
-                    <div style="color: #D60000; margin-left: 21px;">
-                        <input name="postSecretRelated" type="radio" id="s2" value="y" style="zoom:130%;"/>
-                        <label for="s2">否</label>
-                    </div>
-                </td>
-                <td colspan="4" class="title">印数：
-                    <input name="postPrinting" id="postPrinting" style="width: 140px; border: none; outline: none;"/>
-                </td>
-            </tr>
-
-        </table>
-    </div>
-    <br>
-    <div class="form-group row">
-        <div class="col-lg-9 col-md-9" ></div>
-        <div class=" col-lg-3 row" >
-            <div class="col" style="padding-right: 0;">
-                <button id="failbtn" type="button" style="display: block" class="btn btn-danger col">驳回</button>
-            </div>
-            <div class="col" >
-                <button id="passbtn" type="button" style="display: block" class="pass btn btn-danger col" data-target="#staticBackdrop">通过</button>
-            </div>
-            <div class="col" >
-                <button id="cancelbtn" type="button" class="btn btn-light col">返回</button>
+                </div>
             </div>
         </div>
-    </div>
     </div>
     <div class="col-lg-3"></div>
 </div>

@@ -37,12 +37,12 @@
         }
 
         .aa {
-            padding-bottom: 20px;
-            padding-top: 30px;
-            padding-right: 180px;
+            padding-bottom: 45px;
+            padding-top: 20px;
+            padding-right: 100px;
             text-align: center;
-            color: #D60000;
-            font-size: 34px;
+            color: #775637;
+            font-size: 24px;
         }
 
         #clsfile{
@@ -89,37 +89,28 @@
                 <div class="form-group row">
                     <label class="col-sm-2 col-form-label">主送：</label>
                     <div class="col-sm-8">
-                        <select class="custom-select" id="masterSend"></select>
+                        <input id="masterSend" type="text" class="form-control" placeholder="添加主送目标">
                     </div>
                 </div>
 
                 <div class="form-group row">
                     <label class="col-sm-2 col-form-label">抄送：</label>
-                    <div class="col-sm-3">
-                        <input id="copySend" type="text" class="form-control" placeholder="添加抄送目标" readonly="readonly">
-                    </div>
-                    <div class="col-sm-2">
-                        <select id="copySendGoal" class="form-control"></select>
-                    </div>
-                    <div class="col-sm-2">
-                        <button id="add" type="button">添加</button>
-                        <button id="clear" type="button">清空</button>
+                    <div class="col-sm-8">
+                        <input id="copySend" type="text" class="form-control" placeholder="添加抄送目标">
                     </div>
                 </div>
 
                 <div class="form-group row">
                     <label class="col-sm-2 col-form-label">公开方式：</label>
-                    <div class="col-sm-5">
-                        <div class="form-control" style="height: 40px">
-                            <input name="postPublicWay" type="radio" id="pw1" value="0" style="zoom:130%;"/>
-                            <label for="pw1">主动公开</label>
-                            <input name="postPublicWay" type="radio" id="pw2" value="1" style="zoom:130%; margin-left: 50px;"/>
-                            <label for="pw2">依申请公开</label>
-                            <input name="postPublicWay" type="radio" id="pw3" value="2" style="zoom:130%; margin-left: 50px;"/>
-                            <label for="pw3">不公开</label>
-                        </div>
+                    <div class="col-sm-4">
+                        <input name="postPublicWay" type="radio" id="pw1" value="0" style="zoom:130%;"/>
+                        <label for="pw1">主动公开</label>
+                        <input name="postPublicWay" type="radio" id="pw2" value="1" style="zoom:130%; margin-left: 77px;"/>
+                        <label for="pw2">依申请公开</label>
+                        <input name="postPublicWay" type="radio" id="pw3" value="2" style="zoom:130%; margin-left: 77px;"/>
+                        <label for="pw3">不公开</label>
                     </div>
-                    <div class="col-sm-3">
+                    <div class="col-sm-4">
                         <select id="postReason" class="form-control" style="height: 40px; display: none"></select>
                     </div>
                     <!--<div class="col-sm-3">
@@ -138,22 +129,22 @@
                         <div class="form-control" style="height: 40px">
                             <input name="postNormativeDocuments" type="radio" id="g1" value="y" style="zoom:130%;"/>
                             <label for="g1">是</label>
-                            <input name="postNormativeDocuments" type="radio" id="g2" value="n" style="zoom:130%; margin-left: 20px;"/>
+                            <input name="postNormativeDocuments" type="radio" id="g2" value="n" style="zoom:130%; margin-left: 50px;"/>
                             <label for="g2">否</label>
                         </div>
                     </div>
 
-                    <label class="col-sm-1 col-form-label">是否涉密：</label>
+                    <label class="col-sm-1 col-form-label" style="margin-left: 10px">是否涉密：</label>
                     <div class="col-sm-2">
                         <div class="form-control" style="height: 40px">
                             <input name="postSecretRelated" type="radio" id="s1" value="y" style="zoom:130%;"/>
                             <label for="s1">是</label>
-                            <input name="postSecretRelated" type="radio" id="s2" value="n" style="zoom:130%; margin-left: 20px;"/>
+                            <input name="postSecretRelated" type="radio" id="s2" value="n" style="zoom:130%; margin-left: 50px;"/>
                             <label for="s2">否</label>
                         </div>
                     </div>
 
-                    <label class="col-sm-1 col-form-label">印数：</label>
+                    <label class="col-sm-1 col-form-label" style="margin-left: -10px">印数：</label>
                     <div class="col-sm-2">
                         <input id="postPrinting" type="text" class="form-control" placeholder="请输入" maxlength="30">
                     </div>

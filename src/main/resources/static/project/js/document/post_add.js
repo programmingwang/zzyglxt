@@ -1,6 +1,6 @@
 (function () {
-    require(['jquery','ajaxUtil','alertUtil','stringUtil','fileUtil','dictUtil','distpicker','selectUtil','checkUtil','uploadImg'],
-        function (jquery,ajaxUtil,alertUtil,stringUtil,fileUtil,dictUtil,distpicker,selectUtil,checkUtil,uploadImg) {
+    require(['jquery','ajaxUtil','alertUtil','stringUtil','fileUtil','dictUtil','distpicker','selectUtil','checkUtil','uploadImg','modalUtil'],
+        function (jquery,ajaxUtil,alertUtil,stringUtil,fileUtil,dictUtil,distpicker,selectUtil,checkUtil,uploadImg,modalUtil) {
 
             uploadImg.init();
 
@@ -38,8 +38,85 @@
             var num = dictUtil.getDictByCode(dictUtil.DICT_LIST.postDocumentNum);
             $("#postDocumentNum").selectUtil(num);
 
+            //主送抄送
+            // 获取勾选的行
+            var checkids = [];
+            // 存储账号信息
+            var sendGoal = {};
+
+            function distribution(rows) {
+                var addSendModal = {
+                    modalBodyID: "addSendModal", //公用的在后面给span加不同的内容就行了，其他模块同理
+                    modalTitle: "发送对象",
+                    modalClass: "modal-lg",
+                    confirmButtonClass: "btn-danger",
+                    modalConfirmFun: function () {
+                        for (var i = 0; i < rows.length; i++) {
+                            var sendRows = $("#sendTable").bootstrapTable('getSelections');
+                            if (sendRows.length == 0) {
+                                alertUtil.error("错误，未勾选发送对象，请勾选后重试")
+                                return true;
+                            }
+                            else {
+                                var sendList = [];
+                                for (var j = 0; j < sendRows.length; j++) {
+                                    var entity = {
+                                        itemcode: stringUtil.getUUID(),
+                                        expertCode: sendRows[j].itemcode,
+                                        topicCode: rows[i].itemcode,
+                                        exmaineStatus: exmaineStatus[1].id
+                                    }
+                                    sendList.push(entity)
+                                }
+                                var list = new Set(sendList);
+                                sendList = Array.from(list);
+                                ajaxUtil.myAjax(null, "/exmain/exmain", sendList, function (data) {
+                                    if (ajaxUtil.success(data)) {
+                                    } else {
+                                        alert(data.msg);
+                                    }
+                                }, false, true, "post");
+                            }
+                        }
+                        refreshTable();
+                        var submitConfirmModal = {
+                            modalBodyID: "myTopicSubmitTip",
+                            modalTitle: "提示",
+                            modalClass: "modal-lg",
+                            cancelButtonStyle: "display:none",
+                            confirmButtonClass: "btn-danger",
+                            modalConfirmFun: function () {
+                                return true;
+                            }
+                        }
+                        var submitConfirm = modalUtil.init(submitConfirmModal);
+                        submitConfirm.show();
+                        return true;
+                    }
+                }
+                var addSendModal = modalUtil.init(addSendModal);
+                var expertsCol = [
+                    {checkbox: true},
+                    {field: 'username', title: '用户账号'},
+                    {field: 'cityid', title: '主管市区'},
+                ];
+                $('#sendTable').bootstrapTable('destroy');
+                $('#sendTable').bootstrapTable({
+                    toolbar: "#sendTable",
+                    columns: expertsCol,
+                    striped: true,
+                    clickToSelect: true,
+                });
+                $('#sendTable').bootstrapTable('load', Array.from(sendGoal));
+                addSendModal.show();
+            }
+
+            $("#masterSend").unbind().on('click', function () {
+                distribution(checkids);
+            });
+
             //主送目标
-            let send = dictUtil.getDictByCode(dictUtil.DICT_LIST.areaAdmin);
+            /*let send = dictUtil.getDictByCode(dictUtil.DICT_LIST.areaAdmin);
             $("#masterSend").selectUtil(send);
 
             //console.log($("#copySendGoal").val())
@@ -57,11 +134,10 @@
             $("#clear").unbind().on("click",function () {
                 $("#copySend").val("");
                 $("#copySendGoal").selectUtil(send);
-            })
+            })*/
 
             //当前时间
             var nowTime = stringUtil.formatDateTime(new Date());
-
             //当前用户名
             var username = sessionStorage.getItem("username");
 

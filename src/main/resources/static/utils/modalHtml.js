@@ -1656,6 +1656,7 @@
             '    <div><input id="faguijandu" name="fuxuan" type="checkbox" value="zyc"><label for="faguijandu">法规监督处分管局长</label>\n' +
             '    </div>\n' +
             '</div>'
+        modalHtml.addSendModal = '<div><div><table id="sendTable"></table></div></div>';
         modalHtml.addExperModal = '<div><div><table id="expertsTable"></table></div></div>';
         modalHtml.reviseExperModal = '<div><div><button type="button" class="btn btn-primary btn-sm">该项目已经分配的专家</button><table id="expertsTable1"></table><button type="button" class="btn btn-primary btn-sm">该项目还没有分配的专家</button><table id="expertsTable2"></table></div></div>';
         modalHtml.myResonable = "<div>" + '        <textarea name="" id="reason" cols="96" rows="10"></textarea>' + "    </div>";

@@ -6,7 +6,7 @@ import java.util.Date;
 
 public class DataDO extends DataDOKey {
 
-    @NotBlank(message = "名称或者标题不能为空")
+    //@NotBlank(message = "名称或者标题不能为空")
     private String dataTitle;
 
     private String dataLocation;
@@ -17,23 +17,17 @@ public class DataDO extends DataDOKey {
 
     private String dataFileType;
 
-    @NotNull(message = "延时发布时间不能为空")
     private Date dataDelayedRelease;
 
-
     private String dataStatus;
-
 
     private String dataType;
 
     private String creater;
 
-
     private Date itemcreateat;
 
-
     private String updater;
-
 
     private Date itemupdateat;
 

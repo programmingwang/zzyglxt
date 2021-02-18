@@ -4,17 +4,36 @@
 
             const editor = objectUtil.wangEditorUtil();
 
+            /**
+             * 校验文本是否为空
+             * tips：提示信息
+             * 使用方法：$("#id").validate("提示文本");
+             * @itmyhome
+             */
+            $.fn.validate = function(tips){
+
+                if($(this).val() == "" || $.trim($(this).val()).length == 0){
+                    alert(tips + "不能为空！");
+                    throw SyntaxError(); //如果验证不通过，则不执行后面
+                }
+            }
+
             $("#cancelbtn").unbind().on('click',function () {
                 var url = "/data/dataProcess";
                 orange.redirect(url);
             });
+
             $("#btn_save").unbind().on('click',function () {
+                //提示必填信息
+                $("#dataTitle").validate("标题");
+                $("#dataSource").validate("来源");
+
                 var processEntity;
                 var addUpdateUrl;
                 var operateMessage;
                 if(!isUpdate()){
                     addUpdateUrl = "/datado/process/insertProcess";
-                    operateMessage = "新增办事流程成功";
+                    operateMessage = "新增办事指南成功";
                     processEntity = {
                         itemcode: stringUtil.getUUID(),
                         dataTitle : $("#dataTitle").val(),
@@ -33,7 +52,7 @@
                         dataSource : $("#dataSource").val(),
                         dataContent : editor.txt.html()
                     }
-                    operateMessage = "更新办事流程成功";
+                    operateMessage = "更新办事指南成功";
                 }
 
                 fileUtil.handleFile(isUpdate(), processEntity.itemcode, $("#upload_file")[0].files[0]);
@@ -63,6 +82,10 @@
 
 
             $("#submitbtn").unbind().on('click',function () {
+                //提示必填信息
+                $("#dataTitle").validate("标题");
+                $("#dataSource").validate("来源");
+
                 var mySubmitToCZ = {
                     modalBodyID: "mySubmitModal",
                     modalTitle: "提交",
@@ -73,7 +96,7 @@
                         var operateMessage;
                         if(!isUpdate()){
                             addUpdateUrl = "/datado/process/insertProcess";
-                            operateMessage = "新增办事流程成功";
+                            operateMessage = "新增办事指南成功";
                             processEntity = {
                                 itemcode: stringUtil.getUUID(),
                                 dataTitle : $("#dataTitle").val(),
@@ -93,7 +116,7 @@
                                 dataStatus : "1",
                                 dataContent : editor.txt.html()
                             }
-                            operateMessage = "更新并提交办事流程成功";
+                            operateMessage = "更新并提交办事指南成功";
                         }
 
                         fileUtil.handleFile(isUpdate(), processEntity.itemcode, $("#upload_file")[0].files[0]);

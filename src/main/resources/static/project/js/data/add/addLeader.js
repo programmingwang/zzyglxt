@@ -4,11 +4,28 @@
 
             const editor = objectUtil.wangEditorUtil();
 
+            /**
+             * 校验文本是否为空
+             * tips：提示信息
+             * 使用方法：$("#id").validate("提示文本");
+             * @itmyhome
+             */
+            $.fn.validate = function(tips){
+
+                if($(this).val() == "" || $.trim($(this).val()).length == 0){
+                    alert(tips + "不能为空！");
+                    throw SyntaxError(); //如果验证不通过，则不执行后面
+                }
+            }
+
             $("#cancelbtn").unbind().on('click',function () {
                 var url = "/data/dataLeader";
                 orange.redirect(url);
             });
             $("#btn_save").unbind().on('click',function () {
+                //提示必填信息
+                $("#dataTitle").validate("标题");
+
                 var leaderEntity;
                 var addUpdateUrl;
                 var operateMessage;
@@ -63,6 +80,9 @@
 
 
             $("#submitbtn").unbind().on('click',function () {
+                //提示必填信息
+                $("#dataTitle").validate("标题");
+
                 var mySubmitToCZ = {
                     modalBodyID: "mySubmitModal",
                     modalTitle: "提交",

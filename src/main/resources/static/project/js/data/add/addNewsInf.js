@@ -4,25 +4,29 @@
 
             const editor = objectUtil.wangEditorUtil();
 
+            /**
+             * 校验文本是否为空
+             * tips：提示信息
+             * 使用方法：$("#id").validate("提示文本");
+             * @itmyhome
+             */
+            $.fn.validate = function(tips){
+
+                if($(this).val() == "" || $.trim($(this).val()).length == 0){
+                    alert(tips + "不能为空！");
+                    throw SyntaxError(); //如果验证不通过，则不执行后面
+                }
+            }
+
             $("#cancelbtn").unbind().on('click',function () {
                 var url = "/data/dataNewsInf";
                 orange.redirect(url);
             });
 
-            var date= new Date();
-            $("#dataDelayedRelease").datetimepicker({
-                format: 'yyyy-mm-dd hh:00:00',//显示格式
-                startDate: date ,
-                startView:2,
-                minView:1,
-                maxView :3,
-                language: 'cn',
-                autoclose: 1,//选择后自动关闭
-                clearBtn:true,//清除按钮
-                showMeridian:true,
-            });
-
             $("#btn_save").unbind().on('click',function () {
+                //提示必填信息
+                $("#dataTitle").validate("新闻标题");
+
                 var newsInfEntity;
                 var addUpdateUrl;
                 var operateMessage;
@@ -80,6 +84,9 @@
             });
 
             $("#submitbtn").unbind().on('click',function () {
+                //提示必填信息
+                $("#dataTitle").validate("新闻标题");
+
                 var mySubmitToCZ = {
                     modalBodyID: "mySubmitModal",
                     modalTitle: "提交",

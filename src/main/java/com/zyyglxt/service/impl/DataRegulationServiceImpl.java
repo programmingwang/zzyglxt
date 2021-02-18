@@ -20,8 +20,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.sql.Date;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -58,6 +58,7 @@ public class DataRegulationServiceImpl implements IDataRegulationService {
 
     @Override
     public int insertRegulation(DataDO record) {
+        record.setDataDelayedRelease(new Date());
         ValidatorResult result = validator.validate(record);
         if (result.isHasErrors()) {
             throw new BusinessException(result.getErrMsg(), EmBusinessError.PARAMETER_VALIDATION_ERROR);
@@ -79,6 +80,8 @@ public class DataRegulationServiceImpl implements IDataRegulationService {
 
     @Override
     public int updateRegulation(DataDO record) {
+        record.setDataDelayedRelease(new Date());
+
         ValidatorResult result = validator.validate(record);
         if (result.isHasErrors()) {
             throw new BusinessException(result.getErrMsg(), EmBusinessError.PARAMETER_VALIDATION_ERROR);

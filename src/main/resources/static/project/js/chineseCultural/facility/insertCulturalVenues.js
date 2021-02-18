@@ -133,6 +133,7 @@
 
             (function init() {
                 if (isUpdate()){
+                    $(".titleCSS").text("修改文化场馆信息");
                     var tempdata = JSON.parse(localStorage.getItem("rowData"));
                     $("#chineseCulturalName").val(tempdata.chineseCulturalName);
                     $("#chineseCulturalSource").val(tempdata.chineseCulturalSource);

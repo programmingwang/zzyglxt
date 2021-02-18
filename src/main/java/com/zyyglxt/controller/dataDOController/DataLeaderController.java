@@ -35,7 +35,7 @@ public class DataLeaderController {
      */
     @RequestMapping(value = "/selectAll", method = RequestMethod.GET)
     @LogAnnotation(appCode ="",logTitle ="查看所有领导讲话的数据",logLevel ="1",creater ="",updater = "")
-    public ResponseData selectLeaderList(@RequestParam(value = "dataStatus") List dataStatus){
+    public ResponseData selectLeaderList(@RequestParam(value = "dataStatus") String dataStatus){
         return new ResponseData(EmBusinessError.success,iDataLraderService.selectLeaderList(dataStatus));
     }
 

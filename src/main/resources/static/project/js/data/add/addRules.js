@@ -85,6 +85,7 @@
             //页面初始化，即编辑操作设置初始数据
             (function init() {
                 if (isUpdate()){
+                    $(".titleCSS").text("修改规章制度")
                     $("#dataTitle").val(tempdata.dataTitle);
                     $("#dataSource").val(tempdata.dataSource);
                     editor.txt.html(tempdata.dataContent);

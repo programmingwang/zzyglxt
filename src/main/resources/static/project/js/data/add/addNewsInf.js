@@ -150,6 +150,7 @@
 
             (function init() {
                 if (isUpdate()){
+                    $(".titleCSS").text("修改新闻");
                     var tempdata = JSON.parse(localStorage.getItem("rowData"));
                     $("#dataTitle").val(tempdata.dataTitle);
                     $("#dataAuthor").val(tempdata.dataAuthor);

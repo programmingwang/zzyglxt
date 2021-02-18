@@ -128,6 +128,7 @@
 
             (function init() {
                 if (isUpdate()){
+                    $(".titleCSS").text("修改办事指南");
                     var tempdata = JSON.parse(localStorage.getItem("rowData"));
                     $("#dataTitle").val(tempdata.dataTitle);
                     $("#dataSource").val(tempdata.dataSource);

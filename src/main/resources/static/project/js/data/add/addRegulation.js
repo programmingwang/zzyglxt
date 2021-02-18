@@ -149,6 +149,7 @@
 
             (function init() {
                 if (isUpdate()){
+                    $(".titleCSS").text("修改政策法规");
                     var tempdata = JSON.parse(localStorage.getItem("rowData"));
                     if (tempdata.releaseOrNot == "y"){
                         $("#releaseOrNot").prop("checked",true);

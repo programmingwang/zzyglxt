@@ -17,10 +17,9 @@
             $("#btn_save").unbind().on('click',function () {
                 var newsRotationsEntity;
                 var addUpdateUrl;
-                var operateMessage;
                 if(!isUpdate()){
                     addUpdateUrl = "/datado/newsInf/insertNewsInf";
-                    operateMessage = "新增新闻轮播图成功";
+                    
                     newsRotationsEntity = {
                         itemcode: stringUtil.getUUID(),
                         dataTitle : $("#dataTitle").val(),
@@ -43,7 +42,7 @@
                         dataContent : editor.txt.html(),
                         dataLocation : $("#dataLocation").val(),
                     }
-                    operateMessage = "更新新闻轮播图成功";
+                    
                 }
 
                 fileUtil.handleFile(isUpdate(), newsRotationsEntity.itemcode, uploadImg.getFiles()[0]);
@@ -66,10 +65,10 @@
                             submitConfirm.show();
 
                         }else{
-                            alertUtil.error(data.msg);
+                            alertUtil.alert(data.msg);
                         }
                     }else {
-                        alertUtil.error(data.msg);
+                        alertUtil.alert(data.msg);
                     }
                 },false,true);
                 return false;
@@ -83,10 +82,9 @@
                     modalConfirmFun: function () {
                         var newsRotationsEntity;
                         var addUpdateUrl;
-                        var operateMessage;
                         if(!isUpdate()){
                             addUpdateUrl = "/datado/newsInf/insertNewsInf";
-                            operateMessage = "新增新闻轮播图成功";
+                            
                             newsRotationsEntity = {
                                 itemcode: stringUtil.getUUID(),
                                 dataTitle : $("#dataTitle").val(),
@@ -110,7 +108,6 @@
                                 dataContent : editor.txt.html(),
                                 dataLocation : $("#dataLocation").val(),
                             }
-                            operateMessage = "更新并提交新闻轮播图成功";
                         }
 
                         fileUtil.handleFile(isUpdate(), newsRotationsEntity.itemcode, uploadImg.getFiles()[0]);
@@ -133,10 +130,10 @@
                                     submitConfirm.show();
 
                                 }else{
-                                    alertUtil.error(data.msg);
+                                    alertUtil.alert(data.msg);
                                 }
                             }else {
-                                alertUtil.error(data.msg);
+                                alertUtil.alert(data.msg);
                             }
                         },false,true);
                         return true;
@@ -149,6 +146,7 @@
 
             (function init() {
                 if (isUpdate()){
+                    $(".titleCSS").text("修改新闻轮播图");
                     var tempdata = JSON.parse(localStorage.getItem("rowData"));
                     $("#dataTitle").val(tempdata.dataTitle);
                     $("#dataSource").val(tempdata.dataSource);

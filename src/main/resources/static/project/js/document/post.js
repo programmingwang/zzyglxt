@@ -257,9 +257,9 @@
 
                 'click .transpond' : function (e, value, row, index) {
                     var myTranspondModalData ={
-                        modalBodyID :"myTranspondModal",
-                        modalTitle : "转发文件至",
-                        modalClass : "modal-lg",
+                        modalBodyID: "myReceiptModal",
+                        modalTitle: "转发文件至",
+                        modalClass: "modal-sm",
                         modalConfirmFun:function () {
                             var isSuccess = false;
                             var submitStatus = {

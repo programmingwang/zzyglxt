@@ -61,7 +61,7 @@
             }
 
             $("#passbtn").unbind().on('click',function () {
-                var myPassTopicModalData ={
+                var myPassPostModalData ={
                     modalBodyID :"myPassModal",
                     modalTitle : "审核通过",
                     modalClass : "modal-lg",
@@ -81,7 +81,7 @@
                             shStatus.examineStatus = projectStatus[6].id;
                             xmStatus.status = topicStatus[2].id;
                             var developTopicDO = {
-                                projectNo : ++projectNo,
+                                projectNo : ++topicNum,
                                 itemid : row.itemid,
                                 itemcode : row.itemcode,
                             }
@@ -93,10 +93,19 @@
                                         if(ajaxUtil.success(data)){
                                             if(data.code == 88888){
                                                 ajaxUtil.myAjax(null,"/industrialdevelop/updTopic",developTopicDO,null,false,true);
-                                                alertUtil.info("审核已通过");
+                                                var submitConfirmModal = {
+                                                    modalBodyID :"myTopicSubmitTip",
+                                                    modalTitle : "提示",
+                                                    modalClass : "modal-lg",
+                                                    cancelButtonStyle: "display:none",
+                                                    modalConfirmFun:function (){
+                                                        return true;
+                                                    }
+                                                }
+                                                var submitConfirm = modalUtil.init(submitConfirmModal);
+                                                submitConfirm.show();
                                                 isSuccess = true;
-                                                var url = "/scientificProject/topicManagement";
-                                                orange.redirect(url);
+                                                refreshTable();
                                             }else{
                                                 alertUtil.error(data.msg);
                                             }
@@ -111,7 +120,7 @@
                         return isSuccess;
                     }
                 };
-                var myPassModal = modalUtil.init(myPassTopicModalData);
+                var myPassModal = modalUtil.init(myPassPostModalData);
                 myPassModal.show();
             });
 

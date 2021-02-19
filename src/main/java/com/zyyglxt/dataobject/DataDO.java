@@ -17,7 +17,6 @@ public class DataDO extends DataDOKey {
 
     private String dataFileType;
 
-    @NotNull(message = "延时发布时间不能为空")
     private Date dataDelayedRelease;
 
     private String dataStatus;

@@ -25,6 +25,11 @@
     <result column="FILE_NAME" jdbcType="VARCHAR" property="fileName"/>
     <result column="FILE_PATH" jdbcType="VARCHAR" property="filePath"/>
   </resultMap>
+  <resultMap id="PostForMainPageResultMap" type="com.zyyglxt.dto.PostMainPageDto">
+    <id column="itemID" jdbcType="INTEGER" property="itemid" />
+    <id column="itemCode" jdbcType="CHAR" property="itemcode" />
+    <result column="POST_DOCUMENT_TITLE" jdbcType="VARCHAR" property="dataTitle" />
+  </resultMap>
   <sql id="Base_Column_List">
     itemID, itemCode, POST_DOCUMENT_NUM, POST_DOCUMENT_NUM1, POST_OPINION, POST_OPINION1, 
     POST_DOCUMENT_TITLE, POST_DATA_STATUS, POST_PUBLIC_WAY, POST_REASON, POST_FAIR_DEPARTMENT_REVIEW, 
@@ -274,9 +279,9 @@
         b on b.itemID = a.itemID where a.POST_PUBLIC_WAY = 0 or a.POST_PUBLIC_WAY = 1
   </select>
 
-  <select id="selectForMainPage" resultType="java.lang.String">
+  <select id="selectForMainPage" resultMap="PostForMainPageResultMap">
     select
-      a.POST_DOCUMENT_TITLE
+      a.POST_DOCUMENT_TITLE, a.itemID, a.itemCode
     from
       tb_governres_post a inner join
         (select itemID from tb_governres_post limit 0,5)

@@ -4,6 +4,7 @@ import com.zyyglxt.dao.DataDOMapper;
 import com.zyyglxt.dataobject.DataDO;
 import com.zyyglxt.dataobject.DataDOKey;
 import com.zyyglxt.dto.DataDto;
+import com.zyyglxt.dto.MainPageDto;
 import com.zyyglxt.error.BusinessException;
 import com.zyyglxt.error.EmBusinessError;
 import com.zyyglxt.service.IDataLeaderService;
@@ -46,8 +47,8 @@ public class DataLeaderServiceImpl implements IDataLeaderService {
     private CacheManager cacheManager;
 
     @Override
-    public DataDO selectLeader(DataDOKey key) {
-        return dataDOMapper.selectByPrimaryKey(key,"领导讲话");
+    public DataDto selectLeader(DataDOKey key) {
+        return dataDOMapper.selectOneData(key,"领导讲话");
     }
 
     @Override
@@ -98,17 +99,17 @@ public class DataLeaderServiceImpl implements IDataLeaderService {
     }
 
     @Override
-    public List<String> selectForMainPage() {
+    public List<MainPageDto> selectForMainPage() {
         //获得缓存
-        Cache<String, Object> mainPageLdjh = cacheManager.getCache("mainPageData", String.class, Object.class);
+        Cache<Object, Object> mainPageLdjh = cacheManager.getCache("mainPageData", Object.class, Object.class);
         Object ldjhData = mainPageLdjh.get("LdjhData");
         //缓存判空
         if(ObjectUtils.allNotNull(ldjhData)){
             //如果不是空，则直接将缓存数据给前台
-            return (List<String>) ldjhData;
+            return (List<MainPageDto>) ldjhData;
         }else {
             //如果是空，则查询数据库，将数据重新放入本地缓存中
-            List<String> ldjh = dataDOMapper.selectAllForMainPage("领导讲话");
+            List<MainPageDto> ldjh = dataDOMapper.selectAllForMainPage("领导讲话");
             mainPageLdjh.put("LdjhData",ldjh);
             return ldjh;
         }

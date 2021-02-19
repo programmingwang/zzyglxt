@@ -4,6 +4,7 @@ import com.zyyglxt.dao.DataDOMapper;
 import com.zyyglxt.dataobject.DataDO;
 import com.zyyglxt.dataobject.DataDOKey;
 import com.zyyglxt.dto.DataDto;
+import com.zyyglxt.dto.MainPageDto;
 import com.zyyglxt.error.BusinessException;
 import com.zyyglxt.error.EmBusinessError;
 import com.zyyglxt.service.IDataAnnouncementService;
@@ -46,8 +47,8 @@ public class DataAnnouncementServiceImpl implements IDataAnnouncementService {
     private CacheManager cacheManager;
 
     @Override
-    public DataDO selectAnnouncement(DataDOKey key) {
-        return dataDOMapper.selectByPrimaryKey(key,"通知公告");
+    public DataDto selectAnnouncement(DataDOKey key) {
+        return dataDOMapper.selectOneData(key,"通知公告");
     }
 
     @Override
@@ -100,17 +101,17 @@ public class DataAnnouncementServiceImpl implements IDataAnnouncementService {
     }
 
     @Override
-    public List<String> selectForMainPage() {
+    public List<MainPageDto> selectForMainPage() {
         //获得缓存
-        Cache<String, Object> mainPageTzgg = cacheManager.getCache("mainPageData", String.class, Object.class);
+        Cache<Object, Object> mainPageTzgg = cacheManager.getCache("mainPageData", Object.class, Object.class);
         Object tzggData = mainPageTzgg.get("TzggData");
         //缓存判空
         if(ObjectUtils.allNotNull(tzggData)){
             //如果不是空，则直接将缓存数据给前台
-            return (List<String>) tzggData;
+            return (List<MainPageDto>) tzggData;
         }else {
             //如果是空，则查询数据库，将数据重新放入本地缓存中
-            List<String> tzgg = dataDOMapper.selectAllForMainPage("通知公告");
+            List<MainPageDto> tzgg = dataDOMapper.selectAllForMainPage("通知公告");
             mainPageTzgg.put("TzggData",tzgg);
             return tzgg;
         }

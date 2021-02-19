@@ -62,6 +62,7 @@ public class PostController {
         return new ResponseData(EmBusinessError.success,postService.getPostForMainPage(status));
     }
 
+
     private List<PostDto> DoToDto(List<PostDO> DOList){
         List<PostDto> DtoList = new ArrayList<>();
         if (!DOList.isEmpty()){

@@ -862,7 +862,7 @@
             '                                class="form-control col-lg-9 col-md-9"> </div>\n' +
             '                    </div>\n' +
             '            </div>\n' +
-            '            <div class="col-lg-12 col-md-12">\n' +
+            '            <div id="zszt" class="col-lg-12 col-md-12">\n' +
             '                <fieldset disabled>\n' +
             '                    <div class="input-group mb-3">\n' +
             '                        <div class="input-group-prepend col-lg-2 col-md-2"> <span \n' +

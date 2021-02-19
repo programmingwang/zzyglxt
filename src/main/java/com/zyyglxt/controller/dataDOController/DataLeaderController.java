@@ -30,6 +30,19 @@ public class DataLeaderController {
     private IFileService fileService;
 
     /**
+     * 查看一个领导讲话
+     * @return
+     */
+    @RequestMapping(value = "/selectOne/{itemID}/{itemCode}", method = RequestMethod.GET)
+    @LogAnnotation(appCode ="",logTitle ="查看一个领导讲话",logLevel ="1",creater ="",updater = "")
+    public ResponseData selectOneRules(@PathVariable Integer itemID, @PathVariable String itemCode){
+        DataDOKey dataDOKey = new DataDOKey();
+        dataDOKey.setItemid(itemID);
+        dataDOKey.setItemcode(itemCode);
+        return new ResponseData(EmBusinessError.success,iDataLraderService.selectLeader(dataDOKey));
+    }
+
+    /**
      * 查看领导讲话的所有数据
      * @return
      */

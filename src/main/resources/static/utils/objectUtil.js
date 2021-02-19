@@ -36,7 +36,7 @@
                 // 'lineHeight',
                 // 'foreColor',
                 // 'backColor',
-                'link',
+                // 'link',
                 'list',
                 'justify',
                 'image',

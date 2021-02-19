@@ -59,8 +59,8 @@
             '            <div class="col-lg-6 col-md-6">\n' +
             '                <fieldset disabled>\n' +
             '                    <div class="input-group mb-3 row ">\n' +
-            '                        <div class="input-group-prepend col-lg-4 col-md-6"> <span class="lefttext" for="applicant">创建人：</span>\n' +
-            '                        </div><input type="text" id="creater" class="form-control col-lg-6 col-md-6" style="margin-left: 4px;">\n' +
+            '                        <div style="margin-left: 4px;" class="input-group-prepend col-lg-4 col-md-4"> <span class="lefttext" for="applicant">创建人：</span>\n' +
+            '                        </div><input type="text" id="creater" class="form-control col-lg-6 col-md-6" >\n' +
             '                    </div>\n' +
             '                </fieldset>\n' +
             '            </div>\n' +
@@ -135,9 +135,9 @@
             '            <div class="col-lg-6 col-md-6">\n' +
             '                <fieldset disabled>\n' +
             '                    <div class="input-group mb-3 row">\n' +
-            '                        <div class="input-group-prepend col-lg-4 col-md-4"> <span class="lefttext"\n' +
+            '                        <div style="margin-left: 4px;" class="input-group-prepend col-lg-4 col-md-4"> <span class="lefttext"\n' +
             '                                for="applicant">创建人：</span> </div> <input type="text" id="creater"\n' +
-            '                            class="form-control col-lg-6 col-md-6" style="margin-left: 4px;">\n' +
+            '                            class="form-control col-lg-6 col-md-6" >\n' +
             '                    </div>\n' +
             '                </fieldset>\n' +
             '            </div>\n' +
@@ -235,10 +235,10 @@
             '            <div class="col-lg-6 col-md-6">\n' +
             '                <fieldset disabled>\n' +
             '                    <div class="input-group mb-3 row">\n' +
-            '                        <div class="input-group-prepend col-lg-4 col-md-4">\n' +
+            '                        <div style="margin-left: 4px;" class="input-group-prepend col-lg-4 col-md-4">\n' +
             '                            <span class="lefttext" for="applicant">创建人：</span>\n' +
             '                        </div>\n' +
-            '                        <input type="text" id="creater" class="form-control col-lg-6 col-md-6" style="margin-left: 4px;">\n' +
+            '                        <input type="text" id="creater" class="form-control col-lg-6 col-md-6" >\n' +
             '                    </div>\n' +
             '                </fieldset>\n' +
             '            </div>\n' +
@@ -312,8 +312,8 @@
             '            <div class="col-lg-6 col-md-6">\n' +
             '                <fieldset disabled>\n' +
             '                    <div class="input-group mb-3 row">\n' +
-            '                        <div class="input-group-prepend col-lg-4 col-md-4"> <span class="lefttext" for="applicant">创建人：</span>\n' +
-            '                        </div> <input type="text" id="creater" class="form-control col-lg-6 col-md-6" style="margin-left: 4px;">\n' +
+            '                        <div style="margin-left: 4px;" class="input-group-prepend col-lg-4 col-md-4"> <span class="lefttext" for="applicant">创建人：</span>\n' +
+            '                        </div> <input type="text" id="creater" class="form-control col-lg-6 col-md-6" >\n' +
             '                    </div>\n' +
             '                </fieldset>\n' +
             '            </div>\n' +
@@ -372,9 +372,9 @@
             '            <div class="col-lg-6 col-md-6">\n' +
             '                <fieldset disabled>\n' +
             '                    <div class="input-group mb-3 row">\n' +
-            '                        <div class="input-group-prepend col-lg-4 col-md-4"> <span class="lefttext"\n' +
+            '                        <div style="margin-left: 4px;" class="input-group-prepend col-lg-4 col-md-4"> <span class="lefttext"\n' +
             '                                for="applicant">创建人：</span> </div> <input type="text" id="creater"\n' +
-            '                            class="form-control col-lg-6 col-md-6" style="margin-left: 4px;">\n' +
+            '                            class="form-control col-lg-6 col-md-6" >\n' +
             '                    </div>\n' +
             '                </fieldset>\n' +
             '            </div>\n' +
@@ -469,9 +469,9 @@
             '            <div class="col-lg-6 col-md-6">\n' +
             '                <fieldset disabled>\n' +
             '                    <div class="input-group mb-3">\n' +
-            '                        <div class="input-group-prepend col-lg-4 col-md-4"> <span class="lefttext"\n' +
+            '                        <div style="margin-left: 4px;" class="input-group-prepend col-lg-4 col-md-4"> <span class="lefttext"\n' +
             '                                for="applicant">创建人：</span> </div> <input type="text" id="creater"\n' +
-            '                            class="form-control col-lg-6 col-md-6" style="margin-left: 4px;">\n' +
+            '                            class="form-control col-lg-6 col-md-6" >\n' +
             '                    </div>\n' +
             '                </fieldset>\n' +
             '            </div>\n' +
@@ -549,10 +549,10 @@
             '            <div class="col-lg-6 col-md-6">\n' +
             '                <fieldset disabled>\n' +
             '                    <div class="input-group mb-3">\n' +
-            '                        <div class="input-group-prepend col-lg-4 col-md-4 "> <span class="lefttext"\n' +
+            '                        <div style="margin-left: 4px;" class="input-group-prepend col-lg-4 col-md-4 "> <span class="lefttext"\n' +
             '                                for="applicant">创建人：</span>\n' +
             '                        </div> <input type="text" id="creater" class="form-control col-lg-6 col-md-6"\n' +
-            '                            style="margin-left: 4px;">\n' +
+            '                            >\n' +
             '                    </div>\n' +
             '                </fieldset>\n' +
             '            </div>\n' +
@@ -683,9 +683,9 @@
             '            <div class="col-lg-6 col-md-6">\n' +
             '                <fieldset disabled>\n' +
             '                    <div class="input-group mb-3 row">\n' +
-            '                        <div class="input-group-prepend col-lg-4 col-md-4"> <span class="lefttext"\n' +
+            '                        <div style="margin-left: 4px;" class="input-group-prepend col-lg-4 col-md-4"> <span class="lefttext"\n' +
             '                                for="applicant">创建人：</span> </div> <input type="text" id="creater"\n' +
-            '                            class="form-control col-lg-6 col-md-6" style="margin-left: 4px;">\n' +
+            '                            class="form-control col-lg-6 col-md-6" >\n' +
             '                    </div>\n' +
             '                </fieldset>\n' +
             '            </div>\n' +
@@ -889,7 +889,7 @@
             '            <div class="col-lg-6 col-md-6">\n' +
             '                <fieldset disabled>\n' +
             '                    <div class="input-group mb-3">\n' +
-            '                        <div class="input-group-prepend col-lg-4 col-md-4" style="margin-left: 4px;"> <span class="lefttext" for="applicant">创建人：</span>\n' +
+            '                        <div style="margin-left: 4px;" class="input-group-prepend col-lg-4 col-md-4" style="margin-left: 4px;"> <span class="lefttext" for="applicant">创建人：</span>\n' +
             '                        </div><input type="text" id="creater" class="form-control col-lg-6 col-md-6" >\n' +
             '                    </div>\n' +
             '                </fieldset>\n' +
@@ -1023,9 +1023,9 @@
             '            <div class="col-lg-6 col-md-6">\n' +
             '                <fieldset disabled>\n' +
             '                    <div class="input-group mb-3 row">\n' +
-            '                        <div class="input-group-prepend col-lg-4 col-md-4"> <span class="lefttext"\n' +
+            '                        <div style="margin-left: 4px;" class="input-group-prepend col-lg-4 col-md-4"> <span class="lefttext"\n' +
             '                                for="applicant">创建人：</span> </div> <input type="text" id="creater"\n' +
-            '                            class="form-control col-lg-6 col-md-6" style="margin-left: 4px;">\n' +
+            '                            class="form-control col-lg-6 col-md-6" >\n' +
             '                    </div>\n' +
             '                </fieldset>\n' +
             '            </div>\n' +
@@ -1097,7 +1097,7 @@
             '            <div class="col-lg-6 col-md-6">\n' +
             '                <fieldset disabled>\n' +
             '                    <div class="input-group mb-3 row">\n' +
-            '                        <div class="input-group-prepend col-lg-4 col-md-4"> <span class="lefttext"\n' +
+            '                        <div style="margin-left: 4px;" class="input-group-prepend col-lg-4 col-md-4"> <span class="lefttext"\n' +
             '                                for="applicant">创建人：</span>\n' +
             '                        </div> <input type="text" id="creater" class="form-control col-lg-6 col-md-6">\n' +
             '                    </div>\n' +
@@ -1183,9 +1183,9 @@
             '            <div class="col-lg-6 col-md-6">\n' +
             '                <fieldset disabled>\n' +
             '                    <div class="input-group mb-3 row">\n' +
-            '                        <div class="input-group-prepend col-lg-4 col-md-4"> <span class="lefttext"\n' +
+            '                        <div style="margin-left: 4px;" class="input-group-prepend col-lg-4 col-md-4"> <span class="lefttext"\n' +
             '                                for="applicant">创建人：</span> </div> <input type="text" id="creater"\n' +
-            '                            class="form-control col-lg-6 col-md-6"  style="margin-left: 4px;">\n' +
+            '                            class="form-control col-lg-6 col-md-6"  >\n' +
             '                    </div>\n' +
             '                </fieldset>\n' +
             '            </div>\n' +
@@ -1266,9 +1266,9 @@
             '            <div class="col-lg-6 col-md-6">\n' +
             '                <fieldset disabled>\n' +
             '                    <div class="input-group mb-3 row">\n' +
-            '                        <div class="input-group-prepend col-lg-4"> <span class="lefttext"\n' +
+            '                        <div style="margin-left: 4px;" class="input-group-prepend col-lg-4"> <span class="lefttext"\n' +
             '                                for="applicant">创建人：</span> </div> <input type="text" id="creater"\n' +
-            '                            class="form-control col-lg-6 col-md-6" style="margin-left: 4px;">\n' +
+            '                            class="form-control col-lg-6 col-md-6" >\n' +
             '                    </div>\n' +
             '                </fieldset>\n' +
             '            </div>\n' +
@@ -1349,9 +1349,9 @@
             '            <div class="col-lg-6 col-md-6">\n' +
             '                <fieldset disabled>\n' +
             '                    <div class="input-group mb-3">\n' +
-            '                        <div class="input-group-prepend col-lg-4"> <span class="lefttext"\n' +
+            '                        <div style="margin-left: 4px;" class="input-group-prepend col-lg-4"> <span class="lefttext"\n' +
             '                                for="applicant">创建人：</span></div> <input type="text" id="creater"\n' +
-            '                            class="form-control col-lg-6 col-md-6" style="margin-left: 4px;">\n' +
+            '                            class="form-control col-lg-6 col-md-6" >\n' +
             '                    </div>\n' +
             '                </fieldset>\n' +
             '            </div>\n' +
@@ -1427,9 +1427,9 @@
             '            <div class="col-lg-6 col-md-6">\n' +
             '                <fieldset disabled>\n' +
             '                    <div class="input-group mb-3">\n' +
-            '                        <div class="input-group-prepend col-lg-4 col-md-4"> <span class="lefttext"\n' +
+            '                        <div style="margin-left: 4px;" class="input-group-prepend col-lg-4 col-md-4"> <span class="lefttext"\n' +
             '                                for="applicant">创建人：</span> </div><input type="text" id="creater"\n' +
-            '                            class="form-control col-lg-6 col-md-6" style="margin-left: 4px;">\n' +
+            '                            class="form-control col-lg-6 col-md-6" >\n' +
             '                    </div>\n' +
             '                </fieldset>\n' +
             '            </div>\n' +
@@ -1527,9 +1527,9 @@
             '            <div class="col-lg-6 col-md-6">\n' +
             '                <fieldset disabled>\n' +
             '                    <div class="input-group mb-3">\n' +
-            '                        <div class="input-group-prepend col-lg-4 col-md-4"> <span class="lefttext"\n' +
+            '                        <div style="margin-left: 4px;" class="input-group-prepend col-lg-4 col-md-4"> <span class="lefttext"\n' +
             '                                for="applicant">创建人：</span> </div> <input type="text" id="creater"\n' +
-            '                            class="form-control col-lg-6 col-md-6" style="margin-left: 4px;">\n' +
+            '                            class="form-control col-lg-6 col-md-6" >\n' +
             '                    </div>\n' +
             '                </fieldset>\n' +
             '            </div>\n' +
@@ -1721,7 +1721,7 @@
             '            <div class="col-lg-6 col-md-6">\n' +
             '                <fieldset disabled>\n' +
             '                    <div class="input-group mb-3">\n' +
-            '                        <div class="input-group-prepend col-lg-4 col-md-4" style="margin-left: 4px;"> <span class="lefttext" for="applicant">创建人：</span>\n' +
+            '                        <div style="margin-left: 4px;" class="input-group-prepend col-lg-4 col-md-4" style="margin-left: 4px;"> <span class="lefttext" for="applicant">创建人：</span>\n' +
             '                        </div> <input type="text" id="creater" class="form-control col-lg-6 col-md-6">\n' +
             '                    </div>\n' +
             '                </fieldset>\n' +

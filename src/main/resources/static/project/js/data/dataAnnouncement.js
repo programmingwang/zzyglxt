@@ -322,7 +322,7 @@
             {field: 'dataSource', title: '来源'},
             {field: 'filePath', title: '附件名称', formatter:function (value, row, index) {
                     if (row.fileName == null){
-                        return '<p>无附件</p>';
+                        return '无附件';
                     }else{
                         return '<a href="'+value+'">'+row.fileName+'</a>'
                     }

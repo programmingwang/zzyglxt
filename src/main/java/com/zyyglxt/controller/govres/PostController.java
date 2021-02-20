@@ -52,10 +52,8 @@ public class PostController {
     @ResponseBody
     @LogAnnotation(appCode ="",logTitle ="查询一个带文件的发文信息",logLevel ="1",creater ="",updater = "")
     public ResponseData getOnePost(@PathVariable Integer itemid, @PathVariable String itemcode){
-        PostDOKey key = new PostDOKey();
-        key.setItemid(itemid);
-        key.setItemcode(itemcode);
-        return new ResponseData(EmBusinessError.success,postService.selOneWithFile(key));
+
+        return new ResponseData(EmBusinessError.success,postService.selOneWithFile(itemid,itemcode));
     }
 
     @GetMapping(value = "/getPostFileForMain")

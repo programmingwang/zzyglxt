@@ -65,6 +65,27 @@ public class ReceiptController {
         return new ResponseData(EmBusinessError.success,iReceiptDOService.selectAllReceipt(receivingDataStatus));
     }
 
+    /*查询首页收文管理数据*/
+    @RequestMapping(value ="/receipt/selectForMain",method = RequestMethod.GET )
+    @LogAnnotation(appCode ="",logTitle ="查询首页收文管理数据",logLevel ="1")
+    public ResponseData selectForMain(){
+        return new ResponseData(EmBusinessError.success,iReceiptDOService.selectForMain());
+    }
+
+    /*查询一个带文件的收文管理数据*/
+    @RequestMapping(value ="/receipt/selectOne/{itemid}/{itemcode}",method = RequestMethod.GET )
+    @LogAnnotation(appCode ="",logTitle ="查询一个带文件的收文管理数据",logLevel ="1")
+    public ResponseData selectOne(@PathVariable Integer itemid, @PathVariable String itemcode){
+        return new ResponseData(EmBusinessError.success,iReceiptDOService.selectOneWithFile(itemid,itemcode));
+    }
+
+    @GetMapping(value = "/receipt/getReceiptFileForMain")
+    @ResponseBody
+    @LogAnnotation(appCode ="",logTitle ="查询所有公开收文附件信息",logLevel ="1",creater ="",updater = "")
+    public ResponseData getPostFileForMain(){
+        return new ResponseData(EmBusinessError.success,iReceiptDOService.getReceiptFileForMain());
+    }
+
     /*收文管理数据状态*/
     @RequestMapping(value = "changestatustoreceipt/{itemID}/{itemCode}" , method = RequestMethod.POST)
     @ResponseBody

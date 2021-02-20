@@ -9,7 +9,8 @@
                 getMainData("/datado/regulation/selectRegMain", "zcfg","/datado/regulation/selectOne/").then(r1 => {
                     getMainData("/datado/rules/selectRulesMain","gzzd","/datado/rules/selectOne/").then(r2 => {
                         getMainData("/datado/leader/selectLeaderMain", "ldjh","/datado/leader/selectOne/").then(r3 => {
-                            if(rolename === "政务资源处长" || rolename === "政务资源科员" || rolename === "政务资源综合处处长" ||
+                            if(rolename === "政务资源处长" || rolename === "政务资源科员" ||rolename === "政务资源综合处处长" ||
+                            // if(rolename === "政务资源处长" ||rolename === "政务资源综合处处长" ||
                                 rolename === "政务资源局长" || rolename === "政务资源分管局长" || rolename === "中医处分管局长" ||
                                 rolename === "中药处分管局长" || rolename === "综合处分管局长" || rolename === "法规监督处分管局长") {
                                 getMainData("/post/getPostFileForMain", "gxwj").then(r4 => {
@@ -28,6 +29,9 @@
                                 } );
                             }else {
                                 //其余的查询收文信息
+                                getMainData("/receipt/getReceiptFileForMain", "gxwj").then(r4 => {
+                                    getMainData("/receipt/selectForMain","wdbg","/receipt/selectOne/")
+                                });
                             }
                         });
                     });
@@ -46,7 +50,11 @@
                                 localStorage.setItem("viewRowData", JSON.stringify(data.data));
                                 localStorage.setItem("comeFromMain","true");
                                 orange.redirect("/document/post_view");
-                            }else {
+                            }else if(url.indexOf("/receipt/") !== -1){
+                                localStorage.setItem("viewRowData", JSON.stringify(data.data));
+                                localStorage.setItem("comeFromMain","true");
+                                orange.redirect("/document/viewreceipt");
+                            } else {
                                 var myViewModalData ={
                                     modalBodyID : "myViewDataModal", //公用的在后面给span加不同的内容就行了，其他模块同理
                                     modalTitle : "查看详情",

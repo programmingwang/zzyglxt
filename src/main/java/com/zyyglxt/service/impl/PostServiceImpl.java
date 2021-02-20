@@ -130,7 +130,10 @@ public class PostServiceImpl implements IPostService {
     }
 
     @Override
-    public PostDto selOneWithFile(PostDOKey key) {
+    public PostDto selOneWithFile(Integer itemid, String itemcode) {
+        PostDOKey key = new PostDOKey();
+        key.setItemid(itemid);
+        key.setItemcode(itemcode);
         return postDOMapper.selectOneWithFile(key);
     }
 

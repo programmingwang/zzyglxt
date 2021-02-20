@@ -174,7 +174,7 @@
                 $(".tTile").css("display","none");
                 $("#xczy").css("display","block");
             }
-            if (roleName === '政务资源处长'||roleName === '政务资源科员'){
+            else if (roleName === '政务资源处长'||roleName === '政务资源科员'){
                 var menu_list = [
                     {
                         menu_name: "首页",
@@ -278,7 +278,7 @@
                 $(".tTile").css("display","none");
                 $("#zwbg").css("display","block");
             }
-            if (roleName === '政务资源综合处处长'){
+            else if (roleName === '政务资源综合处处长'){
                 var menu_list = [
                     {
                         menu_name: "首页",
@@ -445,7 +445,7 @@
                 $(".tTile").css("display","none");
                 $("#zwbg").css("display","block");
             }
-            if (roleName === '政务资源分管局长'||roleName === '中药处分管局长'||roleName === '中医处分管局长'||roleName === '综合处分管局长'||roleName === '法规监督处分管局长'){
+            else if (roleName === '政务资源分管局长'||roleName === '中药处分管局长'||roleName === '中医处分管局长'||roleName === '综合处分管局长'||roleName === '法规监督处分管局长'){
                 var menu_list = [
                     {
                         menu_name: "首页",
@@ -612,7 +612,7 @@
                 $(".tTile").css("display","none");
                 $("#zwbg").css("display","block");
             }
-            if (roleName === '政务资源局长'){
+            else if (roleName === '政务资源局长'){
                 var menu_list = [
                     {
                         menu_name: "首页",
@@ -779,7 +779,7 @@
                 $(".tTile").css("display","none");
                 $("#zwbg").css("display","block");
             }
-            if (roleName === '主研人'){
+            else if (roleName === '主研人'){
                 var menu_list = [
                     {
                         menu_name: "科研项目管理",
@@ -806,7 +806,7 @@
                 $(".tTile").css("display","none");
                 $("#kyxm").css("display","block");
             }
-            if (roleName === '科研项目申报单位'){
+            else if (roleName === '科研项目申报单位'){
                 var menu_list = [
                     {
                         menu_name: "科研项目管理",
@@ -833,7 +833,7 @@
                 $(".tTile").css("display","none");
                 $("#kyxm").css("display","block");
             }
-            if (roleName === '科研项目-省级'){
+            else if (roleName === '科研项目-省级'){
                 var menu_list = [
                     {
                         menu_name: "科研项目管理",
@@ -888,7 +888,7 @@
                 $(".tTile").css("display","none");
                 $("#kyxm").css("display","block");
             }
-            if (roleName === '科研项目-市级'){
+            else if (roleName === '科研项目-市级'){
                 var menu_list = [
                     {
                         menu_name: "科研项目管理",
@@ -908,7 +908,7 @@
                 $(".tTile").css("display","none");
                 $("#kyxm").css("display","block");
             }
-            if (roleName === '专家'){
+            else if (roleName === '专家'){
                 var menu_list = [
                     {
                         menu_name: "科研项目管理",
@@ -928,7 +928,7 @@
                 $(".tTile").css("display","none");
                 $("#kyxm").css("display","block");
             }
-            if (roleName === '中药材种植园'){
+            else if (roleName === '中药材种植园'){
                 var menu_list = [
                     {
                         menu_name: "在售药材",
@@ -962,7 +962,7 @@
                 $(".tTile").css("display","none");
                 $("#cyfz").css("display","block");
             }
-            if (roleName === '中药材加工企业'){
+            else if (roleName === '中药材加工企业'){
                 var menu_list = [
                     {
                         menu_name: "在售药材",
@@ -996,7 +996,7 @@
                 $(".tTile").css("display","none");
                 $("#cyfz").css("display","block");
             }
-            if (roleName === '中药材制药企业'){
+            else if (roleName === '中药材制药企业'){
                 var menu_list = [
                     {
                         menu_name: "在售药品",
@@ -1030,7 +1030,7 @@
                 $(".tTile").css("display","none");
                 $("#cyfz").css("display","block");
             }
-            if (roleName === '中药材销售企业'){
+            else if (roleName === '中药材销售企业'){
                 var menu_list = [
                     {
                         menu_name: "在售药品",
@@ -1064,7 +1064,7 @@
                 $(".tTile").css("display","none");
                 $("#cyfz").css("display","block");
             }
-            if (roleName === '中医医疗机构'){
+            else if (roleName === '中医医疗机构'){
                 var menu_list = [
                     {
                         menu_name: "科研成果",
@@ -1098,7 +1098,7 @@
                 $(".tTile").css("display","none");
                 $("#cyfz").css("display","block");
             }
-            if (roleName === '高等医学院校'){
+            else if (roleName === '高等医学院校'){
                 var menu_list = [
                     {
                         menu_name: "科研成果",
@@ -1132,7 +1132,7 @@
                 $(".tTile").css("display","none");
                 $("#cyfz").css("display","block");
             }
-            if (roleName === '科研院所'){
+            else if (roleName === '科研院所'){
                 var menu_list = [
                     {
                         menu_name: "科研成果",
@@ -1166,7 +1166,7 @@
                 $(".tTile").css("display","none");
                 $("#cyfz").css("display","block");
             }
-            if (roleName === '技术服务机构'){
+            else if (roleName === '技术服务机构'){
                 var menu_list = [
                     {
                         menu_name: "服务项目",
@@ -1200,7 +1200,7 @@
                 $(".tTile").css("display","none");
                 $("#cyfz").css("display","block");
             }
-            if (roleName === '旅游康养机构'){
+            else if (roleName === '旅游康养机构'){
                 var menu_list = [
                     {
                         menu_name: "基地风采",
@@ -1234,7 +1234,7 @@
                 $(".tTile").css("display","none");
                 $("#cyfz").css("display","block");
             }
-            if (roleName === '产业发展-市级' || roleName === '产业发展-省级'){
+            else if (roleName === '产业发展-市级' || roleName === '产业发展-省级'){
                 var menu_list = [
                     {
                         menu_name: "机构审核",
@@ -1247,7 +1247,17 @@
                 $(".tTile").css("display","none");
                 $("#kyxm").css("display","block");
             }
-
+            else if (roleName === '政务资源市部门' || roleName === '政务资源县部门'){
+                var menu_list = [
+                    {
+                        menu_name: "首页",
+                        menu_url: "/data/mainPage",
+                        id: "1",
+                        level: "1",
+                        pid: ""
+                    },
+                ]
+            }
 
             function getHTML_dropdown_menu_item(astr, aurl, show_active) {
                 var str = "<a class=\"dropdown-item  " + (show_active ? "active" : "") + " \" url=\"" + aurl + "\">" + astr + "</a>\n" +

@@ -314,7 +314,7 @@
       a.POST_DOCUMENT_TITLE, a.itemID, a.itemCode
     from
       tb_governres_post a inner join
-        (select itemID from tb_governres_post limit 0,5)
+        (select itemID from tb_governres_post order by itemUpdateAt limit 0,5)
         b on b.itemID = a.itemID where a.POST_PUBLIC_WAY = 0 or a.POST_PUBLIC_WAY = 1
     <if test="status==1">
         and a.POST_DATA_STATUS in (0,1,2,3,4,5,7,8,9);

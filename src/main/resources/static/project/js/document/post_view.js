@@ -13,8 +13,11 @@
 
             $("#cancelbtn").unbind().on('click',function () {
                 localStorage.removeItem("viewRowData");
-                var url = "/document/post";
-                orange.redirect(url);
+                localStorage.getItem("comeFromMain") === "true" ?
+                    orange.redirect("/data/mainPage")
+                    :
+                    orange.redirect("/document/post");
+                localStorage.removeItem("comeFromMain");
             });
 
             if(rolename === "政务资源科员"){
@@ -189,6 +192,11 @@
             });
 
             (function init() {
+                if(localStorage.getItem("comeFromMain") === "true"){
+                    $("#failbtn").remove();
+                    $("#passbtn").remove();
+                    $("input").attr("disabled","true")
+                }
                 if (isView()){
                     var num = dictUtil.getDictByCode(dictUtil.DICT_LIST.postDocumentNum);
                     var postNum = num[tempdata.postDocumentNum].text + tempdata.postDocumentNum1;

@@ -48,6 +48,16 @@ public class PostController {
         return new ResponseData(EmBusinessError.success,DoToDto(postDOS));
     }
 
+    @GetMapping(value = "/selectOne/{itemid}/{itemcode}")
+    @ResponseBody
+    @LogAnnotation(appCode ="",logTitle ="查询一个带文件的发文信息",logLevel ="1",creater ="",updater = "")
+    public ResponseData getOnePost(@PathVariable Integer itemid, @PathVariable String itemcode){
+        PostDOKey key = new PostDOKey();
+        key.setItemid(itemid);
+        key.setItemcode(itemcode);
+        return new ResponseData(EmBusinessError.success,postService.selOneWithFile(key));
+    }
+
     @GetMapping(value = "/getPostFileForMain")
     @ResponseBody
     @LogAnnotation(appCode ="",logTitle ="查询所有发文附件信息",logLevel ="1",creater ="",updater = "")

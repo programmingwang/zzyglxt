@@ -3,6 +3,7 @@ package com.zyyglxt.dao;
 import com.zyyglxt.dataobject.PostDO;
 import com.zyyglxt.dataobject.PostDOKey;
 import com.zyyglxt.dataobject.PostFileDO;
+import com.zyyglxt.dto.PostDto;
 import com.zyyglxt.dto.PostMainPageDto;
 import org.apache.ibatis.annotations.Param;
 
@@ -16,6 +17,8 @@ public interface PostDOMapper {
     int insertSelective(PostDO record);
 
     PostDO selectByPrimaryKey(PostDOKey key);
+
+    PostDto selectOneWithFile(@Param("key") PostDOKey key);
 
     int updateByPrimaryKeySelective(PostDO record);
 

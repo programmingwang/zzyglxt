@@ -129,4 +129,9 @@ public class PostServiceImpl implements IPostService {
         }
     }
 
+    @Override
+    public PostDto selOneWithFile(PostDOKey key) {
+        return postDOMapper.selectOneWithFile(key);
+    }
+
 }

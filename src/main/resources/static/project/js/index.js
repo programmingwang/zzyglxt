@@ -1341,10 +1341,10 @@
                     $($(this).attr("data-target")).removeClass("show");
                     sessionStorage.setItem('aNumber', '1')
                 }
-
             });
 
             $(".dropdown-item").unbind().on("click", function () {
+                localStorage.removeItem("comeFromMain");
                 $(".dropdown-item").removeClass("active");
                 $(".aaaa").removeClass("active");
                 $(this).addClass("active");
@@ -1352,6 +1352,7 @@
             });
 
             $(".AFirstMenu").unbind().on("click", function () {
+                localStorage.removeItem("comeFromMain");
                 $(".aaaa").removeClass("active");
                 $(".dropdown-item").removeClass("active");
                 $(".collapse").removeClass("show");

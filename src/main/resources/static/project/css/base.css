@@ -469,3 +469,9 @@ input, select{
 .upload-wrap {
     border-radius: unset !important;
 }
+label {
+    margin-top: 6px;
+}
+.modal-body #upFile {
+    padding-top: 4px;
+}

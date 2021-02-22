@@ -9,25 +9,29 @@
                 getMainData("/datado/regulation/selectRegMain", "zcfg","/datado/regulation/selectOne/").then(r1 => {
                     getMainData("/datado/rules/selectRulesMain","gzzd","/datado/rules/selectOne/").then(r2 => {
                         getMainData("/datado/leader/selectLeaderMain", "ldjh","/datado/leader/selectOne/").then(r3 => {
-                            if(rolename === "政务资源处长" || rolename === "政务资源科员" || rolename === "政务资源综合处处长" ||
+                            if(rolename === "政务资源处长" || rolename === "政务资源科员" ||rolename === "政务资源综合处处长" ||
+                            // if(rolename === "政务资源处长" ||rolename === "政务资源综合处处长" ||
                                 rolename === "政务资源局长" || rolename === "政务资源分管局长" || rolename === "中医处分管局长" ||
                                 rolename === "中药处分管局长" || rolename === "综合处分管局长" || rolename === "法规监督处分管局长") {
                                 getMainData("/post/getPostFileForMain", "gxwj").then(r4 => {
                                     if (rolename === "政务资源科员"){
-                                        getMainData("/post/getPostForMainPage?status=1", "wdbg","");
+                                        getMainData("/post/getPostForMainPage?status=1", "wdbg","/post/selectOne/");
                                     }else if (rolename === "政务资源处长"){
-                                        getMainData("/post/getPostForMainPage?status=2", "wdbg");
+                                        getMainData("/post/getPostForMainPage?status=2", "wdbg","/post/selectOne/");
                                     }else if (rolename === "政务资源综合处处长"){
-                                        getMainData("/post/getPostForMainPage?status=3", "wdbg");
+                                        getMainData("/post/getPostForMainPage?status=3", "wdbg","/post/selectOne/");
                                     }else if (rolename === "政务资源分管局长" || rolename === "中医处分管局长" ||
                                         rolename === "中药处分管局长" || rolename === "综合处分管局长" || rolename === "法规监督处分管局长"){
-                                        getMainData("/post/getPostForMainPage?status=4", "wdbg");
+                                        getMainData("/post/getPostForMainPage?status=4", "wdbg","/post/selectOne/");
                                     }else if (rolename === "政务资源局长"){
-                                        getMainData("/post/getPostForMainPage?status=5", "wdbg");
+                                        getMainData("/post/getPostForMainPage?status=5", "wdbg","/post/selectOne/");
                                     }
                                 } );
                             }else {
                                 //其余的查询收文信息
+                                getMainData("/receipt/getReceiptFileForMain", "gxwj").then(r4 => {
+                                    getMainData("/receipt/selectForMain","wdbg","/receipt/selectOne/")
+                                });
                             }
                         });
                     });
@@ -42,26 +46,37 @@
                     url += id+"/"+code;
                     ajaxUtil.myAjax(null,url,null,function (data){
                         if(ajaxUtil.success(data)){
-                            var myViewModalData ={
-                                modalBodyID : "myViewDataModal", //公用的在后面给span加不同的内容就行了，其他模块同理
-                                modalTitle : "查看详情",
-                                modalClass : "modal-lg",
-                                confirmButtonStyle: "display:none",
-                            };
-                            var myModal = modalUtil.init(myViewModalData);
-                            $("#dataTitle").val(data.data.dataTitle);
-                            $("#dataSource").val(data.data.dataSource);
-                            $("#dataContent").html(data.data.dataContent);
-                            $("#creater").val(data.data.creater);
-                            $("#itemCreateAt").val(data.data.itemcreateat);
-                            $("#imgDiv").remove();
-                            $("#author").remove();
-                            $("#fileType").remove();
-                            $("#zszt").remove();
-                            $('#dataTitleSpan').html("标题：");
-                            $("#fileDiv").remove();
+                            if(url.indexOf("/post/") !== -1){
+                                localStorage.setItem("viewRowData", JSON.stringify(data.data));
+                                localStorage.setItem("comeFromMain","true");
+                                orange.redirect("/document/post_view");
+                            }else if(url.indexOf("/receipt/") !== -1){
+                                localStorage.setItem("viewRowData", JSON.stringify(data.data));
+                                localStorage.setItem("comeFromMain","true");
+                                orange.redirect("/document/viewreceipt");
+                            } else {
+                                var myViewModalData ={
+                                    modalBodyID : "myViewDataModal", //公用的在后面给span加不同的内容就行了，其他模块同理
+                                    modalTitle : "查看详情",
+                                    modalClass : "modal-lg",
+                                    confirmButtonStyle: "display:none",
+                                };
+                                var myModal = modalUtil.init(myViewModalData);
+                                $("#dataTitle").val(data.data.dataTitle);
+                                $("#dataSource").val(data.data.dataSource);
+                                $("#dataContent").html(data.data.dataContent);
+                                $("#creater").val(data.data.creater);
+                                $("#itemCreateAt").val(data.data.itemcreateat);
+                                $("#imgDiv").remove();
+                                $("#author").remove();
+                                $("#fileType").remove();
+                                $("#zszt").remove();
+                                $('#dataTitleSpan').html("标题：");
+                                $("#fileDiv").remove();
 
-                            myModal.show();
+                                myModal.show();
+                            }
+
                         }else {
                             alertUtil.error("数据加载失败，请重试！")
                         }

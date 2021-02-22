@@ -29,4 +29,5 @@ public interface IPostService {
 
     List<PostMainPageDto> getPostForMainPage(String status);
 
+    PostDto selOneWithFile(Integer itemid, String itemcode);
 }

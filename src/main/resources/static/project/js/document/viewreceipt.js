@@ -13,8 +13,11 @@
 
             $("#cancelbtn").unbind().on('click',function () {
                 localStorage.removeItem("viewRowData");
-                var url = "/document/receipt";
-                orange.redirect(url);
+                localStorage.getItem("comeFromMain") === "true" ?
+                    orange.redirect("/data/mainPage")
+                    :
+                    orange.redirect("/document/receipt");
+                localStorage.removeItem("comeFromMain");
             });
 
             $("#pass").unbind().on('click',function () {
@@ -210,6 +213,11 @@
             });
 
             (function init() {
+                if(localStorage.getItem("comeFromMain") === "true"){
+                    $("#fail").remove();
+                    $("#pass").remove();
+                    $("input").attr("disabled","true")
+                }
                 if (isView()){
                     var tempdata = JSON.parse(localStorage.getItem("viewRowData"));
                     $("#receivingNum").val(tempdata.receivingNum);

@@ -59,7 +59,7 @@
                 $('#opinin12').attr('style', "display:block;margin-bottom:40px");
                 $('#opinin22').attr('style', "display:block;");
                 $('#opinin42').attr('style', "display:block;");
-            }else if(rolename === "政务资源分管局长"){
+            }else if(rolename === "中医处分管局长" || rolename === "中药处分管局长" || rolename === "综合处分管局长" || rolename === "法规监督处分管局长"){
                 if (tgAdvice.data.deputyDirector === ""){
                     $('#failbtn').attr('style', "display:block;");
                     $('#passbtn').attr('style', "display:block;");
@@ -98,7 +98,7 @@
                             "postOpinion" : ""
                         };
                         var submitOpinion;
-                        if (rolename == "政务资源处长"){
+                        if (rolename === "政务资源处长"){
                             $("#departmentView").validate("审核意见");
                             submitStatus.postDataStatus = postStatus[2].id;
                             submitOpinion = {
@@ -108,7 +108,7 @@
                                 "departDate" : nowTime,
                             };
                             submitStatus.postOpinion = "1";
-                        }else if (rolename == "政务资源综合处处长"){
+                        }else if (rolename === "政务资源综合处处长"){
                             $("#officeView").validate("审核意见");
                             submitStatus.postDataStatus = postStatus[2].id;
                             submitOpinion = {
@@ -118,7 +118,7 @@
                                 "officeDate" : nowTime,
                             };
                             submitStatus.postOpinion = "2";
-                        }else if (rolename == "政务资源分管局长"){
+                        }else if (rolename === "中医处分管局长" || rolename === "中药处分管局长" || rolename === "综合处分管局长" || rolename === "法规监督处分管局长"){
                             $("#deputyDirectorView").validate("审核意见");
                             submitStatus.postDataStatus = postStatus[6].id;
                             submitOpinion = {
@@ -128,7 +128,7 @@
                                 "deputyDirectorDate" : nowTime,
                             };
                             submitStatus.postOpinion = "3";
-                        }else if (rolename == "政务资源局长"){
+                        }else if (rolename === "政务资源局长"){
                             $("#directorView").validate("审核意见");
                             submitStatus.postDataStatus = postStatus[8].id;
                             submitOpinion = {

@@ -273,19 +273,35 @@
                             var submitStatus = {
                                 "itemid": row.itemid,
                                 "itemcode": row.itemcode,
-                                "postDataStatus": postStatus[4].id
+                                "postDataStatus": postStatus[4].id,
+                                "postOpinion1": ""
                             };
-                            ajaxUtil.myAjax(null,"/post/updatePost",submitStatus,function (data) {
-                                if(ajaxUtil.success(data)){
-                                    if(data.code == 88888){
-                                        alertUtil.success("已转发至对应分局局长");
-                                        isSuccess = true;
-                                        refreshTable();
-                                    }else{
-                                        alertUtil.error(data.msg);
+                            if ($("#all_select").is(":checked") == true){
+                                submitStatus.postOpinion1 = "1234";
+                            } else if ($("#zhongyichu").is(":checked") == true){
+                                submitStatus.postOpinion1 = "1";
+                            }else if ($("#zhongyaochu").is(":checked")== true){
+                                submitStatus.postOpinion1 = "2";
+                            }else if ($("#zonghechu").is(":checked") == true){
+                                submitStatus.postOpinion1 = "3";
+                            }else if ($("#faguijandu").is(":checked") == true){
+                                submitStatus.postOpinion1 = "4";
+                            }
+                            if ($("#all_select").is(":checked") == true||$("#zhongyichu").is(":checked") == true||$("#zhongyaochu").is(":checked")== true||$("#zonghechu").is(":checked") == true||$("#faguijandu").is(":checked") == true){
+                                ajaxUtil.myAjax(null,"/post/updatePost",submitStatus,function (data) {
+                                    if(ajaxUtil.success(data)){
+                                        if(data.code == 88888){
+                                            alertUtil.success("已转发至对应分局局长");
+                                            isSuccess = true;
+                                            refreshTable();
+                                        }else{
+                                            alertUtil.error(data.msg);
+                                        }
                                     }
-                                }
-                            },false,true,"post");
+                                },false,true,"post");
+                            }else {
+                                alertUtil.error("选项不能为空");
+                            }
                             return isSuccess;
                         }
 
@@ -448,7 +464,7 @@
             var aCol;
             if (rolename === "政务资源科员"){
                 $('#btn_addTask').attr('style', "display:block;");
-                url = "/post/getPost?postDataStatus=" +postStatus[0].id +"&postDataStatus="+postStatus[1].id +"&postDataStatus="+postStatus[2].id +"&postDataStatus="+postStatus[3].id +"&postDataStatus="+postStatus[4].id +"&postDataStatus="+postStatus[5].id +"&postDataStatus="+postStatus[6].id +"&postDataStatus="+postStatus[7].id +"&postDataStatus="+postStatus[8].id +"&postDataStatus="+postStatus[9].id;
+                url = "/post/getPost?postDataStatus=1";
                 aCol = [
                     {field: 'postDocumentTitle', title: '文件标题', formatter: viewOperation, events: viewEvents},
                     {field: 'postDocumentNum', title: '文号', formatter:function (value, row, index){
@@ -463,7 +479,7 @@
                 ];
 
             }else if (rolename === "政务资源处长"){
-                url = "/post/getPost?postDataStatus=" +postStatus[1].id +"&postDataStatus="+postStatus[2].id +"&postDataStatus="+postStatus[3].id +"&postDataStatus="+postStatus[4].id +"&postDataStatus="+postStatus[5].id +"&postDataStatus="+postStatus[6].id +"&postDataStatus="+postStatus[7].id +"&postDataStatus="+postStatus[8].id +"&postDataStatus="+postStatus[9].id;
+                url = "/post/getPost?postDataStatus=2";
                 aCol = [
                     {field: 'postDocumentTitle', title: '文件标题', formatter: viewOperation, events: viewEvents},
                     {field: 'postDocumentNum', title: '文号', formatter:function (value, row, index){
@@ -478,7 +494,7 @@
                 ];
 
             }else if (rolename === "政务资源综合处处长"){
-                url = "/post/getPost?postDataStatus=" +postStatus[2].id +"&postDataStatus="+postStatus[4].id +"&postDataStatus="+postStatus[5].id +"&postDataStatus="+postStatus[6].id +"&postDataStatus="+postStatus[7].id +"&postDataStatus="+postStatus[8].id +"&postDataStatus="+postStatus[9].id;
+                url = "/post/getPost?postDataStatus=3";
                 aCol = [
                     {field: 'postDocumentTitle', title: '文件标题', formatter: viewOperation, events: viewEvents},
                     {field: 'postDocumentNum', title: '文号', formatter:function (value, row, index){
@@ -492,8 +508,16 @@
                     {field: 'action',  title: '操作',formatter: operation3,events:orgEvents}
                 ];
 
-            }else if (rolename === "政务资源分管局长"){
-                url = "/post/getPost?postDataStatus=" +postStatus[4].id +"&postDataStatus="+postStatus[6].id +"&postDataStatus="+postStatus[7].id +"&postDataStatus="+postStatus[8].id +"&postDataStatus="+postStatus[9].id;
+            }else if (rolename === "中医处分管局长" || rolename === "中药处分管局长" || rolename === "综合处分管局长" || rolename === "法规监督处分管局长"){
+                if (rolename === "中医处分管局长"){
+                    url = "/post/getDeputyDirector?postOpinion1=1";
+                }else if (rolename === "中药处分管局长"){
+                    url = "/post/getDeputyDirector?postOpinion1=2";
+                }else if (rolename === "综合处分管局长"){
+                    url = "/post/getDeputyDirector?postOpinion1=3";
+                }else if (rolename === "法规监督处分管局长"){
+                    url = "/post/getDeputyDirector?postOpinion1=4";
+                }
                 aCol = [
                     {field: 'postDocumentTitle', title: '文件标题', formatter: viewOperation, events: viewEvents},
                     {field: 'postDocumentNum', title: '文号', formatter:function (value, row, index){
@@ -508,7 +532,7 @@
                 ];
 
             }else if (rolename === "政务资源局长"){
-                url = "/post/getPost?postDataStatus=" +postStatus[6].id +"&postDataStatus="+postStatus[8].id +"&postDataStatus="+postStatus[9].id;
+                url = "/post/getPost?postDataStatus=5";
                 aCol = [
                     {field: 'postDocumentTitle', title: '文件标题', formatter: viewOperation, events: viewEvents},
                     {field: 'postDocumentNum', title: '文号', formatter:function (value, row, index){

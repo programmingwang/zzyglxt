@@ -43,6 +43,27 @@
             var checkids = [];
             // 存储账号信息
             var sendGoal = {};
+            // 获取账号信息的url
+            var sendUrl = "/user/alluser";
+
+            //获取专家信息
+            function initExpert() {
+                ajaxUtil.myAjax(null, sendUrl, null, function (data) {
+                    if (ajaxUtil.success(data)) {
+                        sendGoal = data.data
+                    } else {
+                        alert(data.msg);
+                    }
+                }, false, true, "get");
+            }
+
+            //获取勾选的行
+            function getChecks() {
+                checkids = $("#table").bootstrapTable('getSelections');
+                if (checkids.length === 0) {
+                    alertUtil.error("错误，未勾选项目，请勾选项目后重试");
+                }
+            }
 
             function distribution(rows) {
                 var addSendModal = {
@@ -95,15 +116,18 @@
                     }
                 }
                 var addSendModal = modalUtil.init(addSendModal);
-                var expertsCol = [
+                if (Object.keys(sendGoal).length == 0) {
+                    initExpert();
+                }
+                var sendCol = [
                     {checkbox: true},
-                    {field: 'username', title: '用户账号'},
+                    {field: 'username', title: '账号'},
                     {field: 'cityid', title: '主管市区'},
                 ];
                 $('#sendTable').bootstrapTable('destroy');
                 $('#sendTable').bootstrapTable({
                     toolbar: "#sendTable",
-                    columns: expertsCol,
+                    columns: sendCol,
                     striped: true,
                     clickToSelect: true,
                 });
@@ -112,6 +136,9 @@
             }
 
             $("#masterSend").unbind().on('click', function () {
+                distribution(checkids);
+            });
+            $("#copySend").unbind().on('click', function () {
                 distribution(checkids);
             });
 
@@ -190,6 +217,18 @@
                 var PostEntity;
                 var requestUrl;
                 var operateMessage;
+                var publicWay;
+                var reason;
+                if($("input[name='postPublicWay']:checked").val()=="0"){
+                    publicWay="0";
+                    reason = "";
+                }else if($("input[name='postPublicWay']:checked").val()=="1"){
+                    publicWay="1";
+                    reason = "";
+                }else if($("input[name='postPublicWay']:checked").val()=="2"){
+                    publicWay="2";
+                    reason = $("#postReason").val();
+                }
                 var normative;
                 if($("input[name='postNormativeDocuments']:checked").val()=="y"){
                     normative="y";
@@ -208,8 +247,8 @@
                     PostEntity = {
                         itemcode: uuid,
                         postDocumentTitle : $("#postDocumentTitle").val(),
-                        postPublicWay : $("#postPublicWay").val(),
-                        postReason : $("#postReason").val(),
+                        postPublicWay : publicWay,
+                        postReason : reason,
                         postFairDepartmentReview : $("#postFairDepartmentReview").val(),
                         postNormativeDocuments : normative,
                         postSecretRelated : secret,
@@ -233,7 +272,7 @@
                         itemid: needData.itemid,
                         itemcode: needData.itemcode,
                         postDocumentTitle : $("#postDocumentTitle").val(),
-                        postPublicWay : $("#postPublicWay").val(),
+                        postPublicWay : publicWay,
                         postReason : $("#postReason").val(),
                         postFairDepartmentReview : $("#postFairDepartmentReview").val(),
                         postNormativeDocuments : normative,
@@ -280,6 +319,18 @@
                 var PostEntity;
                 var requestUrl;
                 var operateMessage;
+                var publicWay;
+                var reason;
+                if($("input[name='postPublicWay']:checked").val()=="0"){
+                    publicWay="0";
+                    reason = "";
+                }else if($("input[name='postPublicWay']:checked").val()=="1"){
+                    publicWay="1";
+                    reason = "";
+                }else if($("input[name='postPublicWay']:checked").val()=="2"){
+                    publicWay="2";
+                    reason = $("#postReason").val();
+                }
                 var normative;
                 if($("input[name='postNormativeDocuments']:checked").val()=="y"){
                     normative="y";
@@ -298,8 +349,8 @@
                     PostEntity = {
                         itemcode: uuid,
                         postDocumentTitle : $("#postDocumentTitle").val(),
-                        postPublicWay : $("#postPublicWay").val(),
-                        postReason : $("#postReason").val(),
+                        postPublicWay : publicWay,
+                        postReason : reason,
                         postFairDepartmentReview : $("#postFairDepartmentReview").val(),
                         postNormativeDocuments : normative,
                         postSecretRelated : secret,
@@ -374,7 +425,14 @@
                         $('#fairFile1').attr('style',"display:none");
                     }
                     $("#postDocumentTitle").val(tempdata.postDocumentTitle);
-                    $("#postPublicWay").val(tempdata.postPublicWay);
+                    if (tempdata.postPublicWay == "0"){
+                        $("#pw1").prop("checked",true);
+                    }else if (tempdata.postPublicWay == "1"){
+                        $("#pw2").prop("checked",true);
+                    }else if (tempdata.postPublicWay == "2"){
+                        $("#pw3").prop("checked",true);
+                        $('#postReason').attr('style',"display:block");
+                    }
                     $("#postReason").val(tempdata.postReason);
                     $("#postFairDepartmentReview").val(tempdata.postFairDepartmentReview);
                     if (tempdata.postNormativeDocuments == "y"){

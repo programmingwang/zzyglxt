@@ -1756,6 +1756,7 @@
         modalHtml.myDeleteModalMovTV = "是否删除电视电影信息?";
         modalHtml.myDeleteModalSaleDrug = "是否删除该药品";
         modalHtml.mySubmitModal = "确认提交吗？";
+        modalHtml.mySendModal = "确认发送吗？";
         modalHtml.myPassModal = "确认通过吗？";
         modalHtml.myFailModal = "确认不通过吗？";
         modalHtml.myUnderShelfModal = "确认下架吗？";

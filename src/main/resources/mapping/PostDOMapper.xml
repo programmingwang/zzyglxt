@@ -25,11 +25,34 @@
     <result column="FILE_NAME" jdbcType="VARCHAR" property="fileName"/>
     <result column="FILE_PATH" jdbcType="VARCHAR" property="filePath"/>
   </resultMap>
+  <resultMap id="PostForMainPageResultMap" type="com.zyyglxt.dto.PostMainPageDto">
+    <id column="itemID" jdbcType="INTEGER" property="itemid" />
+    <id column="itemCode" jdbcType="CHAR" property="itemcode" />
+    <result column="POST_DOCUMENT_TITLE" jdbcType="VARCHAR" property="dataTitle" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="PostMainFileResultMap" type="com.zyyglxt.dto.PostDto">
+    <collection property="filePath" ofType="java.lang.String">
+      <constructor>
+        <arg column="FILE_PATH"/>
+      </constructor>
+    </collection>
+    <collection property="fileName" ofType="java.lang.String">
+      <constructor>
+        <arg column="FILE_NAME"/>
+      </constructor>
+    </collection>
+  </resultMap>
   <sql id="Base_Column_List">
     itemID, itemCode, POST_DOCUMENT_NUM, POST_DOCUMENT_NUM1, POST_OPINION, POST_OPINION1, 
     POST_DOCUMENT_TITLE, POST_DATA_STATUS, POST_PUBLIC_WAY, POST_REASON, POST_FAIR_DEPARTMENT_REVIEW, 
     POST_NORMATIVE_DOCUMENTS, POST_PRINTING, POST_SECRET_RELATED, CREATER, itemCreateAt, 
     UPDATER, itemUpdateAt
+  </sql>
+  <sql id="Post_Column_List">
+    gp.itemID, gp.itemCode, gp.POST_DOCUMENT_NUM, gp.POST_DOCUMENT_NUM1, gp.POST_OPINION, gp.POST_OPINION1,
+    gp.POST_DOCUMENT_TITLE, gp.POST_DATA_STATUS, gp.POST_PUBLIC_WAY, gp.POST_REASON, gp.POST_FAIR_DEPARTMENT_REVIEW,
+    gp.POST_NORMATIVE_DOCUMENTS, gp.POST_PRINTING, gp.POST_SECRET_RELATED, gp.CREATER, gp.itemCreateAt,
+    gp.UPDATER, gp.itemUpdateAt
   </sql>
   <select id="selectByPrimaryKey" parameterType="com.zyyglxt.dataobject.PostDOKey" resultMap="BaseResultMap">
     select 
@@ -37,6 +60,18 @@
     from tb_governres_post
     where itemID = #{itemid,jdbcType=INTEGER}
       and itemCode = #{itemcode,jdbcType=CHAR}
+  </select>
+  <select id="selectOneWithFile" parameterType="com.zyyglxt.dataobject.PostDOKey" resultMap="PostMainFileResultMap">
+    select
+    <include refid="Post_Column_List" />
+    ,
+    cf.FILE_NAME
+    ,
+    cf.FILE_PATH
+    from tb_governres_post gp left join tb_culpro_file cf
+    on gp.itemCode = cf.DATA_CODE
+    where gp.itemID = #{key.itemid,jdbcType=INTEGER}
+    and gp.itemCode = #{key.itemcode,jdbcType=CHAR}
   </select>
   <select id="selectAll" resultMap="BaseResultMap">
     select
@@ -274,12 +309,12 @@
         b on b.itemID = a.itemID where a.POST_PUBLIC_WAY = 0 or a.POST_PUBLIC_WAY = 1
   </select>
 
-  <select id="selectForMainPage" resultType="java.lang.String">
+  <select id="selectForMainPage" resultMap="PostForMainPageResultMap">
     select
-      a.POST_DOCUMENT_TITLE
+      a.POST_DOCUMENT_TITLE, a.itemID, a.itemCode
     from
       tb_governres_post a inner join
-        (select itemID from tb_governres_post limit 0,5)
+        (select itemID from tb_governres_post order by itemUpdateAt limit 0,5)
         b on b.itemID = a.itemID where a.POST_PUBLIC_WAY = 0 or a.POST_PUBLIC_WAY = 1
     <if test="status==1">
         and a.POST_DATA_STATUS in (0,1,2,3,4,5,7,8,9);

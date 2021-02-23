@@ -58,6 +58,19 @@ public class DataRulesController {
         return new ResponseData(EmBusinessError.success,dataRulesService.selectForMainPage());
     }
 
+    /**
+     * 查看一个规章制度
+     * @return
+     */
+    @RequestMapping(value = "/selectOne/{itemID}/{itemCode}", method = RequestMethod.GET)
+    @LogAnnotation(appCode ="",logTitle ="查看一个规章制度",logLevel ="1",creater ="",updater = "")
+    public ResponseData selectOneRules(@PathVariable Integer itemID, @PathVariable String itemCode){
+        DataDOKey dataDOKey = new DataDOKey();
+        dataDOKey.setItemid(itemID);
+        dataDOKey.setItemcode(itemCode);
+        return new ResponseData(EmBusinessError.success,dataRulesService.getOne(dataDOKey));
+    }
+
 
 
 }

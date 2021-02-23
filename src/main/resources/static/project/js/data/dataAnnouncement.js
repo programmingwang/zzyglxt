@@ -214,8 +214,8 @@
                 $("#dataFileType").val(row.dataFileType);
                 $("#imgDiv").attr("style","display:none");
                 $("#author").attr("style","display:none");
-                $('#dataTitleSpan').html("通知名称");
-                $('#dataFileTypeSpan').html("公告性质");
+                $('#dataTitleSpan').html("通知名称：");
+                $('#dataFileTypeSpan').html("公告性质：");
                 $("#fileDiv").attr("style","display:block");
                 $("#upFile").html(row.fileName);
 
@@ -322,7 +322,7 @@
             {field: 'dataSource', title: '来源'},
             {field: 'filePath', title: '附件名称', formatter:function (value, row, index) {
                     if (row.fileName == null){
-                        return '<p>无附件</p>';
+                        return '无附件';
                     }else{
                         return '<a href="'+value+'">'+row.fileName+'</a>'
                     }
@@ -339,7 +339,7 @@
             myTable = bootstrapTableUtil.myBootStrapTableInit("table", url, param, aCol);
         }
 
-        bootstrapTableUtil.globalSearch("table",url,aParam, aCol, "dataStatus");
+        bootstrapTableUtil.globalSearch2("table",url,aParam, aCol, "dataStatus");
 
 
     })

@@ -3,22 +3,201 @@
         function (jquery,objectUtil,ajaxUtil,alertUtil,stringUtil,fileUtil,dictUtil,modalUtil) {
 
             var rolename = sessionStorage.getItem("rolename");
+            var username = sessionStorage.getItem("username");
+            var tempdata = JSON.parse(localStorage.getItem("viewRowData"));
+            var tgAdvice;
+            $.ajax({cache: false, async: false, type: 'get', data: {dataCode: tempdata.itemcode}, url: "/advice/getByDataCode", success: function (data) {
+                    tgAdvice = data;
+                }
+            });
 
             $("#cancelbtn").unbind().on('click',function () {
                 localStorage.removeItem("viewRowData");
-                var url = "/document/post";
-                orange.redirect(url);
+                localStorage.getItem("comeFromMain") === "true" ?
+                    orange.redirect("/data/mainPage")
+                    :
+                    orange.redirect("/document/post");
+                localStorage.removeItem("comeFromMain");
+            });
+
+            if(rolename === "政务资源科员"){
+                $('#opinin12').attr('style', "display:block;margin-bottom:40px");
+                $('#opinin22').attr('style', "display:block;");
+                $('#opinin32').attr('style', "display:block;");
+                $('#opinin42').attr('style', "display:block;");
+            }else if(rolename === "政务资源处长"){
+                if (tgAdvice.data.department === ""){
+                    $('#opinin41').attr('style', "display:block; height:200px;");
+                }else {
+                    $('#opinin42').attr('style', "display:block;");
+                }
+                $('#opinin12').attr('style', "display:block;margin-bottom:40px");
+                $('#opinin22').attr('style', "display:block;");
+                $('#opinin32').attr('style', "display:block;");
+            }else if(rolename === "政务资源综合处处长"){
+                if (tgAdvice.data.office === ""){
+                    $('#opinin31').attr('style', "display:block; height:200px;");
+                }else {
+                    $('#opinin32').attr('style', "display:block;");
+                }
+                $('#opinin12').attr('style', "display:block;margin-bottom:40px");
+                $('#opinin22').attr('style', "display:block;");
+                $('#opinin42').attr('style', "display:block;");
+            }else if(rolename === "政务资源分管局长"){
+                if (tgAdvice.data.deputyDirector === ""){
+                    $('#opinin21').attr('style', "display:block; height:100px;");
+                }else {
+                    $('#opinin22').attr('style', "display:block;");
+                }
+                $('#opinin12').attr('style', "display:block;margin-bottom:40px");
+                $('#opinin32').attr('style', "display:block;");
+                $('#opinin42').attr('style', "display:block;");
+            }else if(rolename === "政务资源局长"){
+                if (tgAdvice.data.director === ""){
+                    $('#opinin11').attr('style', "display:block; height:100px;");
+                }else {
+                    $('#opinin12').attr('style', "display:block;");
+                }
+                $('#opinin22').attr('style', "display:block;margin-bottom:40px");
+                $('#opinin32').attr('style', "display:block;");
+                $('#opinin42').attr('style', "display:block;");
+            }
+
+            $("#passbtn").unbind().on('click',function () {
+                var myPassPostModalData ={
+                    modalBodyID :"myPassModal",
+                    modalTitle : "审核通过",
+                    modalClass : "modal-lg",
+                    modalConfirmFun:function () {
+                        var isSuccess = false;
+                        var shStatus = {
+                            "examineStatus": ""
+                        };
+                        var xmStatus = {
+                            "status": topicStatus[1].id
+                        };
+                        if(rolename == "科研项目申报单位"){
+                            shStatus.examineStatus = projectStatus[2].id;
+                        }else if (rolename == "科研项目-市级"){
+                            shStatus.examineStatus = projectStatus[4].id;
+                        }else {
+                            shStatus.examineStatus = projectStatus[6].id;
+                            xmStatus.status = topicStatus[2].id;
+                            var developTopicDO = {
+                                projectNo : ++topicNum,
+                                itemid : row.itemid,
+                                itemcode : row.itemcode,
+                            }
+                        }
+                        ajaxUtil.myAjax(null,"/industrialdevelop/examineStatus/"+row.itemid+"/"+row.itemcode,shStatus,function (data) {
+                            if(ajaxUtil.success(data)){
+                                if(data.code == 88888){
+                                    ajaxUtil.myAjax(null,"/industrialdevelop/projectStatus/"+row.itemid+"/"+row.itemcode,xmStatus,function (data) {
+                                        if(ajaxUtil.success(data)){
+                                            if(data.code == 88888){
+                                                ajaxUtil.myAjax(null,"/industrialdevelop/updTopic",developTopicDO,null,false,true);
+                                                var submitConfirmModal = {
+                                                    modalBodyID :"myTopicSubmitTip",
+                                                    modalTitle : "提示",
+                                                    modalClass : "modal-lg",
+                                                    cancelButtonStyle: "display:none",
+                                                    modalConfirmFun:function (){
+                                                        return true;
+                                                    }
+                                                }
+                                                var submitConfirm = modalUtil.init(submitConfirmModal);
+                                                submitConfirm.show();
+                                                isSuccess = true;
+                                                refreshTable();
+                                            }else{
+                                                alertUtil.error(data.msg);
+                                            }
+                                        }
+                                    },false)
+
+                                }else{
+                                    alertUtil.error(data.msg);
+                                }
+                            }
+                        },false);
+                        return isSuccess;
+                    }
+                };
+                var myPassModal = modalUtil.init(myPassPostModalData);
+                myPassModal.show();
+            });
+
+            $("#failbtn").unbind().on('click',function () {
+                var myFailTopiceModalData ={
+                    modalBodyID :"myResonable",
+                    modalTitle : "审核不通过理由",
+                    modalClass : "modal-lg",
+                    modalConfirmFun:function () {
+                        var isSuccess = false;
+                        var developTopicDO = {
+                            reason : $("#reason").val(),
+                            itemid : row.itemid,
+                            itemcode : row.itemcode,
+                        };
+                        var shStatus = {
+                            "examineStatus": ""
+                        };
+                        var xmStatus = {
+                            "status": topicStatus[0].id
+                        };
+                        if(rolename == "科研项目申报单位"){
+                            shStatus.examineStatus = projectStatus[3].id;
+                        }else if (rolename == "科研项目-市级"){
+                            shStatus.examineStatus = projectStatus[5].id;
+                        }else {
+                            shStatus.examineStatus = projectStatus[7].id;
+                        }
+                        ajaxUtil.myAjax(null,"/industrialdevelop/updTopic",developTopicDO,function (data) {
+                            if(data && ajaxUtil.success(data)){
+                                if(data.code == ajaxUtil.successCode){
+                                    ajaxUtil.myAjax(null,"/industrialdevelop/examineStatus/"+row.itemid+"/"+row.itemcode,shStatus,function (data) {
+                                        if(ajaxUtil.success(data)){
+                                            if(data.code == 88888){
+                                                ajaxUtil.myAjax(null,"/industrialdevelop/projectStatus/"+row.itemid+"/"+row.itemcode,xmStatus,function (data) {
+                                                    if(ajaxUtil.success(data)){
+                                                        if(data.code == 88888){
+                                                            alertUtil.info("操作成功");
+                                                            isSuccess = true;
+                                                            var url = "/scientificProject/topicManagement";
+                                                            orange.redirect(url);
+                                                        }else{
+                                                            alertUtil.error(data.msg);
+                                                        }
+                                                    }
+                                                },false)
+
+                                            }else{
+                                                alertUtil.error(data.msg);
+                                            }
+                                        }
+                                    },false);
+                                }else{
+                                    alertUtil.error(data.msg);
+                                }
+                            }
+                            else{
+                                alertUtil.error(data.msg);
+                            }
+                        },false,true)
+                        return isSuccess;
+                    }
+                };
+                var myFailModal = modalUtil.init(myFailTopiceModalData);
+                myFailModal.show();
             });
 
             (function init() {
+                if(localStorage.getItem("comeFromMain") === "true"){
+                    $("#failbtn").remove();
+                    $("#passbtn").remove();
+                    $("input").attr("disabled","true")
+                }
                 if (isView()){
-                    var tempdata = JSON.parse(localStorage.getItem("viewRowData"));
-                    console.log(tempdata);
-                    var tgAdvice;
-                    $.ajax({cache: false, async: false, type: 'get', data: {dataCode: tempdata.itemcode}, url: "/advice/getByDataCode", success: function (data) {
-                            tgAdvice = data;
-                        }
-                    });
                     var num = dictUtil.getDictByCode(dictUtil.DICT_LIST.postDocumentNum);
                     var postNum = num[tempdata.postDocumentNum].text + tempdata.postDocumentNum1;
                     $("#postDocumentNum").val(postNum);

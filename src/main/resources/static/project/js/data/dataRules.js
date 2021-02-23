@@ -211,8 +211,8 @@
                     $("#dataStatus").val(webStatus[row.dataStatus].text);
                     $("#imgDiv").attr("style","display:none");
                     $("#author").attr("style","display:none");
-                    $('#dataTitleSpan').html("政策法规名称");
-                    $('#dataFileTypeSpan').html("文件类型");
+                    $('#dataTitleSpan').html("规章制度名称：");
+                    $('#dataFileTypeSpan').html("文件类型：");
                     $("#fileDiv").attr("style","display:block");
                     $("#upFile").html(row.fileName);
 
@@ -335,7 +335,7 @@
                 myTable = bootstrapTableUtil.myBootStrapTableInit("table", url, param, aCol);
             }
 
-            bootstrapTableUtil.globalSearch("table",url,aParam, aCol, "dataStatus");
+            bootstrapTableUtil.globalSearch2("table",url,aParam, aCol, "dataStatus");
 
 
         })

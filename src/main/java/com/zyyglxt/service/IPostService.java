@@ -5,6 +5,7 @@ import com.zyyglxt.dataobject.PostDO;
 import com.zyyglxt.dataobject.PostDOKey;
 import com.zyyglxt.dataobject.PostFileDO;
 import com.zyyglxt.dto.PostDto;
+import com.zyyglxt.dto.PostMainPageDto;
 
 import java.util.List;
 
@@ -26,6 +27,7 @@ public interface IPostService {
 
     List<PostFileDO> getPostFileForMain();
 
-    List<String> getPostForMainPage(String status);
+    List<PostMainPageDto> getPostForMainPage(String status);
 
+    PostDto selOneWithFile(Integer itemid, String itemcode);
 }

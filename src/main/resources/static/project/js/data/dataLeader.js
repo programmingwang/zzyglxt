@@ -214,7 +214,7 @@
                     $("#imgDiv").attr("style","display:none");
                     $("#author").attr("style","display:none");
                     $("#fileType").attr("style","display:none");
-                    $('#dataTitleSpan').html("文章标题");
+                    $('#dataTitleSpan').html("文章标题：");
                     $("#fileDiv").attr("style","display:block");
                     $("#upFile").html(row.fileName);
 
@@ -332,7 +332,7 @@
                 myTable = bootstrapTableUtil.myBootStrapTableInit("table", url, param, aCol);
             }
 
-            bootstrapTableUtil.globalSearch("table",url,aParam, aCol, "dataStatus");
+            bootstrapTableUtil.globalSearch2("table",url,aParam, aCol, "dataStatus");
 
 
         })

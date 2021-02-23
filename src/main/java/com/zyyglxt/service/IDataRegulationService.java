@@ -3,6 +3,7 @@ package com.zyyglxt.service;
 import com.zyyglxt.dataobject.DataDO;
 import com.zyyglxt.dataobject.DataDOKey;
 import com.zyyglxt.dto.DataDto;
+import com.zyyglxt.dto.MainPageDto;
 
 import java.sql.Date;
 import java.util.List;
@@ -14,7 +15,7 @@ import java.util.List;
  */
 public interface IDataRegulationService {
     //查询一个政策法规
-    DataDO selectRegulation(DataDOKey key);
+    DataDto selectRegulation(DataDOKey key);
 
     //查询所有政策法规
     List<DataDto> selectRegulationList(String dataStatus);
@@ -30,6 +31,6 @@ public interface IDataRegulationService {
 
     int changeStatus(DataDOKey key, String dataDelayedRelease, String dataStatus);
 
-    List<String> selectForMainPage();
+    List<MainPageDto> selectForMainPage();
 
 }

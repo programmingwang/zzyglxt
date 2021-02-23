@@ -3,6 +3,7 @@ package com.zyyglxt.service;
 import com.zyyglxt.dataobject.DataDO;
 import com.zyyglxt.dataobject.DataDOKey;
 import com.zyyglxt.dto.DataDto;
+import com.zyyglxt.dto.MainPageDto;
 
 import java.util.List;
 
@@ -13,10 +14,10 @@ import java.util.List;
  */
 public interface IDataLeaderService {
     //查询一个领导讲话
-    DataDO selectLeader(DataDOKey key);
+    DataDto selectLeader(DataDOKey key);
 
     //查询所有领导讲话
-    List<DataDto> selectLeaderList(List<String> dataStatus);
+    List<DataDto> selectLeaderList(String dataStatus);
 
     //增加一个领导讲话
     int insertLeader(DataDO record);
@@ -29,5 +30,5 @@ public interface IDataLeaderService {
 
     int changeStatus(DataDOKey key, String dataDelayedRelease, String dataStatus);
     //获取首页数据
-    List<String> selectForMainPage();
+    List<MainPageDto> selectForMainPage();
 }

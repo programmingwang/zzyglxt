@@ -21,7 +21,7 @@ public class EhCacheConfig {
     public CacheManager cacheManager() {
         CacheManager cacheManager = CacheManagerBuilder.newCacheManagerBuilder()
                 .withCache("mainPageData",
-                        CacheConfigurationBuilder.newCacheConfigurationBuilder(String.class, Object.class,
+                        CacheConfigurationBuilder.newCacheConfigurationBuilder(Object.class, Object.class,
                                 ResourcePoolsBuilder.heap(1000L))
                                 .withExpiry(ExpiryPolicyBuilder.timeToLiveExpiration(Duration.ofMinutes(20))))
                 .build();

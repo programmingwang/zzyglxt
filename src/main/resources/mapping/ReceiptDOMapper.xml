@@ -40,10 +40,18 @@
     <result column="DATEV" jdbcType="TIMESTAMP" property="datev" />
     <result column="DATES" jdbcType="TIMESTAMP" property="dates" />
   </resultMap>
-
   <resultMap extends="BaseResultMap" id="ResultMapWithBLOBsAndFile" type="com.zyyglxt.dto.ReceiptDto">
     <result column="FILE_PATH" jdbcType="VARCHAR" property="filePath"/>
     <result column="FILE_NAME" jdbcType="VARCHAR" property="fileName"/>
+  </resultMap>
+  <resultMap id="ReceiptForMainPageResultMap" type="com.zyyglxt.dto.ReceiptMainDto">
+    <id column="itemID" jdbcType="INTEGER" property="itemid" />
+    <id column="itemCode" jdbcType="CHAR" property="itemcode" />
+    <result column="RECEIVING_TITLE" jdbcType="VARCHAR" property="dataTitle" />
+  </resultMap>
+  <resultMap id="ReceiptFileResultMap" type="com.zyyglxt.dataobject.PostFileDO">
+    <result column="FILE_NAME" jdbcType="VARCHAR" property="fileName"/>
+    <result column="FILE_PATH" jdbcType="VARCHAR" property="filePath"/>
   </resultMap>
 
   <sql id="Base_Column_List">
@@ -67,6 +75,18 @@
     from tb_governres_receipt
     where itemID = #{itemid,jdbcType=INTEGER}
       and itemCode = #{itemcode,jdbcType=CHAR}
+  </select>
+  <select id="selectOneForMainPage" parameterType="com.zyyglxt.dataobject.ReceiptDOKey" resultMap="ResultMapWithBLOBsAndFile">
+    SELECT
+    <include refid="SelectAll_Column_List" />
+    ,
+    cf.FILE_PATH
+    ,
+    cf.FILE_NAME
+    FROM tb_governres_receipt rp left join tb_culpro_file cf
+    on rp.itemCode = cf.DATA_CODE
+    where rp.itemID = #{key.itemid,jdbcType=INTEGER}
+    and rp.itemCode = #{key.itemcode,jdbcType=CHAR}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="com.zyyglxt.dataobject.ReceiptDOKey">
     delete from tb_governres_receipt
@@ -314,13 +334,6 @@
     where itemID = #{itemid,jdbcType=INTEGER}
       and itemCode = #{itemcode,jdbcType=CHAR}
   </update>
-  <!--<select id="selectAllReceipt" resultMap="BaseResultMap">
-        SELECT *
-        FROM tb_governres_receipt
-       WHERE RECEIVING_DATA_STATUS = #{receivingDataStatus,jdbcType=VARCHAR}
-       order by itemCreateAt desc
-    </select>-->
-
   <select id="selectAllReceipt" resultMap="ResultMapWithBLOBsAndFile">
         SELECT
           <include refid="SelectAll_Column_List" />
@@ -364,4 +377,24 @@
     where itemID = #{key.itemid,jdbcType=INTEGER}
     and itemCode = #{key.itemcode,jdbcType=CHAR}
   </update>
+
+  <select id="selectForMainPage" resultMap="ReceiptForMainPageResultMap">
+    select
+    a.RECEIVING_TITLE, a.itemID, a.itemCode
+    from
+    tb_governres_receipt a inner join
+    (select itemID from tb_governres_receipt order by itemUpdateAt desc limit 0,5)
+    b on b.itemID = a.itemID
+    WHERE a.RECEIVING_DATA_STATUS = 18
+  </select>
+
+  <select id="selectReceiptFileForMain" resultMap="ReceiptFileResultMap">
+    select
+      b.FILE_NAME,b.FILE_PATH
+    from
+      tb_governres_receipt a inner join
+      (select p.itemID,tcf.FILE_NAME,tcf.FILE_PATH from tb_governres_receipt p
+                                                          left join tb_culpro_file tcf on p.itemCode = tcf.DATA_CODE where tcf.FILE_PATH IS NOT NULL limit 0,5)
+        b on b.itemID = a.itemID where a.RECEIVING_DATA_STATUS = 18
+  </select>
 </mapper>

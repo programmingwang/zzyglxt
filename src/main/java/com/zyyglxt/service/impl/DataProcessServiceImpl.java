@@ -17,8 +17,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.sql.Date;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -44,16 +44,14 @@ public class DataProcessServiceImpl implements IDataProcessService {
     }
 
     @Override
-    public List<DataDto> selectProcessList(List<String> dataStatus) {
-        List<DataDto> dataDOList = new ArrayList<>();
-        for (String status : dataStatus) {
-            dataDOList.addAll(dataDOMapper.selectByAllData("办事指南", status));
-        }
-        return dataDOList;
+    public List<DataDto> selectProcessList(String dataStatus) {
+        return dataDOMapper.selectByAllData("办事指南", dataStatus);
     }
 
     @Override
     public int insertProcess(DataDO record) {
+        record.setDataDelayedRelease(new Date());
+
         ValidatorResult result = validator.validate(record);
         if(result.isHasErrors()){
             throw new BusinessException(result.getErrMsg(), EmBusinessError.PARAMETER_VALIDATION_ERROR);
@@ -75,6 +73,8 @@ public class DataProcessServiceImpl implements IDataProcessService {
 
     @Override
     public int updateProcess(DataDO record) {
+        record.setDataDelayedRelease(new Date());
+
         ValidatorResult result = validator.validate(record);
         if(result.isHasErrors()){
             throw new BusinessException(result.getErrMsg(), EmBusinessError.PARAMETER_VALIDATION_ERROR);

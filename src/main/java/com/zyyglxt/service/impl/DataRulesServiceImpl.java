@@ -4,6 +4,7 @@ import com.zyyglxt.dao.DataDOMapper;
 import com.zyyglxt.dataobject.DataDO;
 import com.zyyglxt.dataobject.DataDOKey;
 import com.zyyglxt.dto.DataDto;
+import com.zyyglxt.dto.MainPageDto;
 import com.zyyglxt.error.BusinessException;
 import com.zyyglxt.error.EmBusinessError;
 import com.zyyglxt.service.IDataRulesService;
@@ -40,6 +41,8 @@ public class DataRulesServiceImpl implements IDataRulesService {
 
     @Override
     public int insert(DataDO record) {
+        record.setDataDelayedRelease(new Date());
+
         ValidatorResult result = validator.validate(record);
         if (result.isHasErrors()) {
             throw new BusinessException(result.getErrMsg(), EmBusinessError.PARAMETER_VALIDATION_ERROR);
@@ -61,6 +64,8 @@ public class DataRulesServiceImpl implements IDataRulesService {
 
     @Override
     public int update(DataDO record) {
+        record.setDataDelayedRelease(new Date());
+
         ValidatorResult result = validator.validate(record);
         if (result.isHasErrors()) {
             throw new BusinessException(result.getErrMsg(), EmBusinessError.PARAMETER_VALIDATION_ERROR);
@@ -70,22 +75,27 @@ public class DataRulesServiceImpl implements IDataRulesService {
     }
 
     @Override
+    public DataDto getOne(DataDOKey dataDOKey) {
+        return dataDOMapper.selectOneData(dataDOKey,"规章制度");
+    }
+
+    @Override
     public List<DataDto> selectRules(String dataStatus) {
         return dataDOMapper.selectByAllData("规章制度", dataStatus);
     }
 
     @Override
-    public List<String> selectForMainPage() {
+    public List<MainPageDto> selectForMainPage() {
         //获得缓存
-        Cache<String, Object> mainPageGzzd = cacheManager.getCache("mainPageData", String.class, Object.class);
+        Cache<Object, Object> mainPageGzzd = cacheManager.getCache("mainPageData", Object.class, Object.class);
         Object gzzdData = mainPageGzzd.get("GzzdData");
         //缓存判空
         if(ObjectUtils.allNotNull(gzzdData)){
             //如果不是空，则直接将缓存数据给前台
-            return (List<String>) gzzdData;
+            return (List<MainPageDto>) gzzdData;
         }else {
             //如果是空，则查询数据库，将数据重新放入本地缓存中
-            List<String> gzzd = dataDOMapper.selectAllForMainPage("规章制度");
+            List<MainPageDto> gzzd = dataDOMapper.selectAllForMainPage("规章制度");
             mainPageGzzd.put("GzzdData",gzzd);
             return gzzd;
         }

@@ -710,7 +710,7 @@
             '        <div class="col-lg-12 col-md-12">\n' +
             '            <fieldset disabled="">\n' +
             '                <div class="input-group mb-3 row">\n' +
-            '                    <div class="input-group-prepend col-lg-3 col-md-3"> <span  class="lefttext">用户账号：</span>\n' +
+            '                    <div class="input-group-prepend col-lg-2 col-md-2"> <span  class="lefttext">用户账号：</span>\n' +
             '                    </div> <input type="text" id="username" class="form-control">\n' +
             '                </div>\n' +
             '            </fieldset>\n' +
@@ -718,7 +718,7 @@
             '        <div class="col-lg-12 col-md-12">\n' +
             '            <fieldset disabled="">\n' +
             '                <div class="input-group mb-3 row">\n' +
-            '                    <div class="input-group-prepend col-lg-3 col-md-3"> <span  class="lefttext">账号名称：</span>\n' +
+            '                    <div class="input-group-prepend col-lg-2 col-md-2"> <span  class="lefttext">账号名称：</span>\n' +
             '                    </div> <input type="text" id="name" class="form-control">\n' +
             '                </div>\n' +
             '            </fieldset>\n' +
@@ -726,7 +726,7 @@
             '        <div class="col-lg-12 col-md-12">\n' +
             '            <fieldset disabled="">\n' +
             '                <div class="input-group mb-3 row ">\n' +
-            '                    <div class="input-group-prepend col-lg-3 col-md-3"> <span  class="lefttext">用户角色：</span>\n' +
+            '                    <div class="input-group-prepend col-lg-2 col-md-2"> <span  class="lefttext">用户角色：</span>\n' +
             '                    </div> <input type="text" id="roleName" class="form-control">\n' +
             '                </div>\n' +
             '            </fieldset>\n' +
@@ -734,7 +734,7 @@
             '        <div class="col-lg-6 col-md-6" style="padding-right: 0;">\n' +
             '            <fieldset disabled="">\n' +
             '                <div class="input-group mb-3 row ">\n' +
-            '                    <div class="input-group-prepend col-lg-6 col-md-6"> <span  class="lefttext">联系人：</span>\n' +
+            '                    <div class="input-group-prepend col-lg-4 col-md-4"> <span  class="lefttext">联系人：</span>\n' +
             '                    </div> <input type="text" id="contacts" class="form-control">\n' +
             '                </div>\n' +
             '            </fieldset>\n' +
@@ -742,7 +742,7 @@
             '        <div class="col-lg-6 col-md-6" style="padding-left: 0;">\n' +
             '            <fieldset disabled="">\n' +
             '                <div class="input-group mb-3 row ">\n' +
-            '                    <div class="input-group-prepend col-lg-6 col-md-6"> <span  class="lefttext">联系电话：</span>\n' +
+            '                    <div class="input-group-prepend col-lg-4 col-md-4"> <span  class="lefttext">联系电话：</span>\n' +
             '                    </div> <input type="text" id="mobilephone" class="form-control">\n' +
             '                </div>\n' +
             '            </fieldset>\n' +
@@ -750,7 +750,7 @@
             '        <div class="col-lg-12 col-md-12">\n' +
             '            <fieldset disabled="">\n' +
             '                <div class="input-group mb-3 row ">\n' +
-            '                    <div class="input-group-prepend col-lg-3 col-md-3"> <span  class="lefttext">主管市区：</span>\n' +
+            '                    <div class="input-group-prepend col-lg-2 col-md-2"> <span  class="lefttext">主管市区：</span>\n' +
             '                    </div> <input type="text" id="cityid" class="form-control">\n' +
             '                </div>\n' +
             '            </fieldset>\n' +
@@ -1622,16 +1622,16 @@
             '                \n' +
             '                <div class="col-lg-12 col-md-12" style="margin-bottom: 10px;">\n' +
             '                    <div class="input-group mb-3 row">\n' +
-            '                        <span class=\'input-label  col-lg-3 col-md-3 lefttext\'>开启时间：</span>\n' +
+            '                        <span class=\'input-label  col-lg-2 col-md-2 lefttext\'>开启时间：</span>\n' +
             '                         <input type="text" id="startTime" class="col-lg-9 col-md-9" > <i\n' +
-            '                            class="fa fa-calendar fa-lg" style="position: absolute;top: 0.5rem;right: 7px;"></i>\n' +
+            '                            class="fa fa-calendar fa-lg" style="position: absolute;top: 0.5rem;right: 70px;"></i>\n' +
             '                    </div>\n' +
             '                </div>\n' +
             '                <div class="col-lg-12 col-md-12" >\n' +
             '                    <div class="input-group mb-3 row">\n' +
-            '                        <span class=\'input-label col-lg-3 col-md-3 lefttext\'>结束时间：</span>\n' +
+            '                        <span class=\'input-label col-lg-2 col-md-2 lefttext\'>结束时间：</span>\n' +
             '                        <input type="text" id="endTime" class="col-lg-9 col-md-9"> <i class="fa fa-calendar fa-lg"\n' +
-            '                            style="position: absolute;top: 0.5rem;right: 7px;"></i>\n' +
+            '                            style="position: absolute;top: 0.5rem;right: 70px;"></i>\n' +
             '                    </div>\n' +
             '                </div>\n' +
             '            </div>\n' +

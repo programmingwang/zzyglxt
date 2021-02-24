@@ -6,14 +6,28 @@
 
             var type = isUpdate() ? "put": "post";
 
-            var pl = dictUtil.getDictByCode(dictUtil.DICT_LIST.governerscounter);
-            $("#govPunlic").selectUtil(pl);
+            var pl = dictUtil.getDictByCode(dictUtil.DICT_LIST.parment);
+            $("#parment").selectUtil(pl);
 
             $("#cancel").unbind().on('click',function () {
                 var url = "/document/sign";
                 orange.redirect(url);
             });
 
+            //不公开理由
+            var reason = dictUtil.getDictByCode(dictUtil.DICT_LIST.postReason);
+            $("#reason").selectUtil(reason);
+
+            //公开方式
+            $('input[type=radio][name=govPunlic]').change(function () {
+                if(this.value == "2"){
+                    $('#reason').attr('style',"display:block");
+                }else {
+                    $('#reason').attr('style',"display:none");
+                    $("#reason").selectUtil(reason);
+                    $("#reason").val() == "";
+                }
+            })
 
             $("#btn_save").unbind().on('click',function () {
                 var ReceiptEntity;
@@ -27,7 +41,6 @@
                         govPunlic : $("#govPunlic").val(),
                         receivingTitle : $("#receivingTitle").val(),
                         parment : $("#parment").val(),
-                        fileNo : $("#fileNo").val(),
                         fileNumber : $("#fileNumber").val(),
                         number : $("#number").val(),
                         classification : $("#classification").val(),
@@ -43,7 +56,6 @@
                         govPunlic : $("#govPunlic").val(),
                         receivingTitle : $("#receivingTitle").val(),
                         parment : $("#parment").val(),
-                        fileNo : $("#fileNo").val(),
                         fileNumber : $("#fileNumber").val(),
                         number : $("#number").val(),
                         classification : $("#classification").val(),
@@ -77,7 +89,6 @@
                         govPunlic : $("#govPunlic").val(),
                         receivingTitle : $("#receivingTitle").val(),
                         parment : $("#parment").val(),
-                        fileNo : $("#fileNo").val(),
                         fileNumber : $("#fileNumber").val(),
                         number : $("#number").val(),
                         classification : $("#classification").val(),
@@ -93,7 +104,6 @@
                         govPunlic : $("#govPunlic").val(),
                         receivingTitle : $("#receivingTitle").val(),
                         parment : $("#parment").val(),
-                        fileNo : $("#fileNo").val(),
                         fileNumber : $("#fileNumber").val(),
                         number : $("#number").val(),
                         classification : $("#classification").val(),
@@ -121,7 +131,6 @@
                     $("#govPunlic").val(tempdata.govPunlic);
                     $("#receivingTitle").val(tempdata.receivingTitle);
                     $("#parment").val(tempdata.parment);
-                    $("#fileNo").val(tempdata.fileNo);
                     $("#fileNumber").val(tempdata.fileNumber);
                     $("#number").val(tempdata.number);
                     $("#classification").val(tempdata.classification);

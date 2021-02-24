@@ -13,8 +13,11 @@
 
             $("#cancelbtn").unbind().on('click',function () {
                 localStorage.removeItem("viewRowData");
-                var url = "/document/receipt";
-                orange.redirect(url);
+                localStorage.getItem("comeFromMain") === "true" ?
+                    orange.redirect("/data/mainPage")
+                    :
+                    orange.redirect("/document/receipt");
+                localStorage.removeItem("comeFromMain");
             });
 
             $("#pass").unbind().on('click',function () {
@@ -210,10 +213,19 @@
             });
 
             (function init() {
+                if(localStorage.getItem("comeFromMain") === "true"){
+                    $("#fail").remove();
+                    $("#pass").remove();
+                    $("input").attr("disabled","true")
+                }
                 if (isView()){
                     var tempdata = JSON.parse(localStorage.getItem("viewRowData"));
                     $("#receivingNum").val(tempdata.receivingNum);
-                    $("#receivingDateOfReceipt").val(tempdata.receivingDateOfReceipt);
+                    var receivingDateOfReceipt=tempdata.receivingDateOfReceipt;
+                    var receiptArry = receivingDateOfReceipt.split("-");
+                    $("#Year").val(receiptArry[0]);
+                    $("#Month").val(receiptArry[1]);
+                    $("#Day").val(receiptArry[2]);
                     $("#receivingTitle").val(tempdata.receivingTitle);
                     $("#receivingUnitOfCommun").val(tempdata.receivingUnitOfCommun);
                     $("#fileNo").val(tempdata.fileNo);
@@ -247,11 +259,8 @@
                     $("#datef").val(tempdata.datef);
                     $("#datev").val(tempdata.datev);
                     $("#dates").val(tempdata.dates);
-
-
                 }
             }());
-
             function isView() {
                 return (localStorage.getItem("viewRowData") != null || localStorage.getItem("viewRowData") != undefined)
             }
@@ -265,7 +274,7 @@
                 }
             }
 
-            function getRoleTable(role,preUrl,status,webStatus) {
+           /* function getRoleTable(role,preUrl,status,webStatus) {
                 if(role === "政务资源科员"){
                     $('#btn_addTask').attr('style',"display:block");
                     return preUrl + "?"+status+"="+webStatus[0].id+"&"+status+"="+webStatus[1].id+"&"+status+"="+webStatus[2].id+"&"+status+"="+webStatus[3].id+"&"+status+"="+webStatus[4].id+"&"+status+"="+webStatus[5].id+"&"+status+"="+webStatus[6].id+"&"+status+"="+webStatus[7].id+"&"+status+"="+webStatus[8].id+"&"+status+"="+webStatus[9].id+"&"+status+"="+webStatus[12].id+"&"+status+"="+webStatus[15].id+"&"+status+"="+webStatus[17].id+"&"+status+"="+webStatus[18].id+"&"+status+"="+webStatus[10].id+"&"+status+"="+webStatus[11].id+"&"+status+"="+webStatus[13].id+"&"+status+"="+webStatus[14].id+"&"+status+"="+webStatus[16].id;
@@ -421,6 +430,6 @@
                 getRoleTable:getRoleTable,
                 getRoleOperate:getRoleOperate,
                 getStatus: getStatus,
-            }
+            }*/
         })
 })();

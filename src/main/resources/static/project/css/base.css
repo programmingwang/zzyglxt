@@ -316,6 +316,7 @@ thead.self-thead {
 #accordion2{
     margin-top: 10px;
     border-top: 10px solid white;
+    border-bottom: 15px solid #f7efeb;
 }
 #btn_addTask{
     /*width: 171px;*/
@@ -432,11 +433,16 @@ a{
     margin-top: 6px !important;
     color: #775637;
 }
+.datetimepicker{
+    font-size: 20px;
+}
 th.next {
-    background: #C8C8C8;
+    background-image: url("../../images/new/right.png");
+    background-size: contain;
 }
 th.prev {
-    background: #C8C8C8;
+    background-image: url("../../images/new/left.png");
+    background-size: contain;
 }
 input, select{
     border-color: #c4d3d4;
@@ -461,5 +467,11 @@ input, select{
     z-index: 100;
 }
 .upload-wrap {
-    border-radius: unset;
+    border-radius: unset !important;
+}
+label {
+    margin-top: 6px;
+}
+.modal-body #upFile {
+    padding-top: 4px;
 }

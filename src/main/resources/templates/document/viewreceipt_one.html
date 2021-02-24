@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en"xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewreceipt" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://at.alicdn.com/t/font_1805932_ysrcp4y0uy9.css">
+    <title>Document</title>
+    <style>
+        .receipt-table{
+            width: 900px;
+            margin-top: 20px;
+            margin-left: 30px;
+        }
+        .title{
+            text-align: center;
+            font-size: 21px;
+            color: #D60000;
+        }
+        .documentNum{
+            margin-left: 0rem;
+            margin-right: 0rem;
+            width: 55px;
+            border: none;
+            outline: none;
+           // background-color: #f7efeb;
+        }
+        .document{
+            margin-left: 0rem;
+            margin-right: 0rem;
+            width: 42px;
+            border: none;
+            outline: none;
+        // background-color: #f7efeb;
+        }
+        .opinion{
+            margin-bottom: 20px;
+        }
+        .advice{
+            width: 485px;
+            margin-left: 18px;
+            border: none;
+            outline: none;
+          //  background-color: #f7efeb;
+        }
+        .text1{
+            margin: 10px;
+            width: 95%;
+            border: none;
+            outline: none;
+            background-color: #f7efeb;
+        }
+        .date {
+            float: right;
+            width: 100px;
+            margin-left: 20px;
+            border: none;
+            outline: none;
+          // background-color: #f7efeb;
+        }
+        .name {
+            float: right;
+            text-align: right;
+            width: 160px;
+            border: none;
+            outline: none;
+          //  background-color: #f7efeb;
+        }
+
+        .upload-wrap {
+            position: relative;
+            display: inline-block;
+            overflow: hidden;
+            border-radius: 3px;
+        }
+
+        .upload-wrap .file-ele {
+            position: absolute;
+            top: 0;
+            right: 0;
+            opacity: 0;
+            height: 100%;
+            width: 100%;
+            cursor: pointer;
+        }
+
+        .upload-wrap .file-open {
+            width: 90px;
+            height: 36px;
+            line-height: 36px;
+            text-align: center;
+            color: #fff;
+            background: red;
+        }
+
+        label {
+            text-align: right;
+        }
+
+        .aa {
+            padding-bottom: 45px;
+            padding-top: 20px;
+            padding-right: 100px;
+            text-align: center;
+            color: #775637;
+            font-size: 24px;
+            /*font-weight: 600;*/
+        }
+        #clsfile{
+            height: 36px;
+            margin-left: -92px;
+            display: none;
+            margin-right: 18px;
+            background-color: red;
+            z-index: 1;
+        }
+
+    </style>
+</head>
+<body>
+<div class="row" id="fir_body">
+    <div class="col-lg-2"></div>
+    <div class="col-lg-8" style="margin-left: 60px;">
+
+        <div style="margin-left: 78px;margin-top: 40px;">
+            <h4 style="color: #D60000; font-size: 34px;">政府专题调度乡镇卫生院与村卫生室一体化管理工作审批</h4>
+        </div>
+        <div style="margin-top: 30px; margin-bottom: -13px;">
+            <span style="margin-left: 5rem; color: #D60000;">收文号：</span>
+            <input id="receivingNum" class="documentNum" disabled/>
+            <span style="color: #D60000">号</span>
+            <span style="margin-left: 25rem; color: #D60000;">收文时间：</span>
+            <input id="Year" class="document" disabled />
+            <span style="color: #D60000">年</span>
+            <input id="Month"  class="document" disabled/>
+            <span style="margin-left: -1rem; color: #D60000">月</span>
+            <input id="Day" class="document" disabled/>
+            <span style="margin-left: -1rem; color: #D60000">日</span>
+        </div>
+        <div class="col-lg-12">
+            <table class="receipt-table" border="1" bordercolor="#D60000">
+                <tr style="height: 80px">
+                    <td colspan="2" class="title">来文单位</td>
+                    <td colspan="6">
+                        <div style="color: #D60000; margin-top: 11px; margin-left: -18px;">
+                            <input id="receivingUnitOfCommun" type="text" style="border:none;margin-left: 20px;" maxlength="30" disabled>
+                        </div>
+                    </td>
+                    <td colspan="2" class="title">文件编号</td>
+                    <td colspan="6">
+                        <div style="color: #D60000; margin-top: 11px; margin-left: 5px;">
+                            <input id="fileNo" type="text"style="border:none" maxlength="30" disabled>
+                        </div>
+                    </td>
+                </tr>
+
+                <tr style="height: 80px">
+                    <td colspan="2" class="title">份数</td>
+                    <td colspan="2">
+                        <div style="color: #D60000; margin-top: 11px; margin-left: -18px;">
+                            <input id="number" type="text" style="border:none;margin-left: 20px;" maxlength="30" disabled>
+                        </div>
+                    </td>
+                    <td colspan="2" class="title">密级</td>
+                    <td colspan="2">
+                        <div style="color: #D60000; margin-top: 11px; margin-left: -18px;">
+                            <input id="secretLevel" type="text" style="border:none;margin-left: 20px;" maxlength="30" disabled>
+                        </div>
+                    </td>
+                    <td colspan="2" class="title">紧急程度</td>
+                    <td colspan="2">
+                        <div style="color: #D60000; margin-top: 11px; margin-left: 5px;">
+                            <input id="receivingDegreeOfUrgency" type="text"style="border:none" maxlength="30" disabled>
+                        </div>
+                    </td>
+                    <td colspan="2" class="title">办结时限</td>
+                    <td colspan="2">
+                        <div style="color: #D60000; margin-top: 11px; margin-left: 5px;">
+                            <input id="timeLimit" type="text"style="border:none" maxlength="30" disabled>
+                        </div>
+                    </td>
+                </tr>
+
+                <tr style="height: 80px">
+                    <td colspan="2" class="title">来文标题</td>
+                    <td colspan="14">
+                        <div style="color: #D60000; margin-top: 11px; margin-left: -18px;">
+                            <input id="receivingTitle" type="text" style="border:none;margin-left: 20px; width: 800px;" maxlength="100" disabled>
+                        </div>
+                    </td>
+                </tr>
+                <tr style="height: 80px">
+                    <td colspan="2" class="title">附件</td>
+                    <td colspan="14">
+                        <div class="upload-wrap anticon" nv-file-drop="" uploader="uploader" style="margin-top: 8px;margin-left: -12px;">
+                            <a id="upload_file" href="" style="color: #BD7B37;"></a>
+                        </div>
+                    </td>
+                </tr>
+
+            </table>
+        </div>
+        <br>
+        <div class="form-group row">
+            <div class="col-lg-5 col-md-6" ></div>
+            <div class=" col-lg-2 row" >
+                    <button id="cancelbtn" type="button" class="btn btn-light col">取消</button>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-4" ></div>
+        </div>
+    </div>
+    <div class="col-lg-1"></div>
+</div>
+
+
+<script type="text/javascript" data-main="/main/main.js" th:src="@{/component/require@2.3.6/require-2.3.6.js}"></script>
+<link type="text/css" rel="stylesheet" href="/component/uploadImg/css/uploadImg.css"
+      th:src="@{/component/uploadImg/css/uploadImg.css}">
+</body>
+</html>

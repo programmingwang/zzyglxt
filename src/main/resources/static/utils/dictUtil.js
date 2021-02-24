@@ -122,6 +122,8 @@
             "timeStatus":"timeStatus",
             //收文审核状态
             "receiptStatus":"receiptStatus",
+            //专科级别
+            "specialtyLevel":"specialtyLevel",
             //会签部门
             "parment":"signDepartment"
         }

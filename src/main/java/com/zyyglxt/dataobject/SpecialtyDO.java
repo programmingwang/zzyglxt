@@ -12,6 +12,11 @@ public class SpecialtyDO extends SpecialtyDOKey {
     @NotBlank(message = "科室名称不能为空")
     private String specialtyName;
 
+    @NotBlank(message = "科室级别不能为空")
+    private String specialtyLevel;
+
+    private String specialtyDisease;
+
     @Size(max = 60)
     @NotBlank(message = "科室简介不能为空")
     private String specialtyBriefIntroduce;

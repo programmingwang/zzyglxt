@@ -48,6 +48,14 @@ public class PostController {
         return new ResponseData(EmBusinessError.success,DoToDto(postDOS));
     }
 
+    @GetMapping(value = "/selectOne/{itemid}/{itemcode}")
+    @ResponseBody
+    @LogAnnotation(appCode ="",logTitle ="查询一个带文件的发文信息",logLevel ="1",creater ="",updater = "")
+    public ResponseData getOnePost(@PathVariable Integer itemid, @PathVariable String itemcode){
+
+        return new ResponseData(EmBusinessError.success,postService.selOneWithFile(itemid,itemcode));
+    }
+
     @GetMapping(value = "/getPostFileForMain")
     @ResponseBody
     @LogAnnotation(appCode ="",logTitle ="查询所有发文附件信息",logLevel ="1",creater ="",updater = "")
@@ -61,6 +69,7 @@ public class PostController {
     public ResponseData getPostForMainPage(@RequestParam String status){
         return new ResponseData(EmBusinessError.success,postService.getPostForMainPage(status));
     }
+
 
     private List<PostDto> DoToDto(List<PostDO> DOList){
         List<PostDto> DtoList = new ArrayList<>();

@@ -55,7 +55,7 @@
                 }
                 entity["hospitalStatus"] = saveStatus;
                 entity["hospitalName"] = $("#hospitalName").val();
-                entity["hospitalLevel"] = hospitalLevel[$("#specialtyName").val()].text;
+                entity["hospitalLevel"] = hospitalLevel[$("#hospitalLevel").val()].text;
                 entity["hospitalBriefIntroduce"] = $("#hospitalBriefIntroduce").val();
                 entity["hospitalKeySpecialty"] = $("#hospitalKeySpecialty").val();
                 entity["hospitalTelephone"] = $("#hospitalTelephone").val();

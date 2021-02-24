@@ -14,7 +14,7 @@
 
             var date= new Date();
             $("#receivingDateOfReceipt").datetimepicker({
-                format: 'yyyy-mm-dd hh:ii:00',//显示格式
+                format: 'yyyy-mm-dd',//显示格式
                 startDate: date,
                 startView:2,
                 minView:1,
@@ -25,7 +25,7 @@
                 showMeridian:true,
             });
             $("#timeLimit").datetimepicker({
-                format: 'yyyy-mm-dd hh:ii:00',//显示格式
+                format: 'yyyy-mm-dd',//显示格式
                 startDate: date ,
                 startView:2,
                 minView:1,

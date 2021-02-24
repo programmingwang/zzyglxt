@@ -61,7 +61,7 @@
                 'click .send-file' : function (e, value, row, index) {
                     var mySendFileReceiptModalData ={
                         modalBodyID :"mySendFileModal",
-                        modalTitle : "文件将下达到各个部门",
+                        modalTitle : "文件将下达各个部门",
                         modalClass : "modal-lg",
                         modalConfirmFun:function () {
                             var isSuccess = false;
@@ -103,6 +103,11 @@
                     var viewUrl = "/document/viewreceipt";
                     orange.redirect(viewUrl);
                 },
+                'click .viewo' : function (e, value, row, index) {
+                    localStorage.setItem("viewRowData", JSON.stringify(row));
+                    var viewUrl = "/document/viewreceipt_one";
+                    orange.redirect(viewUrl);
+                },
 
                 'click .transpond' : function (e, value, row, index) {
                     var receiptModalData = {
@@ -116,6 +121,26 @@
                             };
                             if ($("#all_select").is(":checked") == true){
                                 submitStatus.receivingDataStatus = webStatus[19].id;
+                            }else if ($("#zhongyichu").is(":checked") == true&&$("#zhongyaochu").is(":checked") == true){
+                                submitStatus.receivingDataStatus = webStatus[20].id;
+                            }else if ($("#zhongyichu").is(":checked") == true&&$("#zonghechu").is(":checked") == true){
+                                submitStatus.receivingDataStatus = webStatus[21].id;
+                            }else if ($("#zhongyichu").is(":checked") == true&&$("#faguijandu").is(":checked") == true){
+                                submitStatus.receivingDataStatus = webStatus[22].id;
+                            }else if ($("#zhongyaochu").is(":checked") == true&&$("#zonghechu").is(":checked") == true){
+                                submitStatus.receivingDataStatus = webStatus[23].id;
+                            }else if ($("#zhongyaochu").is(":checked") == true&&$("#faguijandu").is(":checked") == true){
+                                submitStatus.receivingDataStatus = webStatus[24].id;
+                            }else if ($("#zonghechu").is(":checked") == true&&$("#faguijandu").is(":checked") == true){
+                                submitStatus.receivingDataStatus = webStatus[25].id;
+                            }else if ($("#zhongyichu").is(":checked") == true&&$("#zhongyaochu").is(":checked") == true&&$("#zonghechu").is(":checked") == true){
+                                submitStatus.receivingDataStatus = webStatus[26].id;
+                            }else if ($("#zhongyichu").is(":checked") == true&&$("#zhongyaochu").is(":checked") == true&&$("#faguijandu").is(":checked") == true){
+                                submitStatus.receivingDataStatus = webStatus[27].id;
+                            }else if ($("#zhongyichu").is(":checked") == true&&$("#zonghechu").is(":checked") == true&&$("#faguijandu").is(":checked") == true){
+                                submitStatus.receivingDataStatus = webStatus[28].id;
+                            }else if ($("#zhongyaochu").is(":checked") == true&&$("#zonghechu").is(":checked") == true&&$("#faguijandu").is(":checked") == true){
+                                submitStatus.receivingDataStatus = webStatus[29].id;
                             } else if ($("#zhongyichu").is(":checked") == true){
                                 submitStatus.receivingDataStatus = webStatus[4].id;
                             }else if ($("#zhongyaochu").is(":checked")== true){
@@ -304,6 +329,10 @@
                     return preUrl + "?"+status+"=6";
                 }else if(role === "政务资源局长") {
                     return preUrl + "?"+status+"=7";
+                }else if(role === "政务资源市部门") {
+                    return preUrl + "?"+status+"=8";
+                }else if(role === "政务资源县部门") {
+                    return preUrl + "?"+status+"=9";
                 }
             }
             function getRoleOperate(value, row, index, role, status,webStatus) {
@@ -355,7 +384,7 @@
                     }
 
                 }else if(role === "中医处分管局长"){
-                    if(status == webStatus[4].id||status == webStatus[19].id){
+                    if(status == webStatus[4].id||status == webStatus[19].id||status == webStatus[20].id||status == webStatus[21].id||status == webStatus[22].id||status == webStatus[26].id||status == webStatus[27].id||status == webStatus[28].id){
                         return [
                             '<a  class="opinion"  data-toggle="modal" style="margin:0 0.6em;text-decoration: none;color:#4df115;" data-target="#staticBackdrop" >填写审核意见</a>',
                             '<a class="view" data-toggle="modal" style="margin:0 0.6em;text-decoration: none;color:#348eff;" data-target="" >查看</a>',
@@ -367,7 +396,7 @@
                     }
                 }
                 else if(role === "中药处分管局长"){
-                    if(status == webStatus[7].id||status == webStatus[19].id){
+                    if(status == webStatus[7].id||status == webStatus[19].id||status == webStatus[20].id||status == webStatus[23].id||status == webStatus[24].id||status == webStatus[26].id||status == webStatus[27].id||status == webStatus[29].id){
                         return [
                             '<a  class="opinion"  data-toggle="modal" style="margin:0 0.6em;text-decoration: none;color:#4df115;" data-target="#staticBackdrop" >填写审核意见</a>',
                             '<a class="view" data-toggle="modal" style="margin:0 0.6em;text-decoration: none;color:#348eff;" data-target="" >查看</a>',
@@ -379,7 +408,7 @@
                     }
                 }
                 else if(role === "综合处分管局长"){
-                    if(status == webStatus[10].id||status == webStatus[19].id){
+                    if(status == webStatus[10].id||status == webStatus[19].id||status == webStatus[21].id||status == webStatus[23].id||status == webStatus[25].id||status == webStatus[26].id||status == webStatus[28].id||status == webStatus[29].id){
                         return [
                             '<a  class="opinion"  data-toggle="modal" style="margin:0 0.6em;text-decoration: none;color:#4df115;" data-target="#staticBackdrop" >填写审核意见</a>',
                             '<a class="view" data-toggle="modal" style="margin:0 0.6em;text-decoration: none;color:#348eff;" data-target="" >查看</a>',
@@ -391,7 +420,7 @@
                     }
                 }
                 else if(role === "法规监督处分管局长"){
-                    if(status == webStatus[13].id||status == webStatus[19].id){
+                    if(status == webStatus[13].id||status == webStatus[19].id||status == webStatus[22].id||status == webStatus[24].id||status == webStatus[25].id||status == webStatus[27].id||status == webStatus[28].id||status == webStatus[29].id){
                         return [
                             '<a  class="opinion"  data-toggle="modal" style="margin:0 0.6em;text-decoration: none;color:#4df115;" data-target="#staticBackdrop" >填写审核意见</a>',
                             '<a class="view" data-toggle="modal" style="margin:0 0.6em;text-decoration: none;color:#348eff;" data-target="" >查看</a>',
@@ -401,8 +430,7 @@
                             '<a class="view" data-toggle="modal" style="margin:0 1em;text-decoration: none;color:#348eff;" data-target="" >查看</a>',
                         ].join('');
                     }
-                }
-                else if(role === "政务资源局长"){
+                }else if(role === "政务资源局长"){
                     if(status == webStatus[5].id || status == webStatus[8].id|| status == webStatus[11].id|| status == webStatus[14].id){
                         return [
                             '<a  class="opinion"  data-toggle="modal" style="margin:0 0.6em;text-decoration: none;color:#4df115;" data-target="#staticBackdrop" >填写审核意见</a>',
@@ -417,6 +445,18 @@
                     }else if(status == webStatus[16].id||status == webStatus[17].id|| status == webStatus[18].id){
                         return [
                             '<a class="view" data-toggle="modal" style="margin:0 1em;text-decoration: none;color:#348eff;" data-target="" >查看</a>',
+                        ].join('');
+                    }
+                }else if(role === "政务资源县部门"){
+                    if(status == webStatus[18].id){
+                        return [
+                            '<a class="viewo" data-toggle="modal" style="margin:0 1em;text-decoration: none;color:#348eff;" data-target="" >查看</a>',
+                        ].join('');
+                    }
+                }else if(role === "政务资源市部门"){
+                    if(status == webStatus[18].id){
+                        return [
+                            '<a class="viewo" data-toggle="modal" style="margin:0 1em;text-decoration: none;color:#348eff;" data-target="" >查看</a>',
                         ].join('');
                     }
                 }

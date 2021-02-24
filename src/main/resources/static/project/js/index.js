@@ -1247,17 +1247,6 @@
                 $(".tTile").css("display","none");
                 $("#kyxm").css("display","block");
             }
-            else if (roleName === '政务资源市部门' || roleName === '政务资源县部门'){
-                var menu_list = [
-                    {
-                        menu_name: "首页",
-                        menu_url: "/data/mainPage",
-                        id: "1",
-                        level: "1",
-                        pid: ""
-                    },
-                ]
-            }
 
             function getHTML_dropdown_menu_item(astr, aurl, show_active) {
                 var str = "<a class=\"dropdown-item  " + (show_active ? "active" : "") + " \" url=\"" + aurl + "\">" + astr + "</a>\n" +

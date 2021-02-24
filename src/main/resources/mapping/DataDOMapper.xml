@@ -351,7 +351,7 @@
       a.DATA_TITLE, a.itemID, a.itemCode
     from
       tb_culpro_data a inner join
-        (select itemID from tb_culpro_data where DATA_TYPE = #{dataType,jdbcType=VARCHAR} order by itemUpdateAt limit 0,5)
-        b on a.itemID=b.itemID where a.DATA_STATUS = 5;
+        (select itemID from tb_culpro_data where DATA_TYPE = #{dataType,jdbcType=VARCHAR} and DATA_STATUS = 5 order by itemUpdateAt limit 0,5)
+        b on a.itemID=b.itemID;
   </select>
 </mapper>

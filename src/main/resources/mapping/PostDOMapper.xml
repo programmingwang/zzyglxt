@@ -314,22 +314,24 @@
       a.POST_DOCUMENT_TITLE, a.itemID, a.itemCode
     from
       tb_governres_post a inner join
-        (select itemID from tb_governres_post order by itemUpdateAt limit 0,5)
-        b on b.itemID = a.itemID where a.POST_PUBLIC_WAY = 0 or a.POST_PUBLIC_WAY = 1
+        (select itemID from tb_governres_post
     <if test="status==1">
-        and a.POST_DATA_STATUS in (0,1,2,3,4,5,7,8,9);
+      where POST_DATA_STATUS in (0,1,2,3,4,5,7,8,9)
     </if>
     <if test="status==2">
-        and a.POST_DATA_STATUS in (1,2,3,4,5,6,7,8,9);
+      where POST_DATA_STATUS in (1,2,3,4,5,6,7,8,9)
     </if>
     <if test="status==3">
-        and a.POST_DATA_STATUS in (2,4,5,6,7,8,9);
+      where POST_DATA_STATUS in (2,4,5,6,7,8,9)
     </if>
     <if test="status==4">
-        and a.POST_DATA_STATUS in (4,6,7,8,9);
+      where POST_DATA_STATUS in (4,6,7,8,9)
     </if>
     <if test="status==5">
-        and a.POST_DATA_STATUS in (6,8,9);
+      where POST_DATA_STATUS in (6,8,9)
     </if>
+     and POST_PUBLIC_WAY = 0 or POST_PUBLIC_WAY = 1
+        order by itemUpdateAt limit 0,5)
+        b on b.itemID = a.itemID
   </select>
 </mapper>

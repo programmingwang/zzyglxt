@@ -105,7 +105,6 @@
                         number : $("#number").val(),
                         secretLevel : $("#secretLevel").val(),
                         receivingDegreeOfUrgency : $("#receivingDegreeOfUrgency").val(),
-                        receivingDataStatus : '1',
                         timeLimit : $("#timeLimit").val(),
                     };
                 }else{

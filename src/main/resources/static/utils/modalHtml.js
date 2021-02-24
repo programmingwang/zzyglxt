@@ -491,89 +491,7 @@
             '                    </div>\n' +
             '            </div>\n' +
             '        </div>';
-        modalHtml.myViewSpecialtyModal = '<div class="row">\n' +
-            '            <div class="col-lg-12 col-md-12">\n' +
-            '                <fieldset disabled>\n' +
-            '                    <div class="input-group mb-3">\n' +
-            '                        <div class="input-group-prepend col-lg-2 col-md-2 ">\n' +
-            '                            <span class="lefttext">科室名称：</span> </div> <input type="text" id="specialtyName"\n' +
-            '                            class="form-control col-lg-9 col-md-9">\n' +
-            '                    </div>\n' +
-            '            </div>\n' +
-            '            <div class="col-lg-12 col-md-12">\n' +
-            '                <fieldset disabled>\n' +
-            '                    <div class="input-group mb-3">\n' +
-            '                        <div class="input-group-prepend col-lg-2 col-md-2 "> <span class="lefttext">科室介绍：</span> </div>\n' +
-            '                        <input type="text" id="specialtyBriefIntroduce" class="form-control col-lg-9 col-md-9">\n' +
-            '                    </div>\n' +
-            '            </div>\n' +
-            '            <div class="col-lg-12 col-md-12">\n' +
-            '                <fieldset disabled>\n' +
-            '                    <div class="input-group mb-3">\n' +
-            '                        <div class="input-group-prepend col-lg-2 col-md-2 "> <span class="lefttext">科室电话：</span> </div>\n' +
-            '                        <input type="text" id="specialtyPhone" class="form-control col-lg-9 col-md-9">\n' +
-            '                    </div>\n' +
-            '            </div>\n' +
-            '            <div class="col-lg-12 col-md-12">\n' +
-            '                <fieldset disabled>\n' +
-            '                    <div class="input-group mb-3">\n' +
-            '                        <div class="input-group-prepend col-lg-2 col-md-2 "> <span class="lefttext">地址：</span> </div>\n' +
-            '                        <input type="text" id="specialtyAddress" class="form-control col-lg-9 col-md-9">\n' +
-            '                    </div>\n' +
-            '            </div>\n' +
-            '            <div class="col-lg-12 col-md-12">\n' +
-            '                <fieldset disabled>\n' +
-            '                    <div class="input-group mb-3">\n' +
-            '                        <div class="input-group-prepend col-lg-2 col-md-2 "> <span class="lefttext">链接地址：</span> </div>\n' +
-            '                        <input type="text" id="specialtyLink" class="form-control col-lg-9 col-md-9">\n' +
-            '                    </div>\n' +
-            '            </div>\n' +
-            '            <div class="col-lg-12 col-md-12">\n' +
-            '                <fieldset disabled>\n' +
-            '                    <div class="input-group mb-3">\n' +
-            '                        <div class="input-group-prepend col-lg-2 col-md-2 "> <span class="lefttext">科室介绍：</span> </div>\n' +
-            '                        <div class="col-lg-9 col-md-9" style="padding: 0;">\n' +
-            '                            <div id="specialtyDescribe"\n' +
-            '                                style="height:300px;width:100%; margin-top:-1px;clear:both;overflow:hidden;overflow:scroll;"\n' +
-            '                                class="form-control "> </div>\n' +
-            '                        </div>\n' +
-            '                    </div>\n' +
-            '            </div>\n' +
-            '            <div class="col-lg-12 col-md-12">\n' +
-            '                <fieldset disabled>\n' +
-            '                    <div class="input-group mb-3">\n' +
-            '                        <div class="input-group-prepend col-lg-2 col-md-2 "> <span class="lefttext">数据状态：</span> </div>\n' +
-            '                        <input type="text" id="specialtyStatus" class="form-control col-lg-9 col-md-9">\n' +
-            '                    </div>\n' +
-            '            </div>\n' +
-            '            <div class="col-lg-6 col-md-6">\n' +
-            '                <fieldset disabled>\n' +
-            '                    <div class="input-group mb-3">\n' +
-            '                        <div style="margin-left: 4px;" class="input-group-prepend col-lg-4 col-md-4 "> <span class="lefttext"\n' +
-            '                                for="applicant">创建人：</span>\n' +
-            '                        </div> <input type="text" id="creater" class="form-control col-lg-6 col-md-6"\n' +
-            '                            >\n' +
-            '                    </div>\n' +
-            '                </fieldset>\n' +
-            '            </div>\n' +
-            '            <div class="col-lg-6 col-md-6">\n' +
-            '                <fieldset disabled>\n' +
-            '                    <div class="input-group mb-3">\n' +
-            '                        <div class="input-group-prepend col-lg-4 col-md-4 "> <span class="lefttext"\n' +
-            '                                for="applicant">创建时间：</span>\n' +
-            '                        </div> <input type="text" id="itemCreateAt" class="form-control col-lg-6 col-md-6">\n' +
-            '                    </div>\n' +
-            '                </fieldset>\n' +
-            '            </div>\n' +
-            '            <div id="imgDiv" class="col-lg-12 col-md-12">\n' +
-            '                <fieldset disabled>\n' +
-            '                    <div class="input-group mb-3">\n' +
-            '                        <div class="input-group-prepend col-lg-2 col-md-2 " style="padding-right: 20px;"> <span\n' +
-            '                                class="lefttext">科室图片：</span> </div> <img id="specialtyImg" src="#"\n' +
-            '                            style="width: 100px;height: 100px;" />\n' +
-            '                    </div>\n' +
-            '            </div>\n' +
-            '        </div>';
+        modalHtml.myViewSpecialtyModal = '<div class="row"><div class="col-lg-12 col-md-12"><fieldset disabled><div class="input-group mb-3"><div class="input-group-prepend col-lg-2 col-md-2 "><span class="lefttext">科室名称：</span></div><input type="text" id="specialtyName" class="form-control col-lg-9 col-md-9"></div></div><div class="col-lg-12 col-md-12"><fieldset disabled><div class="input-group mb-3"><div class="input-group-prepend col-lg-2 col-md-2 "><span class="lefttext">科室简介：</span></div><input type="text" id="specialtyBriefIntroduce" class="form-control col-lg-9 col-md-9"></div></div><div class="col-lg-12 col-md-12"><fieldset disabled><div class="input-group mb-3"><div class="input-group-prepend col-lg-2 col-md-2 "><span class="lefttext">科室级别：</span></div><input type="text" id="specialtyLevel" class="form-control col-lg-9 col-md-9"></div></div><div class="col-lg-12 col-md-12"><fieldset disabled><div class="input-group mb-3"><div class="input-group-prepend col-lg-2 col-md-2 "><span class="lefttext">科室电话：</span></div><input type="text" id="specialtyPhone" class="form-control col-lg-9 col-md-9"></div></div><div class="col-lg-12 col-md-12"><fieldset disabled><div class="input-group mb-3"><div class="input-group-prepend col-lg-2 col-md-2 "><span class="lefttext">地址：</span></div><input type="text" id="specialtyAddress" class="form-control col-lg-9 col-md-9"></div></div><div class="col-lg-12 col-md-12"><fieldset disabled><div class="input-group mb-3"><div class="input-group-prepend col-lg-2 col-md-2 "><span class="lefttext">链接地址：</span></div><input type="text" id="specialtyLink" class="form-control col-lg-9 col-md-9"></div></div><div class="col-lg-12 col-md-12"><fieldset disabled><div class="input-group mb-3"><div class="input-group-prepend col-lg-2 col-md-2 "><span class="lefttext">优势病种：</span></div><input type="text" id="specialtyDisease" class="form-control col-lg-9 col-md-9"></div></div><div class="col-lg-12 col-md-12"><fieldset disabled><div class="input-group mb-3"><div class="input-group-prepend col-lg-2 col-md-2 "><span class="lefttext">科室介绍：</span></div><div class="col-lg-9 col-md-9" style="padding: 0;"><div id="specialtyIntroduce"                        style="height:300px;width:100%; margin-top:-1px;clear:both;overflow:hidden;overflow:scroll;"                        class="form-control "></div></div></div></div><div class="col-lg-12 col-md-12"><fieldset disabled><div class="input-group mb-3"><div class="input-group-prepend col-lg-2 col-md-2 "><span class="lefttext">数据状态：</span></div><input type="text" id="specialtyStatus" class="form-control col-lg-9 col-md-9"></div></div><div class="col-lg-6 col-md-6"><fieldset disabled><div class="input-group mb-3"><div style="margin-left: 4px;" class="input-group-prepend col-lg-4 col-md-4 "><span class="lefttext"                        for="applicant">创建人：</span></div><input type="text" id="creater" class="form-control col-lg-6 col-md-6"></div></fieldset></div><div class="col-lg-6 col-md-6"><fieldset disabled><div class="input-group mb-3"><div class="input-group-prepend col-lg-4 col-md-4 "><span class="lefttext" for="applicant">创建时间：</span></div><input type="text" id="itemCreateAt" class="form-control col-lg-6 col-md-6"></div></fieldset></div><div id="imgDiv" class="col-lg-12 col-md-12"><fieldset disabled><div class="input-group mb-3"><div class="input-group-prepend col-lg-2 col-md-2 " style="padding-right: 20px;"><span class="lefttext">科室图片：</span></div><img id="specialtyImg" src="#" style="width: 100px;height: 100px;" /></div></div></div>';
         modalHtml.myViewChineseMedicineModal = '<div class="row">\n' +
             '           \n' +
             '            <div class="col-lg-12 col-md-12">\n' +
@@ -596,7 +514,7 @@
             '                <fieldset disabled>\n' +
             '                    <div class="input-group mb-3 row">\n' +
             '                        <div class="input-group-prepend col-lg-2 col-md-2"> <span \n' +
-            '                                class="lefttext">职位职称：</span> </div> <input type="text"\n' +
+            '                                class="lefttext">职&ensp;&ensp;&ensp;&ensp;称：</span> </div> <input type="text"\n' +
             '                            id="chineseMedicineTitle" class="form-control col-lg-9 col-md-9">\n' +
             '                    </div>\n' +
             '            </div>\n' +

@@ -121,7 +121,9 @@
             //时间状态
             "timeStatus":"timeStatus",
             //收文审核状态
-            "receiptStatus":"receiptStatus"
+            "receiptStatus":"receiptStatus",
+            //专科级别
+            "specialtyLevel":"specialtyLevel",
         }
 
         var dictList = {

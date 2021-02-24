@@ -61,23 +61,36 @@ public class ReceiptController {
     /*查询所有收文管理数据*/
     @RequestMapping(value ="selectallreceipt",method = RequestMethod.GET )
     @LogAnnotation(appCode ="",logTitle ="查询所有收文管理数据",logLevel ="1")
-    public ResponseData selectAllReceipt(@RequestParam(value = "receivingDataStatus") List receivingDataStatus){
-        List<ReceiptDO> receiptDOList = iReceiptDOService.selectAllReceipt(receivingDataStatus);
-        List<ReceiptDto> receiptDtoList = new ArrayList<>();
-        for (ReceiptDO receiptDO : receiptDOList) {
-            FileDO fileDO = iFileService.selectFileByDataCode(receiptDO.getItemcode());
-            receiptDtoList.add(
-                    ConvertDOToCareFamPre.convertFromReceipt(
-                            receiptDO,fileDO.getFilePath(),fileDO.getFileName()));
-        }
-        return new ResponseData(EmBusinessError.success,receiptDtoList);
+    public ResponseData selectAllReceipt(@RequestParam(value = "receivingDataStatus") String receivingDataStatus){
+        return new ResponseData(EmBusinessError.success,iReceiptDOService.selectAllReceipt(receivingDataStatus));
+    }
+
+    /*查询首页收文管理数据*/
+    @RequestMapping(value ="/receipt/selectForMain",method = RequestMethod.GET )
+    @LogAnnotation(appCode ="",logTitle ="查询首页收文管理数据",logLevel ="1")
+    public ResponseData selectForMain(){
+        return new ResponseData(EmBusinessError.success,iReceiptDOService.selectForMain());
+    }
+
+    /*查询一个带文件的收文管理数据*/
+    @RequestMapping(value ="/receipt/selectOne/{itemid}/{itemcode}",method = RequestMethod.GET )
+    @LogAnnotation(appCode ="",logTitle ="查询一个带文件的收文管理数据",logLevel ="1")
+    public ResponseData selectOne(@PathVariable Integer itemid, @PathVariable String itemcode){
+        return new ResponseData(EmBusinessError.success,iReceiptDOService.selectOneWithFile(itemid,itemcode));
+    }
+
+    @GetMapping(value = "/receipt/getReceiptFileForMain")
+    @ResponseBody
+    @LogAnnotation(appCode ="",logTitle ="查询所有公开收文附件信息",logLevel ="1",creater ="",updater = "")
+    public ResponseData getPostFileForMain(){
+        return new ResponseData(EmBusinessError.success,iReceiptDOService.getReceiptFileForMain());
     }
 
     /*收文管理数据状态*/
     @RequestMapping(value = "changestatustoreceipt/{itemID}/{itemCode}" , method = RequestMethod.POST)
     @ResponseBody
     @LogAnnotation(logTitle = "修改收文管理数据状态", logLevel = "2")
-    public ResponseData changeStatusToReceipt(@RequestParam("receivingDataStatus") String receivingDataStatus , @PathVariable("itemID") Integer itemID , @PathVariable("itemCode")String itemCode){
+    public ResponseData changeStatusToReceipt(@RequestParam(value="receivingDataStatus") String receivingDataStatus , @PathVariable("itemID") Integer itemID , @PathVariable("itemCode")String itemCode){
         ReceiptDOKey receiptDOKey=new ReceiptDOKey();
         receiptDOKey.setItemid(itemID);
         receiptDOKey.setItemcode(itemCode);

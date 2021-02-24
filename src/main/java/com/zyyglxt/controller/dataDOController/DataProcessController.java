@@ -41,7 +41,7 @@ public class DataProcessController {
      */
     @RequestMapping(value = "/selectAll", method = RequestMethod.GET)
     @LogAnnotation(appCode ="",logTitle ="查看所有办事流程数据",logLevel ="1",creater ="",updater = "")
-    public ResponseData selectProcessList(@RequestParam(value = "dataStatus")List dataStatus){
+    public ResponseData selectProcessList(@RequestParam(value = "dataStatus")String dataStatus){
         return new ResponseData(EmBusinessError.success,dataProcessService.selectProcessList(dataStatus));
     }
 

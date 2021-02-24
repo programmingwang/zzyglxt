@@ -123,6 +123,7 @@
 
             if(!objectUtil.strIsBlank(data.modalConfirmFun)){
                 $("#"+data.modalConfirmID).on("click",function () {
+                    $(this).off("click");
                     if(data.modalConfirmFun()) {
                         $("#"+data.modalID).modal("hide");
                     }

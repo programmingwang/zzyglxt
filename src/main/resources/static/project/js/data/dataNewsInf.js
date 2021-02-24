@@ -210,8 +210,8 @@
                 $("#dataStatus").val(webStatus[row.dataStatus].text);
                 $("#dataFileType").val(row.dataFileType);
                 $("#imgDiv").attr("style","display:none");
-                $('#dataTitleSpan').html("新闻标题");
-                $('#dataFileTypeSpan').html("新闻性质");
+                $('#dataTitleSpan').html("新闻标题：");
+                $('#dataFileTypeSpan').html("新闻性质：");
 
                 myNewsInfModal.show();
             },
@@ -309,8 +309,7 @@
             orange.redirect(addUrl);
         });
 
-        var pl = dictUtil.getDictByCode(dictUtil.DICT_LIST.webStatus);
-        $("#chargePersonSearch").selectUtil(pl);
+        $("#chargePersonSearch").selectUtil(selectUtil.inSearchStatus());
 
 
         var aCol = [
@@ -329,7 +328,7 @@
             myTable = bootstrapTableUtil.myBootStrapTableInit("table", url, param, aCol);
         }
 
-        bootstrapTableUtil.globalSearch("table",url,aParam, aCol, "dataStatus");
+        bootstrapTableUtil.globalSearch2("table",url,aParam, aCol, "dataStatus");
 
 
     })

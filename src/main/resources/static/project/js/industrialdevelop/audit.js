@@ -160,6 +160,7 @@
                             ajaxUtil.myAjax(null, viewUrl,null, function (res) {
                                 data = res.data;
                                 modalData.modalBodyID = "myViewPlantModal";
+                                modalData.modalClass= "modal-xl",
                                 myTravelModal = modalUtil.init(modalData);
                                 $("#myImg").attr('src', data.filePath);
                                 $("#name").val(data.name);
@@ -244,6 +245,7 @@
                             ajaxUtil.myAjax(null, viewUrl,null, function (res) {
                                 data = res.data;
                                 modalData.modalBodyID = "myViewSchoolModal";
+                                modalData.modalClass= "modal-xl",
                                 myTravelModal = modalUtil.init(modalData);
                                 $("#myImg").attr('src', data.filePath);
                                 $("#schoolName").val(data.schoolName);
@@ -378,7 +380,7 @@
                 pl = dictUtil.getDictByCode(dictUtil.DICT_LIST.orgAuditStatus);
                 $("#chargePersonSearch").selectUtil(pl);
                 pl = dictUtil.getDictByCode(dictUtil.DICT_LIST.orgType);
-                $("#orgTypeSelect").selectUtil(pl);
+                $("#orgTypeSelect").selectUtil(pl,false,true);
             }else if (rolename == "产业发展-省级"){
                 pl = dictUtil.getDictByCode(dictUtil.DICT_LIST.orgAuditStatus);
                 let tpl = [];
@@ -405,10 +407,10 @@
                 let code = $("#orgTypeSelect").val();
                 if (code != "all"){
                     getUrl = url + "/" + code;
-                    refreshTable();
+                    refreshTable()
                 }else {
                     getUrl = url;
-                    refreshTable();
+                    refreshTable()
                 }
             });
 
@@ -461,6 +463,7 @@
                         var status= allTableData[i]["status"]
                         // console.log("addstr:"+addstr)
                         // console.log("status:"+status)
+
                         //调试时可以先打印出来，进行修改
                         if(addstr==status){
                             isStatusSlot=true;
@@ -469,11 +472,11 @@
                         if (textP == null || textP == undefined || textP == '') {
                             textP = "1";
                         }
-                        if($("#closeAndOpen").text().search("展开")!= -1 && textP.search(str) != -1){
+                        if(textP.search(str) != -1){
                             isStatusSlot = false;
                             newArry.push(allTableData[i])
                         }
-                        if($("#closeAndOpen").text().search("收起")!= -1 && textP.search(str) != -1 && isStatusSlot){
+                        if(textP.search(str) != -1 && isStatusSlot){
                             newArry.push(allTableData[i])
                         }
                     }

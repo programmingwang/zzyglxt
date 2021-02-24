@@ -31,6 +31,7 @@
         }
         label{
             text-align: right;
+            margin-top: 6px;
         }
         div#upimg {
             padding-top: 23%;
@@ -50,11 +51,19 @@
                 <div class="col-sm-3">
                     <input id="name" type="text" class="form-control" placeholder="请输入">
                 </div>
+                <label class="col-sm-2 col-form-label"><span style="color: red">*</span>出处：</label>
+                <div class="col-sm-3">
+                    <input id="source" type="text" class="form-control" placeholder="请输入">
+                </div>
             </div>
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label">历史名方作者：</label>
                 <div class="col-sm-3">
                     <input id="author" type="text" class="form-control" placeholder="请输入">
+                </div>
+                <label class="col-sm-2 col-form-label"><span style="color: red">*</span>处方：</label>
+                <div class="col-sm-3">
+                    <input id="prescription" type="text" class="form-control" placeholder="请输入">
                 </div>
             </div>
             <div class="form-group row">
@@ -62,17 +71,9 @@
                 <div class="col-sm-3">
                     <input id="famsource" type="text" class="form-control" placeholder="请输入">
                 </div>
-            </div>
-            <div class="form-group row">
-                <label class="col-sm-2 col-form-label"><span style="color: red">*</span>出处：</label>
+                <label class="col-sm-2 col-form-label"><span style="color: red">*</span>剂型：</label>
                 <div class="col-sm-3">
-                    <input id="source" type="text" class="form-control" placeholder="请输入">
-                </div>
-            </div>
-            <div class="form-group row">
-                <label class="col-sm-2 col-form-label"><span style="color: red">*</span>处方：</label>
-                <div class="col-sm-3">
-                    <input id="prescription" type="text" class="form-control" placeholder="请输入">
+                    <input id="type" type="text" class="form-control" placeholder="请输入">
                 </div>
             </div>
             <div class="form-group row">
@@ -80,26 +81,23 @@
                 <div id="div1" class="col-sm-8">
                 </div>
             </div>
-            <div class="form-group row">
-                <label class="col-sm-2 col-form-label"><span style="color: red">*</span>剂型：</label>
-                <div class="col-sm-3">
-                    <input id="type" type="text" class="form-control" placeholder="请输入">
-                </div>
-            </div>
+
 
 
             <div class="form-group row">
-                <div class="col-lg-4 col-md-4" ></div>
-                <div class=" col-lg-4 row" >
+                <div class="col-lg-6 col-md-6" ></div>
+                <div class=" col-lg-4 row" style="padding: 0" >
                     <div class="col">
-                        <button id="cancel" type="button" class="btn btn-light col">取消</button>
+                        <button id="cancel" type="button" class="btn btn-light col">关闭</button>
                     </div>
                     <div class="col">
                         <button id="btn_save" type="submit" class="btn btn-danger col">保存</button>
                     </div>
-                    <button id="btn_insert" type="submit" class="btn btn-primary col">提交</button>
+                    <div class="col" style="padding-right: 0;">
+                        <button id="btn_insert" type="submit" class="btn btn-primary col">发送</button>
+                    </div>
                 </div>
-                <div class="col-lg-4 col-md-4" ></div>
+
             </div>
         </form>
     </div>

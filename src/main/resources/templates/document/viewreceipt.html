@@ -109,142 +109,160 @@
     </style>
 </head>
 <body>
-<div class="col-lg-1"></div>
-<div class="col-lg-10">
-    <div style="margin-left: 230px;margin-top: 40px;">
-        <h4 style="color: #D60000; font-size: 34px;">河北省中医药管理局收文审批笺</h4>
-    </div>
-    <div class="col-lg-12">
-        <table class="receipt-table" border="1" bordercolor="#D60000">
-            <tr style="height: 200px">
-                <td class="title">局<br>领<br>导<br>意<br>见</td>
-                <td colspan="9">
-                    <div class="opinion">
-                        <input id="directorOpinion" class="advice" type="text" placeholder="等待审核"/>
-                        <input id="directorDate" class="date" readonly="readonly"/>
-                        <input id="directorName" class="name" readonly="readonly"/>
-                    </div>
-                    <div class="opinion">
-                        <input id="deputyDirectorOpinion" class="advice" type="text" placeholder="等待审核" />
-                        <input id="deputyDirectorDate" class="date" readonly="readonly"/>
-                        <input id="deputyDirectorName" class="name" readonly="readonly"/>
-                    </div>
-                </td>
-            </tr>
-
-            <tr style="height: 200px">
-                <td class="title">处<br>室<br>意<br>见</td>
-                <td colspan="9">
-                    <div class="opinion">
-                        <input id="departmentOpinion" type="text" style="margin-left: 18px; width: 410px; border: none; outline: none; background-color: #f7efeb" placeholder="等待审核" />
-                        <input id="departmentDate" class="date" style="margin-top: 50px;" readonly="readonly"/>
-                        <input id="departmentName" class="name" style="margin-top: 50px;" readonly="readonly"/>
-                    </div>
-                </td>
-            </tr>
-
-            <tr style="height: 130px">
-                <td class="title">文<br>件<br>信<br>息</td>
-                <td colspan="9">
-                    <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">收文号：</label>
-                        <div class="col-sm-4">
-                            <input id="receivingNum" type="text"  style="border:none" maxlength="30" disabled>
-                        </div>
-
-
-                        <label class="col-sm-2 col-form-label">收文时间：</label>
-                        <div class="col-sm-4">
-                            <input id="receivingDateOfReceipt" type="text" style="border:none"  maxlength="30" disabled>
-                        </div>
-                    </div>
-
-                    <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">来文标题：</label>
-                        <div class="col-sm-10">
-                            <input id="receivingTitle" type="text" style="border:none" disabled>
-                        </div>
-                    </div>
-
-
-                    <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">来文单位：</label>
-                        <div class="col-sm-4">
-                            <input id="receivingUnitOfCommun" type="text" style="border:none" maxlength="30" disabled>
-                        </div>
-
-                        <label class="col-sm-2 col-form-label">文件编号：</label>
-                        <div class="col-sm-4">
-                            <input id="fileNo" type="text"style="border:none" maxlength="30" disabled>
-                        </div>
-                    </div>
-
-                    <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">份数：</label>
-                        <div class="col-sm-4">
-                            <input id="number" type="text" style="border:none"  maxlength="30" disabled>
-                        </div>
-
-                        <label class="col-sm-2 col-form-label">密级：</label>
-                        <div class="col-sm-4">
-                            <input id="secretLevel" type="text" style="border:none"  maxlength="30" disabled>
-                        </div>
-                    </div>
-
-                    <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">紧急程度：</label>
-                        <div class="col-sm-4">
-                            <input  id="receivingDegreeOfUrgency" type="text" style="border:none" disabled>
-                        </div>
-
-                        <label class="col-sm-2 col-form-label">办结时限：</label>
-                        <div class="col-sm-4">
-                            <input id="timeLimit" type="text" style="border:none"  maxlength="30" disabled>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">数据状态：</label>
-                        <div class="col-sm-4">
-                            <input  id="receivingDataStatus" type="text" style="border:none" disabled>
-                        </div>
-
-                        <label class="col-sm-2 col-form-label">创建人：</label>
-                        <div class="col-sm-4">
-                            <input id="creater" type="text" style="border:none"  maxlength="30" disabled>
-                        </div>
-                    </div>
-                </td>
-            </tr>
-
-            <tr style="height: 60px">
-                <td class="title">附<br>件</td>
-                <td colspan="9">
-                    <div class="upload-wrap anticon" nv-file-drop="" uploader="uploader" style="margin-top: 8px;">
-                        <a id="upload_file" href="" style="color: #BD7B37;"></a>
-                    </div>
-                </td>
-            </tr>
-
-        </table>
-    </div>
-    <br>
-    <div class="form-group row">
-        <div class="col-lg-4 col-md-4" ></div>
-        <div class=" col-lg-4 row" >
-            <div class="col">
-                <button id="fail" type="submit" class="btn btn-danger col">驳回</button>
-            </div>
-            <div class="col">
-                <button id="pass" type="submit" class="btn btn-primary col">通过</button>
-            </div>
-            <div class="col">
-                <button id="cancelbtn" type="button" class="btn btn-light col">关闭</button>
-            </div>
+<div class="row" id="fir_body">
+    <div class="col-lg-2"></div>
+    <div class="col-lg-7">
+        <div style="margin-left: 230px;margin-top: 40px;">
+            <h4 style="color: #D60000; font-size: 34px;">河北省中医药管理局收文审批笺</h4>
         </div>
-        <div class="col-lg-4 col-md-4" ></div>
+        <div class="col-lg-12">
+            <table class="receipt-table" border="1" bordercolor="#D60000">
+                <tr style="height: 200px">
+                    <td class="title">局<br>领<br>导<br>意<br>见</td>
+                    <td colspan="9">
+                        <div class="opinion">
+                            <input id="reasono" class="advice" type="text" placeholder="局长审核 理由不为空"/>
+                            <input id="dateo" class="date" style="margin-top: 20px;" readonly="readonly"/>
+                            <input id="nameo" class="name" style="margin-top: 20px;" readonly="readonly"/>
+                        </div>
+                        <div class="opinion">
+                            <input id="reasont" class="advice" type="text" placeholder="中医处分局审核 理由不为空" />
+                            <input id="datet" class="date" style="margin-top: 20px;" readonly="readonly"/>
+                            <input id="namet" class="name" style="margin-top: 20px;" readonly="readonly"/>
+                        </div>
+                        <div class="opinion">
+                            <input id="reasonh" class="advice" type="text" placeholder="中药处分局审核 理由不为空" />
+                            <input id="dateh" class="date" style="margin-top: 20px;" readonly="readonly"/>
+                            <input id="nameh" class="name" style="margin-top: 20px;" readonly="readonly"/>
+                        </div>
+                        <div class="opinion">
+                            <input id="reasonf" class="advice" type="text" placeholder="综合处分局审核 理由不为空" />
+                            <input id="datef" class="date" style="margin-top: 20px;" readonly="readonly"/>
+                            <input id="namef" class="name"  style="margin-top: 20px;" readonly="readonly"/>
+                        </div>
+                        <div class="opinion">
+                            <input id="reasonv" class="advice" type="text" placeholder="法规监督分局审核 理由不为空" />
+                            <input id="datev" class="date" style="margin-top: 20px;" readonly="readonly"/>
+                            <input id="namev" class="name" style="margin-top: 20px;" readonly="readonly"/>
+                        </div>
+                    </td>
+                </tr>
+
+                <tr style="height: 200px">
+                    <td class="title">处<br>室<br>意<br>见</td>
+                    <td colspan="9">
+                        <div class="opinion">
+                            <input id="reasons" type="text"   style="margin-left: 18px; width: 410px; border: none; outline: none; background-color: #f7efeb" placeholder="综合处长审核 理由不为空" />
+                            <input id="dates" class="date" style="margin-top: 20px;" readonly="readonly"/>
+                            <input id="names" class="name" style="margin-top: 20px;" readonly="readonly"/>
+                        </div>
+                    </td>
+                </tr>
+
+                <tr style="height: 130px">
+                    <td class="title">文<br>件<br>信<br>息</td>
+                    <td colspan="9">
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">收文号：</label>
+                            <div class="col-sm-4">
+                                <input id="receivingNum" type="text"  style="border:none" maxlength="30" disabled>
+                            </div>
+
+
+                            <label class="col-sm-2 col-form-label">收文时间：</label>
+                            <div class="col-sm-4">
+                                <input id="receivingDateOfReceipt" type="text" style="border:none"  maxlength="30" disabled>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">来文标题：</label>
+                            <div class="col-sm-10">
+                                <input id="receivingTitle" type="text" style="border:none" disabled>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">来文单位：</label>
+                            <div class="col-sm-4">
+                                <input id="receivingUnitOfCommun" type="text" style="border:none" maxlength="30" disabled>
+                            </div>
+
+                            <label class="col-sm-2 col-form-label">文件编号：</label>
+                            <div class="col-sm-4">
+                                <input id="fileNo" type="text"style="border:none" maxlength="30" disabled>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">份数：</label>
+                            <div class="col-sm-4">
+                                <input id="number" type="text" style="border:none"  maxlength="30" disabled>
+                            </div>
+
+                            <label class="col-sm-2 col-form-label">密级：</label>
+                            <div class="col-sm-4">
+                                <input id="secretLevel" type="text" style="border:none"  maxlength="30" disabled>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">紧急程度：</label>
+                            <div class="col-sm-4">
+                                <input  id="receivingDegreeOfUrgency" type="text" style="border:none" disabled>
+                            </div>
+
+                            <label class="col-sm-2 col-form-label">办结时限：</label>
+                            <div class="col-sm-4">
+                                <input id="timeLimit" type="text" style="border:none"  maxlength="30" disabled>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">数据状态：</label>
+                            <div class="col-sm-4">
+                                <input  id="receivingDataStatus" type="text" style="border:none" disabled>
+                            </div>
+
+                            <label class="col-sm-2 col-form-label">创建人：</label>
+                            <div class="col-sm-4">
+                                <input id="creater" type="text" style="border:none"  maxlength="30" disabled>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+
+                <tr style="height: 60px">
+                    <td class="title">附<br>件</td>
+                    <td colspan="9">
+                        <div class="upload-wrap anticon" nv-file-drop="" uploader="uploader" style="margin-top: 8px;">
+                            <a id="upload_file" href="" style="color: #BD7B37;"></a>
+                        </div>
+                    </td>
+                </tr>
+
+            </table>
+        </div>
+        <br>
+        <div class="form-group row">
+            <div class="col-lg-6 col-md-6" ></div>
+            <div class=" col-lg-6 row" >
+                <div class="col">
+                    <button id="fail" type="submit" class="btn btn-danger col">驳回</button>
+                </div>
+                <div class="col">
+                    <button id="pass" type="submit" class="btn btn-primary col">通过</button>
+                </div>
+                <div class="col">
+                    <button id="cancelbtn" type="button" class="btn btn-light col">关闭</button>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-4" ></div>
+        </div>
     </div>
+    <div class="col-lg-1"></div>
 </div>
-<div class="col-lg-1"></div>
+
 
 <script type="text/javascript" data-main="/main/main.js" th:src="@{/component/require@2.3.6/require-2.3.6.js}"></script>
 <link type="text/css" rel="stylesheet" href="/component/uploadImg/css/uploadImg.css"

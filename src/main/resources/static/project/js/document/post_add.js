@@ -1,26 +1,23 @@
 (function () {
-    require(['jquery','ajaxUtil','alertUtil','stringUtil','fileUtil','dictUtil','distpicker','selectUtil','checkUtil','uploadImg'],
-        function (jquery,ajaxUtil,alertUtil,stringUtil,fileUtil,dictUtil,distpicker,selectUtil,checkUtil,uploadImg) {
+    require(['jquery','ajaxUtil','alertUtil','stringUtil','fileUtil','dictUtil','distpicker','selectUtil','checkUtil','uploadImg','modalUtil'],
+        function (jquery,ajaxUtil,alertUtil,stringUtil,fileUtil,dictUtil,distpicker,selectUtil,checkUtil,uploadImg,modalUtil) {
 
             uploadImg.init();
-
-            //公开方式
-            var publicWay = dictUtil.getDictByCode(dictUtil.DICT_LIST.postPublicWay);
-            $("#postPublicWay").selectUtil(publicWay);
-            $('#postPublicWay').change(function () {
-                if($("#postPublicWay").val() == "2"){
-                    $('#reason').attr('style',"display:block");
-                    $('#postReason').attr('style',"display:block");
-                }else {
-                    $('#reason').attr('style',"display:none");
-                    $('#postReason').attr('style',"display:none");
-                    $("#postReason").val() == "";
-                }
-            });
 
             //不公开理由
             var reason = dictUtil.getDictByCode(dictUtil.DICT_LIST.postReason);
             $("#postReason").selectUtil(reason);
+
+            //公开方式
+            $('input[type=radio][name=postPublicWay]').change(function () {
+                if(this.value == "2"){
+                    $('#postReason').attr('style',"display:block");
+                }else {
+                    $('#postReason').attr('style',"display:none");
+                    $("#postReason").selectUtil(reason);
+                    $("#postReason").val() == "";
+                }
+            })
 
             //是否需要公平竞争审查
             var fair = dictUtil.getDictByCode(dictUtil.DICT_LIST.postFairDepartmentReview);
@@ -41,8 +38,85 @@
             var num = dictUtil.getDictByCode(dictUtil.DICT_LIST.postDocumentNum);
             $("#postDocumentNum").selectUtil(num);
 
+            //主送抄送
+            // 获取勾选的行
+            var checkids = [];
+            // 存储账号信息
+            var sendGoal = {};
+
+            function distribution(rows) {
+                var addSendModal = {
+                    modalBodyID: "addSendModal", //公用的在后面给span加不同的内容就行了，其他模块同理
+                    modalTitle: "发送对象",
+                    modalClass: "modal-lg",
+                    confirmButtonClass: "btn-danger",
+                    modalConfirmFun: function () {
+                        for (var i = 0; i < rows.length; i++) {
+                            var sendRows = $("#sendTable").bootstrapTable('getSelections');
+                            if (sendRows.length == 0) {
+                                alertUtil.error("错误，未勾选发送对象，请勾选后重试")
+                                return true;
+                            }
+                            else {
+                                var sendList = [];
+                                for (var j = 0; j < sendRows.length; j++) {
+                                    var entity = {
+                                        itemcode: stringUtil.getUUID(),
+                                        expertCode: sendRows[j].itemcode,
+                                        topicCode: rows[i].itemcode,
+                                        exmaineStatus: exmaineStatus[1].id
+                                    }
+                                    sendList.push(entity)
+                                }
+                                var list = new Set(sendList);
+                                sendList = Array.from(list);
+                                ajaxUtil.myAjax(null, "/exmain/exmain", sendList, function (data) {
+                                    if (ajaxUtil.success(data)) {
+                                    } else {
+                                        alert(data.msg);
+                                    }
+                                }, false, true, "post");
+                            }
+                        }
+                        refreshTable();
+                        var submitConfirmModal = {
+                            modalBodyID: "myTopicSubmitTip",
+                            modalTitle: "提示",
+                            modalClass: "modal-lg",
+                            cancelButtonStyle: "display:none",
+                            confirmButtonClass: "btn-danger",
+                            modalConfirmFun: function () {
+                                return true;
+                            }
+                        }
+                        var submitConfirm = modalUtil.init(submitConfirmModal);
+                        submitConfirm.show();
+                        return true;
+                    }
+                }
+                var addSendModal = modalUtil.init(addSendModal);
+                var expertsCol = [
+                    {checkbox: true},
+                    {field: 'username', title: '用户账号'},
+                    {field: 'cityid', title: '主管市区'},
+                ];
+                $('#sendTable').bootstrapTable('destroy');
+                $('#sendTable').bootstrapTable({
+                    toolbar: "#sendTable",
+                    columns: expertsCol,
+                    striped: true,
+                    clickToSelect: true,
+                });
+                $('#sendTable').bootstrapTable('load', Array.from(sendGoal));
+                addSendModal.show();
+            }
+
+            $("#masterSend").unbind().on('click', function () {
+                distribution(checkids);
+            });
+
             //主送目标
-            let send = dictUtil.getDictByCode(dictUtil.DICT_LIST.areaAdmin);
+            /*let send = dictUtil.getDictByCode(dictUtil.DICT_LIST.areaAdmin);
             $("#masterSend").selectUtil(send);
 
             //console.log($("#copySendGoal").val())
@@ -60,11 +134,10 @@
             $("#clear").unbind().on("click",function () {
                 $("#copySend").val("");
                 $("#copySendGoal").selectUtil(send);
-            })
+            })*/
 
             //当前时间
             var nowTime = stringUtil.formatDateTime(new Date());
-
             //当前用户名
             var username = sessionStorage.getItem("username");
 
@@ -235,6 +308,14 @@
                         postDocumentNum1 : pad(newNum),
                         postDataStatus : "1",
                     };
+                    var postFile = [];
+                    postFile[0] = $("#upload_file")[0].files[0];
+                    postFile[1] = $("#fairFile")[0].files[0];
+                    var code1 = "1" + uuid.substring(1);
+                    var code2 = "2" + uuid.substring(1);
+                    ajaxUtil.postFileAjax(uuid,postFile[0], code1, sessionStorage.getItem("username"), sessionStorage.getItem("itemcode"));
+                    ajaxUtil.postFileAjax(uuid,postFile[1], code2, sessionStorage.getItem("username"), sessionStorage.getItem("itemcode"));
+
                 }
                 else {
                     var needData = JSON.parse(localStorage.getItem("rowData"));
@@ -252,10 +333,21 @@
                         postDocumentNum : $("#postDocumentNum").val(),
                     }
                     operateMessage = "修改发文信息成功";
+                    if (needData.fileName !== null){
+                        ajaxUtil.myAjax(null,"/file/delete?dataCode="+needData.itemcode,null,function (data) {
+                            if(!ajaxUtil.success(data)){
+                                return alertUtil.warning("文件删除失败,可能是文件损坏或不存在了");
+                            }
+                        },false,"","get");
+                        postFile = [];
+                        postFile[0] = $("#upload_file")[0].files[0];
+                        postFile[1] = $("#fairFile")[0].files[0];
+                        code1 = "1" + needData.itemcode.substring(1);
+                        code2 = "2" + needData.itemcode.substring(1);
+                        ajaxUtil.postFileAjax(needData.itemcode,postFile[0], code1, sessionStorage.getItem("username"), sessionStorage.getItem("itemcode"));
+                        ajaxUtil.postFileAjax(needData.itemcode,postFile[1], code2, sessionStorage.getItem("username"), sessionStorage.getItem("itemcode"));
+                    }
                 }
-
-                fileUtil.handleFile(isUpdate(), PostEntity.itemcode, $("#upload_file")[0].files[0]);
-
                 ajaxUtil.myAjax(null,requestUrl,PostEntity,function (data) {
                     if(ajaxUtil.success(data)){
                         ajaxUtil.myAjax(null,adviceUrl,AdviceEntity,function (data) {

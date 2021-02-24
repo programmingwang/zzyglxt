@@ -35,6 +35,19 @@ public class DataRegulationController {
     private IFileService fileService;
 
     /**
+     * 查看一个政策法规
+     * @return
+     */
+    @RequestMapping(value = "/selectOne/{itemID}/{itemCode}", method = RequestMethod.GET)
+    @LogAnnotation(appCode ="",logTitle ="查看一个政策法规",logLevel ="1",creater ="",updater = "")
+    public ResponseData selectOneRegulation(@PathVariable Integer itemID, @PathVariable String itemCode){
+        DataDOKey dataDOKey = new DataDOKey();
+        dataDOKey.setItemid(itemID);
+        dataDOKey.setItemcode(itemCode);
+        return new ResponseData(EmBusinessError.success,dataRegulationService.selectRegulation(dataDOKey));
+    }
+
+    /**
      * 查看政策法规的所有数据
      * @return
      */

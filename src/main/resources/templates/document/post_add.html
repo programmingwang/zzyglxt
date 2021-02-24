@@ -37,12 +37,12 @@
         }
 
         .aa {
-            padding-bottom: 20px;
-            padding-top: 30px;
-            padding-right: 180px;
+            padding-bottom: 45px;
+            padding-top: 20px;
+            padding-right: 100px;
             text-align: center;
-            color: #D60000;
-            font-size: 34px;
+            color: #775637;
+            font-size: 24px;
         }
 
         #clsfile{
@@ -73,141 +73,144 @@
     </style>
 </head>
 <body>
-<div class="row">
+<div class="row" id="fir_body">
     <div class="col-12">
         <form>
 
-            <div class="aa">发文信息录入</div>
+                <div class="aa">发文信息录入</div>
 
-            <div class="form-group row">
-                <label class="col-sm-2 col-form-label">文件标题：</label>
-                <div class="col-sm-8">
-                    <input id="postDocumentTitle" type="text" class="form-control" placeholder="请输入">
-                </div>
-            </div>
-
-            <div class="form-group row">
-                <label class="col-sm-2 col-form-label">主送：</label>
-                <div class="col-sm-8">
-                    <select class="custom-select" id="masterSend"></select>
-                </div>
-            </div>
-
-            <div class="form-group row">
-                <label class="col-sm-2 col-form-label">抄送：</label>
-                <div class="col-sm-3">
-                    <input id="copySend" type="text" class="form-control" placeholder="添加抄送目标" readonly="readonly">
-                </div>
-                <div class="col-sm-2">
-                    <select id="copySendGoal" class="form-control"></select>
-                </div>
-                <div class="col-sm-2">
-                    <button id="add" type="button">添加</button>
-                    <button id="clear" type="button">清空</button>
-                </div>
-            </div>
-
-            <div class="form-group row">
-                <label class="col-sm-2 col-form-label">公开方式：</label>
-                <div class="col-sm-3">
-                    <select id="postPublicWay" name="postPublicWay" class="form-control"></select>
-                </div>
-
-                <label id="reason" class="col-sm-2 col-form-label" style="display: none">不公开理由：</label>
-                <div class="col-sm-3">
-                    <select id="postReason" class="form-control" style="display: none"></select>
-                </div>
-            </div>
-
-            <div class="form-group row">
-                <label class="col-sm-2 col-form-label">公平竞争审查：</label>
-                <div class="col-sm-3">
-                    <select id="postFairDepartmentReview" class="form-control"></select>
-                </div>
-
-                <div class="upload-wrap anticon" nv-file-drop="" uploader="uploader">
-                    <input id="fairFile" class="file-ele" type="file" file-model="image" name="image" nv-file-select uploader="uploader" multiple />
-                    <div id="fairFile1" class="file-open"><em class="upload"></em>&nbsp;上传附件</div>
-                </div>
-                <button type="button" class="btn btn-danger" id="clsFairFile">清除文件</button>
-                <div  id="addFairFile">
-                    <!-- <p> </p> -->
-                </div>
-            </div>
-
-            <div class="form-group row">
-                <label class="col-sm-2 col-form-label">规范性文件：</label>
-                <div class="col-sm-3">
-                    <div class="form-control">
-                        <input name="postNormativeDocuments" type="radio" id="g1" value="y" style="zoom:130%; margin-left: 15px;"/>
-                        <label for="g1">是</label>
-                        <input name="postNormativeDocuments" type="radio" id="g2" value="n" style="zoom:130%; margin-left: 60px;"/>
-                        <label for="g2">否</label>
-                    </div>
-                </div>
-
-                <label class="col-sm-2 col-form-label">是否涉密：</label>
-                <div class="col-sm-3">
-                    <div class="form-control">
-                        <input name="postSecretRelated" type="radio" id="s1" value="y" style="zoom:130%; margin-left: 15px;"/>
-                        <label for="s1">是</label>
-                        <input name="postSecretRelated" type="radio" id="s2" value="n" style="zoom:130%; margin-left: 60px;"/>
-                        <label for="s2">否</label>
-                    </div>
-                </div>
-            </div>
-
-            <div class="form-group row">
-                <label class="col-sm-2 col-form-label">印数：</label>
-                <div class="col-sm-3">
-                    <input id="postPrinting" type="text" class="form-control" placeholder="请输入" maxlength="30">
-                </div>
-
-                <label class="col-sm-2 col-form-label">文号：</label>
                 <div class="form-group row">
-                    <div class="col-sm-6">
-                        <select id="postDocumentNum" class="num form-control"></select>
+                    <label class="col-sm-2 col-form-label">文件标题：</label>
+                    <div class="col-sm-8">
+                        <input id="postDocumentTitle" type="text" class="form-control" placeholder="请输入">
                     </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">主送：</label>
+                    <div class="col-sm-8">
+                        <input id="masterSend" type="text" class="form-control" placeholder="添加主送目标">
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">抄送：</label>
+                    <div class="col-sm-8">
+                        <input id="copySend" type="text" class="form-control" placeholder="添加抄送目标">
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">公开方式：</label>
+                    <div class="col-sm-4">
+                        <input name="postPublicWay" type="radio" id="pw1" value="0" style="zoom:130%;"/>
+                        <label for="pw1">主动公开</label>
+                        <input name="postPublicWay" type="radio" id="pw2" value="1" style="zoom:130%; margin-left: 77px;"/>
+                        <label for="pw2">依申请公开</label>
+                        <input name="postPublicWay" type="radio" id="pw3" value="2" style="zoom:130%; margin-left: 77px;"/>
+                        <label for="pw3">不公开</label>
+                    </div>
+                    <div class="col-sm-4">
+                        <select id="postReason" class="form-control" style="height: 40px; display: none"></select>
+                    </div>
+                    <!--<div class="col-sm-3">
+                        <select id="postPublicWay" name="postPublicWay" class="form-control"></select>
+                    </div>
+                    <label id="reason" class="col-sm-2 col-form-label" style="display: none">不公开理由：</label>
                     <div class="col-sm-3">
-                        <input id="postDocumentNum1" class="form-control" readonly="readonly"/>
+                        <select id="postReason" class="form-control" style="display: none"></select>
+                    </div>-->
+                </div>
+
+
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">规范性文件：</label>
+                    <div class="col-sm-2">
+                        <div class="form-control" style="height: 40px">
+                            <input name="postNormativeDocuments" type="radio" id="g1" value="y" style="zoom:130%;"/>
+                            <label for="g1">是</label>
+                            <input name="postNormativeDocuments" type="radio" id="g2" value="n" style="zoom:130%; margin-left: 50px;"/>
+                            <label for="g2">否</label>
+                        </div>
                     </div>
-                    <div class="num1">号</div>
-                </div>
-            </div>
 
-            <!--附件div-->
-            <div class="form-group row">
-                <label for="exampleFormControlFile1" class="col-sm-2 col-form-label">附件：</label>
-                <div class="upload-wrap anticon" nv-file-drop="" uploader="uploader">
-                    <input id="upload_file" class="file-ele" type="file" file-model="image" name="image" nv-file-select uploader="uploader" multiple />
-                    <div class="file-open"><em class="upload"></em>&nbsp;上传附件</div>
+                    <label class="col-sm-1 col-form-label" style="margin-left: 10px">是否涉密：</label>
+                    <div class="col-sm-2">
+                        <div class="form-control" style="height: 40px">
+                            <input name="postSecretRelated" type="radio" id="s1" value="y" style="zoom:130%;"/>
+                            <label for="s1">是</label>
+                            <input name="postSecretRelated" type="radio" id="s2" value="n" style="zoom:130%; margin-left: 50px;"/>
+                            <label for="s2">否</label>
+                        </div>
+                    </div>
+
+                    <label class="col-sm-1 col-form-label" style="margin-left: -10px">印数：</label>
+                    <div class="col-sm-2">
+                        <input id="postPrinting" type="text" class="form-control" placeholder="请输入" maxlength="30">
+                    </div>
                 </div>
-                <button type="button" class="btn btn-danger" id="clsfile">清除文件</button>
-                <div  id="addFile">
-                    <!-- <p> </p> -->
+
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">公平竞争审查：</label>
+                    <div class="col-sm-3">
+                        <select id="postFairDepartmentReview" class="form-control" style="height: 40px"></select>
+                    </div>
+
+                    <div class="upload-wrap anticon" nv-file-drop="" uploader="uploader">
+                        <input id="fairFile" class="file-ele" type="file" file-model="image" name="image" nv-file-select uploader="uploader" multiple />
+                        <div id="fairFile1" class="file-open"><em class="upload"></em>&nbsp;上传附件</div>
+                    </div>
+                    <button type="button" class="btn btn-danger" id="clsFairFile">清除文件</button>
+                    <div  id="addFairFile">
+                        <!-- <p> </p> -->
+                    </div>
                 </div>
-            </div>
+
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">文号：</label>
+                    <div class="form-group row">
+                        <div class="col-sm-5">
+                            <select id="postDocumentNum" class="num form-control"></select>
+                        </div>
+                        <div class="col-sm-3">
+                            <input id="postDocumentNum1" class="form-control" readonly="readonly"/>
+                        </div>
+                        <div>号</div>
+                    </div>
+
+                    <label for="exampleFormControlFile1" class="col-form-label">附件：</label>
+                    <div class="upload-wrap anticon" nv-file-drop="" uploader="uploader">
+                        <input id="upload_file" class="file-ele" type="file" file-model="image" name="image" nv-file-select uploader="uploader" multiple />
+                        <div class="file-open"><em class="upload"></em>&nbsp;上传附件</div>
+                    </div>
+                    <button type="button" class="btn btn-danger" id="clsfile">清除文件</button>
+                    <div  id="addFile">
+                        <!-- <p> </p> -->
+                    </div>
+
+                </div>
 
             <div class="form-group row">
-                <div class="col-lg-4 col-md-4" ></div>
-                <div class=" col-lg-4 row" >
+                <div class="col-lg-6 col-md-6" ></div>
+                <div class=" col-lg-4 row" style="padding: 0" >
                     <div class="col">
                         <button id="cancelbtn" type="button" class="btn btn-light col">取消</button>
                     </div>
                     <div class="col">
                         <button id="savebtn" type="button" class="btn btn-danger col">保存</button>
                     </div>
-                    <div class="col">
+                    <div class="col" style="padding-right: 0;">
                         <button id="submitbtn" type="submit" class="btn btn-primary col">发送</button>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-4" ></div>
             </div>
         </form>
 
-    </div>
+        </div>
 
+    </div>
 </div>
+
 <script type="text/javascript" data-main="/main/main.js" th:src="@{/component/require@2.3.6/require-2.3.6.js}"></script>
 <script type="text/javascript" th:src="@{/project/js/document/post_add.js}"></script>
 <link type="text/css" rel="stylesheet" href="/component/uploadImg/css/uploadImg.css"

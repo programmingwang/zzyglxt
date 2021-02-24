@@ -27,6 +27,11 @@
     <result column="FILE_NAME" jdbcType="VARCHAR" property="fileName"/>
     <result column="DATA_CONTENT" jdbcType="LONGVARCHAR" property="dataContent" />
   </resultMap>
+  <resultMap id="MainPageResultMap" type="com.zyyglxt.dto.MainPageDto">
+    <id column="itemID" jdbcType="INTEGER" property="itemid" />
+    <id column="itemCode" jdbcType="CHAR" property="itemcode" />
+    <result column="DATA_TITLE" jdbcType="VARCHAR" property="dataTitle" />
+  </resultMap>
   <sql id="Base_Column_List">
     itemID, itemCode, DATA_TITLE, DATA_LOCATION, DATA_AUTHOR, DATA_SOURCE, DATA_FILE_TYPE, 
     DATA_DELAYED_RELEASE, DATA_STATUS, DATA_TYPE, RELEASE_OR_NOT, CREATER, itemCreateAt, UPDATER, itemUpdateAt
@@ -51,6 +56,20 @@
       and itemCode = #{itemcode,jdbcType=CHAR}
       and DATA_TYPE = #{dataType,jdbcType=VARCHAR}
     order by itemUpdateAt desc
+  </select>
+  <select id="selectOneData" parameterType="com.zyyglxt.dataobject.DataDOKey" resultMap="ResultMapWithBLOBsAndFile">
+    select
+    <include refid="SelectAll_Column_List" />
+    ,
+    <include refid="SelectAllBlob_Column_List" />
+    ,
+    cf.FILE_PATH,
+    cf.FILE_NAME
+    from tb_culpro_data cr left join tb_culpro_file cf
+    on cr.itemCode = cf.DATA_CODE
+    where cr.itemID = #{key.itemid,jdbcType=INTEGER}
+    and cr.itemCode = #{key.itemcode,jdbcType=CHAR}
+    and cr.DATA_TYPE = #{dataType,jdbcType=VARCHAR}
   </select>
   <select id="selectByAllData" resultMap="ResultMapWithBLOBsAndFile">
     select
@@ -327,12 +346,12 @@
     order by itemUpdateAt desc
   </select>
 
-  <select id="selectAllForMainPage" resultType="java.lang.String">
+  <select id="selectAllForMainPage" resultMap="MainPageResultMap">
     select
-    a.DATA_TITLE
+      a.DATA_TITLE, a.itemID, a.itemCode
     from
-         tb_culpro_data a inner join
-    (select itemID from tb_culpro_data where DATA_TYPE = #{dataType,jdbcType=VARCHAR} limit 0,5)
-        b on a.itemID=b.itemID;
+      tb_culpro_data a inner join
+        (select itemID from tb_culpro_data where DATA_TYPE = #{dataType,jdbcType=VARCHAR} order by itemUpdateAt limit 0,5)
+        b on a.itemID=b.itemID where a.DATA_STATUS = 5;
   </select>
 </mapper>

@@ -201,7 +201,7 @@
                 var myViewProcessModalData ={
                     modalBodyID : "myViewDataModal", //公用的在后面给span加不同的内容就行了，其他模块同理
                     modalTitle : "查看详情",
-                    modalClass : "modal-lg",
+                    modalClass : "modal-xl",
                     confirmButtonStyle: "display:none",
                 };
                 var myProcessModal = modalUtil.init(myViewProcessModalData);
@@ -214,7 +214,7 @@
                 $("#imgDiv").attr("style","display:none");
                 $("#author").attr("style","display:none");
                 $("#fileType").attr("style","display:none");
-                $('#dataTitleSpan').html("办事指南名称");
+                $('#dataTitleSpan').html("办事指南名称：");
                 $("#fileDiv").attr("style","display:block");
                 $("#upFile").html(row.fileName);
 
@@ -305,8 +305,7 @@
             orange.redirect(addUrl);
         });
 
-        var pl = dictUtil.getDictByCode(dictUtil.DICT_LIST.webStatus);
-        $("#chargePersonSearch").selectUtil(pl);
+        $("#chargePersonSearch").selectUtil(selectUtil.inSearchStatus());
 
 
         var aCol = [
@@ -333,7 +332,7 @@
             myTable = bootstrapTableUtil.myBootStrapTableInit("table", url, param, aCol);
         }
 
-        bootstrapTableUtil.globalSearch("table",url,aParam, aCol, "dataStatus");
+        bootstrapTableUtil.globalSearch2("table",url,aParam, aCol, "dataStatus");
 
 
     })

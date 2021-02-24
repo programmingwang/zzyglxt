@@ -59,8 +59,8 @@
             '            <div class="col-lg-6 col-md-6">\n' +
             '                <fieldset disabled>\n' +
             '                    <div class="input-group mb-3 row ">\n' +
-            '                        <div class="input-group-prepend col-lg-4 col-md-6"> <span class="lefttext" for="applicant">创建人：</span>\n' +
-            '                        </div><input type="text" id="creater" class="form-control col-lg-6 col-md-6" style="margin-left: 4px;">\n' +
+            '                        <div style="margin-left: 4px;" class="input-group-prepend col-lg-4 col-md-4"> <span class="lefttext" for="applicant">创建人：</span>\n' +
+            '                        </div><input type="text" id="creater" class="form-control col-lg-6 col-md-6" >\n' +
             '                    </div>\n' +
             '                </fieldset>\n' +
             '            </div>\n' +
@@ -135,9 +135,9 @@
             '            <div class="col-lg-6 col-md-6">\n' +
             '                <fieldset disabled>\n' +
             '                    <div class="input-group mb-3 row">\n' +
-            '                        <div class="input-group-prepend col-lg-4 col-md-4"> <span class="lefttext"\n' +
+            '                        <div style="margin-left: 4px;" class="input-group-prepend col-lg-4 col-md-4"> <span class="lefttext"\n' +
             '                                for="applicant">创建人：</span> </div> <input type="text" id="creater"\n' +
-            '                            class="form-control col-lg-6 col-md-6" style="margin-left: 4px;">\n' +
+            '                            class="form-control col-lg-6 col-md-6" >\n' +
             '                    </div>\n' +
             '                </fieldset>\n' +
             '            </div>\n' +
@@ -235,10 +235,10 @@
             '            <div class="col-lg-6 col-md-6">\n' +
             '                <fieldset disabled>\n' +
             '                    <div class="input-group mb-3 row">\n' +
-            '                        <div class="input-group-prepend col-lg-4 col-md-4">\n' +
+            '                        <div style="margin-left: 4px;" class="input-group-prepend col-lg-4 col-md-4">\n' +
             '                            <span class="lefttext" for="applicant">创建人：</span>\n' +
             '                        </div>\n' +
-            '                        <input type="text" id="creater" class="form-control col-lg-6 col-md-6" style="margin-left: 4px;">\n' +
+            '                        <input type="text" id="creater" class="form-control col-lg-6 col-md-6" >\n' +
             '                    </div>\n' +
             '                </fieldset>\n' +
             '            </div>\n' +
@@ -312,8 +312,8 @@
             '            <div class="col-lg-6 col-md-6">\n' +
             '                <fieldset disabled>\n' +
             '                    <div class="input-group mb-3 row">\n' +
-            '                        <div class="input-group-prepend col-lg-4 col-md-4"> <span class="lefttext" for="applicant">创建人：</span>\n' +
-            '                        </div> <input type="text" id="creater" class="form-control col-lg-6 col-md-6" style="margin-left: 4px;">\n' +
+            '                        <div style="margin-left: 4px;" class="input-group-prepend col-lg-4 col-md-4"> <span class="lefttext" for="applicant">创建人：</span>\n' +
+            '                        </div> <input type="text" id="creater" class="form-control col-lg-6 col-md-6" >\n' +
             '                    </div>\n' +
             '                </fieldset>\n' +
             '            </div>\n' +
@@ -372,9 +372,9 @@
             '            <div class="col-lg-6 col-md-6">\n' +
             '                <fieldset disabled>\n' +
             '                    <div class="input-group mb-3 row">\n' +
-            '                        <div class="input-group-prepend col-lg-4 col-md-4"> <span class="lefttext"\n' +
+            '                        <div style="margin-left: 4px;" class="input-group-prepend col-lg-4 col-md-4"> <span class="lefttext"\n' +
             '                                for="applicant">创建人：</span> </div> <input type="text" id="creater"\n' +
-            '                            class="form-control col-lg-6 col-md-6" style="margin-left: 4px;">\n' +
+            '                            class="form-control col-lg-6 col-md-6" >\n' +
             '                    </div>\n' +
             '                </fieldset>\n' +
             '            </div>\n' +
@@ -469,9 +469,9 @@
             '            <div class="col-lg-6 col-md-6">\n' +
             '                <fieldset disabled>\n' +
             '                    <div class="input-group mb-3">\n' +
-            '                        <div class="input-group-prepend col-lg-4 col-md-4"> <span class="lefttext"\n' +
+            '                        <div style="margin-left: 4px;" class="input-group-prepend col-lg-4 col-md-4"> <span class="lefttext"\n' +
             '                                for="applicant">创建人：</span> </div> <input type="text" id="creater"\n' +
-            '                            class="form-control col-lg-6 col-md-6" style="margin-left: 4px;">\n' +
+            '                            class="form-control col-lg-6 col-md-6" >\n' +
             '                    </div>\n' +
             '                </fieldset>\n' +
             '            </div>\n' +
@@ -549,10 +549,10 @@
             '            <div class="col-lg-6 col-md-6">\n' +
             '                <fieldset disabled>\n' +
             '                    <div class="input-group mb-3">\n' +
-            '                        <div class="input-group-prepend col-lg-4 col-md-4 "> <span class="lefttext"\n' +
+            '                        <div style="margin-left: 4px;" class="input-group-prepend col-lg-4 col-md-4 "> <span class="lefttext"\n' +
             '                                for="applicant">创建人：</span>\n' +
             '                        </div> <input type="text" id="creater" class="form-control col-lg-6 col-md-6"\n' +
-            '                            style="margin-left: 4px;">\n' +
+            '                            >\n' +
             '                    </div>\n' +
             '                </fieldset>\n' +
             '            </div>\n' +
@@ -683,9 +683,9 @@
             '            <div class="col-lg-6 col-md-6">\n' +
             '                <fieldset disabled>\n' +
             '                    <div class="input-group mb-3 row">\n' +
-            '                        <div class="input-group-prepend col-lg-4 col-md-4"> <span class="lefttext"\n' +
+            '                        <div style="margin-left: 4px;" class="input-group-prepend col-lg-4 col-md-4"> <span class="lefttext"\n' +
             '                                for="applicant">创建人：</span> </div> <input type="text" id="creater"\n' +
-            '                            class="form-control col-lg-6 col-md-6" style="margin-left: 4px;">\n' +
+            '                            class="form-control col-lg-6 col-md-6" >\n' +
             '                    </div>\n' +
             '                </fieldset>\n' +
             '            </div>\n' +
@@ -710,7 +710,7 @@
             '        <div class="col-lg-12 col-md-12">\n' +
             '            <fieldset disabled="">\n' +
             '                <div class="input-group mb-3 row">\n' +
-            '                    <div class="input-group-prepend col-lg-3 col-md-3"> <span  class="lefttext">用户账号：</span>\n' +
+            '                    <div class="input-group-prepend col-lg-2 col-md-2"> <span  class="lefttext">用户账号：</span>\n' +
             '                    </div> <input type="text" id="username" class="form-control">\n' +
             '                </div>\n' +
             '            </fieldset>\n' +
@@ -718,7 +718,7 @@
             '        <div class="col-lg-12 col-md-12">\n' +
             '            <fieldset disabled="">\n' +
             '                <div class="input-group mb-3 row">\n' +
-            '                    <div class="input-group-prepend col-lg-3 col-md-3"> <span  class="lefttext">账号名称：</span>\n' +
+            '                    <div class="input-group-prepend col-lg-2 col-md-2"> <span  class="lefttext">账号名称：</span>\n' +
             '                    </div> <input type="text" id="name" class="form-control">\n' +
             '                </div>\n' +
             '            </fieldset>\n' +
@@ -726,7 +726,7 @@
             '        <div class="col-lg-12 col-md-12">\n' +
             '            <fieldset disabled="">\n' +
             '                <div class="input-group mb-3 row ">\n' +
-            '                    <div class="input-group-prepend col-lg-3 col-md-3"> <span  class="lefttext">用户角色：</span>\n' +
+            '                    <div class="input-group-prepend col-lg-2 col-md-2"> <span  class="lefttext">用户角色：</span>\n' +
             '                    </div> <input type="text" id="roleName" class="form-control">\n' +
             '                </div>\n' +
             '            </fieldset>\n' +
@@ -734,7 +734,7 @@
             '        <div class="col-lg-6 col-md-6" style="padding-right: 0;">\n' +
             '            <fieldset disabled="">\n' +
             '                <div class="input-group mb-3 row ">\n' +
-            '                    <div class="input-group-prepend col-lg-6 col-md-6"> <span  class="lefttext">联系人：</span>\n' +
+            '                    <div class="input-group-prepend col-lg-4 col-md-4"> <span  class="lefttext">联系人：</span>\n' +
             '                    </div> <input type="text" id="contacts" class="form-control">\n' +
             '                </div>\n' +
             '            </fieldset>\n' +
@@ -742,7 +742,7 @@
             '        <div class="col-lg-6 col-md-6" style="padding-left: 0;">\n' +
             '            <fieldset disabled="">\n' +
             '                <div class="input-group mb-3 row ">\n' +
-            '                    <div class="input-group-prepend col-lg-6 col-md-6"> <span  class="lefttext">联系电话：</span>\n' +
+            '                    <div class="input-group-prepend col-lg-4 col-md-4"> <span  class="lefttext">联系电话：</span>\n' +
             '                    </div> <input type="text" id="mobilephone" class="form-control">\n' +
             '                </div>\n' +
             '            </fieldset>\n' +
@@ -750,7 +750,7 @@
             '        <div class="col-lg-12 col-md-12">\n' +
             '            <fieldset disabled="">\n' +
             '                <div class="input-group mb-3 row ">\n' +
-            '                    <div class="input-group-prepend col-lg-3 col-md-3"> <span  class="lefttext">主管市区：</span>\n' +
+            '                    <div class="input-group-prepend col-lg-2 col-md-2"> <span  class="lefttext">主管市区：</span>\n' +
             '                    </div> <input type="text" id="cityid" class="form-control">\n' +
             '                </div>\n' +
             '            </fieldset>\n' +
@@ -827,17 +827,729 @@
             '            </div>\n' +
             '        </div>';
 
-        modalHtml.myViewDataModal = '<div class="row">' + '            <div id="imgDiv" class="col-lg-12 col-md-12">' + "                <fieldset disabled>" + '                <div class="input-group mb-3">' + '                    <div class="input-group-prepend">' + '                        <button type="button" id="newsImgSpan" class="btn btn-primary btn-sm"></button>' + "                    </div>" + '                    <img id="newsImg" src="#"/>' + "                </div>" + "            </div>" + "" + '            <div class="col-lg-12 col-md-12">' + "                <fieldset disabled>" + '                <div class="input-group mb-3">' + '                    <div class="input-group-prepend">' + '                        <button type="button" id="dataTitleSpan" class="btn btn-primary btn-sm"></button>' + "                    </div>" + '                    <input type="text" id="dataTitle" class="form-control">' + "                </div>" + "            </div>" + "" + '            <div id="author" class="col-lg-12 col-md-12">' + "                <fieldset disabled>" + '                <div class="input-group mb-3">' + '                    <div class="input-group-prepend">' + '                        <button type="button" class="btn btn-primary btn-sm" >作&emsp;&emsp;者</button>' + "                    </div>" + '                    <input type="text" id="dataAuthor" class="form-control">' + "                </div>" + "            </div>" + "" + '            <div class="col-lg-12 col-md-12">' + "                <fieldset disabled>" + '                <div class="input-group mb-3">' + '                    <div class="input-group-prepend">' + '                        <button type="button" class="btn btn-primary btn-sm" >来&emsp;&emsp;源</button>' + "                    </div>" + '                   <input type="text" id="dataSource" class="form-control">' + "                </div>" + "            </div>" + "" + '            <div class="col-lg-12 col-md-12">' + "                <fieldset disabled>" + '                <div class="input-group mb-3">' + '                    <div class="input-group-prepend">' + '                        <button type="button" class="btn btn-primary btn-sm" >正&emsp;&emsp;文</button>' + "                    </div>" + "                  <div>" + '                       <div id="dataContent" style="height:300px;width:750px; margin-top:-1px;clear:both;overflow:hidden;overflow:scroll;" class="form-control">' + "                       </div>" + "                  </div>" + "                </div>" + "            </div>" + "" + '            <div class="col-lg-12 col-md-12">' + "                <fieldset disabled>" + '                <div class="input-group mb-3">' + '                    <div class="input-group-prepend">' + '                        <button type="button" class="btn btn-primary btn-sm" >展示状态</button>' + "                    </div>" + '                   <input type="text" id="dataStatus" class="form-control">' + "                </div>" + "            </div>" + "" + '            <div id="fileType" class="col-lg-12 col-md-12">' + "                <fieldset disabled>" + '                <div class="input-group mb-3">' + '                    <div class="input-group-prepend">' + '                        <button type="button" id="dataFileTypeSpan" class="btn btn-primary btn-sm"></button>' + "                    </div>" + '                    <input type="text" id="dataFileType" class="form-control">' + "                </div>" + "            </div>" + "" + '            <div id="fileDiv" class="col-lg-12 col-md-12" style="display: none">' + "                <fieldset disabled>" + '                <div class="input-group mb-3">' + '                    <div class="input-group-prepend">' + '                        <button type="button" class="btn btn-primary btn-sm" >附&emsp;&emsp;件</button>' + "                    </div>" + '                    <span id="upFile" src="#" style="margin-left: 9px;margin-top: 2px;"></span>' + "                </div>" + "            </div>" + "" + '            <div class="col-lg-6 col-md-6">' + "                <fieldset disabled>" + '                <div class="input-group mb-3">' + '                    <div class="input-group-prepend">' + '                        <label class="input-group-text" for="applicant">创&ensp;建&ensp;人</label>' + "                    </div>" + '                    <input type="text"  id="creater" class="form-control">' + "                </div>" + "                </fieldset>" + "            </div>" + "" + '            <div class="col-lg-6 col-md-6">' + "                <fieldset disabled>" + '                <div class="input-group mb-3">' + '                    <div class="input-group-prepend">' + '                        <label class="input-group-text" for="applicant">创建时间</label>' + "                    </div>" + '                    <input type="text"  id="itemCreateAt" class="form-control">' + "                </div>" + "                </fieldset>" + "            </div>" + "</div>";
-        modalHtml.myViewDataRulesModa = '<div id="viewTopic"><div class="col-lg-12 col-md-12"><div class="input-group mb-3"><div class="input-group-prepend"><button type="button" class="btn btn-primary btn-sm">名&emsp;&emsp;称</button></div><input type="text" id="dataTitle" class="form-control" readonly="readonly"></div></div><div class="col-lg-12 col-md-12"><div class="input-group mb-3"><div class="input-group-prepend"><button type="button" class="btn btn-primary btn-sm">来&emsp;&emsp;源</button></div><input type="text" id="dataSource" class="form-control" readonly="readonly"></div></div><div class="col-lg-12 col-md-12"><div class="input-group mb-3"><div class="input-group-prepend"><button type="button" class="btn btn-primary btn-sm">正&emsp;&emsp;文</button></div><div><div id="dataContent" style="height:300px;width:750px; margin-top:-1px;clear:both;overflow:hidden;overflow:scroll;" class="form-control"></div></div></div></div><div class="col-lg-12 col-md-12"><div class="input-group mb-3"><div class="input-group-prepend"><button type="button" class="btn btn-primary btn-sm">展示状态</button></div><input type="text" id="dataStatus" class="form-control" readonly="readonly"></div></div><div class="col-lg-12 col-md-12"><div class="input-group mb-3"><div class="input-group mb-3"><div class="input-group-prepend"><button type="button" class="btn btn-primary btn-sm">附&emsp;&emsp;件</button></div><span id="upFile" src="#" style="margin-left: 9px;margin-top: 2px;"></span></div></div></div><div class="col-lg-12 col-md-12"><div class="input-group mb-3"><div class="input-group-prepend"><button type="button" class="btn btn-primary btn-sm">创&ensp;建&ensp;人</button></div><input type="text" id="creater" class="form-control" readonly="readonly"><div class="input-group-prepend"><button type="button" class="btn btn-primary btn-sm">创建时间</button></div><input type="text" id="itemCreateAt" class="form-control" readonly="readonly"></div></div></div>';
-        modalHtml.myViewReasonHtml = '<div class="row">' + '            <div class="col-lg-12 col-md-12">' + "                <fieldset disabled>" + '                <div class="input-group mb-3">' + '                    <div class="input-group-prepend">' + '                        <button type="button" id="reasonSpan" class="btn btn-primary btn-sm" >理&emsp;&emsp;由</button>' + "                    </div>" + "                  <div>" + '                       <div style="height:300px;width:750px; margin-top:-1px;clear:both;overflow:scroll;word-break: break-all;" id="reason" class="form-control">' + "                       </div>" + "                  </div>" + "                </div>" + "            </div>" + "</div>";
-        modalHtml.myViewLabModal = '<div class="row">' + '            <div id="imgDiv" class="col-lg-12 col-md-12">' + "                <fieldset disabled>" + '                <div class="input-group mb-3">' + '                    <div class="input-group-prepend">' + '                        <button type="button" class="btn btn-primary btn-sm">院所图片</button>' + "                    </div>" + '                    <img id="myImg" src="#"/>' + "                </div>" + "            </div>" + "" + '            <div class="col-lg-12 col-md-12">' + "                <fieldset disabled>" + '                <div class="input-group mb-3">' + '                    <div class="input-group-prepend">' + '                        <button type="button" class="btn btn-primary btn-sm">院所名称</button>' + "                    </div>" + '                    <input type="text" id="name" class="form-control">' + "                </div>" + "            </div>" + "" + '            <div class="col-lg-12 col-md-12">' + "                <fieldset disabled>" + '                <div class="input-group mb-3">' + '                    <div class="input-group-prepend">' + '                        <button type="button" class="btn btn-primary btn-sm" >联系人</button>' + "                    </div>" + '                   <input type="text" id="contacts" class="form-control">' + "                </div>" + "            </div>" + "" + '            <div class="col-lg-12 col-md-12">' + "                <fieldset disabled>" + '                <div class="input-group mb-3">' + '                    <div class="input-group-prepend">' + '                        <button type="button" class="btn btn-primary btn-sm" >联系电话</button>' + "                    </div>" + '                   <input type="text" id="phone" class="form-control">' + "                </div>" + "            </div>" + "" + '            <div class="col-lg-12 col-md-12">' + "                <fieldset disabled>" + '                <div class="input-group mb-3">' + '                    <div class="input-group-prepend">' + '                        <button type="button" class="btn btn-primary btn-sm" >地&emsp;&emsp;址</button>' + "                    </div>" + '                    <input type="text" id="address" class="form-control">' + "                </div>" + "            </div>" + "" + '            <div class="col-lg-12 col-md-12">' + "                <fieldset disabled>" + '                <div class="input-group mb-3">' + '                    <div class="input-group-prepend">' + '                        <button type="button" class="btn btn-primary btn-sm" >介绍</button>' + "                    </div>" + '                    <div style="height:300px;width:750px; margin-top:-1px;clear:both;overflow:hidden;overflow:scroll;" id="intruduce" class="form-control">' + "                       </div>" + "                </div>" + "            </div>" + "" + '            <div class="col-lg-6 col-md-6">' + "                <fieldset disabled>" + '                <div class="input-group mb-3">' + '                    <div class="input-group-prepend">' + '                        <label class="input-group-text" for="applicant">创&ensp;建&ensp;人</label>' + "                    </div>" + '                    <input type="text"  id="creater" class="form-control">' + "                </div>" + "                </fieldset>" + "            </div>" + "" + '            <div class="col-lg-6 col-md-6">' + "                <fieldset disabled>" + '                <div class="input-group mb-3">' + '                    <div class="input-group-prepend">' + '                        <label class="input-group-text" for="applicant">创建时间</label>' + "                    </div>" + '                    <input type="text"  id="itemcreateat" class="form-control">' + "                </div>" + "                </fieldset>" + "            </div>" + "</div>";
-        modalHtml.myViewTecModal = '<div class="row">' + '            <div id="imgDiv" class="col-lg-12 col-md-12">' + "                <fieldset disabled>" + '                <div class="input-group mb-3">' + '                    <div class="input-group-prepend">' + '                        <button type="button" class="btn btn-primary btn-sm">企业图片</button>' + "                    </div>" + '                    <img id="myImg" src="#"/>' + "                </div>" + "            </div>" + "" + '            <div class="col-lg-12 col-md-12">' + "                <fieldset disabled>" + '                <div class="input-group mb-3">' + '                    <div class="input-group-prepend">' + '                        <button type="button" class="btn btn-primary btn-sm">企业名称</button>' + "                    </div>" + '                    <input type="text" id="name" class="form-control">' + "                </div>" + "            </div>" + "" + '            <div class="col-lg-12 col-md-12">' + "                <fieldset disabled>" + '                <div class="input-group mb-3">' + '                    <div class="input-group-prepend">' + '                        <button type="button" class="btn btn-primary btn-sm">服务项目</button>' + "                    </div>" + '                    <input type="text" id="projectName" class="form-control">' + "                </div>" + "            </div>" + "" + '            <div class="col-lg-12 col-md-12">' + "                <fieldset disabled>" + '                <div class="input-group mb-3">' + '                    <div class="input-group-prepend">' + '                        <button type="button" class="btn btn-primary btn-sm" >联系人</button>' + "                    </div>" + '                   <input type="text" id="contacts" class="form-control">' + "                </div>" + "            </div>" + "" + '            <div class="col-lg-12 col-md-12">' + "                <fieldset disabled>" + '                <div class="input-group mb-3">' + '                    <div class="input-group-prepend">' + '                        <button type="button" class="btn btn-primary btn-sm" >联系电话</button>' + "                    </div>" + '                   <input type="text" id="phone" class="form-control">' + "                </div>" + "            </div>" + "" + '            <div class="col-lg-12 col-md-12">' + "                <fieldset disabled>" + '                <div class="input-group mb-3">' + '                    <div class="input-group-prepend">' + '                        <button type="button" class="btn btn-primary btn-sm" >地&emsp;&emsp;址</button>' + "                    </div>" + '                    <input type="text" id="address" class="form-control">' + "                </div>" + "            </div>" + "" + '            <div class="col-lg-12 col-md-12">' + "                <fieldset disabled>" + '                <div class="input-group mb-3">' + '                    <div class="input-group-prepend">' + '                        <button type="button" class="btn btn-primary btn-sm" >企业简介</button>' + "                    </div>" + '                    <div style="height:300px;width:750px; margin-top:-1px;clear:both;overflow:hidden;overflow:scroll;" id="intruduce" class="form-control">' + "                       </div>" + "                </div>" + "            </div>" + "" + '            <div class="col-lg-6 col-md-6">' + "                <fieldset disabled>" + '                <div class="input-group mb-3">' + '                    <div class="input-group-prepend">' + '                        <label class="input-group-text" for="applicant">创&ensp;建&ensp;人</label>' + "                    </div>" + '                    <input type="text"  id="creater" class="form-control">' + "                </div>" + "                </fieldset>" + "            </div>" + "" + '            <div class="col-lg-6 col-md-6">' + "                <fieldset disabled>" + '                <div class="input-group mb-3">' + '                    <div class="input-group-prepend">' + '                        <label class="input-group-text" for="applicant">创建时间</label>' + "                    </div>" + '                    <input type="text"  id="itemcreateat" class="form-control">' + "                </div>" + "                </fieldset>" + "            </div>" + "</div>";
+        modalHtml.myViewDataModal = '<div class="row">\n' +
+            '            <div class="col-lg-12 col-md-12">\n' +
+            '                <fieldset disabled>\n' +
+            '                    <div class="input-group mb-3">\n' +
+            '                        <div class="input-group-prepend col-lg-2 col-md-2">\n' +
+            '                            <span  id="dataTitleSpan" class="lefttext"></span>\n' +
+            '                        </div><input type="text" id="dataTitle" class="form-control col-lg-9 col-md-9">\n' +
+            '                    </div>\n' +
+            '            </div>\n' +
+            '            <div id="author" class="col-lg-12 col-md-12">\n' +
+            '                <fieldset disabled>\n' +
+            '                    <div class="input-group mb-3">\n' +
+            '                        <div class="input-group-prepend col-lg-2 col-md-2"> <span \n' +
+            '                                class="lefttext">作者：</span> </div><input type="text" id="dataAuthor"\n' +
+            '                            class="form-control col-lg-9 col-md-9">\n' +
+            '                    </div>\n' +
+            '            </div>\n' +
+            '            <div class="col-lg-12 col-md-12">\n' +
+            '                <fieldset disabled>\n' +
+            '                    <div class="input-group mb-3">\n' +
+            '                        <div class="input-group-prepend col-lg-2 col-md-2"> <span \n' +
+            '                                class="lefttext">来源：</span> </div><input type="text" id="dataSource"\n' +
+            '                            class="form-control col-lg-9 col-md-9">\n' +
+            '                    </div>\n' +
+            '            </div>\n' +
+            '            <div class="col-lg-12 col-md-12">\n' +
+            '                <fieldset disabled>\n' +
+            '                    <div class="input-group mb-3">\n' +
+            '                        <div class="input-group-prepend col-lg-2 col-md-2"> <span \n' +
+            '                                class="lefttext">正文：</span> </div>\n' +
+            '                            <div id="dataContent"\n' +
+            '                                style="height:300px;width:750px; margin-top:-1px;clear:both;overflow:hidden;overflow:scroll;"\n' +
+            '                                class="form-control col-lg-9 col-md-9"> </div>\n' +
+            '                    </div>\n' +
+            '            </div>\n' +
+            '            <div id="zszt" class="col-lg-12 col-md-12">\n' +
+            '                <fieldset disabled>\n' +
+            '                    <div class="input-group mb-3">\n' +
+            '                        <div class="input-group-prepend col-lg-2 col-md-2"> <span \n' +
+            '                                class="lefttext">展示状态：</span> </div><input type="text" id="dataStatus"\n' +
+            '                            class="form-control col-lg-9 col-md-9">\n' +
+            '                    </div>\n' +
+            '            </div>\n' +
+            '            <div id="fileType" class="col-lg-12 col-md-12">\n' +
+            '                <fieldset disabled>\n' +
+            '                    <div class="input-group mb-3">\n' +
+            '                        <div class="input-group-prepend col-lg-2 col-md-2"> <span  id="dataFileTypeSpan"\n' +
+            '                                class="lefttext"></span> </div><input type="text" id="dataFileType"\n' +
+            '                            class="form-control col-lg-9 col-md-9">\n' +
+            '                    </div>\n' +
+            '            </div>\n' +
+            '            <div id="fileDiv" class="col-lg-12 col-md-12" style="display: none">\n' +
+            '                <fieldset disabled>\n' +
+            '                    <div class="input-group mb-3">\n' +
+            '                        <div class="input-group-prepend col-lg-2 col-md-2"> <span \n' +
+            '                                class="lefttext">附件：</span> </div><span id="upFile" src="#"\n' +
+            '                            style="margin-left: 9px;margin-top: 2px;"></span>\n' +
+            '                    </div>\n' +
+            '            </div>\n' +
+            '            <div class="col-lg-6 col-md-6">\n' +
+            '                <fieldset disabled>\n' +
+            '                    <div class="input-group mb-3">\n' +
+            '                        <div style="margin-left: 4px;" class="input-group-prepend col-lg-4 col-md-4" style="margin-left: 4px;"> <span class="lefttext" for="applicant">创建人：</span>\n' +
+            '                        </div><input type="text" id="creater" class="form-control col-lg-6 col-md-6" >\n' +
+            '                    </div>\n' +
+            '                </fieldset>\n' +
+            '            </div>\n' +
+            '            <div class="col-lg-6 col-md-6">\n' +
+            '                <fieldset disabled>\n' +
+            '                    <div class="input-group mb-3">\n' +
+            '                        <div class="input-group-prepend col-lg-4 col-md-4"> <span class="lefttext" for="applicant">创建时间：</span>\n' +
+            '                        </div><input type="text" id="itemCreateAt" class="form-control col-lg-6 col-md-6">\n' +
+            '                    </div>\n' +
+            '                </fieldset>\n' +
+            '            </div>\n' +
+            '            <div id="imgDiv" class="col-lg-12 col-md-12">\n' +
+            '                <fieldset disabled>\n' +
+            '                    <div class="input-group mb-3">\n' +
+            '                        <div class="input-group-prepend col-lg-2 col-md-2"> <span  id="newsImgSpan"\n' +
+            '                                class="lefttext"></span> </div><img id="newsImg" src="#"  style="width: 100px;height: 100px;" />\n' +
+            '                    </div>\n' +
+            '            </div>\n' +
+            '        </div>';
+        modalHtml.myViewDataRulesModa = '<div id="viewTopic" class="row">\n' +
+            '            <div class="col-lg-12 col-md-12">\n' +
+            '                <div class="input-group mb-3">\n' +
+            '                    <div class="input-group-prepend col-lg-2 col-md-2"><span class="lefttext">名称：</span></div><input\n' +
+            '                        type="text" id="dataTitle" class="form-control col-lg-9 col-md-9" readonly="readonly">\n' +
+            '                </div>\n' +
+            '            </div>\n' +
+            '            <div class="col-lg-12 col-md-12">\n' +
+            '                <div class="input-group mb-3">\n' +
+            '                    <div class="input-group-prepend col-lg-2 col-md-2"><span class="lefttext">来源：</span></div><input\n' +
+            '                        type="text" id="dataSource" class="form-control col-lg-9 col-md-9" readonly="readonly">\n' +
+            '                </div>\n' +
+            '            </div>\n' +
+            '            <div class="col-lg-12 col-md-12">\n' +
+            '                <div class="input-group mb-3">\n' +
+            '                    <div class="input-group-prepend col-lg-2 col-md-2"><span class="lefttext">正文：</span></div>\n' +
+            '                        <div id="dataContent"\n' +
+            '                            style="height:300px;width:750px; margin-top:-1px;clear:both;overflow:hidden;overflow:scroll;"\n' +
+            '                            class="form-control col-lg-9 col-md-9"></div>\n' +
+            '                </div>\n' +
+            '            </div>\n' +
+            '            <div class="col-lg-12 col-md-12">\n' +
+            '                <div class="input-group mb-3">\n' +
+            '                    <div class="input-group-prepend col-lg-2 col-md-2"><span class="lefttext">展示状态：</span>\n' +
+            '                    </div><input type="text" id="dataStatus" class="form-control col-lg-9 col-md-9" readonly="readonly">\n' +
+            '                </div>\n' +
+            '            </div>\n' +
+            '            <div class="col-lg-12 col-md-12">\n' +
+            '                <div class="input-group mb-3">\n' +
+            '                    <div class="input-group mb-3">\n' +
+            '                        <div class="input-group-prepend col-lg-2 col-md-2"><span class="lefttext">附件：</span></div><span\n' +
+            '                            id="upFile" src="#" style="margin-left: 9px;margin-top: 2px;"></span>\n' +
+            '                    </div>\n' +
+            '                </div>\n' +
+            '            </div>\n' +
+            '            <div class="col-lg-6 col-md-6">\n' +
+            '                <fieldset disabled>\n' +
+            '                <div class="input-group mb-3">\n' +
+            '                    <div class="input-group-prepend col-lg-4 col-md-4" style="margin-left: 4px;"><span class="lefttext">创建人：</span></div><input\n' +
+            '                        type="text" id="creater" class="form-control col-lg-6 col-md-6" readonly="readonly">\n' +
+            '                </div>\n' +
+            '            </fieldset>\n' +
+            '            </div>\n' +
+            '            <div class="col-lg-6 col-md-6">\n' +
+            '                <fieldset disabled>\n' +
+            '                    <div class="input-group mb-3">\n' +
+            '                        <div class="input-group-prepend col-lg-4 col-md-4"><span class="lefttext">创建时间：</span>\n' +
+            '                        </div><input type="text" id="itemCreateAt" class="form-control col-lg-6 col-md-6"\n' +
+            '                            readonly="readonly">\n' +
+            '                    </div>\n' +
+            '                </fieldset>\n' +
+            '            </div>\n' +
+            '        </div>';
+        modalHtml.myViewReasonHtml = '<div class="row">\n' +
+            '            <div class="col-lg-12 col-md-12">\n' +
+            '                <fieldset disabled>\n' +
+            '                    <div class="input-group mb-3">\n' +
+            '                        <div class="input-group-prepend col-lg-2 col-md-2"> <span id="reasonSpan"\n' +
+            '                                class="lefttext">理由：</span> </div>\n' +
+            '                            <div style="height:300px;width:750px; margin-top:-1px;clear:both;overflow:scroll;word-break: break-all;"\n' +
+            '                                id="reason" class="form-control col-lg-9 col-md-9"> </div>\n' +
+            '                        \n' +
+            '                    </div>\n' +
+            '            </div>\n' +
+            '        </div>';
+        modalHtml.myViewLabModal = '<div class="row">    \n' +
+            '            <div class="col-lg-12 col-md-12">\n' +
+            '                <fieldset disabled>\n' +
+            '                    <div class="input-group mb-3 row">\n' +
+            '                        <div class="input-group-prepend col-lg-2 col-md-2">\n' +
+            '                            <span  class="lefttext">院所名称：</span> </div> <input type="text"\n' +
+            '                            id="name" class="form-control col-lg-9 col-md-9">\n' +
+            '                    </div>\n' +
+            '            </div>\n' +
+            '            <div class="col-lg-12 col-md-12">\n' +
+            '                <fieldset disabled>\n' +
+            '                    <div class="input-group mb-3 row">\n' +
+            '                        <div class="input-group-prepend col-lg-2 col-md-2"> <span \n' +
+            '                                class="lefttext">联系人：</span> </div> <input type="text" id="contacts"\n' +
+            '                            class="form-control col-lg-9 col-md-9">\n' +
+            '                    </div>\n' +
+            '            </div>\n' +
+            '            <div class="col-lg-12 col-md-12">\n' +
+            '                <fieldset disabled>\n' +
+            '                    <div class="input-group mb-3 row">\n' +
+            '                        <div class="input-group-prepend col-lg-2 col-md-2"> <span \n' +
+            '                                class="lefttext">联系电话：</span> </div> <input type="text" id="phone"\n' +
+            '                            class="form-control col-lg-9 col-md-9">\n' +
+            '                    </div>\n' +
+            '            </div>\n' +
+            '            <div class="col-lg-12 col-md-12">\n' +
+            '                <fieldset disabled>\n' +
+            '                    <div class="input-group mb-3 row">\n' +
+            '                        <div class="input-group-prepend col-lg-2 col-md-2"> <span \n' +
+            '                                class="lefttext">地址：</span> </div> <input type="text"\n' +
+            '                            id="address" class="form-control col-lg-9 col-md-9">\n' +
+            '                    </div>\n' +
+            '            </div>\n' +
+            '            <div class="col-lg-12 col-md-12">\n' +
+            '                <fieldset disabled>\n' +
+            '                    <div class="input-group mb-3 row">\n' +
+            '                        <div class="input-group-prepend col-lg-2 col-md-2"> <span \n' +
+            '                                class="lefttext">介绍：</span> </div>\n' +
+            '                                <div class="col-lg-9 col-md-9" style="padding: 0;">\n' +
+            '                                    <div id="intruduce"\n' +
+            '                                        style="height:300px;width:100%; margin-top:-1px;clear:both;overflow:hidden;overflow:scroll;"\n' +
+            '                                        class="form-control "> </div>\n' +
+            '                                </div>\n' +
+            '                    </div>\n' +
+            '            </div>\n' +
+            '            <div class="col-lg-6 col-md-6">\n' +
+            '                <fieldset disabled>\n' +
+            '                    <div class="input-group mb-3 row">\n' +
+            '                        <div style="margin-left: 4px;" class="input-group-prepend col-lg-4 col-md-4"> <span class="lefttext"\n' +
+            '                                for="applicant">创建人：</span> </div> <input type="text" id="creater"\n' +
+            '                            class="form-control col-lg-6 col-md-6" >\n' +
+            '                    </div>\n' +
+            '                </fieldset>\n' +
+            '            </div>\n' +
+            '            <div class="col-lg-6 col-md-6">\n' +
+            '                <fieldset disabled>\n' +
+            '                    <div class="input-group mb-3 row">\n' +
+            '                        <div class="input-group-prepend col-lg-4 col-md-4"> <span class="lefttext" for="applicant">创建时间：</span>\n' +
+            '                        </div> <input type="text" id="itemcreateat" class="form-control col-lg-6 col-md-6">\n' +
+            '                    </div>\n' +
+            '                </fieldset>\n' +
+            '            </div>\n' +
+            '            <div id="imgDiv" class="col-lg-12 col-md-12">\n' +
+            '                <fieldset disabled>\n' +
+            '                    <div class="input-group mb-3 row">\n' +
+            '                        <div class="input-group-prepend col-lg-2 col-md-2"> <span \n' +
+            '                                class="lefttext">院所图片：</span> </div> <img id="myImg" src="#" style="width: 100px;height: 100px;" />\n' +
+            '                    </div>\n' +
+            '            </div>\n' +
+            '        </div>';
+        modalHtml.myViewTecModal = ' <div class="row">\n' +
+            '            <div class="col-lg-12 col-md-12">\n' +
+            '                <fieldset disabled>\n' +
+            '                    <div class="input-group mb-3 row">\n' +
+            '                        <div class="input-group-prepend col-lg-2 col-md-2">\n' +
+            '                            <span class="lefttext">企业名称：</span> </div> <input type="text" id="name"\n' +
+            '                            class="form-control col-lg-9 col-md-9">\n' +
+            '                    </div>\n' +
+            '            </div>\n' +
+            '            <div class="col-lg-12 col-md-12">\n' +
+            '                <fieldset disabled>\n' +
+            '                    <div class="input-group mb-3 row">\n' +
+            '                        <div class="input-group-prepend col-lg-2 col-md-2"> <span class="lefttext">服务项目：</span> </div>\n' +
+            '                        <input type="text" id="projectName" class="form-control col-lg-9 col-md-9">\n' +
+            '                    </div>\n' +
+            '            </div>\n' +
+            '            <div class="col-lg-12 col-md-12">\n' +
+            '                <fieldset disabled>\n' +
+            '                    <div class="input-group mb-3 row">\n' +
+            '                        <div class="input-group-prepend col-lg-2 col-md-2"> <span class="lefttext">联系人：</span> </div>\n' +
+            '                        <input type="text" id="contacts" class="form-control col-lg-9 col-md-9">\n' +
+            '                    </div>\n' +
+            '            </div>\n' +
+            '            <div class="col-lg-12 col-md-12">\n' +
+            '                <fieldset disabled>\n' +
+            '                    <div class="input-group mb-3 row">\n' +
+            '                        <div class="input-group-prepend col-lg-2 col-md-2"> <span class="lefttext">联系电话：</span> </div>\n' +
+            '                        <input type="text" id="phone" class="form-control col-lg-9 col-md-9">\n' +
+            '                    </div>\n' +
+            '            </div>\n' +
+            '            <div class="col-lg-12 col-md-12">\n' +
+            '                <fieldset disabled>\n' +
+            '                    <div class="input-group mb-3 row">\n' +
+            '                        <div class="input-group-prepend col-lg-2 col-md-2"> <span class="lefttext">地址：</span> </div>\n' +
+            '                        <input type="text" id="address" class="form-control col-lg-9 col-md-9">\n' +
+            '                    </div>\n' +
+            '            </div>\n' +
+            '            <div class="col-lg-12 col-md-12">\n' +
+            '                <fieldset disabled>\n' +
+            '                    <div class="input-group mb-3 row">\n' +
+            '                        <div class="input-group-prepend col-lg-2 col-md-2"> <span class="lefttext">企业简介：</span>\n' +
+            '                        </div>\n' +
+            '                        <div class="col-lg-9 col-md-9" style="padding: 0;">\n' +
+            '                            <div id="intruduce"\n' +
+            '                                style="height:300px;width:100%; margin-top:-1px;clear:both;overflow:hidden;overflow:scroll;"\n' +
+            '                                class="form-control "> </div>\n' +
+            '                        </div>\n' +
+            '                    </div>\n' +
+            '            </div>\n' +
+            '            <div class="col-lg-6 col-md-6">\n' +
+            '                <fieldset disabled>\n' +
+            '                    <div class="input-group mb-3 row">\n' +
+            '                        <div style="margin-left: 4px;" class="input-group-prepend col-lg-4 col-md-4"> <span class="lefttext"\n' +
+            '                                for="applicant">创建人：</span>\n' +
+            '                        </div> <input type="text" id="creater" class="form-control col-lg-6 col-md-6">\n' +
+            '                    </div>\n' +
+            '                </fieldset>\n' +
+            '            </div>\n' +
+            '            <div class="col-lg-6 col-md-6">\n' +
+            '                <fieldset disabled>\n' +
+            '                    <div class="input-group mb-3 row">\n' +
+            '                        <div class="input-group-prepend col-lg-4 col-md-4"> <span class="lefttext"\n' +
+            '                                for="applicant">创建时间：</span>\n' +
+            '                        </div> <input style="margin-left: 4px;" type="text" id="itemcreateat"\n' +
+            '                            class="form-control col-lg-6 col-md-6">\n' +
+            '                    </div>\n' +
+            '                </fieldset>\n' +
+            '            </div>\n' +
+            '            <div id="imgDiv" class="col-lg-12 col-md-12">\n' +
+            '                <fieldset disabled>\n' +
+            '                    <div class="input-group mb-3 row">\n' +
+            '                        <div class="input-group-prepend col-lg-2 col-md-2"> <span class="lefttext">企业图片：</span> </div>\n' +
+            '                        <img style="width: 100px;height: 100px;" id="myImg" src="#" />\n' +
+            '                    </div>\n' +
+            '            </div>\n' +
+            '        </div>';
         modalHtml.myViewTourModal = '<div class="row">' + '            <div id="imgDiv" class="col-lg-12 col-md-12">' + "                <fieldset disabled>" + '                <div class="input-group mb-3">' + '                    <div class="input-group-prepend">' + '                        <button type="button" class="btn btn-primary btn-sm">基地照片</button>' + "                    </div>" + '                    <img id="myImg" src="#"/>' + "                </div>" + "            </div>" + "" + '            <div class="col-lg-12 col-md-12">' + "                <fieldset disabled>" + '                <div class="input-group mb-3">' + '                    <div class="input-group-prepend">' + '                        <button type="button" class="btn btn-primary btn-sm">基地名称</button>' + "                    </div>" + '                    <input type="text" id="name" class="form-control">' + "                </div>" + "            </div>" + "" + '            <div class="col-lg-12 col-md-12">' + "                <fieldset disabled>" + '                <div class="input-group mb-3">' + '                    <div class="input-group-prepend">' + '                        <button type="button" class="btn btn-primary btn-sm">占地面积</button>' + "                    </div>" + '                    <input type="text" id="areaCoverd" class="form-control">' + "                </div>" + "            </div>" + "" + '            <div class="col-lg-12 col-md-12">' + "                <fieldset disabled>" + '                <div class="input-group mb-3">' + '                    <div class="input-group-prepend">' + '                        <button type="button" class="btn btn-primary btn-sm">特色服务</button>' + "                    </div>" + '                    <input type="text" id="specialService" class="form-control">' + "                </div>" + "            </div>" + "" + '            <div class="col-lg-12 col-md-12">' + "                <fieldset disabled>" + '                <div class="input-group mb-3">' + '                    <div class="input-group-prepend">' + '                        <button type="button" class="btn btn-primary btn-sm" >联系人</button>' + "                    </div>" + '                   <input type="text" id="contacts" class="form-control">' + "                </div>" + "            </div>" + "" + '            <div class="col-lg-12 col-md-12">' + "                <fieldset disabled>" + '                <div class="input-group mb-3">' + '                    <div class="input-group-prepend">' + '                        <button type="button" class="btn btn-primary btn-sm" >联系电话</button>' + "                    </div>" + '                   <input type="text" id="phone" class="form-control">' + "                </div>" + "            </div>" + "" + '            <div class="col-lg-12 col-md-12">' + "                <fieldset disabled>" + '                <div class="input-group mb-3">' + '                    <div class="input-group-prepend">' + '                        <button type="button" class="btn btn-primary btn-sm" >地&emsp;&emsp;址</button>' + "                    </div>" + '                    <input type="text" id="address" class="form-control">' + "                </div>" + "            </div>" + "" + '            <div class="col-lg-12 col-md-12">' + "                <fieldset disabled>" + '                <div class="input-group mb-3">' + '                    <div class="input-group-prepend">' + '                        <button type="button" class="btn btn-primary btn-sm" >基地简介</button>' + "                    </div>" + '                    <div style="height:300px;width:750px; margin-top:-1px;clear:both;overflow:hidden;overflow:scroll;" id="intruduce" class="form-control">' + "                       </div>" + "                </div>" + "            </div>" + "" + '            <div class="col-lg-6 col-md-6">' + "                <fieldset disabled>" + '                <div class="input-group mb-3">' + '                    <div class="input-group-prepend">' + '                        <label class="input-group-text" for="applicant">创&ensp;建&ensp;人</label>' + "                    </div>" + '                    <input type="text"  id="creater" class="form-control">' + "                </div>" + "                </fieldset>" + "            </div>" + "" + '            <div class="col-lg-6 col-md-6">' + "                <fieldset disabled>" + '                <div class="input-group mb-3">' + '                    <div class="input-group-prepend">' + '                        <label class="input-group-text" for="applicant">创建时间</label>' + "                    </div>" + '                    <input type="text"  id="itemcreateat" class="form-control">' + "                </div>" + "                </fieldset>" + "            </div>" + "</div>";
-        modalHtml.myViewPlantModal = '<div class="row">' + '            <div id="imgDiv" class="col-lg-12 col-md-12">' + "                <fieldset disabled>" + '                <div class="input-group mb-3">' + '                    <div class="input-group-prepend">' + '                        <button type="button" class="btn btn-primary btn-sm">种植园照片</button>' + "                    </div>" + '                    <img id="myImg" src="#"/>' + "                </div>" + "            </div>" + "" + '            <div class="col-lg-12 col-md-12">' + "                <fieldset disabled>" + '                <div class="input-group mb-3">' + '                    <div class="input-group-prepend">' + '                        <button type="button" class="btn btn-primary btn-sm">种植园名称</button>' + "                    </div>" + '                    <input type="text" id="name" class="form-control">' + "                </div>" + "            </div>" + "" + '            <div class="col-lg-12 col-md-12">' + "                <fieldset disabled>" + '                <div class="input-group mb-3">' + '                    <div class="input-group-prepend">' + '                        <button type="button" class="btn btn-primary btn-sm">种植面积</button>' + "                    </div>" + '                    <input type="text" id="areaCoverd" class="form-control">' + "                </div>" + "            </div>" + "" + '            <div class="col-lg-12 col-md-12">' + "                <fieldset disabled>" + '                <div class="input-group mb-3">' + '                    <div class="input-group-prepend">' + '                        <button type="button" class="btn btn-primary btn-sm">种植种类</button>' + "                    </div>" + '                    <input type="text" id="plantType" class="form-control">' + "                </div>" + "            </div>" + "" + '            <div class="col-lg-12 col-md-12">' + "                <fieldset disabled>" + '                <div class="input-group mb-3">' + '                    <div class="input-group-prepend">' + '                        <button type="button" class="btn btn-primary btn-sm" >联系人</button>' + "                    </div>" + '                   <input type="text" id="contacts" class="form-control">' + "                </div>" + "            </div>" + "" + '            <div class="col-lg-12 col-md-12">' + "                <fieldset disabled>" + '                <div class="input-group mb-3">' + '                    <div class="input-group-prepend">' + '                        <button type="button" class="btn btn-primary btn-sm" >联系电话</button>' + "                    </div>" + '                   <input type="text" id="phone" class="form-control">' + "                </div>" + "            </div>" + "" + '            <div class="col-lg-12 col-md-12">' + "                <fieldset disabled>" + '                <div class="input-group mb-3">' + '                    <div class="input-group-prepend">' + '                        <button type="button" class="btn btn-primary btn-sm" >地&emsp;&emsp;址</button>' + "                    </div>" + '                    <input type="text" id="address" class="form-control">' + "                </div>" + "            </div>" + "" + '            <div class="col-lg-12 col-md-12">' + "                <fieldset disabled>" + '                <div class="input-group mb-3">' + '                    <div class="input-group-prepend">' + '                        <button type="button" class="btn btn-primary btn-sm" >种植园简介</button>' + "                    </div>" + '                    <div style="height:300px;width:750px; margin-top:-1px;clear:both;overflow:hidden;overflow:scroll;" id="intruduce" class="form-control">' + "                       </div>" + "                </div>" + "            </div>" + "" + '            <div class="col-lg-6 col-md-6">' + "                <fieldset disabled>" + '                <div class="input-group mb-3">' + '                    <div class="input-group-prepend">' + '                        <label class="input-group-text" for="applicant">创&ensp;建&ensp;人</label>' + "                    </div>" + '                    <input type="text"  id="creater" class="form-control">' + "                </div>" + "                </fieldset>" + "            </div>" + "" + '            <div class="col-lg-6 col-md-6">' + "                <fieldset disabled>" + '                <div class="input-group mb-3">' + '                    <div class="input-group-prepend">' + '                        <label class="input-group-text" for="applicant">创建时间</label>' + "                    </div>" + '                    <input type="text"  id="itemcreateat" class="form-control">' + "                </div>" + "                </fieldset>" + "            </div>" + "</div>";
-        modalHtml.myViewProcessModal = '<div class="row">' + '            <div id="imgDiv" class="col-lg-12 col-md-12">' + "                <fieldset disabled>" + '                <div class="input-group mb-3">' + '                    <div class="input-group-prepend">' + '                        <button type="button" class="btn btn-primary btn-sm">企业照片</button>' + "                    </div>" + '                    <img id="myImg" src="#"/>' + "                </div>" + "            </div>" + "" + '            <div class="col-lg-12 col-md-12">' + "                <fieldset disabled>" + '                <div class="input-group mb-3">' + '                    <div class="input-group-prepend">' + '                        <button type="button" class="btn btn-primary btn-sm">企业名称</button>' + "                    </div>" + '                    <input type="text" id="name" class="form-control">' + "                </div>" + "            </div>" + "" + '            <div class="col-lg-12 col-md-12">' + "                <fieldset disabled>" + '                <div class="input-group mb-3">' + '                    <div class="input-group-prepend">' + '                        <button type="button" class="btn btn-primary btn-sm">占地面积</button>' + "                    </div>" + '                    <input type="text" id="areaCoverd" class="form-control">' + "                </div>" + "            </div>" + "" + '            <div class="col-lg-12 col-md-12">' + "                <fieldset disabled>" + '                <div class="input-group mb-3">' + '                    <div class="input-group-prepend">' + '                        <button type="button" class="btn btn-primary btn-sm">加工种类</button>' + "                    </div>" + '                    <input type="text" id="processingType" class="form-control">' + "                </div>" + "            </div>" + "" + '            <div class="col-lg-12 col-md-12">' + "                <fieldset disabled>" + '                <div class="input-group mb-3">' + '                    <div class="input-group-prepend">' + '                        <button type="button" class="btn btn-primary btn-sm" >联系人</button>' + "                    </div>" + '                   <input type="text" id="contacts" class="form-control">' + "                </div>" + "            </div>" + "" + '            <div class="col-lg-12 col-md-12">' + "                <fieldset disabled>" + '                <div class="input-group mb-3">' + '                    <div class="input-group-prepend">' + '                        <button type="button" class="btn btn-primary btn-sm" >联系电话</button>' + "                    </div>" + '                   <input type="text" id="phone" class="form-control">' + "                </div>" + "            </div>" + "" + '            <div class="col-lg-12 col-md-12">' + "                <fieldset disabled>" + '                <div class="input-group mb-3">' + '                    <div class="input-group-prepend">' + '                        <button type="button" class="btn btn-primary btn-sm" >地&emsp;&emsp;址</button>' + "                    </div>" + '                    <input type="text" id="address" class="form-control">' + "                </div>" + "            </div>" + "" + '            <div class="col-lg-12 col-md-12">' + "                <fieldset disabled>" + '                <div class="input-group mb-3">' + '                    <div class="input-group-prepend">' + '                        <button type="button" class="btn btn-primary btn-sm" >企业简介</button>' + "                    </div>" + '                    <div style="height:300px;width:750px; margin-top:-1px;clear:both;overflow:hidden;overflow:scroll;" id="intruduce" class="form-control">' + "                       </div>" + "                </div>" + "            </div>" + "" + '            <div class="col-lg-6 col-md-6">' + "                <fieldset disabled>" + '                <div class="input-group mb-3">' + '                    <div class="input-group-prepend">' + '                        <label class="input-group-text" for="applicant">创&ensp;建&ensp;人</label>' + "                    </div>" + '                    <input type="text"  id="creater" class="form-control">' + "                </div>" + "                </fieldset>" + "            </div>" + "" + '            <div class="col-lg-6 col-md-6">' + "                <fieldset disabled>" + '                <div class="input-group mb-3">' + '                    <div class="input-group-prepend">' + '                        <label class="input-group-text" for="applicant">创建时间</label>' + "                    </div>" + '                    <input type="text"  id="itemcreateat" class="form-control">' + "                </div>" + "                </fieldset>" + "            </div>" + "</div>";
-        modalHtml.myViewSaleModal = '<div class="row">' + '            <div id="imgDiv" class="col-lg-12 col-md-12">' + "                <fieldset disabled>" + '                <div class="input-group mb-3">' + '                    <div class="input-group-prepend">' + '                        <button type="button" class="btn btn-primary btn-sm">企业照片</button>' + "                    </div>" + '                    <img id="myImg" src="#"/>' + "                </div>" + "            </div>" + "" + '            <div class="col-lg-12 col-md-12">' + "                <fieldset disabled>" + '                <div class="input-group mb-3">' + '                    <div class="input-group-prepend">' + '                        <button type="button" class="btn btn-primary btn-sm">企业名称</button>' + "                    </div>" + '                    <input type="text" id="name" class="form-control">' + "                </div>" + "            </div>" + "" + '            <div class="col-lg-12 col-md-12">' + "                <fieldset disabled>" + '                <div class="input-group mb-3">' + '                    <div class="input-group-prepend">' + '                        <button type="button" class="btn btn-primary btn-sm">销售种类</button>' + "                    </div>" + '                    <input type="text" id="salesCategory" class="form-control">' + "                </div>" + "            </div>" + "" + '            <div class="col-lg-12 col-md-12">' + "                <fieldset disabled>" + '                <div class="input-group mb-3">' + '                    <div class="input-group-prepend">' + '                        <button type="button" class="btn btn-primary btn-sm">销售药品</button>' + "                    </div>" + '                    <input type="text" id="sellingDrugs" class="form-control">' + "                </div>" + "            </div>" + "" + '            <div class="col-lg-12 col-md-12">' + "                <fieldset disabled>" + '                <div class="input-group mb-3">' + '                    <div class="input-group-prepend">' + '                        <button type="button" class="btn btn-primary btn-sm" >联系人</button>' + "                    </div>" + '                   <input type="text" id="contacts" class="form-control">' + "                </div>" + "            </div>" + "" + '            <div class="col-lg-12 col-md-12">' + "                <fieldset disabled>" + '                <div class="input-group mb-3">' + '                    <div class="input-group-prepend">' + '                        <button type="button" class="btn btn-primary btn-sm" >联系电话</button>' + "                    </div>" + '                   <input type="text" id="phone" class="form-control">' + "                </div>" + "            </div>" + "" + '            <div class="col-lg-12 col-md-12">' + "                <fieldset disabled>" + '                <div class="input-group mb-3">' + '                    <div class="input-group-prepend">' + '                        <button type="button" class="btn btn-primary btn-sm" >地&emsp;&emsp;址</button>' + "                    </div>" + '                    <input type="text" id="address" class="form-control">' + "                </div>" + "            </div>" + "" + '            <div class="col-lg-12 col-md-12">' + "                <fieldset disabled>" + '                <div class="input-group mb-3">' + '                    <div class="input-group-prepend">' + '                        <button type="button" class="btn btn-primary btn-sm" >企业简介</button>' + "                    </div>" + '                    <div style="height:300px;width:750px; margin-top:-1px;clear:both;overflow:hidden;overflow:scroll;" id="intruduce" class="form-control">' + "                       </div>" + "                </div>" + "            </div>" + "" + '            <div class="col-lg-6 col-md-6">' + "                <fieldset disabled>" + '                <div class="input-group mb-3">' + '                    <div class="input-group-prepend">' + '                        <label class="input-group-text" for="applicant">创&ensp;建&ensp;人</label>' + "                    </div>" + '                    <input type="text"  id="creater" class="form-control">' + "                </div>" + "                </fieldset>" + "            </div>" + "" + '            <div class="col-lg-6 col-md-6">' + "                <fieldset disabled>" + '                <div class="input-group mb-3">' + '                    <div class="input-group-prepend">' + '                        <label class="input-group-text" for="applicant">创建时间</label>' + "                    </div>" + '                    <input type="text"  id="itemcreateat" class="form-control">' + "                </div>" + "                </fieldset>" + "            </div>" + "</div>";
-        modalHtml.myViewProduceModal = '<div class="row">' + '            <div id="imgDiv" class="col-lg-12 col-md-12">' + "                <fieldset disabled>" + '                <div class="input-group mb-3">' + '                    <div class="input-group-prepend">' + '                        <button type="button" class="btn btn-primary btn-sm">企业照片</button>' + "                    </div>" + '                    <img id="myImg" src="#"/>' + "                </div>" + "            </div>" + "" + '            <div class="col-lg-12 col-md-12">' + "                <fieldset disabled>" + '                <div class="input-group mb-3">' + '                    <div class="input-group-prepend">' + '                        <button type="button" class="btn btn-primary btn-sm">企业名称</button>' + "                    </div>" + '                    <input type="text" id="name" class="form-control">' + "                </div>" + "            </div>" + "" + '            <div class="col-lg-12 col-md-12">' + "                <fieldset disabled>" + '                <div class="input-group mb-3">' + '                    <div class="input-group-prepend">' + '                        <button type="button" class="btn btn-primary btn-sm">生产种类</button>' + "                    </div>" + '                    <input type="text" id="peoduceType" class="form-control">' + "                </div>" + "            </div>" + "" + '            <div class="col-lg-12 col-md-12">' + "                <fieldset disabled>" + '                <div class="input-group mb-3">' + '                    <div class="input-group-prepend">' + '                        <button type="button" class="btn btn-primary btn-sm">生产药品</button>' + "                    </div>" + '                    <input type="text" id="peoduceDrug" class="form-control">' + "                </div>" + "            </div>" + "" + '            <div class="col-lg-12 col-md-12">' + "                <fieldset disabled>" + '                <div class="input-group mb-3">' + '                    <div class="input-group-prepend">' + '                        <button type="button" class="btn btn-primary btn-sm" >联系人</button>' + "                    </div>" + '                   <input type="text" id="contacts" class="form-control">' + "                </div>" + "            </div>" + "" + '            <div class="col-lg-12 col-md-12">' + "                <fieldset disabled>" + '                <div class="input-group mb-3">' + '                    <div class="input-group-prepend">' + '                        <button type="button" class="btn btn-primary btn-sm" >联系电话</button>' + "                    </div>" + '                   <input type="text" id="phone" class="form-control">' + "                </div>" + "            </div>" + "" + '            <div class="col-lg-12 col-md-12">' + "                <fieldset disabled>" + '                <div class="input-group mb-3">' + '                    <div class="input-group-prepend">' + '                        <button type="button" class="btn btn-primary btn-sm" >地&emsp;&emsp;址</button>' + "                    </div>" + '                    <input type="text" id="address" class="form-control">' + "                </div>" + "            </div>" + "" + '            <div class="col-lg-12 col-md-12">' + "                <fieldset disabled>" + '                <div class="input-group mb-3">' + '                    <div class="input-group-prepend">' + '                        <button type="button" class="btn btn-primary btn-sm" >企业简介</button>' + "                    </div>" + '                    <div style="height:300px;width:750px; margin-top:-1px;clear:both;overflow:hidden;overflow:scroll;" id="intruduce" class="form-control">' + "                       </div>" + "                </div>" + "            </div>" + "" + '            <div class="col-lg-6 col-md-6">' + "                <fieldset disabled>" + '                <div class="input-group mb-3">' + '                    <div class="input-group-prepend">' + '                        <label class="input-group-text" for="applicant">创&ensp;建&ensp;人</label>' + "                    </div>" + '                    <input type="text"  id="creater" class="form-control">' + "                </div>" + "                </fieldset>" + "            </div>" + "" + '            <div class="col-lg-6 col-md-6">' + "                <fieldset disabled>" + '                <div class="input-group mb-3">' + '                    <div class="input-group-prepend">' + '                        <label class="input-group-text" for="applicant">创建时间</label>' + "                    </div>" + '                    <input type="text"  id="itemcreateat" class="form-control">' + "                </div>" + "                </fieldset>" + "            </div>" + "</div>";
-        modalHtml.myViewSchoolModal = '<div class="row">' + '            <div id="imgDiv" class="col-lg-12 col-md-12">' + "                <fieldset disabled>" + '                <div class="input-group mb-3">' + '                    <div class="input-group-prepend">' + '                        <button type="button" class="btn btn-primary btn-sm">学校图片</button>' + "                    </div>" + '                    <img id="myImg" src="#"/>' + "                </div>" + "            </div>" + "" + '            <div class="col-lg-12 col-md-12">' + "                <fieldset disabled>" + '                <div class="input-group mb-3">' + '                    <div class="input-group-prepend">' + '                        <button type="button" class="btn btn-primary btn-sm">学校名称</button>' + "                    </div>" + '                    <input type="text" id="schoolName" class="form-control">' + "                </div>" + "            </div>" + "" + '            <div class="col-lg-12 col-md-12">' + "                <fieldset disabled>" + '                <div class="input-group mb-3">' + '                    <div class="input-group-prepend">' + '                        <button type="button" class="btn btn-primary btn-sm">学校简介</button>' + "                    </div>" + '                    <input type="text" id="schoolIntroduce" class="form-control">' + "                </div>" + "            </div>" + "" + '            <div class="col-lg-12 col-md-12">' + "                <fieldset disabled>" + '                <div class="input-group mb-3">' + '                    <div class="input-group-prepend">' + '                        <button type="button" class="btn btn-primary btn-sm">二级学院名称</button>' + "                    </div>" + '                    <input type="text" id="secondaryCollege" class="form-control">' + "                </div>" + "            </div>" + "" + '            <div class="col-lg-12 col-md-12">' + "                <fieldset disabled>" + '                <div class="input-group mb-3">' + '                    <div class="input-group-prepend">' + '                        <button type="button" class="btn btn-primary btn-sm">本科招生专业</button>' + "                    </div>" + '                    <input type="text" id="enrollmentMajor" class="form-control">' + "                </div>" + "            </div>" + "" + '            <div class="col-lg-12 col-md-12">' + "                <fieldset disabled>" + '                <div class="input-group mb-3">' + '                    <div class="input-group-prepend">' + '                        <button type="button" class="btn btn-primary btn-sm">研究生招生专业</button>' + "                    </div>" + '                    <input type="text" id="graduateEnrollmentMajor" class="form-control">' + "                </div>" + "            </div>" + "" + '            <div class="col-lg-12 col-md-12">' + "                <fieldset disabled>" + '                <div class="input-group mb-3">' + '                    <div class="input-group-prepend">' + '                        <button type="button" class="btn btn-primary btn-sm" >联系电话</button>' + "                    </div>" + '                   <input type="text" id="phone" class="form-control">' + "                </div>" + "            </div>" + "" + '            <div class="col-lg-12 col-md-12">' + "                <fieldset disabled>" + '                <div class="input-group mb-3">' + '                    <div class="input-group-prepend">' + '                        <button type="button" class="btn btn-primary btn-sm" >在线地址</button>' + "                    </div>" + '                   <input type="text" id="onlineAddress" class="form-control">' + "                </div>" + "            </div>" + "" + '            <div class="col-lg-12 col-md-12">' + "                <fieldset disabled>" + '                <div class="input-group mb-3">' + '                    <div class="input-group-prepend">' + '                        <button type="button" class="btn btn-primary btn-sm" >地&emsp;&emsp;址</button>' + "                    </div>" + '                    <input type="text" id="address" class="form-control">' + "                </div>" + "            </div>" + "" + '            <div class="col-lg-12 col-md-12">' + "                <fieldset disabled>" + '                <div class="input-group mb-3">' + '                    <div class="input-group-prepend">' + '                        <button type="button" class="btn btn-primary btn-sm" >学校简介</button>' + "                    </div>" + '                    <div style="height:300px;width:750px; margin-top:-1px;clear:both;overflow:hidden;overflow:scroll;" id="schoolText" class="form-control">' + "                       </div>" + "                </div>" + "            </div>" + "" + '            <div class="col-lg-6 col-md-6">' + "                <fieldset disabled>" + '                <div class="input-group mb-3">' + '                    <div class="input-group-prepend">' + '                        <label class="input-group-text" for="applicant">创&ensp;建&ensp;人</label>' + "                    </div>" + '                    <input type="text"  id="creater" class="form-control">' + "                </div>" + "                </fieldset>" + "            </div>" + "" + '            <div class="col-lg-6 col-md-6">' + "                <fieldset disabled>" + '                <div class="input-group mb-3">' + '                    <div class="input-group-prepend">' + '                        <label class="input-group-text" for="applicant">创建时间</label>' + "                    </div>" + '                    <input type="text"  id="itemcreateat" class="form-control">' + "                </div>" + "                </fieldset>" + "            </div>" + "</div>";
+        modalHtml.myViewPlantModal = ' <div class="row">\n' +
+            '            <div class="col-lg-12 col-md-12">\n' +
+            '                <fieldset disabled>\n' +
+            '                    <div class="input-group mb-3 row">\n' +
+            '                        <div class="input-group-prepend col-lg-2 col-md-2">\n' +
+            '                            <span class="lefttext">种植园名称：</span> </div> <input\n' +
+            '                            type="text" id="name" class="form-control col-lg-9 col-md-9">\n' +
+            '                    </div>\n' +
+            '            </div>\n' +
+            '            <div class="col-lg-12 col-md-12">\n' +
+            '                <fieldset disabled>\n' +
+            '                    <div class="input-group mb-3 row">\n' +
+            '                        <div class="input-group-prepend col-lg-2 col-md-2"> <span\n' +
+            '                                class="lefttext">种植面积：</span> </div> <input type="text" id="areaCoverd"\n' +
+            '                            class="form-control col-lg-9 col-md-9">\n' +
+            '                    </div>\n' +
+            '            </div>\n' +
+            '            <div class="col-lg-12 col-md-12">\n' +
+            '                <fieldset disabled>\n' +
+            '                    <div class="input-group mb-3 row">\n' +
+            '                        <div class="input-group-prepend col-lg-2 col-md-2"> <span\n' +
+            '                                class="lefttext">种植种类：</span> </div> <input type="text" id="plantType"\n' +
+            '                            class="form-control col-lg-9 col-md-9">\n' +
+            '                    </div>\n' +
+            '            </div>\n' +
+            '            <div class="col-lg-12 col-md-12">\n' +
+            '                <fieldset disabled>\n' +
+            '                    <div class="input-group mb-3 row">\n' +
+            '                        <div class="input-group-prepend col-lg-2 col-md-2"> <span\n' +
+            '                                class="lefttext">联系人：</span> </div> <input type="text" id="contacts"\n' +
+            '                            class="form-control col-lg-9 col-md-9">\n' +
+            '                    </div>\n' +
+            '            </div>\n' +
+            '            <div class="col-lg-12 col-md-12">\n' +
+            '                <fieldset disabled>\n' +
+            '                    <div class="input-group mb-3 row">\n' +
+            '                        <div class="input-group-prepend col-lg-2 col-md-2"> <span\n' +
+            '                                class="lefttext">联系电话：</span> </div> <input type="text" id="phone"\n' +
+            '                            class="form-control col-lg-9 col-md-9">\n' +
+            '                    </div>\n' +
+            '            </div>\n' +
+            '            <div class="col-lg-12 col-md-12">\n' +
+            '                <fieldset disabled>\n' +
+            '                    <div class="input-group mb-3 row">\n' +
+            '                        <div class="input-group-prepend col-lg-2 col-md-2"> <span\n' +
+            '                                class="lefttext">地址：</span> </div> <input type="text"\n' +
+            '                            id="address" class="form-control col-lg-9 col-md-9">\n' +
+            '                    </div>\n' +
+            '            </div>\n' +
+            '            <div class="col-lg-12 col-md-12">\n' +
+            '                <fieldset disabled>\n' +
+            '                    <div class="input-group mb-3 row">\n' +
+            '                        <div class="input-group-prepend col-lg-2 col-md-2"> <span\n' +
+            '                                class="lefttext">种植园简介：</span> </div>\n' +
+            '                        <div style="height:300px;width:750px; margin-top:-1px;clear:both;overflow:hidden;overflow:scroll;"\n' +
+            '                            id="intruduce" class="form-control col-lg-9 col-md-9"> </div>\n' +
+            '                    </div>\n' +
+            '            </div>\n' +
+            '            <div class="col-lg-6 col-md-6">\n' +
+            '                <fieldset disabled>\n' +
+            '                    <div class="input-group mb-3 row">\n' +
+            '                        <div style="margin-left: 4px;" class="input-group-prepend col-lg-4 col-md-4"> <span class="lefttext"\n' +
+            '                                for="applicant">创建人：</span> </div> <input type="text" id="creater"\n' +
+            '                            class="form-control col-lg-6 col-md-6"  >\n' +
+            '                    </div>\n' +
+            '                </fieldset>\n' +
+            '            </div>\n' +
+            '            <div class="col-lg-6 col-md-6">\n' +
+            '                <fieldset disabled>\n' +
+            '                    <div class="input-group mb-3 row">\n' +
+            '                        <div class="input-group-prepend col-lg-4 col-md-4"> <span class="lefttext" for="applicant">创建时间：</span>\n' +
+            '                        </div> <input type="text" id="itemcreateat" class="form-control col-lg-6 col-md-6">\n' +
+            '                    </div>\n' +
+            '                </fieldset>\n' +
+            '            </div>\n' +
+            '            <div id="imgDiv" class="col-lg-12 col-md-12">\n' +
+            '                <fieldset disabled>\n' +
+            '                    <div class="input-group mb-3 row">\n' +
+            '                        <div class="input-group-prepend col-lg-2 col-md-2"> <span\n' +
+            '                                class="lefttext">种植园照片：</span> </div> <img id="myImg" src="#"  style="width: 100px;height: 100px;" />\n' +
+            '                    </div>\n' +
+            '            </div>\n' +
+            '        </div>';
+        modalHtml.myViewProcessModal = ' <div class="row"> \n' +
+            '            <div class="col-lg-12 col-md-12">\n' +
+            '                <fieldset disabled>\n' +
+            '                    <div class="input-group mb-3 row">\n' +
+            '                        <div class="input-group-prepend col-lg-2">\n' +
+            '                            <span  class="lefttext">企业名称：</span> </div> <input type="text"\n' +
+            '                            id="name" class="form-control col-lg-9 col-md-9">\n' +
+            '                    </div>\n' +
+            '            </div>\n' +
+            '            <div class="col-lg-12 col-md-12">\n' +
+            '                <fieldset disabled>\n' +
+            '                    <div class="input-group mb-3 row">\n' +
+            '                        <div class="input-group-prepend col-lg-2"> <span \n' +
+            '                                class="lefttext">占地面积：</span> </div> <input type="text" id="areaCoverd"\n' +
+            '                            class="form-control col-lg-9 col-md-9">\n' +
+            '                    </div>\n' +
+            '            </div>\n' +
+            '            <div class="col-lg-12 col-md-12">\n' +
+            '                <fieldset disabled>\n' +
+            '                    <div class="input-group mb-3 row">\n' +
+            '                        <div class="input-group-prepend col-lg-2"> <span \n' +
+            '                                class="lefttext">加工种类：</span> </div> <input type="text"\n' +
+            '                            id="processingType" class="form-control col-lg-9 col-md-9">\n' +
+            '                    </div>\n' +
+            '            </div>\n' +
+            '            <div class="col-lg-12 col-md-12">\n' +
+            '                <fieldset disabled>\n' +
+            '                    <div class="input-group mb-3 row">\n' +
+            '                        <div class="input-group-prepend col-lg-2"> <span \n' +
+            '                                class="lefttext">联系人：</span> </div> <input type="text" id="contacts"\n' +
+            '                            class="form-control col-lg-9 col-md-9">\n' +
+            '                    </div>\n' +
+            '            </div>\n' +
+            '            <div class="col-lg-12 col-md-12">\n' +
+            '                <fieldset disabled>\n' +
+            '                    <div class="input-group mb-3 row">\n' +
+            '                        <div class="input-group-prepend col-lg-2"> <span \n' +
+            '                                class="lefttext">联系电话：</span> </div> <input type="text" id="phone"\n' +
+            '                            class="form-control col-lg-9 col-md-9">\n' +
+            '                    </div>\n' +
+            '            </div>\n' +
+            '            <div class="col-lg-12 col-md-12">\n' +
+            '                <fieldset disabled>\n' +
+            '                    <div class="input-group mb-3 row">\n' +
+            '                        <div class="input-group-prepend col-lg-2"> <span \n' +
+            '                                class="lefttext">地址：</span> </div> <input type="text"\n' +
+            '                            id="address" class="form-control col-lg-9 col-md-9">\n' +
+            '                    </div>\n' +
+            '            </div>\n' +
+            '            <div class="col-lg-12 col-md-12">\n' +
+            '                <fieldset disabled>\n' +
+            '                    <div class="input-group mb-3 row">\n' +
+            '                        <div class="input-group-prepend col-lg-2"> <span \n' +
+            '                                class="lefttext">企业简介：</span> </div>\n' +
+            '                        <div style="height:300px;width:750px; margin-top:-1px;clear:both;overflow:hidden;overflow:scroll;"\n' +
+            '                            id="intruduce" class="form-control col-lg-9 col-md-9"> </div>\n' +
+            '                    </div>\n' +
+            '            </div>\n' +
+            '            <div class="col-lg-6 col-md-6">\n' +
+            '                <fieldset disabled>\n' +
+            '                    <div class="input-group mb-3 row">\n' +
+            '                        <div style="margin-left: 4px;" class="input-group-prepend col-lg-4"> <span class="lefttext"\n' +
+            '                                for="applicant">创建人：</span> </div> <input type="text" id="creater"\n' +
+            '                            class="form-control col-lg-6 col-md-6" >\n' +
+            '                    </div>\n' +
+            '                </fieldset>\n' +
+            '            </div>\n' +
+            '            <div class="col-lg-6 col-md-6">\n' +
+            '                <fieldset disabled>\n' +
+            '                    <div class="input-group mb-3 row">\n' +
+            '                        <div class="input-group-prepend col-lg-4"> <span class="lefttext" for="applicant">创建时间：</span>\n' +
+            '                        </div> <input type="text" id="itemcreateat" class="form-control col-lg-6 col-md-6">\n' +
+            '                    </div>\n' +
+            '                </fieldset>\n' +
+            '            </div>\n' +
+            '            <div id="imgDiv" class="col-lg-12 col-md-12">\n' +
+            '                <fieldset disabled>\n' +
+            '                    <div class="input-group mb-3 row">\n' +
+            '                        <div class="input-group-prepend col-lg-2"> <span \n' +
+            '                                class="lefttext">企业照片：</span> </div> <img id="myImg" src="#"  style="width: 100px;height: 100px;" />\n' +
+            '                    </div>\n' +
+            '            </div>\n' +
+            '        </div>';
+        modalHtml.myViewSaleModal = ' <div class="row">\n' +
+            '            <div class="col-lg-12 col-md-12">\n' +
+            '                <fieldset disabled>\n' +
+            '                    <div class="input-group mb-3">\n' +
+            '                        <div class="input-group-prepend col-lg-2">\n' +
+            '                            <span  class="lefttext">企业名称：</span></div> <input type="text"\n' +
+            '                            id="name" class="form-control col-lg-9 col-md-9">\n' +
+            '                    </div>\n' +
+            '            </div>\n' +
+            '            <div class="col-lg-12 col-md-12">\n' +
+            '                <fieldset disabled>\n' +
+            '                    <div class="input-group mb-3">\n' +
+            '                        <div class="input-group-prepend col-lg-2"> <span \n' +
+            '                                class="lefttext">销售种类：</span></div> <input type="text" id="salesCategory"\n' +
+            '                            class="form-control col-lg-9 col-md-9">\n' +
+            '                    </div>\n' +
+            '            </div>\n' +
+            '            <div class="col-lg-12 col-md-12">\n' +
+            '                <fieldset disabled>\n' +
+            '                    <div class="input-group mb-3">\n' +
+            '                        <div class="input-group-prepend col-lg-2"> <span \n' +
+            '                                class="lefttext">销售药品：</span></div> <input type="text" id="sellingDrugs"\n' +
+            '                            class="form-control col-lg-9 col-md-9">\n' +
+            '                    </div>\n' +
+            '            </div>\n' +
+            '            <div class="col-lg-12 col-md-12">\n' +
+            '                <fieldset disabled>\n' +
+            '                    <div class="input-group mb-3">\n' +
+            '                        <div class="input-group-prepend col-lg-2"> <span \n' +
+            '                                class="lefttext">联系人：</span></div> <input type="text" id="contacts"\n' +
+            '                            class="form-control col-lg-9 col-md-9">\n' +
+            '                    </div>\n' +
+            '            </div>\n' +
+            '            <div class="col-lg-12 col-md-12">\n' +
+            '                <fieldset disabled>\n' +
+            '                    <div class="input-group mb-3">\n' +
+            '                        <div class="input-group-prepend col-lg-2"> <span \n' +
+            '                                class="lefttext">联系电话：</span></div> <input type="text" id="phone"\n' +
+            '                            class="form-control col-lg-9 col-md-9">\n' +
+            '                    </div>\n' +
+            '            </div>\n' +
+            '            <div class="col-lg-12 col-md-12">\n' +
+            '                <fieldset disabled>\n' +
+            '                    <div class="input-group mb-3">\n' +
+            '                        <div class="input-group-prepend col-lg-2"> <span \n' +
+            '                                class="lefttext">地址：</span></div> <input type="text"\n' +
+            '                            id="address" class="form-control col-lg-9 col-md-9">\n' +
+            '                    </div>\n' +
+            '            </div>\n' +
+            '            <div class="col-lg-12 col-md-12">\n' +
+            '                <fieldset disabled>\n' +
+            '                    <div class="input-group mb-3">\n' +
+            '                        <div class="input-group-prepend col-lg-2"> <span \n' +
+            '                                class="lefttext">企业简介：</span></div>\n' +
+            '                        <div style="height:300px;width:750px; margin-top:-1px;clear:both;overflow:hidden;overflow:scroll;"\n' +
+            '                            id="intruduce" class="form-control col-lg-9 col-md-9"></div>\n' +
+            '                    </div>\n' +
+            '            </div>\n' +
+            '            <div class="col-lg-6 col-md-6">\n' +
+            '                <fieldset disabled>\n' +
+            '                    <div class="input-group mb-3">\n' +
+            '                        <div style="margin-left: 4px;" class="input-group-prepend col-lg-4"> <span class="lefttext"\n' +
+            '                                for="applicant">创建人：</span></div> <input type="text" id="creater"\n' +
+            '                            class="form-control col-lg-6 col-md-6" >\n' +
+            '                    </div>\n' +
+            '                </fieldset>\n' +
+            '            </div>\n' +
+            '            <div class="col-lg-6 col-md-6">\n' +
+            '                <fieldset disabled>\n' +
+            '                    <div class="input-group mb-3">\n' +
+            '                        <div class="input-group-prepend col-lg-4"> <span class="lefttext"\n' +
+            '                                for="applicant">创建时间：</span></div> <input type="text" id="itemcreateat"\n' +
+            '                            class="form-control col-lg-6 col-md-6">\n' +
+            '                    </div>\n' +
+            '                </fieldset>\n' +
+            '            </div>\n' +
+            '            <div id="imgDiv" class="col-lg-12 col-md-12">\n' +
+            '                <fieldset disabled>\n' +
+            '                    <div class="input-group mb-3">\n' +
+            '                        <div class="input-group-prepend col-lg-2"> <span \n' +
+            '                                class="lefttext">企业照片：</span></div> <img id="myImg" src="#" style="width: 100px;height: 100px;" />\n' +
+            '                    </div>\n' +
+            '            </div>\n' +
+            '        </div>';
+        modalHtml.myViewProduceModal = '<div class="row">\n' +
+            '            <div class="col-lg-12 col-md-12">\n' +
+            '                <fieldset disabled>\n' +
+            '                    <div class="input-group mb-3">\n' +
+            '                        <div class="input-group-prepend col-lg-2 col-md-2">\n' +
+            '                            <span class="lefttext">企业名称：</span> </div><input type="text" id="name"\n' +
+            '                            class="form-control col-lg-9 col-md-9">\n' +
+            '                    </div>\n' +
+            '            </div>\n' +
+            '            <div class="col-lg-12 col-md-12">\n' +
+            '                <fieldset disabled>\n' +
+            '                    <div class="input-group mb-3">\n' +
+            '                        <div class="input-group-prepend col-lg-2 col-md-2"> <span class="lefttext">生产种类：</span> </div>\n' +
+            '                        <input type="text" id="peoduceType" class="form-control col-lg-9 col-md-9">\n' +
+            '                    </div>\n' +
+            '            </div>\n' +
+            '            <div class="col-lg-12 col-md-12">\n' +
+            '                <fieldset disabled>\n' +
+            '                    <div class="input-group mb-3">\n' +
+            '                        <div class="input-group-prepend col-lg-2 col-md-2"> <span class="lefttext">生产药品：</span> </div>\n' +
+            '                        <input type="text" id="peoduceDrug" class="form-control col-lg-9 col-md-9">\n' +
+            '                    </div>\n' +
+            '            </div>\n' +
+            '            <div class="col-lg-12 col-md-12">\n' +
+            '                <fieldset disabled>\n' +
+            '                    <div class="input-group mb-3">\n' +
+            '                        <div class="input-group-prepend col-lg-2 col-md-2"> <span class="lefttext">联系人：</span> </div>\n' +
+            '                        <input type="text" id="contacts" class="form-control col-lg-9 col-md-9">\n' +
+            '                    </div>\n' +
+            '            </div>\n' +
+            '            <div class="col-lg-12 col-md-12">\n' +
+            '                <fieldset disabled>\n' +
+            '                    <div class="input-group mb-3">\n' +
+            '                        <div class="input-group-prepend col-lg-2 col-md-2"> <span class="lefttext">联系电话：</span> </div>\n' +
+            '                        <input type="text" id="phone" class="form-control col-lg-9 col-md-9">\n' +
+            '                    </div>\n' +
+            '            </div>\n' +
+            '            <div class="col-lg-12 col-md-12">\n' +
+            '                <fieldset disabled>\n' +
+            '                    <div class="input-group mb-3">\n' +
+            '                        <div class="input-group-prepend col-lg-2 col-md-2"> <span class="lefttext">地址：</span> </div>\n' +
+            '                        <input type="text" id="address" class="form-control col-lg-9 col-md-9">\n' +
+            '                    </div>\n' +
+            '            </div>\n' +
+            '            <div class="col-lg-12 col-md-12">\n' +
+            '                <fieldset disabled>\n' +
+            '                    <div class="input-group mb-3">\n' +
+            '                        <div class="input-group-prepend col-lg-2 col-md-2"> <span class="lefttext">企业简介：</span> </div>\n' +
+            '                        <div style="height:300px;width:750px; margin-top:-1px;clear:both;overflow:hidden;overflow:scroll;"\n' +
+            '                            id="intruduce" class="form-control col-lg-9 col-md-9"> </div>\n' +
+            '                    </div>\n' +
+            '            </div>\n' +
+            '            <div class="col-lg-6 col-md-6">\n' +
+            '                <fieldset disabled>\n' +
+            '                    <div class="input-group mb-3">\n' +
+            '                        <div style="margin-left: 4px;" class="input-group-prepend col-lg-4 col-md-4"> <span class="lefttext"\n' +
+            '                                for="applicant">创建人：</span> </div><input type="text" id="creater"\n' +
+            '                            class="form-control col-lg-6 col-md-6" >\n' +
+            '                    </div>\n' +
+            '                </fieldset>\n' +
+            '            </div>\n' +
+            '            <div class="col-lg-6 col-md-6">\n' +
+            '                <fieldset disabled>\n' +
+            '                    <div class="input-group mb-3">\n' +
+            '                        <div class="input-group-prepend col-lg-4 col-md-4"> <span class="lefttext"\n' +
+            '                                for="applicant">创建时间：</span> </div><input type="text" id="itemcreateat"\n' +
+            '                            class="form-control col-lg-6 col-md-6">\n' +
+            '                    </div>\n' +
+            '                </fieldset>\n' +
+            '            </div>\n' +
+            '            <div id="imgDiv" class="col-lg-12 col-md-12">\n' +
+            '                <fieldset disabled>\n' +
+            '                    <div class="input-group mb-3">\n' +
+            '                        <div class="input-group-prepend col-lg-2 col-md-2"> <span class="lefttext">企业照片：</span> </div>\n' +
+            '                        <img id="myImg" src="#" style="width: 100px;height: 100px;" />\n' +
+            '                    </div>\n' +
+            '            </div>\n' +
+            '        </div>';
+        modalHtml.myViewSchoolModal = '<div class="row">\n' +
+            '            <div class="col-lg-12 col-md-12">\n' +
+            '                <fieldset disabled>\n' +
+            '                    <div class="input-group mb-3">\n' +
+            '                        <div class="input-group-prepend col-lg-2 col-md-2">\n' +
+            '                            <span  class="lefttext">学校名称：</span> </div> <input type="text"\n' +
+            '                            id="schoolName" class="form-control col-lg-9 col-md-9">\n' +
+            '                    </div>\n' +
+            '            </div>\n' +
+            '            <div class="col-lg-12 col-md-12">\n' +
+            '                <fieldset disabled>\n' +
+            '                    <div class="input-group mb-3">\n' +
+            '                        <div class="input-group-prepend col-lg-2 col-md-2"> <span \n' +
+            '                                class="lefttext">学校简介：</span> </div> <input type="text" id="schoolIntroduce"\n' +
+            '                            class="form-control col-lg-9 col-md-9">\n' +
+            '                    </div>\n' +
+            '            </div>\n' +
+            '            <div class="col-lg-12 col-md-12">\n' +
+            '                <fieldset disabled>\n' +
+            '                    <div class="input-group mb-3">\n' +
+            '                        <div class="input-group-prepend col-lg-2 col-md-2"> <span \n' +
+            '                                class="lefttext">二级学院名称：</span> </div> <input type="text" id="secondaryCollege"\n' +
+            '                            class="form-control col-lg-9 col-md-9">\n' +
+            '                    </div>\n' +
+            '            </div>\n' +
+            '            <div class="col-lg-12 col-md-12">\n' +
+            '                <fieldset disabled>\n' +
+            '                    <div class="input-group mb-3">\n' +
+            '                        <div class="input-group-prepend col-lg-2 col-md-2"> <span \n' +
+            '                                class="lefttext">本科招生专业：</span> </div> <input type="text" id="enrollmentMajor"\n' +
+            '                            class="form-control col-lg-9 col-md-9">\n' +
+            '                    </div>\n' +
+            '            </div>\n' +
+            '            <div class="col-lg-12 col-md-12">\n' +
+            '                <fieldset disabled>\n' +
+            '                    <div class="input-group mb-3">\n' +
+            '                        <div class="input-group-prepend col-lg-2 col-md-2"> <span \n' +
+            '                                class="lefttext">研究生招生专业：</span> </div> <input type="text" id="graduateEnrollmentMajor"\n' +
+            '                            class="form-control col-lg-9 col-md-9">\n' +
+            '                    </div>\n' +
+            '            </div>\n' +
+            '            <div class="col-lg-12 col-md-12">\n' +
+            '                <fieldset disabled>\n' +
+            '                    <div class="input-group mb-3">\n' +
+            '                        <div class="input-group-prepend col-lg-2 col-md-2"> <span \n' +
+            '                                class="lefttext">联系电话：</span> </div> <input type="text" id="phone"\n' +
+            '                            class="form-control col-lg-9 col-md-9">\n' +
+            '                    </div>\n' +
+            '            </div>\n' +
+            '            <div class="col-lg-12 col-md-12">\n' +
+            '                <fieldset disabled>\n' +
+            '                    <div class="input-group mb-3">\n' +
+            '                        <div class="input-group-prepend col-lg-2 col-md-2"> <span \n' +
+            '                                class="lefttext">在线地址：</span> </div> <input type="text" id="onlineAddress"\n' +
+            '                            class="form-control col-lg-9 col-md-9">\n' +
+            '                    </div>\n' +
+            '            </div>\n' +
+            '            <div class="col-lg-12 col-md-12">\n' +
+            '                <fieldset disabled>\n' +
+            '                    <div class="input-group mb-3">\n' +
+            '                        <div class="input-group-prepend col-lg-2 col-md-2"> <span \n' +
+            '                                class="lefttext">地址：</span> </div> <input type="text" id="address"\n' +
+            '                            class="form-control col-lg-9 col-md-9">\n' +
+            '                    </div>\n' +
+            '            </div>\n' +
+            '            <div class="col-lg-12 col-md-12">\n' +
+            '                <fieldset disabled>\n' +
+            '                    <div class="input-group mb-3">\n' +
+            '                        <div class="input-group-prepend col-lg-2 col-md-2"> <span \n' +
+            '                                class="lefttext">学校简介：</span> </div>\n' +
+            '                        <div style="height:300px;width:750px; margin-top:-1px;clear:both;overflow:hidden;overflow:scroll;"\n' +
+            '                            id="schoolText" class="form-control col-lg-9 col-md-9"> </div>\n' +
+            '                    </div>\n' +
+            '            </div>\n' +
+            '            <div class="col-lg-6 col-md-6">\n' +
+            '                <fieldset disabled>\n' +
+            '                    <div class="input-group mb-3">\n' +
+            '                        <div style="margin-left: 4px;" class="input-group-prepend col-lg-4 col-md-4"> <span class="lefttext"\n' +
+            '                                for="applicant">创建人：</span> </div> <input type="text" id="creater"\n' +
+            '                            class="form-control col-lg-6 col-md-6" >\n' +
+            '                    </div>\n' +
+            '                </fieldset>\n' +
+            '            </div>\n' +
+            '            <div class="col-lg-6 col-md-6">\n' +
+            '                <fieldset disabled>\n' +
+            '                    <div class="input-group mb-3">\n' +
+            '                        <div class="input-group-prepend col-lg-4 col-md-4"> <span class="lefttext"\n' +
+            '                                for="applicant">创建时间：</span> </div> <input type="text" id="itemcreateat"\n' +
+            '                            class="form-control col-lg-6 col-md-6">\n' +
+            '                    </div>\n' +
+            '                </fieldset>\n' +
+            '            </div>\n' +
+            '            <div id="imgDiv" class="col-lg-12 col-md-12">\n' +
+            '                <fieldset disabled>\n' +
+            '                    <div class="input-group mb-3">\n' +
+            '                        <div class="input-group-prepend col-lg-2 col-md-2"> <span \n' +
+            '                                class="lefttext">学校图片：</span> </div> <img id="myImg" src="#" style="width: 100px;height: 100px;" />\n' +
+            '                    </div>\n' +
+            '            </div>\n' +
+            '        </div>';
         modalHtml.myInputReason = '<div class="row">' + "" + '            <div class="col-lg-12 col-md-12">' + '                <div class="input-group mb-3">' + '                    <div class="input-group-prepend">' + '                        <label class="input-group-text" for="applicant">输入理由：</label>' + "                    </div>" + '                    <input type="text"  id="inputReason" class="form-control">' + "                </div>" + "            </div>" + "</div>";
         modalHtml.myViewExpertModal = '<div class="row">\n' +
             '            <div class="col-lg-12 col-md-12">\n' +
@@ -910,16 +1622,16 @@
             '                \n' +
             '                <div class="col-lg-12 col-md-12" style="margin-bottom: 10px;">\n' +
             '                    <div class="input-group mb-3 row">\n' +
-            '                        <span class=\'input-label  col-lg-3 col-md-3 lefttext\'>开启时间：</span>\n' +
+            '                        <span class=\'input-label  col-lg-2 col-md-2 lefttext\'>开启时间：</span>\n' +
             '                         <input type="text" id="startTime" class="col-lg-9 col-md-9" > <i\n' +
-            '                            class="fa fa-calendar fa-lg" style="position: absolute;top: 0.5rem;right: 7px;"></i>\n' +
+            '                            class="fa fa-calendar fa-lg" style="position: absolute;top: 0.5rem;right: 70px;"></i>\n' +
             '                    </div>\n' +
             '                </div>\n' +
             '                <div class="col-lg-12 col-md-12" >\n' +
             '                    <div class="input-group mb-3 row">\n' +
-            '                        <span class=\'input-label col-lg-3 col-md-3 lefttext\'>结束时间：</span>\n' +
+            '                        <span class=\'input-label col-lg-2 col-md-2 lefttext\'>结束时间：</span>\n' +
             '                        <input type="text" id="endTime" class="col-lg-9 col-md-9"> <i class="fa fa-calendar fa-lg"\n' +
-            '                            style="position: absolute;top: 0.5rem;right: 7px;"></i>\n' +
+            '                            style="position: absolute;top: 0.5rem;right: 70px;"></i>\n' +
             '                    </div>\n' +
             '                </div>\n' +
             '            </div>\n' +
@@ -944,11 +1656,85 @@
             '    <div><input id="faguijandu" name="fuxuan" type="checkbox" value="zyc"><label for="faguijandu">法规监督处分管局长</label>\n' +
             '    </div>\n' +
             '</div>'
+        modalHtml.addSendModal = '<div><div><table id="sendTable"></table></div></div>';
         modalHtml.addExperModal = '<div><div><table id="expertsTable"></table></div></div>';
         modalHtml.reviseExperModal = '<div><div><button type="button" class="btn btn-primary btn-sm">该项目已经分配的专家</button><table id="expertsTable1"></table><button type="button" class="btn btn-primary btn-sm">该项目还没有分配的专家</button><table id="expertsTable2"></table></div></div>';
         modalHtml.myResonable = "<div>" + '        <textarea name="" id="reason" cols="96" rows="10"></textarea>' + "    </div>";
         modalHtml.myViewReceiptModal = '<div class="row">' + '            <div class="col-lg-12 col-md-12">' + "                <fieldset disabled>" + '                <div class="input-group mb-3">' + '                    <div class="input-group-prepend">' + '                        <button id="culturalNameSpan" class="btn btn-primary btn-sm">收&emsp;文&emsp;号</button>' + "                    </div>" + '                    <input type="text" id="receivingNum" class="form-control">' + "                </div>" + "            </div>" + "" + '            <div class="col-lg-12 col-md-12">' + "                <fieldset disabled>" + '                <div class="input-group mb-3">' + '                    <div class="input-group-prepend">' + '                        <button class="btn btn-primary btn-sm" >收文时间</button>' + "                    </div>" + '                    <input type="text" id="receivingDateOfReceipt" class="form-control">' + "                </div>" + "            </div>" + "" + '            <div class="col-lg-12 col-md-12">' + "                <fieldset disabled>" + '                <div class="input-group mb-3">' + '                    <div class="input-group-prepend">' + '                        <button class="btn btn-primary btn-sm" >来文标题</button>' + "                    </div>" + '                    <input type="text" id="receivingTitle" class="form-control">' + "                </div>" + "            </div>" + "" + '            <div class="col-lg-12 col-md-12">' + "                <fieldset disabled>" + '                <div class="input-group mb-3">' + '                    <div class="input-group-prepend">' + '                        <button class="btn btn-primary btn-sm" >来文单位</button>' + "                    </div>" + '                    <input type="text" id="receivingUnitOfCommun" class="form-control">' + "                </div>" + "            </div>" + "" + '            <div class="col-lg-12 col-md-12">' + "                <fieldset disabled>" + '                <div class="input-group mb-3">' + '                    <div class="input-group-prepend">' + '                        <button class="btn btn-primary btn-sm" >文件编号</button>' + "                    </div>" + '                    <input type="text" id="fileNo" class="form-control">' + "                </div>" + "            </div>" + "" + '            <div class="col-lg-12 col-md-12">' + "                <fieldset disabled>" + '                <div class="input-group mb-3">' + '                    <div class="input-group-prepend">' + '                        <button class="btn btn-primary btn-sm" >份&emsp;&emsp;数</button>' + "                    </div>" + '                    <input type="text" id="number" class="form-control">' + "                </div>" + "            </div>" + "" + '            <div class="col-lg-12 col-md-12">' + "                <fieldset disabled>" + '                <div class="input-group mb-3">' + '                    <div class="input-group-prepend">' + '                        <button class="btn btn-primary btn-sm" >密&emsp;&emsp;级</button>' + "                    </div>" + '                    <input type="text" id="secretLevel" class="form-control">' + "                </div>" + "            </div>" + "" + '            <div class="col-lg-12 col-md-12">' + "                <fieldset disabled>" + '                <div class="input-group mb-3">' + '                    <div class="input-group-prepend">' + '                        <button class="btn btn-primary btn-sm" >紧急程度</button>' + "                    </div>" + '                    <input type="text" id="receivingDegreeOfUrgency" class="form-control">' + "                </div>" + "            </div>" + "" + '            <div class="col-lg-12 col-md-12">' + "                <fieldset disabled>" + '                <div class="input-group mb-3">' + '                    <div class="input-group-prepend">' + '                        <button class="btn btn-primary btn-sm" >办结时限</button>' + "                    </div>" + '                    <input type="text" id="timeLimit" class="form-control">' + "                </div>" + "            </div>" + "" + '            <div class="col-lg-12 col-md-12">' + "                <fieldset disabled>" + '                <div class="input-group mb-3">' + '                    <div class="input-group-prepend">' + '                        <button class="btn btn-primary btn-sm" >数据状态</button>' + "                    </div>" + '                    <input type="text" id="receivingDataStatus" class="form-control">' + "                </div>" + "            </div>" + "" + '            <div id="fileDiv" class="col-lg-12 col-md-12" style="display: none">' + "                <fieldset disabled>" + '                <div class="input-group mb-3">' + '                    <div class="input-group-prepend">' + '                        <button type="button" class="btn btn-primary btn-sm" >附&emsp;&emsp;件</button>' + "                    </div>" + '                    <span id="upFile" src="#" style="margin-left: 9px;margin-top: 2px;"></span>' + "                </div>" + "            </div>" + "" + '           <div class="col-lg-6 col-md-6">' + "                <fieldset disabled>" + '                <div class="input-group mb-3">' + '                    <div class="input-group-prepend">' + '                        <label class="input-group-text" for="applicant">创&ensp;建&ensp;人</label>' + "                    </div>" + '                    <input type="text"  id="creater" class="form-control">' + "                </div>" + "                </fieldset>" + "            </div>" + "" + '            <div class="col-lg-6 col-md-6">' + "                <fieldset disabled>" + '                <div class="input-group mb-3">' + '                    <div class="input-group-prepend">' + '                        <label class="input-group-text" for="applicant">创建时间</label>' + "                    </div>" + '                    <input type="text"  id="itemcreateat" class="form-control">' + "                </div>" + "                </fieldset>" + "            </div>" + "</div>";
-        modalHtml.myViewSignModal = '<div class="row">' + '            <div class="col-lg-12 col-md-12">' + "                <fieldset disabled>" + '                <div class="input-group mb-3">' + '                    <div class="input-group-prepend">' + '                        <button class="btn btn-primary btn-sm" >文件标题</button>' + "                    </div>" + '                    <input type="text" id="receivingTitle" class="form-control">' + "                </div>" + "            </div>" + "" + '            <div class="col-lg-12 col-md-12">' + "                <fieldset disabled>" + '                <div class="input-group mb-3">' + '                    <div class="input-group-prepend">' + '                        <button class="btn btn-primary btn-sm" >公开方式</button>' + "                    </div>" + '                    <input type="text" id="govPunlic" class="form-control">' + "                </div>" + "            </div>" + "" + '            <div class="col-lg-12 col-md-12">' + "                <fieldset disabled>" + '                <div class="input-group mb-3">' + '                    <div class="input-group-prepend">' + '                        <button class="btn btn-primary btn-sm" >文件编号</button>' + "                    </div>" + '                    <input type="text" id="fileNo" class="form-control">' + "                </div>" + "            </div>" + "" + '            <div class="col-lg-12 col-md-12">' + "                <fieldset disabled>" + '                <div class="input-group mb-3">' + '                    <div class="input-group-prepend">' + '                        <button class="btn btn-primary btn-sm" >份&emsp;&emsp;数</button>' + "                    </div>" + '                    <input type="text" id="number" class="form-control">' + "                </div>" + "            </div>" + "" + '            <div class="col-lg-12 col-md-12">' + "                <fieldset disabled>" + '                <div class="input-group mb-3">' + '                    <div class="input-group-prepend">' + '                        <button class="btn btn-primary btn-sm" >密&emsp;&emsp;级</button>' + "                    </div>" + '                    <input type="text" id="classification" class="form-control">' + "                </div>" + "            </div>" + "" + '            <div class="col-lg-12 col-md-12">' + "                <fieldset disabled>" + '                <div class="input-group mb-3">' + '                    <div class="input-group-prepend">' + '                        <button class="btn btn-primary btn-sm" >不公开理由</button>' + "                    </div>" + '                    <input type="text" id="reason" class="form-control">' + "                </div>" + "            </div>" + "" + '            <div class="col-lg-12 col-md-12">' + "                <fieldset disabled>" + '                <div class="input-group mb-3">' + '                    <div class="input-group-prepend">' + '                        <button class="btn btn-primary btn-sm" >数据状态</button>' + "                    </div>" + '                    <input type="text" id="status" class="form-control">' + "                </div>" + "            </div>" + "" + '            <div id="fileDiv" class="col-lg-12 col-md-12" style="display: none">' + "                <fieldset disabled>" + '                <div class="input-group mb-3">' + '                    <div class="input-group-prepend">' + '                        <button type="button" class="btn btn-primary btn-sm" >附&emsp;&emsp;件</button>' + "                    </div>" + '                    <span id="upFile" src="#" style="margin-left: 9px;margin-top: 2px;"></span>' + "                </div>" + "            </div>" + "" + '           <div class="col-lg-6 col-md-6">' + "                <fieldset disabled>" + '                <div class="input-group mb-3">' + '                    <div class="input-group-prepend">' + '                        <label class="input-group-text" for="applicant">创&ensp;建&ensp;人</label>' + "                    </div>" + '                    <input type="text"  id="creater" class="form-control">' + "                </div>" + "                </fieldset>" + "            </div>" + "" + '            <div class="col-lg-6 col-md-6">' + "                <fieldset disabled>" + '                <div class="input-group mb-3">' + '                    <div class="input-group-prepend">' + '                        <label class="input-group-text" for="applicant">发文日期</label>' + "                    </div>" + '                    <input type="text"  id="itemupdateat" class="form-control">' + "                </div>" + "                </fieldset>" + "            </div>" + "</div>";
+        modalHtml.myViewSignModal = '<div class="row">\n' +
+            '            <div class="col-lg-12 col-md-12">\n' +
+            '                <fieldset disabled>\n' +
+            '                    <div class="input-group mb-3">\n' +
+            '                        <div class="input-group-prepend col-lg-2 col-md-2"> <span class="lefttext">文件标题：</span> </div> <input type="text"\n' +
+            '                            id="receivingTitle" class="form-control col-lg-9 col-md-9">\n' +
+            '                    </div>\n' +
+            '            </div>\n' +
+            '            <div class="col-lg-12 col-md-12">\n' +
+            '                <fieldset disabled>\n' +
+            '                    <div class="input-group mb-3">\n' +
+            '                        <div class="input-group-prepend col-lg-2 col-md-2"> <span class="lefttext">公开方式：</span>\n' +
+            '                        </div> <input type="text" id="govPunlic" class="form-control col-lg-9 col-md-9">\n' +
+            '                    </div>\n' +
+            '            </div>\n' +
+            '            <div class="col-lg-12 col-md-12">\n' +
+            '                <fieldset disabled>\n' +
+            '                    <div class="input-group mb-3">\n' +
+            '                        <div class="input-group-prepend col-lg-2 col-md-2"> <span class="lefttext">文件编号：</span>\n' +
+            '                        </div> <input type="text" id="fileNo" class="form-control col-lg-9 col-md-9">\n' +
+            '                    </div>\n' +
+            '            </div>\n' +
+            '            <div class="col-lg-12 col-md-12">\n' +
+            '                <fieldset disabled>\n' +
+            '                    <div class="input-group mb-3">\n' +
+            '                        <div class="input-group-prepend col-lg-2 col-md-2"> <span class="lefttext">份数：</span> </div> <input\n' +
+            '                            type="text" id="number" class="form-control col-lg-9 col-md-9">\n' +
+            '                    </div>\n' +
+            '            </div>\n' +
+            '            <div class="col-lg-12 col-md-12">\n' +
+            '                <fieldset disabled>\n' +
+            '                    <div class="input-group mb-3">\n' +
+            '                        <div class="input-group-prepend col-lg-2 col-md-2"> <span class="lefttext">密级：</span> </div> <input\n' +
+            '                            type="text" id="classification" class="form-control col-lg-9 col-md-9">\n' +
+            '                    </div>\n' +
+            '            </div>\n' +
+            '            <div class="col-lg-12 col-md-12">\n' +
+            '                <fieldset disabled>\n' +
+            '                    <div class="input-group mb-3">\n' +
+            '                        <div class="input-group-prepend col-lg-2 col-md-2"> <span class="lefttext">不公开理由：</span>\n' +
+            '                        </div> <input type="text" id="reason" class="form-control col-lg-9 col-md-9">\n' +
+            '                    </div>\n' +
+            '            </div>\n' +
+            '            <div class="col-lg-12 col-md-12">\n' +
+            '                <fieldset disabled>\n' +
+            '                    <div class="input-group mb-3">\n' +
+            '                        <div class="input-group-prepend col-lg-2 col-md-2"> <span class="lefttext">数据状态：</span>\n' +
+            '                        </div> <input type="text" id="status" class="form-control col-lg-9 col-md-9">\n' +
+            '                    </div>\n' +
+            '            </div>\n' +
+            '            <div id="fileDiv" class="col-lg-12 col-md-12" style="display: none">\n' +
+            '                <fieldset disabled>\n' +
+            '                    <div class="input-group mb-3">\n' +
+            '                        <div class="input-group-prepend col-lg-2 col-md-2"> <span class="lefttext">附件：</span> </div> <span\n' +
+            '                            id="upFile" src="#" style="margin-left: 9px;margin-top: 2px;"></span>\n' +
+            '                    </div>\n' +
+            '            </div>\n' +
+            '            <div class="col-lg-6 col-md-6">\n' +
+            '                <fieldset disabled>\n' +
+            '                    <div class="input-group mb-3">\n' +
+            '                        <div style="margin-left: 4px;" class="input-group-prepend col-lg-4 col-md-4" style="margin-left: 4px;"> <span class="lefttext" for="applicant">创建人：</span>\n' +
+            '                        </div> <input type="text" id="creater" class="form-control col-lg-6 col-md-6">\n' +
+            '                    </div>\n' +
+            '                </fieldset>\n' +
+            '            </div>\n' +
+            '            <div class="col-lg-6 col-md-6">\n' +
+            '                <fieldset disabled>\n' +
+            '                    <div class="input-group mb-3">\n' +
+            '                        <div class="input-group-prepend col-lg-4 col-md-4"> <span class="lefttext" for="applicant">发文日期：</span> </div>\n' +
+            '                        <input type="text" id="itemupdateat" class="form-control col-lg-6 col-md-6">\n' +
+            '                    </div>\n' +
+            '                </fieldset>\n' +
+            '            </div>\n' +
+            '        </div>';
         modalHtml.myPassReportModal = "<div>" + '        <textarea name="" id="reason" cols="96" rows="10"></textarea>' + "    </div>";
         modalHtml.myPassReportoneModal = "<div>" + '        <textarea name="" id="reasonone" cols="96" rows="10"></textarea>' + "    </div>";
         modalHtml.myPassReporttwoModal = "<div>" + '        <textarea name="" id="reasontwo" cols="96" rows="10"></textarea>' + "    </div>";
@@ -1018,7 +1804,7 @@
         modalHtml.myExmainSaveTips = "您本次的评审已保存，您可以在表格点击评审继续评审";
         modalHtml.myReExmainModal = "您确定要重新评审吗？";
         modalHtml.myReExmainModalSuccessTips = "已重新设置课题状态，您可以重新评审了";
-        modalHtml.mySendFileModal="您确认文件下达吗？";
+        modalHtml.mySendFileModal='是否下达该文件';
         modalHtml.myDeleteLeader="是否删除此领导讲话？"
         return modalHtml
     })

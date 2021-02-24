@@ -3,6 +3,7 @@ package com.zyyglxt.dao;
 import com.zyyglxt.dataobject.DataDO;
 import com.zyyglxt.dataobject.DataDOKey;
 import com.zyyglxt.dto.DataDto;
+import com.zyyglxt.dto.MainPageDto;
 import org.apache.ibatis.annotations.Param;
 
 import java.sql.Date;
@@ -19,10 +20,13 @@ public interface DataDOMapper {
     int insertSelective(DataDO record);
 
     //查询单个数据
-    DataDO selectByPrimaryKey(@Param("key") DataDOKey key, @Param("dataStatus") String dataStatus);
+    DataDO selectByPrimaryKey(@Param("key") DataDOKey key, @Param("dataType") String dataType);
 
     //查询相应数据类型的所有数据
     List<DataDto> selectByAllData(@Param("dataType") String dataType, @Param("dataStatus") String dataStatus);
+
+    //查询一个，带文件的
+    DataDto selectOneData(@Param("key") DataDOKey key, @Param("dataType") String dataType);
 
     //查询所有新闻轮播图
     List<DataDto> getAllNewsRot(@Param("dataType") String dataType, @Param("dataStatus") String dataStatus);
@@ -41,6 +45,6 @@ public interface DataDOMapper {
 
     List<DataDO> selectAll();
 
-    List<String> selectAllForMainPage(String dataType);
+    List<MainPageDto> selectAllForMainPage(String dataType);
 
 }

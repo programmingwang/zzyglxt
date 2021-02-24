@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://at.alicdn.com/t/font_1805932_ysrcp4y0uy9.css">
     <link rel="stylesheet" th:href="@{component/bootstrap-datetimepicker@4.7.14/bootstrap-datetimepicker.min.css}">
-    <title>请示报告录入信息录入信息</title>
+    <title>请示报告录入信息</title>
     <style>
         .upload-wrap {
             position: relative;
@@ -68,20 +68,20 @@
                 <div class="aa">录入请示报告</div>
 
                 <div class="form-group row">
-                    <label class="col-sm-2 col-form-label">报告标题：</label>
-                    <div class="col-sm-3">
+                    <label class="col-sm-3 col-form-label">报告标题：</label>
+                    <div class="col-sm-5">
                         <input id="reportTitle" type="text" class="form-control" placeholder="请输入">
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label class="col-sm-2 col-form-label">报告内容：</label>
-                    <div class="col-sm-3">
-                        <textarea name="" id="reportContent" type="text" class="form-control" rows="2" style="margin-left: 0px;width: 100%;border: 1px solid;" placeholder="请输入"></textarea>
+                    <label class="col-sm-3 col-form-label">报告内容：</label>
+                    <div class="col-sm-5">
+                        <textarea name="" id="reportContent" type="text" class="form-control" rows="15" style="margin-left: 0px;width: 100%;border: 1px solid;" placeholder="请输入"></textarea>
                     </div>
                 </div>
                 <!--附件div-->
                 <div class="form-group row">
-                    <label for="exampleFormControlFile1" class="col-sm-2 col-form-label">附&emsp;&emsp;件：</label>
+                    <label for="exampleFormControlFile1" class="col-sm-3 col-form-label">附&emsp;&emsp;件：</label>
                     <div class="upload-wrap anticon" nv-file-drop="" uploader="uploader">
                         <input id="upload_file" class="file-ele" type="file" file-model="image" name="image" nv-file-select uploader="uploader" multiple />
                         <div class="file-open"  maxlength="30"><em class="upload"></em>&nbsp;上传附件</div>
@@ -93,18 +93,17 @@
                 </div>
                 <div class="form-group row">
                     <div class="col-lg-4 col-md-4" ></div>
-                    <div class=" col-lg-4 row" >
+                    <div class=" col-lg-4 row" style="padding: 0" >
                         <div class="col">
                             <button id="cancel" type="button" class="btn btn-light col">取消</button>
                         </div>
                         <div class="col">
                             <button id="btn_save" type="submit" class="btn btn-danger col">保存</button>
                         </div>
-                        <div class="col">
+                        <div class="col" style="padding-right: 0;">
                             <button id="btn_insert" type="submit" class="btn btn-primary col">发送</button>
                         </div>
                     </div>
-                    <div class="col-lg-4 col-md-4" ></div>
                 </div>
             </form>
 

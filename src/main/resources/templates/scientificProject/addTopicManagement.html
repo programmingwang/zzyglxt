@@ -116,26 +116,16 @@
             </div>
 
             <div id="distpicker" class="form-group row">
-                <label for="addressPro" class="col-sm-2 col-form-label">省：</label>
-                <div class="col-sm-2">
-                    <select id="addressPro" class="form-control"></select>
+                <label for="addressPro" class="col-sm-2 col-form-label"><span style="color: red">*</span>详细地址：</label>
+                <div class="col-sm-5 row" style="padding-left: 30px;">
+                    <select id="addressPro" class="form-control col"></select>
+                    <select id="addressCity" class="form-control col"></select>
+                    <select id="addressCountry" class="form-control col"></select>
                 </div>
-
-                <label for="addressCity" class="col-sm-1 col-form-label">市：</label>
-                <div class="col-sm-2">
-                    <select id="addressCity" class="form-control"></select>
-                </div>
-
-                <label for="addressCountry" class="col-sm-1 col-form-label">区：</label>
-                <div class="col-sm-2">
-                    <select id="addressCountry" class="form-control"></select>
-                </div>
-            </div>
-            <div class="form-group row">
-                <label class="col-sm-2 col-form-label">详细地址：</label>
-                <div class="col-sm-8">
+                <div class="col-sm-3" style="padding-right: 10px;padding-left: 0;flex: 0 0 26.6666%;max-width: 26.6666%;">
                     <input id="address" type="text" class="form-control" placeholder="请输入">
                 </div>
+
             </div>
 
             <!--附件div-->

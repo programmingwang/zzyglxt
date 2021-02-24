@@ -18,18 +18,75 @@
     <result column="itemCreateAt" jdbcType="TIMESTAMP" property="itemcreateat" />
     <result column="UPDATER" jdbcType="VARCHAR" property="updater" />
     <result column="itemUpdateAt" jdbcType="TIMESTAMP" property="itemupdateat" />
+
+    <result column="REASONO" jdbcType="VARCHAR" property="reasono" />
+    <result column="REASONT" jdbcType="VARCHAR" property="reasont" />
+    <result column="REASONH" jdbcType="VARCHAR" property="reasonh" />
+    <result column="REASONF" jdbcType="VARCHAR" property="reasonf" />
+    <result column="REASONV" jdbcType="VARCHAR" property="reasonv" />
+    <result column="REASONS" jdbcType="VARCHAR" property="reasons" />
+
+    <result column="NAMEO" jdbcType="VARCHAR" property="nameo" />
+    <result column="NAMET" jdbcType="VARCHAR" property="namet" />
+    <result column="NAMEH" jdbcType="VARCHAR" property="nameh" />
+    <result column="NAMEF" jdbcType="VARCHAR" property="namef" />
+    <result column="NAMEV" jdbcType="VARCHAR" property="namev" />
+    <result column="NAMES" jdbcType="VARCHAR" property="names" />
+
+    <result column="DATEO" jdbcType="TIMESTAMP" property="dateo" />
+    <result column="DATET" jdbcType="TIMESTAMP" property="datet" />
+    <result column="DATEH" jdbcType="TIMESTAMP" property="dateh" />
+    <result column="DATEF" jdbcType="TIMESTAMP" property="datef" />
+    <result column="DATEV" jdbcType="TIMESTAMP" property="datev" />
+    <result column="DATES" jdbcType="TIMESTAMP" property="dates" />
   </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBsAndFile" type="com.zyyglxt.dto.ReceiptDto">
+    <result column="FILE_PATH" jdbcType="VARCHAR" property="filePath"/>
+    <result column="FILE_NAME" jdbcType="VARCHAR" property="fileName"/>
+  </resultMap>
+  <resultMap id="ReceiptForMainPageResultMap" type="com.zyyglxt.dto.ReceiptMainDto">
+    <id column="itemID" jdbcType="INTEGER" property="itemid" />
+    <id column="itemCode" jdbcType="CHAR" property="itemcode" />
+    <result column="RECEIVING_TITLE" jdbcType="VARCHAR" property="dataTitle" />
+  </resultMap>
+  <resultMap id="ReceiptFileResultMap" type="com.zyyglxt.dataobject.PostFileDO">
+    <result column="FILE_NAME" jdbcType="VARCHAR" property="fileName"/>
+    <result column="FILE_PATH" jdbcType="VARCHAR" property="filePath"/>
+  </resultMap>
+
   <sql id="Base_Column_List">
-    itemID, itemCode, RECEIVING_NUM, RECEIVING_DATE_OF_RECEIPT, RECEIVING_TITLE, RECEIVING_UNIT_OF_COMMUN, 
+    itemID, itemCode, RECEIVING_NUM, RECEIVING_DATE_OF_RECEIPT, RECEIVING_TITLE, RECEIVING_UNIT_OF_COMMUN,
     FILE_NO, NUMBER, RECEIVING_DEGREE_OF_URGENCY, RECEIVING_DATA_STATUS, TIME_LIMIT, 
     CREATER, itemCreateAt, UPDATER, itemUpdateAt
   </sql>
+
+  <sql id="SelectAll_Column_List">
+    rp.itemID, rp.itemCode, rp.RECEIVING_NUM, rp.RECEIVING_DATE_OF_RECEIPT, rp.RECEIVING_TITLE,
+    rp.RECEIVING_UNIT_OF_COMMUN, rp.FILE_NO, rp.NUMBER, rp.RECEIVING_DEGREE_OF_URGENCY,
+    rp.RECEIVING_DATA_STATUS, rp.TIME_LIMIT, rp.REASONO, rp.REASONT, rp.REASONH, rp.REASONF, rp.REASONV, rp.REASONS,
+    rp.NAMEO, rp.NAMET, rp.NAMEH, rp.NAMEF, rp.NAMEV, rp.NAMES,
+    rp.DATEO, rp.DATET, rp.DATEH, rp.DATEF, rp.DATEV, rp.DATES,
+    rp.CREATER, rp.itemCreateAt, rp.UPDATER, rp.itemUpdateAt
+  </sql>
+
   <select id="selectByPrimaryKey" parameterType="com.zyyglxt.dataobject.ReceiptDOKey" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from tb_governres_receipt
     where itemID = #{itemid,jdbcType=INTEGER}
       and itemCode = #{itemcode,jdbcType=CHAR}
+  </select>
+  <select id="selectOneForMainPage" parameterType="com.zyyglxt.dataobject.ReceiptDOKey" resultMap="ResultMapWithBLOBsAndFile">
+    SELECT
+    <include refid="SelectAll_Column_List" />
+    ,
+    cf.FILE_PATH
+    ,
+    cf.FILE_NAME
+    FROM tb_governres_receipt rp left join tb_culpro_file cf
+    on rp.itemCode = cf.DATA_CODE
+    where rp.itemID = #{key.itemid,jdbcType=INTEGER}
+    and rp.itemCode = #{key.itemcode,jdbcType=CHAR}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="com.zyyglxt.dataobject.ReceiptDOKey">
     delete from tb_governres_receipt
@@ -198,6 +255,63 @@
       <if test="itemupdateat != null">
         itemUpdateAt = #{itemupdateat,jdbcType=TIMESTAMP},
       </if>
+
+      <if test="reasono != null">
+        REASONO = #{reasono,jdbcType=VARCHAR},
+      </if>
+      <if test="reasont != null">
+        REASONT = #{reasont,jdbcType=VARCHAR},
+      </if>
+      <if test="reasonh != null">
+        REASONH = #{reasonh,jdbcType=VARCHAR},
+      </if>
+      <if test="reasonf != null">
+        REASONF = #{reasonf,jdbcType=VARCHAR},
+      </if>
+      <if test="reasonv != null">
+        REASONV = #{reasonv,jdbcType=VARCHAR},
+      </if>
+      <if test="reasons != null">
+        REASONS = #{reasons,jdbcType=VARCHAR},
+      </if>
+
+      <if test="nameo != null">
+        NAMEO = #{nameo,jdbcType=VARCHAR},
+      </if>
+      <if test="namet != null">
+        NAMET = #{namet,jdbcType=VARCHAR},
+      </if>
+      <if test="nameh != null">
+        NAMEH = #{nameh,jdbcType=VARCHAR},
+      </if>
+      <if test="namef != null">
+        NAMEF = #{namef,jdbcType=VARCHAR},
+      </if>
+      <if test="namev != null">
+        NAMEV = #{namev,jdbcType=VARCHAR},
+      </if>
+      <if test="names != null">
+        NAMES = #{names,jdbcType=VARCHAR},
+      </if>
+
+      <if test="dateo != null">
+        DATEO = #{dateo,jdbcType=TIMESTAMP},
+      </if>
+      <if test="datet != null">
+        DATET = #{datet,jdbcType=TIMESTAMP},
+      </if>
+      <if test="dateh != null">
+        DATEH = #{dateh,jdbcType=TIMESTAMP},
+      </if>
+      <if test="datef != null">
+        DATEF = #{datef,jdbcType=TIMESTAMP},
+      </if>
+      <if test="datev != null">
+        DATEV = #{datev,jdbcType=TIMESTAMP},
+      </if>
+      <if test="dates != null">
+        DATES = #{dates,jdbcType=TIMESTAMP},
+      </if>
     </set>
     where itemID = #{itemid,jdbcType=INTEGER}
       and itemCode = #{itemcode,jdbcType=CHAR}
@@ -220,12 +334,39 @@
     where itemID = #{itemid,jdbcType=INTEGER}
       and itemCode = #{itemcode,jdbcType=CHAR}
   </update>
-  <select id="selectAllReceipt" resultMap="BaseResultMap">
-        SELECT *
-        FROM tb_governres_receipt
-       WHERE RECEIVING_DATA_STATUS = #{receivingDataStatus,jdbcType=VARCHAR}
-       order by itemCreateAt
+  <select id="selectAllReceipt" resultMap="ResultMapWithBLOBsAndFile">
+        SELECT
+          <include refid="SelectAll_Column_List" />
+          ,
+          cf.FILE_PATH
+          ,
+          cf.FILE_NAME
+          FROM tb_governres_receipt rp left join tb_culpro_file cf
+          on rp.itemCode = cf.DATA_CODE
+          <if test='receivingDataStatus == "7" '>
+            WHERE RECEIVING_DATA_STATUS in (16,17,18)
+          </if>
+          <if test='receivingDataStatus == "6" '>
+            WHERE RECEIVING_DATA_STATUS in (13,14,15,18,19)
+          </if>
+          <if test='receivingDataStatus == "5" '>
+            WHERE RECEIVING_DATA_STATUS in (10,11,12,18,19)
+          </if>
+          <if test='receivingDataStatus == "4" '>
+            WHERE RECEIVING_DATA_STATUS in (7,8,9,18,19)
+          </if>
+          <if test='receivingDataStatus == "3" '>
+               WHERE RECEIVING_DATA_STATUS in (4,5,6,18,19)
+          </if>
+          <if test='receivingDataStatus == "2" '>
+                WHERE RECEIVING_DATA_STATUS in (1,2,3,18)
+          </if>
+          <if test='receivingDataStatus == "1" '>
+               WHERE RECEIVING_DATA_STATUS in (0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18)
+         </if>
+        order by rp.itemUpdateAt desc
     </select>
+
   <update id="changeStatusToReceipt">
     update tb_governres_receipt
     <set>
@@ -236,4 +377,24 @@
     where itemID = #{key.itemid,jdbcType=INTEGER}
     and itemCode = #{key.itemcode,jdbcType=CHAR}
   </update>
+
+  <select id="selectForMainPage" resultMap="ReceiptForMainPageResultMap">
+    select
+    a.RECEIVING_TITLE, a.itemID, a.itemCode
+    from
+    tb_governres_receipt a inner join
+    (select itemID from tb_governres_receipt order by itemUpdateAt desc limit 0,5)
+    b on b.itemID = a.itemID
+    WHERE a.RECEIVING_DATA_STATUS = 18
+  </select>
+
+  <select id="selectReceiptFileForMain" resultMap="ReceiptFileResultMap">
+    select
+      b.FILE_NAME,b.FILE_PATH
+    from
+      tb_governres_receipt a inner join
+      (select p.itemID,tcf.FILE_NAME,tcf.FILE_PATH from tb_governres_receipt p
+                                                          left join tb_culpro_file tcf on p.itemCode = tcf.DATA_CODE where tcf.FILE_PATH IS NOT NULL limit 0,5)
+        b on b.itemID = a.itemID where a.RECEIVING_DATA_STATUS = 18
+  </select>
 </mapper>

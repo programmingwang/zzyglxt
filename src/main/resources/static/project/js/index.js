@@ -174,7 +174,7 @@
                 $(".tTile").css("display","none");
                 $("#xczy").css("display","block");
             }
-            if (roleName === '政务资源处长'||roleName === '政务资源科员'){
+            else if (roleName === '政务资源处长'||roleName === '政务资源科员'){
                 var menu_list = [
                     {
                         menu_name: "首页",
@@ -233,7 +233,7 @@
                         pid: "13"
                     },
                     {
-                        menu_name: "办事流程",
+                        menu_name: "办事指南",
                         menu_url: "/data/dataProcess",
                         id: "13-7",
                         level: "2",
@@ -278,7 +278,7 @@
                 $(".tTile").css("display","none");
                 $("#zwbg").css("display","block");
             }
-            if (roleName === '政务资源综合处处长'){
+            else if (roleName === '政务资源综合处处长'){
                 var menu_list = [
                     {
                         menu_name: "首页",
@@ -337,7 +337,174 @@
                         pid: "13"
                     },
                     {
-                        menu_name: "办事流程",
+                        menu_name: "办事指南",
+                        menu_url: "/data/dataProcess",
+                        id: "13-7",
+                        level: "2",
+                        pid: "13"
+                    },
+                    {
+                        menu_name: "文件流转",
+                        menu_url: "",
+                        id: "14",
+                        level: "1",
+                        pid: ""
+                    },
+                    {
+                        menu_name: "发文管理",
+                        menu_url: "/document/post",
+                        id: "14-1",
+                        level: "2",
+                        pid: "14"
+                    },
+                    {
+                        menu_name: "收文管理",
+                        menu_url: "/document/receipt",
+                        id: "14-2",
+                        level: "2",
+                        pid: "14"
+                    },
+                    {
+                        menu_name: "内部会签",
+                        menu_url: "/document/sign",
+                        id: "14-3",
+                        level: "2",
+                        pid: "14"
+                    },
+                    {
+                        menu_name: "请示报告",
+                        menu_url: "/document/report",
+                        id: "14-4",
+                        level: "2",
+                        pid: "14"
+                    },
+                    // {
+                    //     menu_name: "管理门户",
+                    //     menu_url: "",
+                    //     id: "15",
+                    //     level: "1",
+                    //     pid: ""
+                    // },
+                    // {
+                    //     menu_name: "接入系统管理",
+                    //     menu_url: "",
+                    //     id: "15-1",
+                    //     level: "2",
+                    //     pid: "15"
+                    // },
+                    // {
+                    //     menu_name: "角色管理",
+                    //     menu_url: "",
+                    //     id: "15-2",
+                    //     level: "2",
+                    //     pid: "15"
+                    // },
+                    // {
+                    //     menu_name: "用户映射",
+                    //     menu_url: "",
+                    //     id: "15-3",
+                    //     level: "2",
+                    //     pid: "15"
+                    // },
+                    // {
+                    //     menu_name: "系统管理",
+                    //     menu_url: "",
+                    //     id: "16",
+                    //     level: "1",
+                    //     pid: ""
+                    // },
+                    // {
+                    //     menu_name: "基本字典信息",
+                    //     menu_url: "",
+                    //     id: "16-1",
+                    //     level: "2",
+                    //     pid: "16"
+                    // },
+                    // {
+                    //     menu_name: "权限配置",
+                    //     menu_url: "",
+                    //     id: "16-2",
+                    //     level: "2",
+                    //     pid: "16"
+                    // },
+                    // {
+                    //     menu_name: "系统资料配置",
+                    //     menu_url: "",
+                    //     id: "16-3",
+                    //     level: "2",
+                    //     pid: "16"
+                    // },
+                    // {
+                    //     menu_name: "系统日志",
+                    //     menu_url: "",
+                    //     id: "16-4",
+                    //     level: "2",
+                    //     pid: "16"
+                    // },
+                ];
+                $(".tTile").css("display","none");
+                $("#zwbg").css("display","block");
+            }
+            else if (roleName === '政务资源分管局长'||roleName === '中药处分管局长'||roleName === '中医处分管局长'||roleName === '综合处分管局长'||roleName === '法规监督处分管局长'){
+                var menu_list = [
+                    {
+                        menu_name: "首页",
+                        menu_url: "/data/mainPage",
+                        id: "12",
+                        level: "1",
+                        pid: ""
+                    },
+                    {
+                        menu_name: "信息发布",
+                        menu_url: "/data/dataNewsRotations",
+                        id: "13",
+                        level: "1",
+                        pid: ""
+                    },
+                    {
+                        menu_name: "新闻轮播图",
+                        menu_url: "/data/dataNewsRotations",
+                        id: "13-1",
+                        level: "2",
+                        pid: "13"
+                    },
+                    {
+                        menu_name: "新闻管理",
+                        menu_url: "/data/dataNewsInf",
+                        id: "13-2",
+                        level: "2",
+                        pid: "13"
+                    },
+                    {
+                        menu_name: "通知公告",
+                        menu_url: "/data/dataAnnouncement",
+                        id: "13-3",
+                        level: "2",
+                        pid: "13"
+                    },
+                    {
+                        menu_name: "政策法规",
+                        menu_url: "/data/dataRegulation",
+                        id: "13-4",
+                        level: "2",
+                        pid: "13"
+                    },
+                    {
+                        menu_name: "规章制度",
+                        menu_url: "/data/dataRules",
+                        id: "13-5",
+                        level: "2",
+                        pid: "13"
+                    },
+                    {
+                        menu_name: "领导讲话",
+                        menu_url: "/data/dataLeader",
+                        id: "13-6",
+                        level: "2",
+                        pid: "13"
+                    },
+                    {
+                        menu_name: "办事指南",
                         menu_url: "/data/dataProcess",
                         id: "13-7",
                         level: "2",
@@ -445,7 +612,7 @@
                 $(".tTile").css("display","none");
                 $("#zwbg").css("display","block");
             }
-            if (roleName === '政务资源分管局长'||roleName === '中药处分管局长'||roleName === '中医处分管局长'||roleName === '综合处分管局长'||roleName === '法规监督处分管局长'){
+            else if (roleName === '政务资源局长'){
                 var menu_list = [
                     {
                         menu_name: "首页",
@@ -504,7 +671,7 @@
                         pid: "13"
                     },
                     {
-                        menu_name: "办事流程",
+                        menu_name: "办事指南",
                         menu_url: "/data/dataProcess",
                         id: "13-7",
                         level: "2",
@@ -612,174 +779,7 @@
                 $(".tTile").css("display","none");
                 $("#zwbg").css("display","block");
             }
-            if (roleName === '政务资源局长'){
-                var menu_list = [
-                    {
-                        menu_name: "首页",
-                        menu_url: "/data/mainPage",
-                        id: "12",
-                        level: "1",
-                        pid: ""
-                    },
-                    {
-                        menu_name: "信息发布",
-                        menu_url: "/data/dataNewsRotations",
-                        id: "13",
-                        level: "1",
-                        pid: ""
-                    },
-                    {
-                        menu_name: "新闻轮播图",
-                        menu_url: "/data/dataNewsRotations",
-                        id: "13-1",
-                        level: "2",
-                        pid: "13"
-                    },
-                    {
-                        menu_name: "新闻管理",
-                        menu_url: "/data/dataNewsInf",
-                        id: "13-2",
-                        level: "2",
-                        pid: "13"
-                    },
-                    {
-                        menu_name: "通知公告",
-                        menu_url: "/data/dataAnnouncement",
-                        id: "13-3",
-                        level: "2",
-                        pid: "13"
-                    },
-                    {
-                        menu_name: "政策法规",
-                        menu_url: "/data/dataRegulation",
-                        id: "13-4",
-                        level: "2",
-                        pid: "13"
-                    },
-                    {
-                        menu_name: "规章制度",
-                        menu_url: "/data/dataRules",
-                        id: "13-5",
-                        level: "2",
-                        pid: "13"
-                    },
-                    {
-                        menu_name: "领导讲话",
-                        menu_url: "/data/dataLeader",
-                        id: "13-6",
-                        level: "2",
-                        pid: "13"
-                    },
-                    {
-                        menu_name: "办事流程",
-                        menu_url: "/data/dataProcess",
-                        id: "13-7",
-                        level: "2",
-                        pid: "13"
-                    },
-                    {
-                        menu_name: "文件流转",
-                        menu_url: "",
-                        id: "14",
-                        level: "1",
-                        pid: ""
-                    },
-                    {
-                        menu_name: "发文管理",
-                        menu_url: "/document/post",
-                        id: "14-1",
-                        level: "2",
-                        pid: "14"
-                    },
-                    {
-                        menu_name: "收文管理",
-                        menu_url: "/document/receipt",
-                        id: "14-2",
-                        level: "2",
-                        pid: "14"
-                    },
-                    {
-                        menu_name: "内部会签",
-                        menu_url: "/document/sign",
-                        id: "14-3",
-                        level: "2",
-                        pid: "14"
-                    },
-                    {
-                        menu_name: "请示报告",
-                        menu_url: "/document/report",
-                        id: "14-4",
-                        level: "2",
-                        pid: "14"
-                    },
-                    {
-                        menu_name: "管理门户",
-                        menu_url: "",
-                        id: "15",
-                        level: "1",
-                        pid: ""
-                    },
-                    {
-                        menu_name: "接入系统管理",
-                        menu_url: "",
-                        id: "15-1",
-                        level: "2",
-                        pid: "15"
-                    },
-                    {
-                        menu_name: "角色管理",
-                        menu_url: "",
-                        id: "15-2",
-                        level: "2",
-                        pid: "15"
-                    },
-                    {
-                        menu_name: "用户映射",
-                        menu_url: "",
-                        id: "15-3",
-                        level: "2",
-                        pid: "15"
-                    },
-                    {
-                        menu_name: "系统管理",
-                        menu_url: "",
-                        id: "16",
-                        level: "1",
-                        pid: ""
-                    },
-                    {
-                        menu_name: "基本字典信息",
-                        menu_url: "",
-                        id: "16-1",
-                        level: "2",
-                        pid: "16"
-                    },
-                    {
-                        menu_name: "权限配置",
-                        menu_url: "",
-                        id: "16-2",
-                        level: "2",
-                        pid: "16"
-                    },
-                    {
-                        menu_name: "系统资料配置",
-                        menu_url: "",
-                        id: "16-3",
-                        level: "2",
-                        pid: "16"
-                    },
-                    {
-                        menu_name: "系统日志",
-                        menu_url: "",
-                        id: "16-4",
-                        level: "2",
-                        pid: "16"
-                    },
-                ];
-                $(".tTile").css("display","none");
-                $("#zwbg").css("display","block");
-            }
-            if (roleName === '主研人'){
+            else if (roleName === '主研人'){
                 var menu_list = [
                     {
                         menu_name: "科研项目管理",
@@ -806,7 +806,7 @@
                 $(".tTile").css("display","none");
                 $("#kyxm").css("display","block");
             }
-            if (roleName === '科研项目申报单位'){
+            else if (roleName === '科研项目申报单位'){
                 var menu_list = [
                     {
                         menu_name: "科研项目管理",
@@ -833,7 +833,7 @@
                 $(".tTile").css("display","none");
                 $("#kyxm").css("display","block");
             }
-            if (roleName === '科研项目-省级'){
+            else if (roleName === '科研项目-省级'){
                 var menu_list = [
                     {
                         menu_name: "科研项目管理",
@@ -888,7 +888,7 @@
                 $(".tTile").css("display","none");
                 $("#kyxm").css("display","block");
             }
-            if (roleName === '科研项目-市级'){
+            else if (roleName === '科研项目-市级'){
                 var menu_list = [
                     {
                         menu_name: "科研项目管理",
@@ -908,7 +908,7 @@
                 $(".tTile").css("display","none");
                 $("#kyxm").css("display","block");
             }
-            if (roleName === '专家'){
+            else if (roleName === '专家'){
                 var menu_list = [
                     {
                         menu_name: "科研项目管理",
@@ -928,7 +928,7 @@
                 $(".tTile").css("display","none");
                 $("#kyxm").css("display","block");
             }
-            if (roleName === '中药材种植园'){
+            else if (roleName === '中药材种植园'){
                 var menu_list = [
                     {
                         menu_name: "在售药材",
@@ -962,7 +962,7 @@
                 $(".tTile").css("display","none");
                 $("#cyfz").css("display","block");
             }
-            if (roleName === '中药材加工企业'){
+            else if (roleName === '中药材加工企业'){
                 var menu_list = [
                     {
                         menu_name: "在售药材",
@@ -996,7 +996,7 @@
                 $(".tTile").css("display","none");
                 $("#cyfz").css("display","block");
             }
-            if (roleName === '中药材制药企业'){
+            else if (roleName === '中药材制药企业'){
                 var menu_list = [
                     {
                         menu_name: "在售药品",
@@ -1030,7 +1030,7 @@
                 $(".tTile").css("display","none");
                 $("#cyfz").css("display","block");
             }
-            if (roleName === '中药材销售企业'){
+            else if (roleName === '中药材销售企业'){
                 var menu_list = [
                     {
                         menu_name: "在售药品",
@@ -1064,7 +1064,7 @@
                 $(".tTile").css("display","none");
                 $("#cyfz").css("display","block");
             }
-            if (roleName === '中医医疗机构'){
+            else if (roleName === '中医医疗机构'){
                 var menu_list = [
                     {
                         menu_name: "科研成果",
@@ -1098,7 +1098,7 @@
                 $(".tTile").css("display","none");
                 $("#cyfz").css("display","block");
             }
-            if (roleName === '高等医学院校'){
+            else if (roleName === '高等医学院校'){
                 var menu_list = [
                     {
                         menu_name: "科研成果",
@@ -1132,7 +1132,7 @@
                 $(".tTile").css("display","none");
                 $("#cyfz").css("display","block");
             }
-            if (roleName === '科研院所'){
+            else if (roleName === '科研院所'){
                 var menu_list = [
                     {
                         menu_name: "科研成果",
@@ -1166,7 +1166,7 @@
                 $(".tTile").css("display","none");
                 $("#cyfz").css("display","block");
             }
-            if (roleName === '技术服务机构'){
+            else if (roleName === '技术服务机构'){
                 var menu_list = [
                     {
                         menu_name: "服务项目",
@@ -1200,7 +1200,7 @@
                 $(".tTile").css("display","none");
                 $("#cyfz").css("display","block");
             }
-            if (roleName === '旅游康养机构'){
+            else if (roleName === '旅游康养机构'){
                 var menu_list = [
                     {
                         menu_name: "基地风采",
@@ -1234,7 +1234,7 @@
                 $(".tTile").css("display","none");
                 $("#cyfz").css("display","block");
             }
-            if (roleName === '产业发展-市级' || roleName === '产业发展-省级'){
+            else if (roleName === '产业发展-市级' || roleName === '产业发展-省级'){
                 var menu_list = [
                     {
                         menu_name: "机构审核",
@@ -1247,7 +1247,17 @@
                 $(".tTile").css("display","none");
                 $("#kyxm").css("display","block");
             }
-
+            else if (roleName === '政务资源市部门' || roleName === '政务资源县部门'){
+                var menu_list = [
+                    {
+                        menu_name: "首页",
+                        menu_url: "/data/mainPage",
+                        id: "1",
+                        level: "1",
+                        pid: ""
+                    },
+                ]
+            }
 
             function getHTML_dropdown_menu_item(astr, aurl, show_active) {
                 var str = "<a class=\"dropdown-item  " + (show_active ? "active" : "") + " \" url=\"" + aurl + "\">" + astr + "</a>\n" +
@@ -1341,10 +1351,10 @@
                     $($(this).attr("data-target")).removeClass("show");
                     sessionStorage.setItem('aNumber', '1')
                 }
-
             });
 
             $(".dropdown-item").unbind().on("click", function () {
+                localStorage.removeItem("comeFromMain");
                 $(".dropdown-item").removeClass("active");
                 $(".aaaa").removeClass("active");
                 $(this).addClass("active");
@@ -1352,6 +1362,7 @@
             });
 
             $(".AFirstMenu").unbind().on("click", function () {
+                localStorage.removeItem("comeFromMain");
                 $(".aaaa").removeClass("active");
                 $(".dropdown-item").removeClass("active");
                 $(".collapse").removeClass("show");

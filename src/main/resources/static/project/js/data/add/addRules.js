@@ -8,6 +8,20 @@
             var tempdata = JSON.parse(localStorage.getItem("rowData"));
             var returmUrl = "/data/dataRules";
 
+            /**
+             * 校验文本是否为空
+             * tips：提示信息
+             * 使用方法：$("#id").validate("提示文本");
+             * @itmyhome
+             */
+            $.fn.validate = function(tips){
+
+                if($(this).val() == "" || $.trim($(this).val()).length == 0){
+                    alert(tips + "不能为空！");
+                    throw SyntaxError(); //如果验证不通过，则不执行后面
+                }
+            }
+
             // 取消按钮设置跳转
             $("#cancelbtn").unbind().on('click',function () {
                 orange.redirect(returmUrl);
@@ -62,11 +76,19 @@
 
             // 保存按钮
             $("#btn_save").unbind().on('click',function () {
+                //提示必填信息
+                $("#dataTitle").validate("标题");
+                $("#dataSource").validate("来源");
+
                 add("0");
             });
 
             // 提交按钮
             $("#submitbtn").unbind().on('click',function () {
+                //提示必填信息
+                $("#dataTitle").validate("标题");
+                $("#dataSource").validate("来源");
+
                 var mySubmitToCZ = {
                     modalBodyID: "mySubmitModal",
                     modalTitle: "提交",
@@ -85,6 +107,7 @@
             //页面初始化，即编辑操作设置初始数据
             (function init() {
                 if (isUpdate()){
+                    $(".titleCSS").text("修改规章制度")
                     $("#dataTitle").val(tempdata.dataTitle);
                     $("#dataSource").val(tempdata.dataSource);
                     editor.txt.html(tempdata.dataContent);

@@ -7,12 +7,30 @@
             /*下拉框值*/
             $("#dataFileType").selectUtil(dictUtil.getDictByCode(dictUtil.DICT_LIST.dataFileType));
 
+            /**
+             * 校验文本是否为空
+             * tips：提示信息
+             * 使用方法：$("#id").validate("提示文本");
+             * @itmyhome
+             */
+            $.fn.validate = function(tips){
+
+                if($(this).val() == "" || $.trim($(this).val()).length == 0){
+                    alert(tips + "不能为空！");
+                    throw SyntaxError(); //如果验证不通过，则不执行后面
+                }
+            }
+
             $("#cancelbtn").unbind().on('click',function () {
                 var url = "/data/dataRegulation";
                 orange.redirect(url);
             });
 
             $("#btn_save").unbind().on('click',function () {
+                //提示必填信息
+                $("#dataTitle").validate("标题");
+                $("#dataSource").validate("来源");
+
                 var RegulationEntity;
                 var addUpdateUrl;
                 var operateMessage;
@@ -75,6 +93,10 @@
             });
 
             $("#submitbtn").unbind().on('click',function () {
+                //提示必填信息
+                $("#dataTitle").validate("标题");
+                $("#dataSource").validate("来源");
+
                 var mySubmitToCZ = {
                     modalBodyID: "mySubmitModal",
                     modalTitle: "提交",
@@ -149,6 +171,7 @@
 
             (function init() {
                 if (isUpdate()){
+                    $(".titleCSS").text("修改政策法规");
                     var tempdata = JSON.parse(localStorage.getItem("rowData"));
                     if (tempdata.releaseOrNot == "y"){
                         $("#releaseOrNot").prop("checked",true);

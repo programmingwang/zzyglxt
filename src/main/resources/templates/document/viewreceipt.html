@@ -17,12 +17,20 @@
             color: #D60000;
         }
         .documentNum{
-            margin-left: 1rem;
-            margin-right: 1rem;
-            width: 110px;
+            margin-left: 0rem;
+            margin-right: 0rem;
+            width: 55px;
             border: none;
             outline: none;
-            background-color: #f7efeb;
+           // background-color: #f7efeb;
+        }
+        .document{
+            margin-left: 0rem;
+            margin-right: 0rem;
+            width: 42px;
+            border: none;
+            outline: none;
+        // background-color: #f7efeb;
         }
         .opinion{
             margin-bottom: 20px;
@@ -32,7 +40,7 @@
             margin-left: 18px;
             border: none;
             outline: none;
-            background-color: #f7efeb;
+          //  background-color: #f7efeb;
         }
         .text1{
             margin: 10px;
@@ -47,7 +55,7 @@
             margin-left: 20px;
             border: none;
             outline: none;
-            background-color: #f7efeb;
+          // background-color: #f7efeb;
         }
         .name {
             float: right;
@@ -55,7 +63,7 @@
             width: 160px;
             border: none;
             outline: none;
-            background-color: #f7efeb;
+          //  background-color: #f7efeb;
         }
 
         .upload-wrap {
@@ -111,15 +119,86 @@
 <body>
 <div class="row" id="fir_body">
     <div class="col-lg-2"></div>
-    <div class="col-lg-7">
+    <div class="col-lg-8" style="margin-left: 60px;">
+
         <div style="margin-left: 230px;margin-top: 40px;">
-            <h4 style="color: #D60000; font-size: 34px;">河北省中医药管理局收文审批笺</h4>
+            <h4 style="color: #D60000; font-size: 34px;">河北省中医药管理局收文呈办笺</h4>
+        </div>
+        <div style="margin-top: 30px; margin-bottom: -13px;">
+            <span style="margin-left: 5rem; color: #D60000;">收文号：</span>
+            <input id="receivingNum" class="documentNum" disabled/>
+            <span style="color: #D60000">号</span>
+            <span style="margin-left: 25rem; color: #D60000;">收文时间：</span>
+            <input id="Year" class="document" disabled />
+            <span style="color: #D60000">年</span>
+            <input id="Month"  class="document" disabled/>
+            <span style="margin-left: -1rem; color: #D60000">月</span>
+            <input id="Day" class="document" disabled/>
+            <span style="margin-left: -1rem; color: #D60000">日</span>
         </div>
         <div class="col-lg-12">
             <table class="receipt-table" border="1" bordercolor="#D60000">
+                <tr style="height: 80px">
+                    <td colspan="2" class="title">来文单位</td>
+                    <td colspan="6">
+                        <div style="color: #D60000; margin-top: 11px; margin-left: -18px;">
+                            <input id="receivingUnitOfCommun" type="text" style="border:none;margin-left: 20px;" maxlength="30" disabled>
+                        </div>
+                    </td>
+                    <td colspan="2" class="title">文件编号</td>
+                    <td colspan="6">
+                        <div style="color: #D60000; margin-top: 11px; margin-left: 5px;">
+                            <input id="fileNo" type="text"style="border:none" maxlength="30" disabled>
+                        </div>
+                    </td>
+                </tr>
+
+                <tr style="height: 80px">
+                    <td colspan="2" class="title">份数</td>
+                    <td colspan="2">
+                        <div style="color: #D60000; margin-top: 11px; margin-left: -18px;">
+                            <input id="number" type="text" style="border:none;margin-left: 20px;" maxlength="30" disabled>
+                        </div>
+                    </td>
+                    <td colspan="2" class="title">密级</td>
+                    <td colspan="2">
+                        <div style="color: #D60000; margin-top: 11px; margin-left: -18px;">
+                            <input id="secretLevel" type="text" style="border:none;margin-left: 20px;" maxlength="30" disabled>
+                        </div>
+                    </td>
+                    <td colspan="2" class="title">紧急程度</td>
+                    <td colspan="2">
+                        <div style="color: #D60000; margin-top: 11px; margin-left: 5px;">
+                            <input id="receivingDegreeOfUrgency" type="text"style="border:none" maxlength="30" disabled>
+                        </div>
+                    </td>
+                    <td colspan="2" class="title">办结时限</td>
+                    <td colspan="2">
+                        <div style="color: #D60000; margin-top: 11px; margin-left: 5px;">
+                            <input id="timeLimit" type="text"style="border:none" maxlength="30" disabled>
+                        </div>
+                    </td>
+                </tr>
+
+                <tr style="height: 80px">
+                    <td colspan="2" class="title">来文标题</td>
+                    <td colspan="14">
+                        <div style="color: #D60000; margin-top: 11px; margin-left: -18px;">
+                            <input id="receivingTitle" type="text" style="border:none;margin-left: 20px; width: 800px;" maxlength="100" disabled>
+                        </div>
+                    </td>
+                </tr>
+                <tr style="height: 80px">
+                    <td colspan="2" class="title">附件</td>
+                    <td colspan="14">
+                        <div class="upload-wrap anticon" nv-file-drop="" uploader="uploader" style="margin-top: 8px;margin-left: -12px;">
+                            <a id="upload_file" href="" style="color: #BD7B37;"></a>
+                        </div>
+                    </td>
+                </tr>
                 <tr style="height: 200px">
-                    <td class="title">局<br>领<br>导<br>意<br>见</td>
-                    <td colspan="9">
+                    <td class="title" colspan="2">局<br>领<br>导<br>批<br>示</td>
+                    <td colspan="14">
                         <div class="opinion">
                             <input id="reasono" class="advice" type="text" placeholder="局长审核 理由不为空"/>
                             <input id="dateo" class="date" style="margin-top: 20px;" readonly="readonly"/>
@@ -148,37 +227,37 @@
                     </td>
                 </tr>
 
-                <tr style="height: 200px">
-                    <td class="title">处<br>室<br>意<br>见</td>
-                    <td colspan="9">
+                <tr style="height: 300px">
+                    <td class="title" colspan="2">拟<br>办<br>意<br>见</td>
+                    <td colspan="14">
                         <div class="opinion">
-                            <input id="reasons" type="text"   style="margin-left: 18px; width: 410px; border: none; outline: none; background-color: #f7efeb" placeholder="综合处长审核 理由不为空" />
+                            <input id="reasons"   class="advice" type="text"   style="margin-left: 18px; width: 410px; border: none; outline: none;" placeholder="综合处长审核 理由不为空" />
                             <input id="dates" class="date" style="margin-top: 20px;" readonly="readonly"/>
                             <input id="names" class="name" style="margin-top: 20px;" readonly="readonly"/>
                         </div>
                     </td>
                 </tr>
-
+<!--
                 <tr style="height: 130px">
-                    <td class="title">文<br>件<br>信<br>息</td>
-                    <td colspan="9">
-                        <div class="form-group row">
+                    &lt;!&ndash;<td class="title" colspan="2">处<br>室<br>办<br>里<br>情<br>况</td>
+                    <td colspan="14">
+                        &lt;!&ndash;<div class="form-group row">
                             <label class="col-sm-2 col-form-label">收文号：</label>
                             <div class="col-sm-4">
-                                <input id="receivingNum" type="text"  style="border:none" maxlength="30" disabled>
+                                &lt;!&ndash;<input id="receivingNum" type="text"  style="border:none" maxlength="30" disabled>&ndash;&gt;
                             </div>
 
 
                             <label class="col-sm-2 col-form-label">收文时间：</label>
                             <div class="col-sm-4">
-                                <input id="receivingDateOfReceipt" type="text" style="border:none"  maxlength="30" disabled>
+                                &lt;!&ndash;<input id="receivingDateOfReceipt" type="text" style="border:none"  maxlength="30" disabled>&ndash;&gt;
                             </div>
                         </div>
 
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label">来文标题：</label>
                             <div class="col-sm-10">
-                                <input id="receivingTitle" type="text" style="border:none" disabled>
+                                &lt;!&ndash;<input id="receivingTitle" type="text" style="border:none" disabled>&ndash;&gt;
                             </div>
                         </div>
 
@@ -186,36 +265,36 @@
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label">来文单位：</label>
                             <div class="col-sm-4">
-                                <input id="receivingUnitOfCommun" type="text" style="border:none" maxlength="30" disabled>
+                                <input id="receivingUnitOfCommu" type="text" style="border:none" maxlength="30" disabled>
                             </div>
 
                             <label class="col-sm-2 col-form-label">文件编号：</label>
                             <div class="col-sm-4">
-                                <input id="fileNo" type="text"style="border:none" maxlength="30" disabled>
+                                <input id="fileN" type="text"style="border:none" maxlength="30" disabled>
                             </div>
                         </div>
 
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label">份数：</label>
                             <div class="col-sm-4">
-                                <input id="number" type="text" style="border:none"  maxlength="30" disabled>
+                                &lt;!&ndash;<input id="number" type="text" style="border:none"  maxlength="30" disabled>&ndash;&gt;
                             </div>
 
                             <label class="col-sm-2 col-form-label">密级：</label>
                             <div class="col-sm-4">
-                                <input id="secretLevel" type="text" style="border:none"  maxlength="30" disabled>
+                                &lt;!&ndash;<input id="secretLevel" type="text" style="border:none"  maxlength="30" disabled>&ndash;&gt;
                             </div>
                         </div>
 
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label">紧急程度：</label>
                             <div class="col-sm-4">
-                                <input  id="receivingDegreeOfUrgency" type="text" style="border:none" disabled>
+                                &lt;!&ndash;<input  id="receivingDegreeOfUrgency" type="text" style="border:none" disabled>&ndash;&gt;
                             </div>
 
                             <label class="col-sm-2 col-form-label">办结时限：</label>
                             <div class="col-sm-4">
-                                <input id="timeLimit" type="text" style="border:none"  maxlength="30" disabled>
+                                &lt;!&ndash;<input id="timeLimit" type="text" style="border:none"  maxlength="30" disabled>&ndash;&gt;
                             </div>
                         </div>
                         <div class="form-group row">
@@ -228,25 +307,15 @@
                             <div class="col-sm-4">
                                 <input id="creater" type="text" style="border:none"  maxlength="30" disabled>
                             </div>
-                        </div>
-                    </td>
-                </tr>
-
-                <tr style="height: 60px">
-                    <td class="title">附<br>件</td>
-                    <td colspan="9">
-                        <div class="upload-wrap anticon" nv-file-drop="" uploader="uploader" style="margin-top: 8px;">
-                            <a id="upload_file" href="" style="color: #BD7B37;"></a>
-                        </div>
-                    </td>
-                </tr>
-
+                        </div>&ndash;&gt;
+                    </td>&ndash;&gt;
+                </tr>-->
             </table>
         </div>
         <br>
         <div class="form-group row">
             <div class="col-lg-6 col-md-6" ></div>
-            <div class=" col-lg-6 row" >
+            <div class=" col-lg-4 row" >
                 <div class="col">
                     <button id="fail" type="submit" class="btn btn-danger col">驳回</button>
                 </div>

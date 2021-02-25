@@ -174,7 +174,7 @@
                 $(".tTile").css("display","none");
                 $("#xczy").css("display","block");
             }
-            else if (roleName === '政务资源处长'||roleName === '政务资源科员'||roleName === '政务资源市部门'||roleName === '政务资源县部门'){
+            else if (roleName === '政务资源处长'||roleName === '政务资源科员'){
                 var menu_list = [
                     {
                         menu_name: "首页",
@@ -1246,6 +1246,34 @@
                 ];
                 $(".tTile").css("display","none");
                 $("#kyxm").css("display","block");
+            }
+            else if (roleName === '政务资源市部门'||roleName === '政务资源县部门'){
+                var menu_list = [
+                    {
+                        menu_name: "首页",
+                        menu_url: "/data/mainPage",
+                        id: "1",
+                        level: "1",
+                        pid: ""
+                    },
+
+                    {
+                        menu_name: "文件流转",
+                        menu_url: "",
+                        id: "2",
+                        level: "1",
+                        pid: ""
+                    },
+                    {
+                        menu_name: "收文管理",
+                        menu_url: "/document/receipt",
+                        id: "2-1",
+                        level: "2",
+                        pid: "2"
+                    },
+                ];
+                $(".tTile").css("display","none");
+                $("#zwbg").css("display","block");
             }
 
             function getHTML_dropdown_menu_item(astr, aurl, show_active) {

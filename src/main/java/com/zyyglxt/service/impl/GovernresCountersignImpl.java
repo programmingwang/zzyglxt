@@ -54,12 +54,8 @@ public class GovernresCountersignImpl implements IGovernresCountersignService {
     }
 
     @Override
-    public List<GovernresCountersign> selectAll(List<String> status) {
-        List<GovernresCountersign> governresCountersignList= new ArrayList<>();
-        for(String statu:status){
-            governresCountersignList.addAll(governresCountersignMapper.selectAll(statu));
-        }
-        return governresCountersignList;
+    public List<GovernresCountersign> selectAll(String status) {
+        return governresCountersignMapper.selectAll(status);
     }
 
 }

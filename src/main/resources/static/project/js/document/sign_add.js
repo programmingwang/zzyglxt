@@ -1,8 +1,6 @@
 (function () {
-    require(['jquery','objectUtil','ajaxUtil','alertUtil','stringUtil','fileUtil','distpicker','datetimepicker','dictUtil'],
-        function (jquery,objectUtil,ajaxUtil,alertUtil,stringUtil,fileUtil,distpicker,datetimepicker,dictUtil) {
-
-            const editor = objectUtil.wangEditorUtil();
+    require(['jquery','objectUtil','ajaxUtil','alertUtil','stringUtil','fileUtil','distpicker','datetimepicker','dictUtil','selectUtil'],
+        function (jquery,objectUtil,ajaxUtil,alertUtil,stringUtil,fileUtil,distpicker,datetimepicker,dictUtil,selectUtil) {
 
             var type = isUpdate() ? "put": "post";
 
@@ -38,7 +36,7 @@
                     operateMessage = "保存会签信息成功";
                     ReceiptEntity = {
                         itemcode: stringUtil.getUUID(),
-                        govPunlic : $("#govPunlic").val(),
+                        govPunlic : $('input:radio[name="govPunlic"]:checked').val(),
                         receivingTitle : $("#receivingTitle").val(),
                         parment : $("#parment").val(),
                         fileNumber : $("#fileNumber").val(),
@@ -53,7 +51,7 @@
                     ReceiptEntity = {
                         itemid: needData.itemid,
                         itemcode: needData.itemcode,
-                        govPunlic : $("#govPunlic").val(),
+                        govPunlic : $('input:radio[name="govPunlic"]:checked').val(),
                         receivingTitle : $("#receivingTitle").val(),
                         parment : $("#parment").val(),
                         fileNumber : $("#fileNumber").val(),
@@ -86,7 +84,7 @@
                     operateMessage = "录入会签信息成功";
                     ReceiptEntity = {
                         itemcode: stringUtil.getUUID(),
-                        govPunlic : $("#govPunlic").val(),
+                        govPunlic : $('input:radio[name="govPunlic"]:checked').val(),
                         receivingTitle : $("#receivingTitle").val(),
                         parment : $("#parment").val(),
                         fileNumber : $("#fileNumber").val(),
@@ -101,7 +99,7 @@
                     ReceiptEntity = {
                         itemid: needData.itemid,
                         itemcode: needData.itemcode,
-                        govPunlic : $("#govPunlic").val(),
+                        govPunlic : $('input:radio[name="govPunlic"]:checked').val(),
                         receivingTitle : $("#receivingTitle").val(),
                         parment : $("#parment").val(),
                         fileNumber : $("#fileNumber").val(),
@@ -121,7 +119,7 @@
                     }else {
                         alertUtil.alert(data.msg);
                     }
-                },false,true);
+                },false,true,);
                 return false;
             });
 

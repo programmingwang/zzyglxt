@@ -84,7 +84,7 @@
       and CHINESE_CULTURAL_STATUS in (1,2,3,5)
     </if>
     <if test="status == 1">
-      and CHINESE_CULTURAL_STATUS in (0,1,2,3,4,5,6,7)
+      and CHINESE_CULTURAL_STATUS between 0 and 7
     </if>
     order by cr.itemUpdateAt desc
   </select>

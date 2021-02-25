@@ -124,22 +124,22 @@
         });
 
         $("#tzgggd").unbind().on('click',function () {
-                orange.redirect("/data/dataAnnouncement");
-                return false;
+            orange.redirect("/data/dataAnnouncement",true);
+            return false;
         });
 
         $("#zcfggd").unbind().on('click',function () {
-            orange.redirect("/data/dataRegulation");
+            orange.redirect("/data/dataRegulation",true);
             return false;
         });
 
         $("#gzzdgd").unbind().on('click',function () {
-            orange.redirect("/data/dataRules");
+            orange.redirect("/data/dataRules",true);
             return false;
         });
 
         $("#ldjhgd").unbind().on('click',function () {
-            orange.redirect("/data/dataLeader");
+            orange.redirect("/data/dataLeader",true);
             return false;
         });
 
@@ -148,12 +148,24 @@
             if(rolename == "政务资源处长" || rolename == "政务资源科员" || rolename == "政务资源综合处处长" ||
                 rolename == "政务资源局长" || rolename == "政务资源分管局长" || rolename == "中医处分管局长" ||
                 rolename == "中药处分管局长" || rolename == "综合处分管局长" || rolename == "法规监督处分管局长"){
-                orange.redirect("/document/post");
+                orange.redirect("/document/post",true);
             }else{
-                orange.redirect("/document/receipt");
+                orange.redirect("/document/receipt",true);
             }
             return false;
         });
+
+            $("#gxwjgd").unbind().on('click',function (){
+                var rolename = sessionStorage.getItem("rolename");
+                if(rolename == "政务资源处长" || rolename == "政务资源科员" || rolename == "政务资源综合处处长" ||
+                    rolename == "政务资源局长" || rolename == "政务资源分管局长" || rolename == "中医处分管局长" ||
+                    rolename == "中药处分管局长" || rolename == "综合处分管局长" || rolename == "法规监督处分管局长"){
+                    orange.redirect("/document/post",true);
+                }else{
+                    orange.redirect("/document/receipt",true);
+                }
+                return false;
+            });
 
 
 

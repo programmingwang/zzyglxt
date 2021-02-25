@@ -137,7 +137,7 @@
 		});
 
 		// 页面跳转
-		function redirect(url) {
+		function redirect(url, jump = false) {
 			$("#main_body").html("");
 			loadPage({url: url, target: 'main_body', selector: '#fir_body', replace: true, success: function(data){
 					if(data == null||data == ""){
@@ -145,7 +145,21 @@
 					}
 					$("#main_body").html(data);
 					$('.modal-backdrop').remove();
-				}})
+					if(jump){
+						var elementsByClassName = document.getElementsByClassName("card");
+						elementsByClassName[0].children[0].classList.remove("active")
+						for(var i = 0; i < elementsByClassName.length; i++){
+							var child = elementsByClassName[i].children[1].children[0].children;
+							for(var j = 0; j<child.length; j+=2){
+								if(child[j].attributes["url"].value == url) {
+									elementsByClassName[i].children[1].classList.add("show")
+									child[j].classList.add("active")
+									break;
+								}
+							}
+						}
+					}
+			}})
 		}
 
 

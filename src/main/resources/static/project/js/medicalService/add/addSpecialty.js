@@ -25,6 +25,10 @@
 
             $("#addHosp").unbind().on('click', function () {
                 orange.redirect("/medicalService/add/addHosp");
+                var elementsByClassName = document.getElementsByClassName("card");
+               elementsByClassName[6].children[0].classList.remove("active")
+                elementsByClassName[5].children[0].classList.add("active")
+
             })
 
             //保存和提交调用函数，保存和提交只是状态码不同

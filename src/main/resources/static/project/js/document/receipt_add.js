@@ -53,8 +53,9 @@
                         number : $("#number").val(),
                         secretLevel : $("#secretLevel").val(),
                         receivingDegreeOfUrgency : $("#receivingDegreeOfUrgency").val(),
-                        timeLimit : $("#timeLimit").val(),
                         receivingDataStatus : '0',
+                        timeLimit : $("#timeLimit").val(),
+
                     };
                 }else{
                     var needData = JSON.parse(localStorage.getItem("rowData"));
@@ -94,7 +95,7 @@
                 var operateMessage;
                 if(!isUpdate()){
                     addUpdateUrl = "insertreceipt";
-                    operateMessage = "录入收文信息成功";
+                    operateMessage = "收文信息发送成功";
                     ReceiptEntity = {
                         itemcode: stringUtil.getUUID(),
                         receivingNum : $("#receivingNum").val(),
@@ -105,6 +106,7 @@
                         number : $("#number").val(),
                         secretLevel : $("#secretLevel").val(),
                         receivingDegreeOfUrgency : $("#receivingDegreeOfUrgency").val(),
+                        receivingDataStatus : '1',
                         timeLimit : $("#timeLimit").val(),
                     };
                 }else{

@@ -179,6 +179,7 @@
                     $("#dataSource").val(tempdata.dataSource);
                     $("#dataFileType").val(tempdata.dataFileType);
                     editor.txt.html(tempdata.dataContent);
+                    $("#addFile").text(tempdata.fileName);
                 }
             }());
 

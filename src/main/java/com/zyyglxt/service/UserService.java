@@ -33,6 +33,8 @@ public interface UserService {
 
     List<UserDO> selectAllUser(String itemcode, String username);
 
+    List<UserDO> selectAllUser3(String itemcode, String username);
+
     int deleteByUsername(String username);
 
     UserDO selectByName(String username);

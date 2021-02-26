@@ -73,11 +73,51 @@
     where gp.itemID = #{key.itemid,jdbcType=INTEGER}
     and gp.itemCode = #{key.itemcode,jdbcType=CHAR}
   </select>
-  <select id="selectAll" resultMap="BaseResultMap">
+  <select id="selectAll" resultMap="PostMainFileResultMap">
     select
-    <include refid="Base_Column_List" />
-    from tb_governres_post
-    where POST_DATA_STATUS = #{postDataStatus,jdbcType=VARCHAR}
+    <include refid="Post_Column_List" />
+    ,
+    cf.FILE_NAME
+    ,
+    cf.FILE_PATH
+    from tb_governres_post gp left join tb_culpro_file cf
+    on gp.itemCode = cf.DATA_CODE
+    <if test="postDataStatus == 5">
+      where POST_DATA_STATUS in (6,8,9)
+    </if>
+    <if test="postDataStatus == 3">
+      where POST_DATA_STATUS in (2,4,5,6,7,8,9)
+    </if>
+    <if test="postDataStatus == 2">
+      where POST_DATA_STATUS in (1,2,3,4,5,6,7,8,9)
+    </if>
+    <if test="postDataStatus == 1">
+      where POST_DATA_STATUS in (0,1,2,3,4,5,6,7,8,9)
+    </if>
+    order by itemUpdateAt desc
+  </select>
+  <select id="getDeputyDirector" resultMap="PostMainFileResultMap">
+    select
+    <include refid="Post_Column_List" />
+    ,
+    cf.FILE_NAME
+    ,
+    cf.FILE_PATH
+    from tb_governres_post gp left join tb_culpro_file cf
+    on gp.itemCode = cf.DATA_CODE
+    where POST_DATA_STATUS in (4,6,7,8,9)
+    <if test="postOpinion1 == 1">
+      and POST_OPINION1 in (1,12,13,14,123,124,134,1234)
+    </if>
+    <if test="postOpinion1 == 2">
+      and POST_OPINION1 in (2,12,23,24,123,124,234,1234)
+    </if>
+    <if test="postOpinion1 == 3">
+      and POST_OPINION1 in (3,13,23,34,123,134,234,1234)
+    </if>
+    <if test="postOpinion1 == 4">
+      and POST_OPINION1 in (4,14,24,34,124,134,234,1234)
+    </if>
     order by itemUpdateAt desc
   </select>
   <delete id="deleteByPrimaryKey" parameterType="com.zyyglxt.dataobject.PostDOKey">

@@ -24,11 +24,29 @@ public class adviceDO extends adviceDOKey {
 
     private Date officeDate;
 
-    private String deputyDirector;
+    private String deputyDirector; //中医处分管局长审核意见
 
-    private String deputyDirectorName;
+    private String deputyDirectorName; //中医处分管局长姓名
 
-    private Date deputyDirectorDate;
+    private Date deputyDirectorDate; //中医处分管局长审核时间
+
+    private String deputyDirector1; //中药处分管局长审核意见
+
+    private String deputyDirectorName1; //中药处分管局长姓名
+
+    private Date deputyDirectorDate1; //中药处分管局长审核时间
+
+    private String deputyDirector2; //综合处分管局长审核意见
+
+    private String deputyDirectorName2;  //综合处分管局长姓名
+
+    private Date deputyDirectorDate2; //综合处分管局长审核时间
+
+    private String deputyDirector3; //法规监督处分管局长审核意见
+
+    private String deputyDirectorName3; //法规监督处分管局长姓名
+
+    private Date deputyDirectorDate3; //法规监督处分管局长审核时间
 
     private String director;
 

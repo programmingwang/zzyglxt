@@ -43,9 +43,16 @@ public class PostController {
     @GetMapping(value = "/getPost")
     @ResponseBody
     @LogAnnotation(appCode ="",logTitle ="查询所有发文信息",logLevel ="1",creater ="",updater = "")
-    public ResponseData getPost(@RequestParam(value = "postDataStatus") List postDataStatus){
-        List<PostDO> postDOS = postService.getPost(postDataStatus);
-        return new ResponseData(EmBusinessError.success,DoToDto(postDOS));
+    public ResponseData getPost(@RequestParam(value = "postDataStatus") String postDataStatus){
+        return new ResponseData(EmBusinessError.success,postService.getPost(postDataStatus));
+    }
+
+    //查询当前分管局长
+    @GetMapping(value = "/getDeputyDirector")
+    @ResponseBody
+    @LogAnnotation(appCode ="",logTitle ="查询当前分管局长",logLevel ="1",creater ="",updater = "")
+    public ResponseData getDeputyDirector(@RequestParam(value = "postOpinion1") String postOpinion1){
+        return new ResponseData(EmBusinessError.success,postService.getDeputyDirector(postOpinion1));
     }
 
     @GetMapping(value = "/selectOne/{itemid}/{itemcode}")

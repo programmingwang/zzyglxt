@@ -24,7 +24,9 @@ public interface PostDOMapper {
 
     int updateByPrimaryKey(PostDO record);
 
-    List<PostDO> selectAll(@Param("postDataStatus") String postDataStatus);
+    List<PostDto> selectAll(@Param("postDataStatus") String postDataStatus);
+
+    List<PostDto> getDeputyDirector(@Param("postOpinion1") String postOpinion1);
 
     PostDO maxNum();
 

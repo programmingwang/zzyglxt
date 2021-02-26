@@ -5,6 +5,8 @@
         <id column="itemID" jdbcType="INTEGER" property="itemid"/>
         <id column="itemCode" jdbcType="CHAR" property="itemcode"/>
         <result column="SPECIALTY_NAME" jdbcType="VARCHAR" property="specialtyName"/>
+        <result column="SPECIALTY_LEVEL" jdbcType="VARCHAR" property="specialtyLevel"/>
+        <result column="SPECIALTY_DISEASE" jdbcType="VARCHAR" property="specialtyDisease"/>
         <result column="SPECIALTY_BRIEF_INTRODUCE" jdbcType="VARCHAR" property="specialtyBriefIntroduce"/>
         <result column="SPECIALTY_PHONE" jdbcType="VARCHAR" property="specialtyPhone"/>
         <result column="SPECIALTY_ADDRESS_PRO" jdbcType="VARCHAR" property="specialtyAddressPro"/>
@@ -27,7 +29,7 @@
         <result column="FILE_PATH" jdbcType="VARCHAR" property="filePath"/>
     </resultMap>
     <sql id="Base_Column_List">
-        s.itemID, s.itemCode, s.SPECIALTY_NAME, s.SPECIALTY_BRIEF_INTRODUCE, s.SPECIALTY_PHONE, s.SPECIALTY_ADDRESS_PRO, s.SPECIALTY_ADDRESS_CITY,
+        s.itemID, s.itemCode, s.SPECIALTY_NAME, s.SPECIALTY_LEVEL, s.SPECIALTY_DISEASE, s.SPECIALTY_BRIEF_INTRODUCE, s.SPECIALTY_PHONE, s.SPECIALTY_ADDRESS_PRO, s.SPECIALTY_ADDRESS_CITY,
         s.SPECIALTY_ADDRESS_COUNTY, s.SPECIALTY_ADDRESS, s.SPECIALTY_LINK, s.SPECIALTY_STATUS, s.CREATER,
         s.itemCreateAt, s.UPDATER, s.itemUpdateAt
     </sql>
@@ -59,6 +61,8 @@
     <insert id="insert" parameterType="com.zyyglxt.dataobject.SpecialtyDO">
         insert into tb_culpro_specialty (itemID, itemCode,
         SPECIALTY_NAME,
+        SPECIALTY_LEVEL,
+        SPECIALTY_DISEASE,
         SPECIALTY_BRIEF_INTRODUCE,
         SPECIALTY_PHONE,
         SPECIALTY_ADDRESS_PRO,
@@ -75,6 +79,8 @@
         values (#{itemid,jdbcType=INTEGER},
         #{itemcode,jdbcType=CHAR},
         #{specialtyName,jdbcType=VARCHAR},
+        #{specialtyLevel,jdbcType=VARCHAR},
+        #{specialtyDisease,jdbcType=VARCHAR},
         #{specialtyBriefIntroduce,jdbcType=VARCHAR},
         #{specialtyPhone,jdbcType=VARCHAR},
         #{specialtyAddressPro,jdbcType=VARCHAR},
@@ -100,6 +106,12 @@
             </if>
             <if test="specialtyName != null">
                 SPECIALTY_NAME,
+            </if>
+            <if test="specialtyLevel != null">
+                SPECIALTY_LEVEL,
+            </if>
+            <if test="specialtyDisease != null">
+                SPECIALTY_DISEASE,
             </if>
             <if test="specialtyBriefIntroduce != null">
                 SPECIALTY_BRIEF_INTRODUCE,
@@ -151,6 +163,12 @@
             <if test="specialtyName != null">
                 #{specialtyName,jdbcType=VARCHAR},
             </if>
+            <if test="specialtyLevel != null">
+                #{specialtyLevel,jdbcType=VARCHAR},
+            </if>
+            <if test="specialtyDisease != null">
+                #{specialtyDisease,jdbcType=VARCHAR},
+            </if>
             <if test="specialtyBriefIntroduce != null">
                 #{specialtyBriefIntroduce,jdbcType=VARCHAR},
             </if>
@@ -198,6 +216,12 @@
             <if test="specialtyName != null">
                 SPECIALTY_NAME = #{specialtyName,jdbcType=VARCHAR},
             </if>
+            <if test="specialtyLevel != null">
+                SPECIALTY_LEVEL = #{specialtyLevel,jdbcType=VARCHAR},
+            </if>
+            <if test="specialtyDisease != null">
+                SPECIALTY_DISEASE = #{specialtyDisease,jdbcType=VARCHAR},
+            </if>
             <if test="specialtyBriefIntroduce != null">
                 SPECIALTY_BRIEF_INTRODUCE = #{specialtyBriefIntroduce,jdbcType=VARCHAR},
             </if>
@@ -244,6 +268,8 @@
     <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.zyyglxt.dataobject.SpecialtyDO">
         update tb_culpro_specialty
         set SPECIALTY_NAME = #{specialtyName,jdbcType=VARCHAR},
+        SPECIALTY_LEVEL = #{specialtyLevel,jdbcType=VARCHAR},
+        SPECIALTY_DISEASE = #{specialtyDisease,jdbcType=VARCHAR},
         SPECIALTY_BRIEF_INTRODUCE = #{specialtyBriefIntroduce,jdbcType=VARCHAR},
         SPECIALTY_PHONE = #{specialtyPhone,jdbcType=VARCHAR},
         SPECIALTY_ADDRESS_PRO = #{specialtyAddressPro,jdbcType=VARCHAR},
@@ -263,6 +289,8 @@
     <update id="updateByPrimaryKey" parameterType="com.zyyglxt.dataobject.SpecialtyDO">
         update tb_culpro_specialty
         set SPECIALTY_NAME = #{specialtyName,jdbcType=VARCHAR},
+        SPECIALTY_LEVEL = #{specialtyLevel,jdbcType=VARCHAR},
+        SPECIALTY_DISEASE = #{specialtyDisease,jdbcType=VARCHAR},
         SPECIALTY_BRIEF_INTRODUCE = #{specialtyBriefIntroduce,jdbcType=VARCHAR},
         SPECIALTY_PHONE = #{specialtyPhone,jdbcType=VARCHAR},
         SPECIALTY_ADDRESS_PRO = #{specialtyAddressPro,jdbcType=VARCHAR},

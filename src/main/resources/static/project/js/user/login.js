@@ -48,7 +48,7 @@
                         window.location.href = "/main#/scientificProject/topicManagement";
                     }else if(rolename === '文化宣传处长'||rolename === '文化宣传科员'||rolename === '文化宣传综合处处长'){
                         window.location.href = "/main#/chineseCultural/resource/traditionalCultural";
-                    }else if (rolename === '政务资源处长'||rolename === '政务资源科员'){
+                    }else if (rolename === '政务资源处长'||rolename === '政务资源科员' || rolename === '政务资源市部门' || rolename === '政务资源县部门'){
                         window.location.href = "/main#/data/mainPage";
                     }else if (rolename === '政务资源综合处处长'){
                         window.location.href = "/main#/data/mainPage";

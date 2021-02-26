@@ -1247,7 +1247,7 @@
                 $(".tTile").css("display","none");
                 $("#kyxm").css("display","block");
             }
-            else if (roleName === '政务资源市部门' || roleName === '政务资源县部门'){
+            else if (roleName === '政务资源市部门'||roleName === '政务资源县部门'){
                 var menu_list = [
                     {
                         menu_name: "首页",
@@ -1277,7 +1277,9 @@
                         level: "2",
                         pid: "2"
                     },
-                ]
+                ];
+                $(".tTile").css("display","none");
+                $("#zwbg").css("display","block");
             }
 
             function getHTML_dropdown_menu_item(astr, aurl, show_active) {

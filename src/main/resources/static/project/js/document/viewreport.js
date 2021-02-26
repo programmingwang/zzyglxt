@@ -79,7 +79,7 @@
                 var submitOpinion;
                 var d=new Date();
                 ReportEntity = {
-                    "": ""
+                    "reportDataStatus": ""
                 };
 
                 if (sessionStorage.getItem("rolename") == "政务资源处长"){

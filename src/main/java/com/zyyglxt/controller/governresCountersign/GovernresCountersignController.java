@@ -49,9 +49,8 @@ public class GovernresCountersignController {
     @GetMapping(value = "/selectAll")
     @ResponseBody
     @LogAnnotation(appCode ="",logTitle ="政务办公-内部会签-显示所有文件",logLevel ="1",creater ="",updater = "")
-    public ResponseData selectAll(@RequestParam(value = "status") List status){
-        List<GovernresCountersign> governresCountersignList=governresCountersignService.selectAll(status);
-        return new ResponseData(EmBusinessError.success,CountersignDto(governresCountersignList));
+    public ResponseData selectAll(@RequestParam(value = "status") String status){
+        return new ResponseData(EmBusinessError.success,governresCountersignService.selectAll(status));
     }
     private List<CountersignDto> CountersignDto(List<GovernresCountersign> governresCountersignList){
         List<CountersignDto> DtoList = new ArrayList<>();

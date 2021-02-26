@@ -343,20 +343,26 @@
           cf.FILE_NAME
           FROM tb_governres_receipt rp left join tb_culpro_file cf
           on rp.itemCode = cf.DATA_CODE
+          <if test='receivingDataStatus == "9" '>
+             WHERE RECEIVING_DATA_STATUS in (18)
+          </if>
+          <if test='receivingDataStatus == "8" '>
+            WHERE RECEIVING_DATA_STATUS in (18)
+          </if>
           <if test='receivingDataStatus == "7" '>
             WHERE RECEIVING_DATA_STATUS in (16,17,18)
           </if>
           <if test='receivingDataStatus == "6" '>
-            WHERE RECEIVING_DATA_STATUS in (13,14,15,18,19)
+            WHERE RECEIVING_DATA_STATUS in (13,14,15,18,19,22,24,25,27,28,29)
           </if>
           <if test='receivingDataStatus == "5" '>
-            WHERE RECEIVING_DATA_STATUS in (10,11,12,18,19)
+            WHERE RECEIVING_DATA_STATUS in (10,11,12,18,19,21,23,25,26,28,29)
           </if>
           <if test='receivingDataStatus == "4" '>
-            WHERE RECEIVING_DATA_STATUS in (7,8,9,18,19)
+            WHERE RECEIVING_DATA_STATUS in (7,8,9,18,19,20,23,24,26,27,29)
           </if>
           <if test='receivingDataStatus == "3" '>
-               WHERE RECEIVING_DATA_STATUS in (4,5,6,18,19)
+               WHERE RECEIVING_DATA_STATUS in (4,5,6,18,19,20,21,22,26,27.28)
           </if>
           <if test='receivingDataStatus == "2" '>
                 WHERE RECEIVING_DATA_STATUS in (1,2,3,18)
@@ -383,9 +389,8 @@
     a.RECEIVING_TITLE, a.itemID, a.itemCode
     from
     tb_governres_receipt a inner join
-    (select itemID from tb_governres_receipt order by itemUpdateAt desc limit 0,5)
+    (select itemID from tb_governres_receipt WHERE RECEIVING_DATA_STATUS = 18 order by itemUpdateAt desc limit 0,5)
     b on b.itemID = a.itemID
-    WHERE a.RECEIVING_DATA_STATUS = 18
   </select>
 
   <select id="selectReceiptFileForMain" resultMap="ReceiptFileResultMap">
@@ -394,7 +399,7 @@
     from
       tb_governres_receipt a inner join
       (select p.itemID,tcf.FILE_NAME,tcf.FILE_PATH from tb_governres_receipt p
-                                                          left join tb_culpro_file tcf on p.itemCode = tcf.DATA_CODE where tcf.FILE_PATH IS NOT NULL limit 0,5)
+                left join tb_culpro_file tcf on p.itemCode = tcf.DATA_CODE where tcf.FILE_PATH IS NOT NULL limit 0,5)
         b on b.itemID = a.itemID where a.RECEIVING_DATA_STATUS = 18
   </select>
 </mapper>

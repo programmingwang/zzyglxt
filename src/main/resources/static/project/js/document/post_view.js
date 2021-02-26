@@ -32,9 +32,24 @@
                 localStorage.removeItem("comeFromMain");
             });
 
+            //审核意见
             if(rolename === "政务资源科员"){
-                $('#opinin12').attr('style', "display:block;margin-bottom:40px");
-                $('#opinin22').attr('style', "display:block;");
+                $('#opinin12').attr('style', "display:block;margin-bottom:10px");
+                if (tgAdvice.data.deputyDirector !== ""){
+                    $('#opinin220').attr('style', "display:block;");
+                }
+                if (tgAdvice.data.deputyDirector1 !== ""){
+                    $('#opinin221').attr('style', "display:block;");
+                }
+                if (tgAdvice.data.deputyDirector2 !== ""){
+                    $('#opinin222').attr('style', "display:block;");
+                }
+                if (tgAdvice.data.deputyDirector3 !== ""){
+                    $('#opinin223').attr('style', "display:block;");
+                }
+                if (tgAdvice.data.deputyDirector === "" && tgAdvice.data.deputyDirector1 === "" && tgAdvice.data.deputyDirector2 === "" && tgAdvice.data.deputyDirector3 === ""){
+                    $('#opinin220').attr('style', "display:block;");
+                }
                 $('#opinin32').attr('style', "display:block;");
                 $('#opinin42').attr('style', "display:block;");
             }else if(rolename === "政务资源处长"){
@@ -45,8 +60,22 @@
                 }else {
                     $('#opinin42').attr('style', "display:block;");
                 }
-                $('#opinin12').attr('style', "display:block;margin-bottom:40px");
-                $('#opinin22').attr('style', "display:block;");
+                $('#opinin12').attr('style', "display:block;margin-bottom:10px");
+                if (tgAdvice.data.deputyDirector !== ""){
+                    $('#opinin220').attr('style', "display:block;");
+                }
+                if (tgAdvice.data.deputyDirector1 !== ""){
+                    $('#opinin221').attr('style', "display:block;");
+                }
+                if (tgAdvice.data.deputyDirector2 !== ""){
+                    $('#opinin222').attr('style', "display:block;");
+                }
+                if (tgAdvice.data.deputyDirector3 !== ""){
+                    $('#opinin223').attr('style', "display:block;");
+                }
+                if (tgAdvice.data.deputyDirector === "" && tgAdvice.data.deputyDirector1 === "" && tgAdvice.data.deputyDirector2 === "" && tgAdvice.data.deputyDirector3 === ""){
+                    $('#opinin220').attr('style', "display:block;");
+                }
                 $('#opinin32').attr('style', "display:block;");
             }else if(rolename === "政务资源综合处处长"){
                 if (tgAdvice.data.office === ""){
@@ -56,18 +85,109 @@
                 }else {
                     $('#opinin32').attr('style', "display:block;");
                 }
-                $('#opinin12').attr('style', "display:block;margin-bottom:40px");
-                $('#opinin22').attr('style', "display:block;");
+                $('#opinin12').attr('style', "display:block;margin-bottom:10px");
+                if (tgAdvice.data.deputyDirector !== ""){
+                    $('#opinin220').attr('style', "display:block;");
+                }
+                if (tgAdvice.data.deputyDirector1 !== ""){
+                    $('#opinin221').attr('style', "display:block;");
+                }
+                if (tgAdvice.data.deputyDirector2 !== ""){
+                    $('#opinin222').attr('style', "display:block;");
+                }
+                if (tgAdvice.data.deputyDirector3 !== ""){
+                    $('#opinin223').attr('style', "display:block;");
+                }
+                if (tgAdvice.data.deputyDirector === "" && tgAdvice.data.deputyDirector1 === "" && tgAdvice.data.deputyDirector2 === "" && tgAdvice.data.deputyDirector3 === ""){
+                    $('#opinin220').attr('style', "display:block;");
+                }
                 $('#opinin42').attr('style', "display:block;");
-            }else if(rolename === "中医处分管局长" || rolename === "中药处分管局长" || rolename === "综合处分管局长" || rolename === "法规监督处分管局长"){
+            }else if(rolename === "中医处分管局长"){
                 if (tgAdvice.data.deputyDirector === ""){
                     $('#failbtn').attr('style', "display:block;");
                     $('#passbtn').attr('style', "display:block;");
                     $('#opinin21').attr('style', "display:block; height:100px;");
                 }else {
-                    $('#opinin22').attr('style', "display:block;");
+                    if (tgAdvice.data.deputyDirector !== ""){
+                        $('#opinin220').attr('style', "display:block;");
+                    }
+                    if (tgAdvice.data.deputyDirector1 !== ""){
+                        $('#opinin221').attr('style', "display:block;");
+                    }
+                    if (tgAdvice.data.deputyDirector2 !== ""){
+                        $('#opinin222').attr('style', "display:block;");
+                    }
+                    if (tgAdvice.data.deputyDirector3 !== ""){
+                        $('#opinin223').attr('style', "display:block;");
+                    }
                 }
-                $('#opinin12').attr('style', "display:block;margin-bottom:40px");
+                $('#opinin12').attr('style', "display:block;margin-bottom:10px");
+                $('#opinin32').attr('style', "display:block;");
+                $('#opinin42').attr('style', "display:block;");
+            }else if(rolename === "中药处分管局长"){
+                if (tgAdvice.data.deputyDirector1 === ""){
+                    $('#failbtn').attr('style', "display:block;");
+                    $('#passbtn').attr('style', "display:block;");
+                    $('#opinin21').attr('style', "display:block; height:100px;");
+                }else {
+                    if (tgAdvice.data.deputyDirector !== ""){
+                        $('#opinin220').attr('style', "display:block;");
+                    }
+                    if (tgAdvice.data.deputyDirector1 !== ""){
+                        $('#opinin221').attr('style', "display:block;");
+                    }
+                    if (tgAdvice.data.deputyDirector2 !== ""){
+                        $('#opinin222').attr('style', "display:block;");
+                    }
+                    if (tgAdvice.data.deputyDirector3 !== ""){
+                        $('#opinin223').attr('style', "display:block;");
+                    }
+                }
+                $('#opinin12').attr('style', "display:block;margin-bottom:10px");
+                $('#opinin32').attr('style', "display:block;");
+                $('#opinin42').attr('style', "display:block;");
+            }else if(rolename === "综合处分管局长"){
+                if (tgAdvice.data.deputyDirector2 === ""){
+                    $('#failbtn').attr('style', "display:block;");
+                    $('#passbtn').attr('style', "display:block;");
+                    $('#opinin21').attr('style', "display:block; height:100px;");
+                }else {
+                    if (tgAdvice.data.deputyDirector !== ""){
+                        $('#opinin220').attr('style', "display:block;");
+                    }
+                    if (tgAdvice.data.deputyDirector1 !== ""){
+                        $('#opinin221').attr('style', "display:block;");
+                    }
+                    if (tgAdvice.data.deputyDirector2 !== ""){
+                        $('#opinin222').attr('style', "display:block;");
+                    }
+                    if (tgAdvice.data.deputyDirector3 !== ""){
+                        $('#opinin223').attr('style', "display:block;");
+                    }
+                }
+                $('#opinin12').attr('style', "display:block;margin-bottom:10px");
+                $('#opinin32').attr('style', "display:block;");
+                $('#opinin42').attr('style', "display:block;");
+            }else if(rolename === "法规监督处分管局长"){
+                if (tgAdvice.data.deputyDirector3 === ""){
+                    $('#failbtn').attr('style', "display:block;");
+                    $('#passbtn').attr('style', "display:block;");
+                    $('#opinin21').attr('style', "display:block; height:100px;");
+                }else {
+                    if (tgAdvice.data.deputyDirector !== ""){
+                        $('#opinin220').attr('style', "display:block;");
+                    }
+                    if (tgAdvice.data.deputyDirector1 !== ""){
+                        $('#opinin221').attr('style', "display:block;");
+                    }
+                    if (tgAdvice.data.deputyDirector2 !== ""){
+                        $('#opinin222').attr('style', "display:block;");
+                    }
+                    if (tgAdvice.data.deputyDirector3 !== ""){
+                        $('#opinin223').attr('style', "display:block;");
+                    }
+                }
+                $('#opinin12').attr('style', "display:block;margin-bottom:10px");
                 $('#opinin32').attr('style', "display:block;");
                 $('#opinin42').attr('style', "display:block;");
             }else if(rolename === "政务资源局长"){
@@ -76,9 +196,20 @@
                     $('#passbtn').attr('style', "display:block;");
                     $('#opinin11').attr('style', "display:block; height:100px;");
                 }else {
-                    $('#opinin12').attr('style', "display:block;margin-bottom:40px");
+                    $('#opinin12').attr('style', "display:block;margin-bottom:10px");
                 }
-                $('#opinin22').attr('style', "display:block;");
+                if (tgAdvice.data.deputyDirector !== ""){
+                    $('#opinin220').attr('style', "display:block;");
+                }
+                if (tgAdvice.data.deputyDirector1 !== ""){
+                    $('#opinin221').attr('style', "display:block;");
+                }
+                if (tgAdvice.data.deputyDirector2 !== ""){
+                    $('#opinin222').attr('style', "display:block;");
+                }
+                if (tgAdvice.data.deputyDirector3 !== ""){
+                    $('#opinin223').attr('style', "display:block;");
+                }
                 $('#opinin32').attr('style', "display:block;");
                 $('#opinin42').attr('style', "display:block;");
             }
@@ -121,12 +252,35 @@
                         }else if (rolename === "中医处分管局长" || rolename === "中药处分管局长" || rolename === "综合处分管局长" || rolename === "法规监督处分管局长"){
                             $("#deputyDirectorView").validate("审核意见");
                             submitStatus.postDataStatus = postStatus[6].id;
-                            submitOpinion = {
-                                "dataCode" : tempdata.itemcode,
-                                "deputyDirector" : $("#deputyDirectorView").val(),
-                                "deputyDirectorName" : username,
-                                "deputyDirectorDate" : nowTime,
-                            };
+                            if (rolename === "中医处分管局长"){
+                                submitOpinion = {
+                                    "dataCode" : tempdata.itemcode,
+                                    "deputyDirector" : $("#deputyDirectorView").val(),
+                                    "deputyDirectorName" : username,
+                                    "deputyDirectorDate" : nowTime,
+                                };
+                            }else if (rolename === "中药处分管局长"){
+                                submitOpinion = {
+                                    "dataCode" : tempdata.itemcode,
+                                    "deputyDirector1" : $("#deputyDirectorView").val(),
+                                    "deputyDirectorName1" : username,
+                                    "deputyDirectorDate1" : nowTime,
+                                };
+                            }else if (rolename === "综合处分管局长"){
+                                submitOpinion = {
+                                    "dataCode" : tempdata.itemcode,
+                                    "deputyDirector2" : $("#deputyDirectorView").val(),
+                                    "deputyDirectorName2" : username,
+                                    "deputyDirectorDate2" : nowTime,
+                                };
+                            }else if (rolename === "法规监督处分管局长"){
+                                submitOpinion = {
+                                    "dataCode" : tempdata.itemcode,
+                                    "deputyDirector3" : $("#deputyDirectorView").val(),
+                                    "deputyDirectorName3" : username,
+                                    "deputyDirectorDate3" : nowTime,
+                                };
+                            }
                             submitStatus.postOpinion = "3";
                         }else if (rolename === "政务资源局长"){
                             $("#directorView").validate("审核意见");
@@ -198,15 +352,39 @@
                                 "officeName" : username,
                                 "officeDate" : nowTime,
                             };
-                        }else if (rolename == "政务资源分管局长"){
+                        }else if (rolename === "中医处分管局长" || rolename === "中药处分管局长" || rolename === "综合处分管局长" || rolename === "法规监督处分管局长"){
                             $("#deputyDirectorView").validate("审核意见");
-                            submitStatus.postDataStatus = postStatus[7].id;
-                            submitOpinion = {
-                                "dataCode" : tempdata.itemcode,
-                                "deputyDirector" : $("#deputyDirectorView").val(),
-                                "deputyDirectorName" : username,
-                                "deputyDirectorDate" : nowTime,
-                            };
+                            submitStatus.postDataStatus = postStatus[6].id;
+                            if (rolename === "中医处分管局长"){
+                                submitOpinion = {
+                                    "dataCode" : tempdata.itemcode,
+                                    "deputyDirector" : $("#deputyDirectorView").val(),
+                                    "deputyDirectorName" : username,
+                                    "deputyDirectorDate" : nowTime,
+                                };
+                            }else if (rolename === "中药处分管局长"){
+                                submitOpinion = {
+                                    "dataCode" : tempdata.itemcode,
+                                    "deputyDirector1" : $("#deputyDirectorView").val(),
+                                    "deputyDirectorName1" : username,
+                                    "deputyDirectorDate1" : nowTime,
+                                };
+                            }else if (rolename === "综合处分管局长"){
+                                submitOpinion = {
+                                    "dataCode" : tempdata.itemcode,
+                                    "deputyDirector2" : $("#deputyDirectorView").val(),
+                                    "deputyDirectorName2" : username,
+                                    "deputyDirectorDate2" : nowTime,
+                                };
+                            }else if (rolename === "法规监督处分管局长"){
+                                submitOpinion = {
+                                    "dataCode" : tempdata.itemcode,
+                                    "deputyDirector3" : $("#deputyDirectorView").val(),
+                                    "deputyDirectorName3" : username,
+                                    "deputyDirectorDate3" : nowTime,
+                                };
+                            }
+                            submitStatus.postOpinion = "3";
                         }else if (rolename == "政务资源局长"){
                             $("#directorView").validate("审核意见");
                             submitStatus.postDataStatus = postStatus[9].id;
@@ -309,6 +487,15 @@
                     $("#deputyDirectorOpinion").val(tgAdvice.data.deputyDirector);
                     $("#deputyDirectorName").val(tgAdvice.data.deputyDirectorName);
                     $("#deputyDirectorDate").val(stringUtil.formatTime(tgAdvice.data.deputyDirectorDate));
+                    $("#deputyDirectorOpinion1").val(tgAdvice.data.deputyDirector1);
+                    $("#deputyDirectorName1").val(tgAdvice.data.deputyDirectorName1);
+                    $("#deputyDirectorDate1").val(stringUtil.formatTime(tgAdvice.data.deputyDirectorDate1));
+                    $("#deputyDirectorOpinion2").val(tgAdvice.data.deputyDirector2);
+                    $("#deputyDirectorName2").val(tgAdvice.data.deputyDirectorName2);
+                    $("#deputyDirectorDate2").val(stringUtil.formatTime(tgAdvice.data.deputyDirectorDate2));
+                    $("#deputyDirectorOpinion3").val(tgAdvice.data.deputyDirector3);
+                    $("#deputyDirectorName3").val(tgAdvice.data.deputyDirectorName3);
+                    $("#deputyDirectorDate3").val(stringUtil.formatTime(tgAdvice.data.deputyDirectorDate3));
                     $("#directorOpinion").val(tgAdvice.data.director);
                     $("#directorName").val(tgAdvice.data.directorName);
                     $("#directorDate").val(stringUtil.formatTime(tgAdvice.data.directorDate));

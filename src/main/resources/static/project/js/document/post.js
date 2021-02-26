@@ -278,14 +278,21 @@
                             };
                             if ($("#all_select").is(":checked") == true){
                                 submitStatus.postOpinion1 = "1234";
-                            } else if ($("#zhongyichu").is(":checked") == true){
-                                submitStatus.postOpinion1 = "1";
-                            }else if ($("#zhongyaochu").is(":checked")== true){
-                                submitStatus.postOpinion1 = "2";
-                            }else if ($("#zonghechu").is(":checked") == true){
-                                submitStatus.postOpinion1 = "3";
-                            }else if ($("#faguijandu").is(":checked") == true){
-                                submitStatus.postOpinion1 = "4";
+                            }else {
+                                var po = "";
+                                if ($("#zhongyichu").is(":checked") == true){
+                                    po = "1";
+                                }
+                                if ($("#zhongyaochu").is(":checked")== true){
+                                    po = po + "2";
+                                }
+                                if ($("#zonghechu").is(":checked") == true){
+                                    po = po + "3";
+                                }
+                                if ($("#faguijandu").is(":checked") == true){
+                                    po = po + "4";
+                                }
+                                submitStatus.postOpinion1 = po;
                             }
                             if ($("#all_select").is(":checked") == true||$("#zhongyichu").is(":checked") == true||$("#zhongyaochu").is(":checked")== true||$("#zonghechu").is(":checked") == true||$("#faguijandu").is(":checked") == true){
                                 ajaxUtil.myAjax(null,"/post/updatePost",submitStatus,function (data) {

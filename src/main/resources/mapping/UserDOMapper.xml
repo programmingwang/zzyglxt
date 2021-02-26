@@ -81,6 +81,16 @@
     WHERE u.TYPE=7 AND u.TYPE=r.ROLE_TYPE AND u.ORG_CODE = #{orgCode,jdbcType=CHAR}
     order by u.itemUpdateAt desc
   </select>
+  <select id="selectAllUser3" resultMap="ResultMapWithBLOBs">
+    SELECT
+    <include refid="Base_Column_List_SELECTALL" />
+    ,u.itemCode,
+    <include refid="Blob_Column_List_SELECTALL" />
+    ,r.ROLE_NAME
+    FROM user u,role r
+    WHERE u.TYPE IN(25,26) AND u.TYPE=r.ROLE_TYPE
+    order by u.itemUpdateAt desc
+  </select>
   <select id="selectByUsername" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
     select
     <include refid="Base_Column_List" />

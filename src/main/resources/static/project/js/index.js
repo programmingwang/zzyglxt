@@ -1256,6 +1256,27 @@
                         level: "1",
                         pid: ""
                     },
+                    {
+                        menu_name: "文件流转",
+                        menu_url: "",
+                        id: "2",
+                        level: "1",
+                        pid: ""
+                    },
+                    {
+                        menu_name: "发文管理",
+                        menu_url: "/document/post",
+                        id: "2-1",
+                        level: "2",
+                        pid: "2"
+                    },
+                    {
+                        menu_name: "收文管理",
+                        menu_url: "/document/receipt",
+                        id: "2-2",
+                        level: "2",
+                        pid: "2"
+                    },
                 ]
             }
 

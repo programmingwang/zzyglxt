@@ -4,6 +4,8 @@
 
             var rolename = sessionStorage.getItem("rolename");
             var webStatus = dictUtil.getDictByCode(dictUtil.DICT_LIST.signstatus);
+            var parStatus = dictUtil.getDictByCode(dictUtil.DICT_LIST.parment);
+            var govStatus = dictUtil.getDictByCode(dictUtil.DICT_LIST.governerscounter);
             var row = JSON.parse(localStorage.getItem("viewRowData"));
             const editor = objectUtil.wangEditorUtil();
             var username = sessionStorage.getItem("username");
@@ -96,9 +98,9 @@
                 if (isView()){
                     var tempdata = JSON.parse(localStorage.getItem("viewRowData"));
                     $("#fileNo").val(tempdata.fileNo);
-                    $("#parment").val(tempdata.parment);
+                    $("#parment").val(parStatus[tempdata.parment].text);
                     $("#number").val(tempdata.number);
-                    $("#govPunlic").val(tempdata.govPunlic);
+                    $("#govPunlic").val(govStatus[tempdata.govPunlic].text);
                     $("#receivingTitle").val(tempdata.receivingTitle);
                     $("#fileNumber").val(tempdata.fileNumber);
                     $("#classification").val(tempdata.classification);

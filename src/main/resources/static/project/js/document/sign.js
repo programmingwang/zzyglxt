@@ -29,9 +29,9 @@
                         modalBodyID : "myDeletesignModal",
                         modalTitle : "删除内部会签",
                         modalClass : "modal-lg",
+                        cancelButtonStyle: "display:none",
                         confirmButtonClass : "btn-danger",
                         modalConfirmFun:function () {
-                            var isSuccess = false;
                             ajaxUtil.myAjax(null,"governresCountersign/delete/"+row.itemcode,null,function (data) {
                                 if(ajaxUtil.success(data)){
                                     alertUtil.info("删除内部会签成功");
@@ -39,7 +39,7 @@
                                     refreshTable();
                                 }
                             },false,true,"delete");
-                            return isSuccess;
+                            return true;
                         }
 
                     };

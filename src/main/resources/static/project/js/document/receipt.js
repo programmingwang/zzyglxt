@@ -329,9 +329,9 @@
                     return preUrl + "?"+status+"=6";
                 }else if(role === "政务资源局长") {
                     return preUrl + "?"+status+"=7";
-                }else if(role === "政务资源市部门") {
-                    return preUrl + "?"+status+"=8";
                 }else if(role === "政务资源县部门") {
+                    return preUrl + "?"+status+"=8";
+                }else if(role === "政务资源市部门") {
                     return preUrl + "?"+status+"=9";
                 }
             }

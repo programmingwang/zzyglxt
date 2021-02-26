@@ -62,7 +62,7 @@
 
   <sql id="SelectAll_Column_List">
     rp.itemID, rp.itemCode, rp.RECEIVING_NUM, rp.RECEIVING_DATE_OF_RECEIPT, rp.RECEIVING_TITLE,
-    rp.RECEIVING_UNIT_OF_COMMUN, rp.FILE_NO, rp.NUMBER, rp.RECEIVING_DEGREE_OF_URGENCY,
+    rp.RECEIVING_UNIT_OF_COMMUN, rp.FILE_NO, rp.NUMBER, rp.RECEIVING_DEGREE_OF_URGENCY, rp.SECRET_LEVEL,
     rp.RECEIVING_DATA_STATUS, rp.TIME_LIMIT, rp.REASONO, rp.REASONT, rp.REASONH, rp.REASONF, rp.REASONV, rp.REASONS,
     rp.NAMEO, rp.NAMET, rp.NAMEH, rp.NAMEF, rp.NAMEV, rp.NAMES,
     rp.DATEO, rp.DATET, rp.DATEH, rp.DATEF, rp.DATEV, rp.DATES,
@@ -365,7 +365,7 @@
                WHERE RECEIVING_DATA_STATUS in (4,5,6,18,19,20,21,22,26,27.28)
           </if>
           <if test='receivingDataStatus == "2" '>
-                WHERE RECEIVING_DATA_STATUS in (1,2,3,18)
+                WHERE RECEIVING_DATA_STATUS in (1,2,18)
           </if>
           <if test='receivingDataStatus == "1" '>
                WHERE RECEIVING_DATA_STATUS in (0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18)

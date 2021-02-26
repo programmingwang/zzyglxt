@@ -1,5 +1,7 @@
 package com.zyyglxt.dataobject;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 /**
@@ -19,16 +21,19 @@ public class GovernresCountersign {
     /**
     * 文件标题
     */
+    @NotBlank(message = "文件标题不能为空")
     private String receivingTitle;
 
     /**
     * 需要份数
     */
+    @NotNull(message = "需要份数不能为空")
     private Integer number;
 
     /**
     * 政府信息公开
     */
+    @NotBlank(message = "政府信息公开不能不勾选")
     private String govPunlic;
 
     /**
@@ -44,6 +49,7 @@ public class GovernresCountersign {
     /**
     * 密级
     */
+    @NotBlank(message = "密级不能为空")
     private String classification;
 
     /**
@@ -71,6 +77,7 @@ public class GovernresCountersign {
     */
     private Date itemupdateat;
     private String parment;
+    @NotBlank(message = "文件编号不能为空")
     private String fileNumber;
 
     public String getFileNumber() {

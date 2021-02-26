@@ -167,8 +167,8 @@
                     $("#number").val(tempdata.number);
                     $("#classification").val(tempdata.classification);
                     $("#reason").val(tempdata.reason);
-                    var img = tempdata.filePath;
-                    $("#upimg").attr("src",img);
+                    $("#upload_file").attr('href',tempdata.filePath)
+                    $("#addFile").text(tempdata.fileName);
                 }
                 else {
                     $("#distpicker").distpicker();

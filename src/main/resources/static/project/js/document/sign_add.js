@@ -56,6 +56,7 @@
                         number : $("#number").val(),
                         classification : $("#classification").val(),
                         reason : $("#reason").val(),
+                        status : '0',
                     }
                 }
                 fileUtil.handleFile(isUpdate(), ReceiptEntity.itemcode, $("#upload_file")[0].files[0]);
@@ -85,8 +86,8 @@
 
             $("#btn_insert").unbind().on('click',function () {
                 var mySubmitToCZ = {
-                    modalBodyID: "mySubmitModal",
-                    modalTitle: "提交",
+                    modalBodyID: "mySendTips",
+                    modalTitle: "发送",
                     modalClass: "modal-lg",
                     modalConfirmFun:function (){
                         var ReceiptEntity;
@@ -117,6 +118,7 @@
                                 number : $("#number").val(),
                                 classification : $("#classification").val(),
                                 reason : $("#reason").val(),
+                                status : '1',
                             }
                         }
                         fileUtil.handleFile(isUpdate(), ReceiptEntity.itemcode, $("#upload_file")[0].files[0]);
@@ -140,7 +142,7 @@
                             }else {
                                 alertUtil.alert(data.msg);
                             }
-                        },false,true,);
+                        },false,true,type);
                         return true;
                     }
                 }
@@ -152,7 +154,13 @@
             (function init() {
                 if (isUpdate()){
                     var tempdata = JSON.parse(localStorage.getItem("rowData"));
-                    $("#govPunlic").val(tempdata.govPunlic);
+                    var govPunlicLable = document.getElementsByName("govPunlic");
+                    for(var i=0; i<govPunlicLable.length; i++){
+                        if(govPunlicLable[i].attributes["value"].value == tempdata.govPunlic){
+                            $("#"+govPunlicLable[i].attributes["id"].value).attr("checked","checked")
+                            break;
+                        }
+                    }
                     $("#receivingTitle").val(tempdata.receivingTitle);
                     $("#parment").val(tempdata.parment);
                     $("#fileNumber").val(tempdata.fileNumber);

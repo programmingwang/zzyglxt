@@ -3,17 +3,20 @@
         function (jquery,objectUtil,ajaxUtil,alertUtil,stringUtil,dictUtil,fileUtil,uploadImg,modalUtil) {
 
 
-            /*q全局变量*/
+            /*全局变量*/
             var tempdata = JSON.parse(localStorage.getItem("rowData"));
             var updateStatus = isUpdate()
             var jumpUrl = "/medicalService/specialty"
             var hosps = {}
             var webStatus = dictUtil.getDictByCode(dictUtil.DICT_LIST.webStatus);
-            var specialtyName = dictUtil.getDictByCode(dictUtil.DICT_LIST.dept)
+            var specialtyName = dictUtil.getDictByCode(dictUtil.DICT_LIST.dept);
+            var specialtyLevel = dictUtil.getDictByCode(dictUtil.DICT_LIST.specialtyLevel)
             const editor = objectUtil.wangEditorUtil();
 
             /*设置科室下拉框的值*/
-            $("#specialtyName").selectUtil(dictUtil.getDictByCode(dictUtil.DICT_LIST.dept));
+
+            $("#specialtyName").selectUtil(specialtyName);
+            $("#specialtyLevel").selectUtil(specialtyLevel);
 
             /*点击返回按钮*/
             $("#cancel").unbind().on('click',function () {
@@ -22,6 +25,10 @@
 
             $("#addHosp").unbind().on('click', function () {
                 orange.redirect("/medicalService/add/addHosp");
+                var elementsByClassName = document.getElementsByClassName("card");
+               elementsByClassName[6].children[0].classList.remove("active")
+                elementsByClassName[5].children[0].classList.add("active")
+
             })
 
             //保存和提交调用函数，保存和提交只是状态码不同
@@ -47,6 +54,8 @@
                     };
                 }
                 entity["specialtyName"] = specialtyName[$("#specialtyName").val()].text;
+                entity["specialtyLevel"] = specialtyLevel[$("#specialtyLevel").val()].text;
+                entity["specialtyDisease"] = $("#specialtyDisease").val();
                 entity["specialtyPhone"] = $("#specialtyPhone").val();
                 entity["specialtyBriefIntroduce"] = $("#specialtyBriefIntroduce").val();
                 entity["specialtyAddressPro"] = hosp.hospitalAddressPro;
@@ -131,12 +140,25 @@
                     uploadImg.setImgSrc(tempdata.filePath)
                     $("#specialtyName").find("option").each(function (data) {
                         var $this = $(this);
-                        if($this.text() == tempdata.specialtyName) {
+                        if($this.text() === tempdata.specialtyName) {
                             $this.attr("selected", true);
                         }
                     });
+                    $("#specialtyLevel").find("option").each(function (data) {
+                        var $this = $(this);
+                        if($this.text() === tempdata.specialtyLevel) {
+                            $this.attr("selected", true);
+                        }
+                    });
+                    $("#specialtyDisease").val(tempdata.specialtyDisease)
                     $("#specialtyBriefIntroduce").val(tempdata.specialtyBriefIntroduce)
-                    $("#hospitalName  option[value="+tempdata.hospitalCode+"] ").attr("selected",true)
+                    //$("#hospitalName  option[value="+tempdata.hospitalCode+"] ").attr("selected",true);
+                    $("#hospitalName").find("option").each(function (data) {
+                        var $this = $(this);
+                        if($this.text() === tempdata.hospitalName) {
+                            $this.attr("selected", true);
+                        }
+                    });
                     $("#specialtyPhone").val(tempdata.specialtyPhone);
                     $(".w-e-text").html(tempdata.specialtyIntroduce);
                 }else{

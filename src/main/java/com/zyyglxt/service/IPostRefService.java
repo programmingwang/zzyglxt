@@ -17,4 +17,12 @@ public interface IPostRefService {
 
     int updateByPrimaryKeySelective(PostRefDO record);
 
+    void delByDateCode(String dateCode);
+
+    void updPostRef(PostRefDO postRefDO);
+
+    PostRefDO getMasterSend(String dateCode);
+
+    PostRefDO getCopySend(String dateCode);
+
 }

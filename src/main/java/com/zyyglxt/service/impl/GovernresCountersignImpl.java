@@ -4,12 +4,14 @@ import com.zyyglxt.dao.GovernresAdviceMapper;
 import com.zyyglxt.dao.GovernresCountersignMapper;
 import com.zyyglxt.dataobject.GovernresAdvice;
 import com.zyyglxt.dataobject.GovernresCountersign;
+import com.zyyglxt.error.BusinessException;
+import com.zyyglxt.error.EmBusinessError;
 import com.zyyglxt.service.IGovernresCountersignService;
 import com.zyyglxt.validator.ValidatorImpl;
+import com.zyyglxt.validator.ValidatorResult;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -33,6 +35,10 @@ public class GovernresCountersignImpl implements IGovernresCountersignService {
 
     @Override
     public int insertSelective(GovernresCountersign record) {
+        ValidatorResult result = validator.validate(record);
+        if(result.isHasErrors()){
+            throw new BusinessException(result.getErrMsg(), EmBusinessError.PARAMETER_VALIDATION_ERROR);
+        }
         GovernresAdvice governresAdvice=new GovernresAdvice();
         String itemCode=UUID.randomUUID().toString();
         record.setItemcode(itemCode);
@@ -50,16 +56,16 @@ public class GovernresCountersignImpl implements IGovernresCountersignService {
 
     @Override
     public int updateByPrimaryKeySelective(GovernresCountersign record) {
+        ValidatorResult result = validator.validate(record);
+        if(result.isHasErrors()){
+            throw new BusinessException(result.getErrMsg(), EmBusinessError.PARAMETER_VALIDATION_ERROR);
+        }
         return governresCountersignMapper.updateByPrimaryKeySelective(record);
     }
 
     @Override
-    public List<GovernresCountersign> selectAll(List<String> status) {
-        List<GovernresCountersign> governresCountersignList= new ArrayList<>();
-        for(String statu:status){
-            governresCountersignList.addAll(governresCountersignMapper.selectAll(statu));
-        }
-        return governresCountersignList;
+    public List<GovernresCountersign> selectAll(String status) {
+        return governresCountersignMapper.selectAll(status);
     }
 
 }

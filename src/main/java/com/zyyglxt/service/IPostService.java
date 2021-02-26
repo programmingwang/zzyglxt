@@ -21,7 +21,9 @@ public interface IPostService {
 
     void updatePost(PostDO record);
 
-    List<PostDO> getPost(List<String> postDataStatus);
+    List<PostDto> getPost(String postDataStatus);
+
+    List<PostDto> getDeputyDirector(String postOpinion1);
 
     PostDO maxNum();
 

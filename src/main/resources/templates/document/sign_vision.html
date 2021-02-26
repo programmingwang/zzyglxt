@@ -56,8 +56,9 @@
     </style>
 </head>
 <body>
-<div class="col-lg-1"></div>
-<div class="col-lg-10">
+<div id="fir_body" class="row">
+<div class="col-lg-2"></div>
+<div class="col-lg-8" style="margin-left: 60px;">
     <div style="margin-left: 230px;margin-top: 40px;">
         <h4 style="color: #D60000; font-size: 34px;">河北省中医药管理局文件会签笺</h4>
     </div>
@@ -170,15 +171,9 @@
         </table>
     </div>
     <br>
-    <div class="form-group row">
-        <div class="col-lg-7 col-md-7" ></div>
-        <div class=" col-lg-5 row" >
-            <div class="col" style="padding-right: 0;">
-                <button id="failbtn" type="button" style="display: block" class="btn btn-danger col">驳回</button>
-            </div>
-            <div class="col" style="padding-right: 0;" >
-                <button id="passbtn" type="button" style="display: block" class="pass btn btn-primary col" data-target="#staticBackdrop">通过</button>
-            </div>
+    <div class="form-group row" style="width: 976px;">
+        <div class="col-lg-10 col-md-10" ></div>
+        <div class=" col-lg-2 row" style="flex: 0 0 18%;max-width: 18%;">
             <div class="col" style="padding-right: 0;" >
                 <button id="cancelbtn" type="button" class="btn btn-light col">返回</button>
             </div>
@@ -186,9 +181,10 @@
     </div>
 </div>
 <div class="col-lg-1"></div>
+</div>
 
 <script type="text/javascript" data-main="/main/main.js" th:src="@{/component/require@2.3.6/require-2.3.6.js}"></script>
-<script type="text/javascript" th:src="@{/project/js/document/sign_view.js}"></script>
+<script type="text/javascript" th:src="@{/project/js/document/sign_vision.js}"></script>
 <link type="text/css" rel="stylesheet" href="/component/uploadImg/css/uploadImg.css"
       th:src="@{/component/uploadImg/css/uploadImg.css}">
 </body>

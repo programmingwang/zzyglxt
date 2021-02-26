@@ -1,33 +1,42 @@
 (function () {
-    require(['jquery','objectUtil','ajaxUtil','alertUtil','stringUtil','fileUtil','distpicker','datetimepicker','dictUtil'],
-        function (jquery,objectUtil,ajaxUtil,alertUtil,stringUtil,fileUtil,distpicker,datetimepicker,dictUtil) {
-
-            const editor = objectUtil.wangEditorUtil();
+    require(['jquery','objectUtil','ajaxUtil','alertUtil','stringUtil','fileUtil','distpicker','datetimepicker','dictUtil','selectUtil','modalUtil'],
+        function (jquery,objectUtil,ajaxUtil,alertUtil,stringUtil,fileUtil,distpicker,datetimepicker,dictUtil,selectUtil,modalUtil) {
 
             var type = isUpdate() ? "put": "post";
 
-            var pl = dictUtil.getDictByCode(dictUtil.DICT_LIST.governerscounter);
-            $("#govPunlic").selectUtil(pl);
+            var pl = dictUtil.getDictByCode(dictUtil.DICT_LIST.parment);
+            $("#parment").selectUtil(pl);
 
             $("#cancel").unbind().on('click',function () {
                 var url = "/document/sign";
                 orange.redirect(url);
             });
 
+            //不公开理由
+            var reason = dictUtil.getDictByCode(dictUtil.DICT_LIST.postReason);
+            $("#reason").selectUtil(reason);
+
+            //公开方式
+            $('input[type=radio][name=govPunlic]').change(function () {
+                if(this.value == "2"){
+                    $('#reason').attr('style',"display:block");
+                }else {
+                    $('#reason').attr('style',"display:none");
+                    $("#reason").selectUtil(reason);
+                    $("#reason").val() == "";
+                }
+            })
 
             $("#btn_save").unbind().on('click',function () {
                 var ReceiptEntity;
                 var addUpdateUrl;
-                var operateMessage;
                 if(!isUpdate()){
                     addUpdateUrl = "governresCountersign/insert";
-                    operateMessage = "保存会签信息成功";
                     ReceiptEntity = {
                         itemcode: stringUtil.getUUID(),
-                        govPunlic : $("#govPunlic").val(),
+                        govPunlic : $('input:radio[name="govPunlic"]:checked').val(),
                         receivingTitle : $("#receivingTitle").val(),
                         parment : $("#parment").val(),
-                        fileNo : $("#fileNo").val(),
                         fileNumber : $("#fileNumber").val(),
                         number : $("#number").val(),
                         classification : $("#classification").val(),
@@ -40,24 +49,33 @@
                     ReceiptEntity = {
                         itemid: needData.itemid,
                         itemcode: needData.itemcode,
-                        govPunlic : $("#govPunlic").val(),
+                        govPunlic : $('input:radio[name="govPunlic"]:checked').val(),
                         receivingTitle : $("#receivingTitle").val(),
                         parment : $("#parment").val(),
-                        fileNo : $("#fileNo").val(),
                         fileNumber : $("#fileNumber").val(),
                         number : $("#number").val(),
                         classification : $("#classification").val(),
                         reason : $("#reason").val(),
                     }
-                    operateMessage = "更新会签信息成功";
                 }
                 fileUtil.handleFile(isUpdate(), ReceiptEntity.itemcode, $("#upload_file")[0].files[0]);
 
                 ajaxUtil.myAjax(null,addUpdateUrl,ReceiptEntity,function (data) {
                     if(ajaxUtil.success(data)){
-                        alertUtil.info(operateMessage);
-                        var url = "/document/sign";
-                        orange.redirect(url);
+                        var submitConfirmModal = {
+                            modalBodyID :"myTopicSubmitTip",
+                            modalTitle : "提示",
+                            modalClass : "modal-lg",
+                            cancelButtonStyle: "display:none",
+                            confirmButtonClass: "btn-danger",
+                            modalConfirmFun:function (){
+                                var url = "/document/sign";
+                                orange.redirect(url);
+                                return true;
+                            }
+                        }
+                        var submitConfirm = modalUtil.init(submitConfirmModal);
+                        submitConfirm.show();
                     }else {
                         alertUtil.alert(data.msg);
                     }
@@ -66,52 +84,68 @@
             });
 
             $("#btn_insert").unbind().on('click',function () {
-                var ReceiptEntity;
-                var addUpdateUrl;
-                var operateMessage;
-                if(!isUpdate()){
-                    addUpdateUrl = "governresCountersign/insert";
-                    operateMessage = "录入会签信息成功";
-                    ReceiptEntity = {
-                        itemcode: stringUtil.getUUID(),
-                        govPunlic : $("#govPunlic").val(),
-                        receivingTitle : $("#receivingTitle").val(),
-                        parment : $("#parment").val(),
-                        fileNo : $("#fileNo").val(),
-                        fileNumber : $("#fileNumber").val(),
-                        number : $("#number").val(),
-                        classification : $("#classification").val(),
-                        reason : $("#reason").val(),
-                        status : '1',
-                    };
-                }else{
-                    var needData = JSON.parse(localStorage.getItem("rowData"));
-                    addUpdateUrl = "governresCountersign/update";
-                    ReceiptEntity = {
-                        itemid: needData.itemid,
-                        itemcode: needData.itemcode,
-                        govPunlic : $("#govPunlic").val(),
-                        receivingTitle : $("#receivingTitle").val(),
-                        parment : $("#parment").val(),
-                        fileNo : $("#fileNo").val(),
-                        fileNumber : $("#fileNumber").val(),
-                        number : $("#number").val(),
-                        classification : $("#classification").val(),
-                        reason : $("#reason").val(),
-                    }
-                    operateMessage = "更新会签信息成功";
-                }
-                fileUtil.handleFile(isUpdate(), ReceiptEntity.itemcode, $("#upload_file")[0].files[0]);
+                var mySubmitToCZ = {
+                    modalBodyID: "mySubmitModal",
+                    modalTitle: "提交",
+                    modalClass: "modal-lg",
+                    modalConfirmFun:function (){
+                        var ReceiptEntity;
+                        var addUpdateUrl;
+                        if(!isUpdate()){
+                            addUpdateUrl = "governresCountersign/insert";
+                            ReceiptEntity = {
+                                itemcode: stringUtil.getUUID(),
+                                govPunlic : $('input:radio[name="govPunlic"]:checked').val(),
+                                receivingTitle : $("#receivingTitle").val(),
+                                parment : $("#parment").val(),
+                                fileNumber : $("#fileNumber").val(),
+                                number : $("#number").val(),
+                                classification : $("#classification").val(),
+                                reason : $("#reason").val(),
+                                status : '1',
+                            };
+                        }else{
+                            var needData = JSON.parse(localStorage.getItem("rowData"));
+                            addUpdateUrl = "governresCountersign/update";
+                            ReceiptEntity = {
+                                itemid: needData.itemid,
+                                itemcode: needData.itemcode,
+                                govPunlic : $('input:radio[name="govPunlic"]:checked').val(),
+                                receivingTitle : $("#receivingTitle").val(),
+                                parment : $("#parment").val(),
+                                fileNumber : $("#fileNumber").val(),
+                                number : $("#number").val(),
+                                classification : $("#classification").val(),
+                                reason : $("#reason").val(),
+                            }
+                        }
+                        fileUtil.handleFile(isUpdate(), ReceiptEntity.itemcode, $("#upload_file")[0].files[0]);
 
-                ajaxUtil.myAjax(null,addUpdateUrl,ReceiptEntity,function (data) {
-                    if(ajaxUtil.success(data)){
-                        alertUtil.info(operateMessage);
-                        var url = "/document/sign";
-                        orange.redirect(url);
-                    }else {
-                        alertUtil.alert(data.msg);
+                        ajaxUtil.myAjax(null,addUpdateUrl,ReceiptEntity,function (data) {
+                            if(ajaxUtil.success(data)){
+                                var submitConfirmModal = {
+                                    modalBodyID :"myTopicSubmitTip",
+                                    modalTitle : "提示",
+                                    modalClass : "modal-lg",
+                                    cancelButtonStyle: "display:none",
+                                    confirmButtonClass: "btn-danger",
+                                    modalConfirmFun:function (){
+                                        var url = "/document/sign";
+                                        orange.redirect(url);
+                                        return true;
+                                    }
+                                }
+                                var submitConfirm = modalUtil.init(submitConfirmModal);
+                                submitConfirm.show();
+                            }else {
+                                alertUtil.alert(data.msg);
+                            }
+                        },false,true,);
+                        return true;
                     }
-                },false,true);
+                }
+                var x = modalUtil.init(mySubmitToCZ);
+                x.show();
                 return false;
             });
 
@@ -121,7 +155,6 @@
                     $("#govPunlic").val(tempdata.govPunlic);
                     $("#receivingTitle").val(tempdata.receivingTitle);
                     $("#parment").val(tempdata.parment);
-                    $("#fileNo").val(tempdata.fileNo);
                     $("#fileNumber").val(tempdata.fileNumber);
                     $("#number").val(tempdata.number);
                     $("#classification").val(tempdata.classification);

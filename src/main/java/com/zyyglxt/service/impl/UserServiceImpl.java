@@ -199,6 +199,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public List<UserDO> selectAllUser3(String itemcode, String username) {
+        //UserDO userDO = userDOMapper.selectByUsername(username);
+        return userDOMapper.selectAllUser3(itemcode, username);
+    }
+
+    @Override
     public int deleteByUsername(String username) {
         return userDOMapper.deleteByUsername(username);
     }

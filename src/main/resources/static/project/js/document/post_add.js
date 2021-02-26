@@ -38,72 +38,99 @@
             var num = dictUtil.getDictByCode(dictUtil.DICT_LIST.postDocumentNum);
             $("#postDocumentNum").selectUtil(num);
 
+            //结合发文管理增加意见
+            var uuid = stringUtil.getUUID();
+            var adviceUrl = "/advice/createAdvice";
+            var AdviceEntity = {
+                itemcode : stringUtil.getUUID(),
+                dataCode : uuid,
+                initial : username,
+                initialDate : nowTime,
+            };
+
             //主送抄送
-            // 获取勾选的行
-            var checkids = [];
             // 存储账号信息
             var sendGoal = {};
+            // 获取账号信息的url
+            var sendUrl = "/postref/alluser";
 
-            function distribution(rows) {
+            //获取账号信息
+            function initExpert() {
+                ajaxUtil.myAjax(null, sendUrl, null, function (data) {
+                    if (ajaxUtil.success(data)) {
+                        sendGoal = data.data
+                    } else {
+                        alert(data.msg);
+                    }
+                }, false, true, "get");
+            }
+
+            function distribution(x) {
                 var addSendModal = {
                     modalBodyID: "addSendModal", //公用的在后面给span加不同的内容就行了，其他模块同理
                     modalTitle: "发送对象",
                     modalClass: "modal-lg",
                     confirmButtonClass: "btn-danger",
                     modalConfirmFun: function () {
-                        for (var i = 0; i < rows.length; i++) {
-                            var sendRows = $("#sendTable").bootstrapTable('getSelections');
-                            if (sendRows.length == 0) {
-                                alertUtil.error("错误，未勾选发送对象，请勾选后重试")
-                                return true;
-                            }
-                            else {
-                                var sendList = [];
-                                for (var j = 0; j < sendRows.length; j++) {
-                                    var entity = {
-                                        itemcode: stringUtil.getUUID(),
-                                        expertCode: sendRows[j].itemcode,
-                                        topicCode: rows[i].itemcode,
-                                        exmaineStatus: exmaineStatus[1].id
-                                    }
-                                    sendList.push(entity)
+                        var sendRows = $("#sendTable").bootstrapTable('getSelections');
+                        if (sendRows.length == 0) {
+                            alertUtil.error("错误，未勾选发送对象，请勾选后重试")
+                            return true;
+                        }else {
+                            var sendList = [];
+                            for (var i = 0; i < sendRows.length; i++) {
+                                var entity = {
+                                    itemcode: stringUtil.getUUID(),
+                                    dateCode: uuid,
+                                    receiverId: sendRows[i].username,
+                                    receiverType: 0
+                                };
+                                if (x == 0){
+                                    entity.receiverType = 0;
+                                }else if (x == 1){
+                                    entity.receiverType = 1;
                                 }
-                                var list = new Set(sendList);
-                                sendList = Array.from(list);
-                                ajaxUtil.myAjax(null, "/exmain/exmain", sendList, function (data) {
-                                    if (ajaxUtil.success(data)) {
-                                    } else {
-                                        alert(data.msg);
-                                    }
-                                }, false, true, "post");
+                                sendList.push(entity)
                             }
+                            var list = new Set(sendList);
+                            sendList = Array.from(list);
+                            var postEntity = {
+                                dateCode: uuid
+                            };
+                            ajaxUtil.myAjax(null,"/postref/delPostRef",postEntity,function (data) {
+                                if (ajaxUtil.success(data)) {
+                                    ajaxUtil.myAjax(null, "/postref/createPostRef", sendList, function (data) {
+                                        if (ajaxUtil.success(data)) {
+                                            var zhusong = "";
+                                            for (var i = 0; i < sendRows.length; i++) {
+                                                zhusong = zhusong + sendRows[i].username + "；";
+                                            }
+                                            $("#masterSend").val(zhusong);
+                                        }else {
+                                            alert(data.msg);
+                                        }
+                                    }, false, true, "post");
+                                }else {
+                                    alert(data.msg);
+                                }
+                            },false,"","delete");
                         }
-                        refreshTable();
-                        var submitConfirmModal = {
-                            modalBodyID: "myTopicSubmitTip",
-                            modalTitle: "提示",
-                            modalClass: "modal-lg",
-                            cancelButtonStyle: "display:none",
-                            confirmButtonClass: "btn-danger",
-                            modalConfirmFun: function () {
-                                return true;
-                            }
-                        }
-                        var submitConfirm = modalUtil.init(submitConfirmModal);
-                        submitConfirm.show();
                         return true;
                     }
-                }
+                };
                 var addSendModal = modalUtil.init(addSendModal);
-                var expertsCol = [
+                if (Object.keys(sendGoal).length == 0) {
+                    initExpert();
+                }
+                var sendCol = [
                     {checkbox: true},
-                    {field: 'username', title: '用户账号'},
+                    {field: 'username', title: '账号'},
                     {field: 'cityid', title: '主管市区'},
                 ];
                 $('#sendTable').bootstrapTable('destroy');
                 $('#sendTable').bootstrapTable({
                     toolbar: "#sendTable",
-                    columns: expertsCol,
+                    columns: sendCol,
                     striped: true,
                     clickToSelect: true,
                 });
@@ -112,7 +139,10 @@
             }
 
             $("#masterSend").unbind().on('click', function () {
-                distribution(checkids);
+                distribution(0);
+            });
+            $("#copySend").unbind().on('click', function () {
+                distribution(1);
             });
 
             //主送目标
@@ -149,12 +179,7 @@
             //查询最大的文号
             var maxNum;
             $.ajax
-            ({  cache: false,
-                async: false,
-                type: 'get',
-                data: { aaa: "1" },
-                url: "/post/maxNum",
-                success: function (data) {
+            ({  cache: false, async: false, type: 'get', data: { aaa: "1" }, url: "/post/maxNum", success: function (data) {
                     maxNum = data;
                 }
             });
@@ -175,21 +200,23 @@
             }
             $("#postDocumentNum1").val(pad(newNum));
 
-            //结合发文管理增加意见
-            var uuid = stringUtil.getUUID();
-            var adviceUrl = "/advice/createAdvice";
-            var AdviceEntity = {
-                itemcode : stringUtil.getUUID(),
-                dataCode : uuid,
-                initial : username,
-                initialDate : nowTime,
-            };
-
 
             $("#savebtn").unbind().on('click',function () {
                 var PostEntity;
                 var requestUrl;
                 var operateMessage;
+                var publicWay;
+                var reason;
+                if($("input[name='postPublicWay']:checked").val()=="0"){
+                    publicWay="0";
+                    reason = "";
+                }else if($("input[name='postPublicWay']:checked").val()=="1"){
+                    publicWay="1";
+                    reason = "";
+                }else if($("input[name='postPublicWay']:checked").val()=="2"){
+                    publicWay="2";
+                    reason = $("#postReason").val();
+                }
                 var normative;
                 if($("input[name='postNormativeDocuments']:checked").val()=="y"){
                     normative="y";
@@ -208,8 +235,8 @@
                     PostEntity = {
                         itemcode: uuid,
                         postDocumentTitle : $("#postDocumentTitle").val(),
-                        postPublicWay : $("#postPublicWay").val(),
-                        postReason : $("#postReason").val(),
+                        postPublicWay : publicWay,
+                        postReason : reason,
                         postFairDepartmentReview : $("#postFairDepartmentReview").val(),
                         postNormativeDocuments : normative,
                         postSecretRelated : secret,
@@ -233,7 +260,7 @@
                         itemid: needData.itemid,
                         itemcode: needData.itemcode,
                         postDocumentTitle : $("#postDocumentTitle").val(),
-                        postPublicWay : $("#postPublicWay").val(),
+                        postPublicWay : publicWay,
                         postReason : $("#postReason").val(),
                         postFairDepartmentReview : $("#postFairDepartmentReview").val(),
                         postNormativeDocuments : normative,
@@ -280,6 +307,18 @@
                 var PostEntity;
                 var requestUrl;
                 var operateMessage;
+                var publicWay;
+                var reason;
+                if($("input[name='postPublicWay']:checked").val()=="0"){
+                    publicWay="0";
+                    reason = "";
+                }else if($("input[name='postPublicWay']:checked").val()=="1"){
+                    publicWay="1";
+                    reason = "";
+                }else if($("input[name='postPublicWay']:checked").val()=="2"){
+                    publicWay="2";
+                    reason = $("#postReason").val();
+                }
                 var normative;
                 if($("input[name='postNormativeDocuments']:checked").val()=="y"){
                     normative="y";
@@ -298,8 +337,8 @@
                     PostEntity = {
                         itemcode: uuid,
                         postDocumentTitle : $("#postDocumentTitle").val(),
-                        postPublicWay : $("#postPublicWay").val(),
-                        postReason : $("#postReason").val(),
+                        postPublicWay : publicWay,
+                        postReason : reason,
                         postFairDepartmentReview : $("#postFairDepartmentReview").val(),
                         postNormativeDocuments : normative,
                         postSecretRelated : secret,
@@ -374,7 +413,14 @@
                         $('#fairFile1').attr('style',"display:none");
                     }
                     $("#postDocumentTitle").val(tempdata.postDocumentTitle);
-                    $("#postPublicWay").val(tempdata.postPublicWay);
+                    if (tempdata.postPublicWay == "0"){
+                        $("#pw1").prop("checked",true);
+                    }else if (tempdata.postPublicWay == "1"){
+                        $("#pw2").prop("checked",true);
+                    }else if (tempdata.postPublicWay == "2"){
+                        $("#pw3").prop("checked",true);
+                        $('#postReason').attr('style',"display:block");
+                    }
                     $("#postReason").val(tempdata.postReason);
                     $("#postFairDepartmentReview").val(tempdata.postFairDepartmentReview);
                     if (tempdata.postNormativeDocuments == "y"){

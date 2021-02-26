@@ -57,7 +57,7 @@
   <sql id="Base_Column_List">
     itemID, itemCode, RECEIVING_NUM, RECEIVING_DATE_OF_RECEIPT, RECEIVING_TITLE, RECEIVING_UNIT_OF_COMMUN,
     FILE_NO, NUMBER, RECEIVING_DEGREE_OF_URGENCY, RECEIVING_DATA_STATUS, TIME_LIMIT, 
-    CREATER, itemCreateAt, UPDATER, itemUpdateAt
+    CREATER, itemCreateAt, UPDATER, itemUpdateAt, SECRET_LEVEL
   </sql>
 
   <sql id="SelectAll_Column_List">
@@ -389,9 +389,8 @@
     a.RECEIVING_TITLE, a.itemID, a.itemCode
     from
     tb_governres_receipt a inner join
-    (select itemID from tb_governres_receipt order by itemUpdateAt desc limit 0,5)
+    (select itemID from tb_governres_receipt WHERE RECEIVING_DATA_STATUS = 18 order by itemUpdateAt desc limit 0,5)
     b on b.itemID = a.itemID
-    WHERE a.RECEIVING_DATA_STATUS = 18
   </select>
 
   <select id="selectReceiptFileForMain" resultMap="ReceiptFileResultMap">
@@ -400,7 +399,7 @@
     from
       tb_governres_receipt a inner join
       (select p.itemID,tcf.FILE_NAME,tcf.FILE_PATH from tb_governres_receipt p
-                                                          left join tb_culpro_file tcf on p.itemCode = tcf.DATA_CODE where tcf.FILE_PATH IS NOT NULL limit 0,5)
+                left join tb_culpro_file tcf on p.itemCode = tcf.DATA_CODE where tcf.FILE_PATH IS NOT NULL limit 0,5)
         b on b.itemID = a.itemID where a.RECEIVING_DATA_STATUS = 18
   </select>
 </mapper>

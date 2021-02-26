@@ -22,7 +22,7 @@ public class ReceiptDO extends ReceiptDOKey {
 
     private Integer number;//份数
 
-    private  String secretLevel;//密级
+    private String secretLevel;//密级
 
     private String receivingDegreeOfUrgency;//紧急程度
 

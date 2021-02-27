@@ -56,7 +56,11 @@
             //设置上传的参数名
             editor.config.uploadFileName = 'file';
             // 上传图片到服务器
-            editor.config.uploadImgServer = '/uploadFile';
+            editor.config.uploadImgServer = 'http://42.193.46.47:8999/uploadFile';
+            editor.config.uploadImgHeaders = {
+                "Access-Control-Allow-Origin" : "*",
+            }
+            editor.config.withCredentials = true;
             // editor.config.uploadImgServer = 'http://localhost:8989/uploadFile';
             // 将图片大小限制为 10M
             editor.config.uploadImgMaxSize = 10 * 1024 * 1024;

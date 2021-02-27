@@ -1,5 +1,5 @@
 (function() {
-    define('objectUtil', ['jquery','wangEditor'], function(jquery,wangEditor) {
+    define('objectUtil', ['jquery','wangEditor','urlUtil'], function(jquery,wangEditor,urlUtil) {
 
 
 
@@ -56,7 +56,7 @@
             //设置上传的参数名
             editor.config.uploadFileName = 'file';
             // 上传图片到服务器
-            editor.config.uploadImgServer = 'http://42.193.46.47:8999/uploadFile';
+            editor.config.uploadImgServer = urlUtil.getEditorUrl()+'/uploadFile';
             editor.config.uploadImgHeaders = {
                 "Access-Control-Allow-Origin" : "*",
             }

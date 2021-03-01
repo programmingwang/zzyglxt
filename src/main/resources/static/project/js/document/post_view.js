@@ -8,6 +8,29 @@
             var username = sessionStorage.getItem("username");
             var tempdata = JSON.parse(localStorage.getItem("viewRowData"));
             var postStatus = dictUtil.getDictByCode(dictUtil.DICT_LIST.postStatus);
+
+            //获取主送目标
+            var zhusong;
+            $.ajax({cache: false, async: false, type: 'get', data: { dateCode: tempdata.itemcode }, url: "/postref/getMasterSend", success: function (data) {
+                    zhusong = data;
+                }
+            });
+            var zhusongGoal = "";
+            for (var i = 0; i < zhusong.data.length; i++) {
+                zhusongGoal = zhusongGoal + zhusong.data[i].receiverId + "；";
+            }
+
+            //获取抄送目标
+            var chaosong;
+            $.ajax({cache: false, async: false, type: 'get', data: { dateCode: tempdata.itemcode }, url: "/postref/getCopySend", success: function (data) {
+                    chaosong = data;
+                }
+            });
+            var chaosongGoal = "";
+            for (var j = 0; j < chaosong.data.length; j++) {
+                chaosongGoal = chaosongGoal + chaosong.data[j].receiverId + "；";
+            }
+
             //获取意见表的内容
             var tgAdvice;
             $.ajax({cache: false, async: false, type: 'get', data: {dataCode: tempdata.itemcode}, url: "/advice/getByDataCode", success: function (data) {
@@ -499,6 +522,9 @@
                     $("#directorOpinion").val(tgAdvice.data.director);
                     $("#directorName").val(tgAdvice.data.directorName);
                     $("#directorDate").val(stringUtil.formatTime(tgAdvice.data.directorDate));
+
+                    $("#zhusong").val(zhusongGoal);
+                    $("#chaosong").val(chaosongGoal);
                 }
             }());
 

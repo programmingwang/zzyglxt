@@ -38,8 +38,8 @@ public class PostRefController {
     @ResponseBody
     @LogAnnotation(appCode ="",logTitle ="添加发文关联信息",logLevel ="3",creater ="",updater = "")
     public ResponseData insertSelective(@RequestBody List<PostRefDO> postRefDOList){
-        for (PostRefDO expertRefDO:postRefDOList){
-            iPostRefService.insertSelective(expertRefDO);
+        for (PostRefDO postRefDO:postRefDOList){
+            iPostRefService.insertSelective(postRefDO);
         }
         return new ResponseData(EmBusinessError.success);
     }
@@ -48,8 +48,8 @@ public class PostRefController {
     @RequestMapping(value = "/delPostRef", method = RequestMethod.DELETE)
     @ResponseBody
     @LogAnnotation(appCode ="",logTitle ="删除发文关联信息",logLevel ="4",creater ="",updater = "")
-    public ResponseData delByDateCode(@RequestParam(value = "dateCode") String dateCode) {
-        iPostRefService.delByDateCode(dateCode);
+    public ResponseData delByDateCode(@RequestParam(value = "dateCode") String dateCode, @RequestParam(value = "receiverType") Integer receiverType) {
+        iPostRefService.delByDateCode(dateCode,receiverType);
         return new ResponseData(EmBusinessError.success);
     }
 
@@ -65,16 +65,16 @@ public class PostRefController {
     //查询主送对象
     @RequestMapping(value = "/getMasterSend", method = RequestMethod.GET)
     @ResponseBody
-    public ResponseData getMasterSend(@RequestParam(value = "dateCode") String dateCode){
-        PostRefDO postRefDO = iPostRefService.getMasterSend(dateCode);
+    public ResponseData getMasterSend(@RequestParam(value = "dateCode") List<String> dateCode){
+        List<PostRefDO> postRefDO = iPostRefService.getMasterSend(dateCode);
         return new ResponseData(EmBusinessError.success,postRefDO);
     }
 
     //查询抄送对象
     @RequestMapping(value = "/getCopySend", method = RequestMethod.GET)
     @ResponseBody
-    public ResponseData getCopySend(@RequestParam(value = "dateCode") String dateCode){
-        PostRefDO postRefDO = iPostRefService.getCopySend(dateCode);
+    public ResponseData getCopySend(@RequestParam(value = "dateCode") List<String> dateCode){
+        List<PostRefDO> postRefDO = iPostRefService.getCopySend(dateCode);
         return new ResponseData(EmBusinessError.success,postRefDO);
     }
 

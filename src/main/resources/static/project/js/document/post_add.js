@@ -65,7 +65,7 @@
                 }, false, true, "get");
             }
 
-            function distribution(x) {
+            function sendObject(x) {
                 var addSendModal = {
                     modalBodyID: "addSendModal", //公用的在后面给span加不同的内容就行了，其他模块同理
                     modalTitle: "发送对象",
@@ -74,38 +74,86 @@
                     modalConfirmFun: function () {
                         var sendRows = $("#sendTable").bootstrapTable('getSelections');
                         if (sendRows.length == 0) {
-                            alertUtil.error("错误，未勾选发送对象，请勾选后重试")
+                            alertUtil.error("错误，未勾选发送对象，请勾选后重试");
                             return true;
                         }else {
                             var sendList = [];
-                            for (var i = 0; i < sendRows.length; i++) {
-                                var entity = {
-                                    itemcode: stringUtil.getUUID(),
+                            if (x === 0){
+                                for (var i = 0; i < sendRows.length; i++) {
+                                    var entity = {
+                                        itemcode: stringUtil.getUUID(),
+                                        dateCode: uuid,
+                                        receiverId: sendRows[i].username,
+                                        receiverType: 0
+                                    };
+                                    sendList.push(entity)
+                                }
+                                if ($('#otherSend').val() !== ""){
+                                    var otherEntity = {
+                                        itemcode: stringUtil.getUUID(),
+                                        dateCode: uuid,
+                                        receiverId: $('#otherSend').val(),
+                                        receiverType: 0
+                                    };
+                                    sendList.push(otherEntity)
+                                }
+                                var postEntity = {
                                     dateCode: uuid,
-                                    receiverId: sendRows[i].username,
                                     receiverType: 0
                                 };
-                                if (x == 0){
-                                    entity.receiverType = 0;
-                                }else if (x == 1){
-                                    entity.receiverType = 1;
+                            }else if (x === 1){
+                                for (var i = 0; i < sendRows.length; i++) {
+                                    var entity = {
+                                        itemcode: stringUtil.getUUID(),
+                                        dateCode: uuid,
+                                        receiverId: sendRows[i].username,
+                                        receiverType: 1
+                                    };
+                                    sendList.push(entity)
                                 }
-                                sendList.push(entity)
+                                if ($('#otherSend').val() !== ""){
+                                    var otherEntity = {
+                                        itemcode: stringUtil.getUUID(),
+                                        dateCode: uuid,
+                                        receiverId: $('#otherSend').val(),
+                                        receiverType: 1
+                                    };
+                                    sendList.push(otherEntity)
+                                }
+                                var postEntity = {
+                                    dateCode: uuid,
+                                    receiverType: 1
+                                };
                             }
                             var list = new Set(sendList);
                             sendList = Array.from(list);
-                            var postEntity = {
-                                dateCode: uuid
-                            };
                             ajaxUtil.myAjax(null,"/postref/delPostRef",postEntity,function (data) {
                                 if (ajaxUtil.success(data)) {
                                     ajaxUtil.myAjax(null, "/postref/createPostRef", sendList, function (data) {
                                         if (ajaxUtil.success(data)) {
-                                            var zhusong = "";
-                                            for (var i = 0; i < sendRows.length; i++) {
-                                                zhusong = zhusong + sendRows[i].username + "；";
+                                            if (x === 0){
+                                                var zhusong;
+                                                $.ajax({cache: false, async: false, type: 'get', data: { dateCode: uuid }, url: "/postref/getMasterSend", success: function (data) {
+                                                        zhusong = data;
+                                                    }
+                                                });
+                                                var zhusongGoal = "";
+                                                for (var i = 0; i < zhusong.data.length; i++) {
+                                                    zhusongGoal = zhusongGoal + zhusong.data[i].receiverId + "；";
+                                                }
+                                                $("#masterSend").val(zhusongGoal);
+                                            }else if (x === 1){
+                                                var chaosong;
+                                                $.ajax({cache: false, async: false, type: 'get', data: { dateCode: uuid }, url: "/postref/getCopySend", success: function (data) {
+                                                        chaosong = data;
+                                                    }
+                                                });
+                                                var chaosongGoal = "";
+                                                for (var j = 0; j < chaosong.data.length; j++) {
+                                                    chaosongGoal = chaosongGoal + chaosong.data[j].receiverId + "；";
+                                                }
+                                                $("#copySend").val(chaosongGoal);
                                             }
-                                            $("#masterSend").val(zhusong);
                                         }else {
                                             alert(data.msg);
                                         }
@@ -139,32 +187,12 @@
             }
 
             $("#masterSend").unbind().on('click', function () {
-                distribution(0);
+                sendObject(0);
             });
             $("#copySend").unbind().on('click', function () {
-                distribution(1);
+                sendObject(1);
             });
 
-            //主送目标
-            /*let send = dictUtil.getDictByCode(dictUtil.DICT_LIST.areaAdmin);
-            $("#masterSend").selectUtil(send);
-
-            //console.log($("#copySendGoal").val())
-            //抄送目标
-            $("#copySendGoal").selectUtil(send);
-            $("#add").unbind().on("click",function () {
-                var str = $("#copySend").val();
-                if (str.length === 0){
-                    $("#copySend").val(send[0].text);
-                }else {
-                    $("#copySend").val($("#copySend").val()+" "+send[$("#copySendGoal").val()].text);
-                }
-                $("#copySendGoal option[value=" + $("#copySendGoal").val() + "]").remove();
-            })
-            $("#clear").unbind().on("click",function () {
-                $("#copySend").val("");
-                $("#copySendGoal").selectUtil(send);
-            })*/
 
             //当前时间
             var nowTime = stringUtil.formatDateTime(new Date());
@@ -172,14 +200,33 @@
             var username = sessionStorage.getItem("username");
 
             $("#cancelbtn").unbind().on('click',function () {
-                var url = "/document/post";
-                orange.redirect(url);
+                var masterSendEntity = {
+                    dateCode: uuid,
+                    receiverType: 0
+                };
+                var copySendEntity = {
+                    dateCode: uuid,
+                    receiverType: 1
+                };
+                ajaxUtil.myAjax(null,"/postref/delPostRef",masterSendEntity,function (data) {
+                    if (ajaxUtil.success(data)) {
+                        ajaxUtil.myAjax(null,"/postref/delPostRef",copySendEntity,function (data) {
+                            if (ajaxUtil.success(data)) {
+                                var url = "/document/post";
+                                orange.redirect(url);
+                            }else {
+                                alert(data.msg);
+                            }
+                        },false,"","delete");
+                    }else {
+                        alert(data.msg);
+                    }
+                },false,"","delete");
             });
 
             //查询最大的文号
             var maxNum;
-            $.ajax
-            ({  cache: false, async: false, type: 'get', data: { aaa: "1" }, url: "/post/maxNum", success: function (data) {
+            $.ajax({cache: false, async: false, type: 'get', data: { aaa: "1" }, url: "/post/maxNum", success: function (data) {
                     maxNum = data;
                 }
             });

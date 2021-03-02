@@ -38,6 +38,10 @@
             var num = dictUtil.getDictByCode(dictUtil.DICT_LIST.postDocumentNum);
             $("#postDocumentNum").selectUtil(num);
 
+            //当前时间
+            var nowTime = stringUtil.formatDateTime(new Date());
+            //当前用户名
+            var username = sessionStorage.getItem("username");
             //结合发文管理增加意见
             var uuid = stringUtil.getUUID();
             var adviceUrl = "/advice/createAdvice";
@@ -65,6 +69,34 @@
                 }, false, true, "get");
             }
 
+            //获取所有主送人
+            function getZhuSong(sendCode) {
+                var zhusong;
+                $.ajax({cache: false, async: false, type: 'get', data: { dateCode: sendCode }, url: "/postref/getMasterSend", success: function (data) {
+                        zhusong = data;
+                    }
+                });
+                var zhusongGoal = "";
+                for (var i = 0; i < zhusong.data.length; i++) {
+                    zhusongGoal = zhusongGoal + zhusong.data[i].receiverId + "；";
+                }
+                $("#masterSend").val(zhusongGoal);
+            }
+
+            //获取所有抄送人
+            function getChaoSong(sendCode) {
+                var chaosong;
+                $.ajax({cache: false, async: false, type: 'get', data: { dateCode: sendCode }, url: "/postref/getCopySend", success: function (data) {
+                        chaosong = data;
+                    }
+                });
+                var chaosongGoal = "";
+                for (var j = 0; j < chaosong.data.length; j++) {
+                    chaosongGoal = chaosongGoal + chaosong.data[j].receiverId + "；";
+                }
+                $("#copySend").val(chaosongGoal);
+            }
+
             function sendObject(x) {
                 var addSendModal = {
                     modalBodyID: "addSendModal", //公用的在后面给span加不同的内容就行了，其他模块同理
@@ -78,11 +110,18 @@
                             return true;
                         }else {
                             var sendList = [];
+                            var sendCode;
+                            if (!isUpdate()){
+                                sendCode = uuid;
+                            }else {
+                                var needData = JSON.parse(localStorage.getItem("rowData"));
+                                sendCode = needData.itemcode;
+                            }
                             if (x === 0){
                                 for (var i = 0; i < sendRows.length; i++) {
                                     var entity = {
                                         itemcode: stringUtil.getUUID(),
-                                        dateCode: uuid,
+                                        dateCode: sendCode,
                                         receiverId: sendRows[i].username,
                                         receiverType: 0
                                     };
@@ -91,21 +130,21 @@
                                 if ($('#otherSend').val() !== ""){
                                     var otherEntity = {
                                         itemcode: stringUtil.getUUID(),
-                                        dateCode: uuid,
+                                        dateCode: sendCode,
                                         receiverId: $('#otherSend').val(),
                                         receiverType: 0
                                     };
                                     sendList.push(otherEntity)
                                 }
                                 var postEntity = {
-                                    dateCode: uuid,
+                                    dateCode: sendCode,
                                     receiverType: 0
                                 };
                             }else if (x === 1){
                                 for (var i = 0; i < sendRows.length; i++) {
                                     var entity = {
                                         itemcode: stringUtil.getUUID(),
-                                        dateCode: uuid,
+                                        dateCode: sendCode,
                                         receiverId: sendRows[i].username,
                                         receiverType: 1
                                     };
@@ -114,14 +153,14 @@
                                 if ($('#otherSend').val() !== ""){
                                     var otherEntity = {
                                         itemcode: stringUtil.getUUID(),
-                                        dateCode: uuid,
+                                        dateCode: sendCode,
                                         receiverId: $('#otherSend').val(),
                                         receiverType: 1
                                     };
                                     sendList.push(otherEntity)
                                 }
                                 var postEntity = {
-                                    dateCode: uuid,
+                                    dateCode: sendCode,
                                     receiverType: 1
                                 };
                             }
@@ -132,27 +171,9 @@
                                     ajaxUtil.myAjax(null, "/postref/createPostRef", sendList, function (data) {
                                         if (ajaxUtil.success(data)) {
                                             if (x === 0){
-                                                var zhusong;
-                                                $.ajax({cache: false, async: false, type: 'get', data: { dateCode: uuid }, url: "/postref/getMasterSend", success: function (data) {
-                                                        zhusong = data;
-                                                    }
-                                                });
-                                                var zhusongGoal = "";
-                                                for (var i = 0; i < zhusong.data.length; i++) {
-                                                    zhusongGoal = zhusongGoal + zhusong.data[i].receiverId + "；";
-                                                }
-                                                $("#masterSend").val(zhusongGoal);
+                                                getZhuSong(sendCode);
                                             }else if (x === 1){
-                                                var chaosong;
-                                                $.ajax({cache: false, async: false, type: 'get', data: { dateCode: uuid }, url: "/postref/getCopySend", success: function (data) {
-                                                        chaosong = data;
-                                                    }
-                                                });
-                                                var chaosongGoal = "";
-                                                for (var j = 0; j < chaosong.data.length; j++) {
-                                                    chaosongGoal = chaosongGoal + chaosong.data[j].receiverId + "；";
-                                                }
-                                                $("#copySend").val(chaosongGoal);
+                                                getChaoSong(sendCode);
                                             }
                                         }else {
                                             alert(data.msg);
@@ -193,11 +214,6 @@
                 sendObject(1);
             });
 
-
-            //当前时间
-            var nowTime = stringUtil.formatDateTime(new Date());
-            //当前用户名
-            var username = sessionStorage.getItem("username");
 
             $("#cancelbtn").unbind().on('click',function () {
                 var masterSendEntity = {
@@ -314,6 +330,7 @@
                         postSecretRelated : secret,
                         postPrinting : $("#postPrinting").val(),
                         postDocumentNum : $("#postDocumentNum").val(),
+                        postDataStatus : "0",
                     };
                     operateMessage = "修改发文信息成功";
                     if (needData.fileName !== null){
@@ -335,9 +352,20 @@
                     if(ajaxUtil.success(data)){
                         ajaxUtil.myAjax(null,adviceUrl,AdviceEntity,function (data) {
                             if (ajaxUtil.success(data)){
-                                alertUtil.info(operateMessage);
-                                var url = "/document/post";
-                                orange.redirect(url);
+                                var submitConfirmModal = {
+                                    modalBodyID :"myTopicSubmitTip",
+                                    modalTitle : "提示",
+                                    modalClass : "modal-lg",
+                                    cancelButtonStyle: "display:none",
+                                    modalConfirmFun:function (){
+                                        var url = "/document/post";
+                                        orange.redirect(url);
+                                        return true;
+                                    }
+                                }
+                                var submitConfirm = modalUtil.init(submitConfirmModal);
+                                submitConfirm.show();
+
                             }else {
                                 alertUtil.alert(data.msg);
                             }
@@ -351,111 +379,132 @@
 
 
             $("#submitbtn").unbind().on('click',function () {
-                var PostEntity;
-                var requestUrl;
-                var operateMessage;
-                var publicWay;
-                var reason;
-                if($("input[name='postPublicWay']:checked").val()=="0"){
-                    publicWay="0";
-                    reason = "";
-                }else if($("input[name='postPublicWay']:checked").val()=="1"){
-                    publicWay="1";
-                    reason = "";
-                }else if($("input[name='postPublicWay']:checked").val()=="2"){
-                    publicWay="2";
-                    reason = $("#postReason").val();
-                }
-                var normative;
-                if($("input[name='postNormativeDocuments']:checked").val()=="y"){
-                    normative="y";
-                }else{
-                    normative="n";
-                }
-                var secret;
-                if($("input[name='postSecretRelated']:checked").val()=="y"){
-                    secret="y";
-                }else{
-                    secret="n";
-                }
-                if (!isUpdate()){
-                    requestUrl = "/post/createPost";
-                    operateMessage = "提交发文信息成功";
-                    PostEntity = {
-                        itemcode: uuid,
-                        postDocumentTitle : $("#postDocumentTitle").val(),
-                        postPublicWay : publicWay,
-                        postReason : reason,
-                        postFairDepartmentReview : $("#postFairDepartmentReview").val(),
-                        postNormativeDocuments : normative,
-                        postSecretRelated : secret,
-                        postPrinting : $("#postPrinting").val(),
-                        postDocumentNum : $("#postDocumentNum").val(),
-                        postDocumentNum1 : pad(newNum),
-                        postDataStatus : "1",
-                    };
-                    var postFile = [];
-                    postFile[0] = $("#upload_file")[0].files[0];
-                    postFile[1] = $("#fairFile")[0].files[0];
-                    var code1 = "1" + uuid.substring(1);
-                    var code2 = "2" + uuid.substring(1);
-                    ajaxUtil.postFileAjax(uuid,postFile[0], code1, sessionStorage.getItem("username"), sessionStorage.getItem("itemcode"));
-                    ajaxUtil.postFileAjax(uuid,postFile[1], code2, sessionStorage.getItem("username"), sessionStorage.getItem("itemcode"));
+                var mySubmitToCZ = {
+                    modalBodyID: "mySubmitModal",
+                    modalTitle: "提交",
+                    modalClass: "modal-lg",
+                    modalConfirmFun: function () {
+                        var PostEntity;
+                        var requestUrl;
+                        var operateMessage;
+                        var publicWay;
+                        var reason;
+                        if($("input[name='postPublicWay']:checked").val()=="0"){
+                            publicWay="0";
+                            reason = "";
+                        }else if($("input[name='postPublicWay']:checked").val()=="1"){
+                            publicWay="1";
+                            reason = "";
+                        }else if($("input[name='postPublicWay']:checked").val()=="2"){
+                            publicWay="2";
+                            reason = $("#postReason").val();
+                        }
+                        var normative;
+                        if($("input[name='postNormativeDocuments']:checked").val()=="y"){
+                            normative="y";
+                        }else{
+                            normative="n";
+                        }
+                        var secret;
+                        if($("input[name='postSecretRelated']:checked").val()=="y"){
+                            secret="y";
+                        }else{
+                            secret="n";
+                        }
+                        if (!isUpdate()){
+                            requestUrl = "/post/createPost";
+                            operateMessage = "提交发文信息成功";
+                            PostEntity = {
+                                itemcode: uuid,
+                                postDocumentTitle : $("#postDocumentTitle").val(),
+                                postPublicWay : publicWay,
+                                postReason : reason,
+                                postFairDepartmentReview : $("#postFairDepartmentReview").val(),
+                                postNormativeDocuments : normative,
+                                postSecretRelated : secret,
+                                postPrinting : $("#postPrinting").val(),
+                                postDocumentNum : $("#postDocumentNum").val(),
+                                postDocumentNum1 : pad(newNum),
+                                postDataStatus : "1",
+                            };
+                            var postFile = [];
+                            postFile[0] = $("#upload_file")[0].files[0];
+                            postFile[1] = $("#fairFile")[0].files[0];
+                            var code1 = "1" + uuid.substring(1);
+                            var code2 = "2" + uuid.substring(1);
+                            ajaxUtil.postFileAjax(uuid,postFile[0], code1, sessionStorage.getItem("username"), sessionStorage.getItem("itemcode"));
+                            ajaxUtil.postFileAjax(uuid,postFile[1], code2, sessionStorage.getItem("username"), sessionStorage.getItem("itemcode"));
 
-                }
-                else {
-                    var needData = JSON.parse(localStorage.getItem("rowData"));
-                    requestUrl = "/post/updatePost";
-                    PostEntity = {
-                        itemid: needData.itemid,
-                        itemcode: needData.itemcode,
-                        postDocumentTitle : $("#postDocumentTitle").val(),
-                        postPublicWay : $("#postPublicWay").val(),
-                        postReason : $("#postReason").val(),
-                        postFairDepartmentReview : $("#postFairDepartmentReview").val(),
-                        postNormativeDocuments : normative,
-                        postSecretRelated : secret,
-                        postPrinting : $("#postPrinting").val(),
-                        postDocumentNum : $("#postDocumentNum").val(),
-                    }
-                    operateMessage = "修改发文信息成功";
-                    if (needData.fileName !== null){
-                        ajaxUtil.myAjax(null,"/file/delete?dataCode="+needData.itemcode,null,function (data) {
-                            if(!ajaxUtil.success(data)){
-                                return alertUtil.warning("文件删除失败,可能是文件损坏或不存在了");
+                        }
+                        else {
+                            var needData = JSON.parse(localStorage.getItem("rowData"));
+                            requestUrl = "/post/updatePost";
+                            PostEntity = {
+                                itemid: needData.itemid,
+                                itemcode: needData.itemcode,
+                                postDocumentTitle : $("#postDocumentTitle").val(),
+                                postPublicWay : $("#postPublicWay").val(),
+                                postReason : $("#postReason").val(),
+                                postFairDepartmentReview : $("#postFairDepartmentReview").val(),
+                                postNormativeDocuments : normative,
+                                postSecretRelated : secret,
+                                postPrinting : $("#postPrinting").val(),
+                                postDocumentNum : $("#postDocumentNum").val(),
+                                postDataStatus : "1",
                             }
-                        },false,"","get");
-                        postFile = [];
-                        postFile[0] = $("#upload_file")[0].files[0];
-                        postFile[1] = $("#fairFile")[0].files[0];
-                        code1 = "1" + needData.itemcode.substring(1);
-                        code2 = "2" + needData.itemcode.substring(1);
-                        ajaxUtil.postFileAjax(needData.itemcode,postFile[0], code1, sessionStorage.getItem("username"), sessionStorage.getItem("itemcode"));
-                        ajaxUtil.postFileAjax(needData.itemcode,postFile[1], code2, sessionStorage.getItem("username"), sessionStorage.getItem("itemcode"));
-                    }
-                }
-                ajaxUtil.myAjax(null,requestUrl,PostEntity,function (data) {
-                    if(ajaxUtil.success(data)){
-                        ajaxUtil.myAjax(null,adviceUrl,AdviceEntity,function (data) {
-                            if (ajaxUtil.success(data)){
-                                alertUtil.info(operateMessage);
-                                var url = "/document/post";
-                                orange.redirect(url);
+                            operateMessage = "修改发文信息成功";
+                            if (needData.fileName !== null){
+                                ajaxUtil.myAjax(null,"/file/delete?dataCode="+needData.itemcode,null,function (data) {
+                                    if(!ajaxUtil.success(data)){
+                                        return alertUtil.warning("文件删除失败,可能是文件损坏或不存在了");
+                                    }
+                                },false,"","get");
+                                postFile = [];
+                                postFile[0] = $("#upload_file")[0].files[0];
+                                postFile[1] = $("#fairFile")[0].files[0];
+                                code1 = "1" + needData.itemcode.substring(1);
+                                code2 = "2" + needData.itemcode.substring(1);
+                                ajaxUtil.postFileAjax(needData.itemcode,postFile[0], code1, sessionStorage.getItem("username"), sessionStorage.getItem("itemcode"));
+                                ajaxUtil.postFileAjax(needData.itemcode,postFile[1], code2, sessionStorage.getItem("username"), sessionStorage.getItem("itemcode"));
+                            }
+                        }
+                        ajaxUtil.myAjax(null,requestUrl,PostEntity,function (data) {
+                            if(ajaxUtil.success(data)){
+                                ajaxUtil.myAjax(null,adviceUrl,AdviceEntity,function (data) {
+                                    if (ajaxUtil.success(data)){
+                                        var submitConfirmModal = {
+                                            modalBodyID: "myTopicSubmitTip",
+                                            modalTitle: "提示",
+                                            modalClass: "modal-lg",
+                                            cancelButtonStyle: "display:none",
+                                            modalConfirmFun: function () {
+                                                var url = "/document/post";
+                                                orange.redirect(url);
+                                                return true;
+                                            }
+                                        }
+                                        var submitConfirm = modalUtil.init(submitConfirmModal);
+                                        submitConfirm.show();
+
+                                    }else {
+                                        alertUtil.alert(data.msg);
+                                    }
+                                },false,true);
                             }else {
                                 alertUtil.alert(data.msg);
                             }
                         },false,true);
-                    }else {
-                        alertUtil.alert(data.msg);
+                        return true;
                     }
-                },false,true);
+                }
+                var x = modalUtil.init(mySubmitToCZ);
+                x.show();
                 return false;
             });
 
             (function init() {
                 if (isUpdate()){
                     var tempdata = JSON.parse(localStorage.getItem("rowData"));
-                    //console.log(tempdata);
                     if (tempdata.postFairDepartmentReview == "1"){
                         $('#fairFile1').attr('style',"display:none");
                     }
@@ -483,8 +532,15 @@
                     $("#postPrinting").val(tempdata.postPrinting);
                     $("#postDocumentNum").val(tempdata.postDocumentNum);
                     $("#postDocumentNum1").val(tempdata.postDocumentNum1);
-                    var file = tempdata.filePath;
-                    uploadImg.setImgSrc(file);
+                    if (tempdata.fileName[1] == null){
+                        $("#addFile").text(tempdata.fileName);
+                    }else {
+                        $("#addFile").text(tempdata.fileName[0]);
+                        $("#addFairFile").text(tempdata.fileName[1]);
+                    }
+
+                    getZhuSong(tempdata.itemcode);
+                    getChaoSong(tempdata.itemcode);
                 }
             }());
 

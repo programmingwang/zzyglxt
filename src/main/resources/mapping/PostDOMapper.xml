@@ -80,8 +80,12 @@
     cf.FILE_NAME
     ,
     cf.FILE_PATH
-    from tb_governres_post gp left join tb_culpro_file cf
-    on gp.itemCode = cf.DATA_CODE
+    from (tb_governres_post gp left join tb_culpro_file cf on gp.itemCode = cf.DATA_CODE)
+    left join tb_governres_post_ref gpf on gp.itemCode = gpf.DATE_CODE
+    <if test="postDataStatus == 6">
+      where POST_DATA_STATUS in (8)
+      and SEND_STATUS = 1
+    </if>
     <if test="postDataStatus == 5">
       where POST_DATA_STATUS in (6,8,9)
     </if>

@@ -203,7 +203,7 @@
                                 alertUtil.alert(data.msg);
                             }
                         }, false, true);
-                        return false;
+                        return true;
                     }
                 }
                 var x = modalUtil.init(mySubmitToCZ);
@@ -214,7 +214,6 @@
             var init = function () {
                 if (isUpdate()){
                     var tempdata = JSON.parse(localStorage.getItem("rowData"));
-                    console.log(tempdata)
                     var postalAddress = tempdata.postalAddress;
                     var postalAddressArry = postalAddress.split(",");
                     $("#distpicker").distpicker({

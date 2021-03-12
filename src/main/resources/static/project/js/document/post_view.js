@@ -235,6 +235,25 @@
                 }
                 $('#opinin32').attr('style', "display:block;");
                 $('#opinin42').attr('style', "display:block;");
+            }else {
+                $('#opinin12').attr('style', "display:block;margin-bottom:10px");
+                if (tgAdvice.data.deputyDirector !== ""){
+                    $('#opinin220').attr('style', "display:block;");
+                }
+                if (tgAdvice.data.deputyDirector1 !== ""){
+                    $('#opinin221').attr('style', "display:block;");
+                }
+                if (tgAdvice.data.deputyDirector2 !== ""){
+                    $('#opinin222').attr('style', "display:block;");
+                }
+                if (tgAdvice.data.deputyDirector3 !== ""){
+                    $('#opinin223').attr('style', "display:block;");
+                }
+                if (tgAdvice.data.deputyDirector === "" && tgAdvice.data.deputyDirector1 === "" && tgAdvice.data.deputyDirector2 === "" && tgAdvice.data.deputyDirector3 === ""){
+                    $('#opinin220').attr('style', "display:block;");
+                }
+                $('#opinin32').attr('style', "display:block;");
+                $('#opinin42').attr('style', "display:block;");
             }
 
             $("#passbtn").unbind().on('click',function () {
@@ -331,7 +350,7 @@
                                                         modalConfirmFun: function () {
                                                             var postRefEntity = {
                                                                 sendStatus: 1,
-                                                                dataCode: tempdata.itemcode
+                                                                dateCode: tempdata.itemcode
                                                             };
                                                             ajaxUtil.myAjax(null, "/postref/updPostRef", postRefEntity, function (data) {
                                                                 if (ajaxUtil.success(data)) {
@@ -352,6 +371,7 @@
                                                                     alert(data.msg);
                                                                 }
                                                             }, false, true, "post");
+                                                            return true;
                                                         }
                                                     }
                                                     var x = modalUtil.init(mySubmitToCZ);

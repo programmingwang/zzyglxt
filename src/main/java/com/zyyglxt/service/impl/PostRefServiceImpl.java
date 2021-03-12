@@ -76,7 +76,6 @@ public class PostRefServiceImpl implements IPostRefService {
         if (result.isHasErrors()){
             throw new BusinessException(result.getErrMsg(), EmBusinessError.PARAMETER_VALIDATION_ERROR);
         }
-        postRefDO.setUpdater(usernameUtil.getOperateUser());
         postRefDOMapper.updPostRef(postRefDO);
     }
 

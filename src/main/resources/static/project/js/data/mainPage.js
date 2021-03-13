@@ -123,23 +123,33 @@
 
         });
 
+        function jumpToMore(url, jump){
+            var roleName = sessionStorage.getItem("rolename");
+            if(roleName === '政务资源市部门'||roleName === '政务资源县部门'){
+                alertUtil.warning("您无法跳转到这个菜单！")
+                return false;
+            }else {
+                orange.redirect(url, jump);
+            }
+        }
+
         $("#tzgggd").unbind().on('click',function () {
-            orange.redirect("/data/dataAnnouncement",true);
+            jumpToMore("/data/dataAnnouncement",true)
             return false;
         });
 
         $("#zcfggd").unbind().on('click',function () {
-            orange.redirect("/data/dataRegulation",true);
+            jumpToMore("/data/dataRegulation",true);
             return false;
         });
 
         $("#gzzdgd").unbind().on('click',function () {
-            orange.redirect("/data/dataRules",true);
+            jumpToMore("/data/dataRules",true);
             return false;
         });
 
         $("#ldjhgd").unbind().on('click',function () {
-            orange.redirect("/data/dataLeader",true);
+            jumpToMore("/data/dataLeader",true);
             return false;
         });
 
@@ -155,17 +165,17 @@
             return false;
         });
 
-            $("#gxwjgd").unbind().on('click',function (){
-                var rolename = sessionStorage.getItem("rolename");
-                if(rolename == "政务资源处长" || rolename == "政务资源科员" || rolename == "政务资源综合处处长" ||
-                    rolename == "政务资源局长" || rolename == "政务资源分管局长" || rolename == "中医处分管局长" ||
-                    rolename == "中药处分管局长" || rolename == "综合处分管局长" || rolename == "法规监督处分管局长"){
-                    orange.redirect("/document/post",true);
-                }else{
-                    orange.redirect("/document/receipt",true);
-                }
+        $("#gxwjgd").unbind().on('click',function (){
+            var rolename = sessionStorage.getItem("rolename");
+            if(rolename == "政务资源处长" || rolename == "政务资源科员" || rolename == "政务资源综合处处长" ||
+                rolename == "政务资源局长" || rolename == "政务资源分管局长" || rolename == "中医处分管局长" ||
+                rolename == "中药处分管局长" || rolename == "综合处分管局长" || rolename == "法规监督处分管局长"){
+                orange.redirect("/document/post",true);
+            }else{
+                orange.redirect("/document/receipt",true);
+            }
                 return false;
-            });
+        });
 
 
 

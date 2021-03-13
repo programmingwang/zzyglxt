@@ -63,17 +63,6 @@
                     return [
                         '<a class="view" style="margin:0 1em;text-decoration: none;color:#348eff;" data-toggle="modal" data-target="" >填写审核意见</a>',
                     ].join('');
-                    /*if (row.postOpinion == "1"){
-                        return [
-                            '<a class="view" style="margin:0 1em;text-decoration: none;color:#348eff;" data-toggle="modal" data-target="" >审核意见</a>',
-                            '<a class="pass"  style="margin:0 1em;text-decoration: none;color:#4df115;" data-target="#staticBackdrop" >提交</a>',
-                            '<a  class="fail"  data-toggle="modal" style="margin:0 0.6em;text-decoration: none;color:#D60000;" data-target="#staticBackdrop" >不通过</a>',
-                        ].join('');
-                    }else{
-                        return [
-                            '<a class="opinion" style="margin:0 1em;text-decoration: none;color:#348eff;" data-toggle="modal" data-target="" >填写审核意见</a>',
-                        ].join('');
-                    }*/
                 }else if(row.postDataStatus == postStatus[2].id || row.postDataStatus == postStatus[3].id || row.postDataStatus == postStatus[4].id || row.postDataStatus == postStatus[5].id || row.postDataStatus == postStatus[6].id || row.postDataStatus == postStatus[7].id || row.postDataStatus == postStatus[8].id || row.postDataStatus == postStatus[9].id){
                     return [
                         '<a class="view" style="margin:0 1em;text-decoration: none;color:#348eff;" data-toggle="modal" data-target="" >查看</a>',
@@ -105,17 +94,6 @@
                     return [
                         '<a class="view" style="margin:0 1em;text-decoration: none;color:#348eff;" data-toggle="modal" data-target="" >填写审核意见</a>',
                     ].join('');
-                    /*if (row.postOpinion == "3"){
-                        return [
-                            '<a class="view" style="margin:0 1em;text-decoration: none;color:#348eff;" data-toggle="modal" data-target="" >审核意见</a>',
-                            '<a class="pass"  style="margin:0 1em;text-decoration: none;color:#4df115;" data-target="#staticBackdrop" >提交</a>',
-                            '<a  class="fail"  data-toggle="modal" style="margin:0 0.6em;text-decoration: none;color:#D60000;" data-target="#staticBackdrop" >不通过</a>',
-                        ].join('');
-                    }else{
-                        return [
-                            '<a class="opinion" style="margin:0 1em;text-decoration: none;color:#348eff;" data-toggle="modal" data-target="" >填写审核意见</a>',
-                        ].join('');
-                    }*/
                 }else if(row.postDataStatus == postStatus[6].id || row.postDataStatus == postStatus[7].id || row.postDataStatus == postStatus[8].id || row.postDataStatus == postStatus[9].id){
                     return [
                         '<a class="view" style="margin:0 1em;text-decoration: none;color:#348eff;" data-toggle="modal" data-target="" >查看</a>',
@@ -128,18 +106,15 @@
                     return [
                         '<a class="view" style="margin:0 1em;text-decoration: none;color:#348eff;" data-toggle="modal" data-target="" >填写审核意见</a>',
                     ].join('');
-                    /*if (row.postOpinion == "4"){
-                        return [
-                            '<a class="view" style="margin:0 1em;text-decoration: none;color:#348eff;" data-toggle="modal" data-target="" >审核意见</a>',
-                            '<a class="pass"  style="margin:0 1em;text-decoration: none;color:#4df115;" data-target="#staticBackdrop" >提交</a>',
-                            '<a  class="fail"  data-toggle="modal" style="margin:0 0.6em;text-decoration: none;color:#D60000;" data-target="#staticBackdrop" >不通过</a>',
-                        ].join('');
-                    }else{
-                        return [
-                            '<a class="opinion" style="margin:0 1em;text-decoration: none;color:#348eff;" data-toggle="modal" data-target="" >填写审核意见</a>',
-                        ].join('');
-                    }*/
                 }else if(row.postDataStatus == postStatus[8].id || row.postDataStatus == postStatus[9].id){
+                    return [
+                        '<a class="view" style="margin:0 1em;text-decoration: none;color:#348eff;" data-toggle="modal" data-target="" >查看</a>',
+                    ].join('');
+                }
+            }
+
+            function operation6(value, row, index){
+                if(row.postDataStatus == postStatus[8].id){
                     return [
                         '<a class="view" style="margin:0 1em;text-decoration: none;color:#348eff;" data-toggle="modal" data-target="" >查看</a>',
                     ].join('');
@@ -167,14 +142,41 @@
                             var adviceEntity = {
                                 dataCode: row.itemcode
                             };
+                            var masterSendEntity = {
+                                dateCode: row.itemcode,
+                                receiverType: 0
+                            };
+                            var copySendEntity = {
+                                dateCode: row.itemcode,
+                                receiverType: 1
+                            };
                             var isSuccess = false;
                             ajaxUtil.myAjax(null,"/post/delPost",projectEntity,function (data) {
                                 if(ajaxUtil.success(data)){
                                     ajaxUtil.myAjax(null,"/advice/delAdvice",adviceEntity,function (data) {
-                                        ajaxUtil.deleteFile(row.itemcode);
-                                        alertUtil.info("删除发文信息成功");
-                                        isSuccess = true;
-                                        refreshTable();
+                                        if (ajaxUtil.success(data)){
+                                            ajaxUtil.myAjax(null,"/postref/delPostRef",masterSendEntity,function (data) {
+                                                if (ajaxUtil.success(data)) {
+                                                    ajaxUtil.myAjax(null,"/postref/delPostRef",copySendEntity,function (data) {
+                                                        ajaxUtil.deleteFile(row.itemcode);
+                                                        var submitConfirmModal = {
+                                                            modalBodyID :"myTopicSubmitTip",
+                                                            modalTitle : "提示",
+                                                            modalClass : "modal-lg",
+                                                            cancelButtonStyle: "display:none",
+                                                            modalConfirmFun:function (){
+                                                                return true;
+                                                            }
+                                                        }
+                                                        var submitConfirm = modalUtil.init(submitConfirmModal);
+                                                        submitConfirm.show();
+
+                                                        isSuccess = true;
+                                                        refreshTable();
+                                                    },false,"","delete");
+                                                }
+                                            },false,"","delete");
+                                        }
                                     },false,"","delete");
                                 }
                             },false,"","delete");
@@ -298,7 +300,18 @@
                                 ajaxUtil.myAjax(null,"/post/updatePost",submitStatus,function (data) {
                                     if(ajaxUtil.success(data)){
                                         if(data.code == 88888){
-                                            alertUtil.success("已转发至对应分局局长");
+                                            var submitConfirmModal = {
+                                                modalBodyID :"myTopicSubmitTip",
+                                                modalTitle : "提示",
+                                                modalClass : "modal-lg",
+                                                cancelButtonStyle: "display:none",
+                                                modalConfirmFun:function (){
+                                                    return true;
+                                                }
+                                            }
+                                            var submitConfirm = modalUtil.init(submitConfirmModal);
+                                            submitConfirm.show();
+
                                             isSuccess = true;
                                             refreshTable();
                                         }else{
@@ -411,7 +424,18 @@
                             ajaxUtil.myAjax(null,"/post/updatePost", submitStatus,function (data) {
                                 if(ajaxUtil.success(data)){
                                     if(data.code == 88888){
-                                        alertUtil.info("已发送");
+                                        var submitConfirmModal = {
+                                            modalBodyID :"myTopicSubmitTip",
+                                            modalTitle : "提示",
+                                            modalClass : "modal-lg",
+                                            cancelButtonStyle: "display:none",
+                                            modalConfirmFun:function (){
+                                                return true;
+                                            }
+                                        }
+                                        var submitConfirm = modalUtil.init(submitConfirmModal);
+                                        submitConfirm.show();
+
                                         isSuccess = true;
                                         refreshTable();
                                     }else{
@@ -443,7 +467,18 @@
                             ajaxUtil.myAjax(null,"/post/updatePost", submitStatus,function (data) {
                                 if(ajaxUtil.success(data)){
                                     if(data.code == 88888){
-                                        alertUtil.info("已提交");
+                                        var submitConfirmModal = {
+                                            modalBodyID :"myTopicSubmitTip",
+                                            modalTitle : "提示",
+                                            modalClass : "modal-lg",
+                                            cancelButtonStyle: "display:none",
+                                            modalConfirmFun:function (){
+                                                return true;
+                                            }
+                                        }
+                                        var submitConfirm = modalUtil.init(submitConfirmModal);
+                                        submitConfirm.show();
+
                                         isSuccess = true;
                                         refreshTable();
                                     }else{
@@ -551,6 +586,36 @@
                         }},
                     {field: 'itemcreateat', title: '发文日期'},
                     {field: 'action',  title: '操作',formatter: operation5,events:orgEvents}
+                ];
+
+            }else if (rolename === "政务资源市部门"){
+                url = "/post/getPost?postDataStatus=6";
+                aCol = [
+                    {field: 'postDocumentTitle', title: '文件标题', formatter: viewOperation, events: viewEvents},
+                    {field: 'postDocumentNum', title: '文号', formatter:function (value, row, index){
+                            var postNum = documentNum[value].text + row.postDocumentNum1;
+                            return '</p>'+ postNum +'</p>'
+                        }},
+                    {field: 'postPublicWay', title: '公开方式', formatter:function (value,row,index) {
+                            return '</p>'+ publicWay[value].text +'</p>'
+                        }},
+                    {field: 'itemcreateat', title: '发文日期'},
+                    {field: 'action',  title: '操作',formatter: operation6,events:orgEvents}
+                ];
+
+            }else if (rolename === "政务资源县部门"){
+                url = "/post/getPost?postDataStatus=6";
+                aCol = [
+                    {field: 'postDocumentTitle', title: '文件标题', formatter: viewOperation, events: viewEvents},
+                    {field: 'postDocumentNum', title: '文号', formatter:function (value, row, index){
+                            var postNum = documentNum[value].text + row.postDocumentNum1;
+                            return '</p>'+ postNum +'</p>'
+                        }},
+                    {field: 'postPublicWay', title: '公开方式', formatter:function (value,row,index) {
+                            return '</p>'+ publicWay[value].text +'</p>'
+                        }},
+                    {field: 'itemcreateat', title: '发文日期'},
+                    {field: 'action',  title: '操作',formatter: operation6,events:orgEvents}
                 ];
 
             }

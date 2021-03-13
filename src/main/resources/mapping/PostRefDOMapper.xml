@@ -153,6 +153,7 @@
   <delete id="delByDateCode" parameterType="com.zyyglxt.dataobject.PostRefDO">
     delete from tb_governres_post_ref
     where DATE_CODE = #{dateCode,jdbcType=VARCHAR}
+    and RECEIVER_TYPE = #{receiverType,jdbcType=INTEGER}
   </delete>
   <update id="updPostRef" parameterType="com.zyyglxt.dataobject.PostRefDO">
     update tb_governres_post_ref

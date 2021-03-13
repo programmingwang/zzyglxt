@@ -1725,6 +1725,7 @@
         modalHtml.myReExmainModalSuccessTips = "已重新设置课题状态，您可以重新评审了";
         modalHtml.mySendFileModal='是否下达该文件';
         modalHtml.myDeleteLeader="是否删除此领导讲话？"
+        modalHtml.mySendTips="确定发送吗？"
         return modalHtml
     })
 })();

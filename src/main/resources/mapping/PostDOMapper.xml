@@ -100,6 +100,20 @@
     </if>
     order by itemUpdateAt desc
   </select>
+  <select id="getSend" resultMap="PostMainFileResultMap">
+    select
+    <include refid="Post_Column_List" />
+    ,
+    cf.FILE_NAME
+    ,
+    cf.FILE_PATH
+    from (tb_governres_post gp left join tb_culpro_file cf on gp.itemCode = cf.DATA_CODE)
+    left join tb_governres_post_ref gpf on gp.itemCode = gpf.DATE_CODE
+    where POST_DATA_STATUS in (8)
+    and SEND_STATUS = 1
+    and RECEIVER_ID = #{receiverId,jdbcType=VARCHAR}
+    order by itemUpdateAt desc
+  </select>
   <select id="getDeputyDirector" resultMap="PostMainFileResultMap">
     select
     <include refid="Post_Column_List" />

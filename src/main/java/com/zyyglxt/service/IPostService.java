@@ -23,6 +23,8 @@ public interface IPostService {
 
     List<PostDto> getPost(String postDataStatus);
 
+    List<PostDto> getSend(String receiverId);
+
     List<PostDto> getDeputyDirector(String postOpinion1);
 
     PostDO maxNum();

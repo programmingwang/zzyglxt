@@ -47,6 +47,14 @@ public class PostController {
         return new ResponseData(EmBusinessError.success,postService.getPost(postDataStatus));
     }
 
+    //查询对应省市县部门的发文信息
+    @GetMapping(value = "/getSend")
+    @ResponseBody
+    @LogAnnotation(appCode ="",logTitle ="查询对应省市县部门的发文信息",logLevel ="1",creater ="",updater = "")
+    public ResponseData getSend(@RequestParam(value = "receiverId") String receiverId){
+        return new ResponseData(EmBusinessError.success,postService.getSend(receiverId));
+    }
+
     //查询当前分管局长
     @GetMapping(value = "/getDeputyDirector")
     @ResponseBody
@@ -76,29 +84,6 @@ public class PostController {
     public ResponseData getPostForMainPage(@RequestParam String status){
         return new ResponseData(EmBusinessError.success,postService.getPostForMainPage(status));
     }
-
-
-    private List<PostDto> DoToDto(List<PostDO> DOList){
-        List<PostDto> DtoList = new ArrayList<>();
-        if (!DOList.isEmpty()){
-            for (PostDO DO:DOList){
-                PostDto Dto = new PostDto();
-                BeanUtils.copyProperties(DO,Dto);
-                List<FileDO> fileDO= fileService.selectMultipleFileByDataCode(Dto.getItemcode());
-                List<String> filePath = new ArrayList<>();
-                List<String> fileName = new ArrayList<>();
-                for (FileDO file:fileDO){
-                    filePath.add(file.getFilePath());
-                    fileName.add(file.getFileName());
-                }
-                Dto.setFilePath(filePath);
-                Dto.setFileName(fileName);
-                DtoList.add(Dto);
-            }
-        }
-        return DtoList;
-    }
-
 
     //添加发文信息
     @RequestMapping(value = "/createPost", method = RequestMethod.POST)

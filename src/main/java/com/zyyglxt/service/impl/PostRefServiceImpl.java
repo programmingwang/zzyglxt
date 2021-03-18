@@ -14,6 +14,8 @@ import com.zyyglxt.validator.ValidatorResult;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @Author huangtao
@@ -57,12 +59,12 @@ public class PostRefServiceImpl implements IPostRefService {
     }
 
     @Override
-    public void delByDateCode(String dateCode) {
+    public void delByDateCode(String dateCode,Integer receiverType) {
         ValidatorResult result = validator.validate(dateCode, ValidationGroups.UpdateOrDelete.class);
         if (result.isHasErrors()){
             throw new BusinessException(result.getErrMsg(), EmBusinessError.PARAMETER_VALIDATION_ERROR);
         }
-        postRefDOMapper.delByDateCode(dateCode);
+        postRefDOMapper.delByDateCode(dateCode,receiverType);
     }
 
     @Override
@@ -76,13 +78,21 @@ public class PostRefServiceImpl implements IPostRefService {
     }
 
     @Override
-    public PostRefDO getMasterSend(String dateCode) {
-        return postRefDOMapper.getMasterSend(dateCode);
+    public List<PostRefDO> getMasterSend(List<String> dateCode) {
+        List<PostRefDO> postRefDOS = new ArrayList<>();
+        for (String status : dateCode) {
+            postRefDOS.addAll(postRefDOMapper.getMasterSend(status));
+        }
+        return postRefDOS;
     }
 
     @Override
-    public PostRefDO getCopySend(String dateCode) {
-        return postRefDOMapper.getCopySend(dateCode);
+    public List<PostRefDO> getCopySend(List<String> dateCode) {
+        List<PostRefDO> postRefDOS = new ArrayList<>();
+        for (String status : dateCode) {
+            postRefDOS.addAll(postRefDOMapper.getCopySend(status));
+        }
+        return postRefDOS;
     }
 
 }

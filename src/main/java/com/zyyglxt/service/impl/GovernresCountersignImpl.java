@@ -9,6 +9,7 @@ import com.zyyglxt.error.EmBusinessError;
 import com.zyyglxt.service.IGovernresCountersignService;
 import com.zyyglxt.validator.ValidatorImpl;
 import com.zyyglxt.validator.ValidatorResult;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
@@ -58,7 +59,7 @@ public class GovernresCountersignImpl implements IGovernresCountersignService {
     @Override
     public int updateByPrimaryKeySelective(GovernresCountersign record) {
         ValidatorResult result = validator.validate(record);
-        if(StringUtils.isBlank(record.getItemid().toString())){
+        if(!StringUtils.isBlank(record.getParment())){
             if(result.isHasErrors()){
                 throw new BusinessException(result.getErrMsg(), EmBusinessError.PARAMETER_VALIDATION_ERROR);
             }

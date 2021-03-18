@@ -188,7 +188,7 @@
       and itemCode = #{itemcode,jdbcType=CHAR}
   </update>
 
-  <select id="selectAll" resultMap="BaseResultMap">
+  <select id="selectAll" resultMap="ResultMapWithFile">
     select
     <include refid="File_Column_List" />
     ,

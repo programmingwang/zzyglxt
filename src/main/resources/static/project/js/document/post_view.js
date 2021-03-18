@@ -8,6 +8,29 @@
             var username = sessionStorage.getItem("username");
             var tempdata = JSON.parse(localStorage.getItem("viewRowData"));
             var postStatus = dictUtil.getDictByCode(dictUtil.DICT_LIST.postStatus);
+
+            //获取主送目标
+            var zhusong;
+            $.ajax({cache: false, async: false, type: 'get', data: { dateCode: tempdata.itemcode }, url: "/postref/getMasterSend", success: function (data) {
+                    zhusong = data;
+                }
+            });
+            var zhusongGoal = "";
+            for (var i = 0; i < zhusong.data.length; i++) {
+                zhusongGoal = zhusongGoal + zhusong.data[i].receiverId + "；";
+            }
+
+            //获取抄送目标
+            var chaosong;
+            $.ajax({cache: false, async: false, type: 'get', data: { dateCode: tempdata.itemcode }, url: "/postref/getCopySend", success: function (data) {
+                    chaosong = data;
+                }
+            });
+            var chaosongGoal = "";
+            for (var j = 0; j < chaosong.data.length; j++) {
+                chaosongGoal = chaosongGoal + chaosong.data[j].receiverId + "；";
+            }
+
             //获取意见表的内容
             var tgAdvice;
             $.ajax({cache: false, async: false, type: 'get', data: {dataCode: tempdata.itemcode}, url: "/advice/getByDataCode", success: function (data) {
@@ -299,10 +322,56 @@
                                     ajaxUtil.myAjax(null,"/advice/updAdvice", submitOpinion,function (data) {
                                         if(ajaxUtil.success(data)){
                                             if(data.code == 88888){
-                                                alertUtil.success("提交成功");
                                                 isSuccess = true;
-                                                var url = "/document/post";
-                                                orange.redirect(url);
+                                                if (rolename === "政务资源局长"){
+                                                    var mySubmitToCZ = {
+                                                        modalBodyID: "mySendModal",
+                                                        modalTitle: "发送",
+                                                        modalClass: "modal-lg",
+                                                        modalConfirmFun: function () {
+                                                            var postRefEntity = {
+                                                                sendStatus: 1,
+                                                                dataCode: tempdata.itemcode
+                                                            };
+                                                            ajaxUtil.myAjax(null, "/postref/updPostRef", postRefEntity, function (data) {
+                                                                if (ajaxUtil.success(data)) {
+                                                                    var submitConfirmModal = {
+                                                                        modalBodyID :"myTopicSubmitTip",
+                                                                        modalTitle : "提示",
+                                                                        modalClass : "modal-lg",
+                                                                        cancelButtonStyle: "display:none",
+                                                                        modalConfirmFun:function (){
+                                                                            var url = "/document/post";
+                                                                            orange.redirect(url);
+                                                                            return true;
+                                                                        }
+                                                                    }
+                                                                    var submitConfirm = modalUtil.init(submitConfirmModal);
+                                                                    submitConfirm.show();
+                                                                }else {
+                                                                    alert(data.msg);
+                                                                }
+                                                            }, false, true, "post");
+                                                        }
+                                                    }
+                                                    var x = modalUtil.init(mySubmitToCZ);
+                                                    x.show();
+                                                    return false;
+                                                }else {
+                                                    var submitConfirmModal = {
+                                                        modalBodyID :"myTopicSubmitTip",
+                                                        modalTitle : "提示",
+                                                        modalClass : "modal-lg",
+                                                        cancelButtonStyle: "display:none",
+                                                        modalConfirmFun:function (){
+                                                            var url = "/document/post";
+                                                            orange.redirect(url);
+                                                            return true;
+                                                        }
+                                                    }
+                                                    var submitConfirm = modalUtil.init(submitConfirmModal);
+                                                    submitConfirm.show();
+                                                }
                                             }else{
                                                 alertUtil.error(data.msg);
                                             }
@@ -318,6 +387,7 @@
                 };
                 var myPassModal = modalUtil.init(myPassPostModalData);
                 myPassModal.show();
+                return false;
             });
 
             $("#failbtn").unbind().on('click',function () {
@@ -401,10 +471,21 @@
                                     ajaxUtil.myAjax(null,"/advice/updAdvice", submitOpinion,function (data) {
                                         if(ajaxUtil.success(data)){
                                             if(data.code == 88888){
-                                                alertUtil.success("提交成功");
                                                 isSuccess = true;
-                                                var url = "/document/post";
-                                                orange.redirect(url);
+                                                var submitConfirmModal = {
+                                                    modalBodyID: "myTopicSubmitTip",
+                                                    modalTitle: "提示",
+                                                    modalClass: "modal-lg",
+                                                    cancelButtonStyle: "display:none",
+                                                    modalConfirmFun: function () {
+                                                        var url = "/document/post";
+                                                        orange.redirect(url);
+                                                        return true;
+                                                    }
+                                                }
+                                                var submitConfirm = modalUtil.init(submitConfirmModal);
+                                                submitConfirm.show();
+
                                             }else{
                                                 alertUtil.error(data.msg);
                                             }
@@ -470,10 +551,10 @@
                         $("#upload_file").text(tempdata.fileName);
                         $("#upload_file").attr('href',tempdata.filePath);
                     }else {
-                        $("#upload_file").text(tempdata.fileName[1]);
-                        $("#upload_file").attr('href',tempdata.filePath[1]);
-                        $("#fairFile").text(tempdata.fileName[0]);
-                        $("#fairFile").attr('href',tempdata.filePath[0]);
+                        $("#upload_file").text(tempdata.fileName[0]);
+                        $("#upload_file").attr('href',tempdata.filePath[0]);
+                        $("#fairFile").text(tempdata.fileName[1]);
+                        $("#fairFile").attr('href',tempdata.filePath[1]);
                     }
 
                     $("#initialName").val(tgAdvice.data.initial);
@@ -499,6 +580,9 @@
                     $("#directorOpinion").val(tgAdvice.data.director);
                     $("#directorName").val(tgAdvice.data.directorName);
                     $("#directorDate").val(stringUtil.formatTime(tgAdvice.data.directorDate));
+
+                    $("#zhusong").val(zhusongGoal);
+                    $("#chaosong").val(chaosongGoal);
                 }
             }());
 

@@ -130,6 +130,7 @@
                     $("#chineseCulturalAuthor").val(tempdata.chineseCulturalAuthor);
                     editor.txt.html(tempdata.chineseCulturalContent);
                     $("#addFile").text(tempdata.fileName);
+                    $("#upload_file").attr('href',tempdata.filePath)
                 }
             }());
 

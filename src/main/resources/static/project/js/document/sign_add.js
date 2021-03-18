@@ -166,9 +166,12 @@
                     $("#fileNumber").val(tempdata.fileNumber);
                     $("#number").val(tempdata.number);
                     $("#classification").val(tempdata.classification);
+                    if(tempdata.govPunlic == "2"){
+                        $('#reason').attr('style',"display:block");
+                    }
                     $("#reason").val(tempdata.reason);
-                    var img = tempdata.filePath;
-                    $("#upimg").attr("src",img);
+                    $("#upload_file").attr('href',tempdata.filePath)
+                    $("#addFile").text(tempdata.fileName);
                 }
                 else {
                     $("#distpicker").distpicker();

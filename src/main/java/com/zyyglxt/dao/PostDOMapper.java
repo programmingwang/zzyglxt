@@ -26,6 +26,8 @@ public interface PostDOMapper {
 
     List<PostDto> selectAll(@Param("postDataStatus") String postDataStatus);
 
+    List<PostDto> getSend(@Param("receiverId") String receiverId);
+
     List<PostDto> getDeputyDirector(@Param("postOpinion1") String postOpinion1);
 
     PostDO maxNum();

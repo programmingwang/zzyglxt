@@ -87,6 +87,11 @@ public class PostServiceImpl implements IPostService {
     }
 
     @Override
+    public List<PostDto> getSend(String receiverId) {
+        return postDOMapper.getSend(receiverId);
+    }
+
+    @Override
     public List<PostDto> getDeputyDirector(String postOpinion1) {
         return postDOMapper.getDeputyDirector(postOpinion1);
     }

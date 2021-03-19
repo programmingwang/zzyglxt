@@ -53,6 +53,25 @@ public class ReceiptDO extends ReceiptDOKey {
     private String namev;
     private String names;
 
+    private String receiptReason;//局长审核
+    private String receiptReasonl;//分局审核
+
+    public String getReceiptReason() {
+        return receiptReason;
+    }
+
+    public void setReceiptReason(String receiptReason) {
+        this.receiptReason = receiptReason== null ? null : receiptReason.trim();
+    }
+
+    public String getReceiptReasonl() {
+        return receiptReasonl;
+    }
+
+    public void setReceiptReasonl(String receiptReasonl) {
+        this.receiptReasonl = receiptReasonl== null ? null : receiptReasonl.trim();
+    }
+
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "GMT+8")
     private Date dateo;
 

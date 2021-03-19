@@ -313,16 +313,15 @@
                         ReceiptEntity = {
                             "receivingDataStatus": ""
                         };
+                            submitOpinion = {
+                                "itemid": row.itemid,
+                                "itemcode": row.itemcode,
+                                "receiptReason" : ""
+                            };
                         if (sessionStorage.getItem("rolename") == "政务资源综合处处长") {
                            ReceiptEntity.receivingDataStatus = webStatus[3].id;
-                        } else if (sessionStorage.getItem("rolename") == "中医处分管局长") {
+                        } else if (sessionStorage.getItem("rolename") == "中医处分管局长"||sessionStorage.getItem("rolename") == "中药处分管局长"||sessionStorage.getItem("rolename") == "综合处分管局长"||sessionStorage.getItem("rolename") == "法规监督处分管局长") {
                             ReceiptEntity.receivingDataStatus = webStatus[6].id;
-                        } else if (sessionStorage.getItem("rolename") == "中药处分管局长") {
-                            ReceiptEntity.receivingDataStatus = webStatus[9].id;
-                        } else if (sessionStorage.getItem("rolename") == "综合处分管局长") {
-                            ReceiptEntity.receivingDataStatus = webStatus[12].id;
-                        } else if (sessionStorage.getItem("rolename") == "法规监督处分管局长") {
-                            ReceiptEntity.receivingDataStatus = webStatus[15].id;
                         } else if (sessionStorage.getItem("rolename") == "政务资源局长") {
                             ReceiptEntity.receivingDataStatus = webStatus[17].id;
                         }
@@ -335,42 +334,43 @@
                                 "itemid": row.itemid,
                                 "itemcode": row.itemcode,
                             };
-                        } else if (sessionStorage.getItem("rolename") == "中医处分管局长") {
-                            $("#reasontView").validate("审核意见");
+                            submitOpinion.receiptReason = "1";
+                        } else if (sessionStorage.getItem("rolename") == "中医处分管局长"||sessionStorage.getItem("rolename") == "中药处分管局长"||sessionStorage.getItem("rolename") =="综合处分管局长"||sessionStorage.getItem("rolename") =="法规监督处分管局长") {
+                            $("#reasonView").validate("审核意见");
+                            if (sessionStorage.getItem("rolename") == "中医处分管局长"){
                             submitOpinion = {
-                                "reasont": $("#reasontView").val(),
+                                "reasont": $("#reasonView").val(),
                                 "namet": username,
                                 "datet": nowTime,
                                 "itemid": row.itemid,
                                 "itemcode": row.itemcode,
                             };
                         } else if (sessionStorage.getItem("rolename") == "中药处分管局长") {
-                            $("#reasonhView").validate("审核意见");
                             submitOpinion = {
-                                "reasonh": $("#reasonhView").val(),
+                                "reasonh": $("#reasonView").val(),
                                 "nameh": username,
                                 "dateh": nowTime,
                                 "itemid": row.itemid,
                                 "itemcode": row.itemcode,
                             };
                         } else if (sessionStorage.getItem("rolename") == "综合处分管局长") {
-                            $("#reasonfView").validate("审核意见");
                             submitOpinion = {
-                                "reasonf": $("#reasonfView").val(),
+                                "reasonf": $("#reasonView").val(),
                                 "namef": username,
                                 "datef": nowTime,
                                 "itemid": row.itemid,
                                 "itemcode": row.itemcode,
                             };
                         } else if (sessionStorage.getItem("rolename") == "法规监督处分管局长") {
-                            $("#reasonvView").validate("审核意见");
-                            submitOpinion = {
-                                "reasonv": $("#reasonvView").val(),
-                                "namev": username,
-                                "datev": nowTime,
-                                "itemid": row.itemid,
-                                "itemcode": row.itemcode,
-                            };
+                                submitOpinion = {
+                                    "reasonv": $("#reasonView").val(),
+                                    "namev": username,
+                                    "datev": nowTime,
+                                    "itemid": row.itemid,
+                                    "itemcode": row.itemcode,
+                                };
+                            }
+                            submitOpinion.receiptReason = "2";
                         } else if (sessionStorage.getItem("rolename") == "政务资源局长") {
                             $("#reasonoView").validate("审核意见");
                             submitOpinion = {
@@ -380,6 +380,7 @@
                                 "itemid": row.itemid,
                                 "itemcode": row.itemcode,
                             };
+                            submitOpinion.receiptReason = "3";
                         }
                             ajaxUtil.myAjax(null, "updatereceipt", submitOpinion, function (data) {
                                 if (data && ajaxUtil.success(data)) {

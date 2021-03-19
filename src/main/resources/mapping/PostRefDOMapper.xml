@@ -158,9 +158,6 @@
   <update id="updPostRef" parameterType="com.zyyglxt.dataobject.PostRefDO">
     update tb_governres_post_ref
     <set>
-      <if test="dateCode != null">
-        DATE_CODE = #{dateCode,jdbcType=CHAR},
-      </if>
       <if test="receiverId != null">
         RECEIVER_ID = #{receiverId,jdbcType=CHAR},
       </if>
@@ -183,7 +180,7 @@
         itemUpdateAt = #{itemupdateat,jdbcType=TIMESTAMP},
       </if>
     </set>
-    where DATA_CODE = #{dataCode,jdbcType=VARCHAR}
+    where DATE_CODE = #{dateCode,jdbcType=CHAR}
   </update>
   <select id="getMasterSend" resultMap="BaseResultMap">
     select

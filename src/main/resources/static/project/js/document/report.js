@@ -7,6 +7,21 @@
             url = getRoleTable(sessionStorage.getItem("rolename"),url,"reportDataStatus",webStatus);
             var aParam = {
             };
+
+            //点击文件标题查看详情事件
+            function viewOperation(value, row, index){
+                return [
+                    '<a class="reporttview" data-toggle="modal" style="margin:0 0.6em;text-decoration: none;color:#775637;" data-target="" >'+row.reportTitle+'</a>',
+                ].join('');
+            }
+            window.viewEvents = {
+                'click .reporttview': function (e, value, row, index){
+                    localStorage.setItem("viewRowData", JSON.stringify(row));
+                    var viewUrl = "/document/viewreport";
+                    orange.redirect(viewUrl);
+                },
+            };
+
             //操作
             function operation(value, row, index){
                 return getRoleOperate(value,row,index,sessionStorage.getItem("rolename"),row.reportDataStatus,webStatus)
@@ -185,7 +200,7 @@
             });
 
             var aCol = [
-                {field: 'reportTitle', title: '报告标题'},
+                {field: 'reportTitle', title: '报告标题', formatter: viewOperation, events: viewEvents},
                 {field: 'filePath', title: '附件名称', formatter:function (value, row, index) {
                         if(value == null){
                             return '<p style="padding-top: 15px">无附件</p>';
@@ -279,9 +294,7 @@
             return preUrl + "?"+status+"=1";
         }else if(role === "政务资源处长"){
            return preUrl + "?"+status+"=2";
-       }/*else if(role === "政务资源综合处处长"){
-            return preUrl + "?"+status+"="+webStatus[7].id+"&"+status+"="+webStatus[9].id;
-        }*/else if(role === "政务资源分管局长") {
+       }else if(role === "政务资源分管局长") {
             return preUrl + "?"+status+"=3";
         } else if(role === "政务资源局长") {
            return preUrl + "?"+status+"=4";

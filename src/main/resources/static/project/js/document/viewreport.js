@@ -116,9 +116,20 @@
                                 ajaxUtil.myAjax(null, "changestatustorequestreport/" + row.itemid + "/" + row.itemcode, ReportEntity, function (data) {
                                     if (ajaxUtil.success(data)) {
                                         if (data.code == 88888) {
+                                            var submitConfirmModal = {
+                                                modalBodyID :"myTopicSubmitTip",
+                                                modalTitle : "提示",
+                                                modalClass : "modal-lg",
+                                                cancelButtonStyle: "display:none",
+                                                modalConfirmFun:function (){
+                                                    return true;
+                                                }
+                                            }
                                             alertUtil.success("文件驳回成功");
                                             var url = "/document/report";
                                             orange.redirect(url);
+                                            var submitConfirm = modalUtil.init(submitConfirmModal);
+                                            submitConfirm.show();
                                             isSuccess = true;
                                             refreshTable();
                                         } else {
@@ -190,9 +201,20 @@
                                 ajaxUtil.myAjax(null, "changestatustorequestreport/" + row.itemid + "/" + row.itemcode, ReportEntity, function (data) {
                                     if (ajaxUtil.success(data)) {
                                         if (data.code == 88888) {
+                                            var submitConfirmModal = {
+                                                modalBodyID :"myTopicSubmitTip",
+                                                modalTitle : "提示",
+                                                modalClass : "modal-lg",
+                                                cancelButtonStyle: "display:none",
+                                                modalConfirmFun:function (){
+                                                    return true;
+                                                }
+                                            }
                                             alertUtil.success("审核通过");
                                             var url = "/document/report";
                                             orange.redirect(url);
+                                            var submitConfirm = modalUtil.init(submitConfirmModal);
+                                            submitConfirm.show();
                                             isSuccess = true;
                                             refreshTable();
                                         } else {

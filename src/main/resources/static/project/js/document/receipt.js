@@ -499,7 +499,7 @@
                 }
             }
 
-          /* function getRoleTable(role,preUrl,status,webStatus) {
+          function getRoleTable(role,preUrl,status,webStatus) {
                 if(role === "政务资源科员"){
                     $('#btn_addTask').attr('style',"display:block");
                     return preUrl + "?"+status+"=1";
@@ -663,6 +663,6 @@
                 getRoleTable:getRoleTable,
                 getRoleOperate:getRoleOperate,
                 getStatus: getStatus,
-            }*/
+            }
         })
 })();

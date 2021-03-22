@@ -165,7 +165,7 @@
                     $("#upload_file").text(tempdata.fileName);
                     $("#upload_file").attr('href',tempdata.filePath);
 
-                    $("#initialName").val(tgAdvice.data.initial);
+                    $("#initialNam").val(tgAdvice.data.initial);
                     $("#initialDate").val(tgAdvice.data.initialDate);
                     $("#signOpinion").val(tgAdvice.data.signOpinion);
                     $("#signDate").val(tgAdvice.data.signDate);

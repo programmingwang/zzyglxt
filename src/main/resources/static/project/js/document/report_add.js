@@ -90,6 +90,7 @@
                     var tempdata = JSON.parse(localStorage.getItem("rowData"));
                     $("#reportTitle").val(tempdata.reportTitle);
                     $("#reportContent").val(tempdata.reportContent);
+                    $("#addFile").text(tempdata.fileName);
                     var img = tempdata.filePath;
                     $("#upimg").attr("src",img);
                 }

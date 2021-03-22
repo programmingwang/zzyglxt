@@ -153,6 +153,7 @@
                     $("#secretLevel").val(tempdata.secretLevel);
                     $("#receivingDegreeOfUrgency").val(tempdata.receivingDegreeOfUrgency);
                     $("#timeLimit").val(tempdata.timeLimit);
+                    $("#addFile").text(tempdata.fileName);
                     var img = tempdata.filePath;
                     $("#upimg").attr("src",img);
                 }

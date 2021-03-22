@@ -65,6 +65,13 @@ public class ReceiptController {
         return new ResponseData(EmBusinessError.success,iReceiptDOService.selectAllReceipt(receivingDataStatus));
     }
 
+    //查询当前分管局长
+    @RequestMapping(value ="getDeputyDirector",method = RequestMethod.GET )
+    @LogAnnotation(appCode ="",logTitle ="查询当前分管局长",logLevel ="1",creater ="",updater = "")
+    public ResponseData getDeputyDirector(@RequestParam(value = "receiptReasonl") String receiptReasonl){
+        return new ResponseData(EmBusinessError.success,iReceiptDOService.getDeputyDirector(receiptReasonl));
+    }
+
     /*查询首页收文管理数据*/
     @RequestMapping(value ="/receipt/selectForMain",method = RequestMethod.GET )
     @LogAnnotation(appCode ="",logTitle ="查询首页收文管理数据",logLevel ="1")

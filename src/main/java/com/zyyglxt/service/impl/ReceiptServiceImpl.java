@@ -81,6 +81,11 @@ public class ReceiptServiceImpl implements IReceiptDOService {
     }
 
     @Override
+    public List<ReceiptDto> getDeputyDirector(String receiptReasonl) {
+        return receiptDOMapper.getDeputyDirector(receiptReasonl);
+    }
+
+    @Override
     public List<ReceiptDto> selectAllReceipt(String receivingDataStatus) {
         return receiptDOMapper.selectAllReceipt(receivingDataStatus);
     }

@@ -3,6 +3,7 @@ package com.zyyglxt.dao;
 import com.zyyglxt.dataobject.PostFileDO;
 import com.zyyglxt.dataobject.ReceiptDO;
 import com.zyyglxt.dataobject.ReceiptDOKey;
+import com.zyyglxt.dto.PostDto;
 import com.zyyglxt.dto.ReceiptDto;
 import com.zyyglxt.dto.ReceiptMainDto;
 import org.apache.ibatis.annotations.Mapper;
@@ -19,6 +20,8 @@ public interface ReceiptDOMapper {
     int insert(ReceiptDO record);
 
     int insertSelective(ReceiptDO record);
+
+    List<ReceiptDto> getDeputyDirector(@Param("receiptReasonl") String receiptReasonl);
 
     ReceiptDO selectByPrimaryKey(ReceiptDOKey key);
 

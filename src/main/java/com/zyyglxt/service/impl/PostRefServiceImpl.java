@@ -40,6 +40,8 @@ public class PostRefServiceImpl implements IPostRefService {
 
     @Override
     public int insertSelective(PostRefDO record) {
+        record.setCreater(usernameUtil.getOperateUser());
+        record.setUpdater(usernameUtil.getOperateUser());
         ValidatorResult result = validator.validate(record);
         if(result.isHasErrors()){
             throw new BusinessException(result.getErrMsg(), EmBusinessError.PARAMETER_VALIDATION_ERROR);
@@ -69,11 +71,11 @@ public class PostRefServiceImpl implements IPostRefService {
 
     @Override
     public void updPostRef(PostRefDO postRefDO) {
+        postRefDO.setUpdater(usernameUtil.getOperateUser());
         ValidatorResult result = validator.validate(postRefDO,ValidationGroups.UpdateOrDelete.class);
         if (result.isHasErrors()){
             throw new BusinessException(result.getErrMsg(), EmBusinessError.PARAMETER_VALIDATION_ERROR);
         }
-        postRefDO.setUpdater(usernameUtil.getOperateUser());
         postRefDOMapper.updPostRef(postRefDO);
     }
 

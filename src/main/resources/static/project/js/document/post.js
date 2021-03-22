@@ -589,7 +589,7 @@
                 ];
 
             }else if (rolename === "政务资源市部门"){
-                url = "/post/getPost?postDataStatus=6";
+                url = "/post/getSend?receiverId="+rolename;
                 aCol = [
                     {field: 'postDocumentTitle', title: '文件标题', formatter: viewOperation, events: viewEvents},
                     {field: 'postDocumentNum', title: '文号', formatter:function (value, row, index){
@@ -604,7 +604,7 @@
                 ];
 
             }else if (rolename === "政务资源县部门"){
-                url = "/post/getPost?postDataStatus=6";
+                url = "/post/getSend?receiverId="+rolename;
                 aCol = [
                     {field: 'postDocumentTitle', title: '文件标题', formatter: viewOperation, events: viewEvents},
                     {field: 'postDocumentNum', title: '文号', formatter:function (value, row, index){

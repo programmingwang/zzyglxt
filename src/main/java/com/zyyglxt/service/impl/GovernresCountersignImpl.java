@@ -7,6 +7,7 @@ import com.zyyglxt.dataobject.GovernresCountersign;
 import com.zyyglxt.error.BusinessException;
 import com.zyyglxt.error.EmBusinessError;
 import com.zyyglxt.service.IGovernresCountersignService;
+import com.zyyglxt.util.DateUtils;
 import com.zyyglxt.validator.ValidatorImpl;
 import com.zyyglxt.validator.ValidatorResult;
 import lombok.extern.slf4j.Slf4j;
@@ -46,6 +47,9 @@ public class GovernresCountersignImpl implements IGovernresCountersignService {
         record.setItemcode(itemCode);
         governresAdvice.setItemcode(UUID.randomUUID().toString());
         governresAdvice.setDataCode(itemCode);
+        String creater="科员";
+        governresAdvice.setInitial(creater);
+        governresAdvice.setInitialDate(DateUtils.getDate());
         governresAdviceMapper.insertSelective(governresAdvice);
         return governresCountersignMapper.insertSelective(record);
     }

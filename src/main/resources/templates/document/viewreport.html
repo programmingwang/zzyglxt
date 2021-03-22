@@ -42,7 +42,8 @@
             float: left;
         }
         .mesageP {
-            float: right;
+            float: left;
+            margin-left: 900px;
         }
         #reportTitle{
 
@@ -61,7 +62,13 @@
         .textCy{
             float: right;
             width: 100px;
-            margin-left: 20px;
+            margin-left: -100px;
+            border: none;
+            outline: none;
+        }
+        .advice{
+            width: 485px;
+            margin-left: 18px;
             border: none;
             outline: none;
         }
@@ -77,42 +84,37 @@
                 <tr>
                     <td class="firstL">领<br>导<br>批<br>示</td>
                     <td class="secendL ">
-                        <div class="mesageYJ">
-                            <div>
-                                <input id="reasontwo" class="textC" style=""placeholder="局长审核 理由不为空" ></input>
-                            </div>
-                            <div>
-                                <input id="reasonone" class="textC" style="margin-top: 20px;" placeholder="分局审核 理由不为空"></input>
-                            </div>
+                        <div id="opinin20" style="height:100px; display: none">
+                            <textarea id="reasonj" placeholder="请输入审核意见" style="width:100%; height:40%; padding-left: 18px; border: none; outline: none;"></textarea>
                         </div>
-                        <div class="mesageP">
-                            <div>
-                                <input id="updatertwo" class="textCl" style="border:none;margin-top: 40px;" disabled></input>
-                                <input id="updatetwo" class="textCy" style="border:none;margin-top: 40px;"disabled></input>
+                            <div id="opinin21" style="display: none" >
+                                <input id="reasontwo"  class="advice" style="margin-top: 20px;" placeholder="等待局长审核" readonly="readonly"></input>
+                                <input id="updatertwo" class="mesageP" style="border:none;margin-top: 40px;outline: none;" readonly="readonly"></input>
+                                <input id="updatetwo" class="textCy" style="border:none;margin-top: 40px;outline: none;"readonly="readonly"></input>
                             </div>
-                            <div>
-                                <input id="updaterone" class="textCl" style="border:none;margin-top: 40px;" disabled></input>
-                                <input id="updateone" class="textCy" style="border:none;margin-top: 40px;"disabled></input>
-                            </div>
+
+                        <div id="opinin22" style="height:100px; display: none">
+                            <textarea id="reasonf" placeholder="请输入审核意见" style="width:100%; height:40%; padding-left: 18px; border: none; outline: none;"></textarea>
                         </div>
+                            <div id="opinin23" style="display: none" >
+                                <input id="reasonone"  class="advice" style="margin-top: 20px;" placeholder="等待分局审核" readonly="readonly"></input>
+                                <input id="updaterone" class="mesageP" style="border:none;margin-top: 40px;outline: none;" readonly="readonly"></input>
+                                <input id="updateone" class="textCy" style="border:none;margin-top: 40px;outline: none;"readonly="readonly"></input>
+                            </div>
                     </td>
                 </tr>
                 <tr>
                     <td class="firstL">处<br>室<br>意<br>见</td>
                     <td class="secendL ">
-                        <div class="mesageYJ">
-                            <div>
-                                <input id="reason" class="textC" placeholder="处长审核 理由不为空"></input>
-                            </div>
+                        <div id="opinin24" style="height:100px; display: none">
+                            <textarea id="reasonc" placeholder="请输入审核意见" style="width:100%; height:40%; padding-left: 18px; border: none; outline: none;"></textarea>
                         </div>
-                        <div class="mesageP">
-                            <div>
-                                <input id="updaterf" class="textCl" style="border:none;margin-top: 40px;"disabled></input>
-                                <input id="updatef" class="textCy" style="border:none;margin-top: 40px;"disabled></input>
+                            <div id="opinin25" style="display: none"  >
+                                <input id="reason"  class="advice" style="margin-top: 20px;" placeholder="等待处长审核" readonly="readonly"></input>
+                                <input id="updaterf" class="mesageP" style="border:none;margin-top: 40px;outline: none;"readonly="readonly"></input>
+                                <input id="updatef" class="textCy" style="border:none;margin-top: 40px;outline: none;"readonly="readonly"></input>
                             </div>
-                        </div>
                     </td>
-
                 </tr>
                 <tr>
                     <td class="firstL">报<br>告<br>内<br>容</td>
@@ -159,12 +161,12 @@
             <div class="col-lg-8 col-md-4" ></div>
             <div class=" col-lg-4 row" >
                 <div class="col">
-                    <button id="fail" type="submit" class="btn btn-danger col">驳回</button>
+                    <button id="fail" type="submit" style="display: none" class="btn btn-danger col">驳回</button>
                 </div>
                 <div class="col">
-                    <button id="pass" type="submit" class="btn btn-primary col">通过</button>
+                    <button id="pass" type="submit" style="display: none" class="btn btn-primary col">通过</button>
                 </div>
-                <div class="col">
+                <div class="col"  style="padding-right: 0;">
                     <button id="cancelbtn" type="button" class="btn btn-light col">关闭</button>
                 </div>
             </div>

@@ -553,7 +553,7 @@
             }
 
             function operation5(value, row, index){
-                if(row.receivingDataStatus == webStatus[7].id||row.receivingDataStatus == webStatus[18].id){
+                if(row.receivingDataStatus == webStatus[7].id){
                     return [
                         '<a class="viewo" style="margin:0 1em;text-decoration: none;color:#348eff;" data-toggle="modal" data-target="" >查看</a>',
                     ].join('');

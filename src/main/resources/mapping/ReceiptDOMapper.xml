@@ -356,7 +356,7 @@
           FROM tb_governres_receipt rp left join tb_culpro_file cf
           on rp.itemCode = cf.DATA_CODE
           <if test='receivingDataStatus == "8" '>
-            WHERE RECEIVING_DATA_STATUS in (7,18)
+            WHERE RECEIVING_DATA_STATUS in (7)
           </if>
           <if test='receivingDataStatus == "7" '>
             WHERE RECEIVING_DATA_STATUS in (5,7,16,17,18)

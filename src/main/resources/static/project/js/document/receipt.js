@@ -310,6 +310,28 @@
                     {field: 'receivingDateOfReceipt', title: '来文日期'},
                     {field: 'action', title: '操作', formatter: operation1, events: orgEvents}
                 ];
+            }else if (rolename === "政务资源处长"){
+                url = "selectallreceipt?receivingDataStatus=3";
+                var aCol = [
+                    {field: 'receivingTitle', title: '文件标题', formatter: viewOperation, events: viewEvents},
+                    {field: 'receivingUnitOfCommun', title: '来文单位'},
+                    {
+                        field: 'receivingDegreeOfUrgency', title: '紧急程度', formatter: function (row) {
+                            return '<p>' + pl[row].text + '</p>';
+                        }
+                    },
+                    {
+                        field: 'filePath', title: '附件', formatter: function (value, row, index) {
+                            if (value == null) {
+                                return '<p style="padding-top: 15px">无附件</p>';
+                            } else {
+                                return '<a href="' + value + '">' + row.fileName + '</a>'
+                            }
+                        }
+                    },
+                    {field: 'receivingDateOfReceipt', title: '来文日期'},
+                    {field: 'action', title: '操作', formatter: operation6, events: orgEvents}
+                ];
             }else if (rolename === "政务资源综合处处长"){
                 url = "selectallreceipt?receivingDataStatus=2";
                 var aCol = [
@@ -493,6 +515,13 @@
 
             function operation5(value, row, index){
                 if(row.receivingDataStatus == webStatus[18].id){
+                    return [
+                        '<a class="viewo" style="margin:0 1em;text-decoration: none;color:#348eff;" data-toggle="modal" data-target="" >查看</a>',
+                    ].join('');
+                }
+            }
+            function operation6(value, row, index){
+                if(row.receivingDataStatus == webStatus[18].id) {
                     return [
                         '<a class="viewo" style="margin:0 1em;text-decoration: none;color:#348eff;" data-toggle="modal" data-target="" >查看</a>',
                     ].join('');

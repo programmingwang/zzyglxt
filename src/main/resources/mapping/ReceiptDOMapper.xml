@@ -361,6 +361,9 @@
           <if test='receivingDataStatus == "7" '>
             WHERE RECEIVING_DATA_STATUS in (5,16,17,18)
           </if>
+          <if test='receivingDataStatus == "3" '>
+            WHERE RECEIVING_DATA_STATUS in (18)
+          </if>
           <if test='receivingDataStatus == "2" '>
                 WHERE RECEIVING_DATA_STATUS in (1,2,4,3,5,6,16,17,18)
           </if>

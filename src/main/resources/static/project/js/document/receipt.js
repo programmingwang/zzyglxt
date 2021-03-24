@@ -75,12 +75,51 @@
                 'click .send-file' : function (e, value, row, index) {
                     var mySendFileReceiptModalData ={
                         modalBodyID :"mySendFileModal",
-                        modalTitle : "文件将下达各个部门",
+                        modalTitle : "文件将下达",
                         modalClass : "modal-lg",
                         modalConfirmFun:function () {
                             var isSuccess = false;
                             var submitStatus = {
                                 "receivingDataStatus": webStatus[18].id
+                            };
+                            ajaxUtil.myAjax(null,"changestatustoreceipt/"+row.itemid+"/"+row.itemcode,submitStatus,function (data) {
+                                if(ajaxUtil.success(data)){
+                                    if(data.code == 88888){
+                                        var submitConfirmModal = {
+                                            modalBodyID :"myTopicSubmitTip",
+                                            modalTitle : "提示",
+                                            modalClass : "modal-lg",
+                                            cancelButtonStyle: "display:none",
+                                            modalConfirmFun:function (){
+                                                return true;
+                                            }
+                                        }
+                                        var submitConfirm = modalUtil.init(submitConfirmModal);
+                                        submitConfirm.show();
+
+                                        isSuccess = true;
+                                        refreshTable();
+                                    }else{
+                                        alertUtil.error(data.msg);
+                                    }
+                                }
+                            },false);
+                            return isSuccess;
+                        }
+
+                    };
+                    var mySendFileModal = modalUtil.init(mySendFileReceiptModalData);
+                    mySendFileModal.show();
+                },
+                'click .send-file-ke' : function (e, value, row, index) {
+                    var mySendFileReceiptModalData ={
+                        modalBodyID :"mySendFileModal",
+                        modalTitle : "文件将下达",
+                        modalClass : "modal-lg",
+                        modalConfirmFun:function () {
+                            var isSuccess = false;
+                            var submitStatus = {
+                                "receivingDataStatus": webStatus[7].id
                             };
                             ajaxUtil.myAjax(null,"changestatustoreceipt/"+row.itemid+"/"+row.itemcode,submitStatus,function (data) {
                                 if(ajaxUtil.success(data)){
@@ -310,6 +349,28 @@
                     {field: 'receivingDateOfReceipt', title: '来文日期'},
                     {field: 'action', title: '操作', formatter: operation1, events: orgEvents}
                 ];
+            }else if (rolename === "政务资源处长"){
+                url = "selectallreceipt?receivingDataStatus=3";
+                var aCol = [
+                    {field: 'receivingTitle', title: '文件标题', formatter: viewOperation, events: viewEvents},
+                    {field: 'receivingUnitOfCommun', title: '来文单位'},
+                    {
+                        field: 'receivingDegreeOfUrgency', title: '紧急程度', formatter: function (row) {
+                            return '<p>' + pl[row].text + '</p>';
+                        }
+                    },
+                    {
+                        field: 'filePath', title: '附件', formatter: function (value, row, index) {
+                            if (value == null) {
+                                return '<p style="padding-top: 15px">无附件</p>';
+                            } else {
+                                return '<a href="' + value + '">' + row.fileName + '</a>'
+                            }
+                        }
+                    },
+                    {field: 'receivingDateOfReceipt', title: '来文日期'},
+                    {field: 'action', title: '操作', formatter: operation6, events: orgEvents}
+                ];
             }else if (rolename === "政务资源综合处处长"){
                 url = "selectallreceipt?receivingDataStatus=2";
                 var aCol = [
@@ -431,11 +492,11 @@
                         '<a class="view" style="margin:0 1em;text-decoration: none;color:#348eff;" data-toggle="modal" data-target="" >查看</a>',
                         '<a class="no-submit" style="margin:0 1em;text-decoration: none;color:#ed0f09;" data-toggle="modal" data-target="" >取消提交</a>',
                     ].join('');
-                }else if(row.receivingDataStatus == webStatus[2].id ||row.receivingDataStatus == webStatus[4].id || row.receivingDataStatus == webStatus[5].id || row.receivingDataStatus == webStatus[16].id ){
+                }else if(row.receivingDataStatus == webStatus[2].id ||row.receivingDataStatus == webStatus[4].id || row.receivingDataStatus == webStatus[5].id || row.receivingDataStatus == webStatus[16].id|| row.receivingDataStatus == webStatus[7].id ){
                     return [
                         '<a class="view" style="margin:0 1em;text-decoration: none;color:#348eff;" data-toggle="modal" data-target="" >查看</a>',
                     ].join('');
-                }else if(row.receivingDataStatus == webStatus[3].id || row.receivingDataStatus == webStatus[6].id  || row.receivingDataStatus == webStatus[17].id|| row.receivingDataStatus == webStatus[18].id){
+                }else if(row.receivingDataStatus == webStatus[3].id || row.receivingDataStatus == webStatus[6].id  || row.receivingDataStatus == webStatus[17].id){
                     return [
                         '<a class="view" style="margin:0 1em;text-decoration: none;color:#348eff;" data-toggle="modal" data-target="" >查看</a>',
                         '<a class="delete" style="margin:0 1em;text-decoration: none;color:#ed0f09;" data-toggle="modal" data-target="#staticBackdrop" >删除</a>',
@@ -455,7 +516,7 @@
                     ].join('');
                 }
 
-                else if(row.receivingDataStatus == webStatus[4].id||row.receivingDataStatus == webStatus[2].id||row.receivingDataStatus == webStatus[3].id|| row.receivingDataStatus == webStatus[5].id || row.receivingDataStatus == webStatus[6].id || row.receivingDataStatus == webStatus[16].id || row.receivingDataStatus == webStatus[17].id|| row.receivingDataStatus == webStatus[18].id){
+                else if(row.receivingDataStatus == webStatus[7].id||row.receivingDataStatus == webStatus[4].id||row.receivingDataStatus == webStatus[2].id||row.receivingDataStatus == webStatus[3].id|| row.receivingDataStatus == webStatus[5].id || row.receivingDataStatus == webStatus[6].id || row.receivingDataStatus == webStatus[16].id || row.receivingDataStatus == webStatus[17].id|| row.receivingDataStatus == webStatus[18].id){
 
                     return [
                         '<a class="view" style="margin:0 1em;text-decoration: none;color:#348eff;" data-toggle="modal" data-target="" >查看</a>',
@@ -468,7 +529,7 @@
                     return [
                         '<a class="view" style="margin:0 1em;text-decoration: none;color:#13ff27;" data-toggle="modal" data-target="" >填写审核意见</a>',
                     ].join('');
-                }else if(row.receivingDataStatus == webStatus[5].id ||row.receivingDataStatus == webStatus[6].id || row.receivingDataStatus == webStatus[17].id|| row.receivingDataStatus == webStatus[18].id){
+                }else if(row.receivingDataStatus == webStatus[5].id||row.receivingDataStatus == webStatus[6].id ||row.receivingDataStatus == webStatus[7].id || row.receivingDataStatus == webStatus[17].id|| row.receivingDataStatus == webStatus[18].id){
                     return [
                         '<a class="view" style="margin:0 1em;text-decoration: none;color:#348eff;" data-toggle="modal" data-target="" >查看</a>',
                     ].join('');
@@ -484,7 +545,7 @@
                     return [
                         '<a class="view" style="margin:0 1em;text-decoration: none;color:#15ff31;" data-toggle="modal" data-target="" >填写审核意见</a>',
                     ].join('');
-                }else if(row.receivingDataStatus == webStatus[16].id || row.receivingDataStatus == webStatus[17].id|| row.receivingDataStatus == webStatus[18].id){
+                }else if(row.receivingDataStatus == webStatus[7].id||row.receivingDataStatus == webStatus[16].id || row.receivingDataStatus == webStatus[17].id|| row.receivingDataStatus == webStatus[18].id){
                     return [
                         '<a class="view" style="margin:0 1em;text-decoration: none;color:#348eff;" data-toggle="modal" data-target="" >查看</a>',
                     ].join('');
@@ -492,9 +553,21 @@
             }
 
             function operation5(value, row, index){
-                if(row.receivingDataStatus == webStatus[18].id){
+                if(row.receivingDataStatus == webStatus[7].id||row.receivingDataStatus == webStatus[18].id){
                     return [
                         '<a class="viewo" style="margin:0 1em;text-decoration: none;color:#348eff;" data-toggle="modal" data-target="" >查看</a>',
+                    ].join('');
+                }
+            }
+            function operation6(value, row, index){
+                if(row.receivingDataStatus == webStatus[18].id) {
+                    return [
+                        '<a class="view" style="margin:0 1em;text-decoration: none;color:#348eff;" data-toggle="modal" data-target="" >查看</a>',
+                        '<a  class="send-file-ke"  data-toggle="modal" style="margin:0 0.6em;text-decoration: none;color:#ed0f09;" data-target="#staticBackdrop" >下达文件</a>',
+                    ].join('');
+                }else if(row.receivingDataStatus == webStatus[7].id) {
+                    return [
+                        '<a class="view" style="margin:0 1em;text-decoration: none;color:#348eff;" data-toggle="modal" data-target="" >查看</a>',
                     ].join('');
                 }
             }

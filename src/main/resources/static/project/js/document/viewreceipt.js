@@ -32,7 +32,7 @@
 
 
             //审核意见处理
-            if(rolename === "政务资源科员"){
+            if(rolename === "政务资源科员"||rolename === "政务资源处长"){
                 $('#opinin20').attr('style', "display:block;margin-bottom:10px");
                 if (tempdata.reasont !== ""){
                     $('#opinin220').attr('style', "display:block;");
@@ -280,9 +280,20 @@
                                 ajaxUtil.myAjax(null, "changestatustoreceipt/" + row.itemid + "/" + row.itemcode, ReceiptEntity, function (data) {
                                     if (ajaxUtil.success(data)) {
                                         if (data.code == 88888) {
-                                            alertUtil.success("审核通过");
-                                            var url = "/document/receipt";
-                                            orange.redirect(url);
+                                            var submitConfirmModal = {
+                                                modalBodyID :"myTopicSubmitTip",
+                                                modalTitle : "提示",
+                                                modalClass : "modal-lg",
+                                                cancelButtonStyle: "display:none",
+                                                modalConfirmFun:function (){
+                                                    alertUtil.success("审核通过");
+                                                    var url = "/document/receipt";
+                                                    orange.redirect(url);
+                                                    return true;
+                                                }
+                                            }
+                                            var submitConfirm = modalUtil.init(submitConfirmModal);
+                                            submitConfirm.show();
                                             isSuccess = true;
                                             refreshTable();
                                         } else {
@@ -387,9 +398,20 @@
                                     ajaxUtil.myAjax(null, "changestatustoreceipt/" + row.itemid + "/" + row.itemcode, ReceiptEntity, function (data) {
                                         if (ajaxUtil.success(data)) {
                                             if (data.code == 88888) {
-                                                alertUtil.success("文件驳回成功");
-                                                var url = "/document/receipt";
-                                                orange.redirect(url);
+                                                var submitConfirmModal = {
+                                                    modalBodyID :"myTopicSubmitTip",
+                                                    modalTitle : "提示",
+                                                    modalClass : "modal-lg",
+                                                    cancelButtonStyle: "display:none",
+                                                    modalConfirmFun:function (){
+                                                        alertUtil.success("文件驳回成功");
+                                                        var url = "/document/receipt";
+                                                        orange.redirect(url);
+                                                        return true;
+                                                    }
+                                                }
+                                                var submitConfirm = modalUtil.init(submitConfirmModal);
+                                                submitConfirm.show();
                                                 isSuccess = true;
                                                 refreshTable();
                                             } else {

@@ -122,12 +122,12 @@
                                                 modalClass : "modal-lg",
                                                 cancelButtonStyle: "display:none",
                                                 modalConfirmFun:function (){
+                                                    alertUtil.success("文件驳回成功");
+                                                    var url = "/document/report";
+                                                    orange.redirect(url);
                                                     return true;
                                                 }
                                             }
-                                            alertUtil.success("文件驳回成功");
-                                            var url = "/document/report";
-                                            orange.redirect(url);
                                             var submitConfirm = modalUtil.init(submitConfirmModal);
                                             submitConfirm.show();
                                             isSuccess = true;
@@ -207,12 +207,12 @@
                                                 modalClass : "modal-lg",
                                                 cancelButtonStyle: "display:none",
                                                 modalConfirmFun:function (){
+                                                    alertUtil.success("审核通过");
+                                                    var url = "/document/report";
+                                                    orange.redirect(url);
                                                     return true;
                                                 }
                                             }
-                                            alertUtil.success("审核通过");
-                                            var url = "/document/report";
-                                            orange.redirect(url);
                                             var submitConfirm = modalUtil.init(submitConfirmModal);
                                             submitConfirm.show();
                                             isSuccess = true;

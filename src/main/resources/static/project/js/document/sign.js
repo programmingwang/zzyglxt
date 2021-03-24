@@ -29,9 +29,9 @@
                         modalBodyID : "myDeletesignModal",
                         modalTitle : "删除内部会签",
                         modalClass : "modal-lg",
+                        cancelButtonStyle: "display:none",
                         confirmButtonClass : "btn-danger",
                         modalConfirmFun:function () {
-                            var isSuccess = false;
                             ajaxUtil.myAjax(null,"governresCountersign/delete/"+row.itemcode,null,function (data) {
                                 if(ajaxUtil.success(data)){
                                     var submitConfirmModal = {
@@ -49,7 +49,7 @@
                                     refreshTable();
                                 }
                             },false,true,"delete");
-                            return isSuccess;
+                            return true;
                         }
 
                     };
@@ -103,6 +103,38 @@
                                     "directorDate" : nowTime,
                                 };
                                 submitStatus.fileNo = "4";
+                            }else if (rolename == "中医处分管局长" && row.parment == "1"){
+                                submitOpinion = {
+                                    "dataCode" : row.itemcode,
+                                    "signOpinion" : $("#reason").val(),
+                                    "signName" : username,
+                                    "signDate" : nowTime,
+                                };
+                                submitStatus.fileNo = "5";
+                            }else if (rolename == "中药处分管局长" && row.parment == "2"){
+                                submitOpinion = {
+                                    "dataCode" : row.itemcode,
+                                    "signOpinion" : $("#reason").val(),
+                                    "signName" : username,
+                                    "signDate" : nowTime,
+                                };
+                                submitStatus.fileNo = "5";
+                            }else if (rolename == "综合处分管局长" && row.parment == "0"){
+                                submitOpinion = {
+                                    "dataCode" : row.itemcode,
+                                    "signOpinion" : $("#reason").val(),
+                                    "signName" : username,
+                                    "signDate" : nowTime,
+                                };
+                                submitStatus.fileNo = "5";
+                            }else if (rolename == "法规监督处处分管局长" && row.parment == "3"){
+                                submitOpinion = {
+                                    "dataCode" : row.itemcode,
+                                    "signOpinion" : $("#reason").val(),
+                                    "signName" : username,
+                                    "signDate" : nowTime,
+                                };
+                                submitStatus.fileNo = "5";
                             }
                             ajaxUtil.myAjax(null,"governresCountersign/update",submitStatus,function (data) {
                                 if(ajaxUtil.success(data)){
@@ -296,6 +328,162 @@
                     var myPassModal = modalUtil.init(myPassReceiptModalData);
                     myPassModal.show();
                 },
+                'click .passfo' : function (e, value, row, index) {
+                    var myPassSignModalData ={
+                        modalBodyID :"myPassModal",
+                        modalTitle : "中医处分管局长通过",
+                        modalClass : "modal-lg",
+                        modalConfirmFun:function () {
+                            var isSuccess = false;
+                            var submitStatus = {
+                                "status":getStatus(sessionStorage.getItem("rolename"),webStatus),
+                                "itemid": row.itemid,
+                                "itemcode":row.itemcode
+                            };
+                            ajaxUtil.myAjax(null,"governresCountersign/update",submitStatus,function (data) {
+                                if(ajaxUtil.success(data)){
+                                    if(data.code == ajaxUtil.successCode){
+                                        var submitConfirmModal = {
+                                            modalBodyID :"myTopicSubmitTip",
+                                            modalTitle : "提示",
+                                            modalClass : "modal-lg",
+                                            cancelButtonStyle: "display:none",
+                                            modalConfirmFun:function (){
+                                                return true;
+                                            }
+                                        }
+                                        var submitConfirm = modalUtil.init(submitConfirmModal);
+                                        submitConfirm.show();
+                                        isSuccess = true;
+                                        refreshTable();
+                                    }else{
+                                        alertUtil.error(data.msg);
+                                    }
+                                }
+                            },false,true,"put");
+                            return isSuccess;
+                        }
+                    };
+                    var myPassModal = modalUtil.init(myPassSignModalData);
+                    myPassModal.show();
+                },
+                'click .passfi' : function (e, value, row, index) {
+                    var myPassSignModalData ={
+                        modalBodyID :"myPassModal",
+                        modalTitle : "中药处分管局长通过",
+                        modalClass : "modal-lg",
+                        modalConfirmFun:function () {
+                            var isSuccess = false;
+                            var submitStatus = {
+                                "status":getStatus(sessionStorage.getItem("rolename"),webStatus),
+                                "itemid": row.itemid,
+                                "itemcode":row.itemcode
+                            };
+                            ajaxUtil.myAjax(null,"governresCountersign/update",submitStatus,function (data) {
+                                if(ajaxUtil.success(data)){
+                                    if(data.code == ajaxUtil.successCode){
+                                        var submitConfirmModal = {
+                                            modalBodyID :"myTopicSubmitTip",
+                                            modalTitle : "提示",
+                                            modalClass : "modal-lg",
+                                            cancelButtonStyle: "display:none",
+                                            modalConfirmFun:function (){
+                                                return true;
+                                            }
+                                        }
+                                        var submitConfirm = modalUtil.init(submitConfirmModal);
+                                        submitConfirm.show();
+                                        isSuccess = true;
+                                        refreshTable();
+                                    }else{
+                                        alertUtil.error(data.msg);
+                                    }
+                                }
+                            },false,true,"put");
+                            return isSuccess;
+                        }
+                    };
+                    var myPassModal = modalUtil.init(myPassSignModalData);
+                    myPassModal.show();
+                },
+                'click .passsix' : function (e, value, row, index) {
+                    var myPassSignModalData ={
+                        modalBodyID :"myPassModal",
+                        modalTitle : "综合处分管局长通过",
+                        modalClass : "modal-lg",
+                        modalConfirmFun:function () {
+                            var isSuccess = false;
+                            var submitStatus = {
+                                "status":getStatus(sessionStorage.getItem("rolename"),webStatus),
+                                "itemid": row.itemid,
+                                "itemcode":row.itemcode
+                            };
+                            ajaxUtil.myAjax(null,"governresCountersign/update",submitStatus,function (data) {
+                                if(ajaxUtil.success(data)){
+                                    if(data.code == ajaxUtil.successCode){
+                                        var submitConfirmModal = {
+                                            modalBodyID :"myTopicSubmitTip",
+                                            modalTitle : "提示",
+                                            modalClass : "modal-lg",
+                                            cancelButtonStyle: "display:none",
+                                            modalConfirmFun:function (){
+                                                return true;
+                                            }
+                                        }
+                                        var submitConfirm = modalUtil.init(submitConfirmModal);
+                                        submitConfirm.show();
+                                        isSuccess = true;
+                                        refreshTable();
+                                    }else{
+                                        alertUtil.error(data.msg);
+                                    }
+                                }
+                            },false,true,"put");
+                            return isSuccess;
+                        }
+                    };
+                    var myPassModal = modalUtil.init(myPassSignModalData);
+                    myPassModal.show();
+                },
+                'click .passsev' : function (e, value, row, index) {
+                    var myPassSignModalData ={
+                        modalBodyID :"myPassModal",
+                        modalTitle : "法规监督处分管局长通过",
+                        modalClass : "modal-lg",
+                        modalConfirmFun:function () {
+                            var isSuccess = false;
+                            var submitStatus = {
+                                "status":getStatus(sessionStorage.getItem("rolename"),webStatus),
+                                "itemid": row.itemid,
+                                "itemcode":row.itemcode
+                            };
+                            ajaxUtil.myAjax(null,"governresCountersign/update",submitStatus,function (data) {
+                                if(ajaxUtil.success(data)){
+                                    if(data.code == ajaxUtil.successCode){
+                                        var submitConfirmModal = {
+                                            modalBodyID :"myTopicSubmitTip",
+                                            modalTitle : "提示",
+                                            modalClass : "modal-lg",
+                                            cancelButtonStyle: "display:none",
+                                            modalConfirmFun:function (){
+                                                return true;
+                                            }
+                                        }
+                                        var submitConfirm = modalUtil.init(submitConfirmModal);
+                                        submitConfirm.show();
+                                        isSuccess = true;
+                                        refreshTable();
+                                    }else{
+                                        alertUtil.error(data.msg);
+                                    }
+                                }
+                            },false,true,"put");
+                            return isSuccess;
+                        }
+                    };
+                    var myPassModal = modalUtil.init(myPassSignModalData);
+                    myPassModal.show();
+                },
 
                 'click .fail' : function (e, value, row, index) {
                     var myFailSignModalData ={
@@ -440,6 +628,178 @@
                             };
                             if(sessionStorage.getItem("rolename") == "政务资源局长"){
                                 submitStatus.status = webStatus[6].id;
+                            }
+                            ajaxUtil.myAjax(null,"governresCountersign/update",submitStatus,function (data) {
+                                if(ajaxUtil.success(data)){
+                                    if(data.code == 88888){
+                                        var submitConfirmModal = {
+                                            modalBodyID :"myTopicSubmitTip",
+                                            modalTitle : "提示",
+                                            modalClass : "modal-lg",
+                                            cancelButtonStyle: "display:none",
+                                            modalConfirmFun:function (){
+                                                return true;
+                                            }
+                                        }
+                                        var submitConfirm = modalUtil.init(submitConfirmModal);
+                                        submitConfirm.show();
+                                        isSuccess = true;
+                                        refreshTable();
+                                    }else{
+                                        alertUtil.error(data.msg);
+                                    }
+                                }
+                            },false,true,"put");
+                            return isSuccess;
+                        }
+
+                    };
+                    var myFailModal = modalUtil.init(myFailSignModalData);
+                    myFailModal.show();
+                },
+                'click .failfo' : function (e, value, row, index) {
+                    var myFailSignModalData ={
+                        modalBodyID :"myFailModal",
+                        modalTitle : "中医处分管局长审核不通过",
+                        modalClass : "modal-lg",
+                        modalConfirmFun:function () {
+                            var isSuccess = false;
+                            var submitStatus = {
+                                "status": "",
+                                "itemid": row.itemid,
+                                "itemcode":row.itemcode
+                            };
+                            if(sessionStorage.getItem("rolename") == "中医处分管局长"){
+                                submitStatus.status = webStatus[15].id;
+                            }
+                            ajaxUtil.myAjax(null,"governresCountersign/update",submitStatus,function (data) {
+                                if(ajaxUtil.success(data)){
+                                    if(data.code == 88888){
+                                        var submitConfirmModal = {
+                                            modalBodyID :"myTopicSubmitTip",
+                                            modalTitle : "提示",
+                                            modalClass : "modal-lg",
+                                            cancelButtonStyle: "display:none",
+                                            modalConfirmFun:function (){
+                                                return true;
+                                            }
+                                        }
+                                        var submitConfirm = modalUtil.init(submitConfirmModal);
+                                        submitConfirm.show();
+                                        isSuccess = true;
+                                        refreshTable();
+                                    }else{
+                                        alertUtil.error(data.msg);
+                                    }
+                                }
+                            },false,true,"put");
+                            return isSuccess;
+                        }
+
+                    };
+                    var myFailModal = modalUtil.init(myFailSignModalData);
+                    myFailModal.show();
+                },
+                'click .failfi' : function (e, value, row, index) {
+                    var myFailSignModalData ={
+                        modalBodyID :"myFailModal",
+                        modalTitle : "中药处分管局长审核不通过",
+                        modalClass : "modal-lg",
+                        modalConfirmFun:function () {
+                            var isSuccess = false;
+                            var submitStatus = {
+                                "status": "",
+                                "itemid": row.itemid,
+                                "itemcode":row.itemcode
+                            };
+                            if(sessionStorage.getItem("rolename") == "中药处分管局长"){
+                                submitStatus.status = webStatus[17].id;
+                            }
+                            ajaxUtil.myAjax(null,"governresCountersign/update",submitStatus,function (data) {
+                                if(ajaxUtil.success(data)){
+                                    if(data.code == 88888){
+                                        var submitConfirmModal = {
+                                            modalBodyID :"myTopicSubmitTip",
+                                            modalTitle : "提示",
+                                            modalClass : "modal-lg",
+                                            cancelButtonStyle: "display:none",
+                                            modalConfirmFun:function (){
+                                                return true;
+                                            }
+                                        }
+                                        var submitConfirm = modalUtil.init(submitConfirmModal);
+                                        submitConfirm.show();
+                                        isSuccess = true;
+                                        refreshTable();
+                                    }else{
+                                        alertUtil.error(data.msg);
+                                    }
+                                }
+                            },false,true,"put");
+                            return isSuccess;
+                        }
+
+                    };
+                    var myFailModal = modalUtil.init(myFailSignModalData);
+                    myFailModal.show();
+                },
+                'click .failsix' : function (e, value, row, index) {
+                    var myFailSignModalData ={
+                        modalBodyID :"myFailModal",
+                        modalTitle : "综合处分管局长审核不通过",
+                        modalClass : "modal-lg",
+                        modalConfirmFun:function () {
+                            var isSuccess = false;
+                            var submitStatus = {
+                                "status": "",
+                                "itemid": row.itemid,
+                                "itemcode":row.itemcode
+                            };
+                            if(sessionStorage.getItem("rolename") == "综合处分管局长"){
+                                submitStatus.status = webStatus[19].id;
+                            }
+                            ajaxUtil.myAjax(null,"governresCountersign/update",submitStatus,function (data) {
+                                if(ajaxUtil.success(data)){
+                                    if(data.code == 88888){
+                                        var submitConfirmModal = {
+                                            modalBodyID :"myTopicSubmitTip",
+                                            modalTitle : "提示",
+                                            modalClass : "modal-lg",
+                                            cancelButtonStyle: "display:none",
+                                            modalConfirmFun:function (){
+                                                return true;
+                                            }
+                                        }
+                                        var submitConfirm = modalUtil.init(submitConfirmModal);
+                                        submitConfirm.show();
+                                        isSuccess = true;
+                                        refreshTable();
+                                    }else{
+                                        alertUtil.error(data.msg);
+                                    }
+                                }
+                            },false,true,"put");
+                            return isSuccess;
+                        }
+
+                    };
+                    var myFailModal = modalUtil.init(myFailSignModalData);
+                    myFailModal.show();
+                },
+                'click .failsev' : function (e, value, row, index) {
+                    var myFailSignModalData ={
+                        modalBodyID :"myFailModal",
+                        modalTitle : "法规监督处分管局长审核不通过",
+                        modalClass : "modal-lg",
+                        modalConfirmFun:function () {
+                            var isSuccess = false;
+                            var submitStatus = {
+                                "status": "",
+                                "itemid": row.itemid,
+                                "itemcode":row.itemcode
+                            };
+                            if(sessionStorage.getItem("rolename") == "法规监督处分管局长"){
+                                submitStatus.status = webStatus[21].id;
                             }
                             ajaxUtil.myAjax(null,"governresCountersign/update",submitStatus,function (data) {
                                 if(ajaxUtil.success(data)){
@@ -659,15 +1019,23 @@
             function getRoleTable(role,preUrl,status,webStatus) {
                 if(role === "政务资源科员"){
                     $('#btn_addTask').attr('style',"display:block");
-                    return preUrl + "?status=1"
+                    return preUrl + "?status=0"
                 }else if(role === "政务资源处长"){
-                    return preUrl + "?status=2";
+                    return preUrl + "?status=1";
                 }else if(role === "政务资源综合处处长"){
-                    return preUrl + "?status=3";
+                    return preUrl + "?status=2";
                 }else if(role === "政务资源分管局长") {
-                    return preUrl + "?status=4"
+                    return preUrl + "?status=11"
                 } else if(role === "政务资源局长") {
-                    return preUrl + "?status=5"
+                    return preUrl + "?status=8"
+                }else if(role === "中医处分管局长") {
+                    return preUrl + "?status=9"
+                }else if(role === "中药处分管局长") {
+                    return preUrl + "?status=9"
+                }else if(role === "综合处分管局长") {
+                    return preUrl + "?status=9"
+                }else if(role === "法规监督处分管局长") {
+                    return preUrl + "?status=9"
                 }
             }
 
@@ -680,11 +1048,11 @@
                             '<a class="submit"  style="margin:0 1em;text-decoration: none;color:#4df115;" data-target="#staticBackdrop" >提交</a>',
                             '<a class="delete" style="margin:0 1em;text-decoration: none;color:#ed0f09;"  data-toggle="modal" data-target="#staticBackdrop" >删除</a>',
                         ].join('');
-                    }else if(status == webStatus[2].id || status ==webStatus[11].id|| status ==webStatus[9].id){
+                    }else if(status == webStatus[2].id || status ==webStatus[11].id|| status ==webStatus[9].id|| status ==webStatus[14].id|| status ==webStatus[16].id|| status ==webStatus[18].id|| status ==webStatus[20].id|| status ==webStatus[3].id){
                         return [
                             '<a class="vision" style="margin:0 1em;text-decoration: none;color:#348eff;" data-toggle="modal" data-target="" >查看</a>',
                         ].join('');
-                    }else if(status == webStatus[4].id || status == webStatus[5].id || status == webStatus[6].id|| status == webStatus[7].id|| status == webStatus[12].id){
+                    }else if(status == webStatus[4].id || status == webStatus[5].id || status == webStatus[6].id|| status == webStatus[7].id|| status == webStatus[12].id|| status ==webStatus[15].id|| status ==webStatus[17].id|| status ==webStatus[19].id|| status ==webStatus[21].id){
                         return [
                             '<a class="vision" style="margin:0 1em;text-decoration: none;color:#348eff;" data-toggle="modal" data-target="" >查看</a>',
                             '<a class="delete" style="margin:0 1em;text-decoration: none;color:#ed0f09;" data-toggle="modal" data-target="#staticBackdrop" >删除</a>',
@@ -709,7 +1077,7 @@
                                 '<a class="opinion" style="margin:0 1em;text-decoration: none;color:#348eff;" data-toggle="modal" data-target="" >填写审核意见</a>',
                             ].join('');
                         }
-                    }else if( status == webStatus[4].id||status == webStatus[2].id){
+                    }else {
                         return [
                             '<a class="vision" data-toggle="modal" style="margin:0 1em;text-decoration: none;color:#348eff;" data-target="" >查看</a>',
                         ].join('');
@@ -728,7 +1096,7 @@
                                 '<a class="opinion" style="margin:0 1em;text-decoration: none;color:#348eff;" data-toggle="modal" data-target="" >填写审核意见</a>',
                             ].join('');
                         }
-                    }else if( status == webStatus[12].id){
+                    }else {
                         return [
                             '<a class="vision" data-toggle="modal" style="margin:0 1em;text-decoration: none;color:#348eff;" data-target="" >查看</a>',
                         ].join('');
@@ -747,14 +1115,14 @@
                                 '<a class="opinion" style="margin:0 1em;text-decoration: none;color:#348eff;" data-toggle="modal" data-target="" >填写审核意见</a>',
                             ].join('');
                         }
-                    }else if(status == webStatus[5].id){
-                        return [
-                            '<a class="vision" data-toggle="modal" style="margin:0 1em;text-decoration: none;color:#348eff;" data-target="" >查看</a>',
-                        ].join('');
                     }else if(status == webStatus[9].id){
                         return [
                             '<a  class="vision"  style="margin:0 1em;text-decoration: none;color:#348eff;" data-toggle="modal" data-target="" >查看</a>',
                             '<a  class="under-shelf" style="margin:0 1em;text-decoration: none;color:#ed0f09;" data-toggle="modal" data-target="#staticBackdrop" >撤销</a>',
+                        ].join('');
+                    }else {
+                        return [
+                            '<a class="vision" data-toggle="modal" style="margin:0 1em;text-decoration: none;color:#348eff;" data-target="" >查看</a>',
                         ].join('');
                     }
 
@@ -772,17 +1140,92 @@
                                 '<a class="opinion" style="margin:0 1em;text-decoration: none;color:#348eff;" data-toggle="modal" data-target="" >填写审核意见</a>',
                             ].join('');
                         }
-                    }else if(status == webStatus[6].id||status == webStatus[7].id){
-                        return [
-                            '<a class="vision" data-toggle="modal" style="margin:0 1em;text-decoration: none;color:#348eff;" data-target="" >查看</a>',
-                        ].join('');
                     }else if(status == webStatus[9].id){
                         return [
                             '<a  class="vision"  style="margin:0 1em;text-decoration: none;color:#348eff;" data-toggle="modal" data-target="" >查看</a>',
                             '<a  class="under-shelf" style="margin:0 1em;text-decoration: none;color:#ed0f09;" data-toggle="modal" data-target="#staticBackdrop" >撤销</a>',
                         ].join('');
+                    }else {
+                        return [
+                            '<a class="vision" data-toggle="modal" style="margin:0 1em;text-decoration: none;color:#348eff;" data-target="" >查看</a>',
+                        ].join('');
                     }
-
+                }
+                else if(role === "中医处分管局长"){
+                    if(status == webStatus[9].id && row.parment == "1"){
+                        if (row.fileNo == "5"){
+                            return [
+                                '<a class="view" style="margin:0 1em;text-decoration: none;color:#348eff;" data-toggle="modal" data-target="" >审核意见</a>',
+                                '<a class="passfo"  style="margin:0 1em;text-decoration: none;color:#4df115;" data-target="#staticBackdrop" >提交</a>',
+                                '<a  class="failfo"  data-toggle="modal" style="margin:0 0.6em;text-decoration: none;color:#D60000;" data-target="#staticBackdrop" >不通过</a>',
+                            ].join('');
+                        }else{
+                            return [
+                                '<a class="opinion" style="margin:0 1em;text-decoration: none;color:#348eff;" data-toggle="modal" data-target="" >填写审核意见</a>',
+                            ].join('');
+                        }
+                    }else {
+                        return [
+                            '<a class="vision" data-toggle="modal" style="margin:0 1em;text-decoration: none;color:#348eff;" data-target="" >查看</a>',
+                        ].join('');
+                    }
+                }
+                else if(role === "中药处分管局长"){
+                    if(status == webStatus[9].id && row.parment == "2"){
+                        if (row.fileNo == "5"){
+                            return [
+                                '<a class="view" style="margin:0 1em;text-decoration: none;color:#348eff;" data-toggle="modal" data-target="" >审核意见</a>',
+                                '<a class="passfi"  style="margin:0 1em;text-decoration: none;color:#4df115;" data-target="#staticBackdrop" >提交</a>',
+                                '<a  class="failfi"  data-toggle="modal" style="margin:0 0.6em;text-decoration: none;color:#D60000;" data-target="#staticBackdrop" >不通过</a>',
+                            ].join('');
+                        }else{
+                            return [
+                                '<a class="opinion" style="margin:0 1em;text-decoration: none;color:#348eff;" data-toggle="modal" data-target="" >填写审核意见</a>',
+                            ].join('');
+                        }
+                    }else {
+                        return [
+                            '<a class="vision" data-toggle="modal" style="margin:0 1em;text-decoration: none;color:#348eff;" data-target="" >查看</a>',
+                        ].join('');
+                    }
+                }
+                else if(role === "综合处分管局长"){
+                    if(status == webStatus[9].id && row.parment == "0"){
+                        if (row.fileNo == "5"){
+                            return [
+                                '<a class="view" style="margin:0 1em;text-decoration: none;color:#348eff;" data-toggle="modal" data-target="" >审核意见</a>',
+                                '<a class="passsix"  style="margin:0 1em;text-decoration: none;color:#4df115;" data-target="#staticBackdrop" >提交</a>',
+                                '<a  class="failsix"  data-toggle="modal" style="margin:0 0.6em;text-decoration: none;color:#D60000;" data-target="#staticBackdrop" >不通过</a>',
+                            ].join('');
+                        }else{
+                            return [
+                                '<a class="opinion" style="margin:0 1em;text-decoration: none;color:#348eff;" data-toggle="modal" data-target="" >填写审核意见</a>',
+                            ].join('');
+                        }
+                    }else {
+                        return [
+                            '<a class="vision" data-toggle="modal" style="margin:0 1em;text-decoration: none;color:#348eff;" data-target="" >查看</a>',
+                        ].join('');
+                    }
+                }
+                else if(role === "法规监督处分管局长"){
+                    if(status == webStatus[9].id && row.parment == "3"){
+                        if (row.fileNo == "5"){
+                            return [
+                                '<a class="view" style="margin:0 1em;text-decoration: none;color:#348eff;" data-toggle="modal" data-target="" >审核意见</a>',
+                                '<a class="passsev"  style="margin:0 1em;text-decoration: none;color:#4df115;" data-target="#staticBackdrop" >提交</a>',
+                                '<a  class="failsev"  data-toggle="modal" style="margin:0 0.6em;text-decoration: none;color:#D60000;" data-target="#staticBackdrop" >不通过</a>',
+                            ].join('');
+                        }else{
+                            return [
+                                '<a class="opinion" style="margin:0 1em;text-decoration: none;color:#348eff;" data-toggle="modal" data-target="" >填写审核意见</a>',
+                            ].join('');
+                        }
+                    }else {
+                        return [
+                            '<a class="vision" data-toggle="modal" style="margin:0 1em;text-decoration: none;color:#348eff;" data-target="" >查看</a>',
+                        ].join('');
+                    }
                 }
             }
 
@@ -801,6 +1244,18 @@
                 }
                 else if(role === "政务资源局长"){
                     return webStatus[9].id
+                }
+                else if(role === "中医处分管局长"){
+                    return webStatus[14].id
+                }
+                else if(role === "中药处分管局长"){
+                    return webStatus[16].id
+                }
+                else if(role === "综合处分管局长"){
+                    return webStatus[18].id
+                }
+                else if(role === "法规监督处处分管局长"){
+                    return webStatus[20].id
                 }
             }
 

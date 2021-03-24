@@ -56,7 +56,7 @@ public class adviceDO extends adviceDOKey {
 
     private String signOpinion;
 
-    private String signDate;
+    private Date signDate;
 
     private String signName;
 
@@ -186,5 +186,29 @@ public class adviceDO extends adviceDOKey {
 
     public void setItemupdateat(Date itemupdateat) {
         this.itemupdateat = itemupdateat;
+    }
+
+    public String getSignOpinion() {
+        return signOpinion;
+    }
+
+    public void setSignOpinion(String signOpinion) {
+        this.signOpinion = signOpinion;
+    }
+
+    public Date getSignDate() {
+        return signDate;
+    }
+
+    public void setSignDate(Date signDate) {
+        this.signDate = signDate;
+    }
+
+    public String getSignName() {
+        return signName;
+    }
+
+    public void setSignName(String signName) {
+        this.signName = signName;
     }
 }

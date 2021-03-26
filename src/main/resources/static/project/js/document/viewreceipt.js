@@ -32,7 +32,7 @@
 
 
             //审核意见处理
-            if(rolename === "政务资源科员"||rolename === "政务资源处长"){
+            if(rolename === "政务资源科员"||rolename === "政务资源处长"||rolename === "政务资源县部门"||rolename === "政务资源市部门"){
                 $('#opinin20').attr('style', "display:block;margin-bottom:10px");
                 if (tempdata.reasont !== ""){
                     $('#opinin220').attr('style', "display:block;");

@@ -16,9 +16,16 @@
 
             //点击文件标题查看详情事件
             function viewOperation(value, row, index){
+                    return [
+                        '<a class="receiptview" data-toggle="modal" style="margin:0 0.6em;text-decoration: none;color:#775637;" data-target="" >' + row.receivingTitle + '</a>',
+                    ].join('');
+
+            }
+            function viewOperationone(value, row, index){
                 return [
-                    '<a class="receiptview" data-toggle="modal" style="margin:0 0.6em;text-decoration: none;color:#775637;" data-target="" >'+row.receivingTitle+'</a>',
+                    '<a class="receiptviewone" data-toggle="modal" style="margin:0 0.6em;text-decoration: none;color:#775637;" data-target="" >' + row.receivingTitle + '</a>',
                 ].join('');
+
             }
             window.viewEvents = {
                 'click .receiptview': function (e, value, row, index){
@@ -26,7 +33,13 @@
                     var viewUrl = "/document/viewreceipt";
                     orange.redirect(viewUrl);
                 },
+                'click .receiptviewone': function (e, value, row, index){
+                    localStorage.setItem("viewRowData", JSON.stringify(row));
+                    var viewUrl = "/document/viewreceipt_one";
+                    orange.redirect(viewUrl);
+                }
             };
+
             //操作
             function operation(value, row, index){
                 return getRoleOperate(value,row,index,sessionStorage.getItem("rolename"),row.receivingDataStatus,webStatus)
@@ -156,7 +169,7 @@
                     var viewUrl = "/document/viewreceipt";
                     orange.redirect(viewUrl);
                 },
-                'click .viewo' : function (e, value, row, index) {
+                'click .viewone' : function (e, value, row, index) {
                     localStorage.setItem("viewRowData", JSON.stringify(row));
                     var viewUrl = "/document/viewreceipt_one";
                     orange.redirect(viewUrl);
@@ -449,7 +462,7 @@
             }else if (rolename === "政务资源县部门"||rolename === "政务资源市部门") {
                 url = "selectallreceipt?receivingDataStatus=8";
                 var aCol = [
-                    {field: 'receivingTitle', title: '文件标题', formatter: viewOperation, events: viewEvents},
+                    {field: 'receivingTitle', title: '文件标题', formatter: viewOperationone, events: viewEvents},
                     {field: 'receivingUnitOfCommun', title: '来文单位'},
                     {
                         field: 'receivingDegreeOfUrgency', title: '紧急程度', formatter: function (row) {
@@ -553,9 +566,9 @@
             }
 
             function operation5(value, row, index){
-                if(row.receivingDataStatus == webStatus[7].id||row.receivingDataStatus == webStatus[18].id){
+                if(row.receivingDataStatus == webStatus[7].id){
                     return [
-                        '<a class="viewo" style="margin:0 1em;text-decoration: none;color:#348eff;" data-toggle="modal" data-target="" >查看</a>',
+                        '<a class="viewone" style="margin:0 1em;text-decoration: none;color:#348eff;" data-toggle="modal" data-target="" >查看</a>',
                     ].join('');
                 }
             }

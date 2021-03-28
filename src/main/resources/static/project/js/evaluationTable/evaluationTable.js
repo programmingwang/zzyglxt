@@ -82,7 +82,6 @@
                     modalTitle: "提交",
                     modalClass: "modal-lg",
                     modalConfirmFun:function (){
-                        console.log()
                         var exmaineEntity = {};
                         exmaineEntity.opinion = $("#expertOpinion").val();
                         exmaineEntity.score = $("#allSc").val();

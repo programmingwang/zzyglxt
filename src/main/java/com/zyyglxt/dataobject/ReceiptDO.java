@@ -18,10 +18,13 @@ public class ReceiptDO extends ReceiptDOKey {
     @NotBlank(message = "来文单位不能为空",groups = ValidationGroups.Insert.class)
     private String receivingUnitOfCommun;//来文单位
 
+    @NotBlank(message = "文件编号不能为空",groups = ValidationGroups.Insert.class)
     private String fileNo;//文件编号
 
+    @NotBlank(message = "份数不能为空",groups = ValidationGroups.Insert.class)
     private Integer number;//份数
 
+    @NotBlank(message = "密级不能为空",groups = ValidationGroups.Insert.class)
     private String secretLevel;//密级
 
     private String receivingDegreeOfUrgency;//紧急程度
@@ -55,6 +58,15 @@ public class ReceiptDO extends ReceiptDOKey {
 
     private String receiptReason;//局长审核
     private String receiptReasonl;//分局审核
+    private String receiptReasonk;//审核阶段标志
+
+    public String getReceiptReasonk() {
+        return receiptReasonk;
+    }
+
+    public void setReceiptReasonk(String receiptReasonk) {
+        this.receiptReasonk = receiptReasonk== null ? null : receiptReasonk.trim();
+}
 
     public String getReceiptReason() {
         return receiptReason;

@@ -40,21 +40,23 @@
                 var ReceiptEntity;
                 var addUpdateUrl;
                 var operateMessage;
+                var receivingDateOfReceipt=$("#receivingDateOfReceipt").val();
+                var timeLimit=$("#timeLimit").val();
                 if(!isUpdate()){
                     addUpdateUrl = "insertreceipt";
                     operateMessage = "保存收文信息成功";
                     ReceiptEntity = {
                         itemcode: stringUtil.getUUID(),
                         receivingNum : $("#receivingNum").val(),
-                        receivingDateOfReceipt : $("#receivingDateOfReceipt").val(),
+                        "receivingDateOfReceipt" : receivingDateOfReceipt,
                         receivingTitle : $("#receivingTitle").val(),
                         receivingUnitOfCommun : $("#receivingUnitOfCommun").val(),
                         fileNo : $("#fileNo").val(),
                         number : $("#number").val(),
                         secretLevel : $("#secretLevel").val(),
                         receivingDegreeOfUrgency : $("#receivingDegreeOfUrgency").val(),
+                        "timeLimit" : timeLimit,
                         receivingDataStatus : '0',
-                        timeLimit : $("#timeLimit").val(),
 
                     };
                 }else{
@@ -64,26 +66,37 @@
                         itemid: needData.itemid,
                         itemcode: needData.itemcode,
                         receivingNum : $("#receivingNum").val(),
-                        receivingDateOfReceipt : $("#receivingDateOfReceipt").val(),
+                        "receivingDateOfReceipt" : receivingDateOfReceipt,
                         receivingTitle : $("#receivingTitle").val(),
                         receivingUnitOfCommun : $("#receivingUnitOfCommun").val(),
                         fileNo : $("#fileNo").val(),
                         number : $("#number").val(),
                         secretLevel : $("#secretLevel").val(),
                         receivingDegreeOfUrgency : $("#receivingDegreeOfUrgency").val(),
-                        timeLimit : $("#timeLimit").val(),
+                        "timeLimit" : timeLimit,
+                        receivingDataStatus : '0'
                     }
                     operateMessage = "更新收文信息成功";
                 }
                 fileUtil.handleFile(isUpdate(), ReceiptEntity.itemcode, $("#upload_file")[0].files[0]);
 
                 ajaxUtil.myAjax(null,addUpdateUrl,ReceiptEntity,function (data) {
+                    if(receivingDateOfReceipt!=""&&timeLimit!="") {
+                        var start=new Date(receivingDateOfReceipt.replace("-","/"));
+                        var end=new Date(timeLimit.replace("-","/"));
+                        if(end>start) {
                     if(ajaxUtil.success(data)){
                         alertUtil.info(operateMessage);
                         var url = "/document/receipt";
                         orange.redirect(url);
                     }else {
                         alertUtil.alert(data.msg);
+                    }
+                        }else{
+                            alertUtil.info("办结时限不能小于收文时间");
+                        }
+                    }else{
+                        alertUtil.info("时间栏不能为空");
                     }
                 },false,true);
                 return false;
@@ -93,13 +106,15 @@
                 var ReceiptEntity;
                 var addUpdateUrl;
                 var operateMessage;
+                var receivingDateOfReceipt=$("#receivingDateOfReceipt").val();
+                var timeLimit=$("#timeLimit").val();
                 if(!isUpdate()){
                     addUpdateUrl = "insertreceipt";
                     operateMessage = "收文信息发送成功";
                     ReceiptEntity = {
                         itemcode: stringUtil.getUUID(),
                         receivingNum : $("#receivingNum").val(),
-                        receivingDateOfReceipt : $("#receivingDateOfReceipt").val(),
+                        "receivingDateOfReceipt" : receivingDateOfReceipt,
                         receivingTitle : $("#receivingTitle").val(),
                         receivingUnitOfCommun : $("#receivingUnitOfCommun").val(),
                         fileNo : $("#fileNo").val(),
@@ -107,7 +122,7 @@
                         secretLevel : $("#secretLevel").val(),
                         receivingDegreeOfUrgency : $("#receivingDegreeOfUrgency").val(),
                         receivingDataStatus : '1',
-                        timeLimit : $("#timeLimit").val(),
+                        "timeLimit" : timeLimit,
                     };
                 }else{
                     var needData = JSON.parse(localStorage.getItem("rowData"));
@@ -116,26 +131,37 @@
                         itemid: needData.itemid,
                         itemcode: needData.itemcode,
                         receivingNum : $("#receivingNum").val(),
-                        receivingDateOfReceipt : $("#receivingDateOfReceipt").val(),
+                        "receivingDateOfReceipt" : receivingDateOfReceipt,
                         receivingTitle : $("#receivingTitle").val(),
                         receivingUnitOfCommun : $("#receivingUnitOfCommun").val(),
                         fileNo : $("#fileNo").val(),
                         number : $("#number").val(),
                         secretLevel : $("#secretLevel").val(),
                         receivingDegreeOfUrgency : $("#receivingDegreeOfUrgency").val(),
-                        timeLimit : $("#timeLimit").val(),
+                        "timeLimit" : timeLimit,
+                        receivingDataStatus : '1'
                     }
                     operateMessage = "更新收文信息成功";
                 }
                 fileUtil.handleFile(isUpdate(), ReceiptEntity.itemcode, $("#upload_file")[0].files[0]);
 
                 ajaxUtil.myAjax(null,addUpdateUrl,ReceiptEntity,function (data) {
-                    if(ajaxUtil.success(data)){
-                        alertUtil.info(operateMessage);
-                        var url = "/document/receipt";
-                        orange.redirect(url);
-                    }else {
-                        alertUtil.alert(data.msg);
+                    if(receivingDateOfReceipt!=""&&timeLimit!="") {
+                        var start=new Date(receivingDateOfReceipt.replace("-","/"));
+                        var end=new Date(timeLimit.replace("-","/"));
+                        if(end>start) {
+                            if (ajaxUtil.success(data)) {
+                                alertUtil.info(operateMessage);
+                                var url = "/document/receipt";
+                                orange.redirect(url);
+                            } else {
+                                alertUtil.alert(data.msg);
+                            }
+                        }else{
+                            alertUtil.info("办结时限不能小于收文时间");
+                        }
+                    }else{
+                        alertUtil.info("时间栏不能为空");
                     }
                 },false,true);
                 return false;

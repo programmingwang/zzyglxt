@@ -34,7 +34,7 @@
             font-weight: 500;
         }
         .textC{
-            width: 444px;
+            width: 1000px;
             margin-left: 18px;
             margin: 10px;
         }
@@ -67,10 +67,15 @@
             outline: none;
         }
         .advice{
-            width: 485px;
+            width: 70%;
             margin-left: 18px;
             border: none;
             outline: none;
+        }
+        textarea{
+            resize:none !important;
+            overflow:hidden;
+
         }
     </style>
 </head>
@@ -88,7 +93,7 @@
                             <textarea id="reasonj" placeholder="请输入审核意见" style="width:100%; height:40%; padding-left: 18px; border: none; outline: none;"></textarea>
                         </div>
                             <div id="opinin21" style="display: none" >
-                                <input id="reasontwo"  class="advice" style="margin-top: 20px;" placeholder="等待局长审核" readonly="readonly"></input>
+                                <textarea id="reasontwo"  class="advice" style="margin-top: 20px;" placeholder="等待局长审核" readonly="readonly"></textarea>
                                 <input id="updatertwo" class="mesageP" style="border:none;margin-top: 40px;outline: none;" readonly="readonly"></input>
                                 <input id="updatetwo" class="textCy" style="border:none;margin-top: 40px;outline: none;"readonly="readonly"></input>
                             </div>
@@ -97,7 +102,7 @@
                             <textarea id="reasonf" placeholder="请输入审核意见" style="width:100%; height:40%; padding-left: 18px; border: none; outline: none;"></textarea>
                         </div>
                             <div id="opinin23" style="display: none" >
-                                <input id="reasonone"  class="advice" style="margin-top: 20px;" placeholder="等待分局审核" readonly="readonly"></input>
+                                <textarea id="reasonone"  class="advice" style="margin-top: 20px;" placeholder="等待分局审核" readonly="readonly"></textarea>
                                 <input id="updaterone" class="mesageP" style="border:none;margin-top: 40px;outline: none;" readonly="readonly"></input>
                                 <input id="updateone" class="textCy" style="border:none;margin-top: 40px;outline: none;"readonly="readonly"></input>
                             </div>
@@ -110,7 +115,7 @@
                             <textarea id="reasonc" placeholder="请输入审核意见" style="width:100%; height:40%; padding-left: 18px; border: none; outline: none;"></textarea>
                         </div>
                             <div id="opinin25" style="display: none"  >
-                                <input id="reason"  class="advice" style="margin-top: 20px;" placeholder="等待处长审核" readonly="readonly"></input>
+                                <textarea id="reason"  class="advice" style="margin-top: 20px;" placeholder="等待处长审核" readonly="readonly"></textarea>
                                 <input id="updaterf" class="mesageP" style="border:none;margin-top: 40px;outline: none;"readonly="readonly"></input>
                                 <input id="updatef" class="textCy" style="border:none;margin-top: 40px;outline: none;"readonly="readonly"></input>
                             </div>
@@ -121,20 +126,20 @@
                     <td class="secendL">
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label">报告标题：</label>
-                            <div class="col-sm-4">
+                            <div class="col-sm-10">
                                 <input id="reportTitle" type="text" class="textC" style="margin-left: -120px;border:none;margin-top: 1px;"  disabled>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label">报告内容：</label>
-                            <div class="col-sm-4">
-                                <textarea  id="reportContent"  rows="6" style="font-family: monospace;border:none;margin-left: -120px;width: 100%;" disabled></textarea>
+                            <div class="col-sm-10">
+                                <textarea  id="reportContent"  rows="6" style="border:none;margin-left: -120px;width: 100%;" disabled></textarea>
                             </div>
                         </div>
                         <!--附件div-->
                         <div class="form-group row">
                             <label for="exampleFormControlFile1" class="col-sm-2 col-form-label">附&emsp;&emsp;件：</label>
-                            <div class="upload-wrap anticon" nv-file-drop="" uploader="uploader" style="margin-top: 1px;margin-left: -120px;">
+                            <div class="upload-wrap anticon" nv-file-drop="" uploader="uploader" style="margin-top: 7px;margin-left: -120px;">
                                 <a id="upload_file" href=""></a>
                             </div>
 
@@ -148,11 +153,11 @@
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label">起草人：</label>
                 <div class="col-sm-3">
-                    <input id="creater" type="text" class="textC" style="border:none;margin-left: -150px;margin-top: 1px;"  disabled>
+                    <input id="creater" type="text" class="textC" style="border:none;margin-left: -150px;margin-top: 6px;"  disabled>
                 </div>
                 <label class="col-sm-2 col-form-label" style="margin-left: -120px;">日&emsp;期：</label>
                 <div class="col-sm-3">
-                    <input id="itemcreateat" type="text" class="textC" style="border:none;margin-left: -150px;margin-top: 1px;"  disabled>
+                    <input id="itemcreateat" type="text" class="textC" style="border:none;margin-left: -150px;margin-top: 6px;"  disabled>
                 </div>
             </div>
         </div>

@@ -46,7 +46,7 @@ public class RequestReportServiceImpl implements IRequestReportDOService {
             throw new BusinessException(result.getErrMsg(), EmBusinessError.PARAMETER_VALIDATION_ERROR);
         }
         record.setItemcreateat(new Date());
-        record.setCreater(usernameUtil.getOperateUser());
+        record.setCreater(usernameUtil.getRoleName());
         return requestReportDOMapper.insertSelective(record);
     }
 

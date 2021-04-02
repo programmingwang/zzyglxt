@@ -415,7 +415,7 @@
                                 "itemid": row.itemid,
                                 "itemcode": row.itemcode,
                             };
-                            submitOpinion.receiptReason = "3";
+                            submitOpinion.receiptReason = "6";
                         }
                             ajaxUtil.myAjax(null, "updatereceipt", submitOpinion, function (data) {
                                 if (data && ajaxUtil.success(data)) {

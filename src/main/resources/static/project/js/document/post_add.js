@@ -4,6 +4,20 @@
 
             uploadImg.init();
 
+            /**
+             * 校验文本是否为空
+             * tips：提示信息
+             * 使用方法：$("#id").validate("提示文本");
+             * @itmyhome
+             */
+            $.fn.validate = function(tips){
+
+                if($(this).val() == "" || $.trim($(this).val()).length == 0){
+                    alert(tips + "不能为空！");
+                    throw SyntaxError(); //如果验证不通过，则不执行后面
+                }
+            };
+
             //不公开理由
             var reason = dictUtil.getDictByCode(dictUtil.DICT_LIST.postReason);
             $("#postReason").selectUtil(reason);
@@ -17,7 +31,7 @@
                     $("#postReason").selectUtil(reason);
                     $("#postReason").val() == "";
                 }
-            })
+            });
 
             //是否需要公平竞争审查
             var fair = dictUtil.getDictByCode(dictUtil.DICT_LIST.postFairDepartmentReview);
@@ -265,6 +279,13 @@
 
 
             $("#savebtn").unbind().on('click',function () {
+                //提示必填信息
+                $("#postDocumentTitle").validate("文件标题");
+                $("input[name='postPublicWay']:checked").validate("公开方式");
+                $("input[name='postNormativeDocuments']:checked").validate("规范性文件");
+                $("input[name='postSecretRelated']:checked").validate("是否涉密");
+                $("#postPrinting").validate("印数");
+
                 var PostEntity;
                 var requestUrl;
                 var operateMessage;
@@ -379,6 +400,13 @@
 
 
             $("#submitbtn").unbind().on('click',function () {
+                //提示必填信息
+                $("#postDocumentTitle").validate("文件标题");
+                $("input[name='postPublicWay']:checked").validate("公开方式");
+                $("input[name='postNormativeDocuments']:checked").validate("规范性文件");
+                $("input[name='postSecretRelated']:checked").validate("是否涉密");
+                $("#postPrinting").validate("印数");
+
                 var mySubmitToCZ = {
                     modalBodyID: "mySubmitModal",
                     modalTitle: "提交",

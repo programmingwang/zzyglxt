@@ -9,6 +9,27 @@
             var tempdata = JSON.parse(localStorage.getItem("viewRowData"));
             var postStatus = dictUtil.getDictByCode(dictUtil.DICT_LIST.postStatus);
 
+            //文本域自适应
+            function autoTextAreaHeight(o) {
+                o.style.height = o.scrollTop + o.scrollHeight + "px";
+            }
+            $(function () {
+                var DO = document.getElementById("departmentOpinion");
+                var OO = document.getElementById("officeOpinion");
+                var DDO = document.getElementById("deputyDirectorOpinion");
+                var DDO1 = document.getElementById("deputyDirectorOpinion1");
+                var DDO2 = document.getElementById("deputyDirectorOpinion2");
+                var DDO3 = document.getElementById("deputyDirectorOpinion3");
+                var DON = document.getElementById("directorOpinion");
+                autoTextAreaHeight(DO);
+                autoTextAreaHeight(OO);
+                autoTextAreaHeight(DDO);
+                autoTextAreaHeight(DDO1);
+                autoTextAreaHeight(DDO2);
+                autoTextAreaHeight(DDO3);
+                autoTextAreaHeight(DON);
+            });
+
             //获取主送目标
             var zhusong;
             $.ajax({
@@ -311,7 +332,7 @@
                             submitStatus.postOpinion = "2";
                         } else if (rolename === "中医处分管局长" || rolename === "中药处分管局长" || rolename === "综合处分管局长" || rolename === "法规监督处分管局长") {
                             $("#deputyDirectorView").validate("审核意见");
-                            submitStatus.postDataStatus = postStatus[4].id;
+                            submitStatus.postDataStatus = postStatus[6].id;
                             if (rolename === "中医处分管局长") {
                                 submitOpinion = {
                                     "dataCode": tempdata.itemcode,
@@ -360,58 +381,19 @@
                                         if (ajaxUtil.success(data)) {
                                             if (data.code == 88888) {
                                                 isSuccess = true;
-                                                console.log(tgAdvice.data)
-
-                                                if (rolename === "政务资源局长") {
-                                                    var mySubmitToCZ = {
-                                                        modalBodyID: "mySendModal",
-                                                        modalTitle: "发送",
-                                                        modalClass: "modal-lg",
-                                                        modalConfirmFun: function () {
-                                                            var postRefEntity = {
-                                                                sendStatus: 1,
-                                                                dateCode: tempdata.itemcode
-                                                            };
-                                                            ajaxUtil.myAjax(null, "/postref/updPostRef", postRefEntity, function (data) {
-                                                                if (ajaxUtil.success(data)) {
-                                                                    var submitConfirmModal = {
-                                                                        modalBodyID: "myTopicSubmitTip",
-                                                                        modalTitle: "提示",
-                                                                        modalClass: "modal-lg",
-                                                                        cancelButtonStyle: "display:none",
-                                                                        modalConfirmFun: function () {
-                                                                            var url = "/document/post";
-                                                                            orange.redirect(url);
-                                                                            return true;
-                                                                        }
-                                                                    }
-                                                                    var submitConfirm = modalUtil.init(submitConfirmModal);
-                                                                    submitConfirm.show();
-                                                                } else {
-                                                                    alert(data.msg);
-                                                                }
-                                                            }, false, true, "post");
-                                                            return true;
-                                                        }
+                                                var submitConfirmModal = {
+                                                    modalBodyID: "myTopicSubmitTip",
+                                                    modalTitle: "提示",
+                                                    modalClass: "modal-lg",
+                                                    cancelButtonStyle: "display:none",
+                                                    modalConfirmFun: function () {
+                                                        var url = "/document/post";
+                                                        orange.redirect(url);
+                                                        return true;
                                                     }
-                                                    var x = modalUtil.init(mySubmitToCZ);
-                                                    x.show();
-                                                    return false;
-                                                } else {
-                                                    var submitConfirmModal = {
-                                                        modalBodyID: "myTopicSubmitTip",
-                                                        modalTitle: "提示",
-                                                        modalClass: "modal-lg",
-                                                        cancelButtonStyle: "display:none",
-                                                        modalConfirmFun: function () {
-                                                            var url = "/document/post";
-                                                            orange.redirect(url);
-                                                            return true;
-                                                        }
-                                                    }
-                                                    var submitConfirm = modalUtil.init(submitConfirmModal);
-                                                    submitConfirm.show();
-                                                }
+                                                };
+                                                var submitConfirm = modalUtil.init(submitConfirmModal);
+                                                submitConfirm.show();
                                             } else {
                                                 alertUtil.error(data.msg);
                                             }
@@ -430,81 +412,95 @@
                 return false;
             });
 
-            //判断分管局长是否全部审核完毕
+            /*//判断分管局长是否全部审核完毕
             if (rolename === "中医处分管局长" || rolename === "中药处分管局长" || rolename === "综合处分管局长" || rolename === "法规监督处分管局长") {
                 var submitStatus = {
                     "itemid": tempdata.itemid,
                     "itemcode": tempdata.itemcode,
                     "postDataStatus": "",
                 };
-                if (tempdata.postOpinion1 === "1"){
-                    if (tgAdvice.data.deputyDirector !== ""){
-                        submitStatus.postDataStatus = postStatus[6].id;
-                    }else {submitStatus.postDataStatus = postStatus[4].id;}
-                }else if (tempdata.postOpinion1 === "2") {
-                    if (tgAdvice.data.deputyDirector1 !== ""){
-                        submitStatus.postDataStatus = postStatus[6].id;
-                    }else {submitStatus.postDataStatus = postStatus[4].id;}
-                }else if (tempdata.postOpinion1 === "3") {
-                    if (tgAdvice.data.deputyDirector2 !== ""){
-                        submitStatus.postDataStatus = postStatus[6].id;
-                    }else {submitStatus.postDataStatus = postStatus[4].id;}
-                }else if (tempdata.postOpinion1 === "4") {
-                    if (tgAdvice.data.deputyDirector3 !== ""){
-                        submitStatus.postDataStatus = postStatus[6].id;
-                    }else {submitStatus.postDataStatus = postStatus[4].id;}
-                }else if (tempdata.postOpinion1 === "12") {
-                    if (tgAdvice.data.deputyDirector !== "" && tgAdvice.data.deputyDirector1 !== ""){
-                        submitStatus.postDataStatus = postStatus[6].id;
-                    }else {submitStatus.postDataStatus = postStatus[4].id;}
-                }else if (tempdata.postOpinion1 === "13") {
-                    if (tgAdvice.data.deputyDirector !== "" && tgAdvice.data.deputyDirector2 !== ""){
-                        submitStatus.postDataStatus = postStatus[6].id;
-                    }else {submitStatus.postDataStatus = postStatus[4].id;}
-                }else if (tempdata.postOpinion1 === "14") {
-                    if (tgAdvice.data.deputyDirector !== "" && tgAdvice.data.deputyDirector3 !== ""){
-                        submitStatus.postDataStatus = postStatus[6].id;
-                    }else {submitStatus.postDataStatus = postStatus[4].id;}
-                }else if (tempdata.postOpinion1 === "23") {
-                    if (tgAdvice.data.deputyDirector1 !== "" && tgAdvice.data.deputyDirector2 !== ""){
-                        submitStatus.postDataStatus = postStatus[6].id;
-                    }else {submitStatus.postDataStatus = postStatus[4].id;}
-                }else if (tempdata.postOpinion1 === "24") {
-                    if (tgAdvice.data.deputyDirector1 !== "" && tgAdvice.data.deputyDirector3 !== ""){
-                        submitStatus.postDataStatus = postStatus[6].id;
-                    }else {submitStatus.postDataStatus = postStatus[4].id;}
-                }else if (tempdata.postOpinion1 === "34") {
-                    if (tgAdvice.data.deputyDirector2 !== "" && tgAdvice.data.deputyDirector3 !== ""){
-                        submitStatus.postDataStatus = postStatus[6].id;
-                    }else {submitStatus.postDataStatus = postStatus[4].id;}
-                }else if (tempdata.postOpinion1 === "123") {
-                    if (tgAdvice.data.deputyDirector !== "" && tgAdvice.data.deputyDirector1 !== "" && tgAdvice.data.deputyDirector2 !== ""){
-                        submitStatus.postDataStatus = postStatus[6].id;
-                    }else {submitStatus.postDataStatus = postStatus[4].id;}
-                }else if (tempdata.postOpinion1 === "124") {
-                    if (tgAdvice.data.deputyDirector !== "" && tgAdvice.data.deputyDirector1 !== "" && tgAdvice.data.deputyDirector3 !== ""){
-                        submitStatus.postDataStatus = postStatus[6].id;
-                    }else {submitStatus.postDataStatus = postStatus[4].id;}
-                }else if (tempdata.postOpinion1 === "134") {
-                    if (tgAdvice.data.deputyDirector !== "" && tgAdvice.data.deputyDirector2 !== "" && tgAdvice.data.deputyDirector3 !== ""){
-                        submitStatus.postDataStatus = postStatus[6].id;
-                    }else {submitStatus.postDataStatus = postStatus[4].id;}
-                }else if (tempdata.postOpinion1 === "234") {
-                    if (tgAdvice.data.deputyDirector1 !== "" && tgAdvice.data.deputyDirector2 !== "" && tgAdvice.data.deputyDirector3 !== ""){
-                        submitStatus.postDataStatus = postStatus[6].id;
-                    }else {submitStatus.postDataStatus = postStatus[4].id;}
-                }else if (tempdata.postOpinion1 === "1234") {
-                    if (tgAdvice.data.deputyDirector !== "" && tgAdvice.data.deputyDirector1 !== "" && tgAdvice.data.deputyDirector2 !== "" && tgAdvice.data.deputyDirector3 !== ""){
-                        submitStatus.postDataStatus = postStatus[6].id;
-                    }else {submitStatus.postDataStatus = postStatus[4].id;}
-                }
-                ajaxUtil.myAjax(null, "/post/updatePost", submitStatus, function (data) {
-                    if (ajaxUtil.success(data)){
-                        alert(submitStatus.postDataStatus);
+                if (submitStatus.postDataStatus !== ""){
+                    if (tempdata.postOpinion1 === "1"){
+                        if (tgAdvice.data.deputyDirector !== ""){
+                            submitStatus.postDataStatus = postStatus[6].id;
+                        }else {submitStatus.postDataStatus = postStatus[4].id;}
+                    }else if (tempdata.postOpinion1 === "2") {
+                        if (tgAdvice.data.deputyDirector1 !== ""){
+                            submitStatus.postDataStatus = postStatus[6].id;
+                        }else {submitStatus.postDataStatus = postStatus[4].id;}
+                    }else if (tempdata.postOpinion1 === "3") {
+                        if (tgAdvice.data.deputyDirector2 !== ""){
+                            submitStatus.postDataStatus = postStatus[6].id;
+                        }else {submitStatus.postDataStatus = postStatus[4].id;}
+                    }else if (tempdata.postOpinion1 === "4") {
+                        if (tgAdvice.data.deputyDirector3 !== ""){
+                            submitStatus.postDataStatus = postStatus[6].id;
+                        }else {submitStatus.postDataStatus = postStatus[4].id;}
+                    }else if (tempdata.postOpinion1 === "12") {
+                        if (tgAdvice.data.deputyDirector !== "" && tgAdvice.data.deputyDirector1 !== ""){
+                            submitStatus.postDataStatus = postStatus[6].id;
+                        }else {submitStatus.postDataStatus = postStatus[4].id;}
+                    }else if (tempdata.postOpinion1 === "13") {
+                        if (tgAdvice.data.deputyDirector !== "" && tgAdvice.data.deputyDirector2 !== ""){
+                            submitStatus.postDataStatus = postStatus[6].id;
+                        }else {submitStatus.postDataStatus = postStatus[4].id;}
+                    }else if (tempdata.postOpinion1 === "14") {
+                        if (tgAdvice.data.deputyDirector !== "" && tgAdvice.data.deputyDirector3 !== ""){
+                            submitStatus.postDataStatus = postStatus[6].id;
+                        }else {submitStatus.postDataStatus = postStatus[4].id;}
+                    }else if (tempdata.postOpinion1 === "23") {
+                        if (tgAdvice.data.deputyDirector1 !== "" && tgAdvice.data.deputyDirector2 !== ""){
+                            submitStatus.postDataStatus = postStatus[6].id;
+                        }else {submitStatus.postDataStatus = postStatus[4].id;}
+                    }else if (tempdata.postOpinion1 === "24") {
+                        if (tgAdvice.data.deputyDirector1 !== "" && tgAdvice.data.deputyDirector3 !== ""){
+                            submitStatus.postDataStatus = postStatus[6].id;
+                        }else {submitStatus.postDataStatus = postStatus[4].id;}
+                    }else if (tempdata.postOpinion1 === "34") {
+                        if (tgAdvice.data.deputyDirector2 !== "" && tgAdvice.data.deputyDirector3 !== ""){
+                            submitStatus.postDataStatus = postStatus[6].id;
+                        }else {submitStatus.postDataStatus = postStatus[4].id;}
+                    }else if (tempdata.postOpinion1 === "123") {
+                        if (tgAdvice.data.deputyDirector !== "" && tgAdvice.data.deputyDirector1 !== "" && tgAdvice.data.deputyDirector2 !== ""){
+                            submitStatus.postDataStatus = postStatus[6].id;
+                        }else {submitStatus.postDataStatus = postStatus[4].id;}
+                    }else if (tempdata.postOpinion1 === "124") {
+                        if (tgAdvice.data.deputyDirector !== "" && tgAdvice.data.deputyDirector1 !== "" && tgAdvice.data.deputyDirector3 !== ""){
+                            submitStatus.postDataStatus = postStatus[6].id;
+                        }else {submitStatus.postDataStatus = postStatus[4].id;}
+                    }else if (tempdata.postOpinion1 === "134") {
+                        if (tgAdvice.data.deputyDirector !== "" && tgAdvice.data.deputyDirector2 !== "" && tgAdvice.data.deputyDirector3 !== ""){
+                            submitStatus.postDataStatus = postStatus[6].id;
+                        }else {submitStatus.postDataStatus = postStatus[4].id;}
+                    }else if (tempdata.postOpinion1 === "234") {
+                        if (tgAdvice.data.deputyDirector1 !== "" && tgAdvice.data.deputyDirector2 !== "" && tgAdvice.data.deputyDirector3 !== ""){
+                            submitStatus.postDataStatus = postStatus[6].id;
+                        }else {submitStatus.postDataStatus = postStatus[4].id;}
+                    }else if (tempdata.postOpinion1 === "1234") {
+                        if (tgAdvice.data.deputyDirector !== "" && tgAdvice.data.deputyDirector1 !== "" && tgAdvice.data.deputyDirector2 !== "" && tgAdvice.data.deputyDirector3 !== ""){
+                            submitStatus.postDataStatus = postStatus[6].id;
+                        }else {submitStatus.postDataStatus = postStatus[4].id;}
                     }
-                }, false, true, "post");
+                    ajaxUtil.myAjax(null, "/post/updatePost", submitStatus, function (data) {
+                        if (ajaxUtil.success(data)){
+                            var submitConfirmModal = {
+                                modalBodyID: "myTopicSubmitTip",
+                                modalTitle: "提示",
+                                modalClass: "modal-lg",
+                                cancelButtonStyle: "display:none",
+                                modalConfirmFun: function () {
+                                    var url = "/document/post";
+                                    orange.redirect(url);
+                                    return true;
+                                }
+                            }
+                            var submitConfirm = modalUtil.init(submitConfirmModal);
+                            submitConfirm.show();
+                        }
+                    }, false, true, "post");
+                }
+            }*/
 
-            }
 
 
             $("#failbtn").unbind().on('click',function () {

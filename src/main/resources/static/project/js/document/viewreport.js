@@ -277,5 +277,8 @@
                     $("#addFile").append('<p>附件'+j+'：&nbsp;'+ name +'&nbsp;</p>');
                 }
             }
+            $.each($("textarea"), function(i, n){
+                $(n).css("height", n.scrollHeight + "px");
+            })
         })
 })();

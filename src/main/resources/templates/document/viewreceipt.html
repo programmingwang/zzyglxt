@@ -36,11 +36,10 @@
             margin-bottom: 20px;
         }
         .advice{
-            width: 485px;
+            width: 60%;
             margin-left: 18px;
             border: none;
             outline: none;
-          //  background-color: #f7efeb;
         }
         .text1{
             margin: 10px;
@@ -55,7 +54,7 @@
             margin-left: 20px;
             border: none;
             outline: none;
-          // background-color: #f7efeb;
+            resize:none;
         }
         .name {
             float: right;
@@ -114,6 +113,12 @@
             z-index: 1;
         }
 
+        textarea{
+            resize:none !important;
+            overflow:hidden;
+
+        }
+
     </style>
 </head>
 <body>
@@ -128,7 +133,7 @@
             <span style="margin-left: 5rem; color: #D60000;">收文号：</span>
             <input id="receivingNum" class="documentNum" disabled/>
             <span style="color: #D60000">号</span>
-            <span style="margin-left: 25rem; color: #D60000;">收文时间：</span>
+            <span id="mal" style="color: #D60000;">收文时间：</span>
             <input id="Year" class="document" disabled />
             <span style="color: #D60000">年</span>
             <input id="Month"  class="document" disabled/>
@@ -202,45 +207,43 @@
                         <div id="opinin19" style="height:100px; display: none">
                             <textarea id="reasonoView" placeholder="请输入审核意见" style="width:100%; height:100%; padding-left: 18px; border: none; outline: none;"></textarea>
                         </div>
-                        <div class="opinion" id="opinin20" style=" margin-bottom: 10px">
-                            <input id="reasono" class="advice" type="text" placeholder="等待局长审核 " readonly="readonly"/>
+                        <div class="opinion" id="opinin20" style="display: none">
+                            <textarea id="reasono" class="advice" type="text" placeholder="等待局长审核 " readonly="readonly"></textarea>
                             <input id="dateo" class="date" style="margin-top: 20px;" readonly="readonly"/>
                             <input id="nameo" class="name" style="margin-top: 20px;" readonly="readonly"/>
                         </div>
                            <div id="opinin21" style="height:100px; display: none">
-                                <textarea id="reasonView" placeholder="请输入审核意见" style="width:100%; height:40%; padding-left: 18px; border: none; outline: none;"></textarea>
+                                <textarea id="reasontView" placeholder="请输入审核意见" style="width:100%; height:40%; padding-left: 18px; border: none; outline: none;"></textarea>
                             </div>
-                        <div class="opinion"  id="opinin220" style="">
-                            <input id="reasont" class="advice" type="text" placeholder="等待中医处分局审核" readonly="readonly"/>
+                        <div class="opinion"  id="opinin220" style="display: none">
+                            <textarea id="reasont" class="advice" type="text" placeholder="等待中医处分局审核" readonly="readonly"></textarea>
                             <input id="datet" class="date" style="margin-top: 20px;" readonly="readonly"/>
                             <input id="namet" class="name" style="margin-top: 20px;" readonly="readonly"/>
                         </div>
-                            <!--<div id="opinin22" style="height:100px; display: none">
+                            <div id="opinin22" style="height:100px; display: none">
                                 <textarea id="reasonhView" placeholder="请输入审核意见" style="width:100%; height:40%; padding-left: 18px; border: none; outline: none;"></textarea>
-                            </div>-->
-                        <div class="opinion" id="opinin221" style="">
-                            <input id="reasonh" class="advice" type="text" placeholder="等待中药处分局审核" readonly="readonly" />
+                            </div>
+                        <div class="opinion" id="opinin221" style="display: none">
+                            <textarea id="reasonh" class="advice" type="text" placeholder="等待中药处分局审核" readonly="readonly" ></textarea>
                             <input id="dateh" class="date" style="margin-top: 20px;" readonly="readonly"/>
                             <input id="nameh" class="name" style="margin-top: 20px;" readonly="readonly"/>
                         </div>
-                           <!-- <div id="opinin23" style="height:100px; display: none">
+                           <div id="opinin23" style="height:100px; display: none">
                                 <textarea id="reasonfView" placeholder="请输入审核意见" style="width:100%; height:40%; padding-left: 18px; border: none; outline: none;"></textarea>
-                            </div>-->
-                        <div class="opinion" id="opinin222" style="">
-                            <input id="reasonf" class="advice" type="text" placeholder="等待综合处分局审核" readonly="readonly" />
+                            </div>
+                        <div class="opinion" id="opinin222" style="display: none">
+                            <textarea id="reasonf" class="advice" type="text" placeholder="等待综合处分局审核" readonly="readonly" ></textarea>
                             <input id="datef" class="date" style="margin-top: 20px;" readonly="readonly"/>
                             <input id="namef" class="name"  style="margin-top: 20px;" readonly="readonly"/>
                         </div>
-                           <!-- <div id="opinin24" style="height:100px; display: none">
+                           <div id="opinin24" style="height:100px; display: none">
                                 <textarea id="reasonvView" placeholder="请输入审核意见" style="width:100%; height:40%; padding-left: 18px; border: none; outline: none;"></textarea>
-                            </div>-->
-                        <div class="opinion" id="opinin223" style="">
-                            <input id="reasonv" class="advice" type="text" placeholder="等待法规监督分局审核" readonly="readonly" />
+                            </div>
+                        <div class="opinion" id="opinin223" style="display: none">
+                            <textarea id="reasonv" class="advice" type="text" placeholder="等待法规监督分局审核" readonly="readonly" ></textarea>
                             <input id="datev" class="date" style="margin-top: 20px;" readonly="readonly"/>
                             <input id="namev" class="name" style="margin-top: 20px;" readonly="readonly"/>
                         </div>
-
-
                     </td>
                 </tr>
 
@@ -251,7 +254,7 @@
                             <textarea id="reasonsView" placeholder="请输入审核意见" style="width:100%; height:40%; padding: 18px; border: none; outline: none;"></textarea>
                         </div>
                         <div  id="opinin32" style="display: none">
-                            <input id="reasons" class="advice" type="text" placeholder="等待综合处长审核"  readonly="readonly"/>
+                            <textarea style="resize:none" id="reasons" class="advice" type="text" placeholder="等待综合处长审核"  readonly="readonly"></textarea>
                             <input id="dates" class="date" style="margin-top: 20px;" readonly="readonly"/>
                             <input id="names" class="name" style="margin-top: 20px;" readonly="readonly"/>
                         </div>

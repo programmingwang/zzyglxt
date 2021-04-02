@@ -8,12 +8,48 @@
             url = getRoleTable(sessionStorage.getItem("rolename"),url,"receivingDataStatus",webStatus);
             var rolename = sessionStorage.getItem("rolename");
             var username = sessionStorage.getItem("username");
+            var tempdata = JSON.parse(localStorage.getItem("viewRowData"));
             var P=$("#zhongyichu").is(":checked")
             console.log("00000000000000000:"+P)
+           // var T=(tempdata.reasont).val();
+           // console.log("999999999999999999999999999"+T);
             var aParam = {
             };
 
+           /* (function init() {
+                if(localStorage.getItem("comeFromMain") === "true"){
+                    $("#fail").remove();
+                    $("#pass").remove();
+                    $("input").attr("disabled","true")
+                }
+                if (isView()){
 
+                    $("#reasono").val(tempdata.reasono);
+                    $("#reasont").val(tempdata.reasont);
+                    $("#reasonh").val(tempdata.reasonh);
+                    $("#reasonf").val(tempdata.reasonf);
+                    $("#reasonv").val(tempdata.reasonv);
+                    $("#reasons").val(tempdata.reasons);
+
+                    $("#nameo").val(tempdata.nameo);
+                    $("#namet").val(tempdata.namet);
+                    $("#nameh").val(tempdata.nameh);
+                    $("#namef").val(tempdata.namef);
+                    $("#namev").val(tempdata.namev);
+                    $("#names").val(tempdata.names);
+
+                    $("#dateo").val(tempdata.dateo);
+                    $("#datet").val(tempdata.datet);
+                    $("#dateh").val(tempdata.dateh);
+                    $("#datef").val(tempdata.datef);
+                    $("#datev").val(tempdata.datev);
+                    $("#dates").val(tempdata.dates);
+                }
+            }());
+            function isView() {
+                return (localStorage.getItem("viewRowData") != null || localStorage.getItem("viewRowData") != undefined)
+            }
+*/
             //点击文件标题查看详情事件
             function viewOperation(value, row, index){
                     return [
@@ -406,7 +442,7 @@
                     {field: 'receivingDateOfReceipt', title: '来文日期'},
                     {field: 'action', title: '操作', formatter: operation2, events: orgEvents}
                 ];
-            }else if (rolename === "中医处分管局长" || rolename === "中药处分管局长" || rolename === "综合处分管局长" || rolename === "法规监督处分管局长") {
+            }/*else if (rolename === "中医处分管局长" || rolename === "中药处分管局长" || rolename === "综合处分管局长" || rolename === "法规监督处分管局长") {
                 if (rolename === "中医处分管局长") {
                     url = "getDeputyDirector?receiptReasonl=1";
                 } else if (rolename === "中药处分管局长") {
@@ -435,6 +471,94 @@
                     },
                     {field: 'receivingDateOfReceipt', title: '来文日期'},
                     {field: 'action', title: '操作', formatter: operation3, events: orgEvents}
+                ];
+            }*/else if (rolename === "中医处分管局长") {
+                    url = "getDeputyDirector?receiptReasonl=1";
+                var aCol = [
+                    {field: 'receivingTitle', title: '文件标题', formatter: viewOperation, events: viewEvents},
+                    {field: 'receivingUnitOfCommun', title: '来文单位'},
+                    {
+                        field: 'receivingDegreeOfUrgency', title: '紧急程度', formatter: function (row) {
+                            return '<p>' + pl[row].text + '</p>';
+                        }
+                    },
+                    {
+                        field: 'filePath', title: '附件', formatter: function (value, row, index) {
+                            if (value == null) {
+                                return '<p style="padding-top: 15px">无附件</p>';
+                            } else {
+                                return '<a href="' + value + '">' + row.fileName + '</a>'
+                            }
+                        }
+                    },
+                    {field: 'receivingDateOfReceipt', title: '来文日期'},
+                    {field: 'action', title: '操作', formatter: operation3, events: orgEvents}
+                ];
+            }else if (rolename === "中药处分管局长") {
+                url = "getDeputyDirector?receiptReasonl=2";
+                var aCol = [
+                    {field: 'receivingTitle', title: '文件标题', formatter: viewOperation, events: viewEvents},
+                    {field: 'receivingUnitOfCommun', title: '来文单位'},
+                    {
+                        field: 'receivingDegreeOfUrgency', title: '紧急程度', formatter: function (row) {
+                            return '<p>' + pl[row].text + '</p>';
+                        }
+                    },
+                    {
+                        field: 'filePath', title: '附件', formatter: function (value, row, index) {
+                            if (value == null) {
+                                return '<p style="padding-top: 15px">无附件</p>';
+                            } else {
+                                return '<a href="' + value + '">' + row.fileName + '</a>'
+                            }
+                        }
+                    },
+                    {field: 'receivingDateOfReceipt', title: '来文日期'},
+                    {field: 'action', title: '操作', formatter: operation7, events: orgEvents}
+                ];
+            }else if (rolename === "综合处分管局长") {
+                url = "getDeputyDirector?receiptReasonl=3";
+                var aCol = [
+                    {field: 'receivingTitle', title: '文件标题', formatter: viewOperation, events: viewEvents},
+                    {field: 'receivingUnitOfCommun', title: '来文单位'},
+                    {
+                        field: 'receivingDegreeOfUrgency', title: '紧急程度', formatter: function (row) {
+                            return '<p>' + pl[row].text + '</p>';
+                        }
+                    },
+                    {
+                        field: 'filePath', title: '附件', formatter: function (value, row, index) {
+                            if (value == null) {
+                                return '<p style="padding-top: 15px">无附件</p>';
+                            } else {
+                                return '<a href="' + value + '">' + row.fileName + '</a>'
+                            }
+                        }
+                    },
+                    {field: 'receivingDateOfReceipt', title: '来文日期'},
+                    {field: 'action', title: '操作', formatter: operation8, events: orgEvents}
+                ];
+            }else if (rolename === "法规监督处分管局长") {
+                url = "getDeputyDirector?receiptReasonl=4";
+                var aCol = [
+                    {field: 'receivingTitle', title: '文件标题', formatter: viewOperation, events: viewEvents},
+                    {field: 'receivingUnitOfCommun', title: '来文单位'},
+                    {
+                        field: 'receivingDegreeOfUrgency', title: '紧急程度', formatter: function (row) {
+                            return '<p>' + pl[row].text + '</p>';
+                        }
+                    },
+                    {
+                        field: 'filePath', title: '附件', formatter: function (value, row, index) {
+                            if (value == null) {
+                                return '<p style="padding-top: 15px">无附件</p>';
+                            } else {
+                                return '<a href="' + value + '">' + row.fileName + '</a>'
+                            }
+                        }
+                    },
+                    {field: 'receivingDateOfReceipt', title: '来文日期'},
+                    {field: 'action', title: '操作', formatter: operation9, events: orgEvents}
                 ];
             }else if (rolename === "政务资源局长") {
                 url = "selectallreceipt?receivingDataStatus=7";
@@ -509,7 +633,7 @@
                     return [
                         '<a class="view" style="margin:0 1em;text-decoration: none;color:#348eff;" data-toggle="modal" data-target="" >查看</a>',
                     ].join('');
-                }else if(row.receivingDataStatus == webStatus[3].id || row.receivingDataStatus == webStatus[6].id  || row.receivingDataStatus == webStatus[17].id){
+                }else if(row.receivingDataStatus == webStatus[3].id || row.receivingDataStatus == webStatus[6].id  || row.receivingDataStatus == webStatus[18].id){
                     return [
                         '<a class="view" style="margin:0 1em;text-decoration: none;color:#348eff;" data-toggle="modal" data-target="" >查看</a>',
                         '<a class="delete" style="margin:0 1em;text-decoration: none;color:#ed0f09;" data-toggle="modal" data-target="#staticBackdrop" >删除</a>',
@@ -542,7 +666,122 @@
                     return [
                         '<a class="view" style="margin:0 1em;text-decoration: none;color:#13ff27;" data-toggle="modal" data-target="" >填写审核意见</a>',
                     ].join('');
-                }else if(row.receivingDataStatus == webStatus[5].id||row.receivingDataStatus == webStatus[6].id ||row.receivingDataStatus == webStatus[7].id || row.receivingDataStatus == webStatus[17].id|| row.receivingDataStatus == webStatus[18].id){
+                }else if(row.receivingDataStatus == webStatus[5].id){
+                    if(row.receiptReasonl=="12"||row.receiptReasonl=="13"||row.receiptReasonl=="14"||row.receiptReasonl=="123"||row.receiptReasonl=="124"||row.receiptReasonl=="134"||row.receiptReasonl=="1234") {
+                       if( row.receiptReason=="2"||row.receiptReason=="3"||row.receiptReason=="4"||row.receiptReason=="5"){
+                            return [
+                                '<a class="view" style="margin:0 1em;text-decoration: none;color:#348eff;" data-toggle="modal" data-target="" >查看</a>',
+                            ].join('');
+                        }else if(row.receiptReasonk=="2"||row.receiptReasonk=="3"||row.receiptReasonk=="4") {
+                            return [
+                                '<a class="view" style="margin:0 1em;text-decoration: none;color:#13ff27;" data-toggle="modal" data-target="" >填写审核意见</a>',
+                            ].join('');
+
+                        }
+                    }else{
+                        return [
+                            '<a class="view" style="margin:0 1em;text-decoration: none;color:#348eff;" data-toggle="modal" data-target="" >查看</a>',
+                        ].join('');
+                    }
+                }else if(row.receivingDataStatus == webStatus[6].id ||row.receivingDataStatus == webStatus[7].id || row.receivingDataStatus == webStatus[17].id|| row.receivingDataStatus == webStatus[18].id){
+                    return [
+                        '<a class="view" style="margin:0 1em;text-decoration: none;color:#348eff;" data-toggle="modal" data-target="" >查看</a>',
+                    ].join('');
+                }else if(row.receivingDataStatus == webStatus[16].id ){
+                    return [
+                        '<a  class="send-file"  data-toggle="modal" style="margin:0 0.6em;text-decoration: none;color:#ed0f09;" data-target="#staticBackdrop" >下达文件</a>',
+                    ].join('');
+                }
+            }
+
+            function operation7(value, row, index){
+                if(row.receivingDataStatus == webStatus[4].id){
+                    return [
+                        '<a class="view" style="margin:0 1em;text-decoration: none;color:#13ff27;" data-toggle="modal" data-target="" >填写审核意见</a>',
+                    ].join('');
+                }else if(row.receivingDataStatus == webStatus[5].id){
+                    if(row.receiptReasonl=="12"||row.receiptReasonl=="23"||row.receiptReasonl=="24"||row.receiptReasonl=="123"||row.receiptReasonl=="124"||row.receiptReasonl=="234"||row.receiptReasonl=="1234") {
+                       if(row.receiptReason=="3"||row.receiptReason=="2"||row.receiptReason=="4"||row.receiptReason=="5"){
+                            return [
+                                '<a class="view" style="margin:0 1em;text-decoration: none;color:#348eff;" data-toggle="modal" data-target="" >查看</a>',
+                            ].join('');
+                        }else if(row.receiptReasonk=="1"||row.receiptReasonk=="3"||row.receiptReasonk=="4") {
+                            return [
+                                '<a class="view" style="margin:0 1em;text-decoration: none;color:#13ff27;" data-toggle="modal" data-target="" >填写审核意见</a>',
+                            ].join('');
+
+                        }
+                    }else{
+                        return [
+                            '<a class="view" style="margin:0 1em;text-decoration: none;color:#348eff;" data-toggle="modal" data-target="" >查看</a>',
+                        ].join('');
+                    }
+                }else if(row.receivingDataStatus == webStatus[6].id ||row.receivingDataStatus == webStatus[7].id || row.receivingDataStatus == webStatus[17].id|| row.receivingDataStatus == webStatus[18].id){
+                    return [
+                        '<a class="view" style="margin:0 1em;text-decoration: none;color:#348eff;" data-toggle="modal" data-target="" >查看</a>',
+                    ].join('');
+                }else if(row.receivingDataStatus == webStatus[16].id ){
+                    return [
+                        '<a  class="send-file"  data-toggle="modal" style="margin:0 0.6em;text-decoration: none;color:#ed0f09;" data-target="#staticBackdrop" >下达文件</a>',
+                    ].join('');
+                }
+            }
+
+            function operation8(value, row, index){
+                if(row.receivingDataStatus == webStatus[4].id){
+                    return [
+                        '<a class="view" style="margin:0 1em;text-decoration: none;color:#13ff27;" data-toggle="modal" data-target="" >填写审核意见</a>',
+                    ].join('');
+                }else if(row.receivingDataStatus == webStatus[5].id){
+                    if(row.receiptReasonl=="13"||row.receiptReasonl=="23"||row.receiptReasonl=="34"||row.receiptReasonl=="123"||row.receiptReasonl=="134"||row.receiptReasonl=="234"||row.receiptReasonl=="1234") {
+                      if(row.receiptReason=="4"||row.receiptReason=="2"||row.receiptReason=="3"||row.receiptReason=="5"){
+                            return [
+                                '<a class="view" style="margin:0 1em;text-decoration: none;color:#348eff;" data-toggle="modal" data-target="" >查看</a>',
+                            ].join('');
+                        }else if(row.receiptReasonk=="1"||row.receiptReasonk=="2"||row.receiptReasonk=="4") {
+                            return [
+                                '<a class="view" style="margin:0 1em;text-decoration: none;color:#13ff27;" data-toggle="modal" data-target="" >填写审核意见</a>',
+                            ].join('');
+
+                        }
+                    }else{
+                        return [
+                            '<a class="view" style="margin:0 1em;text-decoration: none;color:#348eff;" data-toggle="modal" data-target="" >查看</a>',
+                        ].join('');
+                    }
+                }else if(row.receivingDataStatus == webStatus[6].id ||row.receivingDataStatus == webStatus[7].id || row.receivingDataStatus == webStatus[17].id|| row.receivingDataStatus == webStatus[18].id){
+                    return [
+                        '<a class="view" style="margin:0 1em;text-decoration: none;color:#348eff;" data-toggle="modal" data-target="" >查看</a>',
+                    ].join('');
+                }else if(row.receivingDataStatus == webStatus[16].id ){
+                    return [
+                        '<a  class="send-file"  data-toggle="modal" style="margin:0 0.6em;text-decoration: none;color:#ed0f09;" data-target="#staticBackdrop" >下达文件</a>',
+                    ].join('');
+                }
+            }
+            function operation9(value, row, index){
+                if(row.receivingDataStatus == webStatus[4].id){
+                    return [
+                        '<a class="view" style="margin:0 1em;text-decoration: none;color:#13ff27;" data-toggle="modal" data-target="" >填写审核意见</a>',
+                    ].join('');
+                }else if(row.receivingDataStatus == webStatus[5].id){
+                    if(row.receiptReasonl=="14"||row.receiptReasonl=="24"||row.receiptReasonl=="34"||row.receiptReasonl=="124"||row.receiptReasonl=="134"||row.receiptReasonl=="234"||row.receiptReasonl=="1234") {
+                     if(row.receiptReason=="5"||row.receiptReason=="2"||row.receiptReason=="3"||row.receiptReason=="4"){
+                            return [
+                                '<a class="view" style="margin:0 1em;text-decoration: none;color:#348eff;" data-toggle="modal" data-target="" >查看</a>',
+                            ].join('');
+                        } else  if(row.receiptReasonk=="1"||row.receiptReasonk=="2"||row.receiptReasonk=="3") {
+                            return [
+                                '<a class="view" style="margin:0 1em;text-decoration: none;color:#13ff27;" data-toggle="modal" data-target="" >填写审核意见</a>',
+                            ].join('');
+
+                        }
+                    }else{
+                        return [
+                            '<a class="view" style="margin:0 1em;text-decoration: none;color:#348eff;" data-toggle="modal" data-target="" >查看</a>',
+                        ].join('');
+                    }
+                }else if(row.receivingDataStatus == webStatus[6].id ||row.receivingDataStatus == webStatus[7].id || row.receivingDataStatus == webStatus[17].id|| row.receivingDataStatus == webStatus[18].id){
                     return [
                         '<a class="view" style="margin:0 1em;text-decoration: none;color:#348eff;" data-toggle="modal" data-target="" >查看</a>',
                     ].join('');
@@ -566,7 +805,7 @@
             }
 
             function operation5(value, row, index){
-                if(row.receivingDataStatus == webStatus[7].id){
+                if(row.receivingDataStatus == webStatus[18].id){
                     return [
                         '<a class="viewone" style="margin:0 1em;text-decoration: none;color:#348eff;" data-toggle="modal" data-target="" >查看</a>',
                     ].join('');
@@ -576,13 +815,10 @@
                 if(row.receivingDataStatus == webStatus[18].id) {
                     return [
                         '<a class="view" style="margin:0 1em;text-decoration: none;color:#348eff;" data-toggle="modal" data-target="" >查看</a>',
-                        '<a  class="send-file-ke"  data-toggle="modal" style="margin:0 0.6em;text-decoration: none;color:#ed0f09;" data-target="#staticBackdrop" >下达文件</a>',
-                    ].join('');
-                }else if(row.receivingDataStatus == webStatus[7].id) {
-                    return [
-                        '<a class="view" style="margin:0 1em;text-decoration: none;color:#348eff;" data-toggle="modal" data-target="" >查看</a>',
+                       // '<a  class="send-file-ke"  data-toggle="modal" style="margin:0 0.6em;text-decoration: none;color:#ed0f09;" data-target="#staticBackdrop" >下达文件</a>',
                     ].join('');
                 }
+
             }
 
           function getRoleTable(role,preUrl,status,webStatus) {

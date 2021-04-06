@@ -351,47 +351,63 @@
                 }
                 this.classList.add("addC");
                 var newArry = [];
-                var allTableData = JSON.parse(localStorage.getItem("2"));
-                var str=this.innerHTML;
-                if (str=='位置一'){
-                    str=0;
-                }else if (str=='位置二'){
-                    str=1;
-                }else if (str=='位置三'){
-                    str=2;
-                }else if (str=='位置四'){
-                    str=3;
-                }else if (str=='位置五'){
-                    str=4;
-                }
-                if (str=='全部'){
-                    for (var i in allTableData) {
-                        var status= allTableData[i]["dataStatus"] //表格里的
-                        if(status == "0") status =0;
-                        else if(status == "1" || status == "2") status = 1;
-                        else if(status == "3" || status == "4") status = 2;
-                        else if(status == "5") status = 3;
-                        else if (status == "6") status = 4;
-                        if (addstr== status || addstr ==99 ) {
-                            newArry.push(allTableData[i]);
+                //var allTableData = JSON.parse(localStorage.getItem("2"));
+                var req = window.indexedDB.open("myDB", 1);
+                req.onsuccess = function (e) {
+                    var db = e.target.result;
+                    //创建事物
+                    var t = db.transaction(["search"], "readwrite");
+                    var userStore = t.objectStore("search");
+                    var request = userStore.get(1);
+                    request.onsuccess = function (event) {
+                        if (request.result) {
+                            var allTableData = request.result.dataSearch;
+                            var str=this.innerHTML;
+                            if (str=='位置一'){
+                                str=0;
+                            }else if (str=='位置二'){
+                                str=1;
+                            }else if (str=='位置三'){
+                                str=2;
+                            }else if (str=='位置四'){
+                                str=3;
+                            }else if (str=='位置五'){
+                                str=4;
+                            }
+                            if (str=='全部'){
+                                for (var i in allTableData) {
+                                    var status= allTableData[i]["dataStatus"] //表格里的
+                                    if(status == "0") status =0;
+                                    else if(status == "1" || status == "2") status = 1;
+                                    else if(status == "3" || status == "4") status = 2;
+                                    else if(status == "5") status = 3;
+                                    else if (status == "6") status = 4;
+                                    if (addstr== status || addstr ==99 ) {
+                                        newArry.push(allTableData[i]);
+                                    }
+                                }
+                                $("#table").bootstrapTable("load", newArry);
+                            }else {
+                                for (var i in allTableData) {
+                                    var thisPosition = allTableData[i][aCol[2].field];
+                                    var status= allTableData[i]["dataStatus"] //表格里的
+                                    if(status == "0") status =0;
+                                    else if(status == "1" || status == "2") status = 1;
+                                    else if(status == "3" || status == "4") status = 2;
+                                    else if(status == "5") status = 3;
+                                    else if (status == "6") status = 4;
+                                    if (thisPosition == str && (addstr== status || addstr ==99 )) {
+                                        newArry.push(allTableData[i]);
+                                    }
+                                }
+                                $("#table").bootstrapTable("load", newArry);
+                            }
+                        } else {
+                            console.log('未获得数据记录');
                         }
                     }
-                    $("#table").bootstrapTable("load", newArry);
-                }else {
-                    for (var i in allTableData) {
-                        var thisPosition = allTableData[i][aCol[2].field];
-                        var status= allTableData[i]["dataStatus"] //表格里的
-                        if(status == "0") status =0;
-                        else if(status == "1" || status == "2") status = 1;
-                        else if(status == "3" || status == "4") status = 2;
-                        else if(status == "5") status = 3;
-                        else if (status == "6") status = 4;
-                    if (thisPosition == str && (addstr== status || addstr ==99 )) {
-                            newArry.push(allTableData[i]);
-                        }
-                    }
-                    $("#table").bootstrapTable("load", newArry);
-                }
+                };
+
             }
         }
 

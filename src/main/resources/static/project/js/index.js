@@ -1473,5 +1473,38 @@
             }
 
             $("#userName").text(sessionStorage.getItem('name'))
+            var myDB={
+                name:"myDB",
+                version:1
+            };
+            if(!window.indexedDB){
+                console.info("当前浏览器不支持indexedDB数据库 ");
+            }else{
+                // 打开数据库
+                var req=window.indexedDB.open(myDB.name,myDB.version);
+                //打开成功
+                req.onsuccess=function(e){
+                    console.log("创建数据库成功");
+                    myDB["db"]=e.target.result;
+                };
+                //打开失败
+                req.onerror=function(){
+                    console.log("打开数据库失败");
+                };
+                //第一次打开 或者 版本变更
+                req.onupgradeneeded=function(e){
+                    var db=e.target.result;//数据库对象
+                    //判断仓库是否存在
+                    if(!db.objectStoreNames.contains("search")){
+                        //创建仓库
+                        var store=db.createObjectStore("search",{
+                            autoIncrement:true
+                            /* ,keyPath */
+                        });
+                        //创建索引
+                        store.createIndex("dataIndex","dataSearch",{unique:false});
+                    }
+                }
+            }
         })
 })();

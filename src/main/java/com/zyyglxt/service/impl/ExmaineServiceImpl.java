@@ -88,6 +88,7 @@ public class ExmaineServiceImpl implements IExmaineService {
                     if(i == 0){
                         exmaineDto = exmaineDtos.get(0);
                     } else {
+                        //上一个专家的意见 ｜ 下一个专家的意见
                         exmaineDto.setExpertCode(exmaineDto.getExpertCode() + "|" + exmaineDtos.get(i).getExpertCode());
                         exmaineDto.setExmaineStatus(exmaineDto.getExmaineStatus() + "|" + exmaineDtos.get(i).getExmaineStatus());
                         exmaineDto.setScore(exmaineDto.getScore() + "|" + exmaineDtos.get(i).getScore());

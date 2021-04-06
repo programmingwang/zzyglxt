@@ -150,4 +150,50 @@
     where itemID = #{itemid,jdbcType=INTEGER}
       and itemCode = #{itemcode,jdbcType=CHAR}
   </update>
+  <delete id="delByDateCode" parameterType="com.zyyglxt.dataobject.PostRefDO">
+    delete from tb_governres_post_ref
+    where DATE_CODE = #{dateCode,jdbcType=VARCHAR}
+    and RECEIVER_TYPE = #{receiverType,jdbcType=INTEGER}
+  </delete>
+  <update id="updPostRef" parameterType="com.zyyglxt.dataobject.PostRefDO">
+    update tb_governres_post_ref
+    <set>
+      <if test="receiverId != null">
+        RECEIVER_ID = #{receiverId,jdbcType=CHAR},
+      </if>
+      <if test="receiverType != null">
+        RECEIVER_TYPE = #{receiverType,jdbcType=INTEGER},
+      </if>
+      <if test="sendStatus != null">
+        SEND_STATUS = #{sendStatus,jdbcType=INTEGER},
+      </if>
+      <if test="creater != null">
+        CREATER = #{creater,jdbcType=VARCHAR},
+      </if>
+      <if test="itemcreateat != null">
+        itemCreateAt = #{itemcreateat,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updater != null">
+        UPDATER = #{updater,jdbcType=VARCHAR},
+      </if>
+      <if test="itemupdateat != null">
+        itemUpdateAt = #{itemupdateat,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where DATE_CODE = #{dateCode,jdbcType=CHAR}
+  </update>
+  <select id="getMasterSend" resultMap="BaseResultMap">
+    select
+    RECEIVER_ID
+    from tb_governres_post_ref
+    where DATE_CODE = #{dateCode,jdbcType=VARCHAR}
+    and RECEIVER_TYPE = 0
+  </select>
+  <select id="getCopySend" resultMap="BaseResultMap">
+    select
+    RECEIVER_ID
+    from tb_governres_post_ref
+    where DATE_CODE = #{dateCode,jdbcType=VARCHAR}
+    and RECEIVER_TYPE = 1
+  </select>
 </mapper>

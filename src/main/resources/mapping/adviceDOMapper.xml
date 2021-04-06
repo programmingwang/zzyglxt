@@ -16,6 +16,15 @@
     <result column="DEPUTY_DIRECTOR" jdbcType="VARCHAR" property="deputyDirector" />
     <result column="DEPUTY_DIRECTOR_NAME" jdbcType="VARCHAR" property="deputyDirectorName" />
     <result column="DEPUTY_DIRECTOR_DATE" jdbcType="TIMESTAMP" property="deputyDirectorDate" />
+    <result column="DEPUTY_DIRECTOR1" jdbcType="VARCHAR" property="deputyDirector1" />
+    <result column="DEPUTY_DIRECTOR_NAME1" jdbcType="VARCHAR" property="deputyDirectorName1" />
+    <result column="DEPUTY_DIRECTOR_DATE1" jdbcType="TIMESTAMP" property="deputyDirectorDate1" />
+    <result column="DEPUTY_DIRECTOR2" jdbcType="VARCHAR" property="deputyDirector2" />
+    <result column="DEPUTY_DIRECTOR_NAME2" jdbcType="VARCHAR" property="deputyDirectorName2" />
+    <result column="DEPUTY_DIRECTOR_DATE2" jdbcType="TIMESTAMP" property="deputyDirectorDate2" />
+    <result column="DEPUTY_DIRECTOR3" jdbcType="VARCHAR" property="deputyDirector3" />
+    <result column="DEPUTY_DIRECTOR_NAME3" jdbcType="VARCHAR" property="deputyDirectorName3" />
+    <result column="DEPUTY_DIRECTOR_DATE3" jdbcType="TIMESTAMP" property="deputyDirectorDate3" />
     <result column="DIRECTOR" jdbcType="VARCHAR" property="director" />
     <result column="DIRECTOR_NAME" jdbcType="VARCHAR" property="directorName" />
     <result column="DIRECTOR_DATE" jdbcType="TIMESTAMP" property="directorDate" />
@@ -25,13 +34,16 @@
     <result column="itemUpdateAt" jdbcType="TIMESTAMP" property="itemupdateat" />
     <result column="signOpinion" jdbcType="VARCHAR" property="signOpinion" />
     <result column="signName" jdbcType="VARCHAR" property="signName" />
-    <result column="signDate" jdbcType="VARCHAR" property="signDate" />
+    <result column="signDate" jdbcType="TIMESTAMP" property="signDate" />
   </resultMap>
   <sql id="Base_Column_List">
-    itemID, itemCode, DATA_CODE, INITIAL, INITIAL_DATE, signOpinion,signName,signDate,
-    DEPARTMENT,DEPARTMENT_NAME, DEPART_DATE, OFFICE, OFFICE_NAME,OFFICE_DATE,
-    DEPUTY_DIRECTOR,DEPUTY_DIRECTOR_NAME, DEPUTY_DIRECTOR_DATE, DIRECTOR,DIRECTOR_NAME, DIRECTOR_DATE,
-    CREATER, itemCreateAt, UPDATER, itemUpdateAt
+    itemID, itemCode, DATA_CODE, INITIAL, INITIAL_DATE, signOpinion, signName, signDate,
+    DEPARTMENT, DEPARTMENT_NAME, DEPART_DATE, OFFICE, OFFICE_NAME, OFFICE_DATE,
+    DEPUTY_DIRECTOR, DEPUTY_DIRECTOR_NAME, DEPUTY_DIRECTOR_DATE, DEPUTY_DIRECTOR1,
+    DEPUTY_DIRECTOR_NAME1, DEPUTY_DIRECTOR_DATE1, DEPUTY_DIRECTOR2, DEPUTY_DIRECTOR_NAME2,
+    DEPUTY_DIRECTOR_DATE2, DEPUTY_DIRECTOR3, DEPUTY_DIRECTOR_NAME3, DEPUTY_DIRECTOR_DATE3,
+    DIRECTOR, DIRECTOR_NAME, DIRECTOR_DATE,
+    CREATER, itemCreateAt, UPDATER, itemUpdateAt, signOpinion,signName,signDate
   </sql>
   <select id="selectByPrimaryKey" parameterType="com.zyyglxt.dataobject.adviceDOKey" resultMap="BaseResultMap">
     select
@@ -51,13 +63,13 @@
       DEPART_DATE, OFFICE, OFFICE_DATE,
       DEPUTY_DIRECTOR, DEPUTY_DIRECTOR_DATE, DIRECTOR,
       DIRECTOR_DATE, CREATER, itemCreateAt,
-      UPDATER, itemUpdateAt)
+      UPDATER, itemUpdateAt,signOpinion,signDate)
     values (#{itemid,jdbcType=INTEGER}, #{itemcode,jdbcType=CHAR}, #{dataCode,jdbcType=VARCHAR},
       #{initial,jdbcType=VARCHAR}, #{initialDate,jdbcType=TIMESTAMP}, #{department,jdbcType=VARCHAR},
       #{departDate,jdbcType=DATE}, #{office,jdbcType=VARCHAR}, #{officeDate,jdbcType=TIMESTAMP},
       #{deputyDirector,jdbcType=VARCHAR}, #{deputyDirectorDate,jdbcType=TIMESTAMP}, #{director,jdbcType=VARCHAR},
       #{directorDate,jdbcType=TIMESTAMP}, #{creater,jdbcType=VARCHAR}, #{itemcreateat,jdbcType=TIMESTAMP},
-      #{updater,jdbcType=VARCHAR}, #{itemupdateat,jdbcType=TIMESTAMP})
+      #{updater,jdbcType=VARCHAR}, #{itemupdateat,jdbcType=TIMESTAMP},#{signOpinion,jdbcType=VARCHAR}, #{signDate,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.zyyglxt.dataobject.adviceDO">
     insert into tb_governres_advice
@@ -104,6 +116,33 @@
       <if test="deputyDirectorDate != null">
         DEPUTY_DIRECTOR_DATE,
       </if>
+      <if test="deputyDirector1 != null">
+        DEPUTY_DIRECTOR1,
+      </if>
+      <if test="deputyDirectorName1 != null">
+        DEPUTY_DIRECTOR_NAME1,
+      </if>
+      <if test="deputyDirectorDate1 != null">
+        DEPUTY_DIRECTOR_DATE1,
+      </if>
+      <if test="deputyDirector2 != null">
+        DEPUTY_DIRECTOR2,
+      </if>
+      <if test="deputyDirectorName2 != null">
+        DEPUTY_DIRECTOR_NAME2,
+      </if>
+      <if test="deputyDirectorDate2 != null">
+        DEPUTY_DIRECTOR_DATE2,
+      </if>
+      <if test="deputyDirector3 != null">
+        DEPUTY_DIRECTOR3,
+      </if>
+      <if test="deputyDirectorName3 != null">
+        DEPUTY_DIRECTOR_NAME3,
+      </if>
+      <if test="deputyDirectorDate3 != null">
+        DEPUTY_DIRECTOR_DATE3,
+      </if>
       <if test="director != null">
         DIRECTOR,
       </if>
@@ -124,6 +163,15 @@
       </if>
       <if test="itemupdateat != null">
         itemUpdateAt,
+      </if>
+      <if test="signOpinion != null">
+        signOpinion,
+      </if>
+      <if test="signName != null">
+        signName,
+      </if>
+      <if test="signDate != null">
+        signDate,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -169,6 +217,33 @@
       <if test="deputyDirectorDate != null">
         #{deputyDirectorDate,jdbcType=TIMESTAMP},
       </if>
+      <if test="deputyDirector1 != null">
+        #{deputyDirector1,jdbcType=VARCHAR},
+      </if>
+      <if test="deputyDirectorName1 != null">
+        #{deputyDirectorName1,jdbcType=VARCHAR},
+      </if>
+      <if test="deputyDirectorDate1 != null">
+        #{deputyDirectorDate1,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deputyDirector2 != null">
+        #{deputyDirector2,jdbcType=VARCHAR},
+      </if>
+      <if test="deputyDirectorName2 != null">
+        #{deputyDirectorName2,jdbcType=VARCHAR},
+      </if>
+      <if test="deputyDirectorDate2 != null">
+        #{deputyDirectorDate2,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deputyDirector3 != null">
+        #{deputyDirector3,jdbcType=VARCHAR},
+      </if>
+      <if test="deputyDirectorName3 != null">
+        #{deputyDirectorName3,jdbcType=VARCHAR},
+      </if>
+      <if test="deputyDirectorDate3 != null">
+        #{deputyDirectorDate3,jdbcType=TIMESTAMP},
+      </if>
       <if test="director != null">
         #{director,jdbcType=VARCHAR},
       </if>
@@ -189,6 +264,15 @@
       </if>
       <if test="itemupdateat != null">
         #{itemupdateat,jdbcType=TIMESTAMP},
+      </if>
+      <if test="signOpinion != null">
+        #{signOpinion,jdbcType=VARCHAR},
+      </if>
+      <if test="signName != null">
+        #{signName,jdbcType=VARCHAR},
+      </if>
+      <if test="signDate != null">
+        #{signDate,jdbcType=TIMESTAMP},
       </if>
     </trim>
   </insert>
@@ -231,6 +315,33 @@
       <if test="deputyDirectorDate != null">
         DEPUTY_DIRECTOR_DATE = #{deputyDirectorDate,jdbcType=TIMESTAMP},
       </if>
+      <if test="deputyDirector1 != null">
+        DEPUTY_DIRECTOR1 = #{deputyDirector1,jdbcType=VARCHAR},
+      </if>
+      <if test="deputyDirectorName1 != null">
+        DEPUTY_DIRECTOR_NAME1 = #{deputyDirectorName1,jdbcType=VARCHAR},
+      </if>
+      <if test="deputyDirectorDate1 != null">
+        DEPUTY_DIRECTOR_DATE1 = #{deputyDirectorDate1,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deputyDirector2 != null">
+        DEPUTY_DIRECTOR2 = #{deputyDirector2,jdbcType=VARCHAR},
+      </if>
+      <if test="deputyDirectorName2 != null">
+        DEPUTY_DIRECTOR_NAME2 = #{deputyDirectorName2,jdbcType=VARCHAR},
+      </if>
+      <if test="deputyDirectorDate2 != null">
+        DEPUTY_DIRECTOR_DATE2 = #{deputyDirectorDate2,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deputyDirector3 != null">
+        DEPUTY_DIRECTOR3 = #{deputyDirector3,jdbcType=VARCHAR},
+      </if>
+      <if test="deputyDirectorName3 != null">
+        DEPUTY_DIRECTOR_NAME3 = #{deputyDirectorName3,jdbcType=VARCHAR},
+      </if>
+      <if test="deputyDirectorDate3 != null">
+        DEPUTY_DIRECTOR_DATE3 = #{deputyDirectorDate3,jdbcType=TIMESTAMP},
+      </if>
       <if test="director != null">
         DIRECTOR = #{director,jdbcType=VARCHAR},
       </if>
@@ -251,6 +362,15 @@
       </if>
       <if test="itemupdateat != null">
         itemUpdateAt = #{itemupdateat,jdbcType=TIMESTAMP},
+      </if>
+       <if test="signOpinion != null">
+        signOpinion = #{signOpinion,jdbcType=VARCHAR},
+      </if>
+      <if test="signName != null">
+        signName = #{signName,jdbcType=VARCHAR},
+      </if>
+      <if test="signDate != null">
+        signDate = #{signDate,jdbcType=TIMESTAMP},
       </if>
     </set>
     where itemID = #{itemid,jdbcType=INTEGER}
@@ -276,7 +396,10 @@
       CREATER = #{creater,jdbcType=VARCHAR},
       itemCreateAt = #{itemcreateat,jdbcType=TIMESTAMP},
       UPDATER = #{updater,jdbcType=VARCHAR},
-      itemUpdateAt = #{itemupdateat,jdbcType=TIMESTAMP}
+      itemUpdateAt = #{itemupdateat,jdbcType=TIMESTAMP},
+      signOpinion = #{signOpinion,jdbcType=VARCHAR},
+      signName = #{signName,jdbcType=VARCHAR},
+      signDate = #{signDate,jdbcType=TIMESTAMP}
     where itemID = #{itemid,jdbcType=INTEGER}
       and itemCode = #{itemcode,jdbcType=CHAR}
   </update>
@@ -330,6 +453,33 @@
       <if test="deputyDirectorDate != null">
         DEPUTY_DIRECTOR_DATE = #{deputyDirectorDate,jdbcType=TIMESTAMP},
       </if>
+      <if test="deputyDirector1 != null">
+        DEPUTY_DIRECTOR1 = #{deputyDirector1,jdbcType=VARCHAR},
+      </if>
+      <if test="deputyDirectorName1 != null">
+        DEPUTY_DIRECTOR_NAME1 = #{deputyDirectorName1,jdbcType=VARCHAR},
+      </if>
+      <if test="deputyDirectorDate1 != null">
+        DEPUTY_DIRECTOR_DATE1 = #{deputyDirectorDate1,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deputyDirector2 != null">
+        DEPUTY_DIRECTOR2 = #{deputyDirector,jdbcType=VARCHAR},
+      </if>
+      <if test="deputyDirectorName2 != null">
+        DEPUTY_DIRECTOR_NAME2 = #{deputyDirectorName2,jdbcType=VARCHAR},
+      </if>
+      <if test="deputyDirectorDate2 != null">
+        DEPUTY_DIRECTOR_DATE2 = #{deputyDirectorDate2,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deputyDirector3 != null">
+        DEPUTY_DIRECTOR3 = #{deputyDirector3,jdbcType=VARCHAR},
+      </if>
+      <if test="deputyDirectorName3 != null">
+        DEPUTY_DIRECTOR_NAME3 = #{deputyDirectorName3,jdbcType=VARCHAR},
+      </if>
+      <if test="deputyDirectorDate3 != null">
+        DEPUTY_DIRECTOR_DATE3 = #{deputyDirectorDate3,jdbcType=TIMESTAMP},
+      </if>
       <if test="director != null">
         DIRECTOR = #{director,jdbcType=VARCHAR},
       </if>
@@ -350,6 +500,15 @@
       </if>
       <if test="itemupdateat != null">
         itemUpdateAt = #{itemupdateat,jdbcType=TIMESTAMP},
+      </if>
+      <if test="signOpinion != null">
+        signOpinion = #{signOpinion,jdbcType=VARCHAR},
+      </if>
+      <if test="signName != null">
+        signName = #{signName,jdbcType=VARCHAR},
+      </if>
+      <if test="signDate != null">
+        signDate = #{signDate,jdbcType=TIMESTAMP},
       </if>
     </set>
     where DATA_CODE = #{dataCode,jdbcType=VARCHAR}

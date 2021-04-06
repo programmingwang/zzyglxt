@@ -122,13 +122,26 @@
             $('#' + data.modalPosition).append(_ml);
 
             if(!objectUtil.strIsBlank(data.modalConfirmFun)){
-                $("#"+data.modalConfirmID).on("click",function () {
-                    $(this).off("click");
-                    if(data.modalConfirmFun()) {
-                        $("#"+data.modalID).modal("hide");
-                    }
-                })
-            }
+                var isClick = true;
+                    $("#"+data.modalConfirmID).on("click",function () {
+                        if(isClick) {
+                            isClick = false;
+                            if (data.modalConfirmFun()) {
+                                $("#" + data.modalID).modal("hide");
+                            }
+                            setTimeout(function() {
+                                isClick = true;
+                            }, 3000);//三秒内不能重复点击
+                        }
+                        else{
+                            alertUtil.warning("请勿重复点击！！")
+                        }
+                    })
+
+                }
+
+
+
 
             if(!objectUtil.strIsBlank(data.modalCancelFun)){
                 $("#"+data.modalCancelID).on("click",function () {

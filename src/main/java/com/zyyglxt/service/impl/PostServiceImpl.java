@@ -82,12 +82,18 @@ public class PostServiceImpl implements IPostService {
     }
 
     @Override
-    public List<PostDO> getPost(List<String> postDataStatus) {
-        List<PostDO> postDOList = new ArrayList<>();
-        for (String status : postDataStatus) {
-            postDOList.addAll(postDOMapper.selectAll(status));
-        }
-        return postDOList;
+    public List<PostDto> getPost(String postDataStatus) {
+        return postDOMapper.selectAll(postDataStatus);
+    }
+
+    @Override
+    public List<PostDto> getSend(String receiverId) {
+        return postDOMapper.getSend(receiverId);
+    }
+
+    @Override
+    public List<PostDto> getDeputyDirector(String postOpinion1) {
+        return postDOMapper.getDeputyDirector(postOpinion1);
     }
 
     @Override

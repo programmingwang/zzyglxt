@@ -544,70 +544,70 @@
                         id: "14-4",
                         level: "2",
                         pid: "14"
-                    },
-                    {
-                        menu_name: "管理门户",
-                        menu_url: "",
-                        id: "15",
-                        level: "1",
-                        pid: ""
-                    },
-                    {
-                        menu_name: "接入系统管理",
-                        menu_url: "",
-                        id: "15-1",
-                        level: "2",
-                        pid: "15"
-                    },
-                    {
-                        menu_name: "角色管理",
-                        menu_url: "",
-                        id: "15-2",
-                        level: "2",
-                        pid: "15"
-                    },
-                    {
-                        menu_name: "用户映射",
-                        menu_url: "",
-                        id: "15-3",
-                        level: "2",
-                        pid: "15"
-                    },
-                    {
-                        menu_name: "系统管理",
-                        menu_url: "",
-                        id: "16",
-                        level: "1",
-                        pid: ""
-                    },
-                    {
-                        menu_name: "基本字典信息",
-                        menu_url: "",
-                        id: "16-1",
-                        level: "2",
-                        pid: "16"
-                    },
-                    {
-                        menu_name: "权限配置",
-                        menu_url: "",
-                        id: "16-2",
-                        level: "2",
-                        pid: "16"
-                    },
-                    {
-                        menu_name: "系统资料配置",
-                        menu_url: "",
-                        id: "16-3",
-                        level: "2",
-                        pid: "16"
-                    },
-                    {
-                        menu_name: "系统日志",
-                        menu_url: "",
-                        id: "16-4",
-                        level: "2",
-                        pid: "16"
-                    },
+                    }
+                    // {
+                    //     menu_name: "管理门户",
+                    //     menu_url: "",
+                    //     id: "15",
+                    //     level: "1",
+                    //     pid: ""
+                    // },
+                    // {
+                    //     menu_name: "接入系统管理",
+                    //     menu_url: "",
+                    //     id: "15-1",
+                    //     level: "2",
+                    //     pid: "15"
+                    // },
+                    // {
+                    //     menu_name: "角色管理",
+                    //     menu_url: "",
+                    //     id: "15-2",
+                    //     level: "2",
+                    //     pid: "15"
+                    // },
+                    // {
+                    //     menu_name: "用户映射",
+                    //     menu_url: "",
+                    //     id: "15-3",
+                    //     level: "2",
+                    //     pid: "15"
+                    // },
+                    // {
+                    //     menu_name: "系统管理",
+                    //     menu_url: "",
+                    //     id: "16",
+                    //     level: "1",
+                    //     pid: ""
+                    // },
+                    // {
+                    //     menu_name: "基本字典信息",
+                    //     menu_url: "",
+                    //     id: "16-1",
+                    //     level: "2",
+                    //     pid: "16"
+                    // },
+                    // {
+                    //     menu_name: "权限配置",
+                    //     menu_url: "",
+                    //     id: "16-2",
+                    //     level: "2",
+                    //     pid: "16"
+                    // },
+                    // {
+                    //     menu_name: "系统资料配置",
+                    //     menu_url: "",
+                    //     id: "16-3",
+                    //     level: "2",
+                    //     pid: "16"
+                    // },
+                    // {
+                    //     menu_name: "系统日志",
+                    //     menu_url: "",
+                    //     id: "16-4",
+                    //     level: "2",
+                    //     pid: "16"
+                    // },
                 ];
                 $(".tTile").css("display","none");
                 $("#zwbg").css("display","block");
@@ -1256,7 +1256,6 @@
                         level: "1",
                         pid: ""
                     },
-
                     {
                         menu_name: "文件流转",
                         menu_url: "",
@@ -1265,9 +1264,16 @@
                         pid: ""
                     },
                     {
+                        menu_name: "发文管理",
+                        menu_url: "/document/post",
+                        id: "2-1",
+                        level: "2",
+                        pid: "2"
+                    },
+                    {
                         menu_name: "收文管理",
                         menu_url: "/document/receipt",
-                        id: "2-1",
+                        id: "2-2",
                         level: "2",
                         pid: "2"
                     },

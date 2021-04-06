@@ -36,11 +36,10 @@
             margin-bottom: 20px;
         }
         .advice{
-            width: 485px;
+            width: 60%;
             margin-left: 18px;
             border: none;
             outline: none;
-          //  background-color: #f7efeb;
         }
         .text1{
             margin: 10px;
@@ -55,7 +54,7 @@
             margin-left: 20px;
             border: none;
             outline: none;
-          // background-color: #f7efeb;
+            resize:none;
         }
         .name {
             float: right;
@@ -114,6 +113,12 @@
             z-index: 1;
         }
 
+        textarea{
+            resize:none !important;
+            overflow:hidden;
+
+        }
+
     </style>
 </head>
 <body>
@@ -128,7 +133,7 @@
             <span style="margin-left: 5rem; color: #D60000;">收文号：</span>
             <input id="receivingNum" class="documentNum" disabled/>
             <span style="color: #D60000">号</span>
-            <span style="margin-left: 25rem; color: #D60000;">收文时间：</span>
+            <span id="mal" style="color: #D60000;">收文时间：</span>
             <input id="Year" class="document" disabled />
             <span style="color: #D60000">年</span>
             <input id="Month"  class="document" disabled/>
@@ -199,28 +204,43 @@
                 <tr style="height: 200px">
                     <td class="title" colspan="2">局<br>领<br>导<br>批<br>示</td>
                     <td colspan="14">
-                        <div class="opinion">
-                            <input id="reasono" class="advice" type="text" placeholder="局长审核 理由不为空"/>
+                        <div id="opinin19" style="height:100px; display: none">
+                            <textarea id="reasonoView" placeholder="请输入审核意见" style="width:100%; height:100%; padding-left: 18px; border: none; outline: none;"></textarea>
+                        </div>
+                        <div class="opinion" id="opinin20" style="display: none">
+                            <textarea id="reasono" class="advice" type="text" placeholder="等待局长审核 " readonly="readonly"></textarea>
                             <input id="dateo" class="date" style="margin-top: 20px;" readonly="readonly"/>
                             <input id="nameo" class="name" style="margin-top: 20px;" readonly="readonly"/>
                         </div>
-                        <div class="opinion">
-                            <input id="reasont" class="advice" type="text" placeholder="中医处分局审核 理由不为空" />
+                           <div id="opinin21" style="height:100px; display: none">
+                                <textarea id="reasontView" placeholder="请输入审核意见" style="width:100%; height:40%; padding-left: 18px; border: none; outline: none;"></textarea>
+                            </div>
+                        <div class="opinion"  id="opinin220" style="display: none">
+                            <textarea id="reasont" class="advice" type="text" placeholder="等待中医处分局审核" readonly="readonly"></textarea>
                             <input id="datet" class="date" style="margin-top: 20px;" readonly="readonly"/>
                             <input id="namet" class="name" style="margin-top: 20px;" readonly="readonly"/>
                         </div>
-                        <div class="opinion">
-                            <input id="reasonh" class="advice" type="text" placeholder="中药处分局审核 理由不为空" />
+                            <div id="opinin22" style="height:100px; display: none">
+                                <textarea id="reasonhView" placeholder="请输入审核意见" style="width:100%; height:40%; padding-left: 18px; border: none; outline: none;"></textarea>
+                            </div>
+                        <div class="opinion" id="opinin221" style="display: none">
+                            <textarea id="reasonh" class="advice" type="text" placeholder="等待中药处分局审核" readonly="readonly" ></textarea>
                             <input id="dateh" class="date" style="margin-top: 20px;" readonly="readonly"/>
                             <input id="nameh" class="name" style="margin-top: 20px;" readonly="readonly"/>
                         </div>
-                        <div class="opinion">
-                            <input id="reasonf" class="advice" type="text" placeholder="综合处分局审核 理由不为空" />
+                           <div id="opinin23" style="height:100px; display: none">
+                                <textarea id="reasonfView" placeholder="请输入审核意见" style="width:100%; height:40%; padding-left: 18px; border: none; outline: none;"></textarea>
+                            </div>
+                        <div class="opinion" id="opinin222" style="display: none">
+                            <textarea id="reasonf" class="advice" type="text" placeholder="等待综合处分局审核" readonly="readonly" ></textarea>
                             <input id="datef" class="date" style="margin-top: 20px;" readonly="readonly"/>
                             <input id="namef" class="name"  style="margin-top: 20px;" readonly="readonly"/>
                         </div>
-                        <div class="opinion">
-                            <input id="reasonv" class="advice" type="text" placeholder="法规监督分局审核 理由不为空" />
+                           <div id="opinin24" style="height:100px; display: none">
+                                <textarea id="reasonvView" placeholder="请输入审核意见" style="width:100%; height:40%; padding-left: 18px; border: none; outline: none;"></textarea>
+                            </div>
+                        <div class="opinion" id="opinin223" style="display: none">
+                            <textarea id="reasonv" class="advice" type="text" placeholder="等待法规监督分局审核" readonly="readonly" ></textarea>
                             <input id="datev" class="date" style="margin-top: 20px;" readonly="readonly"/>
                             <input id="namev" class="name" style="margin-top: 20px;" readonly="readonly"/>
                         </div>
@@ -230,86 +250,16 @@
                 <tr style="height: 300px">
                     <td class="title" colspan="2">拟<br>办<br>意<br>见</td>
                     <td colspan="14">
-                        <div class="opinion">
-                            <input id="reasons"   class="advice" type="text"   style="margin-left: 18px; width: 410px; border: none; outline: none;" placeholder="综合处长审核 理由不为空" />
+                       <div id="opinin31" style="height: 100px; display: none">
+                            <textarea id="reasonsView" placeholder="请输入审核意见" style="width:100%; height:40%; padding: 18px; border: none; outline: none;"></textarea>
+                        </div>
+                        <div  id="opinin32" style="display: none">
+                            <textarea style="resize:none" id="reasons" class="advice" type="text" placeholder="等待综合处长审核"  readonly="readonly"></textarea>
                             <input id="dates" class="date" style="margin-top: 20px;" readonly="readonly"/>
                             <input id="names" class="name" style="margin-top: 20px;" readonly="readonly"/>
                         </div>
                     </td>
                 </tr>
-<!--
-                <tr style="height: 130px">
-                    &lt;!&ndash;<td class="title" colspan="2">处<br>室<br>办<br>里<br>情<br>况</td>
-                    <td colspan="14">
-                        &lt;!&ndash;<div class="form-group row">
-                            <label class="col-sm-2 col-form-label">收文号：</label>
-                            <div class="col-sm-4">
-                                &lt;!&ndash;<input id="receivingNum" type="text"  style="border:none" maxlength="30" disabled>&ndash;&gt;
-                            </div>
-
-
-                            <label class="col-sm-2 col-form-label">收文时间：</label>
-                            <div class="col-sm-4">
-                                &lt;!&ndash;<input id="receivingDateOfReceipt" type="text" style="border:none"  maxlength="30" disabled>&ndash;&gt;
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label class="col-sm-2 col-form-label">来文标题：</label>
-                            <div class="col-sm-10">
-                                &lt;!&ndash;<input id="receivingTitle" type="text" style="border:none" disabled>&ndash;&gt;
-                            </div>
-                        </div>
-
-
-                        <div class="form-group row">
-                            <label class="col-sm-2 col-form-label">来文单位：</label>
-                            <div class="col-sm-4">
-                                <input id="receivingUnitOfCommu" type="text" style="border:none" maxlength="30" disabled>
-                            </div>
-
-                            <label class="col-sm-2 col-form-label">文件编号：</label>
-                            <div class="col-sm-4">
-                                <input id="fileN" type="text"style="border:none" maxlength="30" disabled>
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label class="col-sm-2 col-form-label">份数：</label>
-                            <div class="col-sm-4">
-                                &lt;!&ndash;<input id="number" type="text" style="border:none"  maxlength="30" disabled>&ndash;&gt;
-                            </div>
-
-                            <label class="col-sm-2 col-form-label">密级：</label>
-                            <div class="col-sm-4">
-                                &lt;!&ndash;<input id="secretLevel" type="text" style="border:none"  maxlength="30" disabled>&ndash;&gt;
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label class="col-sm-2 col-form-label">紧急程度：</label>
-                            <div class="col-sm-4">
-                                &lt;!&ndash;<input  id="receivingDegreeOfUrgency" type="text" style="border:none" disabled>&ndash;&gt;
-                            </div>
-
-                            <label class="col-sm-2 col-form-label">办结时限：</label>
-                            <div class="col-sm-4">
-                                &lt;!&ndash;<input id="timeLimit" type="text" style="border:none"  maxlength="30" disabled>&ndash;&gt;
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-sm-2 col-form-label">数据状态：</label>
-                            <div class="col-sm-4">
-                                <input  id="receivingDataStatus" type="text" style="border:none" disabled>
-                            </div>
-
-                            <label class="col-sm-2 col-form-label">创建人：</label>
-                            <div class="col-sm-4">
-                                <input id="creater" type="text" style="border:none"  maxlength="30" disabled>
-                            </div>
-                        </div>&ndash;&gt;
-                    </td>&ndash;&gt;
-                </tr>-->
             </table>
         </div>
         <br>
@@ -317,12 +267,12 @@
             <div class="col-lg-7 col-md-7" ></div>
             <div class=" col-lg-5 row" >
                 <div class="col" style="padding-right: 0;">
-                    <button id="fail" type="submit" class="btn btn-danger col">驳回</button>
+                    <button id="fail" type="button" style="display: none" class="btn btn-danger col">驳回</button>
                 </div>
-                <div class="col" style="padding-right: 0;">
-                    <button id="pass" type="submit" class="btn btn-primary col">通过</button>
+                <div class="col" style="padding-right: 0;" >
+                    <button id="pass" type="button" style="display: none" class="pass btn btn-primary col" data-target="#staticBackdrop">通过</button>
                 </div>
-                <div class="col" style="padding-right: 0;">
+                <div class="col" style="padding-right: 0;" >
                     <button id="cancelbtn" type="button" class="btn btn-light col">关闭</button>
                 </div>
             </div>

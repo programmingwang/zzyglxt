@@ -3,7 +3,8 @@
         function (jquery,objectUtil,ajaxUtil,alertUtil,stringUtil,fileUtil,dictUtil,modalUtil) {
 
             var rolename = sessionStorage.getItem("rolename");
-
+            var parStatus = dictUtil.getDictByCode(dictUtil.DICT_LIST.parment);
+            var govStatus = dictUtil.getDictByCode(dictUtil.DICT_LIST.governerscounter);
             $("#cancelbtn").unbind().on('click',function () {
                 localStorage.removeItem("viewRowData");
                 var url = "/document/sign";
@@ -14,9 +15,9 @@
                 if (isView()){
                     var tempdata = JSON.parse(localStorage.getItem("viewRowData"));
                     $("#fileNo").val(tempdata.fileNo);
-                    $("#parment").val(tempdata.parment);
+                    $("#parment").val(parStatus[tempdata.parment].text);
                     $("#number").val(tempdata.number);
-                    $("#govPunlic").val(tempdata.govPunlic);
+                    $("#govPunlic").val(govStatus[tempdata.parment].text);
                     $("#receivingTitle").val(tempdata.receivingTitle);
                     $("#fileNumber").val(tempdata.fileNumber);
                     $("#classification").val(tempdata.classification);

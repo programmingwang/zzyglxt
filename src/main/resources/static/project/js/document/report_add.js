@@ -30,6 +30,7 @@
                         itemcode: needData.itemcode,
                         reportTitle : $("#reportTitle").val(),
                         reportContent : $("#reportContent").val(),
+                        reportDataStatus : '0',
                     }
                     operateMessage = "更新请示报告成功";
                 }
@@ -53,7 +54,7 @@
                 var operateMessage;
                 if(!isUpdate()){
                     addUpdateUrl = "insertrequestreport";
-                    operateMessage = "新增请示报告信息成功";
+                    operateMessage = "发送请示报告信息成功";
                     ReportEntity = {
                         itemcode: stringUtil.getUUID(),
                         reportTitle : $("#reportTitle").val(),
@@ -68,6 +69,7 @@
                         itemcode: needData.itemcode,
                         reportTitle : $("#reportTitle").val(),
                         reportContent : $("#reportContent").val(),
+                        reportDataStatus : '1',
                     }
                     operateMessage = "更新请示报告信息成功";
                 }
@@ -90,6 +92,7 @@
                     var tempdata = JSON.parse(localStorage.getItem("rowData"));
                     $("#reportTitle").val(tempdata.reportTitle);
                     $("#reportContent").val(tempdata.reportContent);
+                    $("#addFile").text(tempdata.fileName);
                     var img = tempdata.filePath;
                     $("#upimg").attr("src",img);
                 }

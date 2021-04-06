@@ -208,7 +208,6 @@
             }
 
             $("#btnSearch").unbind().on('click',function() {
-
                 var newArry = [];
                 var addstr=document.getElementById("chargePersonSearch").value;
                 var str = document.getElementById("taskNameSearch").value.toLowerCase();

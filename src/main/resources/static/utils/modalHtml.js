@@ -1574,7 +1574,7 @@
             '    <div><input id="faguijandu" name="fuxuan" type="checkbox" value="zyc"><label for="faguijandu">法规监督处分管局长</label>\n' +
             '    </div>\n' +
             '</div>'
-        modalHtml.addSendModal = '<div><div><table id="sendTable"></table></div></div>';
+        modalHtml.addSendModal = '<div><div><table id="sendTable"></table><div>其他发送对象：<input id="otherSend" type="text" class="form-control"></div></div></div>';
         modalHtml.addExperModal = '<div><div><table id="expertsTable"></table></div></div>';
         modalHtml.reviseExperModal = '<div><div><button type="button" class="btn btn-primary btn-sm">该项目已经分配的专家</button><table id="expertsTable1"></table><button type="button" class="btn btn-primary btn-sm">该项目还没有分配的专家</button><table id="expertsTable2"></table></div></div>';
         modalHtml.myResonable = "<div>" + '        <textarea name="" id="reason" cols="96" rows="10"></textarea>' + "    </div>";
@@ -1674,6 +1674,7 @@
         modalHtml.myDeleteModalMovTV = "是否删除电视电影信息?";
         modalHtml.myDeleteModalSaleDrug = "是否删除该药品";
         modalHtml.mySubmitModal = "确认提交吗？";
+        modalHtml.mySendModal = "是否发送至指定部门？";
         modalHtml.myPassModal = "确认通过吗？";
         modalHtml.myFailModal = "确认不通过吗？";
         modalHtml.myUnderShelfModal = "确认下架吗？";
@@ -1724,6 +1725,7 @@
         modalHtml.myReExmainModalSuccessTips = "已重新设置课题状态，您可以重新评审了";
         modalHtml.mySendFileModal='是否下达该文件';
         modalHtml.myDeleteLeader="是否删除此领导讲话？"
+        modalHtml.mySendTips="确定发送吗？"
         return modalHtml
     })
 })();

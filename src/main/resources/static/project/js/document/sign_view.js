@@ -4,6 +4,8 @@
 
             var rolename = sessionStorage.getItem("rolename");
             var webStatus = dictUtil.getDictByCode(dictUtil.DICT_LIST.signstatus);
+            var parStatus = dictUtil.getDictByCode(dictUtil.DICT_LIST.parment);
+            var govStatus = dictUtil.getDictByCode(dictUtil.DICT_LIST.governerscounter);
             var row = JSON.parse(localStorage.getItem("viewRowData"));
             const editor = objectUtil.wangEditorUtil();
             var username = sessionStorage.getItem("username");
@@ -30,9 +32,17 @@
                     SignEntity.status = webStatus[3].id;
                 }else if (sessionStorage.getItem("rolename") == "政务资源局长"){
                     SignEntity.status = webStatus[9].id;
+                }else if (sessionStorage.getItem("rolename") == "中医处分管局长"){
+                    SignEntity.status = webStatus[14].id;
+                }else if (sessionStorage.getItem("rolename") == "中药处分管局长"){
+                    SignEntity.status = webStatus[16].id;
+                }else if (sessionStorage.getItem("rolename") == "综合处分管局长"){
+                    SignEntity.status = webStatus[18].id;
+                }else if (sessionStorage.getItem("rolename") == "法规监督处处分管局长"){
+                    SignEntity.status = webStatus[20].id;
                 }
 
-                if(sessionStorage.getItem("rolename") == "政务资源处长"||sessionStorage.getItem("rolename") == "政务资源综合处处长"||sessionStorage.getItem("rolename") == "政务资源分管局长"||sessionStorage.getItem("rolename") == "政务资源局长") {
+                if(sessionStorage.getItem("rolename") == "政务资源处长"||sessionStorage.getItem("rolename") == "政务资源综合处处长"||sessionStorage.getItem("rolename") == "政务资源分管局长"||sessionStorage.getItem("rolename") == "政务资源局长"||sessionStorage.getItem("rolename") == "中医处分管局长"||sessionStorage.getItem("rolename") == "中药处分管局长"||sessionStorage.getItem("rolename") == "综合处分管局长"||sessionStorage.getItem("rolename") == "法规监督处分管局长") {
                     ajaxUtil.myAjax(null, "governresCountersign/update/" , SignEntity, function (data) {
                         if (ajaxUtil.success(data)) {
                             if (data.code == 88888) {
@@ -68,9 +78,17 @@
                     SignEntity.status = webStatus[5].id;
                 }else if (sessionStorage.getItem("rolename") == "政务资源局长"){
                     SignEntity.status = webStatus[6].id;
+                }else if (sessionStorage.getItem("rolename") == "中医处分管局长"){
+                    SignEntity.status = webStatus[15].id;
+                }else if (sessionStorage.getItem("rolename") == "中药处分管局长"){
+                    SignEntity.status = webStatus[17].id;
+                }else if (sessionStorage.getItem("rolename") == "综合处分管局长"){
+                    SignEntity.status = webStatus[19].id;
+                }else if (sessionStorage.getItem("rolename") == "法规监督处处分管局长"){
+                    SignEntity.status = webStatus[21].id;
                 }
 
-                if(sessionStorage.getItem("rolename") == "政务资源处长"||sessionStorage.getItem("rolename") == "政务资源综合处处长"||sessionStorage.getItem("rolename") == "政务资源分管局长"||sessionStorage.getItem("rolename") == "政务资源局长") {
+                if(sessionStorage.getItem("rolename") == "政务资源处长"||sessionStorage.getItem("rolename") == "政务资源综合处处长"||sessionStorage.getItem("rolename") == "政务资源分管局长"||sessionStorage.getItem("rolename") == "政务资源局长"||sessionStorage.getItem("rolename") == "中医处分管局长"||sessionStorage.getItem("rolename") == "中药处分管局长"||sessionStorage.getItem("rolename") == "综合处分管局长"||sessionStorage.getItem("rolename") == "法规监督处分管局长") {
                     ajaxUtil.myAjax(null, "governresCountersign/update/" , SignEntity, function (data) {
                         if (ajaxUtil.success(data)) {
                             if (data.code == 88888) {
@@ -96,9 +114,9 @@
                 if (isView()){
                     var tempdata = JSON.parse(localStorage.getItem("viewRowData"));
                     $("#fileNo").val(tempdata.fileNo);
-                    $("#parment").val(tempdata.parment);
+                    $("#parment").val(parStatus[tempdata.parment].text);
                     $("#number").val(tempdata.number);
-                    $("#govPunlic").val(tempdata.govPunlic);
+                    $("#govPunlic").val(govStatus[tempdata.govPunlic].text);
                     $("#receivingTitle").val(tempdata.receivingTitle);
                     $("#fileNumber").val(tempdata.fileNumber);
                     $("#classification").val(tempdata.classification);
@@ -183,6 +201,14 @@
                     return preUrl + "?"+status+"="+webStatus[13].id+"&"+status+"="+webStatus[5].id+"&"+status+"="+webStatus[3].id;
                 } else if(role === "政务资源局长") {
                     return preUrl + "?"+status+"="+webStatus[6].id+"&"+status+"="+webStatus[7].id+"&"+status+"="+webStatus[8].id+"&"+status+"="+webStatus[9].id;
+                }else if(role === "中医处分管局长") {
+                    return preUrl + "?"+status+"="+webStatus[9].id+"&"+status+"="+webStatus[14].id+"&"+status+"="+webStatus[15].id;
+                }else if(role === "中药处分管局长") {
+                    return preUrl + "?"+status+"="+webStatus[9].id+"&"+status+"="+webStatus[16].id+"&"+status+"="+webStatus[17].id;
+                }else if(role === "综合处分管局长") {
+                    return preUrl + "?"+status+"="+webStatus[9].id+"&"+status+"="+webStatus[18].id+"&"+status+"="+webStatus[19].id;
+                }else if(role === "法规监督处分管局长") {
+                    return preUrl + "?"+status+"="+webStatus[9].id+"&"+status+"="+webStatus[20].id+"&"+status+"="+webStatus[21].id;
                 }
             }
 
@@ -298,6 +324,26 @@
                     }
 
                 }
+                else if(role === "中医处分管局长"){
+                    if(status == webStatus[9].id){
+                        if (row.fileNo == "5"){
+                            return [
+                                '<a class="view" style="margin:0 1em;text-decoration: none;color:#348eff;" data-toggle="modal" data-target="" >审核意见</a>',
+                                '<a class="pass"  style="margin:0 1em;text-decoration: none;color:#4df115;" data-target="#staticBackdrop" >提交</a>',
+                                '<a  class="fail"  data-toggle="modal" style="margin:0 0.6em;text-decoration: none;color:#D60000;" data-target="#staticBackdrop" >不通过</a>',
+                            ].join('');
+                        }else{
+                            return [
+                                '<a class="opinion" style="margin:0 1em;text-decoration: none;color:#348eff;" data-toggle="modal" data-target="" >填写审核意见</a>',
+                            ].join('');
+                        }
+                    }else if( status == webStatus[4].id){
+                        return [
+                            '<a class="vision" data-toggle="modal" style="margin:0 1em;text-decoration: none;color:#348eff;" data-target="" >查看</a>',
+                        ].join('');
+                    }
+
+                }
             }
 
             function getStatus(role,webStatus) {
@@ -314,6 +360,18 @@
                 }
                 else if(role === "政务资源局长"){
                     return webStatus[9].id
+                }
+                else if(role === "中医处分管局长"){
+                    return webStatus[14].id
+                }
+                else if(role === "中药处分管局长"){
+                    return webStatus[16].id
+                }
+                else if(role === "综合处分管局长"){
+                    return webStatus[18].id
+                }
+                else if(role === "法规监督处处分管局长"){
+                    return webStatus[20].id
                 }
             }
 

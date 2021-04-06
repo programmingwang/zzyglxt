@@ -24,11 +24,29 @@ public class adviceDO extends adviceDOKey {
 
     private Date officeDate;
 
-    private String deputyDirector;
+    private String deputyDirector; //中医处分管局长审核意见
 
-    private String deputyDirectorName;
+    private String deputyDirectorName; //中医处分管局长姓名
 
-    private Date deputyDirectorDate;
+    private Date deputyDirectorDate; //中医处分管局长审核时间
+
+    private String deputyDirector1; //中药处分管局长审核意见
+
+    private String deputyDirectorName1; //中药处分管局长姓名
+
+    private Date deputyDirectorDate1; //中药处分管局长审核时间
+
+    private String deputyDirector2; //综合处分管局长审核意见
+
+    private String deputyDirectorName2;  //综合处分管局长姓名
+
+    private Date deputyDirectorDate2; //综合处分管局长审核时间
+
+    private String deputyDirector3; //法规监督处分管局长审核意见
+
+    private String deputyDirectorName3; //法规监督处分管局长姓名
+
+    private Date deputyDirectorDate3; //法规监督处分管局长审核时间
 
     private String director;
 
@@ -38,7 +56,7 @@ public class adviceDO extends adviceDOKey {
 
     private String signOpinion;
 
-    private String signDate;
+    private Date signDate;
 
     private String signName;
 
@@ -168,5 +186,29 @@ public class adviceDO extends adviceDOKey {
 
     public void setItemupdateat(Date itemupdateat) {
         this.itemupdateat = itemupdateat;
+    }
+
+    public String getSignOpinion() {
+        return signOpinion;
+    }
+
+    public void setSignOpinion(String signOpinion) {
+        this.signOpinion = signOpinion;
+    }
+
+    public Date getSignDate() {
+        return signDate;
+    }
+
+    public void setSignDate(Date signDate) {
+        this.signDate = signDate;
+    }
+
+    public String getSignName() {
+        return signName;
+    }
+
+    public void setSignName(String signName) {
+        this.signName = signName;
     }
 }

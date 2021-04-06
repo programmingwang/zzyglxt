@@ -290,7 +290,7 @@
       WHERE REPORT_DATA_STATUS in (1,2,4,7)
     </if>
     <if test='reportDataStatus == "1" '>
-      WHERE REPORT_DATA_STATUS in (0,1,4,5,6,7,8,13)
+      WHERE REPORT_DATA_STATUS in (0,1,4,5,6,7,8,9,13)
     </if>
     order by rt.itemUpdateAt desc
     </select>

@@ -54,8 +54,8 @@
 </head>
 <body>
 <div id="fir_body" class="row">
-    <div class="col-lg-2"></div>
-    <div class="col-lg-8" style="margin-left: 60px;">
+    <div class="col-lg-1"></div>
+    <div class="col-lg-9" style="margin-left: 60px;">
         <div style="margin-left: 230px;margin-top: 40px;">
             <h4 style="color: #D60000; font-size: 34px;">河北省中医药管理局发文审批笺</h4>
         </div>
@@ -71,9 +71,9 @@
                     <td colspan="9">
                         <div>
                             <div id="opinin11" style="height:100px; display: none">
-                                <textarea placeholder="请输入审核意见" style="width:100%; height:100%; padding: 18px; border: none; outline: none;"></textarea>
+                                <textarea id="directorView" placeholder="请输入审核意见" style="width:100%; height:100%; padding: 18px; border: none; outline: none;"></textarea>
                             </div>
-                            <div id="opinin12" style="display: none; margin-bottom: 40px">
+                            <div id="opinin12" style="display: none; margin-bottom: 10px">
                                 <input id="directorOpinion" class="advice" placeholder="等待局长审批" readonly="readonly"/>
                                 <input id="directorDate" class="date" readonly="readonly"/>
                                 <input id="directorName" class="name" readonly="readonly"/>
@@ -81,12 +81,27 @@
                         </div>
                         <div >
                             <div id="opinin21" style="height:100px; display: none">
-                                <textarea placeholder="请输入审核意见" style="width:100%; height:100%; padding-left: 18px; border: none; outline: none;"></textarea>
+                                <textarea id="deputyDirectorView" placeholder="请输入审核意见" style="width:100%; height:100%; padding-left: 18px; border: none; outline: none;"></textarea>
                             </div>
-                            <div id="opinin22" style="display: none">
+                            <div id="opinin220" style="display: none">
                                 <input id="deputyDirectorOpinion" class="advice" placeholder="等待分管局长审批" readonly="readonly"/>
                                 <input id="deputyDirectorDate" class="date" readonly="readonly"/>
                                 <input id="deputyDirectorName" class="name" readonly="readonly"/>
+                            </div>
+                            <div id="opinin221" style="display: none">
+                                <input id="deputyDirectorOpinion1" class="advice" placeholder="等待分管局长审批" readonly="readonly"/>
+                                <input id="deputyDirectorDate1" class="date" readonly="readonly"/>
+                                <input id="deputyDirectorName1" class="name" readonly="readonly"/>
+                            </div>
+                            <div id="opinin222" style="display: none">
+                                <input id="deputyDirectorOpinion2" class="advice" placeholder="等待分管局长审批" readonly="readonly"/>
+                                <input id="deputyDirectorDate2" class="date" readonly="readonly"/>
+                                <input id="deputyDirectorName2" class="name" readonly="readonly"/>
+                            </div>
+                            <div id="opinin223" style="display: none">
+                                <input id="deputyDirectorOpinion3" class="advice" placeholder="等待分管局长审批" readonly="readonly"/>
+                                <input id="deputyDirectorDate3" class="date" readonly="readonly"/>
+                                <input id="deputyDirectorName3" class="name" readonly="readonly"/>
                             </div>
                         </div>
                     </td>
@@ -96,7 +111,7 @@
                     <td class="title">办<br>公<br>室<br>核<br>稿</td>
                     <td colspan="9">
                         <div id="opinin31" style="height: 200px; display: none">
-                            <textarea placeholder="请输入审核意见" style="width:100%; height:100%; padding: 18px; border: none; outline: none;"></textarea>
+                            <textarea id="officeView" placeholder="请输入审核意见" style="width:100%; height:100%; padding: 18px; border: none; outline: none;"></textarea>
                         </div>
                         <div id="opinin32" style="display: none">
                             <input id="officeOpinion" class="advice" placeholder="等待综合处处长审批" readonly="readonly"/>
@@ -110,7 +125,7 @@
                     <td class="title">处<br>室<br>核<br>稿</td>
                     <td colspan="5">
                         <div id="opinin41" style="height: 200px; display: none">
-                            <textarea placeholder="请输入审核意见" style="width:100%; height:100%; padding: 18px; border: none; outline: none;"></textarea>
+                            <textarea id="departmentView" placeholder="请输入审核意见" style="width:100%; height:100%; padding: 18px; border: none; outline: none;"></textarea>
                         </div>
                         <div id="opinin42" style="display: none">
                             <input id="departmentOpinion" style="margin-left: 18px; width: 410px; border: none; outline: none;" placeholder="等待处长审批" readonly="readonly"/>
@@ -149,7 +164,7 @@
                     <td class="title">主<br>送</td>
                     <td colspan="9">
                         <div>
-                            <span id="zhusong" class="text1">邢台市市中医药管理部门</span>
+                            <input id="zhusong" class="text1"></input>
                         </div>
                     </td>
                 </tr>
@@ -158,7 +173,7 @@
                     <td class="title">抄<br>送</td>
                     <td colspan="9">
                         <div>
-                            <span id="chaosong" class="text1">廊坊市中医药管理部门</span>
+                            <input id="chaosong" class="text1"></input>
                         </div>
                     </td>
                 </tr>
@@ -245,10 +260,10 @@
                 <div class="col-lg-7 col-md-7" ></div>
                 <div class=" col-lg-5 row" >
                     <div class="col" style="padding-right: 0;">
-                        <button id="failbtn" type="button" style="display: block" class="btn btn-danger col">驳回</button>
+                        <button id="failbtn" type="button" style="display: none" class="btn btn-danger col">驳回</button>
                     </div>
                     <div class="col" style="padding-right: 0;" >
-                        <button id="passbtn" type="button" style="display: block" class="pass btn btn-primary col" data-target="#staticBackdrop">通过</button>
+                        <button id="passbtn" type="button" style="display: none" class="pass btn btn-primary col" data-target="#staticBackdrop">通过</button>
                     </div>
                     <div class="col" style="padding-right: 0;" >
                         <button id="cancelbtn" type="button" class="btn btn-light col">返回</button>

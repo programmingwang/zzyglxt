@@ -142,25 +142,41 @@
                 var newArry = [];
                 var searchIsImpl=document.getElementById("taskNameSearch2").value;
                 var searchYear = document.getElementById("taskNameSearch1").value;
-                var allTableData = JSON.parse(localStorage.getItem("2"));
-                for (var i in allTableData) {
-                    var textYear = allTableData[i]["year"];
-                    var textIsimpl= allTableData[i]["isimp"] ;
-                    var isStatusSlot=false;           // 默认状态为true
-                    var isYearSlot=false;           // 默认状态为true
-                    if(searchIsImpl==textIsimpl||searchIsImpl=='99'){
-                        isStatusSlot=true;
-                    }
-                    if(searchYear == textYear||searchYear=='00'){
-                        isYearSlot=true;
-                    }
-                    if(isYearSlot &&isStatusSlot){
-                        newArry.push(allTableData[i]);
-                    }
-                }
-                var newArr=new Set(newArry)
-                newArry=Array.from(newArr)
-                $("#table").bootstrapTable("load", newArry);
+                //var allTableData = JSON.parse(localStorage.getItem("2"));
+                    var req = window.indexedDB.open("myDB", 1);
+                    req.onsuccess = function (e) {
+                        var db = e.target.result;
+                        //创建事物
+                        var t = db.transaction(["search"], "readwrite");
+                        var userStore = t.objectStore("search");
+                        var request = userStore.get(1);
+                        request.onsuccess = function (event) {
+                            if (request.result) {
+                                var allTableData = request.result.dataSearch;
+                                for (var i in allTableData) {
+                                    var textYear = allTableData[i]["year"];
+                                    var textIsimpl= allTableData[i]["isimp"] ;
+                                    var isStatusSlot=false;           // 默认状态为true
+                                    var isYearSlot=false;           // 默认状态为true
+                                    if(searchIsImpl==textIsimpl||searchIsImpl=='99'){
+                                        isStatusSlot=true;
+                                    }
+                                    if(searchYear == textYear||searchYear=='00'){
+                                        isYearSlot=true;
+                                    }
+                                    if(isYearSlot &&isStatusSlot){
+                                        newArry.push(allTableData[i]);
+                                    }
+                                }
+                                var newArr=new Set(newArry)
+                                newArry=Array.from(newArr)
+                                $("#table").bootstrapTable("load", newArry);
+                            } else {
+                                console.log('未获得数据记录');
+                            }
+                        }
+                    };
+
             })
 
             $("#startTime").bind("input propertychange",function(event){

@@ -427,55 +427,55 @@
                 myTable = bootstrapTableUtil.myBootStrapTableInit("table", url, param, aCol);
             }
 
-            // $("#chargePersonSearch").unbind().on('change',function() {
-            //     var newArry = [];
-            //     var addstr=document.getElementById("chargePersonSearch").value;
-            //     var allTableData = JSON.parse(localStorage.getItem("2"));
-            //     for (var i in allTableData) {
-            //         var status= isDistribution(allTableData[i]["expertCode"]);
-            //         if(addstr==Number(status) || addstr=="000") {
-            //             newArry.push(allTableData[i])
-            //         }
-            //     }
-            //     var newArr=new Set(newArry)
-            //     newArry=Array.from(newArr)
-            //     $("#table").bootstrapTable("load", newArry);
-            //     if(newArry.length == 0){
-            //         alertUtil.warning("此状态下没有数据");
-            //     }
-            // })
+
 
             $("#btnSearch").unbind().on('click', function () {
                 var newArry = [];
                 var addstr = document.getElementById("chargePersonSearch").value;
                 var str = document.getElementById("taskNameSearch").value.toLowerCase();
-                var allTableData = JSON.parse(localStorage.getItem("2"));
-                if (str.indexOf("请输入") != -1) {
-                    str = ""
-                }
-                for (var i in allTableData) {
-                    for (var v in aCol) {
-                        //判断这个列是否是专家列，因为后台一对多传过来了一个数组
-                        if (aCol[v].field != "expertList") {
-                            var textP = allTableData[i][aCol[v].field];
-                            var isStatusSlot = false;           // 默认状态为true
-                            //状态条件判断,与表格字段的状态一致,这里根据自己写的修改
-                            var status = isDistribution(allTableData[i]["expertList"]);
-                            if (addstr == Number(status) || addstr == "000") {
-                                isStatusSlot = true;
+                //var allTableData = JSON.parse(localStorage.getItem("2"));
+                var req = window.indexedDB.open("myDB", 1);
+                req.onsuccess = function (e) {
+                    var db = e.target.result;
+                    //创建事物
+                    var t = db.transaction(["search"], "readwrite");
+                    var userStore = t.objectStore("search");
+                    var request = userStore.get(1);
+                    request.onsuccess = function (event) {
+                        if (request.result) {
+                            var allTableData = request.result.dataSearch;
+                            if (str.indexOf("请输入") != -1) {
+                                str = ""
                             }
-                            if (textP == null || textP == undefined || textP == '') {
-                                textP = "1";
+                            for (var i in allTableData) {
+                                for (var v in aCol) {
+                                    //判断这个列是否是专家列，因为后台一对多传过来了一个数组
+                                    if (aCol[v].field != "expertList") {
+                                        var textP = allTableData[i][aCol[v].field];
+                                        var isStatusSlot = false;           // 默认状态为true
+                                        //状态条件判断,与表格字段的状态一致,这里根据自己写的修改
+                                        var status = isDistribution(allTableData[i]["expertList"]);
+                                        if (addstr == Number(status) || addstr == "000") {
+                                            isStatusSlot = true;
+                                        }
+                                        if (textP == null || textP == undefined || textP == '') {
+                                            textP = "1";
+                                        }
+                                        if (textP.search(str) != -1 && isStatusSlot) {
+                                            newArry.push(allTableData[i])
+                                        }
+                                    }
+                                }
                             }
-                            if (textP.search(str) != -1 && isStatusSlot) {
-                                newArry.push(allTableData[i])
-                            }
+                            var newArr = new Set(newArry);
+                            newArry = Array.from(newArr);
+                            $("#table").bootstrapTable("load", newArry);
+                        } else {
+                            console.log('未获得数据记录');
                         }
                     }
-                }
-                var newArr = new Set(newArry);
-                newArry = Array.from(newArr);
-                $("#table").bootstrapTable("load", newArry);
+                };
+
             })
 
 

@@ -87,6 +87,19 @@ public class FileServiceImpl implements IFileService {
     }
 
     @Override
+    public int deleteFileByItemCode(String itemcode) {
+        if(itemcode == null || itemcode == ""){
+            throw new BusinessException("数据源code不能为空", EmBusinessError.PARAMETER_VALIDATION_ERROR);
+        }
+        return fileDOMapper.deleteByItemCode(itemcode);
+    }
+
+    @Override
+    public FileDO getByItemCode(String itemCode) {
+        return fileDOMapper.getByItemCode(itemCode);
+    }
+
+    @Override
     public void uploadFile(FileDO fileDO) {
         ValidatorResult result = validator.validate(fileDO);
         if(result.isHasErrors()){

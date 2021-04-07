@@ -191,6 +191,18 @@
         where DATA_CODE = #{dataCode}
     </delete>
 
+    <delete id="deleteByItemCode" parameterType="java.lang.String">
+        delete from tb_culpro_file
+        where itemCode = #{itemcode,jdbcType=CHAR}
+    </delete>
+
+    <select id="getByItemCode" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from tb_culpro_file
+        where itemCode = #{itemcode,jdbcType=CHAR}
+    </select>
+
     <select id="selectMultipleFileByDataCode" resultMap="BaseResultMap">
         SELECT
         <include refid="Base_Column_List"/>

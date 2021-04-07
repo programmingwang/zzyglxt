@@ -354,7 +354,25 @@
                         postDataStatus : "0",
                     };
                     operateMessage = "修改发文信息成功";
-                    if (needData.fileName !== null){
+                    if ($("#upload_file")[0].files[0] != null && $("#fairFile")[0].files[0] == null){
+                        var itemCode1 = "1" + needData.itemcode.substring(1);
+                        ajaxUtil.myAjax(null,"/file/deleteItemCode?itemcode="+itemCode1,null,function (data) {
+                            if(!ajaxUtil.success(data)){
+                                return alertUtil.warning("文件删除失败,可能是文件损坏或不存在了");
+                            }
+                        },false,"","get");
+                        postFile = $("#upload_file")[0].files[0];
+                        ajaxUtil.postFileAjax(needData.itemcode,postFile, itemCode1, sessionStorage.getItem("username"), sessionStorage.getItem("itemcode"));
+                    }else if ($("#upload_file")[0].files[0] == null && $("#fairFile")[0].files[0] != null){
+                        var itemCode2 = "2" + needData.itemcode.substring(1);
+                        ajaxUtil.myAjax(null,"/file/deleteItemCode?itemcode="+itemCode2,null,function (data) {
+                            if(!ajaxUtil.success(data)){
+                                return alertUtil.warning("文件删除失败,可能是文件损坏或不存在了");
+                            }
+                        },false,"","get");
+                        postFile = $("#fairFile")[0].files[0];
+                        ajaxUtil.postFileAjax(needData.itemcode,postFile, itemCode2, sessionStorage.getItem("username"), sessionStorage.getItem("itemcode"));
+                    }else if ($("#upload_file")[0].files[0] != null && $("#fairFile")[0].files[0] != null){
                         ajaxUtil.myAjax(null,"/file/delete?dataCode="+needData.itemcode,null,function (data) {
                             if(!ajaxUtil.success(data)){
                                 return alertUtil.warning("文件删除失败,可能是文件损坏或不存在了");
@@ -481,7 +499,25 @@
                                 postDataStatus : "1",
                             }
                             operateMessage = "修改发文信息成功";
-                            if (needData.fileName !== null){
+                            if ($("#upload_file")[0].files[0] != null && $("#fairFile")[0].files[0] == null){
+                                var itemCode1 = "1" + needData.itemcode.substring(1);
+                                ajaxUtil.myAjax(null,"/file/deleteItemCode?itemcode="+itemCode1,null,function (data) {
+                                    if(!ajaxUtil.success(data)){
+                                        return alertUtil.warning("文件删除失败,可能是文件损坏或不存在了");
+                                    }
+                                },false,"","get");
+                                postFile = $("#upload_file")[0].files[0];
+                                ajaxUtil.postFileAjax(needData.itemcode,postFile, itemCode1, sessionStorage.getItem("username"), sessionStorage.getItem("itemcode"));
+                            }else if ($("#upload_file")[0].files[0] == null && $("#fairFile")[0].files[0] != null){
+                                var itemCode2 = "2" + needData.itemcode.substring(1);
+                                ajaxUtil.myAjax(null,"/file/deleteItemCode?itemcode="+itemCode2,null,function (data) {
+                                    if(!ajaxUtil.success(data)){
+                                        return alertUtil.warning("文件删除失败,可能是文件损坏或不存在了");
+                                    }
+                                },false,"","get");
+                                postFile = $("#fairFile")[0].files[0];
+                                ajaxUtil.postFileAjax(needData.itemcode,postFile, itemCode2, sessionStorage.getItem("username"), sessionStorage.getItem("itemcode"));
+                            }else if ($("#upload_file")[0].files[0] != null && $("#fairFile")[0].files[0] != null){
                                 ajaxUtil.myAjax(null,"/file/delete?dataCode="+needData.itemcode,null,function (data) {
                                     if(!ajaxUtil.success(data)){
                                         return alertUtil.warning("文件删除失败,可能是文件损坏或不存在了");
@@ -560,12 +596,20 @@
                     $("#postPrinting").val(tempdata.postPrinting);
                     $("#postDocumentNum").val(tempdata.postDocumentNum);
                     $("#postDocumentNum1").val(tempdata.postDocumentNum1);
-                    if (tempdata.fileName[1] == null){
-                        $("#addFile").text(tempdata.fileName);
-                    }else {
-                        $("#addFile").text(tempdata.fileName[0]);
-                        $("#addFairFile").text(tempdata.fileName[1]);
-                    }
+
+                    //附件名称显示
+                    var file1 = "1" + tempdata.itemcode.substring(1);
+                    ajaxUtil.myAjax(null,"/file/getByItemCode?itemcode="+file1,null,function (data) {
+                        if(ajaxUtil.success(data)){
+                            $("#addFile").text(data.data.fileName);
+                        }
+                    },false,"","get");
+                    var file2 = "2" + tempdata.itemcode.substring(1);
+                    ajaxUtil.myAjax(null,"/file/getByItemCode?itemcode="+file2,null,function (data) {
+                        if(ajaxUtil.success(data)){
+                            $("#addFairFile").text(data.data.fileName);
+                        }
+                    },false,"","get");
 
                     getZhuSong(tempdata.itemcode);
                     getChaoSong(tempdata.itemcode);

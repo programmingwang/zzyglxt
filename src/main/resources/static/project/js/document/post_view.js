@@ -660,15 +660,22 @@
                         $("#s2").prop("checked",true);
                     }
                     $("#postPrinting").val(tempdata.postPrinting);
-                    if (tempdata.fileName[1] == null){
-                        $("#upload_file").text(tempdata.fileName);
-                        $("#upload_file").attr('href',tempdata.filePath);
-                    }else {
-                        $("#upload_file").text(tempdata.fileName[0]);
-                        $("#upload_file").attr('href',tempdata.filePath[0]);
-                        $("#fairFile").text(tempdata.fileName[1]);
-                        $("#fairFile").attr('href',tempdata.filePath[1]);
-                    }
+
+                    //显示附件名称
+                    var file1 = "1" + tempdata.itemcode.substring(1);
+                    ajaxUtil.myAjax(null,"/file/getByItemCode?itemcode="+file1,null,function (data) {
+                        if(ajaxUtil.success(data)){
+                            $("#upload_file").text(data.data.fileName);
+                            $("#upload_file").attr('href',data.data.filePath);
+                        }
+                    },false,"","get");
+                    var file2 = "2" + tempdata.itemcode.substring(1);
+                    ajaxUtil.myAjax(null,"/file/getByItemCode?itemcode="+file2,null,function (data) {
+                        if(ajaxUtil.success(data)){
+                            $("#fairFile").text(data.data.fileName);
+                            $("#fairFile").attr('href',data.data.filePath);
+                        }
+                    },false,"","get");
 
                     $("#initialName").val(tgAdvice.data.initial);
                     $("#initialDate").val(stringUtil.formatTime(tgAdvice.data.initialDate));

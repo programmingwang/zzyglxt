@@ -15,6 +15,8 @@ public interface IFileService {
     int deleteFileByKey(FileDOKey fileDOKey);
     FileDO selectFileByDataCode(String dataCode);
     int deleteFileByDataCode(String dataCode);
+    int deleteFileByItemCode(String itemcode);
+    FileDO getByItemCode(String itemCode);
     void uploadFile(FileDO fileDO);
     List<FileDO> selectMultipleFileByDataCode(String dataCode);
 }

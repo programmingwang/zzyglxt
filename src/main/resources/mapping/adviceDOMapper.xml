@@ -463,7 +463,7 @@
         DEPUTY_DIRECTOR_DATE1 = #{deputyDirectorDate1,jdbcType=TIMESTAMP},
       </if>
       <if test="deputyDirector2 != null">
-        DEPUTY_DIRECTOR2 = #{deputyDirector,jdbcType=VARCHAR},
+        DEPUTY_DIRECTOR2 = #{deputyDirector2,jdbcType=VARCHAR},
       </if>
       <if test="deputyDirectorName2 != null">
         DEPUTY_DIRECTOR_NAME2 = #{deputyDirectorName2,jdbcType=VARCHAR},

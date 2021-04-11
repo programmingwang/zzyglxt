@@ -1,5 +1,6 @@
 package com.zyyglxt.dataobject;
 
+import javax.validation.constraints.NotBlank;
 import java.util.Date;
 
 public class PostDO extends PostDOKey {
@@ -11,20 +12,25 @@ public class PostDO extends PostDOKey {
 
     private String postOpinion1; //分局长审核
 
+    @NotBlank(message = "文件标题不能为空")
     private String postDocumentTitle; //文件标题
 
     private String postDataStatus; //数据状态
 
+    @NotBlank(message = "公开方式不能为空")
     private String postPublicWay; //公开方式
 
     private String postReason; //不公开理由
 
     private String postFairDepartmentReview; //是否需要公平竞争审查
 
+    @NotBlank(message = "规范性文件不能为空")
     private String postNormativeDocuments; //是否规范性文件
 
+    @NotBlank(message = "印数不能为空")
     private Integer postPrinting; //印数
 
+    @NotBlank(message = "是否涉密不能为空")
     private String postSecretRelated; //是否泄密
 
     private String creater;

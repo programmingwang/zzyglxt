@@ -83,20 +83,20 @@
     from (tb_governres_post gp left join tb_culpro_file cf on gp.itemCode = cf.DATA_CODE)
     left join tb_governres_post_ref gpf on gp.itemCode = gpf.DATE_CODE
     <if test="postDataStatus == 6">
-      where POST_DATA_STATUS in (8)
+      where POST_DATA_STATUS in (10)
       and SEND_STATUS = 1
     </if>
     <if test="postDataStatus == 5">
-      where POST_DATA_STATUS in (6,8,9)
+      where POST_DATA_STATUS in (6,8,9,10)
     </if>
     <if test="postDataStatus == 3">
-      where POST_DATA_STATUS in (2,4,5,6,7,8,9)
+      where POST_DATA_STATUS in (2,4,5,6,7,8,9,10)
     </if>
     <if test="postDataStatus == 2">
-      where POST_DATA_STATUS in (1,2,3,4,5,6,7,8,9)
+      where POST_DATA_STATUS in (1,2,3,4,5,6,7,8,9,10)
     </if>
     <if test="postDataStatus == 1">
-      where POST_DATA_STATUS in (0,1,2,3,4,5,6,7,8,9)
+      where POST_DATA_STATUS in (0,1,2,3,4,5,6,7,8,9,10)
     </if>
     order by itemUpdateAt desc
   </select>
@@ -109,7 +109,7 @@
     cf.FILE_PATH
     from (tb_governres_post gp left join tb_culpro_file cf on gp.itemCode = cf.DATA_CODE)
     left join tb_governres_post_ref gpf on gp.itemCode = gpf.DATE_CODE
-    where POST_DATA_STATUS in (8)
+    where POST_DATA_STATUS in (10)
     and SEND_STATUS = 1
     and RECEIVER_ID = #{receiverId,jdbcType=VARCHAR}
     order by itemUpdateAt desc

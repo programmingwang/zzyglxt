@@ -64,6 +64,22 @@ public class FileController {
         return new ResponseData(EmBusinessError.success);
     }
 
+    @GetMapping(value = "/deleteItemCode")
+    @ResponseBody
+    @LogAnnotation(appCode ="",logTitle ="依据itemCode删除文件",logLevel ="4",creater ="",updater = "")
+    public ResponseData deleteItemCode(String itemcode){
+        fileService.deleteFileByItemCode(itemcode);
+        return new ResponseData(EmBusinessError.success);
+    }
+
+    //通过itemcode查询课题
+    @GetMapping(value = "/getByItemCode")
+    @ResponseBody
+    public ResponseData getByItemCode(@RequestParam(value = "itemcode") String itemCode){
+        FileDO fileDO = fileService.getByItemCode(itemCode);
+        return new ResponseData(EmBusinessError.success,fileDO);
+    }
+
     @GetMapping("/get/{datacode}")
     @ResponseBody
     public ResponseData get(@PathVariable String datacode){

@@ -9,6 +9,27 @@
             var tempdata = JSON.parse(localStorage.getItem("viewRowData"));
             var postStatus = dictUtil.getDictByCode(dictUtil.DICT_LIST.postStatus);
 
+            //文本域自适应
+            function autoTextAreaHeight(o) {
+                o.style.height = o.scrollTop + o.scrollHeight + "px";
+            }
+            $(function () {
+                var DO = document.getElementById("departmentOpinion");
+                var OO = document.getElementById("officeOpinion");
+                var DDO = document.getElementById("deputyDirectorOpinion");
+                var DDO1 = document.getElementById("deputyDirectorOpinion1");
+                var DDO2 = document.getElementById("deputyDirectorOpinion2");
+                var DDO3 = document.getElementById("deputyDirectorOpinion3");
+                var DON = document.getElementById("directorOpinion");
+                autoTextAreaHeight(DO);
+                autoTextAreaHeight(OO);
+                autoTextAreaHeight(DDO);
+                autoTextAreaHeight(DDO1);
+                autoTextAreaHeight(DDO2);
+                autoTextAreaHeight(DDO3);
+                autoTextAreaHeight(DON);
+            });
+
             //获取主送目标
             var zhusong;
             $.ajax({
@@ -311,7 +332,7 @@
                             submitStatus.postOpinion = "2";
                         } else if (rolename === "中医处分管局长" || rolename === "中药处分管局长" || rolename === "综合处分管局长" || rolename === "法规监督处分管局长") {
                             $("#deputyDirectorView").validate("审核意见");
-                            submitStatus.postDataStatus = postStatus[6].id;
+                            //submitStatus.postDataStatus = postStatus[6].id;
                             if (rolename === "中医处分管局长") {
                                 submitOpinion = {
                                     "dataCode": tempdata.itemcode,
@@ -341,6 +362,107 @@
                                     "deputyDirectorDate3": nowTime,
                                 };
                             }
+                            if (tempdata.postOpinion1 === "1"){
+                                if (!tgAdvice.data.deputyDirector){
+                                    submitStatus.postDataStatus = postStatus[6].id;
+                                }else {submitStatus.postDataStatus = postStatus[4].id;}
+                            }else if (tempdata.postOpinion1 === "2") {
+                                if (!tgAdvice.data.deputyDirector1){
+                                    submitStatus.postDataStatus = postStatus[6].id;
+                                }else {submitStatus.postDataStatus = postStatus[4].id;}
+                            }else if (tempdata.postOpinion1 === "3") {
+                                if (!tgAdvice.data.deputyDirector2){
+                                    submitStatus.postDataStatus = postStatus[6].id;
+                                }else {submitStatus.postDataStatus = postStatus[4].id;}
+                            }else if (tempdata.postOpinion1 === "4") {
+                                if (!tgAdvice.data.deputyDirector3){
+                                    submitStatus.postDataStatus = postStatus[6].id;
+                                }else {submitStatus.postDataStatus = postStatus[4].id;}
+                            }else if (tempdata.postOpinion1 === "12") {
+                                var po12 =[];
+                                if (!tgAdvice.data.deputyDirector){ po12.push("1");}
+                                if (!tgAdvice.data.deputyDirector1){ po12.push("1");}
+                                if (po12.length === 1){
+                                    submitStatus.postDataStatus = postStatus[6].id;
+                                }else {submitStatus.postDataStatus = postStatus[4].id;}
+                            }else if (tempdata.postOpinion1 === "13") {
+                                var po13 =[];
+                                if (!tgAdvice.data.deputyDirector){ po13.push("1");}
+                                if (!tgAdvice.data.deputyDirector2){ po13.push("1");}
+                                if (po13.length === 1){
+                                    submitStatus.postDataStatus = postStatus[6].id;
+                                }else {submitStatus.postDataStatus = postStatus[4].id;}
+                            }else if (tempdata.postOpinion1 === "14") {
+                                var po14 =[];
+                                if (!tgAdvice.data.deputyDirector){ po14.push("1");}
+                                if (!tgAdvice.data.deputyDirector3){ po14.push("1");}
+                                if (po14.length === 1){
+                                    submitStatus.postDataStatus = postStatus[6].id;
+                                }else {submitStatus.postDataStatus = postStatus[4].id;}
+                            }else if (tempdata.postOpinion1 === "23") {
+                                var po23 =[];
+                                if (!tgAdvice.data.deputyDirector1){ po23.push("1");}
+                                if (!tgAdvice.data.deputyDirector2){ po23.push("1");}
+                                if (po23.length === 1){
+                                    submitStatus.postDataStatus = postStatus[6].id;
+                                }else {submitStatus.postDataStatus = postStatus[4].id;}
+                            }else if (tempdata.postOpinion1 === "24") {
+                                var po24 =[];
+                                if (!tgAdvice.data.deputyDirector1){ po24.push("1");}
+                                if (!tgAdvice.data.deputyDirector3){ po24.push("1");}
+                                if (po24.length === 1){
+                                    submitStatus.postDataStatus = postStatus[6].id;
+                                }else {submitStatus.postDataStatus = postStatus[4].id;}
+                            }else if (tempdata.postOpinion1 === "34") {
+                                var po34 =[];
+                                if (!tgAdvice.data.deputyDirector2){ po34.push("1");}
+                                if (!tgAdvice.data.deputyDirector3){ po34.push("1");}
+                                if (po34.length === 1){
+                                    submitStatus.postDataStatus = postStatus[6].id;
+                                }else {submitStatus.postDataStatus = postStatus[4].id;}
+                            }else if (tempdata.postOpinion1 === "123") {
+                                var po123 =[];
+                                if (!tgAdvice.data.deputyDirector){ po123.push("1");}
+                                if (!tgAdvice.data.deputyDirector1){ po123.push("1");}
+                                if (!tgAdvice.data.deputyDirector2){ po123.push("1");}
+                                //alert(po123.length);
+                                if (po123.length === 1){
+                                    submitStatus.postDataStatus = postStatus[6].id;
+                                }else {submitStatus.postDataStatus = postStatus[4].id;}
+                            }else if (tempdata.postOpinion1 === "124") {
+                                var po124 =[];
+                                if (!tgAdvice.data.deputyDirector){ po124.push("1");}
+                                if (!tgAdvice.data.deputyDirector1){ po124.push("1");}
+                                if (!tgAdvice.data.deputyDirector3){ po124.push("1");}
+                                if (po124.length === 1){
+                                    submitStatus.postDataStatus = postStatus[6].id;
+                                }else {submitStatus.postDataStatus = postStatus[4].id;}
+                            }else if (tempdata.postOpinion1 === "134") {
+                                var po134 =[];
+                                if (!tgAdvice.data.deputyDirector){ po134.push("1");}
+                                if (!tgAdvice.data.deputyDirector2){ po134.push("1");}
+                                if (!tgAdvice.data.deputyDirector3){ po134.push("1");}
+                                if (po134.length === 1){
+                                    submitStatus.postDataStatus = postStatus[6].id;
+                                }else {submitStatus.postDataStatus = postStatus[4].id;}
+                            }else if (tempdata.postOpinion1 === "234") {
+                                var po234 =[];
+                                if (!tgAdvice.data.deputyDirector1){ po234.push("1");}
+                                if (!tgAdvice.data.deputyDirector2){ po234.push("1");}
+                                if (!tgAdvice.data.deputyDirector3){ po234.push("1");}
+                                if (po234.length === 1){
+                                    submitStatus.postDataStatus = postStatus[6].id;
+                                }else {submitStatus.postDataStatus = postStatus[4].id;}
+                            }else if (tempdata.postOpinion1 === "1234") {
+                                var po1234 =[];
+                                if (!tgAdvice.data.deputyDirector){ po1234.push("1");}
+                                if (!tgAdvice.data.deputyDirector1){ po1234.push("1");}
+                                if (!tgAdvice.data.deputyDirector2){ po1234.push("1");}
+                                if (!tgAdvice.data.deputyDirector3){ po1234.push("1");}
+                                if (po1234.length === 1){
+                                    submitStatus.postDataStatus = postStatus[6].id;
+                                }else {submitStatus.postDataStatus = postStatus[4].id;}
+                            }
                             submitStatus.postOpinion = "3";
                         } else if (rolename === "政务资源局长") {
                             $("#directorView").validate("审核意见");
@@ -360,56 +482,19 @@
                                         if (ajaxUtil.success(data)) {
                                             if (data.code == 88888) {
                                                 isSuccess = true;
-                                                if (rolename === "政务资源局长") {
-                                                    var mySubmitToCZ = {
-                                                        modalBodyID: "mySendModal",
-                                                        modalTitle: "发送",
-                                                        modalClass: "modal-lg",
-                                                        modalConfirmFun: function () {
-                                                            var postRefEntity = {
-                                                                sendStatus: 1,
-                                                                dateCode: tempdata.itemcode
-                                                            };
-                                                            ajaxUtil.myAjax(null, "/postref/updPostRef", postRefEntity, function (data) {
-                                                                if (ajaxUtil.success(data)) {
-                                                                    var submitConfirmModal = {
-                                                                        modalBodyID: "myTopicSubmitTip",
-                                                                        modalTitle: "提示",
-                                                                        modalClass: "modal-lg",
-                                                                        cancelButtonStyle: "display:none",
-                                                                        modalConfirmFun: function () {
-                                                                            var url = "/document/post";
-                                                                            orange.redirect(url);
-                                                                            return true;
-                                                                        }
-                                                                    }
-                                                                    var submitConfirm = modalUtil.init(submitConfirmModal);
-                                                                    submitConfirm.show();
-                                                                } else {
-                                                                    alert(data.msg);
-                                                                }
-                                                            }, false, true, "post");
-                                                            return true;
-                                                        }
+                                                var submitConfirmModal = {
+                                                    modalBodyID: "myTopicSubmitTip",
+                                                    modalTitle: "提示",
+                                                    modalClass: "modal-lg",
+                                                    cancelButtonStyle: "display:none",
+                                                    modalConfirmFun: function () {
+                                                        var url = "/document/post";
+                                                        orange.redirect(url);
+                                                        return true;
                                                     }
-                                                    var x = modalUtil.init(mySubmitToCZ);
-                                                    x.show();
-                                                    return false;
-                                                } else {
-                                                    var submitConfirmModal = {
-                                                        modalBodyID: "myTopicSubmitTip",
-                                                        modalTitle: "提示",
-                                                        modalClass: "modal-lg",
-                                                        cancelButtonStyle: "display:none",
-                                                        modalConfirmFun: function () {
-                                                            var url = "/document/post";
-                                                            orange.redirect(url);
-                                                            return true;
-                                                        }
-                                                    }
-                                                    var submitConfirm = modalUtil.init(submitConfirmModal);
-                                                    submitConfirm.show();
-                                                }
+                                                };
+                                                var submitConfirm = modalUtil.init(submitConfirmModal);
+                                                submitConfirm.show();
                                             } else {
                                                 alertUtil.error(data.msg);
                                             }
@@ -427,6 +512,96 @@
                 myPassModal.show();
                 return false;
             });
+
+            /*//判断分管局长是否全部审核完毕
+            if (rolename === "中医处分管局长" || rolename === "中药处分管局长" || rolename === "综合处分管局长" || rolename === "法规监督处分管局长") {
+                var submitStatus = {
+                    "itemid": tempdata.itemid,
+                    "itemcode": tempdata.itemcode,
+                    "postDataStatus": "",
+                };
+                if (submitStatus.postDataStatus !== ""){
+                    if (tempdata.postOpinion1 === "1"){
+                        if (tgAdvice.data.deputyDirector !== ""){
+                            submitStatus.postDataStatus = postStatus[6].id;
+                        }else {submitStatus.postDataStatus = postStatus[4].id;}
+                    }else if (tempdata.postOpinion1 === "2") {
+                        if (tgAdvice.data.deputyDirector1 !== ""){
+                            submitStatus.postDataStatus = postStatus[6].id;
+                        }else {submitStatus.postDataStatus = postStatus[4].id;}
+                    }else if (tempdata.postOpinion1 === "3") {
+                        if (tgAdvice.data.deputyDirector2 !== ""){
+                            submitStatus.postDataStatus = postStatus[6].id;
+                        }else {submitStatus.postDataStatus = postStatus[4].id;}
+                    }else if (tempdata.postOpinion1 === "4") {
+                        if (tgAdvice.data.deputyDirector3 !== ""){
+                            submitStatus.postDataStatus = postStatus[6].id;
+                        }else {submitStatus.postDataStatus = postStatus[4].id;}
+                    }else if (tempdata.postOpinion1 === "12") {
+                        if (tgAdvice.data.deputyDirector !== "" && tgAdvice.data.deputyDirector1 !== ""){
+                            submitStatus.postDataStatus = postStatus[6].id;
+                        }else {submitStatus.postDataStatus = postStatus[4].id;}
+                    }else if (tempdata.postOpinion1 === "13") {
+                        if (tgAdvice.data.deputyDirector !== "" && tgAdvice.data.deputyDirector2 !== ""){
+                            submitStatus.postDataStatus = postStatus[6].id;
+                        }else {submitStatus.postDataStatus = postStatus[4].id;}
+                    }else if (tempdata.postOpinion1 === "14") {
+                        if (tgAdvice.data.deputyDirector !== "" && tgAdvice.data.deputyDirector3 !== ""){
+                            submitStatus.postDataStatus = postStatus[6].id;
+                        }else {submitStatus.postDataStatus = postStatus[4].id;}
+                    }else if (tempdata.postOpinion1 === "23") {
+                        if (tgAdvice.data.deputyDirector1 !== "" && tgAdvice.data.deputyDirector2 !== ""){
+                            submitStatus.postDataStatus = postStatus[6].id;
+                        }else {submitStatus.postDataStatus = postStatus[4].id;}
+                    }else if (tempdata.postOpinion1 === "24") {
+                        if (tgAdvice.data.deputyDirector1 !== "" && tgAdvice.data.deputyDirector3 !== ""){
+                            submitStatus.postDataStatus = postStatus[6].id;
+                        }else {submitStatus.postDataStatus = postStatus[4].id;}
+                    }else if (tempdata.postOpinion1 === "34") {
+                        if (tgAdvice.data.deputyDirector2 !== "" && tgAdvice.data.deputyDirector3 !== ""){
+                            submitStatus.postDataStatus = postStatus[6].id;
+                        }else {submitStatus.postDataStatus = postStatus[4].id;}
+                    }else if (tempdata.postOpinion1 === "123") {
+                        if (tgAdvice.data.deputyDirector !== "" && tgAdvice.data.deputyDirector1 !== "" && tgAdvice.data.deputyDirector2 !== ""){
+                            submitStatus.postDataStatus = postStatus[6].id;
+                        }else {submitStatus.postDataStatus = postStatus[4].id;}
+                    }else if (tempdata.postOpinion1 === "124") {
+                        if (tgAdvice.data.deputyDirector !== "" && tgAdvice.data.deputyDirector1 !== "" && tgAdvice.data.deputyDirector3 !== ""){
+                            submitStatus.postDataStatus = postStatus[6].id;
+                        }else {submitStatus.postDataStatus = postStatus[4].id;}
+                    }else if (tempdata.postOpinion1 === "134") {
+                        if (tgAdvice.data.deputyDirector !== "" && tgAdvice.data.deputyDirector2 !== "" && tgAdvice.data.deputyDirector3 !== ""){
+                            submitStatus.postDataStatus = postStatus[6].id;
+                        }else {submitStatus.postDataStatus = postStatus[4].id;}
+                    }else if (tempdata.postOpinion1 === "234") {
+                        if (tgAdvice.data.deputyDirector1 !== "" && tgAdvice.data.deputyDirector2 !== "" && tgAdvice.data.deputyDirector3 !== ""){
+                            submitStatus.postDataStatus = postStatus[6].id;
+                        }else {submitStatus.postDataStatus = postStatus[4].id;}
+                    }else if (tempdata.postOpinion1 === "1234") {
+                        if (tgAdvice.data.deputyDirector !== "" && tgAdvice.data.deputyDirector1 !== "" && tgAdvice.data.deputyDirector2 !== "" && tgAdvice.data.deputyDirector3 !== ""){
+                            submitStatus.postDataStatus = postStatus[6].id;
+                        }else {submitStatus.postDataStatus = postStatus[4].id;}
+                    }
+                    ajaxUtil.myAjax(null, "/post/updatePost", submitStatus, function (data) {
+                        if (ajaxUtil.success(data)){
+                            var submitConfirmModal = {
+                                modalBodyID: "myTopicSubmitTip",
+                                modalTitle: "提示",
+                                modalClass: "modal-lg",
+                                cancelButtonStyle: "display:none",
+                                modalConfirmFun: function () {
+                                    var url = "/document/post";
+                                    orange.redirect(url);
+                                    return true;
+                                }
+                            }
+                            var submitConfirm = modalUtil.init(submitConfirmModal);
+                            submitConfirm.show();
+                        }
+                    }, false, true, "post");
+                }
+            }*/
+
 
 
             $("#failbtn").unbind().on('click',function () {
@@ -586,15 +761,22 @@
                         $("#s2").prop("checked",true);
                     }
                     $("#postPrinting").val(tempdata.postPrinting);
-                    if (tempdata.fileName[1] == null){
-                        $("#upload_file").text(tempdata.fileName);
-                        $("#upload_file").attr('href',tempdata.filePath);
-                    }else {
-                        $("#upload_file").text(tempdata.fileName[0]);
-                        $("#upload_file").attr('href',tempdata.filePath[0]);
-                        $("#fairFile").text(tempdata.fileName[1]);
-                        $("#fairFile").attr('href',tempdata.filePath[1]);
-                    }
+
+                    //显示附件名称
+                    var file1 = "1" + tempdata.itemcode.substring(1);
+                    ajaxUtil.myAjax(null,"/file/getByItemCode?itemcode="+file1,null,function (data) {
+                        if(ajaxUtil.success(data)){
+                            $("#upload_file").text(data.data.fileName);
+                            $("#upload_file").attr('href',data.data.filePath);
+                        }
+                    },false,"","get");
+                    var file2 = "2" + tempdata.itemcode.substring(1);
+                    ajaxUtil.myAjax(null,"/file/getByItemCode?itemcode="+file2,null,function (data) {
+                        if(ajaxUtil.success(data)){
+                            $("#fairFile").text(data.data.fileName);
+                            $("#fairFile").attr('href',data.data.filePath);
+                        }
+                    },false,"","get");
 
                     $("#initialName").val(tgAdvice.data.initial);
                     $("#initialDate").val(stringUtil.formatTime(tgAdvice.data.initialDate));

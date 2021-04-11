@@ -11,8 +11,8 @@
             var postStatus = dictUtil.getDictByCode(dictUtil.DICT_LIST.postStatus);
             var documentNum = dictUtil.getDictByCode(dictUtil.DICT_LIST.postDocumentNum);
             var publicWay = dictUtil.getDictByCode(dictUtil.DICT_LIST.governerscounter);
-
             $("#chargePersonSearch").selectUtil(publicWay);
+
 
             var addUrl = "/document/post_add";
             var aParam = {
@@ -91,9 +91,52 @@
 
             function operation4(value, row, index){
                 if(row.postDataStatus == postStatus[4].id){
-                    return [
-                        '<a class="view" style="margin:0 1em;text-decoration: none;color:#348eff;" data-toggle="modal" data-target="" >填写审核意见</a>',
-                    ].join('');
+                    //获取意见表的内容
+                    var tgAdvice;
+                    $.ajax({ cache: false, async: false, type: 'get', data: {dataCode: row.itemcode}, url: "/advice/getByDataCode", success: function (data) {
+                            tgAdvice = data; }
+                    });
+                    if (rolename === "中医处分管局长"){
+                       if (!tgAdvice.data.deputyDirector){
+                           return [
+                               '<a class="view" style="margin:0 1em;text-decoration: none;color:#348eff;" data-toggle="modal" data-target="" >填写审核意见</a>',
+                           ].join('');
+                       }else {
+                           return [
+                               '<a class="view" style="margin:0 1em;text-decoration: none;color:#348eff;" data-toggle="modal" data-target="" >查看</a>',
+                           ].join('');
+                       }
+                    }else if (rolename === "中药处分管局长"){
+                        if (!tgAdvice.data.deputyDirector1){
+                            return [
+                                '<a class="view" style="margin:0 1em;text-decoration: none;color:#348eff;" data-toggle="modal" data-target="" >填写审核意见</a>',
+                            ].join('');
+                        }else {
+                            return [
+                                '<a class="view" style="margin:0 1em;text-decoration: none;color:#348eff;" data-toggle="modal" data-target="" >查看</a>',
+                            ].join('');
+                        }
+                    }else if (rolename === "综合处分管局长"){
+                        if (!tgAdvice.data.deputyDirector2){
+                            return [
+                                '<a class="view" style="margin:0 1em;text-decoration: none;color:#348eff;" data-toggle="modal" data-target="" >填写审核意见</a>',
+                            ].join('');
+                        }else {
+                            return [
+                                '<a class="view" style="margin:0 1em;text-decoration: none;color:#348eff;" data-toggle="modal" data-target="" >查看</a>',
+                            ].join('');
+                        }
+                    }else if (rolename === "法规监督处分管局长"){
+                        if (!tgAdvice.data.deputyDirector3){
+                            return [
+                                '<a class="view" style="margin:0 1em;text-decoration: none;color:#348eff;" data-toggle="modal" data-target="" >填写审核意见</a>',
+                            ].join('');
+                        }else {
+                            return [
+                                '<a class="view" style="margin:0 1em;text-decoration: none;color:#348eff;" data-toggle="modal" data-target="" >查看</a>',
+                            ].join('');
+                        }
+                    }
                 }else if(row.postDataStatus == postStatus[6].id || row.postDataStatus == postStatus[7].id || row.postDataStatus == postStatus[8].id || row.postDataStatus == postStatus[9].id || row.postDataStatus == postStatus[10].id){
                     return [
                         '<a class="view" style="margin:0 1em;text-decoration: none;color:#348eff;" data-toggle="modal" data-target="" >查看</a>',

@@ -382,42 +382,42 @@
                                 var po12 =[];
                                 if (!tgAdvice.data.deputyDirector){ po12.push("1");}
                                 if (!tgAdvice.data.deputyDirector1){ po12.push("1");}
-                                if (po12.length <= 1){
+                                if (po12.length === 1){
                                     submitStatus.postDataStatus = postStatus[6].id;
                                 }else {submitStatus.postDataStatus = postStatus[4].id;}
                             }else if (tempdata.postOpinion1 === "13") {
                                 var po13 =[];
                                 if (!tgAdvice.data.deputyDirector){ po13.push("1");}
                                 if (!tgAdvice.data.deputyDirector2){ po13.push("1");}
-                                if (po13.length <= 1){
+                                if (po13.length === 1){
                                     submitStatus.postDataStatus = postStatus[6].id;
                                 }else {submitStatus.postDataStatus = postStatus[4].id;}
                             }else if (tempdata.postOpinion1 === "14") {
                                 var po14 =[];
                                 if (!tgAdvice.data.deputyDirector){ po14.push("1");}
                                 if (!tgAdvice.data.deputyDirector3){ po14.push("1");}
-                                if (po14.length <= 1){
+                                if (po14.length === 1){
                                     submitStatus.postDataStatus = postStatus[6].id;
                                 }else {submitStatus.postDataStatus = postStatus[4].id;}
                             }else if (tempdata.postOpinion1 === "23") {
                                 var po23 =[];
                                 if (!tgAdvice.data.deputyDirector1){ po23.push("1");}
                                 if (!tgAdvice.data.deputyDirector2){ po23.push("1");}
-                                if (po23.length <= 1){
+                                if (po23.length === 1){
                                     submitStatus.postDataStatus = postStatus[6].id;
                                 }else {submitStatus.postDataStatus = postStatus[4].id;}
                             }else if (tempdata.postOpinion1 === "24") {
                                 var po24 =[];
                                 if (!tgAdvice.data.deputyDirector1){ po24.push("1");}
                                 if (!tgAdvice.data.deputyDirector3){ po24.push("1");}
-                                if (po24.length <= 1){
+                                if (po24.length === 1){
                                     submitStatus.postDataStatus = postStatus[6].id;
                                 }else {submitStatus.postDataStatus = postStatus[4].id;}
                             }else if (tempdata.postOpinion1 === "34") {
                                 var po34 =[];
                                 if (!tgAdvice.data.deputyDirector2){ po34.push("1");}
                                 if (!tgAdvice.data.deputyDirector3){ po34.push("1");}
-                                if (po34.length <= 1){
+                                if (po34.length === 1){
                                     submitStatus.postDataStatus = postStatus[6].id;
                                 }else {submitStatus.postDataStatus = postStatus[4].id;}
                             }else if (tempdata.postOpinion1 === "123") {
@@ -425,7 +425,8 @@
                                 if (!tgAdvice.data.deputyDirector){ po123.push("1");}
                                 if (!tgAdvice.data.deputyDirector1){ po123.push("1");}
                                 if (!tgAdvice.data.deputyDirector2){ po123.push("1");}
-                                if (po123.length <= 2){
+                                //alert(po123.length);
+                                if (po123.length === 1){
                                     submitStatus.postDataStatus = postStatus[6].id;
                                 }else {submitStatus.postDataStatus = postStatus[4].id;}
                             }else if (tempdata.postOpinion1 === "124") {
@@ -433,7 +434,7 @@
                                 if (!tgAdvice.data.deputyDirector){ po124.push("1");}
                                 if (!tgAdvice.data.deputyDirector1){ po124.push("1");}
                                 if (!tgAdvice.data.deputyDirector3){ po124.push("1");}
-                                if (po124.length <= 2){
+                                if (po124.length === 1){
                                     submitStatus.postDataStatus = postStatus[6].id;
                                 }else {submitStatus.postDataStatus = postStatus[4].id;}
                             }else if (tempdata.postOpinion1 === "134") {
@@ -441,7 +442,7 @@
                                 if (!tgAdvice.data.deputyDirector){ po134.push("1");}
                                 if (!tgAdvice.data.deputyDirector2){ po134.push("1");}
                                 if (!tgAdvice.data.deputyDirector3){ po134.push("1");}
-                                if (po134.length <= 2){
+                                if (po134.length === 1){
                                     submitStatus.postDataStatus = postStatus[6].id;
                                 }else {submitStatus.postDataStatus = postStatus[4].id;}
                             }else if (tempdata.postOpinion1 === "234") {
@@ -449,7 +450,7 @@
                                 if (!tgAdvice.data.deputyDirector1){ po234.push("1");}
                                 if (!tgAdvice.data.deputyDirector2){ po234.push("1");}
                                 if (!tgAdvice.data.deputyDirector3){ po234.push("1");}
-                                if (po234.length <= 2){
+                                if (po234.length === 1){
                                     submitStatus.postDataStatus = postStatus[6].id;
                                 }else {submitStatus.postDataStatus = postStatus[4].id;}
                             }else if (tempdata.postOpinion1 === "1234") {
@@ -458,7 +459,7 @@
                                 if (!tgAdvice.data.deputyDirector1){ po1234.push("1");}
                                 if (!tgAdvice.data.deputyDirector2){ po1234.push("1");}
                                 if (!tgAdvice.data.deputyDirector3){ po1234.push("1");}
-                                if (po1234.length <= 3){
+                                if (po1234.length === 1){
                                     submitStatus.postDataStatus = postStatus[6].id;
                                 }else {submitStatus.postDataStatus = postStatus[4].id;}
                             }

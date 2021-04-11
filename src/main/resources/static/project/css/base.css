@@ -475,3 +475,7 @@ label {
 .modal-body #upFile {
     padding-top: 4px;
 }
+.w-e-full-screen-editor {
+    max-width: 100% !important;
+    padding: 0;
+}

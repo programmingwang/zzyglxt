@@ -280,5 +280,9 @@
             $.each($("textarea"), function(i, n){
                 $(n).css("height", n.scrollHeight + "px");
             })
+
+            var textLen=document.getElementById('reasontwo').offsetWidth
+            var fal=textLen+50+"px"
+            $(".mesageP").css("margin-left",fal)
         })
 })();

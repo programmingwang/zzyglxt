@@ -454,7 +454,7 @@
             var aCol;
             if (rolename === "政务资源科员"){
                 $('#btn_addTask').attr('style', "display:block;");
-                url = "/post/getPost?postDataStatus=1";
+                url = "/post/getByClerk?postDepartment="+sessionStorage.getItem("cityId");
                 aCol = [
                     {field: 'postDocumentTitle', title: '文件标题', formatter: viewOperation, events: viewEvents},
                     {field: 'postDocumentNum', title: '文号', formatter:function (value, row, index){
@@ -469,7 +469,7 @@
                 ];
 
             }else if (rolename === "政务资源处长"){
-                url = "/post/getPost?postDataStatus=2";
+                url = "/post/getByDirector?postDepartment="+sessionStorage.getItem("cityId");
                 aCol = [
                     {field: 'postDocumentTitle', title: '文件标题', formatter: viewOperation, events: viewEvents},
                     {field: 'postDocumentNum', title: '文号', formatter:function (value, row, index){
@@ -536,23 +536,8 @@
                     {field: 'action',  title: '操作',formatter: operation5,events:orgEvents}
                 ];
 
-            }else if (rolename === "政务资源市部门"){
-                url = "/post/getSend?receiverId="+rolename;
-                aCol = [
-                    {field: 'postDocumentTitle', title: '文件标题', formatter: viewOperation, events: viewEvents},
-                    {field: 'postDocumentNum', title: '文号', formatter:function (value, row, index){
-                            var postNum = documentNum[value].text + row.postDocumentNum1;
-                            return '</p>'+ postNum +'</p>'
-                        }},
-                    {field: 'postPublicWay', title: '公开方式', formatter:function (value,row,index) {
-                            return '</p>'+ publicWay[value].text +'</p>'
-                        }},
-                    {field: 'itemcreateat', title: '发文日期'},
-                    {field: 'action',  title: '操作',formatter: operation6,events:orgEvents}
-                ];
-
-            }else if (rolename === "政务资源县部门"){
-                url = "/post/getSend?receiverId="+rolename;
+            }else if (rolename === "省直管医疗机构"||rolename === "市直管医疗机构"||rolename === "县直管医疗机构"||rolename === "省中医药管理部门"||rolename === "市中医药管理部门"||rolename === "县中医药管理部门"){
+                url = "/post/getSend?receiverId="+username;
                 aCol = [
                     {field: 'postDocumentTitle', title: '文件标题', formatter: viewOperation, events: viewEvents},
                     {field: 'postDocumentNum', title: '文号', formatter:function (value, row, index){

@@ -88,7 +88,25 @@
     <include refid="Blob_Column_List_SELECTALL" />
     ,r.ROLE_NAME
     FROM user u,role r
-    WHERE u.TYPE IN(25,26) AND u.TYPE=r.ROLE_TYPE
+    WHERE u.TYPE=r.ROLE_TYPE
+    <if test="type == 1">
+      and u.TYPE in (31,32,34,35)
+    </if>
+    <if test="type == 2">
+      and u.TYPE in (32,33,35,36)
+    </if>
+    <if test="type == 3">
+      and u.TYPE in (33,36)
+    </if>
+    <if test="type == 4">
+      and u.TYPE in (31,34,35)
+    </if>
+    <if test="type == 5">
+      and u.TYPE in (32,34,35,36)
+    </if>
+    <if test="type == 6">
+      and u.TYPE in (33,35,36)
+    </if>
     order by u.itemUpdateAt desc
   </select>
   <select id="selectByUsername" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">

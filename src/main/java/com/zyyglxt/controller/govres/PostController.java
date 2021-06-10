@@ -39,7 +39,6 @@ public class PostController {
     @Resource
     IAdviceService adviceService;
 
-    //查询所有发文信息
     @GetMapping(value = "/getPost")
     @ResponseBody
     @LogAnnotation(appCode ="",logTitle ="查询所有发文信息",logLevel ="1",creater ="",updater = "")
@@ -47,15 +46,27 @@ public class PostController {
         return new ResponseData(EmBusinessError.success,postService.getPost(postDataStatus));
     }
 
-    //查询对应省市县部门的发文信息
+    @GetMapping(value = "/getByClerk")
+    @ResponseBody
+    @LogAnnotation(appCode ="",logTitle ="查询相应部门的对应科员的发文信息",logLevel ="1",creater ="",updater = "")
+    public ResponseData getByClerk(@RequestParam(value = "postDepartment") String postDepartment){
+        return new ResponseData(EmBusinessError.success,postService.selectClerk(postDepartment));
+    }
+
+    @GetMapping(value = "/getByDirector")
+    @ResponseBody
+    @LogAnnotation(appCode ="",logTitle ="查询相应部门的对应处长的发文信息",logLevel ="1",creater ="",updater = "")
+    public ResponseData getByDirector(@RequestParam(value = "postDepartment") String postDepartment){
+        return new ResponseData(EmBusinessError.success,postService.selectDirector(postDepartment));
+    }
+
     @GetMapping(value = "/getSend")
     @ResponseBody
-    @LogAnnotation(appCode ="",logTitle ="查询对应省市县部门的发文信息",logLevel ="1",creater ="",updater = "")
+    @LogAnnotation(appCode ="",logTitle ="查询对应省市县部门或机构收到的发文信息",logLevel ="1",creater ="",updater = "")
     public ResponseData getSend(@RequestParam(value = "receiverId") String receiverId){
         return new ResponseData(EmBusinessError.success,postService.getSend(receiverId));
     }
 
-    //查询当前分管局长
     @GetMapping(value = "/getDeputyDirector")
     @ResponseBody
     @LogAnnotation(appCode ="",logTitle ="查询当前分管局长",logLevel ="1",creater ="",updater = "")
@@ -85,7 +96,6 @@ public class PostController {
         return new ResponseData(EmBusinessError.success,postService.getPostForMainPage(status));
     }
 
-    //添加发文信息
     @RequestMapping(value = "/createPost", method = RequestMethod.POST)
     @ResponseBody
     @LogAnnotation(appCode ="",logTitle ="添加发文信息",logLevel ="3",creater ="",updater = "")
@@ -94,7 +104,6 @@ public class PostController {
         return new ResponseData(EmBusinessError.success);
     }
 
-    //修改发文信息
     @RequestMapping(value = "/updatePost", method = RequestMethod.POST)
     @ResponseBody
     @LogAnnotation(appCode ="",logTitle ="修改发文信息",logLevel ="2",creater ="",updater = "")
@@ -103,7 +112,6 @@ public class PostController {
         return new ResponseData(EmBusinessError.success);
     }
 
-    //删除发文信息
     @RequestMapping(value = "/delPost", method = RequestMethod.DELETE)
     @ResponseBody
     @LogAnnotation(appCode ="",logTitle ="删除发文信息",logLevel ="4",creater ="",updater = "")

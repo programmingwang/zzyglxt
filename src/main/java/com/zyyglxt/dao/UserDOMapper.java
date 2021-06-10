@@ -39,7 +39,7 @@ public interface UserDOMapper {
 
     List<UserDO> selectAllUser2(String itemcode, String username, String orgCode);
 
-    List<UserDO> selectAllUser3(String itemcode, String username);
+    List<UserDO> selectAllUser3(String itemcode, String username, @Param("type") String type);
 
     int deleteByUsername(String username);
 }

@@ -87,6 +87,16 @@ public class PostServiceImpl implements IPostService {
     }
 
     @Override
+    public List<PostDto> selectClerk(String postDepartment) {
+        return postDOMapper.selectClerk(postDepartment);
+    }
+
+    @Override
+    public List<PostDto> selectDirector(String postDepartment) {
+        return postDOMapper.selectDirector(postDepartment);
+    }
+
+    @Override
     public List<PostDto> getSend(String receiverId) {
         return postDOMapper.getSend(receiverId);
     }

@@ -81,8 +81,9 @@ public class PostRefController {
     //获取发送的对象
     @LogAnnotation(logTitle = "获取发送对象", logLevel = "1")
     @RequestMapping(value = "/alluser", method = RequestMethod.GET)
-    public ResponseData selectAllUser() {
-        List<UserDO> users = userService.selectAllUser3(usernameUtil.getItemCode(), usernameUtil.getOperateUser());
+    @ResponseBody
+    public ResponseData selectAllUser(@RequestParam(value = "type") String type) {
+        List<UserDO> users = userService.selectAllUser3(usernameUtil.getItemCode(), usernameUtil.getOperateUser(), type);
         return new ResponseData(EmBusinessError.success, users);
     }
 }

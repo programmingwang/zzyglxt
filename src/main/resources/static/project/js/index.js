@@ -1281,6 +1281,40 @@
                 $(".tTile").css("display","none");
                 $("#zwbg").css("display","block");
             }
+            else if (roleName === '省直管医疗机构'||roleName === '市直管医疗机构'||roleName === '县直管医疗机构'||roleName === '省中医药管理部门'||roleName === '市中医药管理部门'||roleName === '县中医药管理部门'){
+                var menu_list = [
+                    {
+                        menu_name: "首页",
+                        menu_url: "/data/mainPage",
+                        id: "1",
+                        level: "1",
+                        pid: ""
+                    },
+                    {
+                        menu_name: "文件流转",
+                        menu_url: "",
+                        id: "2",
+                        level: "1",
+                        pid: ""
+                    },
+                    {
+                        menu_name: "发文管理",
+                        menu_url: "/document/post",
+                        id: "2-1",
+                        level: "2",
+                        pid: "2"
+                    },
+                    {
+                        menu_name: "收文管理",
+                        menu_url: "/document/receipt",
+                        id: "2-2",
+                        level: "2",
+                        pid: "2"
+                    },
+                ];
+                $(".tTile").css("display","none");
+                $("#zwbg").css("display","block");
+            }
 
             function getHTML_dropdown_menu_item(astr, aurl, show_active) {
                 var str = "<a class=\"dropdown-item  " + (show_active ? "active" : "") + " \" url=\"" + aurl + "\">" + astr + "</a>\n" +

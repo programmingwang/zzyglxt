@@ -33,6 +33,8 @@ public class PostDO extends PostDOKey {
     @NotBlank(message = "是否涉密不能为空")
     private String postSecretRelated; //是否泄密
 
+    private String postDepartment;
+
     private String creater;
 
     private Date itemcreateat;
@@ -135,6 +137,14 @@ public class PostDO extends PostDOKey {
 
     public void setPostSecretRelated(String postSecretRelated) {
         this.postSecretRelated = postSecretRelated == null ? null : postSecretRelated.trim();
+    }
+
+    public String getPostDepartment() {
+        return postDepartment;
+    }
+
+    public void setPostDepartment(String postDepartment) {
+        this.postDepartment = postDepartment == null ? null : postDepartment.trim();
     }
 
     public String getCreater() {

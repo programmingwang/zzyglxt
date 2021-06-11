@@ -199,9 +199,9 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<UserDO> selectAllUser3(String itemcode, String username) {
+    public List<UserDO> selectAllUser3(String itemcode, String username, String type) {
         //UserDO userDO = userDOMapper.selectByUsername(username);
-        return userDOMapper.selectAllUser3(itemcode, username);
+        return userDOMapper.selectAllUser3(itemcode, username, type);
     }
 
     @Override

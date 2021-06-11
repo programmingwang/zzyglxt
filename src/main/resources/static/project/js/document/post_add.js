@@ -4,6 +4,9 @@
 
             uploadImg.init();
 
+            //角色信息
+            var cityId = sessionStorage.getItem("cityId");
+
             /**
              * 校验文本是否为空
              * tips：提示信息
@@ -70,8 +73,20 @@
             // 存储账号信息
             var sendGoal = {};
             // 获取账号信息的url
-            var sendUrl = "/postref/alluser";
-
+            var sendUrl;
+            if (cityId === "省直管医疗机构"){
+                sendUrl = "/postref/alluser?type=1";
+            }else if(cityId === "市直管医疗机构"){
+                sendUrl = "/postref/alluser?type=2";
+            }else if(cityId === "县直管医疗机构"){
+                sendUrl = "/postref/alluser?type=3";
+            }else if(cityId === "省中医药管理部门"){
+                sendUrl = "/postref/alluser?type=4";
+            }else if(cityId === "市中医药管理部门"){
+                sendUrl = "/postref/alluser?type=5";
+            }else if(cityId === "县中医药管理部门"){
+                sendUrl = "/postref/alluser?type=6";
+            }
             //获取账号信息
             function initExpert() {
                 ajaxUtil.myAjax(null, sendUrl, null, function (data) {
@@ -204,6 +219,7 @@
                 var addSendModal = modalUtil.init(addSendModal);
                 if (Object.keys(sendGoal).length == 0) {
                     initExpert();
+                    //console.log(sendGoal.data);
                 }
                 var sendCol = [
                     {checkbox: true},
@@ -327,6 +343,7 @@
                         postPrinting : $("#postPrinting").val(),
                         postDocumentNum : $("#postDocumentNum").val(),
                         postDocumentNum1 : pad(newNum),
+                        postDepartment : cityId,
                         postDataStatus : "0",
                     };
                     var postFile = [];
@@ -351,6 +368,7 @@
                         postSecretRelated : secret,
                         postPrinting : $("#postPrinting").val(),
                         postDocumentNum : $("#postDocumentNum").val(),
+                        postDepartment : cityId,
                         postDataStatus : "0",
                     };
                     operateMessage = "修改发文信息成功";
@@ -471,6 +489,7 @@
                                 postPrinting : $("#postPrinting").val(),
                                 postDocumentNum : $("#postDocumentNum").val(),
                                 postDocumentNum1 : pad(newNum),
+                                postDepartment : cityId,
                                 postDataStatus : "1",
                             };
                             var postFile = [];
@@ -496,6 +515,7 @@
                                 postSecretRelated : secret,
                                 postPrinting : $("#postPrinting").val(),
                                 postDocumentNum : $("#postDocumentNum").val(),
+                                postDepartment : cityId,
                                 postDataStatus : "1",
                             }
                             operateMessage = "修改发文信息成功";

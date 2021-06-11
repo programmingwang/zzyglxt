@@ -16,6 +16,7 @@
     <result column="POST_NORMATIVE_DOCUMENTS" jdbcType="VARCHAR" property="postNormativeDocuments" />
     <result column="POST_PRINTING" jdbcType="INTEGER" property="postPrinting" />
     <result column="POST_SECRET_RELATED" jdbcType="VARCHAR" property="postSecretRelated" />
+    <result column="POST_DEPARTMENT" jdbcType="VARCHAR" property="postDepartment" />
     <result column="CREATER" jdbcType="VARCHAR" property="creater" />
     <result column="itemCreateAt" jdbcType="TIMESTAMP" property="itemcreateat" />
     <result column="UPDATER" jdbcType="VARCHAR" property="updater" />
@@ -45,14 +46,14 @@
   <sql id="Base_Column_List">
     itemID, itemCode, POST_DOCUMENT_NUM, POST_DOCUMENT_NUM1, POST_OPINION, POST_OPINION1, 
     POST_DOCUMENT_TITLE, POST_DATA_STATUS, POST_PUBLIC_WAY, POST_REASON, POST_FAIR_DEPARTMENT_REVIEW, 
-    POST_NORMATIVE_DOCUMENTS, POST_PRINTING, POST_SECRET_RELATED, CREATER, itemCreateAt, 
+    POST_NORMATIVE_DOCUMENTS, POST_PRINTING, POST_SECRET_RELATED, POST_DEPARTMENT, CREATER, itemCreateAt,
     UPDATER, itemUpdateAt
   </sql>
   <sql id="Post_Column_List">
     gp.itemID, gp.itemCode, gp.POST_DOCUMENT_NUM, gp.POST_DOCUMENT_NUM1, gp.POST_OPINION, gp.POST_OPINION1,
     gp.POST_DOCUMENT_TITLE, gp.POST_DATA_STATUS, gp.POST_PUBLIC_WAY, gp.POST_REASON, gp.POST_FAIR_DEPARTMENT_REVIEW,
-    gp.POST_NORMATIVE_DOCUMENTS, gp.POST_PRINTING, gp.POST_SECRET_RELATED, gp.CREATER, gp.itemCreateAt,
-    gp.UPDATER, gp.itemUpdateAt
+    gp.POST_NORMATIVE_DOCUMENTS, gp.POST_PRINTING, gp.POST_SECRET_RELATED, gp.POST_DEPARTMENT, gp.CREATER,
+    gp.itemCreateAt, gp.UPDATER, gp.itemUpdateAt
   </sql>
   <select id="selectByPrimaryKey" parameterType="com.zyyglxt.dataobject.PostDOKey" resultMap="BaseResultMap">
     select 
@@ -99,6 +100,32 @@
       where POST_DATA_STATUS in (0,1,2,3,4,5,6,7,8,9,10)
     </if>
     order by itemUpdateAt desc
+  </select>
+  <select id="selectClerk" resultMap="PostMainFileResultMap">
+    select
+    <include refid="Post_Column_List" />
+    ,
+    cf.FILE_NAME
+    ,
+    cf.FILE_PATH
+    from tb_governres_post gp left join tb_culpro_file cf
+    on gp.itemCode = cf.DATA_CODE
+    where POST_DEPARTMENT = #{postDepartment,jdbcType=VARCHAR}
+    and POST_DATA_STATUS in (0,1,2,3,4,5,6,7,8,9,10)
+    order by gp.itemUpdateAt desc
+  </select>
+  <select id="selectDirector" resultMap="PostMainFileResultMap">
+    select
+    <include refid="Post_Column_List" />
+    ,
+    cf.FILE_NAME
+    ,
+    cf.FILE_PATH
+    from tb_governres_post gp left join tb_culpro_file cf
+    on gp.itemCode = cf.DATA_CODE
+    where POST_DEPARTMENT = #{postDepartment,jdbcType=VARCHAR}
+    and POST_DATA_STATUS in (1,2,3,4,5,6,7,8,9,10)
+    order by gp.itemUpdateAt desc
   </select>
   <select id="getSend" resultMap="PostMainFileResultMap">
     select
@@ -148,14 +175,14 @@
       POST_DOCUMENT_NUM1, POST_OPINION, POST_OPINION1, 
       POST_DOCUMENT_TITLE, POST_DATA_STATUS, POST_PUBLIC_WAY, 
       POST_REASON, POST_FAIR_DEPARTMENT_REVIEW, POST_NORMATIVE_DOCUMENTS, 
-      POST_PRINTING, POST_SECRET_RELATED, CREATER, 
+      POST_PRINTING, POST_SECRET_RELATED, POST_DEPARTMENT, CREATER,
       itemCreateAt, UPDATER, itemUpdateAt
       )
     values (#{itemid,jdbcType=INTEGER}, #{itemcode,jdbcType=CHAR}, #{postDocumentNum,jdbcType=VARCHAR}, 
       #{postDocumentNum1,jdbcType=VARCHAR}, #{postOpinion,jdbcType=VARCHAR}, #{postOpinion1,jdbcType=VARCHAR}, 
       #{postDocumentTitle,jdbcType=VARCHAR}, #{postDataStatus,jdbcType=VARCHAR}, #{postPublicWay,jdbcType=VARCHAR}, 
       #{postReason,jdbcType=VARCHAR}, #{postFairDepartmentReview,jdbcType=VARCHAR}, #{postNormativeDocuments,jdbcType=VARCHAR}, 
-      #{postPrinting,jdbcType=INTEGER}, #{postSecretRelated,jdbcType=VARCHAR}, #{creater,jdbcType=VARCHAR}, 
+      #{postPrinting,jdbcType=INTEGER}, #{postSecretRelated,jdbcType=VARCHAR}, #{postDepartment,jdbcType=VARCHAR}, #{creater,jdbcType=VARCHAR},
       #{itemcreateat,jdbcType=TIMESTAMP}, #{updater,jdbcType=VARCHAR}, #{itemupdateat,jdbcType=TIMESTAMP}
       )
   </insert>
@@ -203,6 +230,9 @@
       </if>
       <if test="postSecretRelated != null">
         POST_SECRET_RELATED,
+      </if>
+      <if test="postDepartment != null">
+        POST_DEPARTMENT,
       </if>
       <if test="creater != null">
         CREATER,
@@ -260,6 +290,9 @@
       <if test="postSecretRelated != null">
         #{postSecretRelated,jdbcType=VARCHAR},
       </if>
+      <if test="postDepartment != null">
+        #{postDepartment,jdbcType=VARCHAR},
+      </if>
       <if test="creater != null">
         #{creater,jdbcType=VARCHAR},
       </if>
@@ -313,6 +346,9 @@
       <if test="postSecretRelated != null">
         POST_SECRET_RELATED = #{postSecretRelated,jdbcType=VARCHAR},
       </if>
+      <if test="postSecretRelated != null">
+        POST_DEPARTMENT = #{postDepartment,jdbcType=VARCHAR},
+      </if>
       <if test="creater != null">
         CREATER = #{creater,jdbcType=VARCHAR},
       </if>
@@ -343,6 +379,7 @@
       POST_NORMATIVE_DOCUMENTS = #{postNormativeDocuments,jdbcType=VARCHAR},
       POST_PRINTING = #{postPrinting,jdbcType=INTEGER},
       POST_SECRET_RELATED = #{postSecretRelated,jdbcType=VARCHAR},
+      POST_DEPARTMENT = #{postDepartment,jdbcType=VARCHAR},
       CREATER = #{creater,jdbcType=VARCHAR},
       itemCreateAt = #{itemcreateat,jdbcType=TIMESTAMP},
       UPDATER = #{updater,jdbcType=VARCHAR},

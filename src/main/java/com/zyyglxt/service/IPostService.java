@@ -23,6 +23,10 @@ public interface IPostService {
 
     List<PostDto> getPost(String postDataStatus);
 
+    List<PostDto> selectClerk(String postDepartment);
+
+    List<PostDto> selectDirector(String postDepartment);
+
     List<PostDto> getSend(String receiverId);
 
     List<PostDto> getDeputyDirector(String postOpinion1);

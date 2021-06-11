@@ -26,6 +26,10 @@ public interface PostDOMapper {
 
     List<PostDto> selectAll(@Param("postDataStatus") String postDataStatus);
 
+    List<PostDto> selectClerk(@Param("postDepartment") String postDepartment);
+
+    List<PostDto> selectDirector(@Param("postDepartment") String postDepartment);
+
     List<PostDto> getSend(@Param("receiverId") String receiverId);
 
     List<PostDto> getDeputyDirector(@Param("postOpinion1") String postOpinion1);
